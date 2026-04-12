@@ -10,6 +10,9 @@ mappings/mapping_candidates.tsv
 # Virtual environment
 .venv/
 
+# PDF planning documents (not for distribution)
+*.pdf
+
 # Python
 __pycache__/
 *.pyc
