@@ -19,7 +19,7 @@ from config.namespaces import (
 )
 
 ROOT = Path(__file__).resolve().parent.parent
-IN_PATH = ROOT / "semiconductor_v0_3.json"
+IN_PATH = ROOT / "data" / "semiconductor_v0_3.json"
 OUT_TTL = ROOT / "ontology" / "sdkb-core-data.ttl"
 OUT_JSONLD = ROOT / "ontology" / "sdkb-core-data.jsonld"
 

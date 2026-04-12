@@ -16,7 +16,7 @@ from pathlib import Path
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parent.parent
-IN_PATH = ROOT / "semiconductor_v0_3.json"
+IN_PATH = ROOT / "data" / "semiconductor_v0_3.json"
 OUT_DIR = ROOT / "data"
 
 

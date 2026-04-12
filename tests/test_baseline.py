@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 
 ROOT = Path(__file__).resolve().parent.parent
-BASELINE = ROOT / "semiconductor_v0_3.json"
+BASELINE = ROOT / "data" / "semiconductor_v0_3.json"
 SCHEMA_REPORT = ROOT / "data" / "schema_report.json"
 NODES_PARQUET = ROOT / "data" / "nodes.parquet"
 EDGES_PARQUET = ROOT / "data" / "edges.parquet"
