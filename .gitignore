@@ -1,0 +1,27 @@
+# SDKB v1.0 — Auto-generated artifacts
+data/schema_report.json
+data/nodes.parquet
+data/edges.parquet
+ontology/sdkb-core.ttl
+ontology/sdkb-core-data.ttl
+ontology/sdkb-core-data.jsonld
+mappings/mapping_candidates.tsv
+
+# Virtual environment
+.venv/
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

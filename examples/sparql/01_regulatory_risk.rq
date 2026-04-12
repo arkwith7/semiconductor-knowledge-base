@@ -1,0 +1,25 @@
+# SDKB v1.0 — BIS 규제 리스크 질의 (ECCN + EAR Rule 연계)
+#
+# 장비 클래스별 ECCN 분류와 적용 규제 조항을 반환합니다.
+
+PREFIX sdkb: <https://w3id.org/sdkb/>
+PREFIX ont:  <https://w3id.org/sdkb/ont/>
+PREFIX gov:  <https://w3id.org/sdkb/gov/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?equipClass ?equipLabel ?eccn ?earRule ?ruleRef ?effectiveDate
+WHERE {
+    ?equipClass a ont:EquipmentClass ;
+                skos:prefLabel ?equipLabel ;
+                ont:hasECCN ?eccn .
+
+    ?eccn a gov:RegulatedItem ;
+          ont:controlledBy ?earRule .
+
+    ?earRule a gov:EARRule ;
+             dcterms:bibliographicCitation ?ruleRef .
+
+    OPTIONAL { ?earRule ont:effectiveDate ?effectiveDate . }
+}
+ORDER BY ?equipClass ?eccn

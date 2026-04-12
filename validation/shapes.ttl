@@ -1,0 +1,157 @@
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix sdkb:    <https://w3id.org/sdkb/> .
+@prefix ont:     <https://w3id.org/sdkb/ont/> .
+@prefix gov:     <https://w3id.org/sdkb/gov/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+# ═══════════════════════════════════════════════════════════════════
+# SDKB v1.0 SHACL Shapes — Release Gate Validation Rules
+# ═══════════════════════════════════════════════════════════════════
+
+# ─── Every node must have a prefLabel and license ─────────────────
+ont:Shape_CoreNode
+    a sh:NodeShape ;
+    sh:targetClass ont:Process, ont:SubProcess, ont:EquipmentClass,
+        ont:Equipment, ont:Vendor, ont:Organization, ont:Parameter,
+        ont:Metrology, ont:Material, ont:TechnologyNode,
+        ont:FailureMode, ont:RootCause, ont:Mitigation, ont:Skill ;
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:minCount 1 ;
+        sh:datatype rdf:langString ;
+        sh:message "Every node must have at least one skos:prefLabel." ;
+    ] ;
+    sh:property [
+        sh:path dcterms:license ;
+        sh:minCount 1 ;
+        sh:message "Every node must declare dcterms:license (SPDX identifier or URI)." ;
+    ] ;
+    sh:property [
+        sh:path ont:interpretationType ;
+        sh:minCount 1 ;
+        sh:in ( "verbatim" "mapped" "author-defined" ) ;
+        sh:message "interpretationType must be one of: verbatim, mapped, author-defined." ;
+    ] .
+
+# ─── Confidence score range (0.0–1.0) ────────────────────────────
+ont:Shape_Confidence
+    a sh:PropertyShape ;
+    sh:path ont:confidence ;
+    sh:datatype xsd:decimal ;
+    sh:minInclusive 0.0 ;
+    sh:maxInclusive 1.0 ;
+    sh:message "confidence must be a decimal in [0.0, 1.0]." .
+
+# ─── FailureMode must link to at least one RootCause ─────────────
+ont:Shape_FailureMode
+    a sh:NodeShape ;
+    sh:targetClass ont:FailureMode ;
+    sh:property [
+        sh:path ont:isDueTo ;
+        sh:minCount 1 ;
+        sh:class ont:RootCause ;
+        sh:message "Every FailureMode must have at least one isDueTo → RootCause." ;
+    ] ;
+    sh:property [
+        sh:path ont:occursAtProcessStep ;
+        sh:minCount 1 ;
+        sh:class ont:SubProcess ;
+        sh:message "Every FailureMode must specify occursAtProcessStep → SubProcess." ;
+    ] .
+
+# ─── Equipment must be instance of an EquipmentClass ─────────────
+ont:Shape_Equipment
+    a sh:NodeShape ;
+    sh:targetClass ont:Equipment ;
+    sh:property [
+        sh:path ont:isInstanceOf ;
+        sh:minCount 1 ;
+        sh:class ont:EquipmentClass ;
+        sh:message "Every Equipment must have isInstanceOf → EquipmentClass." ;
+    ] ;
+    sh:property [
+        sh:path ont:providedBy ;
+        sh:minCount 1 ;
+        sh:class ont:Vendor ;
+        sh:message "Every Equipment must have providedBy → Vendor." ;
+    ] .
+
+# ─── Governance: EAR rule nodes must have effective date ──────────
+gov:Shape_EARRule
+    a sh:NodeShape ;
+    sh:targetClass gov:EARRule ;
+    sh:property [
+        sh:path ont:effectiveDate ;
+        sh:minCount 1 ;
+        sh:datatype xsd:date ;
+        sh:message "EARRule must specify effectiveDate." ;
+    ] ;
+    sh:property [
+        sh:path dcterms:bibliographicCitation ;
+        sh:minCount 1 ;
+        sh:message "EARRule must cite the regulation section." ;
+    ] .
+
+# ─── Governance: SCIP rule threshold ─────────────────────────────
+gov:Shape_SCIPRule
+    a sh:NodeShape ;
+    sh:targetClass gov:SCIPRule ;
+    sh:property [
+        sh:path ont:svhcConcentration ;
+        sh:minCount 1 ;
+        sh:datatype xsd:decimal ;
+        sh:message "SCIPRule must specify svhcConcentration threshold." ;
+    ] .
+
+# ─── TPP export control rule (BIS §744.23) ───────────────────────
+# If tppValue >= 4800, securityLevel must be RESTRICTED
+ont:Shape_TPPExportControl
+    a sh:NodeShape ;
+    sh:targetSubjectsOf ont:tppValue ;
+    sh:property [
+        sh:path ont:tppValue ;
+        sh:datatype xsd:decimal ;
+    ] ;
+    sh:sparql [
+        sh:message "Equipment with TPP >= 4800 must have securityLevel = RESTRICTED." ;
+        sh:select """
+            PREFIX ont: <https://w3id.org/sdkb/ont/>
+            SELECT $this
+            WHERE {
+                $this ont:tppValue ?tpp .
+                FILTER (?tpp >= 4800)
+                OPTIONAL { $this ont:securityLevel ?sec . }
+                FILTER (!bound(?sec) || ?sec != "RESTRICTED")
+            }
+        """ ;
+    ] .
+
+# ─── Provenance: every node should trace back to a source ────────
+ont:Shape_Provenance
+    a sh:NodeShape ;
+    sh:targetClass ont:Process, ont:SubProcess, ont:EquipmentClass,
+        ont:Equipment, ont:Material, ont:FailureMode,
+        ont:RootCause, ont:Mitigation, ont:Skill ;
+    sh:property [
+        sh:path dcterms:source ;
+        sh:minCount 1 ;
+        sh:message "Every curated node must declare dcterms:source." ;
+    ] .
+
+# ─── Standard Reference (Link-Only) must have URL ────────────────
+gov:Shape_StandardReference
+    a sh:NodeShape ;
+    sh:targetClass gov:StandardReference ;
+    sh:property [
+        sh:path <http://www.w3.org/2000/01/rdf-schema#seeAlso> ;
+        sh:minCount 1 ;
+        sh:message "StandardReference must have rdfs:seeAlso (URL to standard)." ;
+    ] ;
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:minCount 1 ;
+        sh:message "StandardReference must have a label." ;
+    ] .

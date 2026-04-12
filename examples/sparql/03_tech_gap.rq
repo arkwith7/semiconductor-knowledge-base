@@ -1,0 +1,23 @@
+# SDKB v1.0 — 기술 격차 탐지 (필수 역량/계측 누락)
+#
+# 특정 기술노드(예: 7nm)에 관련된 공정에서 Skill 또는 Metrology가
+# 누락된 SubProcess를 식별합니다.
+
+PREFIX ont:  <https://w3id.org/sdkb/ont/>
+PREFIX data: <https://w3id.org/sdkb/data/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?subprocess ?subLabel
+       (COUNT(DISTINCT ?skill) AS ?skillCount)
+       (COUNT(DISTINCT ?metro) AS ?metrologyCount)
+WHERE {
+    ?subprocess a ont:SubProcess ;
+                skos:prefLabel ?subLabel ;
+                ont:relevantForTechNode data:technode/7nm .
+
+    OPTIONAL { ?subprocess ont:requiresSkill ?skill . }
+    OPTIONAL { ?subprocess ont:measuredBy ?metro . }
+}
+GROUP BY ?subprocess ?subLabel
+HAVING (COUNT(DISTINCT ?skill) = 0 || COUNT(DISTINCT ?metro) = 0)
+ORDER BY ASC(?skillCount) ASC(?metrologyCount)

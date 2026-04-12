@@ -1,0 +1,146 @@
+@prefix sdkb: <https://w3id.org/sdkb/> .
+@prefix data: <https://w3id.org/sdkb/data/> .
+@prefix ont:  <https://w3id.org/sdkb/ont/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+# ═══════════════════════════════════════════════════════════════════
+# SDKB v1.0 PROV-O Provenance Template
+#
+# Pattern:
+#   prov:Activity → (what curation step produced this data)
+#   prov:Agent    → (who/what performed the activity)
+#   prov:Entity   → (the data node/edge produced)
+#
+# Each curation pipeline stage creates Activity records:
+#   - baseline_ingest       (Week 1)
+#   - owl_design            (Week 2)
+#   - rdf_conversion        (Week 3)
+#   - alignment_semikong    (Week 5)
+#   - alignment_semiconto   (Week 6)
+#   - governance_nist       (Week 8)
+#   - governance_bis        (Week 9)
+#   - governance_echa       (Week 10)
+#   - expert_review         (Week 11)
+#   - release_packaging     (Week 12)
+# ═══════════════════════════════════════════════════════════════════
+
+# ── Agents ────────────────────────────────────────────────────────
+
+data:agent/park_hyoungsik
+    a prov:Agent, prov:Person ;
+    prov:actedOnBehalfOf data:agent/skku_mot ;
+    rdfs:label "Park HyoungSik" ;
+    dcterms:identifier "2025730080" .
+
+data:agent/skku_mot
+    a prov:Agent, prov:Organization ;
+    rdfs:label "SKKU MOT (성균관대학교 기술경영전문대학원)" .
+
+data:agent/sdkb_pipeline
+    a prov:Agent, prov:SoftwareAgent ;
+    rdfs:label "SDKB v1.0 Curation Pipeline" ;
+    ont:changeSet "1.0.0-dev" .
+
+# ── Activities ────────────────────────────────────────────────────
+
+data:activity/baseline_ingest_2026w16
+    a prov:Activity ;
+    rdfs:label "Baseline JSON parsing and schema extraction" ;
+    prov:wasAssociatedWith data:agent/sdkb_pipeline ;
+    prov:used data:source/semiconductor_v0_3 ;
+    prov:startedAtTime "2026-04-13T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-04-19T23:59:59Z"^^xsd:dateTime .
+
+data:activity/owl_design_2026w17
+    a prov:Activity ;
+    rdfs:label "OWL metamodel design (14 Core + Governance classes)" ;
+    prov:wasAssociatedWith data:agent/park_hyoungsik ;
+    prov:startedAtTime "2026-04-20T00:00:00Z"^^xsd:dateTime .
+
+data:activity/rdf_conversion_2026w18
+    a prov:Activity ;
+    rdfs:label "JSON→RDF/JSON-LD conversion pipeline" ;
+    prov:wasAssociatedWith data:agent/sdkb_pipeline ;
+    prov:used data:source/semiconductor_v0_3 .
+
+data:activity/align_semikong_2026w20
+    a prov:Activity ;
+    rdfs:label "SemiKong L1-L3 process hierarchy alignment" ;
+    prov:wasAssociatedWith data:agent/park_hyoungsik ;
+    prov:used data:source/semikong_paper .
+
+data:activity/align_semiconto_2026w21
+    a prov:Activity ;
+    rdfs:label "SemicONTO OWL schema alignment (SKOS mapping)" ;
+    prov:wasAssociatedWith data:agent/park_hyoungsik ;
+    prov:used data:source/semiconto_github .
+
+data:activity/expert_review_2026w26
+    a prov:Activity ;
+    rdfs:label "Expert cross-evaluation (3 reviewers, 7500 ratings)" ;
+    prov:wasAssociatedWith data:agent/park_hyoungsik .
+
+# ── Source Entities ───────────────────────────────────────────────
+
+data:source/semiconductor_v0_3
+    a prov:Entity ;
+    rdfs:label "semiconductor_v0_3.json (baseline)" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    ont:interpretationType "verbatim" .
+
+data:source/semikong_paper
+    a prov:Entity ;
+    rdfs:label "SemiKong (arXiv:2411.13802)" ;
+    dcterms:license "Apache-2.0" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> .
+
+data:source/semiconto_github
+    a prov:Entity ;
+    rdfs:label "SemicONTO v0.1 (CEUR-WS Vol-3760)" ;
+    dcterms:license "CC-BY-4.0" ;
+    rdfs:seeAlso <https://github.com/huanyu-li/SemicONTO> .
+
+data:source/nist_csf2
+    a prov:Entity ;
+    rdfs:label "NIST CSF 2.0" ;
+    dcterms:license "Public Domain" ;
+    rdfs:seeAlso <https://www.nist.gov/publications/nist-cybersecurity-framework-csf-20> .
+
+data:source/nist_ir8546
+    a prov:Entity ;
+    rdfs:label "NIST IR 8546 — Semiconductor Manufacturing Profile (IPD)" ;
+    dcterms:license "Public Domain" ;
+    rdfs:seeAlso <https://csrc.nist.gov/pubs/ir/8546/ipd> .
+
+data:source/bis_ear
+    a prov:Entity ;
+    rdfs:label "BIS EAR (15 CFR Parts 730-774)" ;
+    dcterms:license "Public Domain" ;
+    rdfs:seeAlso <https://www.ecfr.gov/current/title-15/subtitle-B/chapter-VII/subchapter-C> .
+
+data:source/echa_scip
+    a prov:Entity ;
+    rdfs:label "ECHA SCIP Database" ;
+    dcterms:license "Public Access" ;
+    rdfs:seeAlso <https://www.echa.europa.eu/scip> .
+
+data:source/matkg
+    a prov:Entity ;
+    rdfs:label "MatKG (Scientific Data 2024)" ;
+    dcterms:license "CC-BY-4.0" ;
+    rdfs:seeAlso <https://zenodo.org/records/10144972> .
+
+# ── Example: Node provenance chain ───────────────────────────────
+# (Template — copy this pattern for each curated node)
+
+# data:process/lithography
+#     a ont:Process ;
+#     prov:wasGeneratedBy data:activity/align_semikong_2026w20 ;
+#     prov:wasDerivedFrom data:source/semikong_paper ;
+#     prov:wasAttributedTo data:agent/park_hyoungsik ;
+#     dcterms:license "CDLA-Permissive-2.0" ;
+#     ont:validationRequired false ;
+#     ont:interpretationType "mapped" ;
+#     ont:changeSet "1.0.0" .

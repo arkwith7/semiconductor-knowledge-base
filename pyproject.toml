@@ -1,0 +1,60 @@
+[project]
+name = "sdkb"
+version = "1.0.0-dev"
+description = "SDKB v1.0 — Semiconductor Domain Knowledge Base: Provenance-grounded curation ontology"
+authors = [
+    { name = "Park HyoungSik", email = "parkhs@g.skku.edu" },
+]
+readme = "README.md"
+license = { text = "CDLA-Permissive-2.0" }
+requires-python = ">=3.11"
+keywords = ["semiconductor", "ontology", "knowledge-graph", "FMEA", "foresight"]
+
+dependencies = [
+    # RDF / OWL / SHACL
+    "rdflib>=7.0",
+    "pyshacl>=0.26",
+    # Data processing
+    "pandas>=2.2",
+    "pyarrow>=16.0",
+    # Alignment (lexical)
+    "rapidfuzz>=3.9",
+    # JSON Schema validation
+    "jsonschema>=4.22",
+]
+
+[project.optional-dependencies]
+# Embedding-based alignment (GPU recommended)
+align = [
+    "sentence-transformers>=3.0",
+    "numpy>=1.26",
+]
+# Development & testing
+dev = [
+    "pytest>=8.2",
+    "pytest-cov>=5.0",
+    "ruff>=0.5",
+]
+# Full pipeline (all extras)
+full = ["sdkb[align,dev]"]
+
+[project.scripts]
+sdkb-parse   = "scripts.parse_baseline:main"
+sdkb-convert = "scripts.convert_rdf:main"
+sdkb-align   = "scripts.align_candidates:main"
+sdkb-validate = "scripts.validate_shacl:main"
+
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["config*", "scripts*"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"

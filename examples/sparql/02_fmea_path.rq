@@ -1,0 +1,26 @@
+# SDKB v1.0 — FMEA 경로 추출 (불량→원인→완화 + 공정 단계)
+#
+# 특정 공정에서 관측된 불량의 원인/완화 경로와 신뢰도를 추출합니다.
+
+PREFIX ont:  <https://w3id.org/sdkb/ont/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?subprocess ?subLabel
+       ?failureMode ?fmLabel
+       ?rootCause ?rcLabel ?conf_cause
+       ?mitigation ?mitLabel ?conf_mit
+WHERE {
+    ?failureMode a ont:FailureMode ;
+                 skos:prefLabel ?fmLabel ;
+                 ont:occursAtProcessStep ?subprocess ;
+                 ont:isDueTo ?rootCause ;
+                 ont:mitigatedBy ?mitigation .
+
+    ?subprocess skos:prefLabel ?subLabel .
+    ?rootCause  skos:prefLabel ?rcLabel .
+    ?mitigation skos:prefLabel ?mitLabel .
+
+    OPTIONAL { ?failureMode ont:confidence ?conf_cause . }
+    OPTIONAL { ?mitigation ont:confidence ?conf_mit . }
+}
+ORDER BY ?subprocess ?failureMode

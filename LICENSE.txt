@@ -1,0 +1,42 @@
+Community Data License Agreement – Permissive – Version 2.0
+
+This is the Community Data License Agreement – Permissive, Version 2.0 (the "agreement").
+
+Data is provided "as is" under this agreement, without warranty or condition of any kind,
+either express or implied including, without limitation, any warranties or conditions of
+title, non-infringement, merchantability, or fitness for a particular purpose.
+
+Each Recipient is solely responsible for determining the appropriateness of using and
+redistributing Data and assumes all risks associated with its exercise of rights under
+this agreement, including but not limited to the risks and costs of program errors,
+compliance with applicable laws, damage to or loss of data, programs or equipment, and
+unavailability or interruption of operations.
+
+1. Definitions
+
+"Data" means the material offered under this agreement, including any modification or
+addition made to that material.
+
+"Data Provider" means any person who provides Data under this agreement.
+
+"Recipient" means any person who receives Data directly or indirectly from a Data
+Provider, including any person who receives Data that has been modified or added to.
+
+2. Permission
+
+Each Data Provider hereby grants to each Recipient, under any intellectual property
+rights (other than patent or trademark), a perpetual, worldwide, non-exclusive,
+no-charge, royalty-free, irrevocable license to reproduce, prepare derivative works of,
+publicly display, publicly perform, sublicense, and distribute Data.
+
+3. Conditions
+
+Redistribution of the Data, with or without modifications, is permitted provided that
+the Recipient makes available the text of this agreement.
+
+4. No warranty
+
+THE DATA IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND.
+
+Full text: https://cdla.dev/permissive-2-0/
+SPDX-License-Identifier: CDLA-Permissive-2.0
