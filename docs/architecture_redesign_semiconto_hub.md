@@ -1,6 +1,6 @@
 # SDKB 아키텍처 재설계: SemicONTO 중심 다중 소스 통합 전략
 
-> **문서 버전**: v1.0 (2026-04-13)
+> **문서 버전**: v1.1 (2026-04-13)
 > **작성자**: SDKB 프로젝트 팀
 > **상태**: 전략 분석 및 계획 (Architecture Decision Record)
 
@@ -21,6 +21,7 @@ SemicONTO (상위 온톨로지, CC BY 4.0)
   ├── SDKB Manufacturing Extension (새 모듈: Process, FMEA, Governance)
   │     └── semiconductor_v0_3.json → 인스턴스 데이터로 변환·병합
   ├── CPC/IPC/F-term (참조 택소노미, SKOS 매핑)
+  ├── Patent Abstract NLP (특허 초록 기반 엔티티·관계 자동 추출)
   ├── MatKG (재료 지식, CC BY 4.0)
   ├── BIS CCL (수출통제, Public Domain)
   ├── SemiKong (공정 택소노미, Apache 2.0)
@@ -207,11 +208,12 @@ sdkb:Organization
 
 ## 4. 다중 소스 통합 레이어 설계
 
-### 4.1 통합 아키텍처 (5-Layer)
+### 4.1 통합 아키텍처 (6-Layer)
 
 ```
-Layer 5: Application & Query ─────────── SPARQL, API, Visualization
-Layer 4: Governance & Regulation ──────── BIS CCL, SEMI E10, Korea NCT
+Layer 6: Application & Query ─────────── SPARQL, API, Visualization
+Layer 5: Governance & Regulation ──────── BIS CCL, SEMI E10, Korea NCT
+Layer 4: Patent-Derived Enrichment ────── 특허 초록 NLP 추출 엔티티·관계
 Layer 3: Domain Instance Data ─────────── semiconductor_v0_3 + MatKG + Wikidata
 Layer 2: Reference Taxonomy ───────────── CPC/IPC/F-term (SKOS ConceptScheme)
 Layer 1: Core Ontology Schema ─────────── SemicONTO + SDKB Extension Module
@@ -232,8 +234,9 @@ Layer 0: Foundation Ontologies ────────── PROV-O, SKOS, QUDT
 | **tibonto/dr** | L1+L3 | `owl:imports` 부분 모듈 | 공급망, 조직, CO₂ 추적 |
 | **JEDEC JEP122H** | L1+L3 | FailureMode 택소노미 참조 | EM, TDDB, HCI, NBTI 등 실패 메커니즘 |
 | **Wikidata** | L3 | `owl:sameAs` Q-item 링킹 | 공정, 기업, 장비 범용 식별자 |
-| **SEMI E10** | L4 | EquipmentState 모듈 | 장비 상태 모델 (Productive, Standby, Down 등) |
-| **NIST CSF/IR** | L4 | Governance 모듈 | 사이버보안, 반도체 공급망 리스크 |
+| **SEMI E10** | L5 | EquipmentState 모듈 | 장비 상태 모델 (Productive, Standby, Down 등) |
+| **NIST CSF/IR** | L5 | Governance 모듈 | 사이버보안, 반도체 공급망 리스크 |
+| **Patent Abstracts** | L4 | NLP/LLM 추출 → ABox 보강 | 특허 초록에서 소재·공정·장비·파라미터 엔티티/관계 자동 추출 |
 
 ### 4.3 네임스페이스 통합 설계
 
@@ -249,6 +252,108 @@ Layer 0: Foundation Ontologies ────────── PROV-O, SKOS, QUDT
 | `matkg:` | `https://zenodo.org/records/10144972/` | MatKG 엔티티 |
 | `eccn:` | `https://www.ecfr.gov/eccn/` | BIS ECCN 코드 |
 | `wd:` | `http://www.wikidata.org/entity/` | Wikidata Q-item |
+
+### 4.4 특허 초록 기반 온톨로지 보강 (Patent Abstract Enrichment)
+
+특허의 발명 초록(Abstract)은 가장 밀도 높은 기술 기술(description) 원천이다.
+CPC/IPC 분류와 결합하면 SDKB 온톨로지를 **현존하는 실제 기술**로 풍성하게 할 수 있다.
+
+#### 4.4.1 공개 특허 데이터 소스
+
+| 소스 | 데이터 범위 | 접근 방식 | 비용 | 주요 필드 |
+|------|-----------|----------|------|----------|
+| **Google Patents (BigQuery)** | 120+ 특허청, 1억+ 특허 | SQL 쿼리 | 무료 (1TB/월) | CPC, IPC, 제목, 초록, 청구항, 출원일 |
+| **USPTO PatentsView API** | 미국 특허 전체 | REST API (키 필요) | 무료 | 초록, CPC, 발명자, 출원일 |
+| **EPO Open Patent Services** | 전 세계 특허 | OAuth2 REST | 무료 (4GB/주) | 초록, CPC/IPC, 패밀리 |
+| **KIPRIS** | 한국 특허 | REST API | 무료 | 한국어 초록, IPC, 출원인 |
+| **Lens.org** | 전 세계 특허+논문 | 웹+API | 비상업적 무료 | 통합 검색, 인용 네트워크 |
+
+**핵심 소스**: Google BigQuery `patents-public-data.patents.publications` 테이블
+— H01L/H10B/G03F/C23C/B24B CPC 코드 필터로 반도체 특허 5만~8만건 추출 가능
+
+#### 4.4.2 NLP 추출 파이프라인
+
+```
+Patent Bulk Data (BigQuery/API)
+    │  CPC코드 + 초록 + 제목
+    ▼
+CPC 필터링 ──── H01L, H10B, G03F, C23C, B24B만 추출
+    │
+    ▼
+NLP/LLM 엔티티·관계 추출 (NER + RE)
+    │  소재명, 공정명, 장비명, 파라미터, 구조, 응용
+    │  관계: "used_for", "improves", "replaces", "produces"
+    ▼
+엔티티 정규화 (Entity Linking)
+    │  추출 개념 → SDKB 기존 노드 매칭 (rapidfuzz + 임베딩)
+    │  기존 매칭: owl:sameAs / 신규 발견: 후보 노드 생성
+    ▼
+온톨로지 보강 (Enrichment)
+    │  신규 SubProcess, Material, Parameter 후보 추가
+    │  기존 노드에 동의어·설명·CPC코드 보강
+    │  기술 트렌드 (연도별 특허 수)
+    ▼
+전문가 검증 (Expert Review)
+    confidence score 기반 우선순위
+```
+
+#### 4.4.3 보강 유형 및 예시
+
+| 보강 유형 | 예시 | 방법 |
+|-----------|------|------|
+| 신규 SubProcess 발견 | Selective ALD, Area-Selective Deposition | 초록 클러스터링으로 기존 분류에 없는 공정 발견 |
+| 소재-공정 관계 보강 | "EUV photoresist uses metal oxide nanoparticles" | NER로 소재-공정 쌍 추출 |
+| 파라미터 범위 추가 | "plasma etch at 10-50mTorr" | 수치 추출 → ProcessParameter 값 범위 |
+| 장비-공정 연결 | "ASML NXE:3600 EUV scanner" | 특허에서 장비 모델명 추출 |
+| 기술 트렌드 | 연도별 CPC 코드 특허 수 → 신흥 기술 식별 | 통계 분석 |
+| 동의어 확보 | "chemical mechanical polishing" = "CMP" = "planarization" | 초록 내 동의어 패턴 추출 |
+| 한국어 용어 매핑 | KIPRIS 초록에서 한국어 공정명 수집 | 한-영 용어 쌍 |
+
+#### 4.4.4 초록 추출 예시
+
+```
+원문 (US Patent 특허 초록):
+"A method for atomic layer deposition of hafnium oxide thin films
+ using tetrakis(dimethylamido)hafnium precursor at temperatures
+ between 250-350°C, achieving step coverage exceeding 95% in
+ high aspect ratio trenches for advanced 3nm node gate dielectric."
+
+추출 결과:
+├── Process: ALD                    → subprocess:ald (기존 매칭)
+├── Material: HfO2                  → material:hfO2 (기존 매칭)
+├── Material: TDMAH precursor       → ★ 신규 Precursor 후보
+├── Parameter: Temp = 250-350°C     → parameter:temperature 범위 추가
+├── Metric: Step Coverage > 95%     → ★ 신규 품질 지표 후보
+├── Structure: HAR Trench           → ★ 신규 구조 개념 후보
+├── TechnologyNode: 3nm             → technode:3nm (기존 매칭)
+├── Application: Gate Dielectric    → ★ 신규 Application 후보
+└── 관계: ALD --produces--> HfO2 thin film
+          HfO2 --used_as--> Gate Dielectric
+```
+
+#### 4.4.5 데이터 흐름 (Layer 4)
+
+```turtle
+# 특허 추출 엔티티 → SDKB 인스턴스 (자동 생성, 검증 전)
+sdkb-data:material/tdmah_precursor
+    a semi:Material ;
+    skos:prefLabel "Tetrakis(dimethylamido)hafnium"@en ;
+    skos:altLabel "TDMAH"@en ;
+    sdkb:extractedFrom sdkb-data:patent/US20230123456 ;
+    sdkb:confidence 0.92 ;
+    sdkb:validationStatus "pending" ;
+    sdkb:cpcSource cpc:C23C16-455 ;
+    sdkb:usedInProcess sdkb-data:subprocess/ald .
+
+# 특허 출처 기록 (PROV-O)
+sdkb-data:patent/US20230123456
+    a prov:Entity ;
+    dcterms:identifier "US20230123456A1" ;
+    sdkb:cpcCode "C23C 16/455" ;
+    sdkb:filingDate "2023-05-15"^^xsd:date .
+```
+
+> **상세 실행 계획**은 별도 문서 `docs/patent_abstract_enrichment_plan.md`를 참조.
 
 ---
 
@@ -427,6 +532,19 @@ semi:MaterialProperty
 | 3.3 F-term 수집·SKOS 변환 | `ontology/fterm-semiconductor.ttl` |
 | 3.4 SDKB ↔ CPC/F-term 매핑 | `mappings/sdkb_cpc_alignment.ttl` |
 
+### Phase 3.5: 특허 초록 기반 온톨로지 보강 (3주)
+
+*(patent_abstract_enrichment_plan.md 참조)*
+
+| 태스크 | 상세 | 산출물 |
+|--------|------|--------|
+| 3.5.1 | BigQuery/API에서 반도체 CPC별 특허 초록 수집 (5~8만건) | `data/external/patent_abstracts.parquet` |
+| 3.5.2 | NER/RE 파이프라인 구축 (소재·공정·장비·파라미터 추출) | `scripts/extract_patent_entities.py` |
+| 3.5.3 | 추출 엔티티 → SDKB 노드 매칭 + 신규 후보 생성 | `data/reports/patent_entity_linking.json` |
+| 3.5.4 | 동의어·파라미터 범위·기술 트렌드 분석 | `data/reports/patent_enrichment_candidates.json` |
+| 3.5.5 | KIPRIS 한국어 초록으로 한-영 용어 쌍 수집 | `data/external/ko_en_terms.csv` |
+| 3.5.6 | 전문가 검증 후 온톨로지 반영 | 업데이트된 TTL, 확장된 노드·엣지 |
+
 ### Phase 4: 외부 소스 링킹 (2주)
 
 | 태스크 | 상세 | 산출물 |
@@ -443,7 +561,7 @@ semi:MaterialProperty
 |--------|--------|
 | 5.1 SHACL 전체 검증 | `data/reports/validation_report.json` |
 | 5.2 커버리지 분석 (CPC 대비) | `data/reports/coverage_gap.json` |
-| 5.3 통합 테스트 | `tests/test_semiconto_import.py`, `tests/test_taxonomy.py` |
+| 5.3 통합 테스트 | `tests/test_semiconto_import.py`, `tests/test_taxonomy.py`, `tests/test_patent_enrichment.py` |
 | 5.4 README/CHANGELOG 업데이트 | `README.md`, `CHANGELOG.md` |
 | 5.5 GitHub 푸시 및 태그 | `v1.1-semiconto-core` 태그 |
 
@@ -459,6 +577,8 @@ semi:MaterialProperty
 | 참조 택소노미 | 없음 | CPC, IPC, F-term |
 | 외부 엔티티 링킹 | 없음 | MatKG, Wikidata, BIS CCL |
 | 국제 표준 매핑 비율 | 0% | ≥ 80% (CPC 기준) |
+| 특허 기반 보강 | 없음 | 5~8만건 초록에서 엔티티·관계 자동 추출, 동의어·파라미터 보강 |
+| 한국어 용어 매핑 | 없음 | KIPRIS 초록 기반 한-영 용어 쌍 |
 | 학술 발표 가능성 | 자체 구축물 | "SemicONTO 확장" — 기존 연구 위에 기여 |
 
 ---
@@ -472,6 +592,9 @@ semi:MaterialProperty
 | 다중 소스 라이선스 충돌 | 배포 제한 | 라이선스 호환 매트릭스 관리 (주로 CC BY 4.0 + Apache 2.0 + Public Domain) |
 | 온톨로지 복잡도 증가 | 유지보수 부담 | 모듈화 설계로 독립적 업데이트 가능 |
 | MatKG 2.8GB 데이터 처리 | 리소스 부담 | 반도체 관련 엔티티만 필터 추출 (~수천 개) |
+| NLP 추출 정확도 한계 | 오류 엔티티 온톨로지 유입 | confidence score + 전문가 검증 2단계 게이트, validationStatus 속성 |
+| BigQuery 대량 쿼리 비용 | 무료 한도 초과 시 과금 | 반도체 CPC 서브트리만 선별, 파티셔닝 쿼리로 1TB 이내 유지 |
+| 특허 초록 다국어 처리 | 비영문 초록 NER 정확도 저하 | 1차 영문 초록만 처리, KIPRIS 한국어는 별도 파이프라인 |
 
 ---
 
