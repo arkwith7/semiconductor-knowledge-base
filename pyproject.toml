@@ -21,13 +21,23 @@ dependencies = [
     "rapidfuzz>=3.9",
     # JSON Schema validation
     "jsonschema>=4.22",
+    # NumPy (used by ranking baseline)
+    "numpy>=1.26",
 ]
 
 [project.optional-dependencies]
 # Embedding-based alignment (GPU recommended)
 align = [
     "sentence-transformers>=3.0",
-    "numpy>=1.26",
+]
+# Baseline retrieval evaluation for AFCP-EM-PriorArt
+priorart = [
+    "scikit-learn>=1.4",
+]
+# Notebook execution
+notebook = [
+    "jupyter>=1.0",
+    "nbconvert>=7.16",
 ]
 # Development & testing
 dev = [
@@ -36,13 +46,16 @@ dev = [
     "ruff>=0.5",
 ]
 # Full pipeline (all extras)
-full = ["sdkb[align,dev]"]
+full = ["sdkb[align,priorart,notebook,dev]"]
 
 [project.scripts]
-sdkb-parse   = "scripts.parse_baseline:main"
-sdkb-convert = "scripts.convert_rdf:main"
-sdkb-align   = "scripts.align_candidates:main"
-sdkb-validate = "scripts.validate_shacl:main"
+sdkb-parse              = "scripts.parse_baseline:main"
+sdkb-convert            = "scripts.convert_rdf:main"
+sdkb-align              = "scripts.align_candidates:main"
+sdkb-validate           = "scripts.validate_shacl:main"
+sdkb-ingest-sirp        = "scripts.ingest_rejected_patents:main"
+sdkb-sirp-pairs         = "scripts.build_prior_art_pairs:main"
+sdkb-sirp-problems      = "scripts.sample_problems:main"
 
 [build-system]
 requires = ["setuptools>=69"]

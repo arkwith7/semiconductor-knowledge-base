@@ -1,0 +1,107 @@
+{
+  "metadata": {
+    "version": "v1.0",
+    "generated_date": "2026-02-14T00:00:00Z",
+    "description": "Leakage incident reports (L1-L4) with RCA, remediation, and prevention controls",
+    "total_incidents": 4,
+    "coverage": ["S2", "S4", "S6"]
+  },
+  "incidents": [
+    {
+      "incident_id": "L1",
+      "scenario_class": "S2",
+      "problem_id": "PROB_008",
+      "expert_id": "EXP_027",
+      "system_verdict": "PERMIT",
+      "expected_verdict": "BLOCK",
+      "severity": "high",
+      "root_cause": {
+        "category": "policy_enforcement_gap",
+        "detail": "Blocking constraints were not sufficiently reflected in final ranking path.",
+        "evidence": ["rank_path_missing_hard_block", "deny_rule_bypassed_before_final_topk"]
+      },
+      "remediation": {
+        "code_area": "backend/app/agents/compliance_agent.py",
+        "action": "apply hard-block prefilter before ranking",
+        "status": "planned"
+      },
+      "prevention": {
+        "test": "S2 deny-rule regression",
+        "monitor": "leakage_rate_alert",
+        "owner": "compliance-eval"
+      }
+    },
+    {
+      "incident_id": "L2",
+      "scenario_class": "S2",
+      "problem_id": "PROB_019",
+      "expert_id": "EXP_027",
+      "system_verdict": "PERMIT",
+      "expected_verdict": "BLOCK",
+      "severity": "high",
+      "root_cause": {
+        "category": "reranker_override",
+        "detail": "Restriction evidence existed but reranker score overrode compliance penalty.",
+        "evidence": ["compliance_penalty_underweighted", "ltr_score_dominated_final_rank"]
+      },
+      "remediation": {
+        "code_area": "backend/app/experiments/online_runner.py",
+        "action": "enforce compliance penalty floor before final rerank",
+        "status": "planned"
+      },
+      "prevention": {
+        "test": "penalty-floor unit test",
+        "monitor": "topk_false_permit_alarm",
+        "owner": "retrieval-ranking"
+      }
+    },
+    {
+      "incident_id": "L3",
+      "scenario_class": "S4",
+      "problem_id": "ADV_PROB_004",
+      "expert_id": "EXP_039",
+      "system_verdict": "PERMIT",
+      "expected_verdict": "BLOCK",
+      "severity": "critical",
+      "root_cause": {
+        "category": "tier2_not_forced",
+        "detail": "Conflict-resolution branch was skipped when confidence exceeded threshold in Tier1.",
+        "evidence": ["conflict_detected_without_resolution", "tier1_short_circuit"]
+      },
+      "remediation": {
+        "code_area": "backend/app/agents/compliance_agent.py",
+        "action": "force Tier2 conflict protocol for S4 irrespective of Tier1 confidence",
+        "status": "planned"
+      },
+      "prevention": {
+        "test": "S4 adversarial integration test",
+        "monitor": "conflict_resolution_activation_rate",
+        "owner": "agent-orchestration"
+      }
+    },
+    {
+      "incident_id": "L4",
+      "scenario_class": "S6",
+      "problem_id": "ADV_PROB_024",
+      "expert_id": "EXP_049",
+      "system_verdict": "REVIEW",
+      "expected_verdict": "ESCALATE",
+      "severity": "critical",
+      "root_cause": {
+        "category": "escalation_trigger_gap",
+        "detail": "Novel-policy detector did not trigger escalation because policy-version diff was missing.",
+        "evidence": ["missing_policy_diff_signal", "fallback_to_review_instead_of_escalate"]
+      },
+      "remediation": {
+        "code_area": "backend/app/agents/compliance_agent.py",
+        "action": "add policy-version diff gate and enforce ESCALATE on unknown-policy path",
+        "status": "planned"
+      },
+      "prevention": {
+        "test": "S6 escalation integration test",
+        "monitor": "escalation_sla_breach_rate",
+        "owner": "compliance-ops"
+      }
+    }
+  ]
+}

@@ -1,0 +1,143 @@
+@prefix sdkb:    <https://w3id.org/sdkb/> .
+@prefix ont:     <https://w3id.org/sdkb/ont/> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+# ═══════════════════════════════════════════════════════════════════
+# SDKB v1.0 — Foresight Module (sdkb-foresight.ttl)
+#
+# STEEPVE foresight factors, scenarios, signals, and real-options on
+# technology investments. Aligned with Prof. Shin's complex real-options
+# research line and corporate foresight pillar.
+# ═══════════════════════════════════════════════════════════════════
+
+<https://w3id.org/sdkb/ont/fore>
+    a owl:Ontology ;
+    rdfs:label "SDKB Foresight Module"@en ;
+    rdfs:comment "STEEPVE scenarios, signals, and real options for technology investment decisions."@en ;
+    owl:versionInfo "1.0.0-dev" ;
+    dcterms:license <https://spdx.org/licenses/CDLA-Permissive-2.0.html> ;
+    owl:imports <https://w3id.org/sdkb/ont> .
+
+# ── CLASSES ────────────────────────────────────────────────────────
+
+ont:Scenario
+    a owl:Class ;
+    rdfs:label "Foresight Scenario"@en ;
+    rdfs:comment "A coherent narrative of future states used to stress-test technology investment decisions."@en .
+
+ont:STEEPVEFactor
+    a owl:Class ;
+    rdfs:label "STEEPVE Factor"@en ;
+    rdfs:comment "Driver category: Social, Technological, Economic, Environmental, Political, Values, Ethical."@en .
+
+ont:STEEPVEDimension
+    a owl:Class ;
+    rdfs:subClassOf skos:Concept ;
+    rdfs:label "STEEPVE Dimension"@en .
+
+ont:Signal
+    a owl:Class ;
+    rdfs:label "Weak Signal"@en ;
+    rdfs:comment "An early indicator that a foresight factor is materializing (e.g. new patent cluster, regulation draft, media spike)."@en .
+
+ont:RealOption
+    a owl:Class ;
+    rdfs:label "Real Option"@en ;
+    rdfs:comment "An option on a technology investment — defer, expand, switch, abandon, contract, stage."@en .
+
+ont:OptionType
+    a owl:Class ;
+    rdfs:subClassOf skos:Concept ;
+    rdfs:label "Real Option Type"@en .
+
+# ── STEEPVE DIMENSION CONCEPTS ─────────────────────────────────────
+
+ont:STEEPVE_Social        a ont:STEEPVEDimension ; skos:prefLabel "Social"@en ;        skos:notation "S" .
+ont:STEEPVE_Technological a ont:STEEPVEDimension ; skos:prefLabel "Technological"@en ; skos:notation "T" .
+ont:STEEPVE_Economic      a ont:STEEPVEDimension ; skos:prefLabel "Economic"@en ;      skos:notation "E1" .
+ont:STEEPVE_Environmental a ont:STEEPVEDimension ; skos:prefLabel "Environmental"@en ; skos:notation "E2" .
+ont:STEEPVE_Political     a ont:STEEPVEDimension ; skos:prefLabel "Political"@en ;     skos:notation "P" .
+ont:STEEPVE_Values        a ont:STEEPVEDimension ; skos:prefLabel "Values"@en ;        skos:notation "V" .
+ont:STEEPVE_Ethical       a ont:STEEPVEDimension ; skos:prefLabel "Ethical"@en ;       skos:notation "E3" .
+
+# ── OPTION TYPE CONCEPTS ───────────────────────────────────────────
+
+ont:Option_Defer    a ont:OptionType ; skos:prefLabel "Defer Option"@en .
+ont:Option_Expand   a ont:OptionType ; skos:prefLabel "Expand Option"@en .
+ont:Option_Switch   a ont:OptionType ; skos:prefLabel "Switch Option"@en .
+ont:Option_Abandon  a ont:OptionType ; skos:prefLabel "Abandon Option"@en .
+ont:Option_Stage    a ont:OptionType ; skos:prefLabel "Stage Option"@en ;
+    rdfs:comment "Compound option — invest in stages contingent on intermediate signals."@en .
+
+# ── OBJECT PROPERTIES ──────────────────────────────────────────────
+
+ont:scenarioDriver
+    a owl:ObjectProperty ;
+    rdfs:domain ont:Scenario ;
+    rdfs:range ont:STEEPVEFactor ;
+    rdfs:label "scenario driver"@en .
+
+ont:hasDimension
+    a owl:ObjectProperty ;
+    rdfs:domain ont:STEEPVEFactor ;
+    rdfs:range ont:STEEPVEDimension ;
+    rdfs:label "has dimension"@en .
+
+ont:signalsFactor
+    a owl:ObjectProperty ;
+    rdfs:domain ont:Signal ;
+    rdfs:range ont:STEEPVEFactor ;
+    rdfs:label "signals factor"@en .
+
+ont:hasRealOption
+    a owl:ObjectProperty ;
+    rdfs:range ont:RealOption ;
+    rdfs:label "has real option"@en ;
+    rdfs:comment "Attaches a real option to a TechnologyNode, Process, or Firm capability."@en .
+
+ont:optionType
+    a owl:ObjectProperty ;
+    rdfs:domain ont:RealOption ;
+    rdfs:range ont:OptionType ;
+    rdfs:label "option type"@en .
+
+ont:optionUnderScenario
+    a owl:ObjectProperty ;
+    rdfs:domain ont:RealOption ;
+    rdfs:range ont:Scenario ;
+    rdfs:label "option under scenario"@en .
+
+# ── DATATYPE PROPERTIES ────────────────────────────────────────────
+
+ont:scenarioProbability
+    a owl:DatatypeProperty ;
+    rdfs:domain ont:Scenario ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "scenario probability"@en ;
+    rdfs:comment "Subjective probability assigned to the scenario (sums to 1.0 within a scenario set)."@en .
+
+ont:optionValue
+    a owl:DatatypeProperty ;
+    rdfs:domain ont:RealOption ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "option value"@en ;
+    rdfs:comment "Computed real-option value in KRW (compound real-options method, Shin et al.)."@en .
+
+ont:exerciseDate
+    a owl:DatatypeProperty ;
+    rdfs:domain ont:RealOption ;
+    rdfs:range xsd:date ;
+    rdfs:label "exercise date"@en .
+
+ont:signalStrength
+    a owl:DatatypeProperty ;
+    rdfs:domain ont:Signal ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "signal strength"@en ;
+    rdfs:comment "Normalized 0.0–1.0 strength of the weak signal at last observation."@en .

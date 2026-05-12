@@ -7,6 +7,7 @@ object/datatype properties, and annotation properties for SDKB v1.0.
 
 from pathlib import Path
 from rdflib import Graph, Literal, URIRef, BNode
+from rdflib.collection import Collection
 from rdflib.namespace import RDF, RDFS, OWL, XSD, DCTERMS, SKOS
 
 # Add parent to path for config import
@@ -16,6 +17,21 @@ from config.namespaces import SDKB_ONT, SDKB_GOV, SDKB_BASE, PROV, PREFIX_MAP
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "ontology" / "sdkb-core.ttl"
+
+# ─── Permissive domain/range overrides ─────────────────────────────────
+# A handful of curation predicates are used with multiple subject/object
+# class shapes in the baseline data. Emit owl:unionOf rather than a single
+# class so RDFS reasoning does not mis-type nodes (e.g. RootCause being
+# coerced into FailureMode through ont:mitigatedBy's domain).
+PERMISSIVE_DOMAIN: dict[str, list[str]] = {
+    "mitigatedBy":      ["FailureMode", "RootCause"],
+    "requiresSkill":    ["SubProcess", "Mitigation"],
+    "madeBy":           ["Material", "EquipmentClass"],
+    "incompatibleWith": ["SubProcess", "EquipmentClass", "Material"],
+}
+PERMISSIVE_RANGE: dict[str, list[str]] = {
+    "notAllowedWith":   ["Material", "Parameter", "SubProcess"],
+}
 
 
 def build_ontology() -> Graph:
@@ -121,16 +137,32 @@ def build_ontology() -> Graph:
         "notAllowedWith":      ("SubProcess",     "Material",       "Material not permitted in a sub-process."),
     }
 
+    def _resolve(cls_name: str) -> URIRef:
+        return (SDKB_GOV if cls_name in gov_classes else SDKB_ONT)[cls_name]
+
+    def _emit_class_or_union(prop_uri: URIRef, predicate: URIRef,
+                             spec) -> None:
+        """spec is a class name str or a list of class names (→ owl:unionOf)."""
+        if isinstance(spec, list):
+            union_node = BNode()
+            list_root = BNode()
+            g.add((prop_uri, predicate, union_node))
+            g.add((union_node, RDF.type, OWL.Class))
+            g.add((union_node, OWL.unionOf, list_root))
+            Collection(g, list_root, [_resolve(c) for c in spec])
+        else:
+            g.add((prop_uri, predicate, _resolve(spec)))
+
     for prop_name, (domain, range_, desc) in obj_props.items():
         prop = SDKB_ONT[prop_name]
         g.add((prop, RDF.type, OWL.ObjectProperty))
         g.add((prop, RDFS.label, Literal(prop_name, lang="en")))
         g.add((prop, RDFS.comment, Literal(desc, lang="en")))
-        # Determine if domain/range is core or governance
-        domain_ns = SDKB_GOV if domain in gov_classes else SDKB_ONT
-        range_ns = SDKB_GOV if range_ in gov_classes else SDKB_ONT
-        g.add((prop, RDFS.domain, domain_ns[domain]))
-        g.add((prop, RDFS.range, range_ns[range_]))
+        # Use permissive overrides where the baseline data exercises multiple shapes.
+        dom_spec = PERMISSIVE_DOMAIN.get(prop_name, domain)
+        rng_spec = PERMISSIVE_RANGE.get(prop_name, range_)
+        _emit_class_or_union(prop, RDFS.domain, dom_spec)
+        _emit_class_or_union(prop, RDFS.range, rng_spec)
 
     # ═══════════════════════════════════════════════════════════
     # OBJECT PROPERTIES — Governance Layer
@@ -151,10 +183,8 @@ def build_ontology() -> Graph:
         g.add((prop, RDF.type, OWL.ObjectProperty))
         g.add((prop, RDFS.label, Literal(prop_name, lang="en")))
         g.add((prop, RDFS.comment, Literal(desc, lang="en")))
-        domain_ns = SDKB_GOV if domain in gov_classes else SDKB_ONT
-        range_ns = SDKB_GOV if range_ in gov_classes else SDKB_ONT
-        g.add((prop, RDFS.domain, domain_ns[domain]))
-        g.add((prop, RDFS.range, range_ns[range_]))
+        _emit_class_or_union(prop, RDFS.domain, domain)
+        _emit_class_or_union(prop, RDFS.range, range_)
 
     # ═══════════════════════════════════════════════════════════
     # DATATYPE PROPERTIES

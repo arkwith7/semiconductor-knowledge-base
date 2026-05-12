@@ -1,0 +1,2498 @@
+{
+  "metadata": {
+    "generated_date": "2026-02-09T22:48:34.196272",
+    "total_problems": 34,
+    "description": "SME problems with compliance test scenarios (S1~S6, incl. GAP-B/D: US_EAR + SG_SGCOA)",
+    "scenario_distribution": {
+      "S1": 5,
+      "S2": 7,
+      "S3": 5,
+      "S4": 7,
+      "S5": 5,
+      "S6": 5
+    },
+    "purpose": "Priority 2 - Compliance scenario testing for Leakage Rate and Scenario Coverage metrics"
+  },
+  "problems": [
+    {
+      "problem_id": "PROB_001",
+      "company_type": "materials",
+      "company_size": "SME",
+      "problem_category": "cost_optimization",
+      "problem_title": "Need to optimize deposition process for cost reduction",
+      "problem_description": "We need to optimize our deposition process to achieve lower defects. Current performance: 71%. Target specification: 92%. Key constraints include time constraints. Previous optimization attempts using literature review showed mixed results.",
+      "technical_details": {
+        "current_performance": "75%",
+        "target_specification": "93%",
+        "improvement_needed": "21%"
+      },
+      "urgency_level": "medium",
+      "budget_range": "$50K-$100K",
+      "preferred_consultation_mode": "on-site",
+      "expected_timeline": "3 months",
+      "required_expertise": [
+        "equipment_maintenance",
+        "thin_film_physics",
+        "chemical_vapor_deposition"
+      ],
+      "process_area": [
+        "deposition",
+        "thin_film_stress",
+        "epitaxy"
+      ],
+      "equipment_involved": [
+        "AMAT_Endura",
+        "AMAT_Centura"
+      ],
+      "symptoms": [
+        "suboptimal_performance",
+        "variation",
+        "inefficiency"
+      ],
+      "business_impact": "Potential $363K annual savings",
+      "previous_attempts": [
+        "parameter tuning",
+        "DOE study",
+        "benchmarking"
+      ],
+      "compliance_sensitivity": "confidential",
+      "region": "Korea",
+      "industry_tags": [
+        "materials",
+        "deposition",
+        "thin_film_stress",
+        "epitaxy"
+      ],
+      "client_country": "KR",
+      "technology_classification": "GENERAL",
+      "compliance_requirements": {
+        "jurisdictions": [
+          "KR_ITPA"
+        ],
+        "expected_scenario": "S1",
+        "test_purpose": "Validate Clear Permit handling",
+        "blocking_reasons": [],
+        "expected_outcome": "PERMIT"
+      }
+    },
+    {
+      "problem_id": "PROB_002",
+      "company_type": "materials",
+      "company_size": "startup",
+      "problem_category": "qualification",
+      "problem_title": "Implementation support for AI_process_control",
+      "problem_description": "We are implementing EUV_lithography for cost reduction. Current challenges include yield ramp. We need guidance on recipe development. Timeline is 18 months for volume ramp. Success criteria: cycle time improvement.",
+      "technical_details": {
+        "technology_readiness": "TRL6",
+        "development_stage": "pilot",
+        "risk_level": "high"
+      },
+      "urgency_level": "high",
+      "budget_range": "$50K-$100K",
+      "preferred_consultation_mode": "remote",
+      "expected_timeline": "immediate",
+      "required_expertise": [
+        "slurry_chemistry",
+        "pad_conditioning",
+        "endpoint_detection",
+        "mechanical_planarization"
+      ],
+      "process_area": [
+        "CMP",
+        "slurry_chemistry",
+        "pad_conditioning",
+        "endpoint_detection"
+      ],
+      "equipment_involved": [
+        "Cabot_Slurry",
+        "Ebara_Frex"
+      ],
+      "symptoms": [
+        "new_technology_needed",
+        "capability_gap",
+        "competitive_pressure"
+      ],
+      "business_impact": "Potential $4839K opportunity",
+      "previous_attempts": [
+        "literature review",
+        "vendor discussions",
+        "internal trials"
+      ],
+      "compliance_sensitivity": "public",
+      "region": "Europe",
+      "industry_tags": [
+        "materials",
+        "CMP",
+        "slurry_chemistry",
+        "pad_conditioning",
+        "endpoint_detection"
+      ],
+      "client_country": "KR",
+      "technology_classification": "NCT_KR_01",
+      "compliance_requirements": {
+        "jurisdictions": [
+          "KR_ITPA"
+        ],
+        "expected_scenario": "S1",
+        "test_purpose": "Validate Clear Permit handling",
+        "blocking_reasons": [],
+        "expected_outcome": "PERMIT"
+      }
+    },
+    {
+      "problem_id": "PROB_003",
+      "company_type": "parts",
+      "company_size": "mid-size",
+      "problem_category": "equipment_drift",
+      "problem_title": "Gradual yield drop in deposition after material lot change",
+      "problem_description": "We are experiencing a critical yield drop from 88% to 72% in our deposition operation. The issue started after PM activities. Initial investigation shows CD variation. Customer is demanding immediate resolution as this affects customer delivery.",
+      "technical_details": {
+        "yield_baseline": "93%",
+        "current_yield": "76%",
+        "defect_types": [
+          "bridging",
+          "residue"
+        ],
+        "wafer_count_affected": 4886
+      },
+      "urgency_level": "critical",
+      "budget_range": "$50K-$100K",
+      "preferred_consultation_mode": "on-site",
+      "expected_timeline": "6 months",
+      "required_expertise": [
+        "chemical_vapor_deposition",
+        "thin_film_physics",
+        "equipment_maintenance"
+      ],
+      "process_area": [
+        "deposition",
+        "epitaxy",
+        "thin_film_stress",
+        "CVD"
+      ],
+      "equipment_involved": [
+        "AMAT_Endura",
+        "ASM_Pulsar"
+      ],
+      "symptoms": [
+        "yield_drop",
+        "defect_increase",
+        "process_variation"
+      ],
+      "business_impact": "$293K revenue impact per day",
+      "previous_attempts": [
+        "chamber cleaning",
+        "recipe adjustment",
+        "material qualification"
+      ],
+      "compliance_sensitivity": "confidential",
+      "region": "SEA",
+      "industry_tags": [
+        "parts",
+        "deposition",
+        "epitaxy",
+        "thin_film_stress",
+        "CVD"
+      ],
+      "client_country": "KR",
+      "technology_classification": "CCL_3A001",
+      "compliance_requirements": {
+        "jurisdictions": [
+          "KR_ITPA"
+        ],
+        "expected_scenario": "S1",
+        "test_purpose": "Validate Clear Permit handling",
+        "blocking_reasons": [],
+        "expected_outcome": "PERMIT"
+      }
+    },
+    {
+      "problem_id": "PROB_004",
+      "company_type": "parts",
+      "company_size": "mid-size",
+      "problem_category": "throughput_improvement",
+      "problem_title": "Need to optimize etching process for defect reduction",
+      "problem_description": "We need to optimize our etching process to achieve better uniformity. Current performance: 78%. Target specification: 93%. Key constraints include equipment compatibility. Previous optimization attempts using DOE showed inconclusive.",
+      "technical_details": {
+        "current_performance": "80%",
+        "target_specification": "91%",
+        "improvement_needed": "21%"
+      },
+      "urgency_level": "medium",
+      "budget_range": "<$10K",
+      "preferred_consultation_mode": "hybrid",
+      "expected_timeline": "1-2 weeks",
+      "required_expertise": [
+        "process_control",
+        "chemistry",
+        "equipment_troubleshooting"
+      ],
+      "process_area": [
+        "etching",
+        "wet_etching"
+      ],
+      "equipment_involved": [
+        "AMAT_Centura",
+        "TEL_Tactras"
+      ],
+      "symptoms": [
+        "suboptimal_performance",
+        "variation",
+        "inefficiency"
+      ],
+      "business_impact": "Potential $639K annual savings",
+      "previous_attempts": [
+        "parameter tuning",
+        "DOE study",
+        "benchmarking"
+      ],
+      "compliance_sensitivity": "confidential",
+      "region": "Korea",
+      "industry_tags": [
+        "parts",
+        "etching",
+        "wet_etching"
+      ],
+      "client_country": "KR",
+      "technology_classification": "GENERAL",
+      "compliance_requirements": {
+        "jurisdictions": [
+          "KR_ITPA"
+        ],
+        "expected_scenario": "S1",
+        "test_purpose": "Validate Clear Permit handling",
+        "blocking_reasons": [],
+        "expected_outcome": "PERMIT"
+      }
+    },
+    {
+      "problem_id": "PROB_005",
+      "company_type": "materials",
+      "company_size": "startup",
+      "problem_category": "throughput_improvement",
+      "problem_title": "Need to optimize diffusion process for cost reduction",
+      "problem_description": "We need to optimize our diffusion process to achieve lower defects. Current performance: 79%. Target specification: 92%. Key constraints include budget limitations. Previous optimization attempts using literature review showed inconclusive.",
+      "technical_details": {
+        "current_performance": "73%",
+        "target_specification": "95%",
+        "improvement_needed": "19%"
+      },
+      "urgency_level": "medium",
+      "budget_range": ">$100K",
+      "preferred_consultation_mode": "on-site",
+      "expected_timeline": "1 month",
+      "required_expertise": [
+        "dopant_physics",
+        "thermal_processing",
+        "equipment_calibration",
+        "process_integration"
+      ],
+      "process_area": [
+        "diffusion",
+        "annealing",
+        "dopant_activation",
+        "junction_formation"
+      ],
+      "equipment_involved": [
+        "TEL_Alpha",
+        "AMAT_Vantage"
+      ],
+      "symptoms": [
+        "suboptimal_performance",
+        "variation",
+        "inefficiency"
+      ],
+      "business_impact": "Potential $798K annual savings",
+      "previous_attempts": [
+        "parameter tuning",
+        "DOE study",
+        "benchmarking"
+      ],
+      "compliance_sensitivity": "public",
+      "region": "China",
+      "industry_tags": [
+        "materials",
+        "diffusion",
+        "annealing",
+        "dopant_activation",
+        "junction_formation"
+      ],
+      "client_country": "KR",
+      "technology_classification": "DUAL_USE",
+      "compliance_requirements": {
+        "jurisdictions": [
+          "KR_ITPA"
+        ],
+        "expected_scenario": "S1",
+        "test_purpose": "Validate Clear Permit handling",
+        "blocking_reasons": [],
+        "expected_outcome": "PERMIT"
+      }
+    },
+    {
+      "problem_id": "PROB_006",
+      "company_type": "parts",
+      "company_size": "startup",
+      "problem_category": "hardware_failure",
+      "problem_title": "TEL_Coater showing temperature_variation",
+      "problem_description": "Our TEL_Coater has been showing RF_mismatch for the past 2 weeks. Error codes: ERR_815. Chamber matching shows 10%. We have tried chamber cleaning without success. Equipment is critical for Line_3 with 28% throughput loss.",
+      "technical_details": {
+        "error_frequency": "7 times/day",
+        "affected_chambers": 2,
+        "downtime_hours": 56
+      },
+      "urgency_level": "high",
+      "budget_range": "$50K-$100K",
+      "preferred_consultation_mode": "document_review",
+      "expected_timeline": "6 months",
+      "required_expertise": [
+        "overlay_control",
+        "resist_chemistry"
+      ],
+      "process_area": [
+        "lithography",
+        "exposure",
+        "overlay"
+      ],
+      "equipment_involved": [
+        "TEL_Coater",
+        "SCREEN_Developer"
+      ],
+      "symptoms": [
+        "equipment_alarm",
+        "process_variation",
+        "chamber_mismatch"
+      ],
+      "business_impact": "$66K per day capacity loss",
+      "previous_attempts": [
+        "parts replacement",
+        "software update",
+        "vendor support"
+      ],
+      "compliance_sensitivity": "confidential",
+      "region": "Korea",
+      "industry_tags": [
+        "parts",
+        "lithography",
+        "exposure",
+        "overlay"
+      ],
+      "client_country": "CN",
+      "technology_classification": "CCL_3A001",
+      "compliance_requirements": {
+        "jurisdictions": [
+          "KR_ITPA"
+        ],
+        "expected_scenario": "S2",
+        "test_purpose": "Validate Clear Block handling",
+        "blocking_reasons": [
+          "NCT_TRANSFER_PROHIBITED",
+          "DESTINATION_RESTRICTED"
+        ],
+        "expected_outcome": "BLOCK"
+      }
+    },
+    {
+      "problem_id": "PROB_007",
+      "company_type": "equipment",
+      "company_size": "mid-size",
+      "problem_category": "qualification",
+      "problem_title": "Implementation support for selective_deposition",
+      "problem_description": "We are implementing atomic_layer_etching for cost reduction. Current challenges include integration complexity. We need guidance on troubleshooting. Timeline is 6 months for pilot production. Success criteria: yield >85%.",
+      "technical_details": {
+        "technology_readiness": "TRL7",
+        "development_stage": "pilot",
+        "risk_level": "medium"
+      },
+      "urgency_level": "medium",
+      "budget_range": "<$10K",
+      "preferred_consultation_mode": "remote",
+      "expected_timeline": "1 month",
+      "required_expertise": [
+        "material_science",
+        "thin_film_physics",
+        "chemical_vapor_deposition"
+      ],
+      "process_area": [
+        "deposition",
+        "epitaxy"
+      ],
+      "equipment_involved": [
+        "AMAT_Centura"
+      ],
+      "symptoms": [
+        "new_technology_needed",
+        "capability_gap",
+        "competitive_pressure"
+      ],
+      "business_impact": "Potential $2854K opportunity",
+      "previous_attempts": [
+        "literature review",
+        "vendor discussions",
+        "internal trials"
+      ],
+      "compliance_sensitivity": "confidential",
+      "region": "Korea",
+      "industry_tags": [
+        "equipment",
+        "deposition",
+        "epitaxy"
+      ],
+      "client_country": "CN",
+      "technology_classification": "DUAL_USE",
+      "compliance_requirements": {
+        "jurisdictions": [
+          "KR_ITPA"
+        ],
+        "expected_scenario": "S2",
+        "test_purpose": "Validate Clear Block handling",
+        "blocking_reasons": [
+          "NCT_TRANSFER_PROHIBITED",
+          "DESTINATION_RESTRICTED"
+        ],
+        "expected_outcome": "BLOCK"
+      }
+    },
+    {
+      "problem_id": "PROB_008",
+      "company_type": "materials",
+      "company_size": "mid-size",
+      "problem_category": "process_deviation",
+      "problem_title": "Significant yield drop in CMP after equipment PM",
+      "problem_description": "We are experiencing a significant yield drop from 87% to 66% in our CMP operation. The issue started after new material batch. Initial investigation shows film thickness non-uniformity. Customer is demanding immediate resolution as this affects qualification timeline.",
+      "technical_details": {
+        "yield_baseline": "89%",
+        "current_yield": "72%",
+        "defect_types": [
+          "open_circuits",
+          "residue"
+        ],
+        "wafer_count_affected": 550
+      },
+      "urgency_level": "high",
+      "budget_range": "<$10K",
+      "preferred_consultation_mode": "remote",
+      "expected_timeline": "immediate",
+      "required_expertise": [
+        "mechanical_planarization",
+        "slurry_chemistry",
+        "endpoint_detection"
+      ],
+      "process_area": [
+        "CMP",
+        "slurry_chemistry",
+        "defect_reduction",
+        "planarization"
+      ],
+      "equipment_involved": [
+        "3M_Pad"
+      ],
+      "symptoms": [
+        "yield_drop",
+        "defect_increase",
+        "process_variation"
+      ],
+      "business_impact": "$499K revenue impact per day",
+      "previous_attempts": [
+        "chamber cleaning",
+        "recipe adjustment",
+        "material qualification"
+      ],
+      "compliance_sensitivity": "public",
+      "region": "SEA",
+      "industry_tags": [
+        "materials",
+        "CMP",
+        "slurry_chemistry",
+        "defect_reduction",
+        "planarization"
+      ],
+      "client_country": "CN",
+      "technology_classification": "NCT_KR_01",
+      "compliance_requirements": {
+        "jurisdictions": [
+          "KR_ITPA"
+        ],
+        "expected_scenario": "S2",
+        "test_purpose": "Validate Clear Block handling",
+        "blocking_reasons": [
+          "NCT_TRANSFER_PROHIBITED",
+          "DESTINATION_RESTRICTED"
+        ],
+        "expected_outcome": "BLOCK"
+      }
+    },
+    {
+      "problem_id": "PROB_009",
+      "company_type": "parts",
+      "company_size": "SME",
+      "problem_category": "process_deviation",
+      "problem_title": "Gradual yield drop in deposition after recipe change",
+      "problem_description": "We are experiencing a critical yield drop from 89% to 70% in our deposition operation. The issue started after recipe optimization. Initial investigation shows film thickness non-uniformity. Customer is demanding immediate resolution as this affects customer delivery.",
+      "technical_details": {
+        "yield_baseline": "89%",
+        "current_yield": "84%",
+        "defect_types": [
+          "bridging",
+          "residue"
+        ],
+        "wafer_count_affected": 2147
+      },
+      "urgency_level": "critical",
+      "budget_range": "$10K-$50K",
+      "preferred_consultation_mode": "on-site",
+      "expected_timeline": "3 months",
+      "required_expertise": [
+        "material_science",
+        "chemical_vapor_deposition",
+        "equipment_maintenance"
+      ],
+      "process_area": [
+        "deposition",
+        "ALD"
+      ],
+      "equipment_involved": [
+        "ASM_Pulsar"
+      ],
+      "symptoms": [
+        "yield_drop",
+        "defect_increase",
+        "process_variation"
+      ],
+      "business_impact": "$339K revenue impact per day",
+      "previous_attempts": [
+        "chamber cleaning",
+        "recipe adjustment",
+        "material qualification"
+      ],
+      "compliance_sensitivity": "confidential",
+      "region": "Korea",
+      "industry_tags": [
+        "parts",
+        "deposition",
+        "ALD"
+      ],
+      "client_country": "CN",
+      "technology_classification": "CCL_3A001",
+      "compliance_requirements": {
+        "jurisdictions": [
+          "KR_ITPA"
+        ],
+        "expected_scenario": "S2",
+        "test_purpose": "Validate Clear Block handling",
+        "blocking_reasons": [
+          "NCT_TRANSFER_PROHIBITED",
+          "DESTINATION_RESTRICTED"
+        ],
+        "expected_outcome": "BLOCK"
+      }
+    },
+    {
+      "problem_id": "PROB_010",
+      "company_type": "parts",
+      "company_size": "SME",
+      "problem_category": "equipment_drift",
+      "problem_title": "Significant yield drop in lithography after material lot change",
+      "problem_description": "We are experiencing a critical yield drop from 90% to 74% in our lithography operation. The issue started after PM activities. Initial investigation shows pattern distortion. Customer is demanding immediate resolution as this affects quarterly targets.",
+      "technical_details": {
+        "yield_baseline": "90%",
+        "current_yield": "69%",
+        "defect_types": [
+          "particles",
+          "open_circuits"
+        ],
+        "wafer_count_affected": 2392
+      },
+      "urgency_level": "critical",
+      "budget_range": "<$10K",
+      "preferred_consultation_mode": "document_review",
+      "expected_timeline": "3 months",
+      "required_expertise": [
+        "resist_chemistry",
+        "optical_proximity_correction",
+        "overlay_control"
+      ],
+      "process_area": [
+        "lithography",
+        "photoresist",
+        "development",
+        "critical_dimension"
+      ],
+      "equipment_involved": [
+        "SCREEN_Developer",
+        "ASML_Scanner"
+      ],
+      "symptoms": [
+        "yield_drop",
+        "defect_increase",
+        "process_variation"
+      ],
+      "business_impact": "$168K revenue impact per day",
+      "previous_attempts": [
+        "chamber cleaning",
+        "recipe adjustment",
+        "material qualification"
+      ],
+      "compliance_sensitivity": "restricted",
+      "region": "China",
+      "industry_tags": [
+        "parts",
+        "lithography",
+        "photoresist",
+        "development",
+        "critical_dimension"
+      ],
+      "client_country": "CN",
+      "technology_classification": "GENERAL",
+      "compliance_requirements": {
+        "jurisdictions": [
+          "KR_ITPA"
+        ],
+        "expected_scenario": "S2",
+        "test_purpose": "Validate Clear Block handling",
+        "blocking_reasons": [
+          "NCT_TRANSFER_PROHIBITED",
+          "DESTINATION_RESTRICTED"
+        ],
+        "expected_outcome": "BLOCK"
+      }
+    },
+    {
+      "problem_id": "PROB_011",
+      "company_type": "materials",
+      "company_size": "SME",
+      "problem_category": "metallic_contamination",
+      "problem_title": "particle contamination in process chamber",
+      "problem_description": "We have identified particle contamination in our gas delivery system. Contamination levels measured at 58 ppm using ICP-MS. This is impacting memory devices with metal bridging. Root cause investigation points to chamber seasoning.",
+      "technical_details": {
+        "contamination_level": "55 ppm",
+        "detection_method": "XPS",
+        "contaminated_area": "82 cm²"
+      },
+      "urgency_level": "medium",
+      "budget_range": "<$10K",
+      "preferred_consultation_mode": "hybrid",
+      "expected_timeline": "immediate",
+      "required_expertise": [
+        "process_integration",
+        "thermal_processing",
+        "equipment_calibration",
+        "dopant_physics"
+      ],
+      "process_area": [
+        "diffusion",
+        "annealing",
+        "dopant_activation",
+        "ion_implantation"
+      ],
+      "equipment_involved": [
+        "AMAT_Vantage",
+        "Contamination_Monitor"
+      ],
+      "symptoms": [
+        "contamination_detected",
+        "device_failure",
+        "yield_loss"
+      ],
+      "business_impact": "8952 wafers at risk",
+      "previous_attempts": [
+        "chamber cleaning",
+        "chemical replacement",
+        "filter change"
+      ],
+      "compliance_sensitivity": "confidential",
+      "region": "Europe",
+      "industry_tags": [
+        "materials",
+        "diffusion",
+        "annealing",
+        "dopant_activation",
+        "ion_implantation"
+      ],
+      "client_country": "SG",
+      "technology_classification": "CCL_3B001",
+      "compliance_requirements": {
+        "jurisdictions": [
+          "KR_ITPA"
+        ],
+        "expected_scenario": "S3",
+        "test_purpose": "Validate Ambiguous handling",
+        "blocking_reasons": [],
+        "review_required": true,
+        "expected_outcome": "REVIEW"
+      }
+    },
+    {
+      "problem_id": "PROB_012",
+      "company_type": "parts",
+      "company_size": "mid-size",
+      "problem_category": "organic_contamination",
+      "problem_title": "organic contamination in exhaust system",
+      "problem_description": "We have identified organic contamination in our gas delivery system. Contamination levels measured at 51 ppm using XPS. This is impacting memory devices with metal bridging. Root cause investigation points to upstream contamination.",
+      "technical_details": {
+        "contamination_level": "44 ppm",
+        "detection_method": "SIMS",
+        "contaminated_area": "83 cm²"
+      },
+      "urgency_level": "critical",
+      "budget_range": "<$10K",
+      "preferred_consultation_mode": "remote",
+      "expected_timeline": "immediate",
+      "required_expertise": [
+        "thermal_processing",
+        "process_integration",
+        "equipment_calibration"
+      ],
+      "process_area": [
+        "diffusion",
+        "ion_implantation"
+      ],
+      "equipment_involved": [
+        "AMAT_Vantage",
+        "Contamination_Monitor"
+      ],
+      "symptoms": [
+        "contamination_detected",
+        "device_failure",
+        "yield_loss"
+      ],
+      "business_impact": "2262 wafers at risk",
+      "previous_attempts": [
+        "chamber cleaning",
+        "chemical replacement",
+        "filter change"
+      ],
+      "compliance_sensitivity": "confidential",
+      "region": "USA",
+      "industry_tags": [
+        "parts",
+        "diffusion",
+        "ion_implantation"
+      ],
+      "client_country": "SG",
+      "technology_classification": "NCT_KR_01",
+      "compliance_requirements": {
+        "jurisdictions": [
+          "KR_ITPA"
+        ],
+        "expected_scenario": "S3",
+        "test_purpose": "Validate Ambiguous handling",
+        "blocking_reasons": [],
+        "review_required": true,
+        "expected_outcome": "REVIEW"
+      }
+    },
+    {
+      "problem_id": "PROB_013",
+      "company_type": "equipment",
+      "company_size": "startup",
+      "problem_category": "process_deviation",
+      "problem_title": "Gradual yield drop in diffusion after facility maintenance",
+      "problem_description": "We are experiencing a critical yield drop from 92% to 68% in our diffusion operation. The issue started after chamber seasoning. Initial investigation shows pattern distortion. Customer is demanding immediate resolution as this affects qualification timeline.",
+      "technical_details": {
+        "yield_baseline": "91%",
+        "current_yield": "65%",
+        "defect_types": [
+          "bridging",
+          "residue"
+        ],
+        "wafer_count_affected": 4722
+      },
+      "urgency_level": "high",
+      "budget_range": "$50K-$100K",
+      "preferred_consultation_mode": "document_review",
+      "expected_timeline": "3 months",
+      "required_expertise": [
+        "process_integration",
+        "equipment_calibration",
+        "thermal_processing"
+      ],
+      "process_area": [
+        "diffusion",
+        "annealing",
+        "dopant_activation",
+        "junction_formation"
+      ],
+      "equipment_involved": [
+        "TEL_Alpha"
+      ],
+      "symptoms": [
+        "yield_drop",
+        "defect_increase",
+        "process_variation"
+      ],
+      "business_impact": "$72K revenue impact per day",
+      "previous_attempts": [
+        "chamber cleaning",
+        "recipe adjustment",
+        "material qualification"
+      ],
+      "compliance_sensitivity": "confidential",
+      "region": "SEA",
+      "industry_tags": [
+        "equipment",
+        "diffusion",
+        "annealing",
+        "dopant_activation",
+        "junction_formation"
+      ],
+      "client_country": "SG",
+      "technology_classification": "NCT_KR_01",
+      "compliance_requirements": {
+        "jurisdictions": [
+          "KR_ITPA"
+        ],
+        "expected_scenario": "S3",
+        "test_purpose": "Validate Ambiguous handling",
+        "blocking_reasons": [],
+        "review_required": true,
+        "expected_outcome": "REVIEW"
+      }
+    },
+    {
+      "problem_id": "PROB_014",
+      "company_type": "parts",
+      "company_size": "mid-size",
+      "problem_category": "particle_contamination",
+      "problem_title": "particle contamination in process chamber",
+      "problem_description": "We have identified particle contamination in our gas delivery system. Contamination levels measured at 85 ppm using SIMS. This is impacting memory devices with junction leakage. Root cause investigation points to maintenance activities.",
+      "technical_details": {
+        "contamination_level": "10 ppm",
+        "detection_method": "ICP-MS",
+        "contaminated_area": "67 cm²"
+      },
+      "urgency_level": "critical",
+      "budget_range": "$50K-$100K",
+      "preferred_consultation_mode": "remote",
+      "expected_timeline": "1 month",
+      "required_expertise": [
+        "optical_proximity_correction",
+        "photolithography",
+        "overlay_control"
+      ],
+      "process_area": [
+        "lithography",
+        "photoresist"
+      ],
+      "equipment_involved": [
+        "TEL_Coater",
+        "Contamination_Monitor"
+      ],
+      "symptoms": [
+        "contamination_detected",
+        "device_failure",
+        "yield_loss"
+      ],
+      "business_impact": "9556 wafers at risk",
+      "previous_attempts": [
+        "chamber cleaning",
+        "chemical replacement",
+        "filter change"
+      ],
+      "compliance_sensitivity": "restricted",
+      "region": "SEA",
+      "industry_tags": [
+        "parts",
+        "lithography",
+        "photoresist"
+      ],
+      "client_country": "SG",
+      "technology_classification": "NCT_KR_01",
+      "compliance_requirements": {
+        "jurisdictions": [
+          "KR_ITPA"
+        ],
+        "expected_scenario": "S3",
+        "test_purpose": "Validate Ambiguous handling",
+        "blocking_reasons": [],
+        "review_required": true,
+        "expected_outcome": "REVIEW"
+      }
+    },
+    {
+      "problem_id": "PROB_015",
+      "company_type": "equipment",
+      "company_size": "SME",
+      "problem_category": "throughput_improvement",
+      "problem_title": "Need to optimize deposition process for uniformity",
+      "problem_description": "We need to optimize our deposition process to achieve lower defects. Current performance: 75%. Target specification: 93%. Key constraints include equipment compatibility. Previous optimization attempts using literature review showed inconclusive.",
+      "technical_details": {
+        "current_performance": "81%",
+        "target_specification": "91%",
+        "improvement_needed": "15%"
+      },
+      "urgency_level": "medium",
+      "budget_range": "$50K-$100K",
+      "preferred_consultation_mode": "remote",
+      "expected_timeline": "1-2 weeks",
+      "required_expertise": [
+        "equipment_maintenance",
+        "thin_film_physics",
+        "material_science"
+      ],
+      "process_area": [
+        "deposition",
+        "PVD",
+        "ALD"
+      ],
+      "equipment_involved": [
+        "TEL_Formula"
+      ],
+      "symptoms": [
+        "suboptimal_performance",
+        "variation",
+        "inefficiency"
+      ],
+      "business_impact": "Potential $810K annual savings",
+      "previous_attempts": [
+        "parameter tuning",
+        "DOE study",
+        "benchmarking"
+      ],
+      "compliance_sensitivity": "public",
+      "region": "China",
+      "industry_tags": [
+        "equipment",
+        "deposition",
+        "PVD",
+        "ALD"
+      ],
+      "client_country": "SG",
+      "technology_classification": "CCL_3B001",
+      "compliance_requirements": {
+        "jurisdictions": [
+          "KR_ITPA"
+        ],
+        "expected_scenario": "S3",
+        "test_purpose": "Validate Ambiguous handling",
+        "blocking_reasons": [],
+        "review_required": true,
+        "expected_outcome": "REVIEW"
+      }
+    },
+    {
+      "problem_id": "PROB_016",
+      "company_type": "parts",
+      "company_size": "startup",
+      "problem_category": "recipe_development",
+      "problem_title": "Implementation support for AI_process_control",
+      "problem_description": "We are implementing selective_deposition for cost reduction. Current challenges include integration complexity. We need guidance on troubleshooting. Timeline is 1 year for pilot production. Success criteria: cost reduction 20%.",
+      "technical_details": {
+        "technology_readiness": "TRL5",
+        "development_stage": "pilot",
+        "risk_level": "medium"
+      },
+      "urgency_level": "high",
+      "budget_range": "$50K-$100K",
+      "preferred_consultation_mode": "hybrid",
+      "expected_timeline": "immediate",
+      "required_expertise": [
+        "statistical_process_control",
+        "calibration",
+        "measurement_techniques"
+      ],
+      "process_area": [
+        "metrology",
+        "overlay_measurement",
+        "CD_measurement"
+      ],
+      "equipment_involved": [
+        "Hitachi_SEM"
+      ],
+      "symptoms": [
+        "new_technology_needed",
+        "capability_gap",
+        "competitive_pressure"
+      ],
+      "business_impact": "Potential $3208K opportunity",
+      "previous_attempts": [
+        "literature review",
+        "vendor discussions",
+        "internal trials"
+      ],
+      "compliance_sensitivity": "confidential",
+      "region": "Korea",
+      "industry_tags": [
+        "parts",
+        "metrology",
+        "overlay_measurement",
+        "CD_measurement"
+      ],
+      "client_country": "TW",
+      "technology_classification": "GENERAL",
+      "compliance_requirements": {
+        "jurisdictions": [
+          "KR_ITPA",
+          "US_EAR"
+        ],
+        "expected_scenario": "S4",
+        "test_purpose": "Validate Multi-Jurisdiction handling",
+        "blocking_reasons": [],
+        "multi_jurisdiction_consistent": true,
+        "expected_outcome": "BLOCK"
+      }
+    },
+    {
+      "problem_id": "PROB_017",
+      "company_type": "parts",
+      "company_size": "mid-size",
+      "problem_category": "software_issue",
+      "problem_title": "LAM_Flex showing RF_mismatch",
+      "problem_description": "Our LAM_Flex has been showing temperature_variation for the past 3 days. Error codes: ERR_551. Chamber matching shows 11%. We have tried chamber cleaning without success. Equipment is critical for Line_5 with 37% throughput loss.",
+      "technical_details": {
+        "error_frequency": "5 times/day",
+        "affected_chambers": 2,
+        "downtime_hours": 35
+      },
+      "urgency_level": "critical",
+      "budget_range": ">$100K",
+      "preferred_consultation_mode": "on-site",
+      "expected_timeline": "1 month",
+      "required_expertise": [
+        "process_control",
+        "chemistry",
+        "plasma_physics",
+        "equipment_troubleshooting"
+      ],
+      "process_area": [
+        "etching",
+        "selectivity",
+        "profile_control"
+      ],
+      "equipment_involved": [
+        "AMAT_Centura",
+        "LAM_Flex"
+      ],
+      "symptoms": [
+        "equipment_alarm",
+        "process_variation",
+        "chamber_mismatch"
+      ],
+      "business_impact": "$54K per day capacity loss",
+      "previous_attempts": [
+        "parts replacement",
+        "software update",
+        "vendor support"
+      ],
+      "compliance_sensitivity": "confidential",
+      "region": "Korea",
+      "industry_tags": [
+        "parts",
+        "etching",
+        "selectivity",
+        "profile_control"
+      ],
+      "client_country": "TW",
+      "technology_classification": "GENERAL",
+      "compliance_requirements": {
+        "jurisdictions": [
+          "KR_ITPA",
+          "US_EAR"
+        ],
+        "expected_scenario": "S4",
+        "test_purpose": "Validate Multi-Jurisdiction handling",
+        "blocking_reasons": [],
+        "multi_jurisdiction_consistent": true,
+        "expected_outcome": "BLOCK"
+      }
+    },
+    {
+      "problem_id": "PROB_018",
+      "company_type": "materials",
+      "company_size": "startup",
+      "problem_category": "particle_contamination",
+      "problem_title": "ionic contamination in exhaust system",
+      "problem_description": "We have identified ionic contamination in our wafer backside. Contamination levels measured at 87 ppm using particle counter. This is impacting logic chips with metal bridging. Root cause investigation points to chemical purity.",
+      "technical_details": {
+        "contamination_level": "3 ppm",
+        "detection_method": "XPS",
+        "contaminated_area": "15 cm²"
+      },
+      "urgency_level": "critical",
+      "budget_range": "$50K-$100K",
+      "preferred_consultation_mode": "remote",
+      "expected_timeline": "1-2 weeks",
+      "required_expertise": [
+        "statistical_process_control",
+        "measurement_techniques"
+      ],
+      "process_area": [
+        "metrology",
+        "film_thickness"
+      ],
+      "equipment_involved": [
+        "Bruker_Ellipsometer",
+        "Contamination_Monitor"
+      ],
+      "symptoms": [
+        "contamination_detected",
+        "device_failure",
+        "yield_loss"
+      ],
+      "business_impact": "8907 wafers at risk",
+      "previous_attempts": [
+        "chamber cleaning",
+        "chemical replacement",
+        "filter change"
+      ],
+      "compliance_sensitivity": "public",
+      "region": "SEA",
+      "industry_tags": [
+        "materials",
+        "metrology",
+        "film_thickness"
+      ],
+      "client_country": "TW",
+      "technology_classification": "NCT_KR_01",
+      "compliance_requirements": {
+        "jurisdictions": [
+          "KR_ITPA",
+          "US_EAR"
+        ],
+        "expected_scenario": "S4",
+        "test_purpose": "Validate Multi-Jurisdiction handling",
+        "blocking_reasons": [],
+        "multi_jurisdiction_consistent": true,
+        "expected_outcome": "BLOCK"
+      }
+    },
+    {
+      "problem_id": "PROB_019",
+      "company_type": "parts",
+      "company_size": "mid-size",
+      "problem_category": "metallic_contamination",
+      "problem_title": "metallic contamination in chemical lines",
+      "problem_description": "We have identified metallic contamination in our gas delivery system. Contamination levels measured at 15 ppm using particle counter. This is impacting power devices with gate oxide breakdown. Root cause investigation points to chemical purity.",
+      "technical_details": {
+        "contamination_level": "82 ppm",
+        "detection_method": "XPS",
+        "contaminated_area": "19 cm²"
+      },
+      "urgency_level": "high",
+      "budget_range": ">$100K",
+      "preferred_consultation_mode": "remote",
+      "expected_timeline": "1 month",
+      "required_expertise": [
+        "measurement_techniques",
+        "calibration"
+      ],
+      "process_area": [
+        "metrology",
+        "film_thickness"
+      ],
+      "equipment_involved": [
+        "Bruker_Ellipsometer",
+        "Contamination_Monitor"
+      ],
+      "symptoms": [
+        "contamination_detected",
+        "device_failure",
+        "yield_loss"
+      ],
+      "business_impact": "7330 wafers at risk",
+      "previous_attempts": [
+        "chamber cleaning",
+        "chemical replacement",
+        "filter change"
+      ],
+      "compliance_sensitivity": "confidential",
+      "region": "China",
+      "industry_tags": [
+        "parts",
+        "metrology",
+        "film_thickness"
+      ],
+      "client_country": "TW",
+      "technology_classification": "CCL_3B001",
+      "compliance_requirements": {
+        "jurisdictions": [
+          "KR_ITPA",
+          "US_EAR"
+        ],
+        "expected_scenario": "S4",
+        "test_purpose": "Validate Multi-Jurisdiction handling",
+        "blocking_reasons": [],
+        "multi_jurisdiction_consistent": true,
+        "expected_outcome": "BLOCK"
+      }
+    },
+    {
+      "problem_id": "PROB_020",
+      "company_type": "parts",
+      "company_size": "mid-size",
+      "problem_category": "metallic_contamination",
+      "problem_title": "particle contamination in wafer surface",
+      "problem_description": "We have identified particle contamination in our chamber walls. Contamination levels measured at 71 ppm using particle counter. This is impacting power devices with metal bridging. Root cause investigation points to upstream contamination.",
+      "technical_details": {
+        "contamination_level": "34 ppm",
+        "detection_method": "ICP-MS",
+        "contaminated_area": "18 cm²"
+      },
+      "urgency_level": "medium",
+      "budget_range": ">$100K",
+      "preferred_consultation_mode": "hybrid",
+      "expected_timeline": "1-2 weeks",
+      "required_expertise": [
+        "chemistry",
+        "equipment_troubleshooting"
+      ],
+      "process_area": [
+        "etching",
+        "selectivity"
+      ],
+      "equipment_involved": [
+        "TEL_Tactras",
+        "LAM_Flex",
+        "Contamination_Monitor"
+      ],
+      "symptoms": [
+        "contamination_detected",
+        "device_failure",
+        "yield_loss"
+      ],
+      "business_impact": "3540 wafers at risk",
+      "previous_attempts": [
+        "chamber cleaning",
+        "chemical replacement",
+        "filter change"
+      ],
+      "compliance_sensitivity": "public",
+      "region": "China",
+      "industry_tags": [
+        "parts",
+        "etching",
+        "selectivity"
+      ],
+      "client_country": "TW",
+      "technology_classification": "DUAL_USE",
+      "compliance_requirements": {
+        "jurisdictions": [
+          "KR_ITPA",
+          "US_EAR"
+        ],
+        "expected_scenario": "S4",
+        "test_purpose": "Validate Multi-Jurisdiction handling",
+        "blocking_reasons": [],
+        "multi_jurisdiction_consistent": true,
+        "expected_outcome": "BLOCK"
+      }
+    },
+    {
+      "problem_id": "PROB_021",
+      "company_type": "materials",
+      "company_size": "startup",
+      "problem_category": "organic_contamination",
+      "problem_title": "metallic contamination in exhaust system",
+      "problem_description": "We have identified metallic contamination in our chamber walls. Contamination levels measured at 47 ppm using SIMS. This is impacting logic chips with metal bridging. Root cause investigation points to chemical purity.",
+      "technical_details": {
+        "contamination_level": "11 ppm",
+        "detection_method": "ICP-MS",
+        "contaminated_area": "89 cm²"
+      },
+      "urgency_level": "high",
+      "budget_range": ">$100K",
+      "preferred_consultation_mode": "hybrid",
+      "expected_timeline": "immediate",
+      "required_expertise": [
+        "optical_proximity_correction",
+        "overlay_control",
+        "resist_chemistry",
+        "photolithography"
+      ],
+      "process_area": [
+        "lithography",
+        "overlay",
+        "development",
+        "critical_dimension"
+      ],
+      "equipment_involved": [
+        "SCREEN_Developer",
+        "Contamination_Monitor"
+      ],
+      "symptoms": [
+        "contamination_detected",
+        "device_failure",
+        "yield_loss"
+      ],
+      "business_impact": "9862 wafers at risk",
+      "previous_attempts": [
+        "chamber cleaning",
+        "chemical replacement",
+        "filter change"
+      ],
+      "compliance_sensitivity": "public",
+      "region": "Europe",
+      "industry_tags": [
+        "materials",
+        "lithography",
+        "overlay",
+        "development",
+        "critical_dimension"
+      ],
+      "client_country": "VN",
+      "technology_classification": "GENERAL",
+      "compliance_requirements": {
+        "jurisdictions": [
+          "KR_ITPA",
+          "US_EAR"
+        ],
+        "expected_scenario": "S5",
+        "test_purpose": "Validate Conflict handling",
+        "blocking_reasons": [],
+        "jurisdiction_conflict": {
+          "KR_ITPA": "PERMIT",
+          "US_EAR": "RESTRICT"
+        },
+        "expected_outcome": "ESCALATE"
+      }
+    },
+    {
+      "problem_id": "PROB_022",
+      "company_type": "equipment",
+      "company_size": "startup",
+      "problem_category": "throughput_improvement",
+      "problem_title": "Need to optimize lithography process for cost reduction",
+      "problem_description": "We need to optimize our lithography process to achieve better uniformity. Current performance: 78%. Target specification: 91%. Key constraints include equipment compatibility. Previous optimization attempts using DOE showed inconclusive.",
+      "technical_details": {
+        "current_performance": "81%",
+        "target_specification": "93%",
+        "improvement_needed": "18%"
+      },
+      "urgency_level": "medium",
+      "budget_range": "$50K-$100K",
+      "preferred_consultation_mode": "hybrid",
+      "expected_timeline": "immediate",
+      "required_expertise": [
+        "overlay_control",
+        "photolithography"
+      ],
+      "process_area": [
+        "lithography",
+        "exposure"
+      ],
+      "equipment_involved": [
+        "SCREEN_Developer",
+        "ASML_Scanner"
+      ],
+      "symptoms": [
+        "suboptimal_performance",
+        "variation",
+        "inefficiency"
+      ],
+      "business_impact": "Potential $425K annual savings",
+      "previous_attempts": [
+        "parameter tuning",
+        "DOE study",
+        "benchmarking"
+      ],
+      "compliance_sensitivity": "public",
+      "region": "Korea",
+      "industry_tags": [
+        "equipment",
+        "lithography",
+        "exposure"
+      ],
+      "client_country": "VN",
+      "technology_classification": "NCT_KR_01",
+      "compliance_requirements": {
+        "jurisdictions": [
+          "KR_ITPA",
+          "US_EAR"
+        ],
+        "expected_scenario": "S5",
+        "test_purpose": "Validate Conflict handling",
+        "blocking_reasons": [],
+        "jurisdiction_conflict": {
+          "KR_ITPA": "PERMIT",
+          "US_EAR": "RESTRICT"
+        },
+        "expected_outcome": "ESCALATE"
+      }
+    },
+    {
+      "problem_id": "PROB_023",
+      "company_type": "equipment",
+      "company_size": "mid-size",
+      "problem_category": "recipe_development",
+      "problem_title": "Implementation support for atomic_layer_etching",
+      "problem_description": "We are implementing AI_process_control for yield improvement. Current challenges include yield ramp. We need guidance on troubleshooting. Timeline is 18 months for pilot production. Success criteria: cycle time improvement.",
+      "technical_details": {
+        "technology_readiness": "TRL7",
+        "development_stage": "proof of concept",
+        "risk_level": "low"
+      },
+      "urgency_level": "medium",
+      "budget_range": ">$100K",
+      "preferred_consultation_mode": "on-site",
+      "expected_timeline": "6 months",
+      "required_expertise": [
+        "equipment_calibration",
+        "process_integration"
+      ],
+      "process_area": [
+        "diffusion",
+        "ion_implantation",
+        "annealing"
+      ],
+      "equipment_involved": [
+        "TEL_Alpha",
+        "Mattson_RTP"
+      ],
+      "symptoms": [
+        "new_technology_needed",
+        "capability_gap",
+        "competitive_pressure"
+      ],
+      "business_impact": "Potential $2859K opportunity",
+      "previous_attempts": [
+        "literature review",
+        "vendor discussions",
+        "internal trials"
+      ],
+      "compliance_sensitivity": "confidential",
+      "region": "Korea",
+      "industry_tags": [
+        "equipment",
+        "diffusion",
+        "ion_implantation",
+        "annealing"
+      ],
+      "client_country": "VN",
+      "technology_classification": "DUAL_USE",
+      "compliance_requirements": {
+        "jurisdictions": [
+          "KR_ITPA",
+          "US_EAR"
+        ],
+        "expected_scenario": "S5",
+        "test_purpose": "Validate Conflict handling",
+        "blocking_reasons": [],
+        "jurisdiction_conflict": {
+          "KR_ITPA": "PERMIT",
+          "US_EAR": "RESTRICT"
+        },
+        "expected_outcome": "ESCALATE"
+      }
+    },
+    {
+      "problem_id": "PROB_024",
+      "company_type": "materials",
+      "company_size": "startup",
+      "problem_category": "throughput_improvement",
+      "problem_title": "Need to optimize CMP process for uniformity",
+      "problem_description": "We need to optimize our CMP process to achieve lower defects. Current performance: 77%. Target specification: 90%. Key constraints include budget limitations. Previous optimization attempts using literature review showed mixed results.",
+      "technical_details": {
+        "current_performance": "75%",
+        "target_specification": "92%",
+        "improvement_needed": "10%"
+      },
+      "urgency_level": "low",
+      "budget_range": "$50K-$100K",
+      "preferred_consultation_mode": "hybrid",
+      "expected_timeline": "1-2 weeks",
+      "required_expertise": [
+        "endpoint_detection",
+        "mechanical_planarization",
+        "slurry_chemistry",
+        "pad_conditioning"
+      ],
+      "process_area": [
+        "CMP",
+        "defect_reduction"
+      ],
+      "equipment_involved": [
+        "AMAT_Reflexion",
+        "Ebara_Frex"
+      ],
+      "symptoms": [
+        "suboptimal_performance",
+        "variation",
+        "inefficiency"
+      ],
+      "business_impact": "Potential $995K annual savings",
+      "previous_attempts": [
+        "parameter tuning",
+        "DOE study",
+        "benchmarking"
+      ],
+      "compliance_sensitivity": "confidential",
+      "region": "USA",
+      "industry_tags": [
+        "materials",
+        "CMP",
+        "defect_reduction"
+      ],
+      "client_country": "VN",
+      "technology_classification": "NCT_KR_01",
+      "compliance_requirements": {
+        "jurisdictions": [
+          "KR_ITPA",
+          "US_EAR"
+        ],
+        "expected_scenario": "S5",
+        "test_purpose": "Validate Conflict handling",
+        "blocking_reasons": [],
+        "jurisdiction_conflict": {
+          "KR_ITPA": "PERMIT",
+          "US_EAR": "RESTRICT"
+        },
+        "expected_outcome": "ESCALATE"
+      }
+    },
+    {
+      "problem_id": "PROB_025",
+      "company_type": "parts",
+      "company_size": "mid-size",
+      "problem_category": "contamination",
+      "problem_title": "Significant yield drop in metrology after material lot change",
+      "problem_description": "We are experiencing a critical yield drop from 88% to 60% in our metrology operation. The issue started after chamber seasoning. Initial investigation shows film thickness non-uniformity. Customer is demanding immediate resolution as this affects production schedule.",
+      "technical_details": {
+        "yield_baseline": "93%",
+        "current_yield": "61%",
+        "defect_types": [
+          "residue",
+          "open_circuits"
+        ],
+        "wafer_count_affected": 4612
+      },
+      "urgency_level": "critical",
+      "budget_range": ">$100K",
+      "preferred_consultation_mode": "remote",
+      "expected_timeline": "immediate",
+      "required_expertise": [
+        "data_analysis",
+        "statistical_process_control"
+      ],
+      "process_area": [
+        "metrology",
+        "film_thickness",
+        "overlay_measurement",
+        "defect_inspection"
+      ],
+      "equipment_involved": [
+        "Bruker_Ellipsometer"
+      ],
+      "symptoms": [
+        "yield_drop",
+        "defect_increase",
+        "process_variation"
+      ],
+      "business_impact": "$475K revenue impact per day",
+      "previous_attempts": [
+        "chamber cleaning",
+        "recipe adjustment",
+        "material qualification"
+      ],
+      "compliance_sensitivity": "public",
+      "region": "SEA",
+      "industry_tags": [
+        "parts",
+        "metrology",
+        "film_thickness",
+        "overlay_measurement",
+        "defect_inspection"
+      ],
+      "client_country": "VN",
+      "technology_classification": "GENERAL",
+      "compliance_requirements": {
+        "jurisdictions": [
+          "KR_ITPA",
+          "US_EAR"
+        ],
+        "expected_scenario": "S5",
+        "test_purpose": "Validate Conflict handling",
+        "blocking_reasons": [],
+        "jurisdiction_conflict": {
+          "KR_ITPA": "PERMIT",
+          "US_EAR": "RESTRICT"
+        },
+        "expected_outcome": "ESCALATE"
+      }
+    },
+    {
+      "problem_id": "PROB_026",
+      "company_type": "materials",
+      "company_size": "startup",
+      "problem_category": "contamination",
+      "problem_title": "Critical yield drop in CMP after recipe change",
+      "problem_description": "We are experiencing a critical yield drop from 93% to 70% in our CMP operation. The issue started after new material batch. Initial investigation shows pattern distortion. Customer is demanding immediate resolution as this affects quarterly targets.",
+      "technical_details": {
+        "yield_baseline": "85%",
+        "current_yield": "83%",
+        "defect_types": [
+          "scratches",
+          "bridging"
+        ],
+        "wafer_count_affected": 3232
+      },
+      "urgency_level": "high",
+      "budget_range": "$50K-$100K",
+      "preferred_consultation_mode": "document_review",
+      "expected_timeline": "immediate",
+      "required_expertise": [
+        "pad_conditioning",
+        "slurry_chemistry"
+      ],
+      "process_area": [
+        "CMP",
+        "planarization"
+      ],
+      "equipment_involved": [
+        "Ebara_Frex"
+      ],
+      "symptoms": [
+        "yield_drop",
+        "defect_increase",
+        "process_variation"
+      ],
+      "business_impact": "$443K revenue impact per day",
+      "previous_attempts": [
+        "chamber cleaning",
+        "recipe adjustment",
+        "material qualification"
+      ],
+      "compliance_sensitivity": "public",
+      "region": "China",
+      "industry_tags": [
+        "materials",
+        "CMP",
+        "planarization"
+      ],
+      "client_country": "IL",
+      "technology_classification": "CCL_3A001",
+      "compliance_requirements": {
+        "jurisdictions": [
+          "KR_ITPA"
+        ],
+        "expected_scenario": "S6",
+        "test_purpose": "Validate Edge Case handling",
+        "blocking_reasons": [],
+        "novel_case": true,
+        "expected_outcome": "REVIEW",
+        "policy_update_needed": true
+      }
+    },
+    {
+      "problem_id": "PROB_027",
+      "company_type": "parts",
+      "company_size": "startup",
+      "problem_category": "software_issue",
+      "problem_title": "Cabot_Slurry showing chamber_drift",
+      "problem_description": "Our Cabot_Slurry has been showing chamber_drift for the past 3 days. Error codes: ERR_602. Chamber matching shows 12%. We have tried parts replacement without success. Equipment is critical for Line_1 with 23% throughput loss.",
+      "technical_details": {
+        "error_frequency": "6 times/day",
+        "affected_chambers": 1,
+        "downtime_hours": 27
+      },
+      "urgency_level": "critical",
+      "budget_range": "<$10K",
+      "preferred_consultation_mode": "hybrid",
+      "expected_timeline": "1-2 weeks",
+      "required_expertise": [
+        "pad_conditioning",
+        "endpoint_detection"
+      ],
+      "process_area": [
+        "CMP",
+        "defect_reduction",
+        "pad_conditioning",
+        "slurry_chemistry"
+      ],
+      "equipment_involved": [
+        "Cabot_Slurry"
+      ],
+      "symptoms": [
+        "equipment_alarm",
+        "process_variation",
+        "chamber_mismatch"
+      ],
+      "business_impact": "$66K per day capacity loss",
+      "previous_attempts": [
+        "parts replacement",
+        "software update",
+        "vendor support"
+      ],
+      "compliance_sensitivity": "public",
+      "region": "China",
+      "industry_tags": [
+        "parts",
+        "CMP",
+        "defect_reduction",
+        "pad_conditioning",
+        "slurry_chemistry"
+      ],
+      "client_country": "IL",
+      "technology_classification": "CCL_3A001",
+      "compliance_requirements": {
+        "jurisdictions": [
+          "KR_ITPA"
+        ],
+        "expected_scenario": "S6",
+        "test_purpose": "Validate Edge Case handling",
+        "blocking_reasons": [],
+        "novel_case": true,
+        "expected_outcome": "REVIEW",
+        "policy_update_needed": true
+      }
+    },
+    {
+      "problem_id": "PROB_028",
+      "company_type": "equipment",
+      "company_size": "mid-size",
+      "problem_category": "metallic_contamination",
+      "problem_title": "metallic contamination in process chamber",
+      "problem_description": "We have identified metallic contamination in our gas delivery system. Contamination levels measured at 19 ppm using XPS. This is impacting memory devices with junction leakage. Root cause investigation points to chemical purity.",
+      "technical_details": {
+        "contamination_level": "33 ppm",
+        "detection_method": "ICP-MS",
+        "contaminated_area": "95 cm²"
+      },
+      "urgency_level": "high",
+      "budget_range": "<$10K",
+      "preferred_consultation_mode": "on-site",
+      "expected_timeline": "1-2 weeks",
+      "required_expertise": [
+        "endpoint_detection",
+        "pad_conditioning",
+        "slurry_chemistry",
+        "mechanical_planarization"
+      ],
+      "process_area": [
+        "CMP",
+        "slurry_chemistry",
+        "defect_reduction",
+        "planarization"
+      ],
+      "equipment_involved": [
+        "AMAT_Reflexion",
+        "Contamination_Monitor"
+      ],
+      "symptoms": [
+        "contamination_detected",
+        "device_failure",
+        "yield_loss"
+      ],
+      "business_impact": "2289 wafers at risk",
+      "previous_attempts": [
+        "chamber cleaning",
+        "chemical replacement",
+        "filter change"
+      ],
+      "compliance_sensitivity": "public",
+      "region": "Korea",
+      "industry_tags": [
+        "equipment",
+        "CMP",
+        "slurry_chemistry",
+        "defect_reduction",
+        "planarization"
+      ],
+      "client_country": "IL",
+      "technology_classification": "DUAL_USE",
+      "compliance_requirements": {
+        "jurisdictions": [
+          "KR_ITPA"
+        ],
+        "expected_scenario": "S6",
+        "test_purpose": "Validate Edge Case handling",
+        "blocking_reasons": [],
+        "novel_case": true,
+        "expected_outcome": "REVIEW",
+        "policy_update_needed": true
+      }
+    },
+    {
+      "problem_id": "PROB_029",
+      "company_type": "parts",
+      "company_size": "mid-size",
+      "problem_category": "throughput_improvement",
+      "problem_title": "Need to optimize metrology process for cost reduction",
+      "problem_description": "We need to optimize our metrology process to achieve higher throughput. Current performance: 70%. Target specification: 93%. Key constraints include equipment compatibility. Previous optimization attempts using DOE showed mixed results.",
+      "technical_details": {
+        "current_performance": "70%",
+        "target_specification": "91%",
+        "improvement_needed": "24%"
+      },
+      "urgency_level": "low",
+      "budget_range": "$10K-$50K",
+      "preferred_consultation_mode": "remote",
+      "expected_timeline": "1-2 weeks",
+      "required_expertise": [
+        "measurement_techniques",
+        "calibration"
+      ],
+      "process_area": [
+        "metrology",
+        "CD_measurement",
+        "defect_inspection",
+        "film_thickness"
+      ],
+      "equipment_involved": [
+        "Bruker_Ellipsometer"
+      ],
+      "symptoms": [
+        "suboptimal_performance",
+        "variation",
+        "inefficiency"
+      ],
+      "business_impact": "Potential $885K annual savings",
+      "previous_attempts": [
+        "parameter tuning",
+        "DOE study",
+        "benchmarking"
+      ],
+      "compliance_sensitivity": "public",
+      "region": "Korea",
+      "industry_tags": [
+        "parts",
+        "metrology",
+        "CD_measurement",
+        "defect_inspection",
+        "film_thickness"
+      ],
+      "client_country": "IL",
+      "technology_classification": "NCT_KR_01",
+      "compliance_requirements": {
+        "jurisdictions": [
+          "KR_ITPA"
+        ],
+        "expected_scenario": "S6",
+        "test_purpose": "Validate Edge Case handling",
+        "blocking_reasons": [],
+        "novel_case": true,
+        "expected_outcome": "REVIEW",
+        "policy_update_needed": true
+      }
+    },
+    {
+      "problem_id": "PROB_030",
+      "company_type": "materials",
+      "company_size": "startup",
+      "problem_category": "technology_transfer",
+      "problem_title": "Implementation support for AI_process_control",
+      "problem_description": "We are implementing atomic_layer_etching for next-gen devices. Current challenges include integration complexity. We need guidance on process optimization. Timeline is 1 year for qualification. Success criteria: yield >85%.",
+      "technical_details": {
+        "technology_readiness": "TRL6",
+        "development_stage": "optimization",
+        "risk_level": "medium"
+      },
+      "urgency_level": "high",
+      "budget_range": "$10K-$50K",
+      "preferred_consultation_mode": "on-site",
+      "expected_timeline": "1 month",
+      "required_expertise": [
+        "process_integration",
+        "thermal_processing",
+        "equipment_calibration",
+        "dopant_physics"
+      ],
+      "process_area": [
+        "diffusion",
+        "dopant_activation",
+        "annealing"
+      ],
+      "equipment_involved": [
+        "Axcelis_Implanter",
+        "Mattson_RTP"
+      ],
+      "symptoms": [
+        "new_technology_needed",
+        "capability_gap",
+        "competitive_pressure"
+      ],
+      "business_impact": "Potential $1963K opportunity",
+      "previous_attempts": [
+        "literature review",
+        "vendor discussions",
+        "internal trials"
+      ],
+      "compliance_sensitivity": "restricted",
+      "region": "SEA",
+      "industry_tags": [
+        "materials",
+        "diffusion",
+        "dopant_activation",
+        "annealing"
+      ],
+      "client_country": "IL",
+      "technology_classification": "GENERAL",
+      "compliance_requirements": {
+        "jurisdictions": [
+          "KR_ITPA"
+        ],
+        "expected_scenario": "S6",
+        "test_purpose": "Validate Edge Case handling",
+        "blocking_reasons": [],
+        "novel_case": true,
+        "expected_outcome": "REVIEW",
+        "policy_update_needed": true
+      }
+    },
+    {
+      "problem_id": "PROB_031",
+      "company_type": "device",
+      "company_size": "large",
+      "problem_category": "process_transfer",
+      "problem_title": "NAND 128L+ stack process transfer consulting request (US expert)",
+      "problem_description": "China foundry partner is requesting consulting on NAND 128L+ stack process optimization. The engagement involves transfer of 3D-NAND fabrication process knowledge including multi-deck stacking, channel hole etch, and wordline fill processes. Current yield target is 85%. Consultant is a US national with extensive NAND process expertise at a leading US memory manufacturer.",
+      "technical_details": {
+        "technology_node": "128L+ 3D-NAND",
+        "current_yield": "72%",
+        "target_yield": "85%",
+        "process_steps": [
+          "channel_hole_etch",
+          "wordline_fill",
+          "multi_deck_stack"
+        ]
+      },
+      "urgency_level": "high",
+      "budget_range": ">$100K",
+      "preferred_consultation_mode": "on-site",
+      "expected_timeline": "6 months",
+      "required_expertise": [
+        "3d_nand_process",
+        "high_aspect_ratio_etch",
+        "memory_device_integration"
+      ],
+      "process_area": [
+        "3d_nand",
+        "etching",
+        "deposition"
+      ],
+      "equipment_involved": [
+        "AMAT_Centris",
+        "LAM_Kiyo"
+      ],
+      "symptoms": [
+        "yield_loss",
+        "process_control_issue",
+        "new_technology_implementation"
+      ],
+      "business_impact": "Potential $5000K revenue opportunity for CN client",
+      "previous_attempts": [
+        "internal process development",
+        "equipment vendor support"
+      ],
+      "compliance_sensitivity": "confidential",
+      "region": "China",
+      "industry_tags": [
+        "device",
+        "3d_nand",
+        "memory",
+        "advanced_packaging"
+      ],
+      "client_country": "CN",
+      "technology_classification": "CCL_3A001",
+      "compliance_requirements": {
+        "jurisdictions": [
+          "US_EAR"
+        ],
+        "expected_scenario": "S2",
+        "test_purpose": "Validate Clear Block handling — US_EAR Entity List BLOCK (GAP-B1)",
+        "blocking_reasons": [
+          "EAR_ENTITY_LIST_BLOCK",
+          "NCT_TRANSFER_PROHIBITED_US_NATIONAL"
+        ],
+        "expected_outcome": "BLOCK",
+        "gap_reference": "GAP-B1: US national (Micron Technology background), CN foundry client, NAND_128L+ CCL 3A001 + BIS Entity List → EAR BLOCK"
+      }
+    },
+    {
+      "problem_id": "PROB_032",
+      "company_type": "device",
+      "company_size": "large",
+      "problem_category": "design_consulting",
+      "problem_title": "Sub-7nm FinFET process optimization for AI chip design house (US expert)",
+      "problem_description": "China-based AI chip design house (Beijing) requests consulting on sub-7nm FinFET process integration for next-generation AI accelerator SoC. Engagement covers gate stack engineering, source-drain epitaxy, and multi-gate integration. The consultant is a US national with advanced logic process development expertise at a leading US semiconductor manufacturer.",
+      "technical_details": {
+        "technology_node": "sub-7nm FinFET",
+        "development_stage": "tape-out readiness",
+        "target_ppa": "20% power reduction vs prior node"
+      },
+      "urgency_level": "high",
+      "budget_range": ">$100K",
+      "preferred_consultation_mode": "hybrid",
+      "expected_timeline": "1 year",
+      "required_expertise": [
+        "finfet_process",
+        "gate_stack_engineering",
+        "advanced_logic_integration"
+      ],
+      "process_area": [
+        "advanced_logic",
+        "gate_all_around",
+        "source_drain_epitaxy"
+      ],
+      "equipment_involved": [
+        "ASML_NXT",
+        "AMAT_Vantage",
+        "TEL_Triase"
+      ],
+      "symptoms": [
+        "new_technology_implementation",
+        "capability_gap",
+        "competitive_pressure"
+      ],
+      "business_impact": "Critical strategic capability for CN AI chip market",
+      "previous_attempts": [
+        "foundry partnerships",
+        "academic collaboration"
+      ],
+      "compliance_sensitivity": "restricted",
+      "region": "China",
+      "industry_tags": [
+        "device",
+        "advanced_logic",
+        "ai_chip",
+        "finfet"
+      ],
+      "client_country": "CN",
+      "technology_classification": "CCL_3A001",
+      "compliance_requirements": {
+        "jurisdictions": [
+          "US_EAR"
+        ],
+        "expected_scenario": "S2",
+        "test_purpose": "Validate Clear Block handling — US_EAR CCL 3E001 + BIS Entity List BLOCK (GAP-B2)",
+        "blocking_reasons": [
+          "EAR_ENTITY_LIST_BLOCK",
+          "CCL_3E001_TECHNOLOGY_CONTROL"
+        ],
+        "expected_outcome": "BLOCK",
+        "gap_reference": "GAP-B2: US national (Intel background), CN AI chip design house client, sub-7nm FinFET CCL 3E001 → EAR BLOCK. No KR_ITPA (US-only jurisdiction)."
+      }
+    },
+    {
+      "problem_id": "PROB_033",
+      "company_type": "equipment",
+      "company_size": "large",
+      "problem_category": "process_transfer",
+      "problem_title": "EUV lithography process consulting — US expert in Singapore, CN fab client",
+      "problem_description": "China-based foundry (advanced fab) requests EUV lithography process knowledge transfer from a Singapore-based US national consultant currently at Intel Singapore. The consulting scope covers EUV resist process, stochastic defect reduction, and single-pass EUV patterning for sub-14nm nodes. Dual-jurisdiction conflict: US_EAR (BLOCK—controlled tech to CN) vs SG_SGCOA (requires independent domestic strategic goods REVIEW). Requires HITL escalation due to authority process conflict.",
+      "technical_details": {
+        "technology_node": "sub-14nm EUV",
+        "technology_category": "EUV_LITHOGRAPHY",
+        "jurisdiction_primary": "US_EAR",
+        "jurisdiction_secondary": "SG_SGCOA",
+        "conflict_type": "authority_process_conflict"
+      },
+      "urgency_level": "high",
+      "budget_range": ">$100K",
+      "preferred_consultation_mode": "on-site",
+      "expected_timeline": "3 months",
+      "required_expertise": [
+        "euv_lithography",
+        "photoresist_engineering",
+        "stochastic_defect_mitigation",
+        "sub14nm_patterning"
+      ],
+      "process_area": [
+        "lithography",
+        "euv_patterning",
+        "resist_process"
+      ],
+      "equipment_involved": [
+        "ASML_EUV_NXE3400",
+        "TEL_Lithius"
+      ],
+      "symptoms": [
+        "new_technology_needed",
+        "capability_gap"
+      ],
+      "business_impact": "Strategic node advancement to sub-14nm for CN foundry",
+      "previous_attempts": [
+        "equipment vendor training",
+        "internal R&D"
+      ],
+      "compliance_sensitivity": "restricted",
+      "region": "China",
+      "industry_tags": [
+        "equipment",
+        "euv_lithography",
+        "advanced_node",
+        "patterning"
+      ],
+      "client_country": "CN",
+      "technology_classification": "CCL_3A001",
+      "compliance_requirements": {
+        "jurisdictions": [
+          "US_EAR",
+          "SG_SGCOA"
+        ],
+        "expected_scenario": "S4",
+        "test_purpose": "Validate Multi-Jurisdiction Conflict handling — US_EAR BLOCK vs SG_SGCOA REVIEW → HITL (GAP-D1)",
+        "blocking_reasons": [
+          "EAR_CONTROLLED_TECH_CN_DESTINATION"
+        ],
+        "multi_jurisdiction_conflict": true,
+        "conflict_detail": "US_EAR §730.1 BLOCK (CCL EAR99→3A001, CN destination) vs SG_SGCOA requires domestic REVIEW before export decision",
+        "expected_outcome": "REVIEW",
+        "gap_reference": "GAP-D1: US national (Intel Singapore), based in SG, CN fab client. EUV litho sub-14nm CCL 3A001. US_EAR BLOCK vs SG_SGCOA REVIEW → HITL."
+      }
+    },
+    {
+      "problem_id": "PROB_034",
+      "company_type": "device",
+      "company_size": "large",
+      "problem_category": "process_transfer",
+      "problem_title": "3nm GAA process knowledge transfer — US expert in Singapore, CN partner",
+      "problem_description": "China SMIC partner (via Beijing R&D center) requests 3nm Gate-All-Around (GAA) process consulting from Singapore-based US national. Scope: GAA nanosheet formation, inner spacer engineering, and multi-threshold Vt tuning. Consultant is at Intel Singapore with direct 3nm research experience. US_EAR §730 declares BLOCK (3nm GAA = CCL EAR control, CN entity list); SG_SGCOA has independent dual-use review process with no automatic deference to US authority. Neither authority defers to the other → HITL escalation required.",
+      "technical_details": {
+        "technology_node": "3nm GAA",
+        "technology_category": "GATE_ALL_AROUND",
+        "jurisdiction_primary": "US_EAR",
+        "jurisdiction_secondary": "SG_SGCOA",
+        "conflict_type": "authority_precedence_conflict"
+      },
+      "urgency_level": "critical",
+      "budget_range": ">$100K",
+      "preferred_consultation_mode": "document_review",
+      "expected_timeline": "6 months",
+      "required_expertise": [
+        "gate_all_around",
+        "nanosheet_process",
+        "advanced_logic_integration",
+        "3nm_node_development"
+      ],
+      "process_area": [
+        "advanced_logic",
+        "gate_all_around",
+        "nanosheet_transistor"
+      ],
+      "equipment_involved": [
+        "ASML_High_NA_EUV",
+        "AMAT_Sculpta",
+        "LAM_Sense"
+      ],
+      "symptoms": [
+        "new_technology_needed",
+        "competitive_pressure",
+        "capability_gap"
+      ],
+      "business_impact": "Leading-edge node capability for CN fab competitive position",
+      "previous_attempts": [
+        "proprietary R&D",
+        "Taiwan foundry partnership attempt (blocked)"
+      ],
+      "compliance_sensitivity": "restricted",
+      "region": "China",
+      "industry_tags": [
+        "device",
+        "gate_all_around",
+        "3nm",
+        "advanced_logic"
+      ],
+      "client_country": "CN",
+      "technology_classification": "CCL_3A001",
+      "compliance_requirements": {
+        "jurisdictions": [
+          "US_EAR",
+          "SG_SGCOA"
+        ],
+        "expected_scenario": "S4",
+        "test_purpose": "Validate Multi-Jurisdiction Conflict handling — US_EAR BLOCK vs SG_SGCOA REVIEW → HITL (GAP-D2)",
+        "blocking_reasons": [
+          "EAR_3NM_GAA_CONTROLLED_ENTITY_LIST"
+        ],
+        "multi_jurisdiction_conflict": true,
+        "conflict_detail": "US_EAR §730 BLOCK (3nm GAA CCL EAR control, CN entity listed). SG_SGCOA independent dual-use REVIEW process. Neither authority defers.",
+        "expected_outcome": "REVIEW",
+        "gap_reference": "GAP-D2: US national (Intel Singapore), CN SMIC partner. 3nm GAA process CCL 3A001 + Entity List. US_EAR BLOCK vs SG_SGCOA REVIEW → HITL."
+      }
+    },
+    {
+      "problem_id": "SC_PROB_001",
+      "client_country": "CN",
+      "technology_classification": "CRITICAL",
+      "compliance_requirements": {
+        "expected_scenario": "S4",
+        "jurisdictions": [
+          "KR",
+          "CN",
+          "US"
+        ],
+        "expected_outcome": "REVIEW_or_BLOCK_for_some",
+        "blocking_reasons": [
+          "KR NCT regulation applies to advanced semiconductor IP",
+          "US EAR Part 774 controls export to CN entities",
+          "Cross-jurisdictional conflict requires SC loop resolution"
+        ],
+        "stress_tag": "S4_JURISDICTION_CONFLICT"
+      },
+      "description": "A major Shanghai-based foundry partner requires expert consulting on EUV-based sub-5nm process integration including gate-all-around (GAA) transistor formation, EUV double-patterning, and high-k metal"
+    },
+    {
+      "problem_id": "SC_PROB_002",
+      "client_country": "CN",
+      "technology_classification": "CRITICAL",
+      "compliance_requirements": {
+        "expected_scenario": "S4",
+        "jurisdictions": [
+          "KR",
+          "CN",
+          "US"
+        ],
+        "expected_outcome": "REVIEW_or_BLOCK_for_some",
+        "blocking_reasons": [
+          "KR NCT regulation applies to advanced semiconductor IP",
+          "US EAR Part 774 controls export to CN entities",
+          "Cross-jurisdictional conflict requires SC loop resolution"
+        ],
+        "stress_tag": "S4_JURISDICTION_CONFLICT"
+      },
+      "description": "A Wuhan-based memory fab is developing 128-layer 3D NAND cell stacking. Critical process steps involve tungsten-fill wordline etching and ALD-based high-aspect-ratio dielectric gap fill. U.S.-origin I"
+    },
+    {
+      "problem_id": "SC_PROB_003",
+      "client_country": "CN",
+      "technology_classification": "CRITICAL",
+      "compliance_requirements": {
+        "expected_scenario": "S4",
+        "jurisdictions": [
+          "KR",
+          "CN",
+          "US"
+        ],
+        "expected_outcome": "REVIEW_or_BLOCK_for_some",
+        "blocking_reasons": [
+          "KR NCT regulation applies to advanced semiconductor IP",
+          "US EAR Part 774 controls export to CN entities",
+          "Cross-jurisdictional conflict requires SC loop resolution"
+        ],
+        "stress_tag": "S4_JURISDICTION_CONFLICT"
+      },
+      "description": "A joint venture foundry operating across Shenzhen (CN) and Hsinchu (TW) requires expert consulting on HfO2 gate dielectric reliability for 7nm FinFET. Gate oxide TDDB failure rate exceeds specificatio"
+    },
+    {
+      "problem_id": "SC_PROB_004",
+      "client_country": "CN",
+      "technology_classification": "CRITICAL",
+      "compliance_requirements": {
+        "expected_scenario": "S4",
+        "jurisdictions": [
+          "KR",
+          "CN",
+          "US"
+        ],
+        "expected_outcome": "REVIEW_or_BLOCK_for_some",
+        "blocking_reasons": [
+          "KR NCT regulation applies to advanced semiconductor IP",
+          "US EAR Part 774 controls export to CN entities",
+          "Cross-jurisdictional conflict requires SC loop resolution"
+        ],
+        "stress_tag": "S4_JURISDICTION_CONFLICT"
+      },
+      "description": "A joint-venture memory R&D center co-located in Icheon KR and Chengdu CN requires specialist consulting for 1α-nm DRAM capacitor integration. ZrO2/Al2O3/ZrO2 (ZAZ) stack by ALD presents leakage curren"
+    },
+    {
+      "problem_id": "SC_PROB_005",
+      "client_country": "CN",
+      "technology_classification": "CRITICAL",
+      "compliance_requirements": {
+        "expected_scenario": "S4",
+        "jurisdictions": [
+          "KR",
+          "CN",
+          "US"
+        ],
+        "expected_outcome": "REVIEW_or_BLOCK_for_some",
+        "blocking_reasons": [
+          "KR NCT regulation applies to advanced semiconductor IP",
+          "US EAR Part 774 controls export to CN entities",
+          "Cross-jurisdictional conflict requires SC loop resolution"
+        ],
+        "stress_tag": "S4_JURISDICTION_CONFLICT"
+      },
+      "description": "A fabless startup designing AI inference chips for Chinese hyperscale customers requires consulting on 2.5D SiP CoWoS-type advanced packaging. HBM3 memory integration with compute die raises ITAR conc"
+    },
+    {
+      "problem_id": "SC_PROB_006",
+      "client_country": "CN",
+      "technology_classification": "HIGH",
+      "compliance_requirements": {
+        "expected_scenario": "S4",
+        "jurisdictions": [
+          "KR",
+          "CN",
+          "US"
+        ],
+        "expected_outcome": "REVIEW_or_BLOCK_for_some",
+        "blocking_reasons": [
+          "KR NCT regulation applies to advanced semiconductor IP",
+          "US EAR Part 774 controls export to CN entities",
+          "Cross-jurisdictional conflict requires SC loop resolution"
+        ],
+        "stress_tag": "S4_JURISDICTION_CONFLICT"
+      },
+      "description": "A Ningbo-based ODM produces cloud server boards using HBM2E memory. Signal integrity failures occur at SerDes rates above 3.6 Gbps. The memory controller involves EAR99-listed US-origin SerDes IP core"
+    },
+    {
+      "problem_id": "SC_PROB_007",
+      "client_country": "CN",
+      "technology_classification": "CRITICAL",
+      "compliance_requirements": {
+        "expected_scenario": "S4",
+        "jurisdictions": [
+          "KR",
+          "CN",
+          "US"
+        ],
+        "expected_outcome": "REVIEW_or_BLOCK_for_some",
+        "blocking_reasons": [
+          "KR NCT regulation applies to advanced semiconductor IP",
+          "US EAR Part 774 controls export to CN entities",
+          "Cross-jurisdictional conflict requires SC loop resolution"
+        ],
+        "stress_tag": "S4_JURISDICTION_CONFLICT"
+      },
+      "description": "A Shenzhen-based EUV photomask blank manufacturer needs consulting on TaN/SiO2 absorber stack defect reduction. The mask inspection tool uses US-origin KLA e-beam technology potentially subject to EAR"
+    },
+    {
+      "problem_id": "SC_PROB_008",
+      "client_country": "CN",
+      "technology_classification": "CRITICAL",
+      "compliance_requirements": {
+        "expected_scenario": "S4",
+        "jurisdictions": [
+          "KR",
+          "CN",
+          "US"
+        ],
+        "expected_outcome": "REVIEW_or_BLOCK_for_some",
+        "blocking_reasons": [
+          "KR NCT regulation applies to advanced semiconductor IP",
+          "US EAR Part 774 controls export to CN entities",
+          "Cross-jurisdictional conflict requires SC loop resolution"
+        ],
+        "stress_tag": "S4_JURISDICTION_CONFLICT"
+      },
+      "description": "A tri-party consortium (Samsung KR, GLOBALFOUNDRIES US, and SMIC CN) requires expert consulting on copper BEOL reliability at 3nm node: electromigration, stress voiding, and low-k dielectric cracking."
+    },
+    {
+      "problem_id": "SC_PROB_009",
+      "client_country": "KR",
+      "technology_classification": "CRITICAL",
+      "compliance_requirements": {
+        "expected_scenario": "S4",
+        "jurisdictions": [
+          "KR"
+        ],
+        "expected_outcome": "NCT_concentration_high",
+        "blocking_reasons": [
+          "KR NCT designated technology — pre-clearance required",
+          "High concentration of NCT-flagged experts expected in candidate pool"
+        ],
+        "stress_tag": "S4_NCT_HIGH_CONCENTRATION"
+      },
+      "description": "Our advanced logic fab requires urgent recipe optimization for EUV scanner NA=0.33 with intra-field overlay improvement. Current overlay sigma >1.2nm exceeds 7nm node spec. Process involves Samsung-or"
+    },
+    {
+      "problem_id": "SC_PROB_010",
+      "client_country": "KR",
+      "technology_classification": "CRITICAL",
+      "compliance_requirements": {
+        "expected_scenario": "S4",
+        "jurisdictions": [
+          "KR"
+        ],
+        "expected_outcome": "NCT_concentration_high",
+        "blocking_reasons": [
+          "KR NCT designated technology — pre-clearance required",
+          "High concentration of NCT-flagged experts expected in candidate pool"
+        ],
+        "stress_tag": "S4_NCT_HIGH_CONCENTRATION"
+      },
+      "description": "Our memory R&D team requires consulting on 1β-node DRAM capacitor integration using ZrO2-Al2O3-ZrO2 (ZAZ) high-k dielectric stack by thermal ALD. Target cell capacitance Cs > 20fF at <10nm equivalent "
+    },
+    {
+      "problem_id": "SC_PROB_011",
+      "client_country": "KR",
+      "technology_classification": "CRITICAL",
+      "compliance_requirements": {
+        "expected_scenario": "S4",
+        "jurisdictions": [
+          "KR"
+        ],
+        "expected_outcome": "NCT_concentration_high",
+        "blocking_reasons": [
+          "KR NCT designated technology — pre-clearance required",
+          "High concentration of NCT-flagged experts expected in candidate pool"
+        ],
+        "stress_tag": "S4_NCT_HIGH_CONCENTRATION"
+      },
+      "description": "Gate-all-around (GAA) nanosheet transistor channel uniformity is failing sigma > 0.8Å across 300mm wafer in our 3nm process. Si/SiGe superlattice channel etching and inner spacer ALD are the critical "
+    },
+    {
+      "problem_id": "SC_PROB_012",
+      "client_country": "KR",
+      "technology_classification": "CRITICAL",
+      "compliance_requirements": {
+        "expected_scenario": "S4",
+        "jurisdictions": [
+          "KR"
+        ],
+        "expected_outcome": "NCT_concentration_high",
+        "blocking_reasons": [
+          "KR NCT designated technology — pre-clearance required",
+          "High concentration of NCT-flagged experts expected in candidate pool"
+        ],
+        "stress_tag": "S4_NCT_HIGH_CONCENTRATION"
+      },
+      "description": "Our HBM3 memory stack TSV (10μm × 100μm) copper filling yield rate is 94.2%, missing 99.5% specification. Void formation in via bottom during copper ECD and subsequent CMP overpolish are primary failu"
+    },
+    {
+      "problem_id": "SC_PROB_013",
+      "client_country": "KR",
+      "technology_classification": "CRITICAL",
+      "compliance_requirements": {
+        "expected_scenario": "S4",
+        "jurisdictions": [
+          "KR"
+        ],
+        "expected_outcome": "NCT_concentration_high",
+        "blocking_reasons": [
+          "KR NCT designated technology — pre-clearance required",
+          "High concentration of NCT-flagged experts expected in candidate pool"
+        ],
+        "stress_tag": "S4_NCT_HIGH_CONCENTRATION"
+      },
+      "description": "Our EUV pellicle (CNT-based, polysilicon substrate) is failing at accumulated dose of 18kJ/cm2 — well below the 100kJ/cm2 HVM target. Pellicle transmission drops from 90% to below 83% threshold. Pelli"
+    },
+    {
+      "problem_id": "SC_PROB_014",
+      "client_country": "KR",
+      "technology_classification": "CRITICAL",
+      "compliance_requirements": {
+        "expected_scenario": "S4",
+        "jurisdictions": [
+          "KR"
+        ],
+        "expected_outcome": "NCT_concentration_high",
+        "blocking_reasons": [
+          "KR NCT designated technology — pre-clearance required",
+          "High concentration of NCT-flagged experts expected in candidate pool"
+        ],
+        "stress_tag": "S4_NCT_HIGH_CONCENTRATION"
+      },
+      "description": "Our 238-layer V-NAND cell array integration requires expert certification consulting for NCT compliance. Channel hole etch aspect ratio exceeds 100:1. ONO (oxide-nitride-oxide) charge trap layer is ke"
+    },
+    {
+      "problem_id": "SC_PROB_015",
+      "client_country": "KR",
+      "technology_classification": "CRITICAL",
+      "compliance_requirements": {
+        "expected_scenario": "S4",
+        "jurisdictions": [
+          "KR"
+        ],
+        "expected_outcome": "NCT_concentration_high",
+        "blocking_reasons": [
+          "KR NCT designated technology — pre-clearance required",
+          "High concentration of NCT-flagged experts expected in candidate pool"
+        ],
+        "stress_tag": "S4_NCT_HIGH_CONCENTRATION"
+      },
+      "description": "Our PIM-DRAM accelerator integrates analog multiply-accumulate (MAC) circuits within DRAM array periphery. This combination of in-memory computation with national-core-technology DRAM architecture cre"
+    }
+  ]
+}

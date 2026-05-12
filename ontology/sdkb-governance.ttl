@@ -1,0 +1,72 @@
+@prefix sdkb:    <https://w3id.org/sdkb/> .
+@prefix ont:     <https://w3id.org/sdkb/ont/> .
+@prefix gov:     <https://w3id.org/sdkb/gov/> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+# ═══════════════════════════════════════════════════════════════════
+# SDKB v1.0 — Governance Module (sdkb-governance.ttl)
+#
+# Multi-jurisdiction regulatory layer: US BIS EAR, NIST CSF/IR8546,
+# ECHA SCIP. The Korean Industrial Technology Protection Act is
+# in a separate module (sdkb-governance-kr.ttl) to keep jurisdictions
+# decomposable.
+# ═══════════════════════════════════════════════════════════════════
+
+<https://w3id.org/sdkb/gov>
+    a owl:Ontology ;
+    rdfs:label "SDKB Governance Module — US/EU/International"@en ;
+    rdfs:comment "Regulatory rules and identifiers used as structural compliance constraints inside AFCP-EM."@en ;
+    owl:versionInfo "1.0.0-dev" ;
+    dcterms:license <https://spdx.org/licenses/CDLA-Permissive-2.0.html> ;
+    owl:imports <https://w3id.org/sdkb/ont> .
+
+# Note: The seven governance classes (EARRule, RegulatedItem, NISTFunction,
+# NISTOutcome, SCIPRule, StandardReference, EquipmentState) and their object
+# properties are generated programmatically by scripts/build_owl.py into
+# sdkb-core.ttl. This file is a placeholder for additional governance
+# vocabulary (named individuals, controlled lists) layered on top.
+
+gov:JurisdictionUS
+    a skos:Concept ;
+    skos:prefLabel "United States"@en ;
+    skos:notation "US" .
+
+gov:JurisdictionEU
+    a skos:Concept ;
+    skos:prefLabel "European Union"@en ;
+    skos:notation "EU" .
+
+gov:JurisdictionKR
+    a skos:Concept ;
+    skos:prefLabel "Republic of Korea"@en ;
+    skos:notation "KR" .
+
+gov:JurisdictionJP
+    a skos:Concept ;
+    skos:prefLabel "Japan"@en ;
+    skos:notation "JP" .
+
+gov:JurisdictionCN
+    a skos:Concept ;
+    skos:prefLabel "China"@en ;
+    skos:notation "CN" .
+
+gov:hasJurisdiction
+    a owl:ObjectProperty ;
+    rdfs:label "has jurisdiction"@en ;
+    rdfs:comment "Links any regulated entity (rule, item, transaction) to one or more jurisdictions. Used by AFCP-EM to compute the multi-jurisdiction overlap that drives leakage rate."@en .
+
+# ── Anchor individuals (BIS §744.23 TPP boundary as named individual) ──
+
+gov:Rule_BIS_744_23
+    a gov:EARRule ;
+    skos:prefLabel "BIS §744.23 — Advanced Computing FDP Rule"@en ;
+    dcterms:bibliographicCitation "15 CFR §744.23" ;
+    gov:hasJurisdiction gov:JurisdictionUS ;
+    rdfs:seeAlso <https://www.ecfr.gov/current/title-15/section-744.23> .

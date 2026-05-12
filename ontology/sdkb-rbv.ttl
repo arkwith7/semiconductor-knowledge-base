@@ -1,0 +1,138 @@
+@prefix sdkb:    <https://w3id.org/sdkb/> .
+@prefix ont:     <https://w3id.org/sdkb/ont/> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+# ═══════════════════════════════════════════════════════════════════
+# SDKB v1.0 — Resource-Based View Module (sdkb-rbv.ttl)
+#
+# Captures the firm × resource × capability × barrier graph used by
+# Prof. Shin's RBV/TOE research line (Cho/Shin PLoS ONE 2025;
+# Bae/Shin IEEE Access 2022 — EV market entry → semiconductor analog).
+# ═══════════════════════════════════════════════════════════════════
+
+<https://w3id.org/sdkb/ont/rbv>
+    a owl:Ontology ;
+    rdfs:label "SDKB RBV Module"@en ;
+    rdfs:comment "Resource-Based View model for semiconductor firm-level analysis."@en ;
+    owl:versionInfo "1.0.0-dev" ;
+    dcterms:license <https://spdx.org/licenses/CDLA-Permissive-2.0.html> ;
+    owl:imports <https://w3id.org/sdkb/ont> .
+
+# ── CLASSES ────────────────────────────────────────────────────────
+
+ont:Firm
+    a owl:Class ;
+    rdfs:subClassOf ont:Organization ;
+    rdfs:label "Firm"@en ;
+    rdfs:comment "A commercial firm operating in the semiconductor value chain. May be an IDM, fabless, foundry, OSAT, or 소부장 SME."@en .
+
+ont:MarketSegment
+    a owl:Class ;
+    rdfs:label "Market Segment"@en ;
+    rdfs:comment "A demand-side segment, e.g. memory, logic-foundry, automotive MCU, sensor."@en .
+
+ont:Resource
+    a owl:Class ;
+    rdfs:label "Resource"@en ;
+    rdfs:comment "Abstract superclass for firm-owned resources. Subclasses follow Barney (1991): tangible / intangible / human."@en .
+
+ont:TangibleResource
+    a owl:Class ;
+    rdfs:subClassOf ont:Resource ;
+    rdfs:label "Tangible Resource"@en ;
+    rdfs:comment "Physical assets — fab capacity, equipment fleet, materials inventory."@en .
+
+ont:IntangibleResource
+    a owl:Class ;
+    rdfs:subClassOf ont:Resource ;
+    rdfs:label "Intangible Resource"@en ;
+    rdfs:comment "Non-physical assets — IP portfolio, brand, customer relationships, supplier network."@en .
+
+ont:HumanResource
+    a owl:Class ;
+    rdfs:subClassOf ont:Resource ;
+    rdfs:label "Human Resource"@en ;
+    rdfs:comment "People-embedded resources — engineering talent, tacit process knowledge."@en .
+
+ont:Capability
+    a owl:Class ;
+    rdfs:label "Capability"@en ;
+    rdfs:comment "A firm-level capability that emerges from combining resources, e.g. 'sub-3nm DTCO co-design'."@en .
+
+ont:EntryBarrier
+    a owl:Class ;
+    rdfs:label "Entry Barrier"@en ;
+    rdfs:comment "An obstacle preventing entry into a market segment, e.g. capex threshold, IP fence, customer qualification cycle."@en .
+
+ont:ResourceCombination
+    a owl:Class ;
+    rdfs:label "Resource Combination"@en ;
+    rdfs:comment "A named combination of resources studied as a configuration (fsQCA-style truth-table row). Supports Shin et al.'s key-resource-combination analyses."@en .
+
+# ── OBJECT PROPERTIES ──────────────────────────────────────────────
+
+ont:holdsResource
+    a owl:ObjectProperty ;
+    rdfs:domain ont:Firm ;
+    rdfs:range ont:Resource ;
+    rdfs:label "holds resource"@en .
+
+ont:enablesCapability
+    a owl:ObjectProperty ;
+    rdfs:domain ont:Resource ;
+    rdfs:range ont:Capability ;
+    rdfs:label "enables capability"@en .
+
+ont:reducesBarrier
+    a owl:ObjectProperty ;
+    rdfs:domain ont:Capability ;
+    rdfs:range ont:EntryBarrier ;
+    rdfs:label "reduces barrier"@en .
+
+ont:barrierOf
+    a owl:ObjectProperty ;
+    rdfs:domain ont:EntryBarrier ;
+    rdfs:range ont:MarketSegment ;
+    rdfs:label "barrier of"@en .
+
+ont:combines
+    a owl:ObjectProperty ;
+    rdfs:domain ont:ResourceCombination ;
+    rdfs:range ont:Resource ;
+    rdfs:label "combines"@en ;
+    rdfs:comment "A ResourceCombination references the resources whose joint presence (or absence) is being studied."@en .
+
+ont:firmTargets
+    a owl:ObjectProperty ;
+    rdfs:domain ont:Firm ;
+    rdfs:range ont:MarketSegment ;
+    rdfs:label "firm targets"@en .
+
+# ── DATATYPE PROPERTIES ────────────────────────────────────────────
+
+ont:firmType
+    a owl:DatatypeProperty ;
+    rdfs:domain ont:Firm ;
+    rdfs:range xsd:string ;
+    rdfs:label "firm type"@en ;
+    rdfs:comment "IDM | Fabless | Foundry | OSAT | EquipmentMaker | MaterialsSupplier | DesignHouse."@en .
+
+ont:vrioValue
+    a owl:DatatypeProperty ;
+    rdfs:domain ont:Resource ;
+    rdfs:range xsd:string ;
+    rdfs:label "VRIO classification"@en ;
+    rdfs:comment "Barney's VRIO score: V (valuable) / R (rare) / I (inimitable) / O (organized). Encoded as a 4-char mask, e.g. 'VRIO' or 'VR-O'."@en .
+
+ont:resourceMembership
+    a owl:DatatypeProperty ;
+    rdfs:domain ont:ResourceCombination ;
+    rdfs:range xsd:string ;
+    rdfs:label "resource membership"@en ;
+    rdfs:comment "fsQCA fuzzy-set membership score (0.0–1.0) for a resource in this combination."@en .

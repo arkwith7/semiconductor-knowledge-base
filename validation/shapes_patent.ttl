@@ -1,0 +1,141 @@
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix sdkb:    <https://w3id.org/sdkb/> .
+@prefix ont:     <https://w3id.org/sdkb/ont/> .
+@prefix gov:     <https://w3id.org/sdkb/gov/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ═══════════════════════════════════════════════════════════════════
+# SDKB v1.0 SHACL Shapes — Patent Module Release Gate
+#
+# Enforces the structural contract on Patent / IPC / RejectionType /
+# PriorArt instances loaded into the SDKB data graph. Used as a release
+# gate by `scripts/validate_shacl.py --shapes validation/shapes_patent.ttl`.
+# ═══════════════════════════════════════════════════════════════════
+
+# ─── Every Patent must have an application number + office + license ──
+ont:Shape_Patent
+    a sh:NodeShape ;
+    sh:targetClass ont:Patent ;
+    sh:property [
+        sh:path ont:applicationNumber ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Every Patent must declare ont:applicationNumber." ;
+    ] ;
+    sh:property [
+        sh:path ont:patentOffice ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:in ( "KR" "US" "JP" "EP" "WO" "CN" "OTHER" ) ;
+        sh:message "patentOffice must be one of KR/US/JP/EP/WO/CN/OTHER." ;
+    ] ;
+    sh:property [
+        sh:path dcterms:license ;
+        sh:minCount 1 ;
+        sh:message "Every Patent must declare dcterms:license (CDLA-Permissive-2.0 for Open Core; KIPRIS terms otherwise)." ;
+    ] ;
+    sh:property [
+        sh:path ont:interpretationType ;
+        sh:in ( "verbatim" "mapped" "author-defined" ) ;
+        sh:message "interpretationType must be one of: verbatim, mapped, author-defined." ;
+    ] .
+
+# ─── Every RejectedPatent must cite ≥ 1 prior art (examiner-grade) ────
+ont:Shape_RejectedPatent
+    a sh:NodeShape ;
+    sh:targetClass ont:RejectedPatent ;
+    sh:property [
+        sh:path ont:hasPriorArtExaminer ;
+        sh:minCount 1 ;
+        sh:message "Every RejectedPatent must cite at least one examiner-grade prior art." ;
+    ] ;
+    sh:property [
+        sh:path ont:rejectedFor ;
+        sh:minCount 1 ;
+        sh:class ont:RejectionType ;
+        sh:message "Every RejectedPatent must declare ≥1 RejectionType via ont:rejectedFor." ;
+    ] ;
+    sh:property [
+        sh:path ont:examinationStatus ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Every RejectedPatent must declare examinationStatus (거절결정(일반), 거절결정(재심사), …)." ;
+    ] .
+
+# ─── Classification symbols must have notation + broader chain ────────
+ont:Shape_IPCSymbol
+    a sh:NodeShape ;
+    sh:targetClass ont:IPCSymbol ;
+    sh:property [
+        sh:path skos:notation ;
+        sh:minCount 1 ;
+        sh:message "IPCSymbol must have a skos:notation (e.g. 'H01L 21/02')." ;
+    ] .
+
+# ─── PriorArt edges must trace back to a Patent on both ends ──────────
+ont:Shape_PriorArtTarget
+    a sh:NodeShape ;
+    sh:targetSubjectsOf ont:hasPriorArt ;
+    sh:property [
+        sh:path ont:hasPriorArt ;
+        sh:class ont:Patent ;
+        sh:message "ont:hasPriorArt range must be ont:Patent (or subclass)." ;
+    ] ;
+    sh:class ont:Patent ;
+    sh:message "Subject of ont:hasPriorArt must be a Patent." .
+
+# ─── Rejection passages must come with a passage or evidence_url ──────
+ont:Shape_RejectionReason
+    a sh:NodeShape ;
+    sh:targetClass ont:RejectionReason ;
+    sh:or (
+        [ sh:property [ sh:path ont:rejectionPassage ; sh:minCount 1 ; sh:datatype xsd:string ] ]
+        [ sh:property [ sh:path rdfs:seeAlso          ; sh:minCount 1 ] ]
+    ) ;
+    sh:message "RejectionReason must have either ont:rejectionPassage (OCR'd text) or rdfs:seeAlso (URL to decision document)." .
+
+# ─── Multi-jurisdiction leakage warning shape ─────────────────────────
+# A Patent assigned to a KR-domiciled Organization and tagged as NCT must
+# not be released to a candidate whose jurisdiction is outside KR without
+# explicit approval. This is a SPARQL-based shape because the constraint
+# spans multiple hops and is the structural heart of AFCP-EM's gate.
+gov:Shape_NCTLeakage
+    a sh:NodeShape ;
+    sh:targetClass ont:Patent ;
+    sh:sparql [
+        sh:message "Patent designated as KR NationalCoreTechnology may not be linked to a non-KR target without an approval token." ;
+        sh:select """
+            PREFIX ont: <https://w3id.org/sdkb/ont/>
+            PREFIX gov: <https://w3id.org/sdkb/gov/>
+            SELECT $this
+            WHERE {
+                $this gov:designatedAsNCT ?nct .
+                ?nct gov:requiresGovApproval true .
+                $this ont:hasPriorArt ?other .
+                ?other ont:patentOffice ?office .
+                FILTER (?office != "KR")
+                OPTIONAL { $this ont:approvalToken ?tok . }
+                FILTER (!bound(?tok))
+            }
+        """ ;
+    ] .
+
+# ─── Provenance: every Patent must trace to a source dataset ──────────
+ont:Shape_PatentProvenance
+    a sh:NodeShape ;
+    sh:targetClass ont:Patent ;
+    sh:property [
+        sh:path dcterms:source ;
+        sh:minCount 1 ;
+        sh:message "Patent must declare dcterms:source (KIPRIS Plus API / KIPRIS web / EPO OPS / USPTO PEDS)." ;
+    ] ;
+    sh:property [
+        sh:path prov:wasGeneratedBy ;
+        sh:minCount 1 ;
+        sh:message "Patent must declare prov:wasGeneratedBy (ingest activity)." ;
+    ] .

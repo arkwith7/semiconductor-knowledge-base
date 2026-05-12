@@ -1,0 +1,109 @@
+@prefix sdkb:    <https://w3id.org/sdkb/> .
+@prefix ont:     <https://w3id.org/sdkb/ont/> .
+@prefix gov:     <https://w3id.org/sdkb/gov/> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+# ═══════════════════════════════════════════════════════════════════
+# SDKB v1.0 — Korean Governance Module (sdkb-governance-kr.ttl)
+#
+# 산업기술의 유출방지 및 보호에 관한 법률 (Act on Prevention of
+# Divulgence and Protection of Industrial Technology, "산업기술보호법")
+# + 국가핵심기술 (National Core Technology, NCT) designation.
+#
+# Used by AFCP-EM-Expert/PriorArt to compute multi-jurisdiction leakage:
+# a KR-NCT item cited against a non-KR examiner counterpart is a structural
+# compliance risk that must be filtered, not merely flagged post-hoc.
+# ═══════════════════════════════════════════════════════════════════
+
+<https://w3id.org/sdkb/gov/kr>
+    a owl:Ontology ;
+    rdfs:label "SDKB Governance Module — Korea (산업기술보호법)"@en ;
+    rdfs:comment "Korean industrial technology protection law model."@en ;
+    owl:versionInfo "1.0.0-dev" ;
+    dcterms:license <https://spdx.org/licenses/CDLA-Permissive-2.0.html> ;
+    owl:imports <https://w3id.org/sdkb/gov> .
+
+# ── CLASSES ────────────────────────────────────────────────────────
+
+gov:KRIndustrialTechRule
+    a owl:Class ;
+    rdfs:subClassOf prov:Entity ;
+    rdfs:label "Korean Industrial Tech Rule"@en ;
+    rdfs:comment "A provision of the 산업기술보호법 (Industrial Technology Protection Act) or related KIAT/MOTIE notice."@en .
+
+gov:NationalCoreTechnology
+    a owl:Class ;
+    rdfs:label "National Core Technology (국가핵심기술)"@en ;
+    rdfs:comment "Technology designated as national-core by MOTIE under 산업기술보호법. Subject to government approval for export and overseas M&A."@en .
+
+gov:NCTField
+    a owl:Class ;
+    rdfs:subClassOf skos:Concept ;
+    rdfs:label "NCT Field"@en ;
+    rdfs:comment "Industry domain of an NCT designation (반도체, 디스플레이, 이차전지, 등)."@en .
+
+# ── NCT FIELD CONCEPTS (반도체-relevant subset) ─────────────────────
+
+gov:NCTField_Semiconductor
+    a gov:NCTField ;
+    skos:prefLabel "반도체"@ko, "Semiconductor"@en ;
+    skos:notation "NCT-SEMI" .
+
+gov:NCTField_Display
+    a gov:NCTField ;
+    skos:prefLabel "디스플레이"@ko, "Display"@en ;
+    skos:notation "NCT-DISP" .
+
+gov:NCTField_Battery
+    a gov:NCTField ;
+    skos:prefLabel "이차전지"@ko, "Secondary Battery"@en ;
+    skos:notation "NCT-BATT" .
+
+# ── OBJECT PROPERTIES ──────────────────────────────────────────────
+
+gov:designatedAsNCT
+    a owl:ObjectProperty ;
+    rdfs:range gov:NationalCoreTechnology ;
+    rdfs:label "designated as NCT"@en ;
+    rdfs:comment "Marks a TechnologyNode / Process / Material / EquipmentClass as a designated National Core Technology."@en .
+
+gov:nctField
+    a owl:ObjectProperty ;
+    rdfs:domain gov:NationalCoreTechnology ;
+    rdfs:range gov:NCTField ;
+    rdfs:label "NCT field"@en .
+
+gov:requiresGovApproval
+    a owl:DatatypeProperty ;
+    rdfs:domain gov:NationalCoreTechnology ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "requires government approval"@en ;
+    rdfs:comment "True if the technology is subject to mandatory MOTIE approval for export or overseas transaction."@en .
+
+gov:nctDesignationDate
+    a owl:DatatypeProperty ;
+    rdfs:domain gov:NationalCoreTechnology ;
+    rdfs:range xsd:date ;
+    rdfs:label "NCT designation date"@en .
+
+# ── ANCHOR INDIVIDUALS ─────────────────────────────────────────────
+
+gov:Rule_KR_ITPA
+    a gov:KRIndustrialTechRule ;
+    skos:prefLabel "산업기술의 유출방지 및 보호에 관한 법률"@ko, "Industrial Technology Protection Act"@en ;
+    dcterms:bibliographicCitation "법률 제19767호 (2023.10.31. 일부개정)" ;
+    gov:hasJurisdiction gov:JurisdictionKR ;
+    rdfs:seeAlso <https://www.law.go.kr/법령/산업기술의유출방지및보호에관한법률> .
+
+gov:Rule_KR_ITPA_Art11
+    a gov:KRIndustrialTechRule ;
+    skos:prefLabel "국가핵심기술의 수출 (제11조)"@ko, "Export of NCT (Article 11)"@en ;
+    rdfs:comment "국가핵심기술을 외국기업에 매각·이전하려는 경우 산업통상자원부장관의 승인을 받아야 한다."@ko ;
+    dcterms:bibliographicCitation "산업기술보호법 제11조" ;
+    gov:hasJurisdiction gov:JurisdictionKR .

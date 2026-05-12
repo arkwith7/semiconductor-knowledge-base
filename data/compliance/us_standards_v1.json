@@ -1,0 +1,238 @@
+{
+  "dataset_id": "us_compliance_standards_v1",
+  "jurisdiction": "US_EAR",
+  "version": "v1.0",
+  "generated": "2026-03-01",
+  "description": "미국 반도체 분야 수출통제 규제 기준 데이터셋 — EAR/CCL 및 Wassenaar 적용 기준 (마스터 정의)",
+  "coverage": "미국 상무부 BIS(Bureau of Industry and Security) EAR 규정, CCL 3A/3B/3C/3E 카테고리, Wassenaar Arrangement 반도체 항목",
+
+  "legal_framework": {
+    "primary_law": "Export Administration Regulations (EAR)",
+    "regulation_code": "15 CFR Parts 730-774",
+    "administering_agency": "Bureau of Industry and Security (BIS), U.S. Department of Commerce",
+    "related_laws": [
+      {
+        "name": "Export Control Reform Act (ECRA)",
+        "year": 2018,
+        "scope": "EAR 법적 근거, 신흥·기반 기술(Emerging & Foundational Tech) 통제 권한"
+      },
+      {
+        "name": "Wassenaar Arrangement",
+        "scope": "42개국 참가 다자간 수출통제 체제 — 재래식 무기 및 이중용도 물품·기술 통제",
+        "semiconductor_categories": ["3A001", "3B001", "3B002", "3C001", "3E001"]
+      },
+      {
+        "name": "Export Control Classification Number (ECCN)",
+        "scope": "CCL 항목 분류 체계 — Category.Group.ECCN.Paragraph 구조"
+      },
+      {
+        "name": "Entity List (15 CFR Supplement No. 4 to Part 744)",
+        "scope": "특정 기업·기관 대상 수출 전 허가(license) 의무화"
+      }
+    ],
+    "key_provisions": {
+      "EAR_Sec734_13_DeemedExport": "외국 국적자에게 미국 내에서 통제기술을 제공하는 행위는 해당 국가로의 수출로 간주 (Deemed Export Rule)",
+      "EAR_Sec736_2": "수출 거래 시 EAR 준수 의무",
+      "EAR_Sec744_11": "Entity List 대상 수출 시 BIS 사전 허가 필수",
+      "EAR_Sec764": "위반 시 제재 — 민사 최대 $300,000/건, 형사 최대 $1,000,000/건 또는 20년 징역"
+    },
+    "license_types": {
+      "NLR": "No License Required — EAR99 또는 통제대상 아님",
+      "License_Exception": "일부 CCL 항목에 대해 적용 가능한 라이선스 예외 (ENC, TSR, STA 등)",
+      "Specific_License": "BIS에 개별 사전 허가 신청 필요"
+    }
+  },
+
+  "jurisdiction_trigger_rules": {
+    "applies_when": [
+      "전문가 국적(nationality) = US",
+      "전문가 근무이력(work_history) 포함 US",
+      "기술이 US-origin 또는 US_EAR 통제대상 AND 수신인이 외국인(foreign national)",
+      "미국 내에서 외국 국적자에게 기술 제공 시 — Deemed Export 조항 적용",
+      "CN/KP/RU 등 E:1/E:2 그룹 대상국 수신자에게 CCL HIGH이상 기술 제공 시"
+    ],
+    "jurisdiction_id": "US_EAR",
+    "legal_codes": ["EAR_CCL", "Wassenaar", "EAR_Entity_List", "EAR_Deemed_Export"],
+    "country_group_map": {
+      "A_ALLIES": ["GB", "AU", "CA", "DE", "JP", "FR", "NL", "KR"],
+      "D1_CONCERN": ["CN", "RU", "KP", "IR"],
+      "E1_EMBARGO": ["KP", "IR", "CU", "SY"],
+      "E2_SANCTION": ["RU"]
+    }
+  },
+
+  "deemed_export_rule": {
+    "rule_id": "EAR_DeemedExport",
+    "section": "EAR §734.13",
+    "description": "미국 내에서 외국 국적자(비영주권자)에게 Export Administration Regulations 통제기술을 제공하는 행위는 해당 인물의 모국(최근 국적)으로 수출한 것으로 간주",
+    "trigger_conditions": [
+      "전문가.nationality != US (비시민권, 비영주권)",
+      "기술 수신자가 CN/KP/IR 등 D:1~E 그룹 국적",
+      "제공 기술이 EAR99 초과 (즉, CCL 등재 항목)"
+    ],
+    "impact_on_matching": "CN 국적 소부장 업체가 US 시민권/영주권 전문가에게 자문 요청 시 → 해당 전문가의 기술 공유는 CN으로의 수출과 동일하게 EAR 적용",
+    "compliance_outcome": "BIS 사전 허가 없으면 BLOCK 처리 필요"
+  },
+
+  "technology_controls": [
+    {
+      "tech_keyword": "CCL_3A001",
+      "tech_category": "Semiconductor",
+      "control_level": "CRITICAL",
+      "legal_basis": "EAR_CCL",
+      "eccn": "3A001.a.1",
+      "jurisdiction": "US_EAR",
+      "description": "첨단 반도체 소자 — 로직 집적회로 (16nm 이하, 또는 GAA/FinFET, 처리속도 기준 초과)",
+      "conditions": {
+        "logic_node_max_nm": 16,
+        "architecture": ["FinFET", "GAA", "nanosheet"],
+        "transistor_count_min_billion": 10,
+        "clock_speed_ghz_min": 3.0
+      },
+      "export_restriction": "D:1 그룹(CN 등) 수출 시 BIS 개별허가 필수",
+      "entity_list_restriction": "Huawei, SMIC, CXMT 등 Entity List 기업에는 모든 EAR 항목 허가 필요",
+      "penalty_on_violation": "민사 최대 $300,000/건, 형사 최대 $1,000,000/건 + 20년 징역"
+    },
+    {
+      "tech_keyword": "CCL_3B001",
+      "tech_category": "Semiconductor",
+      "control_level": "HIGH",
+      "legal_basis": "EAR_CCL",
+      "eccn": "3B001.a",
+      "jurisdiction": "US_EAR",
+      "description": "반도체 제조장비 — 리소그래피, 식각, 증착, CMP 장비 (첨단 노드 전용)",
+      "conditions": {
+        "equipment_types": ["EUV lithography", "DUV immersion litho below 193nm", "ALE etch", "ALD equipment"],
+        "resolution_nm_max": 7,
+        "subcategory_3B001_b": "Ion implant equipment — high-energy >5MeV",
+        "subcategory_3B001_c": "Process control equipment (CD-SEM/overlay <1nm precision)"
+      },
+      "export_restriction": "D:1 그룹 수출 시 BIS 개별허가, Wassenaar 협의국에는 일부 예외",
+      "penalty_on_violation": "민사/형사 제재"
+    },
+    {
+      "tech_keyword": "EUV_Process",
+      "tech_category": "Semiconductor",
+      "control_level": "HIGH",
+      "legal_basis": "Wassenaar",
+      "eccn": "3B001.a.2",
+      "jurisdiction": "WASSENAAR",
+      "description": "EUV 노광 공정 및 관련 소재 기술 (파장 13.5nm EUV 광원·광학계·레지스트 기술)",
+      "conditions": {
+        "wavelength_nm": 13.5,
+        "equipment": ["ASML EUV", "EUV pellicle", "EUV photoresist"],
+        "resolution_nm_max": 7
+      },
+      "export_restriction": "Wassenaar 참가국 상호 허용. 비참가국(CN, KP, RU 등) 수출 금지",
+      "related_control": "네덜란드 정부 ASML 수출허가 별도 필요 (KR도 동일 조항 적용)",
+      "penalty_on_violation": "Wassenaar 참가국 국내법 위반 제재"
+    },
+    {
+      "tech_keyword": "Advanced_Metrology",
+      "tech_category": "Semiconductor",
+      "control_level": "HIGH",
+      "legal_basis": "Wassenaar",
+      "eccn": "3B001.f",
+      "jurisdiction": "WASSENAAR",
+      "description": "나노급 측정·검사 기술 (CD-SEM, OCD, e-beam inspection — 1nm 이하 분해능)",
+      "conditions": {
+        "resolution_nm_max": 1,
+        "tools": ["CD-SEM", "OCD scatterometry", "e-beam inspection", "atom probe tomography"]
+      },
+      "export_restriction": "Wassenaar 참가국 간 허용. 비참가국 이전 금지",
+      "penalty_on_violation": "Wassenaar 참가국 국내법 위반 제재"
+    },
+    {
+      "tech_keyword": "EAR_Deemed_Export_CN",
+      "tech_category": "Compliance_Rule",
+      "control_level": "HIGH",
+      "legal_basis": "EAR_Deemed_Export",
+      "eccn": "N/A",
+      "jurisdiction": "US_EAR",
+      "description": "중국 국적 외국인에게 CCL 통제기술 제공 시 자동 Deemed Export 적용 — 미국 근무 전문가가 CN 소부장 업체에 기술 자문 시 적용",
+      "conditions": {
+        "recipient_country": "CN",
+        "provider_status": "US resident (non-citizen or non-PR)",
+        "technology_level": "EAR controlled (above EAR99)"
+      },
+      "trigger_scenario": "CN 업체 → US 근무 전문가 (KR 또는 기타 국적) 기술 자문 요청",
+      "export_restriction": "BIS 사전 허가 없으면 자문 불가 (BLOCK)",
+      "penalty_on_violation": "민사 최대 $300,000/건, 형사 최대 $1,000,000/건"
+    },
+    {
+      "tech_keyword": "BIS_Entity_List",
+      "tech_category": "Compliance_Rule",
+      "control_level": "CRITICAL",
+      "legal_basis": "EAR_Entity_List",
+      "eccn": "N/A",
+      "jurisdiction": "US_EAR",
+      "description": "BIS Entity List 등재 기업·기관 대상 — 모든 EAR 해당 품목·기술에 대해 수출 전 허가(license) 필요 (presumption of denial)",
+      "conditions": {
+        "listed_entities_examples": [
+          "Huawei Technologies",
+          "SMIC (Semiconductor Manufacturing International Corporation)",
+          "CXMT (ChangXin Memory Technologies)",
+          "YMTC (Yangtze Memory Technologies)",
+          "Hikvision",
+          "DJI"
+        ],
+        "note": "목록은 BIS 공식 Entity List 최신본 참조"
+      },
+      "export_restriction": "Entity List 등재 기업에는 면허 거부 추정(denial presumption) — 사실상 전면 금지",
+      "penalty_on_violation": "민사/형사 최대 제재 + 미국 시장 접근 금지"
+    },
+    {
+      "tech_keyword": "CCL_3E001_Semiconductor_Tech",
+      "tech_category": "Semiconductor",
+      "control_level": "HIGH",
+      "legal_basis": "EAR_CCL",
+      "eccn": "3E001",
+      "jurisdiction": "US_EAR",
+      "description": "반도체 제조·설계 관련 기술(Technology) — 3A001~3B002 장비·소재의 개발·생산에 필요한 기술 지식",
+      "conditions": {
+        "applies_to": ["DRAM design knowledge", "NAND process technology", "Foundry process IP", "EDA tool-related tech"],
+        "note": "물품이 아닌 '기술 자체'(know-how, process recipe)에 적용 — 전문가 자문 시 핵심 적용 항목"
+      },
+      "export_restriction": "D:1 그룹 수출 시 BIS 개별허가. 전문가의 기술 자문은 3E001 해당 여부 사전 확인 필수",
+      "penalty_on_violation": "민사/형사 제재"
+    },
+    {
+      "tech_keyword": "Legacy_CCL_Low",
+      "tech_category": "Semiconductor",
+      "control_level": "LOW",
+      "legal_basis": "EAR99",
+      "eccn": "EAR99",
+      "jurisdiction": "US_EAR",
+      "description": "EAR99 — 수출관리번호 없는 저통제 항목 (28nm 이상 일반 반도체, 공개 지식 수준)",
+      "conditions": {
+        "tech_node_min_nm": 28,
+        "note": "EAR 통제 목록에 미등재 — 일부 국가/최종용도 제한만 확인"
+      },
+      "export_restriction": "일반 수출 허용. 최종사용자(End-User) 확인 권고",
+      "penalty_on_violation": "위반 해당 없음 (End-Use/User 규정 위반 시 별도 제재)"
+    }
+  ],
+
+  "country_authorization_by_jurisdiction": {
+    "description": "US_EAR/Wassenaar 관할 기술의 수신국가별 이전 허용 수준 (미국 관점)",
+    "note": "전체 국가별 정책은 compliance_jurisdiction_policies_v1.json 참조",
+    "country_groups_summary": {
+      "A_group": "동맹국 — 일반 수출 허용 (KR, JP, DE, NL, GB, FR, AU, CA)",
+      "D1_group": "우려국 — CCL 항목 이전 시 BIS 개별허가 (CN, RU)",
+      "E1_group": "엠바고국 — 전면 금지 (KP, IR, CU, SY)",
+      "E2_group": "제재국 — 전면 금지 (RU 러시아)"
+    }
+  },
+
+  "extensibility": {
+    "add_new_jurisdiction_instructions": "새 국가 규제 추가 시 해당 국가 파일 생성 (예: jp_compliance_standards_v1.json, eu_dualuse_standards_v1.json) 후 compliance_jurisdiction_policies_v1.json 업데이트",
+    "planned_jurisdictions": ["JP_FEFTA", "EU_DualUse_Reg_2021_821", "NL_Semiconductor_Export_Rules", "TW_STC"],
+    "schema_version": "1.0",
+    "backward_compatible_fields": ["tech_keyword", "control_level", "legal_basis", "tech_category", "description"],
+    "db_seed_mapping": {
+      "target_file": "data/compliance/technology_controls_v1.json",
+      "seed_script": "backend/app/scripts/seed_compliance.py",
+      "note": "ExpDataSet 마스터 정의 → data/compliance 운영 파일 → DB 시딩 순서로 관리"
+    }
+  }
+}

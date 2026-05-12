@@ -3300,6 +3300,28 @@
       }
     },
     {
+      "id": "vendor:semes",
+      "type": "Vendor",
+      "canonical_name": "SEMES Co., Ltd.",
+      "description": "한국 반도체 장비 제조사 (Samsung 계열). 식각·세정·트랙·포토 장비를 공급하며 한국 소부장 생태계의 핵심 벤더.",
+      "props": {
+        "country": "KR",
+        "founded_year": 1993,
+        "ticker": "private"
+      },
+      "provenance": {
+        "source": "vendor_public",
+        "source_id": "vendor:semes",
+        "reference": "SEMES corporate site (https://www.semes.com)",
+        "license": "Public information",
+        "url": "https://www.semes.com",
+        "modified": false,
+        "interpretation": "verbatim",
+        "validation_required": false,
+        "cross_ref": []
+      }
+    },
+    {
       "id": "equipment_class:implanter",
       "type": "EquipmentClass",
       "canonical_name": "Ion Implanter",
@@ -3711,33 +3733,6 @@
       "provenance": {
         "source": "vendor_public",
         "source_id": "vendor:asml/ASML_NXT",
-        "reference": "Public product catalog of Asml",
-        "license": "Public information",
-        "url": "Various (company websites)",
-        "modified": false,
-        "interpretation": "mapped",
-        "cross_ref": [
-          {
-            "source": "bis_ccl",
-            "eccn": "3B001.f",
-            "note": "Equipment class may be controlled under ECCN 3B001.f"
-          }
-        ]
-      }
-    },
-    {
-      "id": "equipment:asml_scanner",
-      "type": "Equipment",
-      "canonical_name": "ASML Scanner",
-      "description": "Lithography scanner",
-      "props": {
-        "model": "ASML_scanner",
-        "vendor_id": "vendor:asml",
-        "class_id": "equipment_class:scanner"
-      },
-      "provenance": {
-        "source": "vendor_public",
-        "source_id": "vendor:asml/ASML_scanner",
         "reference": "Public product catalog of Asml",
         "license": "Public information",
         "url": "Various (company websites)",
@@ -7960,6 +7955,58 @@
         "reference": "Public vendor-product relationships",
         "license": "Public information",
         "interpretation": "verbatim"
+      }
+    },
+    {
+      "src": "failuremode:cdu",
+      "predicate": "OBSERVED_IN",
+      "dst": "subprocess:euv_lithography",
+      "provenance": {
+        "source": "fmea_curation_v1.0",
+        "reference": "Standard FMEA-domain mapping (SEMI/JEDEC FMEA practice). Added to close SHACL Shape_FailureMode gap.",
+        "license": "CDLA-Permissive-2.0",
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Critical dimension uniformity drift originates in lithography exposure & focus control."
+      }
+    },
+    {
+      "src": "failuremode:erosion",
+      "predicate": "OBSERVED_IN",
+      "dst": "subprocess:cmp_oxide",
+      "provenance": {
+        "source": "fmea_curation_v1.0",
+        "reference": "Standard FMEA-domain mapping (SEMI/JEDEC FMEA practice). Added to close SHACL Shape_FailureMode gap.",
+        "license": "CDLA-Permissive-2.0",
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Pad/oxide erosion observed during oxide CMP overpolish."
+      }
+    },
+    {
+      "src": "failuremode:footing",
+      "predicate": "OBSERVED_IN",
+      "dst": "subprocess:plasma_etch",
+      "provenance": {
+        "source": "fmea_curation_v1.0",
+        "reference": "Standard FMEA-domain mapping (SEMI/JEDEC FMEA practice). Added to close SHACL Shape_FailureMode gap.",
+        "license": "CDLA-Permissive-2.0",
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Etch footing at the sidewall bottom during plasma etch."
+      }
+    },
+    {
+      "src": "failuremode:particle",
+      "predicate": "OBSERVED_IN",
+      "dst": "subprocess:wet_etch",
+      "provenance": {
+        "source": "fmea_curation_v1.0",
+        "reference": "Standard FMEA-domain mapping (SEMI/JEDEC FMEA practice). Added to close SHACL Shape_FailureMode gap.",
+        "license": "CDLA-Permissive-2.0",
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Particle defects most commonly traced to wet-clean / wet-etch steps."
       }
     }
   ],

@@ -1,0 +1,342 @@
+@prefix sdkb:    <https://w3id.org/sdkb/> .
+@prefix ont:     <https://w3id.org/sdkb/ont/> .
+@prefix data:    <https://w3id.org/sdkb/data/> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+# ═══════════════════════════════════════════════════════════════════
+# SDKB v1.0 — Patent Module (sdkb-patent.ttl)
+#
+# Supports both AFCP-EM-PriorArt (prior-art retrieval evaluation) and
+# Prof. Shin's signature patent-analytics use cases (novelty-focused
+# patent mapping, topic-based forecasting, emerging-tech identification).
+#
+# Instances are loaded from data/patents/rejected_patents_meta.parquet
+# (SIRP — Semiconductor Industry Rejected Patents, 773 records).
+# ═══════════════════════════════════════════════════════════════════
+
+<https://w3id.org/sdkb/ont/patent>
+    a owl:Ontology ;
+    rdfs:label "SDKB Patent Module"@en ;
+    rdfs:comment "Patent, classification taxonomy, rejection reason, and prior-art citation model. Aligned with Prof. Shin Juneseuk's patent-analytics research line."@en ;
+    owl:versionInfo "1.0.0-dev" ;
+    dcterms:license <https://spdx.org/licenses/CDLA-Permissive-2.0.html> ;
+    owl:imports <https://w3id.org/sdkb/ont> .
+
+# ── CLASSES ────────────────────────────────────────────────────────
+
+ont:Patent
+    a owl:Class ;
+    rdfs:subClassOf prov:Entity ;
+    rdfs:label "Patent"@en ;
+    rdfs:comment "A patent application (target of examination) or a granted patent. Subclasses encode examination outcome."@en .
+
+ont:RejectedPatent
+    a owl:Class ;
+    rdfs:subClassOf ont:Patent ;
+    rdfs:label "Rejected Patent"@en ;
+    rdfs:comment "A patent application that received a final rejection decision (거절결정)."@en .
+
+ont:GrantedPatent
+    a owl:Class ;
+    rdfs:subClassOf ont:Patent ;
+    rdfs:label "Granted Patent"@en ;
+    rdfs:comment "A patent that has been granted/registered."@en .
+
+ont:PendingPatent
+    a owl:Class ;
+    rdfs:subClassOf ont:Patent ;
+    rdfs:label "Pending Patent"@en ;
+    rdfs:comment "A patent application currently under examination."@en .
+
+ont:ClassificationSymbol
+    a owl:Class ;
+    rdfs:label "Classification Symbol"@en ;
+    rdfs:comment "Abstract superclass for patent classification codes (IPC/CPC/F-term)."@en .
+
+ont:IPCSymbol
+    a owl:Class ;
+    rdfs:subClassOf ont:ClassificationSymbol ;
+    rdfs:label "IPC Symbol"@en ;
+    rdfs:comment "An International Patent Classification (IPC) code, e.g. H01L 21/02."@en .
+
+ont:CPCSymbol
+    a owl:Class ;
+    rdfs:subClassOf ont:ClassificationSymbol ;
+    rdfs:label "CPC Symbol"@en ;
+    rdfs:comment "A Cooperative Patent Classification (CPC) code, e.g. H01L21/02063."@en .
+
+ont:FTermFacet
+    a owl:Class ;
+    rdfs:subClassOf ont:ClassificationSymbol ;
+    rdfs:label "F-term Facet"@en ;
+    rdfs:comment "A JPO F-term faceted classification, e.g. 5F045 (thin-film deposition view)."@en .
+
+ont:TopicCluster
+    a owl:Class ;
+    rdfs:label "Topic Cluster"@en ;
+    rdfs:comment "A topic cluster derived from patent abstract/claim NLP. Supports topic-based forecasting (Shin et al., TFSC 2017)."@en .
+
+ont:NoveltyScore
+    a owl:Class ;
+    rdfs:label "Novelty Score"@en ;
+    rdfs:comment "A novelty assessment attached to a patent. Supports novelty-focused patent mapping (Lee, Kang, Shin TFSC 2015)."@en .
+
+ont:RejectionReason
+    a owl:Class ;
+    rdfs:label "Rejection Reason"@en ;
+    rdfs:comment "A categorical reason for patent rejection, derived from KIPO/USPTO/JPO examination guidelines."@en .
+
+ont:RejectionType
+    a owl:Class ;
+    rdfs:subClassOf skos:Concept ;
+    rdfs:label "Rejection Type"@en ;
+    rdfs:comment "Controlled vocabulary for rejection categories."@en .
+
+# ── REJECTION TYPE INDIVIDUALS (controlled vocabulary) ──────────────
+
+ont:Rejection_Novelty
+    a ont:RejectionType ;
+    skos:prefLabel "신규성 부정 (lack of novelty)"@ko, "Lack of Novelty"@en ;
+    skos:notation "KIPO-29-1" ;
+    skos:scopeNote "특허법 제29조 제1항 — 출원 전 공지·공연된 발명"@ko .
+
+ont:Rejection_Inventiveness
+    a ont:RejectionType ;
+    skos:prefLabel "진보성 부정 (lack of inventive step)"@ko, "Lack of Inventive Step"@en ;
+    skos:notation "KIPO-29-2" ;
+    skos:scopeNote "특허법 제29조 제2항 — 통상의 기술자에 의해 용이하게 발명"@ko .
+
+ont:Rejection_ClarityScope
+    a ont:RejectionType ;
+    skos:prefLabel "청구범위 불명확 (claim indefiniteness)"@ko, "Indefinite Claim Scope"@en ;
+    skos:notation "KIPO-42" ;
+    skos:scopeNote "특허법 제42조 — 청구범위 기재불비"@ko .
+
+ont:Rejection_Disclosure
+    a ont:RejectionType ;
+    skos:prefLabel "기재불비 (insufficient disclosure)"@ko, "Insufficient Disclosure"@en ;
+    skos:notation "KIPO-42-3" .
+
+ont:Rejection_Eligibility
+    a ont:RejectionType ;
+    skos:prefLabel "발명의 정의 미충족 (non-statutory subject matter)"@ko, "Non-Statutory Subject Matter"@en ;
+    skos:notation "KIPO-2" .
+
+# ── OBJECT PROPERTIES ──────────────────────────────────────────────
+
+ont:hasClassification
+    a owl:ObjectProperty ;
+    rdfs:domain ont:Patent ;
+    rdfs:range ont:ClassificationSymbol ;
+    rdfs:label "has classification"@en ;
+    rdfs:comment "Links a patent to an IPC/CPC/F-term classification symbol."@en .
+
+ont:hasIPC
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf ont:hasClassification ;
+    rdfs:domain ont:Patent ;
+    rdfs:range ont:IPCSymbol ;
+    rdfs:label "has IPC"@en .
+
+ont:hasCPC
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf ont:hasClassification ;
+    rdfs:domain ont:Patent ;
+    rdfs:range ont:CPCSymbol ;
+    rdfs:label "has CPC"@en .
+
+ont:hasFTerm
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf ont:hasClassification ;
+    rdfs:domain ont:Patent ;
+    rdfs:range ont:FTermFacet ;
+    rdfs:label "has F-term"@en .
+
+ont:cites
+    a owl:ObjectProperty ;
+    rdfs:domain ont:Patent ;
+    rdfs:range ont:Patent ;
+    rdfs:label "cites"@en ;
+    rdfs:comment "Generic citation relation between two patents."@en .
+
+ont:hasPriorArt
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf ont:cites ;
+    rdfs:domain ont:Patent ;
+    rdfs:range ont:Patent ;
+    rdfs:label "has prior art"@en ;
+    rdfs:comment "Links a patent (typically rejected/contested) to a prior-art document cited against it. Sub-properties distinguish examiner- vs. applicant-disclosed."@en .
+
+ont:hasPriorArtExaminer
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf ont:hasPriorArt ;
+    rdfs:domain ont:Patent ;
+    rdfs:range ont:Patent ;
+    rdfs:label "has prior art (examiner-cited)"@en ;
+    rdfs:comment "Prior art cited by the patent examiner in the office action. Ground-truth signal for prior-art retrieval evaluation."@en .
+
+ont:hasPriorArtApplicant
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf ont:hasPriorArt ;
+    rdfs:domain ont:Patent ;
+    rdfs:range ont:Patent ;
+    rdfs:label "has prior art (applicant-disclosed)"@en .
+
+ont:rejectedFor
+    a owl:ObjectProperty ;
+    rdfs:domain ont:RejectedPatent ;
+    rdfs:range ont:RejectionType ;
+    rdfs:label "rejected for"@en ;
+    rdfs:comment "Reason category for the rejection decision."@en .
+
+ont:rejectionEvidence
+    a owl:ObjectProperty ;
+    rdfs:domain ont:RejectedPatent ;
+    rdfs:range ont:RejectionReason ;
+    rdfs:label "rejection evidence"@en ;
+    rdfs:comment "A specific RejectionReason instance carrying the cited passage / reasoning."@en .
+
+ont:realizesProcess
+    a owl:ObjectProperty ;
+    rdfs:domain ont:Patent ;
+    rdfs:range ont:Process ;
+    rdfs:label "realizes process"@en ;
+    rdfs:comment "Links a patent to the SDKB Process it concerns (joins patent module to manufacturing core)."@en .
+
+ont:realizesEquipmentClass
+    a owl:ObjectProperty ;
+    rdfs:domain ont:Patent ;
+    rdfs:range ont:EquipmentClass ;
+    rdfs:label "realizes equipment class"@en .
+
+ont:involvesMaterial
+    a owl:ObjectProperty ;
+    rdfs:domain ont:Patent ;
+    rdfs:range ont:Material ;
+    rdfs:label "involves material"@en .
+
+ont:assignedTo
+    a owl:ObjectProperty ;
+    rdfs:domain ont:Patent ;
+    rdfs:range ont:Organization ;
+    rdfs:label "assigned to"@en ;
+    rdfs:comment "Current assignee of the patent (rights holder)."@en .
+
+ont:broaderClassification
+    a owl:ObjectProperty, owl:TransitiveProperty ;
+    rdfs:domain ont:ClassificationSymbol ;
+    rdfs:range ont:ClassificationSymbol ;
+    rdfs:label "broader classification"@en ;
+    rdfs:comment "Hierarchical parent within IPC/CPC tree (e.g. H01L 21/02 → H01L 21 → H01L → H)."@en .
+
+# ── DATATYPE PROPERTIES ────────────────────────────────────────────
+
+ont:applicationNumber
+    a owl:DatatypeProperty ;
+    rdfs:domain ont:Patent ;
+    rdfs:range xsd:string ;
+    rdfs:label "application number"@en ;
+    rdfs:comment "Application number as issued by the patent office."@en .
+
+ont:publicationNumber
+    a owl:DatatypeProperty ;
+    rdfs:domain ont:Patent ;
+    rdfs:range xsd:string ;
+    rdfs:label "publication number"@en .
+
+ont:registrationNumber
+    a owl:DatatypeProperty ;
+    rdfs:domain ont:Patent ;
+    rdfs:range xsd:string ;
+    rdfs:label "registration number"@en .
+
+ont:filingDate
+    a owl:DatatypeProperty ;
+    rdfs:domain ont:Patent ;
+    rdfs:range xsd:date ;
+    rdfs:label "filing date"@en .
+
+ont:publicationDate
+    a owl:DatatypeProperty ;
+    rdfs:domain ont:Patent ;
+    rdfs:range xsd:date ;
+    rdfs:label "publication date"@en .
+
+ont:rejectionDate
+    a owl:DatatypeProperty ;
+    rdfs:domain ont:RejectedPatent ;
+    rdfs:range xsd:date ;
+    rdfs:label "rejection date"@en .
+
+ont:patentOffice
+    a owl:DatatypeProperty ;
+    rdfs:domain ont:Patent ;
+    rdfs:range xsd:string ;
+    rdfs:label "patent office"@en ;
+    rdfs:comment "Issuing office code (KR / US / JP / EP / WO / CN)."@en .
+
+ont:examinationStatus
+    a owl:DatatypeProperty ;
+    rdfs:domain ont:Patent ;
+    rdfs:range xsd:string ;
+    rdfs:label "examination status"@en ;
+    rdfs:comment "거절결정(일반) / 거절결정(재심사) / 원결정유지(심사전치) / 취소환송후 재거절결정 / 등록 / 심사중 등."@en .
+
+ont:abstractText
+    a owl:DatatypeProperty ;
+    rdfs:domain ont:Patent ;
+    rdfs:range xsd:string ;
+    rdfs:label "abstract text"@en ;
+    rdfs:comment "Subject to source license — may be Link-Only depending on KIPRIS terms."@en .
+
+ont:firstClaimText
+    a owl:DatatypeProperty ;
+    rdfs:domain ont:Patent ;
+    rdfs:range xsd:string ;
+    rdfs:label "first claim text"@en ;
+    rdfs:comment "Subject to source license — may be Link-Only depending on KIPRIS terms."@en .
+
+ont:processFamily
+    a owl:DatatypeProperty ;
+    rdfs:domain ont:Patent ;
+    rdfs:range xsd:string ;
+    rdfs:label "process family"@en ;
+    rdfs:comment "Collected process-family tag: etch / deposition / metallization / photo / implant / oxidation_diffusion / memory / packaging / ..."@en .
+
+ont:valueChainStage
+    a owl:DatatypeProperty ;
+    rdfs:domain ont:Patent ;
+    rdfs:range xsd:string ;
+    rdfs:label "value chain stage"@en ;
+    rdfs:comment "Multi-valued: process | material | equipment | device | component."@en .
+
+ont:noveltyValue
+    a owl:DatatypeProperty ;
+    rdfs:domain ont:NoveltyScore ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "novelty value"@en .
+
+ont:noveltyMethod
+    a owl:DatatypeProperty ;
+    rdfs:domain ont:NoveltyScore ;
+    rdfs:range xsd:string ;
+    rdfs:label "novelty method"@en ;
+    rdfs:comment "Method tag: lexical | embedding | citation-based | hybrid."@en .
+
+ont:rejectionPassage
+    a owl:DatatypeProperty ;
+    rdfs:domain ont:RejectionReason ;
+    rdfs:range xsd:string ;
+    rdfs:label "rejection passage"@en ;
+    rdfs:comment "Quoted reasoning text from the rejection decision (거절결정서). May be empty for KIPRIS Plus API records that do not expose OCR'd passages."@en .
+
+# ── ANNOTATION PROPERTIES (reused from core) ───────────────────────
+# Patent instances reuse: ont:interpretationType, ont:validationRequired,
+# dcterms:source, dcterms:license, dcterms:bibliographicCitation,
+# prov:wasGeneratedBy, prov:wasDerivedFrom, prov:wasAttributedTo.

@@ -1,0 +1,1103 @@
+{
+  "metadata": {
+    "generated_date": "2026-02-09T22:47:02.805812",
+    "total_scenarios": 30,
+    "description": "Compliance test scenarios for AFCP-EM evaluation (S1~S6)",
+    "scenario_distribution": {
+      "S1": 5,
+      "S2": 5,
+      "S3": 5,
+      "S4": 5,
+      "S5": 5,
+      "S6": 5
+    },
+    "purpose": "Priority 2 - Compliance scenario data generation for Table 5 validation"
+  },
+  "scenarios": [
+    {
+      "expert_id": "EXP_021",
+      "scenario_class": "S1",
+      "nationality": "KR",
+      "work_history_countries": [
+        "KR"
+      ],
+      "compliance": {
+        "flags": [],
+        "risk_level": "none",
+        "applicable_jurisdictions": [
+          "KR_ITPA"
+        ],
+        "permitted_destinations": [
+          "all"
+        ],
+        "scenario_notes": "Domestic expert, no NCT involvement, general consulting permitted"
+      }
+    },
+    {
+      "expert_id": "EXP_022",
+      "scenario_class": "S1",
+      "nationality": "KR",
+      "work_history_countries": [
+        "KR"
+      ],
+      "compliance": {
+        "flags": [],
+        "risk_level": "none",
+        "applicable_jurisdictions": [
+          "KR_ITPA"
+        ],
+        "permitted_destinations": [
+          "all"
+        ],
+        "scenario_notes": "Domestic expert, no NCT involvement, general consulting permitted"
+      }
+    },
+    {
+      "expert_id": "EXP_023",
+      "scenario_class": "S1",
+      "nationality": "KR",
+      "work_history_countries": [
+        "KR",
+        "CN"
+      ],
+      "compliance": {
+        "flags": [
+          "NCT_HOLDER"
+        ],
+        "risk_level": "none",
+        "applicable_jurisdictions": [
+          "KR_ITPA"
+        ],
+        "permitted_destinations": [
+          "all_non_Na2"
+        ],
+        "scenario_notes": "Korea national, work history: ['KR', 'CN'], jurisdictions: ['KR_ITPA']. Scenario class: S1 -- NCT holder, Updated nationality fix v2.8.0."
+      }
+    },
+    {
+      "expert_id": "EXP_024",
+      "scenario_class": "S1",
+      "nationality": "US",
+      "work_history_countries": [
+        "US"
+      ],
+      "compliance": {
+        "flags": [],
+        "risk_level": "none",
+        "applicable_jurisdictions": [
+          "US_EAR"
+        ],
+        "permitted_destinations": [
+          "Ga-1",
+          "Ga-2",
+          "Na-1_review"
+        ],
+        "scenario_notes": "USA national, work history: ['US'], jurisdictions: ['US_EAR']. Scenario class: S1 -- Updated nationality fix v2.8.0."
+      }
+    },
+    {
+      "expert_id": "EXP_025",
+      "scenario_class": "S1",
+      "nationality": "US",
+      "work_history_countries": [
+        "US",
+        "SG"
+      ],
+      "compliance": {
+        "flags": [],
+        "risk_level": "none",
+        "applicable_jurisdictions": [
+          "US_EAR"
+        ],
+        "permitted_destinations": [
+          "Ga-1",
+          "Ga-2",
+          "Na-1_review"
+        ],
+        "scenario_notes": "USA national, work history: ['US', 'SG'], jurisdictions: ['US_EAR']. Scenario class: S1 -- Updated nationality fix v2.8.0."
+      }
+    },
+    {
+      "expert_id": "EXP_026",
+      "scenario_class": "S2",
+      "nationality": "CN",
+      "work_history_countries": [
+        "CN"
+      ],
+      "compliance": {
+        "flags": [
+          {
+            "type": "nct_restricted",
+            "jurisdiction": "KR_ITPA",
+            "restriction_level": "BLOCK",
+            "technologies": [
+              "3d_nand",
+              "dram_cell_design"
+            ]
+          }
+        ],
+        "risk_level": "high",
+        "applicable_jurisdictions": [
+          "KR_ITPA"
+        ],
+        "prohibited_destinations": [
+          "CN",
+          "RU",
+          "IR",
+          "KP"
+        ],
+        "scenario_notes": "China national, work history: ['CN'], jurisdictions: ['KR_ITPA']. Scenario class: S2 -- Updated nationality fix v2.8.0.",
+        "permitted_destinations": [
+          "all_non_Na2"
+        ]
+      }
+    },
+    {
+      "expert_id": "EXP_027",
+      "scenario_class": "S2",
+      "nationality": "CN",
+      "work_history_countries": [
+        "CN"
+      ],
+      "compliance": {
+        "flags": [
+          {
+            "type": "nct_restricted",
+            "jurisdiction": "KR_ITPA",
+            "restriction_level": "BLOCK",
+            "technologies": [
+              "advanced_packaging",
+              "euv_lithography"
+            ]
+          }
+        ],
+        "risk_level": "high",
+        "applicable_jurisdictions": [
+          "KR_ITPA"
+        ],
+        "prohibited_destinations": [
+          "CN",
+          "RU",
+          "IR",
+          "KP"
+        ],
+        "scenario_notes": "China national, work history: ['CN'], jurisdictions: ['KR_ITPA']. Scenario class: S2 -- Updated nationality fix v2.8.0.",
+        "permitted_destinations": [
+          "all_non_Na2"
+        ]
+      }
+    },
+    {
+      "expert_id": "EXP_028",
+      "scenario_class": "S2",
+      "nationality": "KR",
+      "work_history_countries": [
+        "KR"
+      ],
+      "compliance": {
+        "flags": [
+          {
+            "type": "nct_restricted",
+            "jurisdiction": "KR_ITPA",
+            "restriction_level": "BLOCK",
+            "technologies": [
+              "3d_nand",
+              "ald"
+            ]
+          }
+        ],
+        "risk_level": "high",
+        "applicable_jurisdictions": [
+          "KR_ITPA"
+        ],
+        "prohibited_destinations": [
+          "CN",
+          "RU",
+          "IR",
+          "KP"
+        ],
+        "scenario_notes": "NCT expert, clear block for technology transfer to prohibited countries"
+      }
+    },
+    {
+      "expert_id": "EXP_029",
+      "scenario_class": "S2",
+      "nationality": "KR",
+      "work_history_countries": [
+        "KR"
+      ],
+      "compliance": {
+        "flags": [
+          {
+            "type": "nct_restricted",
+            "jurisdiction": "KR_ITPA",
+            "restriction_level": "BLOCK",
+            "technologies": [
+              "3d_nand",
+              "dram_cell_design"
+            ]
+          }
+        ],
+        "risk_level": "high",
+        "applicable_jurisdictions": [
+          "KR_ITPA"
+        ],
+        "prohibited_destinations": [
+          "CN",
+          "RU",
+          "IR",
+          "KP"
+        ],
+        "scenario_notes": "NCT expert, clear block for technology transfer to prohibited countries"
+      }
+    },
+    {
+      "expert_id": "EXP_030",
+      "scenario_class": "S2",
+      "nationality": "KR",
+      "work_history_countries": [
+        "KR"
+      ],
+      "compliance": {
+        "flags": [
+          {
+            "type": "nct_restricted",
+            "jurisdiction": "KR_ITPA",
+            "restriction_level": "BLOCK",
+            "technologies": [
+              "dram_cell_design",
+              "finfet"
+            ]
+          }
+        ],
+        "risk_level": "high",
+        "applicable_jurisdictions": [
+          "KR_ITPA"
+        ],
+        "prohibited_destinations": [
+          "CN",
+          "RU",
+          "IR",
+          "KP"
+        ],
+        "scenario_notes": "NCT expert, clear block for technology transfer to prohibited countries"
+      }
+    },
+    {
+      "expert_id": "EXP_060",
+      "scenario_class": "S3",
+      "nationality": "KR",
+      "work_history_countries": [
+        "KR",
+        "US"
+      ],
+      "compliance": {
+        "flags": [
+          {
+            "type": "export_control_review",
+            "jurisdiction": "US_EAR",
+            "restriction_level": "REVIEW",
+            "technologies": [
+              "euv_process"
+            ]
+          }
+        ],
+        "risk_level": "medium",
+        "applicable_jurisdictions": [
+          "KR_ITPA",
+          "US_EAR"
+        ],
+        "requires_review": true,
+        "scenario_notes": "Korea national, work history: ['KR'], jurisdictions: ['KR_ITPA']. Scenario class: S3 -- Updated nationality fix v2.8.0.",
+        "permitted_destinations": [
+          "all_non_Na2"
+        ]
+      }
+    },
+    {
+      "expert_id": "EXP_096",
+      "scenario_class": "S3",
+      "nationality": "KR",
+      "work_history_countries": [
+        "KR",
+        "US"
+      ],
+      "compliance": {
+        "flags": [
+          {
+            "type": "export_control_review",
+            "jurisdiction": "US_EAR",
+            "restriction_level": "REVIEW",
+            "technologies": [
+              "quantum_computing"
+            ]
+          },
+          "NCT_HOLDER"
+        ],
+        "risk_level": "medium",
+        "applicable_jurisdictions": [
+          "KR_ITPA",
+          "US_EAR"
+        ],
+        "requires_review": true,
+        "scenario_notes": "Korea national, work history: ['KR', 'SG'], jurisdictions: ['KR_ITPA']. Scenario class: S3 -- NCT holder, Updated nationality fix v2.8.0.",
+        "permitted_destinations": [
+          "all_non_Na2"
+        ]
+      }
+    },
+    {
+      "expert_id": "EXP_070",
+      "scenario_class": "S3",
+      "nationality": "KR",
+      "work_history_countries": [
+        "KR",
+        "US"
+      ],
+      "compliance": {
+        "flags": [
+          {
+            "type": "export_control_review",
+            "jurisdiction": "US_EAR",
+            "restriction_level": "REVIEW",
+            "technologies": [
+              "sub_7nm_process"
+            ]
+          }
+        ],
+        "risk_level": "medium",
+        "applicable_jurisdictions": [
+          "KR_ITPA",
+          "US_EAR"
+        ],
+        "requires_review": true,
+        "scenario_notes": "Singapore national, work history: ['SG'], jurisdictions: ['KR_ITPA']. Scenario class: S3 -- Updated nationality fix v2.8.0.",
+        "permitted_destinations": [
+          "all_non_Na2"
+        ]
+      }
+    },
+    {
+      "expert_id": "EXP_075",
+      "scenario_class": "S3",
+      "nationality": "KR",
+      "work_history_countries": [
+        "KR",
+        "US"
+      ],
+      "compliance": {
+        "flags": [
+          {
+            "type": "export_control_review",
+            "jurisdiction": "US_EAR",
+            "restriction_level": "REVIEW",
+            "technologies": [
+              "quantum_computing"
+            ]
+          },
+          "NCT_HOLDER"
+        ],
+        "risk_level": "medium",
+        "applicable_jurisdictions": [
+          "KR_ITPA",
+          "US_EAR"
+        ],
+        "requires_review": true,
+        "scenario_notes": "Korea national, work history: ['KR'], jurisdictions: ['KR_ITPA']. Scenario class: S3 -- NCT holder, Updated nationality fix v2.8.0.",
+        "permitted_destinations": [
+          "all_non_Na2"
+        ]
+      }
+    },
+    {
+      "expert_id": "EXP_035",
+      "scenario_class": "S3",
+      "nationality": "KR",
+      "work_history_countries": [
+        "KR",
+        "US"
+      ],
+      "compliance": {
+        "flags": [
+          {
+            "type": "export_control_review",
+            "jurisdiction": "US_EAR",
+            "restriction_level": "REVIEW",
+            "technologies": [
+              "quantum_computing"
+            ]
+          }
+        ],
+        "risk_level": "medium",
+        "applicable_jurisdictions": [
+          "KR_ITPA",
+          "US_EAR"
+        ],
+        "requires_review": true,
+        "scenario_notes": "Ambiguous case - requires human review for export control classification"
+      }
+    },
+    {
+      "expert_id": "EXP_093",
+      "scenario_class": "S4",
+      "nationality": "KR",
+      "work_history_countries": [
+        "KR",
+        "US"
+      ],
+      "compliance": {
+        "flags": [
+          {
+            "type": "multi_jurisdiction",
+            "jurisdiction": "KR_ITPA,US_EAR,WASSENAAR",
+            "restriction_level": "BLOCK",
+            "technologies": [
+              "euv_lithography"
+            ]
+          }
+        ],
+        "risk_level": "high",
+        "applicable_jurisdictions": [
+          "KR_ITPA",
+          "US_EAR"
+        ],
+        "consistent_outcome": "BLOCK",
+        "scenario_notes": "Korea national, work history: ['KR', 'CN'], jurisdictions: ['KR_ITPA']. Scenario class: S4 -- Updated nationality fix v2.8.0.",
+        "permitted_destinations": [
+          "all_non_Na2"
+        ]
+      }
+    },
+    {
+      "expert_id": "EXP_014",
+      "scenario_class": "S4",
+      "nationality": "KR",
+      "work_history_countries": [
+        "KR",
+        "CN"
+      ],
+      "compliance": {
+        "flags": [
+          {
+            "type": "multi_jurisdiction",
+            "jurisdiction": "KR_ITPA,US_EAR,WASSENAAR",
+            "restriction_level": "BLOCK",
+            "technologies": [
+              "euv_lithography"
+            ]
+          }
+        ],
+        "risk_level": "high",
+        "applicable_jurisdictions": [
+          "KR_ITPA",
+          "US_EAR"
+        ],
+        "consistent_outcome": "BLOCK",
+        "scenario_notes": "Korea national, work history: ['KR'], jurisdictions: ['KR_ITPA']. Scenario class: S4 -- Updated nationality fix v2.8.0.",
+        "permitted_destinations": [
+          "all_non_Na2"
+        ]
+      }
+    },
+    {
+      "expert_id": "EXP_038",
+      "scenario_class": "S4",
+      "nationality": "TW",
+      "work_history_countries": [
+        "TW",
+        "US"
+      ],
+      "compliance": {
+        "flags": [
+          {
+            "type": "multi_jurisdiction",
+            "jurisdiction": "KR_ITPA,US_EAR,WASSENAAR",
+            "restriction_level": "BLOCK",
+            "technologies": [
+              "euv_lithography"
+            ]
+          }
+        ],
+        "risk_level": "high",
+        "applicable_jurisdictions": [
+          "US_EAR",
+          "Wassenaar_AG"
+        ],
+        "consistent_outcome": "BLOCK",
+        "scenario_notes": "Taiwan national, work history: ['TW', 'US'], jurisdictions: ['US_EAR']. Scenario class: S4 -- Updated nationality fix v2.8.0.",
+        "permitted_destinations": [
+          "Ga-1",
+          "Ga-2",
+          "Na-1_review"
+        ]
+      }
+    },
+    {
+      "expert_id": "EXP_052",
+      "scenario_class": "S4",
+      "nationality": "KR",
+      "work_history_countries": [
+        "KR",
+        "CN"
+      ],
+      "compliance": {
+        "flags": [
+          {
+            "type": "multi_jurisdiction",
+            "jurisdiction": "KR_ITPA,US_EAR,WASSENAAR",
+            "restriction_level": "BLOCK",
+            "technologies": [
+              "euv_lithography"
+            ]
+          }
+        ],
+        "risk_level": "high",
+        "applicable_jurisdictions": [
+          "KR_ITPA",
+          "US_EAR"
+        ],
+        "consistent_outcome": "BLOCK",
+        "scenario_notes": "USA national, work history: ['US'], jurisdictions: ['US_EAR']. Scenario class: S4 -- Updated nationality fix v2.8.0.",
+        "permitted_destinations": [
+          "Ga-1",
+          "Ga-2",
+          "Na-1_review"
+        ]
+      }
+    },
+    {
+      "expert_id": "EXP_083",
+      "scenario_class": "S4",
+      "nationality": "KR",
+      "work_history_countries": [
+        "KR",
+        "CN"
+      ],
+      "compliance": {
+        "flags": [
+          {
+            "type": "multi_jurisdiction",
+            "jurisdiction": "KR_ITPA,US_EAR,WASSENAAR",
+            "restriction_level": "BLOCK",
+            "technologies": [
+              "euv_lithography"
+            ]
+          }
+        ],
+        "risk_level": "high",
+        "applicable_jurisdictions": [
+          "KR_ITPA",
+          "US_EAR"
+        ],
+        "consistent_outcome": "BLOCK",
+        "scenario_notes": "Taiwan national, work history: ['TW', 'US'], jurisdictions: ['US_EAR']. Scenario class: S4 -- Updated nationality fix v2.8.0.",
+        "permitted_destinations": [
+          "Ga-1",
+          "Ga-2",
+          "Na-1_review"
+        ]
+      }
+    },
+    {
+      "expert_id": "EXP_041",
+      "scenario_class": "S5",
+      "nationality": "KR",
+      "work_history_countries": [
+        "KR",
+        "CN"
+      ],
+      "compliance": {
+        "flags": [
+          {
+            "type": "jurisdiction_conflict",
+            "jurisdiction": "KR_ITPA vs US_EAR",
+            "restriction_level": "ESCALATE",
+            "technologies": [
+              "advanced_packaging"
+            ],
+            "conflict_details": {
+              "KR_ITPA": "PERMIT",
+              "US_EAR": "RESTRICT"
+            }
+          }
+        ],
+        "risk_level": "critical",
+        "applicable_jurisdictions": [
+          "KR_ITPA"
+        ],
+        "requires_escalation": true,
+        "scenario_notes": "Korea national, work history: ['KR', 'CN'], jurisdictions: ['KR_ITPA']. Scenario class: S5 -- Updated nationality fix v2.8.0.",
+        "permitted_destinations": [
+          "all_non_Na2"
+        ]
+      }
+    },
+    {
+      "expert_id": "EXP_042",
+      "scenario_class": "S5",
+      "nationality": "KR",
+      "work_history_countries": [
+        "KR",
+        "SG"
+      ],
+      "compliance": {
+        "flags": [
+          {
+            "type": "jurisdiction_conflict",
+            "jurisdiction": "KR_ITPA vs US_EAR",
+            "restriction_level": "ESCALATE",
+            "technologies": [
+              "advanced_packaging"
+            ],
+            "conflict_details": {
+              "KR_ITPA": "PERMIT",
+              "US_EAR": "RESTRICT"
+            }
+          },
+          "NCT_HOLDER"
+        ],
+        "risk_level": "critical",
+        "applicable_jurisdictions": [
+          "KR_ITPA"
+        ],
+        "requires_escalation": true,
+        "scenario_notes": "Korea national, work history: ['KR', 'SG'], jurisdictions: ['KR_ITPA']. Scenario class: S5 -- NCT holder, Updated nationality fix v2.8.0.",
+        "permitted_destinations": [
+          "all_non_Na2"
+        ]
+      }
+    },
+    {
+      "expert_id": "EXP_043",
+      "scenario_class": "S5",
+      "nationality": "CN",
+      "work_history_countries": [
+        "CN"
+      ],
+      "compliance": {
+        "flags": [
+          {
+            "type": "jurisdiction_conflict",
+            "jurisdiction": "KR_ITPA vs US_EAR",
+            "restriction_level": "ESCALATE",
+            "technologies": [
+              "advanced_packaging"
+            ],
+            "conflict_details": {
+              "KR_ITPA": "PERMIT",
+              "US_EAR": "RESTRICT"
+            }
+          }
+        ],
+        "risk_level": "critical",
+        "applicable_jurisdictions": [
+          "KR_ITPA"
+        ],
+        "requires_escalation": true,
+        "scenario_notes": "China national, work history: ['CN'], jurisdictions: ['KR_ITPA']. Scenario class: S5 -- Updated nationality fix v2.8.0.",
+        "permitted_destinations": [
+          "all_non_Na2"
+        ]
+      }
+    },
+    {
+      "expert_id": "EXP_044",
+      "scenario_class": "S5",
+      "nationality": "CN",
+      "work_history_countries": [
+        "CN"
+      ],
+      "compliance": {
+        "flags": [
+          {
+            "type": "jurisdiction_conflict",
+            "jurisdiction": "KR_ITPA vs US_EAR",
+            "restriction_level": "ESCALATE",
+            "technologies": [
+              "advanced_packaging"
+            ],
+            "conflict_details": {
+              "KR_ITPA": "PERMIT",
+              "US_EAR": "RESTRICT"
+            }
+          }
+        ],
+        "risk_level": "critical",
+        "applicable_jurisdictions": [
+          "KR_ITPA"
+        ],
+        "requires_escalation": true,
+        "scenario_notes": "China national, work history: ['CN'], jurisdictions: ['KR_ITPA']. Scenario class: S5 -- Updated nationality fix v2.8.0.",
+        "permitted_destinations": [
+          "all_non_Na2"
+        ]
+      }
+    },
+    {
+      "expert_id": "EXP_045",
+      "scenario_class": "S5",
+      "nationality": "KR",
+      "work_history_countries": [
+        "KR",
+        "CN"
+      ],
+      "compliance": {
+        "flags": [
+          {
+            "type": "jurisdiction_conflict",
+            "jurisdiction": "KR_ITPA vs US_EAR",
+            "restriction_level": "ESCALATE",
+            "technologies": [
+              "advanced_packaging"
+            ],
+            "conflict_details": {
+              "KR_ITPA": "PERMIT",
+              "US_EAR": "RESTRICT"
+            }
+          }
+        ],
+        "risk_level": "critical",
+        "applicable_jurisdictions": [
+          "KR_ITPA"
+        ],
+        "requires_escalation": true,
+        "scenario_notes": "Korea national, work history: ['KR', 'CN'], jurisdictions: ['KR_ITPA']. Scenario class: S5 -- Updated nationality fix v2.8.0.",
+        "permitted_destinations": [
+          "all_non_Na2"
+        ]
+      }
+    },
+    {
+      "expert_id": "EXP_046",
+      "scenario_class": "S6",
+      "nationality": "SG",
+      "work_history_countries": [
+        "SG"
+      ],
+      "compliance": {
+        "flags": [
+          {
+            "type": "novel_technology",
+            "jurisdiction": "UNKNOWN",
+            "restriction_level": "REVIEW",
+            "technologies": [
+              "quantum_photonics",
+              "neuromorphic_computing"
+            ],
+            "edge_case_reason": "Novel technology not yet classified in existing policies"
+          }
+        ],
+        "risk_level": "unknown",
+        "applicable_jurisdictions": [
+          "KR_ITPA"
+        ],
+        "requires_policy_update": true,
+        "scenario_notes": "Singapore national, work history: ['SG'], jurisdictions: ['KR_ITPA']. Scenario class: S6 -- Updated nationality fix v2.8.0.",
+        "permitted_destinations": [
+          "all_non_Na2"
+        ]
+      }
+    },
+    {
+      "expert_id": "EXP_047",
+      "scenario_class": "S6",
+      "nationality": "TW",
+      "work_history_countries": [
+        "TW",
+        "US"
+      ],
+      "compliance": {
+        "flags": [
+          {
+            "type": "novel_technology",
+            "jurisdiction": "UNKNOWN",
+            "restriction_level": "REVIEW",
+            "technologies": [
+              "quantum_photonics",
+              "neuromorphic_computing"
+            ],
+            "edge_case_reason": "Novel technology not yet classified in existing policies"
+          }
+        ],
+        "risk_level": "unknown",
+        "applicable_jurisdictions": [
+          "US_EAR"
+        ],
+        "requires_policy_update": true,
+        "scenario_notes": "Taiwan national, work history: ['TW', 'US'], jurisdictions: ['US_EAR']. Scenario class: S6 -- Updated nationality fix v2.8.0.",
+        "permitted_destinations": [
+          "Ga-1",
+          "Ga-2",
+          "Na-1_review"
+        ]
+      }
+    },
+    {
+      "expert_id": "EXP_048",
+      "scenario_class": "S6",
+      "nationality": "TW",
+      "work_history_countries": [
+        "TW"
+      ],
+      "compliance": {
+        "flags": [
+          {
+            "type": "novel_technology",
+            "jurisdiction": "UNKNOWN",
+            "restriction_level": "REVIEW",
+            "technologies": [
+              "quantum_photonics",
+              "neuromorphic_computing"
+            ],
+            "edge_case_reason": "Novel technology not yet classified in existing policies"
+          }
+        ],
+        "risk_level": "unknown",
+        "applicable_jurisdictions": [
+          "KR_ITPA"
+        ],
+        "requires_policy_update": true,
+        "scenario_notes": "Taiwan national, work history: ['TW'], jurisdictions: ['KR_ITPA']. Scenario class: S6 -- Updated nationality fix v2.8.0.",
+        "permitted_destinations": [
+          "all_non_Na2"
+        ]
+      }
+    },
+    {
+      "expert_id": "EXP_049",
+      "scenario_class": "S6",
+      "nationality": "CN",
+      "work_history_countries": [
+        "CN"
+      ],
+      "compliance": {
+        "flags": [
+          {
+            "type": "novel_technology",
+            "jurisdiction": "UNKNOWN",
+            "restriction_level": "REVIEW",
+            "technologies": [
+              "quantum_photonics",
+              "neuromorphic_computing"
+            ],
+            "edge_case_reason": "Novel technology not yet classified in existing policies"
+          }
+        ],
+        "risk_level": "unknown",
+        "applicable_jurisdictions": [
+          "KR_ITPA"
+        ],
+        "requires_policy_update": true,
+        "scenario_notes": "China national, work history: ['CN'], jurisdictions: ['KR_ITPA']. Scenario class: S6 -- Updated nationality fix v2.8.0.",
+        "permitted_destinations": [
+          "all_non_Na2"
+        ]
+      }
+    },
+    {
+      "expert_id": "EXP_050",
+      "scenario_class": "S6",
+      "nationality": "CN",
+      "work_history_countries": [
+        "CN"
+      ],
+      "compliance": {
+        "flags": [
+          {
+            "type": "novel_technology",
+            "jurisdiction": "UNKNOWN",
+            "restriction_level": "REVIEW",
+            "technologies": [
+              "quantum_photonics",
+              "neuromorphic_computing"
+            ],
+            "edge_case_reason": "Novel technology not yet classified in existing policies"
+          }
+        ],
+        "risk_level": "unknown",
+        "applicable_jurisdictions": [
+          "KR_ITPA"
+        ],
+        "requires_policy_update": true,
+        "scenario_notes": "China national, work history: ['CN'], jurisdictions: ['KR_ITPA']. Scenario class: S6 -- Updated nationality fix v2.8.0.",
+        "permitted_destinations": [
+          "all_non_Na2"
+        ]
+      }
+    },
+    {
+      "expert_id": "EXP_010",
+      "scenario_class": "S2",
+      "nationality": "US",
+      "work_history_countries": [
+        "US"
+      ],
+      "compliance": {
+        "flags": [
+          {
+            "type": "ear_entity_list_block",
+            "jurisdiction": "US_EAR",
+            "restriction_level": "BLOCK",
+            "technologies": [
+              "nand_flash_128l",
+              "3d_nand",
+              "NAND_128L_More"
+            ]
+          }
+        ],
+        "risk_level": "critical",
+        "applicable_jurisdictions": [
+          "US_EAR"
+        ],
+        "prohibited_destinations": [
+          "CN",
+          "RU",
+          "IR",
+          "KP"
+        ],
+        "permitted_destinations": [
+          "all_non_Na2"
+        ],
+        "ground_truth_outcome": "BLOCK",
+        "scenario_notes": "GAP-B1: US national (Micron Technology), China foundry client. NAND_128L+ process node control. US_EAR CCL 3A001 + BIS Entity List → EAR BLOCK. No KR_ITPA applies (non-KR national)."
+      }
+    },
+    {
+      "expert_id": "EXP_039",
+      "scenario_class": "S2",
+      "nationality": "US",
+      "work_history_countries": [
+        "US"
+      ],
+      "compliance": {
+        "flags": [
+          {
+            "type": "ear_entity_list_block",
+            "jurisdiction": "US_EAR",
+            "restriction_level": "BLOCK",
+            "technologies": [
+              "finFET_7nm_below",
+              "advanced_logic",
+              "CCL_3A001"
+            ]
+          }
+        ],
+        "risk_level": "critical",
+        "applicable_jurisdictions": [
+          "US_EAR"
+        ],
+        "prohibited_destinations": [
+          "CN",
+          "RU",
+          "IR",
+          "KP"
+        ],
+        "permitted_destinations": [
+          "all_non_Na2"
+        ],
+        "ground_truth_outcome": "BLOCK",
+        "scenario_notes": "GAP-B2: US national (Intel), China AI chip design house client. Sub-7nm FinFET process technology. US_EAR CCL 3E001 + BIS_Entity_List constraint → EAR BLOCK. No KR_ITPA (US-only jurisdiction)."
+      }
+    },
+    {
+      "expert_id": "EXP_073",
+      "scenario_class": "S4",
+      "nationality": "US",
+      "work_history_countries": [
+        "US",
+        "SG"
+      ],
+      "compliance": {
+        "flags": [
+          {
+            "type": "deemed_export_conflict",
+            "jurisdiction": "US_EAR,SG_SGCOA",
+            "restriction_level": "CONFLICT",
+            "technologies": [
+              "euv_lithography",
+              "litho_sub14nm",
+              "CCL_3A001"
+            ]
+          }
+        ],
+        "risk_level": "high",
+        "applicable_jurisdictions": [
+          "US_EAR",
+          "SG_SGCOA"
+        ],
+        "prohibited_destinations": [
+          "CN"
+        ],
+        "permitted_destinations": [
+          "all_non_Na2"
+        ],
+        "ground_truth_outcome": "REVIEW",
+        "conflict_detail": "US_EAR §730.1 BLOCK (CCL EAR99 → 3A001, CN destination) vs SG Strategic Goods Control Act requires domestic REVIEW before export decision. Process authority conflict requires HITL escalation.",
+        "scenario_notes": "GAP-D1: US national (Intel Singapore), based in SG. China fab client requesting EUV litho process consulting. US_EAR declares BLOCK (controlled tech to CN); SG_SGCOA requires independent strategic goods review. Multi-authority conflict → HITL."
+      }
+    },
+    {
+      "expert_id": "EXP_077",
+      "scenario_class": "S4",
+      "nationality": "US",
+      "work_history_countries": [
+        "US",
+        "SG"
+      ],
+      "compliance": {
+        "flags": [
+          {
+            "type": "deemed_export_conflict",
+            "jurisdiction": "US_EAR,SG_SGCOA",
+            "restriction_level": "CONFLICT",
+            "technologies": [
+              "gate_all_around_3nm",
+              "advanced_logic",
+              "CCL_3A001"
+            ]
+          }
+        ],
+        "risk_level": "high",
+        "applicable_jurisdictions": [
+          "US_EAR",
+          "SG_SGCOA"
+        ],
+        "prohibited_destinations": [
+          "CN"
+        ],
+        "permitted_destinations": [
+          "all_non_Na2"
+        ],
+        "ground_truth_outcome": "REVIEW",
+        "conflict_detail": "US_EAR BLOCK (3nm GAA process = CCL EAR control, CN destination entity listed). SG_SGCOA requires domestic review for dual-use tech exports. Neither authority defers to the other → HITL.",
+        "scenario_notes": "GAP-D2: US national (Intel Singapore). China SMIC partner requesting 3nm GAA process knowledge. US_EAR §730 controlled + Entity List → BLOCK. SG_SGCOA independent dual-use REVIEW process. Jurisdictional conflict on authority precedence."
+      }
+    }
+  ],
+  "scenario_definitions": {
+    "S1": {
+      "name": "Clear Permit",
+      "desc": "No restrictions, full access permitted"
+    },
+    "S2": {
+      "name": "Clear Block",
+      "desc": "Explicit prohibition due to regulations"
+    },
+    "S3": {
+      "name": "Ambiguous",
+      "desc": "Requires human review or policy clarification"
+    },
+    "S4": {
+      "name": "Multi-Jurisdiction",
+      "desc": "Multiple applicable laws with consistent outcome"
+    },
+    "S5": {
+      "name": "Conflict",
+      "desc": "Conflicting requirements across jurisdictions"
+    },
+    "S6": {
+      "name": "Edge Case",
+      "desc": "Novel situation not covered by existing policies"
+    }
+  }
+}

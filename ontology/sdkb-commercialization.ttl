@@ -1,0 +1,139 @@
+@prefix sdkb:    <https://w3id.org/sdkb/> .
+@prefix ont:     <https://w3id.org/sdkb/ont/> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+# ═══════════════════════════════════════════════════════════════════
+# SDKB v1.0 — Commercialization Module (sdkb-commercialization.ttl)
+#
+# TRL, licensing, spinoffs, IP transactions, standard adoption, and
+# funding programs — the input substrate for Prof. Shin's technology
+# valuation and commercialization research.
+# ═══════════════════════════════════════════════════════════════════
+
+<https://w3id.org/sdkb/ont/com>
+    a owl:Ontology ;
+    rdfs:label "SDKB Commercialization Module"@en ;
+    rdfs:comment "Technology readiness, IP transactions, standards adoption, and funding."@en ;
+    owl:versionInfo "1.0.0-dev" ;
+    dcterms:license <https://spdx.org/licenses/CDLA-Permissive-2.0.html> ;
+    owl:imports <https://w3id.org/sdkb/ont> .
+
+# ── CLASSES ────────────────────────────────────────────────────────
+
+ont:TechnologyReadinessLevel
+    a owl:Class ;
+    rdfs:label "Technology Readiness Level"@en ;
+    rdfs:comment "TRL 1–9 (DoD/NASA convention)."@en .
+
+ont:IPTransaction
+    a owl:Class ;
+    rdfs:label "IP Transaction"@en ;
+    rdfs:comment "Any transfer of patent rights — license, assignment, cross-license, security interest."@en .
+
+ont:License
+    a owl:Class ;
+    rdfs:subClassOf ont:IPTransaction ;
+    rdfs:label "License"@en .
+
+ont:Assignment
+    a owl:Class ;
+    rdfs:subClassOf ont:IPTransaction ;
+    rdfs:label "Assignment"@en .
+
+ont:Spinoff
+    a owl:Class ;
+    rdfs:label "Spinoff"@en ;
+    rdfs:comment "A new firm carved out of an existing organization (or university lab) to commercialize a technology."@en .
+
+ont:StandardAdoption
+    a owl:Class ;
+    rdfs:label "Standard Adoption"@en ;
+    rdfs:comment "An event in which an organization adopts a standard for a process or equipment class."@en .
+
+ont:FundingProgram
+    a owl:Class ;
+    rdfs:label "Funding Program"@en ;
+    rdfs:comment "A government or institutional R&D funding program (e.g. NTIS 과제, KIAT 글로벌첨단전략산업기술경영전문인력양성)."@en .
+
+# ── OBJECT PROPERTIES ──────────────────────────────────────────────
+
+ont:hasTRL
+    a owl:ObjectProperty ;
+    rdfs:range ont:TechnologyReadinessLevel ;
+    rdfs:label "has TRL"@en ;
+    rdfs:comment "Assigns a TRL to a Process / TechnologyNode / Patent / Firm capability."@en .
+
+ont:licensee
+    a owl:ObjectProperty ;
+    rdfs:domain ont:License ;
+    rdfs:range ont:Organization ;
+    rdfs:label "licensee"@en .
+
+ont:licensor
+    a owl:ObjectProperty ;
+    rdfs:domain ont:License ;
+    rdfs:range ont:Organization ;
+    rdfs:label "licensor"@en .
+
+ont:licensesPatent
+    a owl:ObjectProperty ;
+    rdfs:domain ont:License ;
+    rdfs:range ont:Patent ;
+    rdfs:label "licenses patent"@en .
+
+ont:spinoffFrom
+    a owl:ObjectProperty ;
+    rdfs:domain ont:Spinoff ;
+    rdfs:range ont:Organization ;
+    rdfs:label "spinoff from"@en .
+
+ont:fundedBy
+    a owl:ObjectProperty ;
+    rdfs:range ont:FundingProgram ;
+    rdfs:label "funded by"@en .
+
+# ── DATATYPE PROPERTIES ────────────────────────────────────────────
+
+ont:trlLevel
+    a owl:DatatypeProperty ;
+    rdfs:domain ont:TechnologyReadinessLevel ;
+    rdfs:range xsd:integer ;
+    rdfs:label "TRL level"@en ;
+    rdfs:comment "Integer 1–9."@en .
+
+ont:transactionDate
+    a owl:DatatypeProperty ;
+    rdfs:domain ont:IPTransaction ;
+    rdfs:range xsd:date ;
+    rdfs:label "transaction date"@en .
+
+ont:transactionValue
+    a owl:DatatypeProperty ;
+    rdfs:domain ont:IPTransaction ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "transaction value (KRW)"@en .
+
+ont:licenseExclusivity
+    a owl:DatatypeProperty ;
+    rdfs:domain ont:License ;
+    rdfs:range xsd:string ;
+    rdfs:label "exclusivity"@en ;
+    rdfs:comment "Exclusive | Non-Exclusive | Sole."@en .
+
+# ── ANCHOR INDIVIDUALS (TRL 1..9) ──────────────────────────────────
+
+ont:TRL_1 a ont:TechnologyReadinessLevel ; ont:trlLevel 1 ; skos:prefLabel "TRL 1 — Basic principles observed"@en .
+ont:TRL_2 a ont:TechnologyReadinessLevel ; ont:trlLevel 2 ; skos:prefLabel "TRL 2 — Technology concept formulated"@en .
+ont:TRL_3 a ont:TechnologyReadinessLevel ; ont:trlLevel 3 ; skos:prefLabel "TRL 3 — Experimental proof of concept"@en .
+ont:TRL_4 a ont:TechnologyReadinessLevel ; ont:trlLevel 4 ; skos:prefLabel "TRL 4 — Technology validated in lab"@en .
+ont:TRL_5 a ont:TechnologyReadinessLevel ; ont:trlLevel 5 ; skos:prefLabel "TRL 5 — Technology validated in relevant environment"@en .
+ont:TRL_6 a ont:TechnologyReadinessLevel ; ont:trlLevel 6 ; skos:prefLabel "TRL 6 — Technology demonstrated in relevant environment"@en .
+ont:TRL_7 a ont:TechnologyReadinessLevel ; ont:trlLevel 7 ; skos:prefLabel "TRL 7 — System prototype in operational environment"@en .
+ont:TRL_8 a ont:TechnologyReadinessLevel ; ont:trlLevel 8 ; skos:prefLabel "TRL 8 — System complete and qualified"@en .
+ont:TRL_9 a ont:TechnologyReadinessLevel ; ont:trlLevel 9 ; skos:prefLabel "TRL 9 — Actual system proven in operational environment"@en .

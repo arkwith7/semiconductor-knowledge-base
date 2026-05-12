@@ -1,4 +1,4 @@
-# SDKB v1.0 — Auto-generated artifacts
+# ── Auto-generated artifacts (baseline track) ────────────────────
 data/schema_report.json
 data/nodes.parquet
 data/edges.parquet
@@ -7,13 +7,46 @@ ontology/sdkb-core-data.ttl
 ontology/sdkb-core-data.jsonld
 mappings/mapping_candidates.tsv
 
-# Virtual environment
+# ── Auto-generated artifacts (SIRP / patent track) ──────────────
+data/patents/rejected_patents_meta.parquet
+data/patents/ipc_links.parquet
+data/patents/prior_art_edges.parquet
+data/patents/prior_art_pairs.parquet
+data/patents/ingest_report.json
+data/patents/pairs_report.json
+data/problems.parquet
+data/regulatory_scenarios.parquet
+data/problems_report.json
+data/expert_profiles.parquet
+data/experts_report.json
+
+# ── Auto-generated artifacts (ExpDataSet / Park 2026a track) ────
+data/compliance/technology_controls.parquet
+data/compliance/seed_report.json
+data/experts/curated_profiles.parquet
+data/experts/curated_profiles_report.json
+data/experts/curated_ratings.parquet
+data/experts/curated_ratings_pivot.parquet
+data/experts/reliability_report.md
+data/experts/reliability_report.json
+ontology/sdkb-governance-kr-instances.ttl
+ontology/sdkb-governance-us-instances.ttl
+
+# NOTE: data/patents/raw/semiconductor_industry_rejected_patents.jsonl
+# is intentionally NOT ignored — Amendment v2 commits the source dataset
+# to the repo pending KIPRIS license resolution. See docs/dataset_rejected_patents_card.md §6.
+
+# ── Notebook execution outputs ───────────────────────────────────
+.ipynb_checkpoints/
+notebooks/**/*.nbconvert.ipynb
+
+# ── Virtual environment ──────────────────────────────────────────
 .venv/
 
-# PDF planning documents (not for distribution)
+# ── PDF planning documents (not for distribution) ───────────────
 *.pdf
 
-# Python
+# ── Python ──────────────────────────────────────────────────────
 __pycache__/
 *.pyc
 *.egg-info/
@@ -21,10 +54,10 @@ dist/
 build/
 .eggs/
 
-# IDE
+# ── IDE ─────────────────────────────────────────────────────────
 .vscode/
 .idea/
 
-# OS
+# ── OS ──────────────────────────────────────────────────────────
 .DS_Store
 Thumbs.db

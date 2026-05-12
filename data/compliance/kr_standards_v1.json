@@ -1,0 +1,249 @@
+{
+  "dataset_id": "kr_compliance_standards_v1",
+  "jurisdiction": "KR_ITPA",
+  "version": "v1.0",
+  "generated": "2026-03-01",
+  "description": "대한민국 반도체 분야 수출통제 및 기술보호 규제 기준 데이터셋 (마스터 정의)",
+  "coverage": "반도체 공정·소자·장비·소재 분야 국가핵심기술(NCT) 및 전략물자 통제 목록",
+
+  "legal_framework": {
+    "primary_law": "산업기술보호법 (Industrial Technology Protection Act, ITA)",
+    "law_number": "법률 제7971호 (2006년 제정, 최근 개정 2023년)",
+    "related_laws": [
+      {
+        "name": "방위산업기술보호법 (Defense Industry Technology Protection Act)",
+        "law_number": "법률 제13479호 (2015년 제정)",
+        "scope": "방산 관련 기술 수출통제"
+      },
+      {
+        "name": "전략물자수출입고시 (Strategic Goods Export/Import Notice)",
+        "authority": "산업통상자원부 고시",
+        "scope": "이중용도(dual-use) 전략물자 목록 관리"
+      },
+      {
+        "name": "대외무역법 (Foreign Trade Act)",
+        "scope": "수출허가 절차 및 제재 위반"
+      }
+    ],
+    "enforcement_body": "산업통상자원부 (Ministry of Trade, Industry and Energy, MOTIE)",
+    "oversight_committee": "산업기술보호위원회 (Industrial Technology Protection Committee)",
+    "nct_designation_cycle": "2년마다 국가핵심기술 고시 개정 (홀수년도 고시)",
+    "key_provisions": {
+      "ITA_Art33": "국가핵심기술 보유기관의 해외 수출 시 산업통상자원부 장관 승인 필요",
+      "ITA_Art34": "국가핵심기술 해외 이전 금지 조항 (무단이전 시 형사처벌)",
+      "ITA_Art35": "기술유출 신고 의무"
+    }
+  },
+
+  "jurisdiction_trigger_rules": {
+    "applies_when": [
+      "전문가 국적(nationality) = KR",
+      "전문가 근무이력국가(work_history) 포함 KR",
+      "기술(technology)이 본 목록에 포함 AND 수신국가(client_country) != KR"
+    ],
+    "jurisdiction_id": "KR_ITPA",
+    "legal_codes": ["ITA_Core_Tech", "Strategic_Tech", "Strategic_Goods"],
+    "nct_flag_field": "expert.compliance.nct_flag",
+    "nct_flag_value_trigger": true
+  },
+
+  "technology_controls": [
+    {
+      "tech_keyword": "DRAM_16nm_Less",
+      "tech_category": "Semiconductor",
+      "control_level": "CRITICAL",
+      "legal_basis": "ITA_Core_Tech",
+      "nct_code": "반도체_NCT_01",
+      "jurisdiction": "KR_ITPA",
+      "description": "16nm급 이하 D램 설계·공정·소자기술",
+      "conditions": {
+        "tech_node": ["16nm", "14nm", "10nm", "7nm", "5nm"],
+        "min_density_gb": 16
+      },
+      "export_restriction": "해외이전 전면금지 (ITA §33 승인 필수)",
+      "penalty_on_violation": "형사처벌 + 과징금 최대 10억원",
+      "reference_standards": ["JEDEC DDR5", "HBM3"]
+    },
+    {
+      "tech_keyword": "NAND_128L_More",
+      "tech_category": "Semiconductor",
+      "control_level": "CRITICAL",
+      "legal_basis": "ITA_Core_Tech",
+      "nct_code": "반도체_NCT_02",
+      "jurisdiction": "KR_ITPA",
+      "description": "128단 이상 3D 낸드 설계·공정·소자기술",
+      "conditions": {
+        "min_layer_count": 128,
+        "stack_type": ["3D_NAND", "V-NAND"]
+      },
+      "export_restriction": "해외이전 전면금지 (ITA §33 승인 필수)",
+      "penalty_on_violation": "형사처벌 + 과징금 최대 10억원",
+      "reference_standards": ["3D NAND 200+ layer"]
+    },
+    {
+      "tech_keyword": "Foundry_14nm_Less",
+      "tech_category": "Semiconductor",
+      "control_level": "CRITICAL",
+      "legal_basis": "ITA_Core_Tech",
+      "nct_code": "반도체_NCT_03",
+      "jurisdiction": "KR_ITPA",
+      "description": "14nm급 이하 파운드리 공정·소자기술 (로직·ASIC 포함)",
+      "conditions": {
+        "tech_node": ["14nm", "10nm", "7nm", "5nm", "3nm"],
+        "process_type": ["FinFET", "GAA", "MBCFET"]
+      },
+      "export_restriction": "해외이전 전면금지 (ITA §33 승인 필수)",
+      "penalty_on_violation": "형사처벌 + 과징금 최대 10억원"
+    },
+    {
+      "tech_keyword": "Advanced_Packaging",
+      "tech_category": "Semiconductor",
+      "control_level": "HIGH",
+      "legal_basis": "Strategic_Tech",
+      "nct_code": "반도체_NCT_04",
+      "jurisdiction": "KR_ITPA",
+      "description": "FO-WLP, TSV 등 첨단 패키징 및 3D 적층 기술",
+      "conditions": {
+        "packaging_types": ["Fan-Out WLP", "3D-IC", "CoWoS", "HBM 패키징", "TSV"],
+        "bump_pitch_um_max": 40
+      },
+      "export_restriction": "해외이전 시 산업부 사전 심사 및 승인",
+      "penalty_on_violation": "과징금 + 수출허가 취소"
+    },
+    {
+      "tech_keyword": "Advanced_Etching",
+      "tech_category": "Semiconductor",
+      "control_level": "HIGH",
+      "legal_basis": "Strategic_Tech",
+      "nct_code": "반도체_NCT_05",
+      "jurisdiction": "KR_ITPA",
+      "description": "첨단 식각 공정 기술 (HAR etching, ALE — High Aspect Ratio 비율 >40:1)",
+      "conditions": {
+        "aspect_ratio_min": 40,
+        "process": ["HAR dry etch", "ALE", "atomic layer etching"]
+      },
+      "export_restriction": "해외이전 시 산업부 사전 심사",
+      "penalty_on_violation": "과징금"
+    },
+    {
+      "tech_keyword": "Advanced_Deposition",
+      "tech_category": "Semiconductor",
+      "control_level": "HIGH",
+      "legal_basis": "Strategic_Tech",
+      "nct_code": "반도체_NCT_06",
+      "jurisdiction": "KR_ITPA",
+      "description": "원자층 증착(ALD) 및 첨단 박막 기술 (High-k/metal gate 기준)",
+      "conditions": {
+        "process": ["ALD", "CVD sub-2nm", "High-k dielectric ≤ SiO2 eq 1.2nm"],
+        "thickness_nm_max": 5
+      },
+      "export_restriction": "해외이전 시 산업부 사전 심사",
+      "penalty_on_violation": "과징금"
+    },
+    {
+      "tech_keyword": "Ion_Implant_Advanced",
+      "tech_category": "Semiconductor",
+      "control_level": "MEDIUM",
+      "legal_basis": "Strategic_Goods",
+      "jurisdiction": "KR_ITPA",
+      "description": "첨단 이온주입 기술 (고에너지 >MeV, 클러스터 이온주입)",
+      "conditions": {
+        "energy_mev_min": 1,
+        "type": ["high-energy implant", "cluster ion beam"]
+      },
+      "export_restriction": "전략물자 수출허가 (단기 심사)",
+      "penalty_on_violation": "수출허가 취소 + 과태료"
+    },
+    {
+      "tech_keyword": "CMP_Advanced",
+      "tech_category": "Semiconductor",
+      "control_level": "MEDIUM",
+      "legal_basis": "Strategic_Goods",
+      "jurisdiction": "KR_ITPA",
+      "description": "첨단 CMP 공정 기술 (다층 금속 배선용 — 7층 이상 BEOL)",
+      "conditions": {
+        "metal_layers_min": 7,
+        "type": ["Cu-CMP", "W-CMP", "Low-k dielectric CMP"]
+      },
+      "export_restriction": "전략물자 수출허가 (단기 심사)",
+      "penalty_on_violation": "수출허가 취소 + 과태료"
+    },
+    {
+      "tech_keyword": "SiC_GaN_Power",
+      "tech_category": "Semiconductor",
+      "control_level": "MEDIUM",
+      "legal_basis": "Strategic_Goods",
+      "jurisdiction": "KR_ITPA",
+      "description": "전력 반도체(SiC, GaN) 소자 제조 기술 (내압 >600V)",
+      "conditions": {
+        "breakdown_voltage_v_min": 600,
+        "material": ["SiC", "GaN", "GaN-on-Si"]
+      },
+      "export_restriction": "전략물자 수출허가",
+      "penalty_on_violation": "수출허가 취소 + 과태료"
+    },
+    {
+      "tech_keyword": "Cleaning_Contamination",
+      "tech_category": "Semiconductor",
+      "control_level": "MEDIUM",
+      "legal_basis": "Catch_All",
+      "jurisdiction": "KR_ITPA",
+      "description": "첨단 세정 및 오염 제어 기술 (5nm 이하 노드 전용 습식/건식 세정)",
+      "conditions": {
+        "tech_node_max_nm": 5,
+        "type": ["wet clean", "plasma clean", "cryogenic aerosol"]
+      },
+      "export_restriction": "Catch-all 조항 적용 (위험 국가 이전 시 심사)",
+      "penalty_on_violation": "과태료"
+    },
+    {
+      "tech_keyword": "Legacy_Logic_Process",
+      "tech_category": "Semiconductor",
+      "control_level": "LOW",
+      "legal_basis": "Catch_All",
+      "jurisdiction": "GENERAL",
+      "description": "28nm 이상 로직 공정 기술 (비통제 — 일반 모니터링)",
+      "conditions": {
+        "tech_node_min_nm": 28
+      },
+      "export_restriction": "수출통제 해당 없음 (최종사용자 확인 권고)",
+      "penalty_on_violation": "해당 없음"
+    },
+    {
+      "tech_keyword": "General_Fab_Operations",
+      "tech_category": "Semiconductor",
+      "control_level": "LOW",
+      "legal_basis": "Catch_All",
+      "jurisdiction": "GENERAL",
+      "description": "일반 팹 운영 및 수율 관리 기술 (공개 지식 수준)",
+      "conditions": {},
+      "export_restriction": "수출통제 해당 없음",
+      "penalty_on_violation": "해당 없음"
+    }
+  ],
+
+  "country_authorization_by_jurisdiction": {
+    "description": "KR_ITPA 관할 기술의 수신국가별 이전 허용 수준 (KR 관점)",
+    "note": "전체 국가별 정책은 compliance_jurisdiction_policies_v1.json 참조",
+    "matrix": [
+      {"destination": "KR", "action": "ALLOW", "requirement": "None", "note": "국내 이전"},
+      {"destination": "US", "action": "ALLOW", "requirement": "Post_Notification", "note": "동맹국 — 사후 신고"},
+      {"destination": "JP", "action": "ALLOW", "requirement": "Post_Notification", "note": "가가 1급 동맹국"},
+      {"destination": "CN", "action": "RESTRICT", "requirement": "Strict_License", "note": "핵심기술 이전 사실상 불허"},
+      {"destination": "KP", "action": "BLOCK", "requirement": "Prohibited", "note": "UN 제재 대상"},
+      {"destination": "RU", "action": "BLOCK", "requirement": "Prohibited", "note": "UN 제재 대상"}
+    ]
+  },
+
+  "extensibility": {
+    "add_new_jurisdiction_instructions": "새 관할권 추가 시 jurisdiction_id를 변경하거나 별도 JSON 파일 생성 후 compliance_jurisdiction_policies_v1.json 업데이트",
+    "planned_jurisdictions": ["JP_FEFTA", "EU_DualUse", "NL_Export", "TW_STC"],
+    "schema_version": "1.0",
+    "backward_compatible_fields": ["tech_keyword", "control_level", "legal_basis", "tech_category", "description"],
+    "db_seed_mapping": {
+      "target_file": "data/compliance/technology_controls_v1.json",
+      "seed_script": "backend/app/scripts/seed_compliance.py",
+      "note": "ExpDataSet 마스터 정의 → data/compliance 운영 파일 → DB 시딩 순서로 관리"
+    }
+  }
+}
