@@ -1,0 +1,264 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sdkb: <https://w3id.org/sdkb/ont/> .
+@prefix semiconto: <http://w3id.org/SemicONTO/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+dcterms:identifier skos:closeMatch semiconto:hasExperimentalStepID .
+
+skos:definition skos:closeMatch semiconto:hasExperimentAim,
+        semiconto:hasExperimentalStepAim,
+        semiconto:hasExperimentalStepDescription .
+
+skos:prefLabel skos:closeMatch semiconto:hasExperimentName .
+
+<https://w3id.org/sdkb/alignment/semiconto> a owl:Ontology ;
+    rdfs:label "SDKB ↔ SemicONTO Alignment (SDKB-centric, SKOS mappings)"@en ;
+    dcterms:source <http://w3id.org/SemicONTO/0.2/> ;
+    rdfs:comment "SKOS mappings from SDKB v1.0 (trunk) to SemicONTO v0.2 (external curation source). SDKB does not owl:imports SemicONTO; SemicONTO terms are referenced by IRI only."@en ;
+    owl:versionInfo "0.3-phase0" .
+
+<https://w3id.org/sdkb/data/equipment/3m_pad> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/alarm_system> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/amat_centura> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/amat_endura> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/amat_reflexion> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/amat_semvision> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/amat_vantage> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/asm_pulsar> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/asml_nxt> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/asml_scanner> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/axcelis_implanter> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/bruker_ellipsometer> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/cabot_slurry> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/coater_track> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/contamination_monitor> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/cvd_reactor> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/ebara_frex> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/exhaust_line> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/exhaust_pipe> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/gas_lines> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/gas_sensor> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/heater_jacket> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/hitachi_etcher> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/hitachi_sem> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/implanter> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/kla_inspector> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/kla_overlay> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/lam_2300> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/lam_etcher> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/lam_flex> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/mattson_rtp> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/monitoring_system> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/pvd_chamber> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/screen_developer> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/scrubber> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/sensor_nodes> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/tel_alpha> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/tel_coater> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/tel_formula> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/tel_tactras> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/equipment/vacuum_pump> skos:exactMatch semiconto:Equipment .
+
+<https://w3id.org/sdkb/data/material/aluminum> skos:exactMatch semiconto:Material .
+
+<https://w3id.org/sdkb/data/material/amorphous_carbon> skos:exactMatch semiconto:Material .
+
+<https://w3id.org/sdkb/data/material/barc> skos:exactMatch semiconto:Material .
+
+<https://w3id.org/sdkb/data/material/cmp_slurry_cu> skos:exactMatch semiconto:Material .
+
+<https://w3id.org/sdkb/data/material/cmp_slurry_oxide> skos:exactMatch semiconto:Material .
+
+<https://w3id.org/sdkb/data/material/cobalt> skos:exactMatch semiconto:Material .
+
+<https://w3id.org/sdkb/data/material/copper> skos:exactMatch semiconto:Material .
+
+<https://w3id.org/sdkb/data/material/hfO2> skos:exactMatch semiconto:Material .
+
+<https://w3id.org/sdkb/data/material/hf_acid> skos:exactMatch semiconto:Material .
+
+<https://w3id.org/sdkb/data/material/low_k_dielectric> skos:exactMatch semiconto:Material .
+
+<https://w3id.org/sdkb/data/material/photoresist_arF> skos:exactMatch semiconto:Material .
+
+<https://w3id.org/sdkb/data/material/photoresist_euv> skos:exactMatch semiconto:Material .
+
+<https://w3id.org/sdkb/data/material/polysilicon> skos:exactMatch semiconto:Material .
+
+<https://w3id.org/sdkb/data/material/sin> skos:exactMatch semiconto:Material .
+
+<https://w3id.org/sdkb/data/material/sio2> skos:exactMatch semiconto:Material .
+
+<https://w3id.org/sdkb/data/material/sog> skos:exactMatch semiconto:Material .
+
+<https://w3id.org/sdkb/data/material/taC> skos:exactMatch semiconto:Material .
+
+<https://w3id.org/sdkb/data/material/teOs> skos:exactMatch semiconto:Material .
+
+<https://w3id.org/sdkb/data/material/tin> skos:exactMatch semiconto:Material .
+
+<https://w3id.org/sdkb/data/material/tungsten> skos:exactMatch semiconto:Material .
+
+<https://w3id.org/sdkb/data/metrology/cd_sem> skos:broadMatch semiconto:ExperimentalMethod .
+
+<https://w3id.org/sdkb/data/metrology/ellipsometry> skos:broadMatch semiconto:ExperimentalMethod .
+
+<https://w3id.org/sdkb/data/metrology/overlay> skos:broadMatch semiconto:ExperimentalMethod .
+
+<https://w3id.org/sdkb/data/org/samsung_electronics> skos:broadMatch prov:Agent .
+
+<https://w3id.org/sdkb/data/org/sk_hynix> skos:broadMatch prov:Agent .
+
+<https://w3id.org/sdkb/data/parameter/bias_power> skos:closeMatch semiconto:MaterialProperty .
+
+<https://w3id.org/sdkb/data/parameter/gas_flow> skos:closeMatch semiconto:MaterialProperty .
+
+<https://w3id.org/sdkb/data/parameter/pressure> skos:closeMatch semiconto:MaterialProperty .
+
+<https://w3id.org/sdkb/data/parameter/rf_power> skos:closeMatch semiconto:MaterialProperty .
+
+<https://w3id.org/sdkb/data/parameter/temperature> skos:closeMatch semiconto:MaterialProperty .
+
+<https://w3id.org/sdkb/data/process/clean> skos:broadMatch semiconto:Experiment .
+
+<https://w3id.org/sdkb/data/process/cmp> skos:broadMatch semiconto:Experiment .
+
+<https://w3id.org/sdkb/data/process/deposition> skos:broadMatch semiconto:Experiment .
+
+<https://w3id.org/sdkb/data/process/diffusion> skos:broadMatch semiconto:Experiment .
+
+<https://w3id.org/sdkb/data/process/etch> skos:broadMatch semiconto:Experiment .
+
+<https://w3id.org/sdkb/data/process/implant> skos:broadMatch semiconto:Experiment .
+
+<https://w3id.org/sdkb/data/process/lithography> skos:broadMatch semiconto:Experiment .
+
+<https://w3id.org/sdkb/data/process/metrology> skos:broadMatch semiconto:Experiment .
+
+<https://w3id.org/sdkb/data/subprocess/ald> skos:closeMatch semiconto:ExperimentalStep .
+
+<https://w3id.org/sdkb/data/subprocess/cmp_metal> skos:closeMatch semiconto:ExperimentalStep .
+
+<https://w3id.org/sdkb/data/subprocess/cmp_oxide> skos:closeMatch semiconto:ExperimentalStep .
+
+<https://w3id.org/sdkb/data/subprocess/cvd> skos:closeMatch semiconto:ExperimentalStep .
+
+<https://w3id.org/sdkb/data/subprocess/duv_lithography> skos:closeMatch semiconto:ExperimentalStep .
+
+<https://w3id.org/sdkb/data/subprocess/euv_lithography> skos:closeMatch semiconto:ExperimentalStep .
+
+<https://w3id.org/sdkb/data/subprocess/hardmask_etch> skos:closeMatch semiconto:ExperimentalStep .
+
+<https://w3id.org/sdkb/data/subprocess/overlay_control> skos:closeMatch semiconto:ExperimentalStep .
+
+<https://w3id.org/sdkb/data/subprocess/photoresist_coat_develop> skos:closeMatch semiconto:ExperimentalStep .
+
+<https://w3id.org/sdkb/data/subprocess/plasma_etch> skos:closeMatch semiconto:ExperimentalStep .
+
+<https://w3id.org/sdkb/data/subprocess/pvd> skos:closeMatch semiconto:ExperimentalStep .
+
+<https://w3id.org/sdkb/data/subprocess/wet_etch> skos:closeMatch semiconto:ExperimentalStep .
+
+<https://w3id.org/sdkb/data/vendor/3m> skos:broadMatch prov:Agent .
+
+<https://w3id.org/sdkb/data/vendor/applied_materials> skos:broadMatch prov:Agent .
+
+<https://w3id.org/sdkb/data/vendor/asm> skos:broadMatch prov:Agent .
+
+<https://w3id.org/sdkb/data/vendor/asml> skos:broadMatch prov:Agent .
+
+<https://w3id.org/sdkb/data/vendor/axcelis> skos:broadMatch prov:Agent .
+
+<https://w3id.org/sdkb/data/vendor/bruker> skos:broadMatch prov:Agent .
+
+<https://w3id.org/sdkb/data/vendor/cabot> skos:broadMatch prov:Agent .
+
+<https://w3id.org/sdkb/data/vendor/ebara> skos:broadMatch prov:Agent .
+
+<https://w3id.org/sdkb/data/vendor/generic> skos:broadMatch prov:Agent .
+
+<https://w3id.org/sdkb/data/vendor/hitachi> skos:broadMatch prov:Agent .
+
+<https://w3id.org/sdkb/data/vendor/kla> skos:broadMatch prov:Agent .
+
+<https://w3id.org/sdkb/data/vendor/lam_research> skos:broadMatch prov:Agent .
+
+<https://w3id.org/sdkb/data/vendor/mattson> skos:broadMatch prov:Agent .
+
+<https://w3id.org/sdkb/data/vendor/screen> skos:broadMatch prov:Agent .
+
+<https://w3id.org/sdkb/data/vendor/semes> skos:broadMatch prov:Agent .
+
+<https://w3id.org/sdkb/data/vendor/tokyo_electron> skos:broadMatch prov:Agent .
+
+sdkb:Equipment owl:equivalentClass semiconto:Equipment ;
+    skos:exactMatch semiconto:Equipment .
+
+sdkb:Material owl:equivalentClass semiconto:Material ;
+    skos:exactMatch semiconto:Material .
+
+sdkb:Metrology skos:broadMatch semiconto:ExperimentalMethod .
+
+sdkb:Organization skos:broadMatch prov:Agent .
+
+sdkb:Parameter skos:closeMatch semiconto:MaterialProperty .
+
+sdkb:Process skos:broadMatch semiconto:Experiment .
+
+sdkb:SubProcess skos:closeMatch semiconto:ExperimentalStep .
+
+sdkb:Vendor skos:broadMatch prov:Agent .
+
+semiconto:hasExperimentAim rdfs:comment "The aim/purpose of an experiment is its definitional statement; SDKB uses skos:definition for free-text definitions."@en .
+
+semiconto:hasExperimentName rdfs:comment "SemicONTO's experiment-name string is the canonical label of the experiment instance; SDKB uses skos:prefLabel for canonical names."@en .
+
+semiconto:hasExperimentalStepAim rdfs:comment "Same convention as hasExperimentAim, applied to a step's purpose."@en .
+
+semiconto:hasExperimentalStepDescription rdfs:comment "Step description maps to the same skos:definition role used by SDKB for free-text descriptions."@en .
+
+semiconto:hasExperimentalStepID rdfs:comment "Stable identifier role; SDKB uses dcterms:identifier (also encoded in the node URI fragment)."@en .
+

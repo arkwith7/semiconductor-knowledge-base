@@ -143,6 +143,83 @@ ont:Shape_Provenance
         sh:message "Every curated node must declare dcterms:source." ;
     ] .
 
+# ═══════════════════════════════════════════════════════════════════
+# Enrichment layer shapes (Phase 1 v1.1, SemicONTO-derived axioms)
+# See docs/architecture_amendment_sdkb_centric.md
+# ═══════════════════════════════════════════════════════════════════
+
+# ─── ExtrinsicSemiconductor must declare its dopant species ──────
+# Mirrors SemicONTO's OWL axiom: ExtrinsicSemiconductor ⊑ ((hasAcceptor
+# some Material) ⊓ (hasAcceptor only Material)) ⊓ ((hasDonor some
+# Material) ⊓ (hasDonor only Material)) — relaxed to "either acceptor
+# or donor" because real-world doped materials need at least one,
+# not necessarily both.
+ont:Shape_ExtrinsicSemiconductor
+    a sh:NodeShape ;
+    sh:targetClass ont:ExtrinsicSemiconductor ;
+    sh:or (
+        [ sh:path ont:hasAcceptor ; sh:minCount 1 ; sh:class ont:Material ]
+        [ sh:path ont:hasDonor    ; sh:minCount 1 ; sh:class ont:Material ]
+    ) ;
+    sh:message "ExtrinsicSemiconductor must have at least one hasAcceptor or hasDonor → Material." .
+
+# ─── hasAcceptor / hasDonor domain restriction ───────────────────
+# Subject of these predicates must be an ExtrinsicSemiconductor.
+ont:Shape_DopantPredicate_hasAcceptor
+    a sh:NodeShape ;
+    sh:targetSubjectsOf ont:hasAcceptor ;
+    sh:class ont:ExtrinsicSemiconductor ;
+    sh:message "Subject of hasAcceptor must be rdf:type ExtrinsicSemiconductor." .
+
+ont:Shape_DopantPredicate_hasDonor
+    a sh:NodeShape ;
+    sh:targetSubjectsOf ont:hasDonor ;
+    sh:class ont:ExtrinsicSemiconductor ;
+    sh:message "Subject of hasDonor must be rdf:type ExtrinsicSemiconductor." .
+
+# ─── hasNextStep / hasSubStep range = SubProcess ─────────────────
+ont:Shape_HasNextStep
+    a sh:NodeShape ;
+    sh:targetSubjectsOf ont:hasNextStep ;
+    sh:property [
+        sh:path ont:hasNextStep ;
+        sh:class ont:SubProcess ;
+        sh:nodeKind sh:IRI ;
+        sh:message "hasNextStep range must be a SubProcess instance." ;
+    ] .
+
+ont:Shape_HasSubStep
+    a sh:NodeShape ;
+    sh:targetSubjectsOf ont:hasSubStep ;
+    sh:property [
+        sh:path ont:hasSubStep ;
+        sh:class ont:SubProcess ;
+        sh:nodeKind sh:IRI ;
+        sh:message "hasSubStep range must be a SubProcess instance." ;
+    ] .
+
+# ─── hasEquipment range = Equipment ──────────────────────────────
+ont:Shape_HasEquipment
+    a sh:NodeShape ;
+    sh:targetSubjectsOf ont:hasEquipment ;
+    sh:property [
+        sh:path ont:hasEquipment ;
+        sh:class ont:Equipment ;
+        sh:nodeKind sh:IRI ;
+        sh:message "hasEquipment range must be an Equipment instance." ;
+    ] .
+
+# ─── Dopant instance must be Acceptor or Donor ───────────────────
+# Implements OWL axiom Dopant ≡ Acceptor ∪ Donor at the SHACL level.
+ont:Shape_DopantInstance
+    a sh:NodeShape ;
+    sh:targetClass ont:Dopant ;
+    sh:or (
+        [ sh:class ont:Acceptor ]
+        [ sh:class ont:Donor ]
+    ) ;
+    sh:message "Every Dopant instance must also be Acceptor or Donor (Dopant ≡ Acceptor ∪ Donor)." .
+
 # ─── Standard Reference (Link-Only) must have URL ────────────────
 gov:Shape_StandardReference
     a sh:NodeShape ;

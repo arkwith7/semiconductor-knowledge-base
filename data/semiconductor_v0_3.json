@@ -30,8 +30,9 @@
         "cross_ref": [
           {
             "source": "semiconto",
-            "class": "ExperimentStep",
-            "note": "SemicONTO models process steps as ExperimentStep instances"
+            "class": "Experiment",
+            "note": "SemicONTO Experiment is the closest broadMatch for a manufacturing Process; per the corrected SDKB→SemicONTO alignment (mappings/sdkb_semiconto_alignment.csv). The earlier ExperimentStep label was incorrect — that class is named ExperimentalStep in SemicONTO and corresponds to SDKB SubProcess, not Process.",
+            "relation": "skos:broadMatch"
           },
           {
             "source": "wikidata",
@@ -60,8 +61,9 @@
         "cross_ref": [
           {
             "source": "semiconto",
-            "class": "ExperimentStep",
-            "note": "SemicONTO models process steps as ExperimentStep instances"
+            "class": "Experiment",
+            "note": "SemicONTO Experiment is the closest broadMatch for a manufacturing Process; per the corrected SDKB→SemicONTO alignment (mappings/sdkb_semiconto_alignment.csv). The earlier ExperimentStep label was incorrect — that class is named ExperimentalStep in SemicONTO and corresponds to SDKB SubProcess, not Process.",
+            "relation": "skos:broadMatch"
           },
           {
             "source": "wikidata",
@@ -90,8 +92,9 @@
         "cross_ref": [
           {
             "source": "semiconto",
-            "class": "ExperimentStep",
-            "note": "SemicONTO models process steps as ExperimentStep instances"
+            "class": "Experiment",
+            "note": "SemicONTO Experiment is the closest broadMatch for a manufacturing Process; per the corrected SDKB→SemicONTO alignment (mappings/sdkb_semiconto_alignment.csv). The earlier ExperimentStep label was incorrect — that class is named ExperimentalStep in SemicONTO and corresponds to SDKB SubProcess, not Process.",
+            "relation": "skos:broadMatch"
           },
           {
             "source": "wikidata",
@@ -120,8 +123,9 @@
         "cross_ref": [
           {
             "source": "semiconto",
-            "class": "ExperimentStep",
-            "note": "SemicONTO models process steps as ExperimentStep instances"
+            "class": "Experiment",
+            "note": "SemicONTO Experiment is the closest broadMatch for a manufacturing Process; per the corrected SDKB→SemicONTO alignment (mappings/sdkb_semiconto_alignment.csv). The earlier ExperimentStep label was incorrect — that class is named ExperimentalStep in SemicONTO and corresponds to SDKB SubProcess, not Process.",
+            "relation": "skos:broadMatch"
           },
           {
             "source": "wikidata",
@@ -150,8 +154,9 @@
         "cross_ref": [
           {
             "source": "semiconto",
-            "class": "ExperimentStep",
-            "note": "SemicONTO models process steps as ExperimentStep instances"
+            "class": "Experiment",
+            "note": "SemicONTO Experiment is the closest broadMatch for a manufacturing Process; per the corrected SDKB→SemicONTO alignment (mappings/sdkb_semiconto_alignment.csv). The earlier ExperimentStep label was incorrect — that class is named ExperimentalStep in SemicONTO and corresponds to SDKB SubProcess, not Process.",
+            "relation": "skos:broadMatch"
           },
           {
             "source": "wikidata",
@@ -180,8 +185,9 @@
         "cross_ref": [
           {
             "source": "semiconto",
-            "class": "ExperimentStep",
-            "note": "SemicONTO models process steps as ExperimentStep instances"
+            "class": "Experiment",
+            "note": "SemicONTO Experiment is the closest broadMatch for a manufacturing Process; per the corrected SDKB→SemicONTO alignment (mappings/sdkb_semiconto_alignment.csv). The earlier ExperimentStep label was incorrect — that class is named ExperimentalStep in SemicONTO and corresponds to SDKB SubProcess, not Process.",
+            "relation": "skos:broadMatch"
           },
           {
             "source": "wikidata",
@@ -210,8 +216,9 @@
         "cross_ref": [
           {
             "source": "semiconto",
-            "class": "ExperimentStep",
-            "note": "SemicONTO models process steps as ExperimentStep instances"
+            "class": "Experiment",
+            "note": "SemicONTO Experiment is the closest broadMatch for a manufacturing Process; per the corrected SDKB→SemicONTO alignment (mappings/sdkb_semiconto_alignment.csv). The earlier ExperimentStep label was incorrect — that class is named ExperimentalStep in SemicONTO and corresponds to SDKB SubProcess, not Process.",
+            "relation": "skos:broadMatch"
           },
           {
             "source": "wikidata",
@@ -240,8 +247,9 @@
         "cross_ref": [
           {
             "source": "semiconto",
-            "class": "ExperimentStep",
-            "note": "SemicONTO models process steps as ExperimentStep instances"
+            "class": "Experiment",
+            "note": "SemicONTO Experiment is the closest broadMatch for a manufacturing Process; per the corrected SDKB→SemicONTO alignment (mappings/sdkb_semiconto_alignment.csv). The earlier ExperimentStep label was incorrect — that class is named ExperimentalStep in SemicONTO and corresponds to SDKB SubProcess, not Process.",
+            "relation": "skos:broadMatch"
           },
           {
             "source": "wikidata",
@@ -900,7 +908,10 @@
         "cross_ref": [
           {
             "source": "semiconto",
-            "property": "hasParameter (implied by ExperimentStep)"
+            "property": "hasParameter (implied by ExperimentStep)",
+            "class": "MaterialProperty",
+            "relation": "skos:closeMatch",
+            "note": "SemicONTO MaterialProperty (subclass of qudt:Quantity) is the closeMatch for SDKB Parameter — both denote measurable quantities. Earlier the field was unset; corrected per mappings/sdkb_semiconto_alignment.csv."
           }
         ]
       }
@@ -927,7 +938,10 @@
         "cross_ref": [
           {
             "source": "semiconto",
-            "property": "hasParameter (implied by ExperimentStep)"
+            "property": "hasParameter (implied by ExperimentStep)",
+            "class": "MaterialProperty",
+            "relation": "skos:closeMatch",
+            "note": "SemicONTO MaterialProperty (subclass of qudt:Quantity) is the closeMatch for SDKB Parameter — both denote measurable quantities. Earlier the field was unset; corrected per mappings/sdkb_semiconto_alignment.csv."
           }
         ]
       }
@@ -955,7 +969,10 @@
         "cross_ref": [
           {
             "source": "semiconto",
-            "property": "hasParameter (implied by ExperimentStep)"
+            "property": "hasParameter (implied by ExperimentStep)",
+            "class": "MaterialProperty",
+            "relation": "skos:closeMatch",
+            "note": "SemicONTO MaterialProperty (subclass of qudt:Quantity) is the closeMatch for SDKB Parameter — both denote measurable quantities. Earlier the field was unset; corrected per mappings/sdkb_semiconto_alignment.csv."
           }
         ]
       }
@@ -982,7 +999,10 @@
         "cross_ref": [
           {
             "source": "semiconto",
-            "property": "hasParameter (implied by ExperimentStep)"
+            "property": "hasParameter (implied by ExperimentStep)",
+            "class": "MaterialProperty",
+            "relation": "skos:closeMatch",
+            "note": "SemicONTO MaterialProperty (subclass of qudt:Quantity) is the closeMatch for SDKB Parameter — both denote measurable quantities. Earlier the field was unset; corrected per mappings/sdkb_semiconto_alignment.csv."
           }
         ]
       }
@@ -1009,7 +1029,10 @@
         "cross_ref": [
           {
             "source": "semiconto",
-            "property": "hasParameter (implied by ExperimentStep)"
+            "property": "hasParameter (implied by ExperimentStep)",
+            "class": "MaterialProperty",
+            "relation": "skos:closeMatch",
+            "note": "SemicONTO MaterialProperty (subclass of qudt:Quantity) is the closeMatch for SDKB Parameter — both denote measurable quantities. Earlier the field was unset; corrected per mappings/sdkb_semiconto_alignment.csv."
           }
         ]
       }

@@ -2,7 +2,7 @@
 
 > **문서 버전**: v1.1 (2026-04-13)
 > **작성자**: SDKB 프로젝트 팀
-> **상태**: 전략 분석 및 계획 (Architecture Decision Record)
+> **상태**: ⚠️ **SUPERSEDED (2026-05-12)** by [architecture_amendment_sdkb_centric.md](architecture_amendment_sdkb_centric.md) — 방향 역전 (SDKB가 trunk, SemicONTO는 정렬 소스). 본 문서는 변경 이력 추적용으로 보존.
 
 ---
 

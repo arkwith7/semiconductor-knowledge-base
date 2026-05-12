@@ -4,6 +4,34 @@ All notable changes to SDKB will be documented in this file.
 
 ## [Unreleased] — v1.0.0-dev
 
+### Added (2026-05-12 — SDKB-Centric Curation, Phase 0+1)
+- Architecture amendment: [docs/architecture_amendment_sdkb_centric.md](docs/architecture_amendment_sdkb_centric.md) reverses ADR v1.1 — SDKB v1.0 is the trunk; SemicONTO becomes one of many external alignment sources via SKOS mapping, not the upper ontology (no `owl:imports`).
+- SemicONTO Phase 0 curation: [ontology/imports/SemicONTO-0.2.ttl](ontology/imports/SemicONTO-0.2.ttl) cached, [data/reports/semiconto_analysis.json](data/reports/semiconto_analysis.json) inventory, [mappings/sdkb_semiconto_alignment.{csv,ttl}](mappings/) (122 SKOS triples, 107/198 nodes aligned), [data/reports/semiconto_enrichment_candidates.json](data/reports/semiconto_enrichment_candidates.json) (Bucket A 29 cls + 13 obj props / Bucket B 6 SDKB-unique types).
+- SDKB v1.1 enrichment layer in [ontology/sdkb-core.ttl](ontology/sdkb-core.ttl): 6 new classes (`Semiconductor`, `Intrinsic/ExtrinsicSemiconductor`, `Dopant`, `Acceptor`, `Donor`) and 4 new ObjectProperties (`hasNextStep`, `hasSubStep` transitive, `hasAcceptor`, `hasDonor`) — all with `skos:exactMatch` back-link to SemicONTO. OWL ontology grew from 257 → 353 triples.
+- Scripts: `analyze_semiconto.py`, `build_semiconto_alignment.py`, `identify_enrichment_candidates.py`. Makefile target `semiconto-phase0` (fetch + analyze + align + enrich).
+- Tests: 8 new enrichment regression tests in `tests/test_owl.py::TestEnrichmentLayer` (54/54 passing).
+- docs/archive/: superseded ADR v1.1 moved here; patent_*_plan.md parents rewired to the new amendment.
+
+### Fixed (2026-05-12)
+- 13 legacy `provenance.cross_ref[source=semiconto]` entries in baseline JSON were wrong (`semiconto:ExperimentStep` does not exist — actual class is `ExperimentalStep`; Process was mis-mapped to step instead of `Experiment`). **Now corrected at the source**: baseline JSON updated in-place; alignment graph reports `legacy_corrections: 0`. Each corrected entry carries an updated `note` explaining the fix.
+
+### Added (2026-05-12 — Instance-level enrichment)
+- `mappings/sdkb_instance_enrichment.json` — externalized type-refinement overrides (declarative, audit-friendly). Phase 1 v1.1 ships with `material:polysilicon → sdkb:Semiconductor`. Empty enrichment classes (Dopant/Acceptor/Donor/Intrinsic/Extrinsic) are documented in the config rather than silently absent.
+- `scripts/convert_rdf.py` reads the enrichment file and emits additional `rdf:type` triples (primary type preserved, refined class added — safe because refined ⊂ primary). RDF data graph: 2117 → 2118 triples.
+- `tests/test_instance_enrichment.py` — 9 regression tests covering (a) config schema, (b) refined types present in data graph, (c) baseline cross_refs reference only real SemicONTO classes.
+
+### Added (2026-05-12 — Self-description metadata + DT prop alignment)
+- `sdkb-core.ttl` ontology declaration now self-describes its external dependencies: `owl:imports` is reserved for PROV-O (the only hard import); SemicONTO 0.2 and QUDT are declared via `dcterms:references` to make the SDKB-centric policy machine-readable. Added `dcterms:modified` (2026-05-12) and bumped `owl:versionInfo` to `1.1.0-dev`. `rdfs:seeAlso` links to the architecture amendment doc and the alignment graph URI. OWL ontology: 433 → 438 triples.
+- 5 SemicONTO DatatypeProperty mappings encoded in [mappings/sdkb_semiconto_alignment.ttl](mappings/sdkb_semiconto_alignment.ttl): `semi:hasExperimentName` ↔ `skos:prefLabel`, three `*Aim`/`*Description` predicates ↔ `skos:definition`, `semi:hasExperimentalStepID` ↔ `dcterms:identifier`. All recorded as `skos:closeMatch` with rdfs:comment rationale; also surfaced in `data/reports/sdkb_semiconto_alignment_report.json` under `datatype_property_alignment`. Alignment graph: 122 → 132 triples.
+- 11 new regression tests: `tests/test_owl.py::TestOntologyDependencyMetadata` (6) and `tests/test_alignment_graph.py` (5). Total **85/85 passing**.
+
+### Added (2026-05-12 — MEDIUM enrichment + SHACL + QUDT)
+- Bucket A MEDIUM enrichment (8 classes + 1 obj prop): `ElectronBeamLithography`/`ThermalEvaporation` ⊂ SubProcess; `HallEffectMeasurement`/`FieldEffectMeasurement`/`PhotoelectronSpectroscopy` ⊂ Metrology; `NTypeSemiconductor`/`PTypeSemiconductor` ⊂ ExtrinsicSemiconductor; `DopingRelation` standalone; `hasEquipment` (SubProcess→Equipment). All with `skos:exactMatch` to SemicONTO. Selective absorption — SemicONTO classes tied to absent parents (Experiment, InformationObject) were intentionally skipped.
+- SHACL enrichment shapes (`validation/shapes.ttl` +53 triples): `Shape_ExtrinsicSemiconductor` enforces "must have hasAcceptor or hasDonor" (SemicONTO axiom); domain shapes for `hasAcceptor`/`hasDonor` (subjects must be ExtrinsicSemiconductor); range shapes for `hasNextStep`/`hasSubStep`/`hasEquipment`; `Shape_DopantInstance` enforces Dopant ≡ Acceptor ∪ Donor at instance level.
+- QUDT-aligned Quantity layer: abstract `sdkb:Quantity` (`skos:exactMatch qudt:Quantity`), `sdkb:MaterialProperty ⊂ sdkb:Quantity` (`skos:exactMatch semi:MaterialProperty`), existing `sdkb:Parameter` reclassified as `⊂ sdkb:Quantity`. New properties: `sdkb:hasProperty` (Material → MaterialProperty), `sdkb:hasMeasuredProperty` (SubProcess → MaterialProperty), `sdkb:hasNumericValue` (xsd:decimal), `sdkb:hasUnitSymbol` (xsd:string). QUDT NOT imported — referenced by IRI only, consistent with SDKB-centric policy.
+- OWL ontology grew 257 → 353 → 398 → **433 triples** across the three Phase 1 enrichment passes.
+- 21 additional tests in `tests/test_owl.py::TestEnrichmentMedium` and `tests/test_owl.py::TestQuantityLayer`. Total **74/74 passing**.
+
 ### Added
 - Amendment v1 / v2 ([docs/plan_amendment_v1.md](docs/plan_amendment_v1.md), [v2](docs/plan_amendment_v2.md))
 - SIRP integration: 773 examiner-grounded rejected patents → 7,500 prior-art pairs, 50 problems, 25 adversarial scenarios

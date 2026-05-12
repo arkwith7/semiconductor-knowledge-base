@@ -1,0 +1,23 @@
+{
+  "version": "1.0",
+  "created": "2026-05-12",
+  "description": "Instance-level enrichment overrides applied during convert_rdf.py. Each entry refines a baseline node's rdf:type to a more specific class introduced by the Phase 1 enrichment layer (see docs/architecture_amendment_sdkb_centric.md). The baseline node's primary type is preserved; the refined type is added as an additional rdf:type triple (justified because the refined class is a subclass of the primary type).",
+  "type_refinements": [
+    {
+      "sdkb_id": "material:polysilicon",
+      "primary_type": "sdkb:Material",
+      "refined_to": "sdkb:Semiconductor",
+      "relation_to_base": "narrowMatch (Material → Semiconductor)",
+      "rationale": "Polysilicon is polycrystalline silicon — a semiconductor material. It typically arrives intrinsic and is doped in-process; this entry uses the parent class Semiconductor rather than guessing intrinsic vs extrinsic at the instance level. A future refinement could split into IntrinsicSemiconductor / ExtrinsicSemiconductor when process context is curated.",
+      "semiconto_alignment": "http://w3id.org/SemicONTO/Semiconductor"
+    }
+  ],
+  "empty_classes_note": {
+    "Dopant": "No baseline node represents a dopant element (boron, phosphorus, arsenic, etc.). The class is defined but unpopulated; future SDKB versions may add dopant material instances if implant/diffusion processes are modeled at finer granularity.",
+    "Acceptor": "Empty — would require Boron/Gallium/Indium instances",
+    "Donor": "Empty — would require Phosphorus/Arsenic/Antimony instances",
+    "IntrinsicSemiconductor": "Empty — baseline does not distinguish intrinsic vs extrinsic at instance level",
+    "ExtrinsicSemiconductor": "Empty — same as above"
+  },
+  "property_assertions": []
+}

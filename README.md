@@ -122,9 +122,10 @@ docs/
   expert_validation_log.md          # 도메인 자문 흔적 (NEW)
   datasheet.md                      # 데이터시트 (Gebru) (NEW)
   commercialization_strategy_v1.md  # 사업화 전략 v1 (NEW)
-  patent_taxonomy_integration_plan.md     # 계획문서 (유지)
-  patent_abstract_enrichment_plan.md      # 계획문서 (유지)
-  architecture_redesign_semiconto_hub.md  # 계획문서 (유지)
+  architecture_amendment_sdkb_centric.md  # 활성 ADR — SDKB-centric 방향 (2026-05-12)
+  patent_taxonomy_integration_plan.md     # 활성 계획 (CPC/IPC/F-term 통합)
+  patent_abstract_enrichment_plan.md      # 활성 계획 (특허 초록 NLP 보강)
+  archive/architecture_redesign_semiconto_hub_v1.1.md  # SUPERSEDED — SemicONTO Hub 원안
 validation/
   shapes.ttl                        # SHACL
   reliability_report.md             # κ/ICC (NEW)

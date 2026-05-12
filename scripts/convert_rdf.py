@@ -20,8 +20,37 @@ from config.namespaces import (
 
 ROOT = Path(__file__).resolve().parent.parent
 IN_PATH = ROOT / "data" / "semiconductor_v0_3.json"
+ENRICHMENT_PATH = ROOT / "mappings" / "sdkb_instance_enrichment.json"
 OUT_TTL = ROOT / "ontology" / "sdkb-core-data.ttl"
 OUT_JSONLD = ROOT / "ontology" / "sdkb-core-data.jsonld"
+
+
+def _resolve_curie(curie: str) -> URIRef:
+    """Resolve 'sdkb:Semiconductor' → full URIRef using known namespaces."""
+    if ":" not in curie:
+        raise ValueError(f"expected prefix:local form, got {curie!r}")
+    prefix, local = curie.split(":", 1)
+    if prefix == "sdkb":
+        return SDKB_ONT[local]
+    if prefix == "gov":
+        return SDKB_GOV[local]
+    raise ValueError(f"unknown prefix {prefix!r} in {curie!r}")
+
+
+def load_instance_enrichment() -> dict[str, list[URIRef]]:
+    """Return {sdkb_id: [extra_rdf_types]} from sdkb_instance_enrichment.json.
+
+    Returns empty dict if the file is missing (enrichment is opt-in).
+    """
+    if not ENRICHMENT_PATH.exists():
+        return {}
+    data = json.loads(ENRICHMENT_PATH.read_text())
+    out: dict[str, list[URIRef]] = {}
+    for entry in data.get("type_refinements", []):
+        out.setdefault(entry["sdkb_id"], []).append(
+            _resolve_curie(entry["refined_to"])
+        )
+    return out
 
 
 def uri(node_id: str) -> URIRef:
@@ -48,10 +77,15 @@ PRED_MAP = {
 }
 
 
-def convert_nodes(g: Graph, nodes: list) -> None:
+def convert_nodes(g: Graph, nodes: list, enrichment: dict[str, list[URIRef]] | None = None) -> None:
+    enrichment = enrichment or {}
     for n in nodes:
         u = uri(n["id"])
         g.add((u, RDF.type, SDKB_ONT[n["type"]]))
+        # Instance-level enrichment: additional rdf:type for refined classes.
+        # The refined class is a subclass of the primary type so this is safe.
+        for extra_type in enrichment.get(n["id"], []):
+            g.add((u, RDF.type, extra_type))
         g.add((u, SKOS.prefLabel, Literal(n["canonical_name"], lang="en")))
 
         if n.get("description"):
@@ -119,9 +153,13 @@ def main():
     g.bind("rdfs", str(RDFS))
     g.bind("xsd", str(XSD))
 
-    convert_nodes(g, data["nodes"])
+    enrichment = load_instance_enrichment()
+    convert_nodes(g, data["nodes"], enrichment)
     convert_synonyms(g, data.get("synonyms", []))
     convert_edges(g, data["edges"])
+    if enrichment:
+        total = sum(len(v) for v in enrichment.values())
+        print(f"  + instance enrichment: {total} extra rdf:type triples across {len(enrichment)} nodes")
 
     # ── Serialize Turtle ──────────────────────────────────────
     OUT_TTL.parent.mkdir(parents=True, exist_ok=True)

@@ -1,6 +1,7 @@
 .PHONY: all install venv parse owl convert align validate test clean \
         ingest-sirp sirp-pairs sirp-problems sirp experts \
         compliance curated-experts curated-ratings expdataset \
+        semiconto-fetch semiconto-analyze semiconto-align semiconto-enrich semiconto-phase0 \
         pipeline pipeline-sirp pipeline-full pipeline-with-expdataset help
 
 PYTHON ?= python3
@@ -29,6 +30,11 @@ help:
 	@echo "  curated-experts Ingest curated 100-expert pool (Park 2026a)"
 	@echo "  curated-ratings Ingest 7,800 3-rater ratings + compute kappa/ICC"
 	@echo "  expdataset      compliance + curated-experts + curated-ratings"
+	@echo "  semiconto-fetch    Download SemicONTO v0.2 TTL into ontology/imports/"
+	@echo "  semiconto-analyze  Parse SemicONTO TTL → data/reports/semiconto_analysis.json"
+	@echo "  semiconto-align    Build SDKB↔SemicONTO SKOS alignment (mappings/)"
+	@echo "  semiconto-enrich   Identify enrichment candidates (Bucket A/B)"
+	@echo "  semiconto-phase0   fetch + analyze + align + enrich (SDKB-centric Phase 0)"
 	@echo "  pipeline        parse + owl + convert + validate + test"
 	@echo "  pipeline-sirp   pipeline + sirp"
 	@echo "  pipeline-full   pipeline + sirp + experts"
@@ -93,6 +99,33 @@ curated-ratings:
 	$(PYTHON) scripts/ingest_curated_ratings.py
 
 expdataset: compliance curated-experts curated-ratings
+
+# ── SemicONTO Phase 0 (SDKB-centric curation) ────────────────────
+SEMICONTO_TTL := ontology/imports/SemicONTO-0.2.ttl
+SEMICONTO_URL := https://huanyu-li.github.io/SemicONTO/0.2/SemicONTO.ttl
+SEMICONTO_SHA := 4c53544de016b2d1147d41ba68094c7849999494378cd2c68674334b0e2e8d52
+
+semiconto-fetch:
+	@mkdir -p ontology/imports
+	@if [ ! -f $(SEMICONTO_TTL) ]; then \
+	  echo "Fetching SemicONTO v0.2 TTL from $(SEMICONTO_URL)"; \
+	  curl -sSL -A "SDKB-curation/0.1" -H "Accept: text/turtle" \
+	    -o $(SEMICONTO_TTL) $(SEMICONTO_URL); \
+	else \
+	  echo "$(SEMICONTO_TTL) already cached — skipping fetch"; \
+	fi
+	@echo "$(SEMICONTO_SHA)  $(SEMICONTO_TTL)" | sha256sum -c
+
+semiconto-analyze: semiconto-fetch
+	$(PYTHON) scripts/analyze_semiconto.py
+
+semiconto-align: semiconto-analyze
+	$(PYTHON) scripts/build_semiconto_alignment.py
+
+semiconto-enrich: semiconto-align
+	$(PYTHON) scripts/identify_enrichment_candidates.py
+
+semiconto-phase0: semiconto-fetch semiconto-analyze semiconto-align semiconto-enrich
 
 # ── Composed pipelines ────────────────────────────────────────────
 pipeline: parse owl convert validate test

@@ -2,7 +2,8 @@
 
 > **문서 버전**: v1.0 (2026-04-13)
 > **작성자**: SDKB 프로젝트 팀
-> **상태**: 계획 수립 단계 (Planning)
+> **상태**: 계획 수립 단계 (활성). 본 계획은 ADR v1.1 시점에 작성됨 — 2026-05-12 방향 역전으로 CPC/IPC/F-term은 SemicONTO Hub의 한 spoke가 아니라 **SDKB와 동등한 외부 alignment source**가 됨. 절차는 유효, 산출물은 `mappings/sdkb_cpc_alignment.ttl` 등 SDKB-centric 패턴으로 통합.
+> **상위 문서**: [`docs/architecture_amendment_sdkb_centric.md`](architecture_amendment_sdkb_centric.md) §4 Phase 3 (기존 상위 ADR은 [`docs/archive/architecture_redesign_semiconto_hub_v1.1.md`](archive/architecture_redesign_semiconto_hub_v1.1.md)로 이관됨)
 
 ---
 

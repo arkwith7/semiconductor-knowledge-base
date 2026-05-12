@@ -1,0 +1,1049 @@
+{
+  "source": {
+    "file": "ontology/imports/SemicONTO-0.2.ttl",
+    "triples": 329
+  },
+  "ontology": {
+    "iri": "http://w3id.org/SemicONTO/",
+    "version_iri": "http://w3id.org/SemicONTO/0.2/",
+    "version_info": "0.2",
+    "title": "Semiconductor ONTOlogy (SemicONTO)",
+    "creator": "Huanyu Li",
+    "created": "2025-06-24",
+    "license": "https://github.com/huanyu-li/SemicONTO/blob/main/LICENSE",
+    "see_also": [
+      "https://github.com/huanyu-li/SemicONTO"
+    ]
+  },
+  "counts": {
+    "classes_total": 43,
+    "classes_own": 35,
+    "classes_by_kind": {
+      "reused:qudt": 3,
+      "own": 35,
+      "reused:mdo": 2,
+      "reused:prov": 3
+    },
+    "object_properties": 17,
+    "datatype_properties": 9,
+    "annotation_properties": 11
+  },
+  "classes": [
+    {
+      "iri": "http://w3id.org/SemicONTO/Acceptor",
+      "local": "Acceptor",
+      "kind": "own",
+      "label": "Acceptor",
+      "comment": null,
+      "super_classes": [
+        "http://w3id.org/SemicONTO/Dopant"
+      ],
+      "equivalent_unions": [],
+      "restriction_count": 0
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/CMTExperiment",
+      "local": "CMTExperiment",
+      "kind": "own",
+      "label": "Charge Mobility Testing Experiment",
+      "comment": null,
+      "super_classes": [
+        "http://w3id.org/SemicONTO/SemiconductorExperiment"
+      ],
+      "equivalent_unions": [],
+      "restriction_count": 0
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/ChemicalEntity",
+      "local": "ChemicalEntity",
+      "kind": "own",
+      "label": null,
+      "comment": null,
+      "super_classes": [
+        "http://w3id.org/SemicONTO/Matter"
+      ],
+      "equivalent_unions": [],
+      "restriction_count": 0
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/ChemicalSubstance",
+      "local": "ChemicalSubstance",
+      "kind": "own",
+      "label": null,
+      "comment": null,
+      "super_classes": [
+        "http://w3id.org/SemicONTO/ChemicalEntity"
+      ],
+      "equivalent_unions": [],
+      "restriction_count": 0
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/Donor",
+      "local": "Donor",
+      "kind": "own",
+      "label": "Donor",
+      "comment": null,
+      "super_classes": [
+        "http://w3id.org/SemicONTO/Dopant"
+      ],
+      "equivalent_unions": [],
+      "restriction_count": 0
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/Dopant",
+      "local": "Dopant",
+      "kind": "own",
+      "label": "Dopant",
+      "comment": null,
+      "super_classes": [],
+      "equivalent_unions": [
+        [
+          "http://w3id.org/SemicONTO/Acceptor",
+          "http://w3id.org/SemicONTO/Donor"
+        ]
+      ],
+      "restriction_count": 0
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/DopingRelation",
+      "local": "DopingRelation",
+      "kind": "own",
+      "label": "Doping Relation",
+      "comment": null,
+      "super_classes": [],
+      "equivalent_unions": [],
+      "restriction_count": 0
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/EQETExperiment",
+      "local": "EQETExperiment",
+      "kind": "own",
+      "label": "External Quantum Efficiency Testing Experiment",
+      "comment": null,
+      "super_classes": [
+        "http://w3id.org/SemicONTO/SemiconductorExperiment"
+      ],
+      "equivalent_unions": [],
+      "restriction_count": 0
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/ElectronBeamLithography",
+      "local": "ElectronBeamLithography",
+      "kind": "own",
+      "label": "Electron Beam Lithography",
+      "comment": null,
+      "super_classes": [
+        "http://w3id.org/SemicONTO/ExperimentalMethod"
+      ],
+      "equivalent_unions": [],
+      "restriction_count": 0
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/Equipment",
+      "local": "Equipment",
+      "kind": "own",
+      "label": "Equipment",
+      "comment": null,
+      "super_classes": [
+        "http://www.w3.org/ns/prov#Agent"
+      ],
+      "equivalent_unions": [],
+      "restriction_count": 0
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/Experiment",
+      "local": "Experiment",
+      "kind": "own",
+      "label": "Experiment",
+      "comment": null,
+      "super_classes": [
+        "http://www.w3.org/ns/prov#Activity"
+      ],
+      "equivalent_unions": [],
+      "restriction_count": 5
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/ExperimentInfoObj",
+      "local": "ExperimentInfoObj",
+      "kind": "own",
+      "label": "Experiment Information Object",
+      "comment": null,
+      "super_classes": [
+        "http://w3id.org/SemicONTO/InformationObject"
+      ],
+      "equivalent_unions": [],
+      "restriction_count": 0
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/ExperimentalMethod",
+      "local": "ExperimentalMethod",
+      "kind": "own",
+      "label": "Experimental Method",
+      "comment": null,
+      "super_classes": [],
+      "equivalent_unions": [],
+      "restriction_count": 0
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/ExperimentalStep",
+      "local": "ExperimentalStep",
+      "kind": "own",
+      "label": "Experimental Step",
+      "comment": null,
+      "super_classes": [
+        "http://www.w3.org/ns/prov#Activity"
+      ],
+      "equivalent_unions": [],
+      "restriction_count": 2
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/ExtrinsicSemiconductor",
+      "local": "ExtrinsicSemiconductor",
+      "kind": "own",
+      "label": "Extrinsic Semiconductor",
+      "comment": null,
+      "super_classes": [
+        "http://w3id.org/SemicONTO/Semiconductor"
+      ],
+      "equivalent_unions": [],
+      "restriction_count": 2
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/FieldEffectMeasurement",
+      "local": "FieldEffectMeasurement",
+      "kind": "own",
+      "label": "Field-Effect Measurement",
+      "comment": null,
+      "super_classes": [
+        "http://w3id.org/SemicONTO/ExperimentalMethod"
+      ],
+      "equivalent_unions": [],
+      "restriction_count": 0
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/HMTExperiment",
+      "local": "HMTExperiment",
+      "kind": "own",
+      "label": "Hole Mobility Testing Experiment",
+      "comment": null,
+      "super_classes": [
+        "http://w3id.org/SemicONTO/SemiconductorExperiment"
+      ],
+      "equivalent_unions": [],
+      "restriction_count": 0
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/HallEffectMeasurement",
+      "local": "HallEffectMeasurement",
+      "kind": "own",
+      "label": "Hall Effect Measurement",
+      "comment": null,
+      "super_classes": [
+        "http://w3id.org/SemicONTO/ExperimentalMethod"
+      ],
+      "equivalent_unions": [],
+      "restriction_count": 0
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/InformationObject",
+      "local": "InformationObject",
+      "kind": "own",
+      "label": "Information Object",
+      "comment": null,
+      "super_classes": [],
+      "equivalent_unions": [],
+      "restriction_count": 0
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/IntrinsicSemiconductor",
+      "local": "IntrinsicSemiconductor",
+      "kind": "own",
+      "label": "Intrinsic Semiconductor",
+      "comment": null,
+      "super_classes": [
+        "http://w3id.org/SemicONTO/Semiconductor"
+      ],
+      "equivalent_unions": [],
+      "restriction_count": 0
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/Material",
+      "local": "Material",
+      "kind": "own",
+      "label": "Material",
+      "comment": null,
+      "super_classes": [
+        "http://w3id.org/SemicONTO/Matter",
+        "http://www.w3.org/ns/prov#Entity"
+      ],
+      "equivalent_unions": [],
+      "restriction_count": 0
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/MaterialProperty",
+      "local": "MaterialProperty",
+      "kind": "own",
+      "label": "Material Property",
+      "comment": null,
+      "super_classes": [
+        "http://qudt.org/schema/qudt/Quantity"
+      ],
+      "equivalent_unions": [],
+      "restriction_count": 0
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/Matter",
+      "local": "Matter",
+      "kind": "own",
+      "label": "Matter",
+      "comment": "A matter is a physical substance.",
+      "super_classes": [],
+      "equivalent_unions": [],
+      "restriction_count": 0
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/MolecularEntity",
+      "local": "MolecularEntity",
+      "kind": "own",
+      "label": null,
+      "comment": null,
+      "super_classes": [
+        "http://w3id.org/SemicONTO/ChemicalEntity"
+      ],
+      "equivalent_unions": [],
+      "restriction_count": 0
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/N-TypeSemiconductor",
+      "local": "N-TypeSemiconductor",
+      "kind": "own",
+      "label": "N-Type Semiconductor",
+      "comment": null,
+      "super_classes": [
+        "http://w3id.org/SemicONTO/ExtrinsicSemiconductor"
+      ],
+      "equivalent_unions": [],
+      "restriction_count": 0
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/P-TypeSemiconductor",
+      "local": "P-TypeSemiconductor",
+      "kind": "own",
+      "label": "P-Type Semiconductor",
+      "comment": null,
+      "super_classes": [
+        "http://w3id.org/SemicONTO/ExtrinsicSemiconductor"
+      ],
+      "equivalent_unions": [],
+      "restriction_count": 0
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/PESExperiment",
+      "local": "PESExperiment",
+      "kind": "own",
+      "label": "Photoelectron Spectroscopy Experiment",
+      "comment": null,
+      "super_classes": [
+        "http://w3id.org/SemicONTO/SemiconductorExperiment"
+      ],
+      "equivalent_unions": [],
+      "restriction_count": 0
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/PPCExperiment",
+      "local": "PPCExperiment",
+      "kind": "own",
+      "label": "Preparation and Parameter Characterization Experiment",
+      "comment": null,
+      "super_classes": [
+        "http://w3id.org/SemicONTO/SemiconductorExperiment"
+      ],
+      "equivalent_unions": [],
+      "restriction_count": 0
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/PhotoelectronSpectroscopy",
+      "local": "PhotoelectronSpectroscopy",
+      "kind": "own",
+      "label": "Photoelectron Spectroscopy",
+      "comment": null,
+      "super_classes": [
+        "http://w3id.org/SemicONTO/ExperimentalMethod"
+      ],
+      "equivalent_unions": [],
+      "restriction_count": 0
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/SEDFabrication",
+      "local": "SEDFabrication",
+      "kind": "own",
+      "label": "Single Electron Device (SED) Fabrication",
+      "comment": null,
+      "super_classes": [
+        "http://w3id.org/SemicONTO/SemiconductorExperiment"
+      ],
+      "equivalent_unions": [],
+      "restriction_count": 0
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/Semiconductor",
+      "local": "Semiconductor",
+      "kind": "own",
+      "label": "Semiconductor",
+      "comment": null,
+      "super_classes": [
+        "http://w3id.org/SemicONTO/Material"
+      ],
+      "equivalent_unions": [
+        [
+          "http://w3id.org/SemicONTO/ExtrinsicSemiconductor",
+          "http://w3id.org/SemicONTO/IntrinsicSemiconductor"
+        ]
+      ],
+      "restriction_count": 0
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/SemiconductorExperiment",
+      "local": "SemiconductorExperiment",
+      "kind": "own",
+      "label": "Semiconductor Experiment",
+      "comment": null,
+      "super_classes": [
+        "http://w3id.org/SemicONTO/Experiment"
+      ],
+      "equivalent_unions": [],
+      "restriction_count": 0
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/SpectralResponseMeasurement",
+      "local": "SpectralResponseMeasurement",
+      "kind": "own",
+      "label": "Spectral Response Measurement",
+      "comment": null,
+      "super_classes": [
+        "http://w3id.org/SemicONTO/ExperimentalMethod"
+      ],
+      "equivalent_unions": [],
+      "restriction_count": 0
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/StepInfoObj",
+      "local": "StepInfoObj",
+      "kind": "own",
+      "label": "Experimental Step Information Object",
+      "comment": null,
+      "super_classes": [
+        "http://w3id.org/SemicONTO/InformationObject"
+      ],
+      "equivalent_unions": [],
+      "restriction_count": 0
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/ThermalEvaporation",
+      "local": "ThermalEvaporation",
+      "kind": "own",
+      "label": "Thermal Evaporation",
+      "comment": null,
+      "super_classes": [
+        "http://w3id.org/SemicONTO/ExperimentalMethod"
+      ],
+      "equivalent_unions": [],
+      "restriction_count": 0
+    },
+    {
+      "iri": "https://w3id.org/mdo/structure/Composition",
+      "local": "Composition",
+      "kind": "reused:mdo",
+      "label": "Composition",
+      "comment": null,
+      "super_classes": [],
+      "equivalent_unions": [],
+      "restriction_count": 0
+    },
+    {
+      "iri": "https://w3id.org/mdo/core/Structure",
+      "local": "Structure",
+      "kind": "reused:mdo",
+      "label": "Structure",
+      "comment": null,
+      "super_classes": [],
+      "equivalent_unions": [],
+      "restriction_count": 0
+    },
+    {
+      "iri": "http://www.w3.org/ns/prov#Activity",
+      "local": "Activity",
+      "kind": "reused:prov",
+      "label": null,
+      "comment": null,
+      "super_classes": [],
+      "equivalent_unions": [],
+      "restriction_count": 0
+    },
+    {
+      "iri": "http://www.w3.org/ns/prov#Agent",
+      "local": "Agent",
+      "kind": "reused:prov",
+      "label": null,
+      "comment": null,
+      "super_classes": [],
+      "equivalent_unions": [],
+      "restriction_count": 0
+    },
+    {
+      "iri": "http://www.w3.org/ns/prov#Entity",
+      "local": "Entity",
+      "kind": "reused:prov",
+      "label": null,
+      "comment": null,
+      "super_classes": [],
+      "equivalent_unions": [],
+      "restriction_count": 0
+    },
+    {
+      "iri": "http://qudt.org/schema/qudt/Quantity",
+      "local": "Quantity",
+      "kind": "reused:qudt",
+      "label": null,
+      "comment": null,
+      "super_classes": [],
+      "equivalent_unions": [],
+      "restriction_count": 0
+    },
+    {
+      "iri": "http://qudt.org/schema/qudt/QuantityValue",
+      "local": "QuantityValue",
+      "kind": "reused:qudt",
+      "label": null,
+      "comment": null,
+      "super_classes": [],
+      "equivalent_unions": [],
+      "restriction_count": 0
+    },
+    {
+      "iri": "http://qudt.org/schema/qudt/Unit",
+      "local": "Unit",
+      "kind": "reused:qudt",
+      "label": null,
+      "comment": null,
+      "super_classes": [],
+      "equivalent_unions": [],
+      "restriction_count": 0
+    }
+  ],
+  "object_properties": [
+    {
+      "iri": "http://w3id.org/SemicONTO/experimentsFor",
+      "local": "experimentsFor",
+      "kind": "own",
+      "label": "experiments for",
+      "domain": [],
+      "range": [],
+      "sub_property_of": [
+        "http://www.w3.org/ns/prov#used"
+      ],
+      "transitive": false
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/experimentsOn",
+      "local": "experimentsOn",
+      "kind": "own",
+      "label": "experiments on",
+      "domain": [],
+      "range": [],
+      "sub_property_of": [
+        "http://www.w3.org/ns/prov#used"
+      ],
+      "transitive": false
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/hasAcceptor",
+      "local": "hasAcceptor",
+      "kind": "own",
+      "label": "has acceptor",
+      "domain": [
+        "http://w3id.org/SemicONTO/ExtrinsicSemiconductor"
+      ],
+      "range": [
+        "http://w3id.org/SemicONTO/Material"
+      ],
+      "sub_property_of": [
+        "http://www.w3.org/2002/07/owl#topObjectProperty"
+      ],
+      "transitive": false
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/hasDonor",
+      "local": "hasDonor",
+      "kind": "own",
+      "label": "has donor",
+      "domain": [
+        "http://w3id.org/SemicONTO/ExtrinsicSemiconductor"
+      ],
+      "range": [
+        "http://w3id.org/SemicONTO/Material"
+      ],
+      "sub_property_of": [
+        "http://www.w3.org/2002/07/owl#topObjectProperty"
+      ],
+      "transitive": false
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/hasEquipment",
+      "local": "hasEquipment",
+      "kind": "own",
+      "label": "has equipment",
+      "domain": [
+        "http://w3id.org/SemicONTO/ExperimentalStep"
+      ],
+      "range": [
+        "http://w3id.org/SemicONTO/Equipment"
+      ],
+      "sub_property_of": [],
+      "transitive": false
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/hasExperimentalMethod",
+      "local": "hasExperimentalMethod",
+      "kind": "own",
+      "label": "has experimental method",
+      "domain": [
+        "http://w3id.org/SemicONTO/Experiment"
+      ],
+      "range": [
+        "http://w3id.org/SemicONTO/ExperimentalMethod"
+      ],
+      "sub_property_of": [],
+      "transitive": false
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/hasExperimentalStep",
+      "local": "hasExperimentalStep",
+      "kind": "own",
+      "label": "has experimental step",
+      "domain": [
+        "http://w3id.org/SemicONTO/Experiment"
+      ],
+      "range": [
+        "http://w3id.org/SemicONTO/ExperimentalStep"
+      ],
+      "sub_property_of": [],
+      "transitive": false
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/hasMeasuredProperty",
+      "local": "hasMeasuredProperty",
+      "kind": "own",
+      "label": "has measured property",
+      "domain": [
+        "http://w3id.org/SemicONTO/Experiment"
+      ],
+      "range": [
+        "http://w3id.org/SemicONTO/MaterialProperty"
+      ],
+      "sub_property_of": [],
+      "transitive": false
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/hasNextStep",
+      "local": "hasNextStep",
+      "kind": "own",
+      "label": "has next step",
+      "domain": [
+        "http://w3id.org/SemicONTO/ExperimentalStep"
+      ],
+      "range": [
+        "http://w3id.org/SemicONTO/ExperimentalStep"
+      ],
+      "sub_property_of": [],
+      "transitive": false
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/hasProperty",
+      "local": "hasProperty",
+      "kind": "own",
+      "label": "has property",
+      "domain": [
+        "http://w3id.org/SemicONTO/Material"
+      ],
+      "range": [
+        "http://w3id.org/SemicONTO/MaterialProperty"
+      ],
+      "sub_property_of": [],
+      "transitive": false
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/hasStructure",
+      "local": "hasStructure",
+      "kind": "own",
+      "label": "has structure",
+      "domain": [
+        "http://w3id.org/SemicONTO/Material"
+      ],
+      "range": [
+        "https://w3id.org/mdo/core/Structure"
+      ],
+      "sub_property_of": [],
+      "transitive": false
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/hasSubStep",
+      "local": "hasSubStep",
+      "kind": "own",
+      "label": "has sub-step",
+      "domain": [
+        "http://w3id.org/SemicONTO/ExperimentalStep"
+      ],
+      "range": [
+        "http://w3id.org/SemicONTO/ExperimentalStep"
+      ],
+      "sub_property_of": [],
+      "transitive": true
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/isDescribedBy",
+      "local": "isDescribedBy",
+      "kind": "own",
+      "label": "is described by",
+      "domain": [],
+      "range": [
+        "http://w3id.org/SemicONTO/InformationObject"
+      ],
+      "sub_property_of": [],
+      "transitive": false
+    },
+    {
+      "iri": "https://w3id.org/mdo/structure/hasComposition",
+      "local": "hasComposition",
+      "kind": "reused:mdo",
+      "label": "has composition",
+      "domain": [],
+      "range": [],
+      "sub_property_of": [],
+      "transitive": false
+    },
+    {
+      "iri": "http://www.w3.org/ns/prov#used",
+      "local": "used",
+      "kind": "reused:prov",
+      "label": null,
+      "domain": [],
+      "range": [],
+      "sub_property_of": [],
+      "transitive": false
+    },
+    {
+      "iri": "http://www.w3.org/ns/prov#wasAssociatedWith",
+      "local": "wasAssociatedWith",
+      "kind": "reused:prov",
+      "label": null,
+      "domain": [],
+      "range": [],
+      "sub_property_of": [],
+      "transitive": false
+    },
+    {
+      "iri": "http://qudt.org/schema/qudt/quantityValue",
+      "local": "quantityValue",
+      "kind": "reused:qudt",
+      "label": null,
+      "domain": [],
+      "range": [],
+      "sub_property_of": [],
+      "transitive": false
+    }
+  ],
+  "datatype_properties": [
+    {
+      "iri": "http://w3id.org/SemicONTO/hasExperimentAim",
+      "local": "hasExperimentAim",
+      "kind": "own",
+      "label": "has experiment aim",
+      "domain": [
+        "http://w3id.org/SemicONTO/ExperimentInfoObj"
+      ],
+      "range": [
+        "http://www.w3.org/2001/XMLSchema#string"
+      ],
+      "sub_property_of": [],
+      "transitive": false
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/hasExperimentName",
+      "local": "hasExperimentName",
+      "kind": "own",
+      "label": "has experiment name",
+      "domain": [
+        "http://w3id.org/SemicONTO/ExperimentInfoObj"
+      ],
+      "range": [
+        "http://www.w3.org/2001/XMLSchema#string"
+      ],
+      "sub_property_of": [],
+      "transitive": false
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/hasExperimentalStepAim",
+      "local": "hasExperimentalStepAim",
+      "kind": "own",
+      "label": "has experimental step aim",
+      "domain": [
+        "http://w3id.org/SemicONTO/StepInfoObj"
+      ],
+      "range": [
+        "http://www.w3.org/2001/XMLSchema#string"
+      ],
+      "sub_property_of": [],
+      "transitive": false
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/hasExperimentalStepDescription",
+      "local": "hasExperimentalStepDescription",
+      "kind": "own",
+      "label": "has experimental step description",
+      "domain": [
+        "http://w3id.org/SemicONTO/StepInfoObj"
+      ],
+      "range": [
+        "http://www.w3.org/2001/XMLSchema#string"
+      ],
+      "sub_property_of": [],
+      "transitive": false
+    },
+    {
+      "iri": "http://w3id.org/SemicONTO/hasExperimentalStepID",
+      "local": "hasExperimentalStepID",
+      "kind": "own",
+      "label": null,
+      "domain": [
+        "http://w3id.org/SemicONTO/StepInfoObj"
+      ],
+      "range": [
+        "http://www.w3.org/2001/XMLSchema#string"
+      ],
+      "sub_property_of": [],
+      "transitive": false
+    },
+    {
+      "iri": "https://w3id.org/mdo/structure/DescriptiveFormula",
+      "local": "DescriptiveFormula",
+      "kind": "reused:mdo",
+      "label": null,
+      "domain": [],
+      "range": [],
+      "sub_property_of": [],
+      "transitive": false
+    },
+    {
+      "iri": "http://www.w3.org/ns/prov#endedAtTime",
+      "local": "endedAtTime",
+      "kind": "reused:prov",
+      "label": null,
+      "domain": [
+        "http://www.w3.org/ns/prov#Activity"
+      ],
+      "range": [
+        "http://www.w3.org/2001/XMLSchema#dateTime"
+      ],
+      "sub_property_of": [],
+      "transitive": false
+    },
+    {
+      "iri": "http://www.w3.org/ns/prov#startedAtTime",
+      "local": "startedAtTime",
+      "kind": "reused:prov",
+      "label": null,
+      "domain": [
+        "http://www.w3.org/ns/prov#Activity"
+      ],
+      "range": [
+        "http://www.w3.org/2001/XMLSchema#dateTime"
+      ],
+      "sub_property_of": [],
+      "transitive": false
+    },
+    {
+      "iri": "http://qudt.org/schema/qudt/numericValue",
+      "local": "numericValue",
+      "kind": "reused:qudt",
+      "label": null,
+      "domain": [],
+      "range": [],
+      "sub_property_of": [],
+      "transitive": false
+    }
+  ],
+  "annotation_properties": [
+    {
+      "iri": "http://purl.org/dc/terms/contributor",
+      "local": "contributor",
+      "kind": "reused:other",
+      "label": null,
+      "domain": [],
+      "range": [],
+      "sub_property_of": [],
+      "transitive": false
+    },
+    {
+      "iri": "http://purl.org/dc/terms/created",
+      "local": "created",
+      "kind": "reused:other",
+      "label": null,
+      "domain": [],
+      "range": [],
+      "sub_property_of": [],
+      "transitive": false
+    },
+    {
+      "iri": "http://purl.org/dc/terms/creator",
+      "local": "creator",
+      "kind": "reused:other",
+      "label": null,
+      "domain": [],
+      "range": [],
+      "sub_property_of": [],
+      "transitive": false
+    },
+    {
+      "iri": "http://purl.org/dc/terms/description",
+      "local": "description",
+      "kind": "reused:other",
+      "label": null,
+      "domain": [],
+      "range": [],
+      "sub_property_of": [],
+      "transitive": false
+    },
+    {
+      "iri": "http://purl.org/dc/terms/isVersionOf",
+      "local": "isVersionOf",
+      "kind": "reused:other",
+      "label": null,
+      "domain": [],
+      "range": [],
+      "sub_property_of": [],
+      "transitive": false
+    },
+    {
+      "iri": "http://purl.org/dc/terms/license",
+      "local": "license",
+      "kind": "reused:other",
+      "label": null,
+      "domain": [],
+      "range": [],
+      "sub_property_of": [],
+      "transitive": false
+    },
+    {
+      "iri": "http://purl.org/dc/terms/modified",
+      "local": "modified",
+      "kind": "reused:other",
+      "label": null,
+      "domain": [],
+      "range": [],
+      "sub_property_of": [],
+      "transitive": false
+    },
+    {
+      "iri": "http://purl.org/vocab/vann/preferredNamespacePrefix",
+      "local": "preferredNamespacePrefix",
+      "kind": "reused:other",
+      "label": null,
+      "domain": [],
+      "range": [],
+      "sub_property_of": [],
+      "transitive": false
+    },
+    {
+      "iri": "http://purl.org/vocab/vann/preferredNamespaceUri",
+      "local": "preferredNamespaceUri",
+      "kind": "reused:other",
+      "label": null,
+      "domain": [],
+      "range": [],
+      "sub_property_of": [],
+      "transitive": false
+    },
+    {
+      "iri": "http://purl.org/dc/terms/rights",
+      "local": "rights",
+      "kind": "reused:other",
+      "label": null,
+      "domain": [],
+      "range": [],
+      "sub_property_of": [],
+      "transitive": false
+    },
+    {
+      "iri": "http://purl.org/dc/terms/title",
+      "local": "title",
+      "kind": "reused:other",
+      "label": null,
+      "domain": [],
+      "range": [],
+      "sub_property_of": [],
+      "transitive": false
+    }
+  ],
+  "subclass_hierarchy": {
+    "http://w3id.org/SemicONTO/Dopant": [
+      "http://w3id.org/SemicONTO/Acceptor",
+      "http://w3id.org/SemicONTO/Donor"
+    ],
+    "http://w3id.org/SemicONTO/SemiconductorExperiment": [
+      "http://w3id.org/SemicONTO/CMTExperiment",
+      "http://w3id.org/SemicONTO/EQETExperiment",
+      "http://w3id.org/SemicONTO/HMTExperiment",
+      "http://w3id.org/SemicONTO/PESExperiment",
+      "http://w3id.org/SemicONTO/PPCExperiment",
+      "http://w3id.org/SemicONTO/SEDFabrication"
+    ],
+    "http://w3id.org/SemicONTO/Matter": [
+      "http://w3id.org/SemicONTO/ChemicalEntity",
+      "http://w3id.org/SemicONTO/Material"
+    ],
+    "http://w3id.org/SemicONTO/ChemicalEntity": [
+      "http://w3id.org/SemicONTO/ChemicalSubstance",
+      "http://w3id.org/SemicONTO/MolecularEntity"
+    ],
+    "http://w3id.org/SemicONTO/ExperimentalMethod": [
+      "http://w3id.org/SemicONTO/ElectronBeamLithography",
+      "http://w3id.org/SemicONTO/FieldEffectMeasurement",
+      "http://w3id.org/SemicONTO/HallEffectMeasurement",
+      "http://w3id.org/SemicONTO/PhotoelectronSpectroscopy",
+      "http://w3id.org/SemicONTO/SpectralResponseMeasurement",
+      "http://w3id.org/SemicONTO/ThermalEvaporation"
+    ],
+    "http://www.w3.org/ns/prov#Agent": [
+      "http://w3id.org/SemicONTO/Equipment"
+    ],
+    "http://www.w3.org/ns/prov#Activity": [
+      "http://w3id.org/SemicONTO/Experiment",
+      "http://w3id.org/SemicONTO/ExperimentalStep"
+    ],
+    "http://w3id.org/SemicONTO/InformationObject": [
+      "http://w3id.org/SemicONTO/ExperimentInfoObj",
+      "http://w3id.org/SemicONTO/StepInfoObj"
+    ],
+    "http://w3id.org/SemicONTO/Semiconductor": [
+      "http://w3id.org/SemicONTO/ExtrinsicSemiconductor",
+      "http://w3id.org/SemicONTO/IntrinsicSemiconductor"
+    ],
+    "http://www.w3.org/ns/prov#Entity": [
+      "http://w3id.org/SemicONTO/Material"
+    ],
+    "http://qudt.org/schema/qudt/Quantity": [
+      "http://w3id.org/SemicONTO/MaterialProperty"
+    ],
+    "http://w3id.org/SemicONTO/ExtrinsicSemiconductor": [
+      "http://w3id.org/SemicONTO/N-TypeSemiconductor",
+      "http://w3id.org/SemicONTO/P-TypeSemiconductor"
+    ],
+    "http://w3id.org/SemicONTO/Material": [
+      "http://w3id.org/SemicONTO/Semiconductor"
+    ],
+    "http://w3id.org/SemicONTO/Experiment": [
+      "http://w3id.org/SemicONTO/SemiconductorExperiment"
+    ]
+  }
+}

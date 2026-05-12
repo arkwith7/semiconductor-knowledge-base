@@ -1,0 +1,135 @@
+{
+  "inputs": {
+    "baseline_nodes": 198,
+    "semiconto_classes_own": 35
+  },
+  "class_alignment": {
+    "Process": {
+      "semiconto_iri": "http://w3id.org/SemicONTO/Experiment",
+      "relation": "broadMatch",
+      "confidence": 0.6
+    },
+    "SubProcess": {
+      "semiconto_iri": "http://w3id.org/SemicONTO/ExperimentalStep",
+      "relation": "closeMatch",
+      "confidence": 0.85
+    },
+    "EquipmentClass": {
+      "semiconto_iri": null,
+      "relation": "none",
+      "confidence": 0.0
+    },
+    "Equipment": {
+      "semiconto_iri": "http://w3id.org/SemicONTO/Equipment",
+      "relation": "exactMatch",
+      "confidence": 1.0
+    },
+    "Vendor": {
+      "semiconto_iri": "http://www.w3.org/ns/prov#Agent",
+      "relation": "broadMatch",
+      "confidence": 0.7
+    },
+    "Organization": {
+      "semiconto_iri": "http://www.w3.org/ns/prov#Agent",
+      "relation": "broadMatch",
+      "confidence": 0.7
+    },
+    "Parameter": {
+      "semiconto_iri": "http://w3id.org/SemicONTO/MaterialProperty",
+      "relation": "closeMatch",
+      "confidence": 0.7
+    },
+    "Metrology": {
+      "semiconto_iri": "http://w3id.org/SemicONTO/ExperimentalMethod",
+      "relation": "broadMatch",
+      "confidence": 0.7
+    },
+    "Material": {
+      "semiconto_iri": "http://w3id.org/SemicONTO/Material",
+      "relation": "exactMatch",
+      "confidence": 1.0
+    },
+    "TechnologyNode": {
+      "semiconto_iri": null,
+      "relation": "none",
+      "confidence": 0.0
+    },
+    "FailureMode": {
+      "semiconto_iri": null,
+      "relation": "none",
+      "confidence": 0.0
+    },
+    "RootCause": {
+      "semiconto_iri": null,
+      "relation": "none",
+      "confidence": 0.0
+    },
+    "Mitigation": {
+      "semiconto_iri": null,
+      "relation": "none",
+      "confidence": 0.0
+    },
+    "Skill": {
+      "semiconto_iri": null,
+      "relation": "none",
+      "confidence": 0.0
+    }
+  },
+  "datatype_property_alignment": {
+    "hasExperimentName": {
+      "semi_iri": "http://w3id.org/SemicONTO/hasExperimentName",
+      "sdkb_side_property": "http://www.w3.org/2004/02/skos/core#prefLabel",
+      "relation": "closeMatch"
+    },
+    "hasExperimentAim": {
+      "semi_iri": "http://w3id.org/SemicONTO/hasExperimentAim",
+      "sdkb_side_property": "http://www.w3.org/2004/02/skos/core#definition",
+      "relation": "closeMatch"
+    },
+    "hasExperimentalStepAim": {
+      "semi_iri": "http://w3id.org/SemicONTO/hasExperimentalStepAim",
+      "sdkb_side_property": "http://www.w3.org/2004/02/skos/core#definition",
+      "relation": "closeMatch"
+    },
+    "hasExperimentalStepDescription": {
+      "semi_iri": "http://w3id.org/SemicONTO/hasExperimentalStepDescription",
+      "sdkb_side_property": "http://www.w3.org/2004/02/skos/core#definition",
+      "relation": "closeMatch"
+    },
+    "hasExperimentalStepID": {
+      "semi_iri": "http://w3id.org/SemicONTO/hasExperimentalStepID",
+      "sdkb_side_property": "http://purl.org/dc/terms/identifier",
+      "relation": "closeMatch"
+    }
+  },
+  "instance_counts": {
+    "total": 198,
+    "with_target": 107,
+    "without_target_enrichment_candidates": 91,
+    "by_relation": {
+      "broadMatch": 29,
+      "closeMatch": 17,
+      "none": 91,
+      "exactMatch": 61
+    },
+    "with_target_by_type": {
+      "Process": 8,
+      "SubProcess": 12,
+      "Vendor": 16,
+      "Organization": 2,
+      "Parameter": 5,
+      "Metrology": 3,
+      "Material": 20,
+      "Equipment": 41
+    }
+  },
+  "legacy_corrections": {
+    "count": 0,
+    "details": []
+  },
+  "outputs": {
+    "csv": "mappings/sdkb_semiconto_alignment.csv",
+    "ttl": "mappings/sdkb_semiconto_alignment.ttl",
+    "triples_in_ttl": 132
+  }
+}

@@ -2,8 +2,8 @@
 
 > **문서 버전**: v1.0 (2026-04-13)
 > **작성자**: SDKB 프로젝트 팀
-> **상태**: 실행 계획 (Ready for Review)
-> **상위 문서**: `docs/architecture_redesign_semiconto_hub.md` § 4.4 및 Phase 3.5
+> **상태**: 실행 계획 (활성). 단 본 계획은 ADR v1.1 (SemicONTO Hub) 시점에 작성됨 — 이후 방향이 SDKB-Centric으로 역전되었으므로 (2026-05-12), 본 문서의 절차/타깃은 유효하되 **결과물의 정렬은 SDKB 네임스페이스로 흡수**한다는 점을 유의할 것.
+> **상위 문서**: [`docs/architecture_amendment_sdkb_centric.md`](architecture_amendment_sdkb_centric.md) §4 Phase 3.5 (기존 상위 ADR은 [`docs/archive/architecture_redesign_semiconto_hub_v1.1.md`](archive/architecture_redesign_semiconto_hub_v1.1.md)로 이관됨)
 
 ---
 

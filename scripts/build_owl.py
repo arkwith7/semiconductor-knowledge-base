@@ -18,6 +18,12 @@ from config.namespaces import SDKB_ONT, SDKB_GOV, SDKB_BASE, PROV, PREFIX_MAP
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "ontology" / "sdkb-core.ttl"
 
+# ─── External alignment targets (SDKB-centric: not imported, referenced) ───
+# SemicONTO terms used as skos:exactMatch back-links from SDKB enrichment
+# classes. See docs/architecture_amendment_sdkb_centric.md.
+SEMI = "http://w3id.org/SemicONTO/"
+QUDT = "http://qudt.org/schema/qudt/"
+
 # ─── Permissive domain/range overrides ─────────────────────────────────
 # A handful of curation predicates are used with multiple subject/object
 # class shapes in the baseline data. Emit owl:unionOf rather than a single
@@ -48,16 +54,44 @@ def build_ontology() -> Graph:
 
     # ── Ontology declaration ─────────────────────────────────
     g.add((ont, RDF.type, OWL.Ontology))
-    g.add((ont, RDFS.label, Literal("SDKB v1.0 — Semiconductor Domain Knowledge Base Ontology", lang="en")))
+    g.add((ont, RDFS.label, Literal(
+        "SDKB v1.1 — Semiconductor Domain Knowledge Base Ontology", lang="en"
+    )))
     g.add((ont, RDFS.comment, Literal(
-        "Provenance-grounded curation ontology for semiconductor manufacturing, "
-        "covering process, equipment, materials, FMEA, and regulatory governance layers.",
+        "Provenance-grounded curation ontology for semiconductor "
+        "manufacturing, covering process, equipment, materials, FMEA, and "
+        "regulatory governance layers. SDKB-centric architecture: external "
+        "ontologies (SemicONTO, QUDT, etc.) are REFERENCED via SKOS mappings "
+        "and class-level skos:exactMatch back-links, NOT imported. See "
+        "docs/architecture_amendment_sdkb_centric.md.",
         lang="en"
     )))
-    g.add((ont, OWL.versionInfo, Literal("1.0.0-dev")))
+    g.add((ont, OWL.versionInfo, Literal("1.1.0-dev")))
+    g.add((ont, DCTERMS.modified, Literal("2026-05-12", datatype=XSD.date)))
     g.add((ont, DCTERMS.license, URIRef("https://spdx.org/licenses/CDLA-Permissive-2.0.html")))
     g.add((ont, DCTERMS.creator, Literal("Park HyoungSik — SKKU MOT")))
+
+    # ── External dependencies ──
+    # Hard import: PROV-O (used directly for prov:Entity / prov:Activity /
+    # prov:Agent typing in governance and equipment layers).
     g.add((ont, OWL.imports, URIRef("http://www.w3.org/ns/prov-o#")))
+
+    # Referenced but NOT imported (SDKB-centric policy): SemicONTO terms appear
+    # as skos:exactMatch targets from sdkb: classes/properties, and the
+    # alignment graph at mappings/sdkb_semiconto_alignment.ttl carries SKOS
+    # mappings for 198 instances. QUDT URIs are similarly used as
+    # skos:exactMatch / skos:closeMatch targets from the Quantity layer.
+    g.add((ont, DCTERMS.references, URIRef("http://w3id.org/SemicONTO/0.2/")))
+    g.add((ont, DCTERMS.references, URIRef("http://qudt.org/schema/qudt/")))
+
+    # Companion documents (architecture decisions and alignment artifacts)
+    g.add((ont, RDFS.seeAlso, URIRef(
+        "https://github.com/arkwith7/semiconductor-knowledge-base/blob/main/"
+        "docs/architecture_amendment_sdkb_centric.md"
+    )))
+    g.add((ont, RDFS.seeAlso, URIRef(
+        "https://w3id.org/sdkb/alignment/semiconto"
+    )))
 
     # ═══════════════════════════════════════════════════════════
     # CLASSES — Domain Layer (14 Core types)
@@ -87,6 +121,166 @@ def build_ontology() -> Graph:
 
     # SubProcess rdfs:subClassOf Process (hierarchy)
     g.add((SDKB_ONT.SubProcess, RDFS.subClassOf, SDKB_ONT.Process))
+
+    # ═══════════════════════════════════════════════════════════
+    # CLASSES — Enrichment Layer (SemicONTO-derived, Phase 1 v1.1)
+    #
+    # New SDKB classes absorbing SemicONTO v0.2 HIGH-priority concepts
+    # (per docs/architecture_amendment_sdkb_centric.md, Bucket A).
+    # URIs remain in sdkb: namespace; skos:exactMatch back-links the
+    # SemicONTO term so external consumers can navigate.
+    # ═══════════════════════════════════════════════════════════
+    # (class_name, parent_sdkb_class_or_None, semiconto_local, description)
+    enrichment_classes: list[tuple[str, str | None, str, str]] = [
+        ("Semiconductor",          "Material",       "Semiconductor",
+         "A material with electrical conductivity between conductor and insulator."),
+        ("IntrinsicSemiconductor", "Semiconductor",  "IntrinsicSemiconductor",
+         "An undoped semiconductor whose carriers come from thermal excitation."),
+        ("ExtrinsicSemiconductor", "Semiconductor",  "ExtrinsicSemiconductor",
+         "A doped semiconductor whose carriers come from intentional dopants."),
+        ("Dopant",                 "Material",       "Dopant",
+         "An impurity introduced into a semiconductor to alter conductivity."),
+        ("Acceptor",               "Dopant",         "Acceptor",
+         "A dopant that accepts electrons, producing a p-type semiconductor."),
+        ("Donor",                  "Dopant",         "Donor",
+         "A dopant that donates electrons, producing an n-type semiconductor."),
+    ]
+    for cls_name, parent, semi_local, desc in enrichment_classes:
+        cls = SDKB_ONT[cls_name]
+        g.add((cls, RDF.type, OWL.Class))
+        g.add((cls, RDFS.label, Literal(cls_name, lang="en")))
+        g.add((cls, RDFS.comment, Literal(desc, lang="en")))
+        if parent:
+            g.add((cls, RDFS.subClassOf, SDKB_ONT[parent]))
+        # Back-link to SemicONTO term (alignment, not import)
+        g.add((cls, SKOS.exactMatch, URIRef(SEMI + semi_local)))
+
+    # Dopant union axiom mirrors SemicONTO: Dopant ≡ Acceptor ∪ Donor
+    dopant_union_node = BNode()
+    dopant_list_root = BNode()
+    g.add((SDKB_ONT.Dopant, OWL.equivalentClass, dopant_union_node))
+    g.add((dopant_union_node, RDF.type, OWL.Class))
+    g.add((dopant_union_node, OWL.unionOf, dopant_list_root))
+    Collection(g, dopant_list_root, [SDKB_ONT.Acceptor, SDKB_ONT.Donor])
+
+    # ── MEDIUM-priority enrichment (Bucket A MEDIUM, Phase 1 v1.1) ──
+    # Selective absorption: only classes with an existing SDKB parent are
+    # pulled in. SemicONTO's Experiment/InformationObject hierarchies have no
+    # SDKB counterpart and are skipped per
+    # docs/architecture_amendment_sdkb_centric.md §7.
+    enrichment_medium: list[tuple[str, str, str, str]] = [
+        # SubProcess specializations
+        ("ElectronBeamLithography",   "SubProcess", "ElectronBeamLithography",
+         "Patterning sub-process using a focused electron beam (direct-write or mask-making)."),
+        ("ThermalEvaporation",        "SubProcess", "ThermalEvaporation",
+         "PVD sub-process where material is vaporized by resistive or e-beam heating in vacuum."),
+        # Metrology specializations
+        ("HallEffectMeasurement",     "Metrology",  "HallEffectMeasurement",
+         "Metrology determining carrier type, density, and mobility via the Hall effect."),
+        ("FieldEffectMeasurement",    "Metrology",  "FieldEffectMeasurement",
+         "Metrology determining field-effect mobility from a transistor characteristic."),
+        ("PhotoelectronSpectroscopy", "Metrology",  "PhotoelectronSpectroscopy",
+         "Surface/composition metrology measuring photoelectron kinetic-energy spectra (XPS/UPS)."),
+        # ExtrinsicSemiconductor specializations
+        ("NTypeSemiconductor",        "ExtrinsicSemiconductor", "N-TypeSemiconductor",
+         "An extrinsic semiconductor whose majority carriers are electrons (donor-doped)."),
+        ("PTypeSemiconductor",        "ExtrinsicSemiconductor", "P-TypeSemiconductor",
+         "An extrinsic semiconductor whose majority carriers are holes (acceptor-doped)."),
+    ]
+    for cls_name, parent, semi_local, desc in enrichment_medium:
+        cls = SDKB_ONT[cls_name]
+        g.add((cls, RDF.type, OWL.Class))
+        g.add((cls, RDFS.label, Literal(cls_name, lang="en")))
+        g.add((cls, RDFS.comment, Literal(desc, lang="en")))
+        g.add((cls, RDFS.subClassOf, SDKB_ONT[parent]))
+        g.add((cls, SKOS.exactMatch, URIRef(SEMI + semi_local)))
+
+    # Standalone: DopingRelation (no SDKB parent — top-level concept)
+    g.add((SDKB_ONT.DopingRelation, RDF.type, OWL.Class))
+    g.add((SDKB_ONT.DopingRelation, RDFS.label, Literal("DopingRelation", lang="en")))
+    g.add((SDKB_ONT.DopingRelation, RDFS.comment, Literal(
+        "A relation describing how a dopant modifies a host semiconductor "
+        "(host material, dopant species, concentration, profile).", lang="en"
+    )))
+    g.add((SDKB_ONT.DopingRelation, SKOS.exactMatch,
+           URIRef(SEMI + "DopingRelation")))
+
+    # ── Quantity / MaterialProperty layer (Phase 1 v1.1, QUDT-aligned) ──
+    # SDKB-centric: QUDT URIs are referenced via skos:exactMatch, not imported.
+    # Abstract sdkb:Quantity unifies the existing sdkb:Parameter (process
+    # input variable) and the new sdkb:MaterialProperty (measured material
+    # attribute). Both share unit/value datatype properties.
+    g.add((SDKB_ONT.Quantity, RDF.type, OWL.Class))
+    g.add((SDKB_ONT.Quantity, RDFS.label, Literal("Quantity", lang="en")))
+    g.add((SDKB_ONT.Quantity, RDFS.comment, Literal(
+        "An abstract measurable quantity with a numeric value and unit. "
+        "Generalizes process Parameter and MaterialProperty.", lang="en"
+    )))
+    g.add((SDKB_ONT.Quantity, SKOS.exactMatch, URIRef(QUDT + "Quantity")))
+
+    g.add((SDKB_ONT.MaterialProperty, RDF.type, OWL.Class))
+    g.add((SDKB_ONT.MaterialProperty, RDFS.label, Literal("MaterialProperty", lang="en")))
+    g.add((SDKB_ONT.MaterialProperty, RDFS.comment, Literal(
+        "A measurable property of a material instance (e.g. bandgap, "
+        "resistivity, carrier mobility, refractive index).", lang="en"
+    )))
+    g.add((SDKB_ONT.MaterialProperty, RDFS.subClassOf, SDKB_ONT.Quantity))
+    g.add((SDKB_ONT.MaterialProperty, SKOS.exactMatch,
+           URIRef(SEMI + "MaterialProperty")))
+    g.add((SDKB_ONT.MaterialProperty, SKOS.closeMatch,
+           URIRef(QUDT + "Quantity")))
+
+    # Existing Parameter becomes a subclass of Quantity (closeMatch QUDT).
+    g.add((SDKB_ONT.Parameter, RDFS.subClassOf, SDKB_ONT.Quantity))
+    g.add((SDKB_ONT.Parameter, SKOS.closeMatch, URIRef(QUDT + "Quantity")))
+
+    # ObjectProperty: hasProperty (Material → MaterialProperty)
+    g.add((SDKB_ONT.hasProperty, RDF.type, OWL.ObjectProperty))
+    g.add((SDKB_ONT.hasProperty, RDFS.label, Literal("hasProperty", lang="en")))
+    g.add((SDKB_ONT.hasProperty, RDFS.comment, Literal(
+        "Links a material to one of its measurable properties.", lang="en"
+    )))
+    g.add((SDKB_ONT.hasProperty, RDFS.domain, SDKB_ONT.Material))
+    g.add((SDKB_ONT.hasProperty, RDFS.range, SDKB_ONT.MaterialProperty))
+    g.add((SDKB_ONT.hasProperty, SKOS.exactMatch, URIRef(SEMI + "hasProperty")))
+
+    # ObjectProperty: hasMeasuredProperty (SubProcess → MaterialProperty)
+    # SDKB-centric reframing of SemicONTO's (Experiment → MaterialProperty):
+    # in SDKB the measurement happens AT a process step, not in a standalone
+    # Experiment.
+    g.add((SDKB_ONT.hasMeasuredProperty, RDF.type, OWL.ObjectProperty))
+    g.add((SDKB_ONT.hasMeasuredProperty, RDFS.label, Literal("hasMeasuredProperty", lang="en")))
+    g.add((SDKB_ONT.hasMeasuredProperty, RDFS.comment, Literal(
+        "Links a sub-process (typically Metrology) to the material property "
+        "it measures.", lang="en"
+    )))
+    g.add((SDKB_ONT.hasMeasuredProperty, RDFS.domain, SDKB_ONT.SubProcess))
+    g.add((SDKB_ONT.hasMeasuredProperty, RDFS.range, SDKB_ONT.MaterialProperty))
+    g.add((SDKB_ONT.hasMeasuredProperty, SKOS.exactMatch,
+           URIRef(SEMI + "hasMeasuredProperty")))
+
+    # DatatypeProperty: hasNumericValue (Quantity → xsd:decimal)
+    g.add((SDKB_ONT.hasNumericValue, RDF.type, OWL.DatatypeProperty))
+    g.add((SDKB_ONT.hasNumericValue, RDFS.label, Literal("hasNumericValue", lang="en")))
+    g.add((SDKB_ONT.hasNumericValue, RDFS.comment, Literal(
+        "Numeric value of a Quantity. Unit is given by hasUnitSymbol.", lang="en"
+    )))
+    g.add((SDKB_ONT.hasNumericValue, RDFS.domain, SDKB_ONT.Quantity))
+    g.add((SDKB_ONT.hasNumericValue, RDFS.range, XSD.decimal))
+    g.add((SDKB_ONT.hasNumericValue, SKOS.closeMatch,
+           URIRef(QUDT + "numericValue")))
+
+    # DatatypeProperty: hasUnitSymbol (Quantity → xsd:string)
+    # String symbol form (e.g. "mTorr", "W", "°C") rather than URI to qudt:Unit
+    # — keeps Phase 1 minimal. Later phases can upgrade to qudt:Unit IRI.
+    g.add((SDKB_ONT.hasUnitSymbol, RDF.type, OWL.DatatypeProperty))
+    g.add((SDKB_ONT.hasUnitSymbol, RDFS.label, Literal("hasUnitSymbol", lang="en")))
+    g.add((SDKB_ONT.hasUnitSymbol, RDFS.comment, Literal(
+        "String symbol of a Quantity's unit (e.g. 'mTorr', 'W', '°C'). "
+        "Pragmatic Phase 1 form; future versions may bind to qudt:Unit IRIs.", lang="en"
+    )))
+    g.add((SDKB_ONT.hasUnitSymbol, RDFS.domain, SDKB_ONT.Quantity))
+    g.add((SDKB_ONT.hasUnitSymbol, RDFS.range, XSD.string))
 
     # ═══════════════════════════════════════════════════════════
     # CLASSES — Governance Layer
@@ -163,6 +357,36 @@ def build_ontology() -> Graph:
         rng_spec = PERMISSIVE_RANGE.get(prop_name, range_)
         _emit_class_or_union(prop, RDFS.domain, dom_spec)
         _emit_class_or_union(prop, RDFS.range, rng_spec)
+
+    # ── Enrichment ObjectProperties (SemicONTO-derived, Phase 1 v1.1) ──
+    # Step-order semantics + dopant relations imported from SemicONTO with
+    # skos:exactMatch back-link. URIs in sdkb: namespace.
+    # Schema: name -> (domain, range, transitive?, semiconto_local, description)
+    enrichment_obj_props: list[tuple[str, str, str, bool, str, str]] = [
+        ("hasNextStep",  "SubProcess",            "SubProcess", False, "hasNextStep",
+         "Links a sub-process step to its immediately succeeding step."),
+        ("hasSubStep",   "SubProcess",            "SubProcess", True,  "hasSubStep",
+         "Links a sub-process step to a nested sub-step (transitive)."),
+        ("hasAcceptor",  "ExtrinsicSemiconductor", "Material",  False, "hasAcceptor",
+         "An extrinsic semiconductor's acceptor dopant material."),
+        ("hasDonor",     "ExtrinsicSemiconductor", "Material",  False, "hasDonor",
+         "An extrinsic semiconductor's donor dopant material."),
+        # MEDIUM-priority: specific-Equipment binding (distinct from
+        # usesEquipmentClass which binds at the EquipmentClass abstraction).
+        ("hasEquipment", "SubProcess",            "Equipment",  False, "hasEquipment",
+         "Links a sub-process step to a specific equipment instance "
+         "(complements usesEquipmentClass at the class level)."),
+    ]
+    for name, domain, range_, transitive, semi_local, desc in enrichment_obj_props:
+        prop = SDKB_ONT[name]
+        g.add((prop, RDF.type, OWL.ObjectProperty))
+        if transitive:
+            g.add((prop, RDF.type, OWL.TransitiveProperty))
+        g.add((prop, RDFS.label, Literal(name, lang="en")))
+        g.add((prop, RDFS.comment, Literal(desc, lang="en")))
+        g.add((prop, RDFS.domain, SDKB_ONT[domain]))
+        g.add((prop, RDFS.range, SDKB_ONT[range_]))
+        g.add((prop, SKOS.exactMatch, URIRef(SEMI + semi_local)))
 
     # ═══════════════════════════════════════════════════════════
     # OBJECT PROPERTIES — Governance Layer

@@ -1,0 +1,602 @@
+{
+  "bucket_a_semiconto_into_sdkb": {
+    "summary": "SemicONTO own classes that SDKB does NOT cover at class level. Candidates for SDKB v1.1 enrichment under sdkb: namespace, with optional skos:exactMatch back to SemicONTO.",
+    "count": 29,
+    "by_top_parent": {
+      "Dopant": 2,
+      "SemiconductorExperiment": 6,
+      "Matter": 1,
+      "ChemicalEntity": 2,
+      "(root)": 4,
+      "ExperimentalMethod": 6,
+      "InformationObject": 2,
+      "Semiconductor": 2,
+      "ExtrinsicSemiconductor": 2,
+      "Material": 1,
+      "Experiment": 1
+    },
+    "classes": [
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/Acceptor",
+        "local": "Acceptor",
+        "label": "Acceptor",
+        "super_classes": [
+          "http://w3id.org/SemicONTO/Dopant"
+        ],
+        "restriction_count": 0,
+        "priority": "HIGH",
+        "enrichment_rationale": "with Dopant",
+        "proposed_sdkb_target": ""
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/Donor",
+        "local": "Donor",
+        "label": "Donor",
+        "super_classes": [
+          "http://w3id.org/SemicONTO/Dopant"
+        ],
+        "restriction_count": 0,
+        "priority": "HIGH",
+        "enrichment_rationale": "with Dopant",
+        "proposed_sdkb_target": ""
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/Dopant",
+        "local": "Dopant",
+        "label": "Dopant",
+        "super_classes": [],
+        "restriction_count": 0,
+        "priority": "HIGH",
+        "enrichment_rationale": "Dopant = Acceptor ∪ Donor is a canonical semiconductor concept absent from SDKB Material taxonomy. Enables ion-implant / diffusion process modeling.",
+        "proposed_sdkb_target": "new sdkb:Dopant ⊂ sdkb:Material (with Acceptor/Donor)"
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/ExtrinsicSemiconductor",
+        "local": "ExtrinsicSemiconductor",
+        "label": "Extrinsic Semiconductor",
+        "super_classes": [
+          "http://w3id.org/SemicONTO/Semiconductor"
+        ],
+        "restriction_count": 2,
+        "priority": "HIGH",
+        "enrichment_rationale": "with Semiconductor",
+        "proposed_sdkb_target": ""
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/IntrinsicSemiconductor",
+        "local": "IntrinsicSemiconductor",
+        "label": "Intrinsic Semiconductor",
+        "super_classes": [
+          "http://w3id.org/SemicONTO/Semiconductor"
+        ],
+        "restriction_count": 0,
+        "priority": "HIGH",
+        "enrichment_rationale": "with Semiconductor",
+        "proposed_sdkb_target": ""
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/Semiconductor",
+        "local": "Semiconductor",
+        "label": "Semiconductor",
+        "super_classes": [
+          "http://w3id.org/SemicONTO/Material"
+        ],
+        "restriction_count": 0,
+        "priority": "HIGH",
+        "enrichment_rationale": "SDKB Material has no semiconductor sub-class. Importing Semiconductor + Intrinsic/Extrinsic + N/P-Type aligns with the field's primary substance categorization.",
+        "proposed_sdkb_target": "new sdkb:Semiconductor ⊂ sdkb:Material"
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/DopingRelation",
+        "local": "DopingRelation",
+        "label": "Doping Relation",
+        "super_classes": [],
+        "restriction_count": 0,
+        "priority": "MEDIUM",
+        "enrichment_rationale": "useful with Dopant",
+        "proposed_sdkb_target": ""
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/ElectronBeamLithography",
+        "local": "ElectronBeamLithography",
+        "label": "Electron Beam Lithography",
+        "super_classes": [
+          "http://w3id.org/SemicONTO/ExperimentalMethod"
+        ],
+        "restriction_count": 0,
+        "priority": "MEDIUM",
+        "enrichment_rationale": "could be sub-class of sdkb:SubProcess (e-beam patterning)",
+        "proposed_sdkb_target": "optional sdkb:ElectronBeamLithography ⊂ sdkb:SubProcess"
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/FieldEffectMeasurement",
+        "local": "FieldEffectMeasurement",
+        "label": "Field-Effect Measurement",
+        "super_classes": [
+          "http://w3id.org/SemicONTO/ExperimentalMethod"
+        ],
+        "restriction_count": 0,
+        "priority": "MEDIUM",
+        "enrichment_rationale": "device-characterization metrology",
+        "proposed_sdkb_target": "optional"
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/HallEffectMeasurement",
+        "local": "HallEffectMeasurement",
+        "label": "Hall Effect Measurement",
+        "super_classes": [
+          "http://w3id.org/SemicONTO/ExperimentalMethod"
+        ],
+        "restriction_count": 0,
+        "priority": "MEDIUM",
+        "enrichment_rationale": "carrier-property metrology; expands SDKB Metrology",
+        "proposed_sdkb_target": "optional"
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/N-TypeSemiconductor",
+        "local": "N-TypeSemiconductor",
+        "label": "N-Type Semiconductor",
+        "super_classes": [
+          "http://w3id.org/SemicONTO/ExtrinsicSemiconductor"
+        ],
+        "restriction_count": 0,
+        "priority": "MEDIUM",
+        "enrichment_rationale": "leaf of ExtrinsicSemiconductor",
+        "proposed_sdkb_target": ""
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/P-TypeSemiconductor",
+        "local": "P-TypeSemiconductor",
+        "label": "P-Type Semiconductor",
+        "super_classes": [
+          "http://w3id.org/SemicONTO/ExtrinsicSemiconductor"
+        ],
+        "restriction_count": 0,
+        "priority": "MEDIUM",
+        "enrichment_rationale": "leaf of ExtrinsicSemiconductor",
+        "proposed_sdkb_target": ""
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/PhotoelectronSpectroscopy",
+        "local": "PhotoelectronSpectroscopy",
+        "label": "Photoelectron Spectroscopy",
+        "super_classes": [
+          "http://w3id.org/SemicONTO/ExperimentalMethod"
+        ],
+        "restriction_count": 0,
+        "priority": "MEDIUM",
+        "enrichment_rationale": "XPS — common semiconductor metrology; SDKB Metrology layer is thin (3 nodes)",
+        "proposed_sdkb_target": "optional sdkb:PhotoelectronSpectroscopy ⊂ sdkb:Metrology"
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/SemiconductorExperiment",
+        "local": "SemiconductorExperiment",
+        "label": "Semiconductor Experiment",
+        "super_classes": [
+          "http://w3id.org/SemicONTO/Experiment"
+        ],
+        "restriction_count": 0,
+        "priority": "MEDIUM",
+        "enrichment_rationale": "A semiconductor-specific experiment grouping. SDKB has no explicit experiment type; could be useful for prior-art characterization linking.",
+        "proposed_sdkb_target": "optional sdkb:SemiconductorExperiment"
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/ThermalEvaporation",
+        "local": "ThermalEvaporation",
+        "label": "Thermal Evaporation",
+        "super_classes": [
+          "http://w3id.org/SemicONTO/ExperimentalMethod"
+        ],
+        "restriction_count": 0,
+        "priority": "MEDIUM",
+        "enrichment_rationale": "PVD variant — could refine sdkb:pvd SubProcess",
+        "proposed_sdkb_target": "optional"
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/CMTExperiment",
+        "local": "CMTExperiment",
+        "label": "Charge Mobility Testing Experiment",
+        "super_classes": [
+          "http://w3id.org/SemicONTO/SemiconductorExperiment"
+        ],
+        "restriction_count": 0,
+        "priority": "LOW",
+        "enrichment_rationale": "narrow experiment leaf — only if SDKB models device characterization",
+        "proposed_sdkb_target": ""
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/ChemicalEntity",
+        "local": "ChemicalEntity",
+        "label": null,
+        "super_classes": [
+          "http://w3id.org/SemicONTO/Matter"
+        ],
+        "restriction_count": 0,
+        "priority": "LOW",
+        "enrichment_rationale": "Bridge to OBO ChEBI / EMMO. Useful for compliance (REACH/SCIP) alignment but not central to current SDKB use cases.",
+        "proposed_sdkb_target": "optional sdkb:ChemicalEntity ⊂ sdkb:Material"
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/ChemicalSubstance",
+        "local": "ChemicalSubstance",
+        "label": null,
+        "super_classes": [
+          "http://w3id.org/SemicONTO/ChemicalEntity"
+        ],
+        "restriction_count": 0,
+        "priority": "LOW",
+        "enrichment_rationale": "with ChemicalEntity",
+        "proposed_sdkb_target": ""
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/EQETExperiment",
+        "local": "EQETExperiment",
+        "label": "External Quantum Efficiency Testing Experiment",
+        "super_classes": [
+          "http://w3id.org/SemicONTO/SemiconductorExperiment"
+        ],
+        "restriction_count": 0,
+        "priority": "LOW",
+        "enrichment_rationale": "narrow experiment leaf",
+        "proposed_sdkb_target": ""
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/ExperimentInfoObj",
+        "local": "ExperimentInfoObj",
+        "label": "Experiment Information Object",
+        "super_classes": [
+          "http://w3id.org/SemicONTO/InformationObject"
+        ],
+        "restriction_count": 0,
+        "priority": "LOW",
+        "enrichment_rationale": "metadata wrapper class — SDKB uses parquet/provenance schema instead",
+        "proposed_sdkb_target": ""
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/HMTExperiment",
+        "local": "HMTExperiment",
+        "label": "Hole Mobility Testing Experiment",
+        "super_classes": [
+          "http://w3id.org/SemicONTO/SemiconductorExperiment"
+        ],
+        "restriction_count": 0,
+        "priority": "LOW",
+        "enrichment_rationale": "narrow experiment leaf",
+        "proposed_sdkb_target": ""
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/InformationObject",
+        "local": "InformationObject",
+        "label": "Information Object",
+        "super_classes": [],
+        "restriction_count": 0,
+        "priority": "LOW",
+        "enrichment_rationale": "abstract wrapper",
+        "proposed_sdkb_target": ""
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/Matter",
+        "local": "Matter",
+        "label": "Matter",
+        "super_classes": [],
+        "restriction_count": 0,
+        "priority": "LOW",
+        "enrichment_rationale": "top-level abstract — not actionable",
+        "proposed_sdkb_target": ""
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/MolecularEntity",
+        "local": "MolecularEntity",
+        "label": null,
+        "super_classes": [
+          "http://w3id.org/SemicONTO/ChemicalEntity"
+        ],
+        "restriction_count": 0,
+        "priority": "LOW",
+        "enrichment_rationale": "with ChemicalEntity",
+        "proposed_sdkb_target": ""
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/PESExperiment",
+        "local": "PESExperiment",
+        "label": "Photoelectron Spectroscopy Experiment",
+        "super_classes": [
+          "http://w3id.org/SemicONTO/SemiconductorExperiment"
+        ],
+        "restriction_count": 0,
+        "priority": "LOW",
+        "enrichment_rationale": "narrow experiment leaf",
+        "proposed_sdkb_target": ""
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/PPCExperiment",
+        "local": "PPCExperiment",
+        "label": "Preparation and Parameter Characterization Experiment",
+        "super_classes": [
+          "http://w3id.org/SemicONTO/SemiconductorExperiment"
+        ],
+        "restriction_count": 0,
+        "priority": "LOW",
+        "enrichment_rationale": "narrow experiment leaf",
+        "proposed_sdkb_target": ""
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/SEDFabrication",
+        "local": "SEDFabrication",
+        "label": "Single Electron Device (SED) Fabrication",
+        "super_classes": [
+          "http://w3id.org/SemicONTO/SemiconductorExperiment"
+        ],
+        "restriction_count": 0,
+        "priority": "LOW",
+        "enrichment_rationale": "narrow fabrication leaf (single-electron device)",
+        "proposed_sdkb_target": ""
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/SpectralResponseMeasurement",
+        "local": "SpectralResponseMeasurement",
+        "label": "Spectral Response Measurement",
+        "super_classes": [
+          "http://w3id.org/SemicONTO/ExperimentalMethod"
+        ],
+        "restriction_count": 0,
+        "priority": "LOW",
+        "enrichment_rationale": "photovoltaic-leaning metrology",
+        "proposed_sdkb_target": ""
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/StepInfoObj",
+        "local": "StepInfoObj",
+        "label": "Experimental Step Information Object",
+        "super_classes": [
+          "http://w3id.org/SemicONTO/InformationObject"
+        ],
+        "restriction_count": 0,
+        "priority": "LOW",
+        "enrichment_rationale": "metadata wrapper class",
+        "proposed_sdkb_target": ""
+      }
+    ],
+    "object_properties": [
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/experimentsFor",
+        "local": "experimentsFor",
+        "label": "experiments for",
+        "domain": [],
+        "range": [],
+        "transitive": false
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/experimentsOn",
+        "local": "experimentsOn",
+        "label": "experiments on",
+        "domain": [],
+        "range": [],
+        "transitive": false
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/hasAcceptor",
+        "local": "hasAcceptor",
+        "label": "has acceptor",
+        "domain": [
+          "http://w3id.org/SemicONTO/ExtrinsicSemiconductor"
+        ],
+        "range": [
+          "http://w3id.org/SemicONTO/Material"
+        ],
+        "transitive": false
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/hasDonor",
+        "local": "hasDonor",
+        "label": "has donor",
+        "domain": [
+          "http://w3id.org/SemicONTO/ExtrinsicSemiconductor"
+        ],
+        "range": [
+          "http://w3id.org/SemicONTO/Material"
+        ],
+        "transitive": false
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/hasEquipment",
+        "local": "hasEquipment",
+        "label": "has equipment",
+        "domain": [
+          "http://w3id.org/SemicONTO/ExperimentalStep"
+        ],
+        "range": [
+          "http://w3id.org/SemicONTO/Equipment"
+        ],
+        "transitive": false
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/hasExperimentalMethod",
+        "local": "hasExperimentalMethod",
+        "label": "has experimental method",
+        "domain": [
+          "http://w3id.org/SemicONTO/Experiment"
+        ],
+        "range": [
+          "http://w3id.org/SemicONTO/ExperimentalMethod"
+        ],
+        "transitive": false
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/hasExperimentalStep",
+        "local": "hasExperimentalStep",
+        "label": "has experimental step",
+        "domain": [
+          "http://w3id.org/SemicONTO/Experiment"
+        ],
+        "range": [
+          "http://w3id.org/SemicONTO/ExperimentalStep"
+        ],
+        "transitive": false
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/hasMeasuredProperty",
+        "local": "hasMeasuredProperty",
+        "label": "has measured property",
+        "domain": [
+          "http://w3id.org/SemicONTO/Experiment"
+        ],
+        "range": [
+          "http://w3id.org/SemicONTO/MaterialProperty"
+        ],
+        "transitive": false
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/hasNextStep",
+        "local": "hasNextStep",
+        "label": "has next step",
+        "domain": [
+          "http://w3id.org/SemicONTO/ExperimentalStep"
+        ],
+        "range": [
+          "http://w3id.org/SemicONTO/ExperimentalStep"
+        ],
+        "transitive": false
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/hasProperty",
+        "local": "hasProperty",
+        "label": "has property",
+        "domain": [
+          "http://w3id.org/SemicONTO/Material"
+        ],
+        "range": [
+          "http://w3id.org/SemicONTO/MaterialProperty"
+        ],
+        "transitive": false
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/hasStructure",
+        "local": "hasStructure",
+        "label": "has structure",
+        "domain": [
+          "http://w3id.org/SemicONTO/Material"
+        ],
+        "range": [
+          "https://w3id.org/mdo/core/Structure"
+        ],
+        "transitive": false
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/hasSubStep",
+        "local": "hasSubStep",
+        "label": "has sub-step",
+        "domain": [
+          "http://w3id.org/SemicONTO/ExperimentalStep"
+        ],
+        "range": [
+          "http://w3id.org/SemicONTO/ExperimentalStep"
+        ],
+        "transitive": true
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/isDescribedBy",
+        "local": "isDescribedBy",
+        "label": "is described by",
+        "domain": [],
+        "range": [
+          "http://w3id.org/SemicONTO/InformationObject"
+        ],
+        "transitive": false
+      }
+    ],
+    "datatype_properties": [
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/hasExperimentAim",
+        "local": "hasExperimentAim",
+        "label": "has experiment aim",
+        "domain": [
+          "http://w3id.org/SemicONTO/ExperimentInfoObj"
+        ],
+        "range": [
+          "http://www.w3.org/2001/XMLSchema#string"
+        ]
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/hasExperimentName",
+        "local": "hasExperimentName",
+        "label": "has experiment name",
+        "domain": [
+          "http://w3id.org/SemicONTO/ExperimentInfoObj"
+        ],
+        "range": [
+          "http://www.w3.org/2001/XMLSchema#string"
+        ]
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/hasExperimentalStepAim",
+        "local": "hasExperimentalStepAim",
+        "label": "has experimental step aim",
+        "domain": [
+          "http://w3id.org/SemicONTO/StepInfoObj"
+        ],
+        "range": [
+          "http://www.w3.org/2001/XMLSchema#string"
+        ]
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/hasExperimentalStepDescription",
+        "local": "hasExperimentalStepDescription",
+        "label": "has experimental step description",
+        "domain": [
+          "http://w3id.org/SemicONTO/StepInfoObj"
+        ],
+        "range": [
+          "http://www.w3.org/2001/XMLSchema#string"
+        ]
+      },
+      {
+        "semiconto_iri": "http://w3id.org/SemicONTO/hasExperimentalStepID",
+        "local": "hasExperimentalStepID",
+        "label": null,
+        "domain": [
+          "http://w3id.org/SemicONTO/StepInfoObj"
+        ],
+        "range": [
+          "http://www.w3.org/2001/XMLSchema#string"
+        ]
+      }
+    ]
+  },
+  "bucket_b_sdkb_unique_to_external": {
+    "summary": "SDKB class-level concepts absent from SemicONTO. These confirm SDKB's net contribution; richer alignment requires other external sources (JEDEC for FMEA, SEMI for EquipmentState, tibonto/dr for Vendor).",
+    "count": 6,
+    "types": [
+      {
+        "sdkb_type": "EquipmentClass",
+        "relation": "none",
+        "rationale_short": "SemicONTO has no corresponding concept"
+      },
+      {
+        "sdkb_type": "TechnologyNode",
+        "relation": "none",
+        "rationale_short": "SemicONTO has no corresponding concept"
+      },
+      {
+        "sdkb_type": "FailureMode",
+        "relation": "none",
+        "rationale_short": "SemicONTO has no corresponding concept"
+      },
+      {
+        "sdkb_type": "RootCause",
+        "relation": "none",
+        "rationale_short": "SemicONTO has no corresponding concept"
+      },
+      {
+        "sdkb_type": "Mitigation",
+        "relation": "none",
+        "rationale_short": "SemicONTO has no corresponding concept"
+      },
+      {
+        "sdkb_type": "Skill",
+        "relation": "none",
+        "rationale_short": "SemicONTO has no corresponding concept"
+      }
+    ]
+  }
+}
