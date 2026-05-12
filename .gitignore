@@ -40,6 +40,9 @@ ontology/sdkb-governance-us-instances.ttl
 .ipynb_checkpoints/
 notebooks/**/*.nbconvert.ipynb
 
+# ── Visualization build output (deployed by CI to GitHub Pages) ──
+site/
+
 # ── Virtual environment ──────────────────────────────────────────
 .venv/
 

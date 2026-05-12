@@ -2,6 +2,7 @@
         ingest-sirp sirp-pairs sirp-problems sirp experts \
         compliance curated-experts curated-ratings expdataset \
         semiconto-fetch semiconto-analyze semiconto-align semiconto-enrich semiconto-phase0 \
+        viz viz-clean viz-open \
         pipeline pipeline-sirp pipeline-full pipeline-with-expdataset help
 
 PYTHON ?= python3
@@ -35,6 +36,9 @@ help:
 	@echo "  semiconto-align    Build SDKB↔SemicONTO SKOS alignment (mappings/)"
 	@echo "  semiconto-enrich   Identify enrichment candidates (Bucket A/B)"
 	@echo "  semiconto-phase0   fetch + analyze + align + enrich (SDKB-centric Phase 0)"
+	@echo "  viz             Build interactive GitHub Pages site → site/"
+	@echo "  viz-open        Build viz and open site/index.html in default browser"
+	@echo "  viz-clean       Remove site/ build artifacts"
 	@echo "  pipeline        parse + owl + convert + validate + test"
 	@echo "  pipeline-sirp   pipeline + sirp"
 	@echo "  pipeline-full   pipeline + sirp + experts"
@@ -127,6 +131,18 @@ semiconto-enrich: semiconto-align
 
 semiconto-phase0: semiconto-fetch semiconto-analyze semiconto-align semiconto-enrich
 
+# ── Visualization (GitHub Pages demo) ─────────────────────────────
+viz:
+	$(PYTHON) scripts/build_viz.py
+
+viz-open: viz
+	@if command -v xdg-open >/dev/null 2>&1; then xdg-open site/index.html; \
+	elif command -v open >/dev/null 2>&1; then open site/index.html; \
+	else echo "open site/index.html manually"; fi
+
+viz-clean:
+	rm -rf site/
+
 # ── Composed pipelines ────────────────────────────────────────────
 pipeline: parse owl convert validate test
 
@@ -153,3 +169,4 @@ clean:
 	rm -f ontology/sdkb-core.ttl ontology/sdkb-core-data.ttl ontology/sdkb-core-data.jsonld
 	rm -f ontology/sdkb-governance-kr-instances.ttl ontology/sdkb-governance-us-instances.ttl
 	rm -f mappings/mapping_candidates.tsv
+	rm -rf site/

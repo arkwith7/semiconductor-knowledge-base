@@ -39,6 +39,11 @@ notebook = [
     "jupyter>=1.0",
     "nbconvert>=7.16",
 ]
+# Interactive visualization (GitHub Pages demo)
+viz = [
+    "pyvis>=0.3.2",
+    "networkx>=3.2",
+]
 # Development & testing
 dev = [
     "pytest>=8.2",
@@ -46,7 +51,7 @@ dev = [
     "ruff>=0.5",
 ]
 # Full pipeline (all extras)
-full = ["sdkb[align,priorart,notebook,dev]"]
+full = ["sdkb[align,priorart,notebook,viz,dev]"]
 
 [project.scripts]
 sdkb-parse              = "scripts.parse_baseline:main"
@@ -56,6 +61,7 @@ sdkb-validate           = "scripts.validate_shacl:main"
 sdkb-ingest-sirp        = "scripts.ingest_rejected_patents:main"
 sdkb-sirp-pairs         = "scripts.build_prior_art_pairs:main"
 sdkb-sirp-problems      = "scripts.sample_problems:main"
+sdkb-build-viz          = "scripts.build_viz:main"
 
 [build-system]
 requires = ["setuptools>=69"]

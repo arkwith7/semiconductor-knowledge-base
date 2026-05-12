@@ -20,17 +20,36 @@ size_categories:
 
 # SDKB v1.0 — Semiconductor Domain Knowledge Base
 
-> **반도체 기술경영 다축 의사결정을 위한 공개 데이터셋**
-> SKKU 기술경영전문대학원 · 계량기술경영연구실 (지도: 신준석 교수)
+> **계량기술경영 연구실 비전의 반도체 도메인 데이터 트렁크**
+> SKKU 기술경영전문대학원 · 계량기술경영 연구실 (Quantitative Technology Management Lab, 지도: 신준석 교수)
 > Hyeonup-Project 2026-1 / Park HyoungSik (Ph.D. 19기)
+>
+> 🔗 **Live demo (GitHub Pages):** [`arkwith7.github.io/semiconductor-knowledge-base`](https://arkwith7.github.io/semiconductor-knowledge-base/) — 베이스라인 198노드 · SIRP 상위 50특허 + 선행기술 · 4-pillar 클래스 골격 인터랙티브 뷰
 
-**1차 응용 — AFCP-EM**: *Agent-First Compliance Platform for Expert/PriorArt Matching* — 같은 컴플라이언스-우선 매칭 아키텍처 위에서 전문가 매칭과 선행기술 매칭 두 시장을 동시에 겨냥한다.
+**한 줄 포지셔닝.**
+본 레포는 성균관대학교 기술경영전문대학원(MOT) **계량기술경영 연구실**이 추진하는 "**특허·시장·산업 데이터 기반 기술예측 — 유망기술 기회 발굴 — 중소기업 혁신 성과 분석 — 인터랙티브 기술/비즈니스 데이터 시각화**" 라는 연구 어젠다의 **반도체 도메인 데이터 인프라 하부 모듈**이다. 2026-1학기 현업 프로젝트의 산출물은 이 연구실 어젠다의 1단계 데이터·온톨로지 기반을 형성하며, 박사학위 연구로 이어질 "컴플라이언스 인지 시맨틱 협업 플랫폼"의 시드 데이터셋 역할을 한다.
+
+**1차 응용 — AFCP-EM**: *Agent-First Compliance Platform for Expert/PriorArt Matching* — 동일한 컴플라이언스-우선 매칭 아키텍처 위에서 반도체 전문가 매칭과 선행기술 매칭 두 시장을 동시에 겨냥하며, 연구실 관심사인 **반도체 전문가 ↔ 소부장 SME 시맨틱 매칭 생태계**의 첫 구현체이다.
+
+## 0. 연구실 비전 내 본 레포의 위치 (Where this repo sits)
+
+신준석 교수님의 **계량기술경영 연구실(Quantitative Technology Management Lab)**은 정량 데이터(특허·시장·산업)와 시맨틱 모델링을 결합해 R&D 기획·기술사업화·중소기업 혁신을 지원하는 방향을 추진해 왔다. 본 레포는 그 어젠다의 반도체 도메인 데이터 기반 모듈이다.
+
+| 연구실 연구 영역 | 본 레포의 기여 모듈 | 본문 위치 |
+|---|---|---|
+| **특허·시장·산업 데이터 기반 기술예측 (Tech Foresight)** | `sdkb-patent.ttl` + SIRP 773 + Topic/Novelty 노드 | §1.2, §2 (notebook 02) |
+| **유망기술 기회 발굴 (Opportunity Discovery)** | Novelty-focused patent mapping, emerging memory 토픽 클러스터 | §2 (notebook 02), `docs/research_alignment.md` |
+| **중소기업 혁신 성과 분석 / 전문가 매칭** | AFCP-EM Expert + 합성 100 + 큐레이션 110 전문가 + 다중관할 컴플라이언스 게이트 | §2 (notebook 01), `docs/commercialization_strategy_v1.md` |
+| **인터랙티브 기술·비즈니스 데이터 시각화** | 지식그래프 인터랙티브 데모 (Pyvis · GitHub Pages 자동 배포) — **베이스라인 / SIRP / 4-pillar 3-뷰 배포 완료**, SHACL 게이트·매칭 익스플로러는 2026-2 | [Live demo](https://arkwith7.github.io/semiconductor-knowledge-base/), `scripts/build_viz.py`, [docs/visualization_plan.md](docs/visualization_plan.md) |
+| **조직적 R&D 관리 / 혁신 디자인 (보조축)** | RBV 핵심자원 조합 + TRL/실물옵션 시드 노드 | §2 (notebook 03), 후속학기 foresight |
+
+이로써 본 레포는 단일 데이터셋이 아니라, **연구실 어젠다 전반에 기여하는 도메인 시드**로 위치한다. 박사학위 단계의 "컴플라이언스 인지 시맨틱 협업 플랫폼" 연구가 이 시드 위에 쌓인다.
 
 ## Why / For / How
 
-- **Why** — 반도체 기술의 정량 의사결정(전문가 매칭, 기술기회 발굴, 핵심자원 조합, 기술가치평가, 다중관할 규제 적합성)을 재현 가능하게 만들기 위함.
-- **For** — MOT 연구자·대학원생, 반도체 소부장 SME 기획/IP/R&D 담당자, 정책 분석가.
-- **How** — 공정·장비·결함·스킬 + 특허(CPC/IPC/F-term) + 핵심자원(RBV) + 규제(BIS/NIST/ECHA + 한국 산업기술보호법) + 표준(SEMI/JEDEC) 를 PROV-O 출처와 함께 하나의 그래프로 묶는다.
+- **Why** — 반도체 기술의 정량 의사결정(기술기회 발굴, 전문가 매칭, 핵심자원 조합, 기술가치평가, 다중관할 규제 적합성)을 **연구실 어젠다의 일관된 시맨틱 그래프 위에서** 재현 가능하게 만들기 위함.
+- **For** — 계량기술경영 연구실 구성원·MOT 연구자·대학원생, 반도체 소부장 SME 기획/IP/R&D 담당자, 변리사·IP-R&D 컨설팅, 정책 분석가.
+- **How** — 공정·장비·결함·스킬 + 특허(CPC/IPC/F-term) + 핵심자원(RBV) + 규제(BIS/NIST/ECHA + 한국 산업기술보호법) + 표준(SEMI/JEDEC) 를 PROV-O 출처와 함께 하나의 그래프로 묶고, 그 위에 연구실의 4대 관심 영역을 응용 노트북으로 인스턴스화한다.
 
 ## 1. 2026-1 산출물 진척표 (계획서 5종 + 정렬 트랙 4종)
 
@@ -78,15 +97,20 @@ size_categories:
 
 > 변경 사유와 amendment 절차: [v1](docs/plan_amendment_v1.md) → [v2](docs/plan_amendment_v2.md) → [v3](docs/plan_amendment_v3.md)
 
-## 2. 데이터셋 사용 사례 (Use Cases)
+## 2. 활용 사례 (Use Cases) — 연구실 4대 영역과의 매핑
 
-| 사용 사례 | 사용 모듈 | 노트북 | 학술 참조 |
-|---|---|---|---|
-| **AFCP-EM (Expert)** — 반도체 소부장 전문가 매칭 + 다중관할 규제 누수 차단 | core + governance + governance-kr | `notebooks/01_matching_baseline_afcp.ipynb` | 본 계획서 |
-| **AFCP-EM (PriorArt)** — 특허출원 ↔ 선행기술 매칭 (IP-R&D 컨설팅) | core + patent + SIRP | `notebooks/04_prior_art_baseline.ipynb` | PatentMatch, CLEF-IP 패밀리 |
-| **Novelty-focused patent mapping** — 반도체 기술기회 클러스터 | core + patent + SIRP | `notebooks/02_patent_opportunity_demo.ipynb` | Lee/Kang/Shin (TFSC 2015) |
-| **Key resource combinations** — 반도체 fabless 시장진입 분석 | core + rbv | `notebooks/03_rbv_resource_combo_demo.ipynb` | Cho/Shin (PLoS ONE 2025), Bae/Shin (IEEE Access 2022) |
-| 실물옵션 기술가치평가 (후속 학기) | core + foresight + commercialization | (2026-2) | 신 교수 실물옵션 라인 |
+각 사례는 §0의 연구실 어젠다를 본 레포의 데이터·모듈로 인스턴스화한 것이다.
+
+| 연구실 영역 | 사용 사례 | 사용 모듈 | 노트북 | 학술 참조 |
+|---|---|---|---|---|
+| **유망기술 기회 발굴 / 기술예측** | Novelty-focused patent mapping — 반도체 기술기회 클러스터 | core + patent + SIRP | `notebooks/02_patent_opportunity_demo.ipynb` | Lee/Kang/Shin (TFSC 2015), Shin et al. (TFSC 2017 — 5속성) |
+| **중소기업 혁신 성과 / 전문가 매칭** | **AFCP-EM (Expert)** — 반도체 소부장 SME ↔ 전문가 시맨틱 매칭 + 다중관할 규제 누수 차단 | core + governance + governance-kr | `notebooks/01_matching_baseline_afcp.ipynb` | 본 계획서 (Park 2026 dissertation seed) |
+| **IP-R&D 컨설팅 / 선행기술 분석** | **AFCP-EM (PriorArt)** — 특허출원 ↔ 선행기술 매칭 (다국가 examiner GT) | core + patent + SIRP | `notebooks/04_prior_art_baseline.ipynb` | PatentMatch, CLEF-IP 패밀리 |
+| **조직적 R&D 관리 / 핵심자원 분석** | Key resource combinations — 반도체 fabless 시장진입 분석 | core + rbv | `notebooks/03_rbv_resource_combo_demo.ipynb` | Cho/Shin (PLoS ONE 2025), Bae/Shin (IEEE Access 2022) |
+| **기술가치평가 (후속 학기)** | 복합실물옵션 — EUV vs High-NA 로드맵 가치평가 | core + foresight + commercialization | (2026-2 예정) | 신 교수 실물옵션 라인 |
+| **인터랙티브 기술/비즈니스 데이터 시각화** | SDKB 지식그래프 인터랙티브 탐색 — 3-뷰(베이스라인 / SIRP / 4-pillar) GitHub Pages 배포 | core + patent + rbv + foresight + commercialization | [Live](https://arkwith7.github.io/semiconductor-knowledge-base/) · `scripts/build_viz.py` | 연구실 시각화 트랙 |
+
+위 표는 연구실의 네 가지 핵심 관심사가 본 레포의 동일 그래프 위에서 일관되게 인스턴스화됨을 보여준다. 4-pillar 상세 매핑은 [docs/research_alignment.md](docs/research_alignment.md) 참고.
 
 ## 3. 아키텍처
 
@@ -201,7 +225,17 @@ make expdataset  # compliance + curated-experts + curated-ratings
 make help        # 모든 타깃 목록
 ```
 
-### 6-4. 검증된 산출물 수치
+### 6-4. 인터랙티브 시각화 (GitHub Pages)
+```bash
+make viz       # SDKB → site/ 에 베이스라인·SIRP·4-pillar 3개 HTML + index 생성
+make viz-open  # 위 + 기본 브라우저로 site/index.html 자동 오픈
+```
+- 빌드된 `site/`는 `.gitignore` 처리되어 main 브랜치에는 커밋되지 않음
+- main에 푸시되면 [.github/workflows/viz-deploy.yml](.github/workflows/viz-deploy.yml)이 자동으로 site/를 재빌드해 GitHub Pages로 배포
+- 1회 설정: 레포 **Settings → Pages → Source: GitHub Actions** 선택
+- 상세: [docs/visualization_plan.md](docs/visualization_plan.md)
+
+### 6-5. 검증된 산출물 수치
 - 베이스라인 **198 노드 / 268 엣지** (deliverable ①, v0.3)
 - SIRP 773 patents · 3,118 IPC 링크 · 4,696 prior-art 엣지
 - 7,500 examiner-grounded pairs (positive 2,723 + hard-neg 2,723 + easy-neg 2,054)
@@ -219,19 +253,28 @@ make help        # 모든 타깃 목록
 - 규제 데이터는 인출 시점 기준 — 월간 갱신 파이프라인 권장
 - 합성 전문가 프로필·평점은 비식별 합성이며 실제 인물·기업과 무관
 
-## 8. Citation
+## 8. Citation & Acknowledgement
+
+본 데이터셋은 성균관대학교 기술경영전문대학원(MOT) **계량기술경영 연구실(Quantitative Technology Management Lab, PI: Prof. Juneseuk Shin)**의 연구 어젠다 — 특허·시장·산업 데이터 기반 기술예측, 유망기술 기회 발굴, 중소기업 혁신 성과 분석, 인터랙티브 기술·비즈니스 데이터 시각화 — 의 반도체 도메인 하부 산출물이다. 향후 동일 연구실에서 작성될 "**컴플라이언스 인지 시맨틱 협업 플랫폼**" 학위 논문 및 관련 학술지 게재 논문에서 본 데이터셋을 실증 아티팩트로 인용할 예정이며, 그 시점에 BibTeX를 갱신한다.
 
 ```bibtex
 @dataset{sdkb_v1_2026,
-  title       = {SDKB v1.0: Semiconductor Domain Knowledge Base},
+  title       = {SDKB v1.0: Semiconductor Domain Knowledge Base —
+                 a data trunk for the Quantitative Technology Management
+                 Lab's foresight, opportunity-discovery, SME-matching,
+                 and interactive-visualization research agenda},
   author      = {Park, HyoungSik},
   advisor     = {Shin, Juneseuk},
   institution = {Sungkyunkwan University, Graduate School of
-                 Management of Technology, Quantitative MOT Lab},
+                 Management of Technology,
+                 Quantitative Technology Management Lab},
   year        = {2026},
   version     = {1.0},
   url         = {https://github.com/arkwith7/semiconductor-knowledge-base},
-  license     = {CDLA-Permissive-2.0}
+  license     = {CDLA-Permissive-2.0},
+  note        = {Hyeonup-Project 2026-1 deliverable; seed dataset for
+                 the forthcoming compliance-aware semantic collaboration
+                 platform dissertation.}
 }
 ```
 

@@ -17,13 +17,18 @@ date-released: "2026-05-12"
 license: CDLA-Permissive-2.0
 repository-code: "https://github.com/arkwith7/semiconductor-knowledge-base"
 abstract: >-
-  SDKB is a provenance-grounded curation knowledge base for semiconductor
-  technology management. It integrates manufacturing process, equipment,
-  material, FMEA, and multi-jurisdiction regulatory layers with patent
-  classification, RBV, commercialization, and foresight modules. The
-  Semiconductor Industry Rejected Patents (SIRP) dataset adds 773
-  examiner-grounded prior-art labels supporting the AFCP-EM platform
-  (Agent-First Compliance Platform for Expert/PriorArt Matching).
+  SDKB is a provenance-grounded curation knowledge base that serves as the
+  semiconductor-domain data trunk for the SKKU Quantitative Technology
+  Management Lab's research agenda — patent/market/industry-driven tech
+  foresight, emerging-technology opportunity discovery, SME innovation and
+  expert matching, and interactive technology/business data visualization.
+  It integrates manufacturing process, equipment, material, FMEA, and
+  multi-jurisdiction regulatory layers with patent classification, RBV,
+  commercialization, and foresight modules. The Semiconductor Industry
+  Rejected Patents (SIRP) dataset adds 773 examiner-grounded prior-art
+  labels supporting the AFCP-EM platform (Agent-First Compliance Platform
+  for Expert/PriorArt Matching), which is the first concrete implementation
+  of the lab's compliance-aware semantic collaboration vision.
 keywords:
   - semiconductor
   - ontology
