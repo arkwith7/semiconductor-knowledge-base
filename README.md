@@ -20,242 +20,182 @@ size_categories:
 
 # SDKB v1.0 — Semiconductor Domain Knowledge Base
 
-> **계량기술경영 연구실 비전의 반도체 도메인 데이터 트렁크**
-> SKKU 기술경영전문대학원 · 계량기술경영 연구실 (Quantitative Technology Management Lab, 지도: 신준석 교수)
-> Hyeonup-Project 2026-1 / Park HyoungSik (Ph.D. 19기)
+> **A reproducible semantic-graph substrate for quantitative technology management research in the semiconductor industry.**
+> Maintained by the [Quantitative Technology Management Lab](#lab-context) at Sungkyunkwan University's Graduate School of Management of Technology (PI: Prof. Juneseuk Shin).
 >
-> 🔗 **Live demo (GitHub Pages):** [`arkwith7.github.io/semiconductor-knowledge-base`](https://arkwith7.github.io/semiconductor-knowledge-base/) — 베이스라인 198노드 · SIRP 상위 50특허 + 선행기술 · 4-pillar 클래스 골격 인터랙티브 뷰
+> 🇰🇷 한국어 버전: [README.ko.md](README.ko.md)
+> 🔗 **Live demo (GitHub Pages):** [`arkwith7.github.io/semiconductor-knowledge-base`](https://arkwith7.github.io/semiconductor-knowledge-base/) — interactive 3-view explorer (baseline 198 nodes · SIRP top-50 + prior art · 4-pillar class skeleton)
 
-**한 줄 포지셔닝.**
-본 레포는 성균관대학교 기술경영전문대학원(MOT) **계량기술경영 연구실**이 추진하는 "**특허·시장·산업 데이터 기반 기술예측 — 유망기술 기회 발굴 — 중소기업 혁신 성과 분석 — 인터랙티브 기술/비즈니스 데이터 시각화**" 라는 연구 어젠다의 **반도체 도메인 데이터 인프라 하부 모듈**이다. 2026-1학기 현업 프로젝트의 산출물은 이 연구실 어젠다의 1단계 데이터·온톨로지 기반을 형성하며, 박사학위 연구로 이어질 "컴플라이언스 인지 시맨틱 협업 플랫폼"의 시드 데이터셋 역할을 한다.
+## One-line positioning
 
-**1차 응용 — AFCP-EM**: *Agent-First Compliance Platform for Expert/PriorArt Matching* — 동일한 컴플라이언스-우선 매칭 아키텍처 위에서 반도체 전문가 매칭과 선행기술 매칭 두 시장을 동시에 겨냥하며, 연구실 관심사인 **반도체 전문가 ↔ 소부장 SME 시맨틱 매칭 생태계**의 첫 구현체이다.
+SDKB unifies semiconductor **process / equipment / defect / skill** knowledge, **patent taxonomies** (CPC / IPC / F-term), **firm resources** (RBV), **multi-jurisdictional regulation** (US BIS · NIST · ECHA + Korea ITPA), and **standards** (SEMI / JEDEC) under a single PROV-O-tracked ontology. It is built as the shared substrate for the lab's four research lines — *tech foresight, opportunity discovery, SME innovation analysis, and interactive tech / business visualization* — and as the seed dataset for an upcoming dissertation on a **compliance-aware semantic collaboration platform**.
 
-## 0. 연구실 비전 내 본 레포의 위치 (Where this repo sits)
+**First application — AFCP-EM** (*Agent-First Compliance Platform for Expert / PriorArt Matching*): two matching markets — Korean semiconductor SME ↔ expert, and patent application ↔ prior art — implemented on a single compliance-first architecture rather than as a post-hoc filter.
 
-신준석 교수님의 **계량기술경영 연구실(Quantitative Technology Management Lab)**은 정량 데이터(특허·시장·산업)와 시맨틱 모델링을 결합해 R&D 기획·기술사업화·중소기업 혁신을 지원하는 방향을 추진해 왔다. 본 레포는 그 어젠다의 반도체 도메인 데이터 기반 모듈이다.
+## Lab context
 
-| 연구실 연구 영역 | 본 레포의 기여 모듈 | 본문 위치 |
+Prof. Shin's Quantitative Technology Management Lab combines patent / market / industry data with semantic modeling to support R&D planning, technology commercialization, and SME innovation. SDKB is the semiconductor-domain data substrate for that agenda:
+
+| Lab research line | SDKB contribution | Entry point |
 |---|---|---|
-| **특허·시장·산업 데이터 기반 기술예측 (Tech Foresight)** | `sdkb-patent.ttl` + SIRP 773 + Topic/Novelty 노드 | §1.2, §2 (notebook 02) |
-| **유망기술 기회 발굴 (Opportunity Discovery)** | Novelty-focused patent mapping, emerging memory 토픽 클러스터 | §2 (notebook 02), `docs/research_alignment.md` |
-| **중소기업 혁신 성과 분석 / 전문가 매칭** | AFCP-EM Expert + 합성 100 + 큐레이션 110 전문가 + 다중관할 컴플라이언스 게이트 | §2 (notebook 01), `docs/commercialization_strategy_v1.md` |
-| **인터랙티브 기술·비즈니스 데이터 시각화** | 지식그래프 인터랙티브 데모 (Pyvis · GitHub Pages 자동 배포) — **베이스라인 / SIRP / 4-pillar 3-뷰 배포 완료**, SHACL 게이트·매칭 익스플로러는 2026-2 | [Live demo](https://arkwith7.github.io/semiconductor-knowledge-base/), `scripts/build_viz.py`, [docs/visualization_plan.md](docs/visualization_plan.md) |
-| **조직적 R&D 관리 / 혁신 디자인 (보조축)** | RBV 핵심자원 조합 + TRL/실물옵션 시드 노드 | §2 (notebook 03), 후속학기 foresight |
-
-이로써 본 레포는 단일 데이터셋이 아니라, **연구실 어젠다 전반에 기여하는 도메인 시드**로 위치한다. 박사학위 단계의 "컴플라이언스 인지 시맨틱 협업 플랫폼" 연구가 이 시드 위에 쌓인다.
+| Patent-/market-/industry-driven **tech foresight** | `sdkb-patent.ttl` + SIRP-773 + Topic / Novelty nodes | [Use case 1](#use-cases) |
+| Promising-technology **opportunity discovery** | Novelty-focused patent mapping, emerging-memory topic clusters | [Use case 1](#use-cases), [notebook 02](notebooks/02_patent_opportunity_demo.ipynb) |
+| **SME innovation analysis / expert matching** | AFCP-EM Expert + synthetic-100 + curated-110 expert pool + multi-jurisdiction compliance gate | [Use case 2](#use-cases), [notebook 01](notebooks/01_matching_baseline_afcp.ipynb) |
+| **Interactive tech / business visualization** | Pyvis 3-view explorer with automatic GitHub Pages deploy | [Live demo](https://arkwith7.github.io/semiconductor-knowledge-base/), [docs/visualization_plan.md](docs/visualization_plan.md) |
+| Organizational R&D / innovation design (secondary) | RBV core-resource combinations + TRL / real-option seed nodes | [Use case 4](#use-cases), [notebook 03](notebooks/03_rbv_resource_combo_demo.ipynb) |
 
 ## Why / For / How
 
-- **Why** — 반도체 기술의 정량 의사결정(기술기회 발굴, 전문가 매칭, 핵심자원 조합, 기술가치평가, 다중관할 규제 적합성)을 **연구실 어젠다의 일관된 시맨틱 그래프 위에서** 재현 가능하게 만들기 위함.
-- **For** — 계량기술경영 연구실 구성원·MOT 연구자·대학원생, 반도체 소부장 SME 기획/IP/R&D 담당자, 변리사·IP-R&D 컨설팅, 정책 분석가.
-- **How** — 공정·장비·결함·스킬 + 특허(CPC/IPC/F-term) + 핵심자원(RBV) + 규제(BIS/NIST/ECHA + 한국 산업기술보호법) + 표준(SEMI/JEDEC) 를 PROV-O 출처와 함께 하나의 그래프로 묶고, 그 위에 연구실의 4대 관심 영역을 응용 노트북으로 인스턴스화한다.
+- **Why** — to make quantitative decisions in semiconductor technology (opportunity discovery, expert matching, core-resource combinations, technology valuation, multi-jurisdiction regulatory fit) **reproducible on a single semantic graph**.
+- **For** — MOT researchers and graduate students worldwide; planning / IP / R&D staff at semiconductor materials-parts-equipment SMEs; patent attorneys and IP-R&D consultants; technology policy analysts.
+- **How** — process / equipment / defect / skill knowledge + patents (CPC / IPC / F-term) + firm resources (RBV) + regulation (BIS / NIST / ECHA + Korea ITPA) + standards (SEMI / JEDEC) tied together with PROV-O provenance, then instantiated by application notebooks aligned to each lab research line.
 
-## 1. 2026-1 산출물 진척표 (계획서 5종 + 정렬 트랙 4종)
+## Use cases
 
-### 1-1. 메인 트랙 — 계획서 채점 항목
+Each use case instantiates a lab research line on SDKB's shared graph.
 
-| # | 산출물 | 수량 요건 | 상태 | 경로 |
-|---|---|---|---|---|
-| ① | SDKB 온톨로지 | ≥198 노드 / ≥264 간선, 14 타입 | ✅ Baseline 충족 | [data/semiconductor_v0_3.json](data/semiconductor_v0_3.json) |
-| ② | 합성 전문가 프로필 | 100명, 비식별, 도메인 자문 | ✅ **Dual track**: 합성 100 + 큐레이션 100 | `data/expert_profiles.parquet` (합성) + `data/experts/curated_profiles.parquet` (큐레이션, Park 2026a) |
-| ③ | 기술 문제 + 규제 시나리오 | 50 + 25 (적대적 포함, 다중 관할) | ✅ | **거절특허 50** + **거절사유 패턴 25** → `data/problems.parquet`, `data/regulatory_scenarios.parquet` |
-| ④ | 정답 평가체계 | 7,500 ratings | ✅ **Dual GT**: examiner 7,500 + 합성 3-rater 7,800 | `data/patents/prior_art_pairs.parquet` (examiner) + `data/experts/curated_ratings.parquet` (3-rater κ/ICC). MRR/NDCG@5/Recall@K + κ=0.258, ICC=0.552 |
-| ⑤ | 기술사업화 전략 v1 | 시장·고객·BM·경쟁 + 자원·가치·규제 + IP-R&D | ⏳ Skeleton | `docs/commercialization_strategy_v1.md` |
+| # | Use case | Lab line | Modules | Notebook | Reference |
+|---|---|---|---|---|---|
+| 1 | **Novelty-focused patent mapping** — semiconductor technology-opportunity clusters | Opportunity discovery / foresight | core + patent + SIRP | [02](notebooks/02_patent_opportunity_demo.ipynb) | Lee/Kang/Shin (TFSC 2015), Shin et al. (TFSC 2017) |
+| 2 | **AFCP-EM (Expert)** — Korean semiconductor SME ↔ expert semantic matching with multi-jurisdiction leakage gating | SME innovation / expert matching | core + governance + governance-kr | [01](notebooks/01_matching_baseline_afcp.ipynb) | Dissertation seed (Park 2026) |
+| 3 | **AFCP-EM (PriorArt)** — patent application ↔ prior art using examiner-cited ground truth | IP-R&D consulting / prior-art analysis | core + patent + SIRP | [04](notebooks/04_prior_art_baseline.ipynb) | PatentMatch, CLEF-IP family |
+| 4 | **Key resource combinations** — semiconductor fabless market-entry analysis | Organizational R&D / core-resource analysis | core + rbv | [03](notebooks/03_rbv_resource_combo_demo.ipynb) | Cho/Shin (PLoS ONE 2025), Bae/Shin (IEEE Access 2022) |
+| 5 | **Compound real options** — EUV vs. High-NA roadmap valuation | Technology valuation (later term) | core + foresight + commercialization | _(2026-2 planned)_ | Lab real-options line |
+| 6 | **Interactive KG explorer** — 3-view (baseline / SIRP / 4-pillar) GitHub Pages deploy | Interactive visualization | core + patent + rbv + foresight + commercialization | [Live](https://arkwith7.github.io/semiconductor-knowledge-base/) · `scripts/build_viz.py` | Lab visualization track |
 
-### 1-2. 정렬 트랙 — 신 교수 4-pillar 방향 (`docs/research_alignment.md` 참조)
+Detailed 4-pillar mapping: [docs/research_alignment.md](docs/research_alignment.md).
 
-| 모듈 | 목적 | 상태 | 경로 |
-|---|---|---|---|
-| `sdkb-patent.ttl` | Patent / CPC / IPC / F-term / Topic / Novelty / RejectionReason / hasPriorArt | ⬜ Pending | `ontology/sdkb-patent.ttl` |
-| `sdkb-rbv.ttl` | Firm / Resource / Capability / EntryBarrier | ⬜ Pending | `ontology/sdkb-rbv.ttl` |
-| `sdkb-commercialization.ttl` | TRL / License / Spinoff / IPTransaction | ⬜ Pending | `ontology/sdkb-commercialization.ttl` |
-| `sdkb-foresight.ttl` | Scenario / STEEPVE / RealOption | ⬜ Pending | `ontology/sdkb-foresight.ttl` |
-| `sdkb-governance-kr.ttl` | 한국 산업기술보호법 (다중 관할 명시화) | ⬜ Pending | `ontology/sdkb-governance-kr.ttl` |
+## Architecture
 
-### 1-3. 1차 실 데이터 — 거절특허 773건 (SIRP) ⭐
-| 항목 | 값 |
-|---|---|
-| 파일 | [data/patents/raw/semiconductor_industry_rejected_patents.jsonl](data/patents/raw/semiconductor_industry_rejected_patents.jsonl) |
-| 규모 | **773 거절특허 + 2,731 GT 인용 선행기술 + examiner-cited 1,961 (mean 2.54/특허)** |
-| 출처 | KIPRIS Plus API + KIPRIS 웹 (KIPO) |
-| 코호트 | `semiconductor_ontology_rejected_patents` 431 / `semiconductor_fullstack_rejected_patents` 342 |
-| 데이터 카드 | [docs/dataset_rejected_patents_card.md](docs/dataset_rejected_patents_card.md) |
-| 라이선스 | KIPRIS Plus API 약관 — 학교 자문 후 조정 |
-
-### 1-4. 사전 자기 작업물 통합 — Park 2026a (ExpDataSet v3.3.5) ⭐
-| 자산 | 통합 위치 | 규모 |
+| Layer | Module | License |
 |---|---|---|
-| KR 거버넌스 마스터 (산업기술보호법 §33/§34) | `data/compliance/kr_standards_v1.json` + `ontology/sdkb-governance-kr-instances.ttl` | 12 controls, 132 triples |
-| US 거버넌스 마스터 (EAR/CCL + Deemed Export) | `data/compliance/us_standards_v1.json` + `ontology/sdkb-governance-us-instances.ttl` | 8 controls, 73 triples |
-| 큐레이션 전문가 풀 (KR + EN) | `data/experts/curated_profiles.parquet` | 110 profiles, 103 columns |
-| 3-rater synthetic ratings | `data/experts/curated_ratings.parquet` + `curated_ratings_pivot.parquet` | 7,800 ratings · 2,600 pivot subjects · Fleiss κ=0.258, ICC(2,1)=0.552 |
-| Compliance scenarios S1~S6 | `data/compliance/scenarios_v1.json` | 34 scenarios |
-| Leakage incidents L1~L4 | `data/compliance/leakage_incidents_v1.json` | 4 cases |
-| SME problems (external reference) | `data/problems_external/sme_problems_v1.json` | 201 problems |
-| 정렬 회계 문서 | [docs/expdataset_alignment.md](docs/expdataset_alignment.md) | net-new contributions 5종 명시 |
-
-> 변경 사유와 amendment 절차: [v1](docs/plan_amendment_v1.md) → [v2](docs/plan_amendment_v2.md) → [v3](docs/plan_amendment_v3.md)
-
-## 2. 활용 사례 (Use Cases) — 연구실 4대 영역과의 매핑
-
-각 사례는 §0의 연구실 어젠다를 본 레포의 데이터·모듈로 인스턴스화한 것이다.
-
-| 연구실 영역 | 사용 사례 | 사용 모듈 | 노트북 | 학술 참조 |
-|---|---|---|---|---|
-| **유망기술 기회 발굴 / 기술예측** | Novelty-focused patent mapping — 반도체 기술기회 클러스터 | core + patent + SIRP | `notebooks/02_patent_opportunity_demo.ipynb` | Lee/Kang/Shin (TFSC 2015), Shin et al. (TFSC 2017 — 5속성) |
-| **중소기업 혁신 성과 / 전문가 매칭** | **AFCP-EM (Expert)** — 반도체 소부장 SME ↔ 전문가 시맨틱 매칭 + 다중관할 규제 누수 차단 | core + governance + governance-kr | `notebooks/01_matching_baseline_afcp.ipynb` | 본 계획서 (Park 2026 dissertation seed) |
-| **IP-R&D 컨설팅 / 선행기술 분석** | **AFCP-EM (PriorArt)** — 특허출원 ↔ 선행기술 매칭 (다국가 examiner GT) | core + patent + SIRP | `notebooks/04_prior_art_baseline.ipynb` | PatentMatch, CLEF-IP 패밀리 |
-| **조직적 R&D 관리 / 핵심자원 분석** | Key resource combinations — 반도체 fabless 시장진입 분석 | core + rbv | `notebooks/03_rbv_resource_combo_demo.ipynb` | Cho/Shin (PLoS ONE 2025), Bae/Shin (IEEE Access 2022) |
-| **기술가치평가 (후속 학기)** | 복합실물옵션 — EUV vs High-NA 로드맵 가치평가 | core + foresight + commercialization | (2026-2 예정) | 신 교수 실물옵션 라인 |
-| **인터랙티브 기술/비즈니스 데이터 시각화** | SDKB 지식그래프 인터랙티브 탐색 — 3-뷰(베이스라인 / SIRP / 4-pillar) GitHub Pages 배포 | core + patent + rbv + foresight + commercialization | [Live](https://arkwith7.github.io/semiconductor-knowledge-base/) · `scripts/build_viz.py` | 연구실 시각화 트랙 |
-
-위 표는 연구실의 네 가지 핵심 관심사가 본 레포의 동일 그래프 위에서 일관되게 인스턴스화됨을 보여준다. 4-pillar 상세 매핑은 [docs/research_alignment.md](docs/research_alignment.md) 참고.
-
-## 3. 아키텍처
-
-| 레이어 | 모듈 | 라이선스 |
-|---|---|---|
-| **Core (Open)** | 공정 14 타입 KG, FMEA | CDLA-Permissive-2.0 |
-| **Governance (Open)** | BIS/NIST/ECHA + **KR 산업기술보호법** | CDLA-Permissive-2.0 |
+| **Core (Open)** | 14-type process KG, FMEA | CDLA-Permissive-2.0 |
+| **Governance (Open)** | US BIS / NIST / ECHA + Korea ITPA | CDLA-Permissive-2.0 |
 | **Alignment (Open)** | patent / rbv / commercialization / foresight | CDLA-Permissive-2.0 |
-| **Link-Only** | SEMI E10/E30/E40/E116 (식별자만) | N/A (메타데이터) |
+| **Link-Only** | SEMI E10 / E30 / E40 / E116 (identifiers only) | N/A (metadata) |
 
 ```
 ontology/
-  sdkb-core.ttl                     # 14 코어 클래스
-  sdkb-governance.ttl               # BIS/NIST/ECHA
-  sdkb-governance-kr.ttl            # 한국 산업기술보호법 (NEW)
-  sdkb-patent.ttl                   # 신 교수 방향: 특허 분류 (NEW)
-  sdkb-rbv.ttl                      # 신 교수 방향: 핵심자원 (NEW)
-  sdkb-commercialization.ttl        # 신 교수 방향: 사업화 (NEW)
-  sdkb-foresight.ttl                # 신 교수 방향: 시나리오/옵션 (NEW)
+  sdkb-core.ttl                     # 14 core classes
+  sdkb-governance.ttl               # BIS / NIST / ECHA
+  sdkb-governance-kr.ttl            # Korea ITPA
+  sdkb-patent.ttl                   # patent taxonomy (CPC / IPC / F-term / Topic / Novelty)
+  sdkb-rbv.ttl                      # firm / resource / capability
+  sdkb-commercialization.ttl        # TRL / license / spinoff
+  sdkb-foresight.ttl                # scenario / STEEPVE / real option
 data/
-  semiconductor_v0_3.json           # 198노드 / 264엣지 베이스라인
-  expert_profiles.parquet           # 100 합성 (NEW)
-  problems.parquet                  # 50 기술 문제 (NEW)
-  regulatory_scenarios.parquet      # 25 적대적 시나리오 (NEW)
-  ground_truth.parquet              # 7,500 ratings (NEW)
-  patents.parquet                   # 정렬 트랙 인스턴스 (NEW)
-  firms.parquet                     # 정렬 트랙 인스턴스 (NEW)
+  semiconductor_v0_3.json           # baseline 198 nodes / 268 edges
+  expert_profiles.parquet           # 100 synthetic profiles
+  experts/curated_profiles.parquet  # 110 curated profiles (Park 2026a)
+  problems.parquet                  # 50 technology problems
+  regulatory_scenarios.parquet      # 25 adversarial scenarios
+  patents/raw/                      # SIRP-773 raw JSONL + parquet
+  patents/prior_art_pairs.parquet   # 7,500 examiner-grounded pairs
+  compliance/                       # KR + US governance masters
 docs/
-  plan_amendment_v1.md              # 계획서 변경 보고
-  research_alignment.md             # 4-pillar 매핑
-  afcp_em_architecture.md           # 시스템 개요 (NEW)
-  leakage_protocol.md               # 누수 정의/측정 (NEW)
-  expert_validation_log.md          # 도메인 자문 흔적 (NEW)
-  datasheet.md                      # 데이터시트 (Gebru) (NEW)
-  commercialization_strategy_v1.md  # 사업화 전략 v1 (NEW)
-  architecture_amendment_sdkb_centric.md  # 활성 ADR — SDKB-centric 방향 (2026-05-12)
-  patent_taxonomy_integration_plan.md     # 활성 계획 (CPC/IPC/F-term 통합)
-  patent_abstract_enrichment_plan.md      # 활성 계획 (특허 초록 NLP 보강)
-  archive/architecture_redesign_semiconto_hub_v1.1.md  # SUPERSEDED — SemicONTO Hub 원안
-validation/
-  shapes.ttl                        # SHACL
-  reliability_report.md             # κ/ICC (NEW)
-provenance/
-  prov.ttl                          # PROV-O 체인
-examples/sparql/
-  01_regulatory_risk.rq
-  02_fmea_path.rq
-  03_tech_gap.rq
-notebooks/
-  01_matching_baseline_afcp.ipynb   # 1차 응용 (NEW)
-  02_patent_opportunity_demo.ipynb  # 정렬 응용 (NEW)
-  03_rbv_resource_combo_demo.ipynb  # 정렬 응용 (NEW)
-CITATION.cff                        # advisor 명시 (NEW)
+  research_alignment.md             # 4-pillar mapping
+  afcp_em_architecture.md           # system overview
+  leakage_protocol.md               # leakage definition and measurement
+  datasheet.md                      # data sheet (Gebru et al.)
+  commercialization_strategy_v1.md
+  visualization_plan.md
+  project_status_2026_1.md          # lab-internal status — 2026-1 deliverables
+validation/shapes.ttl               # SHACL
+provenance/prov.ttl                 # PROV-O chain
+examples/sparql/                    # example queries
+notebooks/                          # baseline matching + alignment demos
+CITATION.cff                        # advisor explicit
 ```
 
-## 4. Provenance & Auditability
+## Provenance and auditability
 
-AFCP-EM의 **아키텍처 수준 규제 준수**(사후 필터가 아님)와 **감사가능성**은 다음 메타데이터로 보장된다.
+AFCP-EM's *architectural* regulatory compliance (not a post-hoc filter) and full auditability are carried by:
 
-- `dcterms:source` / `dcterms:license` / `dcterms:bibliographicCitation` — 출처 추적
+- `dcterms:source` / `dcterms:license` / `dcterms:bibliographicCitation` — source tracking
 - `sdkb:interpretationType` — `verbatim` | `mapped` | `author-defined`
-- `sdkb:validationRequired` — 전문가 검증 필요 플래그
+- `sdkb:validationRequired` — expert-verification flag
 - PROV-O — `prov:wasGeneratedBy` / `prov:wasDerivedFrom` / `prov:wasAttributedTo`
-- SHACL — 모든 릴리스는 `shapes.ttl` 통과 필요
-- 누수(leakage) 프로토콜 — [docs/leakage_protocol.md](docs/leakage_protocol.md) (작성 예정)
+- SHACL — every release must pass `shapes.ttl`
+- Leakage protocol — [docs/leakage_protocol.md](docs/leakage_protocol.md)
 
-## 5. 큐레이션 소스
+## Curation sources
 
-| 소스 | 라이선스 | 통합 형태 |
+| Source | License | Integration |
 |---|---|---|
-| SemiKong (arXiv:2411.13802) | Apache 2.0 | 공정 계층 L1→L3 |
-| SemicONTO (CEUR-WS Vol-3760) | CC BY 4.0 | 재료/장비 OWL 정렬 |
-| MatKG (Scientific Data 2024) | CC BY 4.0 | 재료 엔터티 확장 |
-| USPTO / EPO / KIPO | Public | CPC/IPC 분류 (메타만) |
-| BIS CCL/EAR | Public | 장비 ECCN |
-| NIST CSF 2.0 / IR 8546 | Public | 사이버 거버넌스 |
-| ECHA SCIP | Public | SVHC 재료 컴플라이언스 |
-| 한국 산업기술보호법 | Public | 국가핵심기술 지정 |
-| Wikidata | CC0 | 엔터티 링킹 |
-| SEMI E10/E30/E40/E116 | Proprietary | Link-Only (식별자) |
+| SemiKong (arXiv:2411.13802) | Apache 2.0 | Process hierarchy L1 → L3 |
+| SemicONTO (CEUR-WS Vol-3760) | CC BY 4.0 | Material / equipment OWL alignment |
+| MatKG (Scientific Data 2024) | CC BY 4.0 | Material entity expansion |
+| USPTO / EPO / KIPO | Public | CPC / IPC classification (metadata only) |
+| BIS CCL / EAR | Public | Equipment ECCN |
+| NIST CSF 2.0 / IR 8546 | Public | Cyber governance |
+| ECHA SCIP | Public | SVHC material compliance |
+| Korea Industrial Technology Protection Act | Public | National core technology designation |
+| Wikidata | CC0 | Entity linking |
+| SEMI E10 / E30 / E40 / E116 | Proprietary | Link-Only (identifiers) |
 
-## 6. Usage
+## Usage
 
-### 6-1. Setup (한 번만)
+### Setup (once)
 ```bash
-make venv                           # Python 3.11 가상환경 + 의존성 설치
-source .venv/bin/activate           # 또는 PATH=.venv/bin:$PATH 프리픽스
+make venv                           # Python 3.11 venv + dependencies
+source .venv/bin/activate           # or: PATH=.venv/bin:$PATH
 ```
 
-### 6-2. 전체 파이프라인
+### Full pipeline
 ```bash
-make pipeline-with-expdataset       # baseline + SIRP + experts + Park 2026a 통합 (전체)
-make pipeline-full                  # baseline + SIRP + experts (Park 2026a 제외)
+make pipeline-with-expdataset       # baseline + SIRP + experts + Park 2026a (everything)
+make pipeline-full                  # baseline + SIRP + experts (without Park 2026a)
 ```
 
-### 6-3. 개별 타깃
+### Individual targets
 ```bash
-make parse       # baseline parsing
-make owl         # OWL metamodel (sdkb-core.ttl)
-make convert     # JSON → RDF/JSON-LD
-make align       # alignment candidates (mappings/)
-make validate    # SHACL validation
-make test        # pytest (baseline + patents)
-make ingest-sirp # SIRP JSONL → 3 parquet
-make sirp-pairs  # 7,500 prior-art pairs (deliverable ④)
-make sirp-problems  # 50 problems + 25 scenarios (deliverable ③)
-make experts     # 100 synthetic experts (deliverable ②)
-make compliance  # KR+US governance instances (Park 2026a, 205 triples)
-make curated-experts  # ingest curated 110-expert pool (Park 2026a)
-make curated-ratings  # ingest 7,800 3-rater ratings + κ/ICC report
-make expdataset  # compliance + curated-experts + curated-ratings
-make help        # 모든 타깃 목록
+make parse           # baseline parsing
+make owl             # OWL metamodel (sdkb-core.ttl)
+make convert         # JSON → RDF / JSON-LD
+make align           # alignment candidates
+make validate        # SHACL validation
+make test            # pytest (baseline + patents)
+make ingest-sirp     # SIRP JSONL → parquet
+make sirp-pairs      # 7,500 prior-art pairs
+make sirp-problems   # 50 problems + 25 scenarios
+make experts         # 100 synthetic experts
+make compliance      # KR + US governance instances (205 triples)
+make curated-experts # 110-profile curated pool
+make curated-ratings # 7,800 3-rater ratings + κ / ICC report
+make expdataset      # compliance + curated-experts + curated-ratings
+make help            # list all targets
 ```
 
-### 6-4. 인터랙티브 시각화 (GitHub Pages)
+### Interactive visualization (GitHub Pages)
 ```bash
-make viz       # SDKB → site/ 에 베이스라인·SIRP·4-pillar 3개 HTML + index 생성
-make viz-open  # 위 + 기본 브라우저로 site/index.html 자동 오픈
+make viz       # build baseline / SIRP / 4-pillar HTML into site/
+make viz-open  # build + open site/index.html in the default browser
 ```
-- 빌드된 `site/`는 `.gitignore` 처리되어 main 브랜치에는 커밋되지 않음
-- main에 푸시되면 [.github/workflows/viz-deploy.yml](.github/workflows/viz-deploy.yml)이 자동으로 site/를 재빌드해 GitHub Pages로 배포
-- 1회 설정: 레포 **Settings → Pages → Source: GitHub Actions** 선택
-- 상세: [docs/visualization_plan.md](docs/visualization_plan.md)
+- `site/` is gitignored and rebuilt by [.github/workflows/viz-deploy.yml](.github/workflows/viz-deploy.yml) on every push to `main`
+- One-time setup: repository **Settings → Pages → Source: GitHub Actions**
+- Details: [docs/visualization_plan.md](docs/visualization_plan.md)
 
-### 6-5. 검증된 산출물 수치
-- 베이스라인 **198 노드 / 268 엣지** (deliverable ①, v0.3)
-- SIRP 773 patents · 3,118 IPC 링크 · 4,696 prior-art 엣지
-- 7,500 examiner-grounded pairs (positive 2,723 + hard-neg 2,723 + easy-neg 2,054)
+### Verified release figures
+- Baseline **198 nodes / 268 edges** (v0.3)
+- SIRP 773 patents · 3,118 IPC links · 4,696 prior-art edges
+- 7,500 examiner-grounded pairs (positive 2,723 + hard-negative 2,723 + easy-negative 2,054)
 - 50 stratified problems · 25 adversarial scenarios (all anchored)
-- 100 synthetic experts + 110 curated experts = **dual-track pool**
-- 7,500 examiner + 7,800 3-rater synthetic = **dual-track GT** (κ=0.258, ICC=0.552)
-- KR+US governance: 20 controls, 205 RDF triples
-- **46/46 tests pass + ✓ SHACL VALIDATION PASSED**
+- 100 synthetic experts + 110 curated experts (dual-track pool)
+- 7,500 examiner-grounded + 7,800 3-rater synthetic ratings (dual-track GT; Fleiss κ = 0.258, ICC(2,1) = 0.552)
+- KR + US governance: 20 controls / 205 RDF triples
+- 46 / 46 tests pass · SHACL VALIDATION PASSED
 
-## 7. Limitations & Bias
+## Limitations and bias
 
-- 공개 문서·규정 임계치 기반이며, 팹별 사유 공정 데이터는 포함하지 않음
-- FMEA 인과 관계는 문헌 도출 — 도메인 전문가 검증 필요
-- 영어 중심 + 한국어 동의어 보강, 그 외 언어 미지원
-- 규제 데이터는 인출 시점 기준 — 월간 갱신 파이프라인 권장
-- 합성 전문가 프로필·평점은 비식별 합성이며 실제 인물·기업과 무관
+- Built on public documents and regulatory thresholds — fab-private process data is out of scope.
+- FMEA causal links are literature-derived and require domain-expert validation.
+- English-centric with Korean synonym augmentation; other languages are not yet supported.
+- Regulatory data reflects retrieval-time snapshots; a monthly refresh pipeline is recommended.
+- Synthetic expert profiles and ratings are de-identified synthetic data with no relationship to real persons or firms.
 
-## 8. Citation & Acknowledgement
+## Citation and acknowledgement
 
-본 데이터셋은 성균관대학교 기술경영전문대학원(MOT) **계량기술경영 연구실(Quantitative Technology Management Lab, PI: Prof. Juneseuk Shin)**의 연구 어젠다 — 특허·시장·산업 데이터 기반 기술예측, 유망기술 기회 발굴, 중소기업 혁신 성과 분석, 인터랙티브 기술·비즈니스 데이터 시각화 — 의 반도체 도메인 하부 산출물이다. 향후 동일 연구실에서 작성될 "**컴플라이언스 인지 시맨틱 협업 플랫폼**" 학위 논문 및 관련 학술지 게재 논문에서 본 데이터셋을 실증 아티팩트로 인용할 예정이며, 그 시점에 BibTeX를 갱신한다.
+SDKB is a semiconductor-domain output of the **Quantitative Technology Management Lab** (PI: Prof. Juneseuk Shin) at SKKU's Graduate School of Management of Technology, contributing to its research agenda — tech foresight, opportunity discovery, SME innovation analysis, and interactive tech / business visualization. The forthcoming dissertation "Compliance-aware Semantic Collaboration Platform" and related journal papers will cite this dataset as an empirical artifact; the BibTeX below will be updated at that point.
 
 ```bibtex
 @dataset{sdkb_v1_2026,
@@ -278,7 +218,11 @@ make viz-open  # 위 + 기본 브라우저로 site/index.html 자동 오픈
 }
 ```
 
-## 9. License
+## License
 
-CDLA-Permissive-2.0 (Open Core). Link-Only 레이어는 재배포 대상이 아니다.
-자세한 내용은 [LICENSE.txt](LICENSE.txt) 참조.
+CDLA-Permissive-2.0 (Open Core). The Link-Only layer is not redistributed.
+See [LICENSE.txt](LICENSE.txt).
+
+---
+
+*Hyeonup-Project 2026-1 lab-internal status — deliverables, alignment-track ontologies, ExpDataSet integration, and amendment trail: [docs/project_status_2026_1.md](docs/project_status_2026_1.md).*
