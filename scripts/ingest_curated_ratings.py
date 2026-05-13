@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Ingest ExpDataSet's 7,500 3-rater ground-truth ratings + compute inter-rater
+"""Ingest the curated 7,500 3-rater ground-truth ratings + compute inter-rater
 agreement (weighted κ, ICC) for the synthetic crowd labels.
 
 Inputs:
@@ -13,8 +13,6 @@ Outputs:
 This is the synthetic-crowd label track. Its complement is the SIRP examiner-
 grounded prior-art pair set (data/patents/prior_art_pairs.parquet). The two are
 compared in notebooks/05_synthetic_vs_curated_comparison.ipynb.
-
-Source: Park 2026a [ExpDataSet v3.3.5, kukkukpool/ExpDataSet/ground_truth_ratings.csv].
 """
 
 from __future__ import annotations
@@ -152,7 +150,7 @@ def main() -> None:
             "long": str(OUT_LONG.relative_to(ROOT)),
             "pivot": str(OUT_PIVOT.relative_to(ROOT)),
         },
-        "citation": "Park 2026a — ExpDataSet v3.3.5 (kukkukpool)",
+        "citation": "Curated ExpDataSet — 3-rater synthetic ratings.",
     }
     OUT_REPORT_JSON.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
 
@@ -162,7 +160,7 @@ def main() -> None:
         "",
         "> Source: `data/experts/curated_ratings_3rater.csv` "
         "(7,500 ratings, 50 problems × 50 experts × 3 raters).",
-        "> Provenance: Park 2026a — ExpDataSet v3.3.5 (kukkukpool).",
+        "> Provenance: curated ExpDataSet — 3-rater synthetic crowd labels.",
         "",
         f"- Subjects with 3 raters: **{report['n_subjects_three_raters']}** / "
         f"{int(report['n_subjects_three_raters'] * 3)} total ratings",

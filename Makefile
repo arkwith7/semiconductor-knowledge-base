@@ -28,7 +28,7 @@ help:
 	@echo "  sirp            ingest-sirp + sirp-pairs + sirp-problems"
 	@echo "  experts         Build 100 synthetic expert profiles"
 	@echo "  compliance      Seed KR+US governance instances from ExpDataSet"
-	@echo "  curated-experts Ingest curated 100-expert pool (Park 2026a)"
+	@echo "  curated-experts Ingest curated 110-expert pool"
 	@echo "  curated-ratings Ingest 7,800 3-rater ratings + compute kappa/ICC"
 	@echo "  expdataset      compliance + curated-experts + curated-ratings"
 	@echo "  semiconto-fetch    Download SemicONTO v0.2 TTL into ontology/imports/"
@@ -92,7 +92,7 @@ sirp: ingest-sirp sirp-pairs sirp-problems
 experts:
 	$(PYTHON) scripts/gen_experts.py
 
-# ── ExpDataSet (Park 2026a) integration ──────────────────────────
+# ── Curated ExpDataSet integration ───────────────────────────────
 compliance:
 	$(PYTHON) scripts/seed_compliance_governance.py
 

@@ -59,7 +59,7 @@ SDKB는 반도체 **공정 · 장비 · 결함 · 스킬** 지식, **특허 분�
 | # | 사용 사례 | 연구실 라인 | 모듈 | 노트북 | 학술 참조 |
 |---|---|---|---|---|---|
 | 1 | **Novelty-focused patent mapping** — 반도체 기술기회 클러스터 | 기회 발굴 / 기술예측 | core + patent + SIRP | 🚧 [02](notebooks/02_patent_opportunity_demo.ipynb) | Lee/Kang/Shin (TFSC 2015), Shin et al. (TFSC 2017) |
-| 2 | **AFCP-EM (Expert)** — 반도체 소부장 SME ↔ 전문가 시맨틱 매칭 + 다중관할 누수 차단 | 중소기업 혁신 / 전문가 매칭 | core + governance + governance-kr | 🚧 [01](notebooks/01_matching_baseline_afcp.ipynb) (매칭) · ✅ [05](notebooks/05_synthetic_vs_curated_comparison.ipynb) (GT 타당성) | 학위논문 시드 (Park 2026) |
+| 2 | **AFCP-EM (Expert)** — 반도체 소부장 SME ↔ 전문가 시맨틱 매칭 + 다중관할 누수 차단 | 중소기업 혁신 / 전문가 매칭 | core + governance + governance-kr | ✅ [01](notebooks/01_matching_baseline_afcp.ipynb) (매칭) · ✅ [05](notebooks/05_synthetic_vs_curated_comparison.ipynb) (GT 타당성) | — |
 | 3 | **AFCP-EM (PriorArt)** — 특허출원 ↔ 선행기술 매칭 (examiner GT 기반) | IP-R&D 컨설팅 / 선행기술 분석 | core + patent + SIRP | ✅ [04](notebooks/04_prior_art_baseline.ipynb) | PatentMatch, CLEF-IP 패밀리 |
 | 4 | **Key resource combinations** — 반도체 fabless 시장진입 분석 | 조직적 R&D / 핵심자원 분석 | core + rbv | 🚧 [03](notebooks/03_rbv_resource_combo_demo.ipynb) (데이터 대기 — 정렬 트랙) | Cho/Shin (PLoS ONE 2025), Bae/Shin (IEEE Access 2022) |
 | 5 | **복합실물옵션** — EUV vs High-NA 로드맵 가치평가 | 기술가치평가 (후속 학기) | core + foresight + commercialization | _(2026-2 예정)_ | 연구실 실물옵션 라인 |
@@ -88,7 +88,7 @@ ontology/
 data/
   semiconductor_v0_3.json           # 베이스라인 198노드 / 268엣지
   expert_profiles.parquet           # 합성 전문가 100
-  experts/curated_profiles.parquet  # 큐레이션 110 (Park 2026a)
+  experts/curated_profiles.parquet  # 큐레이션 110
   problems.parquet                  # 기술 문제 50
   regulatory_scenarios.parquet      # 적대적 시나리오 25
   patents/raw/                      # SIRP-773 원본 JSONL + parquet
@@ -106,7 +106,7 @@ validation/shapes.ttl               # SHACL
 provenance/prov.ttl                 # PROV-O 체인
 examples/sparql/                    # 예시 쿼리
 notebooks/
-  01_matching_baseline_afcp.ipynb    # 🚧 Use Case 2 (AFCP-EM Expert)
+  01_matching_baseline_afcp.ipynb    # ✅ Use Case 2 (AFCP-EM Expert floor baseline)
   02_patent_opportunity_demo.ipynb   # 🚧 Use Case 1 (novelty-focused mapping)
   03_rbv_resource_combo_demo.ipynb   # 🚧 Use Case 4 (RBV — 데이터 대기)
   04_prior_art_baseline.ipynb        # ✅ Use Case 3 (AFCP-EM PriorArt 베이스라인)
@@ -150,8 +150,8 @@ source .venv/bin/activate           # 또는 PATH=.venv/bin:$PATH 프리픽스
 
 ### 전체 파이프라인
 ```bash
-make pipeline-with-expdataset       # baseline + SIRP + experts + Park 2026a (전체)
-make pipeline-full                  # baseline + SIRP + experts (Park 2026a 제외)
+make pipeline-with-expdataset       # baseline + SIRP + experts + 큐레이션 ExpDataSet (전체)
+make pipeline-full                  # baseline + SIRP + experts (ExpDataSet 제외)
 ```
 
 ### 개별 타깃

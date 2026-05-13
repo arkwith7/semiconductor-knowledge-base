@@ -59,7 +59,7 @@ Each use case instantiates a lab research line on SDKB's shared graph.
 | # | Use case | Lab line | Modules | Notebook | Reference |
 |---|---|---|---|---|---|
 | 1 | **Novelty-focused patent mapping** — semiconductor technology-opportunity clusters | Opportunity discovery / foresight | core + patent + SIRP | 🚧 [02](notebooks/02_patent_opportunity_demo.ipynb) | Lee/Kang/Shin (TFSC 2015), Shin et al. (TFSC 2017) |
-| 2 | **AFCP-EM (Expert)** — Korean semiconductor SME ↔ expert semantic matching with multi-jurisdiction leakage gating | SME innovation / expert matching | core + governance + governance-kr | 🚧 [01](notebooks/01_matching_baseline_afcp.ipynb) (matching) · ✅ [05](notebooks/05_synthetic_vs_curated_comparison.ipynb) (GT validity) | Dissertation seed (Park 2026) |
+| 2 | **AFCP-EM (Expert)** — Korean semiconductor SME ↔ expert semantic matching with multi-jurisdiction leakage gating | SME innovation / expert matching | core + governance + governance-kr | ✅ [01](notebooks/01_matching_baseline_afcp.ipynb) (matching) · ✅ [05](notebooks/05_synthetic_vs_curated_comparison.ipynb) (GT validity) | — |
 | 3 | **AFCP-EM (PriorArt)** — patent application ↔ prior art using examiner-cited ground truth | IP-R&D consulting / prior-art analysis | core + patent + SIRP | ✅ [04](notebooks/04_prior_art_baseline.ipynb) | PatentMatch, CLEF-IP family |
 | 4 | **Key resource combinations** — semiconductor fabless market-entry analysis | Organizational R&D / core-resource analysis | core + rbv | 🚧 [03](notebooks/03_rbv_resource_combo_demo.ipynb) (data pending — alignment track) | Cho/Shin (PLoS ONE 2025), Bae/Shin (IEEE Access 2022) |
 | 5 | **Compound real options** — EUV vs. High-NA roadmap valuation | Technology valuation (later term) | core + foresight + commercialization | _(2026-2 planned)_ | Lab real-options line |
@@ -88,7 +88,7 @@ ontology/
 data/
   semiconductor_v0_3.json           # baseline 198 nodes / 268 edges
   expert_profiles.parquet           # 100 synthetic profiles
-  experts/curated_profiles.parquet  # 110 curated profiles (Park 2026a)
+  experts/curated_profiles.parquet  # 110 curated profiles
   problems.parquet                  # 50 technology problems
   regulatory_scenarios.parquet      # 25 adversarial scenarios
   patents/raw/                      # SIRP-773 raw JSONL + parquet
@@ -106,7 +106,7 @@ validation/shapes.ttl               # SHACL
 provenance/prov.ttl                 # PROV-O chain
 examples/sparql/                    # example queries
 notebooks/
-  01_matching_baseline_afcp.ipynb    # 🚧 Use Case 2 (AFCP-EM Expert)
+  01_matching_baseline_afcp.ipynb    # ✅ Use Case 2 (AFCP-EM Expert floor baseline)
   02_patent_opportunity_demo.ipynb   # 🚧 Use Case 1 (novelty-focused mapping)
   03_rbv_resource_combo_demo.ipynb   # 🚧 Use Case 4 (RBV — data pending)
   04_prior_art_baseline.ipynb        # ✅ Use Case 3 (AFCP-EM PriorArt baseline)
@@ -150,8 +150,8 @@ source .venv/bin/activate           # or: PATH=.venv/bin:$PATH
 
 ### Full pipeline
 ```bash
-make pipeline-with-expdataset       # baseline + SIRP + experts + Park 2026a (everything)
-make pipeline-full                  # baseline + SIRP + experts (without Park 2026a)
+make pipeline-with-expdataset       # baseline + SIRP + experts + curated ExpDataSet (everything)
+make pipeline-full                  # baseline + SIRP + experts (without ExpDataSet)
 ```
 
 ### Individual targets

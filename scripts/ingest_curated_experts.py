@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Ingest ExpDataSet's curated 100-expert profile pool (KR + EN).
+"""Ingest the curated expert profile pool (KR + EN).
 
 Inputs:
   data/experts/curated_profiles_kr.json   — 100 expert profiles (Korean)
@@ -9,9 +9,8 @@ Output:
   data/experts/curated_profiles.parquet   — joined KR+EN flat table
   data/experts/curated_profiles_report.json — schema + distribution stats
 
-The curated pool is reference data from Park 2026a [ExpDataSet v3.3.5]. It serves
-as the ablation reference against this term's synthetic generator (gen_experts.py).
-See docs/expdataset_alignment.md.
+The curated pool is reference data — used as the ablation reference against
+this term's synthetic generator (gen_experts.py).
 """
 
 from __future__ import annotations
@@ -119,7 +118,7 @@ def main() -> None:
         "sample_columns": list(df.columns[:30]),
         "categorical_distributions": distros,
         "output": str(OUT.relative_to(ROOT)),
-        "citation": "Park 2026a — ExpDataSet v3.3.5 (kukkukpool)",
+        "citation": "Curated ExpDataSet — reference expert profile pool.",
     }
     OUT_REPORT.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
 

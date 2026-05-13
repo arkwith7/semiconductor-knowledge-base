@@ -20,7 +20,7 @@ data/problems_report.json
 data/expert_profiles.parquet
 data/experts_report.json
 
-# ── Auto-generated artifacts (ExpDataSet / Park 2026a track) ────
+# ── Auto-generated artifacts (curated ExpDataSet track) ─────────
 data/compliance/technology_controls.parquet
 data/compliance/seed_report.json
 data/experts/curated_profiles.parquet
@@ -48,6 +48,11 @@ site/
 
 # ── PDF planning documents (not for distribution) ───────────────
 *.pdf
+
+# ── Lab-internal accounting docs (not for public distribution) ───
+docs/expdataset_alignment.md
+docs/plan_amendment_v3.md
+docs/archive/
 
 # ── Python ──────────────────────────────────────────────────────
 __pycache__/

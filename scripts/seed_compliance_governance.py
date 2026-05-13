@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Seed SDKB governance modules from ExpDataSet compliance masters.
+"""Seed SDKB governance modules from curated compliance masters.
 
-Inputs (reference data, see [Park 2026a] — kukkukpool/ExpDataSet):
+Inputs (reference data, curated ExpDataSet):
   data/compliance/kr_standards_v1.json   — KR_ITPA, 12 technology controls
   data/compliance/us_standards_v1.json   — US_EAR/CCL, 8 controls + Deemed Export
 
@@ -14,7 +14,7 @@ Outputs:
 The KR file encodes the Korean Industrial Technology Protection Act (산업기술보호법
 §33/§34) controls; the US file encodes EAR/CCL with the Deemed Export rule.
 This is **reference master data**, not a contribution of this term — see
-docs/expdataset_alignment.md.
+curated reference data (lab-internal accounting).
 """
 
 from __future__ import annotations
@@ -68,7 +68,7 @@ def seed_kr(spec: dict) -> tuple[Graph, list[dict]]:
             g.add((ctl_uri, DCTERMS.bibliographicCitation, Literal(tc["legal_basis"])))
         g.add((ctl_uri, SDKB_ONT["interpretationType"], Literal("verbatim")))
         g.add((ctl_uri, DCTERMS.license, Literal("CDLA-Permissive-2.0")))
-        g.add((ctl_uri, DCTERMS.source, Literal("ExpDataSet/kr_compliance_standards_v1.json [Park 2026a]")))
+        g.add((ctl_uri, DCTERMS.source, Literal("data/compliance/kr_standards_v1.json")))
         # Link to NCT designation only if nct_code is present (CRITICAL/HIGH usually are)
         if tc.get("nct_code"):
             nct_uri = SDKB_DATA["gov/kr/nct/" + _slug(tc["nct_code"])]
@@ -111,7 +111,7 @@ def seed_us(spec: dict) -> tuple[Graph, list[dict]]:
         g.add((ctl_uri, DCTERMS.bibliographicCitation, Literal(tc.get("legal_basis", "EAR_CCL"))))
         g.add((ctl_uri, SDKB_ONT["interpretationType"], Literal("verbatim")))
         g.add((ctl_uri, DCTERMS.license, Literal("CDLA-Permissive-2.0")))
-        g.add((ctl_uri, DCTERMS.source, Literal("ExpDataSet/us_compliance_standards_v1.json [Park 2026a]")))
+        g.add((ctl_uri, DCTERMS.source, Literal("data/compliance/us_standards_v1.json")))
         # Tag entity-list restriction as datatype property if present
         if tc.get("entity_list_restriction"):
             g.add((ctl_uri, SDKB_ONT["securityLevel"], Literal("RESTRICTED")))
@@ -166,7 +166,7 @@ def main() -> None:
             "us_ttl": str(OUT_US_TTL.relative_to(ROOT)),
             "flat_parquet": str(OUT_FLAT.relative_to(ROOT)),
         },
-        "citation": "Park 2026a — ExpDataSet v3.3.5 (kukkukpool); used as reference master data.",
+        "citation": "Curated ExpDataSet — used as reference master data.",
     }
     OUT_REPORT.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
 

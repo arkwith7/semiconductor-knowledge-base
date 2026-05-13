@@ -6,7 +6,7 @@
 
 - **Plan owner.** Park HyoungSik (Ph.D. 19기)
 - **Advisor.** Prof. Juneseuk Shin — Quantitative Technology Management Lab, SKKU GSMOT
-- **Amendment trail.** [v1](plan_amendment_v1.md) → [v2](plan_amendment_v2.md) → [v3](plan_amendment_v3.md) · architecture: [active ADR](architecture_amendment_sdkb_centric.md), [superseded original](archive/architecture_redesign_semiconto_hub_v1.1.md)
+- **Amendment trail.** [v1](plan_amendment_v1.md) → [v2](plan_amendment_v2.md) → v3 (lab-internal) · architecture: [active ADR](architecture_amendment_sdkb_centric.md)
 - **Last verified release.** baseline 198 nodes / 268 edges · SIRP 773 patents · 46/46 tests + SHACL pass
 
 ## 1. 메인 트랙 — 계획서 채점 항목
@@ -14,7 +14,7 @@
 | # | 산출물 | 수량 요건 | 상태 | 경로 |
 |---|---|---|---|---|
 | ① | SDKB 온톨로지 | ≥198 노드 / ≥264 간선, 14 타입 | ✅ Baseline 충족 | [../data/semiconductor_v0_3.json](../data/semiconductor_v0_3.json) |
-| ② | 합성 전문가 프로필 | 100명, 비식별, 도메인 자문 | ✅ **Dual track**: 합성 100 + 큐레이션 110 | `../data/expert_profiles.parquet` (합성) + `../data/experts/curated_profiles.parquet` (큐레이션, Park 2026a) |
+| ② | 합성 전문가 프로필 | 100명, 비식별, 도메인 자문 | ✅ **Dual track**: 합성 100 + 큐레이션 110 | `../data/expert_profiles.parquet` (합성) + `../data/experts/curated_profiles.parquet` (큐레이션) |
 | ③ | 기술 문제 + 규제 시나리오 | 50 + 25 (적대적 포함, 다중 관할) | ✅ | 거절특허 50 + 거절사유 패턴 25 → `../data/problems.parquet`, `../data/regulatory_scenarios.parquet` |
 | ④ | 정답 평가체계 | 7,500 ratings | ✅ **Dual GT**: examiner 7,500 + 합성 3-rater 7,800 | `../data/patents/prior_art_pairs.parquet` (examiner) + `../data/experts/curated_ratings.parquet` (3-rater κ/ICC). MRR/NDCG@5/Recall@K + κ=0.258, ICC=0.552 |
 | ⑤ | 기술사업화 전략 v1 | 시장·고객·BM·경쟁 + 자원·가치·규제 + IP-R&D | ⏳ Skeleton | [commercialization_strategy_v1.md](commercialization_strategy_v1.md) |
@@ -42,9 +42,9 @@
 | 데이터 카드 | [dataset_rejected_patents_card.md](dataset_rejected_patents_card.md) |
 | 라이선스 | KIPRIS Plus API 약관 — 학교 자문 후 조정 |
 
-## 4. 사전 자기 작업물 통합 — Park 2026a (ExpDataSet v3.3.5) ⭐
+## 4. 큐레이션 ExpDataSet 통합 (외부 자산 흡수) ⭐
 
-정렬 회계 (net-new contributions 5종 명시): [expdataset_alignment.md](expdataset_alignment.md).
+정렬 회계 (net-new contributions 5종 명시) — 별도 lab-internal 문서로 관리.
 
 | 자산 | 통합 위치 | 규모 |
 |---|---|---|
