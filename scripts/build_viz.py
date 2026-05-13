@@ -66,6 +66,119 @@ PILLAR_TTLS = {
     "foresight":         "ontology/sdkb-foresight.ttl",
 }
 
+# ── SIRP backbone: process_family → ontology Process anchor ───────
+# Baseline Processes (semiconductor_v0_3.json) are reused where possible;
+# the four ``process:*`` anchors at the bottom are synthetic domain hubs
+# for patent scopes that the baseline does not yet cover.
+PROCESS_FAMILY_MAP: dict[str, str] = {
+    "etch":                "process:etch",
+    "deposition":          "process:deposition",
+    "metallization":       "process:deposition",
+    "interconnect":        "process:deposition",
+    "gate_dielectric":     "process:deposition",
+    "photo":               "process:lithography",
+    "oxidation_diffusion": "process:diffusion",
+    "oxidation":           "process:diffusion",
+    "thermal":             "process:diffusion",
+    "implant":             "process:implant",
+    "3d_integration":      "process:packaging",
+    "packaging":           "process:packaging",
+    "backend_packaging":   "process:packaging",
+    "memory":              "process:device",
+    "memory_cell":         "process:device",
+    "memory_dram":         "process:device",
+    "image_sensor":        "process:device",
+    "mems":                "process:device",
+    "components":          "process:device",
+    "equipment":           "process:equipment",
+    "materials":           "process:materials",
+    "general":             "process:general",
+}
+SYNTHETIC_BACKBONE: dict[str, tuple[str, str]] = {
+    "process:packaging": (
+        "Packaging / 3D",
+        "Backend packaging and 3D integration domain hub (non-baseline anchor).",
+    ),
+    "process:device": (
+        "Device / Memory / Sensor",
+        "Memory cell, image sensor, MEMS and device-level scope (non-baseline anchor).",
+    ),
+    "process:equipment": (
+        "Equipment",
+        "Equipment-level patent scope (non-baseline anchor).",
+    ),
+    "process:materials": (
+        "Materials",
+        "Materials-level patent scope (non-baseline anchor).",
+    ),
+    "process:general": (
+        "General",
+        "Cross-cutting / general scope (non-baseline anchor).",
+    ),
+}
+
+
+# ── Floating toolbar (Home / Zoom + / Zoom − / Fit) ───────────────
+TOOLBAR_HTML = """
+<div class="sdkb-toolbar">
+  <a href="index.html" class="sdkb-btn sdkb-home" title="메인 데모 페이지로 이동">← Demo Home</a>
+  <button type="button" class="sdkb-btn" onclick="sdkbZoom(1.25)" title="확대">＋</button>
+  <button type="button" class="sdkb-btn" onclick="sdkbZoom(0.8)" title="축소">−</button>
+  <button type="button" class="sdkb-btn" onclick="sdkbFit()" title="전체 맞춤">⤢ Fit</button>
+</div>
+<style>
+.sdkb-toolbar {
+  position: fixed; top: 14px; right: 14px; z-index: 9999;
+  display: flex; gap: 6px;
+  background: rgba(15, 23, 42, 0.92);
+  padding: 8px 10px;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+}
+.sdkb-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 34px; height: 32px; padding: 0 10px;
+  background: #1E293B; color: #E2E8F0; border: 1px solid #334155;
+  border-radius: 6px; font-size: 14px; font-weight: 600;
+  cursor: pointer; text-decoration: none; line-height: 1;
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+.sdkb-btn:hover { border-color: #38BDF8; background: #0F172A; color: #38BDF8; }
+.sdkb-home { font-weight: 600; }
+</style>
+<script>
+function sdkbZoom(factor) {
+  try {
+    if (typeof network !== 'undefined' && network) {
+      var s = network.getScale();
+      network.moveTo({ scale: s * factor, animation: { duration: 220, easingFunction: 'easeInOutQuad' } });
+    }
+  } catch (e) { console.warn('sdkbZoom failed', e); }
+}
+function sdkbFit() {
+  try {
+    if (typeof network !== 'undefined' && network) {
+      network.fit({ animation: { duration: 320, easingFunction: 'easeInOutQuad' } });
+    }
+  } catch (e) { console.warn('sdkbFit failed', e); }
+}
+</script>
+"""
+
+
+def _inject_toolbar(out_path: Path) -> None:
+    """Inject the floating Home/Zoom toolbar into a Pyvis HTML file."""
+    html = out_path.read_text(encoding="utf-8")
+    if "sdkb-toolbar" in html:
+        return
+    marker = "<body>"
+    if marker not in html:
+        return
+    html = html.replace(marker, marker + "\n" + TOOLBAR_HTML, 1)
+    out_path.write_text(html, encoding="utf-8")
+
 
 # ── Pyvis helpers ─────────────────────────────────────────────────
 def _new_network(height: str = "780px") -> Network:
@@ -154,6 +267,7 @@ def build_baseline() -> dict:
     _add_legend(net, sorted(types_seen))
     out = OUT_DIR / "baseline.html"
     net.write_html(str(out), open_browser=False, notebook=False)
+    _inject_toolbar(out)
     return {
         "view": "baseline",
         "path": str(out.relative_to(REPO)),
@@ -165,11 +279,25 @@ def build_baseline() -> dict:
 
 # ── View 2 — SIRP (Top-50 patents + examiner-cited prior art) ─────
 def build_sirp(top_n: int = 50) -> dict:
+    """Patent ↔ Process backbone ↔ examiner-cited prior-art subgraph.
+
+    Each rejected patent is anchored to an ontology ``Process`` (or a
+    synthetic domain hub if the baseline does not cover it), so the
+    backbone reads as ``Process → Patent → PriorArt``.  The patent
+    cluster aligns visually with the SDKB Process spine, instead of
+    showing only direct patent ↔ prior-art links.
+    """
     patents_path = REPO / "data/patents/rejected_patents_meta.parquet"
     edges_path = REPO / "data/patents/prior_art_edges.parquet"
+    baseline_path = REPO / "data/semiconductor_v0_3.json"
 
     patents = pd.read_parquet(patents_path)
     edges = pd.read_parquet(edges_path)
+    baseline = json.loads(baseline_path.read_text(encoding="utf-8"))
+    baseline_proc = {
+        n["id"]: n for n in baseline["nodes"]
+        if n.get("type") in ("Process", "SubProcess")
+    }
 
     examiner_edges = edges[edges["source_type"] == "examiner"].copy()
     citation_counts = (
@@ -184,17 +312,47 @@ def build_sirp(top_n: int = 50) -> dict:
 
     net = _new_network()
 
+    backbone_added: set[str] = set()
+    backbone_counter: Counter = Counter()
+
+    def _add_backbone(pid: str) -> None:
+        if pid in backbone_added:
+            return
+        backbone_added.add(pid)
+        if pid in baseline_proc:
+            node = baseline_proc[pid]
+            label = node.get("canonical_name") or pid
+            desc = node.get("description") or ""
+            badge = f"ontology Process ({node.get('type','Process')})"
+        else:
+            label, desc = SYNTHETIC_BACKBONE.get(pid, (pid, ""))
+            badge = "domain anchor (non-baseline)"
+        net.add_node(
+            pid,
+            label=label,
+            title=_node_title(label, badge, pid, desc),
+            color=TYPE_COLORS["Process"],
+            shape="hexagon",
+            size=32,
+            font={"size": 18, "color": "#E0F2FE", "face": "monospace"},
+            group="Process",
+        )
+
     cited_office_counter: Counter = Counter()
     for pid in top_patents:
-        row = patent_meta.loc[pid] if pid in patent_meta.index else None
-        if row is None:
+        if pid not in patent_meta.index:
             continue
+        row = patent_meta.loc[pid]
         title = str(row.get("title", "")) or pid
         ipc = str(row.get("primary_ipc", "") or "—")
         cohort = str(row.get("cohort_scope", "") or "")
-        proc_family = str(row.get("process_family", "") or "")
+        proc_family_raw = str(row.get("process_family", "") or "").strip()
+        proc_family = proc_family_raw.lower()
+        backbone_id = PROCESS_FAMILY_MAP.get(proc_family, "process:general")
+        backbone_counter[backbone_id] += 1
         body = (
-            f"IPC: {ipc} · process_family: {proc_family or '—'}<br/>"
+            f"IPC: {ipc} · process_family: {proc_family_raw or '—'}<br/>"
+            f"backbone: <code>{escape(backbone_id)}</code><br/>"
             f"cohort: {cohort}"
         )
         net.add_node(
@@ -205,6 +363,14 @@ def build_sirp(top_n: int = 50) -> dict:
             shape="diamond",
             size=20,
             group="Patent",
+        )
+        _add_backbone(backbone_id)
+        net.add_edge(
+            backbone_id, pid,
+            title="addresses_process",
+            color="#94A3B8",
+            arrows="to",
+            dashes=True,
         )
 
     for _, e in sub_edges.iterrows():
@@ -224,14 +390,17 @@ def build_sirp(top_n: int = 50) -> dict:
             )
         net.add_edge(target, cited, title="hasPriorArt (examiner)", color="#64748B", arrows="to")
 
-    _add_legend(net, ["Patent", "PriorArt"])
+    _add_legend(net, ["Process", "Patent", "PriorArt"])
     out = OUT_DIR / "sirp.html"
     net.write_html(str(out), open_browser=False, notebook=False)
+    _inject_toolbar(out)
     return {
         "view": "sirp",
         "path": str(out.relative_to(REPO)),
         "n_patents": len(top_patents),
         "n_prior_art_edges": len(sub_edges),
+        "n_backbone_anchors": len(backbone_added),
+        "backbone_breakdown": dict(backbone_counter),
         "office_breakdown": dict(cited_office_counter),
     }
 
@@ -297,6 +466,7 @@ def build_pillars() -> dict:
     _add_legend(net, list(PILLAR_TTLS.keys()))
     out = OUT_DIR / "pillars.html"
     net.write_html(str(out), open_browser=False, notebook=False)
+    _inject_toolbar(out)
     return {
         "view": "pillars",
         "path": str(out.relative_to(REPO)),
@@ -383,7 +553,7 @@ LANDING_TEMPLATE = """<!doctype html>
       </a>
       <a class="card" href="sirp.html">
         <h3>② SIRP Patent ↔ Prior Art</h3>
-        <p>SIRP 773 거절특허 중 <strong>상위 50건과 examiner-cited 선행기술</strong> 서브그래프. 다국 office(KR/US/JP/EP) 비율을 한 화면에서 확인.</p>
+        <p>SIRP 773 거절특허 중 <strong>상위 50건과 examiner-cited 선행기술</strong> 서브그래프. <strong>온톨로지 Process 백본</strong>(Lithography / Etch / Deposition …)을 따라 특허와 선행기술이 연결되어 다국 office(KR/US/JP/EP) 비율을 한 화면에서 확인.</p>
         <div class="meta">{sirp_meta}</div>
       </a>
       <a class="card" href="pillars.html">
@@ -415,7 +585,8 @@ LANDING_TEMPLATE = """<!doctype html>
 def build_index(baseline_info: dict, sirp_info: dict, pillars_info: dict) -> Path:
     baseline_meta = f"{baseline_info['n_nodes']} nodes · {baseline_info['n_edges']} edges · {len(baseline_info['node_types'])} types"
     sirp_meta = (
-        f"{sirp_info['n_patents']} patents · {sirp_info['n_prior_art_edges']} prior-art edges · "
+        f"{sirp_info['n_patents']} patents · {sirp_info['n_backbone_anchors']} process anchors · "
+        f"{sirp_info['n_prior_art_edges']} prior-art edges · "
         + " / ".join(f"{k}:{v}" for k, v in sorted(sirp_info["office_breakdown"].items()))
     )
     pillar_pieces = [
