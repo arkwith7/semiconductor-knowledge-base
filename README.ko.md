@@ -39,10 +39,10 @@ SDKB는 반도체 **공정 · 장비 · 결함 · 스킬** 지식, **특허 분�
 | 연구실 연구 라인 | SDKB의 기여 | 진입점 |
 |---|---|---|
 | 특허·시장·산업 데이터 기반 **기술예측** | `sdkb-patent.ttl` + SIRP-773 + Topic / Novelty 노드 | [활용 사례 1](#활용-사례) |
-| **유망기술 기회 발굴** | Novelty-focused patent mapping, emerging-memory 토픽 클러스터 | [활용 사례 1](#활용-사례), [notebook 02](notebooks/02_patent_opportunity_demo.ipynb) |
-| **중소기업 혁신 성과 분석 / 전문가 매칭** | AFCP-EM Expert + 합성 100 + 큐레이션 110 전문가 풀 + 다중관할 컴플라이언스 게이트 | [활용 사례 2](#활용-사례), [notebook 01](notebooks/01_matching_baseline_afcp.ipynb) |
+| **유망기술 기회 발굴** | Novelty-focused patent mapping, emerging-memory 토픽 클러스터 | [활용 사례 1](#활용-사례), 🚧 [notebook 02](notebooks/02_patent_opportunity_demo.ipynb) |
+| **중소기업 혁신 성과 분석 / 전문가 매칭** | AFCP-EM Expert + 합성 100 + 큐레이션 110 전문가 풀 + 다중관할 컴플라이언스 게이트 | [활용 사례 2](#활용-사례), 🚧 [notebook 01](notebooks/01_matching_baseline_afcp.ipynb), ✅ [notebook 05](notebooks/05_synthetic_vs_curated_comparison.ipynb) |
 | **인터랙티브 기술 · 비즈니스 시각화** | Pyvis 3-뷰 익스플로러 · GitHub Pages 자동 배포 | [Live demo](https://arkwith7.github.io/semiconductor-knowledge-base/), [docs/visualization_plan.md](docs/visualization_plan.md) |
-| 조직적 R&D 관리 / 혁신 디자인 (보조축) | RBV 핵심자원 조합 + TRL / 실물옵션 시드 노드 | [활용 사례 4](#활용-사례), [notebook 03](notebooks/03_rbv_resource_combo_demo.ipynb) |
+| 조직적 R&D 관리 / 혁신 디자인 (보조축) | RBV 핵심자원 조합 + TRL / 실물옵션 시드 노드 | [활용 사례 4](#활용-사례), 🚧 [notebook 03](notebooks/03_rbv_resource_combo_demo.ipynb) |
 
 ## Why / For / How
 
@@ -54,14 +54,16 @@ SDKB는 반도체 **공정 · 장비 · 결함 · 스킬** 지식, **특허 분�
 
 각 사례는 연구실 연구 라인을 SDKB의 동일 그래프 위에서 인스턴스화한다.
 
+> **노트북 상태 범례** — ✅ 출시 완료(실행 가능) · 🚧 스켈레톤 stub (데이터 로딩은 동작, 알고리즘 셀은 `NotImplementedError` — 2026-1 중 구현 예정) · _(…)_ 후속 학기 자리표시자.
+
 | # | 사용 사례 | 연구실 라인 | 모듈 | 노트북 | 학술 참조 |
 |---|---|---|---|---|---|
-| 1 | **Novelty-focused patent mapping** — 반도체 기술기회 클러스터 | 기회 발굴 / 기술예측 | core + patent + SIRP | [02](notebooks/02_patent_opportunity_demo.ipynb) | Lee/Kang/Shin (TFSC 2015), Shin et al. (TFSC 2017) |
-| 2 | **AFCP-EM (Expert)** — 반도체 소부장 SME ↔ 전문가 시맨틱 매칭 + 다중관할 누수 차단 | 중소기업 혁신 / 전문가 매칭 | core + governance + governance-kr | [01](notebooks/01_matching_baseline_afcp.ipynb) | 학위논문 시드 (Park 2026) |
-| 3 | **AFCP-EM (PriorArt)** — 특허출원 ↔ 선행기술 매칭 (examiner GT 기반) | IP-R&D 컨설팅 / 선행기술 분석 | core + patent + SIRP | [04](notebooks/04_prior_art_baseline.ipynb) | PatentMatch, CLEF-IP 패밀리 |
-| 4 | **Key resource combinations** — 반도체 fabless 시장진입 분석 | 조직적 R&D / 핵심자원 분석 | core + rbv | [03](notebooks/03_rbv_resource_combo_demo.ipynb) | Cho/Shin (PLoS ONE 2025), Bae/Shin (IEEE Access 2022) |
+| 1 | **Novelty-focused patent mapping** — 반도체 기술기회 클러스터 | 기회 발굴 / 기술예측 | core + patent + SIRP | 🚧 [02](notebooks/02_patent_opportunity_demo.ipynb) | Lee/Kang/Shin (TFSC 2015), Shin et al. (TFSC 2017) |
+| 2 | **AFCP-EM (Expert)** — 반도체 소부장 SME ↔ 전문가 시맨틱 매칭 + 다중관할 누수 차단 | 중소기업 혁신 / 전문가 매칭 | core + governance + governance-kr | 🚧 [01](notebooks/01_matching_baseline_afcp.ipynb) (매칭) · ✅ [05](notebooks/05_synthetic_vs_curated_comparison.ipynb) (GT 타당성) | 학위논문 시드 (Park 2026) |
+| 3 | **AFCP-EM (PriorArt)** — 특허출원 ↔ 선행기술 매칭 (examiner GT 기반) | IP-R&D 컨설팅 / 선행기술 분석 | core + patent + SIRP | ✅ [04](notebooks/04_prior_art_baseline.ipynb) | PatentMatch, CLEF-IP 패밀리 |
+| 4 | **Key resource combinations** — 반도체 fabless 시장진입 분석 | 조직적 R&D / 핵심자원 분석 | core + rbv | 🚧 [03](notebooks/03_rbv_resource_combo_demo.ipynb) (데이터 대기 — 정렬 트랙) | Cho/Shin (PLoS ONE 2025), Bae/Shin (IEEE Access 2022) |
 | 5 | **복합실물옵션** — EUV vs High-NA 로드맵 가치평가 | 기술가치평가 (후속 학기) | core + foresight + commercialization | _(2026-2 예정)_ | 연구실 실물옵션 라인 |
-| 6 | **인터랙티브 KG 익스플로러** — 3-뷰(베이스라인 / SIRP / 4-pillar) GitHub Pages 배포 | 인터랙티브 시각화 | core + patent + rbv + foresight + commercialization | [Live](https://arkwith7.github.io/semiconductor-knowledge-base/) · `scripts/build_viz.py` | 연구실 시각화 트랙 |
+| 6 | **인터랙티브 KG 익스플로러** — 3-뷰(베이스라인 / SIRP / 4-pillar) GitHub Pages 배포 | 인터랙티브 시각화 | core + patent + rbv + foresight + commercialization | ✅ [Live](https://arkwith7.github.io/semiconductor-knowledge-base/) · `scripts/build_viz.py` | 연구실 시각화 트랙 |
 
 4-pillar 상세 매핑: [docs/research_alignment.md](docs/research_alignment.md).
 
@@ -103,7 +105,12 @@ docs/
 validation/shapes.ttl               # SHACL
 provenance/prov.ttl                 # PROV-O 체인
 examples/sparql/                    # 예시 쿼리
-notebooks/                          # 베이스라인 매칭 + 정렬 데모
+notebooks/
+  01_matching_baseline_afcp.ipynb    # 🚧 Use Case 2 (AFCP-EM Expert)
+  02_patent_opportunity_demo.ipynb   # 🚧 Use Case 1 (novelty-focused mapping)
+  03_rbv_resource_combo_demo.ipynb   # 🚧 Use Case 4 (RBV — 데이터 대기)
+  04_prior_art_baseline.ipynb        # ✅ Use Case 3 (AFCP-EM PriorArt 베이스라인)
+  05_synthetic_vs_curated_comparison.ipynb  # ✅ UC2 용 GT 타당성 진단
 CITATION.cff                        # advisor 명시
 ```
 

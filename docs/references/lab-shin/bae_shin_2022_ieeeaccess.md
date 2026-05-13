@@ -11,7 +11,7 @@ local_pdf: none
 
 **Used in SDKB for:** Use Case 4 — RBV / resource analysis
 **Key claim:** TODO_VERIFY — applied resource-based view analysis with quantitative data
-**Relation to AFCP-EM / SDKB:** Methodological complement to [`cho_shin_2025_plosone`](cho_shin_2025_plosone.md); informs the entry-barrier instances in `sdkb-rbv.ttl`
+**Relation to AFCP-EM / SDKB:** Methodological complement to [`cho_shin_2025_plosone`](cho_shin_2025_plosone.md); informs the entry-barrier instances in `sdkb-rbv.ttl` (Use Case 4 — 🚧 [`notebooks/03_rbv_resource_combo_demo.ipynb`](../../../notebooks/03_rbv_resource_combo_demo.ipynb))
 
 ## Notes
 

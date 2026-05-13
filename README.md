@@ -39,10 +39,10 @@ Prof. Shin's Quantitative Technology Management Lab combines patent / market / i
 | Lab research line | SDKB contribution | Entry point |
 |---|---|---|
 | Patent-/market-/industry-driven **tech foresight** | `sdkb-patent.ttl` + SIRP-773 + Topic / Novelty nodes | [Use case 1](#use-cases) |
-| Promising-technology **opportunity discovery** | Novelty-focused patent mapping, emerging-memory topic clusters | [Use case 1](#use-cases), [notebook 02](notebooks/02_patent_opportunity_demo.ipynb) |
-| **SME innovation analysis / expert matching** | AFCP-EM Expert + synthetic-100 + curated-110 expert pool + multi-jurisdiction compliance gate | [Use case 2](#use-cases), [notebook 01](notebooks/01_matching_baseline_afcp.ipynb) |
+| Promising-technology **opportunity discovery** | Novelty-focused patent mapping, emerging-memory topic clusters | [Use case 1](#use-cases), 🚧 [notebook 02](notebooks/02_patent_opportunity_demo.ipynb) |
+| **SME innovation analysis / expert matching** | AFCP-EM Expert + synthetic-100 + curated-110 expert pool + multi-jurisdiction compliance gate | [Use case 2](#use-cases), 🚧 [notebook 01](notebooks/01_matching_baseline_afcp.ipynb), ✅ [notebook 05](notebooks/05_synthetic_vs_curated_comparison.ipynb) |
 | **Interactive tech / business visualization** | Pyvis 3-view explorer with automatic GitHub Pages deploy | [Live demo](https://arkwith7.github.io/semiconductor-knowledge-base/), [docs/visualization_plan.md](docs/visualization_plan.md) |
-| Organizational R&D / innovation design (secondary) | RBV core-resource combinations + TRL / real-option seed nodes | [Use case 4](#use-cases), [notebook 03](notebooks/03_rbv_resource_combo_demo.ipynb) |
+| Organizational R&D / innovation design (secondary) | RBV core-resource combinations + TRL / real-option seed nodes | [Use case 4](#use-cases), 🚧 [notebook 03](notebooks/03_rbv_resource_combo_demo.ipynb) |
 
 ## Why / For / How
 
@@ -54,14 +54,16 @@ Prof. Shin's Quantitative Technology Management Lab combines patent / market / i
 
 Each use case instantiates a lab research line on SDKB's shared graph.
 
+> **Notebook status legend** — ✅ shipped & runnable · 🚧 skeleton stub (data loads work; algorithm cells raise `NotImplementedError`, scheduled for 2026-1) · _(…)_ later-term placeholder.
+
 | # | Use case | Lab line | Modules | Notebook | Reference |
 |---|---|---|---|---|---|
-| 1 | **Novelty-focused patent mapping** — semiconductor technology-opportunity clusters | Opportunity discovery / foresight | core + patent + SIRP | [02](notebooks/02_patent_opportunity_demo.ipynb) | Lee/Kang/Shin (TFSC 2015), Shin et al. (TFSC 2017) |
-| 2 | **AFCP-EM (Expert)** — Korean semiconductor SME ↔ expert semantic matching with multi-jurisdiction leakage gating | SME innovation / expert matching | core + governance + governance-kr | [01](notebooks/01_matching_baseline_afcp.ipynb) | Dissertation seed (Park 2026) |
-| 3 | **AFCP-EM (PriorArt)** — patent application ↔ prior art using examiner-cited ground truth | IP-R&D consulting / prior-art analysis | core + patent + SIRP | [04](notebooks/04_prior_art_baseline.ipynb) | PatentMatch, CLEF-IP family |
-| 4 | **Key resource combinations** — semiconductor fabless market-entry analysis | Organizational R&D / core-resource analysis | core + rbv | [03](notebooks/03_rbv_resource_combo_demo.ipynb) | Cho/Shin (PLoS ONE 2025), Bae/Shin (IEEE Access 2022) |
+| 1 | **Novelty-focused patent mapping** — semiconductor technology-opportunity clusters | Opportunity discovery / foresight | core + patent + SIRP | 🚧 [02](notebooks/02_patent_opportunity_demo.ipynb) | Lee/Kang/Shin (TFSC 2015), Shin et al. (TFSC 2017) |
+| 2 | **AFCP-EM (Expert)** — Korean semiconductor SME ↔ expert semantic matching with multi-jurisdiction leakage gating | SME innovation / expert matching | core + governance + governance-kr | 🚧 [01](notebooks/01_matching_baseline_afcp.ipynb) (matching) · ✅ [05](notebooks/05_synthetic_vs_curated_comparison.ipynb) (GT validity) | Dissertation seed (Park 2026) |
+| 3 | **AFCP-EM (PriorArt)** — patent application ↔ prior art using examiner-cited ground truth | IP-R&D consulting / prior-art analysis | core + patent + SIRP | ✅ [04](notebooks/04_prior_art_baseline.ipynb) | PatentMatch, CLEF-IP family |
+| 4 | **Key resource combinations** — semiconductor fabless market-entry analysis | Organizational R&D / core-resource analysis | core + rbv | 🚧 [03](notebooks/03_rbv_resource_combo_demo.ipynb) (data pending — alignment track) | Cho/Shin (PLoS ONE 2025), Bae/Shin (IEEE Access 2022) |
 | 5 | **Compound real options** — EUV vs. High-NA roadmap valuation | Technology valuation (later term) | core + foresight + commercialization | _(2026-2 planned)_ | Lab real-options line |
-| 6 | **Interactive KG explorer** — 3-view (baseline / SIRP / 4-pillar) GitHub Pages deploy | Interactive visualization | core + patent + rbv + foresight + commercialization | [Live](https://arkwith7.github.io/semiconductor-knowledge-base/) · `scripts/build_viz.py` | Lab visualization track |
+| 6 | **Interactive KG explorer** — 3-view (baseline / SIRP / 4-pillar) GitHub Pages deploy | Interactive visualization | core + patent + rbv + foresight + commercialization | ✅ [Live](https://arkwith7.github.io/semiconductor-knowledge-base/) · `scripts/build_viz.py` | Lab visualization track |
 
 Detailed 4-pillar mapping: [docs/research_alignment.md](docs/research_alignment.md).
 
@@ -103,7 +105,12 @@ docs/
 validation/shapes.ttl               # SHACL
 provenance/prov.ttl                 # PROV-O chain
 examples/sparql/                    # example queries
-notebooks/                          # baseline matching + alignment demos
+notebooks/
+  01_matching_baseline_afcp.ipynb    # 🚧 Use Case 2 (AFCP-EM Expert)
+  02_patent_opportunity_demo.ipynb   # 🚧 Use Case 1 (novelty-focused mapping)
+  03_rbv_resource_combo_demo.ipynb   # 🚧 Use Case 4 (RBV — data pending)
+  04_prior_art_baseline.ipynb        # ✅ Use Case 3 (AFCP-EM PriorArt baseline)
+  05_synthetic_vs_curated_comparison.ipynb  # ✅ GT validity diagnostics for UC2
 CITATION.cff                        # advisor explicit
 ```
 

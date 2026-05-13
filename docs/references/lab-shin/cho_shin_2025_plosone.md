@@ -11,7 +11,7 @@ local_pdf: none
 
 **Used in SDKB for:** Use Case 4 — key resource combinations (RBV)
 **Key claim:** TODO_VERIFY — empirical analysis of resource-bundle effects on innovation outcomes for SMEs
-**Relation to AFCP-EM / SDKB:** Theoretical anchor for `sdkb-rbv.ttl` (Firm / Resource / Capability / EntryBarrier) and the Use Case 4 notebook ([`notebooks/03_rbv_resource_combo_demo.ipynb`](../../../notebooks/03_rbv_resource_combo_demo.ipynb))
+**Relation to AFCP-EM / SDKB:** Theoretical anchor for `sdkb-rbv.ttl` (Firm / Resource / Capability / EntryBarrier) and the Use Case 4 notebook (🚧 skeleton, data pending: [`notebooks/03_rbv_resource_combo_demo.ipynb`](../../../notebooks/03_rbv_resource_combo_demo.ipynb))
 
 ## Notes
 

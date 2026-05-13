@@ -30,9 +30,9 @@
 
 | 신 교수 대표 연구 | 본 데이터셋으로 재현 가능한 형태 | 출력 위치 |
 |---|---|---|
-| Lee, Kang, Shin (2015) "Novelty-focused patent mapping for technology opportunity analysis", *TFSC* | 반도체 H01L/H10B 패밀리에서 novelty score 산출 → 기회 클러스터 시각화 | `notebooks/02_patent_opportunity_demo.ipynb` |
+| Lee, Kang, Shin (2015) "Novelty-focused patent mapping for technology opportunity analysis", *TFSC* | 반도체 H01L/H10B 패밀리에서 novelty score 산출 → 기회 클러스터 시각화 | 🚧 `notebooks/02_patent_opportunity_demo.ipynb` (스켈레톤) |
 | Shin et al. "A novel approach to forecast promising technology through patent analysis" (TFSC 2017) | 특허 초록 토픽모델로 emerging tech 5속성(novelty/diffusion 등) 추정 | (계획문서: `docs/patent_abstract_enrichment_plan.md`) |
-| Cho, Shin (2025) "Expanding the identification of key resource combinations for mid- to long-term growth in EV market entry", *PLoS ONE* | Firm × Resource × Capability 조합 그래프에서 fsQCA-style 핵심자원 조합 도출 | `notebooks/03_rbv_resource_combo_demo.ipynb` |
+| Cho, Shin (2025) "Expanding the identification of key resource combinations for mid- to long-term growth in EV market entry", *PLoS ONE* | Firm × Resource × Capability 조합 그래프에서 fsQCA-style 핵심자원 조합 도출 | 🚧 `notebooks/03_rbv_resource_combo_demo.ipynb` (스켈레톤, 데이터 대기) |
 | Bae, Shin (2022) "Identifying a Combination of Key Resources to Overcome the Entry Barriers in the Electric Vehicle Market", *IEEE Access* | EntryBarrier 노드 + Firm Resource 카드로 반도체 fabless 진입장벽 매핑 | 위 노트북 확장 셀 |
 | 신 교수 신생기술 조기식별 5속성 (2025 preprint) | Patent + Topic + Novelty 노드로 5속성 정량 추정 | (후속 학기 알고리즘) |
 
@@ -107,3 +107,4 @@ AFCP-EM (이중 응용)       특허기회 발굴            RBV 핵심자원 �
 | 2026-05-12 | v1.0 | 초안 작성 (`plan_amendment_v1.md` 와 동시 도입) |
 | 2026-05-12 | v1.1 | AFCP-EM 이중 응용(Expert/PriorArt) 반영 — `plan_amendment_v2.md` 동시 도입 |
 | 2026-05-12 | v1.2 | Framing 반전 — "연구실 어젠다 상위 frame ↘ SDKB 하부 모듈" 위계 명시, 영역 ④ 인터랙티브 시각화 트랙 추가 |
+| 2026-05-13 | v1.3 | 노트북 02/03을 스켈레톤 stub으로 명시 (📋 dead-link → 🚧 skeleton), 노트북 03은 정렬 트랙 데이터 의존성 표기 |

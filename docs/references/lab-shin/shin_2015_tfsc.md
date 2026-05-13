@@ -11,7 +11,7 @@ local_pdf: none
 
 **Used in SDKB for:** Use Case 1 — novelty-focused patent mapping (opportunity discovery)
 **Key claim:** TODO_VERIFY — early framework for novelty-focused patent foresight used as a lab methodology anchor
-**Relation to AFCP-EM / SDKB:** Grounds the `sdkb-patent.ttl` Novelty / Topic node design and the Use Case 1 notebook ([`notebooks/02_patent_opportunity_demo.ipynb`](../../../notebooks/02_patent_opportunity_demo.ipynb))
+**Relation to AFCP-EM / SDKB:** Grounds the `sdkb-patent.ttl` Novelty / Topic node design and the Use Case 1 notebook (🚧 skeleton: [`notebooks/02_patent_opportunity_demo.ipynb`](../../../notebooks/02_patent_opportunity_demo.ipynb))
 
 ## Notes
 
