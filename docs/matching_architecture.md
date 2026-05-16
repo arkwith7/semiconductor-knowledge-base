@@ -1,11 +1,11 @@
-# AFCP-EM Architecture
+# SDKB-Match Architecture
 
-> **Agent-First Compliance Platform — Expert / PriorArt Matching**
+> **SDKB Matching Layer — semiconductor SME ↔ expert / patent ↔ prior-art matching**
 > v0.1 draft — 2026-05-12. Aligned with Amendment v2.
 
 ## 1. One-sentence statement
 
-AFCP-EM is a matching platform whose **compliance constraints are part of the retrieval graph, not a post-hoc filter** — the same architecture serves two markets: (a) expert matching for 반도체 소부장 SMEs and (b) prior-art retrieval for IP-R&D.
+SDKB-Match is a matching platform whose **compliance constraints are part of the retrieval graph, not a post-hoc filter** — the same architecture serves two markets: (a) expert matching for 반도체 소부장 SMEs and (b) prior-art retrieval for IP-R&D.
 
 ## 2. The two tracks share the same skeleton
 
@@ -55,7 +55,7 @@ AFCP-EM is a matching platform whose **compliance constraints are part of the re
 
 ## 4. Compliance gate semantics (key concept)
 
-The gate is what makes the system **AFCP** rather than a generic matcher. It is a graph rewriter that, given a query and a candidate, expands them into their SDKB subgraphs (Process, Material, EquipmentClass, Patent, Firm) and refuses any pairing whose **union subgraph** violates a constraint.
+The gate is what makes the system **compliance-first** rather than a generic matcher. It is a graph rewriter that, given a query and a candidate, expands them into their SDKB subgraphs (Process, Material, EquipmentClass, Patent, Firm) and refuses any pairing whose **union subgraph** violates a constraint.
 
 Constraints are not opinions in code. They are SHACL shapes (`validation/shapes.ttl`) over the union subgraph. Examples:
 - **BIS §744.23**: if the union subgraph contains a `RegulatedItem` with TPP ≥ 4800 and the matched candidate's `Organization` resolves to an EAR entity-list assignee → refuse.

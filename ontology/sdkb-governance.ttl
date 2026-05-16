@@ -21,7 +21,7 @@
 <https://w3id.org/sdkb/gov>
     a owl:Ontology ;
     rdfs:label "SDKB Governance Module — US/EU/International"@en ;
-    rdfs:comment "Regulatory rules and identifiers used as structural compliance constraints inside AFCP-EM."@en ;
+    rdfs:comment "Regulatory rules and identifiers used as structural compliance constraints inside SDKB-Match."@en ;
     owl:versionInfo "1.0.0-dev" ;
     dcterms:license <https://spdx.org/licenses/CDLA-Permissive-2.0.html> ;
     owl:imports <https://w3id.org/sdkb/ont> .
@@ -60,7 +60,7 @@ gov:JurisdictionCN
 gov:hasJurisdiction
     a owl:ObjectProperty ;
     rdfs:label "has jurisdiction"@en ;
-    rdfs:comment "Links any regulated entity (rule, item, transaction) to one or more jurisdictions. Used by AFCP-EM to compute the multi-jurisdiction overlap that drives leakage rate."@en .
+    rdfs:comment "Links any regulated entity (rule, item, transaction) to one or more jurisdictions. Used by SDKB-Match to compute the multi-jurisdiction overlap that drives leakage rate."@en .
 
 # ── Anchor individuals (BIS §744.23 TPP boundary as named individual) ──
 

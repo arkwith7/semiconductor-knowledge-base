@@ -739,7 +739,7 @@ LANDING_TEMPLATE = """<!doctype html>
     <ul class="lab">
       <li>특허·시장·산업 데이터 기반 <strong>기술예측</strong> ↔ SIRP 773 + sdkb-patent</li>
       <li><strong>유망기술 기회 발굴</strong> ↔ Novelty-focused patent 매핑 (후속)</li>
-      <li><strong>중소기업 혁신 / 전문가 매칭</strong> ↔ AFCP-EM Expert (notebook 01)</li>
+      <li><strong>중소기업 혁신 / 전문가 매칭</strong> ↔ SDKB-Match Expert (notebook 01)</li>
       <li><strong>인터랙티브 기술·비즈니스 데이터 시각화</strong> ↔ <em>본 페이지</em></li>
     </ul>
   </section>

@@ -1,7 +1,7 @@
 # References
 
 Bibliographic references for SDKB-related work, collected as the seed
-for an eventual **dataset paper** on SDKB v1.0 and AFCP-EM.
+for an eventual **dataset paper** on SDKB v1.0 and SDKB-Match.
 
 ## Single source of truth
 

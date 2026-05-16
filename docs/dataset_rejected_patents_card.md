@@ -11,7 +11,7 @@
 - **규모**: 773 레코드
 - **포맷**: JSONL (1행 = 1 거절 특허 + 정답 선행기술)
 - **원 수집 목적**: 반도체 IP-R&D 실습 — AI Agent 기반 선행기술조사 보고서 자동 작성 시스템의 개발·평가
-- **본 프로젝트 통합 목적**: SDKB의 산출물 ③·④ 보강 + `sdkb-patent.ttl` 인스턴스 풀 + AFCP-EM-PriorArt 트랙의 벤치마크
+- **본 프로젝트 통합 목적**: SDKB의 산출물 ③·④ 보강 + `sdkb-patent.ttl` 인스턴스 풀 + SDKB-Match PriorArt 트랙의 벤치마크
 
 ## 2. 출처 (Provenance)
 
@@ -100,7 +100,7 @@
 | 기술전략 | family × IPC × 가치사슬 그리드 |
 | 기술예측 | 거절패턴 × IPC 진화 → novelty 임계 추정 (TFSC 2015 정렬) |
 | 기술평가 | 거절률 = TRL/사업가치의 음의 신호 |
-| 기술상업화 | AFCP-EM-PriorArt 시장 (변리사·IP 부서) |
+| 기술상업화 | SDKB-Match PriorArt 시장 (변리사·IP 부서) |
 
 ## 6. 라이선스 및 재배포
 

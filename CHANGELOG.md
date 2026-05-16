@@ -39,7 +39,7 @@ All notable changes to SDKB will be documented in this file.
 - Alignment-track ontologies: `sdkb-rbv.ttl`, `sdkb-commercialization.ttl`, `sdkb-foresight.ttl`
 - Scripts: `ingest_rejected_patents.py`, `build_prior_art_pairs.py`, `sample_problems.py`, `gen_experts.py`
 - Tests: `tests/test_patents.py` (26 SIRP regression tests)
-- Docs: AFCP-EM architecture, leakage protocol, expert validation log, datasheet, commercialization strategy v1
+- Docs: SDKB-Match architecture, leakage protocol, expert validation log, datasheet, commercialization strategy v1
 - Notebook: `notebooks/04_prior_art_baseline.ipynb` (TF-IDF baseline with MRR/NDCG@5/Recall@K)
 - Makefile targets: `venv`, `ingest-sirp`, `sirp-pairs`, `sirp-problems`, `sirp`, `experts`, `pipeline-full`
 - CITATION.cff with advisor attribution

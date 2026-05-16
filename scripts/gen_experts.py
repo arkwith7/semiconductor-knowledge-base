@@ -203,7 +203,7 @@ def build_one(idx: int, rng: random.Random,
         base += 15_000
     rate = int(base * rng.uniform(0.85, 1.20))
 
-    # Sensitive-attribute proxies for the AFCP compliance gate
+    # Sensitive-attribute proxies for the compliance gate
     has_nct_exposure = primary_family in {"memory", "etch", "deposition", "metallization"} and yoe >= 12
     return {
         "expert_id": expert_id,

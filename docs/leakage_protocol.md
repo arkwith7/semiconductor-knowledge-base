@@ -1,10 +1,10 @@
-# Leakage Protocol — AFCP-EM Evaluation
+# Leakage Protocol — SDKB-Match Evaluation
 
 > v0.1 draft — 2026-05-12. Pins the evaluation contract for deliverable ④ and the 2026-2 algorithm phase.
 
 ## 1. Problem statement
 
-A **leakage** event occurs when AFCP-EM's matching output reveals or relies on information that a multi-jurisdiction compliance rule forbids. Leakage rate measures how often this happens across the evaluation set. The rate must be **structurally bounded by design**, not patched by a post-filter — see [`afcp_em_architecture.md`](afcp_em_architecture.md) §4.
+A **leakage** event occurs when SDKB-Match's matching output reveals or relies on information that a multi-jurisdiction compliance rule forbids. Leakage rate measures how often this happens across the evaluation set. The rate must be **structurally bounded by design**, not patched by a post-filter — see [`matching_architecture.md`](matching_architecture.md) §4.
 
 ## 2. Definitions
 

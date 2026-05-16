@@ -12,7 +12,7 @@
 # ═══════════════════════════════════════════════════════════════════
 # SDKB v1.0 — Patent Module (sdkb-patent.ttl)
 #
-# Supports both AFCP-EM-PriorArt (prior-art retrieval evaluation) and
+# Supports both SDKB-Match PriorArt (prior-art retrieval evaluation) and
 # Prof. Shin's signature patent-analytics use cases (novelty-focused
 # patent mapping, topic-based forecasting, emerging-tech identification).
 #

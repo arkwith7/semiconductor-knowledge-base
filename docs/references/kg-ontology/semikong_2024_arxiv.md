@@ -11,7 +11,7 @@ local_pdf: none
 
 **Used in SDKB for:** Process hierarchy L1 → L3 curation into `sdkb-core.ttl`
 **Key claim:** A semiconductor-industry-specific LLM and accompanying curation pipeline covering process / equipment / material taxonomy
-**Relation to AFCP-EM / SDKB:** Source taxonomy for the SDKB core 14-class hierarchy; one of the three named sources in [Curation sources](../../../README.md#curation-sources)
+**Relation to SDKB-Match / SDKB:** Source taxonomy for the SDKB core 14-class hierarchy; one of the three named sources in [Curation sources](../../../README.md#curation-sources)
 
 ## Notes
 

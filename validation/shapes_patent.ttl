@@ -103,7 +103,7 @@ ont:Shape_RejectionReason
 # A Patent assigned to a KR-domiciled Organization and tagged as NCT must
 # not be released to a candidate whose jurisdiction is outside KR without
 # explicit approval. This is a SPARQL-based shape because the constraint
-# spans multiple hops and is the structural heart of AFCP-EM's gate.
+# spans multiple hops and is the structural heart of SDKB-Match's gate.
 gov:Shape_NCTLeakage
     a sh:NodeShape ;
     sh:targetClass ont:Patent ;

@@ -40,7 +40,7 @@
 ## 5. Uses
 
 ### Intended uses
-- AFCP-EM (Expert + PriorArt) evaluation and ablations
+- SDKB-Match (Expert + PriorArt) evaluation and ablations
 - Patent-analytics replication of Prof. Shin's TFSC family (novelty mapping, topic-based forecasting)
 - RBV / fsQCA-style key-resource-combination analyses
 - Multi-jurisdiction compliance teaching cases

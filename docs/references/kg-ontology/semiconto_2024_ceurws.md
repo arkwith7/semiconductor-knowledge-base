@@ -11,7 +11,7 @@ local_pdf: none
 
 **Used in SDKB for:** Material / equipment OWL alignment with the SDKB core
 **Key claim:** TODO_VERIFY — a semiconductor manufacturing ontology covering material and equipment classes
-**Relation to AFCP-EM / SDKB:** Enrichment source (not upper ontology) per [`docs/architecture_amendment_sdkb_centric.md`](../../architecture_amendment_sdkb_centric.md); SDKB v1.0 is the trunk and SemicONTO classes are aligned via `mappings/`
+**Relation to SDKB-Match / SDKB:** Enrichment source (not upper ontology) per [`docs/architecture_amendment_sdkb_centric.md`](../../architecture_amendment_sdkb_centric.md); SDKB v1.0 is the trunk and SemicONTO classes are aligned via `mappings/`
 
 ## Notes
 

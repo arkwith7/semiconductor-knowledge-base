@@ -30,7 +30,35 @@ size_categories:
 
 SDKB unifies semiconductor **process / equipment / defect / skill** knowledge, **patent taxonomies** (CPC / IPC / F-term), **firm resources** (RBV), **multi-jurisdictional regulation** (US BIS · NIST · ECHA + Korea ITPA), and **standards** (SEMI / JEDEC) under a single PROV-O-tracked ontology. It is built as the shared substrate for the lab's four research lines — *tech foresight, opportunity discovery, SME innovation analysis, and interactive tech / business visualization* — and as the seed dataset for an upcoming dissertation on a **compliance-aware semantic collaboration platform**.
 
-**First application — AFCP-EM** (*Agent-First Compliance Platform for Expert / PriorArt Matching*): two matching markets — Korean semiconductor SME ↔ expert, and patent application ↔ prior art — implemented on a single compliance-first architecture rather than as a post-hoc filter.
+**First application — SDKB-Match** (*SDKB Matching Layer — Korean semiconductor SME ↔ expert and patent application ↔ prior-art matching*): two matching markets implemented on a single compliance-first architecture rather than as a post-hoc filter.
+
+## Glossary
+
+Full names and meanings of acronyms used throughout this repository.
+
+| Acronym | Full name / meaning |
+|---|---|
+| **SDKB** | Semiconductor Domain Knowledge Base — this dataset / ontology trunk |
+| **SDKB-Match** | SDKB Matching Layer — the matching application built on SDKB: Korean semiconductor SME ↔ expert matching and patent ↔ prior-art matching on a single compliance-first architecture (not a post-hoc filter). Sub-tracks: **SDKB-Match Expert** / **SDKB-Match PriorArt** |
+| **SIRP** | Semiconductor Industry Rejected Patents — 773-patent rejected-patent dataset (SIRP-773) |
+| **SME (소부장)** | Small/medium enterprise; here semiconductor materials-parts-equipment firms |
+| **RBV** | Resource-Based View of the firm |
+| **FMEA** | Failure Mode and Effects Analysis |
+| **IPC / CPC / F-term** | International / Cooperative Patent Classification / File-forming term |
+| **GT** | Ground Truth (examiner-grounded = patent-office examiner citations) |
+| **MRR / NDCG@K / Recall@K** | Mean Reciprocal Rank / Normalized Discounted Cumulative Gain@K / Recall@K — retrieval metrics |
+| **κ / ICC** | Weighted Cohen's κ / Intraclass Correlation Coefficient — label-reliability metrics |
+| **IP-R&D** | Intellectual-Property-driven R&D / consulting |
+| **SHACL** | Shapes Constraint Language — RDF graph constraint validation |
+| **PROV-O** | W3C Provenance Ontology |
+| **KG / OWL / RDFS / TTL** | Knowledge Graph / Web Ontology Language / RDF Schema / Turtle serialization |
+| **BIS / NIST / ECHA / ITPA** | US Bureau of Industry and Security / US National Institute of Standards and Technology / European Chemicals Agency / Korea Industrial Technology Protection Act — multi-jurisdiction regulatory sources |
+| **SEMI / JEDEC** | Semiconductor standards bodies (SEMI International Standards / JEDEC Solid State Technology Association) |
+| **KIPRIS** | Korea Intellectual Property Rights Information Service |
+| **TFSC** | *Technological Forecasting & Social Change* (journal) |
+| **CLEF-IP / PatentMatch** | Prior-art retrieval evaluation benchmarks (protocol references) |
+| **MOT** | Management of Technology |
+| **A2 / A6** | Prior-art ontology-gap plan task IDs (A2 = new device/product layer; A6 = IDF-weighted concept ranking) |
 
 ## Lab context
 
@@ -40,7 +68,7 @@ Prof. Shin's Quantitative Technology Management Lab combines patent / market / i
 |---|---|---|
 | Patent-/market-/industry-driven **tech foresight** | `sdkb-patent.ttl` + SIRP-773 + Topic / Novelty nodes | [Use case 1](#use-cases) |
 | Promising-technology **opportunity discovery** | Novelty-focused patent mapping, emerging-memory topic clusters | [Use case 1](#use-cases), 🚧 [notebook 02](notebooks/02_patent_opportunity_demo.ipynb) |
-| **SME innovation analysis / expert matching** | AFCP-EM Expert + synthetic-100 + curated-110 expert pool + multi-jurisdiction compliance gate | [Use case 2](#use-cases), 🚧 [notebook 01](notebooks/01_matching_baseline_afcp.ipynb), ✅ [notebook 05](notebooks/05_synthetic_vs_curated_comparison.ipynb) |
+| **SME innovation analysis / expert matching** | SDKB-Match Expert + synthetic-100 + curated-110 expert pool + multi-jurisdiction compliance gate | [Use case 2](#use-cases), 🚧 [notebook 01](notebooks/01_matching_baseline_expert.ipynb), ✅ [notebook 05](notebooks/05_synthetic_vs_curated_comparison.ipynb) |
 | **Interactive tech / business visualization** | Pyvis 3-view explorer with automatic GitHub Pages deploy | [Live demo](https://arkwith7.github.io/semiconductor-knowledge-base/), [docs/visualization_plan.md](docs/visualization_plan.md) |
 | Organizational R&D / innovation design (secondary) | RBV core-resource combinations + TRL / real-option seed nodes | [Use case 4](#use-cases), 🚧 [notebook 03](notebooks/03_rbv_resource_combo_demo.ipynb) |
 
@@ -59,8 +87,8 @@ Each use case instantiates a lab research line on SDKB's shared graph.
 | # | Use case | Lab line | Modules | Notebook | Reference |
 |---|---|---|---|---|---|
 | 1 | **Novelty-focused patent mapping** — semiconductor technology-opportunity clusters | Opportunity discovery / foresight | core + patent + SIRP | 🚧 [02](notebooks/02_patent_opportunity_demo.ipynb) | Lee/Kang/Shin (TFSC 2015), Shin et al. (TFSC 2017) |
-| 2 | **AFCP-EM (Expert)** — Korean semiconductor SME ↔ expert semantic matching with multi-jurisdiction leakage gating | SME innovation / expert matching | core + governance + governance-kr | ✅ [01](notebooks/01_matching_baseline_afcp.ipynb) (matching) · ✅ [05](notebooks/05_synthetic_vs_curated_comparison.ipynb) (GT validity) | — |
-| 3 | **AFCP-EM (PriorArt)** — patent application ↔ prior art using examiner-cited ground truth | IP-R&D consulting / prior-art analysis | core + patent + SIRP | ✅ [04](notebooks/04_prior_art_baseline.ipynb) | PatentMatch, CLEF-IP family |
+| 2 | **SDKB-Match (Expert)** — Korean semiconductor SME ↔ expert semantic matching with multi-jurisdiction leakage gating | SME innovation / expert matching | core + governance + governance-kr | ✅ [01](notebooks/01_matching_baseline_expert.ipynb) (matching) · ✅ [05](notebooks/05_synthetic_vs_curated_comparison.ipynb) (GT validity) | — |
+| 3 | **SDKB-Match (PriorArt)** — patent application ↔ prior art using examiner-cited ground truth | IP-R&D consulting / prior-art analysis | core + patent + SIRP | ✅ [04](notebooks/04_prior_art_baseline.ipynb) | PatentMatch, CLEF-IP family |
 | 4 | **Key resource combinations** — semiconductor fabless market-entry analysis | Organizational R&D / core-resource analysis | core + rbv | 🚧 [03](notebooks/03_rbv_resource_combo_demo.ipynb) (data pending — alignment track) | Cho/Shin (PLoS ONE 2025), Bae/Shin (IEEE Access 2022) |
 | 5 | **Compound real options** — EUV vs. High-NA roadmap valuation | Technology valuation (later term) | core + foresight + commercialization | _(2026-2 planned)_ | Lab real-options line |
 | 6 | **Interactive KG explorer** — 3-view (baseline / SIRP / 4-pillar) GitHub Pages deploy | Interactive visualization | core + patent + rbv + foresight + commercialization | ✅ [Live](https://arkwith7.github.io/semiconductor-knowledge-base/) · `scripts/build_viz.py` | Lab visualization track |
@@ -96,7 +124,7 @@ data/
   compliance/                       # KR + US governance masters
 docs/
   research_alignment.md             # 4-pillar mapping
-  afcp_em_architecture.md           # system overview
+  matching_architecture.md          # system overview
   leakage_protocol.md               # leakage definition and measurement
   datasheet.md                      # data sheet (Gebru et al.)
   commercialization_strategy_v1.md
@@ -106,17 +134,17 @@ validation/shapes.ttl               # SHACL
 provenance/prov.ttl                 # PROV-O chain
 examples/sparql/                    # example queries
 notebooks/
-  01_matching_baseline_afcp.ipynb    # ✅ Use Case 2 (AFCP-EM Expert floor baseline)
+  01_matching_baseline_expert.ipynb  # ✅ Use Case 2 (SDKB-Match Expert floor baseline)
   02_patent_opportunity_demo.ipynb   # 🚧 Use Case 1 (novelty-focused mapping)
   03_rbv_resource_combo_demo.ipynb   # 🚧 Use Case 4 (RBV — data pending)
-  04_prior_art_baseline.ipynb        # ✅ Use Case 3 (AFCP-EM PriorArt baseline)
+  04_prior_art_baseline.ipynb        # ✅ Use Case 3 (SDKB-Match PriorArt baseline)
   05_synthetic_vs_curated_comparison.ipynb  # ✅ GT validity diagnostics for UC2
 CITATION.cff                        # advisor explicit
 ```
 
 ## Provenance and auditability
 
-AFCP-EM's *architectural* regulatory compliance (not a post-hoc filter) and full auditability are carried by:
+SDKB-Match's *architectural* regulatory compliance (not a post-hoc filter) and full auditability are carried by:
 
 - `dcterms:source` / `dcterms:license` / `dcterms:bibliographicCitation` — source tracking
 - `sdkb:interpretationType` — `verbatim` | `mapped` | `author-defined`

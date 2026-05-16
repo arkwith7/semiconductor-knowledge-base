@@ -11,7 +11,7 @@ local_pdf: none
 
 **Used in SDKB for:** Use Case 1 — patent foresight (opportunity discovery)
 **Key claim:** TODO_VERIFY — 5-attribute foresight framework applied to patent data
-**Relation to AFCP-EM / SDKB:** Informs the attribute selection in `sdkb-patent.ttl` (Topic / Novelty / Rejection / hasPriorArt) and the evaluation framing in Use Case 1
+**Relation to SDKB-Match / SDKB:** Informs the attribute selection in `sdkb-patent.ttl` (Topic / Novelty / Rejection / hasPriorArt) and the evaluation framing in Use Case 1
 
 ## Notes
 

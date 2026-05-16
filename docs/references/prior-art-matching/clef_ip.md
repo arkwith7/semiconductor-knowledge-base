@@ -9,9 +9,9 @@ local_pdf: none
 ---
 # CLEF-IP — CLEF Intellectual Property Track
 
-**Used in SDKB for:** Evaluation-protocol reference for AFCP-EM (PriorArt) — Use Case 3
+**Used in SDKB for:** Evaluation-protocol reference for SDKB-Match (PriorArt) — Use Case 3
 **Key claim:** Shared-task series on patent retrieval and classification; standardised topic-based prior-art search protocol
-**Relation to AFCP-EM / SDKB:** Methodological reference for the SIRP-773 evaluation framing (topic file, qrel, scoring with MRR / NDCG / Recall@K); cited as a family of works rather than a single paper
+**Relation to SDKB-Match / SDKB:** Methodological reference for the SIRP-773 evaluation framing (topic file, qrel, scoring with MRR / NDCG / Recall@K); cited as a family of works rather than a single paper
 
 ## Notes
 

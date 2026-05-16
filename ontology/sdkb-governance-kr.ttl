@@ -16,7 +16,7 @@
 # Divulgence and Protection of Industrial Technology, "산업기술보호법")
 # + 국가핵심기술 (National Core Technology, NCT) designation.
 #
-# Used by AFCP-EM-Expert/PriorArt to compute multi-jurisdiction leakage:
+# Used by SDKB-Match Expert/PriorArt to compute multi-jurisdiction leakage:
 # a KR-NCT item cited against a non-KR examiner counterpart is a structural
 # compliance risk that must be filtered, not merely flagged post-hoc.
 # ═══════════════════════════════════════════════════════════════════

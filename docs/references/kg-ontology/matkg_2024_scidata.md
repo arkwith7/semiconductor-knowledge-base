@@ -11,7 +11,7 @@ local_pdf: none
 
 **Used in SDKB for:** Material entity expansion in the core
 **Key claim:** TODO_VERIFY — an autonomously generated knowledge graph for materials science
-**Relation to AFCP-EM / SDKB:** Provides material-entity coverage that supplements the SemiKong process hierarchy; cited as a curation source in the [top-level README](../../../README.md#curation-sources)
+**Relation to SDKB-Match / SDKB:** Provides material-entity coverage that supplements the SemiKong process hierarchy; cited as a curation source in the [top-level README](../../../README.md#curation-sources)
 
 ## Notes
 

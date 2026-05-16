@@ -30,7 +30,35 @@ size_categories:
 
 SDKB는 반도체 **공정 · 장비 · 결함 · 스킬** 지식, **특허 분류**(CPC / IPC / F-term), **기업 자원**(RBV), **다중관할 규제**(미국 BIS · NIST · ECHA + 한국 산업기술보호법), **표준**(SEMI / JEDEC) 을 단일 PROV-O 출처 추적 온톨로지 위에 통합한다. 본 레포는 계량기술경영 연구실의 네 가지 연구 라인 — *기술예측, 유망기술 기회 발굴, 중소기업 혁신 성과 분석, 인터랙티브 기술 · 비즈니스 데이터 시각화* — 의 공통 데이터 기반이며, 후속 학위논문 "컴플라이언스 인지 시맨틱 협업 플랫폼"의 시드 데이터셋이다.
 
-**1차 응용 — AFCP-EM** (*Agent-First Compliance Platform for Expert / PriorArt Matching*): 반도체 소부장 SME ↔ 전문가 매칭, 특허출원 ↔ 선행기술 매칭 두 시장을 컴플라이언스-우선 아키텍처(사후 필터가 아닌 아키텍처 수준) 위에서 동시에 구현한다.
+**1차 응용 — SDKB-Match** (*SDKB Matching Layer — 반도체 소부장 SME ↔ 전문가, 특허출원 ↔ 선행기술 매칭*): 두 매칭 시장을 컴플라이언스-우선 아키텍처(사후 필터가 아닌 아키텍처 수준) 위에서 동시에 구현한다.
+
+## 약어 · 핵심 용어 (Glossary)
+
+처음 등장하는 약어의 풀네임과 의미를 한곳에 모은다.
+
+| 약어 | 풀네임 / 의미 |
+|---|---|
+| **SDKB** | Semiconductor Domain Knowledge Base — 본 데이터셋·온톨로지 트렁크 |
+| **SDKB-Match** | SDKB Matching Layer — SDKB 위에 구현된 매칭 응용 계층. 반도체 소부장 SME ↔ 전문가 매칭과 특허출원 ↔ 선행기술 매칭을 컴플라이언스-우선 아키텍처(사후 필터가 아님) 위에서 동시 구현. 하위 트랙: **SDKB-Match Expert** / **SDKB-Match PriorArt** |
+| **SIRP** | Semiconductor Industry Rejected Patents — 반도체 거절특허 773건 데이터셋(= SIRP-773) |
+| **소부장 SME** | 소재·부품·장비(materials·parts·equipment) 중소기업 |
+| **RBV** | Resource-Based View — 기업 핵심자원 기반 관점 |
+| **FMEA** | Failure Mode and Effects Analysis — 고장모드영향분석 |
+| **IPC / CPC / F-term** | International / Cooperative Patent Classification / File-forming term — 특허 분류 체계 |
+| **GT** | Ground Truth — 정답 라벨(examiner-grounded = 특허청 심사관 인용 기반) |
+| **MRR / NDCG@K / Recall@K** | Mean Reciprocal Rank / Normalized Discounted Cumulative Gain@K / Recall@K — 검색 성능 지표 |
+| **κ / ICC** | Weighted Cohen's κ / Intraclass Correlation Coefficient — 라벨 신뢰도 지표 |
+| **IP-R&D** | Intellectual-Property-driven R&D — 특허 연계 연구개발·컨설팅 |
+| **SHACL** | Shapes Constraint Language — RDF 그래프 제약 검증 언어 |
+| **PROV-O** | W3C Provenance Ontology — 출처 추적 온톨로지 |
+| **KG / OWL / RDFS / TTL** | Knowledge Graph / Web Ontology Language / RDF Schema / Turtle 직렬화 |
+| **BIS / NIST / ECHA / ITPA** | US Bureau of Industry and Security / US National Institute of Standards and Technology / European Chemicals Agency / 한국 산업기술보호법(Industrial Technology Protection Act) — 다중관할 규제 소스 |
+| **SEMI / JEDEC** | 반도체 표준화 기구(SEMI International Standards / JEDEC Solid State Technology Association) |
+| **KIPRIS** | Korea Intellectual Property Rights Information Service — 한국특허정보넷 |
+| **TFSC** | *Technological Forecasting & Social Change* — 학술지 |
+| **CLEF-IP / PatentMatch** | 선행기술 검색 평가 벤치마크(평가 프로토콜 참조) |
+| **MOT** | Management of Technology — 기술경영 |
+| **A2 / A6** | prior-art 온톨로지 갭 플랜의 작업 항목 ID (A2 = 소자/제품 device 계층 신설, A6 = IDF 가중 개념 랭킹) |
 
 ## 연구실 컨텍스트
 
@@ -40,7 +68,7 @@ SDKB는 반도체 **공정 · 장비 · 결함 · 스킬** 지식, **특허 분�
 |---|---|---|
 | 특허·시장·산업 데이터 기반 **기술예측** | `sdkb-patent.ttl` + SIRP-773 + Topic / Novelty 노드 | [활용 사례 1](#활용-사례) |
 | **유망기술 기회 발굴** | Novelty-focused patent mapping, emerging-memory 토픽 클러스터 | [활용 사례 1](#활용-사례), 🚧 [notebook 02](notebooks/02_patent_opportunity_demo.ipynb) |
-| **중소기업 혁신 성과 분석 / 전문가 매칭** | AFCP-EM Expert + 합성 100 + 큐레이션 110 전문가 풀 + 다중관할 컴플라이언스 게이트 | [활용 사례 2](#활용-사례), 🚧 [notebook 01](notebooks/01_matching_baseline_afcp.ipynb), ✅ [notebook 05](notebooks/05_synthetic_vs_curated_comparison.ipynb) |
+| **중소기업 혁신 성과 분석 / 전문가 매칭** | SDKB-Match Expert + 합성 100 + 큐레이션 110 전문가 풀 + 다중관할 컴플라이언스 게이트 | [활용 사례 2](#활용-사례), 🚧 [notebook 01](notebooks/01_matching_baseline_expert.ipynb), ✅ [notebook 05](notebooks/05_synthetic_vs_curated_comparison.ipynb) |
 | **인터랙티브 기술 · 비즈니스 시각화** | Pyvis 3-뷰 익스플로러 · GitHub Pages 자동 배포 | [Live demo](https://arkwith7.github.io/semiconductor-knowledge-base/), [docs/visualization_plan.md](docs/visualization_plan.md) |
 | 조직적 R&D 관리 / 혁신 디자인 (보조축) | RBV 핵심자원 조합 + TRL / 실물옵션 시드 노드 | [활용 사례 4](#활용-사례), 🚧 [notebook 03](notebooks/03_rbv_resource_combo_demo.ipynb) |
 
@@ -59,8 +87,8 @@ SDKB는 반도체 **공정 · 장비 · 결함 · 스킬** 지식, **특허 분�
 | # | 사용 사례 | 연구실 라인 | 모듈 | 노트북 | 학술 참조 |
 |---|---|---|---|---|---|
 | 1 | **Novelty-focused patent mapping** — 반도체 기술기회 클러스터 | 기회 발굴 / 기술예측 | core + patent + SIRP | 🚧 [02](notebooks/02_patent_opportunity_demo.ipynb) | Lee/Kang/Shin (TFSC 2015), Shin et al. (TFSC 2017) |
-| 2 | **AFCP-EM (Expert)** — 반도체 소부장 SME ↔ 전문가 시맨틱 매칭 + 다중관할 누수 차단 | 중소기업 혁신 / 전문가 매칭 | core + governance + governance-kr | ✅ [01](notebooks/01_matching_baseline_afcp.ipynb) (매칭) · ✅ [05](notebooks/05_synthetic_vs_curated_comparison.ipynb) (GT 타당성) | — |
-| 3 | **AFCP-EM (PriorArt)** — 특허출원 ↔ 선행기술 매칭 (examiner GT 기반) | IP-R&D 컨설팅 / 선행기술 분석 | core + patent + SIRP | ✅ [04](notebooks/04_prior_art_baseline.ipynb) | PatentMatch, CLEF-IP 패밀리 |
+| 2 | **SDKB-Match (Expert)** — 반도체 소부장 SME ↔ 전문가 시맨틱 매칭 + 다중관할 누수 차단 | 중소기업 혁신 / 전문가 매칭 | core + governance + governance-kr | ✅ [01](notebooks/01_matching_baseline_expert.ipynb) (매칭) · ✅ [05](notebooks/05_synthetic_vs_curated_comparison.ipynb) (GT 타당성) | — |
+| 3 | **SDKB-Match (PriorArt)** — 특허출원 ↔ 선행기술 매칭 (examiner GT 기반) | IP-R&D 컨설팅 / 선행기술 분석 | core + patent + SIRP | ✅ [04](notebooks/04_prior_art_baseline.ipynb) | PatentMatch, CLEF-IP 패밀리 |
 | 4 | **Key resource combinations** — 반도체 fabless 시장진입 분석 | 조직적 R&D / 핵심자원 분석 | core + rbv | 🚧 [03](notebooks/03_rbv_resource_combo_demo.ipynb) (데이터 대기 — 정렬 트랙) | Cho/Shin (PLoS ONE 2025), Bae/Shin (IEEE Access 2022) |
 | 5 | **복합실물옵션** — EUV vs High-NA 로드맵 가치평가 | 기술가치평가 (후속 학기) | core + foresight + commercialization | _(2026-2 예정)_ | 연구실 실물옵션 라인 |
 | 6 | **인터랙티브 KG 익스플로러** — 3-뷰(베이스라인 / SIRP / 4-pillar) GitHub Pages 배포 | 인터랙티브 시각화 | core + patent + rbv + foresight + commercialization | ✅ [Live](https://arkwith7.github.io/semiconductor-knowledge-base/) · `scripts/build_viz.py` | 연구실 시각화 트랙 |
@@ -96,7 +124,7 @@ data/
   compliance/                       # KR + US 거버넌스 마스터
 docs/
   research_alignment.md             # 4-pillar 매핑
-  afcp_em_architecture.md           # 시스템 개요
+  matching_architecture.md          # 시스템 개요
   leakage_protocol.md               # 누수 정의 / 측정
   datasheet.md                      # 데이터시트 (Gebru et al.)
   commercialization_strategy_v1.md
@@ -106,17 +134,17 @@ validation/shapes.ttl               # SHACL
 provenance/prov.ttl                 # PROV-O 체인
 examples/sparql/                    # 예시 쿼리
 notebooks/
-  01_matching_baseline_afcp.ipynb    # ✅ Use Case 2 (AFCP-EM Expert floor baseline)
+  01_matching_baseline_expert.ipynb  # ✅ Use Case 2 (SDKB-Match Expert floor baseline)
   02_patent_opportunity_demo.ipynb   # 🚧 Use Case 1 (novelty-focused mapping)
   03_rbv_resource_combo_demo.ipynb   # 🚧 Use Case 4 (RBV — 데이터 대기)
-  04_prior_art_baseline.ipynb        # ✅ Use Case 3 (AFCP-EM PriorArt 베이스라인)
+  04_prior_art_baseline.ipynb        # ✅ Use Case 3 (SDKB-Match PriorArt 베이스라인)
   05_synthetic_vs_curated_comparison.ipynb  # ✅ UC2 용 GT 타당성 진단
 CITATION.cff                        # advisor 명시
 ```
 
 ## Provenance & Auditability
 
-AFCP-EM의 **아키텍처 수준 규제 준수**(사후 필터가 아님)와 **감사가능성**은 다음 메타데이터로 보장된다.
+SDKB-Match의 **아키텍처 수준 규제 준수**(사후 필터가 아님)와 **감사가능성**은 다음 메타데이터로 보장된다.
 
 - `dcterms:source` / `dcterms:license` / `dcterms:bibliographicCitation` — 출처 추적
 - `sdkb:interpretationType` — `verbatim` | `mapped` | `author-defined`

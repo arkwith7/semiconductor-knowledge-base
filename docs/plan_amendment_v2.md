@@ -6,7 +6,7 @@
 | 선행 amendment | [plan_amendment_v1.md](plan_amendment_v1.md) (정렬 트랙 4모듈 추가) |
 | 신청자 | 박형식 (박사 19기, 학번 2025730080) |
 | 지도교수 | 신준석 교수 |
-| 변경 분류 | **합성 데이터 → 실제 검증 데이터 부분 교체** + AFCP-EM 응용 확장 |
+| 변경 분류 | **합성 데이터 → 실제 검증 데이터 부분 교체** + SDKB-Match 응용 확장 |
 | 작성일 | 2026-05-12 |
 | 상태 | Draft — 지도교수 확인 대기 |
 
@@ -22,11 +22,11 @@
 
 학술적 위상이 합성 데이터 대비 한 단계 높다(PatentMatch, CLEF-IP와 동급의 ground-truthed prior-art benchmark).
 
-### A-2. AFCP-EM 응용 확장의 자연적 정합
-원 계획의 AFCP-EM은 "전문가 매칭" 단일 응용으로 정의되었다. 본 데이터는 **선행기술 매칭(prior-art retrieval)** 응용을 동일 아키텍처(컴플라이언스 우선) 위에서 가능케 한다. 매칭의 본질이 동일하므로(쿼리 × 후보 풀 × 다중관할 컴플라이언스 필터), AFCP-EM 알고리즘 한 세트가 두 시장을 동시에 겨냥할 수 있다 — HR/컨설팅 + IP-R&D 컨설팅.
+### A-2. SDKB-Match 응용 확장의 자연적 정합
+원 계획의 SDKB-Match은 "전문가 매칭" 단일 응용으로 정의되었다. 본 데이터는 **선행기술 매칭(prior-art retrieval)** 응용을 동일 아키텍처(컴플라이언스 우선) 위에서 가능케 한다. 매칭의 본질이 동일하므로(쿼리 × 후보 풀 × 다중관할 컴플라이언스 필터), SDKB-Match 알고리즘 한 세트가 두 시장을 동시에 겨냥할 수 있다 — HR/컨설팅 + IP-R&D 컨설팅.
 
 ### A-3. 평가 지표의 자연 연속화
-계획서 산출물 ④의 평가가 합성 라벨 기반 weighted κ / ICC였다면, 본 데이터를 도입하면 평가 지표가 **MRR, NDCG@5, Recall@K, leakage rate** 로 자연스럽게 전환된다. 이는 계획서의 **2026-2학기 AFCP-EM 평가지표와 정확히 일치**하여 학기간 연속성을 확보한다.
+계획서 산출물 ④의 평가가 합성 라벨 기반 weighted κ / ICC였다면, 본 데이터를 도입하면 평가 지표가 **MRR, NDCG@5, Recall@K, leakage rate** 로 자연스럽게 전환된다. 이는 계획서의 **2026-2학기 SDKB-Match 평가지표와 정확히 일치**하여 학기간 연속성을 확보한다.
 
 ---
 
@@ -40,7 +40,7 @@
 | ③ 시나리오 25 | 합성 적대적 | **거절사유 패턴 25건** (진보성·신규성·청구범위·다중관할 충돌) |
 | ④ 7,500 ratings | 합성 7,500 + 600 인간검증 | **examiner-grounded 7,500 pairs** (positive ≈3,000 + hard-negative ≈4,500) |
 | 평가 지표 | weighted κ / ICC | **MRR, NDCG@5, Recall@K, leakage rate** |
-| AFCP-EM 응용 | Expert 단일 | **Expert + PriorArt 이중 응용** (Agent-First Compliance Platform — Expert/PriorArt Matching) |
+| SDKB-Match 응용 | Expert 단일 | **Expert + PriorArt 이중 응용** (SDKB Matching Layer) |
 | sdkb-patent.ttl | 스키마 + 소규모 합성 인스턴스 | **773 실 인스턴스 + IPC/거절사유 분류 포함** |
 | 사업화 전략 v1 | 7축 | 7축 + **IP-R&D 컨설팅 시장 사례** 추가 |
 
@@ -57,8 +57,8 @@
 | ④ | 7,500 ratings | **examiner-grounded pairs 7,500** (실 라벨) |
 | ⑤ | 사업화 전략 v1 | 7축 + IP-R&D 시장 |
 
-### C-2. AFCP-EM 리브랜드
-"Agent-First Compliance Platform — Expert/PriorArt Matching" — 약칭 AFCP-EM 유지, 의미 확장.
+### C-2. 매칭 응용 명명
+매칭 응용 계층의 명칭을 **SDKB-Match**(SDKB Matching Layer)로 하고, Expert/PriorArt 이중 트랙으로 의미를 확장한다.
 
 ### C-3. 데이터셋의 학술 인용성
 **examiner-grounded prior-art pairs**라는 학술 표준 라벨링 — IP&M·TFSC 외에 *Scientometrics*, *World Patent Information*, *JOI* 등 IP/특허분석 저널까지 투고 후보 확대.

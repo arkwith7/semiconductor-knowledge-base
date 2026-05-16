@@ -2,7 +2,7 @@
   "metadata": {
     "generated_date": "2026-02-09T22:47:02.805812",
     "total_scenarios": 30,
-    "description": "Compliance test scenarios for AFCP-EM evaluation (S1~S6)",
+    "description": "Compliance test scenarios for SDKB-Match evaluation (S1~S6)",
     "scenario_distribution": {
       "S1": 5,
       "S2": 5,

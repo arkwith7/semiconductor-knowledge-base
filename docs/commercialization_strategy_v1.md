@@ -18,12 +18,12 @@
 - IP-R&D와 인력 매칭이 분리되어 있음
 - 감사가능성(auditability) 부재
 
-## 3. Solution — AFCP-EM (dual track)
+## 3. Solution — SDKB-Match (dual track)
 
 | Track | Customer | Pain | Our edge |
 |---|---|---|---|
-| **AFCP-EM-Expert** | 소부장 SME, 컨설팅 | 적합 전문가를 찾을 역량 부족 | SDKB+합성 100 + 도메인 자문 + 컴플라이언스 게이트 |
-| **AFCP-EM-PriorArt** | 변리사, 기업 IP 부서 | 다국가 선행기술 누락 | SIRP 773 + examiner-grounded 7,500 평가 + 다중관할 게이트 |
+| **SDKB-Match Expert** | 소부장 SME, 컨설팅 | 적합 전문가를 찾을 역량 부족 | SDKB+합성 100 + 도메인 자문 + 컴플라이언스 게이트 |
+| **SDKB-Match PriorArt** | 변리사, 기업 IP 부서 | 다국가 선행기술 누락 | SIRP 773 + examiner-grounded 7,500 평가 + 다중관할 게이트 |
 
 ## 4. Market sizing (W6 — 정량)
 

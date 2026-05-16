@@ -30,7 +30,7 @@ dependencies = [
 align = [
     "sentence-transformers>=3.0",
 ]
-# Baseline retrieval evaluation for AFCP-EM-PriorArt
+# Baseline retrieval evaluation for SDKB-Match PriorArt
 priorart = [
     "scikit-learn>=1.4",
 ]

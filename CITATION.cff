@@ -26,9 +26,9 @@ abstract: >-
   multi-jurisdiction regulatory layers with patent classification, RBV,
   commercialization, and foresight modules. The Semiconductor Industry
   Rejected Patents (SIRP) dataset adds 773 examiner-grounded prior-art
-  labels supporting the AFCP-EM platform (Agent-First Compliance Platform
-  for Expert/PriorArt Matching), which is the first concrete implementation
-  of the lab's compliance-aware semantic collaboration vision.
+  labels supporting SDKB-Match (the SDKB Matching Layer for semiconductor
+  SME ↔ expert and patent ↔ prior-art matching), the first concrete
+  implementation of the lab's compliance-aware semantic collaboration vision.
 keywords:
   - semiconductor
   - ontology

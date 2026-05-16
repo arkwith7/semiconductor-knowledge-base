@@ -1,6 +1,6 @@
 # `prior-art-matching/` — Patent ↔ prior-art retrieval literature
 
-Baselines and evaluation protocols for **AFCP-EM (PriorArt)** —
+Baselines and evaluation protocols for **SDKB-Match (PriorArt)** —
 SDKB Use Case 3. The SIRP-773 examiner-cited dataset is benchmarked
 against these prior works.
 

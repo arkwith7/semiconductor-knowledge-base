@@ -9,9 +9,9 @@ local_pdf: none
 ---
 # PatentMatch (2020)
 
-**Used in SDKB for:** Baseline benchmark for AFCP-EM (PriorArt) — Use Case 3
+**Used in SDKB for:** Baseline benchmark for SDKB-Match (PriorArt) — Use Case 3
 **Key claim:** TODO_VERIFY — examiner-cited patent matching dataset and BERT-based baselines
-**Relation to AFCP-EM / SDKB:** Reference dataset and baseline against which the SIRP-773 prior-art track is positioned in evaluation; informs the train/test split and negative-sampling protocol in `data/patents/prior_art_pairs.parquet`
+**Relation to SDKB-Match / SDKB:** Reference dataset and baseline against which the SIRP-773 prior-art track is positioned in evaluation; informs the train/test split and negative-sampling protocol in `data/patents/prior_art_pairs.parquet`
 
 ## Notes
 

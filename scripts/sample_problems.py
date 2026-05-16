@@ -160,7 +160,7 @@ def main() -> None:
                 "anchor_patent_id": patent_id or "",
                 "adversarial_intent": (
                     f"{rejection_ko} 사유로 거절된 {jur_label} 다중관할 인용 패턴을 가진 "
-                    f"케이스에서 AFCP-EM이 어느 인용을 노출/차단하는지 평가한다. "
+                    f"케이스에서 SDKB-Match가 어느 인용을 노출/차단하는지 평가한다. "
                     f"leakage rate 측정 단위."
                 ),
             })

@@ -1,12 +1,12 @@
 # `expert-matching/` — SME ↔ expert and talent / reviewer matching
 
-Background for **AFCP-EM (Expert)** — SDKB Use Case 2. Covers reviewer
+Background for **SDKB-Match (Expert)** — SDKB Use Case 2. Covers reviewer
 assignment, expertise retrieval, recommender systems for SME consulting,
 and compliance-aware matching frameworks.
 
 ## Entries
 
-_(none yet — seed will be added as the AFCP-EM Expert notebook matures)_
+_(none yet — seed will be added as the SDKB-Match Expert notebook matures)_
 
 Candidate seeds to collect:
 
