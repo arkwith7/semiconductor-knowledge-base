@@ -1,6 +1,6 @@
 .PHONY: all install venv parse owl convert align validate test clean \
         ingest-sirp sirp-pairs sirp-problems sirp experts \
-        compliance curated-experts curated-ratings expdataset \
+        compliance curated-experts curated-ratings expdataset abox abox-patents \
         semiconto-fetch semiconto-analyze semiconto-align semiconto-enrich semiconto-phase0 \
         viz viz-clean viz-open \
         pipeline pipeline-sirp pipeline-full pipeline-with-expdataset help
@@ -31,6 +31,8 @@ help:
 	@echo "  curated-experts Ingest curated 110-expert pool"
 	@echo "  curated-ratings Ingest 7,800 3-rater ratings + compute kappa/ICC"
 	@echo "  expdataset      compliance + curated-experts + curated-ratings"
+	@echo "  abox            convert + lift experts/problems → A-Box TTL (notebook 06)"
+	@echo "  abox-patents    convert + ingest-sirp + lift patents → A-Box TTL (notebook 07)"
 	@echo "  semiconto-fetch    Download SemicONTO v0.2 TTL into ontology/imports/"
 	@echo "  semiconto-analyze  Parse SemicONTO TTL → data/reports/semiconto_analysis.json"
 	@echo "  semiconto-align    Build SDKB↔SemicONTO SKOS alignment (mappings/)"
@@ -67,6 +69,16 @@ owl:
 
 convert:
 	$(PYTHON) scripts/convert_rdf.py
+
+# Lift curated experts + SME problems into an RDF A-Box linked to the
+# ontology node URIs emitted by `convert` (consumed by notebook 06).
+abox: convert
+	$(PYTHON) scripts/build_abox_experts_problems.py
+
+# Lift the SIRP rejected-patent corpus into an RDF A-Box (consumed by
+# notebook 07 — ontology-driven prior-art retrieval).
+abox-patents: convert ingest-sirp
+	$(PYTHON) scripts/build_abox_patents.py
 
 align:
 	$(PYTHON) scripts/align_candidates.py
