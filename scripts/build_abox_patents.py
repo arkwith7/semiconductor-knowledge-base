@@ -53,6 +53,37 @@ PATENT_ROUTING = {
     "Mitigation": "relatedToTopic",
 }
 
+# Deterministic bridge from the curator-assigned `process_family` field
+# (rejected_patents_meta.parquet) to an ontology Process node. This is a
+# structured-field link — high precision, no NLP — added IN ADDITION to the
+# free-text extraction. Only families that map cleanly to a unit-process
+# node are listed; device/product/packaging families are intentionally
+# absent (see SCOPE_OUT_FAMILIES) so orphans split honestly into
+# "text-miss" (fixable) vs "out-of-ontology-scope" (needs a device layer).
+PROCESS_FAMILY_MAP = {
+    "etch": "process:etch",
+    "deposition": "process:deposition",
+    "metallization": "process:deposition",   # metal-layer deposition
+    "interconnect": "process:deposition",     # damascene metal fill
+    "gate_dielectric": "process:deposition",  # modern high-k = ALD/depo
+    "oxidation_diffusion": "process:diffusion",
+    "oxidation": "process:diffusion",
+    "thermal": "process:diffusion",           # anneal / thermal step
+    "photo": "process:lithography",
+    "implant": "process:implant",
+}
+# Families that have NO unit-process home in the current ontology — device /
+# product / packaging / component level. Patents whose only signal is one of
+# these (and value_chain shows device/component) are scope-out, not bugs.
+SCOPE_OUT_FAMILIES = {
+    "memory", "memory_cell", "memory_dram", "image_sensor", "3d_integration",
+    "mems", "backend_packaging", "packaging", "components",
+}
+
+
+def _value_chain_tokens(v) -> set[str]:
+    return {t.strip() for t in str(v or "").split("|") if t.strip()}
+
 
 def _u(curie_or_id: str) -> URIRef:
     """`patent:kr_..` / `skill:..` → data URI (mirrors convert_rdf.uri)."""
@@ -98,6 +129,8 @@ def main() -> int:
         "applicationNumber": "patent application number",
         "patentOffice": "issuing office",
         "primaryIpc": "primary IPC code",
+        "processFamily": "curator-assigned process family (structured field)",
+        "valueChain": "curator-assigned value-chain position (structured)",
     }.items():
         g.add((ONT_R(p), RDF.type, OWL.ObjectProperty))
         g.add((ONT_R(p), RDFS.comment, Literal(c, lang="en")))
@@ -106,6 +139,11 @@ def main() -> int:
     nodes_per: list[int] = []
     orphans: list[str] = []
     matched_terms = Counter()
+    n_structured = 0          # patents that got >=1 structured-field link
+    n_text = 0                # patents that got >=1 free-text link
+    orphan_scope_out: list[str] = []   # device/packaging/component — no node
+    orphan_text_miss: list[str] = []   # in-domain yet still unlinked (fixable)
+    fam_unmapped = Counter()  # in-domain families with no structured node
 
     for _, r in meta.iterrows():
         pid = str(r["patent_id"])
@@ -114,27 +152,52 @@ def main() -> int:
         g.add((pu, RDFS.label, Literal(str(r.get("title") or pid))))
         for col, prop in (("application_number", "applicationNumber"),
                           ("patent_office", "patentOffice"),
-                          ("primary_ipc", "primaryIpc")):
+                          ("primary_ipc", "primaryIpc"),
+                          ("process_family", "processFamily"),
+                          ("value_chain", "valueChain")):
             v = r.get(col)
             if pd.notna(v) and str(v).strip():
                 g.add((pu, ONT_R(prop), Literal(str(v))))
 
+        # 1) deterministic structured-field bridge (high precision, no NLP)
+        fam = str(r.get("process_family") or "").strip().lower()
+        linked: set[str] = set()
+        if fam in PROCESS_FAMILY_MAP:
+            nid = PROCESS_FAMILY_MAP[fam]
+            g.add((pu, ONT_R("concernsProcess"), _u(nid)))
+            linked.add(nid)
+            type_dist["Process"] += 1
+            n_structured += 1
+
+        # 2) free-text extraction (UNION with the structured link)
         text = (f"{r.get('title') or ''} {r.get('abstract') or ''} "
                 f"{r.get('claim1') or ''}")
-        linked: set[str] = set()
+        had_text = False
         for term, hits in br.extract_from_text(text).items():
             for nid, typ in hits:
                 prop = PATENT_ROUTING.get(typ)
                 if not prop:
                     continue
-                g.add((pu, ONT_R(prop), _u(nid)))
+                if nid not in linked:
+                    g.add((pu, ONT_R(prop), _u(nid)))
+                    type_dist[typ] += 1
                 linked.add(nid)
-                type_dist[typ] += 1
+                had_text = True
             if hits:
                 matched_terms[term] += 1
+        if had_text:
+            n_text += 1
+
         nodes_per.append(len(linked))
         if not linked:
             orphans.append(pid)
+            vc = _value_chain_tokens(r.get("value_chain"))
+            if fam in SCOPE_OUT_FAMILIES or {"device", "component"} & vc:
+                orphan_scope_out.append(pid)   # needs a device layer (A2)
+            else:
+                orphan_text_miss.append(pid)   # genuinely fixable residue
+                if fam and fam not in PROCESS_FAMILY_MAP:
+                    fam_unmapped[fam] += 1
 
     OUT_TTL.parent.mkdir(parents=True, exist_ok=True)
     g.serialize(str(OUT_TTL), format="turtle")
@@ -145,7 +208,23 @@ def main() -> int:
         "patents": n,
         "triples": len(g),
         "patents_with_ontology_link": n - len(orphans),
+        "link_provenance": {
+            "structured_process_family": n_structured,
+            "free_text": n_text,
+            "process_family_map": PROCESS_FAMILY_MAP,
+        },
         "orphans_count": len(orphans),
+        "orphans_split": {
+            "scope_out": len(orphan_scope_out),
+            "text_miss": len(orphan_text_miss),
+            "note": "scope_out = device/packaging/component family or "
+                    "value_chain device|component — no ontology node exists "
+                    "(needs the A2 device layer; NOT a lift bug). text_miss = "
+                    "in-domain yet unlinked — the genuinely fixable residue.",
+            "text_miss_families": dict(fam_unmapped.most_common()),
+            "scope_out_sample": orphan_scope_out[:10],
+            "text_miss_sample": orphan_text_miss[:10],
+        },
         "orphans_sample": orphans[:15],
         "nodes_per_patent": {
             "mean": round(sum(nodes_per) / n, 3) if n else 0,
@@ -157,11 +236,12 @@ def main() -> int:
         "top_matched_terms": [
             {"term": t, "patents": c} for t, c in matched_terms.most_common(40)
         ],
-        "bridge_mode": mode,
-        "note": "Korean free-text lift via the shared 2-tier bridge "
-                "(sdkb_nb / build_abox_experts_problems) over "
-                "title+abstract+claim1. Orphans are graph-unrankable for "
-                "prior-art and reported honestly.",
+        "bridge_mode": mode + " + structured(process_family)",
+        "note": "Lift = deterministic process_family->Process bridge UNION "
+                "Korean free-text (sdkb_nb 2-tier, title+abstract+claim1). "
+                "Orphans split into scope_out (no ontology node — device "
+                "layer gap) vs text_miss (fixable) so the residual loss is "
+                "diagnosed, not just counted.",
     }
     OUT_REPORT.parent.mkdir(parents=True, exist_ok=True)
     OUT_REPORT.write_text(json.dumps(report, ensure_ascii=False, indent=2))
@@ -169,8 +249,10 @@ def main() -> int:
     npp = report["nodes_per_patent"]
     print(f"✓ Patent A-Box ({len(g):,} triples) → {OUT_TTL.relative_to(ROOT)}")
     print(f"  patents={n}  linked={n - len(orphans)} "
-          f"orphans={len(orphans)}  nodes/patent mean={npp['mean']} "
-          f"median={npp['median']} zero={npp['zero']}")
+          f"(structured={n_structured}, text={n_text})  "
+          f"nodes/patent mean={npp['mean']} median={npp['median']}")
+    print(f"  orphans={len(orphans)}  -> scope_out={len(orphan_scope_out)} "
+          f"(device layer gap) / text_miss={len(orphan_text_miss)} (fixable)")
     print(f"  edges by type: {dict(type_dist.most_common(6))}")
     print(f"  report → {OUT_REPORT.relative_to(ROOT)}")
     return 0

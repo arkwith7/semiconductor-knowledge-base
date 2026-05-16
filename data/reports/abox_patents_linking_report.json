@@ -1,37 +1,87 @@
 {
   "input": "data/patents/rejected_patents_meta.parquet",
   "patents": 773,
-  "triples": 5623,
-  "patents_with_ontology_link": 616,
-  "orphans_count": 157,
+  "triples": 7490,
+  "patents_with_ontology_link": 702,
+  "link_provenance": {
+    "structured_process_family": 584,
+    "free_text": 616,
+    "process_family_map": {
+      "etch": "process:etch",
+      "deposition": "process:deposition",
+      "metallization": "process:deposition",
+      "interconnect": "process:deposition",
+      "gate_dielectric": "process:deposition",
+      "oxidation_diffusion": "process:diffusion",
+      "oxidation": "process:diffusion",
+      "thermal": "process:diffusion",
+      "photo": "process:lithography",
+      "implant": "process:implant"
+    }
+  },
+  "orphans_count": 71,
+  "orphans_split": {
+    "scope_out": 48,
+    "text_miss": 23,
+    "note": "scope_out = device/packaging/component family or value_chain device|component — no ontology node exists (needs the A2 device layer; NOT a lift bug). text_miss = in-domain yet unlinked — the genuinely fixable residue.",
+    "text_miss_families": {
+      "general": 19,
+      "materials": 3,
+      "equipment": 1
+    },
+    "scope_out_sample": [
+      "patent:kr_1020210140518",
+      "patent:kr_1020247018636",
+      "patent:kr_1020220049545",
+      "patent:kr_1020230084204",
+      "patent:kr_1020220029544",
+      "patent:kr_1020180006266",
+      "patent:kr_1020140193744",
+      "patent:kr_1020140070032",
+      "patent:kr_1020140000858",
+      "patent:kr_1020220090397"
+    ],
+    "text_miss_sample": [
+      "patent:kr_1020140083150",
+      "patent:kr_1020117011375",
+      "patent:kr_1020080093453",
+      "patent:kr_1020157022334",
+      "patent:kr_1020170135831",
+      "patent:kr_1020167009441",
+      "patent:kr_1020120152163",
+      "patent:kr_1020120148667",
+      "patent:kr_1020120139831",
+      "patent:kr_1020120071127"
+    ]
+  },
   "orphans_sample": [
-    "patent:kr_1020200168702",
-    "patent:kr_1020210146505",
-    "patent:kr_1020237019504",
-    "patent:kr_1020197000593",
-    "patent:kr_1020217001907",
-    "patent:kr_1020160016943",
-    "patent:kr_1020180145243",
-    "patent:kr_1020160047857",
-    "patent:kr_1020237038547",
-    "patent:kr_1020227021807",
-    "patent:kr_1020150191707",
-    "patent:kr_1020167034015",
-    "patent:kr_1020160109880",
-    "patent:kr_1020200137710",
-    "patent:kr_1020210119619"
+    "patent:kr_1020210140518",
+    "patent:kr_1020247018636",
+    "patent:kr_1020220049545",
+    "patent:kr_1020230084204",
+    "patent:kr_1020220029544",
+    "patent:kr_1020180006266",
+    "patent:kr_1020140193744",
+    "patent:kr_1020140070032",
+    "patent:kr_1020140000858",
+    "patent:kr_1020220090397",
+    "patent:kr_1020200013638",
+    "patent:kr_1020120151681",
+    "patent:kr_1020110120353",
+    "patent:kr_1020150023151",
+    "patent:kr_1020160061291"
   ],
   "nodes_per_patent": {
-    "mean": 2.248,
+    "mean": 2.658,
     "median": 2,
     "max": 9,
-    "zero": 157
+    "zero": 71
   },
   "concern_edges_by_node_type": {
-    "Process": 929,
-    "Skill": 538,
-    "Material": 485,
-    "SubProcess": 177,
+    "Process": 1004,
+    "Skill": 510,
+    "Material": 409,
+    "SubProcess": 123,
     "EquipmentClass": 5,
     "FailureMode": 3,
     "TechnologyNode": 1
@@ -198,6 +248,6 @@
       "patents": 12
     }
   ],
-  "bridge_mode": "morph(Kiwi)+substring, title+abstract+claim1",
-  "note": "Korean free-text lift via the shared 2-tier bridge (sdkb_nb / build_abox_experts_problems) over title+abstract+claim1. Orphans are graph-unrankable for prior-art and reported honestly."
+  "bridge_mode": "morph(Kiwi)+substring, title+abstract+claim1 + structured(process_family)",
+  "note": "Lift = deterministic process_family->Process bridge UNION Korean free-text (sdkb_nb 2-tier, title+abstract+claim1). Orphans split into scope_out (no ontology node — device layer gap) vs text_miss (fixable) so the residual loss is diagnosed, not just counted."
 }
