@@ -5,6 +5,8 @@ data/edges.parquet
 ontology/sdkb-core.ttl
 ontology/sdkb-core-data.ttl
 ontology/sdkb-core-data.jsonld
+ontology/sdkb-abox-experts-problems.ttl
+ontology/sdkb-abox-patents.ttl
 mappings/mapping_candidates.tsv
 
 # ── Auto-generated artifacts (SIRP / patent track) ──────────────

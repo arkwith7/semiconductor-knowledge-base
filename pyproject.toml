@@ -44,6 +44,11 @@ viz = [
     "pyvis>=0.3.2",
     "networkx>=3.2",
 ]
+# Korean morphological analysis (notebook 07 patent-text lift; optional —
+# the bridge falls back to the deterministic substring scan without it)
+nlp = [
+    "kiwipiepy>=0.17",
+]
 # Development & testing
 dev = [
     "pytest>=8.2",
@@ -51,7 +56,7 @@ dev = [
     "ruff>=0.5",
 ]
 # Full pipeline (all extras)
-full = ["sdkb[align,priorart,notebook,viz,dev]"]
+full = ["sdkb[align,priorart,notebook,viz,nlp,dev]"]
 
 [project.scripts]
 sdkb-parse              = "scripts.parse_baseline:main"

@@ -1,0 +1,281 @@
+{
+  "inputs": {
+    "kg": "data/semiconductor_v0_3.json",
+    "experts": 110,
+    "problems": 226
+  },
+  "triples": 3561,
+  "mitigation_to_skill_links": 4,
+  "term_resolution": {
+    "distinct_terms_seen": 575,
+    "tier1_lexicon_hits": 1269,
+    "tier2_alias_hits": 766,
+    "unmatched_occurrences": 2122,
+    "distinct_unmatched": 415,
+    "distinct_matched": 132
+  },
+  "orphans": {
+    "experts_with_no_ontology_link": [
+      "EXP_104",
+      "EXP_105",
+      "EXP_107"
+    ],
+    "problems_with_no_ontology_link": [
+      "SC_PROB_005",
+      "SC_PROB_006",
+      "SC_PROB_015",
+      "OT_PROB_001",
+      "OT_PROB_002",
+      "OT_PROB_003",
+      "OT_PROB_004",
+      "OT_PROB_006",
+      "OT_PROB_007",
+      "OT_PROB_008",
+      "OT_PROB_009",
+      "OT_PROB_010"
+    ],
+    "note": "Orphans are un-rankable by the graph query — this is the honest residual loss of the deterministic lift."
+  },
+  "top_unmatched": [
+    {
+      "term": "fab_operations",
+      "occurrences": 119
+    },
+    {
+      "term": "equipment_engineering",
+      "occurrences": 66
+    },
+    {
+      "term": "materials_science",
+      "occurrences": 50
+    },
+    {
+      "term": "process_integration",
+      "occurrences": 43
+    },
+    {
+      "term": "materials",
+      "occurrences": 33
+    },
+    {
+      "term": "new_technology_needed",
+      "occurrences": 32
+    },
+    {
+      "term": "capability_gap",
+      "occurrences": 32
+    },
+    {
+      "term": "development",
+      "occurrences": 31
+    },
+    {
+      "term": "variation",
+      "occurrences": 31
+    },
+    {
+      "term": "performance_degradation",
+      "occurrences": 25
+    },
+    {
+      "term": "semiconductor",
+      "occurrences": 25
+    },
+    {
+      "term": "equipment",
+      "occurrences": 23
+    },
+    {
+      "term": "analysis",
+      "occurrences": 22
+    },
+    {
+      "term": "exposure",
+      "occurrences": 22
+    },
+    {
+      "term": "data_analytics",
+      "occurrences": 21
+    },
+    {
+      "term": "integration",
+      "occurrences": 20
+    },
+    {
+      "term": "DRAM",
+      "occurrences": 20
+    },
+    {
+      "term": "advanced_node_integration",
+      "occurrences": 20
+    },
+    {
+      "term": "predictive_maintenance",
+      "occurrences": 20
+    },
+    {
+      "term": "equipment_drift",
+      "occurrences": 20
+    },
+    {
+      "term": "parts",
+      "occurrences": 19
+    },
+    {
+      "term": "specialty",
+      "occurrences": 18
+    },
+    {
+      "term": "automation",
+      "occurrences": 17
+    },
+    {
+      "term": "wet_etching",
+      "occurrences": 17
+    },
+    {
+      "term": "DDR5",
+      "occurrences": 16
+    },
+    {
+      "term": "resist",
+      "occurrences": 16
+    },
+    {
+      "term": "FEOL",
+      "occurrences": 15
+    },
+    {
+      "term": "3D_NAND",
+      "occurrences": 15
+    },
+    {
+      "term": "process_variation",
+      "occurrences": 15
+    },
+    {
+      "term": "BEOL",
+      "occurrences": 14
+    },
+    {
+      "term": "NAND",
+      "occurrences": 14
+    },
+    {
+      "term": "quality",
+      "occurrences": 14
+    },
+    {
+      "term": "foundry",
+      "occurrences": 14
+    },
+    {
+      "term": "40nm",
+      "occurrences": 14
+    },
+    {
+      "term": "calibration",
+      "occurrences": 14
+    },
+    {
+      "term": "GAA",
+      "occurrences": 13
+    },
+    {
+      "term": "SPC",
+      "occurrences": 13
+    },
+    {
+      "term": "28nm",
+      "occurrences": 13
+    },
+    {
+      "term": "measurement",
+      "occurrences": 13
+    },
+    {
+      "term": "defect_review",
+      "occurrences": 13
+    },
+    {
+      "term": "selectivity",
+      "occurrences": 13
+    },
+    {
+      "term": "advanced_node",
+      "occurrences": 12
+    },
+    {
+      "term": "optimization",
+      "occurrences": 12
+    },
+    {
+      "term": "uniformity",
+      "occurrences": 12
+    },
+    {
+      "term": "manufacturing",
+      "occurrences": 12
+    },
+    {
+      "term": "DRAM_16nm_Less",
+      "occurrences": 12
+    },
+    {
+      "term": "competitive_pressure",
+      "occurrences": 12
+    },
+    {
+      "term": "yield_drop",
+      "occurrences": 12
+    },
+    {
+      "term": "defect_increase",
+      "occurrences": 12
+    },
+    {
+      "term": "process_control",
+      "occurrences": 12
+    },
+    {
+      "term": "device_failure",
+      "occurrences": 12
+    },
+    {
+      "term": "overlay_measurement",
+      "occurrences": 12
+    },
+    {
+      "term": "film_thickness",
+      "occurrences": 12
+    },
+    {
+      "term": "logic",
+      "occurrences": 11
+    },
+    {
+      "term": "memory",
+      "occurrences": 11
+    },
+    {
+      "term": "cleanroom",
+      "occurrences": 11
+    },
+    {
+      "term": "2nm",
+      "occurrences": 11
+    },
+    {
+      "term": "55nm",
+      "occurrences": 11
+    },
+    {
+      "term": "plasma_etching",
+      "occurrences": 11
+    },
+    {
+      "term": "suboptimal_performance",
+      "occurrences": 11
+    }
+  ]
+}
