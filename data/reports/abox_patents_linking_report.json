@@ -1,0 +1,203 @@
+{
+  "input": "data/patents/rejected_patents_meta.parquet",
+  "patents": 773,
+  "triples": 5623,
+  "patents_with_ontology_link": 616,
+  "orphans_count": 157,
+  "orphans_sample": [
+    "patent:kr_1020200168702",
+    "patent:kr_1020210146505",
+    "patent:kr_1020237019504",
+    "patent:kr_1020197000593",
+    "patent:kr_1020217001907",
+    "patent:kr_1020160016943",
+    "patent:kr_1020180145243",
+    "patent:kr_1020160047857",
+    "patent:kr_1020237038547",
+    "patent:kr_1020227021807",
+    "patent:kr_1020150191707",
+    "patent:kr_1020167034015",
+    "patent:kr_1020160109880",
+    "patent:kr_1020200137710",
+    "patent:kr_1020210119619"
+  ],
+  "nodes_per_patent": {
+    "mean": 2.248,
+    "median": 2,
+    "max": 9,
+    "zero": 157
+  },
+  "concern_edges_by_node_type": {
+    "Process": 929,
+    "Skill": 538,
+    "Material": 485,
+    "SubProcess": 177,
+    "EquipmentClass": 5,
+    "FailureMode": 3,
+    "TechnologyNode": 1
+  },
+  "top_matched_terms": [
+    {
+      "term": "절연막",
+      "patents": 141
+    },
+    {
+      "term": "플라즈마",
+      "patents": 140
+    },
+    {
+      "term": "증착",
+      "patents": 139
+    },
+    {
+      "term": "식각",
+      "patents": 139
+    },
+    {
+      "term": "챔버",
+      "patents": 114
+    },
+    {
+      "term": "박막",
+      "patents": 109
+    },
+    {
+      "term": "가스",
+      "patents": 106
+    },
+    {
+      "term": "산화물",
+      "patents": 79
+    },
+    {
+      "term": "마스크",
+      "patents": 74
+    },
+    {
+      "term": "에칭",
+      "patents": 51
+    },
+    {
+      "term": "패터닝",
+      "patents": 49
+    },
+    {
+      "term": "산화막",
+      "patents": 40
+    },
+    {
+      "term": "주입",
+      "patents": 37
+    },
+    {
+      "term": "포토",
+      "patents": 34
+    },
+    {
+      "term": "도핑",
+      "patents": 30
+    },
+    {
+      "term": "스퍼터",
+      "patents": 28
+    },
+    {
+      "term": "열처리",
+      "patents": 28
+    },
+    {
+      "term": "세정",
+      "patents": 27
+    },
+    {
+      "term": "연마",
+      "patents": 26
+    },
+    {
+      "term": "질화막",
+      "patents": 25
+    },
+    {
+      "term": "식각 공정",
+      "patents": 24
+    },
+    {
+      "term": "스퍼터링",
+      "patents": 23
+    },
+    {
+      "term": "질화물",
+      "patents": 23
+    },
+    {
+      "term": "결함",
+      "patents": 22
+    },
+    {
+      "term": "폴리실리콘",
+      "patents": 21
+    },
+    {
+      "term": "박막 증착",
+      "patents": 20
+    },
+    {
+      "term": "평탄화",
+      "patents": 19
+    },
+    {
+      "term": "확산",
+      "patents": 19
+    },
+    {
+      "term": "플라즈마 식각",
+      "patents": 18
+    },
+    {
+      "term": "포토레지스트",
+      "patents": 17
+    },
+    {
+      "term": "정렬",
+      "patents": 17
+    },
+    {
+      "term": "구리",
+      "patents": 16
+    },
+    {
+      "term": "슬러리",
+      "patents": 16
+    },
+    {
+      "term": "cmp",
+      "patents": 15
+    },
+    {
+      "term": "이온 주입",
+      "patents": 14
+    },
+    {
+      "term": "w",
+      "patents": 14
+    },
+    {
+      "term": "원자층 증착",
+      "patents": 14
+    },
+    {
+      "term": "deposition",
+      "patents": 12
+    },
+    {
+      "term": "알루미늄",
+      "patents": 12
+    },
+    {
+      "term": "al",
+      "patents": 12
+    }
+  ],
+  "bridge_mode": "morph(Kiwi)+substring, title+abstract+claim1",
+  "note": "Korean free-text lift via the shared 2-tier bridge (sdkb_nb / build_abox_experts_problems) over title+abstract+claim1. Orphans are graph-unrankable for prior-art and reported honestly."
+}
