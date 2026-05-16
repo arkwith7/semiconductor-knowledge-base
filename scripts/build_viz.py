@@ -187,15 +187,79 @@ function sdkbFit() {
 """
 
 
+# vis-network 9.x renders a STRING `title` as plain text (HTML string
+# rendering was removed for XSS safety; only an HTMLElement is rendered as
+# HTML). pyvis 0.3.2 emits titles as strings, so our concept-card markup
+# would otherwise show raw <div>/<b> tags. This shim converts each node's
+# string title into a real DOM element after the graph is drawn, and
+# themes the tooltip to match the dark site.
+TOOLTIP_FIX_HTML = """
+<style>
+  div.vis-tooltip {
+    background: #0B1220 !important; border: 1px solid #334155 !important;
+    border-radius: 8px !important; box-shadow: 0 6px 20px rgba(0,0,0,0.45) !important;
+    padding: 0 !important; color: #E2E8F0 !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif !important;
+    white-space: normal !important; max-width: 320px !important;
+  }
+  .sdkb-tip { padding: 12px 14px; line-height: 1.5; }
+  .sdkb-tip .t-name { font-size: 15px; font-weight: 700; color: #F1F5F9; }
+  .sdkb-tip .t-cat {
+    display: inline-block; margin: 6px 0 8px; padding: 2px 8px;
+    background: #1E3A8A; color: #DBEAFE; border-radius: 4px;
+    font-size: 12px; font-weight: 600;
+  }
+  .sdkb-tip .t-desc { font-size: 13px; color: #CBD5E1; margin: 2px 0 8px; }
+  .sdkb-tip .t-use { font-size: 13px; color: #E2E8F0; }
+  .sdkb-tip .t-use span {
+    color: #38BDF8; font-weight: 700; margin-right: 6px;
+  }
+  .sdkb-tip .t-id {
+    margin-top: 10px; padding-top: 6px; border-top: 1px solid #1E293B;
+    font-family: ui-monospace, SFMono-Regular, monospace;
+    font-size: 11px; color: #64748B; word-break: break-all;
+  }
+</style>
+<script>
+(function () {
+  function toEl(html) {
+    var d = document.createElement('div');
+    d.innerHTML = html;
+    return d.firstElementChild || d;
+  }
+  function fix(ds) {
+    if (!ds || !ds.get) return;
+    var upd = ds.get()
+      .filter(function (o) { return typeof o.title === 'string'; })
+      .map(function (o) { return { id: o.id, title: toEl(o.title) }; });
+    if (upd.length) ds.update(upd);
+  }
+  var tries = 0;
+  function run() {
+    tries++;
+    try {
+      if (typeof nodes !== 'undefined' && nodes && nodes.get) { fix(nodes); return; }
+    } catch (e) { /* retry */ }
+    if (tries < 40) setTimeout(run, 150);
+  }
+  if (document.readyState === 'complete') run();
+  else window.addEventListener('load', run);
+})();
+</script>
+"""
+
+
 def _inject_toolbar(out_path: Path) -> None:
-    """Inject the floating Home/Zoom toolbar into a Pyvis HTML file."""
+    """Inject the floating Home/Zoom toolbar + the tooltip HTML shim."""
     html = out_path.read_text(encoding="utf-8")
     if "sdkb-toolbar" in html:
         return
     marker = "<body>"
     if marker not in html:
         return
-    html = html.replace(marker, marker + "\n" + TOOLBAR_HTML, 1)
+    html = html.replace(
+        marker, marker + "\n" + TOOLBAR_HTML + TOOLTIP_FIX_HTML, 1
+    )
     out_path.write_text(html, encoding="utf-8")
 
 
@@ -221,14 +285,79 @@ def _new_network(height: str = "780px") -> Network:
     return net
 
 
+# Plain-language category + "where it is used" per node kind, for a
+# semiconductor domain expert who does NOT know ontology. Matched by the
+# first substring that occurs in the (sometimes decorated) ntype string,
+# so order matters — most specific first.
+_FRIENDLY_TYPE: list[tuple[str, str, str]] = [
+    ("PriorArt", "선행기술 (심사관 인용)",
+     "특허 심사관이 실제로 인용한 선행기술 — 선행기술 검색의 정답(GT) 라벨"),
+    ("Patent", "특허 (거절 사례)",
+     "거절된 특허 출원 사례 — 선행기술 검색·IP-R&D 컨설팅 평가 데이터"),
+    ("DeviceCategory", "소자·제품 범주",
+     "반도체 소자/제품을 묶는 범주 — 특허·시장 데이터와 연결되는 지점"),
+    ("Device", "소자·제품",
+     "반도체 소자/제품 계층 — 어떤 제품에 관한 특허인지 연결"),
+    ("owl:Class", "온톨로지 개념(클래스)",
+     "지식베이스의 골격이 되는 개념 정의 — 무엇을 어떤 속성으로 표현하는지의 틀"),
+    ("domain anchor", "도메인 기준점",
+     "베이스라인이 아직 다루지 않는 범위를 잇는 임시 기준 노드"),
+    ("SubProcess", "세부 공정 단계",
+     "상위 공정의 세부 단계 — 결함·장비·소재와의 정밀 연결"),
+    ("Process", "반도체 공정 단계",
+     "공정↔결함↔장비↔소재 연결의 중심 축 — 전문가 매칭·기술예측의 기준점"),
+    ("EquipmentClass", "장비 분류",
+     "공정에 쓰이는 장비 군 — 공급망·수출통제 규제 분석의 입력"),
+    ("Equipment", "장비",
+     "특정 공정 장비 — 공정-장비 의존성, 사업화·규제 적합성 분석"),
+    ("Vendor", "공급사·벤더",
+     "장비/소재 공급 주체 — 공급망 및 사업화 분석"),
+    ("Organization", "기관·조직",
+     "기관 주체 — 규제·사업화 맥락 매핑"),
+    ("Parameter", "공정 변수",
+     "공정 제어 인자 — 품질·수율 분석의 정량 축"),
+    ("Metrology", "계측",
+     "공정 측정·검사 — 품질/수율 진단 지식"),
+    ("FailureMode", "불량 모드",
+     "관측되는 불량 유형 — 근본원인·대책과 연결되어 수율 문제 진단에 활용"),
+    ("RootCause", "근본 원인",
+     "불량의 원인 — 문제 정의와 전문가 매칭의 단서"),
+    ("Mitigation", "개선·대책",
+     "검증된 대응책 — 소부장 SME 문제해결 추천에 활용"),
+    ("TechnologyNode", "기술 노드(공정 세대)",
+     "공정 세대(예: 7nm) — 기술 로드맵·예측의 축"),
+    ("Skill", "역량·스킬",
+     "전문가 역량 태그 — 기업 문제 ↔ 전문가 시맨틱 매칭의 핵심 연결"),
+    ("Material", "소재",
+     "공정에 쓰이는 소재 — 공정-소재 의존성, 화학물질 규제(SCIP 등) 적합성"),
+]
+
+
+def _friendly_type(ntype: str) -> tuple[str, str]:
+    for key, cat, use in _FRIENDLY_TYPE:
+        if key in ntype:
+            return cat, use
+    return ntype, "지식베이스 구성 요소"
+
+
 def _node_title(label: str, ntype: str, nid: str, description: str = "") -> str:
-    desc = escape(description[:240])
-    return (
-        f"<b>{escape(label)}</b><br/>"
-        f"<i>type:</i> {escape(ntype)}<br/>"
-        f"<i>id:</i> <code>{escape(nid)}</code><br/>"
-        f"{desc}"
-    )
+    """A concept card aimed at a semiconductor expert (not an ontologist):
+    term → plain-language category → what it is → where it's used, with the
+    internal id demoted to a small gray footer. Rendered as HTML via the
+    tooltip-element shim injected by ``_inject_toolbar``."""
+    cat, use = _friendly_type(ntype)
+    desc = escape(description[:240]).strip()
+    parts = [
+        '<div class="sdkb-tip">',
+        f'<div class="t-name">{escape(label)}</div>',
+        f'<div class="t-cat">{escape(cat)}</div>',
+    ]
+    if desc:
+        parts.append(f'<div class="t-desc">{desc}</div>')
+    parts.append(f'<div class="t-use"><span>활용</span> {escape(use)}</div>')
+    parts.append(f'<div class="t-id">{escape(nid)}</div>')
+    parts.append("</div>")
+    return "".join(parts)
 
 
 def _add_legend(net: Network, types_in_use: Iterable[str]) -> None:
@@ -417,9 +546,8 @@ def build_sirp(top_n: int = 50) -> dict:
         backbone_counter[backbone_id] += 1
         anchor_kind = "concernsDevice (A2)" if dev_id else "addresses_process"
         body = (
-            f"IPC: {ipc} · process_family: {proc_family_raw or '—'}<br/>"
-            f"anchor: <code>{escape(backbone_id)}</code> ({anchor_kind})<br/>"
-            f"cohort: {cohort}"
+            f"IPC {ipc} · 공정군 {proc_family_raw or '—'} · "
+            f"연결 {backbone_id} ({anchor_kind}) · 코호트 {cohort}"
         )
         net.add_node(
             pid,
@@ -723,60 +851,90 @@ LANDING_TEMPLATE = """<!doctype html>
   footer {{ padding: 24px 32px; max-width: 1100px; margin: 0 auto; color: var(--muted); font-size: 13px; border-top: 1px solid var(--border); }}
   a {{ color: var(--accent); }}
   code {{ background: #0B1220; padding: 1px 6px; border-radius: 3px; }}
+  .lede {{ font-size: 16px; color: var(--ink); margin: 8px 0 0; max-width: 820px; }}
+  .intro {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 4px 0; }}
+  .intro .box {{ background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; }}
+  .intro .box h3 {{ margin: 0 0 8px; font-size: 15px; color: var(--accent); }}
+  .intro .box p {{ margin: 0; color: var(--ink); font-size: 14px; }}
+  .muted-note {{ color: var(--muted); font-size: 13px; }}
+  .lab-context {{ background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; }}
+  .lab-context summary {{ cursor: pointer; color: var(--accent); font-size: 14px; font-weight: 600; }}
 </style>
 </head>
 <body>
 <header>
-  <span class="tag">Quantitative Technology Management Lab · SKKU MOT</span>
-  <h1>SDKB — Interactive Knowledge Graph Demo</h1>
-  <p class="sub">계량기술경영 연구실(지도: 신준석 교수)의 어젠다 중 <strong>반도체 도메인 데이터 트렁크</strong>를 인터랙티브하게 탐색합니다.</p>
-  <p class="sub">Hyeonup-Project 2026-1 / Park HyoungSik (Ph.D. 19기) · <a href="https://github.com/arkwith7/semiconductor-knowledge-base">GitHub 소스</a></p>
+  <span class="tag">반도체 도메인 지식베이스 · SKKU 계량기술경영 연구실</span>
+  <h1>반도체 지식베이스(SDKB) — 인터랙티브 탐색</h1>
+  <p class="lede">반도체 <strong>공정·장비·소재·불량·특허·규제</strong> 지식을 하나의 연결된 그래프로 정리한 지식베이스입니다.
+  흩어진 도메인 지식을 연결해 <strong>기업 문제↔전문가 매칭, 선행기술 검색, 기술예측·사업화 분석</strong>에 재사용합니다.</p>
+  <p class="sub muted-note">Park HyoungSik (Ph.D. 19기) · 지도 신준석 교수 · <a href="https://github.com/arkwith7/semiconductor-knowledge-base">GitHub 소스</a></p>
 </header>
 
 <main>
   <section>
-    <h2>연구실 어젠다 내 본 데모의 위치</h2>
-    <ul class="lab">
-      <li>특허·시장·산업 데이터 기반 <strong>기술예측</strong> ↔ SIRP 773 + sdkb-patent</li>
-      <li><strong>유망기술 기회 발굴</strong> ↔ Novelty-focused patent 매핑 (후속)</li>
-      <li><strong>중소기업 혁신 / 전문가 매칭</strong> ↔ SDKB-Match Expert (notebook 01)</li>
-      <li><strong>인터랙티브 기술·비즈니스 데이터 시각화</strong> ↔ <em>본 페이지</em></li>
-    </ul>
+    <h2>이 지식베이스는 무엇인가</h2>
+    <div class="intro">
+      <div class="box">
+        <h3>무엇을</h3>
+        <p>반도체 제조의 공정 단계, 장비, 소재, 불량 모드와 그 근본원인·대책, 그리고
+        특허·규제 지식을 <strong>개념과 관계로 연결</strong>해 둔 지식 그래프입니다.</p>
+      </div>
+      <div class="box">
+        <h3>왜 유용한가</h3>
+        <p>현장에 흩어진 지식을 한 구조로 모아 <strong>기업의 기술 문제에 맞는 전문가 추천</strong>,
+        <strong>특허 선행기술 검색</strong>, 기술예측·사업화 분석에 그대로 재사용할 수 있습니다.</p>
+      </div>
+      <div class="box">
+        <h3>어떻게 보나</h3>
+        <p>점 = 지식 항목, 선 = 관계, 색 = 종류. 노드에 마우스를 올리면
+        <strong>쉬운 설명·활용 카드</strong>가 뜹니다. 휠로 확대, 드래그로 이동.</p>
+      </div>
+    </div>
   </section>
 
   <section>
-    <h2>인터랙티브 뷰</h2>
+    <h2>탐색하기</h2>
     <div class="grid">
       <a class="card" href="baseline.html">
-        <h3>① Baseline Core Ontology + A2 Device</h3>
-        <p>공정·장비·재료·결함·계측 코어 + <strong>A2 device/product 계층 31노드</strong>(plan §7.4-3)를 device_vocab 카테고리 허브로 묶어 표시. 노드 타입별 컬러 + 호버 툴팁.</p>
+        <h3>① 반도체 핵심 지식 지도</h3>
+        <p>공정·장비·소재·불량·계측 핵심 지식과 소자/제품 계층을 한 그래프로.
+        노드에 올리면 그 항목이 <strong>무엇이고 어디에 쓰이는지</strong> 설명이 나옵니다.</p>
         <div class="meta">{baseline_meta}</div>
       </a>
       <a class="card" href="sirp.html">
-        <h3>② SIRP Patent ↔ Prior Art (+A2)</h3>
-        <p>1000 거절특허 중 <strong>상위 50건과 examiner-cited 선행기술</strong> 서브그래프. Process 백본 + device-family 특허는 실 <strong><code>device:*</code> 노드에 ont:concernsDevice</strong>로 연결(합성 blob 대체). 다국 office 비율 동시 확인.</p>
+        <h3>② 거절 특허 ↔ 선행기술</h3>
+        <p>거절된 특허 상위 50건과 <strong>심사관이 실제 인용한 선행기술</strong>의 연결.
+        어떤 공정·제품에 속하는지, 어느 나라 특허인지 한눈에.</p>
         <div class="meta">{sirp_meta}</div>
       </a>
       <a class="card" href="pillars.html">
-        <h3>③ 4-Pillar Class Skeletons</h3>
-        <p>신준석 교수님 연구라인에 정렬된 네 모듈 — <strong>patent / rbv / commercialization / foresight</strong> — 의 owl:Class · subClassOf 골격. 모듈 간 상대 규모를 한 눈에.</p>
+        <h3>③ 지식 구조 한눈에</h3>
+        <p><strong>특허·기업자원·사업화·기술예측</strong> 네 영역의 개념 구조와
+        영역별 상대 규모. 지식베이스가 어떤 축으로 짜였는지 보여줍니다.</p>
         <div class="meta">{pillars_meta}</div>
       </a>
       <a class="card" href="metrics.html">
-        <h3>④ §5 측정 결과 대시보드</h3>
-        <p>실 examiner-GT 기반 <strong>§5(1) 검색력 · §5(2) 보완성(KR vs 외국) · §5(3) A2 커버리지 · §5(4) 설명정밀도</strong>. IPC-4 프록시 아닌 실 인용 코퍼스 첫 측정 (plan §8).</p>
+        <h3>④ 성능 측정 결과</h3>
+        <p>선행기술 검색 성능과 지식 보강 효과를 <strong>실제 심사관 인용</strong> 기준으로
+        측정한 결과 대시보드.</p>
         <div class="meta">{metrics_meta}</div>
       </a>
     </div>
   </section>
 
   <section>
-    <h2>주석</h2>
-    <p style="color: var(--muted); font-size: 14px;">
-      본 페이지는 <code>make viz</code> → <code>scripts/build_viz.py</code> 로 빌드되며, <code>main</code>에 푸시가 발생하면
-      <code>.github/workflows/viz-deploy.yml</code>이 GitHub Pages로 자동 배포합니다. 시맨틱 협업 플랫폼 비전의
-      후속 시각화(SHACL 게이트·매칭 익스플로러·Novelty patent map)는 2026-2 학기에 추가됩니다.
-    </p>
+    <h2>연구 맥락</h2>
+    <details class="lab-context">
+      <summary>연구실 어젠다 안에서의 위치 (펼치기)</summary>
+      <ul class="lab">
+        <li>특허·시장·산업 데이터 기반 <strong>기술예측</strong></li>
+        <li><strong>유망기술 기회 발굴</strong> (후속)</li>
+        <li><strong>중소기업 혁신 / 전문가 매칭</strong> — SDKB-Match Expert</li>
+        <li><strong>인터랙티브 기술·비즈니스 데이터 시각화</strong> — 본 페이지</li>
+      </ul>
+      <p class="muted-note">SKKU 기술경영전문대학원 계량기술경영 연구실(PI: 신준석 교수)의
+      반도체 도메인 데이터·온톨로지 모듈. 매칭 익스플로러 등 후속 시각화는 2026-2 학기에 추가됩니다.</p>
+    </details>
   </section>
 </main>
 
