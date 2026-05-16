@@ -1,0 +1,58 @@
+{
+  "corpus_content_docs": 2926,
+  "evaluable_targets": 974,
+  "ranker_summary": {
+    "tfidf": {
+      "n": 974,
+      "MRR": 0.2753,
+      "NDCG@5": 0.3088,
+      "Recall@10": 0.2758,
+      "Recall@50": 0.433
+    },
+    "onto": {
+      "n": 974,
+      "MRR": 0.0612,
+      "NDCG@5": 0.0662,
+      "Recall@10": 0.0614,
+      "Recall@50": 0.1606
+    },
+    "onto_idf": {
+      "n": 974,
+      "MRR": 0.0656,
+      "NDCG@5": 0.0717,
+      "Recall@10": 0.0678,
+      "Recall@50": 0.1684
+    },
+    "hybrid": {
+      "n": 974,
+      "MRR": 0.2098,
+      "NDCG@5": 0.2453,
+      "Recall@10": 0.2226,
+      "Recall@50": 0.4234
+    }
+  },
+  "incremental_recall_sec5_2": {
+    "Recall@50_tfidf": {
+      "KR": 0.6708,
+      "FOREIGN": 0.0074
+    },
+    "Recall@50_hybrid": {
+      "KR": 0.6272,
+      "FOREIGN": 0.0599
+    },
+    "delta_hybrid_minus_tfidf": {
+      "KR": -0.0436,
+      "FOREIGN": 0.0525
+    },
+    "gt_positives_in_corpus": {
+      "KR": 1376,
+      "FOREIGN": 952
+    }
+  },
+  "notes": [
+    "Real examiner GT (not IPC-4 proxy) — first measurable after P0/B1.",
+    "bridge morph=False (kiwipiepy absent): documented substring fallback.",
+    "NPL excluded from denominator (plan §7.3-4); stub docs excluded (§7.3-2).",
+    "FOREIGN = non-KR cited (JP/US/…): lexically dissimilar to KR query text, where the domain ontology is expected to add the most (§5-2)."
+  ]
+}

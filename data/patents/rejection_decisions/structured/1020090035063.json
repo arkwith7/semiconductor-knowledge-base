@@ -1,0 +1,35 @@
+{
+  "legal_bases": [
+    {
+      "paragraph": "1",
+      "count": 1
+    },
+    {
+      "paragraph": "2",
+      "count": 1
+    }
+  ],
+  "cited_evidence_phrases": [],
+  "cited_evidence_map": {},
+  "target_claims": [
+    "1",
+    "10",
+    "11",
+    "12~15",
+    "16",
+    "17",
+    "18",
+    "21~24",
+    "3",
+    "4",
+    "7",
+    "8",
+    "9"
+  ],
+  "decision_date": "2014-06-25",
+  "text_length": 3102,
+  "application_number": "1020090035063",
+  "ocr_method": "legacy_raw",
+  "generated_at": "2026-05-16T14:12:16.431815Z",
+  "_excerpt_removed": true
+}

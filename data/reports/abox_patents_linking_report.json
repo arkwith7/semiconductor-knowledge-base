@@ -1,11 +1,12 @@
 {
   "input": "data/patents/rejected_patents_meta.parquet",
-  "patents": 773,
-  "triples": 7490,
-  "patents_with_ontology_link": 702,
+  "patents": 1000,
+  "triples": 9914,
+  "patents_with_ontology_link": 976,
   "link_provenance": {
-    "structured_process_family": 584,
-    "free_text": 616,
+    "structured_process_family": 793,
+    "structured_device_family": 104,
+    "free_text": 844,
     "process_family_map": {
       "etch": "process:etch",
       "deposition": "process:deposition",
@@ -16,38 +17,40 @@
       "oxidation": "process:diffusion",
       "thermal": "process:diffusion",
       "photo": "process:lithography",
+      "lithography": "process:lithography",
       "implant": "process:implant"
+    },
+    "device_family_map": {
+      "memory": "device:dram",
+      "memory_cell": "device:dram",
+      "memory_dram": "device:dram",
+      "backend_packaging": "device:bga",
+      "packaging": "device:bga",
+      "mems": "device:mems",
+      "image_sensor": "device:cmos_image_sensor",
+      "3d_integration": "device:tsv"
     }
   },
-  "orphans_count": 71,
+  "orphans_count": 24,
   "orphans_split": {
-    "scope_out": 48,
+    "scope_out": 1,
     "text_miss": 23,
     "note": "scope_out = device/packaging/component family or value_chain device|component — no ontology node exists (needs the A2 device layer; NOT a lift bug). text_miss = in-domain yet unlinked — the genuinely fixable residue.",
     "text_miss_families": {
-      "general": 19,
-      "materials": 3,
+      "general": 20,
+      "materials": 2,
       "equipment": 1
     },
     "scope_out_sample": [
-      "patent:kr_1020210140518",
-      "patent:kr_1020247018636",
-      "patent:kr_1020220049545",
-      "patent:kr_1020230084204",
-      "patent:kr_1020220029544",
-      "patent:kr_1020180006266",
-      "patent:kr_1020140193744",
-      "patent:kr_1020140070032",
-      "patent:kr_1020140000858",
-      "patent:kr_1020220090397"
+      "patent:kr_1020200072226"
     ],
     "text_miss_sample": [
       "patent:kr_1020140083150",
-      "patent:kr_1020117011375",
       "patent:kr_1020080093453",
       "patent:kr_1020157022334",
       "patent:kr_1020170135831",
       "patent:kr_1020167009441",
+      "patent:kr_1020157028308",
       "patent:kr_1020120152163",
       "patent:kr_1020120148667",
       "patent:kr_1020120139831",
@@ -55,164 +58,190 @@
     ]
   },
   "orphans_sample": [
-    "patent:kr_1020210140518",
-    "patent:kr_1020247018636",
-    "patent:kr_1020220049545",
-    "patent:kr_1020230084204",
-    "patent:kr_1020220029544",
-    "patent:kr_1020180006266",
-    "patent:kr_1020140193744",
-    "patent:kr_1020140070032",
-    "patent:kr_1020140000858",
-    "patent:kr_1020220090397",
-    "patent:kr_1020200013638",
-    "patent:kr_1020120151681",
-    "patent:kr_1020110120353",
-    "patent:kr_1020150023151",
-    "patent:kr_1020160061291"
+    "patent:kr_1020140083150",
+    "patent:kr_1020080093453",
+    "patent:kr_1020157022334",
+    "patent:kr_1020200072226",
+    "patent:kr_1020170135831",
+    "patent:kr_1020167009441",
+    "patent:kr_1020157028308",
+    "patent:kr_1020120152163",
+    "patent:kr_1020120148667",
+    "patent:kr_1020120139831",
+    "patent:kr_1020120071127",
+    "patent:kr_1020237007317",
+    "patent:kr_1020187026966",
+    "patent:kr_1020150155906",
+    "patent:kr_1020157021305"
   ],
   "nodes_per_patent": {
-    "mean": 2.658,
-    "median": 2,
+    "mean": 2.888,
+    "median": 3,
     "max": 9,
-    "zero": 71
+    "zero": 24
   },
   "concern_edges_by_node_type": {
-    "Process": 1004,
-    "Skill": 510,
-    "Material": 409,
-    "SubProcess": 123,
-    "EquipmentClass": 5,
-    "FailureMode": 3,
-    "TechnologyNode": 1
+    "Process": 1292,
+    "Skill": 630,
+    "Material": 526,
+    "SubProcess": 265,
+    "Device": 162,
+    "EquipmentClass": 7,
+    "FailureMode": 4,
+    "TechnologyNode": 1,
+    "RootCause": 1
   },
   "top_matched_terms": [
     {
-      "term": "절연막",
-      "patents": 141
+      "term": "증착",
+      "patents": 189
     },
     {
       "term": "플라즈마",
-      "patents": 140
+      "patents": 169
     },
     {
-      "term": "증착",
-      "patents": 139
-    },
-    {
-      "term": "식각",
-      "patents": 139
-    },
-    {
-      "term": "챔버",
-      "patents": 114
+      "term": "절연막",
+      "patents": 166
     },
     {
       "term": "박막",
-      "patents": 109
-    },
-    {
-      "term": "가스",
-      "patents": 106
-    },
-    {
-      "term": "산화물",
-      "patents": 79
-    },
-    {
-      "term": "마스크",
-      "patents": 74
-    },
-    {
-      "term": "에칭",
-      "patents": 51
-    },
-    {
-      "term": "패터닝",
-      "patents": 49
-    },
-    {
-      "term": "산화막",
-      "patents": 40
-    },
-    {
-      "term": "주입",
-      "patents": 37
-    },
-    {
-      "term": "포토",
-      "patents": 34
-    },
-    {
-      "term": "도핑",
-      "patents": 30
+      "patents": 161
     },
     {
       "term": "스퍼터",
-      "patents": 28
+      "patents": 158
+    },
+    {
+      "term": "식각",
+      "patents": 148
+    },
+    {
+      "term": "스퍼터링",
+      "patents": 147
+    },
+    {
+      "term": "챔버",
+      "patents": 143
+    },
+    {
+      "term": "가스",
+      "patents": 143
+    },
+    {
+      "term": "산화물",
+      "patents": 119
+    },
+    {
+      "term": "마스크",
+      "patents": 91
+    },
+    {
+      "term": "에칭",
+      "patents": 57
+    },
+    {
+      "term": "패터닝",
+      "patents": 52
+    },
+    {
+      "term": "주입",
+      "patents": 47
+    },
+    {
+      "term": "산화막",
+      "patents": 46
     },
     {
       "term": "열처리",
-      "patents": 28
+      "patents": 40
+    },
+    {
+      "term": "포토",
+      "patents": 36
     },
     {
       "term": "세정",
-      "patents": 27
+      "patents": 31
     },
     {
-      "term": "연마",
-      "patents": 26
+      "term": "도핑",
+      "patents": 31
     },
     {
       "term": "질화막",
+      "patents": 29
+    },
+    {
+      "term": "연마",
+      "patents": 28
+    },
+    {
+      "term": "알루미늄",
+      "patents": 27
+    },
+    {
+      "term": "구리",
+      "patents": 27
+    },
+    {
+      "term": "확산",
+      "patents": 26
+    },
+    {
+      "term": "텅스텐",
       "patents": 25
+    },
+    {
+      "term": "결함",
+      "patents": 24
     },
     {
       "term": "식각 공정",
       "patents": 24
     },
     {
-      "term": "스퍼터링",
-      "patents": 23
-    },
-    {
       "term": "질화물",
-      "patents": 23
+      "patents": 24
     },
     {
-      "term": "결함",
+      "term": "평탄화",
+      "patents": 22
+    },
+    {
+      "term": "al",
       "patents": 22
     },
     {
       "term": "폴리실리콘",
-      "patents": 21
+      "patents": 22
     },
     {
-      "term": "박막 증착",
-      "patents": 20
-    },
-    {
-      "term": "평탄화",
+      "term": "파티클",
       "patents": 19
-    },
-    {
-      "term": "확산",
-      "patents": 19
-    },
-    {
-      "term": "플라즈마 식각",
-      "patents": 18
     },
     {
       "term": "포토레지스트",
-      "patents": 17
+      "patents": 18
+    },
+    {
+      "term": "상변화 메모리",
+      "patents": 18
     },
     {
       "term": "정렬",
       "patents": 17
     },
     {
-      "term": "구리",
+      "term": "박막 증착",
+      "patents": 17
+    },
+    {
+      "term": "원자층 증착",
+      "patents": 17
+    },
+    {
+      "term": "플라즈마 식각",
       "patents": 16
     },
     {
@@ -221,33 +250,9 @@
     },
     {
       "term": "cmp",
-      "patents": 15
-    },
-    {
-      "term": "이온 주입",
-      "patents": 14
-    },
-    {
-      "term": "w",
-      "patents": 14
-    },
-    {
-      "term": "원자층 증착",
-      "patents": 14
-    },
-    {
-      "term": "deposition",
-      "patents": 12
-    },
-    {
-      "term": "알루미늄",
-      "patents": 12
-    },
-    {
-      "term": "al",
-      "patents": 12
+      "patents": 16
     }
   ],
-  "bridge_mode": "morph(Kiwi)+substring, title+abstract+claim1 + structured(process_family)",
+  "bridge_mode": "substring-only (kiwipiepy missing), title+abstract+claim1 + structured(process_family)",
   "note": "Lift = deterministic process_family->Process bridge UNION Korean free-text (sdkb_nb 2-tier, title+abstract+claim1). Orphans split into scope_out (no ontology node — device layer gap) vs text_miss (fixable) so the residual loss is diagnosed, not just counted."
 }

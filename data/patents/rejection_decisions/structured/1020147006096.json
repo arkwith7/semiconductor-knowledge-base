@@ -1,0 +1,29 @@
+{
+  "legal_bases": [
+    {
+      "paragraph": "2",
+      "count": 3
+    }
+  ],
+  "cited_evidence_phrases": [
+    "1",
+    "2"
+  ],
+  "cited_evidence_map": {
+    "2": "KR-P-1020100116213"
+  },
+  "target_claims": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6"
+  ],
+  "decision_date": "2016-06-01",
+  "text_length": 3490,
+  "application_number": "1020147006096",
+  "ocr_method": "pdfplumber",
+  "generated_at": "2026-05-16T14:12:47.116821Z",
+  "_excerpt_removed": true
+}

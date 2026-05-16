@@ -1,0 +1,457 @@
+{
+  "device:finfet": {
+    "category": [
+      "logic"
+    ],
+    "en": [
+      "FinFET",
+      "fin field-effect transistor"
+    ],
+    "ko": [
+      "핀펫"
+    ],
+    "wikidata": [
+      "Q33114556"
+    ]
+  },
+  "device:gaa_fet": {
+    "category": [
+      "logic"
+    ],
+    "en": [
+      "gate-all-around field-effect transistor"
+    ],
+    "ko": [],
+    "wikidata": []
+  },
+  "device:mosfet": {
+    "category": [
+      "logic"
+    ],
+    "en": [
+      "MOSFET",
+      "metal–oxide–semiconductor field-effect transistor"
+    ],
+    "ko": [
+      "MOSFET"
+    ],
+    "wikidata": [
+      "Q210793"
+    ]
+  },
+  "device:cmos": {
+    "category": [
+      "logic"
+    ],
+    "en": [
+      "CMOS",
+      "complementary metal–oxide–semiconductor"
+    ],
+    "ko": [
+      "CMOS"
+    ],
+    "wikidata": [
+      "Q173431",
+      "Q5012986"
+    ]
+  },
+  "device:bjt": {
+    "category": [
+      "logic"
+    ],
+    "en": [
+      "BJT",
+      "bipolar junction transistor",
+      "bipolar transistor"
+    ],
+    "ko": [
+      "BJT",
+      "바이폴러 트랜지스터",
+      "접합형 트랜지스터"
+    ],
+    "wikidata": [
+      "Q188946"
+    ]
+  },
+  "device:hemt": {
+    "category": [
+      "logic"
+    ],
+    "en": [
+      "HEMT",
+      "HFET",
+      "MODFET",
+      "heterostructure FET",
+      "high-electron-mobility transistor",
+      "modulation-doped FET"
+    ],
+    "ko": [
+      "하이 일렉트론 모빌리티 트랜지스터"
+    ],
+    "wikidata": [
+      "Q1617706"
+    ]
+  },
+  "device:jfet": {
+    "category": [
+      "logic"
+    ],
+    "en": [
+      "JFET",
+      "junction field-effect transistor"
+    ],
+    "ko": [],
+    "wikidata": [
+      "Q385520"
+    ]
+  },
+  "device:dram": {
+    "category": [
+      "memory"
+    ],
+    "en": [
+      "DRAM",
+      "DRAM, a. s.",
+      "Shelley Marshaun Massenburg-Smith"
+    ],
+    "ko": [
+      "적은 양."
+    ],
+    "wikidata": [
+      "Q25138504",
+      "Q77878070"
+    ]
+  },
+  "device:sram": {
+    "category": [
+      "memory"
+    ],
+    "en": [
+      "SRAM",
+      "static RAM",
+      "static random access memory",
+      "static random-access memory"
+    ],
+    "ko": [
+      "에스램",
+      "정적 기억 장치",
+      "정적 램"
+    ],
+    "wikidata": [
+      "Q267416"
+    ]
+  },
+  "device:nand_flash": {
+    "category": [
+      "memory"
+    ],
+    "en": [
+      "NAND",
+      "NAND flash",
+      "NAND flash memory",
+      "solid state drive",
+      "ssd"
+    ],
+    "ko": [],
+    "wikidata": [
+      "Q13405492"
+    ]
+  },
+  "device:nor_flash": {
+    "category": [
+      "memory"
+    ],
+    "en": [
+      "NOR flash"
+    ],
+    "ko": [],
+    "wikidata": []
+  },
+  "device:eeprom": {
+    "category": [
+      "memory"
+    ],
+    "en": [
+      "E2PROM",
+      "EEPROM",
+      "electrically erasable programmable ROM",
+      "electrically erasable programmable read-only memory"
+    ],
+    "ko": [
+      "EEPROM",
+      "이이피롬"
+    ],
+    "wikidata": [
+      "Q205908"
+    ]
+  },
+  "device:pcram": {
+    "category": [
+      "memory"
+    ],
+    "en": [
+      "C-RAM",
+      "CRAM",
+      "OUM",
+      "PCM",
+      "PCME",
+      "PCRAM",
+      "PRAM",
+      "chalcogenide RAM",
+      "chalcogenide random-access memory",
+      "ovonic unified memory",
+      "phase-change RAM",
+      "phase-change memory",
+      "phase-change random-access memory"
+    ],
+    "ko": [
+      "PCRAM",
+      "PRAM",
+      "P램",
+      "상변화 메모리",
+      "상변환 메모리",
+      "피램"
+    ],
+    "wikidata": [
+      "Q1153902"
+    ]
+  },
+  "device:reram": {
+    "category": [
+      "memory"
+    ],
+    "en": [
+      "RRAM",
+      "ReRAM",
+      "resistive RAM",
+      "resistive random-access memory"
+    ],
+    "ko": [
+      "RRAM",
+      "ReRAM",
+      "저항 메모리"
+    ],
+    "wikidata": [
+      "Q1143830"
+    ]
+  },
+  "device:mram": {
+    "category": [
+      "memory"
+    ],
+    "en": [
+      "MRAM",
+      "magnetoresistive RAM",
+      "magnetoresistive random-access memory"
+    ],
+    "ko": [
+      "MRAM",
+      "엠램"
+    ],
+    "wikidata": [
+      "Q1061546"
+    ]
+  },
+  "device:3d_nand": {
+    "category": [
+      "memory"
+    ],
+    "en": [
+      "3D V-NAND"
+    ],
+    "ko": [],
+    "wikidata": []
+  },
+  "device:igbt": {
+    "category": [
+      "power"
+    ],
+    "en": [
+      "insulated-gate bipolar transistor"
+    ],
+    "ko": [
+      "절연 게이트 양극성 트랜지스터"
+    ],
+    "wikidata": [
+      "Q176110"
+    ]
+  },
+  "device:sic_mosfet": {
+    "category": [
+      "power"
+    ],
+    "en": [
+      "silicon carbide MOSFET"
+    ],
+    "ko": [],
+    "wikidata": []
+  },
+  "device:gan_hemt": {
+    "category": [
+      "power"
+    ],
+    "en": [
+      "gallium nitride HEMT"
+    ],
+    "ko": [],
+    "wikidata": []
+  },
+  "device:thyristor": {
+    "category": [
+      "power"
+    ],
+    "en": [
+      "thyristor"
+    ],
+    "ko": [
+      "사이리스터",
+      "실리콘 제어 정류기",
+      "실리콘제어정류기"
+    ],
+    "wikidata": [
+      "Q180805"
+    ]
+  },
+  "device:cmos_image_sensor": {
+    "category": [
+      "sensor"
+    ],
+    "en": [
+      "CMOS image sensor"
+    ],
+    "ko": [],
+    "wikidata": []
+  },
+  "device:ccd": {
+    "category": [
+      "sensor"
+    ],
+    "en": [
+      "CCD",
+      "CCD image sensor",
+      "charge-coupled device"
+    ],
+    "ko": [
+      "CCD",
+      "CCD 이미지 센서",
+      "전하 결합소자",
+      "전하결합 소자",
+      "전하결합소자"
+    ],
+    "wikidata": [
+      "Q189880"
+    ]
+  },
+  "device:photodiode": {
+    "category": [
+      "sensor"
+    ],
+    "en": [
+      "photodiode"
+    ],
+    "ko": [
+      "광다이오드"
+    ],
+    "wikidata": [
+      "Q175943"
+    ]
+  },
+  "device:mems": {
+    "category": [
+      "sensor"
+    ],
+    "en": [
+      "microelectromechanical systems"
+    ],
+    "ko": [],
+    "wikidata": []
+  },
+  "device:bga": {
+    "category": [
+      "packaging"
+    ],
+    "en": [
+      "ball grid array",
+      "bga"
+    ],
+    "ko": [
+      "볼 그리드 배열"
+    ],
+    "wikidata": [
+      "Q570628"
+    ]
+  },
+  "device:flip_chip": {
+    "category": [
+      "packaging"
+    ],
+    "en": [
+      "C4",
+      "FC",
+      "controlled collapse chip connection",
+      "flip chip"
+    ],
+    "ko": [
+      "플립칩"
+    ],
+    "wikidata": [
+      "Q432439"
+    ]
+  },
+  "device:wire_bonding": {
+    "category": [
+      "packaging"
+    ],
+    "en": [
+      "wire bonding"
+    ],
+    "ko": [],
+    "wikidata": []
+  },
+  "device:tsv": {
+    "category": [
+      "packaging"
+    ],
+    "en": [
+      "TSV",
+      "through silicon via",
+      "through-silicon via"
+    ],
+    "ko": [
+      "실리콘 관통 전극"
+    ],
+    "wikidata": [
+      "Q1578120"
+    ]
+  },
+  "device:hbm": {
+    "category": [
+      "packaging"
+    ],
+    "en": [
+      "high-bandwidth memory"
+    ],
+    "ko": [],
+    "wikidata": []
+  },
+  "device:interposer": {
+    "category": [
+      "packaging"
+    ],
+    "en": [
+      "silicon interposer"
+    ],
+    "ko": [],
+    "wikidata": []
+  },
+  "device:fan_out_wlp": {
+    "category": [
+      "packaging"
+    ],
+    "en": [
+      "fan-out wafer-level packaging"
+    ],
+    "ko": [],
+    "wikidata": []
+  }
+}

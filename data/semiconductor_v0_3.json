@@ -4423,6 +4423,703 @@
         "validation_required": true,
         "note": "Generic facilities equipment; not tied to specific vendor product catalog"
       }
+    },
+    {
+      "id": "device:finfet",
+      "type": "Device",
+      "canonical_name": "FinFET",
+      "description": "Logic/transistor device architecture.",
+      "props": {
+        "category": "logic"
+      },
+      "provenance": {
+        "source": "wikidata",
+        "source_id": "Q33114556",
+        "reference": "Wikidata device class (paper_data Phase D, 2026-05-16)",
+        "license": "CC0-1.0",
+        "url": "https://www.wikidata.org/wiki/Q33114556",
+        "modified": false,
+        "interpretation": "mapped",
+        "cross_ref": [
+          {
+            "source": "wikidata",
+            "id": "Q33114556"
+          }
+        ]
+      }
+    },
+    {
+      "id": "device:gaa_fet",
+      "type": "Device",
+      "canonical_name": "gate-all-around field-effect transistor",
+      "description": "Logic/transistor device architecture.",
+      "props": {
+        "category": "logic"
+      },
+      "provenance": {
+        "source": "author-defined",
+        "source_id": "",
+        "reference": "Wikidata device class (paper_data Phase D, 2026-05-16)",
+        "license": "CC0-1.0",
+        "url": "",
+        "modified": false,
+        "interpretation": "author-defined",
+        "cross_ref": []
+      }
+    },
+    {
+      "id": "device:mosfet",
+      "type": "Device",
+      "canonical_name": "MOSFET",
+      "description": "Logic/transistor device architecture.",
+      "props": {
+        "category": "logic"
+      },
+      "provenance": {
+        "source": "wikidata",
+        "source_id": "Q210793",
+        "reference": "Wikidata device class (paper_data Phase D, 2026-05-16)",
+        "license": "CC0-1.0",
+        "url": "https://www.wikidata.org/wiki/Q210793",
+        "modified": false,
+        "interpretation": "mapped",
+        "cross_ref": [
+          {
+            "source": "wikidata",
+            "id": "Q210793"
+          }
+        ]
+      }
+    },
+    {
+      "id": "device:cmos",
+      "type": "Device",
+      "canonical_name": "CMOS",
+      "description": "Logic/transistor device architecture.",
+      "props": {
+        "category": "logic"
+      },
+      "provenance": {
+        "source": "wikidata",
+        "source_id": "Q173431,Q5012986",
+        "reference": "Wikidata device class (paper_data Phase D, 2026-05-16)",
+        "license": "CC0-1.0",
+        "url": "https://www.wikidata.org/wiki/Q173431",
+        "modified": false,
+        "interpretation": "mapped",
+        "cross_ref": [
+          {
+            "source": "wikidata",
+            "id": "Q173431"
+          },
+          {
+            "source": "wikidata",
+            "id": "Q5012986"
+          }
+        ]
+      }
+    },
+    {
+      "id": "device:bjt",
+      "type": "Device",
+      "canonical_name": "BJT",
+      "description": "Logic/transistor device architecture.",
+      "props": {
+        "category": "logic"
+      },
+      "provenance": {
+        "source": "wikidata",
+        "source_id": "Q188946",
+        "reference": "Wikidata device class (paper_data Phase D, 2026-05-16)",
+        "license": "CC0-1.0",
+        "url": "https://www.wikidata.org/wiki/Q188946",
+        "modified": false,
+        "interpretation": "mapped",
+        "cross_ref": [
+          {
+            "source": "wikidata",
+            "id": "Q188946"
+          }
+        ]
+      }
+    },
+    {
+      "id": "device:hemt",
+      "type": "Device",
+      "canonical_name": "HEMT",
+      "description": "Logic/transistor device architecture.",
+      "props": {
+        "category": "logic"
+      },
+      "provenance": {
+        "source": "wikidata",
+        "source_id": "Q1617706",
+        "reference": "Wikidata device class (paper_data Phase D, 2026-05-16)",
+        "license": "CC0-1.0",
+        "url": "https://www.wikidata.org/wiki/Q1617706",
+        "modified": false,
+        "interpretation": "mapped",
+        "cross_ref": [
+          {
+            "source": "wikidata",
+            "id": "Q1617706"
+          }
+        ]
+      }
+    },
+    {
+      "id": "device:jfet",
+      "type": "Device",
+      "canonical_name": "JFET",
+      "description": "Logic/transistor device architecture.",
+      "props": {
+        "category": "logic"
+      },
+      "provenance": {
+        "source": "wikidata",
+        "source_id": "Q385520",
+        "reference": "Wikidata device class (paper_data Phase D, 2026-05-16)",
+        "license": "CC0-1.0",
+        "url": "https://www.wikidata.org/wiki/Q385520",
+        "modified": false,
+        "interpretation": "mapped",
+        "cross_ref": [
+          {
+            "source": "wikidata",
+            "id": "Q385520"
+          }
+        ]
+      }
+    },
+    {
+      "id": "device:dram",
+      "type": "Device",
+      "canonical_name": "DRAM",
+      "description": "Memory device architecture.",
+      "props": {
+        "category": "memory"
+      },
+      "provenance": {
+        "source": "wikidata",
+        "source_id": "Q25138504,Q77878070",
+        "reference": "Wikidata device class (paper_data Phase D, 2026-05-16)",
+        "license": "CC0-1.0",
+        "url": "https://www.wikidata.org/wiki/Q25138504",
+        "modified": false,
+        "interpretation": "mapped",
+        "cross_ref": [
+          {
+            "source": "wikidata",
+            "id": "Q25138504"
+          },
+          {
+            "source": "wikidata",
+            "id": "Q77878070"
+          }
+        ]
+      }
+    },
+    {
+      "id": "device:sram",
+      "type": "Device",
+      "canonical_name": "SRAM",
+      "description": "Memory device architecture.",
+      "props": {
+        "category": "memory"
+      },
+      "provenance": {
+        "source": "wikidata",
+        "source_id": "Q267416",
+        "reference": "Wikidata device class (paper_data Phase D, 2026-05-16)",
+        "license": "CC0-1.0",
+        "url": "https://www.wikidata.org/wiki/Q267416",
+        "modified": false,
+        "interpretation": "mapped",
+        "cross_ref": [
+          {
+            "source": "wikidata",
+            "id": "Q267416"
+          }
+        ]
+      }
+    },
+    {
+      "id": "device:nand_flash",
+      "type": "Device",
+      "canonical_name": "NAND",
+      "description": "Memory device architecture.",
+      "props": {
+        "category": "memory"
+      },
+      "provenance": {
+        "source": "wikidata",
+        "source_id": "Q13405492",
+        "reference": "Wikidata device class (paper_data Phase D, 2026-05-16)",
+        "license": "CC0-1.0",
+        "url": "https://www.wikidata.org/wiki/Q13405492",
+        "modified": false,
+        "interpretation": "mapped",
+        "cross_ref": [
+          {
+            "source": "wikidata",
+            "id": "Q13405492"
+          }
+        ]
+      }
+    },
+    {
+      "id": "device:nor_flash",
+      "type": "Device",
+      "canonical_name": "NOR flash",
+      "description": "Memory device architecture.",
+      "props": {
+        "category": "memory"
+      },
+      "provenance": {
+        "source": "author-defined",
+        "source_id": "",
+        "reference": "Wikidata device class (paper_data Phase D, 2026-05-16)",
+        "license": "CC0-1.0",
+        "url": "",
+        "modified": false,
+        "interpretation": "author-defined",
+        "cross_ref": []
+      }
+    },
+    {
+      "id": "device:eeprom",
+      "type": "Device",
+      "canonical_name": "E2PROM",
+      "description": "Memory device architecture.",
+      "props": {
+        "category": "memory"
+      },
+      "provenance": {
+        "source": "wikidata",
+        "source_id": "Q205908",
+        "reference": "Wikidata device class (paper_data Phase D, 2026-05-16)",
+        "license": "CC0-1.0",
+        "url": "https://www.wikidata.org/wiki/Q205908",
+        "modified": false,
+        "interpretation": "mapped",
+        "cross_ref": [
+          {
+            "source": "wikidata",
+            "id": "Q205908"
+          }
+        ]
+      }
+    },
+    {
+      "id": "device:pcram",
+      "type": "Device",
+      "canonical_name": "C-RAM",
+      "description": "Memory device architecture.",
+      "props": {
+        "category": "memory"
+      },
+      "provenance": {
+        "source": "wikidata",
+        "source_id": "Q1153902",
+        "reference": "Wikidata device class (paper_data Phase D, 2026-05-16)",
+        "license": "CC0-1.0",
+        "url": "https://www.wikidata.org/wiki/Q1153902",
+        "modified": false,
+        "interpretation": "mapped",
+        "cross_ref": [
+          {
+            "source": "wikidata",
+            "id": "Q1153902"
+          }
+        ]
+      }
+    },
+    {
+      "id": "device:reram",
+      "type": "Device",
+      "canonical_name": "RRAM",
+      "description": "Memory device architecture.",
+      "props": {
+        "category": "memory"
+      },
+      "provenance": {
+        "source": "wikidata",
+        "source_id": "Q1143830",
+        "reference": "Wikidata device class (paper_data Phase D, 2026-05-16)",
+        "license": "CC0-1.0",
+        "url": "https://www.wikidata.org/wiki/Q1143830",
+        "modified": false,
+        "interpretation": "mapped",
+        "cross_ref": [
+          {
+            "source": "wikidata",
+            "id": "Q1143830"
+          }
+        ]
+      }
+    },
+    {
+      "id": "device:mram",
+      "type": "Device",
+      "canonical_name": "MRAM",
+      "description": "Memory device architecture.",
+      "props": {
+        "category": "memory"
+      },
+      "provenance": {
+        "source": "wikidata",
+        "source_id": "Q1061546",
+        "reference": "Wikidata device class (paper_data Phase D, 2026-05-16)",
+        "license": "CC0-1.0",
+        "url": "https://www.wikidata.org/wiki/Q1061546",
+        "modified": false,
+        "interpretation": "mapped",
+        "cross_ref": [
+          {
+            "source": "wikidata",
+            "id": "Q1061546"
+          }
+        ]
+      }
+    },
+    {
+      "id": "device:3d_nand",
+      "type": "Device",
+      "canonical_name": "3D V-NAND",
+      "description": "Memory device architecture.",
+      "props": {
+        "category": "memory"
+      },
+      "provenance": {
+        "source": "author-defined",
+        "source_id": "",
+        "reference": "Wikidata device class (paper_data Phase D, 2026-05-16)",
+        "license": "CC0-1.0",
+        "url": "",
+        "modified": false,
+        "interpretation": "author-defined",
+        "cross_ref": []
+      }
+    },
+    {
+      "id": "device:igbt",
+      "type": "Device",
+      "canonical_name": "insulated-gate bipolar transistor",
+      "description": "Power semiconductor device.",
+      "props": {
+        "category": "power"
+      },
+      "provenance": {
+        "source": "wikidata",
+        "source_id": "Q176110",
+        "reference": "Wikidata device class (paper_data Phase D, 2026-05-16)",
+        "license": "CC0-1.0",
+        "url": "https://www.wikidata.org/wiki/Q176110",
+        "modified": false,
+        "interpretation": "mapped",
+        "cross_ref": [
+          {
+            "source": "wikidata",
+            "id": "Q176110"
+          }
+        ]
+      }
+    },
+    {
+      "id": "device:sic_mosfet",
+      "type": "Device",
+      "canonical_name": "silicon carbide MOSFET",
+      "description": "Power semiconductor device.",
+      "props": {
+        "category": "power"
+      },
+      "provenance": {
+        "source": "author-defined",
+        "source_id": "",
+        "reference": "Wikidata device class (paper_data Phase D, 2026-05-16)",
+        "license": "CC0-1.0",
+        "url": "",
+        "modified": false,
+        "interpretation": "author-defined",
+        "cross_ref": []
+      }
+    },
+    {
+      "id": "device:gan_hemt",
+      "type": "Device",
+      "canonical_name": "gallium nitride HEMT",
+      "description": "Power semiconductor device.",
+      "props": {
+        "category": "power"
+      },
+      "provenance": {
+        "source": "author-defined",
+        "source_id": "",
+        "reference": "Wikidata device class (paper_data Phase D, 2026-05-16)",
+        "license": "CC0-1.0",
+        "url": "",
+        "modified": false,
+        "interpretation": "author-defined",
+        "cross_ref": []
+      }
+    },
+    {
+      "id": "device:thyristor",
+      "type": "Device",
+      "canonical_name": "thyristor",
+      "description": "Power semiconductor device.",
+      "props": {
+        "category": "power"
+      },
+      "provenance": {
+        "source": "wikidata",
+        "source_id": "Q180805",
+        "reference": "Wikidata device class (paper_data Phase D, 2026-05-16)",
+        "license": "CC0-1.0",
+        "url": "https://www.wikidata.org/wiki/Q180805",
+        "modified": false,
+        "interpretation": "mapped",
+        "cross_ref": [
+          {
+            "source": "wikidata",
+            "id": "Q180805"
+          }
+        ]
+      }
+    },
+    {
+      "id": "device:cmos_image_sensor",
+      "type": "Device",
+      "canonical_name": "CMOS image sensor",
+      "description": "Sensor/imaging device.",
+      "props": {
+        "category": "sensor"
+      },
+      "provenance": {
+        "source": "author-defined",
+        "source_id": "",
+        "reference": "Wikidata device class (paper_data Phase D, 2026-05-16)",
+        "license": "CC0-1.0",
+        "url": "",
+        "modified": false,
+        "interpretation": "author-defined",
+        "cross_ref": []
+      }
+    },
+    {
+      "id": "device:ccd",
+      "type": "Device",
+      "canonical_name": "CCD",
+      "description": "Sensor/imaging device.",
+      "props": {
+        "category": "sensor"
+      },
+      "provenance": {
+        "source": "wikidata",
+        "source_id": "Q189880",
+        "reference": "Wikidata device class (paper_data Phase D, 2026-05-16)",
+        "license": "CC0-1.0",
+        "url": "https://www.wikidata.org/wiki/Q189880",
+        "modified": false,
+        "interpretation": "mapped",
+        "cross_ref": [
+          {
+            "source": "wikidata",
+            "id": "Q189880"
+          }
+        ]
+      }
+    },
+    {
+      "id": "device:photodiode",
+      "type": "Device",
+      "canonical_name": "photodiode",
+      "description": "Sensor/imaging device.",
+      "props": {
+        "category": "sensor"
+      },
+      "provenance": {
+        "source": "wikidata",
+        "source_id": "Q175943",
+        "reference": "Wikidata device class (paper_data Phase D, 2026-05-16)",
+        "license": "CC0-1.0",
+        "url": "https://www.wikidata.org/wiki/Q175943",
+        "modified": false,
+        "interpretation": "mapped",
+        "cross_ref": [
+          {
+            "source": "wikidata",
+            "id": "Q175943"
+          }
+        ]
+      }
+    },
+    {
+      "id": "device:mems",
+      "type": "Device",
+      "canonical_name": "microelectromechanical systems",
+      "description": "Sensor/imaging device.",
+      "props": {
+        "category": "sensor"
+      },
+      "provenance": {
+        "source": "author-defined",
+        "source_id": "",
+        "reference": "Wikidata device class (paper_data Phase D, 2026-05-16)",
+        "license": "CC0-1.0",
+        "url": "",
+        "modified": false,
+        "interpretation": "author-defined",
+        "cross_ref": []
+      }
+    },
+    {
+      "id": "device:bga",
+      "type": "Device",
+      "canonical_name": "ball grid array",
+      "description": "Advanced packaging / interconnect architecture.",
+      "props": {
+        "category": "packaging"
+      },
+      "provenance": {
+        "source": "wikidata",
+        "source_id": "Q570628",
+        "reference": "Wikidata device class (paper_data Phase D, 2026-05-16)",
+        "license": "CC0-1.0",
+        "url": "https://www.wikidata.org/wiki/Q570628",
+        "modified": false,
+        "interpretation": "mapped",
+        "cross_ref": [
+          {
+            "source": "wikidata",
+            "id": "Q570628"
+          }
+        ]
+      }
+    },
+    {
+      "id": "device:flip_chip",
+      "type": "Device",
+      "canonical_name": "C4",
+      "description": "Advanced packaging / interconnect architecture.",
+      "props": {
+        "category": "packaging"
+      },
+      "provenance": {
+        "source": "wikidata",
+        "source_id": "Q432439",
+        "reference": "Wikidata device class (paper_data Phase D, 2026-05-16)",
+        "license": "CC0-1.0",
+        "url": "https://www.wikidata.org/wiki/Q432439",
+        "modified": false,
+        "interpretation": "mapped",
+        "cross_ref": [
+          {
+            "source": "wikidata",
+            "id": "Q432439"
+          }
+        ]
+      }
+    },
+    {
+      "id": "device:wire_bonding",
+      "type": "Device",
+      "canonical_name": "wire bonding",
+      "description": "Advanced packaging / interconnect architecture.",
+      "props": {
+        "category": "packaging"
+      },
+      "provenance": {
+        "source": "author-defined",
+        "source_id": "",
+        "reference": "Wikidata device class (paper_data Phase D, 2026-05-16)",
+        "license": "CC0-1.0",
+        "url": "",
+        "modified": false,
+        "interpretation": "author-defined",
+        "cross_ref": []
+      }
+    },
+    {
+      "id": "device:tsv",
+      "type": "Device",
+      "canonical_name": "TSV",
+      "description": "Advanced packaging / interconnect architecture.",
+      "props": {
+        "category": "packaging"
+      },
+      "provenance": {
+        "source": "wikidata",
+        "source_id": "Q1578120",
+        "reference": "Wikidata device class (paper_data Phase D, 2026-05-16)",
+        "license": "CC0-1.0",
+        "url": "https://www.wikidata.org/wiki/Q1578120",
+        "modified": false,
+        "interpretation": "mapped",
+        "cross_ref": [
+          {
+            "source": "wikidata",
+            "id": "Q1578120"
+          }
+        ]
+      }
+    },
+    {
+      "id": "device:hbm",
+      "type": "Device",
+      "canonical_name": "high-bandwidth memory",
+      "description": "Advanced packaging / interconnect architecture.",
+      "props": {
+        "category": "packaging"
+      },
+      "provenance": {
+        "source": "author-defined",
+        "source_id": "",
+        "reference": "Wikidata device class (paper_data Phase D, 2026-05-16)",
+        "license": "CC0-1.0",
+        "url": "",
+        "modified": false,
+        "interpretation": "author-defined",
+        "cross_ref": []
+      }
+    },
+    {
+      "id": "device:interposer",
+      "type": "Device",
+      "canonical_name": "silicon interposer",
+      "description": "Advanced packaging / interconnect architecture.",
+      "props": {
+        "category": "packaging"
+      },
+      "provenance": {
+        "source": "author-defined",
+        "source_id": "",
+        "reference": "Wikidata device class (paper_data Phase D, 2026-05-16)",
+        "license": "CC0-1.0",
+        "url": "",
+        "modified": false,
+        "interpretation": "author-defined",
+        "cross_ref": []
+      }
+    },
+    {
+      "id": "device:fan_out_wlp",
+      "type": "Device",
+      "canonical_name": "fan-out wafer-level packaging",
+      "description": "Advanced packaging / interconnect architecture.",
+      "props": {
+        "category": "packaging"
+      },
+      "provenance": {
+        "source": "author-defined",
+        "source_id": "",
+        "reference": "Wikidata device class (paper_data Phase D, 2026-05-16)",
+        "license": "CC0-1.0",
+        "url": "",
+        "modified": false,
+        "interpretation": "author-defined",
+        "cross_ref": []
+      }
     }
   ],
   "edges": [
@@ -8549,6 +9246,552 @@
       "term": "HF",
       "lang": "en",
       "term_type": "abbr"
+    },
+    {
+      "node_id": "device:finfet",
+      "term": "FinFET",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:finfet",
+      "term": "fin field-effect transistor",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:finfet",
+      "term": "핀펫",
+      "lang": "ko",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:mosfet",
+      "term": "MOSFET",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:cmos",
+      "term": "CMOS",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:bjt",
+      "term": "BJT",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:bjt",
+      "term": "bipolar junction transistor",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:bjt",
+      "term": "bipolar transistor",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:bjt",
+      "term": "바이폴러 트랜지스터",
+      "lang": "ko",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:bjt",
+      "term": "접합형 트랜지스터",
+      "lang": "ko",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:hemt",
+      "term": "HEMT",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:hemt",
+      "term": "HFET",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:hemt",
+      "term": "MODFET",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:hemt",
+      "term": "heterostructure FET",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:hemt",
+      "term": "modulation-doped FET",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:hemt",
+      "term": "하이 일렉트론 모빌리티 트랜지스터",
+      "lang": "ko",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:jfet",
+      "term": "JFET",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:dram",
+      "term": "DRAM",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:sram",
+      "term": "SRAM",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:sram",
+      "term": "static RAM",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:sram",
+      "term": "static random access memory",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:sram",
+      "term": "static random-access memory",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:sram",
+      "term": "에스램",
+      "lang": "ko",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:sram",
+      "term": "정적 기억 장치",
+      "lang": "ko",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:sram",
+      "term": "정적 램",
+      "lang": "ko",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:nand_flash",
+      "term": "NAND",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:nand_flash",
+      "term": "NAND flash",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:nand_flash",
+      "term": "NAND flash memory",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:nand_flash",
+      "term": "solid state drive",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:nand_flash",
+      "term": "ssd",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:nor_flash",
+      "term": "NOR flash",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:eeprom",
+      "term": "E2PROM",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:eeprom",
+      "term": "EEPROM",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:eeprom",
+      "term": "이이피롬",
+      "lang": "ko",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:pcram",
+      "term": "C-RAM",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:pcram",
+      "term": "CRAM",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:pcram",
+      "term": "OUM",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:pcram",
+      "term": "PCM",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:pcram",
+      "term": "PCME",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:pcram",
+      "term": "PCRAM",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:pcram",
+      "term": "PRAM",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:pcram",
+      "term": "chalcogenide RAM",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:pcram",
+      "term": "ovonic unified memory",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:pcram",
+      "term": "phase-change RAM",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:pcram",
+      "term": "phase-change memory",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:pcram",
+      "term": "P램",
+      "lang": "ko",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:pcram",
+      "term": "상변화 메모리",
+      "lang": "ko",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:pcram",
+      "term": "상변환 메모리",
+      "lang": "ko",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:pcram",
+      "term": "피램",
+      "lang": "ko",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:reram",
+      "term": "RRAM",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:reram",
+      "term": "ReRAM",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:reram",
+      "term": "resistive RAM",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:reram",
+      "term": "resistive random-access memory",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:reram",
+      "term": "저항 메모리",
+      "lang": "ko",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:mram",
+      "term": "MRAM",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:mram",
+      "term": "magnetoresistive RAM",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:mram",
+      "term": "엠램",
+      "lang": "ko",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:3d_nand",
+      "term": "3D V-NAND",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:igbt",
+      "term": "절연 게이트 양극성 트랜지스터",
+      "lang": "ko",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:sic_mosfet",
+      "term": "silicon carbide MOSFET",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:gan_hemt",
+      "term": "gallium nitride HEMT",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:thyristor",
+      "term": "thyristor",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:thyristor",
+      "term": "사이리스터",
+      "lang": "ko",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:thyristor",
+      "term": "실리콘 제어 정류기",
+      "lang": "ko",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:thyristor",
+      "term": "실리콘제어정류기",
+      "lang": "ko",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:cmos_image_sensor",
+      "term": "CMOS image sensor",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:ccd",
+      "term": "CCD",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:ccd",
+      "term": "CCD image sensor",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:ccd",
+      "term": "charge-coupled device",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:ccd",
+      "term": "CCD 이미지 센서",
+      "lang": "ko",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:ccd",
+      "term": "전하 결합소자",
+      "lang": "ko",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:ccd",
+      "term": "전하결합 소자",
+      "lang": "ko",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:ccd",
+      "term": "전하결합소자",
+      "lang": "ko",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:photodiode",
+      "term": "photodiode",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:photodiode",
+      "term": "광다이오드",
+      "lang": "ko",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:mems",
+      "term": "microelectromechanical systems",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:bga",
+      "term": "ball grid array",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:bga",
+      "term": "bga",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:bga",
+      "term": "볼 그리드 배열",
+      "lang": "ko",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:flip_chip",
+      "term": "C4",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:flip_chip",
+      "term": "FC",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:flip_chip",
+      "term": "flip chip",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:flip_chip",
+      "term": "플립칩",
+      "lang": "ko",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:wire_bonding",
+      "term": "wire bonding",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:tsv",
+      "term": "TSV",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:tsv",
+      "term": "through silicon via",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:tsv",
+      "term": "through-silicon via",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:tsv",
+      "term": "실리콘 관통 전극",
+      "lang": "ko",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:hbm",
+      "term": "high-bandwidth memory",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:interposer",
+      "term": "silicon interposer",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:fan_out_wlp",
+      "term": "fan-out wafer-level packaging",
+      "lang": "en",
+      "term_type": "synonym"
     }
   ],
   "cases": [

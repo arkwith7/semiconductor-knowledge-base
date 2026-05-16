@@ -1,0 +1,35 @@
+{
+  "legal_bases": [
+    {
+      "paragraph": "2",
+      "count": 4
+    }
+  ],
+  "cited_evidence_phrases": [
+    "1",
+    "2",
+    "3",
+    "4"
+  ],
+  "cited_evidence_map": {
+    "1": "KR-P-1020140068036",
+    "2": "JP-P-2002141341",
+    "3": "KR-P-1020180071394"
+  },
+  "target_claims": [
+    "1",
+    "10",
+    "2",
+    "2~5",
+    "6",
+    "7",
+    "8",
+    "9"
+  ],
+  "decision_date": "2024-07-09",
+  "text_length": 3659,
+  "application_number": "1020210088952",
+  "ocr_method": "cached",
+  "generated_at": "2026-05-16T14:12:16.343773Z",
+  "_excerpt_removed": true
+}

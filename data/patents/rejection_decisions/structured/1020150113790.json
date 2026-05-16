@@ -1,0 +1,25 @@
+{
+  "legal_bases": [
+    {
+      "paragraph": "2",
+      "count": 2
+    }
+  ],
+  "cited_evidence_phrases": [
+    "1",
+    "2"
+  ],
+  "cited_evidence_map": {},
+  "target_claims": [
+    "1",
+    "11",
+    "2",
+    "6"
+  ],
+  "decision_date": "2017-07-26",
+  "text_length": 2867,
+  "application_number": "1020150113790",
+  "ocr_method": "cached",
+  "generated_at": "2026-05-16T14:12:16.425857Z",
+  "_excerpt_removed": true
+}

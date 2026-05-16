@@ -1,0 +1,26 @@
+{
+  "legal_bases": [
+    {
+      "paragraph": "2",
+      "count": 6
+    }
+  ],
+  "cited_evidence_phrases": [
+    "1",
+    "2"
+  ],
+  "cited_evidence_map": {
+    "2": "US-P-20130069134"
+  },
+  "target_claims": [
+    "1",
+    "2",
+    "9"
+  ],
+  "decision_date": "2024-10-30",
+  "text_length": 3745,
+  "application_number": "1020220174995",
+  "ocr_method": "cached",
+  "generated_at": "2026-05-16T14:12:16.348341Z",
+  "_excerpt_removed": true
+}

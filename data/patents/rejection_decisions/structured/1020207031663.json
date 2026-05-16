@@ -1,0 +1,22 @@
+{
+  "legal_bases": [
+    {
+      "paragraph": "2",
+      "count": 3
+    }
+  ],
+  "cited_evidence_phrases": [
+    "1",
+    "2"
+  ],
+  "cited_evidence_map": {
+    "1": "US-P-20070256933"
+  },
+  "target_claims": [],
+  "decision_date": "2021-03-29",
+  "text_length": 3056,
+  "application_number": "1020207031663",
+  "ocr_method": "pdfplumber",
+  "generated_at": "2026-05-16T14:12:40.721533Z",
+  "_excerpt_removed": true
+}

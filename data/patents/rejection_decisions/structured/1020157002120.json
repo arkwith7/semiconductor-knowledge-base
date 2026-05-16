@@ -1,0 +1,45 @@
+{
+  "legal_bases": [
+    {
+      "paragraph": "2",
+      "count": 2
+    }
+  ],
+  "cited_evidence_phrases": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5"
+  ],
+  "cited_evidence_map": {
+    "1": "JP-P-2005077822",
+    "2": "KR-P-1020090104730",
+    "3": "JP-P-2002050761",
+    "4": "JP-P-2002359252",
+    "5": "JP-P-2001051300"
+  },
+  "target_claims": [
+    "1",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "16",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9"
+  ],
+  "decision_date": "2020-11-27",
+  "text_length": 9878,
+  "application_number": "1020157002120",
+  "ocr_method": "cached",
+  "generated_at": "2026-05-16T14:12:16.353731Z",
+  "_excerpt_removed": true
+}

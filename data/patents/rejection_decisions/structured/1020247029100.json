@@ -1,0 +1,27 @@
+{
+  "legal_bases": [
+    {
+      "paragraph": "1",
+      "count": 3
+    },
+    {
+      "paragraph": "2",
+      "count": 3
+    }
+  ],
+  "cited_evidence_phrases": [
+    "1",
+    "2"
+  ],
+  "cited_evidence_map": {
+    "1": "US-G-6490145",
+    "2": "JP-P-2019212910"
+  },
+  "target_claims": [],
+  "decision_date": "2025-10-27",
+  "text_length": 7008,
+  "application_number": "1020247029100",
+  "ocr_method": "cached",
+  "generated_at": "2026-05-16T14:12:16.434302Z",
+  "_excerpt_removed": true
+}

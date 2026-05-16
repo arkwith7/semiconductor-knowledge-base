@@ -1,0 +1,29 @@
+{
+  "legal_bases": [
+    {
+      "paragraph": "1",
+      "count": 2
+    },
+    {
+      "paragraph": "2",
+      "count": 2
+    }
+  ],
+  "cited_evidence_phrases": [
+    "1",
+    "2",
+    "3"
+  ],
+  "cited_evidence_map": {
+    "1": "JP-P-06061234",
+    "2": "JP-P-2010109141",
+    "3": "KR-P-1020090007362"
+  },
+  "target_claims": [],
+  "decision_date": "2016-02-01",
+  "text_length": 4578,
+  "application_number": "1020140116106",
+  "ocr_method": "cached",
+  "generated_at": "2026-05-16T14:12:16.388924Z",
+  "_excerpt_removed": true
+}

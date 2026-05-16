@@ -1,0 +1,30 @@
+{
+  "legal_bases": [
+    {
+      "paragraph": "2",
+      "count": 2
+    }
+  ],
+  "cited_evidence_phrases": [
+    "1",
+    "2"
+  ],
+  "cited_evidence_map": {
+    "1": "KR-P-1020100084664",
+    "2": "JP-P-63112078"
+  },
+  "target_claims": [
+    "1",
+    "2",
+    "3",
+    "5",
+    "6",
+    "7"
+  ],
+  "decision_date": "2017-12-11",
+  "text_length": 3332,
+  "application_number": "1020160039194",
+  "ocr_method": "pdfplumber",
+  "generated_at": "2026-05-16T14:12:53.525448Z",
+  "_excerpt_removed": true
+}

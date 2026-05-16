@@ -1,0 +1,140 @@
+{
+  "pilot_scope": "ground_truth_evidence_v2 (plan §7.4-4 — 270 rec / 656 map)",
+  "evidence_v2_mappings_total": 656,
+  "evidence_v2_records_total": 270,
+  "pairs_with_cited_in_content_corpus": 618,
+  "explanation_coverage": 0.6003,
+  "explanation_threshold": 0.7,
+  "meets_threshold": false,
+  "mean_shared_concepts": 1.029,
+  "mean_shared_when_explained": 1.714,
+  "coverage_by_legal_basis": {
+    "§29": {
+      "explained": 5,
+      "total": 7,
+      "rate": 0.7143
+    },
+    "§29①": {
+      "explained": 4,
+      "total": 7,
+      "rate": 0.5714
+    },
+    "§29②": {
+      "explained": 362,
+      "total": 604,
+      "rate": 0.5993
+    }
+  },
+  "shared_concept_type_distribution": {
+    "Process": 232,
+    "Skill": 171,
+    "Material": 142,
+    "SubProcess": 87,
+    "Device": 4
+  },
+  "top_explained_samples": [
+    {
+      "target": "patent:kr_1020227033671",
+      "cited": "US-P-20190348292",
+      "legal_basis": "§29②",
+      "shared": [
+        "material:photoresist_euv",
+        "process:etch",
+        "process:lithography",
+        "skill:defect_analysis",
+        "skill:mask_engineering",
+        "subprocess:euv_lithography"
+      ]
+    },
+    {
+      "target": "patent:kr_1020210088952",
+      "cited": "KR-P-1020140068036",
+      "legal_basis": "§29②",
+      "shared": [
+        "process:etch",
+        "skill:chamber_conditioning",
+        "skill:gas_chemistry",
+        "skill:mask_engineering",
+        "skill:plasma_diagnostics",
+        "subprocess:plasma_etch"
+      ]
+    },
+    {
+      "target": "patent:kr_1020227033671",
+      "cited": "KR-P-1020190085654",
+      "legal_basis": "§29②",
+      "shared": [
+        "material:photoresist_euv",
+        "process:etch",
+        "process:lithography",
+        "skill:mask_engineering",
+        "subprocess:euv_lithography"
+      ]
+    },
+    {
+      "target": "patent:kr_1020180143287",
+      "cited": "KR-P-1020040082490",
+      "legal_basis": "§29②",
+      "shared": [
+        "material:sio2",
+        "process:deposition",
+        "skill:defect_analysis",
+        "skill:gas_chemistry",
+        "skill:plasma_diagnostics"
+      ]
+    },
+    {
+      "target": "patent:kr_1020230170635",
+      "cited": "KR-P-1020090012676",
+      "legal_basis": "§29②",
+      "shared": [
+        "process:etch",
+        "skill:chamber_conditioning",
+        "skill:gas_chemistry",
+        "skill:plasma_diagnostics",
+        "subprocess:plasma_etch"
+      ]
+    },
+    {
+      "target": "patent:kr_1020210107301",
+      "cited": "KR-P-1020190100035",
+      "legal_basis": "§29②",
+      "shared": [
+        "material:photoresist_euv",
+        "process:deposition",
+        "process:etch",
+        "process:lithography",
+        "skill:plasma_diagnostics"
+      ]
+    },
+    {
+      "target": "patent:kr_1020090055948",
+      "cited": "KR-P-1020050106997",
+      "legal_basis": "§29②",
+      "shared": [
+        "material:hf_acid",
+        "material:sin",
+        "material:sio2",
+        "material:tin",
+        "process:etch"
+      ]
+    },
+    {
+      "target": "patent:kr_1020210184131",
+      "cited": "KR-P-1020210092884",
+      "legal_basis": "§29②",
+      "shared": [
+        "material:sio2",
+        "process:etch",
+        "skill:gas_chemistry",
+        "skill:plasma_diagnostics"
+      ]
+    }
+  ],
+  "notes": [
+    "Explanation = ontology concepts shared by target and examiner-cited fulltext; coverage = non-empty-explanation rate.",
+    "PILOT (270 rec) — not the full corpus; bridge morph=False (substring fallback, kiwipiepy absent).",
+    "§29① = novelty (KR Patent Act 29(1)); §29② = inventive step.",
+    "This axis was UNMEASURABLE before the Phase C collection."
+  ]
+}

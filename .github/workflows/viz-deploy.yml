@@ -6,6 +6,7 @@ on:
     paths:
       - 'data/semiconductor_v0_3.json'
       - 'data/patents/raw/**'
+      - 'data/reports/**'
       - 'ontology/sdkb-*.ttl'
       - 'scripts/build_viz.py'
       - 'pyproject.toml'

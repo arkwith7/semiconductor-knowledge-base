@@ -1,0 +1,28 @@
+{
+  "legal_bases": [
+    {
+      "paragraph": "1",
+      "count": 3
+    },
+    {
+      "paragraph": "2",
+      "count": 3
+    }
+  ],
+  "cited_evidence_phrases": [
+    "1"
+  ],
+  "cited_evidence_map": {},
+  "target_claims": [
+    "1",
+    "3",
+    "7",
+    "9"
+  ],
+  "decision_date": "2020-12-16",
+  "text_length": 4978,
+  "application_number": "1020190092298",
+  "ocr_method": "cached",
+  "generated_at": "2026-05-16T14:12:16.371580Z",
+  "_excerpt_removed": true
+}

@@ -1,0 +1,29 @@
+{
+  "legal_bases": [
+    {
+      "paragraph": "2",
+      "count": 2
+    }
+  ],
+  "cited_evidence_phrases": [
+    "1",
+    "2"
+  ],
+  "cited_evidence_map": {
+    "2": "US-G-5427666"
+  },
+  "target_claims": [
+    "1",
+    "10",
+    "2",
+    "3",
+    "8",
+    "9"
+  ],
+  "decision_date": "2017-08-08",
+  "text_length": 3221,
+  "application_number": "1020167002643",
+  "ocr_method": "pdfplumber",
+  "generated_at": "2026-05-16T14:12:46.127647Z",
+  "_excerpt_removed": true
+}

@@ -1,0 +1,38 @@
+{
+  "legal_bases": [
+    {
+      "paragraph": "2",
+      "count": 4
+    }
+  ],
+  "cited_evidence_phrases": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5"
+  ],
+  "cited_evidence_map": {
+    "1": "JP-P-2007220816",
+    "2": "KR-P-1020090119666",
+    "4": "KR-P-1020050001518",
+    "5": "JP-P-2001100658"
+  },
+  "target_claims": [
+    "1",
+    "11",
+    "13",
+    "14~17",
+    "16",
+    "18",
+    "19~20",
+    "2",
+    "3~12"
+  ],
+  "decision_date": "2019-03-16",
+  "text_length": 4211,
+  "application_number": "1020120091815",
+  "ocr_method": "cached",
+  "generated_at": "2026-05-16T14:12:16.418885Z",
+  "_excerpt_removed": true
+}

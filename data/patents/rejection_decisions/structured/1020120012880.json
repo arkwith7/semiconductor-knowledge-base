@@ -1,0 +1,23 @@
+{
+  "legal_bases": [
+    {
+      "paragraph": "2",
+      "count": 2
+    }
+  ],
+  "cited_evidence_phrases": [
+    "1",
+    "2"
+  ],
+  "cited_evidence_map": {
+    "1": "US-P-20070170489",
+    "2": "US-P-20090213660"
+  },
+  "target_claims": [],
+  "decision_date": "2014-08-29",
+  "text_length": 3233,
+  "application_number": "1020120012880",
+  "ocr_method": "cached",
+  "generated_at": "2026-05-16T14:12:16.435959Z",
+  "_excerpt_removed": true
+}

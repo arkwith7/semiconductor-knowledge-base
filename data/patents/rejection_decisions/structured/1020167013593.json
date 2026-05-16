@@ -1,0 +1,23 @@
+{
+  "legal_bases": [
+    {
+      "paragraph": "2",
+      "count": 2
+    }
+  ],
+  "cited_evidence_phrases": [
+    "1",
+    "2"
+  ],
+  "cited_evidence_map": {
+    "1": "US-P-20080274624",
+    "2": "US-P-20100151676"
+  },
+  "target_claims": [],
+  "decision_date": "2020-10-13",
+  "text_length": 6617,
+  "application_number": "1020167013593",
+  "ocr_method": "cached",
+  "generated_at": "2026-05-16T14:12:16.391087Z",
+  "_excerpt_removed": true
+}

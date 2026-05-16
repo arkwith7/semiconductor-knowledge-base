@@ -1,0 +1,22 @@
+{
+  "legal_bases": [
+    {
+      "paragraph": "2",
+      "count": 3
+    }
+  ],
+  "cited_evidence_phrases": [
+    "1",
+    "2"
+  ],
+  "cited_evidence_map": {
+    "1": "JP-P-2014062316"
+  },
+  "target_claims": [],
+  "decision_date": "2021-06-02",
+  "text_length": 3921,
+  "application_number": "1020197004052",
+  "ocr_method": "pdfplumber",
+  "generated_at": "2026-05-16T14:12:26.779092Z",
+  "_excerpt_removed": true
+}

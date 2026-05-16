@@ -1,0 +1,28 @@
+{
+  "legal_bases": [
+    {
+      "paragraph": "2",
+      "count": 4
+    }
+  ],
+  "cited_evidence_phrases": [
+    "1",
+    "2",
+    "3"
+  ],
+  "cited_evidence_map": {
+    "1": "JP-P-2009070725",
+    "2": "JP-P-2000344859",
+    "3": "KR-P-1020130107513"
+  },
+  "target_claims": [
+    "1",
+    "6"
+  ],
+  "decision_date": "2022-10-11",
+  "text_length": 4590,
+  "application_number": "1020200161939",
+  "ocr_method": "pdfplumber",
+  "generated_at": "2026-05-16T14:12:25.612226Z",
+  "_excerpt_removed": true
+}

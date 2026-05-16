@@ -1,0 +1,19 @@
+{
+  "legal_bases": [],
+  "cited_evidence_phrases": [],
+  "cited_evidence_map": {},
+  "target_claims": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6"
+  ],
+  "decision_date": "2024-04-16",
+  "text_length": 4990,
+  "application_number": "1020230057845",
+  "ocr_method": "pdfplumber",
+  "generated_at": "2026-05-16T14:12:51.064258Z",
+  "_excerpt_removed": true
+}

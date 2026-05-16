@@ -1,0 +1,23 @@
+{
+  "legal_bases": [
+    {
+      "paragraph": "2",
+      "count": 2
+    }
+  ],
+  "cited_evidence_phrases": [
+    "1",
+    "2"
+  ],
+  "cited_evidence_map": {
+    "1": "JP-P-2007206212",
+    "2": "JP-P-2011215454"
+  },
+  "target_claims": [],
+  "decision_date": "2024-05-14",
+  "text_length": 3648,
+  "application_number": "1020230002916",
+  "ocr_method": "cached",
+  "generated_at": "2026-05-16T14:12:16.344104Z",
+  "_excerpt_removed": true
+}

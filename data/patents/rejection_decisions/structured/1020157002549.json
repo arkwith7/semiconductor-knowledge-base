@@ -1,0 +1,24 @@
+{
+  "legal_bases": [
+    {
+      "paragraph": "2",
+      "count": 4
+    }
+  ],
+  "cited_evidence_phrases": [
+    "1"
+  ],
+  "cited_evidence_map": {},
+  "target_claims": [
+    "1",
+    "11",
+    "15",
+    "20"
+  ],
+  "decision_date": "2016-11-21",
+  "text_length": 2452,
+  "application_number": "1020157002549",
+  "ocr_method": "pdfplumber",
+  "generated_at": "2026-05-16T14:12:33.577536Z",
+  "_excerpt_removed": true
+}

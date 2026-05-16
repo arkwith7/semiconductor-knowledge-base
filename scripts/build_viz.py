@@ -48,6 +48,8 @@ TYPE_COLORS: dict[str, str] = {
     "Vendor":          "#A78BFA",
     "Skill":           "#EC4899",
     "TechnologyNode":  "#06B6D4",
+    "Device":          "#14B8A6",   # A2 device/product layer (plan §7.4-3)
+    "DeviceCategory":  "#0D9488",
     # SIRP additions
     "Patent":          "#0EA5E9",
     "PriorArt":        "#FACC15",
@@ -116,6 +118,23 @@ SYNTHETIC_BACKBONE: dict[str, tuple[str, str]] = {
         "Cross-cutting / general scope (non-baseline anchor).",
     ),
 }
+
+# A2 device/product layer — MUST mirror build_abox_patents.DEVICE_FAMILY_MAP.
+# In the SIRP view a device-family patent is anchored to the REAL device:*
+# ontology node (not the synthetic process:device blob), so the graph shows
+# the new ont:concernsDevice linkage (plan §7.4-3).
+DEVICE_FAMILY_MAP: dict[str, str] = {
+    "memory": "device:dram", "memory_cell": "device:dram",
+    "memory_dram": "device:dram", "backend_packaging": "device:bga",
+    "packaging": "device:bga", "mems": "device:mems",
+    "image_sensor": "device:cmos_image_sensor", "3d_integration": "device:tsv",
+}
+
+
+def _device_index() -> dict[str, dict]:
+    """{device:id -> node dict} from the KG (canonical_name, category)."""
+    g = json.loads((REPO / "data/semiconductor_v0_3.json").read_text(encoding="utf-8"))
+    return {n["id"]: n for n in g["nodes"] if n.get("type") == "Device"}
 
 
 # ── Floating toolbar (Home / Zoom + / Zoom − / Fit) ───────────────
@@ -264,6 +283,31 @@ def build_baseline() -> dict:
             arrows="to",
         )
 
+    # A2 device layer (plan §7.4-3): the KG has no edges for Device nodes
+    # (ont:concernsDevice lives in the patent A-Box, not the core KG), so
+    # without this they render as 31 floating dots. Group them under their
+    # device_vocab category so the layer reads as a coherent taxonomy.
+    n_dev_edges = 0
+    cat_hubs: set[str] = set()
+    for n in graph["nodes"]:
+        if n.get("type") != "Device":
+            continue
+        cat = (n.get("props") or {}).get("category") or "device"
+        hub = f"devcat:{cat}"
+        if hub not in cat_hubs:
+            cat_hubs.add(hub)
+            types_seen.add("DeviceCategory")
+            net.add_node(
+                hub, label=f"{cat} devices",
+                title=_node_title(f"{cat} device category", "A2 DeviceCategory",
+                                  hub, "device_vocab category hub (Phase D)"),
+                color=TYPE_COLORS["DeviceCategory"], shape="hexagon",
+                size=20, group="DeviceCategory",
+            )
+        net.add_edge(hub, n["id"], title="hasDevice (A2)",
+                     color="#0D9488", arrows="to", dashes=True)
+        n_dev_edges += 1
+
     _add_legend(net, sorted(types_seen))
     out = OUT_DIR / "baseline.html"
     net.write_html(str(out), open_browser=False, notebook=False)
@@ -271,8 +315,9 @@ def build_baseline() -> dict:
     return {
         "view": "baseline",
         "path": str(out.relative_to(REPO)),
-        "n_nodes": len(graph["nodes"]),
-        "n_edges": len(graph["edges"]),
+        "n_nodes": len(graph["nodes"]) + len(cat_hubs),
+        "n_edges": len(graph["edges"]) + n_dev_edges,
+        "n_device_nodes": sum(1 for n in graph["nodes"] if n.get("type") == "Device"),
         "node_types": sorted(types_seen),
     }
 
@@ -298,6 +343,7 @@ def build_sirp(top_n: int = 50) -> dict:
         n["id"]: n for n in baseline["nodes"]
         if n.get("type") in ("Process", "SubProcess")
     }
+    dev_idx = _device_index()  # A2 device:* nodes (plan §7.4-3)
 
     examiner_edges = edges[edges["source_type"] == "examiner"].copy()
     citation_counts = (
@@ -338,6 +384,24 @@ def build_sirp(top_n: int = 50) -> dict:
             group="Process",
         )
 
+    def _add_device_anchor(dev_id: str) -> None:
+        if dev_id in backbone_added:
+            return
+        backbone_added.add(dev_id)
+        n = dev_idx.get(dev_id, {})
+        label = n.get("canonical_name") or dev_id
+        cat = (n.get("props") or {}).get("category") or ""
+        net.add_node(
+            dev_id,
+            label=label,
+            title=_node_title(label, f"A2 Device ({cat})", dev_id,
+                              n.get("description") or "device/product layer"),
+            color=TYPE_COLORS["Device"], shape="box", size=30,
+            font={"size": 17, "color": "#042F2E", "face": "monospace"},
+            group="Device",
+        )
+
+    n_a2_edges = 0
     cited_office_counter: Counter = Counter()
     for pid in top_patents:
         if pid not in patent_meta.index:
@@ -348,11 +412,13 @@ def build_sirp(top_n: int = 50) -> dict:
         cohort = str(row.get("cohort_scope", "") or "")
         proc_family_raw = str(row.get("process_family", "") or "").strip()
         proc_family = proc_family_raw.lower()
-        backbone_id = PROCESS_FAMILY_MAP.get(proc_family, "process:general")
+        dev_id = DEVICE_FAMILY_MAP.get(proc_family)  # A2: real device:* node
+        backbone_id = dev_id or PROCESS_FAMILY_MAP.get(proc_family, "process:general")
         backbone_counter[backbone_id] += 1
+        anchor_kind = "concernsDevice (A2)" if dev_id else "addresses_process"
         body = (
             f"IPC: {ipc} · process_family: {proc_family_raw or '—'}<br/>"
-            f"backbone: <code>{escape(backbone_id)}</code><br/>"
+            f"anchor: <code>{escape(backbone_id)}</code> ({anchor_kind})<br/>"
             f"cohort: {cohort}"
         )
         net.add_node(
@@ -364,14 +430,20 @@ def build_sirp(top_n: int = 50) -> dict:
             size=20,
             group="Patent",
         )
-        _add_backbone(backbone_id)
-        net.add_edge(
-            backbone_id, pid,
-            title="addresses_process",
-            color="#94A3B8",
-            arrows="to",
-            dashes=True,
-        )
+        if dev_id:
+            _add_device_anchor(dev_id)
+            net.add_edge(pid, dev_id, title="ont:concernsDevice (A2)",
+                         color="#14B8A6", arrows="to")
+            n_a2_edges += 1
+        else:
+            _add_backbone(backbone_id)
+            net.add_edge(
+                backbone_id, pid,
+                title="addresses_process",
+                color="#94A3B8",
+                arrows="to",
+                dashes=True,
+            )
 
     for _, e in sub_edges.iterrows():
         target = e["target_patent_id"]
@@ -390,7 +462,7 @@ def build_sirp(top_n: int = 50) -> dict:
             )
         net.add_edge(target, cited, title="hasPriorArt (examiner)", color="#64748B", arrows="to")
 
-    _add_legend(net, ["Process", "Patent", "PriorArt"])
+    _add_legend(net, ["Process", "Device", "Patent", "PriorArt"])
     out = OUT_DIR / "sirp.html"
     net.write_html(str(out), open_browser=False, notebook=False)
     _inject_toolbar(out)
@@ -400,6 +472,7 @@ def build_sirp(top_n: int = 50) -> dict:
         "n_patents": len(top_patents),
         "n_prior_art_edges": len(sub_edges),
         "n_backbone_anchors": len(backbone_added),
+        "n_a2_device_edges": n_a2_edges,
         "backbone_breakdown": dict(backbone_counter),
         "office_breakdown": dict(cited_office_counter),
     }
@@ -472,6 +545,134 @@ def build_pillars() -> dict:
         "path": str(out.relative_to(REPO)),
         "pillar_counts": counts,
     }
+
+
+# ── View 4 — §5 measured-results dashboard ────────────────────────
+def _load_report(name: str) -> dict | None:
+    p = REPO / "data" / "reports" / name
+    try:
+        return json.loads(p.read_text(encoding="utf-8"))
+    except Exception:
+        return None
+
+
+def build_metrics() -> dict:
+    """Static dashboard of the measured Phase 1–4 results (plan §8).
+
+    Reads the committed data/reports/*.json. Defensive: any missing report
+    degrades to an 'N/A' note so CI (which does not run the eval scripts)
+    never breaks.
+    """
+    rg = _load_report("prior_art_realgt_report.json")
+    ep = _load_report("explanation_precision_report.json")
+    ab = _load_report("abox_patents_linking_report.json")
+    ft = _load_report("fulltext_corpus_report.json")
+
+    def cell(x):
+        return "—" if x is None else (f"{x:.4f}" if isinstance(x, float) else str(x))
+
+    if rg and rg.get("ranker_summary"):
+        rs = rg["ranker_summary"]
+        rows = "".join(
+            f"<tr><td><code>{m}</code></td><td>{cell(rs[m]['MRR'])}</td>"
+            f"<td>{cell(rs[m]['NDCG@5'])}</td><td>{cell(rs[m]['Recall@10'])}</td>"
+            f"<td>{cell(rs[m]['Recall@50'])}</td></tr>"
+            for m in ("tfidf", "onto", "onto_idf", "hybrid") if m in rs
+        )
+        s51 = (f"<p class='note'>corpus(content)={cell(rg.get('corpus_content_docs'))} · "
+               f"evaluable targets={cell(rg.get('evaluable_targets'))} · "
+               f"real examiner GT (IPC-4 프록시 아님)</p>"
+               "<table><thead><tr><th>ranker</th><th>MRR</th><th>NDCG@5</th>"
+               "<th>R@10</th><th>R@50</th></tr></thead><tbody>"
+               f"{rows}</tbody></table>")
+    else:
+        s51 = "<p class='na'>N/A — run <code>scripts/eval_prior_art_realgt.py</code></p>"
+
+    if rg and rg.get("incremental_recall_sec5_2"):
+        ir = rg["incremental_recall_sec5_2"]
+        tf, hy = ir["Recall@50_tfidf"], ir["Recall@50_hybrid"]
+        dl, npos = ir["delta_hybrid_minus_tfidf"], ir["gt_positives_in_corpus"]
+        s52 = ("<table><thead><tr><th>인용</th><th>tfidf R@50</th>"
+               "<th>hybrid R@50</th><th>Δ (hybrid−tfidf)</th><th>n_pos</th></tr>"
+               "</thead><tbody>"
+               + "".join(
+                   f"<tr><td>{b}</td><td>{cell(tf[b])}</td><td>{cell(hy[b])}</td>"
+                   f"<td class='{'pos' if dl[b]>=0 else 'neg'}'>{dl[b]:+.4f}</td>"
+                   f"<td>{cell(npos[b])}</td></tr>" for b in ("KR", "FOREIGN"))
+               + "</tbody></table>"
+               "<p class='note'>FOREIGN(JP/US…) = 어휘 비유사 — 도메인 온톨로지 본질 가치 축. "
+               "외국 인용에서 Δ&gt;0 = §5(2) 보완성 입증.</p>")
+    else:
+        s52 = "<p class='na'>N/A</p>"
+
+    if ep:
+        lb = ep.get("coverage_by_legal_basis", {})
+        lbrows = "".join(
+            f"<tr><td>{k}</td><td>{v['explained']}/{v['total']}</td>"
+            f"<td>{cell(v['rate'])}</td></tr>" for k, v in lb.items())
+        s54 = (f"<p class='note'>pilot {cell(ep.get('evidence_v2_mappings_total'))} map / "
+               f"{cell(ep.get('evidence_v2_records_total'))} rec · "
+               f"corpus 내 {cell(ep.get('pairs_with_cited_in_content_corpus'))} pair</p>"
+               f"<p>explanation coverage = <strong>{cell(ep.get('explanation_coverage'))}</strong> "
+               f"(권고 {cell(ep.get('explanation_threshold'))} → "
+               f"{'충족' if ep.get('meets_threshold') else '미달'})</p>"
+               "<table><thead><tr><th>legal_basis</th><th>explained</th>"
+               f"<th>rate</th></tr></thead><tbody>{lbrows}</tbody></table>")
+    else:
+        s54 = "<p class='na'>N/A — run <code>scripts/eval_explanation_precision.py</code></p>"
+
+    if ab:
+        osp = ab.get("orphans_split", {})
+        lp = ab.get("link_provenance", {})
+        s_a2 = (f"<ul><li>patents linked: <strong>{cell(ab.get('patents_with_ontology_link'))}"
+                f"/{cell(ab.get('patents'))}</strong></li>"
+                f"<li>orphan scope_out: <strong>{cell(osp.get('scope_out'))}</strong> "
+                f"· text_miss: {cell(osp.get('text_miss'))}</li>"
+                f"<li>A2 structured device bridge: <strong>{cell(lp.get('structured_device_family'))}</strong> patents</li>"
+                f"<li>nodes/patent mean: {cell((ab.get('nodes_per_patent') or {}).get('mean'))}</li></ul>")
+    else:
+        s_a2 = "<p class='na'>N/A — run <code>make abox-patents</code></p>"
+    if ft:
+        s_ft = (f"<p>fulltext corpus: <strong>{cell(ft.get('n_with_content'))}</strong> content "
+                f"/ {cell(ft.get('n_stub'))} stub ({cell(ft.get('content_rate'))}) "
+                f"— stub 필터 적용(§7.3-2)</p>")
+    else:
+        s_ft = ""
+
+    page = (
+        "<!doctype html><html lang='ko'><head><meta charset='utf-8'>"
+        "<title>SDKB — §5 측정 결과</title>"
+        "<meta name='viewport' content='width=device-width, initial-scale=1'>"
+        "<style>"
+        "body{margin:0;background:#0F172A;color:#E2E8F0;"
+        "font-family:-apple-system,'Segoe UI','Noto Sans KR',sans-serif;line-height:1.55}"
+        "main{max-width:1000px;margin:0 auto;padding:32px}"
+        "h1{font-size:26px;margin:0 0 4px}h2{color:#38BDF8;font-size:14px;"
+        "letter-spacing:.08em;text-transform:uppercase;margin:32px 0 10px}"
+        "table{border-collapse:collapse;width:100%;margin:8px 0;font-size:14px}"
+        "th,td{border:1px solid #334155;padding:7px 10px;text-align:right}"
+        "th{background:#1E293B;color:#94A3B8}td:first-child,th:first-child{text-align:left}"
+        ".note{color:#94A3B8;font-size:13px}.na{color:#F59E0B;font-size:13px}"
+        ".pos{color:#34D399}.neg{color:#F87171}code{background:#0B1220;padding:1px 6px;"
+        "border-radius:3px}a{color:#38BDF8}.sub{color:#94A3B8;font-size:13px}"
+        "</style></head><body><main>"
+        "<a href='index.html'>← Demo Home</a>"
+        "<h1>§5 4축 측정 결과 — 실 examiner-GT (Phase 1–4)</h1>"
+        "<p class='sub'>plan §8 / 2026-05-17. IPC-4 프록시가 아닌 실제 인용 코퍼스 기반 첫 측정.</p>"
+        f"<h2>§5(1) 검색력 (실 examiner GT)</h2>{s51}"
+        f"<h2>§5(2) 보완성 — incremental recall (핵심)</h2>{s52}"
+        f"<h2>§5(3) A2 스코프 커버리지</h2>{s_a2}{s_ft}"
+        f"<h2>§5(4) 설명 정밀도 (파일럿)</h2>{s54}"
+        "<p class='note'>온톨로지 단독은 floor 미추월(계획이 예견한 정직한 결과). "
+        "핵심 성과 = §5(2) 외국 인용 보완성 입증 + 4축이 처음으로 동시 측정 가능.</p>"
+        "</main></body></html>"
+    )
+    out = OUT_DIR / "metrics.html"
+    out.write_text(page, encoding="utf-8")
+    have = [n for n, r in (("realgt", rg), ("explanation", ep),
+                           ("abox", ab), ("fulltext", ft)) if r]
+    return {"view": "metrics", "path": str(out.relative_to(REPO)),
+            "reports_present": have}
 
 
 # ── Landing page ──────────────────────────────────────────────────
@@ -547,19 +748,24 @@ LANDING_TEMPLATE = """<!doctype html>
     <h2>인터랙티브 뷰</h2>
     <div class="grid">
       <a class="card" href="baseline.html">
-        <h3>① Baseline Core Ontology</h3>
-        <p>공정·장비·재료·결함·계측 등 <strong>14 코어 타입 · 198 노드 / 268 엣지</strong>의 SDKB 베이스라인. 노드 타입별 컬러 + 호버 툴팁 + 물리 시뮬레이션 ON/OFF.</p>
+        <h3>① Baseline Core Ontology + A2 Device</h3>
+        <p>공정·장비·재료·결함·계측 코어 + <strong>A2 device/product 계층 31노드</strong>(plan §7.4-3)를 device_vocab 카테고리 허브로 묶어 표시. 노드 타입별 컬러 + 호버 툴팁.</p>
         <div class="meta">{baseline_meta}</div>
       </a>
       <a class="card" href="sirp.html">
-        <h3>② SIRP Patent ↔ Prior Art</h3>
-        <p>SIRP 773 거절특허 중 <strong>상위 50건과 examiner-cited 선행기술</strong> 서브그래프. <strong>온톨로지 Process 백본</strong>(Lithography / Etch / Deposition …)을 따라 특허와 선행기술이 연결되어 다국 office(KR/US/JP/EP) 비율을 한 화면에서 확인.</p>
+        <h3>② SIRP Patent ↔ Prior Art (+A2)</h3>
+        <p>1000 거절특허 중 <strong>상위 50건과 examiner-cited 선행기술</strong> 서브그래프. Process 백본 + device-family 특허는 실 <strong><code>device:*</code> 노드에 ont:concernsDevice</strong>로 연결(합성 blob 대체). 다국 office 비율 동시 확인.</p>
         <div class="meta">{sirp_meta}</div>
       </a>
       <a class="card" href="pillars.html">
         <h3>③ 4-Pillar Class Skeletons</h3>
         <p>신준석 교수님 연구라인에 정렬된 네 모듈 — <strong>patent / rbv / commercialization / foresight</strong> — 의 owl:Class · subClassOf 골격. 모듈 간 상대 규모를 한 눈에.</p>
         <div class="meta">{pillars_meta}</div>
+      </a>
+      <a class="card" href="metrics.html">
+        <h3>④ §5 측정 결과 대시보드</h3>
+        <p>실 examiner-GT 기반 <strong>§5(1) 검색력 · §5(2) 보완성(KR vs 외국) · §5(3) A2 커버리지 · §5(4) 설명정밀도</strong>. IPC-4 프록시 아닌 실 인용 코퍼스 첫 측정 (plan §8).</p>
+        <div class="meta">{metrics_meta}</div>
       </a>
     </div>
   </section>
@@ -582,10 +788,16 @@ LANDING_TEMPLATE = """<!doctype html>
 """
 
 
-def build_index(baseline_info: dict, sirp_info: dict, pillars_info: dict) -> Path:
-    baseline_meta = f"{baseline_info['n_nodes']} nodes · {baseline_info['n_edges']} edges · {len(baseline_info['node_types'])} types"
+def build_index(baseline_info: dict, sirp_info: dict, pillars_info: dict,
+                 metrics_info: dict) -> Path:
+    baseline_meta = (
+        f"{baseline_info['n_nodes']} nodes · {baseline_info['n_edges']} edges · "
+        f"{len(baseline_info['node_types'])} types · "
+        f"A2 device {baseline_info.get('n_device_nodes', 0)}"
+    )
     sirp_meta = (
-        f"{sirp_info['n_patents']} patents · {sirp_info['n_backbone_anchors']} process anchors · "
+        f"{sirp_info['n_patents']} patents · {sirp_info['n_backbone_anchors']} anchors · "
+        f"A2 concernsDevice {sirp_info.get('n_a2_device_edges', 0)} · "
         f"{sirp_info['n_prior_art_edges']} prior-art edges · "
         + " / ".join(f"{k}:{v}" for k, v in sorted(sirp_info["office_breakdown"].items()))
     )
@@ -594,10 +806,13 @@ def build_index(baseline_info: dict, sirp_info: dict, pillars_info: dict) -> Pat
         for p, c in pillars_info["pillar_counts"].items()
     ]
     pillars_meta = " · ".join(pillar_pieces)
+    rp = metrics_info.get("reports_present", [])
+    metrics_meta = ("reports: " + ("/".join(rp) if rp else "none — run eval scripts"))
     html = LANDING_TEMPLATE.format(
         baseline_meta=baseline_meta,
         sirp_meta=sirp_meta,
         pillars_meta=pillars_meta,
+        metrics_meta=metrics_meta,
     )
     out = OUT_DIR / "index.html"
     out.write_text(html, encoding="utf-8")
@@ -620,7 +835,10 @@ def main() -> None:
         f"{p} {c['classes']}cls" for p, c in pillars_info["pillar_counts"].items()
     ))
 
-    build_index(baseline_info, sirp_info, pillars_info)
+    metrics_info = build_metrics()
+    print(f"[viz] ✓ metrics: reports={metrics_info['reports_present'] or 'none'}")
+
+    build_index(baseline_info, sirp_info, pillars_info, metrics_info)
     print(f"[viz] ✓ index.html written")
     print(f"[viz] open: file://{OUT_DIR}/index.html")
 

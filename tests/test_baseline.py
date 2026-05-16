@@ -60,13 +60,14 @@ class TestNodeIntegrity:
             assert "type" in n, f"Node missing 'type': {n.get('id')}"
             assert "canonical_name" in n, f"Node missing 'canonical_name': {n.get('id')}"
 
-    def test_14_node_types(self, baseline):
+    def test_node_types(self, baseline):
         types = {n["type"] for n in baseline["nodes"]}
         expected = {
             "Process", "SubProcess", "EquipmentClass", "Equipment",
             "Vendor", "Organization", "Parameter", "Metrology",
             "Material", "TechnologyNode", "FailureMode", "RootCause",
             "Mitigation", "Skill",
+            "Device",  # A2 device/product layer (plan §7.4-3, gap A2/B4)
         }
         assert types == expected, f"Unexpected types: {types - expected}, Missing: {expected - types}"
 

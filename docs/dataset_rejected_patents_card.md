@@ -111,6 +111,11 @@
   - (B) 본문(abstract/claim1) 재배포 불가 → `data/patents/raw/` 로 격리 + `.gitattributes`로 별도 관리, 공개 레이어는 `(application_number, IPC, date, family, ground_truth_*)` 메타+URL Link-Only (`sdkb-patent-linkonly.ttl`)
   - (C) 부분 재배포 가능 → abstract만 공개, claim 본문은 Link-Only
 - **사용자(연구자) 권고**: 본 데이터를 학술 목적 외(상업적 제품·서비스)로 활용할 경우 KIPRIS에 별도 문의.
+- **2026-05-17 인입 자산의 공개 범위** (plan §7.1, 미해결 라이선스 보수적 적용):
+  - ❌ 공개 레포 비포함(gitignore, paper_data sync로 재현): 인용 외부특허 본문 `data/patents/fulltext/`·파생 `fulltext_corpus.parquet`·`citation_resolution_full_cache.json` — 제3자(KR/JP/US, Google Patents 스크랩 포함) 특허 본문 대량 = §6(B) "본문 재배포 불가" 선제 적용.
+  - ⚠️ excerpt 스크럽 후 커밋: `data/patents/rejection_decisions/structured/*.json` 에서 KIPRIS 거절결정서 OCR 원문(`excerpt`) 제거(`scripts/scrub_rejection_excerpts.py`), 구조화 매핑(`cited_evidence_map`·`legal_bases`·`target_claims`)만 §5(4) GT로 유지.
+  - ✅ 공개: 온톨로지 KG·device 어휘(Wikidata CC0)·코드·지표 리포트·문서 (KIPRIS 본문 비포함).
+  - jsonl(773→1000) 본문(abstract/claim1)은 기존 §6 "보류" 정책을 그대로 승계 — 법무팀 자문 시 (B)/(C) 결정이 이 jsonl·structured 매핑에 동일 적용 대상.
 
 ## 7. 한계
 

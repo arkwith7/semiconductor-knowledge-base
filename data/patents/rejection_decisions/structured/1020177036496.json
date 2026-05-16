@@ -1,0 +1,24 @@
+{
+  "legal_bases": [
+    {
+      "paragraph": "2",
+      "count": 4
+    }
+  ],
+  "cited_evidence_phrases": [
+    "1",
+    "2",
+    "3"
+  ],
+  "cited_evidence_map": {
+    "1": "KR-P-1020090057690",
+    "2": "KR-P-1020100005900"
+  },
+  "target_claims": [],
+  "decision_date": "2018-09-19",
+  "text_length": 2567,
+  "application_number": "1020177036496",
+  "ocr_method": "cached",
+  "generated_at": "2026-05-16T14:12:16.355722Z",
+  "_excerpt_removed": true
+}

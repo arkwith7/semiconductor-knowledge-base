@@ -1,0 +1,37 @@
+{
+  "n_files": 3154,
+  "n_with_content": 2926,
+  "n_stub": 228,
+  "content_rate": 0.9277,
+  "by_country": {
+    "CN": {
+      "total": 20,
+      "with_content": 19
+    },
+    "EP": {
+      "total": 12,
+      "with_content": 1
+    },
+    "GB": {
+      "total": 1,
+      "with_content": 0
+    },
+    "JP": {
+      "total": 821,
+      "with_content": 729
+    },
+    "KR": {
+      "total": 1740,
+      "with_content": 1727
+    },
+    "US": {
+      "total": 474,
+      "with_content": 379
+    },
+    "WO": {
+      "total": 86,
+      "with_content": 71
+    }
+  },
+  "output": "data/patents/fulltext_corpus.parquet"
+}

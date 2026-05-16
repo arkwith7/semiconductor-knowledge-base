@@ -1,0 +1,33 @@
+{
+  "legal_bases": [
+    {
+      "paragraph": "2",
+      "count": 2
+    }
+  ],
+  "cited_evidence_phrases": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5"
+  ],
+  "cited_evidence_map": {
+    "1": "US-P-20110297929",
+    "2": "US-P-20100044711",
+    "4": "US-P-20120032730",
+    "5": "JP-P-2007059926"
+  },
+  "target_claims": [
+    "1",
+    "2",
+    "8",
+    "9"
+  ],
+  "decision_date": "2019-01-22",
+  "text_length": 3429,
+  "application_number": "1020177003562",
+  "ocr_method": "cached",
+  "generated_at": "2026-05-16T14:12:16.400179Z",
+  "_excerpt_removed": true
+}

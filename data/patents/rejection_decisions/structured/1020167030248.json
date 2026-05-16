@@ -1,0 +1,25 @@
+{
+  "legal_bases": [
+    {
+      "paragraph": "2",
+      "count": 2
+    }
+  ],
+  "cited_evidence_phrases": [
+    "1",
+    "2",
+    "3"
+  ],
+  "cited_evidence_map": {
+    "1": "US-P-20050123244",
+    "2": "US-P-20080290066",
+    "3": "US-P-20130265624"
+  },
+  "target_claims": [],
+  "decision_date": "2018-05-23",
+  "text_length": 3179,
+  "application_number": "1020167030248",
+  "ocr_method": "cached",
+  "generated_at": "2026-05-16T14:12:16.380018Z",
+  "_excerpt_removed": true
+}

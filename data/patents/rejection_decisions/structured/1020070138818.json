@@ -1,0 +1,21 @@
+{
+  "legal_bases": [
+    {
+      "paragraph": "1",
+      "count": 2
+    },
+    {
+      "paragraph": "2",
+      "count": 2
+    }
+  ],
+  "cited_evidence_phrases": [],
+  "cited_evidence_map": {},
+  "target_claims": [],
+  "decision_date": "2009-09-23",
+  "text_length": 2996,
+  "application_number": "1020070138818",
+  "ocr_method": "legacy_raw",
+  "generated_at": "2026-05-16T14:12:16.432170Z",
+  "_excerpt_removed": true
+}

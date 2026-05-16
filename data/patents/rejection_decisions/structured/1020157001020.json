@@ -1,0 +1,28 @@
+{
+  "legal_bases": [
+    {
+      "paragraph": "2",
+      "count": 2
+    }
+  ],
+  "cited_evidence_phrases": [
+    "1",
+    "2",
+    "3"
+  ],
+  "cited_evidence_map": {
+    "1": "US-G-6113761",
+    "2": "US-P-20050285273",
+    "3": "JP-P-08260143"
+  },
+  "target_claims": [
+    "1",
+    "4"
+  ],
+  "decision_date": "2016-10-28",
+  "text_length": 2409,
+  "application_number": "1020157001020",
+  "ocr_method": "pdfplumber",
+  "generated_at": "2026-05-16T14:12:46.851819Z",
+  "_excerpt_removed": true
+}

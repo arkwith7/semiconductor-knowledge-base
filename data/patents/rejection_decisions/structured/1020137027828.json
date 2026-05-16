@@ -1,0 +1,23 @@
+{
+  "legal_bases": [
+    {
+      "paragraph": "2",
+      "count": 2
+    }
+  ],
+  "cited_evidence_phrases": [
+    "1",
+    "2"
+  ],
+  "cited_evidence_map": {},
+  "target_claims": [
+    "1",
+    "2"
+  ],
+  "decision_date": "2018-07-17",
+  "text_length": 3708,
+  "application_number": "1020137027828",
+  "ocr_method": "pdfplumber",
+  "generated_at": "2026-05-16T14:12:21.046133Z",
+  "_excerpt_removed": true
+}

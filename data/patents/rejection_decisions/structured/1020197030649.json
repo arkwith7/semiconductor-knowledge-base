@@ -1,0 +1,27 @@
+{
+  "legal_bases": [
+    {
+      "paragraph": "2",
+      "count": 3
+    }
+  ],
+  "cited_evidence_phrases": [
+    "1",
+    "2",
+    "3",
+    "4"
+  ],
+  "cited_evidence_map": {
+    "1": "JP-P-2013222859",
+    "2": "JP-P-2017045891",
+    "3": "JP-P-2012074636",
+    "4": "JP-P-2013144793"
+  },
+  "target_claims": [],
+  "decision_date": "2023-02-27",
+  "text_length": 3298,
+  "application_number": "1020197030649",
+  "ocr_method": "pdfplumber",
+  "generated_at": "2026-05-16T14:12:25.787021Z",
+  "_excerpt_removed": true
+}

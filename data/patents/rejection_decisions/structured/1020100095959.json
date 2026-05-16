@@ -1,0 +1,38 @@
+{
+  "legal_bases": [
+    {
+      "paragraph": "2",
+      "count": 2
+    }
+  ],
+  "cited_evidence_phrases": [
+    "1",
+    "2"
+  ],
+  "cited_evidence_map": {},
+  "target_claims": [
+    "1",
+    "14",
+    "15",
+    "15~19",
+    "16",
+    "17",
+    "18",
+    "19",
+    "1~19",
+    "2",
+    "2~5",
+    "2~7",
+    "4",
+    "6",
+    "7",
+    "8",
+    "9~13"
+  ],
+  "decision_date": "2016-12-16",
+  "text_length": 3383,
+  "application_number": "1020100095959",
+  "ocr_method": "pdfplumber",
+  "generated_at": "2026-05-16T14:12:25.379766Z",
+  "_excerpt_removed": true
+}

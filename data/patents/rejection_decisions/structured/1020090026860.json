@@ -1,0 +1,23 @@
+{
+  "legal_bases": [
+    {
+      "paragraph": "2",
+      "count": 2
+    }
+  ],
+  "cited_evidence_phrases": [
+    "1",
+    "2"
+  ],
+  "cited_evidence_map": {},
+  "target_claims": [
+    "1",
+    "2"
+  ],
+  "decision_date": "2011-11-23",
+  "text_length": 2563,
+  "application_number": "1020090026860",
+  "ocr_method": "pdfplumber",
+  "generated_at": "2026-05-16T14:12:28.872999Z",
+  "_excerpt_removed": true
+}

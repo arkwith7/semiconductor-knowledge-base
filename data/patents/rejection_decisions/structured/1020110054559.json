@@ -1,0 +1,25 @@
+{
+  "legal_bases": [
+    {
+      "paragraph": "2",
+      "count": 3
+    }
+  ],
+  "cited_evidence_phrases": [
+    "1",
+    "2"
+  ],
+  "cited_evidence_map": {},
+  "target_claims": [
+    "1",
+    "13",
+    "2",
+    "9"
+  ],
+  "decision_date": "2013-08-19",
+  "text_length": 4036,
+  "application_number": "1020110054559",
+  "ocr_method": "cached",
+  "generated_at": "2026-05-16T14:12:16.406940Z",
+  "_excerpt_removed": true
+}

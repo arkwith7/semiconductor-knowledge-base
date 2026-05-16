@@ -1,0 +1,26 @@
+{
+  "legal_bases": [
+    {
+      "paragraph": "2",
+      "count": 2
+    }
+  ],
+  "cited_evidence_phrases": [
+    "1",
+    "8",
+    "9"
+  ],
+  "cited_evidence_map": {},
+  "target_claims": [
+    "16",
+    "17",
+    "18",
+    "19"
+  ],
+  "decision_date": "2026-02-23",
+  "text_length": 4515,
+  "application_number": "1020210152113",
+  "ocr_method": "cached",
+  "generated_at": "2026-05-16T14:12:16.393260Z",
+  "_excerpt_removed": true
+}

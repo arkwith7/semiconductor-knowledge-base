@@ -1,0 +1,32 @@
+{
+  "legal_bases": [
+    {
+      "paragraph": "2",
+      "count": 2
+    }
+  ],
+  "cited_evidence_phrases": [
+    "1",
+    "2",
+    "3",
+    "4"
+  ],
+  "cited_evidence_map": {
+    "2": "JP-P-2004232006",
+    "3": "US-G-6716322",
+    "4": "KR-P-1020030038384"
+  },
+  "target_claims": [
+    "1",
+    "33",
+    "34",
+    "35",
+    "36"
+  ],
+  "decision_date": "2015-02-05",
+  "text_length": 3209,
+  "application_number": "1020137001793",
+  "ocr_method": "pdfplumber",
+  "generated_at": "2026-05-16T14:12:41.075089Z",
+  "_excerpt_removed": true
+}

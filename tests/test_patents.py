@@ -64,8 +64,9 @@ class TestIngest:
         )
 
     def test_meta_row_count(self, meta_df: pd.DataFrame):
-        # SIRP cohort is frozen at 773 for 2026-1 grading.
-        assert len(meta_df) == 773, f"expected 773 patents, got {len(meta_df)}"
+        # SIRP cohort: 773 (2026-1 grading freeze) ⊂ 1000 (paper_data
+        # Phase A~D canonical, plan §7.1 — strict superset, same app numbers).
+        assert len(meta_df) == 1000, f"expected 1000 patents, got {len(meta_df)}"
 
     def test_meta_application_number_unique(self, meta_df: pd.DataFrame):
         dupes = meta_df["application_number"].duplicated().sum()
@@ -107,8 +108,10 @@ class TestIngest:
         # We normalise: examiner ≥ 1,900, all ≥ 2,700, both inside [1500, 3500].
         assert by_src.get("examiner", 0) >= 1900
         assert by_src.get("all", 0) >= 2700
-        # source_type is one of: examiner | all | evidence
-        assert set(by_src.keys()).issubset({"examiner", "all", "evidence"})
+        # source_type ∈ examiner | all | evidence | evidence_v2
+        # (evidence_v2 = structured rejection-reason→cited GT, plan §7.3-3)
+        assert set(by_src.keys()).issubset(
+            {"examiner", "all", "evidence", "evidence_v2"})
 
     def test_ingest_report_matches(self, meta_df: pd.DataFrame):
         _require(INGEST_REPORT, "ingest-sirp")

@@ -51,6 +51,7 @@ PATENT_ROUTING = {
     "FailureMode": "exhibitsFailureMode",
     "RootCause": "relatedToTopic",
     "Mitigation": "relatedToTopic",
+    "Device": "concernsDevice",   # A2 device/product layer (plan §7.4-3)
 }
 
 # Deterministic bridge from the curator-assigned `process_family` field
@@ -70,14 +71,27 @@ PROCESS_FAMILY_MAP = {
     "oxidation": "process:diffusion",
     "thermal": "process:diffusion",           # anneal / thermal step
     "photo": "process:lithography",
+    "lithography": "process:lithography",      # was text_miss — clearly in-scope
     "implant": "process:implant",
 }
-# Families that have NO unit-process home in the current ontology — device /
-# product / packaging / component level. Patents whose only signal is one of
-# these (and value_chain shows device/component) are scope-out, not bugs.
+# A2 device/product layer (plan §7.4-3): families that have no UNIT-PROCESS
+# home but DO map cleanly to a Device-architecture node now that the 31
+# device classes are in the KG. Deterministic, no NLP — routed via
+# ont:concernsDevice. Representative-device choice is documented per family.
+DEVICE_FAMILY_MAP = {
+    "memory": "device:dram",            # DRAM = representative memory cell
+    "memory_cell": "device:dram",
+    "memory_dram": "device:dram",
+    "backend_packaging": "device:bga",  # BGA = representative package
+    "packaging": "device:bga",
+    "mems": "device:mems",
+    "image_sensor": "device:cmos_image_sensor",
+    "3d_integration": "device:tsv",     # 3D integration = TSV stacking
+}
+# After the device layer, the only family with NO ontology home is the
+# genuinely generic 'components' (13 patents) — kept scope-out, honestly.
 SCOPE_OUT_FAMILIES = {
-    "memory", "memory_cell", "memory_dram", "image_sensor", "3d_integration",
-    "mems", "backend_packaging", "packaging", "components",
+    "components",
 }
 
 
@@ -124,6 +138,7 @@ def main() -> int:
         "concernsMaterial": "patent concerns a Material",
         "concernsEquipment": "patent concerns Equipment/Vendor/Class",
         "concernsSkill": "patent concerns a Skill",
+        "concernsDevice": "patent concerns a Device/product architecture (A2)",
         "exhibitsFailureMode": "patent concerns a FailureMode",
         "relatedToTopic": "weak/uncategorized link to an ontology node",
         "applicationNumber": "patent application number",
@@ -139,7 +154,8 @@ def main() -> int:
     nodes_per: list[int] = []
     orphans: list[str] = []
     matched_terms = Counter()
-    n_structured = 0          # patents that got >=1 structured-field link
+    n_structured = 0          # patents that got >=1 structured Process link
+    n_device = 0              # patents that got >=1 structured Device link (A2)
     n_text = 0                # patents that got >=1 free-text link
     orphan_scope_out: list[str] = []   # device/packaging/component — no node
     orphan_text_miss: list[str] = []   # in-domain yet still unlinked (fixable)
@@ -168,6 +184,13 @@ def main() -> int:
             linked.add(nid)
             type_dist["Process"] += 1
             n_structured += 1
+        # A2: deterministic device-family bridge (plan §7.4-3)
+        if fam in DEVICE_FAMILY_MAP:
+            dnid = DEVICE_FAMILY_MAP[fam]
+            g.add((pu, ONT_R("concernsDevice"), _u(dnid)))
+            linked.add(dnid)
+            type_dist["Device"] += 1
+            n_device += 1
 
         # 2) free-text extraction (UNION with the structured link)
         text = (f"{r.get('title') or ''} {r.get('abstract') or ''} "
@@ -210,8 +233,10 @@ def main() -> int:
         "patents_with_ontology_link": n - len(orphans),
         "link_provenance": {
             "structured_process_family": n_structured,
+            "structured_device_family": n_device,   # A2 (plan §7.4-3)
             "free_text": n_text,
             "process_family_map": PROCESS_FAMILY_MAP,
+            "device_family_map": DEVICE_FAMILY_MAP,
         },
         "orphans_count": len(orphans),
         "orphans_split": {

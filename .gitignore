@@ -38,6 +38,15 @@ ontology/sdkb-governance-us-instances.ttl
 # is intentionally NOT ignored — Amendment v2 commits the source dataset
 # to the repo pending KIPRIS license resolution. See docs/dataset_rejected_patents_card.md §6.
 
+# ── Prior-art collected assets (paper_data Phase A~D, 2026-05-16) ──
+# Bulk / derived: gitignored, re-copy from /home/arkwith/Dev/paper_data via
+# scripts/sync_paper_data_assets.sh. Provenance: plan §7.1.
+data/patents/fulltext/
+data/patents/fulltext_corpus.parquet
+data/patents/citation_resolution_full_cache.json
+# Kept committed (small GT / vocab): rejection_decisions/structured, _index.jsonl,
+# data/external/device_vocab — intentionally NOT ignored (ground truth).
+
 # ── Notebook execution outputs ───────────────────────────────────
 .ipynb_checkpoints/
 notebooks/**/*.nbconvert.ipynb

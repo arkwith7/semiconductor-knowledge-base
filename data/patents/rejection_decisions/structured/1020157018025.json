@@ -1,0 +1,31 @@
+{
+  "legal_bases": [
+    {
+      "paragraph": "2",
+      "count": 2
+    }
+  ],
+  "cited_evidence_phrases": [
+    "1",
+    "2",
+    "3",
+    "4"
+  ],
+  "cited_evidence_map": {
+    "2": "KR-P-1020120027058",
+    "3": "JP-P-2000280090",
+    "4": "KR-P-1020110038615"
+  },
+  "target_claims": [
+    "1",
+    "2",
+    "3",
+    "4"
+  ],
+  "decision_date": "2017-05-08",
+  "text_length": 3899,
+  "application_number": "1020157018025",
+  "ocr_method": "pdfplumber",
+  "generated_at": "2026-05-16T14:12:26.239618Z",
+  "_excerpt_removed": true
+}

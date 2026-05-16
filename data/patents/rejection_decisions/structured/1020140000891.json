@@ -1,0 +1,33 @@
+{
+  "legal_bases": [
+    {
+      "paragraph": "2",
+      "count": 2
+    }
+  ],
+  "cited_evidence_phrases": [],
+  "cited_evidence_map": {},
+  "target_claims": [
+    "1",
+    "10",
+    "11",
+    "12",
+    "16",
+    "17",
+    "18",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9"
+  ],
+  "decision_date": "2015-09-21",
+  "text_length": 6683,
+  "application_number": "1020140000891",
+  "ocr_method": "cached",
+  "generated_at": "2026-05-16T14:12:16.415765Z",
+  "_excerpt_removed": true
+}

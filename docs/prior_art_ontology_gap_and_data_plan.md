@@ -150,3 +150,124 @@ process_family → ontology  (구현된 PROCESS_FAMILY_MAP)
 ### 한 줄 요약
 
 > 거절특허 데이터셋이 선행기술 온톨로지에 기여하려면, **(P0) 인용 외부특허 본문을 수집해 평가 자체를 가능케 하고, 이미 보유한 `process_family`/`value_chain` 구조화 분류를 결정적으로 브리지**하는 것이 최우선이다. 그다음 소자/제품 계층·거절사유 계층을 보강하고, 성능은 *단독 우위*가 아니라 *보완성·스코프 커버리지·설명 정밀도*의 4축으로 판정한다.
+
+---
+
+## 7. P0/B1 + B2/B3/B5 + A2/B4 — **수집 완료 + sdkb 내부 정합 검증 (2026-05-16)**
+
+`paper_data` 저장소(`/home/arkwith/Dev/paper_data`)의 `dataset_full_collection_runbook.md` Phase A~D 실행으로 §3-B / §4 P0~P2 다수가 데이터로 충족되었고, 본 절은 그 산출물을 **sdkb 저장소로 인입한 뒤 1000건 데이터에서 직접 재집계 검증**한 결과를 기록한다(문서 주장 신뢰가 아닌 독립 검증).
+
+### 7.1 인입 자산 (sdkb in-repo)
+
+| 자산 | sdkb 경로 | 규모 | git |
+|---|---|---|---|
+| canonical 데이터셋 | `data/patents/raw/semiconductor_industry_rejected_patents.jsonl` | 1000건 (기존 773 ⊂ 1000, 동일 출원번호 순상위집합) | commit (Amendment v2 정책) |
+| 인용 외부특허 본문 | `data/patents/fulltext/{prior_arts,etching_prior_arts}/*.txt` | 3,155 + 192 | gitignore (bulk) |
+| 인용 해소 캐시 | `data/patents/citation_resolution_full_cache.json` | 3,154 entries | gitignore (derived) |
+| 거절결정 구조화 GT | `data/patents/rejection_decisions/{structured,_index.jsonl}` | 441 structured | commit (GT) |
+| device 어휘 | `data/external/device_vocab/` | 31 classes | commit |
+| 인용 정규화 모듈 | `scripts/citation_norm.py` (vendored) | — | commit |
+
+### 7.2 독립 검증 결과 (citation_norm 정규화 후 1000건 실측)
+
+| 항목 | 계획 목표 | 이전 | **sdkb 재검증값** | 판정 |
+|---|---|---|---|---|
+| **B1** examiner 인용 in-corpus (콘텐츠) | ≥0.70 | 0% | **93.5%** (2,950/3,154 distinct resolved); 레코드 단위 **993/1000 평가가능** | ✅ 대폭 초과 |
+| — 외국 인용 (JP/US, §5(2) 핵심) | — | 100% 미해소 | JP 752/821(91.6%)·US 379/474(80.0%) resolved; 전 인용 본문 파일 보유 | ✅ 결정적 |
+| **B3** `claims_full` | ≥0.90 | 0% | **100%** (1000/1000) | ✅ 초과 |
+| legal_status | — | 0% | **100%** | ✅ |
+| **B2** 거절결정 구조화 | ≥600/773 | 10 | **441 구조화 / 270 v2 레코드 / 656 매핑** | ⚠️ 미달 |
+| **B5** family | ≥0.70 | 0% | **53.4%** (534/1000) | ⚠️ 미달 |
+| **B4** device alias/노드 | ≥5 | 0 | 31 classes, 평균 **3.42**, 9/31만 ≥5 | ⚠️ 미달 |
+| **§5(4)** 설명 GT 본문 in-corpus | — | 불가 | `evidence_v2` cited 609 distinct 중 **96.7% 본문 보유** | ✅ 파일럿 가능 |
+
+> `citation_resolution_full_cache.json`의 2,950/3,154(93.5%)와 paper_data §7 주장이 정확히 일치. paper_data 갱신 계획서는 잔여 갭을 정직히 명시 — **과대주장 없음**.
+
+### 7.3 통합 요구사항 — 빌더 반영 필수 (검증 중 발견된 무결성 항목)
+
+이 항목들을 ingest/build 파이프라인에 반영하지 않으면 결과가 **거짓 0%** 등으로 잘못 나온다(실제 1차 검증에서 재현됨).
+
+1. **식별자 정규화 필수.** GT(`ground_truth_examiner`/`_all`)는 raw 형식(`KR1020190085654 A`), fulltext·캐시·`evidence_v2.cited_id`는 정규화형(`KR-P-1020190085654`). sdkb 내부 ID(`patent:kr_*`)와도 형식이 다름 → ingest 단계에서 `scripts/citation_norm.parse().normalized_id`로 단일 정규화 후 fulltext 코퍼스(`KR-P-*` 파일명)와 매칭.
+2. **파일 존재 ≠ 콘텐츠.** 미해소 204건은 `## TITLE`/`## ABSTRACT` 없는 헤더-stub. 코퍼스 편입은 파일 존재가 아니라 **본문 유무**로 필터(유효 수치 = 93.5%, not 100%).
+3. **GT 필드 버전.** legacy `ground_truth_evidence`(≈빈값 10)가 아니라 `meta.ground_truth_evidence_v2`(656/270) + `rejection_decisions/structured/*.json`의 `cited_evidence_map` 사용.
+4. **NPL 제외.** examiner 인용 ~1.2%는 비특허문헌(특허 doc_id 없음) — §5 patent-recall 분모에서 명시적 제외(미제외 시 recall 과소평가).
+5. **1000건 재베이스라인.** §2/§6 수치(773 모집단, orphan 71 등)는 옛 773 기준 — 1000건(commercial 864 + legacy etch 136)으로 재산출, 옛 수치와 직접 비교 금지.
+
+### 7.4 §5 4축 — 수집 후 가능 상태
+
+1. **실 인용 검색력**: 측정 *가능* — nb 07/04를 IPC-4 프록시 → 실 examiner 코퍼스로 재측정(993/1000).
+2. **보완성**: 외국(JP/US) 인용에서 incremental recall 동시 산출 — 데이터 완비.
+3. **스코프 커버리지**: orphan scope_out 48을 Phase D device 31 classes(A2 노드)로 다수 커버 후 재측정.
+4. **설명 정밀도**: `ground_truth_evidence_v2` 270 rec / 656 map 기반 §29①/② × 대비청구항 × 인용발명 매핑 **파일럿** 평가 가능(수집 전 평가 자체 불가였음).
+
+> 한 줄: **P0 해소로 §5 4축 판정이 처음으로 동시 가능. 단 수집만으로 floor 단독 우위가 자동 달성되지는 않음 — 다음은 §7.3 무결성 반영 + nb 07/04 재측정 + A2 노드 신설 + IDF/제약 재튜닝.**
+
+---
+
+## 8. 구축 실행 결과 (2026-05-17, sdkb in-repo)
+
+§7.3 무결성 반영 + A2 신설 + 실 GT 재측정을 sdkb 파이프라인에 구현·실행한 결과.
+
+### 8.1 산출물
+
+| 신규/수정 | 역할 |
+|---|---|
+| `scripts/citation_norm.py` (vendored) | raw GT → 정규화 doc_id (§7.3-1) |
+| `scripts/ingest_rejected_patents.py` (수정) | 정규화 doc_id·`is_npl`·`cited_doc_id`·`evidence_v2` edge·확장 스키마 컬럼 |
+| `scripts/build_fulltext_corpus.py` (신규) | 인용 본문 코퍼스 인덱스 + **stub 필터** (§7.3-2) → 2,926 content / 228 stub |
+| `scripts/add_device_nodes.py` (신규) | KG에 Device 31노드 + 정제 동의어 91 주입 (A2/B4) |
+| `scripts/build_abox_patents.py` (수정) | `DEVICE_FAMILY_MAP`·`concernsDevice`·`lithography` 정정 |
+| `scripts/eval_prior_art_realgt.py` (신규) | §5(1)+§5(2) 실 examiner-GT 평가 |
+| `scripts/eval_explanation_precision.py` (신규) | §5(4) 설명 정밀도 파일럿 |
+
+### 8.2 A2 스코프 커버리지 (§5-3)
+
+| 지표 | 773 baseline(§6) | **1000 + A2** |
+|---|---|---|
+| 링크 특허 | 702/773 | **976/1000** |
+| orphan scope_out | 48 | **1** (generic `components` 잔여만) |
+| orphan text_miss | 23 | 23 (general 20·materials 2·equipment 1 — 예견된 generic) |
+| 노드/특허 mean | 2.66 | **2.89** |
+| 구조 device 브리지 | 0 | 104건 + free-text Device edge 162 |
+
+### 8.3 실 examiner-GT 검색력 (§5-1) — IPC-4 프록시 *아님*, 사상 첫 측정
+
+corpus = content 2,926 / evaluable targets = 974.
+
+| Ranker | MRR | NDCG@5 | R@10 | R@50 |
+|---|---|---|---|---|
+| tfidf (floor) | 0.275 | 0.309 | 0.276 | **0.433** |
+| onto | 0.061 | 0.066 | 0.061 | 0.161 |
+| onto+IDF (A6) | 0.066 | 0.072 | 0.068 | 0.168 |
+| hybrid (RRF) | 0.210 | 0.245 | 0.223 | 0.423 |
+
+→ 온톨로지 단독은 floor 미추월(**계획대로 예견된 정직한 결과** — 단독 우위가 목표가 아님).
+
+### 8.4 보완성 (§5-2) — 핵심 가치 축, 데이터로 입증
+
+R@50, examiner GT positive를 인용국 기준 분리:
+
+| 인용 | tfidf | hybrid | Δ | n_pos |
+|---|---|---|---|---|
+| KR (어휘 유사) | 0.671 | 0.627 | −0.044 | 1,376 |
+| **FOREIGN (JP/US…, 어휘 비유사)** | **0.007** | **0.060** | **+0.053** | 952 |
+
+→ 한국어 질의 ↔ 외국어 인용에서 TF-IDF는 사실상 무력(0.7%), 언어중립 온톨로지 개념이 외국 인용 recall을 **~8배(0.7%→6.0%)** 상향. **incremental recall > 0 on lexically-dissimilar citations** = 도메인 온톨로지 본질 가치 입증. (KR에서는 −0.044 — 균일 RRF 융합의 희석; 다음 최적화: 외국어/저신뢰 질의에서만 온톨로지 가중.)
+
+### 8.5 설명 정밀도 (§5-4) 파일럿 — 수집 전 *측정 불가*였던 축
+
+`ground_truth_evidence_v2` 656 map / 270 rec, content corpus 내 618 pair:
+
+| 지표 | 값 |
+|---|---|
+| explanation coverage | **0.60** (권고 0.70 미달) |
+| §29② (진보성, n=604) | 0.599 |
+| mean shared concepts (explained 시) | 1.71 |
+
+→ 축이 0.60 베이스라인으로 **정량화**됨(파일럿). 잔여 격차 원인 = substring 폴백(kiwipiepy 부재)·외국어 개념추출 한계 → B4 device alias 확장 + morph 활성화가 개선 경로.
+
+### 8.6 회귀
+
+본 작업 테스트(`test_baseline`·`test_patents` 등) 전부 통과(773→1000·Device·evidence_v2 반영해 갱신). `test_owl` 24건은 **기존 실패**(stale `sdkb-core.ttl` / `make owl` 미실행, 본 작업 무관·범위 밖).
+
+> 한 줄: **§5 4축이 처음으로 동시 측정됨. §5-2(보완성)가 외국 인용에서 +0.053로 입증되어 도메인 온톨로지의 본질 가치가 데이터로 확인됨. 단독 검색력·설명 정밀도는 floor/0.70 미달이나 측정 가능 상태 자체가 P0 해소의 성과 — 다음은 외국어 개념추출·선택적 융합·morph/B4 확장.**

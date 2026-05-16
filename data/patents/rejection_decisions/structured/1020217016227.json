@@ -1,0 +1,26 @@
+{
+  "legal_bases": [
+    {
+      "paragraph": "2",
+      "count": 4
+    }
+  ],
+  "cited_evidence_phrases": [
+    "1",
+    "2",
+    "3",
+    "4"
+  ],
+  "cited_evidence_map": {
+    "2": "JP-P-2001110736",
+    "3": "JP-P-10270453",
+    "4": "JP-P-2000031251"
+  },
+  "target_claims": [],
+  "decision_date": "2022-06-03",
+  "text_length": 6599,
+  "application_number": "1020217016227",
+  "ocr_method": "cached",
+  "generated_at": "2026-05-16T14:12:16.355057Z",
+  "_excerpt_removed": true
+}
