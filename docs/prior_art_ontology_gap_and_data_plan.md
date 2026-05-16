@@ -28,7 +28,7 @@
 | IPC-4 프록시는 어휘기반에 유리 | IPC는 동일 텍스트에서 부여 → TF-IDF와 신호원 동일 | 현재 비교는 온톨로지에 구조적으로 불리(과소평가) |
 | 스코프 미스매치 | 제목 휴리스틱: device성 386 / process성 133 / 기타 283 (`/773`); orphan의 ~88%가 소자·제품 특허 | 온톨로지가 *단위공정·소재·장비* 중심 → 소자/제품 특허는 노드 부재로 구조적 미커버 |
 | lift 커버리지(개선 후) | 링크 616/773, orphan 157, 노드/특허 mean 2.25 (`abox_patents_linking_report.json`, morph+claim1+별칭) | 공학적 개선으로 손실↓ 했으나 스코프 천장은 못 넘음 |
-| 구조화 분류 미사용 | 메타에 `process_family`(etch 231·deposition 135·oxidation_diffusion 47·photo 46·implant 38…), `value_chain`(process\|equipment 230, process\|device 90…) 존재하나 브리지는 텍스트만 사용 | **가장 값싼 미활용 신호** |
+| 구조화 분류 ~~미사용~~ → **활용 완료** | 메타 `process_family`/`value_chain`를 결정적 브리지로 사용(§6). 링크 90.8%, orphan 71로 ↓ | 가장 값싼 신호 — 적용됨 |
 | 검색 비교(IPC-4 프록시, 04 동일 코드) | TF-IDF MRR 0.5377 / NDCG@5 0.2172 ; 온톨로지 0.3649 / **0.2506** / n=50 | NDCG@5만 floor 추월. 단독 랭커로는 미입증 |
 
 → 결론: 데이터셋이 *지금* 온톨로지에 기여하지 못하는 1차 원인은 NLP가 아니라 **(a) 검증 불가능한 정답 구조, (b) 온톨로지 스코프-모집단 불일치, (c) 이미 가진 구조화 분류 미활용** 이다.
@@ -65,10 +65,10 @@
 
 | 우선 | 항목 | 노력 | 기대 효과 | 1차 지표 |
 |---|---|---|---|---|
-| **P0** | B1 인용 외부특허 본문 | 중(수집 파이프라인) | 평가 가능성 자체를 확보 — *결정적* | examiner cited in-corpus ≥0.7 |
-| **P0** | A1 구조화필드 브리지 | 소(결정적 매핑) | orphan↓, 정밀도↑, 즉시 적용 가능 | orphan <100, 정밀도≥0.95 |
-| **P1** | A2 소자/제품 계층 + B4 어휘 | 중 | 스코프 천장 상향(모집단의 절반) | 스코프 커버리지 +0.2 |
-| **P1** | A6 가중/제약 랭킹 | 소~중 | MRR/NDCG 개선(인프라 기존) | 동일 GT 개선폭 |
+| **P0** | B1 인용 외부특허 본문 | 중(수집 파이프라인) | 평가 가능성 자체를 확보 — *결정적* · **미착수(다음 최우선)** | examiner cited in-corpus ≥0.7 |
+| ~~P0~~ | A1 구조화필드 브리지 | 소 | ✅ **완료(§6)**: 링크 90.8%, orphan 71(scope_out 48/text_miss 23) | orphan<100 달성 |
+| **P1** | A2 소자/제품 계층 + B4 어휘 | 중 | 스코프 천장 상향(scope_out 48건이 직접 대상) | 스코프 커버리지 +0.2 |
+| ~~P1~~ | A6 가중/제약 랭킹 | 소~중 | ✅ **완료(§6)**: IDF 가중, MRR 0.29→0.32 부분회복(floor 미달) | 동일 GT 개선폭 |
 | **P1** | A5 IPC/CPC 앵커 + 프록시 정밀화 | 중 | 평가 편향 완화 | IPC-4→CPC subgroup 프록시 |
 | **P2** | A3 거절사유/청구항 + B2/B3 | 대 | 진짜 선행기술 판단 단위 | 사유→개념 커버리지≥0.7 |
 | **P2** | B5 패밀리/인용망, B6 피드백루프 | 중 | recall 확장·운영 지속성 | incremental recall, orphan 추세 |
@@ -88,24 +88,48 @@
 
 ---
 
-## 6. 즉시 실행 가능한 Quick Win (P0/A1, 코드 변경 소규모)
+## 6. P0/A1 구조화 필드 브리지 — **구현 완료 + 측정 결과 (2026-05-16)**
 
-`scripts/build_abox_patents.py`는 현재 title+abstract+claim1 텍스트만 본다. 메타의 **`process_family`** 는 큐레이터가 부여한 결정적 분류이므로 텍스트 추출과 *별도로* 다음 매핑을 추가하면 즉시 고정밀 링크가 늘어난다:
+`scripts/build_abox_patents.py`에 `process_family` 결정적 매핑(`PROCESS_FAMILY_MAP`)과 `value_chain` 스코프 분리를 구현했다(텍스트 추출과 UNION):
 
 ```
-process_family → ontology
-  etch                → process:etch
-  deposition          → process:deposition
-  oxidation_diffusion → process:diffusion
-  photo               → process:lithography
-  implant             → process:implant
-  metallization       → (노드 결정 필요: process:deposition 또는 신규 metallization 노드)
-  memory / general    → (스코프 외 라벨 — orphan 사유로 기록, A2 대상)
+process_family → ontology  (구현된 PROCESS_FAMILY_MAP)
+  etch                            → process:etch
+  deposition/metallization/
+    interconnect/gate_dielectric  → process:deposition
+  oxidation_diffusion/oxidation/
+    thermal                       → process:diffusion
+  photo                           → process:lithography
+  implant                         → process:implant
+  memory*/packaging/mems/
+    components/image_sensor/
+    3d_integration                → SCOPE_OUT (노드 없음 — A2 대상)
 ```
 
-- 적용: 빌더에 `concernsProcess`(결정적) 엣지를 `process_family` 매핑으로 추가, `value_chain`에 `device` 포함 시 `scope_out` 플래그를 리포트에 기록.
-- 기대: orphan의 상당수가 "텍스트 미스"가 아니라 "스코프 외"임을 *데이터로 분리* → §5-(3) 스코프 커버리지를 정직하게 산출, 공정계열 링크 정밀도 상승.
-- 검증: 재빌드 후 `abox_patents_linking_report.json`의 orphan/노드분포 + 수기표본 정밀도, 노트북 07 §3 재측정.
+**결과 (정직):**
+
+| 지표 | 텍스트만 | **+구조화 브리지** |
+|---|---|---|
+| 링크 특허 | 616/773 | **702/773 (90.8%)** |
+| orphan | 157 | **71** → scope_out 48 / **text_miss 23** |
+| 노드/특허 mean | 2.25 | **2.66** |
+| §3 평가 커버리지 n | 50 | **60 (전수)** |
+
+- ✅ **커버리지·진단은 성공**: orphan을 *데이터로* scope_out(48, 소자계층 부재 — A2 필요, 버그 아님) vs text_miss(23, 실제 수정가능: general 19·materials 3·equipment 1)로 분리. §5-(3) 스코프 커버리지가 정직하게 산출됨.
+- ❌ **랭킹은 후퇴**(IPC-4 프록시, 노트북 07 §3): MRR 0.3649→**0.2914**. 거친 Process 노드(`process:etch` 등)가 ~584건에 부여되어 비가중 overlap 변별력이 떨어지는 *예견된* 트레이드오프 → **A6 동기를 데이터로 입증**.
+
+### A6 (개념 IDF 가중) — 구현 완료 + 결과
+
+비가중 `COUNT DISTINCT` 대신 corpus IDF(`log(N/df)`)로 공유 개념을 가중(`rank_ontology_idf`, 노트북 07 §3):
+
+| (IPC-4 프록시, n=60) | MRR | NDCG@5 | Recall@50 |
+|---|---|---|---|
+| 04 floor (TF-IDF) | 0.5377 | 0.2172 | 0.1708 |
+| 07 ontology (비가중) | 0.2914 | 0.2361 | 0.1139 |
+| **07 ontology+IDF (A6)** | **0.3152** | 0.2112 | **0.1250** |
+
+- A6는 **부분·혼합 회복**: MRR/Recall@50 소폭 ↑, NDCG@5 소폭 ↓. 이론대로 거친 개념을 눌러 일부 회복하나 **floor(0.54)도, 구조화 이전(0.3649)도 회복 못 함**.
+- 결론: 구조화 브리지+A6는 **커버리지·진단·설명가능성의 향상**이지 *어휘 floor 추월*이 아니다. 잔여 격차(MRR/Recall)는 §5-(1)(진짜 인용 GT)·§5-(2)(보완성) 없이는 닫히지 않음 — 다음 우선순위는 여전히 **P0/B1(인용 외부특허 본문 수집)**.
 
 ---
 
