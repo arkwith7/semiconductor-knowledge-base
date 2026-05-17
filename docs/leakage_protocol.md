@@ -4,7 +4,7 @@
 
 ## 1. Problem statement
 
-A **leakage** event occurs when SDKB-Match's matching output reveals or relies on information that a multi-jurisdiction compliance rule forbids. Leakage rate measures how often this happens across the evaluation set. The rate must be **structurally bounded by design**, not patched by a post-filter — see [`matching_architecture.md`](matching_architecture.md) §4.
+A **leakage** event occurs when SDKB-Match's matching output reveals or relies on information that a multi-jurisdiction compliance rule forbids. Leakage rate measures how often this happens across the evaluation set. The rate must be **structurally bounded by design**, not patched by a post-filter — see [`matching_architecture.md`](project/matching_architecture.md) §4.
 
 ## 2. Definitions
 
@@ -38,7 +38,7 @@ For deliverable ④ this term: N = 50 problems (Expert track placeholder) + 50 S
 | Recall@50 | Fraction of all relevant candidates appearing in top-50. | ≥ 0.80 baseline |
 | Coverage | Fraction of queries with at least one eligible candidate post-gate. | ≥ 0.95 |
 
-Numbers above are **placeholders to be calibrated** after the TF-IDF baseline lands; lock them in [`validation/reliability_report.md`](../validation/reliability_report.md) at end of term.
+Numbers above are **placeholders to be calibrated** after the TF-IDF baseline lands; lock them in [`data/experts/reliability_report.md`](../data/experts/reliability_report.md) at end of term.
 
 ## 5. Slice-level reporting
 

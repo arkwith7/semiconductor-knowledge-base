@@ -3,7 +3,7 @@
 > **문서 상태**: Active Amendment (supersedes ADR v1.1)
 > **작성일**: 2026-05-12
 > **저자**: SDKB 프로젝트 팀 (Park HyoungSik)
-> **연관 문서**: [architecture_redesign_semiconto_hub.md](architecture_redesign_semiconto_hub.md) (v1.1, **superseded**)
+> **연관 문서**: architecture_redesign_semiconto_hub.md (ADR v1.1, **superseded & removed** — git history only)
 > **승인 단계**: 학생 단계 확정 → 지도교수(신준석) 검토 요청 예정
 
 ---
@@ -18,7 +18,7 @@
 
 | 자산 | 규모 | 정착 위치 |
 |---|---|---|
-| 베이스라인 그래프 (14 코어 클래스) | **198 노드 / 268 엣지** | [data/semiconductor_v0_3.json](../data/semiconductor_v0_3.json) |
+| 베이스라인 그래프 (14 코어 클래스) | **198 노드 / 268 엣지** | [data/semiconductor_v0_3.json](../../data/semiconductor_v0_3.json) |
 | SIRP 거절특허 데이터셋 | 773 patents + 7,500 prior-art pairs | `data/patents/` |
 | 큐레이션 전문가 풀 | 110 profiles + 7,800 ratings (κ=0.258) | `data/experts/` |
 | 4-pillar 정렬 모듈 (지도교수 방향) | sdkb-patent / rbv / commercialization / foresight | `ontology/*.ttl` |
@@ -43,14 +43,14 @@
 
 ### 2.1 SemicONTO 자산을 SDKB가 어떻게 흡수하는가
 
-1. **SKOS 매핑 그래프** — [mappings/sdkb_semiconto_alignment.ttl](../mappings/sdkb_semiconto_alignment.ttl)
+1. **SKOS 매핑 그래프** — [mappings/sdkb_semiconto_alignment.ttl](../../mappings/sdkb_semiconto_alignment.ttl)
    `sdkb:Equipment skos:exactMatch semi:Equipment`, `sdkb:Material skos:exactMatch semi:Material` 등 14 코어 클래스 + 198 인스턴스에 대한 SKOS 매핑 트리플.
 2. **SDKB-side 확장 클래스** — SemicONTO에만 있는 개념(Dopant, Semiconductor, MaterialProperty 등) 중 가치 있는 것은 **`sdkb:` 네임스페이스로 새 클래스를 신설**하고 `skos:exactMatch <semiconto:…>`로 역링크. 그렇게 하면 SDKB가 자체 그래프로 닫힌 채 외부 인용은 유지된다.
-3. **참조 캐시** — [ontology/imports/SemicONTO-0.2.ttl](../ontology/imports/SemicONTO-0.2.ttl)에 TTL을 보관하지만 `owl:imports`하지 않는다. SHACL 검증 시 alignment 그래프가 참조하는 IRI의 존재만 확인.
+3. **참조 캐시** — [ontology/imports/SemicONTO-0.2.ttl](../../ontology/imports/SemicONTO-0.2.ttl)에 TTL을 보관하지만 `owl:imports`하지 않는다. SHACL 검증 시 alignment 그래프가 참조하는 IRI의 존재만 확인.
 
 ## 3. Phase 0 실행 결과 (2026-05-12 완료분)
 
-### 3.1 SemicONTO v0.2 인벤토리 ([data/reports/semiconto_analysis.json](../data/reports/semiconto_analysis.json))
+### 3.1 SemicONTO v0.2 인벤토리 ([data/reports/semiconto_analysis.json](../../data/reports/semiconto_analysis.json))
 
 | 항목 | 수치 |
 |---|---|
@@ -62,7 +62,7 @@
 | AnnotationProperty | 11 |
 | TransitiveProperty | 1 (`hasSubStep`) |
 
-### 3.2 SDKB ↔ SemicONTO 정렬 결과 ([mappings/sdkb_semiconto_alignment.ttl](../mappings/sdkb_semiconto_alignment.ttl))
+### 3.2 SDKB ↔ SemicONTO 정렬 결과 ([mappings/sdkb_semiconto_alignment.ttl](../../mappings/sdkb_semiconto_alignment.ttl))
 
 **클래스-레벨 매핑 (14 SDKB 타입)**
 
@@ -103,9 +103,9 @@
 | `process:lithography` | `semiconto:ExperimentStep` | `semi:Experiment` (broadMatch) |
 | `parameter:pressure` | `semiconto:None` | `semi:MaterialProperty` (closeMatch) |
 
-(전체 13건 → [data/reports/sdkb_semiconto_alignment_report.json](../data/reports/sdkb_semiconto_alignment_report.json) `legacy_corrections`)
+(전체 13건 → [data/reports/sdkb_semiconto_alignment_report.json](../../data/reports/sdkb_semiconto_alignment_report.json) `legacy_corrections`)
 
-### 3.3 보강 후보 분석 ([data/reports/semiconto_enrichment_candidates.json](../data/reports/semiconto_enrichment_candidates.json))
+### 3.3 보강 후보 분석 ([data/reports/semiconto_enrichment_candidates.json](../../data/reports/semiconto_enrichment_candidates.json))
 
 #### Bucket A — SemicONTO 개념 중 SDKB 보강 후보 (29 클래스 + 13 obj props)
 
@@ -177,17 +177,17 @@ Phase 1.1 ~ 1.6 중 `sdkb-manufacturing.ttl` (SemicONTO 기반 확장)은 **사�
 
 | 경로 | 종류 | 상태 |
 |---|---|---|
-| [ontology/imports/SemicONTO-0.2.ttl](../ontology/imports/SemicONTO-0.2.ttl) | TTL cache (12 KB, SHA256 `4c53544d…`) | ✅ |
-| [ontology/imports/README.md](../ontology/imports/README.md) | retrieval metadata | ✅ |
-| [scripts/analyze_semiconto.py](../scripts/analyze_semiconto.py) | rdflib parser | ✅ |
-| [scripts/build_semiconto_alignment.py](../scripts/build_semiconto_alignment.py) | alignment builder | ✅ |
-| [scripts/identify_enrichment_candidates.py](../scripts/identify_enrichment_candidates.py) | bucket A/B 분석 | ✅ |
-| [data/reports/semiconto_analysis.json](../data/reports/semiconto_analysis.json) | 클래스/속성 인벤토리 | ✅ |
-| [mappings/sdkb_semiconto_alignment.csv](../mappings/sdkb_semiconto_alignment.csv) | 198 인스턴스 매핑 행 | ✅ |
-| [mappings/sdkb_semiconto_alignment.ttl](../mappings/sdkb_semiconto_alignment.ttl) | SKOS 트리플 (122개) | ✅ |
-| [data/reports/sdkb_semiconto_alignment_report.json](../data/reports/sdkb_semiconto_alignment_report.json) | 매핑 통계 + 레거시 교정 13건 | ✅ |
-| [data/reports/semiconto_enrichment_candidates.json](../data/reports/semiconto_enrichment_candidates.json) | Bucket A 29 클래스·13 obj props + Bucket B 6 SDKB-unique | ✅ |
-| [docs/architecture_amendment_sdkb_centric.md](architecture_amendment_sdkb_centric.md) | 본 문서 | ✅ |
+| [ontology/imports/SemicONTO-0.2.ttl](../../ontology/imports/SemicONTO-0.2.ttl) | TTL cache (12 KB, SHA256 `4c53544d…`) | ✅ |
+| [ontology/imports/README.md](../../ontology/imports/README.md) | retrieval metadata | ✅ |
+| [scripts/analyze_semiconto.py](../../scripts/analyze_semiconto.py) | rdflib parser | ✅ |
+| [scripts/build_semiconto_alignment.py](../../scripts/build_semiconto_alignment.py) | alignment builder | ✅ |
+| [scripts/identify_enrichment_candidates.py](../../scripts/identify_enrichment_candidates.py) | bucket A/B 분석 | ✅ |
+| [data/reports/semiconto_analysis.json](../../data/reports/semiconto_analysis.json) | 클래스/속성 인벤토리 | ✅ |
+| [mappings/sdkb_semiconto_alignment.csv](../../mappings/sdkb_semiconto_alignment.csv) | 198 인스턴스 매핑 행 | ✅ |
+| [mappings/sdkb_semiconto_alignment.ttl](../../mappings/sdkb_semiconto_alignment.ttl) | SKOS 트리플 (122개) | ✅ |
+| [data/reports/sdkb_semiconto_alignment_report.json](../../data/reports/sdkb_semiconto_alignment_report.json) | 매핑 통계 + 레거시 교정 13건 | ✅ |
+| [data/reports/semiconto_enrichment_candidates.json](../../data/reports/semiconto_enrichment_candidates.json) | Bucket A 29 클래스·13 obj props + Bucket B 6 SDKB-unique | ✅ |
+| [docs/project/architecture_amendment_sdkb_centric.md](architecture_amendment_sdkb_centric.md) | 본 문서 | ✅ |
 
 ## 7. 권장 다음 단계 (Phase 1, 새 노선)
 

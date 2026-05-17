@@ -6,7 +6,7 @@ Verifies that:
   - baseline JSON's legacy SemicONTO cross_refs are correct (no longer point at
     the non-existent semiconto:ExperimentStep or to None)
 
-See docs/architecture_amendment_sdkb_centric.md.
+See docs/project/architecture_amendment_sdkb_centric.md.
 """
 
 import json

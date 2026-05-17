@@ -3,7 +3,7 @@
 > **Audience.** Lab-internal (advisor / graders / project owner).
 > This document tracks SDKB v1.0 against the **signed 2026-1 plan (v2 PDF)** and its amendments (v1→v3),
 > and records a verified gap analysis of the built dataset/concepts vs. the v2 plan's quantitative targets.
-> Public-facing usage of SDKB lives in [../README.md](../README.md) (English) / [../README.ko.md](../README.ko.md) (한국어).
+> Public-facing usage of SDKB lives in [../README.md](../../README.md) (English) / [../README.ko.md](../../README.ko.md) (한국어).
 
 - **Plan owner.** Park HyoungSik (Ph.D. 19기, 학번 2025730080) — (주)아크위드(ARKWITH) 대표이사
 - **Advisor.** Prof. Juneseuk Shin — Quantitative Technology Management Lab, SKKU GSMOT
@@ -21,7 +21,7 @@ v2 PDF §1.3의 **본 학기 5대 목표** + §10~§12(파이프라인·릴리�
 |---|---|---|---|
 | **① SDKB 온톨로지 설계** | ≥198 노드 / ≥264 간선, 14 Core 타입, Foresight 프레임워크 | `data/semiconductor_v0_3.json` **229 노드 / 268 간선, 15 타입** (baseline 198/264 → 큐레이션 확장; Device 31 신규) | ✅ 충족 |
 | **② 전문가 프로필 100** | 100명 비식별 합성 + 도메인 자문 검증 | `experts/curated_profiles_en.json` **100** + `curated_profiles_kr.json` **110** (dual-track) | ✅ 초과 |
-| **③ 문제 50 + 규제 25** | 소부장 SME 문제 50 + 다중관할 적대 25 | SIRP 거절특허 기반 **50 층화 + 25 적대** ([card](dataset_rejected_patents_card.md) §5-1) + 외부 SME 226 / 적대 30 / 컴플 49 | ✅ 충족·초과 |
+| **③ 문제 50 + 규제 25** | 소부장 SME 문제 50 + 다중관할 적대 25 | SIRP 거절특허 기반 **50 층화 + 25 적대** ([card](../dataset_rejected_patents_card.md) §5-1) + 외부 SME 226 / 적대 30 / 컴플 49 | ✅ 충족·초과 |
 | **④ GT 7,500 + 신뢰도** | 100×50×3 = **7,500 평점**, weighted κ **≥ 0.6**, ICC **≥ 0.7** (v2 §12.1) | examiner GT **7,500** ✅ + 합성 3-rater **7,800** / **ICC(2,k) 합의라벨 = 0.787 → ICC 게이트 ✅ 통과** · weighted κ(quadratic) = **0.550**(0.05 미달) · (투명성) Fleiss κ=0.258, ICC(2,1)=0.552 | ⚠️ **ICC 게이트 통과 / weighted κ 0.05 미달** — §0-1 |
 | **⑤ 사업화 전략 초안** | 시장·고객·BM·경쟁 분석 | [commercialization_strategy_v1.md](commercialization_strategy_v1.md) — ARKWITH 3종 응용 행 분리 + §10 측정 가능 지표 (v3 §C-1) | ⏳ W2 결선 |
 | 릴리스 번들 (§11.1) | core/governance/**links-semi**.ttl, nodes/edges/expert_profiles/problems/ground_truth `.parquet`, prov.ttl, shapes.ttl, card, LICENSE | core/core-data/abox-patents·patent·rbv·commercialization·foresight·governance·governance-kr `.ttl` ✅ · shapes.ttl ✅ · **`sdkb-links-semi.ttl` 미구축** · expert/problems/GT는 JSON·CSV (parquet 경로 상이) | ⚠️ 부분 |
@@ -30,7 +30,7 @@ v2 PDF §1.3의 **본 학기 5대 목표** + §10~§12(파이프라인·릴리�
 
 ### 0-1. 짚어야 할 갭 (보고서 5장 "한계 및 후속 연구"에 반영)
 
-1. **합성 3-rater 신뢰도 — 측정 정합 후 ICC 게이트 통과, weighted κ 0.05 잔여 미달** — v2 §12.1은 **weighted** κ ≥ 0.6 / ICC ≥ 0.7을 명시하나, 기존 코드는 순서형 점수(0–3, 우세범주 prevalence 0.539)에 대해 **가중 없는 명목형 Fleiss κ**를 계산하고 있었음(스크립트 docstring은 "weighted κ"라 기재 — 측정 버그). [scripts/ingest_curated_ratings.py](../scripts/ingest_curated_ratings.py)를 계획 정합 통계로 보강(2026-05-17) 후 [reliability_report.md](../data/experts/reliability_report.md):
+1. **합성 3-rater 신뢰도 — 측정 정합 후 ICC 게이트 통과, weighted κ 0.05 잔여 미달** — v2 §12.1은 **weighted** κ ≥ 0.6 / ICC ≥ 0.7을 명시하나, 기존 코드는 순서형 점수(0–3, 우세범주 prevalence 0.539)에 대해 **가중 없는 명목형 Fleiss κ**를 계산하고 있었음(스크립트 docstring은 "weighted κ"라 기재 — 측정 버그). [scripts/ingest_curated_ratings.py](../../scripts/ingest_curated_ratings.py)를 계획 정합 통계로 보강(2026-05-17) 후 [reliability_report.md](../../data/experts/reliability_report.md):
    - **ICC(2,k) 합의라벨 = 0.787 → ICC ≥ 0.70 게이트 ✅ 통과**. 다운스트림 GT는 단일 평가자가 아니라 3인 합의 라벨이므로 ICC(2,k)가 결정 관련 지표(ICC(2,1)=0.552는 투명성 위해 병기).
    - **weighted κ(quadratic) = 0.550**, Krippendorff α(interval) = 0.552 — Fleiss 0.258 대비 "fair→moderate"로 상승하나 0.60 게이트에 **0.05 미달**(절반은 측정 오류, 절반은 실제 moderate 수준이라는 정직한 결론).
    - 원본 Fleiss κ=0.258 / ICC(2,1)=0.552, kappa-paradox 증거(우세 prevalence 0.539, pairwise exact 0.576)를 보고서에 **그대로 병기**(분식 아님, 측정 정합).
@@ -54,10 +54,10 @@ v2 PDF §1.3의 **본 학기 5대 목표** + §10~§12(파이프라인·릴리�
 
 | # | 산출물 | 수량 요건 (v2) | 상태 | 경로 |
 |---|---|---|---|---|
-| ① | SDKB 온톨로지 | ≥198 노드 / ≥264 간선, 14 타입 | ✅ 충족 — **229 노드 / 268 간선 / 15 타입** (baseline 198/264 → 큐레이션 확장) | [../data/semiconductor_v0_3.json](../data/semiconductor_v0_3.json) |
+| ① | SDKB 온톨로지 | ≥198 노드 / ≥264 간선, 14 타입 | ✅ 충족 — **229 노드 / 268 간선 / 15 타입** (baseline 198/264 → 큐레이션 확장) | [../data/semiconductor_v0_3.json](../../data/semiconductor_v0_3.json) |
 | ② | 합성 전문가 프로필 | 100명, 비식별, 도메인 자문 | ✅ **Dual track**: 합성/큐레이션 100(EN) + 110(KR) | `../data/experts/curated_profiles_en.json` + `curated_profiles_kr.json` |
-| ③ | 기술 문제 + 규제 시나리오 | 50 + 25 (적대적, 다중 관할) | ✅ SIRP 50 층화 + 25 적대 + 외부 SME 226/적대 30/컴플 49 | [card §5-1](dataset_rejected_patents_card.md), `../data/problems_external/*.json` |
-| ④ | 정답 평가체계 | 7,500 ratings · weighted κ≥0.6 / ICC≥0.7 | ⚠️ 수량 충족(examiner 7,500 + 3-rater 7,800) · **ICC(2,k)=0.787 게이트 ✅** · weighted κ=0.550 (0.05 미달) · 원본 Fleiss 0.258/ICC(2,1) 0.552 병기 — §0-1 | `../data/patents/prior_art_pairs.parquet` (examiner) + `../data/experts/curated_ratings_3rater.csv` (3-rater) + [reliability_report.md](../data/experts/reliability_report.md) |
+| ③ | 기술 문제 + 규제 시나리오 | 50 + 25 (적대적, 다중 관할) | ✅ SIRP 50 층화 + 25 적대 + 외부 SME 226/적대 30/컴플 49 | [card §5-1](../dataset_rejected_patents_card.md), `../data/problems_external/*.json` |
+| ④ | 정답 평가체계 | 7,500 ratings · weighted κ≥0.6 / ICC≥0.7 | ⚠️ 수량 충족(examiner 7,500 + 3-rater 7,800) · **ICC(2,k)=0.787 게이트 ✅** · weighted κ=0.550 (0.05 미달) · 원본 Fleiss 0.258/ICC(2,1) 0.552 병기 — §0-1 | `../data/patents/prior_art_pairs.parquet` (examiner) + `../data/experts/curated_ratings_3rater.csv` (3-rater) + [reliability_report.md](../../data/experts/reliability_report.md) |
 | ⑤ | 기술사업화 전략 v1 | 시장·고객·BM·경쟁 + 자원·가치·규제 + IP-R&D | ⏳ W2 결선 — ARKWITH 3종 응용 §3 행 분리, §10 SDKB 도입 후 측정 가능 지표 (v3 §C-1) | [commercialization_strategy_v1.md](commercialization_strategy_v1.md) |
 
 ## 2. 정렬 트랙 — 신 교수 4-pillar 방향
@@ -79,11 +79,11 @@ v2 PDF §1.3의 **본 학기 5대 목표** + §10~§12(파이프라인·릴리�
 
 | 항목 | 값 |
 |---|---|
-| 파일 | [../data/patents/raw/semiconductor_industry_rejected_patents.jsonl](../data/patents/raw/semiconductor_industry_rejected_patents.jsonl) |
-| 규모 | **1,000 레코드** (jsonl 실측). [card](dataset_rejected_patents_card.md) 기재 "773"은 초기 코호트 스냅샷 — 카드/README 동기화는 §10 후속 항목 |
+| 파일 | [../data/patents/raw/semiconductor_industry_rejected_patents.jsonl](../../data/patents/raw/semiconductor_industry_rejected_patents.jsonl) |
+| 규모 | **1,000 레코드** (jsonl 실측). [card](../dataset_rejected_patents_card.md) 기재 "773"은 초기 코호트 스냅샷 — 카드/README 동기화는 §10 후속 항목 |
 | GT | examiner-cited 인용 풀 → `prior_art_pairs.parquet` 7,500 pairs (positive 2,723 + hard-neg 2,723 + easy-neg 2,054) |
 | 출처 | KIPRIS Plus API + KIPRIS 웹 (KIPO) |
-| 데이터 카드 | [dataset_rejected_patents_card.md](dataset_rejected_patents_card.md) |
+| 데이터 카드 | [dataset_rejected_patents_card.md](../dataset_rejected_patents_card.md) |
 | 라이선스 | KIPRIS Plus API 약관 — 학교 자문 후 조정 (v3 §E 3-option 분기) |
 
 ## 4. 큐레이션 ExpDataSet 통합 (외부 자산 흡수) ⭐
@@ -149,7 +149,7 @@ v2 PDF §1.3의 **본 학기 5대 목표** + §10~§12(파이프라인·릴리�
 | 4장 적용 결과 | UC1 매칭 + UC2 선행기술 + 시각화 인터랙티브 증빙 + 품질지표 + **§0-1 한계(κ/ICC, links-semi) 정직 명시** |
 | 5장 성과 및 기대효과 | ARKWITH 3종 응용 적용 가설 + HuggingFace 공개 + 박사논문 seed + v2 §14.3 4-pillar 학술 어젠다(IP&M/Scientometrics) 기여 |
 
-SPARQL 시연: `examples/sparql/uc{1,2}_*.rq` + `data/use_cases/uc{1,2}_result.tsv` (현재 미구축 — W2 신규). GitHub Pages: `site/usecases/uc{1,2}_*.html` (현재 미구축 — W3 신규). 빌더는 [`scripts/build_viz.py`](../scripts/build_viz.py)에 entry 2개 추가([`visualization_plan.md`](visualization_plan.md) Phase 2 일부 앞당김). 기존 v2 §12.2 대표 3쿼리(`0{1,2,3}_*.rq`)는 이미 충족.
+SPARQL 시연: `examples/sparql/uc{1,2}_*.rq` + `data/use_cases/uc{1,2}_result.tsv` (현재 미구축 — W2 신규). GitHub Pages: `site/usecases/uc{1,2}_*.html` (현재 미구축 — W3 신규). 빌더는 [`scripts/build_viz.py`](../../scripts/build_viz.py)에 entry 2개 추가([`visualization_plan.md`](visualization_plan.md) Phase 2 일부 앞당김). 기존 v2 §12.2 대표 3쿼리(`0{1,2,3}_*.rq`)는 이미 충족.
 
 ## 9. 3주 압축 실행 일정 (2026-05-16 → 2026-06-07)
 
@@ -164,14 +164,14 @@ SPARQL 시연: `examples/sparql/uc{1,2}_*.rq` + `data/use_cases/uc{1,2}_result.t
 
 **Tier 우선순위 (절단 순서)**: T1 보고서 5장 + UC1 / T2 UC2 + 시각화 view / T3 IPBridge 정량 비교 / T4 pytest 회귀(후속 학기). 자세한 절단 정책은 [v3 §D-1](plan_amendment_v3.md).
 
-**SME 리뷰**: 김범수 FST 부사장 (W1-W2 30분). 결과는 `docs/feedback/2026w22_kim_review.md`. 이영주 POSCO DX PM 리뷰는 후속 학기로 연기.
+**SME 리뷰**: 김범수 FST 부사장 (W1-W2 30분). 결과는 `docs/project/feedback/2026w22_kim_review.md`. 이영주 POSCO DX PM 리뷰는 후속 학기로 연기.
 
 ## 10. 후속 정리 항목 (보고 완료 후 / 비채점)
 
 - ✅ (2026-05-17 해소) **테스트 회귀** — 원인: 커밋된 `sdkb-core.ttl`이 stale `1.0.0-dev`(enrichment·메타데이터 누락). `make owl` 재생성(438 triples, 1.1.0-dev) → **75 passed / 10 skipped / 0 failed**. CHANGELOG 2026-05-17 항목에 기록.
 - ✅ (2026-05-17 완료) README(EN/KO)/CHANGELOG/datasheet/card SIRP·노드·테스트·κ 수치를 검증 스냅샷으로 일괄 동기화 (CHANGELOG 과거 일자 항목은 보존). 커밋 `46230c6` (private origin push 완료).
-- ⚠️ **익명 스냅샷 제외 갱신 필요** — [commercialization_strategy_v1.md](commercialization_strategy_v1.md)가 실제 ARKWITH 독점정보(IPBridge 시장·가격·로드맵)로 재작성됨 → project_status/risk_review처럼 **익명 스냅샷 제외 대상**. 다음 스냅샷 재빌드 시 rsync `--exclude='docs/commercialization_strategy_v1.md'` 추가(제출 직전 재빌드 필수). [risk_review](dataset_publication_risk_review.md) 동기화 완료.
+- ⚠️ **익명 스냅샷 제외 갱신 필요** — [commercialization_strategy_v1.md](commercialization_strategy_v1.md)가 실제 ARKWITH 독점정보(IPBridge 시장·가격·로드맵)로 재작성됨 → project_status/risk_review처럼 **익명 스냅샷 제외 대상**. 다음 스냅샷 재빌드 시 rsync `--exclude='docs/project/commercialization_strategy_v1.md'` 추가(제출 직전 재빌드 필수). [risk_review](dataset_publication_risk_review.md) 동기화 완료.
 - `sdkb-links-semi.ttl` 직렬화 (v2 §11.1 릴리스 번들 완성).
-- ✅ (2026-05-17 완료) 합성 3-rater 신뢰도 측정 정합 — weighted κ/Krippendorff α/ICC(2,k) 산출, [reliability_report.md](../data/experts/reliability_report.md) 재생성. **잔여**: rater rubric 강화(앵커·척도 축약·calibration) → weighted κ 0.05 미달분 재도전 (Tier C, 후속 학기).
+- ✅ (2026-05-17 완료) 합성 3-rater 신뢰도 측정 정합 — weighted κ/Krippendorff α/ICC(2,k) 산출, [reliability_report.md](../../data/experts/reliability_report.md) 재생성. **잔여**: rater rubric 강화(앵커·척도 축약·calibration) → weighted κ 0.05 미달분 재도전 (Tier C, 후속 학기).
 - `examples/sparql/uc{1,2}_*.rq` + `data/use_cases/` + `site/usecases/` + `scripts/build_viz.py` UC entry (v3 W2~W3).
 - 학술 trajectory: v2 §14.3 목표 저널(IP&M / Scientometrics) 초록 draft — 박사논문 seed와 연계.

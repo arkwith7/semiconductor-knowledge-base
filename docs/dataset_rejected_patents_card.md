@@ -8,7 +8,7 @@
 
 - **이름**: Semiconductor Industry Rejected Patents (SIRP)
 - **버전**: 2026-05 (수집 종료 2026-05-06)
-- **규모**: **1,000 레코드** (jsonl 실측, 2026-05-17 검증). 본 카드 내 "773"은 초기 코호트 스냅샷 수치 — 통계(§4)는 773 시점 산출이며 1,000 기준 재산출은 §7·[dataset_publication_risk_review.md](dataset_publication_risk_review.md) #3 후속 항목
+- **규모**: **1,000 레코드** (jsonl 실측, 2026-05-17 검증). 본 카드 내 "773"은 초기 코호트 스냅샷 수치 — 통계(§4)는 773 시점 산출이며 1,000 기준 재산출은 §7·[dataset_publication_risk_review.md](project/dataset_publication_risk_review.md) #3 후속 항목
 - **포맷**: JSONL (1행 = 1 거절 특허 + 정답 선행기술)
 - **원 수집 목적**: 반도체 IP-R&D 실습 — AI Agent 기반 선행기술조사 보고서 자동 작성 시스템의 개발·평가
 - **본 프로젝트 통합 목적**: SDKB의 산출물 ③·④ 보강 + `sdkb-patent.ttl` 인스턴스 풀 + SDKB-Match PriorArt 트랙의 벤치마크
@@ -136,7 +136,7 @@
 - 일부 GT 식별자가 비특허·논문 인용 (`논문`, `비특` 등 23건) — ingest 단계에서 별도 분기 처리.
 - 날짜 포맷 이상치 일부 (`20260430` 8자리) — 정규화 필요.
 
-### 7-1. 논문 투고 무결성 한계 (위험 #2·#3·#7 — [risk review](dataset_publication_risk_review.md))
+### 7-1. 논문 투고 무결성 한계 (위험 #2·#3·#7 — [risk review](project/dataset_publication_risk_review.md))
 
 - **#2 합성 ≠ 전문가**: 7,500 = examiner-grounded(객관, 전문가 주석 아님);
   3-rater 7,800 = 합성 시뮬레이션(전문가 아님). 논문에서 어느 쪽도 "전문가

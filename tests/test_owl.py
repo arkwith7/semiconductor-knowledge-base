@@ -78,7 +78,7 @@ class TestOWLProperties:
 class TestEnrichmentLayer:
     """Phase 1 v1.1 — SemicONTO-derived Bucket A HIGH classes & properties.
 
-    See docs/architecture_amendment_sdkb_centric.md.
+    See docs/project/architecture_amendment_sdkb_centric.md.
     """
 
     ENRICHMENT_CLASSES = {
@@ -175,7 +175,7 @@ class TestEnrichmentLayer:
 class TestEnrichmentMedium:
     """Phase 1 v1.1 — Bucket A MEDIUM classes/properties.
 
-    Selective absorption (see docs/architecture_amendment_sdkb_centric.md):
+    Selective absorption (see docs/project/architecture_amendment_sdkb_centric.md):
     SemicONTO Experiment/InformationObject hierarchies have no SDKB parent
     and are intentionally skipped.
     """
@@ -226,7 +226,7 @@ class TestQuantityLayer:
     """Phase 1 v1.1 — QUDT-aligned Quantity/MaterialProperty layer.
 
     SDKB does not import QUDT; qudt: URIs are referenced via skos:exactMatch
-    or skos:closeMatch. See docs/architecture_amendment_sdkb_centric.md §7.
+    or skos:closeMatch. See docs/project/architecture_amendment_sdkb_centric.md §7.
     """
 
     def test_quantity_class_exists(self, owl_graph):

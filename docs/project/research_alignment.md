@@ -22,7 +22,7 @@
 | **기술전략 (Strategy)** | RBV/TOE 기반 핵심자원 조합 분석 | `sdkb-rbv.ttl`, `data/firms.parquet`, `sdkb-core` | 반도체 fabless 시장진입 핵심자원 조합 도출 |
 | **기술예측 (Foresight)** | 특허 기반 기술기회 발굴, 토픽모델 특허분석, 신생기술 5속성 | `sdkb-patent.ttl`, `data/patents.parquet` (CPC/IPC/F-term + 초록) | Novelty-focused 특허 맵, emerging memory 토픽 클러스터 |
 | **기술평가 (Valuation)** | 복합실물옵션, TRL 기반 사업가치 평가 | `sdkb-commercialization.ttl`, `sdkb-foresight.ttl` (RealOption 노드) | EUV vs High-NA 로드맵 실물옵션 가치평가 |
-| **기술상업화 (Commercialization)** | 시장진입 장벽 분석, BM 설계 | `sdkb-commercialization.ttl`, `docs/commercialization_strategy_v1.md`, `sdkb-governance*.ttl` | 소부장 SME 사업화 시나리오, 다중관할 규제 적합성 |
+| **기술상업화 (Commercialization)** | 시장진입 장벽 분석, BM 설계 | `sdkb-commercialization.ttl`, `docs/project/commercialization_strategy_v1.md`, `sdkb-governance*.ttl` | 소부장 SME 사업화 시나리오, 다중관할 규제 적합성 |
 
 ---
 
@@ -31,7 +31,7 @@
 | 신 교수 대표 연구 | 본 데이터셋으로 재현 가능한 형태 | 출력 위치 |
 |---|---|---|
 | Lee, Kang, Shin (2015) "Novelty-focused patent mapping for technology opportunity analysis", *TFSC* | 반도체 H01L/H10B 패밀리에서 novelty score 산출 → 기회 클러스터 시각화 | 🚧 `notebooks/02_patent_opportunity_demo.ipynb` (스켈레톤) |
-| Shin et al. "A novel approach to forecast promising technology through patent analysis" (TFSC 2017) | 특허 초록 토픽모델로 emerging tech 5속성(novelty/diffusion 등) 추정 | (계획문서: `docs/patent_abstract_enrichment_plan.md`) |
+| Shin et al. "A novel approach to forecast promising technology through patent analysis" (TFSC 2017) | 특허 초록 토픽모델로 emerging tech 5속성(novelty/diffusion 등) 추정 | (특허 초록 기반 보강 트랙 — 별도 계획 문서는 제거됨) |
 | Cho, Shin (2025) "Expanding the identification of key resource combinations for mid- to long-term growth in EV market entry", *PLoS ONE* | Firm × Resource × Capability 조합 그래프에서 fsQCA-style 핵심자원 조합 도출 | 🚧 `notebooks/03_rbv_resource_combo_demo.ipynb` (스켈레톤, 데이터 대기) |
 | Bae, Shin (2022) "Identifying a Combination of Key Resources to Overcome the Entry Barriers in the Electric Vehicle Market", *IEEE Access* | EntryBarrier 노드 + Firm Resource 카드로 반도체 fabless 진입장벽 매핑 | 위 노트북 확장 셀 |
 | 신 교수 신생기술 조기식별 5속성 (2025 preprint) | Patent + Topic + Novelty 노드로 5속성 정량 추정 | (후속 학기 알고리즘) |
@@ -74,7 +74,7 @@ SDKB-Match (이중 응용)       특허기회 발굴            RBV 핵심자원
 | ② SIRP patent ↔ examiner-cited prior art (상위 50특허) | `data/patents/*.parquet` | `site/sirp.html` |
 | ③ 4-pillar class skeleton — patent / rbv / commercialization / foresight | `ontology/sdkb-*.ttl` | `site/pillars.html` |
 
-빌더 = `scripts/build_viz.py` · 배포 = `.github/workflows/viz-deploy.yml`. URL = [https://arkwith7.github.io/semiconductor-knowledge-base/](https://arkwith7.github.io/semiconductor-knowledge-base/). 운영 가이드: [docs/visualization_plan.md](visualization_plan.md).
+빌더 = `scripts/build_viz.py` · 배포 = `.github/workflows/viz-deploy.yml`. URL = [https://arkwith7.github.io/semiconductor-knowledge-base/](https://arkwith7.github.io/semiconductor-knowledge-base/). 운영 가이드: [docs/project/visualization_plan.md](visualization_plan.md).
 
 ### 4.2 후속 학기 확장 (2026-2)
 

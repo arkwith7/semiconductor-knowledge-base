@@ -15,7 +15,7 @@
 | Q | A |
 |---|---|
 | What do instances represent? | Nodes in a curation knowledge graph — Process, SubProcess, EquipmentClass, Equipment, Vendor, Organization, Parameter, Metrology, Material, TechnologyNode, FailureMode, RootCause, Mitigation, Skill, plus alignment-track classes (Patent, IPCSymbol, Firm, Resource, Capability, RealOption, Scenario, …). |
-| Total instances | **Verified snapshot 2026-05-17**: curation graph **229 nodes / 268 edges** (`data/semiconductor_v0_3.json`; baseline origin was 198/264, expanded by curation incl. Device) + **1,000** SIRP rejected patents (`data/patents/raw/semiconductor_industry_rejected_patents.jsonl`; the "773" in older docs was an initial cohort snapshot) + ancillary tables (synthetic experts 100 EN + 110 KR, problems, scenarios, prior-art pairs). All paper/README/CHANGELOG figures MUST be synced to this snapshot before submission (see [dataset_publication_risk_review.md](dataset_publication_risk_review.md) #3). |
+| Total instances | **Verified snapshot 2026-05-17**: curation graph **229 nodes / 268 edges** (`data/semiconductor_v0_3.json`; baseline origin was 198/264, expanded by curation incl. Device) + **1,000** SIRP rejected patents (`data/patents/raw/semiconductor_industry_rejected_patents.jsonl`; the "773" in older docs was an initial cohort snapshot) + ancillary tables (synthetic experts 100 EN + 110 KR, problems, scenarios, prior-art pairs). All paper/README/CHANGELOG figures MUST be synced to this snapshot before submission (see [dataset_publication_risk_review.md](project/dataset_publication_risk_review.md) #3). |
 | Splits | Baseline graph has no train/test split (it's a curation graph). Prior-art pairs split is documented in `data/patents/pairs_report.json`. |
 | Confidential or sensitive content? | Patent abstracts and first claims are sourced from KIPRIS — subject to KIPRIS Plus terms. License resolution is in-progress; see [`dataset_rejected_patents_card.md`](dataset_rejected_patents_card.md) §6. Synthetic expert profiles are not personally identifiable. |
 
@@ -68,7 +68,7 @@
 ## 8. Publication-integrity notes (paper-submission grade)
 
 Mandatory before any paper using this dataset is submitted. Full risk review:
-[dataset_publication_risk_review.md](dataset_publication_risk_review.md).
+[dataset_publication_risk_review.md](project/dataset_publication_risk_review.md).
 
 - **#2 Synthetic ≠ expert.** The 7,500 GT is examiner-grounded (objective KIPO
   citations); the 7,800 3-rater set is algorithmically simulated. Neither is

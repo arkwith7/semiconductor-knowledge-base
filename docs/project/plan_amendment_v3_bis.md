@@ -44,7 +44,7 @@ v3 §A-3의 **외부 참여자**(Bespin Global·POSCO DX·KUKKUK)는 *작업에 
 | 수강 동료 학생 | 발표 청중·동료 피드백 | **peer-feedback 채널**(익명 집계) |
 
 → v3 §A-3 외부 참여자 표는 **수정하지 않는다**. 대신 v3 §D-3(외부 검증·
-피드백 채널: 김범수 SME 리뷰 → `docs/feedback/2026w22_kim_review.md`)과
+피드백 채널: 김범수 SME 리뷰 → `docs/project/feedback/2026w22_kim_review.md`)과
 **동일 패턴**으로 확장한다.
 
 ## 3. v3 §D-3 확장 (검증·피드백 채널 1건 추가)
@@ -54,7 +54,7 @@ v3 §A-3의 **외부 참여자**(Bespin Global·POSCO DX·KUKKUK)는 *작업에 
 
 - **IP-R&D 실습 기말 발표 (2026-06)** — 본 데이터셋의 선행기술조사 트랙
   (SIRP 1,000 / examiner-grounded 7,500)을 발표. 담당교수·수강생 피드백을
-  `docs/feedback/2026w24_iprd_class_review.md`로 수렴하여 보고서 5장
+  `docs/project/feedback/2026w24_iprd_class_review.md`로 수렴하여 보고서 5장
   "현장 적용 및 학술 피드백" 절의 보조 자료로 활용.
 - 일정 정합: v3 §D 병행 작업의 "6월 IP-R&D 강좌 발표"와 동일 일정에 귀속
   (신규 부담 아님 — 기존 병행 항목의 채널화).
@@ -69,7 +69,7 @@ v3 §A-3의 **외부 참여자**(Bespin Global·POSCO DX·KUKKUK)는 *작업에 
 - 수강생: **개별 동의 없이 실명 기재 금지.** 기본은 **익명 집계 피드백**
   (예: "수강생 N명 중 M명이 …" 형태).
 - 피드백 로그(`2026w24_iprd_class_review.md`)는 lab-internal·익명 스냅샷
-  제외(docs/feedback/ 일괄 제외) 대상.
+  제외(docs/project/feedback/ 일괄 제외) 대상.
 
 ## 5. 신 교수 §D-2 검토 미팅 — 결정항목 (누적 정리)
 

@@ -54,7 +54,7 @@
 | ② | 전문가 100 | `data/expert_profiles.parquet` + `scripts/gen_experts.py` + `docs/expert_validation_log.md` |
 | ③ | 문제 50 + 시나리오 25 | `data/problems.parquet`, `data/regulatory_scenarios.parquet` (한국 산업기술보호법 노드 포함) |
 | ④ | 7,500 ratings | 합성 baseline 7,500 + 600건 표본 인간검증, κ/ICC 산출 (`validation/reliability_report.md`) |
-| ⑤ | 사업화 전략 v1 | `docs/commercialization_strategy_v1.md` (4축 → 7축 보강) |
+| ⑤ | 사업화 전략 v1 | `docs/project/commercialization_strategy_v1.md` (4축 → 7축 보강) |
 
 ### C-2. 추가 4개 모듈 (정렬 트랙)
 스키마(.ttl) + 소규모 인스턴스(각 30~100건) + 데모 노트북 1종으로 한정한다. 이는 본 학기 채점 범위를 초과하지 않으면서 후속 학기 알고리즘(SDKB-Match) 및 사업화 검증의 기반이 된다.

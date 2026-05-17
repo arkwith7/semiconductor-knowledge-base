@@ -1,6 +1,6 @@
 # IP-R&D 실습 기말 발표 — 검증·피드백 로그 (2026 W24)
 
-> **CONFIDENTIAL — lab-internal.** docs/feedback/ 는 익명 스냅샷 일괄 제외.
+> **CONFIDENTIAL — lab-internal.** docs/project/feedback/ 는 익명 스냅샷 일괄 제외.
 > 채널 근거: [plan_amendment_v3_bis.md](../plan_amendment_v3_bis.md) §3
 > (v3 §D-3 검증·피드백 채널 확장). **선결**: 동 메모 §1 두 교수 서면 승인
 > 충족 후에만 본 로그를 보고서 5장 보조 자료로 사용.

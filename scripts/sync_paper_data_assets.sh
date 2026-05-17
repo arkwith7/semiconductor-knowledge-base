@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Re-copy gitignored prior-art bulk assets from the paper_data collection repo.
-# Provenance & rationale: docs/prior_art_ontology_gap_and_data_plan.md §7.1.
+# Provenance & rationale: docs/project/prior_art_ontology_gap_and_data_plan.md §7.1.
 # Committed assets (canonical jsonl, rejection_decisions/structured, device_vocab,
 # citation_norm.py) are tracked in git and NOT re-copied here.
 set -euo pipefail

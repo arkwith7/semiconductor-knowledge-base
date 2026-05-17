@@ -62,7 +62,7 @@ site/
 
 # ── Lab-internal accounting docs (not for public distribution) ───
 docs/expdataset_alignment.md
-docs/plan_amendment_v3.md
+docs/project/plan_amendment_v3.md
 docs/archive/
 
 # ── Python ──────────────────────────────────────────────────────

@@ -1,6 +1,6 @@
 # SDKB Reference Cache — External Ontologies
 
-This directory holds **read-only caches** of external ontologies that SDKB *references* but does **not** `owl:imports`. The SDKB architecture is SDKB-centric: external ontologies are curation/alignment sources, not parent schemas. See [docs/architecture_amendment_sdkb_centric.md](../../docs/architecture_amendment_sdkb_centric.md).
+This directory holds **read-only caches** of external ontologies that SDKB *references* but does **not** `owl:imports`. The SDKB architecture is SDKB-centric: external ontologies are curation/alignment sources, not parent schemas. See [docs/project/architecture_amendment_sdkb_centric.md](../../docs/project/architecture_amendment_sdkb_centric.md).
 
 ## Contents
 

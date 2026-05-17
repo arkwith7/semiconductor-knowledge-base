@@ -69,7 +69,7 @@ Prof. Shin's Quantitative Technology Management Lab combines patent / market / i
 | Patent-/market-/industry-driven **tech foresight** | `sdkb-patent.ttl` + SIRP + Topic / Novelty nodes | [Use case 1](#use-cases) |
 | Promising-technology **opportunity discovery** | Novelty-focused patent mapping, emerging-memory topic clusters | [Use case 1](#use-cases), 🚧 [notebook 02](notebooks/02_patent_opportunity_demo.ipynb) |
 | **SME innovation analysis / expert matching** | SDKB-Match Expert + synthetic-100 + curated-110 expert pool + multi-jurisdiction compliance gate | [Use case 2](#use-cases), 🚧 [notebook 01](notebooks/01_matching_baseline_expert.ipynb), ✅ [notebook 05](notebooks/05_synthetic_vs_curated_comparison.ipynb) |
-| **Interactive tech / business visualization** | Pyvis 3-view explorer with automatic GitHub Pages deploy | [Live demo](https://arkwith7.github.io/semiconductor-knowledge-base/), [docs/visualization_plan.md](docs/visualization_plan.md) |
+| **Interactive tech / business visualization** | Pyvis 3-view explorer with automatic GitHub Pages deploy | [Live demo](https://arkwith7.github.io/semiconductor-knowledge-base/), [docs/project/visualization_plan.md](docs/project/visualization_plan.md) |
 | Organizational R&D / innovation design (secondary) | RBV core-resource combinations + TRL / real-option seed nodes | [Use case 4](#use-cases), 🚧 [notebook 03](notebooks/03_rbv_resource_combo_demo.ipynb) |
 
 ## Why / For / How
@@ -93,7 +93,7 @@ Each use case instantiates a lab research line on SDKB's shared graph.
 | 5 | **Compound real options** — EUV vs. High-NA roadmap valuation | Technology valuation (later term) | core + foresight + commercialization | _(2026-2 planned)_ | Lab real-options line |
 | 6 | **Interactive KG explorer** — 3-view (baseline / SIRP / 4-pillar) GitHub Pages deploy | Interactive visualization | core + patent + rbv + foresight + commercialization | ✅ [Live](https://arkwith7.github.io/semiconductor-knowledge-base/) · `scripts/build_viz.py` | Lab visualization track |
 
-Detailed 4-pillar mapping: [docs/research_alignment.md](docs/research_alignment.md).
+Detailed 4-pillar mapping: [docs/project/research_alignment.md](docs/project/research_alignment.md).
 
 ## Architecture
 
@@ -123,13 +123,15 @@ data/
   patents/prior_art_pairs.parquet   # 7,500 examiner-grounded pairs
   compliance/                       # KR + US governance masters
 docs/
-  research_alignment.md             # 4-pillar mapping
-  matching_architecture.md          # system overview
+  datasheet.md                      # data sheet (Gebru et al.) — whole SDKB
+  dataset_rejected_patents_card.md  # SIRP dataset card
   leakage_protocol.md               # leakage definition and measurement
-  datasheet.md                      # data sheet (Gebru et al.)
-  commercialization_strategy_v1.md
-  visualization_plan.md
-  project_status_2026_1.md          # lab-internal status — 2026-1 deliverables
+  expert_validation_log.md          # expert-consultation audit trail
+  semiconductor_ontology_provenance_research.md  # source / provenance landscape
+  references/                       # BibTeX library + per-paper notes
+  project/                          # 현업프로젝트1 governance: plan amendments,
+                                    #   status, commercialization, ADR,
+                                    #   matching arch, viz plan, feedback
 validation/shapes.ttl               # SHACL
 provenance/prov.ttl                 # PROV-O chain
 examples/sparql/                    # example queries
@@ -208,7 +210,7 @@ make viz-open  # build + open site/index.html in the default browser
 ```
 - `site/` is gitignored and rebuilt by [.github/workflows/viz-deploy.yml](.github/workflows/viz-deploy.yml) on every push to `main`
 - One-time setup: repository **Settings → Pages → Source: GitHub Actions**
-- Details: [docs/visualization_plan.md](docs/visualization_plan.md)
+- Details: [docs/project/visualization_plan.md](docs/project/visualization_plan.md)
 
 ### Verified release figures
 - Curation graph **229 nodes / 268 edges** (v0.3; baseline origin 198/264, expanded by curation incl. Device)
@@ -260,4 +262,4 @@ See [LICENSE.txt](LICENSE.txt).
 
 ---
 
-*Hyeonup-Project 2026-1 lab-internal status — deliverables, alignment-track ontologies, ExpDataSet integration, and amendment trail: [docs/project_status_2026_1.md](docs/project_status_2026_1.md).*
+*Hyeonup-Project 2026-1 lab-internal status — deliverables, alignment-track ontologies, ExpDataSet integration, and amendment trail: [docs/project/project_status_2026_1.md](docs/project/project_status_2026_1.md).*

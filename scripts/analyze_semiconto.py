@@ -6,7 +6,7 @@ data/reports/semiconto_analysis.json.
 
 The report is consumed downstream by:
   - scripts/build_semiconto_alignment.py (Phase 0.3)
-  - docs/architecture_amendment_sdkb_centric.md (Phase 0.4)
+  - docs/project/architecture_amendment_sdkb_centric.md (Phase 0.4)
 
 Inventory dimensions:
   - ontology metadata (URI, version, license, creator)

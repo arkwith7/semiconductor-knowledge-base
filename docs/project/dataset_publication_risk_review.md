@@ -3,7 +3,7 @@
 > **목적.** 본 프로젝트 데이터셋을 이용한 학술 논문 작성 시 발생 가능한
 > 데이터셋 관련 시비(법률·윤리·방법론·재현성)를 사전 식별하고 완화책을 고정.
 > **범위 한정.** 학술·방법론·라이선스 **리스크 평가**이며 **법률 자문이 아니다**.
-> KIPRIS/KIPO 항목은 [dataset_rejected_patents_card.md](dataset_rejected_patents_card.md)
+> KIPRIS/KIPO 항목은 [dataset_rejected_patents_card.md](../dataset_rejected_patents_card.md)
 > §6에 명시된 대로 SKKU 산학협력단·법무팀 자문 사안이다.
 > **작성.** 2026-05-17 · lab-internal · 근거: 저장소 직접 검증(아래 각 항목 evidence).
 
@@ -53,7 +53,7 @@ datasheet에 **일괄 동기화**: 노드 **229 / 엣지 268**, SIRP **1,000**,
 weighted κ **0.550** / ICC(2,k) **0.787** / (투명성) Fleiss κ 0.258 ·
 ICC(2,1) 0.552. `test_owl` 24 fail은 `make build-owl` 재생성으로 해소 후
 "SHACL PASS + N/N tests" 정확 기재. (상세: [project_status_2026_1.md](project_status_2026_1.md)
-§0-1·§6·§10, [reliability_report.md](../data/experts/reliability_report.md))
+§0-1·§6·§10, [reliability_report.md](../../data/experts/reliability_report.md))
 
 ### #4 순환성 (High — 방법론 방어)
 examiner-grounded 트랙을 **주 평가축**으로 전면 배치. 합성 트랙은 보조·한계
@@ -101,17 +101,17 @@ leakage는 v0.1 **설계만** 완료. 논문에 측정 수치 주장 금지. "�
 
 스냅샷 재빌드 시 rsync `--exclude` 고정 (제출 직전 재빌드 필수):
 `.git/ .venv/ site/ .env *.pdf CITATION.cff` +
-`docs/project_status_2026_1.md`, `docs/plan_amendment_v{1,2,3}.md`,
-`docs/architecture_amendment_sdkb_centric.md`, `docs/expert_validation_log.md`,
-`docs/feedback/`, `docs/dataset_publication_risk_review.md`,
-`docs/plan_amendment_v3_bis.md`,
-**`docs/commercialization_strategy_v1.md`** (2026-05-17 추가 — 실제 ARKWITH
+`docs/project/project_status_2026_1.md`, `docs/project/plan_amendment_v{1,2,3}.md`,
+`docs/project/architecture_amendment_sdkb_centric.md`, `docs/expert_validation_log.md`,
+`docs/project/feedback/`, `docs/project/dataset_publication_risk_review.md`,
+`docs/project/plan_amendment_v3_bis.md`,
+**`docs/project/commercialization_strategy_v1.md`** (2026-05-17 추가 — 실제 ARKWITH
 IPBridge 시장·가격·로드맵 독점정보로 재작성됨).
 
 ## 5. 관련 문서
 
 - [project_status_2026_1.md](project_status_2026_1.md) §0 점검 분석 / §0-1 갭 / §10 후속
-- [dataset_rejected_patents_card.md](dataset_rejected_patents_card.md) §6 라이선스
-- [datasheet.md](datasheet.md) §8 publication-integrity notes
-- [reliability_report.md](../data/experts/reliability_report.md) κ/ICC 측정 정합
-- [leakage_protocol.md](leakage_protocol.md) v0.1
+- [dataset_rejected_patents_card.md](../dataset_rejected_patents_card.md) §6 라이선스
+- [datasheet.md](../datasheet.md) §8 publication-integrity notes
+- [reliability_report.md](../../data/experts/reliability_report.md) κ/ICC 측정 정합
+- [leakage_protocol.md](../leakage_protocol.md) v0.1
