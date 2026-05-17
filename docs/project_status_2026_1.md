@@ -8,7 +8,7 @@
 - **Plan owner.** Park HyoungSik (Ph.D. 19기, 학번 2025730080) — (주)아크위드(ARKWITH) 대표이사
 - **Advisor.** Prof. Juneseuk Shin — Quantitative Technology Management Lab, SKKU GSMOT
 - **Authoritative plan.** `SDKB_v1_0_온톨로지_큐레이션_구축_실행계획_v2.pdf` (Version 2.0, 2026-04-12) — supersedes the v1 PDF. 본 학기 5대 목표·12주 4단계 파이프라인·릴리스 번들·평가 지표는 v2 §1.3 / §10 / §11 / §12 기준.
-- **Amendment trail.** [v1](plan_amendment_v1.md) → [v2](plan_amendment_v2.md) → [v3](plan_amendment_v3.md) · architecture: [active ADR](architecture_amendment_sdkb_centric.md)
+- **Amendment trail.** [v1](plan_amendment_v1.md) → [v2](plan_amendment_v2.md) → [v3](plan_amendment_v3.md) → [v3-bis](plan_amendment_v3_bis.md) (IP-R&D 실습 피드백 채널 분류·이중제출 선결, 신 교수 §D-2 대기) · architecture: [active ADR](architecture_amendment_sdkb_centric.md)
 - **Last verified figures (2026-05-17).** curated graph **229 nodes / 268 edges (15 types)** · SIRP **1,000 patents** · examiner GT 7,500 + 3-rater 7,800 · **85 tests collected + SHACL VALIDATION PASSED**
 - **Critical milestone.** **2026-05-30 지도교수 승인** / **2026-06 첫째 주 보고 완료** (v3 §D — 3주 압축)
 - **이중 trajectory.** 산업(ARKWITH 3종 응용) + 학술(신 교수 Foresight/STEEPVE 4-pillar, 박사논문 seed, 목표 저널 IP&M / Scientometrics — v2 §14.3).
@@ -119,6 +119,14 @@ v2 PDF §1.3의 **본 학기 5대 목표** + §10~§12(파이프라인·릴리�
 
 [Amendment v3 §A-1](plan_amendment_v3.md) — SDKB는 (주)아크위드의 3종 핵심 응용 공통 백본. 동시에 v2 §14.3 학술 기여(IP&M / Scientometrics 투고)의 seed dataset.
 
+> ⚠️ **재정렬 플래그 (2026-05-17, 소유자 결정).** 사업화 deliverable ⑤는
+> 실제 ARKWITH repo(arkwith-web/api) 검토 결과 **단일 제품 IPBridge** 현실에
+> 맞춰 **SDKB-자산 중심(T1 IPBridge 앵커 / T2 백본 라이선싱 / T3 데이터셋)**
+> 으로 전면 재작성됨 — [commercialization_strategy_v1.md](commercialization_strategy_v1.md).
+> 아래 v3 "3종 응용" 표는 **서명 트랙 기록으로 보존**하되, ⑤ 채점·5장 framing
+> 에서는 본 재정렬이 우선. v3/§8 정합은 **신 교수 미팅 결정항목**([v3 §D-2](plan_amendment_v3.md)):
+> ①매칭·②기술현황은 현 제품 라인 아닌 SDKB-enabled 인접 기회로 강등.
+
 | ARKWITH 응용 | SDKB가 공급하는 백본 | 보고서 4장 시연 |
 |---|---|---|
 | **① 기술문제 ↔ 기술인력 매칭** | Expert pool 100+110 + governance 20 controls + SDKB-Match Expert 아키텍처 | UC1 SPARQL + GitHub Pages `usecases/uc1_*.html` |
@@ -160,8 +168,9 @@ SPARQL 시연: `examples/sparql/uc{1,2}_*.rq` + `data/use_cases/uc{1,2}_result.t
 
 ## 10. 후속 정리 항목 (보고 완료 후 / 비채점)
 
-- ⚠️ **테스트 회귀 (기존 이슈, 2026-05-17 발견)** — pytest 현재 **24 failed / 51 passed / 10 skipped**. 전부 `tests/test_owl.py`(`TestQuantityLayer`·`TestOntologyDependencyMetadata`)이며 원인은 `ontology/sdkb-core.ttl`에 `dcterms:modified`·QUDT/SemicONTO 참조 메타데이터 누락(rename refactor 이후 `scripts/build_owl.py` 재생성 누락 추정). ratings 파이프라인과 무관. README "46/46" / CHANGELOG "85/85"는 이 회귀 이전 수치 — `make build-owl` 재생성 후 수치 재검증·동기화 필요 (SHACL 게이트와 별개로 보고 전 점검 권장).
-- README.md / CHANGELOG.md / dataset_rejected_patents_card.md 의 SIRP 수치(773)를 검증값(1,000)으로 동기화.
+- ✅ (2026-05-17 해소) **테스트 회귀** — 원인: 커밋된 `sdkb-core.ttl`이 stale `1.0.0-dev`(enrichment·메타데이터 누락). `make owl` 재생성(438 triples, 1.1.0-dev) → **75 passed / 10 skipped / 0 failed**. CHANGELOG 2026-05-17 항목에 기록.
+- ✅ (2026-05-17 완료) README(EN/KO)/CHANGELOG/datasheet/card SIRP·노드·테스트·κ 수치를 검증 스냅샷으로 일괄 동기화 (CHANGELOG 과거 일자 항목은 보존). 커밋 `46230c6` (private origin push 완료).
+- ⚠️ **익명 스냅샷 제외 갱신 필요** — [commercialization_strategy_v1.md](commercialization_strategy_v1.md)가 실제 ARKWITH 독점정보(IPBridge 시장·가격·로드맵)로 재작성됨 → project_status/risk_review처럼 **익명 스냅샷 제외 대상**. 다음 스냅샷 재빌드 시 rsync `--exclude='docs/commercialization_strategy_v1.md'` 추가(제출 직전 재빌드 필수). [risk_review](dataset_publication_risk_review.md) 동기화 완료.
 - `sdkb-links-semi.ttl` 직렬화 (v2 §11.1 릴리스 번들 완성).
 - ✅ (2026-05-17 완료) 합성 3-rater 신뢰도 측정 정합 — weighted κ/Krippendorff α/ICC(2,k) 산출, [reliability_report.md](../data/experts/reliability_report.md) 재생성. **잔여**: rater rubric 강화(앵커·척도 축약·calibration) → weighted κ 0.05 미달분 재도전 (Tier C, 후속 학기).
 - `examples/sparql/uc{1,2}_*.rq` + `data/use_cases/` + `site/usecases/` + `scripts/build_viz.py` UC entry (v3 W2~W3).

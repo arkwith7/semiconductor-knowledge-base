@@ -89,13 +89,24 @@ leakage는 v0.1 **설계만** 완료. 논문에 측정 수치 주장 금지. "�
 
 - [ ] #1 KIPRIS 법무 자문 결과 문서화 + §6(B) 확정 (데이터셋 트랙 한정 게이트)
 - [ ] #2 본문·datasheet·card에서 합성 3-rater ≠ 전문가 명문화 (✅ 문서 측 반영)
-- [ ] #3 단일 스냅샷 수치 일괄 동기화 + `test_owl` 해소 후 테스트 수치 확정
+- [x] #3 단일 스냅샷 수치 일괄 동기화 (2026-05-17 완료, 커밋 46230c6) + `test_owl` 해소 (`make owl` → 75 passed/10 skipped/0 failed)
 - [ ] #4 examiner-grounded 주축 + 합성 한계 Limitations 명문
 - [ ] #5 CC-BY attribution README/datasheet 명시
 - [ ] #6 IRB 면제 + 생성방법론 + 실명 자문가 동의
 - [ ] #7 leakage = 프로토콜만, 미측정 명시 (✅ card 반영)
 - [ ] #8 dual-use/Broader-Impact 문단
 - [ ] 익명 스냅샷(더블블라인드) + 원본 비공개(선행공개) — 별도 워크플로우 진행 중
+
+### 4-1. 익명 스냅샷 제외 목록 (lab-internal·독점·식별 문서)
+
+스냅샷 재빌드 시 rsync `--exclude` 고정 (제출 직전 재빌드 필수):
+`.git/ .venv/ site/ .env *.pdf CITATION.cff` +
+`docs/project_status_2026_1.md`, `docs/plan_amendment_v{1,2,3}.md`,
+`docs/architecture_amendment_sdkb_centric.md`, `docs/expert_validation_log.md`,
+`docs/feedback/`, `docs/dataset_publication_risk_review.md`,
+`docs/plan_amendment_v3_bis.md`,
+**`docs/commercialization_strategy_v1.md`** (2026-05-17 추가 — 실제 ARKWITH
+IPBridge 시장·가격·로드맵 독점정보로 재작성됨).
 
 ## 5. 관련 문서
 
