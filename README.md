@@ -24,7 +24,7 @@ size_categories:
 > Maintained by the [Quantitative Technology Management Lab](#lab-context) at Sungkyunkwan University's Graduate School of Management of Technology (PI: Prof. Juneseuk Shin).
 >
 > 🇰🇷 한국어 버전: [README.ko.md](README.ko.md)
-> 🔗 **Live demo (GitHub Pages):** [`arkwith7.github.io/semiconductor-knowledge-base`](https://arkwith7.github.io/semiconductor-knowledge-base/) — interactive 3-view explorer (baseline 198 nodes · SIRP top-50 + prior art · 4-pillar class skeleton)
+> 🔗 **Live demo (GitHub Pages):** [`arkwith7.github.io/semiconductor-knowledge-base`](https://arkwith7.github.io/semiconductor-knowledge-base/) — interactive 3-view explorer (curation graph 229 nodes · SIRP top-50 + prior art · 4-pillar class skeleton)
 
 ## One-line positioning
 
@@ -40,7 +40,7 @@ Full names and meanings of acronyms used throughout this repository.
 |---|---|
 | **SDKB** | Semiconductor Domain Knowledge Base — this dataset / ontology trunk |
 | **SDKB-Match** | SDKB Matching Layer — the matching application built on SDKB: Korean semiconductor SME ↔ expert matching and patent ↔ prior-art matching on a single compliance-first architecture (not a post-hoc filter). Sub-tracks: **SDKB-Match Expert** / **SDKB-Match PriorArt** |
-| **SIRP** | Semiconductor Industry Rejected Patents — 773-patent rejected-patent dataset (SIRP-773) |
+| **SIRP** | Semiconductor Industry Rejected Patents — 1,000-patent rejected-patent dataset (initial cohort snapshot was 773; GT pairs frozen at the 773-snapshot) |
 | **SME (소부장)** | Small/medium enterprise; here semiconductor materials-parts-equipment firms |
 | **RBV** | Resource-Based View of the firm |
 | **FMEA** | Failure Mode and Effects Analysis |
@@ -66,7 +66,7 @@ Prof. Shin's Quantitative Technology Management Lab combines patent / market / i
 
 | Lab research line | SDKB contribution | Entry point |
 |---|---|---|
-| Patent-/market-/industry-driven **tech foresight** | `sdkb-patent.ttl` + SIRP-773 + Topic / Novelty nodes | [Use case 1](#use-cases) |
+| Patent-/market-/industry-driven **tech foresight** | `sdkb-patent.ttl` + SIRP + Topic / Novelty nodes | [Use case 1](#use-cases) |
 | Promising-technology **opportunity discovery** | Novelty-focused patent mapping, emerging-memory topic clusters | [Use case 1](#use-cases), 🚧 [notebook 02](notebooks/02_patent_opportunity_demo.ipynb) |
 | **SME innovation analysis / expert matching** | SDKB-Match Expert + synthetic-100 + curated-110 expert pool + multi-jurisdiction compliance gate | [Use case 2](#use-cases), 🚧 [notebook 01](notebooks/01_matching_baseline_expert.ipynb), ✅ [notebook 05](notebooks/05_synthetic_vs_curated_comparison.ipynb) |
 | **Interactive tech / business visualization** | Pyvis 3-view explorer with automatic GitHub Pages deploy | [Live demo](https://arkwith7.github.io/semiconductor-knowledge-base/), [docs/visualization_plan.md](docs/visualization_plan.md) |
@@ -114,12 +114,12 @@ ontology/
   sdkb-commercialization.ttl        # TRL / license / spinoff
   sdkb-foresight.ttl                # scenario / STEEPVE / real option
 data/
-  semiconductor_v0_3.json           # baseline 198 nodes / 268 edges
+  semiconductor_v0_3.json           # curation graph 229 nodes / 268 edges (baseline origin 198/264)
   expert_profiles.parquet           # 100 synthetic profiles
   experts/curated_profiles.parquet  # 110 curated profiles
   problems.parquet                  # 50 technology problems
   regulatory_scenarios.parquet      # 25 adversarial scenarios
-  patents/raw/                      # SIRP-773 raw JSONL + parquet
+  patents/raw/                      # SIRP raw JSONL (1,000 records) + parquet
   patents/prior_art_pairs.parquet   # 7,500 examiner-grounded pairs
   compliance/                       # KR + US governance masters
 docs/
@@ -211,14 +211,14 @@ make viz-open  # build + open site/index.html in the default browser
 - Details: [docs/visualization_plan.md](docs/visualization_plan.md)
 
 ### Verified release figures
-- Baseline **198 nodes / 268 edges** (v0.3)
-- SIRP 773 patents · 3,118 IPC links · 4,696 prior-art edges
+- Curation graph **229 nodes / 268 edges** (v0.3; baseline origin 198/264, expanded by curation incl. Device)
+- SIRP **1,000 patents** (GT pairs frozen at the 773-cohort snapshot) · 3,118 IPC links · 4,696 prior-art edges
 - 7,500 examiner-grounded pairs (positive 2,723 + hard-negative 2,723 + easy-negative 2,054)
 - 50 stratified problems · 25 adversarial scenarios (all anchored)
 - 100 synthetic experts + 110 curated experts (dual-track pool)
-- 7,500 examiner-grounded + 7,800 3-rater synthetic ratings (dual-track GT; Fleiss κ = 0.258, ICC(2,1) = 0.552)
+- 7,500 examiner-grounded (objective KIPO citations) + 7,800 algorithmically-simulated 3-rater synthetic ratings — **not human-expert annotation** (dual-track GT). 3-rater reliability: weighted κ = 0.550 / ICC(2,k) = 0.787 (consensus); transparency: Fleiss κ = 0.258 / ICC(2,1) = 0.552 — see [data/experts/reliability_report.md](data/experts/reliability_report.md)
 - KR + US governance: 20 controls / 205 RDF triples
-- 46 / 46 tests pass · SHACL VALIDATION PASSED
+- 75 passed / 10 skipped (85 collected) · OWL 438 triples · SHACL VALIDATION PASSED
 
 ## Limitations and bias
 

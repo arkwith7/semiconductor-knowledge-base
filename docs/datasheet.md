@@ -15,7 +15,7 @@
 | Q | A |
 |---|---|
 | What do instances represent? | Nodes in a curation knowledge graph — Process, SubProcess, EquipmentClass, Equipment, Vendor, Organization, Parameter, Metrology, Material, TechnologyNode, FailureMode, RootCause, Mitigation, Skill, plus alignment-track classes (Patent, IPCSymbol, Firm, Resource, Capability, RealOption, Scenario, …). |
-| Total instances | 198 baseline nodes / 264 baseline edges (`data/semiconductor_v0_3.json`) + 773 rejected patents (SIRP, `data/patents/rejected_patents_meta.parquet`) + ancillary tables (experts, problems, scenarios, prior-art pairs). |
+| Total instances | **Verified snapshot 2026-05-17**: curation graph **229 nodes / 268 edges** (`data/semiconductor_v0_3.json`; baseline origin was 198/264, expanded by curation incl. Device) + **1,000** SIRP rejected patents (`data/patents/raw/semiconductor_industry_rejected_patents.jsonl`; the "773" in older docs was an initial cohort snapshot) + ancillary tables (synthetic experts 100 EN + 110 KR, problems, scenarios, prior-art pairs). All paper/README/CHANGELOG figures MUST be synced to this snapshot before submission (see [dataset_publication_risk_review.md](dataset_publication_risk_review.md) #3). |
 | Splits | Baseline graph has no train/test split (it's a curation graph). Prior-art pairs split is documented in `data/patents/pairs_report.json`. |
 | Confidential or sensitive content? | Patent abstracts and first claims are sourced from KIPRIS — subject to KIPRIS Plus terms. License resolution is in-progress; see [`dataset_rejected_patents_card.md`](dataset_rejected_patents_card.md) §6. Synthetic expert profiles are not personally identifiable. |
 
@@ -26,7 +26,7 @@
 | How was data acquired? | (Domain core) Manual curation from public literature & standards. (Patent layer) KIPRIS Plus API + KIPRIS web for 773 records. (Synthetic profiles) Generated programmatically with `scripts/gen_experts.py` (to be added) using rejection-rate–calibrated archetypes. |
 | Sampling strategy | (Domain) Comprehensive but explicitly biased toward etch/depo/lithography/CMP/oxidation/implant/packaging — the same axes as SemicONTO. (SIRP) Two cohorts: `semiconductor_ontology_rejected_patents` (431) + `semiconductor_fullstack_rejected_patents` (342). |
 | Time frame | Baseline: curated 2026-04. SIRP: collected 2026-04 → 2026-05-06, covering patents filed 1997-12-31 → 2026-04-30. |
-| Did the collection process involve crowdworkers, contractors, or third parties? | Patent data via KIPO/KIPRIS, regulatory data via BIS/NIST/ECHA public sources. No paid annotators this term; 7,500 labels come from KIPO examiner records, not crowd. |
+| Did the collection process involve crowdworkers, contractors, or third parties? | Patent data via KIPO/KIPRIS, regulatory data via BIS/NIST/ECHA public sources. **No human annotators.** Two GT tracks must not be conflated: (a) **primary** = `prior_art_pairs.parquet` 7,500 pairs, **examiner-grounded** (objective KIPO examiner citations), not crowd, not expert annotation; (b) **secondary** = `curated_ratings_3rater.csv` 7,800, **algorithmically simulated 3-rater synthetic labels** (NOT human experts). Domain experts (expert_validation_log) advised on profile *design* only — they did **not** produce the 7,500/7,800 ratings. Any paper using this data MUST NOT describe either track as "expert annotation". |
 
 ## 4. Preprocessing / cleaning / labeling
 
@@ -64,3 +64,22 @@
 | Who is supporting / hosting / maintaining the dataset? | Park HyoungSik with advisor Shin Juneseuk. |
 | Will the dataset be updated? | Yes — monthly regulatory refresh planned. SIRP cohort frozen for 2026-1 grading; expanded in 2026-2. |
 | Erratum policy | Tracked in `CHANGELOG.md`. SHACL release-gate failures block any release. |
+
+## 8. Publication-integrity notes (paper-submission grade)
+
+Mandatory before any paper using this dataset is submitted. Full risk review:
+[dataset_publication_risk_review.md](dataset_publication_risk_review.md).
+
+- **#2 Synthetic ≠ expert.** The 7,500 GT is examiner-grounded (objective KIPO
+  citations); the 7,800 3-rater set is algorithmically simulated. Neither is
+  human-expert annotation. Misrepresenting this is a fabrication risk.
+- **#3 Figure consistency.** Use only the verified 2026-05-17 snapshot figures
+  (229/268 nodes·edges, SIRP 1,000, weighted κ 0.550 / ICC(2,k) 0.787 /
+  transparency Fleiss κ 0.258 · ICC(2,1) 0.552). Resolve the `test_owl`
+  regression (`make build-owl`) before quoting any test count.
+- **#7 Leakage scope.** `leakage_protocol.md` is a v0.1 *design* only — no
+  quantitative leakage results were produced this term (2026-2 algorithm
+  phase). Papers must not claim measured leakage figures.
+- **#1 Licensing.** SIRP patent body text (abstract/claim1) is under
+  unresolved KIPRIS Plus terms — see [`dataset_rejected_patents_card.md`](dataset_rejected_patents_card.md)
+  §6. A dataset-resource paper is blocked until §6(B) is confirmed by counsel.

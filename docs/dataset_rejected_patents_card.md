@@ -8,7 +8,7 @@
 
 - **이름**: Semiconductor Industry Rejected Patents (SIRP)
 - **버전**: 2026-05 (수집 종료 2026-05-06)
-- **규모**: 773 레코드
+- **규모**: **1,000 레코드** (jsonl 실측, 2026-05-17 검증). 본 카드 내 "773"은 초기 코호트 스냅샷 수치 — 통계(§4)는 773 시점 산출이며 1,000 기준 재산출은 §7·[dataset_publication_risk_review.md](dataset_publication_risk_review.md) #3 후속 항목
 - **포맷**: JSONL (1행 = 1 거절 특허 + 정답 선행기술)
 - **원 수집 목적**: 반도체 IP-R&D 실습 — AI Agent 기반 선행기술조사 보고서 자동 작성 시스템의 개발·평가
 - **본 프로젝트 통합 목적**: SDKB의 산출물 ③·④ 보강 + `sdkb-patent.ttl` 인스턴스 풀 + SDKB-Match PriorArt 트랙의 벤치마크
@@ -80,6 +80,17 @@
 - **적대적 시나리오 25건**: 거절사유 패턴에서 도출 — 진보성 부정, 신규성 부정, 청구범위 불명확, 출원인-인용인 다중관할 충돌 (예: KR 출원 × US/JP 인용), 자국-타국 검증 비대칭 등.
 
 ### 5-2. 산출물 ④ (7,500 examiner-grounded pairs)
+
+> **표현 정밀성 (논문 투고 필수, 위험 #2).** 본 7,500쌍은 **KIPO 심사관 인용
+> 근거(examiner-grounded)** 의 객관 GT이며 **인간 전문가 주석이 아니다**.
+> 별도 `data/experts/curated_ratings_3rater.csv`(7,800)는 **알고리즘 시뮬레이션
+> 3-rater 합성 라벨**(전문가 아님, 보조 일관성 레이어)로, 두 트랙을 혼동하거나
+> 어느 쪽이든 "전문가 평가"로 서술하면 허위표시 시비 대상이다. 도메인 전문가는
+> 프로필 *설계 자문*([expert_validation_log.md](expert_validation_log.md))에만
+> 참여했고 평점을 산출하지 않았다. 합성 트랙 신뢰도(weighted κ=0.550 /
+> ICC(2,k)=0.787 / 투명성 Fleiss κ=0.258)는
+> [reliability_report.md](../data/experts/reliability_report.md) 참조.
+
 - Positive(high-confidence): `ground_truth_examiner` 1,961쌍
 - Positive(broad): `ground_truth_all` 추가 770쌍 → 합계 ≈2,731
 - Hard negative: 같은 IPC 4-digit 내·다른 `process_family`에서 추출 ≈2,300
@@ -125,6 +136,20 @@
 - 일부 GT 식별자가 비특허·논문 인용 (`논문`, `비특` 등 23건) — ingest 단계에서 별도 분기 처리.
 - 날짜 포맷 이상치 일부 (`20260430` 8자리) — 정규화 필요.
 
+### 7-1. 논문 투고 무결성 한계 (위험 #2·#3·#7 — [risk review](dataset_publication_risk_review.md))
+
+- **#2 합성 ≠ 전문가**: 7,500 = examiner-grounded(객관, 전문가 주석 아님);
+  3-rater 7,800 = 합성 시뮬레이션(전문가 아님). 논문에서 어느 쪽도 "전문가
+  평가"로 서술 금지 (§5-2 주석 참조).
+- **#3 수치 비일관**: 본 카드 §4 통계는 **773 시점** 산출, 실제 jsonl은
+  **1,000**. 논문·README·CHANGELOG·datasheet 수치를 단일 검증 스냅샷으로
+  일괄 동기화 후 투고 (1,000 기준 §4 재산출은 후속).
+- **#7 leakage 미측정**: [leakage_protocol.md](leakage_protocol.md)는 v0.1
+  **설계만** — 본 학기 정량 leakage 결과 없음(2026-2 알고리즘 단계). 논문에
+  측정 수치 주장 금지.
+- **#1 라이선스**: §6 KIPRIS 미해결 — 데이터셋-리소스 논문은 §6(B) 법무
+  확정 전 보류.
+
 ## 8. 인용 (citation)
 
 데이터 활용 시 본 데이터셋과 원 출처(KIPRIS)를 함께 인용한다.
@@ -138,7 +163,7 @@
                  Management of Technology, Quantitative MOT Lab},
   year        = {2026},
   source      = {KIPRIS Plus API, KIPO},
-  size        = {773 records},
+  size        = {1000 records},
   url         = {https://github.com/arkwith7/semiconductor-knowledge-base}
 }
 ```
@@ -148,3 +173,4 @@
 | 일자 | 버전 | 변경 |
 |---|---|---|
 | 2026-05-12 | v1.0 | 초안 작성 — Amendment v2 동시 도입 |
+| 2026-05-17 | v1.1 | 규모 773→1,000 검증 반영, §5-2 합성≠전문가 주석, §7-1 논문 투고 무결성 한계(#2·#3·#7) 추가, citation size 갱신 |

@@ -24,7 +24,7 @@ size_categories:
 > 운영: 성균관대학교 기술경영전문대학원 [계량기술경영 연구실](#연구실-컨텍스트) (Quantitative Technology Management Lab, PI: 신준석 교수)
 >
 > 🌐 English version: [README.md](README.md)
-> 🔗 **Live demo (GitHub Pages):** [`arkwith7.github.io/semiconductor-knowledge-base`](https://arkwith7.github.io/semiconductor-knowledge-base/) — 베이스라인 198노드 · SIRP 상위 50특허 + 선행기술 · 4-pillar 클래스 골격 인터랙티브 3-뷰
+> 🔗 **Live demo (GitHub Pages):** [`arkwith7.github.io/semiconductor-knowledge-base`](https://arkwith7.github.io/semiconductor-knowledge-base/) — 큐레이션 그래프 229노드 · SIRP 상위 50특허 + 선행기술 · 4-pillar 클래스 골격 인터랙티브 3-뷰
 
 ## 한 줄 포지셔닝
 
@@ -40,7 +40,7 @@ SDKB는 반도체 **공정 · 장비 · 결함 · 스킬** 지식, **특허 분�
 |---|---|
 | **SDKB** | Semiconductor Domain Knowledge Base — 본 데이터셋·온톨로지 트렁크 |
 | **SDKB-Match** | SDKB Matching Layer — SDKB 위에 구현된 매칭 응용 계층. 반도체 소부장 SME ↔ 전문가 매칭과 특허출원 ↔ 선행기술 매칭을 컴플라이언스-우선 아키텍처(사후 필터가 아님) 위에서 동시 구현. 하위 트랙: **SDKB-Match Expert** / **SDKB-Match PriorArt** |
-| **SIRP** | Semiconductor Industry Rejected Patents — 반도체 거절특허 773건 데이터셋(= SIRP-773) |
+| **SIRP** | Semiconductor Industry Rejected Patents — 반도체 거절특허 **1,000건** 데이터셋 (초기 코호트 스냅샷 773건; GT 쌍은 773-스냅샷에 고정) |
 | **소부장 SME** | 소재·부품·장비(materials·parts·equipment) 중소기업 |
 | **RBV** | Resource-Based View — 기업 핵심자원 기반 관점 |
 | **FMEA** | Failure Mode and Effects Analysis — 고장모드영향분석 |
@@ -66,7 +66,7 @@ SDKB는 반도체 **공정 · 장비 · 결함 · 스킬** 지식, **특허 분�
 
 | 연구실 연구 라인 | SDKB의 기여 | 진입점 |
 |---|---|---|
-| 특허·시장·산업 데이터 기반 **기술예측** | `sdkb-patent.ttl` + SIRP-773 + Topic / Novelty 노드 | [활용 사례 1](#활용-사례) |
+| 특허·시장·산업 데이터 기반 **기술예측** | `sdkb-patent.ttl` + SIRP + Topic / Novelty 노드 | [활용 사례 1](#활용-사례) |
 | **유망기술 기회 발굴** | Novelty-focused patent mapping, emerging-memory 토픽 클러스터 | [활용 사례 1](#활용-사례), 🚧 [notebook 02](notebooks/02_patent_opportunity_demo.ipynb) |
 | **중소기업 혁신 성과 분석 / 전문가 매칭** | SDKB-Match Expert + 합성 100 + 큐레이션 110 전문가 풀 + 다중관할 컴플라이언스 게이트 | [활용 사례 2](#활용-사례), 🚧 [notebook 01](notebooks/01_matching_baseline_expert.ipynb), ✅ [notebook 05](notebooks/05_synthetic_vs_curated_comparison.ipynb) |
 | **인터랙티브 기술 · 비즈니스 시각화** | Pyvis 3-뷰 익스플로러 · GitHub Pages 자동 배포 | [Live demo](https://arkwith7.github.io/semiconductor-knowledge-base/), [docs/visualization_plan.md](docs/visualization_plan.md) |
@@ -114,12 +114,12 @@ ontology/
   sdkb-commercialization.ttl        # TRL / 라이선스 / 스핀오프
   sdkb-foresight.ttl                # 시나리오 / STEEPVE / 실물옵션
 data/
-  semiconductor_v0_3.json           # 베이스라인 198노드 / 268엣지
+  semiconductor_v0_3.json           # 큐레이션 그래프 229노드 / 268엣지 (베이스라인 원본 198/264)
   expert_profiles.parquet           # 합성 전문가 100
   experts/curated_profiles.parquet  # 큐레이션 110
   problems.parquet                  # 기술 문제 50
   regulatory_scenarios.parquet      # 적대적 시나리오 25
-  patents/raw/                      # SIRP-773 원본 JSONL + parquet
+  patents/raw/                      # SIRP 원본 JSONL (1,000건) + parquet
   patents/prior_art_pairs.parquet   # 7,500 examiner-grounded pairs
   compliance/                       # KR + US 거버넌스 마스터
 docs/
@@ -212,14 +212,14 @@ make viz-open  # 위 + 기본 브라우저로 site/index.html 자동 오픈
 - 상세: [docs/visualization_plan.md](docs/visualization_plan.md)
 
 ### 검증된 산출물 수치
-- 베이스라인 **198 노드 / 268 엣지** (v0.3)
-- SIRP 773 patents · 3,118 IPC 링크 · 4,696 prior-art 엣지
+- 큐레이션 그래프 **229 노드 / 268 엣지** (v0.3; 베이스라인 원본 198/264, 큐레이션으로 확장·Device 포함)
+- SIRP **1,000 patents** (GT 쌍은 773-코호트 스냅샷에 고정) · 3,118 IPC 링크 · 4,696 prior-art 엣지
 - 7,500 examiner-grounded pairs (positive 2,723 + hard-neg 2,723 + easy-neg 2,054)
 - 50 stratified problems · 25 adversarial scenarios (all anchored)
 - 100 synthetic experts + 110 curated experts = **dual-track pool**
-- 7,500 examiner + 7,800 3-rater synthetic = **dual-track GT** (Fleiss κ = 0.258, ICC(2,1) = 0.552)
+- 7,500 examiner-grounded(객관 KIPO 인용) + 7,800 알고리즘 시뮬레이션 3-rater 합성 평점 — **인간 전문가 주석 아님** (dual-track GT). 3-rater 신뢰도: weighted κ = 0.550 / ICC(2,k) = 0.787 (합의); 투명성: Fleiss κ = 0.258 / ICC(2,1) = 0.552 — [data/experts/reliability_report.md](data/experts/reliability_report.md)
 - KR + US governance: 20 controls / 205 RDF triples
-- **46/46 tests pass + ✓ SHACL VALIDATION PASSED**
+- **75 passed / 10 skipped (85 collected) · OWL 438 triples · SHACL VALIDATION PASSED**
 
 ## Limitations & Bias
 
