@@ -175,3 +175,4 @@ SPARQL 시연: `examples/sparql/uc{1,2}_*.rq` + `data/use_cases/uc{1,2}_result.t
 - ✅ (2026-05-17 완료) 합성 3-rater 신뢰도 측정 정합 — weighted κ/Krippendorff α/ICC(2,k) 산출, [reliability_report.md](../data/experts/reliability_report.md) 재생성. **잔여**: rater rubric 강화(앵커·척도 축약·calibration) → weighted κ 0.05 미달분 재도전 (Tier C, 후속 학기).
 - `examples/sparql/uc{1,2}_*.rq` + `data/use_cases/` + `site/usecases/` + `scripts/build_viz.py` UC entry (v3 W2~W3).
 - 학술 trajectory: v2 §14.3 목표 저널(IP&M / Scientometrics) 초록 draft — 박사논문 seed와 연계.
+- **데이터 확장 검토의견 대응(2026-2 Stage 2 귀속)** — KIPRIS 최신·생태계 데이터 4종(융합기술 IPC/CPC · 대기업↔소부장 공동출원/인용 · 국가핵심기술/R&D · 심판·분쟁) 채택 방안. 현 학기 승인 범위 불변, 보고서 5장 "확장 로드맵" 절에 서술만 반영 → [feedback/2026w22_dataset_expansion_review_response.md](feedback/2026w22_dataset_expansion_review_response.md).
