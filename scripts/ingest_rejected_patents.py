@@ -127,7 +127,9 @@ def attach_kipris_filing_dates(meta_df: pd.DataFrame) -> pd.DataFrame:
         )
 
     kip = pd.read_parquet(
-        KIPRIS_BIBLIO, columns=["application_number", "filing_date", "ipc_codes"]
+        KIPRIS_BIBLIO,
+        columns=["application_number", "filing_date", "ipc_codes",
+                 "applicant_ko", "applicant_en"],
     ).rename(columns={"filing_date": "_kipris_filing_date", "ipc_codes": "_kipris_ipc"})
     key = meta_df["application_number"].astype(str).str.replace("-", "", regex=False)
 
@@ -137,6 +139,8 @@ def attach_kipris_filing_dates(meta_df: pd.DataFrame) -> pd.DataFrame:
     )
     merged["filing_date"] = merged["_kipris_filing_date"].fillna("")
     merged["ipc_codes"] = merged["_kipris_ipc"].fillna("")   # '|' 구분, ABox 의 hasIPC 원천
+    for col in ("applicant_ko", "applicant_en"):             # '|' 구분, ABox 의 assignedTo 원천
+        merged[col] = merged[col].fillna("")
     merged = merged.drop(
         columns=["_an", "application_number_kip", "_kipris_filing_date", "_kipris_ipc"]
     )
@@ -147,6 +151,10 @@ def attach_kipris_filing_dates(meta_df: pd.DataFrame) -> pd.DataFrame:
             f"ERROR: 출원일 결측 {missing}건. KIPRIS 수집이 불완전하다 — "
             f"`python scripts/enrich_kipris_biblio.py` 를 다시 실행할 것."
         )
+
+    no_app = int(((merged["applicant_ko"] == "") & (merged["applicant_en"] == "")).sum())
+    if no_app:
+        raise SystemExit(f"ERROR: 출원인 결측 {no_app}건 — 특허의 귀속 주체가 없으면 포트폴리오 분석이 불가능하다.")
 
     bad = int((merged["filing_date"] > merged["publication_date"]).sum())
     if bad:

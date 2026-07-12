@@ -121,6 +121,16 @@ def parse(body: str) -> dict:
         for e in root.iter("ipcNumber")
         if e.text and (e.text or "").strip()
     ]
+
+    # 출원인. 태그가 name/engName 으로 일반화되어 있어 발명자·대리인과 섞이므로
+    # applicantInfo 섹션 안에서만 읽는다.
+    ko, en = [], []
+    for info in root.iter("applicantInfo"):
+        for tag, bucket in (("name", ko), ("engName", en)):
+            el = info.find(tag)
+            if el is not None and (el.text or "").strip():
+                bucket.append(el.text.strip())
+
     return {
         "result_code": first("resultCode"),
         "filing_date": _iso(first("applicationDate")),      # ← 진짜 출원일
@@ -129,6 +139,8 @@ def parse(body: str) -> dict:
         "register_date": _iso(first("registerDate")),
         "ipc_codes": "|".join(dict.fromkeys(ipcs)),         # 순서 보존 dedup
         "invention_title": first("inventionTitle"),
+        "applicant_ko": "|".join(dict.fromkeys(ko)),
+        "applicant_en": "|".join(dict.fromkeys(en)),
     }
 
 
@@ -181,6 +193,15 @@ def main() -> int:
         print(f"  출원연도 범위        : {yrs.min()} ~ {yrs.max()}")
         print(f"  연도별 상위          : {dict(yrs.value_counts().head(5))}")
         print(f"  ipc_codes 확보       : {(df.ipc_codes != '').sum():,}/{len(df):,}")
+
+        have_app = (df.applicant_ko != "") | (df.applicant_en != "")
+        print(f"  출원인 확보          : {have_app.sum():,}/{len(df):,}")
+        firms = [a for s in df.applicant_en for a in s.split("|") if a]
+        from collections import Counter
+        top = Counter(firms).most_common(8)
+        print(f"  고유 출원인(영문)    : {len(set(firms)):,}")
+        for name, n in top:
+            print(f"     {n:4d}  {name[:46]}")
     for an, err in failed[:5]:
         print(f"  ! 실패 {an}: {err}", file=sys.stderr)
     return 0

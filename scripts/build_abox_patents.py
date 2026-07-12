@@ -19,6 +19,7 @@ Outputs:
 from __future__ import annotations
 
 import json
+import re
 import sys
 from collections import Counter
 from pathlib import Path
@@ -116,6 +117,37 @@ def _u(curie_or_id: str) -> URIRef:
     return URIRef(S.DATA + curie_or_id.replace(":", "/"))
 
 
+def _org_slug(name: str) -> str:
+    """출원인 명칭 → 안정적인 IRI 슬러그.
+
+    표기 변형(대소문자·구두점·법인격 접미어)을 흡수한다. 완벽한 기업 식별자 해소(entity
+    resolution)는 아니다 — 남는 변형은 프로파일이 드러내고, 그 한계는 논문 §5.3 에 적는다.
+    """
+    s = name.lower()
+    for suffix in (
+        "co., ltd.", "co.,ltd.", "co. ltd", "corporation", "incorporated",
+        "kabushiki kaisha", "inc.", "inc", "ltd.", "ltd", "llc", "gmbh", "corp.", "corp",
+    ):
+        s = s.replace(suffix, " ")
+    s = re.sub(r"[^a-z0-9가-힣]+", "_", s).strip("_")
+    return s or "unknown"
+
+
+def _applicants(row) -> list[tuple[str, str, str]]:
+    """(슬러그, 영문명, 한글명) 목록. 영문명이 있으면 그것을 표준 표기로 삼는다."""
+    en = [a.strip() for a in str(row.get("applicant_en") or "").split("|") if a.strip()]
+    ko = [a.strip() for a in str(row.get("applicant_ko") or "").split("|") if a.strip()]
+
+    out, seen = [], set()
+    for i, name in enumerate(en or ko):
+        slug = _org_slug(name)
+        if slug in seen:
+            continue
+        seen.add(slug)
+        out.append((slug, name if en else "", ko[i] if i < len(ko) else ""))
+    return out
+
+
 def _ipc_codes(row) -> list[str]:
     """특허 1건의 IPC 코드. KIPRIS 서지의 ipc_codes('A|B') 우선, 없으면 primary_ipc."""
     raw = row.get("ipc_codes")
@@ -172,6 +204,7 @@ def main() -> int:
     n_structured = 0          # patents that got >=1 structured Process link
     n_device = 0              # patents that got >=1 structured Device link (A2)
     n_text = 0                # patents that got >=1 free-text link
+    n_org_links = 0           # patent -> Organization (assignedTo) 트리플 수
     orphan_scope_out: list[str] = []   # device/packaging/component — no node
     orphan_text_miss: list[str] = []   # in-domain yet still unlinked (fixable)
     fam_unmapped = Counter()  # in-domain families with no structured node
@@ -211,6 +244,18 @@ def main() -> int:
             g.add((sym, RDF.type, ONT_R("IPCSymbol")))
             g.add((sym, SKOS.notation, Literal(code, datatype=XSD.string)))
             g.add((pu, ONT_R("hasIPC"), sym))
+
+        # 출원인 — TBox 의 ont:assignedTo (domain Patent, range Organization).
+        # 출원인 없는 특허 지식베이스는 기업별 포트폴리오·경쟁 분석을 지원할 수 없다.
+        for slug, en, ko in _applicants(r):
+            org = _u(f"organization/{slug}")
+            g.add((org, RDF.type, ONT_R("Organization")))
+            if en:
+                g.add((org, SKOS.prefLabel, Literal(en, lang="en")))
+            if ko:
+                g.add((org, SKOS.altLabel, Literal(ko, lang="ko")))
+            g.add((pu, ONT_R("assignedTo"), org))
+            n_org_links += 1
 
         # 출처·라이선스·생성 활동 — shapes_patent.ttl 이 특허마다 요구한다
         g.add((pu, DCTERMS.source, Literal(KIPRIS_SOURCE, datatype=XSD.string)))
