@@ -4,6 +4,28 @@ All notable changes to SDKB will be documented in this file.
 
 ## [Unreleased] — v1.0.0-dev
 
+### Added (2026-07-12 — SemiKong 공정 분류 복원 + 소자 어휘 보강)
+- **SDKB 는 출처 분류의 3개 그룹을 통째로 빠뜨리고 있었다.** `Process` 노드의 `provenance.source_id`
+  (`L1-Planarization` 등)가 보여주듯 SDKB 의 공정은 SemiKong Appendix A **Table 7 의 L1 Process Group**
+  인데, Table 7 은 그룹이 **10개**이고 SDKB 는 7개만 담았다. 누락: **1. Substrate Preparation ·
+  9. Advanced Modules · 10. Back-End Processes**. 즉 다이싱·패키징·금속화·웨이퍼 테스트를
+  **표현할 어휘 자체가 없었다.** 있는 그룹들도 L2 모듈 대부분이 빠져 있었다(예: Film Formation 에
+  Oxidation·Epitaxy 없음, Thermal Processing 에 Annealing 없음).
+- `scripts/add_semikong_process_nodes.py` (신규, 멱등): Table 7 의 Group·Module 열을 **전량 복원**한다.
+  **Process 8 → 11** (+3 그룹), **SubProcess 12 → 38** (+26 모듈). 기존 20개 IRI 는 **하나도 건드리지
+  않는다** — 하류(특허 ABox 링크, foresight-paper 의 G₀)가 그것을 가리키기 때문이다.
+  Table 7 자체의 중복(1.3 Cleaning ≡ 6. Cleaning, 7.2 Thermal Oxidation ≡ 2.1 Oxidation)은 하나로 합쳤고,
+  그 판단을 노드 `provenance.note` 에 남겼다.
+- **Device 31 → 34**: `EPROM`(Q378210) · `FeRAM`(Q703656) · `Diode`(Q11656) 추가.
+  EPROM 누락이 특히 컸다 — IPC `H10B 69/00`(EPROM 잔여군)과 구 `H01L 21/8247`(EPROM 제조)에 걸리는
+  특허가 SIRP 1,000건 중 다수인데 대응 개념이 없었다. Wikidata 상 EEPROM(Q205908)은 EPROM 의
+  `P279 subclass of` 하위이므로 **별개 소자**임을 확인하고 추가했다.
+  `add_device_nodes.py` 에 `discrete` 카테고리 추가(다이오드는 logic/memory/power/sensor/packaging 중
+  어디에도 정직하게 들어가지 않는다).
+- 그래프: core-data **2,743 트리플**. `make validate` SHACL 통과, `pytest` 75 passed / 10 skipped.
+- **하류 통보**: `sdkb-foresight-paper` 의 G₀ 가 26,676 → **26,973 트리플**로 움직인다. 이 논문은 아직
+  G₀ 를 동결하기 전이므로 의도된 변경이며, baseline 재조립 후 표 3·H1 관측 단위를 갱신한다.
+
 ### Fixed / Changed (2026-05-17 — figure reconciliation, reliability re-measurement, OWL regen)
 - **OWL regression fixed**: committed `ontology/sdkb-core.ttl` was a stale `1.0.0-dev` build missing the enrichment layer + `dcterms:modified`/`dcterms:references`/`rdfs:seeAlso`/`versionInfo 1.1.0-dev`, causing 24 `tests/test_owl.py` failures. Regenerated via `make owl` (`scripts/build_owl.py`) → **438 triples**, `1.1.0-dev`. Full suite now **75 passed / 10 skipped (85 collected) / 0 failed**. (Earlier "46/46" and "85/85" were pre-regression counts.)
 - **Verified-figure reconciliation** (single snapshot, 2026-05-17): curation graph **229 nodes / 268 edges** (baseline origin 198/264, expanded by curation incl. `Device`); SIRP raw corpus **1,000 records** (the prior "773"/"SIRP-773" was the initial cohort snapshot; the 7,500 GT pairs remain frozen at the 773-snapshot and are unchanged). README (EN/KO), datasheet, and the SIRP card synced to these figures.

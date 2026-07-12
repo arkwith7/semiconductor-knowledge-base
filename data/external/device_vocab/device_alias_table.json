@@ -453,5 +453,48 @@
     ],
     "ko": [],
     "wikidata": []
+  },
+  "device:eprom": {
+    "category": [
+      "memory"
+    ],
+    "en": [
+      "EPROM",
+      "erasable programmable read-only memory"
+    ],
+    "ko": [],
+    "wikidata": [
+      "Q378210"
+    ]
+  },
+  "device:feram": {
+    "category": [
+      "memory"
+    ],
+    "en": [
+      "FeRAM",
+      "FRAM",
+      "F-RAM",
+      "ferroelectric RAM",
+      "ferroelectric random-access memory"
+    ],
+    "ko": [],
+    "wikidata": [
+      "Q703656"
+    ]
+  },
+  "device:diode": {
+    "category": [
+      "discrete"
+    ],
+    "en": [
+      "diode"
+    ],
+    "ko": [
+      "다이오드"
+    ],
+    "wikidata": [
+      "Q11656"
+    ]
   }
 }

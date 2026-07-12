@@ -4425,6 +4425,557 @@
       }
     },
     {
+      "id": "process:substrate_preparation",
+      "type": "Process",
+      "canonical_name": "Substrate Preparation",
+      "description": "Wafer manufacturing, polishing and incoming cleaning, before device fabrication.",
+      "props": {
+        "priority": 1
+      },
+      "provenance": {
+        "source": "semikong",
+        "source_id": "L1-Substrate_Preparation",
+        "reference": "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)",
+        "license": "Apache-2.0",
+        "url": "https://github.com/aitomatic/semikong",
+        "modified": false,
+        "interpretation": "mapped",
+        "note": "Process group enumerated in Table 7 but absent from SDKB v0.3."
+      }
+    },
+    {
+      "id": "process:advanced_modules",
+      "type": "Process",
+      "canonical_name": "Advanced Modules",
+      "description": "Device-enabling integration modules, e.g. high-k/metal gate, strain, 3D structures.",
+      "props": {
+        "priority": 1
+      },
+      "provenance": {
+        "source": "semikong",
+        "source_id": "L1-Advanced_Modules",
+        "reference": "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)",
+        "license": "Apache-2.0",
+        "url": "https://github.com/aitomatic/semikong",
+        "modified": false,
+        "interpretation": "mapped",
+        "note": "Process group enumerated in Table 7 but absent from SDKB v0.3."
+      }
+    },
+    {
+      "id": "process:back_end",
+      "type": "Process",
+      "canonical_name": "Back-End Processes",
+      "description": "Post-FEOL processes: interconnect, passivation, thinning, test, dicing and packaging.",
+      "props": {
+        "priority": 1
+      },
+      "provenance": {
+        "source": "semikong",
+        "source_id": "L1-Back_End_Processes",
+        "reference": "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)",
+        "license": "Apache-2.0",
+        "url": "https://github.com/aitomatic/semikong",
+        "modified": false,
+        "interpretation": "mapped",
+        "note": "Process group enumerated in Table 7 but absent from SDKB v0.3."
+      }
+    },
+    {
+      "id": "subprocess:wafer_manufacturing",
+      "type": "SubProcess",
+      "canonical_name": "Wafer Manufacturing",
+      "description": "Crystal growth, wafer slicing, edge rounding.",
+      "props": {
+        "parent_process": "process:substrate_preparation"
+      },
+      "provenance": {
+        "source": "semikong",
+        "source_id": "L2-Substrate_Preparation/Wafer_Manufacturing",
+        "reference": "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)",
+        "license": "Apache-2.0",
+        "url": "https://github.com/aitomatic/semikong",
+        "modified": false,
+        "interpretation": "mapped",
+        "note": "Process module enumerated in Table 7 but absent from SDKB v0.3."
+      }
+    },
+    {
+      "id": "subprocess:wafer_polishing",
+      "type": "SubProcess",
+      "canonical_name": "Wafer Polishing",
+      "description": "Lapping and polishing of the incoming wafer.",
+      "props": {
+        "parent_process": "process:substrate_preparation"
+      },
+      "provenance": {
+        "source": "semikong",
+        "source_id": "L2-Substrate_Preparation/Wafer_Polishing",
+        "reference": "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)",
+        "license": "Apache-2.0",
+        "url": "https://github.com/aitomatic/semikong",
+        "modified": false,
+        "interpretation": "mapped",
+        "note": "Process module enumerated in Table 7 but absent from SDKB v0.3."
+      }
+    },
+    {
+      "id": "subprocess:oxidation",
+      "type": "SubProcess",
+      "canonical_name": "Oxidation",
+      "description": "Growth of oxide films (thermal, plasma-enhanced, high/low pressure, anodic). Table 7 lists oxidation twice (2.1 and 7.2 Thermal Oxidation); modelled once.",
+      "props": {
+        "parent_process": "process:deposition"
+      },
+      "provenance": {
+        "source": "semikong",
+        "source_id": "L2-Film_Formation/Oxidation",
+        "reference": "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)",
+        "license": "Apache-2.0",
+        "url": "https://github.com/aitomatic/semikong",
+        "modified": false,
+        "interpretation": "mapped",
+        "note": "Process module enumerated in Table 7 but absent from SDKB v0.3."
+      }
+    },
+    {
+      "id": "subprocess:epitaxial_growth",
+      "type": "SubProcess",
+      "canonical_name": "Epitaxial Growth",
+      "description": "Silicon and compound-semiconductor epitaxy.",
+      "props": {
+        "parent_process": "process:deposition"
+      },
+      "provenance": {
+        "source": "semikong",
+        "source_id": "L2-Film_Formation/Epitaxial_Growth",
+        "reference": "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)",
+        "license": "Apache-2.0",
+        "url": "https://github.com/aitomatic/semikong",
+        "modified": false,
+        "interpretation": "mapped",
+        "note": "Process module enumerated in Table 7 but absent from SDKB v0.3."
+      }
+    },
+    {
+      "id": "subprocess:in_situ_doping",
+      "type": "SubProcess",
+      "canonical_name": "In-situ Doping",
+      "description": "Dopant incorporation during epitaxy or deposition.",
+      "props": {
+        "parent_process": "process:implant"
+      },
+      "provenance": {
+        "source": "semikong",
+        "source_id": "L2-Doping/In_situ_Doping",
+        "reference": "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)",
+        "license": "Apache-2.0",
+        "url": "https://github.com/aitomatic/semikong",
+        "modified": false,
+        "interpretation": "mapped",
+        "note": "Process module enumerated in Table 7 but absent from SDKB v0.3."
+      }
+    },
+    {
+      "id": "subprocess:etchback_planarization",
+      "type": "SubProcess",
+      "canonical_name": "Etchback Planarization",
+      "description": "Planarisation by resist or sacrificial-layer etchback.",
+      "props": {
+        "parent_process": "process:cmp"
+      },
+      "provenance": {
+        "source": "semikong",
+        "source_id": "L2-Planarization/Etchback_Planarization",
+        "reference": "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)",
+        "license": "Apache-2.0",
+        "url": "https://github.com/aitomatic/semikong",
+        "modified": false,
+        "interpretation": "mapped",
+        "note": "Process module enumerated in Table 7 but absent from SDKB v0.3."
+      }
+    },
+    {
+      "id": "subprocess:wet_cleaning",
+      "type": "SubProcess",
+      "canonical_name": "Wet Cleaning",
+      "description": "RCA clean, piranha clean, HF dip.",
+      "props": {
+        "parent_process": "process:clean"
+      },
+      "provenance": {
+        "source": "semikong",
+        "source_id": "L2-Cleaning_and_Surface_Preparation/Wet_Cleaning",
+        "reference": "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)",
+        "license": "Apache-2.0",
+        "url": "https://github.com/aitomatic/semikong",
+        "modified": false,
+        "interpretation": "mapped",
+        "note": "Process module enumerated in Table 7 but absent from SDKB v0.3."
+      }
+    },
+    {
+      "id": "subprocess:dry_cleaning",
+      "type": "SubProcess",
+      "canonical_name": "Dry Cleaning",
+      "description": "Plasma and UV-ozone cleaning.",
+      "props": {
+        "parent_process": "process:clean"
+      },
+      "provenance": {
+        "source": "semikong",
+        "source_id": "L2-Cleaning_and_Surface_Preparation/Dry_Cleaning",
+        "reference": "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)",
+        "license": "Apache-2.0",
+        "url": "https://github.com/aitomatic/semikong",
+        "modified": false,
+        "interpretation": "mapped",
+        "note": "Process module enumerated in Table 7 but absent from SDKB v0.3."
+      }
+    },
+    {
+      "id": "subprocess:advanced_cleaning",
+      "type": "SubProcess",
+      "canonical_name": "Advanced Cleaning",
+      "description": "Supercritical CO2 and cryogenic cleaning.",
+      "props": {
+        "parent_process": "process:clean"
+      },
+      "provenance": {
+        "source": "semikong",
+        "source_id": "L2-Cleaning_and_Surface_Preparation/Advanced_Cleaning",
+        "reference": "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)",
+        "license": "Apache-2.0",
+        "url": "https://github.com/aitomatic/semikong",
+        "modified": false,
+        "interpretation": "mapped",
+        "note": "Process module enumerated in Table 7 but absent from SDKB v0.3."
+      }
+    },
+    {
+      "id": "subprocess:annealing",
+      "type": "SubProcess",
+      "canonical_name": "Annealing",
+      "description": "Furnace, rapid thermal and laser annealing.",
+      "props": {
+        "parent_process": "process:diffusion"
+      },
+      "provenance": {
+        "source": "semikong",
+        "source_id": "L2-Thermal_Processing/Annealing",
+        "reference": "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)",
+        "license": "Apache-2.0",
+        "url": "https://github.com/aitomatic/semikong",
+        "modified": false,
+        "interpretation": "mapped",
+        "note": "Process module enumerated in Table 7 but absent from SDKB v0.3."
+      }
+    },
+    {
+      "id": "subprocess:dopant_activation",
+      "type": "SubProcess",
+      "canonical_name": "Dopant Activation",
+      "description": "Spike and flash annealing for dopant activation.",
+      "props": {
+        "parent_process": "process:diffusion"
+      },
+      "provenance": {
+        "source": "semikong",
+        "source_id": "L2-Thermal_Processing/Dopant_Activation",
+        "reference": "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)",
+        "license": "Apache-2.0",
+        "url": "https://github.com/aitomatic/semikong",
+        "modified": false,
+        "interpretation": "mapped",
+        "note": "Process module enumerated in Table 7 but absent from SDKB v0.3."
+      }
+    },
+    {
+      "id": "subprocess:physical_metrology",
+      "type": "SubProcess",
+      "canonical_name": "Physical Metrology",
+      "description": "Profilometry, ellipsometry, X-ray reflectometry.",
+      "props": {
+        "parent_process": "process:metrology"
+      },
+      "provenance": {
+        "source": "semikong",
+        "source_id": "L2-Metrology_and_Inspection/Physical_Metrology",
+        "reference": "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)",
+        "license": "Apache-2.0",
+        "url": "https://github.com/aitomatic/semikong",
+        "modified": false,
+        "interpretation": "mapped",
+        "note": "Process module enumerated in Table 7 but absent from SDKB v0.3."
+      }
+    },
+    {
+      "id": "subprocess:electrical_metrology",
+      "type": "SubProcess",
+      "canonical_name": "Electrical Metrology",
+      "description": "Sheet resistance and C-V measurement.",
+      "props": {
+        "parent_process": "process:metrology"
+      },
+      "provenance": {
+        "source": "semikong",
+        "source_id": "L2-Metrology_and_Inspection/Electrical_Metrology",
+        "reference": "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)",
+        "license": "Apache-2.0",
+        "url": "https://github.com/aitomatic/semikong",
+        "modified": false,
+        "interpretation": "mapped",
+        "note": "Process module enumerated in Table 7 but absent from SDKB v0.3."
+      }
+    },
+    {
+      "id": "subprocess:defect_inspection",
+      "type": "SubProcess",
+      "canonical_name": "Defect Inspection",
+      "description": "Optical, e-beam and wafer inspection.",
+      "props": {
+        "parent_process": "process:metrology"
+      },
+      "provenance": {
+        "source": "semikong",
+        "source_id": "L2-Metrology_and_Inspection/Defect_Inspection",
+        "reference": "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)",
+        "license": "Apache-2.0",
+        "url": "https://github.com/aitomatic/semikong",
+        "modified": false,
+        "interpretation": "mapped",
+        "note": "Process module enumerated in Table 7 but absent from SDKB v0.3."
+      }
+    },
+    {
+      "id": "subprocess:high_k_metal_gate",
+      "type": "SubProcess",
+      "canonical_name": "High-k/Metal Gate",
+      "description": "Gate dielectric and metal gate formation.",
+      "props": {
+        "parent_process": "process:advanced_modules"
+      },
+      "provenance": {
+        "source": "semikong",
+        "source_id": "L2-Advanced_Modules/High_k_Metal_Gate",
+        "reference": "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)",
+        "license": "Apache-2.0",
+        "url": "https://github.com/aitomatic/semikong",
+        "modified": false,
+        "interpretation": "mapped",
+        "note": "Process module enumerated in Table 7 but absent from SDKB v0.3."
+      }
+    },
+    {
+      "id": "subprocess:strain_engineering",
+      "type": "SubProcess",
+      "canonical_name": "Strain Engineering",
+      "description": "Strained silicon and SiGe channels.",
+      "props": {
+        "parent_process": "process:advanced_modules"
+      },
+      "provenance": {
+        "source": "semikong",
+        "source_id": "L2-Advanced_Modules/Strain_Engineering",
+        "reference": "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)",
+        "license": "Apache-2.0",
+        "url": "https://github.com/aitomatic/semikong",
+        "modified": false,
+        "interpretation": "mapped",
+        "note": "Process module enumerated in Table 7 but absent from SDKB v0.3."
+      }
+    },
+    {
+      "id": "subprocess:three_d_structures",
+      "type": "SubProcess",
+      "canonical_name": "3D Structures",
+      "description": "FinFET formation and gate-all-around structures.",
+      "props": {
+        "parent_process": "process:advanced_modules"
+      },
+      "provenance": {
+        "source": "semikong",
+        "source_id": "L2-Advanced_Modules/3D_Structures",
+        "reference": "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)",
+        "license": "Apache-2.0",
+        "url": "https://github.com/aitomatic/semikong",
+        "modified": false,
+        "interpretation": "mapped",
+        "note": "Process module enumerated in Table 7 but absent from SDKB v0.3."
+      }
+    },
+    {
+      "id": "subprocess:multilayer_interconnect",
+      "type": "SubProcess",
+      "canonical_name": "Multilayer Interconnect",
+      "description": "Interlayer dielectric and metal layers, with CMP.",
+      "props": {
+        "parent_process": "process:back_end"
+      },
+      "provenance": {
+        "source": "semikong",
+        "source_id": "L2-Back_End_Processes/Multilayer_Interconnect",
+        "reference": "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)",
+        "license": "Apache-2.0",
+        "url": "https://github.com/aitomatic/semikong",
+        "modified": false,
+        "interpretation": "mapped",
+        "note": "Process module enumerated in Table 7 but absent from SDKB v0.3."
+      }
+    },
+    {
+      "id": "subprocess:metallization",
+      "type": "SubProcess",
+      "canonical_name": "Metallization",
+      "description": "PVD, CVD, electroplating and sputtering of interconnect metal.",
+      "props": {
+        "parent_process": "process:back_end"
+      },
+      "provenance": {
+        "source": "semikong",
+        "source_id": "L2-Back_End_Processes/Metallization",
+        "reference": "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)",
+        "license": "Apache-2.0",
+        "url": "https://github.com/aitomatic/semikong",
+        "modified": false,
+        "interpretation": "mapped",
+        "note": "Process module enumerated in Table 7 but absent from SDKB v0.3."
+      }
+    },
+    {
+      "id": "subprocess:interconnect_patterning",
+      "type": "SubProcess",
+      "canonical_name": "Interconnect Patterning",
+      "description": "Damascene and dual-damascene patterning.",
+      "props": {
+        "parent_process": "process:back_end"
+      },
+      "provenance": {
+        "source": "semikong",
+        "source_id": "L2-Back_End_Processes/Interconnect_Patterning",
+        "reference": "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)",
+        "license": "Apache-2.0",
+        "url": "https://github.com/aitomatic/semikong",
+        "modified": false,
+        "interpretation": "mapped",
+        "note": "Process module enumerated in Table 7 but absent from SDKB v0.3."
+      }
+    },
+    {
+      "id": "subprocess:passivation",
+      "type": "SubProcess",
+      "canonical_name": "Passivation",
+      "description": "Silicon nitride deposition, polyimide coating.",
+      "props": {
+        "parent_process": "process:back_end"
+      },
+      "provenance": {
+        "source": "semikong",
+        "source_id": "L2-Back_End_Processes/Passivation",
+        "reference": "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)",
+        "license": "Apache-2.0",
+        "url": "https://github.com/aitomatic/semikong",
+        "modified": false,
+        "interpretation": "mapped",
+        "note": "Process module enumerated in Table 7 but absent from SDKB v0.3."
+      }
+    },
+    {
+      "id": "subprocess:wafer_thinning",
+      "type": "SubProcess",
+      "canonical_name": "Wafer Thinning",
+      "description": "Backside grinding and chemical etching.",
+      "props": {
+        "parent_process": "process:back_end"
+      },
+      "provenance": {
+        "source": "semikong",
+        "source_id": "L2-Back_End_Processes/Wafer_Thinning",
+        "reference": "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)",
+        "license": "Apache-2.0",
+        "url": "https://github.com/aitomatic/semikong",
+        "modified": false,
+        "interpretation": "mapped",
+        "note": "Process module enumerated in Table 7 but absent from SDKB v0.3."
+      }
+    },
+    {
+      "id": "subprocess:wafer_testing",
+      "type": "SubProcess",
+      "canonical_name": "Wafer Testing",
+      "description": "Parametric and functional test at wafer level.",
+      "props": {
+        "parent_process": "process:back_end"
+      },
+      "provenance": {
+        "source": "semikong",
+        "source_id": "L2-Back_End_Processes/Wafer_Testing",
+        "reference": "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)",
+        "license": "Apache-2.0",
+        "url": "https://github.com/aitomatic/semikong",
+        "modified": false,
+        "interpretation": "mapped",
+        "note": "Process module enumerated in Table 7 but absent from SDKB v0.3."
+      }
+    },
+    {
+      "id": "subprocess:dicing",
+      "type": "SubProcess",
+      "canonical_name": "Dicing",
+      "description": "Mechanical, laser and plasma dicing.",
+      "props": {
+        "parent_process": "process:back_end"
+      },
+      "provenance": {
+        "source": "semikong",
+        "source_id": "L2-Back_End_Processes/Dicing",
+        "reference": "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)",
+        "license": "Apache-2.0",
+        "url": "https://github.com/aitomatic/semikong",
+        "modified": false,
+        "interpretation": "mapped",
+        "note": "Process module enumerated in Table 7 but absent from SDKB v0.3."
+      }
+    },
+    {
+      "id": "subprocess:packaging",
+      "type": "SubProcess",
+      "canonical_name": "Packaging",
+      "description": "Die attach, wire bonding, flip-chip bonding, encapsulation.",
+      "props": {
+        "parent_process": "process:back_end"
+      },
+      "provenance": {
+        "source": "semikong",
+        "source_id": "L2-Back_End_Processes/Packaging",
+        "reference": "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)",
+        "license": "Apache-2.0",
+        "url": "https://github.com/aitomatic/semikong",
+        "modified": false,
+        "interpretation": "mapped",
+        "note": "Process module enumerated in Table 7 but absent from SDKB v0.3."
+      }
+    },
+    {
+      "id": "subprocess:advanced_packaging",
+      "type": "SubProcess",
+      "canonical_name": "Advanced Packaging",
+      "description": "TSV, wafer-level packaging, 3D integration.",
+      "props": {
+        "parent_process": "process:back_end"
+      },
+      "provenance": {
+        "source": "semikong",
+        "source_id": "L2-Back_End_Processes/Advanced_Packaging",
+        "reference": "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)",
+        "license": "Apache-2.0",
+        "url": "https://github.com/aitomatic/semikong",
+        "modified": false,
+        "interpretation": "mapped",
+        "note": "Process module enumerated in Table 7 but absent from SDKB v0.3."
+      }
+    },
+    {
       "id": "device:finfet",
       "type": "Device",
       "canonical_name": "FinFET",
@@ -5119,6 +5670,78 @@
         "modified": false,
         "interpretation": "author-defined",
         "cross_ref": []
+      }
+    },
+    {
+      "id": "device:eprom",
+      "type": "Device",
+      "canonical_name": "EPROM",
+      "description": "Memory device architecture.",
+      "props": {
+        "category": "memory"
+      },
+      "provenance": {
+        "source": "wikidata",
+        "source_id": "Q378210",
+        "reference": "Wikidata device class (paper_data Phase D, 2026-05-16)",
+        "license": "CC0-1.0",
+        "url": "https://www.wikidata.org/wiki/Q378210",
+        "modified": false,
+        "interpretation": "mapped",
+        "cross_ref": [
+          {
+            "source": "wikidata",
+            "id": "Q378210"
+          }
+        ]
+      }
+    },
+    {
+      "id": "device:feram",
+      "type": "Device",
+      "canonical_name": "FeRAM",
+      "description": "Memory device architecture.",
+      "props": {
+        "category": "memory"
+      },
+      "provenance": {
+        "source": "wikidata",
+        "source_id": "Q703656",
+        "reference": "Wikidata device class (paper_data Phase D, 2026-05-16)",
+        "license": "CC0-1.0",
+        "url": "https://www.wikidata.org/wiki/Q703656",
+        "modified": false,
+        "interpretation": "mapped",
+        "cross_ref": [
+          {
+            "source": "wikidata",
+            "id": "Q703656"
+          }
+        ]
+      }
+    },
+    {
+      "id": "device:diode",
+      "type": "Device",
+      "canonical_name": "diode",
+      "description": "Discrete semiconductor device (rectifying or switching component).",
+      "props": {
+        "category": "discrete"
+      },
+      "provenance": {
+        "source": "wikidata",
+        "source_id": "Q11656",
+        "reference": "Wikidata device class (paper_data Phase D, 2026-05-16)",
+        "license": "CC0-1.0",
+        "url": "https://www.wikidata.org/wiki/Q11656",
+        "modified": false,
+        "interpretation": "mapped",
+        "cross_ref": [
+          {
+            "source": "wikidata",
+            "id": "Q11656"
+          }
+        ]
       }
     }
   ],
@@ -8728,6 +9351,344 @@
         "validation_required": true,
         "note": "Particle defects most commonly traced to wet-clean / wet-etch steps."
       }
+    },
+    {
+      "src": "process:substrate_preparation",
+      "predicate": "HAS_SUBPROCESS",
+      "dst": "subprocess:wafer_manufacturing",
+      "weight": 0.9,
+      "provenance": {
+        "source": "semikong",
+        "reference": "SemiKong L1->L2 taxonomy hierarchy",
+        "license": "Apache-2.0",
+        "interpretation": "mapped",
+        "note": "Process group -> process module nesting, per Table 7"
+      }
+    },
+    {
+      "src": "process:substrate_preparation",
+      "predicate": "HAS_SUBPROCESS",
+      "dst": "subprocess:wafer_polishing",
+      "weight": 0.9,
+      "provenance": {
+        "source": "semikong",
+        "reference": "SemiKong L1->L2 taxonomy hierarchy",
+        "license": "Apache-2.0",
+        "interpretation": "mapped",
+        "note": "Process group -> process module nesting, per Table 7"
+      }
+    },
+    {
+      "src": "process:deposition",
+      "predicate": "HAS_SUBPROCESS",
+      "dst": "subprocess:oxidation",
+      "weight": 0.9,
+      "provenance": {
+        "source": "semikong",
+        "reference": "SemiKong L1->L2 taxonomy hierarchy",
+        "license": "Apache-2.0",
+        "interpretation": "mapped",
+        "note": "Process group -> process module nesting, per Table 7"
+      }
+    },
+    {
+      "src": "process:deposition",
+      "predicate": "HAS_SUBPROCESS",
+      "dst": "subprocess:epitaxial_growth",
+      "weight": 0.9,
+      "provenance": {
+        "source": "semikong",
+        "reference": "SemiKong L1->L2 taxonomy hierarchy",
+        "license": "Apache-2.0",
+        "interpretation": "mapped",
+        "note": "Process group -> process module nesting, per Table 7"
+      }
+    },
+    {
+      "src": "process:implant",
+      "predicate": "HAS_SUBPROCESS",
+      "dst": "subprocess:in_situ_doping",
+      "weight": 0.9,
+      "provenance": {
+        "source": "semikong",
+        "reference": "SemiKong L1->L2 taxonomy hierarchy",
+        "license": "Apache-2.0",
+        "interpretation": "mapped",
+        "note": "Process group -> process module nesting, per Table 7"
+      }
+    },
+    {
+      "src": "process:cmp",
+      "predicate": "HAS_SUBPROCESS",
+      "dst": "subprocess:etchback_planarization",
+      "weight": 0.9,
+      "provenance": {
+        "source": "semikong",
+        "reference": "SemiKong L1->L2 taxonomy hierarchy",
+        "license": "Apache-2.0",
+        "interpretation": "mapped",
+        "note": "Process group -> process module nesting, per Table 7"
+      }
+    },
+    {
+      "src": "process:clean",
+      "predicate": "HAS_SUBPROCESS",
+      "dst": "subprocess:wet_cleaning",
+      "weight": 0.9,
+      "provenance": {
+        "source": "semikong",
+        "reference": "SemiKong L1->L2 taxonomy hierarchy",
+        "license": "Apache-2.0",
+        "interpretation": "mapped",
+        "note": "Process group -> process module nesting, per Table 7"
+      }
+    },
+    {
+      "src": "process:clean",
+      "predicate": "HAS_SUBPROCESS",
+      "dst": "subprocess:dry_cleaning",
+      "weight": 0.9,
+      "provenance": {
+        "source": "semikong",
+        "reference": "SemiKong L1->L2 taxonomy hierarchy",
+        "license": "Apache-2.0",
+        "interpretation": "mapped",
+        "note": "Process group -> process module nesting, per Table 7"
+      }
+    },
+    {
+      "src": "process:clean",
+      "predicate": "HAS_SUBPROCESS",
+      "dst": "subprocess:advanced_cleaning",
+      "weight": 0.9,
+      "provenance": {
+        "source": "semikong",
+        "reference": "SemiKong L1->L2 taxonomy hierarchy",
+        "license": "Apache-2.0",
+        "interpretation": "mapped",
+        "note": "Process group -> process module nesting, per Table 7"
+      }
+    },
+    {
+      "src": "process:diffusion",
+      "predicate": "HAS_SUBPROCESS",
+      "dst": "subprocess:annealing",
+      "weight": 0.9,
+      "provenance": {
+        "source": "semikong",
+        "reference": "SemiKong L1->L2 taxonomy hierarchy",
+        "license": "Apache-2.0",
+        "interpretation": "mapped",
+        "note": "Process group -> process module nesting, per Table 7"
+      }
+    },
+    {
+      "src": "process:diffusion",
+      "predicate": "HAS_SUBPROCESS",
+      "dst": "subprocess:dopant_activation",
+      "weight": 0.9,
+      "provenance": {
+        "source": "semikong",
+        "reference": "SemiKong L1->L2 taxonomy hierarchy",
+        "license": "Apache-2.0",
+        "interpretation": "mapped",
+        "note": "Process group -> process module nesting, per Table 7"
+      }
+    },
+    {
+      "src": "process:metrology",
+      "predicate": "HAS_SUBPROCESS",
+      "dst": "subprocess:physical_metrology",
+      "weight": 0.9,
+      "provenance": {
+        "source": "semikong",
+        "reference": "SemiKong L1->L2 taxonomy hierarchy",
+        "license": "Apache-2.0",
+        "interpretation": "mapped",
+        "note": "Process group -> process module nesting, per Table 7"
+      }
+    },
+    {
+      "src": "process:metrology",
+      "predicate": "HAS_SUBPROCESS",
+      "dst": "subprocess:electrical_metrology",
+      "weight": 0.9,
+      "provenance": {
+        "source": "semikong",
+        "reference": "SemiKong L1->L2 taxonomy hierarchy",
+        "license": "Apache-2.0",
+        "interpretation": "mapped",
+        "note": "Process group -> process module nesting, per Table 7"
+      }
+    },
+    {
+      "src": "process:metrology",
+      "predicate": "HAS_SUBPROCESS",
+      "dst": "subprocess:defect_inspection",
+      "weight": 0.9,
+      "provenance": {
+        "source": "semikong",
+        "reference": "SemiKong L1->L2 taxonomy hierarchy",
+        "license": "Apache-2.0",
+        "interpretation": "mapped",
+        "note": "Process group -> process module nesting, per Table 7"
+      }
+    },
+    {
+      "src": "process:advanced_modules",
+      "predicate": "HAS_SUBPROCESS",
+      "dst": "subprocess:high_k_metal_gate",
+      "weight": 0.9,
+      "provenance": {
+        "source": "semikong",
+        "reference": "SemiKong L1->L2 taxonomy hierarchy",
+        "license": "Apache-2.0",
+        "interpretation": "mapped",
+        "note": "Process group -> process module nesting, per Table 7"
+      }
+    },
+    {
+      "src": "process:advanced_modules",
+      "predicate": "HAS_SUBPROCESS",
+      "dst": "subprocess:strain_engineering",
+      "weight": 0.9,
+      "provenance": {
+        "source": "semikong",
+        "reference": "SemiKong L1->L2 taxonomy hierarchy",
+        "license": "Apache-2.0",
+        "interpretation": "mapped",
+        "note": "Process group -> process module nesting, per Table 7"
+      }
+    },
+    {
+      "src": "process:advanced_modules",
+      "predicate": "HAS_SUBPROCESS",
+      "dst": "subprocess:three_d_structures",
+      "weight": 0.9,
+      "provenance": {
+        "source": "semikong",
+        "reference": "SemiKong L1->L2 taxonomy hierarchy",
+        "license": "Apache-2.0",
+        "interpretation": "mapped",
+        "note": "Process group -> process module nesting, per Table 7"
+      }
+    },
+    {
+      "src": "process:back_end",
+      "predicate": "HAS_SUBPROCESS",
+      "dst": "subprocess:multilayer_interconnect",
+      "weight": 0.9,
+      "provenance": {
+        "source": "semikong",
+        "reference": "SemiKong L1->L2 taxonomy hierarchy",
+        "license": "Apache-2.0",
+        "interpretation": "mapped",
+        "note": "Process group -> process module nesting, per Table 7"
+      }
+    },
+    {
+      "src": "process:back_end",
+      "predicate": "HAS_SUBPROCESS",
+      "dst": "subprocess:metallization",
+      "weight": 0.9,
+      "provenance": {
+        "source": "semikong",
+        "reference": "SemiKong L1->L2 taxonomy hierarchy",
+        "license": "Apache-2.0",
+        "interpretation": "mapped",
+        "note": "Process group -> process module nesting, per Table 7"
+      }
+    },
+    {
+      "src": "process:back_end",
+      "predicate": "HAS_SUBPROCESS",
+      "dst": "subprocess:interconnect_patterning",
+      "weight": 0.9,
+      "provenance": {
+        "source": "semikong",
+        "reference": "SemiKong L1->L2 taxonomy hierarchy",
+        "license": "Apache-2.0",
+        "interpretation": "mapped",
+        "note": "Process group -> process module nesting, per Table 7"
+      }
+    },
+    {
+      "src": "process:back_end",
+      "predicate": "HAS_SUBPROCESS",
+      "dst": "subprocess:passivation",
+      "weight": 0.9,
+      "provenance": {
+        "source": "semikong",
+        "reference": "SemiKong L1->L2 taxonomy hierarchy",
+        "license": "Apache-2.0",
+        "interpretation": "mapped",
+        "note": "Process group -> process module nesting, per Table 7"
+      }
+    },
+    {
+      "src": "process:back_end",
+      "predicate": "HAS_SUBPROCESS",
+      "dst": "subprocess:wafer_thinning",
+      "weight": 0.9,
+      "provenance": {
+        "source": "semikong",
+        "reference": "SemiKong L1->L2 taxonomy hierarchy",
+        "license": "Apache-2.0",
+        "interpretation": "mapped",
+        "note": "Process group -> process module nesting, per Table 7"
+      }
+    },
+    {
+      "src": "process:back_end",
+      "predicate": "HAS_SUBPROCESS",
+      "dst": "subprocess:wafer_testing",
+      "weight": 0.9,
+      "provenance": {
+        "source": "semikong",
+        "reference": "SemiKong L1->L2 taxonomy hierarchy",
+        "license": "Apache-2.0",
+        "interpretation": "mapped",
+        "note": "Process group -> process module nesting, per Table 7"
+      }
+    },
+    {
+      "src": "process:back_end",
+      "predicate": "HAS_SUBPROCESS",
+      "dst": "subprocess:dicing",
+      "weight": 0.9,
+      "provenance": {
+        "source": "semikong",
+        "reference": "SemiKong L1->L2 taxonomy hierarchy",
+        "license": "Apache-2.0",
+        "interpretation": "mapped",
+        "note": "Process group -> process module nesting, per Table 7"
+      }
+    },
+    {
+      "src": "process:back_end",
+      "predicate": "HAS_SUBPROCESS",
+      "dst": "subprocess:packaging",
+      "weight": 0.9,
+      "provenance": {
+        "source": "semikong",
+        "reference": "SemiKong L1->L2 taxonomy hierarchy",
+        "license": "Apache-2.0",
+        "interpretation": "mapped",
+        "note": "Process group -> process module nesting, per Table 7"
+      }
+    },
+    {
+      "src": "process:back_end",
+      "predicate": "HAS_SUBPROCESS",
+      "dst": "subprocess:advanced_packaging",
+      "weight": 0.9,
+      "provenance": {
+        "source": "semikong",
+        "reference": "SemiKong L1->L2 taxonomy hierarchy",
+        "license": "Apache-2.0",
+        "interpretation": "mapped",
+        "note": "Process group -> process module nesting, per Table 7"
+      }
     }
   ],
   "synonyms": [
@@ -9791,6 +10752,48 @@
       "node_id": "device:fan_out_wlp",
       "term": "fan-out wafer-level packaging",
       "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:eprom",
+      "term": "EPROM",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:feram",
+      "term": "FeRAM",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:feram",
+      "term": "FRAM",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:feram",
+      "term": "F-RAM",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:feram",
+      "term": "ferroelectric RAM",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:diode",
+      "term": "diode",
+      "lang": "en",
+      "term_type": "synonym"
+    },
+    {
+      "node_id": "device:diode",
+      "term": "다이오드",
+      "lang": "ko",
       "term_type": "synonym"
     }
   ],
