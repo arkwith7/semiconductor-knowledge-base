@@ -83,3 +83,6 @@ Thumbs.db
 
 # ── Environment-specific ─────────────────────────────────────────
 .env
+
+# KIPRIS 응답 캐시 (재수집 방지용 로컬 캐시 — 산출물 아님)
+data/patents/.kipris_cache.sqlite

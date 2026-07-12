@@ -1,7 +1,7 @@
 {
   "input": "data/patents/rejected_patents_meta.parquet",
   "patents": 1000,
-  "triples": 9914,
+  "triples": 21314,
   "patents_with_ontology_link": 976,
   "link_provenance": {
     "structured_process_family": 793,
@@ -121,11 +121,11 @@
       "patents": 147
     },
     {
-      "term": "챔버",
+      "term": "가스",
       "patents": 143
     },
     {
-      "term": "가스",
+      "term": "챔버",
       "patents": 143
     },
     {

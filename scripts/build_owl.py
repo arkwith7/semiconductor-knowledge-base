@@ -111,6 +111,9 @@ def build_ontology() -> Graph:
         "RootCause":      "An identified root cause of a failure mode.",
         "Mitigation":     "A corrective or preventive action for a failure mode.",
         "Skill":          "A human competency required for a process or mitigation.",
+        # Device 는 core-data 에 31개 인스턴스가 있는데 클래스 선언이 없었다 —
+        # 선언되지 않은 클래스는 추론기·SHACL 이 검증할 수 없다 (CLAUDE.md §1.2).
+        "Device":         "A device/product architecture (e.g. DRAM, BGA, CMOS image sensor).",
     }
 
     for cls_name, desc in core_classes.items():
