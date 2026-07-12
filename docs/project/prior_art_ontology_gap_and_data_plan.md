@@ -4,10 +4,10 @@
 > **작성자**: SDKB 프로젝트 팀
 > **상태**: 활성 — 실측 기반 갭 분석/실행 가이드
 > **관련 문서**:
-> - [`dataset_rejected_patents_card.md`](dataset_rejected_patents_card.md) — SIRP 데이터셋 카드(출처·구성·한계)
-> - [`patent_taxonomy_integration_plan.md`](patent_taxonomy_integration_plan.md) — CPC/IPC/F-term 정렬 계획
-> - [`patent_abstract_enrichment_plan.md`](patent_abstract_enrichment_plan.md) — 초록 기반 NER/RE 온톨로지 보강 계획
-> - 산출물: [`notebooks/07_sparql_prior_art_ontology.ipynb`](../notebooks/07_sparql_prior_art_ontology.ipynb) (온톨로지 선행기술 검색), [`notebooks/04_prior_art_baseline.ipynb`](../notebooks/04_prior_art_baseline.ipynb) (TF-IDF floor), [`scripts/build_abox_patents.py`](../scripts/build_abox_patents.py), [`scripts/sdkb_nb.py`](../scripts/sdkb_nb.py)
+> - [`dataset_rejected_patents_card.md`](../dataset_rejected_patents_card.md) — SIRP 데이터셋 카드(출처·구성·한계)
+> - CPC/IPC/F-term 정렬 — 별도 계획 문서는 제거됨 (절차는 `mappings/` SDKB-centric 패턴으로 흡수)
+> - 초록 기반 NER/RE 온톨로지 보강 — 별도 계획 문서는 제거됨
+> - 산출물: [`notebooks/07_sparql_prior_art_ontology.ipynb`](../../notebooks/07_sparql_prior_art_ontology.ipynb) (온톨로지 선행기술 검색), [`notebooks/04_prior_art_baseline.ipynb`](../../notebooks/04_prior_art_baseline.ipynb) (TF-IDF floor), [`scripts/build_abox_patents.py`](../../scripts/build_abox_patents.py), [`scripts/sdkb_nb.py`](../../scripts/sdkb_nb.py)
 
 ---
 
@@ -137,13 +137,13 @@ process_family → ontology  (구현된 PROCESS_FAMILY_MAP)
 
 | 보완/수집 | 닿는 산출물 |
 |---|---|
-| A1·A6 | [`scripts/build_abox_patents.py`](../scripts/build_abox_patents.py), [`scripts/sdkb_nb.py`](../scripts/sdkb_nb.py) |
-| A4 | [`mappings/abox_term_aliases.json`](../mappings/abox_term_aliases.json) (`_KO`/`_KO2` 블록) |
+| A1·A6 | [`scripts/build_abox_patents.py`](../../scripts/build_abox_patents.py), [`scripts/sdkb_nb.py`](../../scripts/sdkb_nb.py) |
+| A4 | [`mappings/abox_term_aliases.json`](../../mappings/abox_term_aliases.json) (`_KO`/`_KO2` 블록) |
 | A2·A3 | `data/semiconductor_v0_3.json`(노드/엣지), `ontology/sdkb-patent.ttl` |
-| A5 | [`patent_taxonomy_integration_plan.md`](patent_taxonomy_integration_plan.md) |
-| B1·B2·B3·B5 | [`dataset_rejected_patents_card.md`](dataset_rejected_patents_card.md)(수집 절차·한계 갱신 대상) |
-| B4 | [`patent_abstract_enrichment_plan.md`](patent_abstract_enrichment_plan.md)(NER/RE·외부 어휘 소스) |
-| 평가(§5) | [`notebooks/07_sparql_prior_art_ontology.ipynb`](../notebooks/07_sparql_prior_art_ontology.ipynb), [`notebooks/04_prior_art_baseline.ipynb`](../notebooks/04_prior_art_baseline.ipynb) |
+| A5 | CPC/IPC/F-term 정렬 (별도 계획 문서 제거됨) |
+| B1·B2·B3·B5 | [`dataset_rejected_patents_card.md`](../dataset_rejected_patents_card.md)(수집 절차·한계 갱신 대상) |
+| B4 | 초록 기반 NER/RE·외부 어휘 소스 (별도 계획 문서 제거됨) |
+| 평가(§5) | [`notebooks/07_sparql_prior_art_ontology.ipynb`](../../notebooks/07_sparql_prior_art_ontology.ipynb), [`notebooks/04_prior_art_baseline.ipynb`](../../notebooks/04_prior_art_baseline.ipynb) |
 
 ---
 

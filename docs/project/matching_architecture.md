@@ -74,7 +74,7 @@ Constraints are not opinions in code. They are SHACL shapes (`validation/shapes.
 ### Outputs (this term)
 - `notebooks/04_prior_art_baseline.ipynb` — TF-IDF baseline running end-to-end on the above
 - `validation/reliability_report.md` — MRR / NDCG@5 / Recall@K / leakage rate on the 7,500-pair evaluation
-- `docs/commercialization_strategy_v1.md` — deliverable ⑤
+- `docs/project/commercialization_strategy_v1.md` — deliverable ⑤
 
 ### Out of scope this term (2026-2)
 - Full agent loop with cross-encoder re-ranking
@@ -85,5 +85,5 @@ Constraints are not opinions in code. They are SHACL shapes (`validation/shapes.
 ## 6. Open architectural questions (resolve W3-W4)
 
 - Cohort split for the 7,500 pairs — random vs. by-IPC-section vs. by-time. *Recommendation*: by-IPC-section to estimate cross-domain generalization.
-- Leakage rate definition — exact formula in [`leakage_protocol.md`](leakage_protocol.md).
+- Leakage rate definition — exact formula in [`leakage_protocol.md`](../leakage_protocol.md).
 - Multi-jurisdiction conflict resolution — pure refusal vs. approval-required tier vs. risk-flag tier.

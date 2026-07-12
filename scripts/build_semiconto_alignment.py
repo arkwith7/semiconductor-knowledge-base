@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Phase 0.3 — Build SDKB → SemicONTO alignment.
 
-Direction (SDKB-centric, per docs/architecture_amendment_sdkb_centric.md):
+Direction (SDKB-centric, per docs/project/architecture_amendment_sdkb_centric.md):
   SDKB v1.0 is the trunk. SemicONTO is referenced as an external curation
   source via SKOS mappings — NOT imported as upper ontology.
 

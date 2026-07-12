@@ -11,11 +11,11 @@ local_pdf: none
 
 **Used in SDKB for:** Material / equipment OWL alignment with the SDKB core
 **Key claim:** TODO_VERIFY — a semiconductor manufacturing ontology covering material and equipment classes
-**Relation to SDKB-Match / SDKB:** Enrichment source (not upper ontology) per [`docs/architecture_amendment_sdkb_centric.md`](../../architecture_amendment_sdkb_centric.md); SDKB v1.0 is the trunk and SemicONTO classes are aligned via `mappings/`
+**Relation to SDKB-Match / SDKB:** Enrichment source (not upper ontology) per [`docs/project/architecture_amendment_sdkb_centric.md`](../../project/architecture_amendment_sdkb_centric.md); SDKB v1.0 is the trunk and SemicONTO classes are aligned via `mappings/`
 
 ## Notes
 
 - CEUR-WS papers are CC BY 4.0 — PDF may be committed:
   `git add -f docs/references/kg-ontology/semiconto_2024_ceurws.pdf`
 - TODO_VERIFY exact paper number within Vol-3760, title, and author list
-- See also [`docs/architecture_amendment_sdkb_centric.md`](../../architecture_amendment_sdkb_centric.md) for the ADR that reversed the original SemicONTO-Hub plan
+- See also [`docs/project/architecture_amendment_sdkb_centric.md`](../../project/architecture_amendment_sdkb_centric.md) for the ADR that reversed the original SemicONTO-Hub plan

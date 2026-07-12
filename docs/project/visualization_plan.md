@@ -94,7 +94,7 @@ Each Phase-2 view maps to a specific lab research area. Phase 1 stays as-is; Pha
 
 | Lab area | Phase-2 view | Adds | Notes |
 |---|---|---|---|
-| ① Tech foresight | `novelty_map.html` — Novelty-focused patent landscape (Lee/Kang/Shin 2015) | Plotly scatter + Pyvis subgraph drill-down | needs patent abstract enrichment (`docs/patent_abstract_enrichment_plan.md`) |
+| ① Tech foresight | `novelty_map.html` — Novelty-focused patent landscape (Lee/Kang/Shin 2015) | Plotly scatter + Pyvis subgraph drill-down | needs patent abstract enrichment (planned; design doc removed) |
 | ② Opportunity discovery | `emerging_topics.html` — Topic-model emerging-tech clusters | Plotly + LDA outputs | needs `make topics` target |
 | ③ SME-expert matching | `matching_explorer.html` — query → ranked experts + SHACL gate trace | Streamlit (external host on HF Spaces) | linked-from, not embedded |
 | ② / ③ | `governance_gate.html` — SHACL conformance trace per matching | Pyvis + SHACL `sh:resultMessage` | requires compliance allowlist review |

@@ -336,6 +336,54 @@ ont:rejectionPassage
     rdfs:label "rejection passage"@en ;
     rdfs:comment "Quoted reasoning text from the rejection decision (거절결정서). May be empty for KIPRIS Plus API records that do not expose OCR'd passages."@en .
 
+# ── PATENT → DOMAIN LINKS (patent A-Box lift) ──────────────────────
+# build_abox_patents.py 가 특허를 도메인 개념에 잇는 술어들. 이전에는 이 술어들이
+# ABox 파일 안에서 인라인 선언되어 있었다 — TBox 를 읽는 소비자에게는 존재하지 않는
+# 술어였고, 추론기·SHACL 이 검증할 수 없었다. 공정 링크는 별도 술어를 만들지 않고
+# 이미 정의된 ont:realizesProcess / ont:involvesMaterial / ont:realizesEquipmentClass 를 쓴다.
+
+ont:concernsSkill
+    a owl:ObjectProperty ;
+    rdfs:domain ont:Patent ;
+    rdfs:range ont:Skill ;
+    rdfs:label "concerns skill"@en ;
+    rdfs:comment "Links a patent to a Skill (competency) implicated by its disclosure."@en .
+
+ont:concernsEquipment
+    a owl:ObjectProperty ;
+    rdfs:domain ont:Patent ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( ont:Equipment ont:EquipmentClass ont:Vendor ont:Metrology ) ] ;
+    rdfs:label "concerns equipment"@en ;
+    rdfs:comment "Links a patent to equipment-side concepts (instance, class, vendor, or metrology method)."@en .
+
+ont:concernsDevice
+    a owl:ObjectProperty ;
+    rdfs:domain ont:Patent ;
+    rdfs:range ont:Device ;
+    rdfs:label "concerns device"@en ;
+    rdfs:comment "Links a patent to a Device/product architecture (DRAM, BGA, CMOS image sensor …)."@en .
+
+ont:concernsTechnologyNode
+    a owl:ObjectProperty ;
+    rdfs:domain ont:Patent ;
+    rdfs:range ont:TechnologyNode ;
+    rdfs:label "concerns technology node"@en ;
+    rdfs:comment "Links a patent to a technology generation (7nm, 3nm …). Kept distinct from ont:realizesProcess, whose range is ont:Process."@en .
+
+ont:exhibitsFailureMode
+    a owl:ObjectProperty ;
+    rdfs:domain ont:Patent ;
+    rdfs:range ont:FailureMode ;
+    rdfs:label "exhibits failure mode"@en ;
+    rdfs:comment "Links a patent to a FailureMode it addresses or discloses."@en .
+
+ont:relatedToTopic
+    a owl:ObjectProperty ;
+    rdfs:domain ont:Patent ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( ont:RootCause ont:Mitigation ont:TopicCluster ) ] ;
+    rdfs:label "related to topic"@en ;
+    rdfs:comment "Weak link from a patent to a RootCause / Mitigation / TopicCluster. Deliberately loose — used when free-text extraction cannot commit to a stronger relation."@en .
+
 # ── ANNOTATION PROPERTIES (reused from core) ───────────────────────
 # Patent instances reuse: ont:interpretationType, ont:validationRequired,
 # dcterms:source, dcterms:license, dcterms:bibliographicCitation,

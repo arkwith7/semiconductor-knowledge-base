@@ -20,7 +20,7 @@ OUT = ROOT / "ontology" / "sdkb-core.ttl"
 
 # ─── External alignment targets (SDKB-centric: not imported, referenced) ───
 # SemicONTO terms used as skos:exactMatch back-links from SDKB enrichment
-# classes. See docs/architecture_amendment_sdkb_centric.md.
+# classes. See docs/project/architecture_amendment_sdkb_centric.md.
 SEMI = "http://w3id.org/SemicONTO/"
 QUDT = "http://qudt.org/schema/qudt/"
 
@@ -63,7 +63,7 @@ def build_ontology() -> Graph:
         "regulatory governance layers. SDKB-centric architecture: external "
         "ontologies (SemicONTO, QUDT, etc.) are REFERENCED via SKOS mappings "
         "and class-level skos:exactMatch back-links, NOT imported. See "
-        "docs/architecture_amendment_sdkb_centric.md.",
+        "docs/project/architecture_amendment_sdkb_centric.md.",
         lang="en"
     )))
     g.add((ont, OWL.versionInfo, Literal("1.1.0-dev")))
@@ -87,7 +87,7 @@ def build_ontology() -> Graph:
     # Companion documents (architecture decisions and alignment artifacts)
     g.add((ont, RDFS.seeAlso, URIRef(
         "https://github.com/arkwith7/semiconductor-knowledge-base/blob/main/"
-        "docs/architecture_amendment_sdkb_centric.md"
+        "docs/project/architecture_amendment_sdkb_centric.md"
     )))
     g.add((ont, RDFS.seeAlso, URIRef(
         "https://w3id.org/sdkb/alignment/semiconto"
@@ -111,6 +111,9 @@ def build_ontology() -> Graph:
         "RootCause":      "An identified root cause of a failure mode.",
         "Mitigation":     "A corrective or preventive action for a failure mode.",
         "Skill":          "A human competency required for a process or mitigation.",
+        # Device 는 core-data 에 31개 인스턴스가 있는데 클래스 선언이 없었다 —
+        # 선언되지 않은 클래스는 추론기·SHACL 이 검증할 수 없다 (CLAUDE.md §1.2).
+        "Device":         "A device/product architecture (e.g. DRAM, BGA, CMOS image sensor).",
     }
 
     for cls_name, desc in core_classes.items():
@@ -126,7 +129,7 @@ def build_ontology() -> Graph:
     # CLASSES — Enrichment Layer (SemicONTO-derived, Phase 1 v1.1)
     #
     # New SDKB classes absorbing SemicONTO v0.2 HIGH-priority concepts
-    # (per docs/architecture_amendment_sdkb_centric.md, Bucket A).
+    # (per docs/project/architecture_amendment_sdkb_centric.md, Bucket A).
     # URIs remain in sdkb: namespace; skos:exactMatch back-links the
     # SemicONTO term so external consumers can navigate.
     # ═══════════════════════════════════════════════════════════
@@ -167,7 +170,7 @@ def build_ontology() -> Graph:
     # Selective absorption: only classes with an existing SDKB parent are
     # pulled in. SemicONTO's Experiment/InformationObject hierarchies have no
     # SDKB counterpart and are skipped per
-    # docs/architecture_amendment_sdkb_centric.md §7.
+    # docs/project/architecture_amendment_sdkb_centric.md §7.
     enrichment_medium: list[tuple[str, str, str, str]] = [
         # SubProcess specializations
         ("ElectronBeamLithography",   "SubProcess", "ElectronBeamLithography",

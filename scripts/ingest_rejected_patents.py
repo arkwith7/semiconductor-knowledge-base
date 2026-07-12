@@ -108,6 +108,62 @@ def file_sha256(path: Path) -> str:
     return h.hexdigest()
 
 
+KIPRIS_BIBLIO = OUT_DIR / "kipris_biblio.parquet"
+
+
+def attach_kipris_filing_dates(meta_df: pd.DataFrame) -> pd.DataFrame:
+    """출원일을 KIPRIS 권위 원천에서 채운다 (scripts/enrich_kipris_biblio.py 산출물).
+
+    raw JSONL 에는 출원일이 아예 없다 — `target_patent.date` 는 공개일이다. 출원번호는
+    연도만 인코딩하므로 로컬 복원도 불가능하다. 사이드카가 없으면 **조용히 빈 값을 흘리지 않고
+    멈춘다**: 출원일이 틀린 채로 시계열 연구에 들어가는 것이 이 저장소가 겪은 결함이다.
+    """
+    if not KIPRIS_BIBLIO.exists():
+        raise SystemExit(
+            f"ERROR: {KIPRIS_BIBLIO.relative_to(ROOT)} 없음.\n"
+            f"       출원일은 KIPRIS 권위 원천에서만 얻을 수 있다 "
+            f"(raw JSONL 의 date 는 공개일).\n"
+            f"       먼저 실행: python scripts/enrich_kipris_biblio.py"
+        )
+
+    kip = pd.read_parquet(
+        KIPRIS_BIBLIO,
+        columns=["application_number", "filing_date", "ipc_codes",
+                 "applicant_ko", "applicant_en"],
+    ).rename(columns={"filing_date": "_kipris_filing_date", "ipc_codes": "_kipris_ipc"})
+    key = meta_df["application_number"].astype(str).str.replace("-", "", regex=False)
+
+    merged = meta_df.assign(_an=key).merge(
+        kip, left_on="_an", right_on="application_number", how="left",
+        suffixes=("", "_kip"),
+    )
+    merged["filing_date"] = merged["_kipris_filing_date"].fillna("")
+    merged["ipc_codes"] = merged["_kipris_ipc"].fillna("")   # '|' 구분, ABox 의 hasIPC 원천
+    for col in ("applicant_ko", "applicant_en"):             # '|' 구분, ABox 의 assignedTo 원천
+        merged[col] = merged[col].fillna("")
+    merged = merged.drop(
+        columns=["_an", "application_number_kip", "_kipris_filing_date", "_kipris_ipc"]
+    )
+
+    missing = int((merged["filing_date"] == "").sum())
+    if missing:
+        raise SystemExit(
+            f"ERROR: 출원일 결측 {missing}건. KIPRIS 수집이 불완전하다 — "
+            f"`python scripts/enrich_kipris_biblio.py` 를 다시 실행할 것."
+        )
+
+    no_app = int(((merged["applicant_ko"] == "") & (merged["applicant_en"] == "")).sum())
+    if no_app:
+        raise SystemExit(f"ERROR: 출원인 결측 {no_app}건 — 특허의 귀속 주체가 없으면 포트폴리오 분석이 불가능하다.")
+
+    bad = int((merged["filing_date"] > merged["publication_date"]).sum())
+    if bad:
+        raise SystemExit(f"ERROR: 출원일 > 공개일 인 행이 {bad}건 — 날짜가 다시 뒤섞였다.")
+
+    print(f"  filing_date ← KIPRIS 권위 원천 {len(merged):,}건 (결측 0, 출원일 ≤ 공개일 100%)")
+    return merged
+
+
 def main() -> None:
     if not IN_PATH.exists():
         print(f"ERROR: {IN_PATH} not found", file=sys.stderr)
@@ -179,7 +235,10 @@ def main() -> None:
                 "primary_ipc_section": primary_section,
                 "primary_ipc_4digit": primary_4digit,
                 "n_ipc_codes": len(ipc_codes),
-                "filing_date": normalize_date(tp.get("date")),
+                # raw JSONL 의 target_patent.date 는 출원일이 아니라 **공개일**이다
+                # (biblio.unex_pub_date 와 값이 같다). 출원일은 KIPRIS 권위 원천에서
+                # 조인해 채운다 — 아래 attach_kipris_filing_dates() 참조.
+                "filing_date": "",
                 "publication_number": biblio.get("unex_pub_number") or "",
                 "publication_date": normalize_date(biblio.get("unex_pub_date")),
                 "register_status": registration.get("register_status") or "",
@@ -277,6 +336,8 @@ def main() -> None:
                       evidence_phrase_no=str(item.get("evidence_phrase_no") or ""))
 
     meta_df = pd.DataFrame(meta_rows)
+    meta_df = attach_kipris_filing_dates(meta_df)
+
     ipc_df = pd.DataFrame(ipc_rows)
     edge_df = pd.DataFrame(edge_rows)
 

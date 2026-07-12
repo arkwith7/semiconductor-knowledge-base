@@ -29,6 +29,7 @@ _CAT_DESC = {
     "power": "Power semiconductor device.",
     "sensor": "Sensor/imaging device.",
     "packaging": "Advanced packaging / interconnect architecture.",
+    "discrete": "Discrete semiconductor device (rectifying or switching component).",
 }
 
 

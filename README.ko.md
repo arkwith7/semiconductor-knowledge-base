@@ -69,7 +69,7 @@ SDKB는 반도체 **공정 · 장비 · 결함 · 스킬** 지식, **특허 분�
 | 특허·시장·산업 데이터 기반 **기술예측** | `sdkb-patent.ttl` + SIRP + Topic / Novelty 노드 | [활용 사례 1](#활용-사례) |
 | **유망기술 기회 발굴** | Novelty-focused patent mapping, emerging-memory 토픽 클러스터 | [활용 사례 1](#활용-사례), 🚧 [notebook 02](notebooks/02_patent_opportunity_demo.ipynb) |
 | **중소기업 혁신 성과 분석 / 전문가 매칭** | SDKB-Match Expert + 합성 100 + 큐레이션 110 전문가 풀 + 다중관할 컴플라이언스 게이트 | [활용 사례 2](#활용-사례), 🚧 [notebook 01](notebooks/01_matching_baseline_expert.ipynb), ✅ [notebook 05](notebooks/05_synthetic_vs_curated_comparison.ipynb) |
-| **인터랙티브 기술 · 비즈니스 시각화** | Pyvis 3-뷰 익스플로러 · GitHub Pages 자동 배포 | [Live demo](https://arkwith7.github.io/semiconductor-knowledge-base/), [docs/visualization_plan.md](docs/visualization_plan.md) |
+| **인터랙티브 기술 · 비즈니스 시각화** | Pyvis 3-뷰 익스플로러 · GitHub Pages 자동 배포 | [Live demo](https://arkwith7.github.io/semiconductor-knowledge-base/), [docs/project/visualization_plan.md](docs/project/visualization_plan.md) |
 | 조직적 R&D 관리 / 혁신 디자인 (보조축) | RBV 핵심자원 조합 + TRL / 실물옵션 시드 노드 | [활용 사례 4](#활용-사례), 🚧 [notebook 03](notebooks/03_rbv_resource_combo_demo.ipynb) |
 
 ## Why / For / How
@@ -93,7 +93,7 @@ SDKB는 반도체 **공정 · 장비 · 결함 · 스킬** 지식, **특허 분�
 | 5 | **복합실물옵션** — EUV vs High-NA 로드맵 가치평가 | 기술가치평가 (후속 학기) | core + foresight + commercialization | _(2026-2 예정)_ | 연구실 실물옵션 라인 |
 | 6 | **인터랙티브 KG 익스플로러** — 3-뷰(베이스라인 / SIRP / 4-pillar) GitHub Pages 배포 | 인터랙티브 시각화 | core + patent + rbv + foresight + commercialization | ✅ [Live](https://arkwith7.github.io/semiconductor-knowledge-base/) · `scripts/build_viz.py` | 연구실 시각화 트랙 |
 
-4-pillar 상세 매핑: [docs/research_alignment.md](docs/research_alignment.md).
+4-pillar 상세 매핑: [docs/project/research_alignment.md](docs/project/research_alignment.md).
 
 ## 아키텍처
 
@@ -123,13 +123,15 @@ data/
   patents/prior_art_pairs.parquet   # 7,500 examiner-grounded pairs
   compliance/                       # KR + US 거버넌스 마스터
 docs/
-  research_alignment.md             # 4-pillar 매핑
-  matching_architecture.md          # 시스템 개요
+  datasheet.md                      # 데이터시트 (Gebru et al.) — SDKB 전체
+  dataset_rejected_patents_card.md  # SIRP 데이터셋 카드
   leakage_protocol.md               # 누수 정의 / 측정
-  datasheet.md                      # 데이터시트 (Gebru et al.)
-  commercialization_strategy_v1.md
-  visualization_plan.md
-  project_status_2026_1.md          # 연구실 내부 진척표 — 2026-1 산출물
+  expert_validation_log.md          # 전문가 자문 audit trail
+  semiconductor_ontology_provenance_research.md  # 출처 / provenance 조사
+  references/                       # BibTeX 라이브러리 + 논문별 노트
+  project/                          # 현업프로젝트1 거버넌스: 계획서 변경보고·
+                                    #   진척표·사업화·ADR·매칭 아키텍처·
+                                    #   시각화 계획·피드백
 validation/shapes.ttl               # SHACL
 provenance/prov.ttl                 # PROV-O 체인
 examples/sparql/                    # 예시 쿼리
@@ -209,7 +211,7 @@ make viz-open  # 위 + 기본 브라우저로 site/index.html 자동 오픈
 - 빌드된 `site/`는 `.gitignore` 처리되어 main 브랜치에는 커밋되지 않음
 - main에 푸시되면 [.github/workflows/viz-deploy.yml](.github/workflows/viz-deploy.yml)이 자동으로 site/를 재빌드해 GitHub Pages로 배포
 - 1회 설정: 레포 **Settings → Pages → Source: GitHub Actions** 선택
-- 상세: [docs/visualization_plan.md](docs/visualization_plan.md)
+- 상세: [docs/project/visualization_plan.md](docs/project/visualization_plan.md)
 
 ### 검증된 산출물 수치
 - 큐레이션 그래프 **229 노드 / 268 엣지** (v0.3; 베이스라인 원본 198/264, 큐레이션으로 확장·Device 포함)
@@ -261,4 +263,4 @@ CDLA-Permissive-2.0 (Open Core). Link-Only 레이어는 재배포 대상이 아�
 
 ---
 
-*현업프로젝트 2026-1 연구실 내부 진척표 — 산출물 5종, 정렬 트랙 4-pillar, ExpDataSet 통합, amendment trail: [docs/project_status_2026_1.md](docs/project_status_2026_1.md).*
+*현업프로젝트 2026-1 연구실 내부 진척표 — 산출물 5종, 정렬 트랙 4-pillar, ExpDataSet 통합, amendment trail: [docs/project/project_status_2026_1.md](docs/project/project_status_2026_1.md).*

@@ -1,7 +1,7 @@
 {
   "input": "data/patents/rejected_patents_meta.parquet",
   "patents": 1000,
-  "triples": 9914,
+  "triples": 23424,
   "patents_with_ontology_link": 976,
   "link_provenance": {
     "structured_process_family": 793,

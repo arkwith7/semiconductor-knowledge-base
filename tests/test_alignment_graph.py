@@ -5,7 +5,7 @@ Verifies that mappings/sdkb_semiconto_alignment.ttl contains:
   - 5 DatatypeProperty alignments (semi:hasExperimentName etc.) → W3C
     conventions used by SDKB (skos:prefLabel / skos:definition / dcterms:id).
 
-See docs/architecture_amendment_sdkb_centric.md §6.
+See docs/project/architecture_amendment_sdkb_centric.md §6.
 """
 
 import json

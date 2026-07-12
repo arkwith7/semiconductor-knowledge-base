@@ -19,12 +19,13 @@ Outputs:
 from __future__ import annotations
 
 import json
+import re
 import sys
 from collections import Counter
 from pathlib import Path
 
 import pandas as pd
-from rdflib import Graph, Literal, URIRef
+from rdflib import Graph, Literal, Namespace, URIRef
 from rdflib.namespace import OWL, RDF, RDFS, XSD
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -36,18 +37,30 @@ OUT_TTL = ROOT / "ontology" / "sdkb-abox-patents.ttl"
 OUT_REPORT = ROOT / "data" / "reports" / "abox_patents_linking_report.json"
 
 ONT = S.ONT
+DCTERMS = Namespace("http://purl.org/dc/terms/")
+PROV = Namespace("http://www.w3.org/ns/prov#")
+SKOS = Namespace("http://www.w3.org/2004/02/skos/core#")
+
+# 이 A-Box 가 나온 출처. shapes_patent.ttl 이 특허마다 요구한다.
+INGEST_ACTIVITY = "activity/sirp_ingest"
+KIPRIS_SOURCE = "KIPRIS Plus API (getBibliographyDetailInfoSearch)"
+PATENT_LICENSE = "KIPRIS terms — academic use, no redistribution of full text"
 
 # node type → patent A-Box predicate (local name under ont:)
+#
+# 모두 sdkb-patent.ttl TBox 가 정의한 술어다. 예전 생성기는 여기서 concernsProcess /
+# concernsMaterial / primaryIpc 를 **ABox 안에서 새로 선언**해 썼는데, TBox 를 읽는
+# 소비자에게는 존재하지 않는 술어였고 SHACL·추론기가 검증할 수 없었다 (CLAUDE.md §8-2).
 PATENT_ROUTING = {
     "Skill": "concernsSkill",
-    "Process": "concernsProcess",
-    "SubProcess": "concernsProcess",
-    "Material": "concernsMaterial",
+    "Process": "realizesProcess",        # TBox: domain Patent, range Process
+    "SubProcess": "realizesProcess",     # SubProcess ⊑ Process 이므로 range 만족
+    "Material": "involvesMaterial",      # TBox: range Material
     "Equipment": "concernsEquipment",
-    "EquipmentClass": "concernsEquipment",
+    "EquipmentClass": "realizesEquipmentClass",   # TBox: range EquipmentClass
     "Vendor": "concernsEquipment",
     "Metrology": "concernsEquipment",
-    "TechnologyNode": "concernsProcess",
+    "TechnologyNode": "concernsTechnologyNode",   # realizesProcess 로 보내면 range 위반
     "FailureMode": "exhibitsFailureMode",
     "RootCause": "relatedToTopic",
     "Mitigation": "relatedToTopic",
@@ -104,6 +117,48 @@ def _u(curie_or_id: str) -> URIRef:
     return URIRef(S.DATA + curie_or_id.replace(":", "/"))
 
 
+def _org_slug(name: str) -> str:
+    """출원인 명칭 → 안정적인 IRI 슬러그.
+
+    표기 변형(대소문자·구두점·법인격 접미어)을 흡수한다. 완벽한 기업 식별자 해소(entity
+    resolution)는 아니다 — 남는 변형은 프로파일이 드러내고, 그 한계는 논문 §5.3 에 적는다.
+    """
+    s = name.lower()
+    for suffix in (
+        "co., ltd.", "co.,ltd.", "co. ltd", "corporation", "incorporated",
+        "kabushiki kaisha", "inc.", "inc", "ltd.", "ltd", "llc", "gmbh", "corp.", "corp",
+    ):
+        s = s.replace(suffix, " ")
+    s = re.sub(r"[^a-z0-9가-힣]+", "_", s).strip("_")
+    return s or "unknown"
+
+
+def _applicants(row) -> list[tuple[str, str, str]]:
+    """(슬러그, 영문명, 한글명) 목록. 영문명이 있으면 그것을 표준 표기로 삼는다."""
+    en = [a.strip() for a in str(row.get("applicant_en") or "").split("|") if a.strip()]
+    ko = [a.strip() for a in str(row.get("applicant_ko") or "").split("|") if a.strip()]
+
+    out, seen = [], set()
+    for i, name in enumerate(en or ko):
+        slug = _org_slug(name)
+        if slug in seen:
+            continue
+        seen.add(slug)
+        out.append((slug, name if en else "", ko[i] if i < len(ko) else ""))
+    return out
+
+
+def _ipc_codes(row) -> list[str]:
+    """특허 1건의 IPC 코드. KIPRIS 서지의 ipc_codes('A|B') 우선, 없으면 primary_ipc."""
+    raw = row.get("ipc_codes")
+    if pd.notna(raw) and str(raw).strip():
+        codes = [c.strip() for c in str(raw).split("|") if c.strip()]
+    else:
+        p = row.get("primary_ipc")
+        codes = [str(p).strip()] if pd.notna(p) and str(p).strip() else []
+    return list(dict.fromkeys(codes))   # 순서 보존 dedup
+
+
 def main() -> int:
     if not META.exists():
         print(f"ERROR: {META} not found — run "
@@ -127,28 +182,20 @@ def main() -> int:
     g.bind("data", S.DATA)
     g.bind("owl", str(OWL))
     g.bind("rdfs", str(RDFS))
+    g.bind("dcterms", DCTERMS)
+    g.bind("prov", PROV)
+    g.bind("skos", SKOS)
 
     ONT_R = lambda local: URIRef(ONT + local)  # noqa: E731
 
-    # self-describing schema (core ontology untouched)
-    g.add((ONT_R("Patent"), RDF.type, OWL.Class))
-    g.add((ONT_R("Patent"), RDFS.label, Literal("Rejected patent (SIRP corpus)", lang="en")))
-    for p, c in {
-        "concernsProcess": "patent concerns a Process/SubProcess",
-        "concernsMaterial": "patent concerns a Material",
-        "concernsEquipment": "patent concerns Equipment/Vendor/Class",
-        "concernsSkill": "patent concerns a Skill",
-        "concernsDevice": "patent concerns a Device/product architecture (A2)",
-        "exhibitsFailureMode": "patent concerns a FailureMode",
-        "relatedToTopic": "weak/uncategorized link to an ontology node",
-        "applicationNumber": "patent application number",
-        "patentOffice": "issuing office",
-        "primaryIpc": "primary IPC code",
-        "processFamily": "curator-assigned process family (structured field)",
-        "valueChain": "curator-assigned value-chain position (structured)",
-    }.items():
-        g.add((ONT_R(p), RDF.type, OWL.ObjectProperty))
-        g.add((ONT_R(p), RDFS.comment, Literal(c, lang="en")))
+    # 어휘 선언은 여기서 하지 않는다 — 클래스·술어는 전부 TBox(ontology/sdkb-patent.ttl,
+    # sdkb-core.ttl)가 정의한다. ABox 가 어휘를 인라인 선언하면 TBox 만 읽는 소비자에게
+    # 그 술어는 존재하지 않게 되고, 추론기·SHACL 이 검증할 수 없다 (CLAUDE.md §1.2).
+
+    # 이 A-Box 를 만든 적재 활동 (shapes_patent.ttl 의 prov:wasGeneratedBy 요구)
+    activity = _u(INGEST_ACTIVITY)
+    g.add((activity, RDF.type, PROV.Activity))
+    g.add((activity, RDFS.label, Literal("SIRP rejected-patent ingest", lang="en")))
 
     type_dist = Counter()
     nodes_per: list[int] = []
@@ -157,6 +204,7 @@ def main() -> int:
     n_structured = 0          # patents that got >=1 structured Process link
     n_device = 0              # patents that got >=1 structured Device link (A2)
     n_text = 0                # patents that got >=1 free-text link
+    n_org_links = 0           # patent -> Organization (assignedTo) 트리플 수
     orphan_scope_out: list[str] = []   # device/packaging/component — no node
     orphan_text_miss: list[str] = []   # in-domain yet still unlinked (fixable)
     fam_unmapped = Counter()  # in-domain families with no structured node
@@ -166,21 +214,60 @@ def main() -> int:
         pu = _u(pid)
         g.add((pu, RDF.type, ONT_R("Patent")))
         g.add((pu, RDFS.label, Literal(str(r.get("title") or pid))))
+
+        # 문자열 속성 — 전부 TBox 가 정의한 DatatypeProperty
         for col, prop in (("application_number", "applicationNumber"),
                           ("patent_office", "patentOffice"),
-                          ("primary_ipc", "primaryIpc"),
+                          ("publication_number", "publicationNumber"),
+                          ("examination_status", "examinationStatus"),
                           ("process_family", "processFamily"),
-                          ("value_chain", "valueChain")):
+                          ("value_chain", "valueChainStage")):
             v = r.get(col)
             if pd.notna(v) and str(v).strip():
+                # 평문 리터럴로 둔다 (RDF 1.1 에서 곧 xsd:string). ^^xsd:string 을 명시하면
+                # shapes 의 sh:in ( "KR" … ) 평문 리터럴과 term 이 달라져 위반이 난다.
                 g.add((pu, ONT_R(prop), Literal(str(v))))
+
+        # 날짜 — xsd:date. filingDate 는 KIPRIS 권위 원천에서 온 **진짜 출원일**이다
+        # (raw JSONL 의 date 는 공개일이었다 — CLAUDE.md §8-1). 시계열 연구의 전제.
+        for col, prop in (("filing_date", "filingDate"),
+                          ("publication_date", "publicationDate")):
+            v = r.get(col)
+            if pd.notna(v) and str(v).strip():
+                g.add((pu, ONT_R(prop), Literal(str(v), datatype=XSD.date)))
+
+        # IPC — TBox 의 hasIPC 는 range 가 ont:IPCSymbol 인 ObjectProperty 다.
+        # 리터럴(primaryIpc)로 흘리던 것을 심볼 노드로 승격한다 (skos:notation 은
+        # shapes_patent.ttl 의 Shape_IPCSymbol 요구).
+        for code in _ipc_codes(r):
+            sym = _u(f"ipc/{code.replace(' ', '_').replace('/', '-')}")
+            g.add((sym, RDF.type, ONT_R("IPCSymbol")))
+            g.add((sym, SKOS.notation, Literal(code, datatype=XSD.string)))
+            g.add((pu, ONT_R("hasIPC"), sym))
+
+        # 출원인 — TBox 의 ont:assignedTo (domain Patent, range Organization).
+        # 출원인 없는 특허 지식베이스는 기업별 포트폴리오·경쟁 분석을 지원할 수 없다.
+        for slug, en, ko in _applicants(r):
+            org = _u(f"organization/{slug}")
+            g.add((org, RDF.type, ONT_R("Organization")))
+            if en:
+                g.add((org, SKOS.prefLabel, Literal(en, lang="en")))
+            if ko:
+                g.add((org, SKOS.altLabel, Literal(ko, lang="ko")))
+            g.add((pu, ONT_R("assignedTo"), org))
+            n_org_links += 1
+
+        # 출처·라이선스·생성 활동 — shapes_patent.ttl 이 특허마다 요구한다
+        g.add((pu, DCTERMS.source, Literal(KIPRIS_SOURCE, datatype=XSD.string)))
+        g.add((pu, DCTERMS.license, Literal(PATENT_LICENSE, datatype=XSD.string)))
+        g.add((pu, PROV.wasGeneratedBy, activity))
 
         # 1) deterministic structured-field bridge (high precision, no NLP)
         fam = str(r.get("process_family") or "").strip().lower()
         linked: set[str] = set()
         if fam in PROCESS_FAMILY_MAP:
             nid = PROCESS_FAMILY_MAP[fam]
-            g.add((pu, ONT_R("concernsProcess"), _u(nid)))
+            g.add((pu, ONT_R("realizesProcess"), _u(nid)))   # TBox 술어 (구 concernsProcess)
             linked.add(nid)
             type_dist["Process"] += 1
             n_structured += 1
