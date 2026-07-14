@@ -33,8 +33,17 @@ import sdkb_nb as S  # noqa: E402
 
 ROOT = S.find_root(Path(__file__).resolve().parent)
 META = ROOT / "data" / "patents" / "rejected_patents_meta.parquet"
+PRIOR_ART = ROOT / "data" / "patents" / "prior_art_edges.parquet"
 OUT_TTL = ROOT / "ontology" / "sdkb-abox-patents.ttl"
 OUT_REPORT = ROOT / "data" / "reports" / "abox_patents_linking_report.json"
+
+# KIPO 거절 근거(특허법 제29조) 항 번호 → TBox 의 RejectionType 통제어휘.
+# rejected_patents_meta 의 rejection_legal_bases 는 "§2×3|§1×1" 형태다 (항×횟수).
+# 제29조 제3항 등 나머지 항은 TBox 통제어휘에 대응 개념이 없어 싣지 않고 리포트에 남긴다.
+REJECTION_PARAGRAPH_TO_TYPE = {
+    "1": "Rejection_Novelty",         # 제29조 제1항 — 신규성
+    "2": "Rejection_Inventiveness",   # 제29조 제2항 — 진보성
+}
 
 ONT = S.ONT
 DCTERMS = Namespace("http://purl.org/dc/terms/")
@@ -159,6 +168,55 @@ def _ipc_codes(row) -> list[str]:
     return list(dict.fromkeys(codes))   # 순서 보존 dedup
 
 
+def _rejection_paragraphs(v) -> list[str]:
+    """'§2×3|§1×1' → ['2', '1'].  항 번호만 뽑는다 (×N 은 인용 횟수라 무시)."""
+    if not v or pd.isna(v) or not str(v).strip():
+        return []
+    return [m.group(1) for m in re.finditer(r"§(\d+)", str(v))]
+
+
+def _emit_prior_art(g: Graph, ont_r, known: set[str]) -> dict:
+    """심사관·광의 선행기술 인용을 그래프에 싣는다.
+
+    prior_art_edges.parquet 의 source_type 은 겹친다: examiner ⊂ all.
+    - ont:hasPriorArt         ← 'all'      (광의 정답. 출처는 심사관 또는 출원인)
+    - ont:hasPriorArtExaminer ← 'examiner' ('all' 의 부분집합. 심사관 인용 = 검색 평가의 정답)
+    evidence/evidence_v2 (673쌍) 는 거절결정서 본문에서 구절 단위로 추출한 것이라
+    ont:rejectionEvidence(range RejectionReason) 모델링이 필요하다 — 이 적재의 범위 밖이다.
+
+    인용문헌에는 rdf:type 을 붙이지 않는다. 우리는 그 문헌의 서지(출원번호·출원일)를
+    갖고 있지 않고, 30건은 비특허문헌(논문·표준)이라 ont:Patent 가 아니다. TBox 의
+    hasPriorArt 가 range 를 두지 않는 이유다.
+    """
+    if not PRIOR_ART.exists():
+        return {"loaded": False, "reason": f"{PRIOR_ART.name} not found"}
+
+    edges = pd.read_parquet(PRIOR_ART)
+    stats: dict = {"loaded": True}
+    for source_type, prop in (("all", "hasPriorArt"), ("examiner", "hasPriorArtExaminer")):
+        sub = edges[edges["source_type"] == source_type].drop_duplicates(
+            ["target_patent_id", "cited_id"]
+        )
+        n_edge = n_skip = 0
+        for tgt, cited in zip(sub["target_patent_id"], sub["cited_id"]):
+            if str(tgt) not in known:   # 우리 코퍼스 밖의 특허는 domain 위반이다
+                n_skip += 1
+                continue
+            g.add((_u(str(tgt)), ont_r(prop), _u(str(cited))))
+            n_edge += 1
+        stats[prop] = {
+            "edges": n_edge,
+            "skipped_unknown_target": n_skip,
+            "distinct_cited": int(sub["cited_id"].nunique()),
+            "npl_cited": int(sub["is_npl"].sum()),
+        }
+    stats["excluded_evidence_pairs"] = int(
+        edges[edges["source_type"].isin(["evidence", "evidence_v2"])]
+        .drop_duplicates(["target_patent_id", "cited_id"]).shape[0]
+    )
+    return stats
+
+
 def main() -> int:
     if not META.exists():
         print(f"ERROR: {META} not found — run "
@@ -208,6 +266,10 @@ def main() -> int:
     orphan_scope_out: list[str] = []   # device/packaging/component — no node
     orphan_text_miss: list[str] = []   # in-domain yet still unlinked (fixable)
     fam_unmapped = Counter()  # in-domain families with no structured node
+    n_rejected = 0             # rdf:type ont:RejectedPatent 를 받은 특허
+    rejected_for = Counter()   # RejectionType 별 rejectedFor 트리플
+    unmapped_paragraphs = Counter()  # TBox 통제어휘에 없는 제29조 항
+    text_props = Counter()     # abstractText / firstClaimText
 
     for _, r in meta.iterrows():
         pid = str(r["patent_id"])
@@ -256,6 +318,29 @@ def main() -> int:
                 g.add((org, SKOS.altLabel, Literal(ko, lang="ko")))
             g.add((pu, ONT_R("assignedTo"), org))
             n_org_links += 1
+
+        # SIRP 는 거절특허 코퍼스다 — register_status 가 1,000건 전부 '거절'이다.
+        # TBox 의 RejectedPatent ⊑ Patent 이므로 위의 rdf:type Patent 와 모순되지 않는다.
+        if str(r.get("register_status") or "").strip() == "거절":
+            g.add((pu, RDF.type, ONT_R("RejectedPatent")))
+            n_rejected += 1
+
+        # 거절 근거 — rejectedFor 의 range 는 ont:RejectionType (통제어휘 개체)다.
+        for para in _rejection_paragraphs(r.get("rejection_legal_bases")):
+            rtype = REJECTION_PARAGRAPH_TO_TYPE.get(para)
+            if rtype is None:
+                unmapped_paragraphs[para] += 1
+                continue
+            g.add((pu, ONT_R("rejectedFor"), ONT_R(rtype)))
+            rejected_for[rtype] += 1
+
+        # 초록·청구항 1 — TBox 의 abstractText / firstClaimText.
+        # 이 텍스트는 KIPRIS 학술이용 조건 아래 있다 (아래 dcterms:license 가 명시한다).
+        for col, prop in (("abstract", "abstractText"), ("claim1", "firstClaimText")):
+            v = r.get(col)
+            if pd.notna(v) and str(v).strip():
+                g.add((pu, ONT_R(prop), Literal(str(v))))
+                text_props[prop] += 1
 
         # 출처·라이선스·생성 활동 — shapes_patent.ttl 이 특허마다 요구한다
         g.add((pu, DCTERMS.source, Literal(KIPRIS_SOURCE, datatype=XSD.string)))
@@ -309,6 +394,9 @@ def main() -> int:
                 if fam and fam not in PROCESS_FAMILY_MAP:
                     fam_unmapped[fam] += 1
 
+    # 선행기술 인용 — 특허 루프 밖에서, 우리가 아는 특허만 대상으로
+    prior_art = _emit_prior_art(g, ONT_R, set(meta["patent_id"].astype(str)))
+
     OUT_TTL.parent.mkdir(parents=True, exist_ok=True)
     g.serialize(str(OUT_TTL), format="turtle")
 
@@ -317,6 +405,13 @@ def main() -> int:
         "input": str(META.relative_to(ROOT)),
         "patents": n,
         "triples": len(g),
+        "rejection": {
+            "typed_RejectedPatent": n_rejected,
+            "rejectedFor": dict(rejected_for),
+            "unmapped_paragraphs": dict(unmapped_paragraphs),
+        },
+        "text": dict(text_props),
+        "prior_art": prior_art,
         "patents_with_ontology_link": n - len(orphans),
         "link_provenance": {
             "structured_process_family": n_structured,
@@ -366,6 +461,14 @@ def main() -> int:
     print(f"  orphans={len(orphans)}  -> scope_out={len(orphan_scope_out)} "
           f"(device layer gap) / text_miss={len(orphan_text_miss)} (fixable)")
     print(f"  edges by type: {dict(type_dist.most_common(6))}")
+    print(f"  RejectedPatent={n_rejected}  rejectedFor={sum(rejected_for.values())} "
+          f"{dict(rejected_for)}  text={dict(text_props)}")
+    if prior_art.get("loaded"):
+        pa = prior_art["hasPriorArt"]
+        px = prior_art["hasPriorArtExaminer"]
+        print(f"  priorArt: hasPriorArt={pa['edges']} (cited {pa['distinct_cited']}) "
+              f"examiner={px['edges']} (cited {px['distinct_cited']}, npl {px['npl_cited']})"
+              f"  excluded_evidence_pairs={prior_art['excluded_evidence_pairs']}")
     print(f"  report → {OUT_REPORT.relative_to(ROOT)}")
     return 0
 

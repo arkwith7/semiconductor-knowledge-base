@@ -191,27 +191,22 @@ def main() -> int:
     g.bind("rdfs", str(RDFS))
     g.bind("xsd", str(XSD))
 
-    # ── Self-describing schema additions (lightweight; core ontology untouched)
-    for cls, lbl in (("Expert", "Domain expert (curated profile)"),
-                     ("Problem", "SME technical problem (소부장 client request)")):
-        g.add((SDKB_ONT[cls], RDF.type, OWL.Class))
-        g.add((SDKB_ONT[cls], RDFS.label, Literal(lbl, lang="en")))
-    new_props = {
-        "hasSkill": "expert possesses ontology Skill",
-        "hasProcessExpertise": "expert expertise in a Process/SubProcess",
-        "hasMaterialExpertise": "expert expertise with a Material",
-        "hasEquipmentExperience": "expert hands-on with Equipment/Vendor/Class",
-        "involvesProcess": "problem involves a Process/SubProcess",
-        "involvesMaterial": "problem involves a Material",
-        "involvesEquipment": "problem involves Equipment/Vendor/Class",
-        "exhibitsFailureMode": "problem exhibits a FailureMode",
-        "relatedToTopic": "weak/uncategorized link to an ontology node",
-        "mitigationProvidesSkill": "Mitigation actionable via this Skill",
-    }
-    for p, c in new_props.items():
-        g.add((SDKB_ONT[p], RDF.type, OWL.ObjectProperty))
-        g.add((SDKB_ONT[p], RDFS.comment, Literal(c, lang="en")))
-    # `requiresSkill` already exists in core ontology (Process->Skill); reused.
+    # 어휘 선언은 여기서 하지 않는다 (CLAUDE.md §1.2).
+    #
+    # 예전에는 이 A-Box 가 owl:Class 2개(Expert·Problem)와 owl:ObjectProperty 10개를
+    # **자기 안에서 인라인 선언**했다. TBox 에는 하나도 없었다 — 그래서 TBox 만 읽는
+    # 소비자에게 인력·문제 축은 아예 존재하지 않는 어휘였고, 추론기·SHACL 이 검증할 수
+    # 없는 자리에 있었다. 특허 A-Box 가 겪고 고친 것과 같은 사고다 (§8-2).
+    #
+    # 이제 전부 TBox 소유다:
+    #   - Expert · Problem · hasSkill · hasProcessExpertise · hasMaterialExpertise ·
+    #     hasEquipmentExperience · involvesProcess · involvesEquipment ·
+    #     mitigationProvidesSkill      → sdkb-core.ttl (scripts/build_owl.py)
+    #   - involvesMaterial · exhibitsFailureMode · relatedToTopic
+    #                                   → sdkb-patent.ttl (domain 을 Patent ∪ Problem 으로 넓혔다.
+    #                                     Patent 로 좁혀두면 이 A-Box 의 Problem 들이
+    #                                     RDFS domain 함의로 Patent 가 된다)
+    #   - requiresSkill                 → sdkb-core.ttl (기존)
 
     # ── Mitigation -> Skill enrichment (slug-equality + curated near pairs) ──
     skill_ids = {n["id"] for n in kg["nodes"] if n["type"] == "Skill"}

@@ -165,19 +165,23 @@ ont:cites
     rdfs:label "cites"@en ;
     rdfs:comment "Generic citation relation between two patents."@en .
 
+# NOTE: hasPriorArt is deliberately NOT a sub-property of ont:cites, and carries
+# no rdfs:range. Prior art is not always a patent — 30 of the 2,534 examiner
+# citations in the SIRP corpus are non-patent literature (papers, standards).
+# Declaring range ont:Patent (or inheriting it from ont:cites, whose range is
+# ont:Patent) would entail that those documents are patents. That is false, and
+# it would additionally force every cited document to satisfy the Patent shape
+# (application number + filing date) — bibliography we do not have for cited docs.
 ont:hasPriorArt
     a owl:ObjectProperty ;
-    rdfs:subPropertyOf ont:cites ;
     rdfs:domain ont:Patent ;
-    rdfs:range ont:Patent ;
     rdfs:label "has prior art"@en ;
-    rdfs:comment "Links a patent (typically rejected/contested) to a prior-art document cited against it. Sub-properties distinguish examiner- vs. applicant-disclosed."@en .
+    rdfs:comment "Links a patent (typically rejected/contested) to a prior-art document cited against it. The document may be a patent or non-patent literature. Sub-properties distinguish examiner- vs. applicant-disclosed."@en .
 
 ont:hasPriorArtExaminer
     a owl:ObjectProperty ;
     rdfs:subPropertyOf ont:hasPriorArt ;
     rdfs:domain ont:Patent ;
-    rdfs:range ont:Patent ;
     rdfs:label "has prior art (examiner-cited)"@en ;
     rdfs:comment "Prior art cited by the patent examiner in the office action. Ground-truth signal for prior-art retrieval evaluation."@en .
 
@@ -185,7 +189,6 @@ ont:hasPriorArtApplicant
     a owl:ObjectProperty ;
     rdfs:subPropertyOf ont:hasPriorArt ;
     rdfs:domain ont:Patent ;
-    rdfs:range ont:Patent ;
     rdfs:label "has prior art (applicant-disclosed)"@en .
 
 ont:rejectedFor
@@ -215,9 +218,13 @@ ont:realizesEquipmentClass
     rdfs:range ont:EquipmentClass ;
     rdfs:label "realizes equipment class"@en .
 
+# domain 은 Patent ∪ Problem 이다. 특허만이 아니라 소부장 실문제(ont:Problem)도 소재를
+# 다루고 실패모드를 드러내며 토픽에 걸린다 — experts/problems A-Box 가 이 세 술어를
+# Problem 주어로 쓴다(involvesMaterial 33 · exhibitsFailureMode 8 · relatedToTopic 1).
+# domain 을 Patent 로 좁혀두면 RDFS domain 함의가 그 Problem 들을 Patent 로 만든다.
 ont:involvesMaterial
     a owl:ObjectProperty ;
-    rdfs:domain ont:Patent ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( ont:Patent ont:Problem ) ] ;
     rdfs:range ont:Material ;
     rdfs:label "involves material"@en .
 
@@ -372,14 +379,14 @@ ont:concernsTechnologyNode
 
 ont:exhibitsFailureMode
     a owl:ObjectProperty ;
-    rdfs:domain ont:Patent ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( ont:Patent ont:Problem ) ] ;
     rdfs:range ont:FailureMode ;
     rdfs:label "exhibits failure mode"@en ;
     rdfs:comment "Links a patent to a FailureMode it addresses or discloses."@en .
 
 ont:relatedToTopic
     a owl:ObjectProperty ;
-    rdfs:domain ont:Patent ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( ont:Patent ont:Problem ) ] ;
     rdfs:range [ a owl:Class ; owl:unionOf ( ont:RootCause ont:Mitigation ont:TopicCluster ) ] ;
     rdfs:label "related to topic"@en ;
     rdfs:comment "Weak link from a patent to a RootCause / Mitigation / TopicCluster. Deliberately loose — used when free-text extraction cannot commit to a stronger relation."@en .

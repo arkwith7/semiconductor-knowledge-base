@@ -1,12 +1,42 @@
 {
   "input": "data/patents/rejected_patents_meta.parquet",
   "patents": 1000,
-  "triples": 23424,
-  "patents_with_ontology_link": 976,
+  "triples": 32884,
+  "rejection": {
+    "typed_RejectedPatent": 1000,
+    "rejectedFor": {
+      "Rejection_Inventiveness": 400,
+      "Rejection_Novelty": 14
+    },
+    "unmapped_paragraphs": {
+      "3": 1
+    }
+  },
+  "text": {
+    "abstractText": 1000,
+    "firstClaimText": 1000
+  },
+  "prior_art": {
+    "loaded": true,
+    "hasPriorArt": {
+      "edges": 3485,
+      "skipped_unknown_target": 0,
+      "distinct_cited": 3197,
+      "npl_cited": 44
+    },
+    "hasPriorArtExaminer": {
+      "edges": 2534,
+      "skipped_unknown_target": 0,
+      "distinct_cited": 2321,
+      "npl_cited": 30
+    },
+    "excluded_evidence_pairs": 673
+  },
+  "patents_with_ontology_link": 977,
   "link_provenance": {
     "structured_process_family": 793,
     "structured_device_family": 104,
-    "free_text": 844,
+    "free_text": 850,
     "process_family_map": {
       "etch": "process:etch",
       "deposition": "process:deposition",
@@ -31,13 +61,13 @@
       "3d_integration": "device:tsv"
     }
   },
-  "orphans_count": 24,
+  "orphans_count": 23,
   "orphans_split": {
     "scope_out": 1,
-    "text_miss": 23,
+    "text_miss": 22,
     "note": "scope_out = device/packaging/component family or value_chain device|component — no ontology node exists (needs the A2 device layer; NOT a lift bug). text_miss = in-domain yet unlinked — the genuinely fixable residue.",
     "text_miss_families": {
-      "general": 20,
+      "general": 19,
       "materials": 2,
       "equipment": 1
     },
@@ -51,10 +81,10 @@
       "patent:kr_1020170135831",
       "patent:kr_1020167009441",
       "patent:kr_1020157028308",
-      "patent:kr_1020120152163",
       "patent:kr_1020120148667",
       "patent:kr_1020120139831",
-      "patent:kr_1020120071127"
+      "patent:kr_1020120071127",
+      "patent:kr_1020237007317"
     ]
   },
   "orphans_sample": [
@@ -65,27 +95,27 @@
     "patent:kr_1020170135831",
     "patent:kr_1020167009441",
     "patent:kr_1020157028308",
-    "patent:kr_1020120152163",
     "patent:kr_1020120148667",
     "patent:kr_1020120139831",
     "patent:kr_1020120071127",
     "patent:kr_1020237007317",
     "patent:kr_1020187026966",
     "patent:kr_1020150155906",
-    "patent:kr_1020157021305"
+    "patent:kr_1020157021305",
+    "patent:kr_1020137007759"
   ],
   "nodes_per_patent": {
-    "mean": 2.888,
+    "mean": 2.915,
     "median": 3,
     "max": 9,
-    "zero": 24
+    "zero": 23
   },
   "concern_edges_by_node_type": {
     "Process": 1292,
     "Skill": 630,
     "Material": 526,
-    "SubProcess": 265,
-    "Device": 162,
+    "SubProcess": 273,
+    "Device": 181,
     "EquipmentClass": 7,
     "FailureMode": 4,
     "TechnologyNode": 1,
@@ -121,11 +151,11 @@
       "patents": 147
     },
     {
-      "term": "챔버",
+      "term": "가스",
       "patents": 143
     },
     {
-      "term": "가스",
+      "term": "챔버",
       "patents": 143
     },
     {
@@ -217,6 +247,10 @@
       "patents": 22
     },
     {
+      "term": "다이오드",
+      "patents": 19
+    },
+    {
       "term": "파티클",
       "patents": 19
     },
@@ -246,10 +280,6 @@
     },
     {
       "term": "슬러리",
-      "patents": 16
-    },
-    {
-      "term": "cmp",
       "patents": 16
     }
   ],

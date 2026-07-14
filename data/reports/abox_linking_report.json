@@ -4,25 +4,22 @@
     "experts": 110,
     "problems": 226
   },
-  "triples": 3561,
+  "triples": 3573,
   "mitigation_to_skill_links": 4,
   "term_resolution": {
     "distinct_terms_seen": 575,
-    "tier1_lexicon_hits": 1269,
-    "tier2_alias_hits": 766,
-    "unmatched_occurrences": 2122,
-    "distinct_unmatched": 415,
-    "distinct_matched": 132
+    "tier1_lexicon_hits": 1390,
+    "tier2_alias_hits": 746,
+    "unmatched_occurrences": 2021,
+    "distinct_unmatched": 404,
+    "distinct_matched": 142
   },
   "orphans": {
     "experts_with_no_ontology_link": [
       "EXP_104",
-      "EXP_105",
       "EXP_107"
     ],
     "problems_with_no_ontology_link": [
-      "SC_PROB_005",
-      "SC_PROB_006",
       "SC_PROB_015",
       "OT_PROB_001",
       "OT_PROB_002",
@@ -102,10 +99,6 @@
       "occurrences": 20
     },
     {
-      "term": "DRAM",
-      "occurrences": 20
-    },
-    {
       "term": "advanced_node_integration",
       "occurrences": 20
     },
@@ -146,19 +139,11 @@
       "occurrences": 15
     },
     {
-      "term": "3D_NAND",
-      "occurrences": 15
-    },
-    {
       "term": "process_variation",
       "occurrences": 15
     },
     {
       "term": "BEOL",
-      "occurrences": 14
-    },
-    {
-      "term": "NAND",
       "occurrences": 14
     },
     {
@@ -276,6 +261,18 @@
     {
       "term": "suboptimal_performance",
       "occurrences": 11
+    },
+    {
+      "term": "inefficiency",
+      "occurrences": 11
+    },
+    {
+      "term": "spec_miss",
+      "occurrences": 11
+    },
+    {
+      "term": "TCAD",
+      "occurrences": 10
     }
   ]
 }

@@ -114,6 +114,11 @@ def build_ontology() -> Graph:
         # Device 는 core-data 에 31개 인스턴스가 있는데 클래스 선언이 없었다 —
         # 선언되지 않은 클래스는 추론기·SHACL 이 검증할 수 없다 (CLAUDE.md §1.2).
         "Device":         "A device/product architecture (e.g. DRAM, BGA, CMOS image sensor).",
+        # Expert·Problem 은 sdkb-abox-experts-problems.ttl 이 **A-Box 안에서 인라인
+        # 선언**하고 있었다 (Expert 110 · Problem 226 인스턴스). Device 와 같은 결함이다 —
+        # TBox 를 읽는 소비자에게는 존재하지 않는 클래스이고, 추론기·SHACL 이 검증할 수 없다.
+        "Expert":         "A domain expert with a curated competency profile (인력 축).",
+        "Problem":        "A technical problem posed by a materials/parts/equipment SME (소부장 실문제).",
     }
 
     for cls_name, desc in core_classes.items():
@@ -332,6 +337,26 @@ def build_ontology() -> Graph:
         # Negative constraints
         "incompatibleWith":    ("SubProcess",     "Material",       "Material incompatible with a sub-process."),
         "notAllowedWith":      ("SubProcess",     "Material",       "Material not permitted in a sub-process."),
+        # ── 인력·문제 축 (experts/problems A-Box 가 인라인 선언하던 술어들) ──────
+        # range 는 A-Box 가 **실제로 가리키는** 클래스의 합집합이다. 주석이 말하는
+        # 이상(理想)보다 좁게 선언하면 range 위반(=거짓 함의)이 생긴다. 예컨대
+        # hasEquipmentExperience 는 Vendor 265 · Metrology 40 · EquipmentClass 14 ·
+        # Equipment 1 을 가리킨다 — 브릿지가 느슨하게 라우팅한 결과이고, 그 느슨함은
+        # 데이터의 사실이므로 TBox 가 그대로 반영한다.
+        "hasSkill":               ("Expert",     ["Skill", "Mitigation"],
+                                   "Skill possessed by an expert."),
+        "hasProcessExpertise":    ("Expert",     ["Process", "TechnologyNode"],
+                                   "Process (or technology-node) expertise of an expert."),
+        "hasMaterialExpertise":   ("Expert",     "Material",
+                                   "Material expertise of an expert."),
+        "hasEquipmentExperience": ("Expert",     ["Equipment", "EquipmentClass", "Vendor", "Metrology"],
+                                   "Hands-on equipment experience of an expert."),
+        "involvesProcess":        ("Problem",    "Process",
+                                   "Process implicated by an SME problem."),
+        "involvesEquipment":      ("Problem",    ["Equipment", "EquipmentClass", "Metrology"],
+                                   "Equipment implicated by an SME problem."),
+        "mitigationProvidesSkill": ("Mitigation", "Skill",
+                                    "Skill through which a mitigation is actionable."),
     }
 
     def _resolve(cls_name: str) -> URIRef:
