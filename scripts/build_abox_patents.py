@@ -488,8 +488,12 @@ def main() -> int:
             "zero": sum(1 for x in nodes_per if x == 0),
         },
         "concern_edges_by_node_type": dict(type_dist.most_common()),
+        # most_common() 은 동점일 때 삽입 순서를 따르는데, 그 순서가 집합 순회에서 와서
+        # 실행마다 흔들렸다("챔버"·"가스" 둘 다 143건). 리포트가 흔들리면 워킹트리가 계속
+        # 더러워져 스냅샷의 출처(커밋 SHA)가 오염된다. 동점은 사전순으로 끊는다.
         "top_matched_terms": [
-            {"term": t, "patents": c} for t, c in matched_terms.most_common(40)
+            {"term": t, "patents": c}
+            for t, c in sorted(matched_terms.items(), key=lambda kv: (-kv[1], kv[0]))[:40]
         ],
         "bridge_mode": mode + " + structured(process_family)",
         "note": "Lift = deterministic process_family->Process bridge UNION "

@@ -151,11 +151,11 @@
       "patents": 147
     },
     {
-      "term": "챔버",
+      "term": "가스",
       "patents": 143
     },
     {
-      "term": "가스",
+      "term": "챔버",
       "patents": 143
     },
     {
@@ -191,11 +191,11 @@
       "patents": 36
     },
     {
-      "term": "세정",
+      "term": "도핑",
       "patents": 31
     },
     {
-      "term": "도핑",
+      "term": "세정",
       "patents": 31
     },
     {
@@ -207,11 +207,11 @@
       "patents": 28
     },
     {
-      "term": "알루미늄",
+      "term": "구리",
       "patents": 27
     },
     {
-      "term": "구리",
+      "term": "알루미늄",
       "patents": 27
     },
     {
@@ -235,11 +235,11 @@
       "patents": 24
     },
     {
-      "term": "평탄화",
+      "term": "al",
       "patents": 22
     },
     {
-      "term": "al",
+      "term": "평탄화",
       "patents": 22
     },
     {
@@ -255,16 +255,12 @@
       "patents": 19
     },
     {
-      "term": "포토레지스트",
-      "patents": 18
-    },
-    {
       "term": "상변화 메모리",
       "patents": 18
     },
     {
-      "term": "정렬",
-      "patents": 17
+      "term": "포토레지스트",
+      "patents": 18
     },
     {
       "term": "박막 증착",
@@ -275,7 +271,11 @@
       "patents": 17
     },
     {
-      "term": "플라즈마 식각",
+      "term": "정렬",
+      "patents": 17
+    },
+    {
+      "term": "cmp",
       "patents": 16
     },
     {
