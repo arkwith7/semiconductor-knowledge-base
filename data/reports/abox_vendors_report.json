@@ -1,0 +1,27 @@
+{
+  "input": "data/vendors/ksia_member_industry_list_20260714.csv",
+  "rows": 329,
+  "vendors_emitted": 326,
+  "identity": {
+    "new_vendor_node": 296,
+    "matched_existing_organization": 31,
+    "duplicate_row_skipped": 3,
+    "website_unusable": 7,
+    "matched_existing_vendor": 2
+  },
+  "by_company_type": {
+    "장비업체": 94,
+    "설계업체": 75,
+    "재료업체": 50,
+    "부분품업체": 46,
+    "외국업체": 24,
+    "설비업체": 12,
+    "소자/파운드리업체": 10,
+    "테스트/패키징업체": 10,
+    "상사": 3,
+    "연구기관": 1,
+    "특별회원": 1
+  },
+  "triples": 2601,
+  "known_limitation": "KSIA 명부는 각 회원사가 무엇을 공급하는지 담지 않는다. 따라서 새로 만든 벤더 노드에는 providedBy(장비→벤더)·madeBy(소재→벤더) 엣지가 없다 — 그래프에서 고립 노드다. 공급관계는 별도 수집이 필요하며 지어내지 않는다."
+}

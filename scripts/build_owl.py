@@ -459,8 +459,10 @@ def build_ontology() -> Graph:
         # ── 인력·문제 축 (experts/problems A-Box). 이 여섯은 **어디에도 선언되지 않은 채**
         # 쓰이고 있었다 — 인라인 선언조차 없었다. ObjectProperty 만 인라인 선언돼 있어서
         # 눈에 띄지 않았다. 선언되지 않은 술어는 추론기·SHACL 이 검증할 수 없다 (§1.2).
-        "companyType":           ("Problem", XSD.string,
-                                  "Value-chain role of the SME that raised the problem (materials | equipment | parts | fabless | foundry …)."),
+        # domain 은 Problem ∪ Vendor 다. 같은 축(밸류체인 역할)을 두 주체가 쓴다:
+        # 문제를 낸 소부장 기업(Problem)과, KSIA 명부에서 올라온 공급사(Vendor).
+        "companyType":           (["Problem", "Vendor"], XSD.string,
+                                  "Value-chain role of a company (materials | equipment | parts | fabless | foundry …). Used both for the SME that raised a problem and for a KSIA-listed vendor."),
         "problemCategory":       ("Problem", XSD.string,
                                   "Category of the SME problem (defect_reduction | contamination | yield_improvement …)."),
         "clientCountry":         ("Problem", XSD.string,

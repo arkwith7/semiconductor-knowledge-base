@@ -80,6 +80,12 @@ abox: convert
 abox-patents: convert ingest-sirp
 	$(PYTHON) scripts/build_abox_patents.py
 
+# KSIA 회원사 명부 → ont:Vendor A-Box. abox-patents 뒤에 와야 한다 —
+# 이미 특허 출원인(Organization)으로 존재하는 회사를 알아보고 중복 노드를 만들지 않으려면
+# sdkb-abox-patents.ttl 이 먼저 있어야 한다.
+abox-vendors: convert abox-patents
+	$(PYTHON) scripts/build_abox_vendors_ksia.py
+
 align:
 	$(PYTHON) scripts/align_candidates.py
 
