@@ -718,7 +718,7 @@
       }
     },
     {
-      "id": "vendor:asml",
+      "id": "organization:asml",
       "type": "Vendor",
       "canonical_name": "ASML",
       "description": "Lithography tool vendor.",
@@ -742,7 +742,7 @@
       }
     },
     {
-      "id": "vendor:lam_research",
+      "id": "organization:lam_research",
       "type": "Vendor",
       "canonical_name": "Lam Research",
       "description": "Etch and deposition vendor.",
@@ -766,7 +766,7 @@
       }
     },
     {
-      "id": "vendor:applied_materials",
+      "id": "organization:applied_materials",
       "type": "Vendor",
       "canonical_name": "Applied Materials",
       "description": "Deposition, etch, CMP, metrology vendor.",
@@ -790,7 +790,7 @@
       }
     },
     {
-      "id": "vendor:tokyo_electron",
+      "id": "organization:tokyo_electron_limited",
       "type": "Vendor",
       "canonical_name": "Tokyo Electron",
       "description": "Coat/develop, etch, deposition vendor.",
@@ -814,7 +814,7 @@
       }
     },
     {
-      "id": "vendor:kla",
+      "id": "organization:kla",
       "type": "Vendor",
       "canonical_name": "KLA",
       "description": "Inspection and metrology vendor.",
@@ -838,7 +838,7 @@
       }
     },
     {
-      "id": "org:samsung_electronics",
+      "id": "organization:samsung_electronics",
       "type": "Organization",
       "canonical_name": "Samsung Electronics",
       "description": "IDM/foundry and memory manufacturer.",
@@ -862,7 +862,7 @@
       }
     },
     {
-      "id": "org:sk_hynix",
+      "id": "organization:sk_hynix",
       "type": "Organization",
       "canonical_name": "SK hynix",
       "description": "Memory manufacturer.",
@@ -3103,7 +3103,7 @@
       }
     },
     {
-      "id": "vendor:screen",
+      "id": "organization:screen_holdings",
       "type": "Vendor",
       "canonical_name": "SCREEN Semiconductor Solutions",
       "description": "Coater/developer equipment",
@@ -3125,7 +3125,7 @@
       }
     },
     {
-      "id": "vendor:hitachi",
+      "id": "organization:hitachi_high_tech",
       "type": "Vendor",
       "canonical_name": "Hitachi High-Tech",
       "description": "Etch and metrology equipment",
@@ -3147,7 +3147,7 @@
       }
     },
     {
-      "id": "vendor:asm",
+      "id": "organization:asm_ip_holding_b_v",
       "type": "Vendor",
       "canonical_name": "ASM International",
       "description": "ALD and epitaxy equipment",
@@ -3169,7 +3169,7 @@
       }
     },
     {
-      "id": "vendor:mattson",
+      "id": "organization:mattson_technology",
       "type": "Vendor",
       "canonical_name": "Mattson Technology",
       "description": "Thermal processing equipment",
@@ -3191,7 +3191,7 @@
       }
     },
     {
-      "id": "vendor:axcelis",
+      "id": "organization:axcelis",
       "type": "Vendor",
       "canonical_name": "Axcelis Technologies",
       "description": "Ion implantation equipment",
@@ -3213,7 +3213,7 @@
       }
     },
     {
-      "id": "vendor:bruker",
+      "id": "organization:bruker",
       "type": "Vendor",
       "canonical_name": "Bruker",
       "description": "Metrology and analytical equipment",
@@ -3235,7 +3235,7 @@
       }
     },
     {
-      "id": "vendor:ebara",
+      "id": "organization:ebara",
       "type": "Vendor",
       "canonical_name": "Ebara",
       "description": "CMP equipment",
@@ -3257,7 +3257,7 @@
       }
     },
     {
-      "id": "vendor:cabot",
+      "id": "organization:cabot",
       "type": "Vendor",
       "canonical_name": "Cabot Microelectronics",
       "description": "CMP consumables",
@@ -3279,7 +3279,7 @@
       }
     },
     {
-      "id": "vendor:3m",
+      "id": "organization:3m_innovative_properties_company",
       "type": "Vendor",
       "canonical_name": "3M",
       "description": "CMP consumables and materials",
@@ -3323,7 +3323,7 @@
       }
     },
     {
-      "id": "vendor:semes",
+      "id": "organization:semes",
       "type": "Vendor",
       "canonical_name": "SEMES Co., Ltd.",
       "description": "한국 반도체 장비 제조사 (Samsung 계열). 식각·세정·트랙·포토 장비를 공급하며 한국 소부장 생태계의 핵심 벤더.",
@@ -3399,7 +3399,7 @@
       "description": "PVD platform for metal deposition",
       "props": {
         "model": "AMAT_Endura",
-        "vendor_id": "vendor:applied_materials",
+        "vendor_id": "organization:applied_materials",
         "class_id": "equipment_class:deposition_tool"
       },
       "provenance": {
@@ -3426,7 +3426,7 @@
       "description": "CVD/PECVD platform",
       "props": {
         "model": "AMAT_Centura",
-        "vendor_id": "vendor:applied_materials",
+        "vendor_id": "organization:applied_materials",
         "class_id": "equipment_class:deposition_tool"
       },
       "provenance": {
@@ -3453,7 +3453,7 @@
       "description": "Epi CVD platform",
       "props": {
         "model": "AMAT_Vantage",
-        "vendor_id": "vendor:applied_materials",
+        "vendor_id": "organization:applied_materials",
         "class_id": "equipment_class:deposition_tool"
       },
       "provenance": {
@@ -3480,7 +3480,7 @@
       "description": "CMP platform",
       "props": {
         "model": "AMAT_Reflexion",
-        "vendor_id": "vendor:applied_materials",
+        "vendor_id": "organization:applied_materials",
         "class_id": "equipment_class:cmp_tool"
       },
       "provenance": {
@@ -3507,7 +3507,7 @@
       "description": "Defect review SEM",
       "props": {
         "model": "AMAT_SEMVision",
-        "vendor_id": "vendor:applied_materials",
+        "vendor_id": "organization:applied_materials",
         "class_id": "equipment_class:defect_inspection"
       },
       "provenance": {
@@ -3534,7 +3534,7 @@
       "description": "CVD platform",
       "props": {
         "model": "TEL_Tactras",
-        "vendor_id": "vendor:tokyo_electron",
+        "vendor_id": "organization:tokyo_electron_limited",
         "class_id": "equipment_class:deposition_tool"
       },
       "provenance": {
@@ -3561,7 +3561,7 @@
       "description": "Dielectric etch platform",
       "props": {
         "model": "TEL_Alpha",
-        "vendor_id": "vendor:tokyo_electron",
+        "vendor_id": "organization:tokyo_electron_limited",
         "class_id": "equipment_class:etcher"
       },
       "provenance": {
@@ -3588,7 +3588,7 @@
       "description": "Conductor etch platform",
       "props": {
         "model": "TEL_Formula",
-        "vendor_id": "vendor:tokyo_electron",
+        "vendor_id": "organization:tokyo_electron_limited",
         "class_id": "equipment_class:etcher"
       },
       "provenance": {
@@ -3615,7 +3615,7 @@
       "description": "Coater/developer track",
       "props": {
         "model": "TEL_Coater",
-        "vendor_id": "vendor:tokyo_electron",
+        "vendor_id": "organization:tokyo_electron_limited",
         "class_id": "equipment_class:track"
       },
       "provenance": {
@@ -3642,7 +3642,7 @@
       "description": "Dielectric etch platform",
       "props": {
         "model": "LAM_Flex",
-        "vendor_id": "vendor:lam_research",
+        "vendor_id": "organization:lam_research",
         "class_id": "equipment_class:etcher"
       },
       "provenance": {
@@ -3669,7 +3669,7 @@
       "description": "Metal etch platform",
       "props": {
         "model": "LAM_2300",
-        "vendor_id": "vendor:lam_research",
+        "vendor_id": "organization:lam_research",
         "class_id": "equipment_class:etcher"
       },
       "provenance": {
@@ -3696,7 +3696,7 @@
       "description": "General etch platform",
       "props": {
         "model": "LAM_etcher",
-        "vendor_id": "vendor:lam_research",
+        "vendor_id": "organization:lam_research",
         "class_id": "equipment_class:etcher"
       },
       "provenance": {
@@ -3723,7 +3723,7 @@
       "description": "DUV/EUV scanner",
       "props": {
         "model": "ASML_Scanner",
-        "vendor_id": "vendor:asml",
+        "vendor_id": "organization:asml",
         "class_id": "equipment_class:scanner"
       },
       "provenance": {
@@ -3750,7 +3750,7 @@
       "description": "ArF immersion scanner",
       "props": {
         "model": "ASML_NXT",
-        "vendor_id": "vendor:asml",
+        "vendor_id": "organization:asml",
         "class_id": "equipment_class:scanner"
       },
       "provenance": {
@@ -3777,7 +3777,7 @@
       "description": "Wafer defect inspection",
       "props": {
         "model": "KLA_Inspector",
-        "vendor_id": "vendor:kla",
+        "vendor_id": "organization:kla",
         "class_id": "equipment_class:defect_inspection"
       },
       "provenance": {
@@ -3804,7 +3804,7 @@
       "description": "Overlay measurement system",
       "props": {
         "model": "KLA_Overlay",
-        "vendor_id": "vendor:kla",
+        "vendor_id": "organization:kla",
         "class_id": "equipment_class:overlay_metrology"
       },
       "provenance": {
@@ -3831,7 +3831,7 @@
       "description": "Photoresist developer",
       "props": {
         "model": "SCREEN_Developer",
-        "vendor_id": "vendor:screen",
+        "vendor_id": "organization:screen_holdings",
         "class_id": "equipment_class:track"
       },
       "provenance": {
@@ -3858,7 +3858,7 @@
       "description": "Critical dimension SEM",
       "props": {
         "model": "Hitachi_SEM",
-        "vendor_id": "vendor:hitachi",
+        "vendor_id": "organization:hitachi_high_tech",
         "class_id": "equipment_class:cd_sem"
       },
       "provenance": {
@@ -3885,7 +3885,7 @@
       "description": "Plasma etch system",
       "props": {
         "model": "Hitachi_Etcher",
-        "vendor_id": "vendor:hitachi",
+        "vendor_id": "organization:hitachi_high_tech",
         "class_id": "equipment_class:etcher"
       },
       "provenance": {
@@ -3912,7 +3912,7 @@
       "description": "ALD platform",
       "props": {
         "model": "ASM_Pulsar",
-        "vendor_id": "vendor:asm",
+        "vendor_id": "organization:asm_ip_holding_b_v",
         "class_id": "equipment_class:deposition_tool"
       },
       "provenance": {
@@ -3939,7 +3939,7 @@
       "description": "Rapid thermal processing",
       "props": {
         "model": "Mattson_RTP",
-        "vendor_id": "vendor:mattson",
+        "vendor_id": "organization:mattson_technology",
         "class_id": "equipment_class:deposition_tool"
       },
       "provenance": {
@@ -3966,7 +3966,7 @@
       "description": "Ion implantation system",
       "props": {
         "model": "Axcelis_Implanter",
-        "vendor_id": "vendor:axcelis",
+        "vendor_id": "organization:axcelis",
         "class_id": "equipment_class:implanter"
       },
       "provenance": {
@@ -3993,7 +3993,7 @@
       "description": "Film thickness measurement",
       "props": {
         "model": "Bruker_Ellipsometer",
-        "vendor_id": "vendor:bruker",
+        "vendor_id": "organization:bruker",
         "class_id": "equipment_class:overlay_metrology"
       },
       "provenance": {
@@ -4020,7 +4020,7 @@
       "description": "CMP platform",
       "props": {
         "model": "Ebara_Frex",
-        "vendor_id": "vendor:ebara",
+        "vendor_id": "organization:ebara",
         "class_id": "equipment_class:cmp_tool"
       },
       "provenance": {
@@ -4047,7 +4047,7 @@
       "description": "CMP slurry consumable",
       "props": {
         "model": "Cabot_Slurry",
-        "vendor_id": "vendor:cabot",
+        "vendor_id": "organization:cabot",
         "class_id": "equipment_class:cmp_tool"
       },
       "provenance": {
@@ -4074,7 +4074,7 @@
       "description": "CMP polishing pad",
       "props": {
         "model": "3M_Pad",
-        "vendor_id": "vendor:3m",
+        "vendor_id": "organization:3m_innovative_properties_company",
         "class_id": "equipment_class:cmp_tool"
       },
       "provenance": {
@@ -6035,7 +6035,7 @@
     {
       "src": "equipment_class:scanner",
       "predicate": "MADE_BY",
-      "dst": "vendor:asml",
+      "dst": "organization:asml",
       "weight": 0.8,
       "provenance": {
         "source": "wikidata",
@@ -6048,7 +6048,7 @@
     {
       "src": "equipment_class:etcher",
       "predicate": "MADE_BY",
-      "dst": "vendor:lam_research",
+      "dst": "organization:lam_research",
       "weight": 0.7,
       "provenance": {
         "source": "wikidata",
@@ -6061,7 +6061,7 @@
     {
       "src": "equipment_class:deposition_tool",
       "predicate": "MADE_BY",
-      "dst": "vendor:applied_materials",
+      "dst": "organization:applied_materials",
       "weight": 0.7,
       "provenance": {
         "source": "wikidata",
@@ -6074,7 +6074,7 @@
     {
       "src": "equipment_class:track",
       "predicate": "MADE_BY",
-      "dst": "vendor:tokyo_electron",
+      "dst": "organization:tokyo_electron_limited",
       "weight": 0.7,
       "provenance": {
         "source": "wikidata",
@@ -6087,7 +6087,7 @@
     {
       "src": "equipment_class:defect_inspection",
       "predicate": "MADE_BY",
-      "dst": "vendor:kla",
+      "dst": "organization:kla",
       "weight": 0.7,
       "provenance": {
         "source": "wikidata",
@@ -8349,7 +8349,7 @@
     {
       "src": "equipment:amat_endura",
       "predicate": "PROVIDED_BY",
-      "dst": "vendor:applied_materials",
+      "dst": "organization:applied_materials",
       "provenance": {
         "source": "vendor_public",
         "reference": "Public vendor-product relationships",
@@ -8372,7 +8372,7 @@
     {
       "src": "equipment:amat_centura",
       "predicate": "PROVIDED_BY",
-      "dst": "vendor:applied_materials",
+      "dst": "organization:applied_materials",
       "provenance": {
         "source": "vendor_public",
         "reference": "Public vendor-product relationships",
@@ -8395,7 +8395,7 @@
     {
       "src": "equipment:amat_vantage",
       "predicate": "PROVIDED_BY",
-      "dst": "vendor:applied_materials",
+      "dst": "organization:applied_materials",
       "provenance": {
         "source": "vendor_public",
         "reference": "Public vendor-product relationships",
@@ -8418,7 +8418,7 @@
     {
       "src": "equipment:amat_reflexion",
       "predicate": "PROVIDED_BY",
-      "dst": "vendor:applied_materials",
+      "dst": "organization:applied_materials",
       "provenance": {
         "source": "vendor_public",
         "reference": "Public vendor-product relationships",
@@ -8441,7 +8441,7 @@
     {
       "src": "equipment:amat_semvision",
       "predicate": "PROVIDED_BY",
-      "dst": "vendor:applied_materials",
+      "dst": "organization:applied_materials",
       "provenance": {
         "source": "vendor_public",
         "reference": "Public vendor-product relationships",
@@ -8464,7 +8464,7 @@
     {
       "src": "equipment:tel_tactras",
       "predicate": "PROVIDED_BY",
-      "dst": "vendor:tokyo_electron",
+      "dst": "organization:tokyo_electron_limited",
       "provenance": {
         "source": "vendor_public",
         "reference": "Public vendor-product relationships",
@@ -8487,7 +8487,7 @@
     {
       "src": "equipment:tel_alpha",
       "predicate": "PROVIDED_BY",
-      "dst": "vendor:tokyo_electron",
+      "dst": "organization:tokyo_electron_limited",
       "provenance": {
         "source": "vendor_public",
         "reference": "Public vendor-product relationships",
@@ -8510,7 +8510,7 @@
     {
       "src": "equipment:tel_formula",
       "predicate": "PROVIDED_BY",
-      "dst": "vendor:tokyo_electron",
+      "dst": "organization:tokyo_electron_limited",
       "provenance": {
         "source": "vendor_public",
         "reference": "Public vendor-product relationships",
@@ -8533,7 +8533,7 @@
     {
       "src": "equipment:tel_coater",
       "predicate": "PROVIDED_BY",
-      "dst": "vendor:tokyo_electron",
+      "dst": "organization:tokyo_electron_limited",
       "provenance": {
         "source": "vendor_public",
         "reference": "Public vendor-product relationships",
@@ -8556,7 +8556,7 @@
     {
       "src": "equipment:lam_flex",
       "predicate": "PROVIDED_BY",
-      "dst": "vendor:lam_research",
+      "dst": "organization:lam_research",
       "provenance": {
         "source": "vendor_public",
         "reference": "Public vendor-product relationships",
@@ -8579,7 +8579,7 @@
     {
       "src": "equipment:lam_2300",
       "predicate": "PROVIDED_BY",
-      "dst": "vendor:lam_research",
+      "dst": "organization:lam_research",
       "provenance": {
         "source": "vendor_public",
         "reference": "Public vendor-product relationships",
@@ -8602,7 +8602,7 @@
     {
       "src": "equipment:lam_etcher",
       "predicate": "PROVIDED_BY",
-      "dst": "vendor:lam_research",
+      "dst": "organization:lam_research",
       "provenance": {
         "source": "vendor_public",
         "reference": "Public vendor-product relationships",
@@ -8625,7 +8625,7 @@
     {
       "src": "equipment:asml_scanner",
       "predicate": "PROVIDED_BY",
-      "dst": "vendor:asml",
+      "dst": "organization:asml",
       "provenance": {
         "source": "vendor_public",
         "reference": "Public vendor-product relationships",
@@ -8648,7 +8648,7 @@
     {
       "src": "equipment:asml_nxt",
       "predicate": "PROVIDED_BY",
-      "dst": "vendor:asml",
+      "dst": "organization:asml",
       "provenance": {
         "source": "vendor_public",
         "reference": "Public vendor-product relationships",
@@ -8671,7 +8671,7 @@
     {
       "src": "equipment:asml_scanner",
       "predicate": "PROVIDED_BY",
-      "dst": "vendor:asml",
+      "dst": "organization:asml",
       "provenance": {
         "source": "vendor_public",
         "reference": "Public vendor-product relationships",
@@ -8694,7 +8694,7 @@
     {
       "src": "equipment:kla_inspector",
       "predicate": "PROVIDED_BY",
-      "dst": "vendor:kla",
+      "dst": "organization:kla",
       "provenance": {
         "source": "vendor_public",
         "reference": "Public vendor-product relationships",
@@ -8717,7 +8717,7 @@
     {
       "src": "equipment:kla_overlay",
       "predicate": "PROVIDED_BY",
-      "dst": "vendor:kla",
+      "dst": "organization:kla",
       "provenance": {
         "source": "vendor_public",
         "reference": "Public vendor-product relationships",
@@ -8740,7 +8740,7 @@
     {
       "src": "equipment:screen_developer",
       "predicate": "PROVIDED_BY",
-      "dst": "vendor:screen",
+      "dst": "organization:screen_holdings",
       "provenance": {
         "source": "vendor_public",
         "reference": "Public vendor-product relationships",
@@ -8763,7 +8763,7 @@
     {
       "src": "equipment:hitachi_sem",
       "predicate": "PROVIDED_BY",
-      "dst": "vendor:hitachi",
+      "dst": "organization:hitachi_high_tech",
       "provenance": {
         "source": "vendor_public",
         "reference": "Public vendor-product relationships",
@@ -8786,7 +8786,7 @@
     {
       "src": "equipment:hitachi_etcher",
       "predicate": "PROVIDED_BY",
-      "dst": "vendor:hitachi",
+      "dst": "organization:hitachi_high_tech",
       "provenance": {
         "source": "vendor_public",
         "reference": "Public vendor-product relationships",
@@ -8809,7 +8809,7 @@
     {
       "src": "equipment:asm_pulsar",
       "predicate": "PROVIDED_BY",
-      "dst": "vendor:asm",
+      "dst": "organization:asm_ip_holding_b_v",
       "provenance": {
         "source": "vendor_public",
         "reference": "Public vendor-product relationships",
@@ -8832,7 +8832,7 @@
     {
       "src": "equipment:mattson_rtp",
       "predicate": "PROVIDED_BY",
-      "dst": "vendor:mattson",
+      "dst": "organization:mattson_technology",
       "provenance": {
         "source": "vendor_public",
         "reference": "Public vendor-product relationships",
@@ -8855,7 +8855,7 @@
     {
       "src": "equipment:axcelis_implanter",
       "predicate": "PROVIDED_BY",
-      "dst": "vendor:axcelis",
+      "dst": "organization:axcelis",
       "provenance": {
         "source": "vendor_public",
         "reference": "Public vendor-product relationships",
@@ -8878,7 +8878,7 @@
     {
       "src": "equipment:bruker_ellipsometer",
       "predicate": "PROVIDED_BY",
-      "dst": "vendor:bruker",
+      "dst": "organization:bruker",
       "provenance": {
         "source": "vendor_public",
         "reference": "Public vendor-product relationships",
@@ -8901,7 +8901,7 @@
     {
       "src": "equipment:ebara_frex",
       "predicate": "PROVIDED_BY",
-      "dst": "vendor:ebara",
+      "dst": "organization:ebara",
       "provenance": {
         "source": "vendor_public",
         "reference": "Public vendor-product relationships",
@@ -8924,7 +8924,7 @@
     {
       "src": "equipment:cabot_slurry",
       "predicate": "PROVIDED_BY",
-      "dst": "vendor:cabot",
+      "dst": "organization:cabot",
       "provenance": {
         "source": "vendor_public",
         "reference": "Public vendor-product relationships",
@@ -8947,7 +8947,7 @@
     {
       "src": "equipment:3m_pad",
       "predicate": "PROVIDED_BY",
-      "dst": "vendor:3m",
+      "dst": "organization:3m_innovative_properties_company",
       "provenance": {
         "source": "vendor_public",
         "reference": "Public vendor-product relationships",
@@ -9801,49 +9801,49 @@
       "term_type": "synonym"
     },
     {
-      "node_id": "vendor:asml",
+      "node_id": "organization:asml",
       "term": "에이에스엠엘",
       "lang": "ko",
       "term_type": "vendor_alias"
     },
     {
-      "node_id": "vendor:lam_research",
+      "node_id": "organization:lam_research",
       "term": "LAM",
       "lang": "en",
       "term_type": "vendor_alias"
     },
     {
-      "node_id": "vendor:applied_materials",
+      "node_id": "organization:applied_materials",
       "term": "AMAT",
       "lang": "en",
       "term_type": "vendor_alias"
     },
     {
-      "node_id": "vendor:tokyo_electron",
+      "node_id": "organization:tokyo_electron_limited",
       "term": "TEL",
       "lang": "en",
       "term_type": "vendor_alias"
     },
     {
-      "node_id": "org:samsung_electronics",
+      "node_id": "organization:samsung_electronics",
       "term": "삼성전자",
       "lang": "ko",
       "term_type": "synonym"
     },
     {
-      "node_id": "org:samsung_electronics",
+      "node_id": "organization:samsung_electronics",
       "term": "삼성",
       "lang": "ko",
       "term_type": "synonym"
     },
     {
-      "node_id": "org:sk_hynix",
+      "node_id": "organization:sk_hynix",
       "term": "SK하이닉스",
       "lang": "ko",
       "term_type": "synonym"
     },
     {
-      "node_id": "org:sk_hynix",
+      "node_id": "organization:sk_hynix",
       "term": "하이닉스",
       "lang": "ko",
       "term_type": "synonym"

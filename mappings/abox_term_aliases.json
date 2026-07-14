@@ -1,14 +1,12 @@
 {
   "_README": "Curated bridge layer for the A-Box builder (scripts/build_abox_experts_problems.py). Maps a NORMALIZED free-text tag (lowercase; / _ - . collapsed to single spaces) found on expert profiles / SME problems to one or more ontology node IDs from data/semiconductor_v0_3.json. This is the auditable, deterministic part of the lossy lift: only terms with a defensible ontology home are listed; genuinely out-of-ontology terms (DRAM, DDR5, FEOL, generic 'materials'/'parts') are intentionally absent and reported as unmatched. Tier-1 (exact lexicon: canonical_name / id-local / synonyms incl. Korean) is applied first; this file is Tier-2. Extend from data/reports/abox_linking_report.json -> top_unmatched.",
   "_format": "<normalized term>: <node_id>  OR  <normalized term>: [<node_id>, ...]",
-
   "etching": "process:etch",
   "etch process": "process:etch",
   "dry etch": "subprocess:plasma_etch",
   "plasma etch": "subprocess:plasma_etch",
   "wet etch": "subprocess:wet_etch",
   "hardmask etch": "subprocess:hardmask_etch",
-
   "photolithography": "process:lithography",
   "litho": "process:lithography",
   "patterning": "process:lithography",
@@ -20,7 +18,6 @@
   "arf immersion": "subprocess:duv_lithography",
   "immersion lithography": "subprocess:duv_lithography",
   "krf": "subprocess:duv_lithography",
-
   "thin film deposition": "process:deposition",
   "thin film": "process:deposition",
   "metal deposition": "process:deposition",
@@ -38,24 +35,19 @@
   "sputter": "subprocess:pvd",
   "epitaxy": "process:deposition",
   "epi": "process:deposition",
-
   "chemical mechanical planarization": "process:cmp",
   "planarization": "process:cmp",
   "cmp oxide": "subprocess:cmp_oxide",
   "cmp metal": "subprocess:cmp_metal",
-
   "ion implantation": "process:implant",
   "implantation": "process:implant",
   "implant": "process:implant",
-
   "anneal": "process:diffusion",
   "annealing": "process:diffusion",
   "diffusion anneal": "process:diffusion",
   "rta": "process:diffusion",
-
   "inspection": "process:metrology",
   "metrology inspection": "process:metrology",
-
   "cleaning": "process:clean",
   "wet clean": "process:clean",
   "contamination": "process:clean",
@@ -63,7 +55,6 @@
   "contamination detected": "process:clean",
   "particle control": "process:clean",
   "particle": "process:clean",
-
   "defect": "skill:defect_analysis",
   "defectivity": "skill:defect_analysis",
   "defect density": "skill:defect_analysis",
@@ -75,71 +66,58 @@
   "yield ramp": "skill:defect_analysis",
   "yield enhancement": "skill:defect_analysis",
   "failure analysis": "skill:defect_analysis",
-
   "slurry": "skill:slurry_management",
   "slurry chemistry": "skill:slurry_management",
   "slurry management": "skill:slurry_management",
   "pad conditioning": "skill:slurry_management",
-
   "overlay": "skill:overlay_optimization",
   "overlay control": "skill:overlay_optimization",
   "overlay optimization": "skill:overlay_optimization",
   "alignment": "skill:overlay_optimization",
-
   "opc": "skill:mask_engineering",
   "optical proximity correction": "skill:mask_engineering",
   "mask": "skill:mask_engineering",
   "reticle": "skill:mask_engineering",
   "mask engineering": "skill:mask_engineering",
   "photomask": "skill:mask_engineering",
-
   "plasma": "skill:plasma_diagnostics",
   "plasma diagnostics": "skill:plasma_diagnostics",
   "plasma physics": "skill:plasma_diagnostics",
-
   "doe": "skill:doe_analysis",
   "design of experiments": "skill:doe_analysis",
   "doe study": "skill:doe_analysis",
   "doe analysis": "skill:doe_analysis",
   "statistical analysis": "skill:doe_analysis",
-
   "recipe tuning": "skill:recipe_tuning",
   "recipe optimization": "skill:recipe_tuning",
   "recipe development": "skill:recipe_tuning",
   "process optimization": "skill:recipe_tuning",
   "process tuning": "skill:recipe_tuning",
-
   "endpoint": "skill:endpoint_detection",
   "endpoint detection": "skill:endpoint_detection",
-
   "film stress": "skill:film_stress_control",
   "thin film stress": "skill:film_stress_control",
   "stress control": "skill:film_stress_control",
   "film stress control": "skill:film_stress_control",
   "wafer warpage": "skill:film_stress_control",
-
   "gas chemistry": "skill:gas_chemistry",
   "gas chemistry change": "skill:gas_chemistry",
   "process gas": "skill:gas_chemistry",
-
   "chamber conditioning": "skill:chamber_conditioning",
   "chamber clean": "skill:chamber_conditioning",
   "chamber matching": "skill:chamber_conditioning",
   "tool matching": "skill:chamber_conditioning",
-
   "metrology analysis": "skill:metrology_analysis",
   "cd measurement": "skill:metrology_analysis",
   "characterization": "skill:metrology_analysis",
-
-  "amat": "vendor:applied_materials",
-  "applied materials": "vendor:applied_materials",
-  "lam": "vendor:lam_research",
-  "lam research": "vendor:lam_research",
-  "tel": "vendor:tokyo_electron",
-  "tokyo electron": "vendor:tokyo_electron",
-  "kla tencor": "vendor:kla",
-  "kla": "vendor:kla",
-
+  "amat": "organization:applied_materials",
+  "applied materials": "organization:applied_materials",
+  "lam": "organization:lam_research",
+  "lam research": "organization:lam_research",
+  "tel": "organization:tokyo_electron_limited",
+  "tokyo electron": "organization:tokyo_electron_limited",
+  "kla tencor": "organization:kla",
+  "kla": "organization:kla",
   "copper": "material:copper",
   "cu interconnect": "material:copper",
   "tungsten": "material:tungsten",
@@ -158,7 +136,6 @@
   "euv resist": "material:photoresist_euv",
   "arf photoresist": "material:photoresist_arF",
   "arf resist": "material:photoresist_arF",
-
   "_KO": "Korean-language aliases — patent titles/abstracts (SIRP) are Korean prose; the KG carries only 86 synonyms so free-text coverage is thin. These map high-frequency Korean domain terms with a defensible ontology home (conservative, same audit policy as the English block). norm() keeps Hangul intact; both spaced and unspaced forms are listed.",
   "에칭": "process:etch",
   "식각": "process:etch",
@@ -237,7 +214,6 @@
   "질화 규소": "material:sin",
   "폴리실리콘": "material:polysilicon",
   "알루미늄": "material:aluminum",
-
   "_KO2": "Korean alias expansion round 2 — base-noun surface forms surfaced as still-missed in-ontology terms after the orphan diagnostic (device/product patents stay out by design). Conservative, same audit policy.",
   "퇴적": "process:deposition",
   "증착 공정": "process:deposition",

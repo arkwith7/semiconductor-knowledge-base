@@ -21,7 +21,7 @@ from __future__ import annotations
 import json
 import re
 import sys
-from collections import Counter
+from collections import Counter, defaultdict
 from pathlib import Path
 
 import pandas as pd
@@ -34,6 +34,7 @@ import sdkb_nb as S  # noqa: E402
 ROOT = S.find_root(Path(__file__).resolve().parent)
 META = ROOT / "data" / "patents" / "rejected_patents_meta.parquet"
 PRIOR_ART = ROOT / "data" / "patents" / "prior_art_edges.parquet"
+CORE_DATA = ROOT / "ontology" / "sdkb-core-data.ttl"
 OUT_TTL = ROOT / "ontology" / "sdkb-abox-patents.ttl"
 OUT_REPORT = ROOT / "data" / "reports" / "abox_patents_linking_report.json"
 
@@ -157,6 +158,41 @@ def _applicants(row) -> list[tuple[str, str, str]]:
     return out
 
 
+def _canonical_applicant_names(meta) -> dict[str, str]:
+    """슬러그별 **대표** 영문 표기.
+
+    KIPRIS 는 같은 출원인을 여러 표기로 적는다 — "ULVAC, INC." 와 "ULVAC. Inc" 는 같은
+    회사이고 같은 슬러그(ulvac)로 접히지만, 둘 다 prefLabel 로 올라가면 CQ08 이 prefLabel 로
+    GROUP BY 하므로 **한 회사가 두 출원인으로 이중 계상된다** (구 G₀ 에서 실제로 그랬다).
+
+    최빈 표기를 prefLabel 로 삼고 나머지 변형은 altLabel 로 내린다. 동률은 사전순으로
+    끊는다 — 같은 입력에 같은 출력이어야 G₀ 가 재현된다.
+    """
+    seen: dict[str, Counter] = defaultdict(Counter)
+    for _, r in meta.iterrows():
+        for slug, en, _ko in _applicants(r):
+            if en:
+                seen[slug][en] += 1
+    return {s: min(c.items(), key=lambda kv: (-kv[1], kv[0]))[0] for s, c in seen.items()}
+
+
+def _curated_orgs() -> set[URIRef]:
+    """core-data 가 이미 skos:prefLabel 을 준 노드.
+
+    출원인명은 KIPRIS 서지의 verbatim 표기다("SAMSUNG ELECTRONICS CO., LTD."). 큐레이션된
+    표제어("Samsung Electronics")가 있는 회사에 그것을 **또 하나의 prefLabel** 로 얹으면
+    같은 노드에 prefLabel@en 이 둘이 된다 — CQ08 이 prefLabel 로 GROUP BY 하므로 회사가
+    두 그룹으로 쪼개진다. 정체성 통합의 취지를 라벨 수준에서 되돌리는 셈이다.
+
+    그래서 큐레이션 표제어가 있으면 그쪽이 prefLabel 이고, verbatim 출원인명은 altLabel 이다.
+    """
+    if not CORE_DATA.exists():
+        return set()
+    g = Graph()
+    g.parse(CORE_DATA, format="turtle")
+    return set(g.subjects(SKOS.prefLabel, None))
+
+
 def _ipc_codes(row) -> list[str]:
     """특허 1건의 IPC 코드. KIPRIS 서지의 ipc_codes('A|B') 우선, 없으면 primary_ipc."""
     raw = row.get("ipc_codes")
@@ -270,6 +306,8 @@ def main() -> int:
     rejected_for = Counter()   # RejectionType 별 rejectedFor 트리플
     unmapped_paragraphs = Counter()  # TBox 통제어휘에 없는 제29조 항
     text_props = Counter()     # abstractText / firstClaimText
+    curated = _curated_orgs()  # 이미 표제어를 가진 회사 — 출원인명은 altLabel 로 간다
+    canon_en = _canonical_applicant_names(meta)  # 슬러그별 대표 표기
 
     for _, r in meta.iterrows():
         pid = str(r["patent_id"])
@@ -313,7 +351,11 @@ def main() -> int:
             org = _u(f"organization/{slug}")
             g.add((org, RDF.type, ONT_R("Organization")))
             if en:
-                g.add((org, SKOS.prefLabel, Literal(en, lang="en")))
+                # prefLabel 은 회사당·언어당 하나다. 큐레이션 표제어가 있으면 그쪽이 prefLabel 이고
+                # (_curated_orgs), 없으면 최빈 표기가 prefLabel 이다 (_canonical_applicant_names).
+                # 나머지 표기는 전부 altLabel — 그러지 않으면 CQ08 이 회사를 쪼갠다.
+                is_pref = org not in curated and en == canon_en.get(slug)
+                g.add((org, SKOS.prefLabel if is_pref else SKOS.altLabel, Literal(en, lang="en")))
             if ko:
                 g.add((org, SKOS.altLabel, Literal(ko, lang="ko")))
             # Shape_CoreNode 는 모든 Organization 에 dcterms:license 와 interpretationType 을

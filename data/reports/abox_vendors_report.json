@@ -3,7 +3,7 @@
   "rows": 329,
   "vendors_emitted": 326,
   "identity": {
-    "new_vendor_node": 296,
+    "new_org_node": 296,
     "matched_existing_organization": 31,
     "duplicate_row_skipped": 3,
     "website_unusable": 7,

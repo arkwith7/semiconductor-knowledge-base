@@ -142,8 +142,13 @@ def main() -> int:
                 # 특허 출원인으로 이미 있는 회사다 — 새 노드를 만들지 않고 타입만 더한다.
                 stats["matched_existing_organization"] += 1
             else:
-                iri = URIRef(DATA[f"vendor/ksia_{slug(en or ko)}"])
-                stats["new_vendor_node"] += 1
+                # 회사는 organization/ 한 스킴에만 산다 — 역할(Vendor)은 rdf:type 이 말한다.
+                # vendor/ksia_* 로 만들면, 이 회사의 특허를 수집하는 순간 출원인 빌더가
+                # organization/{slug} 를 새로 만들어 **같은 회사가 두 노드로 갈라진다**.
+                # KSIA 명부는 소부장 코퍼스(G₂)의 출원인 목록 그 자체라 분열이 293곳에서
+                # 재생산된다. (mappings/org_identity_crosswalk.csv 참조)
+                iri = URIRef(DATA[f"organization/{slug(en or ko)}"])
+                stats["new_org_node"] += 1
         is_new = iri not in orgs.values() and iri not in vendors.values()
 
         if iri in seen:

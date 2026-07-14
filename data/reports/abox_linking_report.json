@@ -4,15 +4,15 @@
     "experts": 110,
     "problems": 226
   },
-  "triples": 3573,
+  "triples": 3553,
   "mitigation_to_skill_links": 4,
   "term_resolution": {
     "distinct_terms_seen": 575,
-    "tier1_lexicon_hits": 1390,
+    "tier1_lexicon_hits": 1370,
     "tier2_alias_hits": 746,
-    "unmatched_occurrences": 2021,
-    "distinct_unmatched": 404,
-    "distinct_matched": 142
+    "unmatched_occurrences": 2041,
+    "distinct_unmatched": 406,
+    "distinct_matched": 140
   },
   "orphans": {
     "experts_with_no_ontology_link": [
@@ -113,6 +113,10 @@
     {
       "term": "parts",
       "occurrences": 19
+    },
+    {
+      "term": "SCREEN",
+      "occurrences": 18
     },
     {
       "term": "specialty",
@@ -269,10 +273,6 @@
     {
       "term": "spec_miss",
       "occurrences": 11
-    },
-    {
-      "term": "TCAD",
-      "occurrences": 10
     }
   ]
 }

@@ -148,9 +148,9 @@ skos:prefLabel skos:closeMatch semiconto:hasExperimentName .
 
 <https://w3id.org/sdkb/data/metrology/overlay> skos:broadMatch semiconto:ExperimentalMethod .
 
-<https://w3id.org/sdkb/data/org/samsung_electronics> skos:broadMatch prov:Agent .
+<https://w3id.org/sdkb/data/organization/samsung_electronics> skos:broadMatch prov:Agent .
 
-<https://w3id.org/sdkb/data/org/sk_hynix> skos:broadMatch prov:Agent .
+<https://w3id.org/sdkb/data/organization/sk_hynix> skos:broadMatch prov:Agent .
 
 <https://w3id.org/sdkb/data/parameter/bias_power> skos:closeMatch semiconto:MaterialProperty .
 
@@ -202,37 +202,37 @@ skos:prefLabel skos:closeMatch semiconto:hasExperimentName .
 
 <https://w3id.org/sdkb/data/subprocess/wet_etch> skos:closeMatch semiconto:ExperimentalStep .
 
-<https://w3id.org/sdkb/data/vendor/3m> skos:broadMatch prov:Agent .
+<https://w3id.org/sdkb/data/organization/3m_innovative_properties_company> skos:broadMatch prov:Agent .
 
-<https://w3id.org/sdkb/data/vendor/applied_materials> skos:broadMatch prov:Agent .
+<https://w3id.org/sdkb/data/organization/applied_materials> skos:broadMatch prov:Agent .
 
-<https://w3id.org/sdkb/data/vendor/asm> skos:broadMatch prov:Agent .
+<https://w3id.org/sdkb/data/organization/asm_ip_holding_b_v> skos:broadMatch prov:Agent .
 
-<https://w3id.org/sdkb/data/vendor/asml> skos:broadMatch prov:Agent .
+<https://w3id.org/sdkb/data/organization/asml> skos:broadMatch prov:Agent .
 
-<https://w3id.org/sdkb/data/vendor/axcelis> skos:broadMatch prov:Agent .
+<https://w3id.org/sdkb/data/organization/axcelis> skos:broadMatch prov:Agent .
 
-<https://w3id.org/sdkb/data/vendor/bruker> skos:broadMatch prov:Agent .
+<https://w3id.org/sdkb/data/organization/bruker> skos:broadMatch prov:Agent .
 
-<https://w3id.org/sdkb/data/vendor/cabot> skos:broadMatch prov:Agent .
+<https://w3id.org/sdkb/data/organization/cabot> skos:broadMatch prov:Agent .
 
-<https://w3id.org/sdkb/data/vendor/ebara> skos:broadMatch prov:Agent .
+<https://w3id.org/sdkb/data/organization/ebara> skos:broadMatch prov:Agent .
 
 <https://w3id.org/sdkb/data/vendor/generic> skos:broadMatch prov:Agent .
 
-<https://w3id.org/sdkb/data/vendor/hitachi> skos:broadMatch prov:Agent .
+<https://w3id.org/sdkb/data/organization/hitachi_high_tech> skos:broadMatch prov:Agent .
 
-<https://w3id.org/sdkb/data/vendor/kla> skos:broadMatch prov:Agent .
+<https://w3id.org/sdkb/data/organization/kla> skos:broadMatch prov:Agent .
 
-<https://w3id.org/sdkb/data/vendor/lam_research> skos:broadMatch prov:Agent .
+<https://w3id.org/sdkb/data/organization/lam_research> skos:broadMatch prov:Agent .
 
-<https://w3id.org/sdkb/data/vendor/mattson> skos:broadMatch prov:Agent .
+<https://w3id.org/sdkb/data/organization/mattson_technology> skos:broadMatch prov:Agent .
 
-<https://w3id.org/sdkb/data/vendor/screen> skos:broadMatch prov:Agent .
+<https://w3id.org/sdkb/data/organization/screen_holdings> skos:broadMatch prov:Agent .
 
-<https://w3id.org/sdkb/data/vendor/semes> skos:broadMatch prov:Agent .
+<https://w3id.org/sdkb/data/organization/semes> skos:broadMatch prov:Agent .
 
-<https://w3id.org/sdkb/data/vendor/tokyo_electron> skos:broadMatch prov:Agent .
+<https://w3id.org/sdkb/data/organization/tokyo_electron_limited> skos:broadMatch prov:Agent .
 
 sdkb:Equipment owl:equivalentClass semiconto:Equipment ;
     skos:exactMatch semiconto:Equipment .
