@@ -43,6 +43,14 @@ ont:Shape_Patent
         sh:path ont:interpretationType ;
         sh:in ( "verbatim" "mapped" "author-defined" ) ;
         sh:message "interpretationType must be one of: verbatim, mapped, author-defined." ;
+    ] ;
+    # 특허의 이름은 발명의 명칭이다. rdfs:label 로 넣는 바람에 제목 1,000건이 질의에
+    # 잡히지 않았고, 선행기술 질의가 사람이 읽을 수 없는 IRI 만 돌려줬다.
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:minCount 1 ;
+        sh:datatype rdf:langString ;
+        sh:message "Every Patent must have a language-tagged skos:prefLabel (발명의 명칭, not rdfs:label)." ;
     ] .
 
 # ─── Every RejectedPatent must cite ≥ 1 prior art (examiner-grade) ────
@@ -54,11 +62,13 @@ ont:Shape_RejectedPatent
         sh:minCount 1 ;
         sh:message "Every RejectedPatent must cite at least one examiner-grade prior art." ;
     ] ;
+    # 거절유형은 **요구하지 않는다** — SIRP 원천이 1,000건 중 414건에만 담고 있다.
+    # minCount 1 을 걸면 없는 유형을 지어내야 한다 (날조). 값이 있을 때 타입만 검사하고,
+    # 결측 586건은 게이트가 아니라 데이터 프로파일이 보고한다.
     sh:property [
         sh:path ont:rejectedFor ;
-        sh:minCount 1 ;
         sh:class ont:RejectionType ;
-        sh:message "Every RejectedPatent must declare ≥1 RejectionType via ont:rejectedFor." ;
+        sh:message "ont:rejectedFor must point at an ont:RejectionType." ;
     ] ;
     sh:property [
         sh:path ont:examinationStatus ;
@@ -77,15 +87,14 @@ ont:Shape_IPCSymbol
         sh:message "IPCSymbol must have a skos:notation (e.g. 'H01L 21/02')." ;
     ] .
 
-# ─── PriorArt edges must trace back to a Patent on both ends ──────────
-ont:Shape_PriorArtTarget
+# ─── PriorArt: 인용하는 쪽만 특허다 ───────────────────────────────────
+# **인용되는 쪽에 ont:Patent 를 요구하지 않는다.** 심사관 인용 2,534건 중 30건은 비특허문헌
+# (논문·표준·매뉴얼)이고, 인용된 문헌은 서지가 없어 ont:Patent 로 타입하지 않는다 — 그것이
+# 설계다. TBox 는 이미 hasPriorArt 의 range 를 제거했는데 이 shape 만 옛 주장을 유지하고
+# 있었고, 그래서 3,485건 전부가 위반으로 잡혔다. **shape 이 틀렸다.**
+ont:Shape_PriorArtSubject
     a sh:NodeShape ;
     sh:targetSubjectsOf ont:hasPriorArt ;
-    sh:property [
-        sh:path ont:hasPriorArt ;
-        sh:class ont:Patent ;
-        sh:message "ont:hasPriorArt range must be ont:Patent (or subclass)." ;
-    ] ;
     sh:class ont:Patent ;
     sh:message "Subject of ont:hasPriorArt must be a Patent." .
 

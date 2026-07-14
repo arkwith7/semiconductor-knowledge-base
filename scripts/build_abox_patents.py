@@ -313,7 +313,11 @@ def main() -> int:
         pid = str(r["patent_id"])
         pu = _u(pid)
         g.add((pu, RDF.type, ONT_R("Patent")))
-        g.add((pu, RDFS.label, Literal(str(r.get("title") or pid))))
+        # 특허의 이름은 발명의 명칭이고, 인스턴스의 이름은 skos:prefLabel 이다
+        # (rdfs:label 은 TBox 의 클래스·속성 이름). 여기가 rdfs:label 을 쓰는 바람에
+        # **특허 1,000건의 제목이 질의에 잡히지 않았다** — 선행기술 질의가 IRI 만 돌려줬다.
+        # KIPRIS 원문은 국문이다.
+        g.add((pu, SKOS.prefLabel, Literal(str(r.get("title") or pid), lang="ko")))
 
         # 문자열 속성 — 전부 TBox 가 정의한 DatatypeProperty
         for col, prop in (("application_number", "applicationNumber"),

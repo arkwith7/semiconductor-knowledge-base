@@ -89,10 +89,15 @@ abox-vendors: convert abox-patents
 align:
 	$(PYTHON) scripts/align_candidates.py
 
-# core-data 만 검증하면 Expert·Problem A-Box 에 걸리는 shape 이 **한 번도 안 돈다**
-# (Shape_PersonProblemLabel 이 그랬다 — 라벨 규약 위반이 게이트를 통과했다).
+# 검사되지 않는 shape 은 shape 이 아니다. 세 번 데었다:
+#   · Shape_CoreNode 가 Expert·Problem 을 대상에서 빼먹었다 (라벨 규약 위반이 통과)
+#   · validate 가 core-data 만 읽어 A-Box 에 걸리는 shape 이 아예 안 돌았다
+#   · shapes_patent.ttl 은 **어떤 타깃도 실행하지 않았다** (특허 제목 결측이 통과)
+# 그래서 A-Box 를 전부 싣고, 특허 shape 도 함께 돌린다.
 validate:
 	$(PYTHON) scripts/validate_shacl.py --data ontology/sdkb-core-data.ttl ontology/sdkb-abox-experts-problems.ttl
+	$(PYTHON) scripts/validate_shacl.py --shapes validation/shapes_patent.ttl \
+		--data ontology/sdkb-abox-patents.ttl ontology/sdkb-core-data.ttl ontology/sdkb-patent.ttl
 
 test:
 	$(PYTHON) -m pytest tests/ -v --tb=short
