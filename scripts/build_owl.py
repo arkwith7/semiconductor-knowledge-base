@@ -492,6 +492,10 @@ def build_ontology() -> Graph:
         g.add((ind, RDF.type, OWL.NamedIndividual))
         g.add((ind, RDF.type, SDKB_ONT.ConstraintType if ctype else OWL.Thing))
         g.add((ind, RDFS.label, Literal(ctype, lang="en")))
+        # named individual 도 그래프에서는 ont:ConstraintType 의 인스턴스로 잡힌다.
+        # 인스턴스의 이름은 skos:prefLabel 이다 — 이것만 rdfs:label 뿐이라 질의가 이름을 못 찾았다.
+        g.add((ind, SKOS.prefLabel, Literal("Hard Constraint" if ctype == "hardConstraint"
+                                            else "Soft Constraint", lang="en")))
 
     # ConstraintType class
     ct = SDKB_ONT.ConstraintType
