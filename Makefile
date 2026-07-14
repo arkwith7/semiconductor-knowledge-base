@@ -89,8 +89,10 @@ abox-vendors: convert abox-patents
 align:
 	$(PYTHON) scripts/align_candidates.py
 
+# core-data 만 검증하면 Expert·Problem A-Box 에 걸리는 shape 이 **한 번도 안 돈다**
+# (Shape_PersonProblemLabel 이 그랬다 — 라벨 규약 위반이 게이트를 통과했다).
 validate:
-	$(PYTHON) scripts/validate_shacl.py
+	$(PYTHON) scripts/validate_shacl.py --data ontology/sdkb-core-data.ttl ontology/sdkb-abox-experts-problems.ttl
 
 test:
 	$(PYTHON) -m pytest tests/ -v --tb=short

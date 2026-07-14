@@ -20,18 +20,23 @@ DEFAULT_OWL    = ROOT / "ontology" / "sdkb-core.ttl"
 
 def main():
     parser = argparse.ArgumentParser(description="SDKB SHACL Validator")
-    parser.add_argument("--data",   type=Path, default=DEFAULT_DATA,   help="Data graph (TTL)")
+    parser.add_argument("--data",   type=Path, default=DEFAULT_DATA, nargs="+",
+                        help="Data graph(s) (TTL). 여러 개를 주면 병합해서 검증한다 — "
+                             "A-Box 를 빼놓고 검증하면 그 A-Box 에 걸리는 shape 이 vacuous 해진다.")
     parser.add_argument("--shapes", type=Path, default=DEFAULT_SHAPES, help="SHACL shapes (TTL)")
     parser.add_argument("--owl",    type=Path, default=DEFAULT_OWL,    help="OWL ontology (TTL)")
     args = parser.parse_args()
 
-    if not args.data.exists():
-        print(f"ERROR: Data file not found: {args.data}", file=sys.stderr)
-        sys.exit(1)
+    data_paths = args.data if isinstance(args.data, list) else [args.data]
+    for path in data_paths:
+        if not path.exists():
+            print(f"ERROR: Data file not found: {path}", file=sys.stderr)
+            sys.exit(1)
 
     # Load data graph (+ ontology for class inference)
     data_graph = Graph()
-    data_graph.parse(str(args.data), format="turtle")
+    for path in data_paths:
+        data_graph.parse(str(path), format="turtle")
     if args.owl.exists():
         data_graph.parse(str(args.owl), format="turtle")
     print(f"Loaded data: {len(data_graph)} triples")

@@ -38,6 +38,23 @@ ont:Shape_CoreNode
         sh:message "interpretationType must be one of: verbatim, mapped, author-defined." ;
     ] .
 
+# ─── Expert/Problem 도 이름이 있어야 한다 ────────────────────────
+# Shape_CoreNode 의 대상에서 Expert·Problem 만 빠져 있었고, 그래서 이 둘이 rdfs:label 만
+# 달고 다니는 것을 게이트가 잡지 못했다. 결과: "이 공정에 필요한 스킬을 가진 전문가는
+# 누구인가" 라는 질의가 답은 하되 **IRI 만** 돌려줬다 (읽을 수 있는 답이 아니었다).
+#
+# license·interpretationType 은 요구하지 않는다 — 이 두 클래스는 큐레이션 원천이 다르고
+# 프로비넌스 부여는 별개 과제다. 없는 것을 있는 척하지 않는다.
+ont:Shape_PersonProblemLabel
+    a sh:NodeShape ;
+    sh:targetClass ont:Expert, ont:Problem ;
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:minCount 1 ;
+        sh:datatype rdf:langString ;
+        sh:message "Expert/Problem must have a language-tagged skos:prefLabel (not rdfs:label)." ;
+    ] .
+
 # ─── Confidence score range (0.0–1.0) ────────────────────────────
 ont:Shape_Confidence
     a sh:PropertyShape ;

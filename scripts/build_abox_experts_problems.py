@@ -43,7 +43,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 from rdflib import Graph, Literal, URIRef
-from rdflib.namespace import OWL, RDF, RDFS, XSD
+from rdflib.namespace import OWL, RDF, RDFS, SKOS, XSD
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from config.namespaces import PREFIX_MAP, SDKB_DATA, SDKB_ONT  # noqa: E402
@@ -189,6 +189,7 @@ def main() -> int:
         g.bind(pfx, str(ns))
     g.bind("owl", str(OWL))
     g.bind("rdfs", str(RDFS))
+    g.bind("skos", str(SKOS))
     g.bind("xsd", str(XSD))
 
     # 어휘 선언은 여기서 하지 않는다 (CLAUDE.md §1.2).
@@ -264,9 +265,22 @@ def main() -> int:
         eid = e["expert_id"]
         u = node_uri(f"expert:{eid}")
         g.add((u, RDF.type, SDKB_ONT.Expert))
-        # KR file carries real names; EN file uses anonymized placeholders.
-        name = (e.get("name") or experts_en.get(eid, {}).get("name") or eid)
-        g.add((u, RDFS.label, Literal(name)))
+        # 인스턴스의 이름은 skos:prefLabel 이다 (rdfs:label 은 TBox 의 클래스·속성 이름).
+        # 이 A-Box 만 rdfs:label 을 쓰고 있었고, 그래서 "이 공정에 필요한 스킬을 가진
+        # 전문가는 누구인가" 라는 질의가 **IRI 만** 돌려줬다 — 답은 하는데 읽히지 않았다.
+        #
+        # KR 파일이 실명, EN 파일은 익명화된 자리표시자("Kim, [Given Name]")다. 익명 자리표시자를
+        # 대표 이름으로 삼을 수는 없으므로 **prefLabel 은 실명(@ko)**, EN 표기는 altLabel(@en) 이다.
+        kr_name = e.get("name")
+        en_name = experts_en.get(eid, {}).get("name")
+        if kr_name:
+            g.add((u, SKOS.prefLabel, Literal(kr_name, lang="ko")))
+            if en_name:
+                g.add((u, SKOS.altLabel, Literal(en_name, lang="en")))
+        elif en_name:
+            g.add((u, SKOS.prefLabel, Literal(en_name, lang="en")))
+        else:
+            g.add((u, SKOS.prefLabel, Literal(eid, lang="en")))
         if e.get("region"):
             g.add((u, SDKB_ONT.region, Literal(e["region"])))
         g.add((u, SDKB_ONT.complianceFlag,
@@ -279,7 +293,8 @@ def main() -> int:
         pid = p["problem_id"]
         u = node_uri(f"problem:{pid}")
         g.add((u, RDF.type, SDKB_ONT.Problem))
-        g.add((u, RDFS.label, Literal(p.get("problem_title") or pid)))
+        # 문제 제목은 원천(sme_problems_v1.json)이 영문이다.
+        g.add((u, SKOS.prefLabel, Literal(p.get("problem_title") or pid, lang="en")))
         for fld, prop in (("compliance_sensitivity", "complianceSensitivity"),
                           ("client_country", "clientCountry"),
                           ("region", "region"),
