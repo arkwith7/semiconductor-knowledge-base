@@ -456,6 +456,21 @@ def build_ontology() -> Graph:
         "conflictNote":        (None, XSD.string,   "Note on unresolved alignment conflict."),
         "reviewStatus":        (None, XSD.string,   "Review status: APPROVED | DISPUTED | PENDING."),
         "granularity":         (None, XSD.string,   "Process granularity level (group/module/unit)."),
+        # ── 인력·문제 축 (experts/problems A-Box). 이 여섯은 **어디에도 선언되지 않은 채**
+        # 쓰이고 있었다 — 인라인 선언조차 없었다. ObjectProperty 만 인라인 선언돼 있어서
+        # 눈에 띄지 않았다. 선언되지 않은 술어는 추론기·SHACL 이 검증할 수 없다 (§1.2).
+        "companyType":           ("Problem", XSD.string,
+                                  "Value-chain role of the SME that raised the problem (materials | equipment | parts | fabless | foundry …)."),
+        "problemCategory":       ("Problem", XSD.string,
+                                  "Category of the SME problem (defect_reduction | contamination | yield_improvement …)."),
+        "clientCountry":         ("Problem", XSD.string,
+                                  "ISO country code of the SME that raised the problem."),
+        "complianceSensitivity": ("Problem", XSD.string,
+                                  "Disclosure sensitivity of the problem: public | restricted | confidential."),
+        "complianceFlag":        ("Expert", XSD.boolean,
+                                  "Whether the expert profile is subject to compliance review."),
+        "region":                (["Expert", "Problem"], XSD.string,
+                                  "Geographic region of an expert or of the SME that raised a problem."),
     }
 
     for prop_name, (domain, range_, desc) in dt_props.items():
@@ -464,6 +479,8 @@ def build_ontology() -> Graph:
         g.add((prop, RDFS.label, Literal(prop_name, lang="en")))
         g.add((prop, RDFS.comment, Literal(desc, lang="en")))
         g.add((prop, RDFS.range, range_))
+        if domain is not None:
+            _emit_class_or_union(prop, RDFS.domain, domain)
 
     # ═══════════════════════════════════════════════════════════
     # CONSTRAINT TYPES (named individuals for weight semantics)
