@@ -8,8 +8,8 @@
     dcterms:license "Public information (KSIA member directory)"^^xsd:string ;
     dcterms:source "KSIA member directory (https://www.ksia.or.kr), retrieved 2026-07-14"^^xsd:string ;
     rdfs:seeAlso <https://semiconductor.samsung.com/kr> ;
-    skos:altLabel "삼성전자㈜"@ko ;
-    skos:prefLabel "Samsung Electronics Co. Ltd - Device Solutions"@en ;
+    skos:altLabel "Samsung Electronics Co. Ltd - Device Solutions"@en,
+        "삼성전자㈜"@ko ;
     ont:companyType "소자/파운드리업체" ;
     ont:interpretationType "verbatim" .
 
@@ -17,8 +17,8 @@
     dcterms:license "Public information (KSIA member directory)"^^xsd:string ;
     dcterms:source "KSIA member directory (https://www.ksia.or.kr), retrieved 2026-07-14"^^xsd:string ;
     rdfs:seeAlso <https://www.skhynix.com> ;
-    skos:altLabel "SK하이닉스㈜"@ko ;
-    skos:prefLabel "SK hynix co., ltd."@en ;
+    skos:altLabel "SK hynix co., ltd."@en,
+        "SK하이닉스㈜"@ko ;
     ont:companyType "소자/파운드리업체" ;
     ont:interpretationType "verbatim" .
 
@@ -26,8 +26,8 @@
     dcterms:license "Public information (KSIA member directory)"^^xsd:string ;
     dcterms:source "KSIA member directory (https://www.ksia.or.kr), retrieved 2026-07-14"^^xsd:string ;
     rdfs:seeAlso <http://www.asendia-global.com> ;
-    skos:altLabel "㈜아센디아"@ko ;
-    skos:prefLabel "ASENDIA Co., Ltd."@en ;
+    skos:altLabel "ASENDIA Co., Ltd."@en,
+        "㈜아센디아"@ko ;
     ont:companyType "부분품업체" ;
     ont:interpretationType "verbatim" .
 
@@ -35,8 +35,8 @@
     dcterms:license "Public information (KSIA member directory)"^^xsd:string ;
     dcterms:source "KSIA member directory (https://www.ksia.or.kr), retrieved 2026-07-14"^^xsd:string ;
     rdfs:seeAlso <https://www.avaco.com> ;
-    skos:altLabel "㈜아바코"@ko ;
-    skos:prefLabel "AVACO Co.,Ltd."@en ;
+    skos:altLabel "AVACO Co.,Ltd."@en,
+        "㈜아바코"@ko ;
     ont:companyType "장비업체" ;
     ont:interpretationType "verbatim" .
 
@@ -44,8 +44,8 @@
     dcterms:license "Public information (KSIA member directory)"^^xsd:string ;
     dcterms:source "KSIA member directory (https://www.ksia.or.kr), retrieved 2026-07-14"^^xsd:string ;
     rdfs:seeAlso <http://www.dbhitek.com/kr> ;
-    skos:altLabel "㈜DB하이텍"@ko ;
-    skos:prefLabel "DB HiTek Co., Ltd."@en ;
+    skos:altLabel "DB HiTek Co., Ltd."@en,
+        "㈜DB하이텍"@ko ;
     ont:companyType "소자/파운드리업체" ;
     ont:interpretationType "verbatim" .
 
@@ -53,8 +53,8 @@
     dcterms:license "Public information (KSIA member directory)"^^xsd:string ;
     dcterms:source "KSIA member directory (https://www.ksia.or.kr), retrieved 2026-07-14"^^xsd:string ;
     rdfs:seeAlso <https://www.dwchem.co.kr> ;
-    skos:altLabel "동우화인켐㈜"@ko ;
-    skos:prefLabel "DONGWOO FINE-CHEM"@en ;
+    skos:altLabel "DONGWOO FINE-CHEM"@en,
+        "동우화인켐㈜"@ko ;
     ont:companyType "재료업체" ;
     ont:interpretationType "verbatim" .
 
@@ -62,8 +62,8 @@
     dcterms:license "Public information (KSIA member directory)"^^xsd:string ;
     dcterms:source "KSIA member directory (https://www.ksia.or.kr), retrieved 2026-07-14"^^xsd:string ;
     rdfs:seeAlso <http://www.etri.re.kr> ;
-    skos:altLabel "한국전자통신연구원"@ko ;
-    skos:prefLabel "ETRI"@en ;
+    skos:altLabel "ETRI"@en,
+        "한국전자통신연구원"@ko ;
     ont:companyType "연구기관" ;
     ont:interpretationType "verbatim" .
 
@@ -71,8 +71,8 @@
     dcterms:license "Public information (KSIA member directory)"^^xsd:string ;
     dcterms:source "KSIA member directory (https://www.ksia.or.kr), retrieved 2026-07-14"^^xsd:string ;
     rdfs:seeAlso <http://hniruja.com/> ;
-    skos:altLabel "㈜에이치앤이루자"@ko ;
-    skos:prefLabel "H&iruja Co. Ltd"@en ;
+    skos:altLabel "H&iruja Co. Ltd"@en,
+        "㈜에이치앤이루자"@ko ;
     ont:companyType "장비업체" ;
     ont:interpretationType "verbatim" .
 
@@ -80,8 +80,8 @@
     dcterms:license "Public information (KSIA member directory)"^^xsd:string ;
     dcterms:source "KSIA member directory (https://www.ksia.or.kr), retrieved 2026-07-14"^^xsd:string ;
     rdfs:seeAlso <https://www.hanwha-pm.com/ko/> ;
-    skos:altLabel "한화세미텍 주식회사"@ko ;
-    skos:prefLabel "Hanwha Semitech Co., Ltd"@en ;
+    skos:altLabel "Hanwha Semitech Co., Ltd"@en,
+        "한화세미텍 주식회사"@ko ;
     ont:companyType "장비업체" ;
     ont:interpretationType "verbatim" .
 
@@ -89,8 +89,8 @@
     dcterms:license "Public information (KSIA member directory)"^^xsd:string ;
     dcterms:source "KSIA member directory (https://www.ksia.or.kr), retrieved 2026-07-14"^^xsd:string ;
     rdfs:seeAlso <https://www.icd.co.kr/main/main.html?> ;
-    skos:altLabel "㈜아이씨디"@ko ;
-    skos:prefLabel "INNOVATION FOR CREATIVE DEVICES CO., LTD. (ICD CO.,LTD.)"@en ;
+    skos:altLabel "INNOVATION FOR CREATIVE DEVICES CO., LTD. (ICD CO.,LTD.)"@en,
+        "㈜아이씨디"@ko ;
     ont:companyType "장비업체" ;
     ont:interpretationType "verbatim" .
 
@@ -98,8 +98,8 @@
     dcterms:license "Public information (KSIA member directory)"^^xsd:string ;
     dcterms:source "KSIA member directory (https://www.ksia.or.kr), retrieved 2026-07-14"^^xsd:string ;
     rdfs:seeAlso <http://www.iste.co.kr/> ;
-    skos:altLabel "주식회사 아이에스티이"@ko ;
-    skos:prefLabel "ISTE Co.,Ltd."@en ;
+    skos:altLabel "ISTE Co.,Ltd."@en,
+        "주식회사 아이에스티이"@ko ;
     ont:companyType "장비업체" ;
     ont:interpretationType "verbatim" .
 
@@ -107,8 +107,8 @@
     dcterms:license "Public information (KSIA member directory)"^^xsd:string ;
     dcterms:source "KSIA member directory (https://www.ksia.or.kr), retrieved 2026-07-14"^^xsd:string ;
     rdfs:seeAlso <https://www.jusung.com> ;
-    skos:altLabel "주성엔지니어링㈜"@ko ;
-    skos:prefLabel "JUSUNG ENGINEERING Co., LTD."@en ;
+    skos:altLabel "JUSUNG ENGINEERING Co., LTD."@en,
+        "주성엔지니어링㈜"@ko ;
     ont:companyType "장비업체" ;
     ont:interpretationType "verbatim" .
 
@@ -116,8 +116,8 @@
     dcterms:license "Public information (KSIA member directory)"^^xsd:string ;
     dcterms:source "KSIA member directory (https://www.ksia.or.kr), retrieved 2026-07-14"^^xsd:string ;
     rdfs:seeAlso <https://www.komico.com> ;
-    skos:altLabel "코미코"@ko ;
-    skos:prefLabel "KoMiCo LTD."@en ;
+    skos:altLabel "KoMiCo LTD."@en,
+        "코미코"@ko ;
     ont:companyType "부분품업체" ;
     ont:interpretationType "verbatim" .
 
@@ -125,8 +125,8 @@
     dcterms:license "Public information (KSIA member directory)"^^xsd:string ;
     dcterms:source "KSIA member directory (https://www.ksia.or.kr), retrieved 2026-07-14"^^xsd:string ;
     rdfs:seeAlso <https://www.kicl.co.kr> ;
-    skos:altLabel "㈜코리아인스트루먼트"@ko ;
-    skos:prefLabel "Korea Instrument Co., Ltd."@en ;
+    skos:altLabel "Korea Instrument Co., Ltd."@en,
+        "㈜코리아인스트루먼트"@ko ;
     ont:companyType "부분품업체" ;
     ont:interpretationType "verbatim" .
 
@@ -134,8 +134,8 @@
     dcterms:license "Public information (KSIA member directory)"^^xsd:string ;
     dcterms:source "KSIA member directory (https://www.ksia.or.kr), retrieved 2026-07-14"^^xsd:string ;
     rdfs:seeAlso <https://www.laserssel.com/> ;
-    skos:altLabel "레이저쎌 주식회사"@ko ;
-    skos:prefLabel "LASERSSEL CO., LTD."@en ;
+    skos:altLabel "LASERSSEL CO., LTD."@en,
+        "레이저쎌 주식회사"@ko ;
     ont:companyType "장비업체" ;
     ont:interpretationType "verbatim" .
 
@@ -143,8 +143,8 @@
     dcterms:license "Public information (KSIA member directory)"^^xsd:string ;
     dcterms:source "KSIA member directory (https://www.ksia.or.kr), retrieved 2026-07-14"^^xsd:string ;
     rdfs:seeAlso <https://www.lge.co.kr> ;
-    skos:altLabel "LG전자㈜"@ko ;
-    skos:prefLabel "LG Electronics"@en ;
+    skos:altLabel "LG Electronics"@en,
+        "LG전자㈜"@ko ;
     ont:companyType "설계업체" ;
     ont:interpretationType "verbatim" .
 
@@ -152,8 +152,8 @@
     dcterms:license "Public information (KSIA member directory)"^^xsd:string ;
     dcterms:source "KSIA member directory (https://www.ksia.or.kr), retrieved 2026-07-14"^^xsd:string ;
     rdfs:seeAlso <https://www.lxsemicon.com> ;
-    skos:altLabel "㈜LX세미콘"@ko ;
-    skos:prefLabel "LX Semicon Co., Ltd."@en ;
+    skos:altLabel "LX Semicon Co., Ltd."@en,
+        "㈜LX세미콘"@ko ;
     ont:companyType "설계업체" ;
     ont:interpretationType "verbatim" .
 
@@ -161,8 +161,8 @@
     dcterms:license "Public information (KSIA member directory)"^^xsd:string ;
     dcterms:source "KSIA member directory (https://www.ksia.or.kr), retrieved 2026-07-14"^^xsd:string ;
     rdfs:seeAlso <https://www.magnachip.com/> ;
-    skos:altLabel "매그나칩반도체 유한회사"@ko ;
-    skos:prefLabel "Magnachip Semiconductor Ltd."@en ;
+    skos:altLabel "Magnachip Semiconductor Ltd."@en,
+        "매그나칩반도체 유한회사"@ko ;
     ont:companyType "소자/파운드리업체" ;
     ont:interpretationType "verbatim" .
 
@@ -170,8 +170,8 @@
     dcterms:license "Public information (KSIA member directory)"^^xsd:string ;
     dcterms:source "KSIA member directory (https://www.ksia.or.kr), retrieved 2026-07-14"^^xsd:string ;
     rdfs:seeAlso <https://www.mico.kr> ;
-    skos:altLabel "㈜미코"@ko ;
-    skos:prefLabel "MiCo Ltd."@en ;
+    skos:altLabel "MiCo Ltd."@en,
+        "㈜미코"@ko ;
     ont:companyType "부분품업체" ;
     ont:interpretationType "verbatim" .
 
@@ -179,8 +179,8 @@
     dcterms:license "Public information (KSIA member directory)"^^xsd:string ;
     dcterms:source "KSIA member directory (https://www.ksia.or.kr), retrieved 2026-07-14"^^xsd:string ;
     rdfs:seeAlso <http://www.msmaterials.co.kr> ;
-    skos:altLabel "㈜엠에스머트리얼즈"@ko ;
-    skos:prefLabel "MS Materials Co., Ltd."@en ;
+    skos:altLabel "MS Materials Co., Ltd."@en,
+        "㈜엠에스머트리얼즈"@ko ;
     ont:companyType "재료업체" ;
     ont:interpretationType "verbatim" .
 
@@ -188,8 +188,8 @@
     dcterms:license "Public information (KSIA member directory)"^^xsd:string ;
     dcterms:source "KSIA member directory (https://www.ksia.or.kr), retrieved 2026-07-14"^^xsd:string ;
     rdfs:seeAlso <https://www.nepes.co.kr> ;
-    skos:altLabel "(주)네패스"@ko ;
-    skos:prefLabel "nepes corporation"@en ;
+    skos:altLabel "nepes corporation"@en,
+        "(주)네패스"@ko ;
     ont:companyType "테스트/패키징업체" ;
     ont:interpretationType "verbatim" .
 
@@ -197,8 +197,8 @@
     dcterms:license "Public information (KSIA member directory)"^^xsd:string ;
     dcterms:source "KSIA member directory (https://www.ksia.or.kr), retrieved 2026-07-14"^^xsd:string ;
     rdfs:seeAlso <http://www.psk-inc.com> ;
-    skos:altLabel "피에스케이㈜"@ko ;
-    skos:prefLabel "PSK Inc."@en ;
+    skos:altLabel "PSK Inc."@en,
+        "피에스케이㈜"@ko ;
     ont:companyType "장비업체" ;
     ont:interpretationType "verbatim" .
 
@@ -206,8 +206,8 @@
     dcterms:license "Public information (KSIA member directory)"^^xsd:string ;
     dcterms:source "KSIA member directory (https://www.ksia.or.kr), retrieved 2026-07-14"^^xsd:string ;
     rdfs:seeAlso <https://www.pskholding.com> ;
-    skos:altLabel "피에스케이홀딩스㈜"@ko ;
-    skos:prefLabel "PSK Holdings Inc."@en ;
+    skos:altLabel "PSK Holdings Inc."@en,
+        "피에스케이홀딩스㈜"@ko ;
     ont:companyType "장비업체" ;
     ont:interpretationType "verbatim" .
 
@@ -215,8 +215,8 @@
     dcterms:license "Public information (KSIA member directory)"^^xsd:string ;
     dcterms:source "KSIA member directory (https://www.ksia.or.kr), retrieved 2026-07-14"^^xsd:string ;
     rdfs:seeAlso <https://www.snstech.co.kr> ;
-    skos:altLabel "㈜에스앤에스텍"@ko ;
-    skos:prefLabel "snstech"@en ;
+    skos:altLabel "snstech"@en,
+        "㈜에스앤에스텍"@ko ;
     ont:companyType "재료업체" ;
     ont:interpretationType "verbatim" .
 
@@ -224,8 +224,8 @@
     dcterms:license "Public information (KSIA member directory)"^^xsd:string ;
     dcterms:source "KSIA member directory (https://www.ksia.or.kr), retrieved 2026-07-14"^^xsd:string ;
     rdfs:seeAlso <https://www.samsungsdi.co.kr> ;
-    skos:altLabel "삼성SDI"@ko ;
-    skos:prefLabel "SAMSUNG SDI CO., LTD."@en ;
+    skos:altLabel "SAMSUNG SDI CO., LTD."@en,
+        "삼성SDI"@ko ;
     ont:companyType "재료업체" ;
     ont:interpretationType "verbatim" .
 
@@ -233,8 +233,8 @@
     dcterms:license "Public information (KSIA member directory)"^^xsd:string ;
     dcterms:source "KSIA member directory (https://www.ksia.or.kr), retrieved 2026-07-14"^^xsd:string ;
     rdfs:seeAlso <http://www.skenpulse.com> ;
-    skos:altLabel "에스케이엔펄스 주식회사"@ko ;
-    skos:prefLabel "SK enpulse Co., Ltd."@en ;
+    skos:altLabel "SK enpulse Co., Ltd."@en,
+        "에스케이엔펄스 주식회사"@ko ;
     ont:companyType "부분품업체" ;
     ont:interpretationType "verbatim" .
 
@@ -242,8 +242,8 @@
     dcterms:license "Public information (KSIA member directory)"^^xsd:string ;
     dcterms:source "KSIA member directory (https://www.ksia.or.kr), retrieved 2026-07-14"^^xsd:string ;
     rdfs:seeAlso <https://www.skspecialty.com/> ;
-    skos:altLabel "SK스페셜티"@ko ;
-    skos:prefLabel "SKspecialty"@en ;
+    skos:altLabel "SKspecialty"@en,
+        "SK스페셜티"@ko ;
     ont:companyType "재료업체" ;
     ont:interpretationType "verbatim" .
 
@@ -251,8 +251,8 @@
     dcterms:license "Public information (KSIA member directory)"^^xsd:string ;
     dcterms:source "KSIA member directory (https://www.ksia.or.kr), retrieved 2026-07-14"^^xsd:string ;
     rdfs:seeAlso <http://www.soulbrain.co.kr/> ;
-    skos:altLabel "솔브레인㈜"@ko ;
-    skos:prefLabel "Soulbrain Co.,Ltd."@en ;
+    skos:altLabel "Soulbrain Co.,Ltd."@en,
+        "솔브레인㈜"@ko ;
     ont:companyType "재료업체" ;
     ont:interpretationType "verbatim" .
 
@@ -260,8 +260,8 @@
     dcterms:license "Public information (KSIA member directory)"^^xsd:string ;
     dcterms:source "KSIA member directory (https://www.ksia.or.kr), retrieved 2026-07-14"^^xsd:string ;
     rdfs:seeAlso <https://www.hites.co.kr> ;
-    skos:altLabel "㈜테스"@ko ;
-    skos:prefLabel "TES Co.,Ltd"@en ;
+    skos:altLabel "TES Co.,Ltd"@en,
+        "㈜테스"@ko ;
     ont:companyType "장비업체" ;
     ont:interpretationType "verbatim" .
 
@@ -269,8 +269,8 @@
     dcterms:license "Public information (KSIA member directory)"^^xsd:string ;
     dcterms:source "KSIA member directory (https://www.ksia.or.kr), retrieved 2026-07-14"^^xsd:string ;
     rdfs:seeAlso <https://www.ulvackorea.co.kr> ;
-    skos:altLabel "한국알박㈜"@ko ;
-    skos:prefLabel "ULVAC KOREA, Ltd."@en ;
+    skos:altLabel "ULVAC KOREA, Ltd."@en,
+        "한국알박㈜"@ko ;
     ont:companyType "장비업체" ;
     ont:interpretationType "verbatim" .
 
@@ -278,8 +278,8 @@
     dcterms:license "Public information (KSIA member directory)"^^xsd:string ;
     dcterms:source "KSIA member directory (https://www.ksia.or.kr), retrieved 2026-07-14"^^xsd:string ;
     rdfs:seeAlso <http://www.ips.co.kr> ;
-    skos:altLabel "주식회사 원익아이피에스"@ko ;
-    skos:prefLabel "WONIK IPS Co., Ltd"@en ;
+    skos:altLabel "WONIK IPS Co., Ltd"@en,
+        "주식회사 원익아이피에스"@ko ;
     ont:companyType "장비업체" ;
     ont:interpretationType "verbatim" .
 
@@ -287,8 +287,8 @@
     dcterms:license "Public information (KSIA member directory)"^^xsd:string ;
     dcterms:source "KSIA member directory (https://www.ksia.or.kr), retrieved 2026-07-14"^^xsd:string ;
     rdfs:seeAlso <https://www.kla-tencor.com> ;
-    skos:altLabel "케이엘에이텐코코리아㈜"@ko ;
-    skos:prefLabel "KLA"@en ;
+    skos:altLabel "KLA"@en,
+        "케이엘에이텐코코리아㈜"@ko ;
     ont:companyType "외국업체" ;
     ont:interpretationType "verbatim" .
 
@@ -2926,8 +2926,8 @@
     dcterms:license "Public information (KSIA member directory)"^^xsd:string ;
     dcterms:source "KSIA member directory (https://www.ksia.or.kr), retrieved 2026-07-14"^^xsd:string ;
     rdfs:seeAlso <https://www.semes.com> ;
-    skos:altLabel "세메스㈜"@ko ;
-    skos:prefLabel "SEMES"@en ;
+    skos:altLabel "SEMES"@en,
+        "세메스㈜"@ko ;
     ont:companyType "장비업체" ;
     ont:interpretationType "verbatim" .
 

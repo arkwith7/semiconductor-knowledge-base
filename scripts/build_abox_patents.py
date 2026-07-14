@@ -316,6 +316,12 @@ def main() -> int:
                 g.add((org, SKOS.prefLabel, Literal(en, lang="en")))
             if ko:
                 g.add((org, SKOS.altLabel, Literal(ko, lang="ko")))
+            # Shape_CoreNode 는 모든 Organization 에 dcterms:license 와 interpretationType 을
+            # 요구한다. 출원인 보강 때 이 둘을 빠뜨려 위반 702건이 났었다 (PLAN-013 D3).
+            # 출원인 이름은 KIPRIS 서지의 값을 그대로 옮긴 것이므로 verbatim 이다.
+            g.add((org, DCTERMS.source, Literal(KIPRIS_SOURCE, datatype=XSD.string)))
+            g.add((org, DCTERMS.license, Literal(PATENT_LICENSE, datatype=XSD.string)))
+            g.add((org, ONT_R("interpretationType"), Literal("verbatim")))
             g.add((pu, ONT_R("assignedTo"), org))
             n_org_links += 1
 

@@ -144,6 +144,7 @@ def main() -> int:
             else:
                 iri = URIRef(DATA[f"vendor/ksia_{slug(en or ko)}"])
                 stats["new_vendor_node"] += 1
+        is_new = iri not in orgs.values() and iri not in vendors.values()
 
         if iri in seen:
             stats["duplicate_row_skipped"] += 1
@@ -152,7 +153,15 @@ def main() -> int:
 
         g.add((iri, RDF.type, ONT.Vendor))
         # Shape_CoreNode: prefLabel(langString) · dcterms:license · interpretationType
-        g.add((iri, SKOS.prefLabel, Literal(en or ko, lang="en")))
+        #
+        # 이미 있는 노드에는 prefLabel 을 **덧붙이지 않는다**. skos:prefLabel 은 언어당
+        # 하나여야 하는데, KSIA 표기는 기존 표기와 미세하게 다르다("SEMES" ↔ "SEMES Co., Ltd.").
+        # 덧붙이면 한 노드에 prefLabel@en 이 둘이 되어 SKOS 를 위반하고, 라벨로 묶는 질의
+        # (CQ08 출원인 포트폴리오)가 같은 회사를 두 행으로 쪼갠다. 별칭으로 싣는다.
+        if is_new:
+            g.add((iri, SKOS.prefLabel, Literal(en or ko, lang="en")))
+        elif en:
+            g.add((iri, SKOS.altLabel, Literal(en, lang="en")))
         if ko:
             g.add((iri, SKOS.altLabel, Literal(ko, lang="ko")))
         g.add((iri, ONT.companyType, Literal(ctype)))

@@ -1,7 +1,7 @@
 {
   "input": "data/patents/rejected_patents_meta.parquet",
   "patents": 1000,
-  "triples": 32884,
+  "triples": 33937,
   "rejection": {
     "typed_RejectedPatent": 1000,
     "rejectedFor": {
