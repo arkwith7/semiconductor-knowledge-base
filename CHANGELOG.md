@@ -4,6 +4,17 @@ All notable changes to SDKB will be documented in this file.
 
 ## [Unreleased] — v1.0.0-dev
 
+### Added (2026-07-15 — 청구항 전문 어휘: IP-R&D FTO 자기완결성)
+- **`ont:claimText`**(반복 가능 · 청구항당 1트리플, 선두 번호 보존) · **`ont:claimCount`**(정수) 신설.
+  TBox `ontology/sdkb-patent.ttl`, 기존 `firstClaimText`/`abstractText` 패턴 그대로(domain `ont:Patent`,
+  range string/integer). **파급**: 순수 가산 — 기존 인스턴스·엣지·shape 불변, 하류 G₀ 는 TBox 선언
+  2개만 늘고 ABox 0 변화(재vendor 후 재동결 시 H1 불변을 하류에서 실증).
+- **왜.** KIPRIS 로 수집한 특허는 제목+링크만 있어 IP-R&D 세부 태스크(FTO·회피설계)를 그래프만으로
+  실행할 수 없었다 — 태스크 시점에 청구항을 다시 긁어야 해 **온톨로지의 문제해결 자기완결성**이
+  깨졌다. `firstClaimText`(청구항1)만으로는 독립·종속 청구항 전체를 못 담는다. `getBibliographyDetailInfoSearch`
+  가 청구항 전문을 주므로(claimCount 포함) 이를 실체화한다. 소스 라이선스 종속 — KIPRIS 원문은
+  로컬 그래프 전용(비커밋·비재배포).
+
 ### Added (2026-07-12 — SemiKong 공정 분류 복원 + 소자 어휘 보강)
 - **SDKB 는 출처 분류의 3개 그룹을 통째로 빠뜨리고 있었다.** `Process` 노드의 `provenance.source_id`
   (`L1-Planarization` 등)가 보여주듯 SDKB 의 공정은 SemiKong Appendix A **Table 7 의 L1 Process Group**

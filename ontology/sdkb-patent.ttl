@@ -309,6 +309,20 @@ ont:firstClaimText
     rdfs:label "first claim text"@en ;
     rdfs:comment "Subject to source license — may be Link-Only depending on KIPRIS terms."@en .
 
+ont:claimText
+    a owl:DatatypeProperty ;
+    rdfs:domain ont:Patent ;
+    rdfs:range xsd:string ;
+    rdfs:label "claim text"@en ;
+    rdfs:comment "Full text of a single claim, one triple per claim with the leading claim number preserved (e.g. \"1. ...\"). Enables IP-R&D FTO (freedom-to-operate) analysis without re-fetching — self-contained claim coverage. firstClaimText remains the independent-claim-1 shortcut. Subject to source license — Link-Only if KIPRIS terms require."@en .
+
+ont:claimCount
+    a owl:DatatypeProperty ;
+    rdfs:domain ont:Patent ;
+    rdfs:range xsd:integer ;
+    rdfs:label "claim count"@en ;
+    rdfs:comment "Number of claims in the patent (KIPRIS claimCount). A claimText triple count below this signals claims not yet loaded."@en .
+
 ont:processFamily
     a owl:DatatypeProperty ;
     rdfs:domain ont:Patent ;
