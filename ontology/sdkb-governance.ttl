@@ -57,10 +57,33 @@ gov:JurisdictionCN
     skos:prefLabel "China"@en ;
     skos:notation "CN" .
 
+gov:JurisdictionWASSENAAR
+    a skos:Concept ;
+    skos:prefLabel "Wassenaar Arrangement"@en ;
+    skos:notation "WASSENAAR" ;
+    rdfs:comment "Multilateral export-control regime (42 participating states). Some CCL semiconductor items are controlled under Wassenaar rather than a single national jurisdiction."@en .
+
 gov:hasJurisdiction
     a owl:ObjectProperty ;
     rdfs:label "has jurisdiction"@en ;
     rdfs:comment "Links any regulated entity (rule, item, transaction) to one or more jurisdictions. Used by SDKB-Match to compute the multi-jurisdiction overlap that drives leakage rate."@en .
+
+# ── Regulatory attributes layered on top (added for RQ3 export-control support) ──
+# Domain/range are left open by design: subjectToControl links a concept from ANY
+# axis (Process/Device/EquipmentClass/Material/Metrology/TechnologyNode) to the
+# control that governs it, and a fixed domain would force-type the subject (a bug
+# this codebase has already paid for). Reasoning stays sound without it.
+
+gov:controlLevel
+    a owl:DatatypeProperty ;
+    rdfs:range xsd:string ;
+    rdfs:label "control level"@en ;
+    rdfs:comment "Severity of an export-control designation: CRITICAL | HIGH | MEDIUM | LOW. Verbatim from the jurisdiction's master list (EAR/CCL control tier or KR-ITPA NCT grade)."@en .
+
+gov:subjectToControl
+    a owl:ObjectProperty ;
+    rdfs:label "subject to control"@en ;
+    rdfs:comment "Links a technology concept (process, device, equipment class, material, metrology, or technology node) to the regulatory control (EARRule / KRIndustrialTechRule / NationalCoreTechnology) that governs it. Asserted only where the control's stated conditions (ECCN node/architecture/nm threshold, or NCT scope) overlap the concept's definition — never fabricated to inflate coverage."@en .
 
 # ── Anchor individuals (BIS §744.23 TPP boundary as named individual) ──
 
