@@ -4,6 +4,35 @@ All notable changes to SDKB will be documented in this file.
 
 ## [Unreleased] — v1.0.0-dev
 
+### Added (2026-07-20 — SubProcess 한국어 별칭 승격 · 하류 G₀ 이동)
+- **SubProcess 축에 한국어 `skos:altLabel` 19건 신설**
+  (`scripts/promote_korean_aliases.py`, 신규 · 결정적 · 멱등). 원자층증착=ALD ·
+  화학기상증착=CVD · 물리기상증착/스퍼터링=PVD · 건식(플라즈마) 식각 · 습식 식각.
+  `data/semiconductor_v0_3.json` 의 `synonyms` 가 정본이고 `convert_rdf` 가 방출한다.
+- **왜.** Process·Device·Material·Skill 축에는 한국어 별칭이 있는데 **SubProcess 38개만
+  0개**였다. KIPRIS/SIRP 국문 명세는 한국어 산문이므로, 이 공백은 국문 텍스트에서 하위 공정을
+  식별할 수 없다는 뜻이었다. 용어는 **새로 만들지 않았다** — 이미 커밋돼 있던
+  `mappings/abox_term_aliases.json` 의 큐레이션을 개념 어휘로 **승격**했을 뿐이다.
+  출처는 `provenance_sources.sdkb_curation_ko` 로 선언한다.
+- **승격하지 않은 것과 그 이유.** 별칭 사전의 한국어 100건 중 19건만 옮겼다. 브리지 태그와
+  `skos:altLabel` 은 뜻이 다르다 — 전자는 "이 텍스트를 보면 이 노드를 떠올려라", 후자는
+  "이 개념은 이렇게도 불린다". 전량 승격하면 그래프가 **거짓을 주장한다**: `플라즈마`가 Skill
+  Plasma Diagnostics 의 이름이 되고(물리 현상이다), `파티클`이 Process Clean 의 이름이 되며
+  (`FailureMode:particle` 노드가 따로 있다), `산화물`이 SiO₂ 의 이름이 되고(상위어다),
+  `감광제`가 EUV 포토레지스트 전용이 된다(`193nm PR` 노드가 있다). **Skill 축 21건은 전부**
+  이 유형이라 0건 승격했다. Process·Material 축의 증분은 상하위 관계 판정(패터닝⊃노광 ·
+  도핑⊃이온주입)을 요구하므로 사람 검수 후 별도로 다룬다. 축이 맞아도 의미가 어긋나는
+  `극자외선`(광원)·`하드마스크`(재료)는 명시적으로 제외했다.
+- **하류 영향 (§0).** `sdkb-foresight-paper` 의 G₀ 가 움직인다 — 재vendor·재동결이 필요하고
+  논문의 baseline 서명(트리플 수)이 갱신된다. 특허↔공정 엣지는 만들지 않으므로 C₀·H1 은
+  불변이어야 하며, 그 불변을 하류에서 실측해 확인한다.
+- **미해결 (기록만).** 기존 한국어 별칭(`식각`·`증착`·`포토`·`리소그래피`·`평탄화`)은 노드 단위
+  프로비넌스가 `semikong` / `Nguyen et al. 2024 arXiv Appendix A` 를 가리키는데, **영문 arXiv
+  부록에 한국어 용어가 있을 리 없다.** 이 용어들은 최초 seed JSON(`created_by: seed`)에 딸려
+  들어왔고 git 이력이 없어 실제 출처를 특정할 수 없다. 값을 채우면 교정이 아니라 날조이므로
+  **고치지 않고 여기 남긴다.** 구조적 원인은 `synonyms` 가 용어 단위 프로비넌스를 갖지 못하고
+  노드의 것을 물려받는 데 있다.
+
 ### Fixed / Documented (2026-07-20 — 인력·문제 축 프로비넌스 정본화 + 전문가 이름 충돌 해소)
 - **`docs/deidentification_protocol.md` 신설.** 인력·문제 축이 실 원천을 그대로 쓸 수 없는
   데이터임을, 그리고 무엇을 어떻게 변조했는지를 기록한다. Expert 110 = **변조 파생 5**

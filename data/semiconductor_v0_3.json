@@ -10795,6 +10795,139 @@
       "term": "다이오드",
       "lang": "ko",
       "term_type": "synonym"
+    },
+    {
+      "node_id": "subprocess:plasma_etch",
+      "term": "건식 식각",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "sdkb_curation_ko"
+    },
+    {
+      "node_id": "subprocess:plasma_etch",
+      "term": "건식식각",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "sdkb_curation_ko"
+    },
+    {
+      "node_id": "subprocess:pvd",
+      "term": "물리 기상 증착",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "sdkb_curation_ko"
+    },
+    {
+      "node_id": "subprocess:pvd",
+      "term": "물리 기상 퇴적",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "sdkb_curation_ko"
+    },
+    {
+      "node_id": "subprocess:pvd",
+      "term": "물리기상증착",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "sdkb_curation_ko"
+    },
+    {
+      "node_id": "subprocess:pvd",
+      "term": "물리기상퇴적",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "sdkb_curation_ko"
+    },
+    {
+      "node_id": "subprocess:pvd",
+      "term": "스퍼터",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "sdkb_curation_ko"
+    },
+    {
+      "node_id": "subprocess:pvd",
+      "term": "스퍼터링",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "sdkb_curation_ko"
+    },
+    {
+      "node_id": "subprocess:wet_etch",
+      "term": "습식 식각",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "sdkb_curation_ko"
+    },
+    {
+      "node_id": "subprocess:wet_etch",
+      "term": "습식식각",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "sdkb_curation_ko"
+    },
+    {
+      "node_id": "subprocess:ald",
+      "term": "원자층 증착",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "sdkb_curation_ko"
+    },
+    {
+      "node_id": "subprocess:ald",
+      "term": "원자층 퇴적",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "sdkb_curation_ko"
+    },
+    {
+      "node_id": "subprocess:ald",
+      "term": "원자층증착",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "sdkb_curation_ko"
+    },
+    {
+      "node_id": "subprocess:ald",
+      "term": "원자층퇴적",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "sdkb_curation_ko"
+    },
+    {
+      "node_id": "subprocess:plasma_etch",
+      "term": "플라즈마 식각",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "sdkb_curation_ko"
+    },
+    {
+      "node_id": "subprocess:cvd",
+      "term": "화학 기상 증착",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "sdkb_curation_ko"
+    },
+    {
+      "node_id": "subprocess:cvd",
+      "term": "화학 기상 퇴적",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "sdkb_curation_ko"
+    },
+    {
+      "node_id": "subprocess:cvd",
+      "term": "화학기상증착",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "sdkb_curation_ko"
+    },
+    {
+      "node_id": "subprocess:cvd",
+      "term": "화학기상퇴적",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "sdkb_curation_ko"
     }
   ],
   "cases": [
@@ -10948,6 +11081,14 @@
       "url": "N/A",
       "data_format": "N/A",
       "note": "Nodes/edges defined by researcher based on domain expertise; requires expert validation"
+    },
+    "sdkb_curation_ko": {
+      "full_name": "SDKB Korean term curation (bridge alias table)",
+      "reference": "mappings/abox_term_aliases.json — conservative, audited Korean alias curation",
+      "license": "CDLA-Permissive-2.0",
+      "url": "https://github.com/arkwith7/sdkb",
+      "data_format": "JSON (term → node id)",
+      "note": "KIPRIS/SIRP 국문 명세에 걸리도록 큐레이션된 한국어 표기. 번역 생성이 아니라 승격."
     }
   },
   "provenance_statistics": {
