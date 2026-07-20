@@ -4,6 +4,34 @@ All notable changes to SDKB will be documented in this file.
 
 ## [Unreleased] — v1.0.0-dev
 
+### Fixed / Documented (2026-07-20 — 인력·문제 축 프로비넌스 정본화 + 전문가 이름 충돌 해소)
+- **`docs/deidentification_protocol.md` 신설.** 인력·문제 축이 실 원천을 그대로 쓸 수 없는
+  데이터임을, 그리고 무엇을 어떻게 변조했는지를 기록한다. Expert 110 = **변조 파생 5**
+  (EXP_001–005, 실 경력기술서 근거 · "1.기본정보"·"4.주요 경력 사항" 식별불가 처리 · 가명 ·
+  수치는 생성값) **+ 결정적 생성 105**. Problem 226 = 최초 큐레이션 61 + 수출통제 시나리오 15 +
+  온톨로지 추론 시나리오 10 + 공개사례 파생 18(WM-811K 8·블로그 5·TEMAZ 3·문헌 2) +
+  구조 파생 생성 122. **원본 문서는 저장소·릴리스·하류 vendor 산출물 어디에도 반입된 적이 없다.**
+- **왜 지금.** `docs/datasheet.md` 는 전문가 프로필을 일괄 "synthetic … not personally
+  identifiable" 로 단언했는데, 이는 생성 105건에만 정밀하고 변조 파생 5건에는 부정확했다.
+  하류 논문이 이 축의 출처를 인용해야 하는데 **참조할 문서 자체가 없었다.** datasheet 3개 항목과
+  `build_abox_experts_problems.py` 의 "KR 파일이 실명" 주석(사실과 다름)을 함께 정정했다.
+- **전문가 이름 충돌 해소** (`scripts/reassign_expert_names.py`, 신규 · 결정적 · 멱등).
+  이름 풀이 좁아 **56개 이름이 110명에 배분**돼 있었다. 완전 중복 레코드는 **0건**이고(38필드
+  정규화 해시), IRI 충돌도 0이며, 겹치는 것은 `skos:prefLabel` 문자열뿐이었다 — 그런데 라벨만
+  프로젝션하는 CQ11 이 텍스트상 동일한 행 11건을 내 **데이터 중복처럼 보였다.** 삭제는 서로 다른
+  프로필 54개를 없애므로 채택하지 않고, 이름이 이미 가명이므로 **성 보존 + 이름 교체**로 재부여했다
+  (EN 자리표시자 `"Kang, [Given Name]"` 가 그대로 유효해진다). 고유 이름 **56 → 110**.
+- **프로비넌스 위생** (`scripts/sanitize_expert_provenance.py`, 신규 · 멱등): `upgrade_log.resume_matched`
+  의 `pdf` 필드가 담고 있던 **저장소 밖 비공개 경로 5건**을 KR·EN 양쪽에서 제거했다. 재현에 쓸 수
+  없으면서 내부 디렉터리 구조만 배포물에 남겼기 때문이다. `text_sha256` 은 남긴다 — 파생 사실을
+  고정하는 앵커는 해시이지 파일 위치가 아니다.
+- 그래프: `sdkb-abox-experts-problems.ttl` **3,653 트리플 불변** · Expert 110 · Problem 226 불변.
+  변경 트리플은 `skos:prefLabel` 54 + `skos:altLabel` 7 뿐. `make validate` SHACL 통과(양 그래프).
+- **하류 통보 — `sdkb-foresight-paper`.** 트리플 수는 안 움직이지만 **TTL 내용이 바뀌어 sha256 이
+  바뀐다.** 재vendor 후 G₀ 를 재동결해야 하며, **트리플 44,202 는 그대로**다. 특허↔공정 엣지를
+  건드리지 않으므로 **H1·H2 결론은 불변**이다. CQ11 은 66행 유지에 distinct 가 55 → 66 으로 올라
+  라벨 프로젝션의 겉보기 중복이 사라진다.
+
 ### Added (2026-07-15 — 청구항 전문 어휘: IP-R&D FTO 자기완결성)
 - **`ont:claimText`**(반복 가능 · 청구항당 1트리플, 선두 번호 보존) · **`ont:claimCount`**(정수) 신설.
   TBox `ontology/sdkb-patent.ttl`, 기존 `firstClaimText`/`abstractText` 패턴 그대로(domain `ont:Patent`,

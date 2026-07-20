@@ -14,7 +14,6 @@
         {
           "name": "박지현",
           "expert_id": "EXP_002",
-          "pdf": "ExpDataSet/PDF/experts/박지현_경력기술서_수정본.pdf",
           "changes": {
             "age": 59,
             "years_experience": 29,
@@ -23,12 +22,12 @@
               "SK Hynix"
             ]
           },
-          "text_sha256": "588503af1fe17b8d"
+          "text_sha256": "588503af1fe17b8d",
+          "source": "de-identified derivative of a real practitioner career record (original document not ingested into this repository)"
         },
         {
           "name": "김영수",
           "expert_id": "EXP_005",
-          "pdf": "ExpDataSet/PDF/experts/김영수_경력기술서_수정본.pdf",
           "changes": {
             "age": 61,
             "years_experience": 31,
@@ -36,12 +35,12 @@
               "SK Hynix"
             ]
           },
-          "text_sha256": "1570969d4d41da83"
+          "text_sha256": "1570969d4d41da83",
+          "source": "de-identified derivative of a real practitioner career record (original document not ingested into this repository)"
         },
         {
           "name": "최재호",
           "expert_id": "EXP_004",
-          "pdf": "ExpDataSet/PDF/experts/최재호_경력기술서_수정본.pdf",
           "changes": {
             "age": 63,
             "years_experience": 33,
@@ -49,12 +48,12 @@
               "Samsung Electronics"
             ]
           },
-          "text_sha256": "0c6e2af5aa5cfd2d"
+          "text_sha256": "0c6e2af5aa5cfd2d",
+          "source": "de-identified derivative of a real practitioner career record (original document not ingested into this repository)"
         },
         {
           "name": "김태훈",
           "expert_id": "EXP_001",
-          "pdf": "ExpDataSet/PDF/experts/김태훈_경력기술서_수정본.pdf",
           "changes": {
             "age": 60,
             "years_experience": 30,
@@ -64,12 +63,12 @@
               "TSMC"
             ]
           },
-          "text_sha256": "623c2b5d24fd9197"
+          "text_sha256": "623c2b5d24fd9197",
+          "source": "de-identified derivative of a real practitioner career record (original document not ingested into this repository)"
         },
         {
           "name": "이승우",
           "expert_id": "EXP_003",
-          "pdf": "ExpDataSet/PDF/experts/이승우_경력기술서_수정본.pdf",
           "changes": {
             "age": 62,
             "years_experience": 32,
@@ -78,7 +77,8 @@
               "TSMC"
             ]
           },
-          "text_sha256": "2b216f7ada8939c6"
+          "text_sha256": "2b216f7ada8939c6",
+          "source": "de-identified derivative of a real practitioner career record (original document not ingested into this repository)"
         }
       ],
       "resume_missing": [],
@@ -86,7 +86,8 @@
         "Added ontology_alignment (process/subprocess/vendor/equipment ids) derived from tags+summary.",
         "Adjusted implausible age/years_experience pairs only when clearly inconsistent.",
         "Reconciled EXP_001~EXP_005 using resume PDFs when available (age/years_experience/equipment/tags)."
-      ]
+      ],
+      "source_note": "EXP_001~005 는 실 경력기술서를 근거로 식별 불가능하도록 변조한 파생 프로필이다. 이름은 가명이고 수치(patent_count 등)는 생성값이며 실인물에 대한 주장이 아니다. 원본 문서는 저장소·스냅샷·배포물 어디에도 반입되지 않았다. 절차는 docs/deidentification_protocol.md."
     },
     "rebalanced_date": "2026-01-31 01:02:16",
     "rebalanced_to_match": "ExpDataSet/EXPERIMENT_DATASET_DESCRIPTION.md",
@@ -111,7 +112,233 @@
       "rationale": "EXPERIMENT_DATASET_DESCRIPTION.md specifies has_nct=true for 20 experts (20%); compliance.nct_flag was incorrectly set to true for all 100 experts, breaking S1(Clear Permit) vs S2(Clear Block) scenario testing"
     },
     "version": "v2.0",
-    "last_updated": "2026-03-01"
+    "last_updated": "2026-03-01",
+    "name_reassignment": {
+      "date": "2026-07-20",
+      "reason": "이름 풀이 좁아 56개 이름이 110명에 배분돼 있었다. 프로필은 전부 상이(완전 중복 0건)하나 prefLabel 문자열만 겹쳐 라벨 프로젝션 질의가 동일해 보이는 행을 냈다. 삭제 대신 이름을 재부여한다.",
+      "method": "충돌 그룹의 최소 expert_id 는 유지, 나머지는 성 보존 + 이름 교체. 난수 없이 정렬 순회로 배정 — 결정적.",
+      "changed_count": 54,
+      "unique_names_before": 56,
+      "unique_names_after": 110,
+      "changes": {
+        "EXP_014": {
+          "from": "강태영",
+          "to": "강다영"
+        },
+        "EXP_016": {
+          "from": "임소영",
+          "to": "임다영"
+        },
+        "EXP_020": {
+          "from": "한예원",
+          "to": "한다영"
+        },
+        "EXP_022": {
+          "from": "강현수",
+          "to": "강동욱"
+        },
+        "EXP_023": {
+          "from": "한예원",
+          "to": "한동욱"
+        },
+        "EXP_025": {
+          "from": "최동현",
+          "to": "최다영"
+        },
+        "EXP_028": {
+          "from": "전호영",
+          "to": "전다영"
+        },
+        "EXP_032": {
+          "from": "김서연",
+          "to": "김동욱"
+        },
+        "EXP_035": {
+          "from": "강현수",
+          "to": "강동현"
+        },
+        "EXP_038": {
+          "from": "황수정",
+          "to": "황다영"
+        },
+        "EXP_039": {
+          "from": "강현수",
+          "to": "강동훈"
+        },
+        "EXP_042": {
+          "from": "한예원",
+          "to": "한동현"
+        },
+        "EXP_043": {
+          "from": "윤서진",
+          "to": "윤다영"
+        },
+        "EXP_044": {
+          "from": "송지은",
+          "to": "송다영"
+        },
+        "EXP_046": {
+          "from": "강현수",
+          "to": "강미경"
+        },
+        "EXP_050": {
+          "from": "김서연",
+          "to": "김동현"
+        },
+        "EXP_051": {
+          "from": "최동현",
+          "to": "최동욱"
+        },
+        "EXP_052": {
+          "from": "이예은",
+          "to": "이다영"
+        },
+        "EXP_053": {
+          "from": "문예린",
+          "to": "문다영"
+        },
+        "EXP_054": {
+          "from": "문예린",
+          "to": "문동욱"
+        },
+        "EXP_055": {
+          "from": "송지은",
+          "to": "송동욱"
+        },
+        "EXP_056": {
+          "from": "이예은",
+          "to": "이동욱"
+        },
+        "EXP_057": {
+          "from": "윤미경",
+          "to": "윤동욱"
+        },
+        "EXP_058": {
+          "from": "박현민",
+          "to": "박다영"
+        },
+        "EXP_059": {
+          "from": "이예은",
+          "to": "이동현"
+        },
+        "EXP_060": {
+          "from": "강현수",
+          "to": "강미라"
+        },
+        "EXP_063": {
+          "from": "윤미경",
+          "to": "윤동현"
+        },
+        "EXP_064": {
+          "from": "한예원",
+          "to": "한동훈"
+        },
+        "EXP_067": {
+          "from": "문지현",
+          "to": "문동현"
+        },
+        "EXP_069": {
+          "from": "김다영",
+          "to": "김동훈"
+        },
+        "EXP_070": {
+          "from": "조민수",
+          "to": "조다영"
+        },
+        "EXP_071": {
+          "from": "이하은",
+          "to": "이동훈"
+        },
+        "EXP_072": {
+          "from": "윤미경",
+          "to": "윤동훈"
+        },
+        "EXP_073": {
+          "from": "송지은",
+          "to": "송동현"
+        },
+        "EXP_075": {
+          "from": "송지은",
+          "to": "송동훈"
+        },
+        "EXP_077": {
+          "from": "이준석",
+          "to": "이미경"
+        },
+        "EXP_078": {
+          "from": "김하늘",
+          "to": "김미경"
+        },
+        "EXP_080": {
+          "from": "이준석",
+          "to": "이미라"
+        },
+        "EXP_082": {
+          "from": "조민수",
+          "to": "조동욱"
+        },
+        "EXP_083": {
+          "from": "장승호",
+          "to": "장다영"
+        },
+        "EXP_084": {
+          "from": "황지민",
+          "to": "황동욱"
+        },
+        "EXP_085": {
+          "from": "김다영",
+          "to": "김미라"
+        },
+        "EXP_086": {
+          "from": "신동욱",
+          "to": "신다영"
+        },
+        "EXP_087": {
+          "from": "백동현",
+          "to": "백다영"
+        },
+        "EXP_088": {
+          "from": "황수정",
+          "to": "황동현"
+        },
+        "EXP_089": {
+          "from": "문예린",
+          "to": "문동훈"
+        },
+        "EXP_091": {
+          "from": "문예린",
+          "to": "문미경"
+        },
+        "EXP_092": {
+          "from": "류현정",
+          "to": "류다영"
+        },
+        "EXP_093": {
+          "from": "윤미경",
+          "to": "윤미라"
+        },
+        "EXP_094": {
+          "from": "전호영",
+          "to": "전동욱"
+        },
+        "EXP_095": {
+          "from": "문예린",
+          "to": "문미라"
+        },
+        "EXP_096": {
+          "from": "강태영",
+          "to": "강민석"
+        },
+        "EXP_097": {
+          "from": "장승호",
+          "to": "장동욱"
+        },
+        "EXP_098": {
+          "from": "이준석",
+          "to": "이민석"
+        }
+      }
+    }
   },
   "experts": [
     {
@@ -2190,7 +2417,7 @@
     },
     {
       "expert_id": "EXP_014",
-      "name": "강태영",
+      "name": "강다영",
       "age": 53,
       "education": "KAIST 물리학 석사",
       "current_status": "advisor",
@@ -2324,7 +2551,7 @@
         "LAM_Research"
       ],
       "specialization": "Lithography",
-      "name_korean": "강태영",
+      "name_korean": "강다영",
       "nationality": "KR",
       "work_history_countries": [
         "KR",
@@ -2507,7 +2734,7 @@
     },
     {
       "expert_id": "EXP_016",
-      "name": "임소영",
+      "name": "임다영",
       "age": 59,
       "education": "UNIST 재료공학 석사",
       "current_status": "advisor",
@@ -2639,7 +2866,7 @@
         "KLA"
       ],
       "specialization": "Metrology",
-      "name_korean": "임소영",
+      "name_korean": "임다영",
       "nationality": "KR",
       "work_history_countries": [
         "KR",
@@ -3068,7 +3295,7 @@
     },
     {
       "expert_id": "EXP_020",
-      "name": "한예원",
+      "name": "한다영",
       "age": 61,
       "education": "포항공대 재료공학 석사",
       "current_status": "active",
@@ -3245,7 +3472,7 @@
         "KLA"
       ],
       "specialization": "ALD",
-      "name_korean": "한예원",
+      "name_korean": "한다영",
       "nationality": "US",
       "work_history_countries": [
         "US"
@@ -3376,7 +3603,7 @@
     },
     {
       "expert_id": "EXP_022",
-      "name": "강현수",
+      "name": "강동욱",
       "age": 58,
       "education": "MIT 전자공학 석사",
       "current_status": "consultant",
@@ -3476,7 +3703,7 @@
         "Applied_Materials"
       ],
       "specialization": "Metrology",
-      "name_korean": "강현수",
+      "name_korean": "강동욱",
       "nationality": "KR",
       "work_history_countries": [
         "KR"
@@ -3484,7 +3711,7 @@
     },
     {
       "expert_id": "EXP_023",
-      "name": "한예원",
+      "name": "한동욱",
       "age": 57,
       "education": "서울대 재료공학 석사",
       "current_status": "advisor",
@@ -3619,7 +3846,7 @@
         "SCREEN"
       ],
       "specialization": "Lithography",
-      "name_korean": "한예원",
+      "name_korean": "한동욱",
       "nationality": "KR",
       "work_history_countries": [
         "KR",
@@ -3755,7 +3982,7 @@
     },
     {
       "expert_id": "EXP_025",
-      "name": "최동현",
+      "name": "최다영",
       "age": 61,
       "education": "KAIST 화학공학 박사",
       "current_status": "retired",
@@ -3894,7 +4121,7 @@
         "Applied_Materials"
       ],
       "specialization": "Lithography",
-      "name_korean": "최동현",
+      "name_korean": "최다영",
       "nationality": "US",
       "work_history_countries": [
         "US",
@@ -4161,7 +4388,7 @@
     },
     {
       "expert_id": "EXP_028",
-      "name": "전호영",
+      "name": "전다영",
       "age": 55,
       "education": "UNIST 화학공학 석사",
       "current_status": "advisor",
@@ -4284,7 +4511,7 @@
         "ASML"
       ],
       "specialization": "CMP",
-      "name_korean": "전호영",
+      "name_korean": "전다영",
       "nationality": "KR",
       "work_history_countries": [
         "KR"
@@ -4693,7 +4920,7 @@
     },
     {
       "expert_id": "EXP_032",
-      "name": "김서연",
+      "name": "김동욱",
       "age": 53,
       "education": "서울대 재료공학 석사",
       "current_status": "advisor",
@@ -4823,7 +5050,7 @@
         "TEL"
       ],
       "specialization": "ALD",
-      "name_korean": "김서연",
+      "name_korean": "김동욱",
       "nationality": "KR",
       "work_history_countries": [
         "KR",
@@ -5071,7 +5298,7 @@
     },
     {
       "expert_id": "EXP_035",
-      "name": "강현수",
+      "name": "강동현",
       "age": 51,
       "education": "UC Berkeley 전자공학 석사",
       "current_status": "active",
@@ -5165,7 +5392,7 @@
         "Applied_Materials"
       ],
       "specialization": "Etch",
-      "name_korean": "강현수",
+      "name_korean": "강동현",
       "nationality": "KR",
       "work_history_countries": [
         "KR",
@@ -5423,7 +5650,7 @@
     },
     {
       "expert_id": "EXP_038",
-      "name": "황수정",
+      "name": "황다영",
       "age": 57,
       "education": "포항공대 화학공학 석사",
       "current_status": "advisor",
@@ -5523,7 +5750,7 @@
         "Applied_Materials"
       ],
       "specialization": "Etch",
-      "name_korean": "황수정",
+      "name_korean": "황다영",
       "nationality": "TW",
       "work_history_countries": [
         "TW",
@@ -5532,7 +5759,7 @@
     },
     {
       "expert_id": "EXP_039",
-      "name": "강현수",
+      "name": "강동훈",
       "age": 64,
       "education": "UC Berkeley 재료공학 석사",
       "current_status": "retired",
@@ -5666,7 +5893,7 @@
         "Applied_Materials"
       ],
       "specialization": "Metrology",
-      "name_korean": "강현수",
+      "name_korean": "강동훈",
       "nationality": "US",
       "work_history_countries": [
         "US"
@@ -5929,7 +6156,7 @@
     },
     {
       "expert_id": "EXP_042",
-      "name": "한예원",
+      "name": "한동현",
       "age": 57,
       "education": "MIT 전자공학 박사",
       "current_status": "consultant",
@@ -6070,7 +6297,7 @@
         "ASML"
       ],
       "specialization": "Lithography",
-      "name_korean": "한예원",
+      "name_korean": "한동현",
       "nationality": "KR",
       "work_history_countries": [
         "KR",
@@ -6079,7 +6306,7 @@
     },
     {
       "expert_id": "EXP_043",
-      "name": "윤서진",
+      "name": "윤다영",
       "age": 65,
       "education": "UC Berkeley 물리학 석사",
       "current_status": "retired",
@@ -6213,7 +6440,7 @@
         "Applied_Materials"
       ],
       "specialization": "Lithography",
-      "name_korean": "윤서진",
+      "name_korean": "윤다영",
       "nationality": "CN",
       "work_history_countries": [
         "CN"
@@ -6221,7 +6448,7 @@
     },
     {
       "expert_id": "EXP_044",
-      "name": "송지은",
+      "name": "송다영",
       "age": 63,
       "education": "포항공대 화학공학 석사",
       "current_status": "retired",
@@ -6344,7 +6571,7 @@
         "Applied_Materials"
       ],
       "specialization": "Metrology",
-      "name_korean": "송지은",
+      "name_korean": "송다영",
       "nationality": "CN",
       "work_history_countries": [
         "CN"
@@ -6491,7 +6718,7 @@
     },
     {
       "expert_id": "EXP_046",
-      "name": "강현수",
+      "name": "강미경",
       "age": 46,
       "education": "포항공대 물리학 박사",
       "current_status": "consultant",
@@ -6628,7 +6855,7 @@
         "SCREEN"
       ],
       "specialization": "Lithography",
-      "name_korean": "강현수",
+      "name_korean": "강미경",
       "nationality": "SG",
       "work_history_countries": [
         "SG"
@@ -7015,7 +7242,7 @@
     },
     {
       "expert_id": "EXP_050",
-      "name": "김서연",
+      "name": "김동현",
       "age": 50,
       "education": "포항공대 재료공학 박사",
       "current_status": "advisor",
@@ -7135,7 +7362,7 @@
         "ASML"
       ],
       "specialization": "Lithography",
-      "name_korean": "김서연",
+      "name_korean": "김동현",
       "nationality": "CN",
       "work_history_countries": [
         "CN"
@@ -7143,7 +7370,7 @@
     },
     {
       "expert_id": "EXP_051",
-      "name": "최동현",
+      "name": "최동욱",
       "age": 66,
       "education": "서울대 물리학 석사",
       "current_status": "retired",
@@ -7242,7 +7469,7 @@
         "KLA"
       ],
       "specialization": "Metrology",
-      "name_korean": "최동현",
+      "name_korean": "최동욱",
       "nationality": "US",
       "work_history_countries": [
         "US"
@@ -7250,7 +7477,7 @@
     },
     {
       "expert_id": "EXP_052",
-      "name": "이예은",
+      "name": "이다영",
       "age": 64,
       "education": "UC Berkeley 전자공학 석사",
       "current_status": "retired",
@@ -7388,7 +7615,7 @@
         "ASML"
       ],
       "specialization": "Lithography",
-      "name_korean": "이예은",
+      "name_korean": "이다영",
       "nationality": "KR",
       "work_history_countries": [
         "KR",
@@ -7397,7 +7624,7 @@
     },
     {
       "expert_id": "EXP_053",
-      "name": "문예린",
+      "name": "문다영",
       "age": 65,
       "education": "Stanford 전자공학 석사",
       "current_status": "retired",
@@ -7530,7 +7757,7 @@
         "ASML"
       ],
       "specialization": "Lithography",
-      "name_korean": "문예린",
+      "name_korean": "문다영",
       "nationality": "KR",
       "work_history_countries": [
         "KR",
@@ -7539,7 +7766,7 @@
     },
     {
       "expert_id": "EXP_054",
-      "name": "문예린",
+      "name": "문동욱",
       "age": 46,
       "education": "KAIST 화학공학 박사",
       "current_status": "consultant",
@@ -7657,7 +7884,7 @@
         "TEL"
       ],
       "specialization": "Lithography",
-      "name_korean": "문예린",
+      "name_korean": "문동욱",
       "nationality": "KR",
       "work_history_countries": [
         "KR",
@@ -7666,7 +7893,7 @@
     },
     {
       "expert_id": "EXP_055",
-      "name": "송지은",
+      "name": "송동욱",
       "age": 65,
       "education": "UNIST 전자공학 석사",
       "current_status": "retired",
@@ -7798,7 +8025,7 @@
         "LAM_Research"
       ],
       "specialization": "Metrology",
-      "name_korean": "송지은",
+      "name_korean": "송동욱",
       "nationality": "KR",
       "work_history_countries": [
         "KR",
@@ -7807,7 +8034,7 @@
     },
     {
       "expert_id": "EXP_056",
-      "name": "이예은",
+      "name": "이동욱",
       "age": 57,
       "education": "UC Berkeley 재료공학 박사",
       "current_status": "active",
@@ -7956,7 +8183,7 @@
         "KLA"
       ],
       "specialization": "Lithography",
-      "name_korean": "이예은",
+      "name_korean": "이동욱",
       "nationality": "KR",
       "work_history_countries": [
         "KR"
@@ -7964,7 +8191,7 @@
     },
     {
       "expert_id": "EXP_057",
-      "name": "윤미경",
+      "name": "윤동욱",
       "age": 68,
       "education": "KAIST 화학공학 박사",
       "current_status": "retired",
@@ -8093,7 +8320,7 @@
         "LAM_Research"
       ],
       "specialization": "Metrology",
-      "name_korean": "윤미경",
+      "name_korean": "윤동욱",
       "nationality": "KR",
       "work_history_countries": [
         "KR",
@@ -8102,7 +8329,7 @@
     },
     {
       "expert_id": "EXP_058",
-      "name": "박현민",
+      "name": "박다영",
       "age": 66,
       "education": "Stanford 물리학 박사",
       "current_status": "retired",
@@ -8226,7 +8453,7 @@
         "SCREEN"
       ],
       "specialization": "Lithography",
-      "name_korean": "박현민",
+      "name_korean": "박다영",
       "nationality": "KR",
       "work_history_countries": [
         "KR"
@@ -8234,7 +8461,7 @@
     },
     {
       "expert_id": "EXP_059",
-      "name": "이예은",
+      "name": "이동현",
       "age": 49,
       "education": "UC Berkeley 화학공학 석사",
       "current_status": "advisor",
@@ -8373,7 +8600,7 @@
         "TEL"
       ],
       "specialization": "CMP",
-      "name_korean": "이예은",
+      "name_korean": "이동현",
       "nationality": "KR",
       "work_history_countries": [
         "KR",
@@ -8382,7 +8609,7 @@
     },
     {
       "expert_id": "EXP_060",
-      "name": "강현수",
+      "name": "강미라",
       "age": 54,
       "education": "서울대 물리학 석사",
       "current_status": "active",
@@ -8497,7 +8724,7 @@
         "Applied_Materials"
       ],
       "specialization": "Metrology",
-      "name_korean": "강현수",
+      "name_korean": "강미라",
       "nationality": "KR",
       "work_history_countries": [
         "KR",
@@ -8789,7 +9016,7 @@
     },
     {
       "expert_id": "EXP_063",
-      "name": "윤미경",
+      "name": "윤동현",
       "age": 51,
       "education": "포항공대 화학공학 박사",
       "current_status": "active",
@@ -8914,7 +9141,7 @@
         "ASML"
       ],
       "specialization": "Lithography",
-      "name_korean": "윤미경",
+      "name_korean": "윤동현",
       "nationality": "KR",
       "work_history_countries": [
         "KR"
@@ -8922,7 +9149,7 @@
     },
     {
       "expert_id": "EXP_064",
-      "name": "한예원",
+      "name": "한동훈",
       "age": 66,
       "education": "포항공대 재료공학 박사",
       "current_status": "retired",
@@ -9058,7 +9285,7 @@
         "Applied_Materials"
       ],
       "specialization": "CMP",
-      "name_korean": "한예원",
+      "name_korean": "한동훈",
       "nationality": "TW",
       "work_history_countries": [
         "TW",
@@ -9353,7 +9580,7 @@
     },
     {
       "expert_id": "EXP_067",
-      "name": "문지현",
+      "name": "문동현",
       "age": 68,
       "education": "MIT 화학공학 석사",
       "current_status": "retired",
@@ -9450,7 +9677,7 @@
         "LAM_Research"
       ],
       "specialization": "Metrology",
-      "name_korean": "문지현",
+      "name_korean": "문동현",
       "nationality": "TW",
       "work_history_countries": [
         "TW"
@@ -9599,7 +9826,7 @@
     },
     {
       "expert_id": "EXP_069",
-      "name": "김다영",
+      "name": "김동훈",
       "age": 49,
       "education": "MIT 전자공학 박사",
       "current_status": "active",
@@ -9738,7 +9965,7 @@
         "LAM_Research"
       ],
       "specialization": "CMP",
-      "name_korean": "김다영",
+      "name_korean": "김동훈",
       "nationality": "US",
       "work_history_countries": [
         "US",
@@ -9747,7 +9974,7 @@
     },
     {
       "expert_id": "EXP_070",
-      "name": "조민수",
+      "name": "조다영",
       "age": 52,
       "education": "KAIST 재료공학 석사",
       "current_status": "advisor",
@@ -9885,7 +10112,7 @@
         "Applied_Materials"
       ],
       "specialization": "Lithography",
-      "name_korean": "조민수",
+      "name_korean": "조다영",
       "nationality": "KR",
       "work_history_countries": [
         "KR",
@@ -9894,7 +10121,7 @@
     },
     {
       "expert_id": "EXP_071",
-      "name": "이하은",
+      "name": "이동훈",
       "age": 62,
       "education": "KAIST 전자공학 박사",
       "current_status": "retired",
@@ -9991,7 +10218,7 @@
         "Applied_Materials"
       ],
       "specialization": "Metrology",
-      "name_korean": "이하은",
+      "name_korean": "이동훈",
       "nationality": "TW",
       "work_history_countries": [
         "TW",
@@ -10000,7 +10227,7 @@
     },
     {
       "expert_id": "EXP_072",
-      "name": "윤미경",
+      "name": "윤동훈",
       "age": 51,
       "education": "KAIST 전자공학 석사",
       "current_status": "active",
@@ -10121,7 +10348,7 @@
         "ASML"
       ],
       "specialization": "CMP",
-      "name_korean": "윤미경",
+      "name_korean": "윤동훈",
       "nationality": "TW",
       "work_history_countries": [
         "TW"
@@ -10129,7 +10356,7 @@
     },
     {
       "expert_id": "EXP_073",
-      "name": "송지은",
+      "name": "송동현",
       "age": 54,
       "education": "포항공대 화학공학 박사",
       "current_status": "advisor",
@@ -10244,7 +10471,7 @@
         "ASML"
       ],
       "specialization": "Metrology",
-      "name_korean": "송지은",
+      "name_korean": "송동현",
       "nationality": "US",
       "work_history_countries": [
         "US",
@@ -10397,7 +10624,7 @@
     },
     {
       "expert_id": "EXP_075",
-      "name": "송지은",
+      "name": "송동훈",
       "age": 56,
       "education": "UC Berkeley 화학공학 석사",
       "current_status": "consultant",
@@ -10534,7 +10761,7 @@
         "SCREEN"
       ],
       "specialization": "Lithography",
-      "name_korean": "송지은",
+      "name_korean": "송동훈",
       "nationality": "KR",
       "work_history_countries": [
         "KR",
@@ -10649,7 +10876,7 @@
     },
     {
       "expert_id": "EXP_077",
-      "name": "이준석",
+      "name": "이미경",
       "age": 64,
       "education": "서울대 전자공학 박사",
       "current_status": "retired",
@@ -10744,7 +10971,7 @@
         "LAM_Research"
       ],
       "specialization": "Metrology",
-      "name_korean": "이준석",
+      "name_korean": "이미경",
       "nationality": "US",
       "work_history_countries": [
         "US",
@@ -10753,7 +10980,7 @@
     },
     {
       "expert_id": "EXP_078",
-      "name": "김하늘",
+      "name": "김미경",
       "age": 51,
       "education": "MIT 화학공학 석사",
       "current_status": "advisor",
@@ -10866,7 +11093,7 @@
         "Applied_Materials"
       ],
       "specialization": "Metrology",
-      "name_korean": "김하늘",
+      "name_korean": "김미경",
       "nationality": "TW",
       "work_history_countries": [
         "TW",
@@ -10999,7 +11226,7 @@
     },
     {
       "expert_id": "EXP_080",
-      "name": "이준석",
+      "name": "이미라",
       "age": 66,
       "education": "Stanford 물리학 박사",
       "current_status": "retired",
@@ -11093,7 +11320,7 @@
         "KLA"
       ],
       "specialization": "Metrology",
-      "name_korean": "이준석",
+      "name_korean": "이미라",
       "nationality": "CN",
       "work_history_countries": [
         "CN"
@@ -11233,7 +11460,7 @@
     },
     {
       "expert_id": "EXP_082",
-      "name": "조민수",
+      "name": "조동욱",
       "age": 52,
       "education": "Stanford 물리학 석사",
       "current_status": "consultant",
@@ -11379,7 +11606,7 @@
         "TEL"
       ],
       "specialization": "ALD",
-      "name_korean": "조민수",
+      "name_korean": "조동욱",
       "nationality": "TW",
       "work_history_countries": [
         "TW",
@@ -11388,7 +11615,7 @@
     },
     {
       "expert_id": "EXP_083",
-      "name": "장승호",
+      "name": "장다영",
       "age": 51,
       "education": "Stanford 재료공학 석사",
       "current_status": "advisor",
@@ -11527,7 +11754,7 @@
         "Applied_Materials"
       ],
       "specialization": "Lithography",
-      "name_korean": "장승호",
+      "name_korean": "장다영",
       "nationality": "KR",
       "work_history_countries": [
         "KR",
@@ -11536,7 +11763,7 @@
     },
     {
       "expert_id": "EXP_084",
-      "name": "황지민",
+      "name": "황동욱",
       "age": 47,
       "education": "서울대 물리학 석사",
       "current_status": "consultant",
@@ -11666,7 +11893,7 @@
         "LAM_Research"
       ],
       "specialization": "Metrology",
-      "name_korean": "황지민",
+      "name_korean": "황동욱",
       "nationality": "KR",
       "work_history_countries": [
         "KR",
@@ -11675,7 +11902,7 @@
     },
     {
       "expert_id": "EXP_085",
-      "name": "김다영",
+      "name": "김미라",
       "age": 60,
       "education": "KAIST 화학공학 박사",
       "current_status": "retired",
@@ -11823,7 +12050,7 @@
         "LAM_Research"
       ],
       "specialization": "CMP",
-      "name_korean": "김다영",
+      "name_korean": "김미라",
       "nationality": "KR",
       "work_history_countries": [
         "KR",
@@ -11832,7 +12059,7 @@
     },
     {
       "expert_id": "EXP_086",
-      "name": "신동욱",
+      "name": "신다영",
       "age": 63,
       "education": "KAIST 재료공학 박사",
       "current_status": "retired",
@@ -11960,7 +12187,7 @@
         "Applied_Materials"
       ],
       "specialization": "ALD",
-      "name_korean": "신동욱",
+      "name_korean": "신다영",
       "nationality": "KR",
       "work_history_countries": [
         "KR",
@@ -11969,7 +12196,7 @@
     },
     {
       "expert_id": "EXP_087",
-      "name": "백동현",
+      "name": "백다영",
       "age": 60,
       "education": "KAIST 전자공학 석사",
       "current_status": "retired",
@@ -12097,7 +12324,7 @@
         "Applied_Materials"
       ],
       "specialization": "Metrology",
-      "name_korean": "백동현",
+      "name_korean": "백다영",
       "nationality": "KR",
       "work_history_countries": [
         "KR"
@@ -12105,7 +12332,7 @@
     },
     {
       "expert_id": "EXP_088",
-      "name": "황수정",
+      "name": "황동현",
       "age": 63,
       "education": "포항공대 화학공학 석사",
       "current_status": "retired",
@@ -12206,7 +12433,7 @@
         "ASML"
       ],
       "specialization": "Metrology",
-      "name_korean": "황수정",
+      "name_korean": "황동현",
       "nationality": "US",
       "work_history_countries": [
         "US"
@@ -12214,7 +12441,7 @@
     },
     {
       "expert_id": "EXP_089",
-      "name": "문예린",
+      "name": "문동훈",
       "age": 53,
       "education": "UC Berkeley 재료공학 석사",
       "current_status": "advisor",
@@ -12377,7 +12604,7 @@
         "ASML"
       ],
       "specialization": "Lithography",
-      "name_korean": "문예린",
+      "name_korean": "문동훈",
       "nationality": "KR",
       "work_history_countries": [
         "KR",
@@ -12531,7 +12758,7 @@
     },
     {
       "expert_id": "EXP_091",
-      "name": "문예린",
+      "name": "문미경",
       "age": 52,
       "education": "Stanford 재료공학 석사",
       "current_status": "active",
@@ -12631,7 +12858,7 @@
         "LAM_Research"
       ],
       "specialization": "Metrology",
-      "name_korean": "문예린",
+      "name_korean": "문미경",
       "nationality": "KR",
       "work_history_countries": [
         "KR",
@@ -12640,7 +12867,7 @@
     },
     {
       "expert_id": "EXP_092",
-      "name": "류현정",
+      "name": "류다영",
       "age": 48,
       "education": "Stanford 재료공학 석사",
       "current_status": "active",
@@ -12738,7 +12965,7 @@
         "Applied_Materials"
       ],
       "specialization": "Metrology",
-      "name_korean": "류현정",
+      "name_korean": "류다영",
       "nationality": "CN",
       "work_history_countries": [
         "CN"
@@ -12746,7 +12973,7 @@
     },
     {
       "expert_id": "EXP_093",
-      "name": "윤미경",
+      "name": "윤미라",
       "age": 67,
       "education": "서울대 재료공학 석사",
       "current_status": "retired",
@@ -12893,7 +13120,7 @@
         "ASML"
       ],
       "specialization": "Lithography",
-      "name_korean": "윤미경",
+      "name_korean": "윤미라",
       "nationality": "KR",
       "work_history_countries": [
         "KR",
@@ -12902,7 +13129,7 @@
     },
     {
       "expert_id": "EXP_094",
-      "name": "전호영",
+      "name": "전동욱",
       "age": 60,
       "education": "KAIST 물리학 석사",
       "current_status": "consultant",
@@ -12996,7 +13223,7 @@
         "Applied_Materials"
       ],
       "specialization": "Metrology",
-      "name_korean": "전호영",
+      "name_korean": "전동욱",
       "nationality": "KR",
       "work_history_countries": [
         "KR",
@@ -13005,7 +13232,7 @@
     },
     {
       "expert_id": "EXP_095",
-      "name": "문예린",
+      "name": "문미라",
       "age": 56,
       "education": "KAIST 물리학 석사",
       "current_status": "active",
@@ -13136,7 +13363,7 @@
         "Applied_Materials"
       ],
       "specialization": "ALD",
-      "name_korean": "문예린",
+      "name_korean": "문미라",
       "nationality": "TW",
       "work_history_countries": [
         "TW",
@@ -13145,7 +13372,7 @@
     },
     {
       "expert_id": "EXP_096",
-      "name": "강태영",
+      "name": "강민석",
       "age": 59,
       "education": "서울대 전자공학 박사",
       "current_status": "consultant",
@@ -13283,7 +13510,7 @@
         "LAM_Research"
       ],
       "specialization": "CMP",
-      "name_korean": "강태영",
+      "name_korean": "강민석",
       "nationality": "KR",
       "work_history_countries": [
         "KR",
@@ -13292,7 +13519,7 @@
     },
     {
       "expert_id": "EXP_097",
-      "name": "장승호",
+      "name": "장동욱",
       "age": 63,
       "education": "UNIST 화학공학 석사",
       "current_status": "retired",
@@ -13391,7 +13618,7 @@
         "Applied_Materials"
       ],
       "specialization": "Etch",
-      "name_korean": "장승호",
+      "name_korean": "장동욱",
       "nationality": "TW",
       "work_history_countries": [
         "TW",
@@ -13400,7 +13627,7 @@
     },
     {
       "expert_id": "EXP_098",
-      "name": "이준석",
+      "name": "이민석",
       "age": 66,
       "education": "서울대 재료공학 박사",
       "current_status": "retired",
@@ -13532,7 +13759,7 @@
         "ASML"
       ],
       "specialization": "Metrology",
-      "name_korean": "이준석",
+      "name_korean": "이민석",
       "nationality": "TW",
       "work_history_countries": [
         "TW"

@@ -269,8 +269,10 @@ def main() -> int:
         # 이 A-Box 만 rdfs:label 을 쓰고 있었고, 그래서 "이 공정에 필요한 스킬을 가진
         # 전문가는 누구인가" 라는 질의가 **IRI 만** 돌려줬다 — 답은 하는데 읽히지 않았다.
         #
-        # KR 파일이 실명, EN 파일은 익명화된 자리표시자("Kim, [Given Name]")다. 익명 자리표시자를
-        # 대표 이름으로 삼을 수는 없으므로 **prefLabel 은 실명(@ko)**, EN 표기는 altLabel(@en) 이다.
+        # KR 파일의 이름은 **전부 가명**이다 — 실 경력기술서 파생 5건은 비식별 변조 단계에서
+        # 가명이 부여됐고 나머지는 생성값이다(docs/deidentification_protocol.md). EN 파일은
+        # 자리표시자("Kim, [Given Name]")라 대표 이름으로 삼을 수 없으므로,
+        # prefLabel 은 KR 가명(@ko) · EN 표기는 altLabel(@en) 이다.
         kr_name = e.get("name")
         en_name = experts_en.get(eid, {}).get("name")
         if kr_name:

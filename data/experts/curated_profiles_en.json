@@ -14,7 +14,6 @@
         {
           "name": "박지현",
           "expert_id": "EXP_002",
-          "pdf": "ExpDataSet/PDF/experts/박지현_경력기술서_수정본.pdf",
           "changes": {
             "age": 59,
             "years_experience": 29,
@@ -23,12 +22,12 @@
               "SK Hynix"
             ]
           },
-          "text_sha256": "588503af1fe17b8d"
+          "text_sha256": "588503af1fe17b8d",
+          "source": "de-identified derivative of a real practitioner career record (original document not ingested into this repository)"
         },
         {
           "name": "김영수",
           "expert_id": "EXP_005",
-          "pdf": "ExpDataSet/PDF/experts/김영수_경력기술서_수정본.pdf",
           "changes": {
             "age": 61,
             "years_experience": 31,
@@ -36,12 +35,12 @@
               "SK Hynix"
             ]
           },
-          "text_sha256": "1570969d4d41da83"
+          "text_sha256": "1570969d4d41da83",
+          "source": "de-identified derivative of a real practitioner career record (original document not ingested into this repository)"
         },
         {
           "name": "최재호",
           "expert_id": "EXP_004",
-          "pdf": "ExpDataSet/PDF/experts/최재호_경력기술서_수정본.pdf",
           "changes": {
             "age": 63,
             "years_experience": 33,
@@ -49,12 +48,12 @@
               "Samsung Electronics"
             ]
           },
-          "text_sha256": "0c6e2af5aa5cfd2d"
+          "text_sha256": "0c6e2af5aa5cfd2d",
+          "source": "de-identified derivative of a real practitioner career record (original document not ingested into this repository)"
         },
         {
           "name": "김태훈",
           "expert_id": "EXP_001",
-          "pdf": "ExpDataSet/PDF/experts/김태훈_경력기술서_수정본.pdf",
           "changes": {
             "age": 60,
             "years_experience": 30,
@@ -64,12 +63,12 @@
               "TSMC"
             ]
           },
-          "text_sha256": "623c2b5d24fd9197"
+          "text_sha256": "623c2b5d24fd9197",
+          "source": "de-identified derivative of a real practitioner career record (original document not ingested into this repository)"
         },
         {
           "name": "이승우",
           "expert_id": "EXP_003",
-          "pdf": "ExpDataSet/PDF/experts/이승우_경력기술서_수정본.pdf",
           "changes": {
             "age": 62,
             "years_experience": 32,
@@ -78,7 +77,8 @@
               "TSMC"
             ]
           },
-          "text_sha256": "2b216f7ada8939c6"
+          "text_sha256": "2b216f7ada8939c6",
+          "source": "de-identified derivative of a real practitioner career record (original document not ingested into this repository)"
         }
       ],
       "resume_missing": [],
@@ -86,7 +86,8 @@
         "Added ontology_alignment (process/subprocess/vendor/equipment ids) derived from tags+summary.",
         "Adjusted implausible age/years_experience pairs only when clearly inconsistent.",
         "Reconciled EXP_001~EXP_005 using resume PDFs when available (age/years_experience/equipment/tags)."
-      ]
+      ],
+      "source_note": "EXP_001~005 는 실 경력기술서를 근거로 식별 불가능하도록 변조한 파생 프로필이다. 이름은 가명이고 수치(patent_count 등)는 생성값이며 실인물에 대한 주장이 아니다. 원본 문서는 저장소·스냅샷·배포물 어디에도 반입되지 않았다. 절차는 docs/deidentification_protocol.md."
     },
     "rebalanced_date": "2026-01-31 01:02:16",
     "rebalanced_to_match": "ExpDataSet/EXPERIMENT_DATASET_DESCRIPTION.md",
@@ -112,7 +113,8 @@
     },
     "language_standardized": true,
     "standardization_version": "v1.0",
-    "notes": "All Korean fields translated to English. Original Korean preserved in *_korean fields where applicable."
+    "notes": "All Korean fields translated to English. Original Korean preserved in *_korean fields where applicable.",
+    "name_reassignment_synced": "2026-07-20"
   },
   "experts": [
     {
@@ -7269,7 +7271,7 @@
     },
     {
       "expert_id": "EXP_053",
-      "name": "문예린",
+      "name": "문다영",
       "age": 65,
       "education": "Stanford 전자공학 석사",
       "current_status": "retired",
@@ -7408,7 +7410,7 @@
     },
     {
       "expert_id": "EXP_054",
-      "name": "문예린",
+      "name": "문동욱",
       "age": 46,
       "education": "KAIST 화학공학 박사",
       "current_status": "consultant",
@@ -9187,7 +9189,7 @@
     },
     {
       "expert_id": "EXP_067",
-      "name": "문지현",
+      "name": "문동현",
       "age": 68,
       "education": "MIT 화학공학 석사",
       "current_status": "retired",
@@ -11749,7 +11751,7 @@
     },
     {
       "expert_id": "EXP_087",
-      "name": "백동현",
+      "name": "백다영",
       "age": 60,
       "education": "KAIST 전자공학 석사",
       "current_status": "retired",
@@ -11990,7 +11992,7 @@
     },
     {
       "expert_id": "EXP_089",
-      "name": "문예린",
+      "name": "문동훈",
       "age": 53,
       "education": "UC Berkeley 재료공학 석사",
       "current_status": "advisor",
@@ -12301,7 +12303,7 @@
     },
     {
       "expert_id": "EXP_091",
-      "name": "문예린",
+      "name": "문미경",
       "age": 52,
       "education": "Stanford 재료공학 석사",
       "current_status": "active",
@@ -12764,7 +12766,7 @@
     },
     {
       "expert_id": "EXP_095",
-      "name": "문예린",
+      "name": "문미라",
       "age": 56,
       "education": "KAIST 물리학 석사",
       "current_status": "active",
