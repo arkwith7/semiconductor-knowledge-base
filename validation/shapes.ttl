@@ -55,6 +55,93 @@ ont:Shape_PersonProblemLabel
         sh:message "Expert/Problem must have a language-tagged skos:prefLabel (not rdfs:label)." ;
     ] .
 
+# ─── EquipmentModel must have a label ────────────────────────────
+# 전문가 프로필의 equipment_models 를 실체화한 노드. license·provenance 는 요구하지
+# 않는다 — Expert/Problem 과 같은 큐레이션 원천이라 (없는 것을 있는 척하지 않는다).
+ont:Shape_EquipmentModel
+    a sh:NodeShape ;
+    sh:targetClass ont:EquipmentModel ;
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:minCount 1 ;
+        sh:datatype rdf:langString ;
+        sh:message "Every EquipmentModel must have a language-tagged skos:prefLabel." ;
+    ] .
+
+# ─── ExpertCase reification: label + provenance + typed links ─────
+# case_experience 를 그룹핑한 노드. 이름·출처는 필수(정직한 프로비넌스), 개별 링크는
+# 미해결일 수 있어 필수로 하지 않되 존재하면 range 를 검증한다 (어휘가 SHACL 에 보이게).
+ont:Shape_ExpertCase
+    a sh:NodeShape ;
+    sh:targetClass ont:ExpertCase ;
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:minCount 1 ;
+        sh:datatype rdf:langString ;
+        sh:message "Every ExpertCase must have a language-tagged skos:prefLabel." ;
+    ] ;
+    sh:property [
+        sh:path ont:caseSource ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Every ExpertCase must record caseSource (provenance)." ;
+    ] ;
+    sh:property [
+        sh:path ont:caseProcess ;
+        sh:nodeKind sh:IRI ;
+        sh:or ( [ sh:class ont:Process ] [ sh:class ont:SubProcess ] ) ;
+        sh:message "caseProcess range must be a Process or SubProcess instance." ;
+    ] ;
+    sh:property [
+        sh:path ont:caseFailureMode ;
+        sh:class ont:FailureMode ; sh:nodeKind sh:IRI ;
+        sh:message "caseFailureMode range must be a FailureMode instance." ;
+    ] ;
+    sh:property [
+        sh:path ont:caseRootCause ;
+        sh:class ont:RootCause ; sh:nodeKind sh:IRI ;
+        sh:message "caseRootCause range must be a RootCause instance." ;
+    ] ;
+    sh:property [
+        sh:path ont:caseMitigation ;
+        sh:class ont:Mitigation ; sh:nodeKind sh:IRI ;
+        sh:message "caseMitigation range must be a Mitigation instance." ;
+    ] ;
+    sh:property [
+        sh:path ont:caseParameter ;
+        sh:class ont:Parameter ; sh:nodeKind sh:IRI ;
+        sh:message "caseParameter range must be a Parameter instance." ;
+    ] .
+
+# ─── Expert career datatype fields (protocol §1.5) ───────────────
+# 신규 적재 경력 필드의 자료형을 검증한다. 존재는 강제하지 않는다(retirementYear 는
+# 은퇴자만, 등). 목적은 어휘가 SHACL 에 보이고(§5.2) 자료형이 옳게 실렸음을 고정하는 것.
+ont:Shape_ExpertCareer
+    a sh:NodeShape ;
+    sh:targetClass ont:Expert ;
+    sh:property [ sh:path ont:age ;              sh:datatype xsd:integer ] ;
+    sh:property [ sh:path ont:yearsExperience ;  sh:datatype xsd:integer ] ;
+    sh:property [ sh:path ont:patentCount ;      sh:datatype xsd:integer ; sh:minInclusive 0 ] ;
+    sh:property [ sh:path ont:publicationCount ; sh:datatype xsd:integer ; sh:minInclusive 0 ] ;
+    sh:property [ sh:path ont:toeicScore ;       sh:datatype xsd:integer ] ;
+    sh:property [ sh:path ont:retirementYear ;   sh:datatype xsd:gYear ] ;
+    sh:property [ sh:path ont:lastActivity ;     sh:datatype xsd:date ] ;
+    sh:property [ sh:path ont:hasNCT ;           sh:datatype xsd:boolean ] ;
+    sh:property [ sh:path ont:education ;         sh:datatype xsd:string ] ;
+    sh:property [ sh:path ont:currentStatus ;     sh:datatype xsd:string ] ;
+    sh:property [ sh:path ont:formerEmployer ;    sh:datatype xsd:string ] ;
+    sh:property [ sh:path ont:securityClearance ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path ont:consultingAvailability ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path ont:specialization ;    sh:datatype xsd:string ] ;
+    sh:property [ sh:path ont:profileSummary ;    sh:datatype xsd:string ] ;
+    sh:property [ sh:path ont:hourlyRateRange ;   sh:datatype xsd:string ] ;
+    sh:property [ sh:path ont:nationality ;       sh:datatype xsd:string ] ;
+    sh:property [ sh:path ont:hasCertification ;  sh:datatype xsd:string ] ;
+    sh:property [ sh:path ont:language ;          sh:datatype xsd:string ] ;
+    sh:property [ sh:path ont:majorProject ;      sh:datatype xsd:string ] ;
+    sh:property [ sh:path ont:preferredProjectType ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path ont:workHistoryCountry ;   sh:datatype xsd:string ] .
+
 # ─── Confidence score range (0.0–1.0) ────────────────────────────
 ont:Shape_Confidence
     a sh:PropertyShape ;

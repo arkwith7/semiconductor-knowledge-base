@@ -62,6 +62,41 @@ SDKB 의 `ont:Expert`(110) · `ont:Problem`(226) 인스턴스는 실 원천을 *
 `scripts/sanitize_expert_provenance.py` 로 경로를 제거하고 `text_sha256` 은 남겼다 —
 파생 사실을 고정하는 앵커는 해시이지 파일 위치가 아니다.
 
+### 1.5 상세 경력의 그래프 적재 — 배포 노출 재검토 (2026-07-21)
+
+그간 그래프에는 전문가 노드의 `skos:prefLabel`·`region`·`complianceFlag` 과 온톨로지 링크만
+실려 있었다. 이번에 **큐레이션된 상세 경력 필드를 A-Box 로 실체화**한다 —
+[[sdkb-knowledge-trapped-in-parquet]] · SubProcess 별칭 승격과 같은 패턴(데이터는 정본에
+있으나 그래프에만 없던 것). 그래프는 CDLA 로 배포되므로, **A-Box 는 지울 수 있어도 배포된
+값은 지울 수 없다** — 이 비대칭 때문에 적재 전에 노출을 다시 못박는다.
+
+**새로 그래프에 실리는 필드(전 110명 · datatype property):**
+`age` · `education`(학위·전공·기관·연도 서술) · `currentStatus` · `formerEmployer` ·
+`yearsExperience` · `retirementYear` · `patentCount` · `publicationCount` ·
+`hasCertification` · `language` · `toeicScore` · `securityClearance` ·
+`consultingAvailability` · `specialization` · `profileSummary`(경력 서술문) ·
+`majorProject` · `hasNCT` · `preferredProjectType` · `hourlyRateRange` ·
+`nationality` · `workHistoryCountry` · `lastActivity`. 추가로 `equipment_models` 를
+`ont:EquipmentModel` 노드로, `case_experience` 를 `ont:ExpertCase` 로 실체화한다.
+
+**이 값들은 §1.1–1.2 의 비식별 지위를 그대로 승계한다.** EXP_001–005 의 경력·수치·소속은
+전부 **변조/재작성값**이고(데이터셋 값이 원천 문서와 불일치하는 것이 그 증거),
+EXP_006–110 은 시드 고정 생성값이다. 그래프에 실린 어떤 경력 수치도 **실인물에 대한 주장이
+아니다** — 원천 데이터의 `intellectual_property.notes` 선언이 이 축 전체에 적용된다.
+연락처·이메일·생년월일은 원천에도 변조본에도 없어 그래프에도 없다. `age` 는 변조/생성값이다.
+
+> **`hourlyRateRange` 에 관한 한계 표기.** 시급대는 배포 위험 검토
+> ([dataset_publication_risk_review.md](project/dataset_publication_risk_review.md) §4-1)
+> 가 공개 스냅샷에서 제외를 권고한 **상업 성격의 필드**다. 사용자 결정(2026-07-21)으로
+> 그래프에 싣되, 값은 **합성 프로필의 생성값**이며 실 자문 단가·시장 가격을 나타내지 않는다.
+> 실 ARKWITH IPBridge 시장·가격 독점정보는 `commercialization_strategy_v1.md` 에만 있고
+> 그래프·전문가 프로필과 무관하다. 더블블라인드 스냅샷에서 이 필드를 뺄 필요가 있으면
+> `hourlyRateRange` 트리플만 필터링해 재직렬화한다(엣지 불변).
+
+**CEO·전화·팩스는 싣지 않는다(소부장 벤더 축).** KSIA 명부의 `대표자`·`전화번호`·`팩스`
+는 실 개인/기업 연락정보라 그래프에서 계속 제외한다 — 벤더 노드에는 `companyType`·명칭·
+웹사이트만 남는다.
+
 ---
 
 ## 2. Problem 축 (226)

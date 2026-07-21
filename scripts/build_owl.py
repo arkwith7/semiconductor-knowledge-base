@@ -119,6 +119,14 @@ def build_ontology() -> Graph:
         # TBox 를 읽는 소비자에게는 존재하지 않는 클래스이고, 추론기·SHACL 이 검증할 수 없다.
         "Expert":         "A domain expert with a curated competency profile (인력 축).",
         "Problem":        "A technical problem posed by a materials/parts/equipment SME (소부장 실문제).",
+        # EquipmentModel 은 전문가 프로필의 equipment_models 문자열("Applied Materials
+        # Centura" 등 고유 29종)을 실체화한 노드다. EquipmentClass(범주)·Equipment(KG 의
+        # 소수 인스턴스)와 구분되는, 벤더별 상용 모델 층이다.
+        "EquipmentModel": "A commercial equipment model (vendor product line, e.g. 'Applied Materials Centura'). More specific than EquipmentClass.",
+        # ExpertCase 는 전문가의 case_experience(공정↔불량↔원인↔완화↔파라미터의 co-occurrence)
+        # 를 보존하는 reification 노드다. 개별 링크를 전문가에 평탄화하면 이 그룹핑이 사라진다.
+        # source 는 전량 'synthetic_ontology_heuristic' — 실 사례 기록이 아니다(비식별 프로토콜).
+        "ExpertCase":     "A reified case-experience record of an expert, grouping a process with its failure modes, root causes, mitigations, and parameters.",
     }
 
     for cls_name, desc in core_classes.items():
@@ -349,8 +357,21 @@ def build_ontology() -> Graph:
                                    "Process (or technology-node) expertise of an expert."),
         "hasMaterialExpertise":   ("Expert",     "Material",
                                    "Material expertise of an expert."),
-        "hasEquipmentExperience": ("Expert",     ["Equipment", "EquipmentClass", "Vendor", "Metrology"],
+        "hasEquipmentExperience": ("Expert",     ["Equipment", "EquipmentClass", "Vendor", "Metrology", "EquipmentModel"],
                                    "Hands-on equipment experience of an expert."),
+        # ── ExpertCase reification (case_experience 축) ─────────────────────
+        "hasCaseExperience":      ("Expert",     "ExpertCase",
+                                   "A reified case-experience record of an expert."),
+        "caseProcess":            ("ExpertCase", ["Process", "SubProcess"],
+                                   "The process (or sub-process) a case-experience is about."),
+        "caseFailureMode":        ("ExpertCase", "FailureMode",
+                                   "A failure mode encountered in the case-experience."),
+        "caseRootCause":          ("ExpertCase", "RootCause",
+                                   "A root cause diagnosed in the case-experience."),
+        "caseMitigation":         ("ExpertCase", "Mitigation",
+                                   "A mitigation applied in the case-experience."),
+        "caseParameter":          ("ExpertCase", "Parameter",
+                                   "A process parameter involved in the case-experience."),
         "involvesProcess":        ("Problem",    "Process",
                                    "Process implicated by an SME problem."),
         "involvesEquipment":      ("Problem",    ["Equipment", "EquipmentClass", "Metrology"],
@@ -473,6 +494,31 @@ def build_ontology() -> Graph:
                                   "Whether the expert profile is subject to compliance review."),
         "region":                (["Expert", "Problem"], XSD.string,
                                   "Geographic region of an expert or of the SME that raised a problem."),
+        # ── 전문가 상세 경력 (curated_profiles_kr.json → A-Box, 2026-07-21) ──
+        # 전부 비식별 변조/생성값이다 — 실인물 주장 아님(docs/deidentification_protocol.md §1.5).
+        "age":                   ("Expert", XSD.integer, "Expert age (synthetic/altered — no claim about a real individual)."),
+        "education":             ("Expert", XSD.string,  "Highest degree, field, institution, and year (narrative)."),
+        "currentStatus":         ("Expert", XSD.string,  "Current professional status (retired | advisor | consultant | active | title)."),
+        "formerEmployer":        ("Expert", XSD.string,  "A former employer of the expert (altered for EXP_001–005)."),
+        "yearsExperience":       ("Expert", XSD.integer, "Years of professional experience."),
+        "retirementYear":        ("Expert", XSD.gYear,   "Year of retirement, if retired."),
+        "patentCount":           ("Expert", XSD.integer, "Patent count (synthetic — no claim about a real individual)."),
+        "publicationCount":      ("Expert", XSD.integer, "Publication count (synthetic — no claim about a real individual)."),
+        "hasCertification":      ("Expert", XSD.string,  "A professional certification held by the expert."),
+        "language":              ("Expert", XSD.string,  "A language the expert works in."),
+        "toeicScore":            ("Expert", XSD.integer, "TOEIC score (synthetic)."),
+        "securityClearance":     ("Expert", XSD.string,  "Security clearance level (none | confidential | secret | top_secret)."),
+        "consultingAvailability":("Expert", XSD.string,  "Consulting availability (available | limited | selective | not_available)."),
+        "specialization":        ("Expert", XSD.string,  "Primary specialization (e.g. Lithography, Metrology, CMP)."),
+        "profileSummary":        ("Expert", XSD.string,  "Free-text career summary (altered/synthetic narrative)."),
+        "majorProject":          ("Expert", XSD.string,  "A notable project the expert led or contributed to."),
+        "hasNCT":                ("Expert", XSD.boolean, "Whether the expert's profile touches a National Core Technology field."),
+        "preferredProjectType":  ("Expert", XSD.string,  "A preferred project type (troubleshooting | new_technology | optimization | training)."),
+        "hourlyRateRange":       ("Expert", XSD.string,  "Indicative consulting rate range (synthetic — not a real market price; see deidentification_protocol §1.5)."),
+        "nationality":           ("Expert", XSD.string,  "ISO country code of nationality (synthetic/altered)."),
+        "workHistoryCountry":    ("Expert", XSD.string,  "An ISO country code where the expert has worked."),
+        "lastActivity":          ("Expert", XSD.date,    "Date of the expert's last recorded activity."),
+        "caseSource":            ("ExpertCase", XSD.string, "Provenance of a case-experience record (e.g. synthetic_ontology_heuristic)."),
     }
 
     for prop_name, (domain, range_, desc) in dt_props.items():

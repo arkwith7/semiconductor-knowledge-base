@@ -4,8 +4,149 @@
     "experts": 110,
     "problems": 226
   },
-  "triples": 3653,
+  "triples": 8483,
   "mitigation_to_skill_links": 4,
+  "expert_enrichment": {
+    "alignment_resolved_by_field": {
+      "process_ids": 122,
+      "subprocess_ids": 70,
+      "vendor_ids": 245,
+      "equipment_class_ids": 395,
+      "mitigation_ids": 235,
+      "process_id": 122,
+      "failure_mode_ids": 105,
+      "root_cause_ids": 46,
+      "parameter_ids": 41
+    },
+    "alignment_unmatched_occurrences": 201,
+    "alignment_distinct_unmatched": 51,
+    "equipment_models_declared": 29,
+    "equipment_model_links": 263,
+    "expert_cases": 163,
+    "top_alignment_unmatched": [
+      {
+        "id": "failure:cd_uniformity",
+        "occurrences": 72
+      },
+      {
+        "id": "process:inspection",
+        "occurrences": 26
+      },
+      {
+        "id": "process:ion_implant",
+        "occurrences": 16
+      },
+      {
+        "id": "mitigation:annealing",
+        "occurrences": 12
+      },
+      {
+        "id": "cause:pressure_instability",
+        "occurrences": 9
+      },
+      {
+        "id": "failure:step_coverage",
+        "occurrences": 8
+      },
+      {
+        "id": "P001",
+        "occurrences": 5
+      },
+      {
+        "id": "P002",
+        "occurrences": 3
+      },
+      {
+        "id": "P005",
+        "occurrences": 3
+      },
+      {
+        "id": "mitigation:power_tuning",
+        "occurrences": 2
+      },
+      {
+        "id": "mitigation:gas_chemistry",
+        "occurrences": 2
+      },
+      {
+        "id": "P004",
+        "occurrences": 2
+      },
+      {
+        "id": "process:TSV_void_elimination",
+        "occurrences": 2
+      },
+      {
+        "id": "mitigation:TSV_void_elimination",
+        "occurrences": 2
+      },
+      {
+        "id": "process:overlay_improvement",
+        "occurrences": 1
+      },
+      {
+        "id": "mitigation:overlay_improvement",
+        "occurrences": 1
+      },
+      {
+        "id": "process:EUV_scanner_optimization",
+        "occurrences": 1
+      },
+      {
+        "id": "mitigation:EUV_scanner_optimization",
+        "occurrences": 1
+      },
+      {
+        "id": "process:capacitor_leakage_reduction",
+        "occurrences": 1
+      },
+      {
+        "id": "mitigation:capacitor_leakage_reduction",
+        "occurrences": 1
+      },
+      {
+        "id": "process:ALD_recipe_optimization",
+        "occurrences": 1
+      },
+      {
+        "id": "mitigation:ALD_recipe_optimization",
+        "occurrences": 1
+      },
+      {
+        "id": "process:nanosheet_uniformity",
+        "occurrences": 1
+      },
+      {
+        "id": "mitigation:nanosheet_uniformity",
+        "occurrences": 1
+      },
+      {
+        "id": "process:inner_spacer_optimization",
+        "occurrences": 1
+      },
+      {
+        "id": "mitigation:inner_spacer_optimization",
+        "occurrences": 1
+      },
+      {
+        "id": "P003",
+        "occurrences": 1
+      },
+      {
+        "id": "process:channel_hole_ar_improvement",
+        "occurrences": 1
+      },
+      {
+        "id": "mitigation:channel_hole_ar_improvement",
+        "occurrences": 1
+      },
+      {
+        "id": "process:ONO_thickness_optimization",
+        "occurrences": 1
+      }
+    ],
+    "note": "Alignment ids use a different prefix scheme than KG node ids; resolved by field-driven remap + normalized canonical-name fallback. Unmatched ids are genuinely out-of-ontology (e.g. process:inspection, mitigation:annealing, P00x placeholders) and are never forced."
+  },
   "term_resolution": {
     "distinct_terms_seen": 575,
     "tier1_lexicon_hits": 1370,
@@ -16,8 +157,12 @@
   },
   "orphans": {
     "experts_with_no_ontology_link": [
+      "EXP_103",
       "EXP_104",
-      "EXP_107"
+      "EXP_105",
+      "EXP_106",
+      "EXP_107",
+      "EXP_110"
     ],
     "problems_with_no_ontology_link": [
       "SC_PROB_015",
