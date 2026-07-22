@@ -6,8 +6,9 @@
   cited     인용 선행기술 KR+US   — cited_enriched/{kipris.jsonl,bigquery_us.parquet} (청구항 블록)
   g2        소부장 G2 12,339      — graph_v2.ttl 의 ont:claimText (청구항 블록)
 
-거절특허는 독립·종속항 전부 분해한다(종속항의 added-feature 가 §29② 진보성 판단의 초점).
-cited·g2 는 독립항만(대비 단위). 규칙이 flag 한 청구항만 로컬 LLM 재분해.
+거절특허·인용(Tier 2)·g2(Tier 3) 전부 독립·종속항을 분해한다 — 종속항의 added-feature 가
+§29② 진보성 판단의 초점이고 all-elements 대비의 완전 한정요소집합을 이룬다.
+규칙이 flag 한 청구항만 LLM(Bedrock Haiku) 재분해.
 증분 저장(features.jsonl) — 재실행 시 (source,patent,claim_no) 이미 처리분은 건너뛴다.
 소스는 (patent, claim_no, text, depends_on) 4-튜플을 낸다(독립항 depends_on=[]).
 """
@@ -72,9 +73,9 @@ def src_g2():
          "SELECT ?p ?c WHERE { ?p ont:claimText ?c }")
     for sol in store.query(q):
         pid = "g2:" + str(sol["p"].value).rsplit("/", 1)[-1]
-        for no, txt in split_claims(str(sol["c"].value)):
-            if is_independent(txt):
-                yield pid, no, txt, []
+        for no, txt in split_claims(str(sol["c"].value)):   # 독립·종속 전부(Tier 3)
+            dep = [] if is_independent(txt) else _parents(txt)
+            yield pid, no, txt, dep
 
 
 SOURCES = {"rejected": src_rejected, "cited": src_cited, "g2": src_g2}

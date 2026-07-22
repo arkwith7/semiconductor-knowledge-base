@@ -1,14 +1,14 @@
 {
-  "triples": 2230338,
-  "input_claims": 98659,
+  "triples": 4201318,
+  "input_claims": 215433,
   "counts": {
-    "claims": 98526,
+    "claims": 215300,
     "claims_independent": 57526,
-    "features": 253850,
-    "depends": 138507,
-    "depends_on_claim": 45475,
-    "claims_dependent": 41000,
-    "depends_on_claim_dangling": 20,
+    "features": 455638,
+    "depends": 179158,
+    "depends_on_claim": 174010,
+    "claims_dependent": 157774,
+    "depends_on_claim_dangling": 21,
     "judgment_no_ground": 7,
     "reextract_rows": 545,
     "judgments": 635,
@@ -16,13 +16,13 @@
     "judgment_cited_unresolved": 24
   },
   "feature_concept_by_type": {
-    "Skill": 65082,
-    "Process": 58881,
-    "Material": 31549,
-    "SubProcess": 11127,
-    "Device": 3316,
-    "FailureMode": 226,
-    "EquipmentClass": 102
+    "Process": 131544,
+    "Skill": 121073,
+    "Material": 50708,
+    "SubProcess": 18725,
+    "Device": 3891,
+    "FailureMode": 349,
+    "EquipmentClass": 246
   },
   "note": "feature 정규화 = build_abox_patents 와 동일 브리지. 판단 = evidence_v2 실체화."
 }
