@@ -448,6 +448,12 @@ ont:isIndependent
     rdfs:domain ont:Claim ; rdfs:range xsd:boolean ;
     rdfs:label "is independent claim"@en .
 
+ont:dependsOnClaim
+    a owl:ObjectProperty ;
+    rdfs:domain ont:Claim ; rdfs:range ont:Claim ;
+    rdfs:label "depends on claim"@en ;
+    rdfs:comment "종속항이 한정하는 부모 청구항. 완전 한정요소집합 = 부모 features ∪ 종속 추가 features(질의/추론으로 계산). 진보성(§29②) 판단의 added-feature 는 여기에 있다."@ko .
+
 ont:hasFeature
     a owl:ObjectProperty ;
     rdfs:domain ont:Claim ; rdfs:range ont:ClaimFeature ;

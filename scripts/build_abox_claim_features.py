@@ -93,6 +93,9 @@ def main() -> int:
     concept_hits = Counter()
     rows = [json.loads(l) for l in FEATURES.open()]
     seen_claim: set[str] = set()
+    # 실재하는 청구항 IRI 집합 — dependsOnClaim 이 매달린 부모(존재하지 않는 참조 번호)를
+    # 만들지 않도록. 일부 거절특허는 청구항 재번호/OCR 로 존재하지 않는 부모항을 참조한다.
+    present_claims = {f"claim/{_slug(r['patent'])}_c{r['claim_no']}" for r in rows}
 
     for r in rows:
         pat = _patent_iri(r["patent"], cited_map)
@@ -103,12 +106,23 @@ def main() -> int:
         cno = r["claim_no"]
         claim = _u(f"claim/{pslug}_c{cno}")
         if str(claim) not in seen_claim:
+            dep = r.get("depends_on") or []
             g.add((claim, RDF.type, R("Claim")))
             g.add((claim, R("claimNumber"), Literal(int(cno), datatype=XSD.integer)))
-            g.add((claim, R("isIndependent"), Literal(True, datatype=XSD.boolean)))
+            g.add((claim, R("isIndependent"), Literal(not dep, datatype=XSD.boolean)))
             g.add((pat, R("hasClaim"), claim))
+            # 종속항 → 부모 청구항(같은 특허, claims_full 의 depends_on). 완전 한정요소집합의 상속 축.
+            # 실재하는 부모에만 연결 — 존재하지 않는 참조 번호는 매달린 IRI 를 낳으므로 버리고 계상.
+            for parent_no in dep:
+                pkey = f"claim/{pslug}_c{parent_no}"
+                if pkey in present_claims:
+                    g.add((claim, R("dependsOnClaim"), _u(pkey)))
+                    stat["depends_on_claim"] += 1
+                else:
+                    stat["depends_on_claim_dangling"] += 1
             seen_claim.add(str(claim))
             stat["claims"] += 1
+            stat["claims_dependent" if dep else "claims_independent"] += 1
 
         feat_iris: list[tuple[URIRef, dict]] = []
         for f in r["features"]:

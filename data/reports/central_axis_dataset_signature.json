@@ -1,9 +1,15 @@
 {
-  "중심축 데이터셋 최종 서명(2026-07-22, OCR 재추출 통합)": "",
+  "중심축 데이터셋 최종 서명(2026-07-22, Tier 1+2 종속항 분해 통합)": "",
   "인용노드 CitedPatent": 3034,
-  "Claim": 53860,
-  "ClaimFeature": 165940,
+  "Claim": 98526,
+  "Claim_독립": 57526,
+  "Claim_종속": 41000,
+  "ClaimFeature": 253850,
+  "dependsOnClaim": 45475,
+  "dependsOnClaim_매달린부모_버림": 20,
   "PriorArtJudgment": 635,
-  "aboutClaim": 1588,
-  "재추출 통합행": 545
+  "aboutClaim": 5917,
+  "재추출 통합행": 545,
+  "트리플": 2230338,
+  "note": "Tier 1(거절특허 종속항 10,562)·Tier 2(인용 선행기술 종속항 30,438) 실체화 — 양방향 feature 대비. LLM 재분해 = AWS Bedrock Haiku(egress 승인, temperature 0 + sqlite 캐시로 결정적). SHACL 4종 통과. Tier 3(G2 종속항) 미착수."
 }
