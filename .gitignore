@@ -42,6 +42,14 @@ ontology/sdkb-governance-us-instances.ttl
 # Bulk / derived: gitignored, re-copy from /home/arkwith/Dev/paper_data via
 # scripts/sync_paper_data_assets.sh. Provenance: plan §7.1.
 data/patents/fulltext/
+
+# 청구항 feature · 인용문헌 보강 — KIPRIS 비재배포 청구항/초록 원문 포함 (§1.5)
+data/patents/cited_enriched/
+data/interim/claim_features.jsonl
+data/interim/llm_claim_cache.sqlite
+data/interim/reextracted_judgments.jsonl
+ontology/sdkb-abox-claim-features.ttl
+ontology/sdkb-abox-prior-art.ttl
 data/patents/fulltext_corpus.parquet
 data/patents/citation_resolution_full_cache.json
 # Kept committed (small GT / vocab): rejection_decisions/structured, _index.jsonl,

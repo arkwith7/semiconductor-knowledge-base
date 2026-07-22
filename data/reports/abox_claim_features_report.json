@@ -1,0 +1,24 @@
+{
+  "triples": 1411642,
+  "input_claims": 53860,
+  "counts": {
+    "claims": 53860,
+    "features": 165940,
+    "depends": 125392,
+    "judgment_no_ground": 7,
+    "reextract_rows": 545,
+    "judgments": 635,
+    "about_claim": 1588,
+    "judgment_cited_unresolved": 24
+  },
+  "feature_concept_by_type": {
+    "Skill": 52603,
+    "Process": 39643,
+    "Material": 12496,
+    "SubProcess": 4001,
+    "Device": 867,
+    "FailureMode": 100,
+    "EquipmentClass": 54
+  },
+  "note": "feature 정규화 = build_abox_patents 와 동일 브리지. 판단 = evidence_v2 실체화."
+}

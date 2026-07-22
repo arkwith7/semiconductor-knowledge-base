@@ -1,0 +1,90 @@
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix ont:     <https://w3id.org/sdkb/ont/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+# ═══════════════════════════════════════════════════════════════════
+# SDKB — SHACL Shapes: Claim-Feature & Prior-Art-Judgment 중심축
+#
+# 청구항 feature·거절-판단 계층의 구조 계약. 신규성/진보성 판단의 단위(feature)와
+# 심사관 판단(PriorArtJudgment)이 실체로 채워졌는지 게이트한다.
+# 인용문헌(CitedPatent)은 서지가 불완전할 수 있어 완화 검증한다(출원번호 미요구).
+# ═══════════════════════════════════════════════════════════════════
+
+# ─── Claim: 번호·독립여부·한정요소 ≥1 ───────────────────────────────
+ont:Shape_Claim
+    a sh:NodeShape ;
+    sh:targetClass ont:Claim ;
+    sh:property [
+        sh:path ont:claimNumber ; sh:minCount 1 ; sh:maxCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:message "Claim 은 claimNumber 1개를 가져야 한다." ;
+    ] ;
+    sh:property [
+        sh:path ont:isIndependent ; sh:minCount 1 ; sh:maxCount 1 ;
+        sh:datatype xsd:boolean ;
+        sh:message "Claim 은 isIndependent 를 명시해야 한다." ;
+    ] ;
+    sh:property [
+        sh:path ont:hasFeature ; sh:minCount 1 ;
+        sh:class ont:ClaimFeature ;
+        sh:message "Claim 은 한정요소(hasFeature) 를 최소 1개 가져야 한다 — 빈 청구항 금지." ;
+    ] .
+
+# ─── ClaimFeature: 텍스트·순서·분해방법·라이선스 ────────────────────
+ont:Shape_ClaimFeature
+    a sh:NodeShape ;
+    sh:targetClass ont:ClaimFeature ;
+    sh:property [
+        sh:path ont:featureText ; sh:minCount 1 ; sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "ClaimFeature 는 featureText 1개를 가져야 한다." ;
+    ] ;
+    sh:property [
+        sh:path ont:featureSeq ; sh:minCount 1 ; sh:maxCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:message "ClaimFeature 는 featureSeq 1개를 가져야 한다." ;
+    ] ;
+    sh:property [
+        sh:path ont:decompositionMethod ; sh:minCount 1 ; sh:maxCount 1 ;
+        sh:in ( "rule" "llm" ) ;
+        sh:message "decompositionMethod 는 rule 또는 llm 이어야 한다(정직성)." ;
+    ] ;
+    sh:property [
+        sh:path dcterms:license ; sh:minCount 1 ;
+        sh:message "ClaimFeature 는 dcterms:license 를 명시해야 한다(KIPRIS 비재배포)." ;
+    ] .
+
+# ─── PriorArtJudgment: 근거 1개 + 대비 선행기술 ≥1 ──────────────────
+ont:Shape_PriorArtJudgment
+    a sh:NodeShape ;
+    sh:targetClass ont:PriorArtJudgment ;
+    sh:property [
+        sh:path ont:onGround ; sh:minCount 1 ; sh:maxCount 1 ;
+        sh:class ont:RejectionType ;
+        sh:message "PriorArtJudgment 은 근거(onGround) 1개(RejectionType)를 가져야 한다." ;
+    ] ;
+    sh:property [
+        sh:path ont:overPriorArt ; sh:minCount 1 ;
+        sh:message "PriorArtJudgment 은 대비 선행기술(overPriorArt) 을 최소 1개 가져야 한다." ;
+    ] .
+    # aboutClaim 은 선택 — evidence_v2 407/656 만 청구항 번호 보유(정직). 없으면 특허-단위 판단.
+
+# ─── CitedPatent: 완화 — 출원번호 미요구, 서지 최소 요건 ────────────
+ont:Shape_CitedPatent
+    a sh:NodeShape ;
+    sh:targetClass ont:CitedPatent ;
+    # 인용문헌은 출원번호가 없을 수 있다. 대신 실체의 최소 근거로 filingDate 또는 abstractText 중
+    # 하나는 있어야 한다 — "매달린 IRI"(아무 속성 없는 빈 노드) 재발 방지.
+    sh:or (
+        [ sh:path ont:filingDate ; sh:minCount 1 ]
+        [ sh:path ont:abstractText ; sh:minCount 1 ]
+    ) ;
+    sh:property [
+        sh:path dcterms:license ; sh:minCount 1 ;
+        sh:message "CitedPatent 은 dcterms:license 를 명시해야 한다." ;
+    ] ;
+    sh:property [
+        sh:path dcterms:source ; sh:minCount 1 ;
+        sh:message "CitedPatent 은 dcterms:source(수집 원천)를 명시해야 한다." ;
+    ] .

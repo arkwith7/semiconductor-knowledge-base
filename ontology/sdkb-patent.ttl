@@ -54,6 +54,12 @@ ont:PendingPatent
     rdfs:label "Pending Patent"@en ;
     rdfs:comment "A patent application currently under examination."@en .
 
+ont:CitedPatent
+    a owl:Class ;
+    rdfs:subClassOf ont:Patent ;
+    rdfs:label "Cited Prior-Art Patent"@en ;
+    rdfs:comment "심사관이 선행기술로 인용한 특허 문헌. 서지(출원번호)가 불완전할 수 있어 완화 shape 로 검증한다 — 우리 코퍼스의 심사대상 특허(SIRP/G1/G2)와 구분되는 표식. 비특허문헌(NPL)은 이 클래스가 아니다."@ko .
+
 ont:ClassificationSymbol
     a owl:Class ;
     rdfs:label "Classification Symbol"@en ;
@@ -404,6 +410,112 @@ ont:relatedToTopic
     rdfs:range [ a owl:Class ; owl:unionOf ( ont:RootCause ont:Mitigation ont:TopicCluster ) ] ;
     rdfs:label "related to topic"@en ;
     rdfs:comment "Weak link from a patent to a RootCause / Mitigation / TopicCluster. Deliberately loose — used when free-text extraction cannot commit to a stronger relation."@en .
+
+# ── CLAIM FEATURE & PRIOR-ART JUDGMENT (중심축) ─────────────────────
+# 신규성/진보성 판단의 실제 단위는 청구항의 한정요소(feature)다. 이 계층은 청구항을
+# feature 로 분해(규칙+로컬 LLM)하고 개념에 정규화하며, 심사관의 선행기술 판단을
+# n-항 관계(어느 청구항 · 어느 선행기술 · 어느 근거)로 실체화한다. 기존 어휘
+# (ont:claimText · ont:RejectionType 개체 · ont:hasPriorArtExaminer)는 재사용하고 덧붙일 뿐이다.
+
+ont:Claim
+    a owl:Class ;
+    rdfs:label "Patent Claim"@en ;
+    rdfs:comment "특허의 청구항 1건. 독립항이 신규성/진보성 대비의 단위다."@ko .
+
+ont:ClaimFeature
+    a owl:Class ;
+    rdfs:label "Claim Feature (Limitation)"@en ;
+    rdfs:comment "청구항을 구성하는 한정요소 하나. 규칙+LLM 분해의 산출 단위이며 개념에 정규화된다."@ko .
+
+ont:PriorArtJudgment
+    a owl:Class ;
+    rdfs:label "Prior-Art Judgment"@en ;
+    rdfs:comment "심사관의 선행기술 판단 1건(n-항 관계의 실체화): 어느 청구항이 · 어느 선행기술에 대해 · 어느 근거로 거절됐는가. 무효심판 등 타 도메인에도 재사용되는 패턴."@en .
+
+# 청구항 구조
+ont:hasClaim
+    a owl:ObjectProperty ;
+    rdfs:domain ont:Patent ; rdfs:range ont:Claim ;
+    rdfs:label "has claim"@en .
+
+ont:claimNumber
+    a owl:DatatypeProperty ;
+    rdfs:domain ont:Claim ; rdfs:range xsd:integer ;
+    rdfs:label "claim number"@en .
+
+ont:isIndependent
+    a owl:DatatypeProperty ;
+    rdfs:domain ont:Claim ; rdfs:range xsd:boolean ;
+    rdfs:label "is independent claim"@en .
+
+ont:hasFeature
+    a owl:ObjectProperty ;
+    rdfs:domain ont:Claim ; rdfs:range ont:ClaimFeature ;
+    rdfs:label "has feature"@en .
+
+ont:featureSeq
+    a owl:DatatypeProperty ;
+    rdfs:domain ont:ClaimFeature ; rdfs:range xsd:integer ;
+    rdfs:label "feature sequence"@en .
+
+ont:featureText
+    a owl:DatatypeProperty ;
+    rdfs:domain ont:ClaimFeature ; rdfs:range xsd:string ;
+    rdfs:label "feature text"@en ;
+    rdfs:comment "한정요소 원문. KIPRIS 학술이용·비재배포 — dcterms:license 로 출처별 표기."@ko .
+
+ont:dependsOnFeature
+    a owl:ObjectProperty ;
+    rdfs:domain ont:ClaimFeature ; rdfs:range ont:ClaimFeature ;
+    rdfs:label "depends on feature"@en ;
+    rdfs:comment "'상기 X'(said X) 역참조 — 요소 간 의존."@ko .
+
+ont:decompositionMethod
+    a owl:DatatypeProperty ;
+    rdfs:domain ont:ClaimFeature ; rdfs:range xsd:string ;
+    rdfs:label "decomposition method"@en ;
+    rdfs:comment "rule | llm — 규칙 결정적 산출인지 로컬 LLM 재분해 산출인지(정직성)."@ko .
+
+# feature → 개념 (정규화 층). range 는 SDKB 개념 클래스들의 합집합.
+ont:featureConcept
+    a owl:ObjectProperty ;
+    rdfs:domain ont:ClaimFeature ;
+    rdfs:range [ a owl:Class ; owl:unionOf
+        ( ont:Process ont:SubProcess ont:Device ont:Material
+          ont:Skill ont:FailureMode ont:EquipmentClass ) ] ;
+    rdfs:label "feature concept"@en ;
+    rdfs:comment "한정요소가 지시하는 SDKB 개념. prefLabel/altLabel 브리지로 결정적 매핑. 언어중립 대비의 축."@ko .
+
+# 거절-판단 (reification)
+ont:hasJudgment
+    a owl:ObjectProperty ;
+    rdfs:domain ont:Patent ; rdfs:range ont:PriorArtJudgment ;
+    rdfs:label "has judgment"@en .
+
+ont:aboutClaim
+    a owl:ObjectProperty ;
+    rdfs:domain ont:PriorArtJudgment ; rdfs:range ont:Claim ;
+    rdfs:label "about claim"@en ;
+    rdfs:comment "거절된 대상 청구항(evidence_v2 target_claims)."@ko .
+
+# overPriorArt 는 range 를 두지 않는다 — 인용문헌은 특허가 아닐 수 있다(NPL). hasPriorArt 와 같은 이유.
+ont:overPriorArt
+    a owl:ObjectProperty ;
+    rdfs:domain ont:PriorArtJudgment ;
+    rdfs:label "over prior art"@en ;
+    rdfs:comment "대비된 인용 선행기술(특허 또는 비특허문헌)."@en .
+
+ont:onGround
+    a owl:ObjectProperty ;
+    rdfs:domain ont:PriorArtJudgment ; rdfs:range ont:RejectionType ;
+    rdfs:label "on ground"@en ;
+    rdfs:comment "판단 근거 = 기존 개체 Rejection_Novelty(§29①) / Rejection_Inventiveness(§29②)."@ko .
+
+ont:overlappingFeature
+    a owl:ObjectProperty ;
+    rdfs:domain ont:PriorArtJudgment ; rdfs:range ont:ClaimFeature ;
+    rdfs:label "overlapping feature"@en ;
+    rdfs:comment "겹친다고 도출된 한정요소(라벨 아님 — 양쪽 feature 개념 오버랩의 제안, 청구항단위 판단으로 검증)."@ko .
 
 # ── ANNOTATION PROPERTIES (reused from core) ───────────────────────
 # Patent instances reuse: ont:interpretationType, ont:validationRequired,
