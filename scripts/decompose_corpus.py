@@ -43,14 +43,15 @@ def src_rejected():
     f = SDKB / "data" / "patents" / "raw" / "semiconductor_industry_rejected_patents.jsonl"
     for line in f.open():
         d = json.loads(line)
-        tp = d["target_patent"]; pid = "rej:" + str(tp["application_number"])
+        tp = d["target_patent"]
+        pid = "rej:" + str(tp["application_number"])
         for c in (tp.get("claims_full") or []):   # 독립·종속 전부
             dep = [int(x) for x in (c.get("depends_on") or [])]
             yield pid, int(c["claim_no"]), c["text"], dep
 
 
 def src_cited():
-    kr = [json.loads(l) for l in (PD / "data/patents/cited_enriched/kipris.jsonl").open()]
+    kr = [json.loads(line) for line in (PD / "data/patents/cited_enriched/kipris.jsonl").open()]
     for r in kr:
         if (r.get("n_claims") or 0) > 0:
             for no, txt in split_claims(str(r["claims"])):   # 독립·종속 전부(Tier 2)
@@ -78,7 +79,26 @@ def src_g2():
             yield pid, no, txt, dep
 
 
-SOURCES = {"rejected": src_rejected, "cited": src_cited, "g2": src_g2}
+def src_g1():
+    """주 대비 코퍼스 G1(삼성·SK하이닉스) 청구항 → feature (§G1 Phase C+D).
+
+    G2 와 완전 대칭 — 독립·종속 전부. 종속 added-feature 는 §29② 진보성 판단의 초점이며,
+    판단(Tier 1)·인용(Tier 2)·코퍼스(Tier 3) 세 축과 주 대비축의 커버리지 비대칭을 해소한다(플랜 §G1 D).
+    """
+    from pyoxigraph import RdfFormat, Store
+    store = Store()
+    store.bulk_load(path=str(SDKB.parent / "SKKU/sdkb-foresight-paper/data/processed/graph_v1.ttl"),
+                    format=RdfFormat.TURTLE)
+    q = ("PREFIX ont: <https://w3id.org/sdkb/ont/> "
+         "SELECT ?p ?c WHERE { ?p ont:claimText ?c }")
+    for sol in store.query(q):
+        pid = "g1:" + str(sol["p"].value).rsplit("/", 1)[-1]
+        for no, txt in split_claims(str(sol["c"].value)):
+            dep = [] if is_independent(txt) else _parents(txt)   # 종속 포함(Phase D·Tier 4)
+            yield pid, no, txt, dep
+
+
+SOURCES = {"rejected": src_rejected, "cited": src_cited, "g2": src_g2, "g1": src_g1}
 
 
 def main() -> int:
@@ -91,7 +111,8 @@ def main() -> int:
     done: set[tuple] = set()
     if FEATURES.exists():
         for line in FEATURES.open():
-            r = json.loads(line); done.add((r["source"], r["patent"], r["claim_no"]))
+            r = json.loads(line)
+            done.add((r["source"], r["patent"], r["claim_no"]))
     print(f"[decompose] 기처리 {len(done)}청구항")
 
     names = list(SOURCES) if args.source == "all" else [args.source]
@@ -130,15 +151,18 @@ def main() -> int:
             llm = llm_map.get(r["txt"])
             if llm and len(llm) > len(feats):
                 feats = [{"seq": i + 1, "text": t, "marker": "", "refs": []} for i, t in enumerate(llm)]
-                method = "llm"; n_llm += 1
+                method = "llm"
+                n_llm += 1
         if not feats:                      # 분해 결과 0요소 — 빈 청구항은 만들지 않는다(정직 계상)
             n_skip += 1
             continue
         fh.write(json.dumps({"source": r["source"], "patent": r["patent"], "claim_no": r["claim_no"],
                              "depends_on": r["depends_on"], "method": method, "flag": r["flag"],
                              "n_features": len(feats), "features": feats}, ensure_ascii=False) + "\n")
-        n_claim += 1; n_feat += len(feats)
-    fh.close(); cache.close()
+        n_claim += 1
+        n_feat += len(feats)
+    fh.close()
+    cache.close()
     print(f"✓ {n_claim}청구항 → {n_feat}feature (LLM {n_llm}·{BACKEND}, 0요소 스킵 {n_skip}) "
           f"→ {FEATURES.name} ({time.time()-t0:.0f}s)")
     return 0

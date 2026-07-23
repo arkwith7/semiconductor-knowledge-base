@@ -50,12 +50,13 @@ def _u(curie_or_path: str) -> URIRef:
 def _patent_iri(field: str, cited_map: dict[str, str]) -> URIRef | None:
     """분해 patent 필드 → 그래프 특허 IRI.
 
-    rej:{appno} → data:patent/kr_{appno} · cited:{doc_id} → cited_id 맵 · g2:{slug} → data:patent/{slug}
+    rej:{appno} → data:patent/kr_{appno} · cited:{doc_id} → cited_id 맵 ·
+    g2:{slug}·g1:{slug} → data:patent/{slug} (둘 다 patent/kr_{appno} 슬러그)
     """
     kind, _, rest = field.partition(":")
     if kind == "rej":
         return _u(f"patent/kr_{rest}")
-    if kind == "g2":
+    if kind in ("g2", "g1"):
         return _u(f"patent/{rest}")
     if kind == "cited":
         cid = cited_map.get(rest)          # 'patent:kr_KR..A'
@@ -91,7 +92,7 @@ def main() -> int:
 
     stat = Counter()
     concept_hits = Counter()
-    rows = [json.loads(l) for l in FEATURES.open()]
+    rows = [json.loads(line) for line in FEATURES.open()]
     seen_claim: set[str] = set()
     # 실재하는 청구항 IRI 집합 — dependsOnClaim 이 매달린 부모(존재하지 않는 참조 번호)를
     # 만들지 않도록. 일부 거절특허는 청구항 재번호/OCR 로 존재하지 않는 부모항을 참조한다.

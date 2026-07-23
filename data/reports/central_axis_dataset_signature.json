@@ -1,15 +1,15 @@
 {
-  "중심축 데이터셋 최종 서명(2026-07-22, Tier 1+2+3 종속항 분해 통합)": "",
+  "중심축 데이터셋 최종 서명(2026-07-23, Tier 1+2+3 + G1 주 대비축 Phase C+D 통합)": "",
   "인용노드 CitedPatent": 3034,
-  "Claim": 215300,
-  "Claim_독립": 57526,
-  "Claim_종속": 157774,
-  "ClaimFeature": 455638,
-  "dependsOnClaim": 174010,
-  "dependsOnClaim_매달린부모_버림": 21,
+  "Claim": 586567,
+  "Claim_독립": 141605,
+  "Claim_종속": 444962,
+  "ClaimFeature": 1289512,
+  "dependsOnClaim": 483394,
+  "dependsOnClaim_매달린부모_버림": 53,
   "PriorArtJudgment": 635,
   "aboutClaim": 5917,
   "재추출 통합행": 545,
-  "트리플": 4201318,
-  "note": "Tier 1(거절특허 종속항 10,562)·Tier 2(인용 선행기술 종속항 30,438)·Tier 3(G2 소부장 종속항 116,774) 실체화 — 판단·인용·코퍼스 세 축 all-elements feature 대비. G2 종속 부모추출 회수율 1.0000(매달린 부모 1건만 가드가 버림). LLM 재분해 = AWS Bedrock Haiku(egress 승인, temperature 0 + sqlite 캐시로 결정적, Tier 3 재분해 11,479/12,119 flag). SHACL 4종 CONFORMS=True(전체 4.2M 트리플). aboutClaim·PriorArtJudgment 불변(G2는 코퍼스측 — 거절 판단 안 건드림). 미착수: G1 청구항 축(수집→delta.py details→src_g1) · G1 종속항(Tier 4)."
+  "트리플": 11605931,
+  "note": "Tier 1(거절특허 종속항 10,562)·Tier 2(인용 선행기술 종속항 30,438)·Tier 3(G2 소부장 종속항 116,774)에 이어 G1 주 대비축(삼성·SK하이닉스) 청구항 축을 실체화 — 판단·인용·코퍼스·주대비축 네 축 all-elements feature 대비. G1 = 독립 84,079(Phase C) + 종속 287,188(Phase D·2026-07-23, 종속 → 499,874 feature, 0요소 스킵 0) → Claim 215,300→586,567(독립 57,526→141,605 · 종속 157,774→444,962) · ClaimFeature 455,638→1,289,512 · dependsOnClaim 174,010→483,394(매달린 부모 21→53 가드 버림). LLM 재분해 = AWS Bedrock Haiku global.anthropic.claude-haiku-4-5(egress 승인, temperature 0 + sqlite 캐시로 결정적, G1 종속 재분해 22,182/22,423 flag). SHACL 4종 CONFORMS=True(전체 11.6M 트리플, shapes_claim_features + sdkb-patent TBox) · pytest 93 passed/10 skipped. aboutClaim 5,917·PriorArtJudgment 635 불변(G1은 코퍼스/대비측 — 거절 판단 안 건드림). H1 엣지 중립: graph_v1.ttl 미변경(Phase D는 claimText 읽기만) → realizesProcess/concernsDevice·C₀/C₁ 원리적 불변. 남은 후속: 없음(중심축 4축 all-elements 완결)."
 }
