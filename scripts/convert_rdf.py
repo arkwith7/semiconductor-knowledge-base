@@ -74,6 +74,10 @@ PRED_MAP = {
     "MITIGATED_BY":         SDKB_ONT.mitigatedBy,
     "INCOMPATIBLE_WITH":    SDKB_ONT.incompatibleWith,
     "NOT_ALLOWED_WITH":     SDKB_ONT.notAllowedWith,
+    # CR-007 결정 ①-b — 개념 상하위. 새 술어를 발명하지 않고 SKOS 를 쓴다.
+    # sdkb: 네임스페이스로 떨어지면 안 되므로 PRED_MAP 에 명시한다
+    # (미등록 술어는 SDKB_ONT[pred_key] 로 폴백한다).
+    "BROADER":              SKOS.broader,
 }
 
 

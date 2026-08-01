@@ -1,6 +1,12 @@
 {
   "_README": "Curated bridge layer for the A-Box builder (scripts/build_abox_experts_problems.py). Maps a NORMALIZED free-text tag (lowercase; / _ - . collapsed to single spaces) found on expert profiles / SME problems to one or more ontology node IDs from data/semiconductor_v0_3.json. This is the auditable, deterministic part of the lossy lift: only terms with a defensible ontology home are listed; genuinely out-of-ontology terms (DRAM, DDR5, FEOL, generic 'materials'/'parts') are intentionally absent and reported as unmatched. Tier-1 (exact lexicon: canonical_name / id-local / synonyms incl. Korean) is applied first; this file is Tier-2. Extend from data/reports/abox_linking_report.json -> top_unmatched.",
-  "_format": "<normalized term>: <node_id>  OR  <normalized term>: [<node_id>, ...]",
+  "_format": "<normalized term>: <node_id> | [<node_id>, ...]  — 모든 프로파일에 적용. 프로파일별로 갈라야 하면 {\"expert-tag\": <target|null>, \"patent-text\": <target|null>} 객체를 쓴다 (null = 그 프로파일에서 비활성). 파일을 복제하지 않는다.",
+  "_profiles": {
+    "expert-tag": "전문가 프로필·SME 문제 태그용 (현행 · 동작 불변 · T3 회귀 금지).",
+    "patent-text": "특허 전문 등 자유 텍스트용 (CR-007 신설). 과대일반화 표면형을 역량(Skill) 축에서 떼어 상위 개념으로 재지정한다 (D-15)."
+  },
+  "_rule_patent_text_short_ko": "patent-text 기본 규칙: 공백 없는 ≤4자 한글 표면형은 태스크 축(Skill·RootCause·Mitigation)으로 이월하지 않는다. 정당한 소수는 _exceptions_short_ko_task_axis 에 명시적으로 올린다 (CR-007 결정 ③).",
+  "_exceptions_short_ko_task_axis": [],
   "etching": "process:etch",
   "etch process": "process:etch",
   "dry etch": "subprocess:plasma_etch",
@@ -73,7 +79,10 @@
   "overlay": "skill:overlay_optimization",
   "overlay control": "skill:overlay_optimization",
   "overlay optimization": "skill:overlay_optimization",
-  "alignment": "skill:overlay_optimization",
+  "alignment": {
+    "expert-tag": "skill:overlay_optimization",
+    "patent-text": "subprocess:overlay_control"
+  },
   "opc": "skill:mask_engineering",
   "optical proximity correction": "skill:mask_engineering",
   "mask": "skill:mask_engineering",
@@ -160,19 +169,31 @@
   "패터닝": "process:lithography",
   "극자외선": "subprocess:euv_lithography",
   "노광 장비": "equipment_class:scanner",
-  "마스크": "skill:mask_engineering",
-  "포토마스크": "skill:mask_engineering",
+  "마스크": {
+    "expert-tag": "skill:mask_engineering",
+    "patent-text": "material:photomask"
+  },
+  "포토마스크": {
+    "expert-tag": "skill:mask_engineering",
+    "patent-text": "material:photomask"
+  },
   "레티클": "skill:mask_engineering",
   "하드마스크": "subprocess:hardmask_etch",
   "오버레이": "skill:overlay_optimization",
-  "정렬": "skill:overlay_optimization",
+  "정렬": {
+    "expert-tag": "skill:overlay_optimization",
+    "patent-text": "subprocess:overlay_control"
+  },
   "포토레지스트": "material:photoresist_euv",
   "감광제": "material:photoresist_euv",
   "평탄화": "process:cmp",
   "화학 기계적 연마": "process:cmp",
   "화학기계적연마": "process:cmp",
   "연마": "process:cmp",
-  "슬러리": "skill:slurry_management",
+  "슬러리": {
+    "expert-tag": "skill:slurry_management",
+    "patent-text": "material:cmp_slurry"
+  },
   "이온 주입": "process:implant",
   "이온주입": "process:implant",
   "주입": "process:implant",
@@ -187,16 +208,34 @@
   "파티클": "process:clean",
   "계측": "process:metrology",
   "검사": "process:metrology",
-  "결함": "skill:defect_analysis",
+  "결함": {
+    "expert-tag": "skill:defect_analysis",
+    "patent-text": null
+  },
   "결함 검사": "skill:defect_analysis",
-  "수율": "skill:defect_analysis",
+  "수율": {
+    "expert-tag": "skill:defect_analysis",
+    "patent-text": null
+  },
   "수율 향상": "skill:defect_analysis",
-  "플라즈마": "skill:plasma_diagnostics",
+  "플라즈마": {
+    "expert-tag": "skill:plasma_diagnostics",
+    "patent-text": "process:plasma_processing"
+  },
   "플라즈마 진단": "skill:plasma_diagnostics",
-  "챔버": "skill:chamber_conditioning",
+  "챔버": {
+    "expert-tag": "skill:chamber_conditioning",
+    "patent-text": "equipment_class:process_chamber"
+  },
   "챔버 세정": "skill:chamber_conditioning",
-  "가스": "skill:gas_chemistry",
-  "공정 가스": "skill:gas_chemistry",
+  "가스": {
+    "expert-tag": "skill:gas_chemistry",
+    "patent-text": "material:process_gas"
+  },
+  "공정 가스": {
+    "expert-tag": "skill:gas_chemistry",
+    "patent-text": "material:process_gas"
+  },
   "응력": "skill:film_stress_control",
   "박막 응력": "skill:film_stress_control",
   "레시피": "skill:recipe_tuning",
@@ -208,7 +247,10 @@
   "코발트": "material:cobalt",
   "질화 티타늄": "material:tin",
   "이산화 규소": "material:sio2",
-  "산화막": "material:sio2",
+  "산화막": {
+    "expert-tag": "material:sio2",
+    "patent-text": "material:oxide"
+  },
   "게이트 산화막": "material:sio2",
   "질화막": "material:sin",
   "질화 규소": "material:sin",
@@ -224,8 +266,14 @@
   "물리 기상 퇴적": "subprocess:pvd",
   "물리기상퇴적": "subprocess:pvd",
   "스퍼터": "subprocess:pvd",
-  "산화물": "material:sio2",
-  "절연막": "material:sio2",
+  "산화물": {
+    "expert-tag": "material:sio2",
+    "patent-text": "material:oxide"
+  },
+  "절연막": {
+    "expert-tag": "material:sio2",
+    "patent-text": "material:dielectric"
+  },
   "열산화": "process:diffusion",
   "산화 공정": "process:diffusion",
   "질화물": "material:sin",

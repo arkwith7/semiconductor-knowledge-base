@@ -338,3 +338,37 @@ gov:Shape_StandardReference
         sh:minCount 1 ;
         sh:message "StandardReference must have a label." ;
     ] .
+
+# ═══════════════════════════════════════════════════════════════════
+# CR-007 — 개념 상하위 (skos:broader)
+# ═══════════════════════════════════════════════════════════════════
+
+# ─── broader 의 값은 IRI 여야 한다 ────────────────────────────────
+# 리터럴 계층은 조용히 죽은 계층이다 — 질의로 따라갈 수 없다.
+ont:Shape_ConceptBroader
+    a sh:NodeShape ;
+    sh:targetSubjectsOf skos:broader ;
+    sh:property [
+        sh:path skos:broader ;
+        sh:nodeKind sh:IRI ;
+        sh:message "skos:broader must point at an IRI, not a literal." ;
+    ] .
+
+# ─── 상위 개념은 하위를 ≥1 개 가져야 한다 (CR-007 성공기준 ⑩) ────
+# 하위가 없는 상위 개념은 재지정이 붙을 자리를 만들지 못한 것이고,
+# 그때 이 CR 은 목적을 달성하지 못한 것이다. 그래서 계약으로 고정한다.
+ont:Shape_SuperordinateHasNarrower
+    a sh:NodeShape ;
+    sh:targetNode
+        <https://w3id.org/sdkb/data/equipment_class/process_chamber>,
+        <https://w3id.org/sdkb/data/material/process_gas>,
+        <https://w3id.org/sdkb/data/process/plasma_processing>,
+        <https://w3id.org/sdkb/data/material/photomask>,
+        <https://w3id.org/sdkb/data/material/dielectric>,
+        <https://w3id.org/sdkb/data/material/oxide>,
+        <https://w3id.org/sdkb/data/material/cmp_slurry> ;
+    sh:property [
+        sh:path [ sh:inversePath skos:broader ] ;
+        sh:minCount 1 ;
+        sh:message "Superordinate concept introduced by CR-007 must have at least one narrower concept." ;
+    ] .

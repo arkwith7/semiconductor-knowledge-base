@@ -93,6 +93,13 @@ def _rewrite_aliases(rename: dict[str, str]) -> int:
                 if t in rename:
                     target[i] = rename[t]
                     n += 1
+        elif isinstance(target, dict):
+            # 프로파일 객체(CR-007). 여기를 빼먹으면 개명 후 죽은 id 를 가리키는
+            # 별칭이 프로파일 안에 조용히 남는다 — 이 함수가 존재하는 이유 그대로.
+            for prof, t in list(target.items()):
+                if isinstance(t, str) and t in rename:
+                    target[prof] = rename[t]
+                    n += 1
     if n:
         ALIASES.write_text(json.dumps(al, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return n

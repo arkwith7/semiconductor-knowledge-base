@@ -187,13 +187,26 @@ def iter_terms(value: object):
             yield s
 
 
-def build_lexicon(kg: dict) -> tuple[dict[str, list[tuple[str, str]]], dict[str, str]]:
-    """Return (tier1 lexicon: normterm -> [(node_id, type)], node_id -> type)."""
+def build_lexicon(kg: dict,
+                  profile: str = "expert-tag"
+                  ) -> tuple[dict[str, list[tuple[str, str]]], dict[str, str]]:
+    """Return (tier1 lexicon: normterm -> [(node_id, type)], node_id -> type).
+
+    `props.lexicon_profile` 이 걸린 노드는 그 프로파일에서만 Tier-1 어휘가 된다
+    (CR-007). 노드 자체와 계층은 프로파일과 무관하게 그래프에 있다 — 가려지는
+    것은 **이름으로 텍스트를 잡는 힘**뿐이다. node_type 은 전 노드를 담는다:
+    별칭 타깃 해석에 필요하다.
+    """
     lex: dict[str, set[tuple[str, str]]] = defaultdict(set)
     node_type: dict[str, str] = {}
+    out_of_scope: set[str] = set()
     for n in kg["nodes"]:
         nid, typ = n["id"], n["type"]
         node_type[nid] = typ
+        scope = (n.get("props") or {}).get("lexicon_profile")
+        if scope and scope != profile:
+            out_of_scope.add(nid)
+            continue
         local = nid.split(":", 1)[1] if ":" in nid else nid
         for key in (n.get("canonical_name"), local, local.replace("_", " ")):
             k = norm(key)
@@ -202,19 +215,38 @@ def build_lexicon(kg: dict) -> tuple[dict[str, list[tuple[str, str]]], dict[str,
     for s in kg.get("synonyms", []):
         nid = s["node_id"]
         k = norm(s.get("term"))
-        if k and nid in node_type:
+        if k and nid in node_type and nid not in out_of_scope:
             lex[k].add((nid, node_type[nid]))
     return {k: sorted(v) for k, v in lex.items()}, node_type
 
 
-def load_aliases(node_type: dict[str, str]) -> dict[str, list[tuple[str, str]]]:
+def resolve_alias_target(target: object, profile: str) -> list[str]:
+    """별칭 값 → 이 프로파일에서 유효한 node_id 목록 (CR-007 결정 ②).
+
+    값의 세 형태: 문자열 · 문자열 리스트 · 프로파일 객체.
+    앞의 둘은 **모든 프로파일에 적용**되므로 사전을 복제하지 않아도 된다.
+    프로파일 객체에서 값이 None 이면 그 프로파일에서 비활성이다.
+    """
+    if isinstance(target, dict):
+        picked = target.get(profile)
+        if picked is None:
+            return []
+        return [picked] if isinstance(picked, str) else list(picked)
+    if isinstance(target, str):
+        return [target]
+    return list(target)
+
+
+def load_aliases(node_type: dict[str, str],
+                 profile: str = "expert-tag") -> dict[str, list[tuple[str, str]]]:
+    """기본값은 expert-tag — 전문가매칭의 현행 동작은 바뀌지 않는다 (T3)."""
     raw = json.loads(ALIASES_PATH.read_text())
     out: dict[str, list[tuple[str, str]]] = {}
     bad: list[str] = []
     for term, target in raw.items():
         if term.startswith("_"):
             continue
-        ids = [target] if isinstance(target, str) else list(target)
+        ids = resolve_alias_target(target, profile)
         resolved = []
         for nid in ids:
             if nid in node_type:

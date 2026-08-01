@@ -59,6 +59,11 @@ def load_alias_pairs() -> list[tuple[str, str]]:
     raw = json.loads(ALIASES.read_text(encoding="utf-8"))
     out = []
     for term, node in raw.items():
+        # 프로파일 객체({"expert-tag": …, "patent-text": …}, CR-007)는 승격하지 않는다.
+        # 그 항목들은 축이 프로파일마다 다르다 — 어느 한쪽을 개념의 이름(altLabel)으로
+        # 올리면 다른 프로파일에서 그래프가 거짓을 주장하게 된다(이 파일 상단 doctrine).
+        if isinstance(node, dict):
+            continue
         if not isinstance(node, str) or ":" not in node:
             continue  # `_comment` 류
         prefix = node.split(":", 1)[0]

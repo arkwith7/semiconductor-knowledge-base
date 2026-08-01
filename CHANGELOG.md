@@ -4,6 +4,51 @@ All notable changes to SDKB will be documented in this file.
 
 ## [Unreleased] — v1.0.0-dev
 
+### Added (2026-08-01 — CR-007 · 개념 매핑 자산과 상위 개념 계층 · 하류 D-14/D-15/D-16)
+- **상위 개념 7 + 구체 하위 6 신설, `skos:broader` 18 트리플**
+  (`scripts/add_superordinate_concepts.py`, 신규 · 결정적 · 멱등).
+  `equipment_class:process_chamber` · `material:process_gas` ·
+  `process:plasma_processing` · `material:photomask` · `material:dielectric` ·
+  `material:oxide` · `material:cmp_slurry`.
+- **왜.** 하류가 현행 별칭 사전을 특허 전문에 적용하면 `챔버`→`skill:chamber_conditioning`,
+  `가스`→`skill:gas_chemistry` 처럼 문서의 주제가 **역량(Skill) 축**에 붙어 Skill 이 특허
+  개념 링크의 18.1 % 를 차지했다(축 범주 오류 · D-15). 고칠 방법은 별칭 삭제가 아니라 축
+  재지정인데(삭제하면 동점블록 중앙값이 9 → 28 로 악화해 해상도가 무너진다), **재지정이
+  붙을 상위 개념이 온톨로지에 없었다.** 이 변경이 그 자리를 만든다.
+- **구체 하위 6 을 함께 세운 이유.** `process_gas`·`photomask` 의 하위가 스냅샷 261 노드에
+  **0 개**였다(Material 20 에 가스·마스크 실체가 없다). 성공기준을 느슨하게 만드는 대신
+  실체를 세웠다 — `cf4`·`sf6`·`oxygen_gas`·`argon`·`euv_mask`·`duv_photomask`.
+  2 글자 라틴 토큰이 자유 텍스트에서 오검출되므로 id 를 `argon`·`oxygen_gas` 로 둔다.
+- **TBox.** `skos:broader` 를 `sdkb-core.ttl` 에 선언한다(A-Box 가 쓰는 술어는 TBox 가 알아야
+  한다 · §1.2). **domain·range 는 걸지 않는다** — 외부 어휘에 SDKB 의 정의역을 얹으면 SKOS 를
+  쓰는 다른 소비자의 의미가 달라진다. 새 술어를 발명하지 않았다.
+- **`mappings/concept_mapping.json` 신설 (릴리스 자산)** — 표면형 → 개념 IRI 를
+  **프로파일별로** 발행한다(`scripts/build_concept_mapping.py`). 규칙 5 개(R1 정규화 ·
+  R2 Tier-1 · R3 Tier-2 · R4 한글 단문 차단 · R5 중의성)와 신뢰도·규칙 id 를 함께 싣는다.
+  `provenance/PROVENANCE.json` 에 sha256 등재. 타임스탬프를 넣지 않아 재생성이 결정적이다.
+  **적용기(linker)는 상류가 만들지 않는다** — 하류마다 토큰화가 다르다.
+- **프로파일은 사전의 속성이다(파일 복제 없음).** `abox_term_aliases.json` 의 값이
+  `{"expert-tag": …, "patent-text": …}` 형태를 받는다. `null` = 그 프로파일에서 비활성.
+  14 항목만 프로파일화했고 나머지 228 항목은 모든 프로파일에 그대로 적용된다.
+- **하류 영향 (§0).** 릴리스 서명이 움직인다: core-data **2,762 → 2,884 트리플(+122)** ·
+  인스턴스 262 → 275 · 클래스별 Δ = Material +11 · EquipmentClass +1 · Process +1 ·
+  술어 Δ = `skos:broader` +18, 그 외 노드 속성 술어 각 +13.
+  `SDKB-Match` 는 새 자산을 vendor 목록에 넣어야 개념 링크를 스냅샷만으로 재현할 수 있다(D-16).
+- **전문가매칭은 움직이지 않았다(T3).** `sdkb-abox-experts-problems.ttl` 8,483 트리플이
+  변경 전후 **집합으로 동일**하다(added 0 · removed 0). 처음 빌드했을 때는 그렇지 않았다 —
+  신설 노드의 이름(`photomask`·`oxide`)이 Tier-1 어휘집에 들어가 Tier-2 별칭을 가리면서
+  `SC_PROB_007` 의 `requiresSkill → skill:mask_engineering` 이 **사라졌다.** 그래서 신설
+  노드에 `props.lexicon_profile: patent-text` 를 걸어 어휘를 프로파일 범위로 묶었다.
+  노드와 계층 자체는 프로파일과 무관하게 그래프에 있다 — 가려지는 것은 이름으로 텍스트를
+  잡는 힘뿐이다.
+- **미달로 남기는 것 (성공기준 ①).** "개념의 ≥ 95 % 가 표면형 ≥ 3 개 보유"는 **27.0 %**
+  (patent-text · 74/274)로 크게 미달이다. 원인은 이 CR 이 아니라 다국어 라벨의 부재다
+  (@en 632 · @ko 93 · @ja 0). CR-003 의 일이며, 여기서 채우면 어휘를 지어내는 것이 된다.
+- **잔여 (기록).** `산화막` 은 patent-text 에서 `material:oxide`(재지정)와 `material:sio2`
+  (기존 `skos:altLabel`) **양쪽**에 걸린다. R5 규칙대로 후보를 지우지 않고 `ambiguous` 로
+  표시했다 — 어느 쪽을 고를지는 적용기의 판단이다. 따라서 sio2 접힘 해소는 이 표면형에서
+  부분적이며, 실제 효과는 하류 재측정(고유 개념집합)이 판정한다.
+
 ### Added (2026-07-20 — SubProcess 한국어 별칭 승격 · 하류 G₀ 이동)
 - **SubProcess 축에 한국어 `skos:altLabel` 19건 신설**
   (`scripts/promote_korean_aliases.py`, 신규 · 결정적 · 멱등). 원자층증착=ALD ·

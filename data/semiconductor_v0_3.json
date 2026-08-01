@@ -5743,6 +5743,240 @@
           }
         ]
       }
+    },
+    {
+      "id": "equipment_class:process_chamber",
+      "type": "EquipmentClass",
+      "canonical_name": "Process Chamber",
+      "description": "Generic process chamber. Equipment 축의 41 노드는 전부 모델·부품 단위라 일반 개념은 EquipmentClass 층에 둔다.",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "CR-007 §3단계 결정 ①",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Superordinate concept introduced so that over-general surface forms can be re-targeted off the Skill axis (D-15)."
+      }
+    },
+    {
+      "id": "material:process_gas",
+      "type": "Material",
+      "canonical_name": "Process Gas",
+      "description": "Generic process gas consumed in etch/deposition. 소모재는 Material 축 (hf_acid·barc 선례).",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "CR-007 §3단계 결정 ①",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Superordinate concept introduced so that over-general surface forms can be re-targeted off the Skill axis (D-15)."
+      }
+    },
+    {
+      "id": "process:plasma_processing",
+      "type": "Process",
+      "canonical_name": "Plasma Processing",
+      "description": "Plasma-based processing in general. subprocess:plasma_etch 는 과대특정이라 Process 층에 상위를 세운다.",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "CR-007 §3단계 결정 ①",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Superordinate concept introduced so that over-general surface forms can be re-targeted off the Skill axis (D-15)."
+      }
+    },
+    {
+      "id": "material:photomask",
+      "type": "Material",
+      "canonical_name": "Photomask",
+      "description": "Photomask / reticle. Device 34 노드는 전부 반도체 소자라 마스크 자리가 없다.",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "CR-007 §3단계 결정 ①",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Superordinate concept introduced so that over-general surface forms can be re-targeted off the Skill axis (D-15)."
+      }
+    },
+    {
+      "id": "material:dielectric",
+      "type": "Material",
+      "canonical_name": "Dielectric Material",
+      "description": "Dielectric material superclass of sio2 · sin · low_k_dielectric · hfO2.",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "CR-007 §3단계 결정 ①",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Superordinate concept introduced so that over-general surface forms can be re-targeted off the Skill axis (D-15)."
+      }
+    },
+    {
+      "id": "material:oxide",
+      "type": "Material",
+      "canonical_name": "Oxide Material",
+      "description": "Oxide material superclass of sio2 · teOs · hfO2.",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "CR-007 §3단계 결정 ①",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Superordinate concept introduced so that over-general surface forms can be re-targeted off the Skill axis (D-15)."
+      }
+    },
+    {
+      "id": "material:cmp_slurry",
+      "type": "Material",
+      "canonical_name": "CMP Slurry",
+      "description": "CMP slurry superclass of cmp_slurry_cu · cmp_slurry_oxide.",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "CR-007 §3단계 결정 ①",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Superordinate concept introduced so that over-general surface forms can be re-targeted off the Skill axis (D-15)."
+      }
+    },
+    {
+      "id": "material:cf4",
+      "type": "Material",
+      "canonical_name": "Carbon Tetrafluoride",
+      "description": "CF4 — fluorocarbon etch gas.",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "CR-007 §3단계 결정 ①",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Superordinate concept introduced so that over-general surface forms can be re-targeted off the Skill axis (D-15)."
+      }
+    },
+    {
+      "id": "material:sf6",
+      "type": "Material",
+      "canonical_name": "Sulfur Hexafluoride",
+      "description": "SF6 — fluorine-source etch gas.",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "CR-007 §3단계 결정 ①",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Superordinate concept introduced so that over-general surface forms can be re-targeted off the Skill axis (D-15)."
+      }
+    },
+    {
+      "id": "material:oxygen_gas",
+      "type": "Material",
+      "canonical_name": "Oxygen Gas",
+      "description": "O2 — oxidant / ashing gas.",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "CR-007 §3단계 결정 ①",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Superordinate concept introduced so that over-general surface forms can be re-targeted off the Skill axis (D-15)."
+      }
+    },
+    {
+      "id": "material:argon",
+      "type": "Material",
+      "canonical_name": "Argon",
+      "description": "Ar — inert carrier and sputtering gas.",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "CR-007 §3단계 결정 ①",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Superordinate concept introduced so that over-general surface forms can be re-targeted off the Skill axis (D-15)."
+      }
+    },
+    {
+      "id": "material:euv_mask",
+      "type": "Material",
+      "canonical_name": "EUV Mask",
+      "description": "Reflective multilayer mask for EUV lithography.",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "CR-007 §3단계 결정 ①",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Superordinate concept introduced so that over-general surface forms can be re-targeted off the Skill axis (D-15)."
+      }
+    },
+    {
+      "id": "material:duv_photomask",
+      "type": "Material",
+      "canonical_name": "DUV Photomask",
+      "description": "Transmissive photomask for DUV lithography.",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "CR-007 §3단계 결정 ①",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Superordinate concept introduced so that over-general surface forms can be re-targeted off the Skill axis (D-15)."
+      }
     }
   ],
   "edges": [
@@ -9688,6 +9922,222 @@
         "license": "Apache-2.0",
         "interpretation": "mapped",
         "note": "Process group -> process module nesting, per Table 7"
+      }
+    },
+    {
+      "src": "equipment:pvd_chamber",
+      "predicate": "BROADER",
+      "dst": "equipment_class:process_chamber",
+      "provenance": {
+        "source": "author",
+        "reference": "CR-007 §3단계 결정 ①-b",
+        "license": "CDLA-Permissive-2.0",
+        "interpretation": "author-defined",
+        "note": "skos:broader — CR-002 가 제안한 술어의 최소 선착수."
+      }
+    },
+    {
+      "src": "equipment:cvd_reactor",
+      "predicate": "BROADER",
+      "dst": "equipment_class:process_chamber",
+      "provenance": {
+        "source": "author",
+        "reference": "CR-007 §3단계 결정 ①-b",
+        "license": "CDLA-Permissive-2.0",
+        "interpretation": "author-defined",
+        "note": "skos:broader — CR-002 가 제안한 술어의 최소 선착수."
+      }
+    },
+    {
+      "src": "material:cf4",
+      "predicate": "BROADER",
+      "dst": "material:process_gas",
+      "provenance": {
+        "source": "author",
+        "reference": "CR-007 §3단계 결정 ①-b",
+        "license": "CDLA-Permissive-2.0",
+        "interpretation": "author-defined",
+        "note": "skos:broader — CR-002 가 제안한 술어의 최소 선착수."
+      }
+    },
+    {
+      "src": "material:sf6",
+      "predicate": "BROADER",
+      "dst": "material:process_gas",
+      "provenance": {
+        "source": "author",
+        "reference": "CR-007 §3단계 결정 ①-b",
+        "license": "CDLA-Permissive-2.0",
+        "interpretation": "author-defined",
+        "note": "skos:broader — CR-002 가 제안한 술어의 최소 선착수."
+      }
+    },
+    {
+      "src": "material:oxygen_gas",
+      "predicate": "BROADER",
+      "dst": "material:process_gas",
+      "provenance": {
+        "source": "author",
+        "reference": "CR-007 §3단계 결정 ①-b",
+        "license": "CDLA-Permissive-2.0",
+        "interpretation": "author-defined",
+        "note": "skos:broader — CR-002 가 제안한 술어의 최소 선착수."
+      }
+    },
+    {
+      "src": "material:argon",
+      "predicate": "BROADER",
+      "dst": "material:process_gas",
+      "provenance": {
+        "source": "author",
+        "reference": "CR-007 §3단계 결정 ①-b",
+        "license": "CDLA-Permissive-2.0",
+        "interpretation": "author-defined",
+        "note": "skos:broader — CR-002 가 제안한 술어의 최소 선착수."
+      }
+    },
+    {
+      "src": "subprocess:plasma_etch",
+      "predicate": "BROADER",
+      "dst": "process:plasma_processing",
+      "provenance": {
+        "source": "author",
+        "reference": "CR-007 §3단계 결정 ①-b",
+        "license": "CDLA-Permissive-2.0",
+        "interpretation": "author-defined",
+        "note": "skos:broader — CR-002 가 제안한 술어의 최소 선착수."
+      }
+    },
+    {
+      "src": "material:euv_mask",
+      "predicate": "BROADER",
+      "dst": "material:photomask",
+      "provenance": {
+        "source": "author",
+        "reference": "CR-007 §3단계 결정 ①-b",
+        "license": "CDLA-Permissive-2.0",
+        "interpretation": "author-defined",
+        "note": "skos:broader — CR-002 가 제안한 술어의 최소 선착수."
+      }
+    },
+    {
+      "src": "material:duv_photomask",
+      "predicate": "BROADER",
+      "dst": "material:photomask",
+      "provenance": {
+        "source": "author",
+        "reference": "CR-007 §3단계 결정 ①-b",
+        "license": "CDLA-Permissive-2.0",
+        "interpretation": "author-defined",
+        "note": "skos:broader — CR-002 가 제안한 술어의 최소 선착수."
+      }
+    },
+    {
+      "src": "material:sio2",
+      "predicate": "BROADER",
+      "dst": "material:dielectric",
+      "provenance": {
+        "source": "author",
+        "reference": "CR-007 §3단계 결정 ①-b",
+        "license": "CDLA-Permissive-2.0",
+        "interpretation": "author-defined",
+        "note": "skos:broader — CR-002 가 제안한 술어의 최소 선착수."
+      }
+    },
+    {
+      "src": "material:sin",
+      "predicate": "BROADER",
+      "dst": "material:dielectric",
+      "provenance": {
+        "source": "author",
+        "reference": "CR-007 §3단계 결정 ①-b",
+        "license": "CDLA-Permissive-2.0",
+        "interpretation": "author-defined",
+        "note": "skos:broader — CR-002 가 제안한 술어의 최소 선착수."
+      }
+    },
+    {
+      "src": "material:low_k_dielectric",
+      "predicate": "BROADER",
+      "dst": "material:dielectric",
+      "provenance": {
+        "source": "author",
+        "reference": "CR-007 §3단계 결정 ①-b",
+        "license": "CDLA-Permissive-2.0",
+        "interpretation": "author-defined",
+        "note": "skos:broader — CR-002 가 제안한 술어의 최소 선착수."
+      }
+    },
+    {
+      "src": "material:hfO2",
+      "predicate": "BROADER",
+      "dst": "material:dielectric",
+      "provenance": {
+        "source": "author",
+        "reference": "CR-007 §3단계 결정 ①-b",
+        "license": "CDLA-Permissive-2.0",
+        "interpretation": "author-defined",
+        "note": "skos:broader — CR-002 가 제안한 술어의 최소 선착수."
+      }
+    },
+    {
+      "src": "material:sio2",
+      "predicate": "BROADER",
+      "dst": "material:oxide",
+      "provenance": {
+        "source": "author",
+        "reference": "CR-007 §3단계 결정 ①-b",
+        "license": "CDLA-Permissive-2.0",
+        "interpretation": "author-defined",
+        "note": "skos:broader — CR-002 가 제안한 술어의 최소 선착수."
+      }
+    },
+    {
+      "src": "material:teOs",
+      "predicate": "BROADER",
+      "dst": "material:oxide",
+      "provenance": {
+        "source": "author",
+        "reference": "CR-007 §3단계 결정 ①-b",
+        "license": "CDLA-Permissive-2.0",
+        "interpretation": "author-defined",
+        "note": "skos:broader — CR-002 가 제안한 술어의 최소 선착수."
+      }
+    },
+    {
+      "src": "material:hfO2",
+      "predicate": "BROADER",
+      "dst": "material:oxide",
+      "provenance": {
+        "source": "author",
+        "reference": "CR-007 §3단계 결정 ①-b",
+        "license": "CDLA-Permissive-2.0",
+        "interpretation": "author-defined",
+        "note": "skos:broader — CR-002 가 제안한 술어의 최소 선착수."
+      }
+    },
+    {
+      "src": "material:cmp_slurry_cu",
+      "predicate": "BROADER",
+      "dst": "material:cmp_slurry",
+      "provenance": {
+        "source": "author",
+        "reference": "CR-007 §3단계 결정 ①-b",
+        "license": "CDLA-Permissive-2.0",
+        "interpretation": "author-defined",
+        "note": "skos:broader — CR-002 가 제안한 술어의 최소 선착수."
+      }
+    },
+    {
+      "src": "material:cmp_slurry_oxide",
+      "predicate": "BROADER",
+      "dst": "material:cmp_slurry",
+      "provenance": {
+        "source": "author",
+        "reference": "CR-007 §3단계 결정 ①-b",
+        "license": "CDLA-Permissive-2.0",
+        "interpretation": "author-defined",
+        "note": "skos:broader — CR-002 가 제안한 술어의 최소 선착수."
       }
     }
   ],

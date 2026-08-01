@@ -1,6 +1,7 @@
 .PHONY: all install venv parse owl convert align validate test clean \
         ingest-sirp sirp-pairs sirp-problems sirp experts \
         compliance curated-experts curated-ratings expdataset abox abox-patents \
+        superordinate-concepts concept-mapping \
         semiconto-fetch semiconto-analyze semiconto-align semiconto-enrich semiconto-phase0 \
         viz viz-clean viz-open \
         pipeline pipeline-sirp pipeline-full pipeline-with-expdataset help
@@ -88,6 +89,16 @@ abox-vendors: convert abox-patents
 
 align:
 	$(PYTHON) scripts/align_candidates.py
+
+# ── 개념 매핑 자산 (CR-007) ───────────────────────────────────────
+# 하류는 동결 스냅샷만으로 개념 링크를 재현할 수 있어야 한다(D-16). 그 재현에
+# 필요한 규칙·사전이 이 자산이다. 상위 개념 주입이 먼저다 — 없으면 재지정이
+# 붙을 자리가 없다.
+superordinate-concepts:
+	$(PYTHON) scripts/add_superordinate_concepts.py
+
+concept-mapping: convert
+	$(PYTHON) scripts/build_concept_mapping.py
 
 # 검사되지 않는 shape 은 shape 이 아니다. 세 번 데었다:
 #   · Shape_CoreNode 가 Expert·Problem 을 대상에서 빼먹었다 (라벨 규약 위반이 통과)

@@ -437,6 +437,22 @@ def build_ontology() -> Graph:
         g.add((prop, RDFS.range, SDKB_ONT[range_]))
         g.add((prop, SKOS.exactMatch, URIRef(SEMI + semi_local)))
 
+    # ── 개념 상하위 (CR-007 결정 ①-b) ──────────────────────────
+    # A-Box 가 skos:broader 를 쓰므로 TBox 가 그것을 알아야 한다 (§1.2 —
+    # 선언되지 않은 술어는 추론기·SHACL 이 검증할 수 없다). 새 술어를
+    # 발명하지 않고 SKOS 를 그대로 쓰되, **domain·range 를 걸지 않는다** —
+    # 외부 어휘에 SDKB 의 정의역을 얹으면 SKOS 를 쓰는 다른 소비자의
+    # 의미가 달라진다. SKOS 자신이 주는 성질(비이행적 · non-transitive)만
+    # 재확인하고, 어느 축에 쓰이는지는 주석으로 남긴다.
+    g.add((SKOS.broader, RDF.type, OWL.ObjectProperty))
+    g.add((SKOS.broader, RDFS.label, Literal("broader", lang="en")))
+    g.add((SKOS.broader, RDFS.comment, Literal(
+        "Concept-level hierarchy (narrower → broader). Introduced by CR-007 so "
+        "that over-general surface forms resolve to a superordinate concept "
+        "instead of being mis-attached to the Skill axis. Domain/range are "
+        "deliberately unconstrained: SKOS is an external vocabulary and SDKB "
+        "must not narrow it for other consumers.", lang="en")))
+
     # ═══════════════════════════════════════════════════════════
     # OBJECT PROPERTIES — Governance Layer
     # ═══════════════════════════════════════════════════════════
