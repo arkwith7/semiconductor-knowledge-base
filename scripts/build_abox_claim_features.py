@@ -197,18 +197,42 @@ def main() -> int:
                 g.add((j, R("aboutClaim"), cl))
                 stat["about_claim"] += 1
 
+    # CR-004R: RejectionReason 실체화 — reextract_claim_judgments.py --reasons-only 산출을 읽는다.
+    # 입도 = 출원 × groundClause(조-항-호 전체) × 회차. 인용문헌 불필요(§29 한정 아님) — 그 조항이
+    # 그 회차에 제기됐다는 사실만 기록한다. 기존 judg 루프(PriorArtJudgment·§29 한정)와 독립.
+    reasons_f = ROOT / "data" / "interim" / "rejection_reasons.jsonl"
+    if reasons_f.exists():
+        for line in reasons_f.open():
+            r = json.loads(line)
+            if "_skipped_clauses" in r:
+                continue
+            app = r["application"]
+            patent = _u(f"patent/kr_{app}")
+            rr = _u(f"rejection/kr_{app}__{r['clause']}__r{r['notice_round']}")
+            g.add((rr, RDF.type, R("RejectionReason")))
+            g.add((rr, R("reasonGround"), R(r["reason_ground"])))
+            g.add((rr, R("groundClause"), Literal(r["clause"], datatype=XSD.string)))
+            g.add((rr, R("noticeRound"), Literal(int(r["notice_round"]), datatype=XSD.integer)))
+            g.add((rr, R("noticeType"), Literal(r["notice_type"], datatype=XSD.string)))
+            if r.get("notice_date"):
+                g.add((rr, R("noticeDate"), Literal(r["notice_date"], datatype=XSD.date)))
+            g.add((patent, R("rejectionEvidence"), rr))
+            stat["rejection_reasons"] += 1
+
     OUT_TTL.parent.mkdir(parents=True, exist_ok=True)
     g.serialize(str(OUT_TTL), format="turtle")
     report = {
         "triples": len(g), "input_claims": len(rows),
         "counts": dict(stat), "feature_concept_by_type": dict(concept_hits.most_common()),
-        "note": "feature 정규화 = build_abox_patents 와 동일 브리지. 판단 = evidence_v2 실체화.",
+        "note": "feature 정규화 = build_abox_patents 와 동일 브리지. 판단 = evidence_v2 실체화. "
+                "RejectionReason = rejection_reasons.jsonl 실체화(CR-004R).",
     }
     OUT_REPORT.parent.mkdir(parents=True, exist_ok=True)
     OUT_REPORT.write_text(json.dumps(report, ensure_ascii=False, indent=2))
     print(f"✓ ({len(g):,} 트리플) → {OUT_TTL.name}")
     print(f"  claims={stat['claims']} features={stat['features']} depends={stat['depends']}")
     print(f"  judgments={stat['judgments']} about_claim={stat['about_claim']}")
+    print(f"  rejection_reasons={stat['rejection_reasons']}")
     print(f"  featureConcept by type: {dict(concept_hits.most_common(6))}")
     return 0
 

@@ -134,6 +134,52 @@ ont:Rejection_Eligibility
     skos:prefLabel "발명의 정의 미충족 (non-statutory subject matter)"@ko, "Non-Statutory Subject Matter"@en ;
     skos:notation "KIPO-2" .
 
+# 항(項) 단위 신규 개체 7개 (CR-004R · D-06 · 2026-07-30 법령 원문 대조 확정).
+# 위 5개의 IRI·의미·notation 은 손대지 않는다 — 겹치는 영역(Rejection_ClarityScope)이 있어도
+# 그대로 둔다. 호(號)는 개체로 만들지 않고 ont:groundClause 문자열(예 "42-4-2")에 보존한다.
+# 제42조 제5항(2014.6.11. 삭제)은 개체를 발행하지 않는다 — 확인 못한 의미에 이름을 붙이지 않는다.
+ont:Rejection_ClaimRequirements
+    a ont:RejectionType ;
+    skos:prefLabel "청구범위 기재요건 위반 (claim drafting requirements)"@ko, "Claim Drafting Requirements"@en ;
+    skos:notation "KIPO-42-4" ;
+    skos:scopeNote "특허법 제42조 제4항 — 청구범위가 발명의 설명에 의해 뒷받침(1호)되고 명확하고 간결하게(2호) 기재될 것"@ko .
+
+ont:Rejection_UnityOfInvention
+    a ont:RejectionType ;
+    skos:prefLabel "1발명1출원 위반 (unity of invention)"@ko, "Unity of Invention"@en ;
+    skos:notation "KIPO-45" ;
+    skos:scopeNote "특허법 제45조 — 하나의 특허출원의 범위(하나의 발명마다 하나의 특허출원)"@ko .
+
+ont:Rejection_ClaimFormat
+    a ont:RejectionType ;
+    skos:prefLabel "청구범위 기재방법 위반 (claim format)"@ko, "Claim Format"@en ;
+    skos:notation "KIPO-42-8" ;
+    skos:scopeNote "특허법 제42조 제8항 — 청구범위의 기재방법에 관하여 필요한 사항은 대통령령으로 정한다"@ko .
+
+ont:Rejection_SameDayFiling
+    a ont:RejectionType ;
+    skos:prefLabel "동일자 출원 협의불성립 (same-day filing)"@ko, "Same-Day Filing"@en ;
+    skos:notation "KIPO-36-2" ;
+    skos:scopeNote "특허법 제36조 제2항 — 동일한 발명에 대해 같은 날 둘 이상 출원 시 협의 불성립"@ko .
+
+ont:Rejection_ExpandedPriorFiling
+    a ont:RejectionType ;
+    skos:prefLabel "확대된 선출원 (expanded prior filing)"@ko, "Expanded Prior Filing"@en ;
+    skos:notation "KIPO-29-3" ;
+    skos:scopeNote "특허법 제29조 제3항 — 동일한 다른 특허출원과의 관계(확대된 선출원)"@ko .
+
+ont:Rejection_AmendmentScope
+    a ont:RejectionType ;
+    skos:prefLabel "보정범위 위반 (amendment scope)"@ko, "Amendment Scope"@en ;
+    skos:notation "KIPO-47-2" ;
+    skos:scopeNote "특허법 제47조 제2항 — 보정은 최초 첨부 명세서·도면에 기재된 범위 내에서"@ko .
+
+ont:Rejection_DivisionalScope
+    a ont:RejectionType ;
+    skos:prefLabel "분할출원 범위 위반 (divisional application scope)"@ko, "Divisional Application Scope"@en ;
+    skos:notation "KIPO-52-1" ;
+    skos:scopeNote "특허법 제52조 제1항 — 분할출원의 범위"@ko .
+
 # ── OBJECT PROPERTIES ──────────────────────────────────────────────
 
 ont:hasClassification
@@ -210,6 +256,13 @@ ont:rejectionEvidence
     rdfs:range ont:RejectionReason ;
     rdfs:label "rejection evidence"@en ;
     rdfs:comment "A specific RejectionReason instance carrying the cited passage / reasoning."@en .
+
+ont:reasonGround
+    a owl:ObjectProperty ;
+    rdfs:domain ont:RejectionReason ;
+    rdfs:range ont:RejectionType ;
+    rdfs:label "reason ground"@en ;
+    rdfs:comment "조(항) 단위 근거 분류. RejectionReason 인스턴스마다 정확히 1개(CR-004R)."@en .
 
 ont:realizesProcess
     a owl:ObjectProperty ;
@@ -362,6 +415,34 @@ ont:rejectionPassage
     rdfs:range xsd:string ;
     rdfs:label "rejection passage"@en ;
     rdfs:comment "Quoted reasoning text from the rejection decision (거절결정서). May be empty for KIPRIS Plus API records that do not expose OCR'd passages."@en .
+
+ont:groundClause
+    a owl:DatatypeProperty ;
+    rdfs:domain ont:RejectionReason ;
+    rdfs:range xsd:string ;
+    rdfs:label "ground clause"@en ;
+    rdfs:comment "조-항-호 문자열 (예 '42-4-2'). ont:reasonGround 가 항 단위로 뭉개는 호(號) 구분을 보존한다(CR-004R)."@en .
+
+ont:noticeRound
+    a owl:DatatypeProperty ;
+    rdfs:domain ont:RejectionReason ;
+    rdfs:range xsd:integer ;
+    rdfs:label "notice round"@en ;
+    rdfs:comment "해당 출원 내 통지 문서의 발송일자 오름차순 순번(1부터). 결정성: 동일 발송일자는 발송번호 오름차순으로 재정렬(CR-004R)."@en .
+
+ont:noticeType
+    a owl:DatatypeProperty ;
+    rdfs:domain ont:RejectionReason ;
+    rdfs:range xsd:string ;
+    rdfs:label "notice type"@en ;
+    rdfs:comment "'의견제출통지서' 또는 '거절결정서' (CR-004R)."@en .
+
+ont:noticeDate
+    a owl:DatatypeProperty ;
+    rdfs:domain ont:RejectionReason ;
+    rdfs:range xsd:date ;
+    rdfs:label "notice date"@en ;
+    rdfs:comment "통지 문서의 발송일자(CR-004R)."@en .
 
 # ── PATENT → DOMAIN LINKS (patent A-Box lift) ──────────────────────
 # build_abox_patents.py 가 특허를 도메인 개념에 잇는 술어들. 이전에는 이 술어들이

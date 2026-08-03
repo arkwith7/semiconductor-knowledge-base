@@ -99,14 +99,48 @@ ont:Shape_PriorArtSubject
     sh:message "Subject of ont:hasPriorArt must be a Patent." .
 
 # ─── Rejection passages must come with a passage or evidence_url ──────
+# CR-004R (2026-08-02): 새 인스턴스 2,749건은 rejectionPassage/seeAlso 대신 조항 분류
+# (reasonGround·groundClause·noticeRound·noticeType)로 채워진다 — 인용문헌 없이도 "그 조항이
+# 그 회차에 제기됐다"는 사실 자체가 근거다. 기존 branch(passage/seeAlso)는 다른 경로로
+# 채워질 수 있어 그대로 유지하고, or 로 병존시킨다.
 ont:Shape_RejectionReason
     a sh:NodeShape ;
     sh:targetClass ont:RejectionReason ;
     sh:or (
         [ sh:property [ sh:path ont:rejectionPassage ; sh:minCount 1 ; sh:datatype xsd:string ] ]
         [ sh:property [ sh:path rdfs:seeAlso          ; sh:minCount 1 ] ]
+        [ sh:property [ sh:path ont:reasonGround ; sh:minCount 1 ] ]
     ) ;
-    sh:message "RejectionReason must have either ont:rejectionPassage (OCR'd text) or rdfs:seeAlso (URL to decision document)." .
+    sh:message "RejectionReason must have ont:rejectionPassage (OCR'd text), rdfs:seeAlso (URL), or ont:reasonGround (clause classification, CR-004R)." .
+
+ont:Shape_RejectionReason_Clause
+    a sh:NodeShape ;
+    sh:targetClass ont:RejectionReason ;
+    sh:property [
+        sh:path ont:reasonGround ;
+        sh:minCount 0 ; sh:maxCount 1 ;
+        sh:class ont:RejectionType ;
+        sh:message "ont:reasonGround (있다면) 은 정확히 1개의 ont:RejectionType 을 가리켜야 한다." ;
+    ] ;
+    sh:property [
+        sh:path ont:groundClause ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "ont:groundClause (있다면) 은 문자열 1개여야 한다." ;
+    ] ;
+    sh:property [
+        sh:path ont:noticeRound ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 1 ;
+        sh:message "ont:noticeRound (있다면) 은 1 이상의 정수 1개여야 한다." ;
+    ] ;
+    sh:property [
+        sh:path ont:noticeType ;
+        sh:maxCount 1 ;
+        sh:in ( "의견제출통지서"^^xsd:string "거절결정서"^^xsd:string ) ;
+        sh:message "ont:noticeType (있다면) 은 '의견제출통지서'|'거절결정서' 중 하나여야 한다." ;
+    ] .
 
 # ─── Multi-jurisdiction leakage warning shape ─────────────────────────
 # A Patent assigned to a KR-domiciled Organization and tagged as NCT must

@@ -4,6 +4,42 @@ All notable changes to SDKB will be documented in this file.
 
 ## [Unreleased] — v1.0.0-dev
 
+### Added (2026-08-03 — CR-004R · 거절이유 조항(RejectionReason) 분류 · 하류 CR-004R)
+- **`ont:RejectionType` 개체 7 신설**(`ontology/sdkb-patent.ttl`, 기존 5개는 무변경):
+  `Rejection_ClaimRequirements`(§42④) · `Rejection_UnityOfInvention`(§45) ·
+  `Rejection_ClaimFormat`(§42⑧) · `Rejection_SameDayFiling`(§36②) ·
+  `Rejection_ExpandedPriorFiling`(§29③) · `Rejection_AmendmentScope`(§47②) ·
+  `Rejection_DivisionalScope`(§52①). §42⑤(2014.6.11 폐지)는 의도적으로 제외.
+- **신규 술어 5**: `ont:reasonGround`(ObjectProperty, domain `RejectionReason`,
+  range `RejectionType`) · `ont:groundClause`·`ont:noticeRound`·`ont:noticeType`·
+  `ont:noticeDate`(DatatypeProperty, domain `RejectionReason`). TBox 선언 후
+  447 트리플로 파싱 확인.
+- **거절이유 조항 분류 파이프라인** (`scripts/reextract_claim_judgments.py`
+  `--reasons-only`/`--skip-reasons`): 의견제출통지서·거절결정서 원문에서
+  법조항(조-항-호)을 추출해 `RejectionType` 으로 매핑, 발송일자·발송번호로
+  정렬해 `noticeRound` 를 부여. 원천 = `paper_data/data/processed/opinion_notices`.
+  결과: **994/1000 출원 커버 · RejectionReason 2,749건** · 미매핑 조항 6건
+  (§42⑤ 2 · §36① 2 · §29⑤ 2, 전부 저빈도 · `data/reports/rejection_reasons_loss.json`).
+  612개 출원이 서로 다른 거절근거(reason_ground) 2종 이상, 861개 출원이
+  RejectionReason 2건 이상을 가진다.
+- **`build_abox_claim_features.py`**: 위 산출을 `ont:rejectionEvidence` 로
+  기존 `Patent` 인스턴스에 연결. **+19,240 트리플**(2,749건 × 7 술어 − 미기재
+  `noticeDate` 3건). 기존 `PriorArtJudgment` 635건은 **완전히 무변경**
+  (회귀 확인 — 코드 경로 분리).
+- **SHACL** (`validation/shapes_patent.ttl`): 기존 `Shape_RejectionReason`
+  (`sh:or` 로 `rejectionPassage`|`seeAlso` 요구, 인스턴스 0개일 때는 공허하게
+  통과했으나 이번 인스턴스화로 위반이 드러남)에 `reasonGround` 분기를 추가하고,
+  신규 `Shape_RejectionReason_Clause`(reasonGround 최대1·groundClause 문자열·
+  noticeRound ≥1 정수·noticeType 열거값)를 신설. 500건 표본 검증 통과.
+- **부수 수정**: `reextract_claim_judgments.py` 의 미사용 `import requests`
+  (선언되지 않은 의존성, `pyproject.toml` 미포함)를 지연/옵션 임포트로 변경 —
+  새 의존성 추가 아님, 기존 버그 수정.
+- **하류 영향 (§0)**: `sdkb-abox-claim-features.ttl` 트리플 11,625,171(judgments
+  635 무변경 확인). `SDKB-Match`·논문 코퍼스는 vendor 시 `RejectionReason` 신규
+  트리플이 포함된다 — 조항 단위 거절근거 조회(CQ)가 처음 가능해진다.
+- **알려진 한계**: opinion_notices 인용 해소를 통한 `PriorArtJudgment` 확장은
+  이번 변경 범위 밖(§1.3 미검증 파서 리스크로 제외) — 별도 CR 필요.
+
 ### Added (2026-08-01 — CR-007 · 개념 매핑 자산과 상위 개념 계층 · 하류 D-14/D-15/D-16)
 - **상위 개념 7 + 구체 하위 6 신설, `skos:broader` 18 트리플**
   (`scripts/add_superordinate_concepts.py`, 신규 · 결정적 · 멱등).

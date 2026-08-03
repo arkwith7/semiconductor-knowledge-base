@@ -48,6 +48,7 @@ data/patents/cited_enriched/
 data/interim/claim_features.jsonl
 data/interim/llm_claim_cache.sqlite
 data/interim/reextracted_judgments.jsonl
+data/interim/rejection_reasons.jsonl
 ontology/sdkb-abox-claim-features.ttl
 ontology/sdkb-abox-prior-art.ttl
 data/patents/fulltext_corpus.parquet
