@@ -4,6 +4,77 @@ All notable changes to SDKB will be documented in this file.
 
 ## [Unreleased] — v1.0.0-dev
 
+### Added (2026-08-04 — CR-009 · 개념별 df·일반성 메타 발행 · 하류 D-23)
+- **`mappings/concept_mapping.json` 스키마 1.0 → 1.1.** 프로파일마다
+  `concept_meta` 신설 — `df_denominator` + 개념별 `df_abox`·`depth`·`is_superordinate`.
+  **`entries`·`blocked`·`rules` 는 값·순서 전부 무변경**(추가만 · 회귀 테스트로 고정).
+- **분모 4,513** = SIRP 거절특허 1,000 + 인용 선행기술 3,513. 원천은 `data/**` 이며
+  (`rejected_patents_meta.parquet`·`cited_enriched/`) TTL 이 아니다(§1-1).
+  **CR-008 이 이 분모를 바꾼다.** 두 CR 은 파일이 겹치지 않지만 **데이터가 겹친다** —
+  최초 산출 시점의 분모는 4,034(인용 3,034)였고, B층 노드 479 가 들어오며 4,513 이 됐다.
+  CR-008 이 재수집될 때마다 이 자산도 다시 발행해야 한다.
+- **실측**: `patent-text` 274 개념 중 df>0 **147**(53.6 %) · `expert-tag` 261 중 **136**(52.1 %).
+  두 프로파일의 df 는 실제로 갈린다 — `material:oxide` 1,100 대 0 · `material:sio2`
+  827 대 1,492 · `skill:plasma_diagnostics` 204 대 753(R4-SHORT-KO-TASK 차단의 효과).
+  **한 값으로 뭉치지 않는 이유가 이것이다.**
+- **CR-007 상위 개념 7 이 전부 patent-text df 상위 21 위 안**(`oxide` 6위 ·
+  `dielectric` 11위 · `process_gas` 14위 · `plasma_processing` 15위 ·
+  `process_chamber` 19위 · `photomask` 21위) — 고빈도와 상위어를 함께 줘야 하는 근거.
+- **`depth` 는 얇다**: `skos:broader` 18 트리플 · 최대 깊이 1 · patent-text 274 중
+  **16 개(5.8 %)만 depth=1**. 필드는 발행하되 실질화는 CR-002(D-02) 소관이다.
+  `expert-tag` 사전에는 상위어가 **0 개**다(상위 개념 7 이 patent-text 전용이므로).
+- **df 는 상류가 df 계산 전용 참조 적용기로 센다 — 하류용 적용기가 아니다.**
+  CR-007 의 분업(토큰화는 하류)은 유지되며, 두 값의 어긋남은 하류가 회신할
+  Spearman ρ(상위 30개념)가 검정한다.
+- **가중식을 정하지 않고, 고빈도 개념을 삭제하지 않는다**(CR-009 비목표 ⓐ·ⓑ).
+- **알려진 결함이 df 에 실린다(D-20)**: 단독 `hf` → `material:hf_acid` 오지정으로
+  df 259. 이 CR 은 매핑을 고치지 않으며, 자산 스키마에 플래그를 만들지 않고
+  `data/reports/concept_df_report.json` 에 명시한다.
+- **하류 영향 (§0)**: vendor 시 개념 신호에 특이도 가중을 걸 재료가 처음 생긴다.
+  A-Box 가 바뀌면 df 가 낡으므로 두 원천을 `PROVENANCE.json` `inputs` 에 등재했다.
+
+### Added (2026-08-04 — CR-008 · B층 인용 선행기술 모집단 · 하류 D-18)
+- **`scripts/build_b_layer_cited_ids.py` 신설**(결정적·멱등). 하류 이관 파일
+  (514 행 · sha256 `9d0a7c0f…` 대조 강제) → `data/patents/b_layer_cited_population.parquet`.
+  **특허 문헌 503 · NPL 11**(동결 분모 · 2026-08-03) · KR 235 · JP 186 · US 51 ·
+  WO 24 · CN 6 · EP 1.
+- **`--population` 경로 추가** — `build_abox_prior_art.py`(+`--extra-enriched`) ·
+  `paper_data/scripts/collect_cited_biblio_claims.py`(+`--tag`). 인자가 없으면
+  **기존 동작 그대로**이고, B층 IRI 는 기존 맵에 `setdefault` 로 병합되므로
+  **A층 자산은 규칙적으로 불변**이다(성공기준 ③).
+- **`cited_doc_id` 는 `scripts/citation_norm.py` 가 만든다** — 손으로 만든 규칙은
+  KR 등록번호에서 틀렸다(`KR101036572 B1` → `KR-G-1036572`, 접두 '10' 과 선행 0 탈락 ·
+  A층 264 건). 정본 정규화기는 A층 `cited_doc_id` 를 **3,145/3,149 재현**한다.
+- **간선은 만들지 않는다**(CR-008 비목표 ⓐ). `hasPriorArtExaminer`·`hasPriorArt`·
+  `overPriorArt` 가 산출 TTL 에 0 트리플임을 테스트가 단정하고, 생성기 원문에
+  해당 술어가 없음도 함께 단정한다 — 상류에 간선을 두면 하류 봉인이 무의미해진다.
+- **수집 실행 완료(2026-08-04)** — KIPRIS(KR 235) · BigQuery(JP·WO·CN·EP 217) ·
+  BigQuery US(51). GCP 프로젝트 `starry-runner-310008` · 실측 스캔 370.5 GB + 368.4 GB.
+- **`ontology/sdkb-abox-prior-art.ttl` 서명**: 트리플 57,075 → **66,453**(+9,378) ·
+  `CitedPatent` 3,034 → **3,513**(+479) · `claimText` 2,197 → 2,479 ·
+  `abstractText` 2,973 → 3,438 · `filingDate` 3,034 → 3,513 · IPCSymbol 2,974 ·
+  CPCSymbol 4,234 · `realizesProcess` 2,786 · `involvesMaterial` 1,580 ·
+  `concernsSkill` 1,486 · `concernsDevice` 262.
+- **성공기준 ① 도달성 482/503 = 0.9583** (합격선 0.95 · NPL 11 별도 · 총계 514).
+- **성공기준 ② 관할별** — KR 도달성 1.0000·초록 1.0000·**청구항 1.0000** ·
+  US 0.9608/0.9608/**0.9608** · JP 0.8978/**0.8226**/0.0000 · WO 1.0000/1.0000/0.0000 ·
+  CN 1.0000/1.0000/0.0000 · EP 1.0000/1.0000/0.0000.
+  **US 청구항 0.9608 은 임계 0.99 에 미달**한다 — 해소된 49 건은 전부 청구항을 가지므로
+  원인은 청구항 부재가 아니라 **문헌 2 건 미해소**다. JP·WO·CN·EP 의 청구항 0.000 은
+  CR 이 미리 적어 둔 상한(D-05)이며 이 CR 의 실패가 아니다.
+- **성공기준 ③ A층 자산 불변 — 트리플 집합 차로 증명.** 사라진 트리플 **0** ·
+  A층 노드를 주어로 하는 트리플 45,411 → 45,411(**차이 0**) · A층 NPL 노드 9 불변.
+- **간선 0 재확인**: 산출 TTL 의 `hasPriorArtExaminer`·`hasPriorArt`·`overPriorArt` = 0.
+- **미해소 21 건**(JP 19 · US 2). 대부분 1990년대 JP 공개공보로 BigQuery
+  `patents-public-data` 에 해당 `publication_number` 가 없다. **분모에서 빼지 않는다.**
+- **A층 전례 없는 종별 5 건**: `KR…Y1` 3 · `JP2605509 Y2` 는 노드 생성 성공,
+  `JP60244476 X2`(특허공고 昭60) 는 미해소.
+- **SHACL** `shapes_patent.ttl` × 산출 TTL 통과(67,171 트리플 검증).
+- **부수 수정**: 수집기의 dotenv 경로가 삭제된 저장소
+  (`sdkb-foresight-paper/.env`)를 가리키고 있었다. `load_dotenv` 는 없는 파일에
+  조용히 성공하므로 키가 빈 채로 API 가 전부 not_found 를 냈을 것이다 —
+  `paper_data/.env` 를 먼저 찾도록 폴백을 넣었다.
+
 ### Added (2026-08-03 — CR-004R · 거절이유 조항(RejectionReason) 분류 · 하류 CR-004R)
 - **`ont:RejectionType` 개체 7 신설**(`ontology/sdkb-patent.ttl`, 기존 5개는 무변경):
   `Rejection_ClaimRequirements`(§42④) · `Rejection_UnityOfInvention`(§45) ·

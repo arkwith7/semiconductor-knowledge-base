@@ -1,0 +1,235 @@
+{
+  "ids_file": "data/patents/b_layer_cited_population.parquet",
+  "denominator_patent_docs": 503,
+  "npl_excluded": 11,
+  "total_ids": 514,
+  "by_jurisdiction": {
+    "CN": {
+      "n": 6,
+      "resolved_nodes": 6,
+      "reachability": 1.0,
+      "abstract": 1.0,
+      "claim": 0.0
+    },
+    "EP": {
+      "n": 1,
+      "resolved_nodes": 1,
+      "reachability": 1.0,
+      "abstract": 1.0,
+      "claim": 0.0
+    },
+    "JP": {
+      "n": 186,
+      "resolved_nodes": 167,
+      "reachability": 0.8978,
+      "abstract": 0.8226,
+      "claim": 0.0
+    },
+    "KR": {
+      "n": 235,
+      "resolved_nodes": 235,
+      "reachability": 1.0,
+      "abstract": 1.0,
+      "claim": 1.0
+    },
+    "US": {
+      "n": 51,
+      "resolved_nodes": 49,
+      "reachability": 0.9608,
+      "abstract": 0.9608,
+      "claim": 0.9608
+    },
+    "WO": {
+      "n": 24,
+      "resolved_nodes": 24,
+      "reachability": 1.0,
+      "abstract": 1.0,
+      "claim": 0.0
+    }
+  },
+  "a_layer_reference_by_jurisdiction": {
+    "KR": {
+      "n": 1720,
+      "abstract": 0.999,
+      "claim": 1.0
+    },
+    "JP": {
+      "n": 721,
+      "abstract": 0.921,
+      "claim": 0.0
+    },
+    "US": {
+      "n": 471,
+      "abstract": 0.998,
+      "claim": 0.996
+    },
+    "WO": {
+      "n": 81,
+      "abstract": 0.975,
+      "claim": 0.0
+    },
+    "CN": {
+      "n": 20,
+      "abstract": 1.0,
+      "claim": 0.0
+    },
+    "EP": {
+      "n": 12,
+      "abstract": 1.0,
+      "claim": 0.0
+    }
+  },
+  "cr008_thresholds": {
+    "KR_claim": 0.99,
+    "US_claim": 0.99,
+    "foreign_abstract": 0.57
+  },
+  "kind_codes_without_a_layer_precedent": [
+    {
+      "cited_raw": "JP2605509 Y2",
+      "cited_id": "patent:jp_JP2605509Y2",
+      "node_built": true
+    },
+    {
+      "cited_raw": "JP60244476 X2",
+      "cited_id": "patent:jp_JP60244476X2",
+      "node_built": false
+    },
+    {
+      "cited_raw": "KR200287084 Y1",
+      "cited_id": "patent:kr_KR200287084Y1",
+      "node_built": true
+    },
+    {
+      "cited_raw": "KR200415562 Y1",
+      "cited_id": "patent:kr_KR200415562Y1",
+      "node_built": true
+    },
+    {
+      "cited_raw": "KR200440005 Y1",
+      "cited_id": "patent:kr_KR200440005Y1",
+      "node_built": true
+    }
+  ],
+  "npl_rows": [
+    "B. R. Yang et. al. An anisotropic etching effect in the graphene basal plane, Advanced Materials. 22 Sep. 2010, Vol. 22, Issue 36, pp 4014-4019. 1부.",
+    "HIRAM E. GRANT. 지그와 고정구. 서울: 성안당. 1990.01.05., 12판 (제66면, 제72면 및 제115면) 1부.",
+    "K. S. Hazra et. al. Thinning of multilayer graphene to monolayer graphene in a plasma environment. Nanotechnology. 8 Dec. 2010, Vol.22, No.2, 025704. 1부.",
+    "Liu Wang 외 8명. MoS2 /Si Heterojunction with Vertically Standing Layered Structure for Ultrafast, High-Detectivity, Self-Driven Visible-Near Infrared Photodetectors, 2015년 공개",
+    "Phys. Rev. X, 2017, Vol.7, 011017(2017.02.14.)",
+    "Yuka Tsuboi 외 7명. Enhanced Photovoltaic Performances of Graphene/Si Solar Cells by Insertion of an MoS2 Thin Film, 2015. 8. 10. 공개",
+    "Z. P. Ling 외 10명. Large-scale two-dimensional MoS2 photodetectors by magnetron sputtering , 2015년 5월 14일 공개",
+    "ZHENHUA LOU 외 8명. High-performance MoS2/Si heterojunction broadband photodetectors from deep ultraviolet to near infrared. Optics Letters, Vol. 42, No. 17 2017.9.1. 공개",
+    "기원명 외 3인. \"무연솔더 접합부 특성 향상을 위한 나노복합솔더 기술\". 마이크로전자 및 패키징학회지 제18권 제3호. pp. 9-17.(2011) 1부.",
+    "일본 공개특허공보 특개46-003811(1971.11.6.) 1부.",
+    "일본 특허공보 특공평 07-065867호(1995.07.19.) 1부."
+  ],
+  "unresolved": [
+    {
+      "cited_raw": "JP01033055 A",
+      "country": "JP",
+      "reason": "수집 미해소"
+    },
+    {
+      "cited_raw": "JP08288368 A",
+      "country": "JP",
+      "reason": "수집 미해소"
+    },
+    {
+      "cited_raw": "JP09139413 A",
+      "country": "JP",
+      "reason": "수집 미해소"
+    },
+    {
+      "cited_raw": "JP09216111 A",
+      "country": "JP",
+      "reason": "수집 미해소"
+    },
+    {
+      "cited_raw": "JP09246697 A",
+      "country": "JP",
+      "reason": "수집 미해소"
+    },
+    {
+      "cited_raw": "JP10121292 A",
+      "country": "JP",
+      "reason": "수집 미해소"
+    },
+    {
+      "cited_raw": "JP10165920 A",
+      "country": "JP",
+      "reason": "수집 미해소"
+    },
+    {
+      "cited_raw": "JP10500202 A",
+      "country": "JP",
+      "reason": "수집 미해소"
+    },
+    {
+      "cited_raw": "JP11058046 A",
+      "country": "JP",
+      "reason": "수집 미해소"
+    },
+    {
+      "cited_raw": "JP11170188 A",
+      "country": "JP",
+      "reason": "수집 미해소"
+    },
+    {
+      "cited_raw": "JP11214727 A",
+      "country": "JP",
+      "reason": "수집 미해소"
+    },
+    {
+      "cited_raw": "JP11310464 A",
+      "country": "JP",
+      "reason": "수집 미해소"
+    },
+    {
+      "cited_raw": "JP11337288 A",
+      "country": "JP",
+      "reason": "수집 미해소"
+    },
+    {
+      "cited_raw": "JP11347722 A",
+      "country": "JP",
+      "reason": "수집 미해소"
+    },
+    {
+      "cited_raw": "JP11504357 A",
+      "country": "JP",
+      "reason": "수집 미해소"
+    },
+    {
+      "cited_raw": "JP56050579 U",
+      "country": "JP",
+      "reason": "수집 미해소"
+    },
+    {
+      "cited_raw": "JP58070978 A",
+      "country": "JP",
+      "reason": "수집 미해소"
+    },
+    {
+      "cited_raw": "JP59179265 A",
+      "country": "JP",
+      "reason": "수집 미해소"
+    },
+    {
+      "cited_raw": "JP60244476 X2",
+      "country": "JP",
+      "reason": "수집 미해소"
+    },
+    {
+      "cited_raw": "US03517643 A1",
+      "country": "US",
+      "reason": "수집 미해소"
+    },
+    {
+      "cited_raw": "US03530092 A1",
+      "country": "US",
+      "reason": "수집 미해소"
+    }
+  ],
+  "note": "합계 행 없음 — 관할별로만 본다(CR-008 성공기준 ②). 분모 503 은 2026-08-03 동결이며 결과를 보고 고르지 않는다."
+}

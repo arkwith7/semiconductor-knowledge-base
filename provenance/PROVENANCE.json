@@ -2,13 +2,15 @@
   "_README": "릴리스 자산의 무결성 기록. 하류는 이 해시로 자기 스냅샷을 검증한다.",
   "assets": {
     "mappings/concept_mapping.json": {
-      "sha256": "dc73bae2cc5e161860b0bfebf13df97aa3c210df5c1c40380bb70a468678528c",
+      "sha256": "b2da08e7c261465e4d50b0228f05fdcc2edc6b30b26643c90e1cffa2ab9cf09a",
       "generator": "scripts/build_concept_mapping.py",
       "inputs": [
         "data/semiconductor_v0_3.json",
-        "mappings/abox_term_aliases.json"
+        "mappings/abox_term_aliases.json",
+        "data/patents/rejected_patents_meta.parquet",
+        "data/patents/cited_enriched/"
       ],
-      "change_request": "CR-007"
+      "change_request": "CR-007, CR-009"
     }
   }
 }

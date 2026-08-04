@@ -1,6 +1,6 @@
 {
-  "_README": "CR-007 개념 매핑 자산. 표면형 → 개념 IRI 를 프로파일별로 발행한다. 적용기(linker)는 하류가 구현한다 — 이 파일은 규칙과 사전이다.",
-  "schema_version": "1.0",
+  "_README": "CR-007 개념 매핑 자산. 표면형 → 개념 IRI 를 프로파일별로 발행한다. 적용기(linker)는 하류가 구현한다 — 이 파일은 규칙과 사전이다. CR-009: profiles[*].concept_meta 는 특이도 가중의 **재료**다. df 는 상류가 df 계산 전용 참조 적용기로 센 값이며 하류용 적용기가 아니다 — 하류는 자기 토큰화로 구현하고, 두 값의 어긋남은 Spearman ρ 로 검정한다. 가중식은 상류가 정하지 않는다.",
+  "schema_version": "1.1",
   "source_graph": "data/semiconductor_v0_3.json",
   "profiles": {
     "expert-tag": {
@@ -5793,7 +5793,1317 @@
           "ambiguous": false
         }
       ],
-      "blocked": []
+      "blocked": [],
+      "concept_meta": {
+        "df_denominator": 4513,
+        "concepts": {
+          "device:3d_nand": {
+            "df_abox": 3,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:bga": {
+            "df_abox": 8,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:bjt": {
+            "df_abox": 4,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:ccd": {
+            "df_abox": 4,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:cmos": {
+            "df_abox": 24,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:cmos_image_sensor": {
+            "df_abox": 1,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:diode": {
+            "df_abox": 126,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:dram": {
+            "df_abox": 22,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:eeprom": {
+            "df_abox": 26,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:eprom": {
+            "df_abox": 21,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:fan_out_wlp": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:feram": {
+            "df_abox": 40,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:finfet": {
+            "df_abox": 12,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:flip_chip": {
+            "df_abox": 74,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:gaa_fet": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:gan_hemt": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:hbm": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:hemt": {
+            "df_abox": 5,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:igbt": {
+            "df_abox": 3,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:interposer": {
+            "df_abox": 14,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:jfet": {
+            "df_abox": 1,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:mems": {
+            "df_abox": 24,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:mosfet": {
+            "df_abox": 14,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:mram": {
+            "df_abox": 8,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:nand_flash": {
+            "df_abox": 45,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:nor_flash": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:pcram": {
+            "df_abox": 71,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:photodiode": {
+            "df_abox": 6,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:reram": {
+            "df_abox": 28,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:sic_mosfet": {
+            "df_abox": 2,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:sram": {
+            "df_abox": 11,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:thyristor": {
+            "df_abox": 3,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:tsv": {
+            "df_abox": 18,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:wire_bonding": {
+            "df_abox": 4,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:3m_pad": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:alarm_system": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:amat_centura": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:amat_endura": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:amat_reflexion": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:amat_semvision": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:amat_vantage": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:asm_pulsar": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:asml_nxt": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:asml_scanner": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:axcelis_implanter": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:bruker_ellipsometer": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:cabot_slurry": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:coater_track": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:contamination_monitor": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:cvd_reactor": {
+            "df_abox": 2,
+            "depth": 1,
+            "is_superordinate": false
+          },
+          "equipment:ebara_frex": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:exhaust_line": {
+            "df_abox": 2,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:exhaust_pipe": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:gas_lines": {
+            "df_abox": 3,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:gas_sensor": {
+            "df_abox": 1,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:heater_jacket": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:hitachi_etcher": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:hitachi_sem": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:implanter": {
+            "df_abox": 1,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:kla_inspector": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:kla_overlay": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:lam_2300": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:lam_etcher": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:lam_flex": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:mattson_rtp": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:monitoring_system": {
+            "df_abox": 1,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:pvd_chamber": {
+            "df_abox": 2,
+            "depth": 1,
+            "is_superordinate": false
+          },
+          "equipment:screen_developer": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:scrubber": {
+            "df_abox": 1,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:sensor_nodes": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:tel_alpha": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:tel_coater": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:tel_formula": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:tel_tactras": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:vacuum_pump": {
+            "df_abox": 4,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment_class:cd_sem": {
+            "df_abox": 1,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment_class:cmp_tool": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment_class:defect_inspection": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment_class:deposition_tool": {
+            "df_abox": 9,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment_class:etcher": {
+            "df_abox": 9,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment_class:facilities": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment_class:implanter": {
+            "df_abox": 1,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment_class:overlay_metrology": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment_class:scanner": {
+            "df_abox": 3,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment_class:track": {
+            "df_abox": 2,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment_class:wetbench": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:bowing": {
+            "df_abox": 4,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:bridging": {
+            "df_abox": 5,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:cdu": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:delamination": {
+            "df_abox": 2,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:dishing": {
+            "df_abox": 9,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:erosion": {
+            "df_abox": 21,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:footing": {
+            "df_abox": 1,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:haze": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:hillock": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:ler": {
+            "df_abox": 183,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:line_width_variation": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:microtrenching": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:overlay_error": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:particle": {
+            "df_abox": 110,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:pattern_collapse": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:pinhole": {
+            "df_abox": 1,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:residue": {
+            "df_abox": 16,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:scratches": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:scumming": {
+            "df_abox": 1,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:seam": {
+            "df_abox": 10,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:sidewall_angle_deviation": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:step_coverage_issue": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:stress_induced_crack": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:undercut": {
+            "df_abox": 9,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:void": {
+            "df_abox": 48,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "material:aluminum": {
+            "df_abox": 2212,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "material:amorphous_carbon": {
+            "df_abox": 962,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "material:barc": {
+            "df_abox": 33,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "material:cmp_slurry_cu": {
+            "df_abox": 0,
+            "depth": 1,
+            "is_superordinate": false
+          },
+          "material:cmp_slurry_oxide": {
+            "df_abox": 0,
+            "depth": 1,
+            "is_superordinate": false
+          },
+          "material:cobalt": {
+            "df_abox": 1879,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "material:copper": {
+            "df_abox": 1044,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "material:hfO2": {
+            "df_abox": 76,
+            "depth": 1,
+            "is_superordinate": false
+          },
+          "material:hf_acid": {
+            "df_abox": 272,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "material:low_k_dielectric": {
+            "df_abox": 26,
+            "depth": 1,
+            "is_superordinate": false
+          },
+          "material:photoresist_arF": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "material:photoresist_euv": {
+            "df_abox": 110,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "material:polysilicon": {
+            "df_abox": 420,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "material:sin": {
+            "df_abox": 1512,
+            "depth": 1,
+            "is_superordinate": false
+          },
+          "material:sio2": {
+            "df_abox": 1545,
+            "depth": 1,
+            "is_superordinate": false
+          },
+          "material:sog": {
+            "df_abox": 18,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "material:taC": {
+            "df_abox": 442,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "material:teOs": {
+            "df_abox": 46,
+            "depth": 1,
+            "is_superordinate": false
+          },
+          "material:tin": {
+            "df_abox": 1223,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "material:tungsten": {
+            "df_abox": 1981,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "metrology:cd_sem": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "metrology:ellipsometry": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "metrology:overlay": {
+            "df_abox": 4,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:adhesion_promoter": {
+            "df_abox": 2,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:alignment_optimization": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:barrier_layer": {
+            "df_abox": 57,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:chamber_clean": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:diffusion_barrier": {
+            "df_abox": 16,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:equipment_pm": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:esd_protection": {
+            "df_abox": 2,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:flow_rate_calibration": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:gas_chemistry_change": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:humidity_control": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:leak_check": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:mask_review": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:material_qualification": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:power_supply_stabilization": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:precursor_refill": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:recipe_tuning": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:slurry_refresh": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:stress_relief_anneal": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:temperature_control": {
+            "df_abox": 9,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:thickness_optimization": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "organization:3m_innovative_properties_company": {
+            "df_abox": 7,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "organization:applied_materials": {
+            "df_abox": 6,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "organization:asm_ip_holding_b_v": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "organization:asml": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "organization:axcelis": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "organization:bruker": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "organization:cabot": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "organization:ebara": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "organization:hitachi_high_tech": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "organization:kla": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "organization:lam_research": {
+            "df_abox": 176,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "organization:mattson_technology": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "organization:samsung_electronics": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "organization:screen_holdings": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "organization:semes": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "organization:sk_hynix": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "organization:tokyo_electron_limited": {
+            "df_abox": 146,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "parameter:bias_power": {
+            "df_abox": 5,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "parameter:gas_flow": {
+            "df_abox": 28,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "parameter:pressure": {
+            "df_abox": 122,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "parameter:rf_power": {
+            "df_abox": 19,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "parameter:temperature": {
+            "df_abox": 213,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "process:advanced_modules": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "process:back_end": {
+            "df_abox": 1,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "process:clean": {
+            "df_abox": 366,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "process:cmp": {
+            "df_abox": 288,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "process:deposition": {
+            "df_abox": 1370,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "process:diffusion": {
+            "df_abox": 560,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "process:etch": {
+            "df_abox": 1086,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "process:implant": {
+            "df_abox": 466,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "process:lithography": {
+            "df_abox": 530,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "process:metrology": {
+            "df_abox": 31,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "process:substrate_preparation": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:alignment_error": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:charging": {
+            "df_abox": 11,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:electrostatic_discharge": {
+            "df_abox": 1,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:equipment_aging": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:gas_flow_instability": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:humidity_variation": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:mask_defect": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:material_contamination": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:metal_interdiffusion": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:oxidation": {
+            "df_abox": 39,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:particle_contamination": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:polymer_buildup": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:poor_adhesion": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:precursor_depletion": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:rf_power_variation": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:slurry_instability": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:stress_mismatch": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:temperature_drift": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:thickness_nonuniformity": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:vacuum_leak": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "skill:chamber_conditioning": {
+            "df_abox": 513,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "skill:defect_analysis": {
+            "df_abox": 1126,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "skill:doe_analysis": {
+            "df_abox": 43,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "skill:endpoint_detection": {
+            "df_abox": 14,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "skill:film_stress_control": {
+            "df_abox": 48,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "skill:gas_chemistry": {
+            "df_abox": 671,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "skill:mask_engineering": {
+            "df_abox": 580,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "skill:metrology_analysis": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "skill:overlay_optimization": {
+            "df_abox": 192,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "skill:plasma_diagnostics": {
+            "df_abox": 801,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "skill:recipe_tuning": {
+            "df_abox": 7,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "skill:slurry_management": {
+            "df_abox": 70,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:advanced_cleaning": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:advanced_packaging": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:ald": {
+            "df_abox": 188,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:annealing": {
+            "df_abox": 54,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:cmp_metal": {
+            "df_abox": 1,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:cmp_oxide": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:cvd": {
+            "df_abox": 263,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:defect_inspection": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:dicing": {
+            "df_abox": 19,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:dopant_activation": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:dry_cleaning": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:duv_lithography": {
+            "df_abox": 10,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:electrical_metrology": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:epitaxial_growth": {
+            "df_abox": 12,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:etchback_planarization": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:euv_lithography": {
+            "df_abox": 25,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:hardmask_etch": {
+            "df_abox": 59,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:high_k_metal_gate": {
+            "df_abox": 1,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:in_situ_doping": {
+            "df_abox": 4,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:interconnect_patterning": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:metallization": {
+            "df_abox": 19,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:multilayer_interconnect": {
+            "df_abox": 1,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:overlay_control": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:oxidation": {
+            "df_abox": 39,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:packaging": {
+            "df_abox": 8,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:passivation": {
+            "df_abox": 24,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:photoresist_coat_develop": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:physical_metrology": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:plasma_etch": {
+            "df_abox": 134,
+            "depth": 1,
+            "is_superordinate": false
+          },
+          "subprocess:pvd": {
+            "df_abox": 598,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:strain_engineering": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:three_d_structures": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:wafer_manufacturing": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:wafer_polishing": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:wafer_testing": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:wafer_thinning": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:wet_cleaning": {
+            "df_abox": 1,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:wet_etch": {
+            "df_abox": 82,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "technode:3nm": {
+            "df_abox": 17,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "technode:5nm": {
+            "df_abox": 22,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "technode:7nm": {
+            "df_abox": 3,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "vendor:generic": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          }
+        }
+      }
     },
     "patent-text": {
       "entries": [
@@ -11712,7 +13022,1382 @@
           "concept_type": "Skill",
           "rule_id": "R4-SHORT-KO-TASK"
         }
-      ]
+      ],
+      "concept_meta": {
+        "df_denominator": 4513,
+        "concepts": {
+          "device:3d_nand": {
+            "df_abox": 3,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:bga": {
+            "df_abox": 8,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:bjt": {
+            "df_abox": 4,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:ccd": {
+            "df_abox": 4,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:cmos": {
+            "df_abox": 24,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:cmos_image_sensor": {
+            "df_abox": 1,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:diode": {
+            "df_abox": 126,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:dram": {
+            "df_abox": 22,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:eeprom": {
+            "df_abox": 26,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:eprom": {
+            "df_abox": 21,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:fan_out_wlp": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:feram": {
+            "df_abox": 40,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:finfet": {
+            "df_abox": 12,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:flip_chip": {
+            "df_abox": 74,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:gaa_fet": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:gan_hemt": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:hbm": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:hemt": {
+            "df_abox": 5,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:igbt": {
+            "df_abox": 3,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:interposer": {
+            "df_abox": 14,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:jfet": {
+            "df_abox": 1,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:mems": {
+            "df_abox": 24,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:mosfet": {
+            "df_abox": 14,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:mram": {
+            "df_abox": 8,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:nand_flash": {
+            "df_abox": 45,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:nor_flash": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:pcram": {
+            "df_abox": 71,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:photodiode": {
+            "df_abox": 6,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:reram": {
+            "df_abox": 28,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:sic_mosfet": {
+            "df_abox": 2,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:sram": {
+            "df_abox": 11,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:thyristor": {
+            "df_abox": 3,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:tsv": {
+            "df_abox": 18,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:wire_bonding": {
+            "df_abox": 4,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:3m_pad": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:alarm_system": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:amat_centura": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:amat_endura": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:amat_reflexion": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:amat_semvision": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:amat_vantage": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:asm_pulsar": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:asml_nxt": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:asml_scanner": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:axcelis_implanter": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:bruker_ellipsometer": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:cabot_slurry": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:coater_track": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:contamination_monitor": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:cvd_reactor": {
+            "df_abox": 2,
+            "depth": 1,
+            "is_superordinate": false
+          },
+          "equipment:ebara_frex": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:exhaust_line": {
+            "df_abox": 2,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:exhaust_pipe": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:gas_lines": {
+            "df_abox": 3,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:gas_sensor": {
+            "df_abox": 1,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:heater_jacket": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:hitachi_etcher": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:hitachi_sem": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:implanter": {
+            "df_abox": 1,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:kla_inspector": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:kla_overlay": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:lam_2300": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:lam_etcher": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:lam_flex": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:mattson_rtp": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:monitoring_system": {
+            "df_abox": 1,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:pvd_chamber": {
+            "df_abox": 2,
+            "depth": 1,
+            "is_superordinate": false
+          },
+          "equipment:screen_developer": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:scrubber": {
+            "df_abox": 1,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:sensor_nodes": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:tel_alpha": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:tel_coater": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:tel_formula": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:tel_tactras": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment:vacuum_pump": {
+            "df_abox": 4,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment_class:cd_sem": {
+            "df_abox": 1,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment_class:cmp_tool": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment_class:defect_inspection": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment_class:deposition_tool": {
+            "df_abox": 9,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment_class:etcher": {
+            "df_abox": 9,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment_class:facilities": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment_class:implanter": {
+            "df_abox": 1,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment_class:overlay_metrology": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment_class:process_chamber": {
+            "df_abox": 537,
+            "depth": 0,
+            "is_superordinate": true
+          },
+          "equipment_class:scanner": {
+            "df_abox": 3,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment_class:track": {
+            "df_abox": 2,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "equipment_class:wetbench": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:bowing": {
+            "df_abox": 4,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:bridging": {
+            "df_abox": 5,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:cdu": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:delamination": {
+            "df_abox": 2,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:dishing": {
+            "df_abox": 9,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:erosion": {
+            "df_abox": 21,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:footing": {
+            "df_abox": 1,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:haze": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:hillock": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:ler": {
+            "df_abox": 183,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:line_width_variation": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:microtrenching": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:overlay_error": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:particle": {
+            "df_abox": 110,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:pattern_collapse": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:pinhole": {
+            "df_abox": 1,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:residue": {
+            "df_abox": 16,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:scratches": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:scumming": {
+            "df_abox": 1,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:seam": {
+            "df_abox": 10,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:sidewall_angle_deviation": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:step_coverage_issue": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:stress_induced_crack": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:undercut": {
+            "df_abox": 9,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "failuremode:void": {
+            "df_abox": 48,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "material:aluminum": {
+            "df_abox": 2212,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "material:amorphous_carbon": {
+            "df_abox": 962,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "material:argon": {
+            "df_abox": 29,
+            "depth": 1,
+            "is_superordinate": false
+          },
+          "material:barc": {
+            "df_abox": 33,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "material:cf4": {
+            "df_abox": 32,
+            "depth": 1,
+            "is_superordinate": false
+          },
+          "material:cmp_slurry": {
+            "df_abox": 61,
+            "depth": 0,
+            "is_superordinate": true
+          },
+          "material:cmp_slurry_cu": {
+            "df_abox": 0,
+            "depth": 1,
+            "is_superordinate": false
+          },
+          "material:cmp_slurry_oxide": {
+            "df_abox": 0,
+            "depth": 1,
+            "is_superordinate": false
+          },
+          "material:cobalt": {
+            "df_abox": 1879,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "material:copper": {
+            "df_abox": 1044,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "material:dielectric": {
+            "df_abox": 875,
+            "depth": 0,
+            "is_superordinate": true
+          },
+          "material:duv_photomask": {
+            "df_abox": 0,
+            "depth": 1,
+            "is_superordinate": false
+          },
+          "material:euv_mask": {
+            "df_abox": 3,
+            "depth": 1,
+            "is_superordinate": false
+          },
+          "material:hfO2": {
+            "df_abox": 76,
+            "depth": 1,
+            "is_superordinate": false
+          },
+          "material:hf_acid": {
+            "df_abox": 272,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "material:low_k_dielectric": {
+            "df_abox": 26,
+            "depth": 1,
+            "is_superordinate": false
+          },
+          "material:oxide": {
+            "df_abox": 1140,
+            "depth": 0,
+            "is_superordinate": true
+          },
+          "material:oxygen_gas": {
+            "df_abox": 6,
+            "depth": 1,
+            "is_superordinate": false
+          },
+          "material:photomask": {
+            "df_abox": 462,
+            "depth": 0,
+            "is_superordinate": true
+          },
+          "material:photoresist_arF": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "material:photoresist_euv": {
+            "df_abox": 110,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "material:polysilicon": {
+            "df_abox": 420,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "material:process_gas": {
+            "df_abox": 671,
+            "depth": 0,
+            "is_superordinate": true
+          },
+          "material:sf6": {
+            "df_abox": 17,
+            "depth": 1,
+            "is_superordinate": false
+          },
+          "material:sin": {
+            "df_abox": 1512,
+            "depth": 1,
+            "is_superordinate": false
+          },
+          "material:sio2": {
+            "df_abox": 857,
+            "depth": 1,
+            "is_superordinate": false
+          },
+          "material:sog": {
+            "df_abox": 18,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "material:taC": {
+            "df_abox": 442,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "material:teOs": {
+            "df_abox": 46,
+            "depth": 1,
+            "is_superordinate": false
+          },
+          "material:tin": {
+            "df_abox": 1223,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "material:tungsten": {
+            "df_abox": 1981,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "metrology:cd_sem": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "metrology:ellipsometry": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "metrology:overlay": {
+            "df_abox": 4,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:adhesion_promoter": {
+            "df_abox": 2,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:alignment_optimization": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:barrier_layer": {
+            "df_abox": 57,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:chamber_clean": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:diffusion_barrier": {
+            "df_abox": 16,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:equipment_pm": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:esd_protection": {
+            "df_abox": 2,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:flow_rate_calibration": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:gas_chemistry_change": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:humidity_control": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:leak_check": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:mask_review": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:material_qualification": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:power_supply_stabilization": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:precursor_refill": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:recipe_tuning": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:slurry_refresh": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:stress_relief_anneal": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:temperature_control": {
+            "df_abox": 9,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "mitigation:thickness_optimization": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "organization:3m_innovative_properties_company": {
+            "df_abox": 7,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "organization:applied_materials": {
+            "df_abox": 6,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "organization:asm_ip_holding_b_v": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "organization:asml": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "organization:axcelis": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "organization:bruker": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "organization:cabot": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "organization:ebara": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "organization:hitachi_high_tech": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "organization:kla": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "organization:lam_research": {
+            "df_abox": 176,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "organization:mattson_technology": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "organization:samsung_electronics": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "organization:screen_holdings": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "organization:semes": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "organization:sk_hynix": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "organization:tokyo_electron_limited": {
+            "df_abox": 146,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "parameter:bias_power": {
+            "df_abox": 5,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "parameter:gas_flow": {
+            "df_abox": 28,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "parameter:pressure": {
+            "df_abox": 122,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "parameter:rf_power": {
+            "df_abox": 19,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "parameter:temperature": {
+            "df_abox": 213,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "process:advanced_modules": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "process:back_end": {
+            "df_abox": 1,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "process:clean": {
+            "df_abox": 366,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "process:cmp": {
+            "df_abox": 288,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "process:deposition": {
+            "df_abox": 1370,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "process:diffusion": {
+            "df_abox": 560,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "process:etch": {
+            "df_abox": 1086,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "process:implant": {
+            "df_abox": 466,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "process:lithography": {
+            "df_abox": 530,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "process:metrology": {
+            "df_abox": 31,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "process:plasma_processing": {
+            "df_abox": 633,
+            "depth": 0,
+            "is_superordinate": true
+          },
+          "process:substrate_preparation": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:alignment_error": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:charging": {
+            "df_abox": 11,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:electrostatic_discharge": {
+            "df_abox": 1,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:equipment_aging": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:gas_flow_instability": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:humidity_variation": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:mask_defect": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:material_contamination": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:metal_interdiffusion": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:oxidation": {
+            "df_abox": 39,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:particle_contamination": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:polymer_buildup": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:poor_adhesion": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:precursor_depletion": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:rf_power_variation": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:slurry_instability": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:stress_mismatch": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:temperature_drift": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:thickness_nonuniformity": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "rootcause:vacuum_leak": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "skill:chamber_conditioning": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "skill:defect_analysis": {
+            "df_abox": 1024,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "skill:doe_analysis": {
+            "df_abox": 43,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "skill:endpoint_detection": {
+            "df_abox": 8,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "skill:film_stress_control": {
+            "df_abox": 4,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "skill:gas_chemistry": {
+            "df_abox": 23,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "skill:mask_engineering": {
+            "df_abox": 144,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "skill:metrology_analysis": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "skill:overlay_optimization": {
+            "df_abox": 9,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "skill:plasma_diagnostics": {
+            "df_abox": 223,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "skill:recipe_tuning": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "skill:slurry_management": {
+            "df_abox": 13,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:advanced_cleaning": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:advanced_packaging": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:ald": {
+            "df_abox": 188,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:annealing": {
+            "df_abox": 54,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:cmp_metal": {
+            "df_abox": 1,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:cmp_oxide": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:cvd": {
+            "df_abox": 263,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:defect_inspection": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:dicing": {
+            "df_abox": 19,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:dopant_activation": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:dry_cleaning": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:duv_lithography": {
+            "df_abox": 10,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:electrical_metrology": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:epitaxial_growth": {
+            "df_abox": 12,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:etchback_planarization": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:euv_lithography": {
+            "df_abox": 25,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:hardmask_etch": {
+            "df_abox": 59,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:high_k_metal_gate": {
+            "df_abox": 1,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:in_situ_doping": {
+            "df_abox": 4,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:interconnect_patterning": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:metallization": {
+            "df_abox": 19,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:multilayer_interconnect": {
+            "df_abox": 1,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:overlay_control": {
+            "df_abox": 180,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:oxidation": {
+            "df_abox": 39,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:packaging": {
+            "df_abox": 8,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:passivation": {
+            "df_abox": 24,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:photoresist_coat_develop": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:physical_metrology": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:plasma_etch": {
+            "df_abox": 134,
+            "depth": 1,
+            "is_superordinate": false
+          },
+          "subprocess:pvd": {
+            "df_abox": 598,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:strain_engineering": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:three_d_structures": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:wafer_manufacturing": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:wafer_polishing": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:wafer_testing": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:wafer_thinning": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:wet_cleaning": {
+            "df_abox": 1,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "subprocess:wet_etch": {
+            "df_abox": 82,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "technode:3nm": {
+            "df_abox": 17,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "technode:5nm": {
+            "df_abox": 22,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "technode:7nm": {
+            "df_abox": 3,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "vendor:generic": {
+            "df_abox": 0,
+            "depth": 0,
+            "is_superordinate": false
+          }
+        }
+      }
     }
   },
   "rules": {

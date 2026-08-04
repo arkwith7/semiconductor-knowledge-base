@@ -29,6 +29,13 @@ ALIASES_PATH = ROOT / "mappings" / "abox_term_aliases.json"
 OUT_PATH = ROOT / "mappings" / "concept_mapping.json"
 PROV_PATH = ROOT / "provenance" / "PROVENANCE.json"
 
+# CR-009 — df 의 문서 모집단. **TTL 이 아니라 `data/**` 를 읽는다**(§1-1: TTL 은 빌드 산출물).
+# 두 파일은 A-Box 생성기가 쓰는 것과 **같은 원천**이므로, 여기서 센 df 의 분모는
+# 그래프에 실제로 들어간 문서 수와 일치한다(실측 1,000 + 3,034 = 4,034).
+SIRP_META = ROOT / "data" / "patents" / "rejected_patents_meta.parquet"
+CITED_ENRICHED = ROOT / "data" / "patents" / "cited_enriched"
+DF_REPORT = ROOT / "data" / "reports" / "concept_df_report.json"
+
 PROFILES = ("expert-tag", "patent-text")
 
 # 태스크 축 — 문서가 "무엇에 관한 것인가"가 아니라 "누가 무엇을 할 수 있는가"를
@@ -165,6 +172,88 @@ RULES = {
 }
 
 
+# ── CR-009 · 개념 단위 메타 (df · 계층) ─────────────────────────────
+def load_abox_docs() -> list[str]:
+    """A-Box 문서의 정규화 본문. 결정적 — 문서 순서가 df 에 영향을 주지 않는다.
+
+    SIRP 거절특허 1,000 = abstract + claim1 (= TBox 의 abstractText/firstClaimText)
+    인용 선행기술 3,034 = abstract + claims  (= 같은 술어)
+    """
+    import pandas as pd
+
+    docs: list[str] = []
+    meta = pd.read_parquet(SIRP_META)
+    for _, r in meta.iterrows():
+        docs.append(norm(f"{r.get('abstract') or ''} {r.get('claim1') or ''}"))
+
+    # **캐시 전량을 읽는다.** 고정 목록으로 두면 CR-008 이 더한 `*_b_layer.parquet` 이 빠져
+    # KR 만 분모에 들어오는 부분 반영이 된다(실측: 4,034 → 4,267 로 233 건만 늘었다).
+    # df 의 정의가 "A-Box 문서 중"이므로, A-Box 에 있는 문서는 전부 분모여야 한다.
+    frames = []
+    kj = CITED_ENRICHED / "kipris.jsonl"
+    if kj.exists():
+        frames.append(pd.DataFrame([json.loads(x) for x in kj.open()]))
+    for pq in sorted(CITED_ENRICHED.glob("*.parquet")):
+        frames.append(pd.read_parquet(pq))
+    if frames:
+        cited = pd.concat(frames, ignore_index=True)
+        cited = cited[cited["resolved"] == True].drop_duplicates("cited_doc_id")  # noqa: E712
+        for _, r in cited.iterrows():
+            docs.append(norm(f"{r.get('abstract') or ''} {r.get('claims') or ''}"))
+    return docs
+
+
+def concept_df(entries: list[dict], docs: list[str]) -> dict[str, int]:
+    """개념 IRI → **문서빈도**. 한 문서에서 표면형이 몇 번 나오든 1 이다.
+
+    매칭 단위는 R1 로 정규화한 표면형 **전체의 포함**이다(형태소 분석 없음 · 결정적).
+    이것은 df 계산 전용 참조 적용기이며 **하류용 적용기가 아니다** — 하류는 자기
+    토큰화로 구현한다(CR-007 분업). 두 값이 얼마나 어긋나는지는 하류가 회신할
+    Spearman ρ 가 검정한다(CR-009 성공기준 ②).
+    """
+    by_concept: dict[str, set[str]] = {}
+    for e in entries:
+        s = norm(e["surface"])
+        if s:
+            by_concept.setdefault(e["concept_id"], set()).add(s)
+    df = {cid: 0 for cid in by_concept}
+    for doc in docs:
+        if not doc:
+            continue
+        for cid, surfaces in by_concept.items():
+            if any(s in doc for s in surfaces):
+                df[cid] += 1
+    return df
+
+
+def concept_hierarchy(kg: dict) -> tuple[dict[str, int], dict[str, bool]]:
+    """BROADER 엣지 → (depth, is_superordinate). 루트 = 0.
+
+    사이클은 **ValueError** 다 — 조용히 자르면 깊이가 입력 순서에 의존하게 된다.
+    """
+    parent: dict[str, str] = {}
+    children: dict[str, int] = {}
+    for e in kg.get("edges", []):
+        if str(e.get("predicate", "")).upper() != "BROADER":
+            continue
+        parent[e["src"]] = e["dst"]
+        children[e["dst"]] = children.get(e["dst"], 0) + 1
+
+    def depth_of(nid: str) -> int:
+        seen, d, cur = {nid}, 0, nid
+        while cur in parent:
+            cur = parent[cur]
+            if cur in seen:
+                raise ValueError(f"BROADER 사슬에 사이클: {nid} → … → {cur}")
+            seen.add(cur)
+            d += 1
+        return d
+
+    ids = [n["id"] for n in kg["nodes"]]
+    return ({nid: depth_of(nid) for nid in ids},
+            {nid: children.get(nid, 0) > 0 for nid in ids})
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--check", action="store_true",
@@ -177,8 +266,12 @@ def main() -> int:
 
     asset = {
         "_README": "CR-007 개념 매핑 자산. 표면형 → 개념 IRI 를 프로파일별로 발행한다. "
-                   "적용기(linker)는 하류가 구현한다 — 이 파일은 규칙과 사전이다.",
-        "schema_version": "1.0",
+                   "적용기(linker)는 하류가 구현한다 — 이 파일은 규칙과 사전이다. "
+                   "CR-009: profiles[*].concept_meta 는 특이도 가중의 **재료**다. "
+                   "df 는 상류가 df 계산 전용 참조 적용기로 센 값이며 하류용 적용기가 "
+                   "아니다 — 하류는 자기 토큰화로 구현하고, 두 값의 어긋남은 "
+                   "Spearman ρ 로 검정한다. 가중식은 상류가 정하지 않는다.",
+        "schema_version": "1.1",
         "source_graph": "data/semiconductor_v0_3.json",
         "profiles": {p: {} for p in PROFILES},
         "rules": RULES,
@@ -186,12 +279,31 @@ def main() -> int:
                         "심사관 인용 정답 문서는 사전 구축 입력이 아니다(CR-007 누출 규율).",
     }
 
+    # CR-009 — 문서 모집단과 계층은 프로파일과 무관하므로 한 번만 읽는다.
+    docs = load_abox_docs()
+    depth, is_super = concept_hierarchy(kg)
+
     summary = {}
+    df_report: dict[str, dict] = {}
     for profile in PROFILES:
         entries, blocked = collect(kg, aliases, profile, exceptions)
+        # 그 프로파일의 개념 **전량**이 키를 갖는다 — 빠지면 하류가 "없음"과 "0"을
+        # 구별할 수 없고, 없음을 최대 특이도로 오해한다.
+        df = concept_df(entries, docs)
         asset["profiles"][profile] = {
             "entries": entries,
             "blocked": sorted(blocked, key=lambda b: (b["surface"], b["concept_id"])),
+            "concept_meta": {
+                # 분모를 프로파일 안에 둔다 — 지금은 두 프로파일이 같지만, 같다는 보장이
+                # 스키마에 없으면 하류가 가정하게 된다.
+                "df_denominator": len(docs),
+                "concepts": {
+                    cid: {"df_abox": df[cid],
+                          "depth": depth.get(cid, 0),
+                          "is_superordinate": bool(is_super.get(cid, False))}
+                    for cid in sorted(df)
+                },
+            },
         }
         concepts = {e["concept_id"] for e in entries}
         per_concept = {}
@@ -208,6 +320,23 @@ def main() -> int:
             "concepts_with_ge3_surfaces": ge3,
             "blocked_pairs": len(blocked),
             "task_axis_pairs": sum(v for k, v in axis_share.items() if k in TASK_AXES),
+        }
+        # CR-009 설계 D3·D4 — 자산 스키마에 플래그를 만들지 않고 리포트에 낸다.
+        nz = {c: v for c, v in df.items() if v > 0}
+        df_report[profile] = {
+            "df_denominator": len(docs),
+            "concepts": len(df),
+            "concepts_with_df_gt0": len(nz),
+            "concepts_with_df_0": len(df) - len(nz),
+            "top30": sorted(df.items(), key=lambda x: (-x[1], x[0]))[:30],
+            "superordinates": sorted(c for c in df if is_super.get(c)),
+            "depth_distribution": {
+                str(d): sum(1 for c in df if depth.get(c, 0) == d)
+                for d in sorted({depth.get(c, 0) for c in df})},
+            "d20_affected_note": (
+                "D-20 — 단독 'hf' 를 material:hf_acid 로 오지정한 매핑이 df 에 그대로 실린다. "
+                "이 CR 은 매핑을 고치지 않는다(비목표 ⓒ · 축 재지정은 후속 CR). "
+                f"현재 material:hf_acid df = {df.get('material:hf_acid', 0)}."),
         }
 
     payload = json.dumps(asset, ensure_ascii=False, indent=2, sort_keys=False) + "\n"
@@ -229,9 +358,16 @@ def main() -> int:
     prov["assets"]["mappings/concept_mapping.json"] = {
         "sha256": digest,
         "generator": "scripts/build_concept_mapping.py",
-        "inputs": ["data/semiconductor_v0_3.json", "mappings/abox_term_aliases.json"],
-        "change_request": "CR-007",
+        # CR-009 — df 의 원천 두 개를 등재한다. 그래야 A-Box 가 바뀌었을 때
+        # 하류의 freshness 증명이 "df 가 낡았다"를 드러낸다.
+        "inputs": ["data/semiconductor_v0_3.json", "mappings/abox_term_aliases.json",
+                   "data/patents/rejected_patents_meta.parquet",
+                   "data/patents/cited_enriched/"],
+        "change_request": "CR-007, CR-009",
     }
+    DF_REPORT.parent.mkdir(parents=True, exist_ok=True)
+    DF_REPORT.write_text(json.dumps(df_report, ensure_ascii=False, indent=2) + "\n",
+                         encoding="utf-8")
     PROV_PATH.parent.mkdir(parents=True, exist_ok=True)
     PROV_PATH.write_text(json.dumps(prov, ensure_ascii=False, indent=2) + "\n",
                          encoding="utf-8")
