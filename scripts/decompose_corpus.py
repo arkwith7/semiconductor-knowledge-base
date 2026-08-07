@@ -103,7 +103,33 @@ def src_g1():
             yield pid, no, txt, dep
 
 
-SOURCES = {"rejected": src_rejected, "cited": src_cited, "g2": src_g2, "g1": src_g1}
+def src_b_queries():
+    """CR-012 — B층 확증분할 질의 200건의 청구항.
+
+    pid 접두를 A층 질의와 **같은 `rej:`** 로 둔다. `build_abox_claim_features.py::_patent_iri()`
+    가 이미 `rej:{출원번호}` → `data:patent/kr_{출원번호}` 를 해소하므로, 접두를 새로 만들면
+    해소 코드를 고쳐야 하고 그 순간 A층/B층이 다른 경로를 타게 된다.
+
+    청구항 덩어리를 `split_claims` 로 다시 가르는 것은 인용 축(`src_cited`)과 같다 —
+    KIPRIS 는 구조화 depends_on 을 주지 않으므로 A층 SIRP(`claims_full`)처럼 읽을 수 없고,
+    참조는 본문에서 뽑는다. 이 비대칭은 리포트에 남긴다.
+    """
+    f = SDKB / "data" / "patents" / "b_layer_queries_raw.jsonl"
+    for line in f.open():
+        if not line.strip():
+            continue
+        d = json.loads(line)
+        blob = str(d.get("claims") or "")
+        if not blob:
+            continue
+        pid = "rej:" + str(d["application_number"])
+        for no, txt in split_claims(blob):     # 독립·종속 전부
+            dep = [] if is_independent(txt) else _parents(txt)
+            yield pid, no, txt, dep
+
+
+SOURCES = {"rejected": src_rejected, "cited": src_cited, "g2": src_g2, "g1": src_g1,
+           "b_queries": src_b_queries}
 
 
 def main() -> int:

@@ -54,14 +54,25 @@ ont:Shape_Patent
     ] .
 
 # ─── Every RejectedPatent must cite ≥ 1 prior art (examiner-grade) ────
+#
+# 예외 하나가 있고, 그것은 **느슨함이 아니라 이름 붙은 면제**다 (CR-012).
+# B층 확증분할 질의 200건은 심사관 인용을 **실제로 갖고 있으면서 일부러 싣지 않는다** —
+# 그 간선의 집합이 곧 하류의 봉인 정답지(qrel)이고, 상류에 실으면 확증 분할이 그 자리에서
+# 소진된다. 되돌릴 방법이 없다.
+#
+# 그래서 minCount 를 낮추지 않았다. 낮추면 A층 1,000건에 걸려 있던 계약까지 함께 풀리고,
+# 앞으로 인용 없는 거절특허가 조용히 들어와도 게이트가 잡지 못한다.
+# 대신 면제를 **출처(prov)로만** 얻게 했다. 그 출처를 붙일 수 있는 것은 생성기 하나
+# (scripts/build_abox_b_layer_queries.py)뿐이므로, 면제는 손으로 얻을 수 없다.
 ont:Shape_RejectedPatent
     a sh:NodeShape ;
     sh:targetClass ont:RejectedPatent ;
-    sh:property [
-        sh:path ont:hasPriorArtExaminer ;
-        sh:minCount 1 ;
-        sh:message "Every RejectedPatent must cite at least one examiner-grade prior art." ;
-    ] ;
+    sh:or (
+        [ sh:path ont:hasPriorArtExaminer ; sh:minCount 1 ]
+        [ sh:path prov:wasGeneratedBy ;
+          sh:hasValue <https://w3id.org/sdkb/data/activity/b_layer_query_ingest> ]
+    ) ;
+    sh:message """Every RejectedPatent must cite at least one examiner-grade prior art, unless it was published by the CR-012 B-layer query ingest (activity/b_layer_query_ingest), which withholds citations by design — they are the downstream sealed qrel.""" ;
     # 거절유형은 **요구하지 않는다** — SIRP 원천이 1,000건 중 414건에만 담고 있다.
     # minCount 1 을 걸면 없는 유형을 지어내야 한다 (날조). 값이 있을 때 타입만 검사하고,
     # 결측 586건은 게이트가 아니라 데이터 프로파일이 보고한다.

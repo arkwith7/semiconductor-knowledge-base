@@ -81,6 +81,17 @@ abox: convert
 abox-patents: convert ingest-sirp
 	$(PYTHON) scripts/build_abox_patents.py
 
+# ── CR-012 · B층 확증분할 질의 (하류 논문 평가자산) ────────────────────
+# 별도 파일로 둔다. 이유 둘 — ⓐ CR-012 요구 ⓑ 의 층 구분을 새 술어 없이(T-Box 델타 0)
+# 주는 가장 싼 형태가 파일이고, ⓑ 이 저장소는 공개되는 기반 온톨로지라 논문 평가자산을
+# 도메인 지식과 같은 파일에 섞으면 공개본 정리 때 다시 갈라내야 한다.
+# 수집은 네트워크를 타므로 빌드와 분리한다 — 재실행해도 이미 받은 건은 건너뛴다.
+collect-b-layer-queries:
+	$(PYTHON) scripts/collect_b_layer_queries.py
+
+abox-b-layer-queries: convert
+	$(PYTHON) scripts/build_abox_b_layer_queries.py
+
 # KSIA 회원사 명부 → ont:Vendor A-Box. abox-patents 뒤에 와야 한다 —
 # 이미 특허 출원인(Organization)으로 존재하는 회사를 알아보고 중복 노드를 만들지 않으려면
 # sdkb-abox-patents.ttl 이 먼저 있어야 한다.
@@ -109,6 +120,13 @@ validate:
 	$(PYTHON) scripts/validate_shacl.py --data ontology/sdkb-core-data.ttl ontology/sdkb-abox-experts-problems.ttl
 	$(PYTHON) scripts/validate_shacl.py --shapes validation/shapes_patent.ttl \
 		--data ontology/sdkb-abox-patents.ttl ontology/sdkb-core-data.ttl ontology/sdkb-patent.ttl
+	@# CR-012 B층 질의도 같은 shape 을 탄다. A층과 **따로** 돌리는 이유는 인용 면제가
+	@# B층에만 걸린다는 것을 실행으로 보이기 위해서다 — 합쳐 돌리면 A층이 통과시켜 준
+	@# 것인지 면제가 걸린 것인지 출력만 봐서는 갈리지 않는다.
+	@test -f ontology/sdkb-abox-b-layer-queries.ttl && \
+		$(PYTHON) scripts/validate_shacl.py --shapes validation/shapes_patent.ttl \
+			--data ontology/sdkb-abox-b-layer-queries.ttl ontology/sdkb-core-data.ttl ontology/sdkb-patent.ttl \
+		|| echo "  (B층 질의 A-Box 미빌드 — 건너뜀. 빌드: make abox-b-layer-queries)"
 
 test:
 	$(PYTHON) -m pytest tests/ -v --tb=short

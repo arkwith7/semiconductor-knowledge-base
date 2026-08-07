@@ -1,14 +1,14 @@
 {
-  "triples": 11718456,
-  "input_claims": 591603,
+  "triples": 11770236,
+  "input_claims": 594221,
   "counts": {
-    "claims": 591460,
-    "claims_independent": 143061,
-    "features": 1300457,
-    "depends": 651998,
-    "depends_on_claim": 487183,
-    "claims_dependent": 448399,
-    "depends_on_claim_dangling": 53,
+    "claims": 594078,
+    "claims_independent": 143485,
+    "features": 1306419,
+    "depends": 653539,
+    "depends_on_claim": 489814,
+    "claims_dependent": 450593,
+    "depends_on_claim_dangling": 54,
     "judgment_no_ground": 7,
     "reextract_rows": 545,
     "judgments": 635,
@@ -17,13 +17,13 @@
     "rejection_reasons": 2749
   },
   "feature_concept_by_type": {
-    "Process": 225729,
-    "Skill": 180251,
-    "Material": 139906,
-    "SubProcess": 29516,
-    "Device": 14365,
-    "FailureMode": 717,
-    "EquipmentClass": 406
+    "Process": 226658,
+    "Skill": 180822,
+    "Material": 140160,
+    "SubProcess": 29619,
+    "Device": 14393,
+    "FailureMode": 720,
+    "EquipmentClass": 407
   },
   "note": "feature 정규화 = build_abox_patents 와 동일 브리지. 판단 = evidence_v2 실체화. RejectionReason = rejection_reasons.jsonl 실체화(CR-004R)."
 }

@@ -26,6 +26,12 @@ dependencies = [
     # HTTP — llm_claim_validate(ollama 호출)·llm_claim_validate 를 쓰는 decompose_corpus,
     # scripts/enrich_kipris_biblio.py 가 이미 임포트하고 있었으나 선언이 없었다(하류 대장 D-24).
     "requests>=2.31",
+    # KIPRIS 수집 경로 — CR-008·CR-011 이 이미 paper_data 의 수집기·응답 파서를 통해
+    # 이 둘을 쓰고 있었으나 선언이 없었다. requests 와 같은 종류의 누락이다(D-24).
+    # xmltodict: KiprisClient 가 XML 응답을 dict 로 바꾸는 데 쓴다.
+    # python-dotenv: 수집기가 .env 의 KIPRIS_API_KEY 를 읽는 데 쓴다.
+    "xmltodict>=0.13",
+    "python-dotenv>=1.0",
 ]
 
 [project.optional-dependencies]

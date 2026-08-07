@@ -1,0 +1,19 @@
+{
+  "cr": "CR-012",
+  "input_ids": "/home/arkwith/Dev/SKKU/sdkb-prior-art-paper/upstream/handoff/CR-012-b-query-ids.txt",
+  "input_sha256": "ef4ad03c2734af4212209516c05064b1550bea478f1f79bc72f3e2f14bac60e5",
+  "requested": 200,
+  "collected": 200,
+  "resolved": 200,
+  "with_claims": 200,
+  "with_abstract": 200,
+  "with_filing_date": 200,
+  "with_ipc": 200,
+  "with_examination_status": 200,
+  "register_status_distribution": {
+    "거절": 200
+  },
+  "claims_per_patent_mean": 13.09,
+  "unresolved": [],
+  "note": "출원번호 직행 조회(getBibliographyDetailInfoSearch). 인용 표기 해소 단계 없음 — 하류 이관 파일이 출원번호 자체를 준다."
+}

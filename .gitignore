@@ -51,6 +51,15 @@ data/interim/reextracted_judgments.jsonl
 data/interim/rejection_reasons.jsonl
 ontology/sdkb-abox-claim-features.ttl
 ontology/sdkb-abox-prior-art.ttl
+
+# ── CR-012 · B층 확증분할 질의 (하류 논문 평가자산) ────────────────
+# 이 저장소는 공개되는 기반 온톨로지이고, 이 둘은 반도체 도메인 지식이 아니라
+# **논문 확증분할의 봉인 질의**다. 그래서 도메인 자산과 다르게 취급한다 —
+# 원문은 KIPRIS 비재배포 조건이기도 하다(§1.5).
+# 재현 경로는 커밋된 것으로 닫힌다: 하류 이관 파일(sha256 대조 강제) + 수집기 +
+# 생성기 + 집계 리포트. 논문 종료 후 공개본 정리 시 이 두 줄이 경계선이다.
+data/patents/b_layer_queries_raw.jsonl
+ontology/sdkb-abox-b-layer-queries.ttl
 data/patents/fulltext_corpus.parquet
 data/patents/citation_resolution_full_cache.json
 # Kept committed (small GT / vocab): rejection_decisions/structured, _index.jsonl,
