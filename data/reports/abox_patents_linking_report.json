@@ -1,7 +1,7 @@
 {
   "input": "data/patents/rejected_patents_meta.parquet",
   "patents": 1000,
-  "triples": 33937,
+  "triples": 33931,
   "rejection": {
     "typed_RejectedPatent": 1000,
     "rejectedFor": {
@@ -105,7 +105,7 @@
     "patent:kr_1020137007759"
   ],
   "nodes_per_patent": {
-    "mean": 2.915,
+    "mean": 2.909,
     "median": 3,
     "max": 9,
     "zero": 23
@@ -113,7 +113,7 @@
   "concern_edges_by_node_type": {
     "Process": 1292,
     "Skill": 630,
-    "Material": 526,
+    "Material": 520,
     "SubProcess": 273,
     "Device": 181,
     "EquipmentClass": 7,

@@ -7,6 +7,17 @@
   },
   "_rule_patent_text_short_ko": "patent-text 기본 규칙: 공백 없는 ≤4자 한글 표면형은 태스크 축(Skill·RootCause·Mitigation)으로 이월하지 않는다. 정당한 소수는 _exceptions_short_ko_task_axis 에 명시적으로 올린다 (CR-007 결정 ③).",
   "_exceptions_short_ko_task_axis": [],
+  "_suppress_tier1_surface": {
+    "_why": "CR-013 (하류 D-20) — Tier-1 표면형을 **프로파일 단위로** 끈다. 원천(KG synonyms)에서 지우면 두 프로파일과 skos:altLabel·A-Box 추출이 함께 움직이므로, 끄는 자리를 여기로 둔다. 형식: <정규화 표면형>: {<프로파일>: [<끌 node_id>, ...]}. 프로파일이 없으면 그 프로파일에서는 그대로 산다. 결과는 자산의 profiles[*].blocked 에 rule_id R6-SURFACE-SUPPRESS 로 남는다 — 지운 것이 아니라 옮긴 것이다.",
+    "hf": {
+      "patent-text": ["material:hf_acid"],
+      "_evidence": "하류 실측(CR-013 §3.2) — 단독 hf 링크 1,245 문서의 원문 대소문자: Hf 736 · HF 488 · 둘다 21. 정규화가 대소문자를 지우므로(R1) 이 표면형은 사전 층에서 원리적으로 판별 불가하고, 남는 링크의 41 %가 반대 뜻이다. 재지정은 오링크의 방향만 뒤집는다."
+    },
+    "high k": {
+      "patent-text": ["material:hfO2"],
+      "_evidence": "CR-013 §3.4 — high-k 는 부류(고유전율 물질)이고 hfO2 는 그 한 원소다(ZrO2·Al2O3·La2O3 도 high-k). 부류를 특정 물질로 축소하는 매핑이므로 뗀다. 같은 CR 에서 상위 부류 material:dielectric 으로 재지정한다(아래 'high k' 별칭)."
+    }
+  },
   "etching": "process:etch",
   "etch process": "process:etch",
   "dry etch": "subprocess:plasma_etch",
@@ -272,6 +283,11 @@
   },
   "절연막": {
     "expert-tag": "material:sio2",
+    "patent-text": "material:dielectric"
+  },
+  "_CR013": "CR-013 (하류 D-20) — 과대특정 표면형의 상위 부류 재지정. 'high k' 는 부류이고 material:hfO2 는 그 한 원소이므로, Tier-1 의 hfO2 지정을 _suppress_tier1_surface 로 끄고 여기서 상위 부류에 붙인다. expert-tag 는 null — 현행 동작 불변(비목표 ⓕ).",
+  "high k": {
+    "expert-tag": null,
     "patent-text": "material:dielectric"
   },
   "열산화": "process:diffusion",

@@ -4,6 +4,44 @@ All notable changes to SDKB will be documented in this file.
 
 ## [Unreleased] — v1.0.0-dev
 
+### Changed (2026-08-07 — CR-013 · 원소 기호 별칭의 정밀도 · 하류 D-20)
+
+- **`patent-text` 프로파일에서 표면형 둘을 뗐다.** 단독 `hf` → `material:hf_acid`
+  **제거** · `high k` → `material:hfO2` **분리 후 상위 부류 `material:dielectric`
+  로 재지정**. `patent-text` 쌍 653 → **652** · 표면형 636 → **635**.
+  **`expert-tag` 는 entries·blocked·concept_meta 전량 불변**(테스트가 단정).
+- **재지정이 아니라 제거인 이유.** 하류가 원문 대소문자를 셌다 — 단독 `hf` 링크
+  1,245 문서 중 `Hf`(하프늄) 736 · **`HF`(불산) 488** · 둘다 21. 사전 적용은
+  `.lower()` 정규화 위에서 돌므로(R1) 이 표면형은 **사전 층에서 원리적으로 갈리지
+  않는다.** `hfO2` 로 재지정하면 488 문서에 반대 방향 오링크가 생긴다.
+  **대소문자 민감 표면형이나 새 스키마 필드를 발행하지 않았다** — 하류 적용기가
+  읽지 못한다(하류 D-28 · 소관 하류).
+- **`R6-SURFACE-SUPPRESS` 신설** — Tier-1 표면형을 **프로파일 단위로** 끈다.
+  원천(`data/semiconductor_v0_3.json` synonyms)에서 지우면 두 프로파일과
+  `skos:altLabel`·A-Box 추출이 함께 움직이므로, 끄는 자리를
+  `mappings/abox_term_aliases.json` 의 `_suppress_tier1_surface` 로 뒀다.
+  **끈 쌍은 `profiles[*].blocked` 에 남는다 — 지운 것이 아니라 옮긴 것이다**
+  (`patent-text` blocked 6 → **8**).
+- **A-Box 는 원문 대소문자로 갈랐다(상류만 가능).** `scripts/sdkb_nb.resolve_hf_case`
+  — `HF` 만 있으면 불산으로 남기고, `Hf`·혼재·판별불가는 뗀다. **하프늄 링크를 새로
+  만들지 않는다**(오링크의 방향만 뒤집는 일이 되므로).
+  `sdkb-abox-patents.ttl` 33,937 → **33,931**(−6 · `involvesMaterial` 526 → **520**) ·
+  `sdkb-abox-prior-art.ttl` 66,453 → **66,440**(−13 · `involvesMaterial` 1,580 → **1,567**).
+  **제거 19 · 추가 0**(트리플 집합 차로 증명) · 릴리스 A-Box 의 `hf_acid` 링크
+  **34 → 15**(patents 8 → 2 · prior-art 26 → 13).
+- **T-Box·IRI·어휘 불변.** `sdkb-core.ttl`·`sdkb-core-data.ttl` sha256 불변 ·
+  어휘 신설 0 · 클래스/술어 델타 0. 상위 부류 `material:dielectric` 는 CR-007 이
+  이미 만든 노드다(`props.lexicon_profile = patent-text`).
+- **하류 영향 (§0)**: `sdkb-prior-art-paper` 는 스냅샷 서명이 바뀌므로 §2.1
+  (정지 게이트 1 개) 경로로 전량 재측정한다. **`high k` 재지정은 하류가 동결하려던
+  검증기준 ⑤(고유 (doc,concept) 쌍 예측값)를 무효로 만든다** — 그 예측은 순수
+  제거를 가정한 값이었다. 하류는 사전등록 동결 전에 ⑤ 를 재산출해야 한다.
+  `SDKB-Match`·공개 사이트: 개념 링크 19 건 감소 외 영향 없음.
+- 자산 sha256 — `mappings/concept_mapping.json` **`cdf5fa5d…`** ·
+  `mappings/abox_term_aliases.json` **`9c8bbeb2…`** ·
+  `ontology/sdkb-abox-patents.ttl` **`974899fa…`** ·
+  `ontology/sdkb-abox-prior-art.ttl` **`e96d9873…`**.
+
 ### Added (2026-08-06 — CR-011 · B층 인용 선행기술의 청구항 ClaimFeature 분해 · 하류 D-26)
 
 - **B층 인용 문헌 284건의 청구항을 A층과 같은 사이드카 형식으로 발행했다.**

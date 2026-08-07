@@ -141,9 +141,18 @@ def test_frozen_denominator_matches_abox(asset):
 
 
 # ── 통합: 추가만 했는가 ─────────────────────────────────────────────
-def test_entries_unchanged_by_meta_addition(asset):
-    """CR-009 는 추가만 한다 — `entries`·`blocked` 는 CR-007 판과 같아야 한다.
+# CR-013 이 **선언한** 사전 값 변경. 이 셋 말고 다른 것이 움직이면 아래 테스트가
+# 막는다 — 목록을 늘려야 통과하는 구조라 "조용한 변경"이 불가능하다.
+# 느슨하게 만든 것이 아니라, 무엇을 허용했는지를 코드에 적은 것이다(§1-6).
+CR013_REMOVED = {("hf", "material:hf_acid"), ("high k", "material:hfO2")}
+CR013_ADDED = {("high k", "material:dielectric")}
+CR013_PROFILE = "patent-text"
 
+
+def test_entries_changed_only_where_declared(asset):
+    """`entries`·`blocked` 는 직전 판과 같다 — **선언된 CR 델타를 뺀 나머지가**.
+
+    CR-009 는 추가만 했고(값 불변), CR-013 은 patent-text 두 표면형만 움직였다.
     git 에 남은 직전 판과 비교한다. 비교 대상이 없으면(신규 클론) 건너뛴다.
     """
     prev = subprocess.run(
@@ -152,12 +161,25 @@ def test_entries_unchanged_by_meta_addition(asset):
     if prev.returncode != 0:
         pytest.skip("직전 판 없음")
     old = json.loads(prev.stdout)
+
+    def pairs(doc, profile, key="entries"):
+        return {(e["surface"], e["concept_id"]) for e in doc["profiles"][profile][key]}
+
     for profile in PROFILES:
-        assert asset["profiles"][profile]["entries"] == old["profiles"][profile]["entries"], \
-            f"{profile}: entries 가 바뀌었다 — CR-009 는 값을 바꾸지 않는다"
-        assert asset["profiles"][profile]["blocked"] == old["profiles"][profile]["blocked"], \
-            f"{profile}: blocked 가 바뀌었다"
-    assert asset["rules"] == old["rules"]
+        removed = pairs(old, profile) - pairs(asset, profile)
+        added = pairs(asset, profile) - pairs(old, profile)
+        expect_rm = CR013_REMOVED if profile == CR013_PROFILE else set()
+        expect_add = CR013_ADDED if profile == CR013_PROFILE else set()
+        assert removed == expect_rm, f"{profile}: 선언되지 않은 제거 {removed - expect_rm}"
+        assert added == expect_add, f"{profile}: 선언되지 않은 추가 {added - expect_add}"
+        # 뺀 것은 blocked 로 **옮겨져야** 한다 — 조용히 사라지면 안 된다.
+        moved = pairs(asset, profile, "blocked") - pairs(old, profile, "blocked")
+        assert moved == expect_rm, f"{profile}: blocked 이동 기록이 어긋난다 {moved}"
+
+    # 규칙은 추가만 가능하다 — 기존 규칙 문구가 바뀌면 하류 해석이 달라진다.
+    assert set(asset["rules"]) - set(old["rules"]) == {"R6-SURFACE-SUPPRESS"}
+    for k, v in old["rules"].items():
+        assert asset["rules"][k] == v, f"{k}: 기존 규칙 문구가 바뀌었다"
 
 
 # ── 통합: 결정성 ────────────────────────────────────────────────────

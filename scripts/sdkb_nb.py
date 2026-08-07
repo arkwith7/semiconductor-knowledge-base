@@ -212,6 +212,40 @@ def make_bridge(root: Path | None = None, *, morph: bool = False) -> Bridge:
     return Bridge(root or find_root(), morph=morph)
 
 
+# ── CR-013 — 단독 `hf` 는 대소문자로만 갈린다 ─────────────────────────────
+# 추출은 `.lower()` 정규화 위에서 돌기 때문에 `Hf`(하프늄)와 `HF`(불산)가 같은
+# 표면형이 된다. 사전(concept_mapping.json)에서는 이 판별자를 실을 방법이 없어
+# 표면형을 끄지만(R6), **A-Box 생성기는 원문을 갖고 있으므로 여기서는 갈 수 있다.**
+# 보수적으로 간다 — `HF` 만 있을 때만 불산으로 남기고, `Hf` 든 혼재든 판별 불가든
+# 링크를 뗀다. 하프늄 링크를 새로 만들지는 **않는다**(CR-013 §3.2 · 설계 C2).
+_HF_CASE = re.compile(r"(?<![A-Za-z])(HF|Hf)(?![A-Za-z])")
+_HF_SURFACE = "hf"
+_HF_ACID_NODE = "material:hf_acid"
+
+
+def resolve_hf_case(hits: dict[str, list[tuple[str, str]]],
+                    raw_text: str) -> dict[str, list[tuple[str, str]]]:
+    """단독 `hf` 히트를 원문 대소문자로 재판정한다 (CR-013 ⓒ).
+
+    `hits` 는 Bridge.extract_from_text 의 반환값이고, `raw_text` 는 **정규화 전**
+    원문이어야 한다 — 정규화된 텍스트를 넘기면 판별자가 이미 사라져 있다.
+    다른 표면형(`불산`·`hydrofluoric acid`)으로 붙은 링크는 건드리지 않는다.
+    """
+    targets = hits.get(_HF_SURFACE)
+    if not targets or not any(nid == _HF_ACID_NODE for nid, _ in targets):
+        return hits
+    forms = set(_HF_CASE.findall(str(raw_text or "")))
+    if forms == {"HF"}:
+        return hits
+    kept = [(nid, typ) for nid, typ in targets if nid != _HF_ACID_NODE]
+    out = dict(hits)
+    if kept:
+        out[_HF_SURFACE] = kept
+    else:
+        del out[_HF_SURFACE]
+    return out
+
+
 # ── metric suite #1 — expert ranking (verbatim from notebooks 01/06) ──────
 def calculate_mrr_with_ground_truth(ranked_results: list[list],
                                      ground_truth: dict[str, list[str]]) -> float:

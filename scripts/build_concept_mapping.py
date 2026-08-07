@@ -79,6 +79,21 @@ def _alias_targets(value: object, profile: str) -> list[str]:
     return list(value)
 
 
+def suppressions(aliases: dict, profile: str) -> set[tuple[str, str]]:
+    """R6 — 이 프로파일에서 끌 (정규화 표면형, node_id) 쌍 (CR-013).
+
+    원천(KG synonyms)에서 지우지 않는 이유: Tier-1 동의어는 프로파일 구분이 없어
+    한쪽을 지우면 다른 프로파일과 skos:altLabel·A-Box 추출이 함께 움직인다.
+    """
+    out: set[tuple[str, str]] = set()
+    for surface, per_profile in (aliases.get("_suppress_tier1_surface") or {}).items():
+        if surface.startswith("_") or not isinstance(per_profile, dict):
+            continue
+        for nid in per_profile.get(profile) or []:
+            out.add((norm(surface), nid))
+    return out
+
+
 def collect(kg: dict, aliases: dict, profile: str,
             exceptions: set[str]) -> tuple[list[dict], list[dict]]:
     """(entries, blocked) — 이 프로파일에서 유효한 표면형 → 개념 매핑."""
@@ -126,10 +141,18 @@ def collect(kg: dict, aliases: dict, profile: str,
     # ── R4 patent-text 한글 단문 → 태스크 축 이월 금지 ──────────────────
     blocked: list[dict] = []
     entries: list[dict] = []
+    # R6 — 억제는 후보 확정 **전에** 건다. 뒤에 걸면 ambiguous 플래그가 이미
+    # 지워질 후보를 세어 버려, 남은 후보가 하나인데 다의로 발행된다.
+    suppress = suppressions(aliases, profile)
     for surface in sorted(acc):
         cands = []
         for nid, (rule, conf, lang) in acc[surface].items():
             axis = node_type[nid]
+            if (surface, nid) in suppress:
+                blocked.append({"surface": surface, "concept_id": nid,
+                                "concept_type": axis,
+                                "rule_id": "R6-SURFACE-SUPPRESS"})
+                continue
             if (profile == "patent-text" and axis in TASK_AXES
                     and is_short_korean(surface) and surface not in exceptions):
                 blocked.append({"surface": surface, "concept_id": nid,
@@ -163,6 +186,10 @@ RULES = {
     "R4-SHORT-KO-TASK": "patent-text 한정 — 공백 없는 ≤4자 한글 표면형은 태스크 축"
                         "(Skill·RootCause·Mitigation)으로 이월하지 않는다. "
                         "예외는 사전의 _exceptions_short_ko_task_axis 에 명시한다.",
+    "R6-SURFACE-SUPPRESS": "CR-013 — 사전의 _suppress_tier1_surface 에 오른 (표면형, 개념) "
+                           "쌍을 그 프로파일에서만 끈다. 지운 것이 아니라 blocked 로 옮긴 "
+                           "것이며, 다른 프로파일과 원천(KG synonyms)·skos:altLabel 은 "
+                           "움직이지 않는다. 억제는 R5 의 다의 판정 **앞**에 걸린다.",
     "R5-AMBIGUITY": "한 표면형이 여러 개념에 걸리면 **후보를 지우지 않는다**. 더 특정한 축을 "
                     "앞에 두고(SubProcess > … > Process) 같은 순위는 node_id 사전순으로 "
                     "정렬한 뒤 ambiguous=true 로 표시한다. 어느 하나를 고르는 것은 "
@@ -334,9 +361,15 @@ def main() -> int:
                 str(d): sum(1 for c in df if depth.get(c, 0) == d)
                 for d in sorted({depth.get(c, 0) for c in df})},
             "d20_affected_note": (
-                "D-20 — 단독 'hf' 를 material:hf_acid 로 오지정한 매핑이 df 에 그대로 실린다. "
-                "이 CR 은 매핑을 고치지 않는다(비목표 ⓒ · 축 재지정은 후속 CR). "
-                f"현재 material:hf_acid df = {df.get('material:hf_acid', 0)}."),
+                "D-20 — CR-013 에서 해소. 단독 'hf'(→ material:hf_acid) 와 'high k'"
+                "(→ material:hfO2) 를 patent-text 에서 R6 로 끄고, 'high k' 는 상위 부류 "
+                "material:dielectric 로 재지정했다. 재지정이 아니라 제거인 이유는 정규화가 "
+                "대소문자를 지워 Hf/HF 가 사전 층에서 갈리지 않기 때문이다(CR-013 §3.2). "
+                f"현재 df: hf_acid={df.get('material:hf_acid', 0)} · "
+                f"hfO2={df.get('material:hfO2', 0)} · "
+                f"dielectric={df.get('material:dielectric', 0)}. "
+                "주의 — 이 참조 적용기는 단어경계가 없는 부분문자열 포함이라 df 가 하류 값과 "
+                "같지 않다(CR-013 §2.6 · 이번 범위 밖)."),
         }
 
     payload = json.dumps(asset, ensure_ascii=False, indent=2, sort_keys=False) + "\n"
@@ -363,7 +396,7 @@ def main() -> int:
         "inputs": ["data/semiconductor_v0_3.json", "mappings/abox_term_aliases.json",
                    "data/patents/rejected_patents_meta.parquet",
                    "data/patents/cited_enriched/"],
-        "change_request": "CR-007, CR-009",
+        "change_request": "CR-007, CR-009, CR-013",
     }
     DF_REPORT.parent.mkdir(parents=True, exist_ok=True)
     DF_REPORT.write_text(json.dumps(df_report, ensure_ascii=False, indent=2) + "\n",

@@ -9187,15 +9187,6 @@
           "ambiguous": false
         },
         {
-          "surface": "hf",
-          "lang": "en",
-          "concept_id": "material:hf_acid",
-          "concept_type": "Material",
-          "rule_id": "T1-SYNONYM",
-          "confidence": 1.0,
-          "ambiguous": false
-        },
-        {
           "surface": "hf acid",
           "lang": "und",
           "concept_id": "material:hf_acid",
@@ -9233,11 +9224,11 @@
         },
         {
           "surface": "high k",
-          "lang": "en",
-          "concept_id": "material:hfO2",
+          "lang": "und",
+          "concept_id": "material:dielectric",
           "concept_type": "Material",
-          "rule_id": "T1-SYNONYM",
-          "confidence": 1.0,
+          "rule_id": "T2-ALIAS-REASSIGN",
+          "confidence": 0.8,
           "ambiguous": false
         },
         {
@@ -12987,6 +12978,18 @@
       ],
       "blocked": [
         {
+          "surface": "hf",
+          "concept_id": "material:hf_acid",
+          "concept_type": "Material",
+          "rule_id": "R6-SURFACE-SUPPRESS"
+        },
+        {
+          "surface": "high k",
+          "concept_id": "material:hfO2",
+          "concept_type": "Material",
+          "rule_id": "R6-SURFACE-SUPPRESS"
+        },
+        {
           "surface": "레시피",
           "concept_id": "skill:recipe_tuning",
           "concept_type": "Skill",
@@ -13637,7 +13640,7 @@
             "is_superordinate": false
           },
           "material:dielectric": {
-            "df_abox": 875,
+            "df_abox": 881,
             "depth": 0,
             "is_superordinate": true
           },
@@ -13652,12 +13655,12 @@
             "is_superordinate": false
           },
           "material:hfO2": {
-            "df_abox": 76,
+            "df_abox": 57,
             "depth": 1,
             "is_superordinate": false
           },
           "material:hf_acid": {
-            "df_abox": 272,
+            "df_abox": 26,
             "depth": 0,
             "is_superordinate": false
           },
@@ -14405,6 +14408,7 @@
     "R2-TIER1": "그래프가 개념을 부르는 이름 — canonical_name(1.0) · id local(0.9) · synonym(1.0). props.lexicon_profile 이 걸린 노드는 그 프로파일에서만 나온다.",
     "R3-TIER2": "큐레이션 브리지 사전(0.8). 값이 프로파일 객체면 해당 프로파일 타깃만 쓰고, null 이면 그 프로파일에서 비활성이다.",
     "R4-SHORT-KO-TASK": "patent-text 한정 — 공백 없는 ≤4자 한글 표면형은 태스크 축(Skill·RootCause·Mitigation)으로 이월하지 않는다. 예외는 사전의 _exceptions_short_ko_task_axis 에 명시한다.",
+    "R6-SURFACE-SUPPRESS": "CR-013 — 사전의 _suppress_tier1_surface 에 오른 (표면형, 개념) 쌍을 그 프로파일에서만 끈다. 지운 것이 아니라 blocked 로 옮긴 것이며, 다른 프로파일과 원천(KG synonyms)·skos:altLabel 은 움직이지 않는다. 억제는 R5 의 다의 판정 **앞**에 걸린다.",
     "R5-AMBIGUITY": "한 표면형이 여러 개념에 걸리면 **후보를 지우지 않는다**. 더 특정한 축을 앞에 두고(SubProcess > … > Process) 같은 순위는 node_id 사전순으로 정렬한 뒤 ambiguous=true 로 표시한다. 어느 하나를 고르는 것은 적용기(하류)의 판단이며, 그 판단에 필요한 재료를 전부 넘긴다.",
     "CONFIDENCE": "측정값이 아니라 **출처 강도의 규약**이다: 그래프가 그렇게 부른다=1.0 · slug 파생=0.9 · 큐레이션 브리지=0.8."
   },

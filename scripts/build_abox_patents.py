@@ -420,7 +420,8 @@ def main() -> int:
         text = (f"{r.get('title') or ''} {r.get('abstract') or ''} "
                 f"{r.get('claim1') or ''}")
         had_text = False
-        for term, hits in br.extract_from_text(text).items():
+        # CR-013 ⓒ — 단독 `hf` 는 원문 대소문자로만 갈린다. 원문을 넘긴다.
+        for term, hits in S.resolve_hf_case(br.extract_from_text(text), text).items():
             for nid, typ in hits:
                 prop = PATENT_ROUTING.get(typ)
                 if not prop:
