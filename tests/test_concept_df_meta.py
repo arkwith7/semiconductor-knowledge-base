@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -141,25 +142,39 @@ def test_frozen_denominator_matches_abox(asset):
 
 
 # ── 통합: 추가만 했는가 ─────────────────────────────────────────────
-# CR-013 이 **선언한** 사전 값 변경. 이 셋 말고 다른 것이 움직이면 아래 테스트가
-# 막는다 — 목록을 늘려야 통과하는 구조라 "조용한 변경"이 불가능하다.
-# 느슨하게 만든 것이 아니라, 무엇을 허용했는지를 코드에 적은 것이다(§1-6).
-CR013_REMOVED = {("hf", "material:hf_acid"), ("high k", "material:hfO2")}
-CR013_ADDED = {("high k", "material:dielectric")}
-CR013_PROFILE = "patent-text"
+#
+# **기준선은 HEAD 가 아니라 고정된 커밋이다.** 앞선 판은 워킹트리를 `HEAD:` 와 비교했고,
+# 그래서 **CR-013 이 커밋되는 순간 스스로 무효가 됐다** — HEAD == 워킹트리가 되어 델타가
+# 사라지고 아래 단정이 영구히 실패한다. 커밋 전 창에서만 통과하는 테스트는 게이트가 아니다.
+#
+# 고정 기준선으로 바꾸면 성질이 반대가 된다. 이 자산은 **CR 마다 한 번씩만 움직이므로**,
+# "기준선 이후 일어난 변경 전부"를 아래 표에 적어 두면 그 표가 곧 **누적 변경 대장**이 된다.
+# 새 CR 이 자산을 건드리면 이 테스트가 실패하고, 통과시키려면 **표에 델타를 적어야 한다** —
+# 조용한 변경이 불가능하다는 원래 성질이 그대로 유지되면서 커밋 뒤에도 살아 있다.
+BASELINE_COMMIT = "39855bb46c95897f401986caa18e1c423c8e63c6"  # CR-008·CR-009 판 (CR-013 직전)
+
+# 기준선 이후 **선언된** 사전 값 변경. 새 CR 은 여기에 자기 델타를 더한다.
+#   CR-013 — 단독 `hf` 제거 · `high k` 를 상위 부류로 재지정
+DECLARED_REMOVED = {"patent-text": {("hf", "material:hf_acid"), ("high k", "material:hfO2")}}
+DECLARED_ADDED = {"patent-text": {("high k", "material:dielectric")}}
+DECLARED_NEW_RULES = {"R6-SURFACE-SUPPRESS"}
+
+_DECLARE_HINT = (
+    "\n→ 자산을 바꾼 CR 이 있다면 이 파일의 DECLARED_REMOVED/DECLARED_ADDED 에 델타를 "
+    "적어라. 적지 않고 통과시키는 길은 없다(§1-6)."
+)
 
 
 def test_entries_changed_only_where_declared(asset):
-    """`entries`·`blocked` 는 직전 판과 같다 — **선언된 CR 델타를 뺀 나머지가**.
+    """`entries`·`blocked` 는 **고정 기준선 + 선언된 델타** 와 정확히 같다.
 
-    CR-009 는 추가만 했고(값 불변), CR-013 은 patent-text 두 표면형만 움직였다.
-    git 에 남은 직전 판과 비교한다. 비교 대상이 없으면(신규 클론) 건너뛴다.
+    비교 대상은 `BASELINE_COMMIT` 의 자산이다. 그 커밋이 없으면(얕은 클론) 건너뛴다.
     """
     prev = subprocess.run(
-        ["git", "-C", str(ROOT), "show", "HEAD:mappings/concept_mapping.json"],
+        ["git", "-C", str(ROOT), "show", f"{BASELINE_COMMIT}:mappings/concept_mapping.json"],
         capture_output=True, text=True)
     if prev.returncode != 0:
-        pytest.skip("직전 판 없음")
+        pytest.skip(f"기준선 커밋 {BASELINE_COMMIT[:7]} 없음 (얕은 클론)")
     old = json.loads(prev.stdout)
 
     def pairs(doc, profile, key="entries"):
@@ -168,18 +183,40 @@ def test_entries_changed_only_where_declared(asset):
     for profile in PROFILES:
         removed = pairs(old, profile) - pairs(asset, profile)
         added = pairs(asset, profile) - pairs(old, profile)
-        expect_rm = CR013_REMOVED if profile == CR013_PROFILE else set()
-        expect_add = CR013_ADDED if profile == CR013_PROFILE else set()
-        assert removed == expect_rm, f"{profile}: 선언되지 않은 제거 {removed - expect_rm}"
-        assert added == expect_add, f"{profile}: 선언되지 않은 추가 {added - expect_add}"
+        expect_rm = DECLARED_REMOVED.get(profile, set())
+        expect_add = DECLARED_ADDED.get(profile, set())
+        assert removed == expect_rm, (
+            f"{profile}: 선언되지 않은 제거 {removed - expect_rm} · "
+            f"선언됐으나 일어나지 않은 제거 {expect_rm - removed}{_DECLARE_HINT}")
+        assert added == expect_add, (
+            f"{profile}: 선언되지 않은 추가 {added - expect_add} · "
+            f"선언됐으나 일어나지 않은 추가 {expect_add - added}{_DECLARE_HINT}")
         # 뺀 것은 blocked 로 **옮겨져야** 한다 — 조용히 사라지면 안 된다.
         moved = pairs(asset, profile, "blocked") - pairs(old, profile, "blocked")
         assert moved == expect_rm, f"{profile}: blocked 이동 기록이 어긋난다 {moved}"
 
     # 규칙은 추가만 가능하다 — 기존 규칙 문구가 바뀌면 하류 해석이 달라진다.
-    assert set(asset["rules"]) - set(old["rules"]) == {"R6-SURFACE-SUPPRESS"}
+    assert set(asset["rules"]) - set(old["rules"]) == DECLARED_NEW_RULES
     for k, v in old["rules"].items():
         assert asset["rules"][k] == v, f"{k}: 기존 규칙 문구가 바뀌었다"
+
+
+def test_baseline_is_pinned_not_head():
+    """**이 테스트가 커밋 뒤에도 살아 있는지**를 고정한다.
+
+    기준선을 `HEAD:` 로 되돌리면 자산을 바꾼 CR 이 커밋되는 순간 위 테스트가 스스로
+    무효가 된다(2026-08-08 에 실제로 그랬다 — CR-013 `4f3dbfb` 커밋 직후 영구 실패).
+    회귀를 막는 자리는 여기뿐이다 — 위 테스트는 자기가 무효해진 것을 알 수 없다.
+    """
+    src = Path(__file__).read_text(encoding="utf-8")
+    # 찾는 문자열을 쪼개서 만든다 — 통째로 쓰면 **이 단정문 자신이** 소스에 그 문자열을
+    # 넣어 테스트가 늘 실패한다(처음에 그렇게 썼고 그래서 실패했다).
+    forbidden = "HEAD" + ":mappings/concept_mapping.json"
+    assert forbidden not in src, (
+        "기준선이 HEAD 로 되돌아갔다 — 자산을 바꾼 CR 이 커밋되면 테스트가 자기무효화된다")
+    assert re.fullmatch(r"[0-9a-f]{40}", BASELINE_COMMIT), (
+        "기준선은 40자리 전체 SHA 로 고정한다 — 짧은 SHA·브랜치명·`^` 표기는 히스토리가 "
+        "바뀌면 다른 것을 가리킨다")
 
 
 # ── 통합: 결정성 ────────────────────────────────────────────────────
