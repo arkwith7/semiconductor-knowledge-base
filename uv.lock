@@ -2873,6 +2873,7 @@ dependencies = [
     { name = "pyshacl" },
     { name = "rapidfuzz" },
     { name = "rdflib" },
+    { name = "requests" },
 ]
 
 [package.optional-dependencies]
@@ -2927,6 +2928,7 @@ requires-dist = [
     { name = "pyvis", marker = "extra == 'viz'", specifier = ">=0.3.2" },
     { name = "rapidfuzz", specifier = ">=3.9" },
     { name = "rdflib", specifier = ">=7.0" },
+    { name = "requests", specifier = ">=2.31" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.5" },
     { name = "scikit-learn", marker = "extra == 'priorart'", specifier = ">=1.4" },
     { name = "sdkb", extras = ["align", "priorart", "notebook", "viz", "nlp", "dev"], marker = "extra == 'full'" },

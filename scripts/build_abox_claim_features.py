@@ -29,8 +29,12 @@ import sdkb_nb as S  # noqa: E402
 ROOT = S.find_root(Path(__file__).resolve().parent)
 FEATURES = ROOT / "data" / "interim" / "claim_features.jsonl"
 EDGES = ROOT / "data" / "patents" / "prior_art_edges.parquet"
+# CR-011 — B층 인용 문헌은 EDGES 에 없다(CR-008 비목표 ⓒ · 질의–인용 대응 미이관).
+# 503건 중 EDGES 정규형 맵에 있는 것은 3건뿐이라, 이 맵 없이는 500건이 patent_unresolved 로 버려진다.
+B_LAYER_POP = ROOT / "data" / "patents" / "b_layer_cited_population.parquet"
 OUT_TTL = ROOT / "ontology" / "sdkb-abox-claim-features.ttl"
 OUT_REPORT = ROOT / "data" / "reports" / "abox_claim_features_report.json"
+B_LOSS_REPORT = ROOT / "data" / "reports" / "b_layer_claim_decomposition_loss.json"
 
 ONT = S.ONT
 DCTERMS = Namespace("http://purl.org/dc/terms/")
@@ -69,6 +73,75 @@ def _slug(field: str) -> str:
     return re.sub(r"[^A-Za-z0-9]+", "_", field).strip("_")
 
 
+# CR-011 성공기준 ② — 본문 자체가 없어 분모에서 빼는 US 2건.
+# 1968년 출원·1970년 등록이라 어느 원천에도 OCR 전문이 없다(재시도 1회 실패 · 하류 §1.6a).
+B_US_NO_FULLTEXT = ("US-P-03517643", "US-P-03530092")
+ENRICHED = ROOT / "data" / "patents" / "cited_enriched"
+
+
+def _b_loss_report(b_pop: "pd.DataFrame", b_claims: Counter) -> None:
+    """CR-011 출력 (2) — 청구항 문자열은 있으나 분해되지 않은 B층 문헌을 **건별로** 남긴다.
+
+    자원 지표만으로 합격을 선언하지 않기 위한 장치다. 관할별 분해율은 성공기준 ①② 의 값이고,
+    `unresolved` 목록은 "조용히 빠뜨리지 않았다"의 증거다.
+    """
+    def _claim_len(v: object) -> int:
+        """청구항 문자열의 길이. **결측은 0 이다.**
+
+        `str(v or "")` 로 쓰면 안 된다 — parquet 의 결측은 float `nan` 이고 **`nan` 은 참**이라
+        `str(nan)` = `"nan"`(3글자)이 되어 결측이 "청구항 있음"으로 둔갑한다. 실제로 그렇게
+        JP 19건이 미분해로 잘못 계상됐다(2026-08-06). 분모를 부풀리는 방향의 오류다.
+        """
+        if v is None or (isinstance(v, float) and pd.isna(v)):
+            return 0
+        return len(str(v).strip())
+
+    have_text: dict[str, int] = {}
+    for line in (ENRICHED / "kipris.jsonl").open():
+        r = json.loads(line)
+        n = _claim_len(r.get("claims"))
+        if n:
+            have_text[r["cited_doc_id"]] = n
+    for pq in ("bigquery.parquet", "bigquery_us.parquet",
+               "bigquery_b_layer.parquet", "bigquery_us_b_layer.parquet"):
+        df = pd.read_parquet(ENRICHED / pq)
+        for _, r in df.iterrows():
+            n = _claim_len(r.get("claims"))
+            if n and r["cited_doc_id"] not in have_text:
+                have_text[r["cited_doc_id"]] = n
+
+    pat = b_pop[~b_pop["is_npl"]]
+    per_country: dict[str, dict] = {}
+    unresolved: list[dict] = []
+    for country, grp in pat.groupby("cited_country"):
+        docs = sorted(grp["cited_doc_id"])
+        with_text = [d for d in docs if d in have_text and d not in B_US_NO_FULLTEXT]
+        decomposed = [d for d in with_text if b_claims.get(d, 0) > 0]
+        per_country[str(country)] = {
+            "n_documents": len(docs),
+            "n_with_claim_text": len(with_text),
+            "n_decomposed": len(decomposed),
+            "decomposition_rate": round(len(decomposed) / len(with_text), 4) if with_text else None,
+            "claims_published": sum(b_claims.get(d, 0) for d in docs),
+        }
+        for d in sorted(set(with_text) - set(decomposed)):
+            unresolved.append({"cited_doc_id": d, "country": str(country),
+                               "claim_text_len": have_text[d], "reason": "claim_text present but no Claim published"})
+
+    report = {
+        "cr": "CR-011", "denominator_note":
+            f"본문 자체가 없는 US {len(B_US_NO_FULLTEXT)}건은 분모에서 뺀다(성공기준 ②): "
+            + ", ".join(B_US_NO_FULLTEXT),
+        "by_country": dict(sorted(per_country.items())),
+        "unresolved": unresolved,
+    }
+    B_LOSS_REPORT.parent.mkdir(parents=True, exist_ok=True)
+    B_LOSS_REPORT.write_text(json.dumps(report, ensure_ascii=False, indent=2))
+    kr, us = per_country.get("KR", {}), per_country.get("US", {})
+    print(f"✓ B층 손실 리포트 → {B_LOSS_REPORT.name} "
+          f"(KR {kr.get('decomposition_rate')} · US {us.get('decomposition_rate')} · 미분해 {len(unresolved)}건)")
+
+
 def main() -> int:
     if not FEATURES.exists():
         print(f"ERROR: {FEATURES} 없음 — decompose_corpus.py 먼저", file=sys.stderr)
@@ -83,6 +156,11 @@ def main() -> int:
     # evidence_v2 는 비정규형('KR-P-..'). 인용 노드(A-1)는 정규형 IRI 를 쓰므로 정규형만으로 맵을 만든다.
     canon = edges[edges["cited_id"].astype(str).str.startswith("patent:")]
     cited_map = dict(zip(canon["cited_doc_id"], canon["cited_id"]))
+    # CR-011 — B층 모집단 IRI 를 **병합**한다. A층 항목을 덮어쓰지 않는다(A층 IRI 불변 = 성공기준 ③).
+    b_pop = pd.read_parquet(B_LAYER_POP)
+    b_map = dict(zip(b_pop[~b_pop["is_npl"]]["cited_doc_id"], b_pop[~b_pop["is_npl"]]["cited_id"]))
+    for doc, cid in b_map.items():
+        cited_map.setdefault(doc, cid)
 
     g = Graph()
     for p, ns in (("ont", ONT), ("data", S.DATA), ("owl", str(OWL)), ("rdfs", str(RDFS)),
@@ -92,6 +170,7 @@ def main() -> int:
 
     stat = Counter()
     concept_hits = Counter()
+    b_claims: Counter = Counter()   # CR-011 — B층 cited_doc_id → 발행된 Claim 수
     rows = [json.loads(line) for line in FEATURES.open()]
     seen_claim: set[str] = set()
     # 실재하는 청구항 IRI 집합 — dependsOnClaim 이 매달린 부모(존재하지 않는 참조 번호)를
@@ -124,6 +203,11 @@ def main() -> int:
             seen_claim.add(str(claim))
             stat["claims"] += 1
             stat["claims_dependent" if dep else "claims_independent"] += 1
+            # CR-011 출력 (2) — B층 문헌별 발행 청구항 수. 조용히 빠뜨리지 않기 위한 계수다.
+            if r["patent"].startswith("cited:"):
+                doc = r["patent"][len("cited:"):]
+                if doc in b_map:
+                    b_claims[doc] += 1
 
         feat_iris: list[tuple[URIRef, dict]] = []
         for f in r["features"]:
@@ -218,6 +302,8 @@ def main() -> int:
                 g.add((rr, R("noticeDate"), Literal(r["notice_date"], datatype=XSD.date)))
             g.add((patent, R("rejectionEvidence"), rr))
             stat["rejection_reasons"] += 1
+
+    _b_loss_report(b_pop, b_claims)
 
     OUT_TTL.parent.mkdir(parents=True, exist_ok=True)
     g.serialize(str(OUT_TTL), format="turtle")

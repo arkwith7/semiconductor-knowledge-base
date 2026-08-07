@@ -23,6 +23,9 @@ dependencies = [
     "jsonschema>=4.22",
     # NumPy (used by ranking baseline)
     "numpy>=1.26",
+    # HTTP — llm_claim_validate(ollama 호출)·llm_claim_validate 를 쓰는 decompose_corpus,
+    # scripts/enrich_kipris_biblio.py 가 이미 임포트하고 있었으나 선언이 없었다(하류 대장 D-24).
+    "requests>=2.31",
 ]
 
 [project.optional-dependencies]

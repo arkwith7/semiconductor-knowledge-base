@@ -58,11 +58,16 @@ def src_cited():
                 dep = [] if is_independent(txt) else _parents(txt)
                 yield "cited:" + r["cited_doc_id"], no, txt, dep
     import pandas as pd
-    us = pd.read_parquet(PD / "data/patents/cited_enriched/bigquery_us.parquet")
-    for _, r in us[us.n_claims.fillna(0) > 0].iterrows():
-        for no, txt in split_claims(str(r["claims"])):
-            dep = [] if is_independent(txt) else _parents(txt)
-            yield "cited:" + r["cited_doc_id"], no, txt, dep
+    # B층(CR-008) parquet 을 함께 읽는다 — CR-011. KR B층 235건은 위 kipris.jsonl 에 이미 섞여
+    # 들어오지만 US B층은 별도 파일이라 원천 목록에 없으면 도달하지 못한다.
+    # bigquery_b_layer(JP·WO·CN·EP)는 현재 n_claims>0 이 0건이라 산출이 없다 — D-05 가 해소되면
+    # 자동으로 흐르도록 통로만 열어 둔다(고치는 것이 아니라 통로다 · CR-011 비목표 ⓐ 와 무충돌).
+    for pq in ("bigquery_us.parquet", "bigquery_b_layer.parquet", "bigquery_us_b_layer.parquet"):
+        df = pd.read_parquet(PD / "data/patents/cited_enriched" / pq)
+        for _, r in df[df.n_claims.fillna(0) > 0].iterrows():
+            for no, txt in split_claims(str(r["claims"])):
+                dep = [] if is_independent(txt) else _parents(txt)
+                yield "cited:" + r["cited_doc_id"], no, txt, dep
 
 
 def src_g2():

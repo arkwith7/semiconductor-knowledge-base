@@ -166,8 +166,11 @@ def llm_decompose_batch(texts: list[str], *, cache: sqlite3.Connection,
                 result[t] = feats
                 cache.execute("INSERT OR REPLACE INTO cache (key, features) VALUES (?,?)",
                               (_key(t), json.dumps(feats, ensure_ascii=False)))
-                if i % 500 == 0:
-                    cache.commit()
-                    print(f"  [llm] {i}/{len(todo)} 재분해 ({BACKEND})")
+                # 매 건 커밋한다 — 캐시 내용도 반환값도 바뀌지 않고 내구성만 바뀐다.
+                # 500건 주기였을 때, 로컬 30B 모델 실행 중 장비가 내려가 한 시간치가 통째로
+                # 유실됐다(2026-08-06). 재개는 캐시 적중으로만 가능하므로 커밋이 곧 체크포인트다.
+                cache.commit()
+                if i % 25 == 0:
+                    print(f"  [llm] {i}/{len(todo)} 재분해 ({BACKEND})", flush=True)
         cache.commit()
     return result

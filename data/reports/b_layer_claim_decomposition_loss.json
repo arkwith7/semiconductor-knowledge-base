@@ -1,0 +1,49 @@
+{
+  "cr": "CR-011",
+  "denominator_note": "본문 자체가 없는 US 2건은 분모에서 뺀다(성공기준 ②): US-P-03517643, US-P-03530092",
+  "by_country": {
+    "CN": {
+      "n_documents": 6,
+      "n_with_claim_text": 0,
+      "n_decomposed": 0,
+      "decomposition_rate": null,
+      "claims_published": 0
+    },
+    "EP": {
+      "n_documents": 1,
+      "n_with_claim_text": 0,
+      "n_decomposed": 0,
+      "decomposition_rate": null,
+      "claims_published": 0
+    },
+    "JP": {
+      "n_documents": 186,
+      "n_with_claim_text": 0,
+      "n_decomposed": 0,
+      "decomposition_rate": null,
+      "claims_published": 0
+    },
+    "KR": {
+      "n_documents": 235,
+      "n_with_claim_text": 235,
+      "n_decomposed": 235,
+      "decomposition_rate": 1.0,
+      "claims_published": 3905
+    },
+    "US": {
+      "n_documents": 51,
+      "n_with_claim_text": 49,
+      "n_decomposed": 49,
+      "decomposition_rate": 1.0,
+      "claims_published": 1014
+    },
+    "WO": {
+      "n_documents": 24,
+      "n_with_claim_text": 0,
+      "n_decomposed": 0,
+      "decomposition_rate": null,
+      "claims_published": 0
+    }
+  },
+  "unresolved": []
+}

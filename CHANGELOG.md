@@ -4,6 +4,50 @@ All notable changes to SDKB will be documented in this file.
 
 ## [Unreleased] — v1.0.0-dev
 
+### Added (2026-08-06 — CR-011 · B층 인용 선행기술의 청구항 ClaimFeature 분해 · 하류 D-26)
+
+- **B층 인용 문헌 284건의 청구항을 A층과 같은 사이드카 형식으로 발행했다.**
+  `ont:hasClaim` → `claimNumber`·`isIndependent` → `hasFeature` → `featureSeq`·`featureText`.
+  `Claim` 586,567 → **591,460** · `ClaimFeature` 1,289,512 → **1,300,457** ·
+  트리플 11,625,171 → **11,718,456**.
+- **성공 기준 판정.** ① B층 KR 분해율 **235/235 = 1.0000**(청구항 3,905건) ·
+  ② US **49/49 = 1.0000**(1,014건 · 본문 자체가 없는 `US-P-03517643`·`US-P-03530092` 는
+  분모 제외 · 하류 §1.6a) · ③ **A층 불변** — claim/feature IRI 1,875,867 개 전량 존속,
+  사라진 IRI **0**(집합 연산 검증). ④ 하류 재 vendor 후 코퍼스 확보율은 **하류가 잰다**.
+- **원인은 발행 형식 하나가 아니었다 — 분해 자체가 안 돌아 있었다.** 하류 CR 은 청구항이
+  `ont:claimText` 로만 있어 형식이 다르다고 진단했으나, 상류 실물은 그 앞 단계였다:
+  ⓐ `decompose_corpus.py::src_cited()` 의 원천 목록에 B층 parquet 이 없었고(US 49건 미도달),
+  ⓑ `kipris.jsonl` 이 CR-008 로 커진 뒤 재실행되지 않아 KR 235건 중 **2건만** 분해돼 있었다.
+  하류가 관측한 **B층 KR 0.0085 = 2/235** 가 정확히 그 2건이다.
+- **`build_abox_claim_features.py` 의 `cited:` IRI 해소에 B층 모집단 맵을 병합**했다.
+  B층 문헌은 `prior_art_edges.parquet` 에 없어(CR-008 비목표 ⓒ) 503건 중 **3건만** 기존 맵에
+  잡혔고, 나머지 500건은 `patent_unresolved` 로 조용히 버려지고 있었다.
+  병합은 `setdefault` — **같은 키에서 A층 값이 이긴다**(성공기준 ③의 구조적 보장).
+- **A층과 같은 분해기·같은 모델을 썼다.** 규칙 분해 + flag 시 LLM(`ollama qwen3-coder:30b` ·
+  캐시 키가 모델명을 포함하므로 A층 4,117건과 동일 모델임을 캐시 대조로 확인). B층 신규
+  4,903 청구항 중 LLM 채택 **506건(10.3 %)** 으로 A층 `cited` 축의 10.1 % 와 사실상 같다.
+  **다른 모델을 쓰면 사이드카 안에서 A층/B층이 비균질해진다** — CR-011 이 하류 폴백을 거부한
+  이유가 그것이므로, 같은 이유가 상류에도 적용된다.
+- **손실 리포트 신설** — `data/reports/b_layer_claim_decomposition_loss.json`.
+  관할별 분해율 + 청구항 문자열은 있으나 분해되지 않은 문헌을 **건별로**. 현재 **0건**.
+- **비목표는 지켜졌다.** `ont:claimText` 삭제 0 · T-Box 불변 · 새 술어 0 · 새 클래스 0 ·
+  인용 간선(`hasPriorArtExaminer`·`hasPriorArt`·`overPriorArt`) 0 · JP 167건은 손대지 않았다
+  (D-05 상한 · 분모에도 넣지 않는다) · 청구항 번역 없음.
+- **결정적·멱등.** 두 번 돌려 산출 TTL sha256 동일(`1b4c143d3da63bb4…`).
+
+### Fixed (2026-08-06)
+
+- **`pyproject.toml` 에 `requests` 선언**(하류 대장 **D-24** 해소). `llm_claim_validate.py:22` ·
+  `enrich_kipris_biblio.py:32` 가 이미 임포트하고 있었으나 선언이 없어, 청정 환경에서 LLM 분해
+  경로가 **임포트 단계에서 죽었다.** CR-011 구현이 실제로 여기서 막혔다.
+- **LLM 캐시를 매 건 커밋한다**(`llm_claim_validate.py`). 이전에는 500건 주기라, 로컬 30B 모델
+  실행 중 장비가 내려가자 **한 시간치가 통째로 유실**됐다. 캐시 내용도 반환값도 바뀌지 않고
+  **내구성만** 바뀐다 — 재개는 캐시 적중으로만 가능하므로 커밋이 곧 체크포인트다.
+- **손실 리포트의 결측 판정**(`build_abox_claim_features.py`). parquet 결측은 float `nan` 이고
+  **`nan` 은 참**이라 `str(v or "")` 가 `"nan"`(3글자)을 내어, 결측이 "청구항 있음"으로 둔갑해
+  JP 19건이 미분해로 **잘못** 계상됐다. 분모를 부풀리는 방향의 오류라 없는 손실을 하류에
+  보고할 뻔했다. `pd.isna` 검사로 교정하고 회귀 테스트로 고정했다.
+
 ### Added (2026-08-04 — CR-009 · 개념별 df·일반성 메타 발행 · 하류 D-23)
 - **`mappings/concept_mapping.json` 스키마 1.0 → 1.1.** 프로파일마다
   `concept_meta` 신설 — `df_denominator` + 개념별 `df_abox`·`depth`·`is_superordinate`.
