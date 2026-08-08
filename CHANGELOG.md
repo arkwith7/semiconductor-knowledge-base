@@ -4,6 +4,38 @@ All notable changes to SDKB will be documented in this file.
 
 ## [Unreleased] — v1.0.0-dev
 
+### Added (2026-08-08 — CR-014 · B층 질의의 서지 두 칸 · 하류 D-31)
+
+- **공개번호·공개일을 채웠다 — 200/200.** `ont:publicationNumber` 200 ·
+  `ont:publicationDate` 200. `sdkb-abox-b-layer-queries.ttl` 트리플 **4,204 → 4,604**
+  (+400 · B층 200 노드의 속성 추가분뿐). A층 1,000 · T-Box · IRI 규칙 · 파일 분리 구조
+  **전부 불변**이고 인용 간선은 여전히 **0** 이다.
+- **값은 `openNumber` 이지 `publicationNumber` 가 아니다(§1.3).** KIPRIS 응답에도
+  `publicationNumber` 필드가 있는데 그것은 **공고번호**이고, 거절특허는 등록되지 않아
+  **전량 `null`** 이다. A층의 `ont:publicationNumber` 는 SIRP `biblio.unex_pub_number`
+  (= **공개번호** · `10-2022-0148249` 형식)이므로 같은 의미의 칸은 `openNumber` 다.
+  이름만 보고 골랐으면 칸은 비고 값은 A층과 다른 것을 담았을 것이다. 형식(`10-YYYY-NNNNNNN`)과
+  **공개일 ≥ 출원일**을 테스트가 고정한다.
+- **`processFamily`·`valueChainStage` 는 채우지 않았다 — 이것이 이 CR 의 결론이다.**
+  A층의 두 값은 특허의 속성이 아니라 **SIRP 코호트의 수집 출처**다. 원천은 KIPRIS 가
+  아니라 *"어느 검색 전략(키워드 게이트+IPC)이 그 특허를 건졌는가"* 이며
+  (`meta.search_strategy='plasma_H01J37' → process_family='etch'`), B층 200 은 하류가
+  **다른 절차**(IPC 스트림 스크리닝)로 뽑아 그 라벨이 존재하지 않는다. A층 parquet ·
+  SIRP 원본과의 교집합도 **0 건**이라 조인으로 가져올 수도 없다.
+  **추정 충전을 거부한 이유는 둘이다.** ⓐ 같은 이름의 다른 것이 된다(§1.3).
+  ⓑ 하류 T2 하위집단이 **"공정군"으로 갈리므로**, A층은 검색전략 라벨 · B층은 IPC 추론
+  라벨이 되면 T2 가 서로 다른 규칙으로 만든 층을 같은 축으로 비교하게 된다 — **비어 있는
+  것보다 나쁘다.** 못 채운 이유는 리포트
+  (`data/reports/abox_b_layer_queries_report.json` → `cr014_bibliographic`)에 수치와 함께
+  남는다. 빈 것을 조용히 비워 두지 않는다.
+- **수집기는 백필한다.** 캐시에 있어도 두 필드가 **없으면** 다시 받는다(필드 존재 여부로
+  판단 — 빈 값으로 판단하면 정말 값이 없는 건이 매번 200 콜을 되살린다). 백필 후 JSONL 을
+  이관 파일 순서로 다시 써 **같은 입력 → 같은 파일**을 유지한다.
+- **하류 영향(§0)**: `sdkb-prior-art-paper` — 재 `make vendor` 로 위반 **600 → 400**.
+  남는 400 은 위 두 칸이고, 하류가 `prov:wasGeneratedBy activity/b_layer_query_ingest`
+  를 조건으로 한 `sh:or` 로 면제한다(CR-012 가 인용 `minCount` 에 쓴 패턴과 같다 —
+  A층 1,000 에 걸린 계약은 풀리지 않는다). `SDKB-Match`·공개 사이트: **영향 없음**.
+
 ### Added (2026-08-08 — CR-012 · B층 확증분할 질의 200건 · 하류 D-27)
 
 - **질의 200건을 별도 A-Box 파일로 세웠다** — `ontology/sdkb-abox-b-layer-queries.ttl`

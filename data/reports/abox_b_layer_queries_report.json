@@ -5,7 +5,7 @@
   "rows_in": 200,
   "typed_RejectedPatent": 200,
   "skipped_no_text": [],
-  "triples": 4204,
+  "triples": 4604,
   "text": {
     "abstractText": 200,
     "firstClaimText": 200
@@ -14,6 +14,14 @@
     "거절결정(재심사)": 57,
     "거절결정(일반)": 142,
     "취소환송후 재거절결정": 1
+  },
+  "cr014_bibliographic": {
+    "publicationNumber": 200,
+    "publicationDate": 200,
+    "processFamily": 0,
+    "valueChainStage": 0,
+    "unfilled_reason": "processFamily·valueChainStage 는 특허의 속성이 아니라 A층 SIRP 코호트의 수집 출처다 — 값의 원천은 KIPRIS 가 아니라 '어느 검색 전략(키워드 게이트+IPC)이 그 특허를 건졌는가'이며(paper_data/scripts/expand_dataset_via_api.py), B층 200 은 다른 절차(IPC 스트림 스크리닝)로 뽑혀 그 라벨이 존재하지 않는다. A층 parquet·SIRP 원본과의 교집합도 0 건이라 조인으로 가져올 수도 없다. IPC·개념링크로 추정해 채우면 ① 같은 이름의 다른 것이 되고(§1.3) ② 하류 T2 하위집단의 '공정군' 축이 A/B 서로 다른 규칙으로 만든 층을 비교하게 된다 — 비어 있는 것보다 나쁘다. 그래서 채우지 않는다.",
+    "downstream_action": "하류가 prov:wasGeneratedBy activity/b_layer_query_ingest 를 조건으로 한 sh:or 로 이 두 칸을 면제한다(CR-012 가 인용 minCount 에 쓴 패턴과 같다). A층 1,000 에 걸린 계약은 풀리지 않는다."
   },
   "register_status_verified_rejected": 200,
   "forbidden_predicate_triples": {

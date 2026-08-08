@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""CR-012 ⓐ — B층 확증분할 질의 200건의 서지·청구항 수집 (KIPRIS Plus).
+"""CR-012 ⓐ (+CR-014) — B층 확증분할 질의 200건의 서지·청구항 수집 (KIPRIS Plus).
+
+CR-014 로 서지 두 칸(공개번호·공개일)이 추가됐다. 캐시에 그 필드가 없는 줄은 다시 받는다
+(§collect 의 백필 조건). 나머지 셋 — processFamily·valueChainStage — 은 이 원천에 **없다**:
+A층의 그 값들은 특허의 속성이 아니라 SIRP 코호트의 수집 출처(검색 전략)이고 KIPRIS 가 주는
+값이 아니다. 추정해 채우지 않는다(CLAUDE.md §1.3) — 상세는 upstream/CR-014 회신.
 
 왜 새 수집기인가. 기존 `collect_cited_biblio_claims.py`(paper_data)는 **인용 문헌**
 수집기다. 입력이 인용 표기(`KR1020090041506 A`)라서 출원번호를 먼저 **해소**해야 하고
@@ -101,10 +106,16 @@ def collect(ids: list[str], limit: int | None = None) -> list[dict]:
                 r = json.loads(line)
                 done[r["application_number"]] = r
 
-    todo = [i for i in ids if i not in done]
+    # CR-014 백필 — 캐시에 있어도 서지 두 칸이 없으면 다시 받는다.
+    # 필드 **존재 여부**로 판단한다(빈 문자열이 아니라). 값이 정말 없는 건(openNumber 미보유)을
+    # 매번 다시 부르면 200 콜짜리 배치가 재실행마다 되살아난다 — 캐시가 캐시가 아니게 된다.
+    todo = [i for i in ids
+            if i not in done or "publication_number" not in done[i]]
     if limit:
         todo = todo[:limit]
-    print(f"[collect] 대상 {len(ids)} · 캐시 {len(done)} · 이번 수집 {len(todo)}")
+    n_backfill = sum(1 for i in todo if i in done)
+    print(f"[collect] 대상 {len(ids)} · 캐시 {len(done)} · 이번 수집 {len(todo)}"
+          f" (그중 CR-014 백필 {n_backfill})")
 
     if todo:
         key = os.environ.get("KIPRIS_API_KEY")
@@ -117,7 +128,8 @@ def collect(ids: list[str], limit: int | None = None) -> list[dict]:
                 row = {"application_number": an, "resolved": False, "note": "not_found",
                        "invention_title": "", "abstract": "", "claims": "", "n_claims": 0,
                        "filing_date": "", "ipc_codes": "",
-                       "examination_status": "", "register_status": ""}
+                       "examination_status": "", "register_status": "",
+                       "publication_number": "", "publication_date": ""}
                 try:
                     bib = eu._biblio(client, an)
                     if bib:
@@ -141,6 +153,13 @@ def collect(ids: list[str], limit: int | None = None) -> list[dict]:
                             # 상류는 그 말을 KIPRIS 에서 **독립적으로** 확인한다. 어긋나면
                             # RejectedPatent 타입 자체가 거짓이 되므로 빌드가 중단한다.
                             "register_status": eu._s(summ.get("registerStatus")),
+                            # CR-014 — 공개번호·공개일. **openNumber 이지 publicationNumber 가
+                            # 아니다.** KIPRIS 의 publicationNumber 는 공고번호이고 거절특허는
+                            # 등록되지 않아 전부 null 이다. A층의 ont:publicationNumber 는
+                            # SIRP biblio.unex_pub_number(=공개번호 · "10-2022-0148249")이므로
+                            # 의미가 같은 칸은 openNumber 다. 이름만 보고 고르면 §1.3 사고다.
+                            "publication_number": eu._s(summ.get("openNumber")),
+                            "publication_date": _fmt_date(summ.get("openDate")),
                             "resolved": bool(claims or abstract),
                             "note": "" if claims else "no_claims",
                         }
@@ -153,7 +172,16 @@ def collect(ids: list[str], limit: int | None = None) -> list[dict]:
                     print(f"  [collect] {n}/{len(todo)} …", flush=True)
 
     # 이관 파일 순서를 정본으로 삼는다 — 수집 순서가 산출 순서를 흔들면 안 된다.
-    return [done[i] for i in ids if i in done]
+    rows = [done[i] for i in ids if i in done]
+
+    # 백필은 같은 출원번호를 다시 append 한다. 그대로 두면 파일에 낡은 줄과 새 줄이 함께 남고
+    # (읽을 때는 뒤가 이기지만) 파일 자체가 두 개의 진실을 담는다. 이관 파일 순서로 다시 쓴다 —
+    # 같은 입력 → 같은 파일이 되어야 한다(멱등).
+    if todo:
+        OUT_JSONL.write_text(
+            "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows))
+
+    return rows
 
 
 def main() -> int:
@@ -172,6 +200,8 @@ def main() -> int:
     have_date = sum(1 for r in rows if r["filing_date"])
     have_ipc = sum(1 for r in rows if r["ipc_codes"])
     have_exam = sum(1 for r in rows if r.get("examination_status"))
+    have_pub_no = sum(1 for r in rows if r.get("publication_number"))
+    have_pub_dt = sum(1 for r in rows if r.get("publication_date"))
     reg_status = Counter(r.get("register_status") or "(빈값)" for r in rows)
     failed = [{"application_number": r["application_number"], "note": r["note"]}
               for r in rows if not r["resolved"]]
@@ -188,6 +218,9 @@ def main() -> int:
         "with_filing_date": have_date,
         "with_ipc": have_ipc,
         "with_examination_status": have_exam,
+        # CR-014 검증기준 — 하류 SHACL 이 요구하는 칸. 200/200 이 아니면 그만큼 위반이 남는다.
+        "with_publication_number": have_pub_no,
+        "with_publication_date": have_pub_dt,
         "register_status_distribution": dict(reg_status),
         "claims_per_patent_mean": round(sum(r["n_claims"] for r in rows) / n, 2) if n else 0,
         "unresolved": failed,
@@ -200,6 +233,7 @@ def main() -> int:
     print(f"\n✓ {n}/{len(ids)}건 → {OUT_JSONL.relative_to(ROOT)}")
     print(f"  청구항 보유 : {have_claims}/{n}   초록 {have_abs}/{n}   "
           f"출원일 {have_date}/{n}   IPC {have_ipc}/{n}   심사상태 {have_exam}/{n}")
+    print(f"  공개번호(CR-014): {have_pub_no}/{n}   공개일 {have_pub_dt}/{n}")
     print(f"  등록상태(권위 원천 대조) : {dict(reg_status)}")
     print(f"  미해소      : {len(failed)}건")
     print(f"  report → {OUT_REPORT.relative_to(ROOT)}")

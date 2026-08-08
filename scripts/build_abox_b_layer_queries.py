@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""CR-012 ⓐ+ⓑ — B층 확증분할 질의 200건을 별도 A-Box 파일로 세운다.
+"""CR-012 ⓐ+ⓑ (+CR-014) — B층 확증분할 질의 200건을 별도 A-Box 파일로 세운다.
+
+CR-014 로 서지 두 칸(publicationNumber·publicationDate)이 들어왔다. 하류가 요구한 셋 중
+processFamily·valueChainStage 는 **채우지 않는다** — 원천이 없고, 추정하면 하류 T2 의
+공정군 하위집단이 A/B 서로 다른 규칙으로 만든 축을 비교하게 된다. 근거는 리포트의
+`cr014_bibliographic.unfilled_reason` 에 수치와 함께 남는다.
 
 ## 왜 `build_abox_patents.py` 를 고치지 않고 새 생성기인가 — ⓑ 가 요구하는 것이 파일이다
 
@@ -151,6 +156,7 @@ def build() -> int:
     text_props: Counter = Counter()
     nodes_per: list[int] = []
     n_typed = n_text_linked = 0
+    n_pub_no = n_pub_dt = 0          # CR-014 — 하류 SHACL 이 세는 칸
     no_text: list[str] = []
     orphans: list[str] = []
     ipc4_b: Counter = Counter()
@@ -199,6 +205,22 @@ def build() -> int:
         fd = str(r.get("filing_date") or "")
         if fd:
             g.add((pu, ONT_R("filingDate"), Literal(fd, datatype=XSD.date)))
+
+        # CR-014 — 공개번호·공개일. 하류 bibliographic_shape 가 RejectedPatent 마다
+        # publicationNumber 를 요구한다(위반 200). 값은 KIPRIS openNumber(공개번호)이고
+        # A층 ont:publicationNumber(=SIRP unex_pub_number)와 **같은 의미의 같은 형식**이다.
+        # 리터럴은 평문으로 둔다 — A층과 term 이 달라지면 같은 술어가 두 모양을 갖는다
+        # (build_abox_patents.py 의 같은 이유 주석 참조).
+        pn = str(r.get("publication_number") or "")
+        if pn:
+            g.add((pu, ONT_R("publicationNumber"), Literal(pn)))
+            n_pub_no += 1
+        # 공개일은 CR-014 §5-5(선택·강하게 권장) — 채워지면 하류가 B층 문서를 시점 필터로
+        # 거를 수 있다. 하류는 이것에 의존하지 않는다.
+        pdt = str(r.get("publication_date") or "")
+        if pdt:
+            g.add((pu, ONT_R("publicationDate"), Literal(pdt, datatype=XSD.date)))
+            n_pub_dt += 1
 
         for code in _ipc_codes(r.get("ipc_codes")):
             ipc4_b[code.split()[0][:4]] += 1
@@ -257,6 +279,27 @@ def build() -> int:
         "triples": len(g),
         "text": dict(text_props),
         "examination_status": dict(exam_status),
+        # CR-014 — 하류 pat:RejectedPatentContentShape 가 요구하는 서지 여섯 중 셋이 비어
+        # L1 이 막혔다(위반 600 = 200 × 3). 채운 것과 **채우지 않은 것**을 같은 자리에 적는다.
+        "cr014_bibliographic": {
+            "publicationNumber": n_pub_no,
+            "publicationDate": n_pub_dt,
+            "processFamily": 0,
+            "valueChainStage": 0,
+            "unfilled_reason":
+                "processFamily·valueChainStage 는 특허의 속성이 아니라 A층 SIRP 코호트의 "
+                "수집 출처다 — 값의 원천은 KIPRIS 가 아니라 '어느 검색 전략(키워드 게이트+IPC)이 "
+                "그 특허를 건졌는가'이며(paper_data/scripts/expand_dataset_via_api.py), "
+                "B층 200 은 다른 절차(IPC 스트림 스크리닝)로 뽑혀 그 라벨이 존재하지 않는다. "
+                "A층 parquet·SIRP 원본과의 교집합도 0 건이라 조인으로 가져올 수도 없다. "
+                "IPC·개념링크로 추정해 채우면 ① 같은 이름의 다른 것이 되고(§1.3) "
+                "② 하류 T2 하위집단의 '공정군' 축이 A/B 서로 다른 규칙으로 만든 층을 "
+                "비교하게 된다 — 비어 있는 것보다 나쁘다. 그래서 채우지 않는다.",
+            "downstream_action":
+                "하류가 prov:wasGeneratedBy activity/b_layer_query_ingest 를 조건으로 한 "
+                "sh:or 로 이 두 칸을 면제한다(CR-012 가 인용 minCount 에 쓴 패턴과 같다). "
+                "A층 1,000 에 걸린 계약은 풀리지 않는다.",
+        },
         "register_status_verified_rejected": len(rows) - len(not_rejected),
         "forbidden_predicate_triples": leaked,
         "concept_links": {
@@ -289,6 +332,8 @@ def build() -> int:
 
     print(f"✓ B-layer query A-Box ({len(g):,} triples) → {OUT_TTL.relative_to(ROOT)}")
     print(f"  RejectedPatent={n_typed}  text={dict(text_props)}  본문없어 제외={len(no_text)}")
+    print(f"  서지(CR-014): publicationNumber={n_pub_no}/{n}  publicationDate={n_pub_dt}/{n}  "
+          f"processFamily=0  valueChainStage=0 (원천 없음 — 회신 참조)")
     print(f"  개념링크: 보유 {n_text_linked}/{n}  고아 {len(orphans)}  "
           f"평균 {report['concept_links']['nodes_per_patent_mean']}개/문서 (자유텍스트만)")
     print(f"  인용 간선: {leaked}  ← 전부 0 이어야 한다(비목표 ⓐ)")

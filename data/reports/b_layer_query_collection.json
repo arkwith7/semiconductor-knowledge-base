@@ -10,6 +10,8 @@
   "with_filing_date": 200,
   "with_ipc": 200,
   "with_examination_status": 200,
+  "with_publication_number": 200,
+  "with_publication_date": 200,
   "register_status_distribution": {
     "거절": 200
   },

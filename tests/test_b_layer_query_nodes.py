@@ -128,6 +128,7 @@ def test_uses_only_existing_patent_predicates():
         "Patent", "RejectedPatent", "IPCSymbol",          # 클래스 (참조만 · 선언 아님)
         "applicationNumber", "patentOffice", "filingDate", "hasIPC",
         "abstractText", "firstClaimText", "examinationStatus",
+        "publicationNumber", "publicationDate",          # CR-014 — A층이 이미 쓰던 칸
     }
     routing = _routing_predicates()          # 개념 링크 술어는 A층 라우팅표에서 가져온다
     unexpected = used - allowed - routing
@@ -192,6 +193,52 @@ def test_negative_control_still_fails(tmp_path):
     assert "kr_9999999999999" in text, "거부됐지만 대상 노드가 음성 대조군이 아니다"
 
 
+# ── 4c. CR-014 — 서지 두 칸은 채우고, 없는 두 칸은 채우지 않는다 ────
+# 이 CR 이 깨지는 방식도 조용하다. ① 공개번호 자리에 **공고번호**를 넣으면(KIPRIS 응답의
+# publicationNumber) 거절특허는 그 값이 전부 null 이라 칸이 비고, 값이 있는 날에는 A층과
+# 다른 것을 담는다(§1.3). ② 없는 두 칸을 추정으로 채우면 하류 T2 의 공정군 축이 A/B 서로
+# 다른 규칙으로 만든 층을 비교하게 된다 — 빌드는 성공하고 하위집단 분석만 거짓이 된다.
+def test_publication_fields_are_filled():
+    rep = json.loads(REPORT.read_text())
+    bib = rep["cr014_bibliographic"]
+    assert bib["publicationNumber"] == EXPECTED_N, (
+        f"공개번호 {bib['publicationNumber']}/{EXPECTED_N} — 그만큼 하류 SHACL 위반이 남는다")
+    assert bib["publicationDate"] == EXPECTED_N
+    assert _ttl().count("ont:publicationNumber") == EXPECTED_N
+
+
+def test_publication_number_is_the_open_number():
+    """값이 이름대로인가(§1.3) — 공개번호는 `10-YYYY-NNNNNNN` 이고 출원번호와 다르다."""
+    nums = re.findall(r'ont:publicationNumber\s+"([^"]+)"', _ttl())
+    assert len(nums) == EXPECTED_N
+    bad = [v for v in nums if not re.fullmatch(r"10-\d{4}-\d{7}", v)]
+    assert not bad, f"A층 공개번호 형식이 아닌 값 {len(bad)}건 — 예: {bad[:3]}"
+    # 공개일 ≥ 출원일. 두 날짜가 뒤집히면 시점 필터가 조용히 반대로 돈다.
+    from rdflib import Graph, Namespace
+
+    g = Graph()
+    g.parse(str(TTL), format="turtle")
+    ont = Namespace("https://w3id.org/sdkb/ont/")
+    pairs = [(str(g.value(s, ont.filingDate)), str(o))
+             for s, o in g.subject_objects(ont.publicationDate)]
+    assert len(pairs) == EXPECTED_N
+    inverted = [p for p in pairs if p[0] and p[1] and p[1] < p[0]]
+    assert not inverted, f"공개일 < 출원일 인 건 {len(inverted)}건 — 예: {inverted[:3]}"
+
+
+def test_process_family_is_not_invented():
+    """없는 값을 만들지 않았는가. **비어 있는 것이 이 CR 의 결론**이다.
+
+    A층의 processFamily·valueChainStage 는 특허의 속성이 아니라 SIRP 코호트의 수집 출처다.
+    B층에 IPC·개념링크로 추정해 채우면 같은 이름의 다른 것이 된다(§1.3).
+    """
+    assert "ont:processFamily" not in _ttl(), "추정으로 채워졌다 — CR-014 회신과 어긋난다"
+    assert "ont:valueChainStage" not in _ttl(), "추정으로 채워졌다 — CR-014 회신과 어긋난다"
+    bib = json.loads(REPORT.read_text())["cr014_bibliographic"]
+    assert bib["processFamily"] == 0 and bib["valueChainStage"] == 0
+    assert bib["unfilled_reason"], "못 채운 이유가 산출물에 남지 않으면 하류가 결손을 오독한다"
+
+
 # ── 5. 거절근거가 실리지 않는다 (비목표 ⓔ) ──────────────────────────
 def test_no_rejection_basis():
     assert "ont:rejectedFor" not in _ttl(), "거절근거가 실렸다 — CR-012 비목표 ⓔ"
@@ -205,6 +252,9 @@ def test_collection_is_complete():
     assert rep["collected"] == rep["requested"] == EXPECTED_N
     assert rep["with_claims"] == EXPECTED_N, (
         f"청구항 미확보 {EXPECTED_N - rep['with_claims']}건 — 성공기준 ② 가 위태롭다")
+    # CR-014 — 수집 단계에서 이미 200/200 이어야 한다. 여기서 모자라면 그래프는 손댈 수 없다.
+    assert rep["with_publication_number"] == EXPECTED_N
+    assert rep["with_publication_date"] == EXPECTED_N
 
 
 @pytest.mark.skipif(not REPORT.exists(), reason="빌드 리포트 없음")
