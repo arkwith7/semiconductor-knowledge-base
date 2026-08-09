@@ -123,15 +123,17 @@ data/
   patents/prior_art_pairs.parquet   # 7,500 examiner-grounded pairs
   compliance/                       # KR + US governance masters
 docs/
+  README.md                         # documentation index — start here
+  ontology_guide.md                 # vocabulary, modelling decisions, extension recipes
+  glossary_ontology.md              # RDF/OWL/SHACL terms, with the defects they caused here
+  glossary_semiconductor.md         # the semiconductor domain this ontology models
   datasheet.md                      # data sheet (Gebru et al.) — whole SDKB
   dataset_rejected_patents_card.md  # SIRP dataset card
   leakage_protocol.md               # leakage definition and measurement
-  expert_validation_log.md          # expert-consultation audit trail
+  public_release_readiness_review.md # what this repo still gets wrong (measured)
   semiconductor_ontology_provenance_research.md  # source / provenance landscape
   references/                       # BibTeX library + per-paper notes
-  project/                          # 현업프로젝트1 governance: plan amendments,
-                                    #   status, commercialization, ADR,
-                                    #   matching arch, viz plan, feedback
+  project/                          # architecture, alignment and visualization docs
 validation/shapes.ttl               # SHACL
 provenance/prov.ttl                 # PROV-O chain
 examples/sparql/                    # example queries
@@ -296,4 +298,4 @@ See [LICENSE.txt](LICENSE.txt).
 
 ---
 
-*Hyeonup-Project 2026-1 lab-internal status — deliverables, alignment-track ontologies, ExpDataSet integration, and amendment trail: [docs/project/project_status_2026_1.md](docs/project/project_status_2026_1.md).*
+*New here? Start at [docs/README.md](docs/README.md). To understand or extend the ontology itself: [docs/ontology_guide.md](docs/ontology_guide.md).*

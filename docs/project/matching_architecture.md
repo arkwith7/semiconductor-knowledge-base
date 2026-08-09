@@ -74,7 +74,6 @@ Constraints are not opinions in code. They are SHACL shapes (`validation/shapes.
 ### Outputs (this term)
 - `notebooks/04_prior_art_baseline.ipynb` — TF-IDF baseline running end-to-end on the above
 - `validation/reliability_report.md` — MRR / NDCG@5 / Recall@K / leakage rate on the 7,500-pair evaluation
-- `docs/project/commercialization_strategy_v1.md` — deliverable ⑤
 
 ### Out of scope this term (2026-2)
 - Full agent loop with cross-encoder re-ranking

@@ -1,6 +1,6 @@
 # Research Alignment: 계량기술경영 연구실 어젠다 ↘ SDKB 하부 모듈
 
-> 본 문서의 framing: SKKU 기술경영전문대학원 **계량기술경영 연구실(Quantitative Technology Management Lab, PI: 신준석 교수)**의 어젠다가 **상위 frame**이고, SDKB는 그 어젠다 중 **반도체 도메인 데이터·온톨로지 모듈**을 담당하는 **하위 산출물**이다. 본 문서는 그 위계 관계를 명시하고 1:1 매핑으로 추적가능성을 확보한다. `plan_amendment_v1.md` 와 함께 읽는다.
+> 본 문서의 framing: SKKU 기술경영전문대학원 **계량기술경영 연구실(Quantitative Technology Management Lab, PI: 신준석 교수)**의 어젠다가 **상위 frame**이고, SDKB는 그 어젠다 중 **반도체 도메인 데이터·온톨로지 모듈**을 담당하는 **하위 산출물**이다. 본 문서는 그 위계 관계를 명시하고 1:1 매핑으로 추적가능성을 확보한다.
 
 ## 0. 연구실 어젠다 (상위 frame)
 
@@ -22,7 +22,7 @@
 | **기술전략 (Strategy)** | RBV/TOE 기반 핵심자원 조합 분석 | `sdkb-rbv.ttl`, `data/firms.parquet`, `sdkb-core` | 반도체 fabless 시장진입 핵심자원 조합 도출 |
 | **기술예측 (Foresight)** | 특허 기반 기술기회 발굴, 토픽모델 특허분석, 신생기술 5속성 | `sdkb-patent.ttl`, `data/patents.parquet` (CPC/IPC/F-term + 초록) | Novelty-focused 특허 맵, emerging memory 토픽 클러스터 |
 | **기술평가 (Valuation)** | 복합실물옵션, TRL 기반 사업가치 평가 | `sdkb-commercialization.ttl`, `sdkb-foresight.ttl` (RealOption 노드) | EUV vs High-NA 로드맵 실물옵션 가치평가 |
-| **기술상업화 (Commercialization)** | 시장진입 장벽 분석, BM 설계 | `sdkb-commercialization.ttl`, `docs/project/commercialization_strategy_v1.md`, `sdkb-governance*.ttl` | 소부장 SME 사업화 시나리오, 다중관할 규제 적합성 |
+| **기술상업화 (Commercialization)** | 시장진입 장벽 분석, BM 설계 | `sdkb-commercialization.ttl`, `sdkb-governance*.ttl` | 소부장 SME 사업화 시나리오, 다중관할 규제 적합성 |
 
 ---
 
@@ -104,7 +104,7 @@ SDKB-Match (이중 응용)       특허기회 발굴            RBV 핵심자원
 
 | 일자 | 버전 | 변경 |
 |---|---|---|
-| 2026-05-12 | v1.0 | 초안 작성 (`plan_amendment_v1.md` 와 동시 도입) |
-| 2026-05-12 | v1.1 | SDKB-Match 이중 응용(Expert/PriorArt) 반영 — `plan_amendment_v2.md` 동시 도입 |
+| 2026-05-12 | v1.0 | 초안 작성 |
+| 2026-05-12 | v1.1 | SDKB-Match 이중 응용(Expert/PriorArt) 반영 |
 | 2026-05-12 | v1.2 | Framing 반전 — "연구실 어젠다 상위 frame ↘ SDKB 하부 모듈" 위계 명시, 영역 ④ 인터랙티브 시각화 트랙 추가 |
 | 2026-05-13 | v1.3 | 노트북 02/03을 스켈레톤 stub으로 명시 (📋 dead-link → 🚧 skeleton), 노트북 03은 정렬 트랙 데이터 의존성 표기 |

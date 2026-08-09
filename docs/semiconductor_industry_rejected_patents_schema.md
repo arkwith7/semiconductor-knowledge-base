@@ -282,7 +282,7 @@ legacy etch PoC를 canonical dataset에 합칠 때는 다음 규칙을 썼습니
 4. legacy row의 `meta`는 새 스키마에 맞게 승격
 5. 승격 시 `detail_notes`는 `meta.notes`로 접어 넣음
 
-실제 merge는 [scripts/merge_legacy_etch_into_semiconductor_dataset.py](/home/arkwith/Dev/paper_data/scripts/merge_legacy_etch_into_semiconductor_dataset.py)로 수행했습니다.
+실제 merge는 [scripts/merge_legacy_etch_into_semiconductor_dataset.py](../scripts/merge_legacy_etch_into_semiconductor_dataset.py)로 수행했습니다.
 
 ## 6. 생성 산출물
 

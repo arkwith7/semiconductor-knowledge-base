@@ -123,15 +123,17 @@ data/
   patents/prior_art_pairs.parquet   # 7,500 examiner-grounded pairs
   compliance/                       # KR + US 거버넌스 마스터
 docs/
+  README.md                         # 문서 색인 — 여기서 시작
+  ontology_guide.md                 # 어휘·설계 결정·확장 레시피
+  glossary_ontology.md              # RDF/OWL/SHACL 용어 + 여기서 실제로 낸 사고
+  glossary_semiconductor.md         # 이 온톨로지가 표현하는 반도체 도메인
   datasheet.md                      # 데이터시트 (Gebru et al.) — SDKB 전체
   dataset_rejected_patents_card.md  # SIRP 데이터셋 카드
   leakage_protocol.md               # 누수 정의 / 측정
-  expert_validation_log.md          # 전문가 자문 audit trail
+  public_release_readiness_review.md # 이 저장소가 아직 틀린 것 (실측)
   semiconductor_ontology_provenance_research.md  # 출처 / provenance 조사
   references/                       # BibTeX 라이브러리 + 논문별 노트
-  project/                          # 현업프로젝트1 거버넌스: 계획서 변경보고·
-                                    #   진척표·사업화·ADR·매칭 아키텍처·
-                                    #   시각화 계획·피드백
+  project/                          # 아키텍처·정렬·시각화 문서
 validation/shapes.ttl               # SHACL
 provenance/prov.ttl                 # PROV-O 체인
 examples/sparql/                    # 예시 쿼리
@@ -296,4 +298,4 @@ CDLA-Permissive-2.0 (Open Core). Link-Only 레이어는 재배포 대상이 아�
 
 ---
 
-*현업프로젝트 2026-1 연구실 내부 진척표 — 산출물 5종, 정렬 트랙 4-pillar, ExpDataSet 통합, amendment trail: [docs/project/project_status_2026_1.md](docs/project/project_status_2026_1.md).*
+*처음이라면 [docs/README.md](docs/README.md) 부터. 온톨로지를 이해하고 확장하려면 [docs/ontology_guide.md](docs/ontology_guide.md).*

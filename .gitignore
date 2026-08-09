@@ -98,6 +98,12 @@ docs/expdataset_alignment.md
 docs/project/plan_amendment_v3.md
 docs/archive/
 
+# ── Archived internal docs — local reference only, never published ──
+# 공개 트리는 `git ls-files` 로 만들어지므로(scripts/build_public_release.py)
+# 여기 들어온 것은 자동으로 공개본에서 빠진다. 근거·판정: docs/public_release_readiness_review.md §1
+# 되살리려면 파일을 docs/ 아래 제자리로 옮긴다. `git add -f` 로 예외를 만들지 않는다.
+docs/_private/
+
 # ── Python ──────────────────────────────────────────────────────
 __pycache__/
 *.pyc

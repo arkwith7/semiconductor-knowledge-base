@@ -3,10 +3,10 @@
 > **문서 버전**: v1.0 (2026-05-16)
 > **상태**: 활성 — 실행 계획 + 운영 절차
 > **상위 문서**:
-> - [`prior_art_ontology_gap_and_data_plan.md`](../prior_art_ontology_gap_and_data_plan.md) — 갭 분석 (이 runbook 의 근거)
+> - [`prior_art_ontology_gap_and_data_plan.md`](project/prior_art_ontology_gap_and_data_plan.md) — 갭 분석 (이 runbook 의 근거)
 > - [`semiconductor_industry_rejected_patents_schema.md`](semiconductor_industry_rejected_patents_schema.md) — canonical schema (수집 후 스키마 확장 대상)
 > - [`kipris_reject_dataset_source_mapping.md`](kipris_reject_dataset_source_mapping.md) — KIPRIS 소스 매핑
-> - [`legacy_web_ocr_runbook.md`](legacy_web_ocr_runbook.md) — legacy OCR 절차 (B2 의 기반)
+> - `legacy_web_ocr_runbook.md` (미작성) — legacy OCR 절차 (B2 의 기반)
 
 ---
 
@@ -33,7 +33,7 @@
 | 시스템 poppler | `which pdftoppm` | ✅ `/usr/bin/pdftoppm` |
 | PDF/OCR Python libs | `.venv/bin/pip list` | ✅ pdfplumber 0.11.9 / PyMuPDF 1.27.2.3 / pdf2image 1.17.0 / pytesseract 0.3.13 / Pillow 12.2.0 |
 
-추가 의존성은 [`requirements.txt`](../requirements.txt) 와 [`pyproject.toml`](../pyproject.toml) 에 반영되어 있다 (`pdfplumber`, `PyMuPDF`, `pdf2image`, `pytesseract`, `Pillow`).
+추가 의존성은 [`requirements.txt`](../pyproject.toml) 와 [`pyproject.toml`](../pyproject.toml) 에 반영되어 있다 (`pdfplumber`, `PyMuPDF`, `pdf2image`, `pytesseract`, `Pillow`).
 
 ---
 

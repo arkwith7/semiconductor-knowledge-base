@@ -15,7 +15,7 @@
 | Q | A |
 |---|---|
 | What do instances represent? | Nodes in a curation knowledge graph — Process, SubProcess, EquipmentClass, Equipment, Vendor, Organization, Parameter, Metrology, Material, TechnologyNode, FailureMode, RootCause, Mitigation, Skill, plus alignment-track classes (Patent, IPCSymbol, Firm, Resource, Capability, RealOption, Scenario, …). |
-| Total instances | **Verified snapshot 2026-05-17**: curation graph **229 nodes / 268 edges** (`data/semiconductor_v0_3.json`; baseline origin was 198/264, expanded by curation incl. Device) + **1,000** SIRP rejected patents (`data/patents/raw/semiconductor_industry_rejected_patents.jsonl`; the "773" in older docs was an initial cohort snapshot) + ancillary tables (expert profiles 100 EN + 110 KR — 105 generated + 5 de-identified derivatives, see [`deidentification_protocol.md`](deidentification_protocol.md); problems 226; scenarios; prior-art pairs). All paper/README/CHANGELOG figures MUST be synced to this snapshot before submission (see [dataset_publication_risk_review.md](project/dataset_publication_risk_review.md) #3). |
+| Total instances | **Verified snapshot 2026-05-17**: curation graph **229 nodes / 268 edges** (`data/semiconductor_v0_3.json`; baseline origin was 198/264, expanded by curation incl. Device) + **1,000** SIRP rejected patents (`data/patents/raw/semiconductor_industry_rejected_patents.jsonl`; the "773" in older docs was an initial cohort snapshot) + ancillary tables (expert profiles 100 EN + 110 KR — 105 generated + 5 de-identified derivatives, see [`deidentification_protocol.md`](deidentification_protocol.md); problems 226; scenarios; prior-art pairs). ⚠️ The committed source has grown since this snapshot; rebuild and count rather than quoting these figures — see [`public_release_readiness_review.md`](public_release_readiness_review.md) F5. |
 | Splits | Baseline graph has no train/test split (it's a curation graph). Prior-art pairs split is documented in `data/patents/pairs_report.json`. |
 | Confidential or sensitive content? | Patent abstracts and first claims are sourced from KIPRIS — subject to KIPRIS Plus terms. License resolution is in-progress; see [`dataset_rejected_patents_card.md`](dataset_rejected_patents_card.md) §6. Expert profiles are not personally identifiable: 105 of 110 are programmatically generated, and the remaining 5 (EXP_001–005) are **de-identified, perturbed derivatives** of real practitioner career records — pseudonymous names, rewritten employment/experience values, no contact or birth data, and the original documents were never ingested into this repository. Procedure: [`deidentification_protocol.md`](deidentification_protocol.md). |
 
@@ -26,7 +26,7 @@
 | How was data acquired? | (Domain core) Manual curation from public literature & standards. (Patent layer) KIPRIS Plus API + KIPRIS web for 773 records. (Expert profiles) 105 generated programmatically with `scripts/gen_experts.py` using rejection-rate–calibrated archetypes; 5 (EXP_001–005) de-identified and perturbed from real practitioner career records — originals not ingested. (Problem profiles) 61 initial curation + 15 export-control and 10 ontology-reasoning scenarios + 18 rewritten from public cases (WM-811K, TEMAZ, technical blogs, literature) + 122 structure-derived generated. Both procedures: [`deidentification_protocol.md`](deidentification_protocol.md). |
 | Sampling strategy | (Domain) Comprehensive but explicitly biased toward etch/depo/lithography/CMP/oxidation/implant/packaging — the same axes as SemicONTO. (SIRP) Two cohorts: `semiconductor_ontology_rejected_patents` (431) + `semiconductor_fullstack_rejected_patents` (342). |
 | Time frame | Baseline: curated 2026-04. SIRP: collected 2026-04 → 2026-05-06, covering patents filed 1997-12-31 → 2026-04-30. |
-| Did the collection process involve crowdworkers, contractors, or third parties? | Patent data via KIPO/KIPRIS, regulatory data via BIS/NIST/ECHA public sources. **No human annotators.** Two GT tracks must not be conflated: (a) **primary** = `prior_art_pairs.parquet` 7,500 pairs, **examiner-grounded** (objective KIPO examiner citations), not crowd, not expert annotation; (b) **secondary** = `curated_ratings_3rater.csv` 7,800, **algorithmically simulated 3-rater synthetic labels** (NOT human experts). Domain experts (expert_validation_log) advised on profile *design* only — they did **not** produce the 7,500/7,800 ratings. Any paper using this data MUST NOT describe either track as "expert annotation". |
+| Did the collection process involve crowdworkers, contractors, or third parties? | Patent data via KIPO/KIPRIS, regulatory data via BIS/NIST/ECHA public sources. **No human annotators.** Two GT tracks must not be conflated: (a) **primary** = `prior_art_pairs.parquet` 7,500 pairs, **examiner-grounded** (objective KIPO examiner citations), not crowd, not expert annotation; (b) **secondary** = `curated_ratings_3rater.csv` 7,800, **algorithmically simulated 3-rater synthetic labels** (NOT human experts). Domain experts advised on profile *design* only — they did **not** produce the 7,500/7,800 ratings. Any paper using this data MUST NOT describe either track as "expert annotation". |
 
 ## 4. Preprocessing / cleaning / labeling
 
@@ -67,8 +67,9 @@
 
 ## 8. Publication-integrity notes (paper-submission grade)
 
-Mandatory before any paper using this dataset is submitted. Full risk review:
-[dataset_publication_risk_review.md](project/dataset_publication_risk_review.md).
+Mandatory before any paper using this dataset is submitted. (The full lab-internal risk
+review is not part of the public tree — see
+[`public_release_readiness_review.md`](public_release_readiness_review.md) §1 for why.)
 
 - **#2 Synthetic ≠ expert.** The 7,500 GT is examiner-grounded (objective KIPO
   citations); the 7,800 3-rater set is algorithmically simulated. Neither is
