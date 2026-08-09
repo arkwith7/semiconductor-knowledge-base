@@ -2,6 +2,7 @@
         ingest-sirp sirp-pairs sirp-problems sirp experts \
         compliance curated-experts curated-ratings expdataset abox abox-patents \
         abox-prior-art abox-claim-features abox-full refetch-fulltext cq \
+        public-release check-public \
         superordinate-concepts concept-mapping \
         semiconto-fetch semiconto-analyze semiconto-align semiconto-enrich semiconto-phase0 \
         viz viz-clean viz-open \
@@ -40,6 +41,8 @@ help:
 	@echo "  abox-full       all A-Box layers (needs KIPRIS key)"
 	@echo "  refetch-fulltext  re-fetch KIPRIS full text into the emptied A-Box inputs"
 	@echo "  cq              run the competency-question suite → report"
+	@echo "  public-release  build the public tree (KIPRIS full text emptied) into PUBLIC_OUT"
+	@echo "  check-public    scan that tree with fingerprints from the private canonical"
 	@echo "  semiconto-fetch    Download SemicONTO v0.2 TTL into ontology/imports/"
 	@echo "  semiconto-analyze  Parse SemicONTO TTL → data/reports/semiconto_analysis.json"
 	@echo "  semiconto-align    Build SDKB↔SemicONTO SKOS alignment (mappings/)"
@@ -128,6 +131,22 @@ abox-full: abox abox-patents abox-vendors abox-prior-art abox-claim-features
 # 자산이다. 하류 논문 저장소에만 있으면 "CQ 를 공개한다"는 서술이 거짓이 된다.
 cq: convert
 	$(PYTHON) scripts/run_cq.py
+
+# ── 공개본 (CR-015) ────────────────────────────────────────────────────
+# 공개할 트리를 **매번 코드가 만든다.** 손으로 지우면 다음에 또 어긋난다 — 원고 §10.3 이
+# "재배포할 수 없다"고 쓰는데 리포는 초록·청구항 전문 1,000건을 담고 있었던 것이 정확히
+# 그 어긋남이었다.
+#
+# 푸시는 이 Makefile 이 하지 않는다. 되돌릴 수 없는 단계이므로 사람이 검사기 통과를
+# 확인한 뒤에 한다 — 공개된 커밋은 지워도 포크·캐시·PR ref 로 남는다.
+PUBLIC_OUT ?= build/public
+
+public-release:
+	$(PYTHON) scripts/build_public_release.py --out $(PUBLIC_OUT) --force
+
+check-public:
+	$(PYTHON) scripts/check_public_release.py --tree $(PUBLIC_OUT) \
+		--report data/reports/public_release_check.json
 
 # KSIA 회원사 명부 → ont:Vendor A-Box. abox-patents 뒤에 와야 한다 —
 # 이미 특허 출원인(Organization)으로 존재하는 회사를 알아보고 중복 노드를 만들지 않으려면

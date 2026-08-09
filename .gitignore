@@ -35,8 +35,15 @@ ontology/sdkb-governance-kr-instances.ttl
 ontology/sdkb-governance-us-instances.ttl
 
 # NOTE: data/patents/raw/semiconductor_industry_rejected_patents.jsonl
-# is intentionally NOT ignored — Amendment v2 commits the source dataset
-# to the repo pending KIPRIS license resolution. See docs/dataset_rejected_patents_card.md §6.
+# is intentionally NOT ignored in this **private development** repo — it is the canonical
+# dataset and is never redistributed from here.
+#
+# 2026-08-09(CR-015): the public release is a **different tree**, produced by
+# scripts/build_public_release.py, in which abstract / claim1 / claims_full[].text are
+# emptied (schema and identifiers kept) and notebook outputs are stripped.
+# scripts/check_public_release.py must pass before anything is pushed publicly.
+# Decision (B) — metadata + ground truth + link-only. Rationale: the paper's §10.3 already
+# states KIPRIS full text cannot be redistributed. See docs/dataset_rejected_patents_card.md §6.
 
 # ── Prior-art collected assets (Phase A~D, 2026-05-16) ──
 # Bulk / derived: gitignored. 2026-08-09(CR-016) 전에는 옆 저장소에서 rsync 로 받았고

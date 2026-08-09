@@ -116,17 +116,42 @@
 ## 6. 라이선스 및 재배포
 
 - **출처 권리**: KIPRIS / KIPO. KIPRIS Plus API의 약관에 따른다.
-- **현 상태**: 본 레포에 그대로 포함 (`semiconductor_industry_rejected_patents.jsonl`).
-- **확정 사항**: 학기 중 SKKU 산학협력단/도서관·법무팀 자문 후 다음 중 하나로 조정.
-  - (A) 본 형태 그대로 학술 목적 재배포 허용 → 현 상태 유지
-  - (B) 본문(abstract/claim1) 재배포 불가 → `data/patents/raw/` 로 격리 + `.gitattributes`로 별도 관리, 공개 레이어는 `(application_number, IPC, date, family, ground_truth_*)` 메타+URL Link-Only (`sdkb-patent-linkonly.ttl`)
-  - (C) 부분 재배포 가능 → abstract만 공개, claim 본문은 Link-Only
+- **결정: (B) 확정 — 2026-08-09 (CR-015).** 보류를 끝낸다.
+  - **왜 자문 없이 확정하는가.** 이전 판은 *"SKKU 산학협력단·법무팀 자문 후 (A)/(B)/(C)
+    중 택일"* 로 적혀 있었다. **그 전제는 다른 사업 맥락의 것이었고 지금은 해당 사항이
+    없다.** 그리고 자문이 필요 없는 이유가 따로 있다 — **결정은 이미 논문에 있다.**
+    원고 §10.3 이 *"KIPRIS 원문(특허 전문·서지)은 학술이용 조건상 재배포할 수 없다"* 고
+    쓴 시점에 선택지는 (B) 하나로 좁혀졌다. 리포를 그 문장에 맞추는 것은 법적 판단이
+    아니라 **정합성 작업**이다.
+  - ~~(A) 본 형태 그대로 학술 목적 재배포~~ — 원고 §10.3 과 정면 충돌이므로 선택 불가
+  - **(B) 본문 재배포 불가 → 메타 + `ground_truth_*` + Link-Only** ← **확정**
+  - ~~(C) abstract 만 공개~~ — 초록도 KIPRIS 원문이므로 같은 이유로 불가
+- **(B)를 구현한 형태 — 격리가 아니라 두 트리다.**
+  - **비공개 개발 리포**(현재 이곳)는 정본 jsonl 을 **그대로 추적한다.** 재배포하지
+    않으므로 문제가 되지 않는다.
+  - **공개본은 별도 트리**이며 `scripts/build_public_release.py` 가 만든다 —
+    `abstract` · `claim1` · **`claims_full[].text`** 를 **빈 문자열**로 두고
+    스키마·`claim_no`·`depends_on`·식별자·IPC·날짜·`ground_truth_*` 는 남긴다.
+    `title` 은 서지이므로 남긴다(이미 `kipris_biblio.parquet` 에 커밋돼 있다).
+    노트북 셀 출력도 함께 제거한다 — 07 의 출력 하나가 초록 발췌를 인쇄하고 있었다.
+  - **채우는 방법을 함께 준다**: `scripts/refetch_rejected_patents.py`(본인 KIPRIS 키).
+    복원 판정은 sha256 대조(`fc142f51…`)다.
+  - **푸시 전 검사기가 선다**: `scripts/check_public_release.py` 가 비공개 정본에서 뽑은
+    지문 3,341개로 공개 트리 전량을 훑는다. 적중 0건이어야 푸시한다.
+    (2026-08-09 실측: 파일 689개 검사 · **적중 0**.)
+  - **공개는 새 리포에 orphan 루트 커밋 1개로 한다.** 현 리포의 이력에는 원문이 담긴
+    커밋 둘(`b3969b8`·`4be52e1`)이 네 브랜치에 걸쳐 **이미 원격에 푸시돼 있어**, 이
+    리포를 공개 전환하면 과거 커밋에서 원문을 받을 수 있기 때문이다. 이력 재작성
+    (`git filter-repo`)을 택하지 않은 이유는 **모든 커밋 해시가 바뀌어** 하류
+    `PROVENANCE.json` 과 논문의 상류 해시 인용이 전부 무효가 되기 때문이다.
 - **사용자(연구자) 권고**: 본 데이터를 학술 목적 외(상업적 제품·서비스)로 활용할 경우 KIPRIS에 별도 문의.
 - **2026-05-17 인입 자산의 공개 범위** (plan §7.1, 미해결 라이선스 보수적 적용):
   - ❌ 공개 레포 비포함(gitignore, paper_data sync로 재현): 인용 외부특허 본문 `data/patents/fulltext/`·파생 `fulltext_corpus.parquet`·`citation_resolution_full_cache.json` — 제3자(KR/JP/US, Google Patents 스크랩 포함) 특허 본문 대량 = §6(B) "본문 재배포 불가" 선제 적용.
   - ⚠️ excerpt 스크럽 후 커밋: `data/patents/rejection_decisions/structured/*.json` 에서 KIPRIS 거절결정서 OCR 원문(`excerpt`) 제거(`scripts/scrub_rejection_excerpts.py`), 구조화 매핑(`cited_evidence_map`·`legal_bases`·`target_claims`)만 §5(4) GT로 유지.
   - ✅ 공개: 온톨로지 KG·device 어휘(Wikidata CC0)·코드·지표 리포트·문서 (KIPRIS 본문 비포함).
-  - jsonl(773→1000) 본문(abstract/claim1)은 기존 §6 "보류" 정책을 그대로 승계 — 법무팀 자문 시 (B)/(C) 결정이 이 jsonl·structured 매핑에 동일 적용 대상.
+  - ~~jsonl 본문은 기존 §6 "보류" 정책을 승계 — 법무팀 자문 시 (B)/(C) 결정 적용 대상.~~
+    **2026-08-09 해소** — (B) 확정으로 공개본에서 `abstract`·`claim1`·`claims_full[].text` 가
+    비워진다(위 참조). `structured/*.json` 은 이미 excerpt 스크럽이 끝나 추가 조치가 없다.
 
 ## 7. 한계
 
@@ -147,8 +172,8 @@
 - **#7 leakage 미측정**: [leakage_protocol.md](leakage_protocol.md)는 v0.1
   **설계만** — 본 학기 정량 leakage 결과 없음(2026-2 알고리즘 단계). 논문에
   측정 수치 주장 금지.
-- **#1 라이선스**: §6 KIPRIS 미해결 — 데이터셋-리소스 논문은 §6(B) 법무
-  확정 전 보류.
+- ~~**#1 라이선스**: §6 KIPRIS 미해결 — §6(B) 법무 확정 전 보류.~~
+  **2026-08-09 해소** — §6 에서 (B) 확정. 보류 사유가 사라졌다.
 
 ## 8. 인용 (citation)
 
@@ -174,3 +199,4 @@
 |---|---|---|
 | 2026-05-12 | v1.0 | 초안 작성 — Amendment v2 동시 도입 |
 | 2026-05-17 | v1.1 | 규모 773→1,000 검증 반영, §5-2 합성≠전문가 주석, §7-1 논문 투고 무결성 한계(#2·#3·#7) 추가, citation size 갱신 |
+| 2026-08-09 | v1.2 | **§6 (B) 확정**(CR-015) — 공개본은 별도 트리·원문 3필드 비움·재인출 스크립트·푸시 전 검사기·새 리포 orphan 공개. §7-1 #1 해소 |
