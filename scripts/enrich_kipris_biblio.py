@@ -48,7 +48,9 @@ def api_key() -> str:
     key = os.environ.get("KIPRIS_API_KEY")
     if key:
         return key
-    for env in (ROOT / ".env", ROOT.parent / "SKKU" / "sdkb-foresight-paper" / ".env"):
+    # 2026-08-09(F7): 2순위였던 하류 저장소 경로를 지웠다. 남의 컴퓨터에 없는 경로이고,
+    # 공개본에서는 그것이 그냥 깨진 참조다. 이 저장소의 .env 를 쓴다.
+    for env in (ROOT / ".env",):
         if env.exists():
             for line in env.read_text(encoding="utf-8").splitlines():
                 if line.startswith("KIPRIS_API_KEY="):

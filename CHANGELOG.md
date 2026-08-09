@@ -27,6 +27,44 @@ All notable changes to SDKB will be documented in this file.
 
 ## [Unreleased] — v1.0.0-dev
 
+### Added (2026-08-09 — 공개 경계를 원문에서 **문서와 경로**로 넓혔다 · 점검 R1·F7)
+
+- **비공개 문서 토큰 `<!-- sdkb:private -->`.** 첫 줄에 이 토큰을 단 파일은 공개 트리에
+  복사되지 않고(`build_public_release.py`), 트리에 남아 있으면 검사기가 거부한다
+  (`check_public_release.py`). **첫 줄에서만** 인정한다 — 본문에서 토큰을 언급하는 문서는
+  그것을 *설명*하는 것이지 *선언*하는 것이 아니다.
+  - 자연어 마커(`CONFIDENTIAL` 등)를 쓰지 않은 이유는 실측이다: 그 낱말이 걸리는 추적 파일
+    7건이 **전부 정상 문서**였다. 기밀을 담은 문서와 기밀을 논하는 문서를 가르지 못하는
+    검사기는 무시된다.
+  - 두 층인 이유: 생성기만 있으면 **손으로 만든 트리**를 못 잡고, 검사기만 있으면 매번 사람이
+    지워야 한다. 되돌릴 수 없는 경로라 거르는 층과 확인하는 층을 나눴다.
+- **홈 절대경로 검사.** 공개 트리에 사용자 홈으로 시작하는 파일시스템 경로가 남으면 실패한다.
+  URL 경로 안의 같은 문자열은 잡지 않는다 — 실측으로 둘 있었다(`irds.ieee.org/home/…` ·
+  `horiba.com/kr/horiba-stec/home/`). 실행 리포트와 거절결정 인덱스는 복사 시 경로를
+  **파일명으로** 줄인다(어떤 파일을 읽었는지는 남긴다).
+
+### Changed (2026-08-09 — 공개 스크립트가 하류 저장소를 읽지 않는다 · 점검 F7)
+
+- **`decompose_corpus.py` 의 외부 코퍼스는 경로를 인자로 받는다** — `--g1-ttl`·`--g2-ttl`.
+  두 소스는 옆 저장소의 절대경로를 하드코딩하고 있었고, 그 경로가 없는 사람에게 이 진입점은
+  그냥 깨진 스크립트였다. 경로 없이 `--source g2` 를 지목하면 **무엇을 줘야 하는지 적고
+  실패**한다.
+  - **`--source all` 의 의미가 바뀌었다**: 저장소 내부 3종(rejected·cited·b_queries)은 항상
+    돌고, 외부 소스는 **경로가 주어진 것만** 돈다. 건너뛴 것은 한 줄로 출력한다 —
+    조용한 스킵이 아니라 말하는 스킵이다. **산출은 불변**(`claim_features.jsonl`
+    sha256 `8c8287ef…` 재실행 전후 동일).
+  - docstring 에서 하류 코퍼스 구획 이름(`G1(삼성·SK하이닉스)`·`Tier 1/2/3`)을 뺐다.
+    **§29②·all-elements 같은 법·도메인 근거는 남겼다** — 공개 가능한 지식이다.
+- **`.env` 폴백에서 하류 경로를 지웠다** (`enrich_kipris_biblio.py`·`llm_claim_validate.py`·
+  `collect_cited_biblio_claims.py`). 이 저장소의 `.env` 만 본다.
+- 하류 저장소 이름·홈 절대경로를 문서·주석·테스트에서 제거했다
+  (`add_superordinate_concepts.py` docstring · `test_b_layer_query_nodes.py` 는
+  `SDKB_B_QUERY_IDS` 환경변수로 받고 없으면 skip · `prior_art_ontology_gap_and_data_plan.md`).
+
+> **남은 것(F8).** `data/patents/rejection_decisions/_index.jsonl` 11행의 `pdf_path` 가
+> 여전히 홈 절대경로다. **생성기는 이미 상대경로로 쓴다** — 과거 실행이 남긴 데이터 잔재이고,
+> 정규화하려면 원천 트리가 있어야 한다. 공개본에서는 위 스크럽이 막는다.
+
 ### Fixed (2026-08-09 — CR-016 성공기준 ① · 빈 체크아웃에서 처음 드러난 것 넷)
 
 **공개 트리를 실제로 격리해 `make pipeline` 을 돌려 봤다.** 넷이 걸렸고, 넷 다 **개인
@@ -113,7 +151,7 @@ All notable changes to SDKB will be documented in this file.
   채우는 명령 · **필요한 자격** 5열. 결손 고백이 아니라 **설계의 진술**이다.
 - **`sync_paper_data_assets.sh` 삭제** — 동기화할 대상이 없다(§4 흡수 완료).
 - **조용한 절대경로 둘을 더 끊었다.** `decompose_corpus.py` 가 인용 보강분을 **옆
-  저장소에서** 읽고 있었다(`PD = /home/arkwith/Dev/paper_data`). 흡수된 수집기는 이쪽으로
+  저장소에서** 읽고 있었다(`PD = ~/Dev/paper_data`). 흡수된 수집기는 이쪽으로
   쓰므로 원천이 둘이 될 뻔했다 — 교체 전에 대조했고 읽는 5파일이 **바이트 동일**이라
   산출은 바뀌지 않는다. `collect_cited_biblio_claims.py` 의 절대경로도 상대로 바꿨다.
 - **테스트 208 통과 · 10 스킵 · 실패 0.** T-Box·A-Box·트리플 수 불변.
@@ -125,7 +163,7 @@ All notable changes to SDKB will be documented in this file.
   `scripts/kipris_dataset/` 6파일(KIPRIS 클라이언트·인용 정규화·코호트·거절결정 파서) ·
   수집 스크립트 **13개** · 문서 **6건**.
 - **왜 지금인가.** 논문 투고와 함께 이 저장소가 공개되는데, 비운 A-Box 를 채우는 절차가
-  개인 로컬 디렉터리(`/home/arkwith/Dev/paper_data`)를 거치면 **외부인은 재현할 수 없다.**
+  개인 로컬 디렉터리(`~/Dev/paper_data`)를 거치면 **외부인은 재현할 수 없다.**
   의존(pinned dependency)이 아니라 흡수를 택한 근거는 독립성이다.
 - **사본 넷을 정리했다 — 그중 하나는 이미 갈라져 있었다.**
   `device_alias_table.json` 이 이쪽 **34키** 대 저쪽 **31키**로 갈렸고 빠진 셋
@@ -140,7 +178,7 @@ All notable changes to SDKB will be documented in this file.
   남겼으며, 임포터 둘(`build_b_layer_cited_ids.py`·`ingest_rejected_patents.py`)을 고쳤다.
   깨진 문서 참조는 함께 옮긴 `docs/legacy_etching_poc_schema.md` 로 해소된다.
 - **조용한 외부 의존 하나가 드러나 함께 끊었다.** `collect_b_layer_queries.py`(CR-012 의
-  B층 질의 수집기)가 `sys.path` 에 `/home/arkwith/Dev/paper_data` 를 끼워 넣고
+  B층 질의 수집기)가 `sys.path` 에 `~/Dev/paper_data` 를 끼워 넣고
   `enrich_unresolved.py` 를 임포트하고 있었다 — **커밋된 스크립트가 커밋되지 않은 파일에
   의존**하는 형태였고, 그대로 공개했으면 외부에서 `ImportError` 로 죽었다.
   `enrich_unresolved.py`(982행)도 이관 대상에 넣었다.

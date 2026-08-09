@@ -155,7 +155,7 @@ process_family → ontology  (구현된 PROCESS_FAMILY_MAP)
 
 ## 7. P0/B1 + B2/B3/B5 + A2/B4 — **수집 완료 + sdkb 내부 정합 검증 (2026-05-16)**
 
-`paper_data` 저장소(`/home/arkwith/Dev/paper_data`)의 `dataset_full_collection_runbook.md` Phase A~D 실행으로 §3-B / §4 P0~P2 다수가 데이터로 충족되었고, 본 절은 그 산출물을 **sdkb 저장소로 인입한 뒤 1000건 데이터에서 직접 재집계 검증**한 결과를 기록한다(문서 주장 신뢰가 아닌 독립 검증).
+`paper_data` 저장소의 `dataset_full_collection_runbook.md` Phase A~D 실행으로 §3-B / §4 P0~P2 다수가 데이터로 충족되었고, 본 절은 그 산출물을 **sdkb 저장소로 인입한 뒤 1000건 데이터에서 직접 재집계 검증**한 결과를 기록한다(문서 주장 신뢰가 아닌 독립 검증).
 
 ### 7.1 인입 자산 (sdkb in-repo)
 

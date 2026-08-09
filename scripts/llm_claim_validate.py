@@ -26,11 +26,10 @@ import requests
 # 절대경로가 1순위였고, 그 경로가 없는 사람에게는 자격이 조용히 비어 있었다.
 try:
     from dotenv import load_dotenv
-    for _p in (Path(__file__).resolve().parents[1] / ".env",
-               Path(__file__).resolve().parents[2] / "SKKU/sdkb-foresight-paper/.env"):
-        if _p.exists():
-            load_dotenv(_p)
-            break
+    # 2026-08-09(F7): 2순위였던 하류 저장소 경로를 지웠다 — 남의 컴퓨터에 없다.
+    _p = Path(__file__).resolve().parents[1] / ".env"
+    if _p.exists():
+        load_dotenv(_p)
 except ImportError:
     pass
 

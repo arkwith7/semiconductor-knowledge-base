@@ -19,8 +19,10 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from build_public_release import scrub_dataset, strip_notebook  # noqa: E402
-from check_public_release import build_probes  # noqa: E402
+from build_public_release import (  # noqa: E402
+    PRIVATE_TOKEN, is_private_doc, scrub_abs_paths, scrub_dataset, strip_notebook,
+)
+from check_public_release import build_probes, scan_boundary  # noqa: E402
 
 
 def _record() -> dict:
@@ -104,6 +106,42 @@ def test_검사기_지문이_누출을_잡는다(tmp_path):
     assert probes, "지문이 하나도 안 나오면 검사기는 아무것도 못 잡는다"
     leaked = _record()["target_patent"]["abstract"]
     assert any(p in leaked for _, _, p in probes)
+
+
+def test_첫줄_토큰_문서는_비공개다():
+    """**첫 줄에서만** 인정한다 — 본문에서 토큰을 언급하는 문서는 그것을 설명하는 것이지
+    선언하는 것이 아니다. 실제로 그런 문서가 있다(readiness_review.md:53)."""
+    assert is_private_doc(f"{PRIVATE_TOKEN}\n# 내부 문서\n".encode())
+    assert is_private_doc(f"   {PRIVATE_TOKEN}   \n본문\n".encode())          # 앞뒤 공백
+    assert not is_private_doc(f"# 공개 문서\n\n{PRIVATE_TOKEN}\n".encode())   # 셋째 줄
+    assert not is_private_doc(f"> 첫 줄에 `{PRIVATE_TOKEN}` 를 단다\n".encode())  # 인용문
+    assert not is_private_doc(b"")
+
+
+def test_검사기가_트리의_토큰_문서를_잡는다(tmp_path):
+    """생성기가 걸러도 **손으로 만든 트리**가 있다. 실패해야 할 입력이 실패하는가."""
+    (tmp_path / "docs").mkdir()
+    (tmp_path / "docs" / "internal.md").write_text(
+        f"{PRIVATE_TOKEN}\nCONFIDENTIAL 가격표\n", encoding="utf-8")
+    (tmp_path / "docs" / "public.md").write_text(
+        f"비공개 문서는 첫 줄에 `{PRIVATE_TOKEN}` 를 단다.\n", encoding="utf-8")
+    private, abs_hits = scan_boundary(sorted(tmp_path.rglob("*.md")), tmp_path)
+    assert private == ["docs/internal.md"]     # 규약을 **설명**하는 문서는 통과한다
+    assert abs_hits == []
+
+
+def test_URL_의_home_은_스크럽되지_않는다():
+    """실측 회귀 — 추적 파일 둘이 URL 안에 `/home/` 을 담는다
+    (irds.ieee.org/home/… · horiba.com/kr/horiba-stec/home/). 지우면 발행된 링크가 죽는다."""
+    keep = b'{"url": "https://irds.ieee.org/home/how-to-download-irds"}'
+    out, n = scrub_abs_paths(keep)
+    assert (out, n) == (keep, 0)
+
+    # 리터럴로 적으면 **이 테스트 파일 자신이** 검사기에 걸린다 — 조립해서 만든다.
+    abs_path = "/" + "home/u/Dev/private-repo/ids.txt"
+    out, n = scrub_abs_paths(f'{{"input_ids": "{abs_path}"}}'.encode())
+    assert n == 1
+    assert out == b'{"input_ids": "ids.txt"}'   # 경로는 지우되 **어떤 파일인지는 남긴다**
 
 
 def test_남기는_필드와_겹치는_지문은_버린다(tmp_path):

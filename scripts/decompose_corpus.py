@@ -1,13 +1,17 @@
 #!/usr/bin/env python3
 """전 코퍼스 청구항 → feature 분해 (규칙 + flag 시 LLM). 중심축 데이터셋의 1단계.
 
-소스:
-  rejected  거절특허 1,000       — raw/…rejected_patents.jsonl 의 claims_full (구조화)
-  cited     인용 선행기술 KR+US   — cited_enriched/{kipris.jsonl,bigquery_us.parquet} (청구항 블록)
-  g2        소부장 G2 12,339      — graph_v2.ttl 의 ont:claimText (청구항 블록)
+저장소 내부 소스 (인자 없이 돈다):
+  rejected   거절특허      — raw/…rejected_patents.jsonl 의 claims_full (구조화)
+  cited      인용 선행기술  — cited_enriched/{kipris.jsonl,bigquery_*.parquet} (청구항 블록)
+  b_queries  질의 특허     — b_layer_queries_raw.jsonl (청구항 블록)
 
-거절특허·인용(Tier 2)·g2(Tier 3) 전부 독립·종속항을 분해한다 — 종속항의 added-feature 가
-§29② 진보성 판단의 초점이고 all-elements 대비의 완전 한정요소집합을 이룬다.
+외부 소스 (호출자가 경로를 준다):
+  g1 · g2    `ont:claimText` 를 갖는 임의의 TTL 그래프 — `--g1-ttl` · `--g2-ttl`
+             자기 코퍼스를 붙이는 자리다. 경로가 없으면 **돌지 않고, 돌지 않았다고 말한다.**
+
+전 소스가 독립·종속항을 모두 분해한다 — 종속항의 added-feature 가 §29② 진보성 판단의
+초점이고 all-elements 대비의 완전 한정요소집합을 이룬다.
 규칙이 flag 한 청구항만 LLM(Bedrock Haiku) 재분해.
 증분 저장(features.jsonl) — 재실행 시 (source,patent,claim_no) 이미 처리분은 건너뛴다.
 소스는 (patent, claim_no, text, depends_on) 4-튜플을 낸다(독립항 depends_on=[]).
@@ -75,37 +79,32 @@ def src_cited():
                 yield "cited:" + r["cited_doc_id"], no, txt, dep
 
 
-def src_g2():
+def _src_external(prefix: str, ttl: Path):
+    """외부 TTL 코퍼스의 `ont:claimText` → 청구항 4-튜플. 독립·종속 전부.
+
+    **경로는 호출자가 준다.** 예전에는 옆 저장소의 절대경로가 박혀 있었고, 그 경로가 없는
+    사람에게 이 진입점은 그냥 깨진 스크립트였다.
+    """
+    if not ttl.exists():
+        raise SystemExit(f"ERROR: TTL 이 없다 — {ttl}")
     from pyoxigraph import RdfFormat, Store
     store = Store()
-    store.bulk_load(path=str(SDKB.parent / "SKKU/sdkb-foresight-paper/data/processed/graph_v2.ttl"),
-                    format=RdfFormat.TURTLE)
+    store.bulk_load(path=str(ttl), format=RdfFormat.TURTLE)
     q = ("PREFIX ont: <https://w3id.org/sdkb/ont/> "
          "SELECT ?p ?c WHERE { ?p ont:claimText ?c }")
     for sol in store.query(q):
-        pid = "g2:" + str(sol["p"].value).rsplit("/", 1)[-1]
-        for no, txt in split_claims(str(sol["c"].value)):   # 독립·종속 전부(Tier 3)
+        pid = f"{prefix}:" + str(sol["p"].value).rsplit("/", 1)[-1]
+        for no, txt in split_claims(str(sol["c"].value)):
             dep = [] if is_independent(txt) else _parents(txt)
             yield pid, no, txt, dep
 
 
-def src_g1():
-    """주 대비 코퍼스 G1(삼성·SK하이닉스) 청구항 → feature (§G1 Phase C+D).
+def src_g2(ttl: Path):
+    return _src_external("g2", ttl)
 
-    G2 와 완전 대칭 — 독립·종속 전부. 종속 added-feature 는 §29② 진보성 판단의 초점이며,
-    판단(Tier 1)·인용(Tier 2)·코퍼스(Tier 3) 세 축과 주 대비축의 커버리지 비대칭을 해소한다(플랜 §G1 D).
-    """
-    from pyoxigraph import RdfFormat, Store
-    store = Store()
-    store.bulk_load(path=str(SDKB.parent / "SKKU/sdkb-foresight-paper/data/processed/graph_v1.ttl"),
-                    format=RdfFormat.TURTLE)
-    q = ("PREFIX ont: <https://w3id.org/sdkb/ont/> "
-         "SELECT ?p ?c WHERE { ?p ont:claimText ?c }")
-    for sol in store.query(q):
-        pid = "g1:" + str(sol["p"].value).rsplit("/", 1)[-1]
-        for no, txt in split_claims(str(sol["c"].value)):
-            dep = [] if is_independent(txt) else _parents(txt)   # 종속 포함(Phase D·Tier 4)
-            yield pid, no, txt, dep
+
+def src_g1(ttl: Path):
+    return _src_external("g1", ttl)
 
 
 def src_b_queries():
@@ -133,15 +132,48 @@ def src_b_queries():
             yield pid, no, txt, dep
 
 
-SOURCES = {"rejected": src_rejected, "cited": src_cited, "g2": src_g2, "g1": src_g1,
-           "b_queries": src_b_queries}
+# 저장소 안에 원천이 있는 소스 — 인자 없이 돈다.
+SOURCES = {"rejected": src_rejected, "cited": src_cited, "b_queries": src_b_queries}
+# 외부 TTL 을 요구하는 소스 — (CLI 플래그, 팩토리).
+EXTERNAL = {"g1": ("--g1-ttl", src_g1), "g2": ("--g2-ttl", src_g2)}
+
+
+def resolve_sources(names: list[str], paths: dict[str, Path | None]) -> tuple[list, list[str]]:
+    """이름 목록 → (호출 가능한 소스, 건너뛴 이유들).
+
+    `all` 이 외부 소스를 **조용히** 건너뛰지 않게 이유를 함께 낸다. 명시적으로 지목한
+    외부 소스에 경로가 없으면 건너뛰지 않고 **실패한다** — 요청한 것이 돌지 않았는데
+    성공으로 끝나는 것이 이 저장소가 반복해 낸 사고다.
+    """
+    resolved, skipped = [], []
+    for name in names:
+        if name in SOURCES:
+            resolved.append((name, SOURCES[name]))
+            continue
+        flag, factory = EXTERNAL[name]
+        ttl = paths.get(name)
+        if ttl is None:
+            skipped.append(f"{name} ({flag} 없음)")
+            continue
+        resolved.append((name, lambda f=factory, p=ttl: f(p)))
+    return resolved, skipped
 
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--source", required=True, choices=[*SOURCES, "all"])
+    ap.add_argument("--source", required=True, choices=[*SOURCES, *EXTERNAL, "all"])
+    ap.add_argument("--g1-ttl", type=Path, default=None,
+                    help="외부 코퍼스 TTL (ont:claimText 를 갖는 그래프)")
+    ap.add_argument("--g2-ttl", type=Path, default=None, help="외부 코퍼스 TTL (같은 형식)")
     ap.add_argument("--no-llm", action="store_true", help="규칙만 (LLM 생략)")
     args = ap.parse_args()
+
+    paths = {"g1": args.g1_ttl, "g2": args.g2_ttl}
+    if args.source in EXTERNAL and paths[args.source] is None:
+        flag, _ = EXTERNAL[args.source]
+        raise SystemExit(
+            f"ERROR: --source {args.source} 는 외부 TTL 코퍼스를 요구한다. "
+            f"{flag} <path> 로 준다 (ont:claimText 를 갖는 그래프).")
 
     FEATURES.parent.mkdir(parents=True, exist_ok=True)
     done: set[tuple] = set()
@@ -151,7 +183,11 @@ def main() -> int:
             done.add((r["source"], r["patent"], r["claim_no"]))
     print(f"[decompose] 기처리 {len(done)}청구항")
 
-    names = list(SOURCES) if args.source == "all" else [args.source]
+    names = [*SOURCES, *EXTERNAL] if args.source == "all" else [args.source]
+    sources, skipped = resolve_sources(names, paths)
+    print(f"[decompose] 소스 {[n for n, _ in sources]}")
+    for why in skipped:                       # 조용한 스킵이 아니라 말하는 스킵
+        print(f"[decompose] 건너뜀: {why}")
     workers = int(os.getenv("LLM_WORKERS", "12"))
     cache = _conn()
     t0 = time.time()
@@ -159,8 +195,8 @@ def main() -> int:
     # 1단계: 규칙 분해(빠름·순차). LLM 대상 청구항의 텍스트를 모은다.
     pending: list[dict] = []
     llm_texts: list[str] = []
-    for name in names:
-        for pid, no, txt, dep in SOURCES[name]():
+    for name, factory in sources:
+        for pid, no, txt, dep in factory():
             if (name, pid, no) in done:
                 continue
             dc = decompose(txt, no)

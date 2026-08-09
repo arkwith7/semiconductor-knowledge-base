@@ -18,6 +18,7 @@
 from __future__ import annotations
 
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -35,9 +36,11 @@ BUILDER = ROOT / "scripts" / "build_abox_b_layer_queries.py"
 COLLECTOR = ROOT / "scripts" / "collect_b_layer_queries.py"
 A_LAYER_TTL = ROOT / "ontology" / "sdkb-abox-patents.ttl"
 
-IDS_FILE = Path(
-    "/home/arkwith/Dev/SKKU/sdkb-prior-art-paper/upstream/handoff/CR-012-b-query-ids.txt"
-)
+# 2026-08-09(F7): 하류 이관 목록의 절대경로가 여기 박혀 있었다. 그 목록은 논문 평가자산이라
+# 이 저장소로 옮기지 않는다(수집기 기본값과 같은 판단) — 대신 **환경변수로 받고, 없으면
+# 이 테스트만 skip 한다.** 판정력은 그대로고 남의 홈 경로만 사라진다.
+_IDS_ENV = os.environ.get("SDKB_B_QUERY_IDS", "")
+IDS_FILE = Path(_IDS_ENV) if _IDS_ENV else ROOT / "data" / "patents" / "b_layer_query_ids.txt"
 EXPECTED_N = 200
 
 pytestmark = pytest.mark.skipif(not TTL.exists(), reason="B층 질의 A-Box 미빌드")
@@ -81,7 +84,8 @@ def test_iri_rule_matches_a_layer():
     assert "/patent/KR" not in _ttl(), "관할 접두가 대문자다 — A층 규칙과 갈라졌다"
 
 
-@pytest.mark.skipif(not IDS_FILE.exists(), reason="하류 이관 파일 없음")
+@pytest.mark.skipif(not IDS_FILE.exists(),
+                    reason="이관 목록 없음 — SDKB_B_QUERY_IDS 로 경로를 준다")
 def test_iris_are_exactly_the_handoff_ids():
     """이관 파일의 200 과 **정확히** 같아야 한다. 더도 덜도 안 된다."""
     want = {ln.strip() for ln in IDS_FILE.read_text().splitlines() if ln.strip()}

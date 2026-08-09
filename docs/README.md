@@ -53,6 +53,17 @@ still gets wrong, measured) → [`leakage_protocol.md`](leakage_protocol.md) →
 | [`deidentification_protocol.md`](deidentification_protocol.md) | KO | How the expert profiles were generated and de-identified. 105 of 110 are programmatically generated; 5 are perturbed derivatives with originals never ingested. |
 | [`private_data_handling_and_upload_policy.md`](private_data_handling_and_upload_policy.md) | KO | What may and may not be committed. |
 
+### Writing a document that must **not** ship publicly
+
+Put `<!-- sdkb:private -->` on the **first line**, alone. `make public-release` then leaves the
+file out of the public tree, and `make check-public` fails if it is there anyway. The marker is
+recognised on the first line only — a document that *discusses* the token (this one, for
+instance) is not affected.
+
+Do not rely on writing "CONFIDENTIAL" in the text. That was tried and measured: the word matches
+seven tracked files here and **all seven are ordinary documents**. A checker that cannot tell a
+document containing secrets from a document discussing them gets ignored.
+
 ## Data documents — where the numbers come from
 
 | Document | Lang | Contents |

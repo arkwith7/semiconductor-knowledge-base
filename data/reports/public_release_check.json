@@ -1,7 +1,9 @@
 {
-  "tree": "/tmp/claude-1000/-home-arkwith-Dev-SKKU-sdkb-prior-art-paper/f746e42d-925a-4cb0-aafd-b537a7a1bf00/scratchpad/sdkb-public",
+  "tree": "sdkb-public",
   "probes": 3341,
   "probes_dropped_overlapping_retained_fields": 2,
-  "files_scanned": 692,
-  "hits": []
+  "files_scanned": 679,
+  "hits": [],
+  "private_token_hits": [],
+  "absolute_path_hits": []
 }

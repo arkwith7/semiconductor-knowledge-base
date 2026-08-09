@@ -104,3 +104,16 @@ def test_llm_cache_key_includes_model():
     assert L._key("동일 청구항") != __import__("hashlib").sha256(b"other-model\n\xeb\x8f\x99").hexdigest()
     # 같은 텍스트·같은 모델이면 같은 키(재현성)
     assert L._key("x") == L._key("x")
+
+
+def test_외부_소스는_경로_없이_실패한다():
+    """F7 — `--source g2` 는 예전에 옆 저장소의 절대경로를 읽었다. 이제 호출자가 준다.
+
+    조용히 건너뛰지 않고 **실패**해야 한다 — 요청한 소스가 돌지 않았는데 성공으로 끝나는
+    것이 이 저장소가 반복해 낸 사고다.
+    """
+    import subprocess
+    r = subprocess.run([sys.executable, str(ROOT / "scripts" / "decompose_corpus.py"),
+                        "--source", "g2"], capture_output=True, text=True)
+    assert r.returncode != 0
+    assert "--g2-ttl" in (r.stderr + r.stdout), "무엇을 줘야 하는지 말해야 한다"

@@ -1,5 +1,15 @@
 #!/usr/bin/env python3
-"""공개 트리 검사기 — 원문이 한 조각도 남지 않았는지 **기계로** 센다 (CR-015 성공기준 ①②).
+"""공개 트리 검사기 — 원문·비공개 문서·홈 절대경로가 남지 않았는지 **기계로** 센다.
+
+세 가지를 본다 (CR-015 성공기준 ①② + R1·F7).
+  ① KIPRIS 원문 지문 — 아래 본문
+  ② **비공개 토큰**: 첫 줄이 `<!-- sdkb:private -->` 인 파일이 트리에 있는가
+  ③ **홈 절대경로**: 사용자 홈으로 시작하는 파일시스템 경로가 남았는가
+
+②③ 이 왜 검사기에도 있나 — 생성기가 이미 거른다. 그러나 생성기만 있으면 **사람이 손으로
+만든 트리**를 못 잡고, 검사기만 있으면 매번 사람이 지워야 한다. 되돌릴 수 없는 경로라
+거르는 층과 확인하는 층을 나눈다.
+
 
 grep 한 번으로는 부족하다. 원문은 데이터셋 파일에만 있는 것이 아니라 노트북 셀 출력·리포트·
 문서 예시로도 샌다 — 실제로 이 저장소에서 **노트북 07 의 출력 하나**가 그랬고, 그것은
@@ -24,6 +34,9 @@ import argparse
 import json
 import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from build_public_release import _ABS_PATH, PRIVATE_TOKEN, is_private_doc  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 CANONICAL = ROOT / "data" / "patents" / "raw" / "semiconductor_industry_rejected_patents.jsonl"
@@ -72,6 +85,28 @@ def build_probes(canonical: Path) -> tuple[list[tuple[str, str, str]], int]:
     return probes, dropped
 
 
+def scan_boundary(files: list[Path], tree: Path) -> tuple[list[str], list[dict]]:
+    """비공개 토큰 파일과 홈 절대경로를 찾는다 (R1·F7).
+
+    토큰은 **첫 줄에서만** 본다 — 본문에서 토큰을 언급하는 문서는 그것을 설명하는 것이지
+    선언하는 것이 아니다. 절대경로 정규식은 URL 경로 안의 같은 문자열을 잡지 않는다
+    (생성기 주석 참조).
+    """
+    private: list[str] = []
+    abs_hits: list[dict] = []
+    for p in files:
+        try:
+            raw = p.read_bytes()
+        except Exception:
+            continue
+        rel = str(p.relative_to(tree))
+        if is_private_doc(raw):
+            private.append(rel)
+        for m in _ABS_PATH.finditer(raw.decode("utf-8", errors="ignore")):
+            abs_hits.append({"file": rel, "path": m.group(0)})
+    return private, abs_hits
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--tree", type=Path, required=True, help="검사할 공개 트리")
@@ -90,8 +125,10 @@ def main() -> int:
     print(f"[check] 지문 {len(probes)}개 ({len(by_text)}개 고유) · "
           f"판별력 없어 버린 지문 {dropped}개 · 트리 {args.tree}")
 
-    files = [p for p in args.tree.rglob("*")
-             if p.is_file() and ".git" not in p.parts and p.stat().st_size <= MAX_BYTES]
+    # sorted: rglob 순서는 파일시스템 의존이다. 적중 목록의 순서가 흔들리면 리포트 diff 가
+    # 거짓 변경을 낸다.
+    files = sorted(p for p in args.tree.rglob("*")
+                   if p.is_file() and ".git" not in p.parts and p.stat().st_size <= MAX_BYTES)
     hits: list[dict] = []
     scanned = 0
     for p in files:
@@ -112,16 +149,34 @@ def main() -> int:
     if len(hits) > 40:
         print(f"   … 그리고 {len(hits) - 40}건 더")
 
+    private, abs_hits = scan_boundary(files, args.tree)
+    print(f"[check] 비공개 토큰({PRIVATE_TOKEN}) 적중 {len(private)}건 · "
+          f"홈 절대경로 적중 {len(abs_hits)}건")
+    for rel in private[:20]:
+        print(f"   ✗ {rel}  ← 첫 줄 비공개 선언")
+    for h in abs_hits[:20]:
+        print(f"   ✗ {h['file']}  ← {h['path']}")
+
+    # 리포트는 커밋된다 — 여기서 절대경로를 적으면 그것이 다음 공개본의 누출이 된다.
+    try:
+        tree_label = str(args.tree.resolve().relative_to(ROOT))
+    except ValueError:
+        tree_label = args.tree.name
+
     if args.report:
         args.report.write_text(json.dumps(
-            {"tree": str(args.tree), "probes": len(probes),
+            {"tree": tree_label, "probes": len(probes),
              "probes_dropped_overlapping_retained_fields": dropped,
-             "files_scanned": scanned, "hits": hits}, ensure_ascii=False, indent=2), encoding="utf-8")
+             "files_scanned": scanned, "hits": hits,
+             "private_token_hits": private, "absolute_path_hits": abs_hits},
+            ensure_ascii=False, indent=2), encoding="utf-8")
 
-    if hits:
-        print("\n[check] ❌ 실패 — 원문이 남아 있다. **푸시하지 않는다.**")
+    if hits or private or abs_hits:
+        why = " · ".join(w for w, n in (("원문", len(hits)), ("비공개 문서", len(private)),
+                                        ("홈 절대경로", len(abs_hits))) if n)
+        print(f"\n[check] ❌ 실패 — {why} 가 남아 있다. **푸시하지 않는다.**")
         return 1
-    print("\n[check] ✅ 통과 — 지문 어느 것도 공개 트리에 없다.")
+    print("\n[check] ✅ 통과 — 지문·비공개 토큰·홈 절대경로 어느 것도 공개 트리에 없다.")
     return 0
 
 
