@@ -172,7 +172,15 @@ concept-mapping: convert
 #   · validate 가 core-data 만 읽어 A-Box 에 걸리는 shape 이 아예 안 돌았다
 #   · shapes_patent.ttl 은 **어떤 타깃도 실행하지 않았다** (특허 제목 결측이 통과)
 # 그래서 A-Box 를 전부 싣고, 특허 shape 도 함께 돌린다.
+# 2026-08-09(CR-016 성공기준 ①): 빈 체크아웃에서 `make pipeline` 이 **여기서 죽었다** —
+# 두 A-Box 는 gitignore 된 빌드 산출물인데 pipeline 이 그것을 만들지 않는다. 파일이
+# 없으면 검증기가 "Data file not found" 로 종료하고, T-Box 재현까지 함께 막혔다.
+# 고친 방향은 **건너뛰기가 아니라 짓기**다 — 이 둘은 자격이 필요 없다(커밋된 원천에서
+# 만든다). 없을 때만 짓고, 그래도 없으면 그때는 건너뛰되 **무엇을 빌드해야 하는지 말한다**
+# (B층 질의에 이미 쓰던 방식). 검증 자체는 한 칸도 느슨하게 하지 않는다(§1.6).
 validate:
+	@test -f ontology/sdkb-abox-experts-problems.ttl || $(MAKE) PYTHON=$(PYTHON) abox
+	@test -f ontology/sdkb-abox-patents.ttl || $(MAKE) PYTHON=$(PYTHON) abox-patents
 	$(PYTHON) scripts/validate_shacl.py --data ontology/sdkb-core-data.ttl ontology/sdkb-abox-experts-problems.ttl
 	$(PYTHON) scripts/validate_shacl.py --shapes validation/shapes_patent.ttl \
 		--data ontology/sdkb-abox-patents.ttl ontology/sdkb-core-data.ttl ontology/sdkb-patent.ttl

@@ -32,13 +32,17 @@ try:
 except ImportError:
     _conn = None  # type: ignore[assignment]
 
-OCR_DIR = Path("/home/arkwith/Dev/paper_data/data/processed/rejection_decisions/txt")
-STRUCT_DIR = Path("/home/arkwith/Dev/sdkb/data/patents/rejection_decisions/structured")
-OPINION_DIR = Path("/home/arkwith/Dev/paper_data/data/processed/opinion_notices")
+# 2026-08-09(CR-016): 경로 일곱 개가 개인 홈 절대경로였다 — 넷은 이 저장소를 스스로
+# 가리켰고(그런데 남의 컴퓨터에서는 없는 경로다) 둘은 흡수 전 paper_data 를 가리켰다.
+# 흡수(§4)로 통지서·OCR 산출물의 자리는 이 저장소의 data/processed/ 다.
+REPO = Path(__file__).resolve().parents[1]
+OCR_DIR = REPO / "data" / "processed" / "rejection_decisions" / "txt"
+STRUCT_DIR = REPO / "data" / "patents" / "rejection_decisions" / "structured"
+OPINION_DIR = REPO / "data" / "processed" / "opinion_notices"
 OPINION_INDEX = OPINION_DIR / "_index.json"
-OUT = Path("/home/arkwith/Dev/sdkb/data/interim/reextracted_judgments.jsonl")
-REASONS_OUT = Path("/home/arkwith/Dev/sdkb/data/interim/rejection_reasons.jsonl")
-REASONS_REPORT = Path("/home/arkwith/Dev/sdkb/data/reports/rejection_reasons_loss.json")
+OUT = REPO / "data" / "interim" / "reextracted_judgments.jsonl"
+REASONS_OUT = REPO / "data" / "interim" / "rejection_reasons.jsonl"
+REASONS_REPORT = REPO / "data" / "reports" / "rejection_reasons_loss.json"
 OLLAMA_URL = "http://localhost:11434/api/chat"
 MODEL = "qwen3-coder:30b"
 
@@ -322,7 +326,7 @@ def main() -> int:
     if args.validate:
         # 기존 GT(evidence_v2 target_claims) 있는 특허에서 청구항 집합 일치율
         gt = {}
-        for line in open("/home/arkwith/Dev/sdkb/data/patents/raw/semiconductor_industry_rejected_patents.jsonl"):
+        for line in open(REPO / "data" / "patents" / "raw" / "semiconductor_industry_rejected_patents.jsonl"):
             d = json.loads(line); a = d["target_patent"]["application_number"]
             cl = set()
             for e in (d["meta"].get("ground_truth_evidence_v2") or []):

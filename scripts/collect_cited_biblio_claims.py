@@ -29,7 +29,7 @@ from dotenv import load_dotenv
 # load_dotenv 는 없는 파일에 조용히 성공하므로, 그대로 두면 키가 비어 있는 채로
 # API 가 전부 not_found 를 내고 그것이 "자원 부재"로 오독된다. 이 저장소의 .env 를 쓴다.
 for _env in (Path(__file__).resolve().parents[1] / ".env",
-             Path("/home/arkwith/Dev/SKKU/sdkb-foresight-paper/.env")):
+             Path(__file__).resolve().parents[2] / "SKKU/sdkb-foresight-paper/.env"):
     if _env.exists():
         load_dotenv(_env)
         break

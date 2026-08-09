@@ -29,6 +29,17 @@ from build_b_layer_cited_ids import (  # noqa: E402
 
 EDGES = ROOT / "data" / "patents" / "prior_art_edges.parquet"
 
+# 2026-08-09(CR-016 성공기준 ①): 이 파일들은 **논문 평가자산**이라 공개본에 없다
+# (원고 §10.3 — 하네스 비공개). 그런데 테스트는 그 사실을 몰랐고, 개인 컴퓨터에
+# 논문 저장소가 있어서 **우연히** 통과하고 있었다. 빈 체크아웃에서 처음 드러났다.
+# 없으면 **건너뛴다** — 검증을 느슨하게 하는 것이 아니라, 입력이 없으면 이 질문을
+# 물을 수 없다는 사실을 말하는 것이다. 있으면 예전 그대로 전부 돈다.
+_missing = [p.name for p in (DEFAULT_IDS, EDGES) if not p.exists()]
+pytestmark = pytest.mark.skipif(
+    bool(_missing),
+    reason=f"논문 평가자산 미비 — {_missing}. 목록은 --ids 로 주거나 논문 저장소에서 가져온다.",
+)
+
 
 # ── 단위: 정규화 ────────────────────────────────────────────────────
 # `cited_doc_id` 기대값은 손으로 지은 것이 아니라 **A층 실물에서 확인한 규약**이다.

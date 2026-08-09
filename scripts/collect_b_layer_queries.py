@@ -47,7 +47,11 @@ import enrich_unresolved as eu  # noqa: E402
 from kipris_dataset.kipris import KiprisClient, OP_BIBLIO_DETAIL  # noqa: E402
 
 DEFAULT_IDS = Path(
-    "/home/arkwith/Dev/SKKU/sdkb-prior-art-paper/upstream/handoff/CR-012-b-query-ids.txt"
+    ROOT / "data" / "patents" / "b_layer_query_ids.txt"
+    # 2026-08-09(CR-016): 기본값이 개인 홈의 논문 저장소 절대경로였다. 그 목록은 논문
+    # 평가자산이라 여기로 옮기지 않는다(원고 §10.3 하네스 비공개) — 대신 기본값을
+    # 이 저장소 안으로 돌리고, 없으면 --ids 로 주라고 말한다. 공개본에 남의 홈 경로가
+    # 박혀 있으면 외부인에게는 그냥 깨진 스크립트다. CR-012 이관 목록.
 )
 OUT_JSONL = ROOT / "data" / "patents" / "b_layer_queries_raw.jsonl"
 OUT_REPORT = ROOT / "data" / "reports" / "b_layer_query_collection.json"

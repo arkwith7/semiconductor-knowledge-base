@@ -4,6 +4,28 @@ All notable changes to SDKB will be documented in this file.
 
 ## [Unreleased] — v1.0.0-dev
 
+### Fixed (2026-08-09 — CR-016 성공기준 ① · 빈 체크아웃에서 처음 드러난 것 넷)
+
+**공개 트리를 실제로 격리해 `make pipeline` 을 돌려 봤다.** 넷이 걸렸고, 넷 다 **개인
+컴퓨터에 옆 저장소가 있어서 우연히 통과하고 있던** 것들이다.
+
+- **`validate` 가 `pipeline` 이 만들지 않는 A-Box 를 요구했다.** 두 TTL 은 gitignore 된
+  빌드 산출물인데 파일이 없으면 검증기가 종료하고, **T-Box 재현까지 함께 막혔다.**
+  고친 방향은 **건너뛰기가 아니라 짓기**다 — 이 둘은 자격이 필요 없다(커밋된 원천에서
+  만든다). 없을 때만 `abox`·`abox-patents` 를 부른다. 검증은 한 칸도 느슨해지지 않았다.
+- **개인 홈 절대경로 열둘을 끊었다.** `reextract_claim_judgments.py` 일곱 ·
+  `llm_claim_validate.py`·`collect_cited_biblio_claims.py` 의 `.env` 순서(이 저장소를
+  **먼저** 본다 — 앞서는 없는 남의 경로가 1순위라 자격이 조용히 비었다) ·
+  `build_b_layer_cited_ids.py`·`collect_b_layer_queries.py` 의 기본 목록 경로.
+- **테스트 여덟이 커밋되지 않은 입력에 의존하고 있었다.** B층 식별자 목록 일곱은 논문
+  평가자산(§10.3 비공개)이고, `concept_mapping` 결정성 하나는 `cited_enriched/`(수집분)를
+  읽는다. **입력이 없으면 물을 수 없는 질문이므로 건너뛰되, 무엇이 없어서인지 말한다.**
+  비공개 리포에서는 목록 파일을 제자리에 두어 **215건 전량이 그대로 돈다**(파일은
+  gitignore — 공개 트리 생성기가 `git ls-files` 만 복사하므로 공개본에 새지 않는다).
+- **실측**: 빈 체크아웃 `make pipeline` **완주**(152 통과 · 73 스킵 — 스킵은 전부 자격·
+  수집분 미비) · 비공개 리포 **215 통과 · 10 스킵** · SHACL **3/3** ·
+  공개 트리 검사기 **파일 692 · 적중 0**.
+
 ### Added (2026-08-09 — CR-015 · 공개본 경계 · (B) 확정 · 하류 D-36)
 
 - **원고와 리포가 서로 반대였다.** 원고 §10.3 은 *"KIPRIS 원문은 재배포할 수 없다"* 고

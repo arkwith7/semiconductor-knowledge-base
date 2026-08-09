@@ -220,8 +220,18 @@ def test_baseline_is_pinned_not_head():
 
 
 # ── 통합: 결정성 ────────────────────────────────────────────────────
+@pytest.mark.skipif(
+    not (ROOT / "data" / "patents" / "cited_enriched").exists(),
+    reason="인용 보강분(cited_enriched)이 없다 — 재생성 입력이 없으면 결정성을 물을 수 없다. "
+           "빌드: make refetch-fulltext (KIPRIS 키 필요)",
+)
 def test_rebuild_is_byte_identical():
-    """두 번 돌려 같은 바이트 — 성공기준 ① 의 뒷부분."""
+    """두 번 돌려 같은 바이트 — 성공기준 ① 의 뒷부분.
+
+    2026-08-09(CR-016): 빈 체크아웃에서 실패했다. 재생성은 `cited_enriched/`(gitignore)를
+    읽는데 공개본에는 없다 — 자산은 커밋돼 있으나 **그것을 다시 만들 재료가 없다.**
+    입력이 없을 때 이 테스트가 말할 수 있는 것은 없으므로 건너뛴다.
+    """
     before = hashlib.sha256(OUT_PATH.read_bytes()).hexdigest()
     r = subprocess.run([sys.executable, str(ROOT / "scripts" / "build_concept_mapping.py"),
                         "--check"], capture_output=True, text=True)

@@ -21,12 +21,14 @@ from pathlib import Path
 
 import requests
 
-# .env(paper 저장소)에서 AWS 자격증명·모델 ID 를 읽는다. 이미 설정된 환경변수는 덮지 않는다.
+# .env 에서 AWS 자격증명·모델 ID 를 읽는다. 이미 설정된 환경변수는 덮지 않는다.
+# 2026-08-09(CR-016): 이 저장소의 .env 를 **먼저** 본다. 앞서는 옆 저장소의 개인 홈
+# 절대경로가 1순위였고, 그 경로가 없는 사람에게는 자격이 조용히 비어 있었다.
 try:
     from dotenv import load_dotenv
-    for _p in ("/home/arkwith/Dev/SKKU/sdkb-foresight-paper/.env",
-               str(Path(__file__).resolve().parents[2] / "SKKU/sdkb-foresight-paper/.env")):
-        if Path(_p).exists():
+    for _p in (Path(__file__).resolve().parents[1] / ".env",
+               Path(__file__).resolve().parents[2] / "SKKU/sdkb-foresight-paper/.env"):
+        if _p.exists():
             load_dotenv(_p)
             break
 except ImportError:
