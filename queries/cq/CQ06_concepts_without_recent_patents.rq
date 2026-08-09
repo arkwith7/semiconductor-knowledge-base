@@ -1,0 +1,23 @@
+# desc: 최근 5년(2021-) 출원이 하나도 없는 개념은 무엇인가? — 전 공정 균형 커버리지의 공백
+# suite: tf
+# monotone: down
+# expect-min: 0
+PREFIX ont:  <https://w3id.org/sdkb/ont/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+SELECT ?axis ?conceptLabel
+WHERE {
+  # expect-min 0: 공백이 0건이면 커버리지가 완전하다는 뜻이므로 실패가 아니다.
+  # 이 CQ 의 값어치는 응답 가능 여부가 아니라 **행 수**에 있다 — G₀ 대비 G₁ 에서 줄어드는가.
+  VALUES (?conceptType ?linkProp ?axis) {
+    (ont:Process    ont:realizesProcess "process")
+    (ont:SubProcess ont:realizesProcess "subprocess")
+    (ont:Device     ont:concernsDevice  "device")
+  }
+  ?concept a ?conceptType ; skos:prefLabel ?conceptLabel .
+  FILTER NOT EXISTS {
+    ?patent a ont:Patent ; ?linkProp ?concept ; ont:filingDate ?date .
+    FILTER(?date >= "2021-01-01"^^xsd:date)
+  }
+}
+ORDER BY ?axis ?conceptLabel

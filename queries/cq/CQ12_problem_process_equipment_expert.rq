@@ -1,0 +1,17 @@
+# desc: 소부장 실문제가 어느 공정·장비에 걸려 있고, 그 공정에 전문성을 가진 전문가는 누구인가? — 문제 해결 태스크
+# suite: em
+# monotone: up
+# expect-min: 1
+PREFIX ont:  <https://w3id.org/sdkb/ont/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?problemLabel ?processLabel ?equipmentLabel ?expertLabel
+WHERE {
+  ?problem a ont:Problem ;
+           ont:involvesProcess ?process ;
+           ont:involvesEquipment ?equipment ;
+           skos:prefLabel ?problemLabel .
+  ?process skos:prefLabel ?processLabel .
+  ?equipment skos:prefLabel ?equipmentLabel .
+  ?expert a ont:Expert ; ont:hasProcessExpertise ?process ; skos:prefLabel ?expertLabel .
+}
+ORDER BY ?problemLabel ?processLabel ?equipmentLabel ?expertLabel

@@ -1,0 +1,14 @@
+# desc: 특정 공정 단계가 요구하는 스킬을 실제로 보유한 전문가는 누구인가? — 인력 매칭 태스크
+# suite: em
+# monotone: up
+# expect-min: 1
+PREFIX ont:  <https://w3id.org/sdkb/ont/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?stepLabel ?skillLabel ?expertLabel
+WHERE {
+  VALUES ?stepType { ont:Process ont:SubProcess }
+  ?step a ?stepType ; ont:requiresSkill ?skill ; skos:prefLabel ?stepLabel .
+  ?skill skos:prefLabel ?skillLabel .
+  ?expert a ont:Expert ; ont:hasSkill ?skill ; skos:prefLabel ?expertLabel .
+}
+ORDER BY ?stepLabel ?skillLabel ?expertLabel

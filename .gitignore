@@ -38,9 +38,10 @@ ontology/sdkb-governance-us-instances.ttl
 # is intentionally NOT ignored — Amendment v2 commits the source dataset
 # to the repo pending KIPRIS license resolution. See docs/dataset_rejected_patents_card.md §6.
 
-# ── Prior-art collected assets (paper_data Phase A~D, 2026-05-16) ──
-# Bulk / derived: gitignored, re-copy from /home/arkwith/Dev/paper_data via
-# scripts/sync_paper_data_assets.sh. Provenance: plan §7.1.
+# ── Prior-art collected assets (Phase A~D, 2026-05-16) ──
+# Bulk / derived: gitignored. 2026-08-09(CR-016) 전에는 옆 저장소에서 rsync 로 받았고
+# (scripts/sync_paper_data_assets.sh — 삭제됨) 그래서 그 디렉터리가 없는 사람은 채울 수
+# 없었다. 지금은 `make refetch-fulltext` 로 KIPRIS 에서 다시 받는다.
 data/patents/fulltext/
 
 # ── 흡수된 수집기의 작업 디렉터리 (2026-08-09 · CR-016 §4) ──

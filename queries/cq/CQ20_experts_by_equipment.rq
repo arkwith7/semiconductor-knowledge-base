@@ -1,0 +1,16 @@
+# desc: 이 장비(또는 장비 클래스)를 실제로 다뤄본 전문가는 누구인가? — 장비 축 인력 매칭 (스킬이 아니라 장비 경험으로 찾는다)
+# suite: em
+# monotone: up
+# expect-min: 1
+PREFIX ont:  <https://w3id.org/sdkb/ont/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+# 전문가의 장비 경험은 개별 장비(ont:Equipment)에도, 장비 클래스(ont:EquipmentClass)에도 붙는다
+# — 이력서가 "Lam Kiyo" 라고 쓰기도 하고 "식각기" 라고 쓰기도 하기 때문이다. 한쪽만 열면
+# 300건 중 1건만 보인다(실측). 둘 다 연다.
+SELECT ?equipmentLabel ?expertLabel
+WHERE {
+  ?expert a ont:Expert ; ont:hasEquipmentExperience ?equipment ; skos:prefLabel ?expertLabel .
+  { ?equipment a ont:Equipment } UNION { ?equipment a ont:EquipmentClass }
+  ?equipment skos:prefLabel ?equipmentLabel .
+}
+ORDER BY ?equipmentLabel ?expertLabel

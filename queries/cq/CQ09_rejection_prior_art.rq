@@ -1,0 +1,19 @@
+# desc: 거절된 특허가 어떤 법적 근거(신규성·진보성)로, 어떤 선행기술 때문에 거절됐는가? — 선행기술조사 태스크의 정답 집합
+# suite: pa
+# monotone: up
+# expect-min: 1
+PREFIX ont:  <https://w3id.org/sdkb/ont/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+# 인용은 두 층이다: 전체 인용(hasPriorArt)과 그중 **심사관 인용**(hasPriorArtExaminer).
+# 후자가 선행기술 판단의 권위 있는 근거이므로 둘을 나눠 센다.
+SELECT ?patent ?title ?rejectionType (COUNT(DISTINCT ?cited) AS ?nCited) (COUNT(DISTINCT ?byExaminer) AS ?nExaminer)
+WHERE {
+  ?patent a ont:RejectedPatent ;
+          skos:prefLabel ?title ;
+          ont:rejectedFor ?rejectionType ;
+          ont:hasPriorArt ?cited ;
+          ont:hasPriorArtExaminer ?byExaminer .
+}
+# 제목이 아니라 IRI 로 묶는다 — 동명 특허가 한 행으로 합쳐지면 건수가 조용히 줄어든다.
+GROUP BY ?patent ?title ?rejectionType
+ORDER BY DESC(?nExaminer)

@@ -1,0 +1,18 @@
+# desc: 이 공정은 어떤 파라미터로 제어되고 무엇으로 측정되는가? — 공정 엔지니어의 관리 질의
+# suite: core
+# monotone: up
+# expect-min: 1
+PREFIX ont:  <https://w3id.org/sdkb/ont/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+# 제어(hasParameter)와 측정(measuredBy)은 서로 다른 공정에 붙어 있다 — 둘 다 필수로 걸면
+# 0행이 된다. 그것 자체가 관측이므로 UNION 으로 열고, 어느 공정이 어느 쪽만 갖는지 드러낸다.
+SELECT ?stepLabel ?knobLabel
+WHERE {
+  ?step skos:prefLabel ?stepLabel .
+  { ?step ont:hasParameter ?knob }
+  UNION
+  { ?step ont:measuredBy ?knob }
+  ?knob skos:prefLabel ?knobLabel .
+  { ?knob a ont:Parameter } UNION { ?knob a ont:Metrology }
+}
+ORDER BY ?stepLabel ?knobLabel

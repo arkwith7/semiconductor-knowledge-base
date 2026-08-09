@@ -1,0 +1,16 @@
+# desc: 출원인별 공정 포트폴리오는 어떻게 분포하는가? — "전 공정 포트폴리오 보유"(§1.1) 주장의 전제
+# suite: core
+# monotone: up
+# expect-min: 1
+PREFIX ont:  <https://w3id.org/sdkb/ont/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?applicant (COUNT(DISTINCT ?process) AS ?steps) (COUNT(?patent) AS ?n)
+WHERE {
+  # 특정 기업이 전 공정에 걸쳐 특허를 보유하는지는 출원인 없이는 물을 수 없다.
+  ?patent a ont:Patent ;
+          ont:assignedTo ?org ;
+          ont:realizesProcess ?process .
+  ?org skos:prefLabel ?applicant .
+}
+GROUP BY ?applicant
+ORDER BY DESC(?steps) DESC(?n)

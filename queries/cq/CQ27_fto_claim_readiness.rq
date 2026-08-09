@@ -1,0 +1,16 @@
+# desc: 어떤 특허가 청구항 전문(FTO·회피설계의 기초)을 그래프에 갖추고 있으며 출원인별로 몇 건인가? — IP-R&D FTO 자기완결성 (RQ3 · 태스크 시점 청구항 재수집 불요)
+# suite: pa
+# monotone: up
+# expect-min: 1
+PREFIX ont:  <https://w3id.org/sdkb/ont/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?orgLabel (COUNT(DISTINCT ?patent) AS ?nFtoReady)
+WHERE {
+  ?patent a ont:Patent ;
+          ont:claimText ?claim ;
+          ont:claimCount ?claimCount ;
+          ont:assignedTo ?org .
+  ?org skos:prefLabel ?orgLabel .
+}
+GROUP BY ?orgLabel
+ORDER BY DESC(?nFtoReady)

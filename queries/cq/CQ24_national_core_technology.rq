@@ -1,0 +1,13 @@
+# desc: 어떤 기술 개념이 국가핵심기술(NCT)로 지정돼 해외 이전 시 산업부 승인이 필요한가? — 산업기술보호법 제11조 (소부장 해외 M&A·기술이전 심사)
+# suite: core
+# monotone: up
+# expect-min: 1
+PREFIX gov:  <https://w3id.org/sdkb/gov/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?concept ?controlLabel ?nct
+WHERE {
+  ?concept gov:subjectToControl ?control .
+  ?control gov:designatedAsNCT ?nct .
+  OPTIONAL { ?control skos:prefLabel ?controlLabel }
+}
+ORDER BY ?concept

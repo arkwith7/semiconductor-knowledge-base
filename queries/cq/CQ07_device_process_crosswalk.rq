@@ -1,0 +1,17 @@
+# desc: 특정 디바이스의 특허가 어떤 공정을 실현하는가? — 제품(시장) 축과 공정(기술) 축의 교차
+# suite: core
+# monotone: up
+# expect-min: 1
+PREFIX ont:  <https://w3id.org/sdkb/ont/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?deviceLabel ?processLabel (COUNT(?patent) AS ?n)
+WHERE {
+  # 소부장 기업의 실제 질문("우리 식각 기술이 어느 제품으로 가는가")이 이 경로를 탄다.
+  ?patent a ont:Patent ;
+          ont:concernsDevice ?device ;
+          ont:realizesProcess ?process .
+  ?device  skos:prefLabel ?deviceLabel .
+  ?process skos:prefLabel ?processLabel .
+}
+GROUP BY ?deviceLabel ?processLabel
+ORDER BY DESC(?n)

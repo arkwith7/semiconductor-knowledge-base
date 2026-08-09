@@ -1,0 +1,19 @@
+# desc: 특정 공정에 쓰이는 장비를 공급하는 회사는 누구이고, 그 회사의 특허 포트폴리오는 몇 건인가? — IP-R&D 공급망 질의 (RQ3 의 심장)
+# suite: core
+# monotone: up
+# expect-min: 1
+PREFIX ont: <https://w3id.org/sdkb/ont/>
+# 공급 관계는 두 층위로 표현된다: 장비클래스의 제조사(madeBy)와 개별 장비의 공급사(providedBy).
+# 둘 다 열지 않으면 공급망의 절반만 본다.
+SELECT ?step ?supplier (COUNT(DISTINCT ?patent) AS ?nPatents)
+WHERE {
+  ?step ont:usesEquipmentClass ?eqClass .
+  ?eqClass a ont:EquipmentClass .
+  ?supplier a ont:Vendor .
+  { ?eqClass ont:madeBy ?supplier }
+  UNION
+  { ?equipment ont:isInstanceOf ?eqClass ; ont:providedBy ?supplier }
+  ?patent a ont:Patent ; ont:assignedTo ?supplier .
+}
+GROUP BY ?step ?supplier
+ORDER BY DESC(?nPatents)

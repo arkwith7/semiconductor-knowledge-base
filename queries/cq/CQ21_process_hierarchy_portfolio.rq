@@ -1,0 +1,16 @@
+# desc: 상위 공정 그룹별로 하위 공정은 무엇이고 각 하위 공정에 특허가 몇 건인가? — 계층을 따라 본 포트폴리오 공백
+# suite: core
+# monotone: up
+# expect-min: 1
+PREFIX ont:  <https://w3id.org/sdkb/ont/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+# 하위 단계를 상위로 합산(roll-up)하지 않는다 — 합산하면 같은 특허가 두 층위에 이중 계상된다
+# (논문 §3.4.3). 여기서는 계층을 **보여줄** 뿐 커버리지를 합치지 않는다.
+SELECT ?groupLabel ?stepLabel (COUNT(DISTINCT ?patent) AS ?nPatents)
+WHERE {
+  ?group ont:hasSubprocess ?step ; skos:prefLabel ?groupLabel .
+  ?step skos:prefLabel ?stepLabel .
+  OPTIONAL { ?patent a ont:Patent ; ont:realizesProcess ?step }
+}
+GROUP BY ?groupLabel ?stepLabel
+ORDER BY ?groupLabel ?stepLabel

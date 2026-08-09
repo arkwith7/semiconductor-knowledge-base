@@ -1,0 +1,15 @@
+# desc: 공정 단계별로 매핑된 특허가 몇 건인가? (커버리지 기본 질의 — Process/SubProcess 두 층위)
+# suite: core
+# monotone: up
+# expect-min: 1
+PREFIX ont:  <https://w3id.org/sdkb/ont/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?level ?stepLabel (COUNT(?patent) AS ?n)
+WHERE {
+  # RDFS 추론에 의존하지 않도록 두 층위를 명시적으로 연다 (cq_runner 는 추론 없이 질의).
+  VALUES (?stepType ?level) { (ont:Process "process") (ont:SubProcess "subprocess") }
+  ?step a ?stepType ; skos:prefLabel ?stepLabel .
+  ?patent a ont:Patent ; ont:realizesProcess ?step .
+}
+GROUP BY ?level ?stepLabel
+ORDER BY DESC(?n)

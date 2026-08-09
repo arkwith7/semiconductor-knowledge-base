@@ -1,0 +1,18 @@
+# desc: 거절특허의 **종속항 계층**이 살아 있는가 — 축소 실시태양은 무효 대비의 방어선이다 (REF-001 §4 "비침해 논리 개발·무효 조사")
+# suite: pa
+# target: sidecar
+# monotone: up
+# expect-min: 1
+PREFIX ont: <https://w3id.org/sdkb/ont/>
+# 독립항이 무효가 되어도 종속항이 살아남는 것이 실무의 방어 구조다. 그 판단은 종속 관계가
+# 그래프에 명시돼 있어야 가능하며, 종속 참조가 끊기면 "이 청구항이 무엇을 한정하는가"를
+# 물을 수 없게 된다 — 청구항 분해 Tier1 이 실체화한 축이다.
+SELECT ?parent (COUNT(DISTINCT ?child) AS ?nDependent)
+WHERE {
+  ?child a ont:Claim ;
+         ont:dependsOnClaim ?parent .
+  FILTER(STRSTARTS(STR(?child), "https://w3id.org/sdkb/data/claim/rej_"))
+}
+# 부모 청구항으로 묶는다 — 종속항이 많이 달린 청구항일수록 방어 여지가 크다.
+GROUP BY ?parent
+ORDER BY DESC(?nDependent)

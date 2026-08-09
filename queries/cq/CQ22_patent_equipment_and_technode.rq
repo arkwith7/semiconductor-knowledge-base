@@ -1,0 +1,18 @@
+# desc: 특허가 겨냥하는 장비 클래스·기술 노드·주제는 무엇인가? — 특허를 장비/세대 축에 붙이는 질의 (소부장 장비사의 IP-R&D)
+# suite: core
+# monotone: up
+# expect-min: 1
+PREFIX ont:  <https://w3id.org/sdkb/ont/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?title ?targetLabel
+WHERE {
+  ?patent a ont:Patent ; skos:prefLabel ?title .
+  { ?patent ont:realizesEquipmentClass ?target }
+  UNION
+  { ?patent ont:concernsTechnologyNode ?target }
+  UNION
+  { ?patent ont:relatedToTopic ?target }
+  ?target skos:prefLabel ?targetLabel .
+  { ?target a ont:EquipmentClass } UNION { ?target a ont:TechnologyNode } UNION { ?target a ont:RootCause }
+}
+ORDER BY ?title ?targetLabel

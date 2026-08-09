@@ -1,0 +1,13 @@
+# desc: 이 실문제가 얽힌 재료는 무엇이고, 그 재료에 전문성을 가진 전문가는 누구인가? — 재료 축 인력 매칭
+# suite: em
+# monotone: up
+# expect-min: 1
+PREFIX ont:  <https://w3id.org/sdkb/ont/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?problemLabel ?materialLabel ?expertLabel
+WHERE {
+  ?problem a ont:Problem ; ont:involvesMaterial ?material ; skos:prefLabel ?problemLabel .
+  ?material skos:prefLabel ?materialLabel .
+  ?expert a ont:Expert ; ont:hasMaterialExpertise ?material ; skos:prefLabel ?expertLabel .
+}
+ORDER BY ?problemLabel ?materialLabel ?expertLabel

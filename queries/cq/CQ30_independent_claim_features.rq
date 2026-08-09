@@ -1,0 +1,22 @@
+# desc: 거절특허 **독립항의 한정요소**는 무엇인가? — 회피설계(design-around)와 침해 대비의 출발점 (REF-001 §4 방어기법 · §9.1 이 "범위 밖"으로 적어 둔 항목)
+# suite: pa
+# target: sidecar
+# monotone: up
+# expect-min: 1
+PREFIX ont: <https://w3id.org/sdkb/ont/>
+# 회피설계는 "독립항의 한정요소를 하나라도 빠뜨리면 침해가 아니다"에서 출발한다. 그러려면
+# 청구항 원문 한 덩어리가 아니라 **분해된 한정요소**가 있어야 한다 — SDKB 는 청구항 텍스트를
+# ClaimFeature.featureText 로 분해 저장한다(claimText 단일 문자열 없음 · SPEC-006 §5).
+# 이 CQ 는 C2 검색 실험의 입력 층(P1 FeatureCoverage · featureText 임베딩)과 같은 층을 심문한다.
+SELECT ?claim (COUNT(DISTINCT ?feature) AS ?nFeature)
+WHERE {
+  ?claim a ont:Claim ;
+         ont:isIndependent true ;
+         ont:hasFeature ?feature .
+  ?feature ont:featureText ?text .
+  # 질의 특허(거절특허) 청구항으로 한정한다 — 후보 코퍼스(g1_/g2_)까지 세면 이 CQ 가
+  # 선행기술조사 태스크가 아니라 코퍼스 규모를 재게 된다.
+  FILTER(STRSTARTS(STR(?claim), "https://w3id.org/sdkb/data/claim/rej_"))
+}
+GROUP BY ?claim
+ORDER BY DESC(?nFeature)

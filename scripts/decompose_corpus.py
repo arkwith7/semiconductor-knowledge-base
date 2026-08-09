@@ -34,8 +34,13 @@ def _parents(txt: str) -> list[int]:
     head = re.sub(r"^\s*\d+\s*[.)]\s*", "", txt.strip())[:120]  # 참조는 청구항 앞머리에 온다
     return sorted({int(g) for m in _PARENT.finditer(head) for g in m.groups() if g})
 
-SDKB = Path("/home/arkwith/Dev/sdkb")
-PD = Path("/home/arkwith/Dev/paper_data")
+# 2026-08-09(CR-016 §4): 여기 있던 절대경로 둘(SDKB·PD)을 리포 상대로 바꿨다. 인용 보강분을
+# 옆 저장소에서 읽고 있었는데, 흡수된 collect_cited_biblio_claims.py 는 이 저장소의
+# data/patents/cited_enriched/ 로 쓴다 — 원천이 둘이면 다시 갈라진다. 교체 전에 대조했다:
+# 읽는 5파일(kipris.jsonl · bigquery{,_us,_b_layer,_us_b_layer}.parquet)이 **바이트 동일**이라
+# 산출은 바뀌지 않는다.
+SDKB = Path(__file__).resolve().parents[1]
+ENRICHED = SDKB / "data" / "patents" / "cited_enriched"
 FEATURES = SDKB / "data" / "interim" / "claim_features.jsonl"
 
 
@@ -51,7 +56,7 @@ def src_rejected():
 
 
 def src_cited():
-    kr = [json.loads(line) for line in (PD / "data/patents/cited_enriched/kipris.jsonl").open()]
+    kr = [json.loads(line) for line in (ENRICHED / "kipris.jsonl").open()]
     for r in kr:
         if (r.get("n_claims") or 0) > 0:
             for no, txt in split_claims(str(r["claims"])):   # 독립·종속 전부(Tier 2)
@@ -63,7 +68,7 @@ def src_cited():
     # bigquery_b_layer(JP·WO·CN·EP)는 현재 n_claims>0 이 0건이라 산출이 없다 — D-05 가 해소되면
     # 자동으로 흐르도록 통로만 열어 둔다(고치는 것이 아니라 통로다 · CR-011 비목표 ⓐ 와 무충돌).
     for pq in ("bigquery_us.parquet", "bigquery_b_layer.parquet", "bigquery_us_b_layer.parquet"):
-        df = pd.read_parquet(PD / "data/patents/cited_enriched" / pq)
+        df = pd.read_parquet(ENRICHED / pq)
         for _, r in df[df.n_claims.fillna(0) > 0].iterrows():
             for no, txt in split_claims(str(r["claims"])):
                 dep = [] if is_independent(txt) else _parents(txt)

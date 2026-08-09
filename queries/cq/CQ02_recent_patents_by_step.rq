@@ -1,0 +1,16 @@
+# desc: 특정 시점(2021년) 이후 출원된 특허를 공정 단계와 함께 조회할 수 있는가? (시계열의 전제)
+# suite: tf
+# monotone: up
+# expect-min: 1
+PREFIX ont:  <https://w3id.org/sdkb/ont/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+SELECT ?patent ?date ?stepLabel
+WHERE {
+  ?patent a ont:Patent ;
+          ont:filingDate ?date ;
+          ont:realizesProcess ?step .
+  ?step skos:prefLabel ?stepLabel .
+  FILTER(?date >= "2021-01-01"^^xsd:date)
+}
+ORDER BY ?date

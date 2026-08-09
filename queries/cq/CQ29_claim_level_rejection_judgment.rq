@@ -1,0 +1,20 @@
+# desc: 거절 판단이 어느 **청구항**에 대해, 어느 선행기술로, 어떤 법적 근거로 내려졌는가? — 심사이력(prosecution history) 검토의 최소 단위 (REF-001 §7.1 단계 8 · §4 방어기법)
+# suite: pa
+# target: sidecar
+# monotone: up
+# expect-min: 1
+PREFIX ont: <https://w3id.org/sdkb/ont/>
+# 현행 CQ09 는 **특허 수준**에서 멈춘다 — "이 특허가 이 선행기술 때문에 거절됐다"까지다.
+# 실무의 방어(비침해 논리·무효 조사)는 **청구항 단위**로 이뤄지므로 판단의 실제 입도를 묻는다.
+# PriorArtJudgment 는 사이드카에만 있다(G₀ 에 인스턴스 0건 · PLAN-023 §0).
+SELECT ?claim ?priorArt ?ground (COUNT(DISTINCT ?judgment) AS ?nJudgment)
+WHERE {
+  ?judgment a ont:PriorArtJudgment ;
+            ont:aboutClaim ?claim ;
+            ont:overPriorArt ?priorArt ;
+            ont:onGround ?ground .
+}
+# 청구항 IRI 로 묶는다 — 같은 청구항에 복수 선행기술이 걸리는 것이 정상이며(진보성 조합 인용),
+# 그것을 한 행으로 접으면 판단의 다중성이 사라진다.
+GROUP BY ?claim ?priorArt ?ground
+ORDER BY DESC(?nJudgment)

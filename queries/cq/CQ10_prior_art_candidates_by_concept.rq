@@ -1,0 +1,16 @@
+# desc: 아이디어를 온톨로지 개념(여기서는 plasma_etch)으로 표현했을 때, 같은 개념을 실현하면서 출원일이 앞선 선행기술 후보는? — IP-R&D 선행기술조사의 핵심 질의
+# suite: pa
+# monotone: up
+# expect-min: 1
+PREFIX ont:  <https://w3id.org/sdkb/ont/>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+# 개념과 기준일은 질의의 파라미터다. 태스크는 "내 아이디어(개념 C, 착상 시점 T)에 대한
+# 선행기술은 무엇인가"이며, 여기서는 대표 개념 하나를 상수로 고정해 응답 완전성을 잰다.
+SELECT ?prior ?filed
+WHERE {
+  ?prior a ont:Patent ;
+         ont:realizesProcess <https://w3id.org/sdkb/data/subprocess/plasma_etch> ;
+         ont:filingDate ?filed .
+  FILTER(?filed < "2015-01-01"^^xsd:date)
+}
+ORDER BY ?filed

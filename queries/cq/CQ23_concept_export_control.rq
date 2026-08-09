@@ -1,0 +1,15 @@
+# desc: 각 기술 개념(공정·소자·장비·계측·재료)은 어떤 수출통제를 받으며, 통제수준·관할은 무엇인가? — RQ3 수출통제 심사의 출발점
+# suite: core
+# monotone: up
+# expect-min: 1
+PREFIX ont:  <https://w3id.org/sdkb/ont/>
+PREFIX gov:  <https://w3id.org/sdkb/gov/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?concept ?controlLabel ?level ?jurisdiction
+WHERE {
+  ?concept gov:subjectToControl ?control .
+  ?control gov:controlLevel ?level .
+  OPTIONAL { ?control skos:prefLabel ?controlLabel }
+  OPTIONAL { ?control gov:hasJurisdiction ?jur . ?jur skos:notation ?jurisdiction }
+}
+ORDER BY ?level ?concept

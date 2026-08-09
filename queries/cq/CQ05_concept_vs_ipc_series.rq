@@ -1,0 +1,16 @@
+# desc: 같은 특허 집합을 IPC 코드 단위로도 연도별 집계할 수 있는가? — H2 의 대조군(코드 단위 시계열)
+# suite: tf
+# monotone: up
+# expect-min: 1
+PREFIX ont:  <https://w3id.org/sdkb/ont/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?ipc ?year (COUNT(?patent) AS ?n)
+WHERE {
+  # H2 는 "개념 단위가 코드 단위보다 빠른가"를 묻는다. 그러려면 온톨로지가 **양쪽 시계열을
+  # 모두** 낼 수 있어야 한다 — 대조군을 못 만들면 가설 자체를 검정할 수 없다.
+  ?patent a ont:Patent ; ont:hasIPC ?symbol ; ont:filingDate ?date .
+  ?symbol skos:notation ?ipc .
+  BIND(SUBSTR(STR(?date), 1, 4) AS ?year)
+}
+GROUP BY ?ipc ?year
+ORDER BY ?ipc ?year

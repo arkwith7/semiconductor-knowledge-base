@@ -1,0 +1,12 @@
+# desc: 밸류체인 역할(장비·재료·부분품 …)별로 어떤 소부장 회사가 몇 곳 있고, 그중 특허를 보유한 회사는 몇 곳인가? — 소부장 코퍼스 층화의 전제 (RQ3)
+# suite: core
+# monotone: up
+# expect-min: 1
+PREFIX ont: <https://w3id.org/sdkb/ont/>
+SELECT ?companyType (COUNT(DISTINCT ?company) AS ?nFirms) (COUNT(DISTINCT ?owner) AS ?nFirmsWithPatents)
+WHERE {
+  ?company ont:companyType ?companyType .
+  OPTIONAL { ?patent a ont:Patent ; ont:assignedTo ?company . BIND(?company AS ?owner) }
+}
+GROUP BY ?companyType
+ORDER BY DESC(?nFirms)

@@ -34,7 +34,7 @@ for _env in (Path(__file__).resolve().parents[1] / ".env",
         load_dotenv(_env)
         break
 
-EDGES = Path("/home/arkwith/Dev/sdkb/data/patents/prior_art_edges.parquet")
+EDGES = Path(__file__).resolve().parents[1] / "data" / "patents" / "prior_art_edges.parquet"
 OUT_DIR = Path(__file__).resolve().parents[1] / "data" / "patents" / "cited_enriched"
 FOREIGN_BQ = {"JP", "WO", "CN", "EP", "GB"}   # US 는 PatentsView 로 뺀다
 

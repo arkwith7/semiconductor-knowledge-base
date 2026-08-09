@@ -1,0 +1,13 @@
+# desc: 특정 스킬(예: 종점검출)을 다루는 특허는 몇 건이며 무엇인가? — 특허↔역량 브리지 (기술기획·인력 양쪽이 요구한다)
+# suite: em
+# monotone: up
+# expect-min: 1
+PREFIX ont:  <https://w3id.org/sdkb/ont/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?skillLabel (COUNT(DISTINCT ?patent) AS ?nPatents) (SAMPLE(?title) AS ?example)
+WHERE {
+  ?patent a ont:Patent ; ont:concernsSkill ?skill ; skos:prefLabel ?title .
+  ?skill skos:prefLabel ?skillLabel .
+}
+GROUP BY ?skillLabel
+ORDER BY DESC(?nPatents)

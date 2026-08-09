@@ -1,0 +1,13 @@
+# desc: 가장 엄격한 CRITICAL 수준 수출통제를 받는 개념은 무엇인가? — D:1 그룹(중국 등) 이전 시 개별허가 필수 항목
+# suite: core
+# monotone: up
+# expect-min: 1
+PREFIX gov:  <https://w3id.org/sdkb/gov/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?concept ?controlLabel
+WHERE {
+  ?concept gov:subjectToControl ?control .
+  ?control gov:controlLevel "CRITICAL" .
+  OPTIONAL { ?control skos:prefLabel ?controlLabel }
+}
+ORDER BY ?concept

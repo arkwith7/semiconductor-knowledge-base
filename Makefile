@@ -1,6 +1,7 @@
 .PHONY: all install venv parse owl convert align validate test clean \
         ingest-sirp sirp-pairs sirp-problems sirp experts \
         compliance curated-experts curated-ratings expdataset abox abox-patents \
+        abox-prior-art abox-claim-features abox-full refetch-fulltext cq \
         superordinate-concepts concept-mapping \
         semiconto-fetch semiconto-analyze semiconto-align semiconto-enrich semiconto-phase0 \
         viz viz-clean viz-open \
@@ -34,6 +35,11 @@ help:
 	@echo "  expdataset      compliance + curated-experts + curated-ratings"
 	@echo "  abox            convert + lift experts/problems → A-Box TTL (notebook 06)"
 	@echo "  abox-patents    convert + ingest-sirp + lift patents → A-Box TTL (notebook 07)"
+	@echo "  abox-prior-art  cited prior-art documents → A-Box TTL (needs refetch-fulltext)"
+	@echo "  abox-claim-features  claim features + judgments → A-Box TTL (needs refetch-fulltext)"
+	@echo "  abox-full       all A-Box layers (needs KIPRIS key)"
+	@echo "  refetch-fulltext  re-fetch KIPRIS full text into the emptied A-Box inputs"
+	@echo "  cq              run the competency-question suite → report"
 	@echo "  semiconto-fetch    Download SemicONTO v0.2 TTL into ontology/imports/"
 	@echo "  semiconto-analyze  Parse SemicONTO TTL → data/reports/semiconto_analysis.json"
 	@echo "  semiconto-align    Build SDKB↔SemicONTO SKOS alignment (mappings/)"
@@ -91,6 +97,37 @@ collect-b-layer-queries:
 
 abox-b-layer-queries: convert
 	$(PYTHON) scripts/build_abox_b_layer_queries.py
+
+# ── 인용 선행기술 · 청구항 feature A-Box (CR-016 §2 출력 (1)) ──────────
+# 두 생성기는 2026-05 부터 실재했는데 **진입점이 없었다** — 사람이 손으로
+# `python scripts/…` 를 치는 것만이 방법이었고, 그래서 외부인에게는 존재하지 않는
+# 빌드였다. 산출 TTL 둘은 gitignore 된 대용량이므로(라이선스 · 899 MB/21 MB)
+# **진입점이 곧 재현 경로**다. 비워 두고 채우는 방법을 주는 설계는 채우는 명령이
+# 있어야 성립한다.
+#
+# 입력은 네트워크 수집분(cited_enriched · claim_features)이라 `make refetch-fulltext`
+# 가 선행한다. 그래서 두 타깃을 pipeline 계보에 **직접 걸지 않는다** — 키 없는
+# 체크아웃에서 pipeline 이 죽으면 T-Box 재현까지 함께 막힌다.
+abox-prior-art: convert
+	$(PYTHON) scripts/build_abox_prior_art.py
+
+abox-claim-features: convert
+	$(PYTHON) scripts/build_abox_claim_features.py
+
+# 비운 A-Box 를 채우는 진입점 — KIPRIS 키가 필요하다(§ README "무엇이 비어 있고
+# 어떻게 채우는가"). 수집 규칙의 정본은 흡수된 수집기이고, 여기서 새로 짜지 않는다.
+refetch-fulltext:
+	$(PYTHON) scripts/refetch_rejected_patents.py
+	$(PYTHON) scripts/collect_cited_biblio_claims.py
+
+# A-Box 전량 — 자격(KIPRIS 키)과 시간이 드는 경로를 한 이름으로 묶는다.
+abox-full: abox abox-patents abox-vendors abox-prior-art abox-claim-features
+
+# ── CQ 스위트 (CR-016 §2 출력 (3)) ─────────────────────────────────────
+# CQ 는 평가 하네스가 아니라 **온톨로지가 무엇에 답할 수 있는가의 명세**, 즉 도메인
+# 자산이다. 하류 논문 저장소에만 있으면 "CQ 를 공개한다"는 서술이 거짓이 된다.
+cq: convert
+	$(PYTHON) scripts/run_cq.py
 
 # KSIA 회원사 명부 → ont:Vendor A-Box. abox-patents 뒤에 와야 한다 —
 # 이미 특허 출원인(Organization)으로 존재하는 회사를 알아보고 중복 노드를 만들지 않으려면

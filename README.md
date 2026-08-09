@@ -203,6 +203,40 @@ make expdataset      # compliance + curated-experts + curated-ratings
 make help            # list all targets
 ```
 
+## What is empty, and how to fill it
+
+This repository ships **generators, not instances**. The T-Box, the vocabularies, the SHACL
+shapes, the competency-question suite and every build script are here; the large A-Box layers
+built from KIPRIS patent text are **not**, because KIPRIS terms permit academic use but not
+redistribution of full text.
+
+**This is the design, not a gap.** A public checkout plus your own KIPRIS key reconstructs the
+graph the paper cites. What follows says exactly what is missing, why, and which command fills it.
+
+| Layer | What is empty | Why | Command to fill | Credentials needed |
+|---|---|---|---|---|
+| **T-Box** (`ontology/sdkb-core.ttl`) | nothing — but the file itself is a build artifact | generated from the committed `data/semiconductor_v0_3.json` (392 KB) | `make owl && make convert` | none |
+| **SIRP patent A-Box** (`ontology/sdkb-abox-patents.ttl`) | abstracts and claim text | KIPRIS full text is not redistributable | `make refetch-fulltext && make abox-patents` | KIPRIS OpenAPI key |
+| **Rejected-patent dataset** (`data/patents/raw/…rejected_patents.jsonl`) | `abstract`, `claim1`, `claims_full[].text` are present as **empty strings** — the schema, the identifiers, the IPC/date metadata and the `ground_truth_*` citation labels are all intact | same | `python scripts/refetch_rejected_patents.py` (verifies the restored file against a published sha256) | KIPRIS OpenAPI key |
+| **Cited prior-art A-Box** (`ontology/sdkb-abox-prior-art.ttl`, 21 MB) | the whole file | built from collected full text | `make refetch-fulltext && make abox-prior-art` | KIPRIS key (+ BigQuery for non-KR documents) |
+| **Claim-feature A-Box** (`ontology/sdkb-abox-claim-features.ttl`, 899 MB) | the whole file | derived from claim text; too large to distribute regardless of licence | `make abox-claim-features` | KIPRIS key; several hours |
+| **Governance instances** (`ontology/sdkb-governance-*-instances.ttl`) | the whole files | build artifacts of committed sources | `make compliance` | none |
+| **Expert profiles and ratings** | nothing | committed — they are **synthetic**, generated for method evaluation, and contain no personal data | `make expdataset` | none |
+
+Everything with "none" in the last column reproduces from an empty checkout. Everything else
+needs your own key: we can give you the procedure, not the licensed text.
+
+### Competency questions
+
+```bash
+make cq      # run queries/cq/*.rq → data/reports/cq_report.json
+```
+
+The 31 questions carry their own metadata (`# suite:` — `pa` prior-art, `em` expert matching,
+`tf` technology foresight, `core`). Suites that depend on an unbuilt A-Box report **0 rows and
+fail**; the report's `graph_files_missing` names the files, so a failure tells you what to build
+rather than that the ontology is broken.
+
 ### Interactive visualization (GitHub Pages)
 ```bash
 make viz       # build baseline / SIRP / 4-pillar HTML into site/

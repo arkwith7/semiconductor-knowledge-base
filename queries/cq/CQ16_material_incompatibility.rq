@@ -1,0 +1,17 @@
+# desc: 이 공정이 쓰는 재료와 함께 쓰면 안 되는 것은 무엇인가? — 재료업체 IP-R&D 의 금기 질의
+# suite: pa
+# monotone: up
+# expect-min: 1
+PREFIX ont:  <https://w3id.org/sdkb/ont/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+# 금기는 두 술어로 표현된다(물리적 비양립 · 규정상 금지). 하나만 열면 절반만 본다.
+SELECT ?stepLabel ?materialLabel ?forbiddenLabel
+WHERE {
+  ?step ont:usesMaterial ?material ; skos:prefLabel ?stepLabel .
+  ?material a ont:Material ; skos:prefLabel ?materialLabel .
+  { ?material ont:incompatibleWith ?forbidden }
+  UNION
+  { ?material ont:notAllowedWith ?forbidden }
+  ?forbidden skos:prefLabel ?forbiddenLabel .
+}
+ORDER BY ?stepLabel ?materialLabel

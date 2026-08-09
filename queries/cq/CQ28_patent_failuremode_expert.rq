@@ -1,0 +1,14 @@
+# desc: 특정 결함모드를 다루는 선행특허와, 그 결함모드를 실제로 다뤄본 전문가는 누구인가? — 특허↔문제↔전문가 다리 (선행기술 설명 + 전문가매칭 substrate · §G1 Phase C)
+# suite: em
+# monotone: up
+# expect-min: 1
+PREFIX ont:  <https://w3id.org/sdkb/ont/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?fmLabel ?patLabel ?expertLabel
+WHERE {
+  ?pat a ont:Patent ; ont:exhibitsFailureMode ?fm ; skos:prefLabel ?patLabel .
+  ?fm skos:prefLabel ?fmLabel .
+  ?expert a ont:Expert ; ont:hasCaseExperience ?case ; skos:prefLabel ?expertLabel .
+  ?case ont:caseFailureMode ?fm .
+}
+ORDER BY ?fmLabel ?patLabel ?expertLabel

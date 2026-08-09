@@ -1,0 +1,16 @@
+# desc: 어떤 거절특허가 수출통제 대상 공정·소자를 구현하는가? — 특허 포트폴리오의 수출통제 노출 (라이선싱·기술이전 심사, IP-R&D 산출물 4)
+# suite: pa
+# monotone: up
+# expect-min: 1
+PREFIX ont:  <https://w3id.org/sdkb/ont/>
+PREFIX gov:  <https://w3id.org/sdkb/gov/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?patent ?level ?controlLabel
+WHERE {
+  ?patent a ont:Patent .
+  { ?patent ont:realizesProcess ?concept } UNION { ?patent ont:concernsDevice ?concept }
+  ?concept gov:subjectToControl ?control .
+  ?control gov:controlLevel ?level .
+  OPTIONAL { ?control skos:prefLabel ?controlLabel }
+}
+ORDER BY ?level ?patent

@@ -203,6 +203,39 @@ make expdataset      # compliance + curated-experts + curated-ratings
 make help            # 모든 타깃 목록
 ```
 
+## 무엇이 비어 있고 어떻게 채우는가
+
+이 저장소가 담는 것은 **생성기이지 인스턴스가 아니다.** T-Box·어휘·SHACL shape·CQ 스위트·
+빌드 스크립트는 전부 여기 있고, KIPRIS 특허 원문으로 만든 큰 A-Box 층은 **없다** — KIPRIS
+이용약관이 학술 이용은 허용하되 원문 재배포는 허용하지 않기 때문이다.
+
+**이것은 결손이 아니라 설계다.** 빈 체크아웃에 본인 KIPRIS 키만 있으면 논문이 인용한 그래프를
+다시 만들 수 있다. 아래 표가 무엇이 왜 비어 있고 어느 명령이 채우는지를 그대로 적는다.
+
+| 층 | 비어 있는 것 | 왜 | 채우는 명령 | 필요한 자격 |
+|---|---|---|---|---|
+| **T-Box** (`ontology/sdkb-core.ttl`) | 없음 — 다만 파일 자체가 빌드 산출물이다 | 커밋된 `data/semiconductor_v0_3.json`(392 KB)에서 생성된다 | `make owl && make convert` | 없음 |
+| **SIRP 특허 A-Box** (`ontology/sdkb-abox-patents.ttl`) | 초록·청구항 텍스트 | KIPRIS 원문은 재배포 불가 | `make refetch-fulltext && make abox-patents` | KIPRIS OpenAPI 키 |
+| **거절특허 데이터셋** (`data/patents/raw/…rejected_patents.jsonl`) | `abstract`·`claim1`·`claims_full[].text` 가 **빈 문자열**로 들어 있다. 스키마·식별자·IPC·날짜·정답 인용 라벨(`ground_truth_*`)은 **그대로 있다** | 같음 | `python scripts/refetch_rejected_patents.py` (복원본을 공표된 sha256 과 대조한다) | KIPRIS OpenAPI 키 |
+| **인용 선행기술 A-Box** (`ontology/sdkb-abox-prior-art.ttl` · 21 MB) | 파일 전체 | 수집한 원문에서 만든다 | `make refetch-fulltext && make abox-prior-art` | KIPRIS 키 (+ 비 KR 문헌은 BigQuery) |
+| **청구항 feature A-Box** (`ontology/sdkb-abox-claim-features.ttl` · 899 MB) | 파일 전체 | 청구항 텍스트의 파생물이며, 라이선스와 무관하게 배포하기엔 너무 크다 | `make abox-claim-features` | KIPRIS 키 · 수 시간 |
+| **거버넌스 인스턴스** (`ontology/sdkb-governance-*-instances.ttl`) | 파일 전체 | 커밋된 원천의 빌드 산출물 | `make compliance` | 없음 |
+| **전문가 프로필·평점** | 없음 | 커밋돼 있다 — **합성 데이터**이고 개인정보를 담지 않는다 | `make expdataset` | 없음 |
+
+마지막 열이 "없음"인 것은 빈 체크아웃에서 그대로 재현된다. 나머지는 본인 키가 필요하다 —
+**우리가 줄 수 있는 것은 절차이지 라이선스가 걸린 원문이 아니다.**
+
+### 역량 질문(CQ)
+
+```bash
+make cq      # queries/cq/*.rq 전량 실행 → data/reports/cq_report.json
+```
+
+31개 질문은 각자 메타데이터를 갖는다(`# suite:` — `pa` 선행기술 · `em` 전문가매칭 ·
+`tf` 기술예측 · `core`). 아직 짓지 않은 A-Box 에 의존하는 질의는 **0행으로 실패**하며,
+리포트의 `graph_files_missing` 이 그 파일 이름을 적는다 — 실패가 "온톨로지가 깨졌다"가 아니라
+**"무엇을 더 지어야 하는가"** 를 가리키게 하기 위해서다.
+
 ### 인터랙티브 시각화 (GitHub Pages)
 ```bash
 make viz       # SDKB → site/ 에 베이스라인 · SIRP · 4-pillar 3개 HTML + index 생성

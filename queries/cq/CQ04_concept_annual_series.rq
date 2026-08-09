@@ -1,0 +1,21 @@
+# desc: 온톨로지 개념(공정 ∪ 디바이스)별 연도별 출원 건수를 낼 수 있는가? — H2 개념 단위 시계열의 최소 단위
+# suite: tf
+# monotone: up
+# expect-min: 1
+PREFIX ont:  <https://w3id.org/sdkb/ont/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?axis ?conceptLabel ?year (COUNT(?patent) AS ?n)
+WHERE {
+  # 개념 축은 Process ∪ Device 다 — H2 의 검증 사례(HBM, GAA)가 공정이 아니라 디바이스이므로,
+  # 공정만으로는 자기 사례를 표현할 수 없다.
+  VALUES (?conceptType ?linkProp ?axis) {
+    (ont:Process    ont:realizesProcess "process")
+    (ont:SubProcess ont:realizesProcess "subprocess")
+    (ont:Device     ont:concernsDevice  "device")
+  }
+  ?concept a ?conceptType ; skos:prefLabel ?conceptLabel .
+  ?patent a ont:Patent ; ?linkProp ?concept ; ont:filingDate ?date .
+  BIND(SUBSTR(STR(?date), 1, 4) AS ?year)
+}
+GROUP BY ?axis ?conceptLabel ?year
+ORDER BY ?axis ?conceptLabel ?year
