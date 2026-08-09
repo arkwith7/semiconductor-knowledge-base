@@ -4,6 +4,38 @@ All notable changes to SDKB will be documented in this file.
 
 ## [Unreleased] — v1.0.0-dev
 
+### Changed (2026-08-09 — CR-016 §4 · paper_data 재현 경로 흡수 · 하류 D-38)
+
+- **SDKB 가 단독으로 선다.** 데이터셋을 만들고 채우는 수집·재현 자산을 비공개 저장소
+  `paper_data` 에서 **옮겨 왔다**(복사가 아니라 이관 — 사본을 남기지 않았다).
+  `scripts/kipris_dataset/` 6파일(KIPRIS 클라이언트·인용 정규화·코호트·거절결정 파서) ·
+  수집 스크립트 **13개** · 문서 **6건**.
+- **왜 지금인가.** 논문 투고와 함께 이 저장소가 공개되는데, 비운 A-Box 를 채우는 절차가
+  개인 로컬 디렉터리(`/home/arkwith/Dev/paper_data`)를 거치면 **외부인은 재현할 수 없다.**
+  의존(pinned dependency)이 아니라 흡수를 택한 근거는 독립성이다.
+- **사본 넷을 정리했다 — 그중 하나는 이미 갈라져 있었다.**
+  `device_alias_table.json` 이 이쪽 **34키** 대 저쪽 **31키**로 갈렸고 빠진 셋
+  (`device:diode`·`device:eprom`·`device:feram`) 중 `device:eprom` 은 하류 코퍼스의
+  최빈 개념(df 5,146)이다. **저쪽 판으로 재구성했다면 논문이 조용히 재현되지 않았다.**
+  이쪽 판을 정본으로 남긴다. 공통 31키의 값은 **완전히 동일**이라 데이터 변화는 0.
+  `wikidata_device_classes.jsonl` 은 두 판이 **바이트 동일** ·
+  `prior_art_ontology_gap_and_data_plan.md` 는 이쪽 판(273행)이 최신.
+- **`citation_norm.py` 정본 통합 — 동작은 바뀌지 않는다.** 두 판의 차이는 **docstring
+  참조 한 줄**뿐이었다(코드 동일). 따라서 `cited_doc_id` 정규화는 그대로이고 하류 qrel
+  매칭에 영향이 없다. 사본을 지우고 `scripts/kipris_dataset/citation_norm.py` 하나만
+  남겼으며, 임포터 둘(`build_b_layer_cited_ids.py`·`ingest_rejected_patents.py`)을 고쳤다.
+  깨진 문서 참조는 함께 옮긴 `docs/legacy_etching_poc_schema.md` 로 해소된다.
+- **조용한 외부 의존 하나가 드러나 함께 끊었다.** `collect_b_layer_queries.py`(CR-012 의
+  B층 질의 수집기)가 `sys.path` 에 `/home/arkwith/Dev/paper_data` 를 끼워 넣고
+  `enrich_unresolved.py` 를 임포트하고 있었다 — **커밋된 스크립트가 커밋되지 않은 파일에
+  의존**하는 형태였고, 그대로 공개했으면 외부에서 `ImportError` 로 죽었다.
+  `enrich_unresolved.py`(982행)도 이관 대상에 넣었다.
+- **경로 상수는 고치지 않았다.** 이관된 수집기는 원 저장소 레이아웃(`data/processed/`)을
+  그대로 쓰고, 그 디렉터리를 gitignore 에 넣었다. 고쳐 쓰면 **수집 규칙이 갈려 재인출본이
+  정본과 달라진다** — 복원 대조(sha256)를 무의미하게 만드는 변경이다.
+- **T-Box·A-Box·트리플 수·IRI 규칙 전부 불변.** 테스트 **208 통과 · 10 스킵 · 실패 0**.
+- **하류 영향(§0)**: 없음 — vendor 대상 파일이 하나도 바뀌지 않았다.
+
 ### Added (2026-08-08 — CR-014 · B층 질의의 서지 두 칸 · 하류 D-31)
 
 - **공개번호·공개일을 채웠다 — 200/200.** `ont:publicationNumber` 200 ·

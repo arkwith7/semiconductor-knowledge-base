@@ -28,7 +28,7 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-import citation_norm as CN  # noqa: E402  vendored from paper_data — plan §7.1
+from kipris_dataset import citation_norm as CN  # noqa: E402  흡수 2026-08-09 (CR-016 §4)
 
 ROOT = Path(__file__).resolve().parent.parent
 IN_PATH = ROOT / "data" / "patents" / "raw" / "semiconductor_industry_rejected_patents.jsonl"

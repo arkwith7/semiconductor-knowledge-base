@@ -41,7 +41,7 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from citation_norm import parse as parse_citation  # noqa: E402
+from kipris_dataset.citation_norm import parse as parse_citation  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_IDS = Path(

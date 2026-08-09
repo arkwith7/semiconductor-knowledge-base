@@ -43,6 +43,13 @@ ontology/sdkb-governance-us-instances.ttl
 # scripts/sync_paper_data_assets.sh. Provenance: plan §7.1.
 data/patents/fulltext/
 
+# ── 흡수된 수집기의 작업 디렉터리 (2026-08-09 · CR-016 §4) ──
+# 이관된 수집 스크립트들은 원 저장소의 레이아웃(data/processed/)을 그대로 쓴다.
+# 경로 상수를 고쳐 쓰지 않은 이유는 수집 규칙을 갈리게 하지 않기 위해서다 —
+# 재인출본이 정본과 달라지면 복원 대조(sha256)가 무의미해진다.
+# 정본은 data/patents/raw/ 이고, 그쪽으로 옮기는 것은 refetch 스크립트의 몫이다.
+data/processed/
+
 # 청구항 feature · 인용문헌 보강 — KIPRIS 비재배포 청구항/초록 원문 포함 (§1.5)
 data/patents/cited_enriched/
 data/interim/claim_features.jsonl

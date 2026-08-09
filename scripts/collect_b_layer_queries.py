@@ -38,12 +38,11 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 ROOT = Path(__file__).resolve().parent.parent
-PD = Path("/home/arkwith/Dev/paper_data")
 
-# API 호출·응답 파싱의 정본은 paper_data 에 있다. 복사하지 않고 가져다 쓴다
-# (decompose_corpus.py 가 cited_enriched 를 읽는 것과 같은 방식의 의존이다).
-sys.path.insert(0, str(PD / "scripts"))
-sys.path.insert(0, str(PD / "src"))
+# API 호출·응답 파싱의 정본은 이 저장소 안에 있다 — 2026-08-09 흡수(CR-016 §4) 전에는
+# /home/arkwith/Dev/paper_data 를 sys.path 에 끼워 가져다 썼고, 그래서 SDKB 는 단독으로
+# 서지 못했다. 파서를 새로 쓰지 않고 원본을 그대로 옮겼으므로 규칙은 갈리지 않는다.
+sys.path.insert(0, str(ROOT / "scripts"))
 import enrich_unresolved as eu  # noqa: E402
 from kipris_dataset.kipris import KiprisClient, OP_BIBLIO_DETAIL  # noqa: E402
 

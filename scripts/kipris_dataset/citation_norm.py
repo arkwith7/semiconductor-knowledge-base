@@ -1,6 +1,6 @@
 """정답(prior-art) 인용 식별자 정규화.
 
-`docs/etching_reject_web_poc_dataset_schema.md` §3을 코드로 옮긴 모듈.
+`docs/legacy_etching_poc_schema.md` §3을 코드로 옮긴 모듈.
 
 관측된 표기들을 `Citation(country, kind, serial, original)` 정규형으로 변환하고,
 검색 결과와 매칭 가능한 단일 문자열 키 `normalized_id`를 제공한다.
