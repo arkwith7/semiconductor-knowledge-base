@@ -2,6 +2,29 @@
 
 All notable changes to SDKB will be documented in this file.
 
+> **How to read this log** · 이 로그를 읽는 법
+>
+> This is a **contemporaneous engineering record**, not a release summary. Entries are written
+> when the change happens and are **never rewritten afterwards** — where a later entry corrects
+> an earlier one, both stay. That is deliberate: a downstream consumer that pinned an old commit
+> needs to see what was true then, not what we wish had been true.
+>
+> **Vocabulary used throughout.** Entries are written for the consumers listed in
+> [`CLAUDE.md`](CLAUDE.md) §0, so they use that repository's shorthand:
+>
+> | 표기 | 뜻 |
+> |---|---|
+> | **하류 (downstream)** | A repository that vendors a frozen snapshot of this graph and evaluates on it. SDKB is the *upstream* resource; it does not depend on downstream code. |
+> | **CR-NNN** | *Change Request* — a defect report filed by a downstream consumer with evidence, a proposed fix, and an acceptance criterion. Entries titled `CR-NNN` record what this repository did in response. |
+> | **D-NN** | The downstream defect-ledger id that a CR answers. Cited so the two records can be lined up; the ledger itself is not part of this repository. |
+> | **vendor / 스냅샷** | Copying this repository's TTL at a specific commit and freezing it (commit SHA + per-file sha256). |
+> | **G₀ / G₁ / G₂** | A downstream consumer's naming for its frozen baseline graph and its augmented candidate pools. Appears here only when reporting how a change moves *their* triple counts. |
+>
+> **Relationship to papers that cite this dataset.** This log keeps growing after any manuscript
+> is frozen, so a paper and this file will diverge by design. **Cite a release tag, not `main`** —
+> the tag names the state the paper actually used. Entries here describe *what was built and why*;
+> they are not that research's results, and no experimental result is reported in this file.
+
 ## [Unreleased] — v1.0.0-dev
 
 ### Fixed (2026-08-09 — CR-016 성공기준 ① · 빈 체크아웃에서 처음 드러난 것 넷)

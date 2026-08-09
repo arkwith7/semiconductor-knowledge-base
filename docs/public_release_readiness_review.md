@@ -152,6 +152,34 @@ README·CHANGELOG 를 같은 커밋에서 고친다."*
 **권고.** 숫자를 손으로 고치지 말고, 릴리스 서명(클래스별 인스턴스 수)을 **코드가 뽑아** README 에
 넣는 절차를 만든다. 손으로 고치면 다음에 또 어긋난다 — 이번이 그 증거다.
 
+### F7. 공개 스크립트가 비공개 하류 저장소를 읽는다 🟠 (2026-08-09 추가)
+
+**의존 방향이 뒤집혔다.** `CLAUDE.md` §0 은 *"하류가 커밋 SHA + sha256 으로 우리를 핀한다"* 고
+적는다 — 즉 상류는 하류를 모르는 것이 계약이다. 그런데 커밋된 스크립트 셋이 **옆 디렉터리의
+비공개 논문 저장소를 하드코딩**하고 있다.
+
+```
+scripts/decompose_corpus.py:81   …/SKKU/sdkb-foresight-paper/data/processed/graph_v2.ttl
+scripts/decompose_corpus.py:100  …/SKKU/sdkb-foresight-paper/data/processed/graph_v1.ttl
+scripts/enrich_kipris_biblio.py:51 · llm_claim_validate.py:30 · collect_cited_biblio_claims.py:32  (.env 폴백)
+```
+
+문제는 셋이다.
+
+1. **외부인에게 재현 불가.** 그 경로는 남의 컴퓨터에 없다. 빈 체크아웃 검증(CR-016)이 잡아낸
+   것과 **같은 종류의 결함이 아직 셋 남아 있다.**
+2. **경로 자체가 낡았다.** `sdkb-foresight-paper` 는 현재 `sdkb-prior-art-paper` 다.
+3. **docstring 이 하류의 코퍼스 설계를 공개한다.** `decompose_corpus.py:92-95` 는
+   *"주 대비 코퍼스 G1(삼성·SK하이닉스)"* · *"판단(Tier 1)·인용(Tier 2)·코퍼스(Tier 3)"* ·
+   *"§29② 진보성 판단의 초점"* 을 적는다. **결과는 아니지만 설계이고, CHANGELOG 보다 구체적이다.**
+
+**권고.** `.env` 폴백 셋은 지운다(자기 `.env` 를 쓰게 한다). `decompose_corpus.py` 의 두
+`src_g1`/`src_g2` 는 **경로를 인자로 받게** 바꾸고, 입력이 없으면 명확히 실패시킨다 —
+그러면 공개본은 "이 진입점은 자기 코퍼스를 준다"가 되고 하류 이름이 사라진다.
+docstring 의 하류 설계 서술은 일반 문장으로 바꾼다.
+
+> 코드 변경이므로 CLAUDE.md §2 정지 게이트를 탄다. **요구 정의까지이고 구현하지 않았다.**
+
 ### F6. 공개 대상 문서가 한국어 중심인데 정본 README 는 영문이다 🟡
 
 | 문서 | 한국어 줄 / 전체 |
