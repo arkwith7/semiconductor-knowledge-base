@@ -81,25 +81,29 @@ ont:holdsResource
     a owl:ObjectProperty ;
     rdfs:domain ont:Firm ;
     rdfs:range ont:Resource ;
-    rdfs:label "holds resource"@en .
+    rdfs:label "holds resource"@en ;
+    rdfs:comment "Reads firm → resource: the Firm owns or controls the Resource. Ownership, not access — a resource reachable through a supplier is not held."@en .
 
 ont:enablesCapability
     a owl:ObjectProperty ;
     rdfs:domain ont:Resource ;
     rdfs:range ont:Capability ;
-    rdfs:label "enables capability"@en .
+    rdfs:label "enables capability"@en ;
+    rdfs:comment "Reads resource → capability: holding the Resource makes the Capability attainable. Barney (1991): capabilities emerge from resources, not the reverse."@en .
 
 ont:reducesBarrier
     a owl:ObjectProperty ;
     rdfs:domain ont:Capability ;
     rdfs:range ont:EntryBarrier ;
-    rdfs:label "reduces barrier"@en .
+    rdfs:label "reduces barrier"@en ;
+    rdfs:comment "Reads capability → barrier: possessing the Capability lowers the EntryBarrier. The barrier is lowered for the capability's holder, not for the segment as a whole."@en .
 
 ont:barrierOf
     a owl:ObjectProperty ;
     rdfs:domain ont:EntryBarrier ;
     rdfs:range ont:MarketSegment ;
-    rdfs:label "barrier of"@en .
+    rdfs:label "barrier of"@en ;
+    rdfs:comment "Reads barrier → segment: the EntryBarrier is a barrier to entering the MarketSegment. Not the inverse; a segment does not 'have' barriers through this predicate."@en .
 
 ont:combines
     a owl:ObjectProperty ;
@@ -112,7 +116,8 @@ ont:firmTargets
     a owl:ObjectProperty ;
     rdfs:domain ont:Firm ;
     rdfs:range ont:MarketSegment ;
-    rdfs:label "firm targets"@en .
+    rdfs:label "firm targets"@en ;
+    rdfs:comment "Reads firm → segment: the Firm competes in, or intends to enter, the MarketSegment. Records intent or presence, not market share."@en .
 
 # ── DATATYPE PROPERTIES ────────────────────────────────────────────
 

@@ -1,5 +1,18 @@
 # Dataset Card — Semiconductor Industry Rejected Patents
 
+> **English summary.** SIRP (Semiconductor Industry Rejected Patents) is a Gebru-style dataset
+> card for `semiconductor_industry_rejected_patents.jsonl`: **1,000 Korean patent applications
+> that were refused by a KIPO examiner**, each paired with the prior art the examiner cited as
+> the ground for refusal. Collection ran 2026-04 → 2026-05-06, primarily through the KIPRIS Plus
+> API. One record = one refused application + its examiner-cited prior art + the refusal grounds.
+> The label is therefore **examiner-grounded, not annotator-generated**: the positives come from
+> an official examination record rather than from human raters or heuristics.
+> **What is redistributed here is metadata only.** KIPRIS full text (abstracts, claims) is
+> licensed for academic use and cannot be redistributed, so the public tree carries identifiers,
+> classifications, dates, family links and ground-truth pointers, plus a re-fetch script for
+> anyone holding a KIPRIS key (§6). Statistics in §4 were computed on an earlier 773-record
+> cohort; the file itself has since grown to 1,000 — the sections below say which is which.
+
 > Gebru-style 데이터셋 카드. `semiconductor_industry_rejected_patents.jsonl` 의 출처·구성·통계·라이선스·활용·한계를 기술한다.
 
 ---
@@ -15,7 +28,7 @@
 
 ## 2. 출처 (Provenance)
 
-| 항목 | 값 |
+| 항목 · Item | 값 · Value |
 |---|---|
 | 1차 출처 | KIPRIS Plus API (`kipris_plus_api`, 763건) |
 | 보조 출처 | KIPRIS 웹 고급검색 (`kipris_web_advanced_search`, 10건) |
@@ -58,7 +71,7 @@
 
 ## 4. 통계 (2026-05-12 산출)
 
-| 축 | 분포 |
+| 축 · Axis | 분포 · Distribution |
 |---|---|
 | 거절 상태 | 거절결정(일반) 528 / 거절결정(재심사) 231 / 원결정유지 13 / 취소환송 1 |
 | process_family | etch 231 · deposition 135 · metallization 77 · general 52 · oxidation/diffusion 47 · photo 46 · memory 40 · implant 38 · materials 31 · backend_packaging 18 · components 13 · packaging 11 · mems 8 · equipment 7 · 기타 19 |
@@ -189,7 +202,7 @@
   year        = {2026},
   source      = {KIPRIS Plus API, KIPO},
   size        = {1000 records},
-  url         = {https://github.com/arkwith7/semiconductor-knowledge-base}
+  url         = {https://github.com/arkwith7/sdkb-dataset}
 }
 ```
 

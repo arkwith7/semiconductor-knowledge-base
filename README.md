@@ -24,7 +24,7 @@ size_categories:
 > Maintained by the [Quantitative Technology Management Lab](#lab-context) at Sungkyunkwan University's Graduate School of Management of Technology (PI: Prof. Juneseuk Shin).
 >
 > 🇰🇷 한국어 버전: [README.ko.md](README.ko.md)
-> 🔗 **Live demo (GitHub Pages):** [`arkwith7.github.io/semiconductor-knowledge-base`](https://arkwith7.github.io/semiconductor-knowledge-base/) — interactive 3-view explorer (curation graph 229 nodes · SIRP top-50 + prior art · 4-pillar class skeleton)
+> 🔗 **Live demo (GitHub Pages):** [`arkwith7.github.io/sdkb-dataset`](https://arkwith7.github.io/sdkb-dataset/) — interactive 3-view explorer (curation graph · SIRP top-50 + prior art · 4-pillar class skeleton)
 
 ## One-line positioning
 
@@ -69,7 +69,7 @@ Prof. Shin's Quantitative Technology Management Lab combines patent / market / i
 | Patent-/market-/industry-driven **tech foresight** | `sdkb-patent.ttl` + SIRP + Topic / Novelty nodes | [Use case 1](#use-cases) |
 | Promising-technology **opportunity discovery** | Novelty-focused patent mapping, emerging-memory topic clusters | [Use case 1](#use-cases), 🚧 [notebook 02](notebooks/02_patent_opportunity_demo.ipynb) |
 | **SME innovation analysis / expert matching** | SDKB-Match Expert + synthetic-100 + curated-110 expert pool + multi-jurisdiction compliance gate | [Use case 2](#use-cases), 🚧 [notebook 01](notebooks/01_matching_baseline_expert.ipynb), ✅ [notebook 05](notebooks/05_synthetic_vs_curated_comparison.ipynb) |
-| **Interactive tech / business visualization** | Pyvis 3-view explorer with automatic GitHub Pages deploy | [Live demo](https://arkwith7.github.io/semiconductor-knowledge-base/), [docs/project/visualization_plan.md](docs/project/visualization_plan.md) |
+| **Interactive tech / business visualization** | Pyvis 3-view explorer with automatic GitHub Pages deploy | [Live demo](https://arkwith7.github.io/sdkb-dataset/), [docs/project/visualization_plan.md](docs/project/visualization_plan.md) |
 | Organizational R&D / innovation design (secondary) | RBV core-resource combinations + TRL / real-option seed nodes | [Use case 4](#use-cases), 🚧 [notebook 03](notebooks/03_rbv_resource_combo_demo.ipynb) |
 
 ## Why / For / How
@@ -91,7 +91,7 @@ Each use case instantiates a lab research line on SDKB's shared graph.
 | 3 | **SDKB-Match (PriorArt)** — patent application ↔ prior art using examiner-cited ground truth | IP-R&D consulting / prior-art analysis | core + patent + SIRP | ✅ [04](notebooks/04_prior_art_baseline.ipynb) | PatentMatch, CLEF-IP family |
 | 4 | **Key resource combinations** — semiconductor fabless market-entry analysis | Organizational R&D / core-resource analysis | core + rbv | 🚧 [03](notebooks/03_rbv_resource_combo_demo.ipynb) (data pending — alignment track) | Cho/Shin (PLoS ONE 2025), Bae/Shin (IEEE Access 2022) |
 | 5 | **Compound real options** — EUV vs. High-NA roadmap valuation | Technology valuation (later term) | core + foresight + commercialization | _(2026-2 planned)_ | Lab real-options line |
-| 6 | **Interactive KG explorer** — 3-view (baseline / SIRP / 4-pillar) GitHub Pages deploy | Interactive visualization | core + patent + rbv + foresight + commercialization | ✅ [Live](https://arkwith7.github.io/semiconductor-knowledge-base/) · `scripts/build_viz.py` | Lab visualization track |
+| 6 | **Interactive KG explorer** — 3-view (baseline / SIRP / 4-pillar) GitHub Pages deploy | Interactive visualization | core + patent + rbv + foresight + commercialization | ✅ [Live](https://arkwith7.github.io/sdkb-dataset/) · `scripts/build_viz.py` | Lab visualization track |
 
 Detailed 4-pillar mapping: [docs/project/research_alignment.md](docs/project/research_alignment.md).
 
@@ -99,14 +99,14 @@ Detailed 4-pillar mapping: [docs/project/research_alignment.md](docs/project/res
 
 | Layer | Module | License |
 |---|---|---|
-| **Core (Open)** | 14-type process KG, FMEA | CDLA-Permissive-2.0 |
+| **Core (Open)** | process / equipment / material / FMEA core KG | CDLA-Permissive-2.0 |
 | **Governance (Open)** | US BIS / NIST / ECHA + Korea ITPA | CDLA-Permissive-2.0 |
 | **Alignment (Open)** | patent / rbv / commercialization / foresight | CDLA-Permissive-2.0 |
 | **Link-Only** | SEMI E10 / E30 / E40 / E116 (identifiers only) | N/A (metadata) |
 
 ```
 ontology/
-  sdkb-core.ttl                     # 14 core classes
+  sdkb-core.ttl                     # core vocabulary — counts under "Release signature"
   sdkb-governance.ttl               # BIS / NIST / ECHA
   sdkb-governance-kr.ttl            # Korea ITPA
   sdkb-patent.ttl                   # patent taxonomy (CPC / IPC / F-term / Topic / Novelty)
@@ -114,7 +114,7 @@ ontology/
   sdkb-commercialization.ttl        # TRL / license / spinoff
   sdkb-foresight.ttl                # scenario / STEEPVE / real option
 data/
-  semiconductor_v0_3.json           # curation graph 229 nodes / 268 edges (baseline origin 198/264)
+  semiconductor_v0_3.json           # hand-curated source graph — counts under "Release signature"
   expert_profiles.parquet           # 100 synthetic profiles
   experts/curated_profiles.parquet  # 110 curated profiles
   problems.parquet                  # 50 technology problems
@@ -248,15 +248,62 @@ make viz-open  # build + open site/index.html in the default browser
 - One-time setup: repository **Settings → Pages → Source: GitHub Actions**
 - Details: [docs/project/visualization_plan.md](docs/project/visualization_plan.md)
 
-### Verified release figures
-- Curation graph **229 nodes / 268 edges** (v0.3; baseline origin 198/264, expanded by curation incl. Device)
+### Release signature
+
+Generated by `make signature` — **do not edit the block below by hand.**
+The source of truth is [`data/reports/graph_signature.json`](data/reports/graph_signature.json).
+(The curation graph grew past the 2026-05-17 snapshot of 229/268; hand-maintained
+figures drifted, which is why this block is generated.)
+
+<!-- sdkb:signature:begin -->
+<!-- 이 블록은 `make signature-inject` 가 씁니다. 손으로 고치지 마세요 —
+     data/reports/graph_signature.json 이 원천입니다. -->
+
+**T-Box (vocabulary).** Named classes are counted separately from restriction
+blank nodes: `grep -c owl:Class` counts both and reports a larger number.
+
+| Module | Classes (named) | (blank) | ObjectProperty | DatatypeProperty | `rdfs:comment` | Triples |
+|---|---|---|---|---|---|---|
+| `sdkb-core.ttl` | 43 | 13 | 45 | 45 | 133/133 | 719 |
+| `sdkb-patent.ttl` | 16 | 6 | 32 | 26 | 74/74 | 465 |
+| `sdkb-rbv.ttl` | 9 | 0 | 6 | 3 | 18/18 | 82 |
+| `sdkb-foresight.ttl` | 6 | 0 | 6 | 4 | 16/16 | 107 |
+| `sdkb-commercialization.ttl` | 7 | 0 | 6 | 4 | 17/17 | 104 |
+| `sdkb-governance.ttl` | 0 | 0 | 2 | 1 | 3/3 | 40 |
+| `sdkb-governance-kr.ttl` | 3 | 0 | 2 | 2 | 7/7 | 60 |
+| **Total** | **84** | 19 | **99** | **85** | **268/268** | 1,577 |
+
+**Curation graph** (`data/semiconductor_v0_3.json` — the hand-curated source the core A-Box is generated from).
+
+- **274 nodes / 312 edges** across **15 node types** (version `0.3`)
+
+**A-Box layers.** `not built` is the expected state on a fresh checkout — these layers are generated, and the large ones need a KIPRIS key. See *What is empty, and how to fill it*.
+
+| Layer | Content | Triples |
+|---|---|---|
+| `sdkb-core-data.ttl` | curation graph, instantiated | 2,884 |
+| `sdkb-abox-patents.ttl` | SIRP rejected patents | 33,931 |
+| `sdkb-abox-prior-art.ttl` | examiner-cited prior art | 66,440 |
+| `sdkb-abox-claim-features.ttl` | claim features | 11,770,236 ¹ |
+| `sdkb-abox-b-layer-queries.ttl` | B-layer confirmation queries | 4,604 |
+| `sdkb-abox-experts-problems.ttl` | experts and problems | 8,483 |
+| `sdkb-abox-vendors.ttl` | equipment vendors | 2,601 |
+| `sdkb-governance-kr-instances.ttl` | Korea regulatory instances | 175 |
+| `sdkb-governance-us-instances.ttl` | US export-control instances | 105 |
+
+¹ counted by the generator that emitted the layer (`data/reports/`) rather than re-parsed here — the file is too large to re-parse on every signature run. Use `--parse-large` to re-count.
+
+<!-- sdkb:signature:end -->
+
+Other frozen counts (not covered by the signature above):
 - SIRP **1,000 patents** (GT pairs frozen at the 773-cohort snapshot) · 3,118 IPC links · 4,696 prior-art edges
 - 7,500 examiner-grounded pairs (positive 2,723 + hard-negative 2,723 + easy-negative 2,054)
 - 50 stratified problems · 25 adversarial scenarios (all anchored)
 - 100 synthetic experts + 110 curated experts (dual-track pool)
 - 7,500 examiner-grounded (objective KIPO citations) + 7,800 algorithmically-simulated 3-rater synthetic ratings — **not human-expert annotation** (dual-track GT). 3-rater reliability: weighted κ = 0.550 / ICC(2,k) = 0.787 (consensus); transparency: Fleiss κ = 0.258 / ICC(2,1) = 0.552 — see [data/experts/reliability_report.md](data/experts/reliability_report.md)
 - KR + US governance: 20 controls / 205 RDF triples
-- 75 passed / 10 skipped (85 collected) · OWL 438 triples · SHACL VALIDATION PASSED
+- SHACL validation passes; run `make test` for the current test tally (the previously
+  hand-written "75 passed / 10 skipped · OWL 438 triples" had gone stale)
 
 ## Limitations and bias
 
@@ -283,7 +330,7 @@ SDKB is a semiconductor-domain output of the **Quantitative Technology Managemen
                  Quantitative Technology Management Lab},
   year        = {2026},
   version     = {1.0},
-  url         = {https://github.com/arkwith7/semiconductor-knowledge-base},
+  url         = {https://github.com/arkwith7/sdkb-dataset},
   license     = {CDLA-Permissive-2.0},
   note        = {Hyeonup-Project 2026-1 deliverable; seed dataset for
                  the forthcoming compliance-aware semantic collaboration

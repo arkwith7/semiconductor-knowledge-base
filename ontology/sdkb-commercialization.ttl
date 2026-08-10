@@ -39,12 +39,14 @@ ont:IPTransaction
 ont:License
     a owl:Class ;
     rdfs:subClassOf ont:IPTransaction ;
-    rdfs:label "License"@en .
+    rdfs:label "License"@en ;
+    rdfs:comment "A grant of permission to practise a patent while ownership stays with the licensor. Subclass of IPTransaction; the two parties are distinguished by licensor and licensee."@en .
 
 ont:Assignment
     a owl:Class ;
     rdfs:subClassOf ont:IPTransaction ;
-    rdfs:label "Assignment"@en .
+    rdfs:label "Assignment"@en ;
+    rdfs:comment "An outright transfer of patent ownership from one organization to another. Subclass of IPTransaction; unlike a License, the assignor retains no right to practise."@en .
 
 ont:Spinoff
     a owl:Class ;
@@ -73,30 +75,35 @@ ont:licensee
     a owl:ObjectProperty ;
     rdfs:domain ont:License ;
     rdfs:range ont:Organization ;
-    rdfs:label "licensee"@en .
+    rdfs:label "licensee"@en ;
+    rdfs:comment "The organization receiving the right to practise under the License. Paired with licensor; both are needed for a License to be interpretable."@en .
 
 ont:licensor
     a owl:ObjectProperty ;
     rdfs:domain ont:License ;
     rdfs:range ont:Organization ;
-    rdfs:label "licensor"@en .
+    rdfs:label "licensor"@en ;
+    rdfs:comment "The organization granting the License and retaining ownership. Paired with licensee."@en .
 
 ont:licensesPatent
     a owl:ObjectProperty ;
     rdfs:domain ont:License ;
     rdfs:range ont:Patent ;
-    rdfs:label "licenses patent"@en .
+    rdfs:label "licenses patent"@en ;
+    rdfs:comment "Reads license → patent: which patent the License grants rights in. A license may cover several patents."@en .
 
 ont:spinoffFrom
     a owl:ObjectProperty ;
     rdfs:domain ont:Spinoff ;
     rdfs:range ont:Organization ;
-    rdfs:label "spinoff from"@en .
+    rdfs:label "spinoff from"@en ;
+    rdfs:comment "Reads spinoff → parent: the Organization the Spinoff separated from. Direction is child → parent."@en .
 
 ont:fundedBy
     a owl:ObjectProperty ;
     rdfs:range ont:FundingProgram ;
-    rdfs:label "funded by"@en .
+    rdfs:label "funded by"@en ;
+    rdfs:comment "Links a funded thing to the FundingProgram funding it. **No rdfs:domain is declared** — programs fund organizations, projects and spinoffs alike, and fixing the domain to one of them would type the others incorrectly."@en .
 
 # ── DATATYPE PROPERTIES ────────────────────────────────────────────
 
@@ -111,13 +118,15 @@ ont:transactionDate
     a owl:DatatypeProperty ;
     rdfs:domain ont:IPTransaction ;
     rdfs:range xsd:date ;
-    rdfs:label "transaction date"@en .
+    rdfs:label "transaction date"@en ;
+    rdfs:comment "The date the IP transaction took effect. For a license this is the effective date, not the negotiation or announcement date."@en .
 
 ont:transactionValue
     a owl:DatatypeProperty ;
     rdfs:domain ont:IPTransaction ;
     rdfs:range xsd:decimal ;
-    rdfs:label "transaction value (KRW)"@en .
+    rdfs:label "transaction value (KRW)"@en ;
+    rdfs:comment "The transaction's monetary value **in KRW**. The currency is fixed by this predicate; converted values must be converted before assertion, and undisclosed values are omitted rather than recorded as zero."@en .
 
 ont:licenseExclusivity
     a owl:DatatypeProperty ;

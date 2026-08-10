@@ -1,9 +1,14 @@
 {
-  "tree": "sdkb-public",
+  "tree": "build/public",
   "probes": 3341,
   "probes_dropped_overlapping_retained_fields": 2,
   "files_scanned": 679,
   "hits": [],
   "private_token_hits": [],
-  "absolute_path_hits": []
+  "absolute_path_hits": [],
+  "legacy_repo_slug_hits": [],
+  "legacy_repo_slug_allowed": [
+    "config/namespaces.py",
+    "docs/public_release_readiness_review.md"
+  ]
 }

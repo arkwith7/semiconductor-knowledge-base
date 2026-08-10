@@ -1,5 +1,17 @@
 # `semiconductor_industry_rejected_patents.jsonl` 정식 스키마
 
+> **English summary.** The canonical field-by-field schema of
+> `semiconductor_industry_rejected_patents.jsonl`, the merged SIRP dataset (**1,000 records** as
+> of 2026-05-16). The file merges three collection lineages: `semiconductor_commercial` (KIPRIS
+> refusal-decision REST seed + KIPRIS Plus bibliographic detail), `semiconductor_ontology`
+> (41 strategic coverage plans spanning FEOL → packaging → materials → equipment → design), and
+> `legacy_etch_web_poc_import` (an earlier etch-only PoC file promoted into this schema).
+> Each record nests `target_patent` (the refused application, including full claims, INPADOC/PCT
+> family and legal-status events), `meta.rejection_decision` (OCR plus structured parse of the
+> refusal decision), and `meta.ground_truth_evidence_v2` (which refusal ground maps to which
+> cited document). **Field names, types and coverage ratios are language-independent facts** and
+> the tables below carry English column headers alongside the Korean ones.
+
 이 문서는 canonical merged dataset인
 `data/processed/semiconductor_industry_rejected_patents.jsonl`의 실제 필드 구조를
 정리한 정식 스키마입니다.
@@ -23,7 +35,7 @@
 
 수집 직후 실측 보유율:
 
-| 필드 | 보유 | 비율 |
+| 필드 · Field | 보유 · Present | 비율 · Coverage |
 |---|---|---|
 | `claims_full` | 1000/1000 | 100% |
 | `family` (`publication_numbers` 비공란) | 534/1000 | 53.4% |
@@ -129,7 +141,7 @@ legacy import 레코드는 같은 구조를 따르되 다음과 같은 차이가
 
 ## 2. 필드별 의미와 보장 수준
 
-| 경로 | 타입 | 보장 수준 | 비고 |
+| 경로 · Path | 타입 · Type | 보장 수준 · Guarantee | 비고 · Notes |
 |---|---|---|---|
 | `target_patent.application_number` | string(13) | 필수 | canonical dedupe key |
 | `target_patent.title` | string | 필수 | |

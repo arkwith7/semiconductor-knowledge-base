@@ -31,6 +31,18 @@ SDKB_ONT  = Namespace(SDKB_BASE + "ont/")
 SDKB_DATA = Namespace(SDKB_BASE + "data/")
 SDKB_GOV  = Namespace(SDKB_BASE + "gov/")
 
+# ── Public release identity ─────────────────────────────────────
+# 리포 이름은 발행되는 그래프(rdfs:seeAlso)와 인용 메타데이터(CITATION.cff)에 박힌다.
+# 12곳에 흩어져 있던 것이 공개 첫날 404 의 원인이었으므로 한 곳에서만 정한다.
+REPO_OWNER = "arkwith7"
+REPO_SLUG = "sdkb-dataset"
+REPO_URL = f"https://github.com/{REPO_OWNER}/{REPO_SLUG}"
+REPO_BLOB = f"{REPO_URL}/blob/main/"
+PAGES_URL = f"https://{REPO_OWNER}.github.io/{REPO_SLUG}/"
+
+# 옛 리포 슬러그. 지우지 않는다 — 공개 트리 검사기가 이 문자열의 재유입을 잡는다.
+LEGACY_REPO_SLUG = "semiconductor-knowledge-base"
+
 # ── External namespaces ─────────────────────────────────────────
 PROV = Namespace("http://www.w3.org/ns/prov#")
 SKOS = Namespace("http://www.w3.org/2004/02/skos/core#")

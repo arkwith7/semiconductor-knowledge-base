@@ -2,7 +2,7 @@
         ingest-sirp sirp-pairs sirp-problems sirp experts \
         compliance curated-experts curated-ratings expdataset abox abox-patents \
         abox-prior-art abox-claim-features abox-full refetch-fulltext cq \
-        public-release check-public \
+        public-release check-public signature signature-inject signature-check \
         superordinate-concepts concept-mapping \
         semiconto-fetch semiconto-analyze semiconto-align semiconto-enrich semiconto-phase0 \
         viz viz-clean viz-open \
@@ -43,6 +43,9 @@ help:
 	@echo "  cq              run the competency-question suite → report"
 	@echo "  public-release  build the public tree (KIPRIS full text emptied) into PUBLIC_OUT"
 	@echo "  check-public    scan that tree with fingerprints from the private canonical"
+	@echo "  signature       count classes / predicates / instances → data/reports/graph_signature.json"
+	@echo "  signature-inject  + rewrite the signature block in README.md and README.ko.md"
+	@echo "  signature-check   fail if that block is stale (do not write)"
 	@echo "  semiconto-fetch    Download SemicONTO v0.2 TTL into ontology/imports/"
 	@echo "  semiconto-analyze  Parse SemicONTO TTL → data/reports/semiconto_analysis.json"
 	@echo "  semiconto-align    Build SDKB↔SemicONTO SKOS alignment (mappings/)"
@@ -147,6 +150,19 @@ public-release:
 check-public:
 	$(PYTHON) scripts/check_public_release.py --tree $(PUBLIC_OUT) \
 		--report data/reports/public_release_check.json
+
+# ── 그래프 서명 (R4 · CLAUDE.md §4) ────────────────────────────────
+# §4 는 "릴리스를 만들 때 그래프 서명을 CHANGELOG 에 남긴다" 고 요구하는데 그것을
+# 이행하는 코드가 없어서 README 수치가 손으로 관리됐고 넷이 어긋났다(점검 F4·F5).
+# 이제 세는 것은 코드다. `signature-check` 는 README 블록이 낡았으면 실패한다.
+signature:
+	$(PYTHON) scripts/report_graph_signature.py
+
+signature-inject:
+	$(PYTHON) scripts/report_graph_signature.py --inject
+
+signature-check:
+	$(PYTHON) scripts/report_graph_signature.py --check
 
 # KSIA 회원사 명부 → ont:Vendor A-Box. abox-patents 뒤에 와야 한다 —
 # 이미 특허 출원인(Organization)으로 존재하는 회사를 알아보고 중복 노드를 만들지 않으려면

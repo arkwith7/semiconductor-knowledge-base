@@ -22,7 +22,10 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from build_public_release import (  # noqa: E402
     PRIVATE_TOKEN, is_private_doc, scrub_abs_paths, scrub_dataset, strip_notebook,
 )
-from check_public_release import build_probes, scan_boundary  # noqa: E402
+from check_public_release import (  # noqa: E402
+    LEGACY_SLUG_ALLOWED, build_probes, scan_boundary,
+)
+from config.namespaces import LEGACY_REPO_SLUG  # noqa: E402
 
 
 def _record() -> dict:
@@ -125,9 +128,29 @@ def test_검사기가_트리의_토큰_문서를_잡는다(tmp_path):
         f"{PRIVATE_TOKEN}\nCONFIDENTIAL 가격표\n", encoding="utf-8")
     (tmp_path / "docs" / "public.md").write_text(
         f"비공개 문서는 첫 줄에 `{PRIVATE_TOKEN}` 를 단다.\n", encoding="utf-8")
-    private, abs_hits = scan_boundary(sorted(tmp_path.rglob("*.md")), tmp_path)
+    private, abs_hits, legacy = scan_boundary(sorted(tmp_path.rglob("*.md")), tmp_path)
     assert private == ["docs/internal.md"]     # 규약을 **설명**하는 문서는 통과한다
     assert abs_hits == []
+    assert legacy == []
+
+
+def test_검사기가_옛_리포_URL_을_잡는다(tmp_path):
+    """R3 회귀 — 리포명을 바꾼 뒤 누가 옛 URL 을 다시 심으면 공개 첫날 404 가 된다.
+    실패해야 할 입력이 실패하는가, 그리고 **인용 허용 파일은 통과하는가.**"""
+    (tmp_path / "docs").mkdir()
+    (tmp_path / "docs" / "new.md").write_text(
+        f"소스: https://github.com/arkwith7/{LEGACY_REPO_SLUG}\n", encoding="utf-8")
+    (tmp_path / "docs" / "clean.md").write_text(
+        "소스: https://github.com/arkwith7/sdkb-dataset\n", encoding="utf-8")
+    _, _, legacy = scan_boundary(sorted(tmp_path.rglob("*.md")), tmp_path)
+    assert [h["file"] for h in legacy] == ["docs/new.md"]
+
+    # 허용 목록의 파일은 그 슬러그를 **인용하는 것이 일**이다 — F3 의 증거다.
+    allowed = tmp_path / next(iter(LEGACY_SLUG_ALLOWED))
+    allowed.parent.mkdir(parents=True, exist_ok=True)
+    allowed.write_text(f"F3 의 증거: …/{LEGACY_REPO_SLUG}/…\n", encoding="utf-8")
+    _, _, legacy2 = scan_boundary(sorted(tmp_path.rglob("*.md")), tmp_path)
+    assert [h["file"] for h in legacy2] == ["docs/new.md"]
 
 
 def test_URL_의_home_은_스크럽되지_않는다():

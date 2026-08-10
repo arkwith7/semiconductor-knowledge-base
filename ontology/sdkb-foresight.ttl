@@ -39,7 +39,8 @@ ont:STEEPVEFactor
 ont:STEEPVEDimension
     a owl:Class ;
     rdfs:subClassOf skos:Concept ;
-    rdfs:label "STEEPVE Dimension"@en .
+    rdfs:label "STEEPVE Dimension"@en ;
+    rdfs:comment "One of the seven STEEPVE analysis dimensions (Social, Technological, Economic, Environmental, Political, Values, Ethics). A skos:Concept; the seven instances are declared in this module."@en .
 
 ont:Signal
     a owl:Class ;
@@ -54,7 +55,8 @@ ont:RealOption
 ont:OptionType
     a owl:Class ;
     rdfs:subClassOf skos:Concept ;
-    rdfs:label "Real Option Type"@en .
+    rdfs:label "Real Option Type"@en ;
+    rdfs:comment "The kind of real option a RealOption instantiates (defer, expand, contract, abandon, stage, switch). A skos:Concept, so the vocabulary is extended by adding instances rather than subclasses."@en .
 
 # ── STEEPVE DIMENSION CONCEPTS ─────────────────────────────────────
 
@@ -81,19 +83,22 @@ ont:scenarioDriver
     a owl:ObjectProperty ;
     rdfs:domain ont:Scenario ;
     rdfs:range ont:STEEPVEFactor ;
-    rdfs:label "scenario driver"@en .
+    rdfs:label "scenario driver"@en ;
+    rdfs:comment "Reads scenario → factor: the STEEPVEFactor is a driver of the Scenario. Direction matters — the scenario is the subject, and the factor is what moves it, not the other way round."@en .
 
 ont:hasDimension
     a owl:ObjectProperty ;
     rdfs:domain ont:STEEPVEFactor ;
     rdfs:range ont:STEEPVEDimension ;
-    rdfs:label "has dimension"@en .
+    rdfs:label "has dimension"@en ;
+    rdfs:comment "Reads factor → dimension: the STEEPVEFactor is classified under that STEEPVE dimension."@en .
 
 ont:signalsFactor
     a owl:ObjectProperty ;
     rdfs:domain ont:Signal ;
     rdfs:range ont:STEEPVEFactor ;
-    rdfs:label "signals factor"@en .
+    rdfs:label "signals factor"@en ;
+    rdfs:comment "Reads signal → factor: the observed Signal is evidence about that STEEPVEFactor. A signal is an observation; a factor is the underlying driver it is evidence for."@en .
 
 ont:hasRealOption
     a owl:ObjectProperty ;
@@ -105,13 +110,15 @@ ont:optionType
     a owl:ObjectProperty ;
     rdfs:domain ont:RealOption ;
     rdfs:range ont:OptionType ;
-    rdfs:label "option type"@en .
+    rdfs:label "option type"@en ;
+    rdfs:comment "Reads option → type: which kind of real option this RealOption is. An ObjectProperty rather than a literal so the type vocabulary stays a controlled SKOS scheme."@en .
 
 ont:optionUnderScenario
     a owl:ObjectProperty ;
     rdfs:domain ont:RealOption ;
     rdfs:range ont:Scenario ;
-    rdfs:label "option under scenario"@en .
+    rdfs:label "option under scenario"@en ;
+    rdfs:comment "Reads option → scenario: the RealOption is evaluated under that Scenario. The same option is normally valued under several scenarios, so this is not functional."@en .
 
 # ── DATATYPE PROPERTIES ────────────────────────────────────────────
 
@@ -133,7 +140,8 @@ ont:exerciseDate
     a owl:DatatypeProperty ;
     rdfs:domain ont:RealOption ;
     rdfs:range xsd:date ;
-    rdfs:label "exercise date"@en .
+    rdfs:label "exercise date"@en ;
+    rdfs:comment "The date at or by which the real option may be exercised. A decision deadline, not an event that has necessarily occurred."@en .
 
 ont:signalStrength
     a owl:DatatypeProperty ;

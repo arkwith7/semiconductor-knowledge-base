@@ -1,5 +1,17 @@
 # 인력·문제 축 비식별 변조 프로토콜
 
+> **English summary.** How the expert and problem axes of SDKB were built without ever ingesting
+> the source documents. The real inputs — career histories of practising semiconductor engineers
+> and firms' technical problem statements — contain personal and commercially confidential
+> information and cannot be redistributed in any form. So the **`ont:Expert` (110)** and
+> **`ont:Problem` (226)** instances are of two kinds: a small set of **de-identified derivatives**
+> (5 expert profiles, altered until re-identification is not possible) and a larger set of
+> **deterministically generated** instances (105 profiles, seeded, generated to be consistent
+> with the process and device vocabulary). **No original source document has ever been copied
+> into this repository, into a release snapshot, or into any downstream vendored artifact** —
+> only the transformed outputs were kept. Papers citing this axis should cite this protocol, and
+> should not describe these instances as human-expert annotation.
+
 SDKB 의 `ont:Expert`(110) · `ont:Problem`(226) 인스턴스는 실 원천을 **그대로 사용할 수 없는**
 데이터다. 실 경력기술서·실 기술문제 기술서는 개인정보와 기업 영업정보를 담고 있어 어떤 형태로도
 재배포할 수 없다. 그래서 두 축은 **실 데이터를 근거로 식별 불가능하도록 변조한 파생물**과,
@@ -16,7 +28,7 @@ SDKB 의 `ont:Expert`(110) · `ont:Problem`(226) 인스턴스는 실 원천을 *
 
 ### 1.1 구성
 
-| 층 | 건수 | 성격 |
+| 층 · Tier | 건수 · Count | 성격 · Nature |
 |---|---:|---|
 | 변조 파생 프로필 | **5** (EXP_001–005) | 실 반도체 실무자 경력기술서를 근거로 식별 불가능하도록 변조 |
 | 결정적 생성 프로필 | **105** (EXP_006–110) | 공정·소자 어휘에 정합하도록 시드 고정 생성 (`scripts/gen_experts.py`) |
@@ -105,7 +117,7 @@ EXP_006–110 은 시드 고정 생성값이다. 그래프에 실린 어떤 경�
 
 ### 2.1 구성 (`data_source` 필드 실집계)
 
-| 층 | 건수 | 원천 |
+| 층 · Tier | 건수 · Count | 원천 · Source |
 |---|---:|---|
 | 최초 큐레이션 | **61** | 실 기술문제 기술서의 데이터 구조를 근거로 작성 (`PROB_001–050` + `prob_*` 11) |
 | 수출통제 트리거 시나리오 | **15** | 목적 설계 (`SC_PROB_*`) |

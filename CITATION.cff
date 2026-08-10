@@ -15,7 +15,7 @@ contact:
 version: "1.0.0-dev"
 date-released: "2026-05-12"
 license: CDLA-Permissive-2.0
-repository-code: "https://github.com/arkwith7/semiconductor-knowledge-base"
+repository-code: "https://github.com/arkwith7/sdkb-dataset"
 abstract: >-
   SDKB is a provenance-grounded curation knowledge base that serves as the
   semiconductor-domain data trunk for the SKKU Quantitative Technology

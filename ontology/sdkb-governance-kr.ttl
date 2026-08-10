@@ -77,7 +77,8 @@ gov:nctField
     a owl:ObjectProperty ;
     rdfs:domain gov:NationalCoreTechnology ;
     rdfs:range gov:NCTField ;
-    rdfs:label "NCT field"@en .
+    rdfs:label "NCT field"@en ;
+    rdfs:comment "Reads technology → field: which National Core Technology field the NationalCoreTechnology is designated under. An ObjectProperty into a controlled field vocabulary, not a free-text label."@en .
 
 gov:requiresGovApproval
     a owl:DatatypeProperty ;
@@ -90,7 +91,8 @@ gov:nctDesignationDate
     a owl:DatatypeProperty ;
     rdfs:domain gov:NationalCoreTechnology ;
     rdfs:range xsd:date ;
-    rdfs:label "NCT designation date"@en .
+    rdfs:label "NCT designation date"@en ;
+    rdfs:comment "The date the technology was designated a National Core Technology. Designation dates change as the list is revised, so a value is only meaningful together with the snapshot it was read from."@en .
 
 # ── ANCHOR INDIVIDUALS ─────────────────────────────────────────────
 

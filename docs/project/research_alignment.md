@@ -74,7 +74,7 @@ SDKB-Match (이중 응용)       특허기회 발굴            RBV 핵심자원
 | ② SIRP patent ↔ examiner-cited prior art (상위 50특허) | `data/patents/*.parquet` | `site/sirp.html` |
 | ③ 4-pillar class skeleton — patent / rbv / commercialization / foresight | `ontology/sdkb-*.ttl` | `site/pillars.html` |
 
-빌더 = `scripts/build_viz.py` · 배포 = `.github/workflows/viz-deploy.yml`. URL = [https://arkwith7.github.io/semiconductor-knowledge-base/](https://arkwith7.github.io/semiconductor-knowledge-base/). 운영 가이드: [docs/project/visualization_plan.md](visualization_plan.md).
+빌더 = `scripts/build_viz.py` · 배포 = `.github/workflows/viz-deploy.yml`. URL = [https://arkwith7.github.io/sdkb-dataset/](https://arkwith7.github.io/sdkb-dataset/). 운영 가이드: [docs/project/visualization_plan.md](visualization_plan.md).
 
 ### 4.2 후속 학기 확장 (2026-2)
 

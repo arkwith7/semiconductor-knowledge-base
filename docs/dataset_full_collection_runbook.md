@@ -1,5 +1,17 @@
 # 거절특허 데이터셋 전체 확장 수집 Runbook (B1~B5 + A2/B4)
 
+> **English summary.** An operational runbook for expanding the SIRP dataset from a partial
+> cohort to **all 1,000 refused applications**, filling six data gaps labelled B1–B5 plus A2/B4.
+> It covers what to fetch (examiner-cited prior art ≈2,551 citations; ≈3,199 distinct documents
+> across all citation types; refusal-decision PDFs; external device vocabulary), from where
+> (KIPRIS Plus API, KIPRIS advanced web search, OCR over refusal decisions), in what order, and
+> under what API call budget. Deliverables are the extended canonical JSONL schema, a full-text
+> prior-art corpus, OCR text plus structured JSON for refusal decisions, and a device hierarchy
+> vocabulary. Explicitly out of scope: NLP entity/relation extraction, T-Box extension, and
+> re-running any evaluation. **The procedure text stays in Korean by intent** — it describes
+> KIPRIS/KIPO interfaces and forms whose field names and screens are Korean, and translating
+> them would make the steps harder to follow, not easier.
+
 > **문서 버전**: v1.0 (2026-05-16)
 > **상태**: 활성 — 실행 계획 + 운영 절차
 > **상위 문서**:

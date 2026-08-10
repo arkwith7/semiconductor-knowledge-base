@@ -24,7 +24,7 @@ size_categories:
 > 운영: 성균관대학교 기술경영전문대학원 [계량기술경영 연구실](#연구실-컨텍스트) (Quantitative Technology Management Lab, PI: 신준석 교수)
 >
 > 🌐 English version: [README.md](README.md)
-> 🔗 **Live demo (GitHub Pages):** [`arkwith7.github.io/semiconductor-knowledge-base`](https://arkwith7.github.io/semiconductor-knowledge-base/) — 큐레이션 그래프 229노드 · SIRP 상위 50특허 + 선행기술 · 4-pillar 클래스 골격 인터랙티브 3-뷰
+> 🔗 **Live demo (GitHub Pages):** [`arkwith7.github.io/sdkb-dataset`](https://arkwith7.github.io/sdkb-dataset/) — 큐레이션 그래프 · SIRP 상위 50특허 + 선행기술 · 4-pillar 클래스 골격 인터랙티브 3-뷰
 
 ## 한 줄 포지셔닝
 
@@ -69,7 +69,7 @@ SDKB는 반도체 **공정 · 장비 · 결함 · 스킬** 지식, **특허 분�
 | 특허·시장·산업 데이터 기반 **기술예측** | `sdkb-patent.ttl` + SIRP + Topic / Novelty 노드 | [활용 사례 1](#활용-사례) |
 | **유망기술 기회 발굴** | Novelty-focused patent mapping, emerging-memory 토픽 클러스터 | [활용 사례 1](#활용-사례), 🚧 [notebook 02](notebooks/02_patent_opportunity_demo.ipynb) |
 | **중소기업 혁신 성과 분석 / 전문가 매칭** | SDKB-Match Expert + 합성 100 + 큐레이션 110 전문가 풀 + 다중관할 컴플라이언스 게이트 | [활용 사례 2](#활용-사례), 🚧 [notebook 01](notebooks/01_matching_baseline_expert.ipynb), ✅ [notebook 05](notebooks/05_synthetic_vs_curated_comparison.ipynb) |
-| **인터랙티브 기술 · 비즈니스 시각화** | Pyvis 3-뷰 익스플로러 · GitHub Pages 자동 배포 | [Live demo](https://arkwith7.github.io/semiconductor-knowledge-base/), [docs/project/visualization_plan.md](docs/project/visualization_plan.md) |
+| **인터랙티브 기술 · 비즈니스 시각화** | Pyvis 3-뷰 익스플로러 · GitHub Pages 자동 배포 | [Live demo](https://arkwith7.github.io/sdkb-dataset/), [docs/project/visualization_plan.md](docs/project/visualization_plan.md) |
 | 조직적 R&D 관리 / 혁신 디자인 (보조축) | RBV 핵심자원 조합 + TRL / 실물옵션 시드 노드 | [활용 사례 4](#활용-사례), 🚧 [notebook 03](notebooks/03_rbv_resource_combo_demo.ipynb) |
 
 ## Why / For / How
@@ -91,7 +91,7 @@ SDKB는 반도체 **공정 · 장비 · 결함 · 스킬** 지식, **특허 분�
 | 3 | **SDKB-Match (PriorArt)** — 특허출원 ↔ 선행기술 매칭 (examiner GT 기반) | IP-R&D 컨설팅 / 선행기술 분석 | core + patent + SIRP | ✅ [04](notebooks/04_prior_art_baseline.ipynb) | PatentMatch, CLEF-IP 패밀리 |
 | 4 | **Key resource combinations** — 반도체 fabless 시장진입 분석 | 조직적 R&D / 핵심자원 분석 | core + rbv | 🚧 [03](notebooks/03_rbv_resource_combo_demo.ipynb) (데이터 대기 — 정렬 트랙) | Cho/Shin (PLoS ONE 2025), Bae/Shin (IEEE Access 2022) |
 | 5 | **복합실물옵션** — EUV vs High-NA 로드맵 가치평가 | 기술가치평가 (후속 학기) | core + foresight + commercialization | _(2026-2 예정)_ | 연구실 실물옵션 라인 |
-| 6 | **인터랙티브 KG 익스플로러** — 3-뷰(베이스라인 / SIRP / 4-pillar) GitHub Pages 배포 | 인터랙티브 시각화 | core + patent + rbv + foresight + commercialization | ✅ [Live](https://arkwith7.github.io/semiconductor-knowledge-base/) · `scripts/build_viz.py` | 연구실 시각화 트랙 |
+| 6 | **인터랙티브 KG 익스플로러** — 3-뷰(베이스라인 / SIRP / 4-pillar) GitHub Pages 배포 | 인터랙티브 시각화 | core + patent + rbv + foresight + commercialization | ✅ [Live](https://arkwith7.github.io/sdkb-dataset/) · `scripts/build_viz.py` | 연구실 시각화 트랙 |
 
 4-pillar 상세 매핑: [docs/project/research_alignment.md](docs/project/research_alignment.md).
 
@@ -99,14 +99,14 @@ SDKB는 반도체 **공정 · 장비 · 결함 · 스킬** 지식, **특허 분�
 
 | 레이어 | 모듈 | 라이선스 |
 |---|---|---|
-| **Core (Open)** | 공정 14 타입 KG, FMEA | CDLA-Permissive-2.0 |
+| **Core (Open)** | 공정 · 장비 · 소재 · FMEA 코어 KG | CDLA-Permissive-2.0 |
 | **Governance (Open)** | 미국 BIS / NIST / ECHA + **한국 산업기술보호법** | CDLA-Permissive-2.0 |
 | **Alignment (Open)** | patent / rbv / commercialization / foresight | CDLA-Permissive-2.0 |
 | **Link-Only** | SEMI E10 / E30 / E40 / E116 (식별자만) | N/A (메타데이터) |
 
 ```
 ontology/
-  sdkb-core.ttl                     # 14 코어 클래스
+  sdkb-core.ttl                     # 코어 어휘 — 규모는 "릴리스 서명" 참조
   sdkb-governance.ttl               # BIS / NIST / ECHA
   sdkb-governance-kr.ttl            # 한국 산업기술보호법
   sdkb-patent.ttl                   # 특허 분류 (CPC / IPC / F-term / Topic / Novelty)
@@ -114,7 +114,7 @@ ontology/
   sdkb-commercialization.ttl        # TRL / 라이선스 / 스핀오프
   sdkb-foresight.ttl                # 시나리오 / STEEPVE / 실물옵션
 data/
-  semiconductor_v0_3.json           # 큐레이션 그래프 229노드 / 268엣지 (베이스라인 원본 198/264)
+  semiconductor_v0_3.json           # 손으로 큐레이션한 원천 그래프 — 규모는 "릴리스 서명" 참조
   expert_profiles.parquet           # 합성 전문가 100
   experts/curated_profiles.parquet  # 큐레이션 110
   problems.parquet                  # 기술 문제 50
@@ -248,15 +248,62 @@ make viz-open  # 위 + 기본 브라우저로 site/index.html 자동 오픈
 - 1회 설정: 레포 **Settings → Pages → Source: GitHub Actions** 선택
 - 상세: [docs/project/visualization_plan.md](docs/project/visualization_plan.md)
 
-### 검증된 산출물 수치
-- 큐레이션 그래프 **229 노드 / 268 엣지** (v0.3; 베이스라인 원본 198/264, 큐레이션으로 확장·Device 포함)
+### 릴리스 서명
+
+`make signature` 가 생성한다 — **아래 블록을 손으로 고치지 마세요.**
+원천은 [`data/reports/graph_signature.json`](data/reports/graph_signature.json) 입니다.
+(큐레이션 그래프는 2026-05-17 스냅샷 229/268 이후 자랐습니다. 손으로 관리한 수치가
+어긋난 것이 이 블록을 코드가 쓰게 만든 이유입니다.)
+
+<!-- sdkb:signature:begin -->
+<!-- 이 블록은 `make signature-inject` 가 씁니다. 손으로 고치지 마세요 —
+     data/reports/graph_signature.json 이 원천입니다. -->
+
+**T-Box (vocabulary).** Named classes are counted separately from restriction
+blank nodes: `grep -c owl:Class` counts both and reports a larger number.
+
+| Module | Classes (named) | (blank) | ObjectProperty | DatatypeProperty | `rdfs:comment` | Triples |
+|---|---|---|---|---|---|---|
+| `sdkb-core.ttl` | 43 | 13 | 45 | 45 | 133/133 | 719 |
+| `sdkb-patent.ttl` | 16 | 6 | 32 | 26 | 74/74 | 465 |
+| `sdkb-rbv.ttl` | 9 | 0 | 6 | 3 | 18/18 | 82 |
+| `sdkb-foresight.ttl` | 6 | 0 | 6 | 4 | 16/16 | 107 |
+| `sdkb-commercialization.ttl` | 7 | 0 | 6 | 4 | 17/17 | 104 |
+| `sdkb-governance.ttl` | 0 | 0 | 2 | 1 | 3/3 | 40 |
+| `sdkb-governance-kr.ttl` | 3 | 0 | 2 | 2 | 7/7 | 60 |
+| **Total** | **84** | 19 | **99** | **85** | **268/268** | 1,577 |
+
+**Curation graph** (`data/semiconductor_v0_3.json` — the hand-curated source the core A-Box is generated from).
+
+- **274 nodes / 312 edges** across **15 node types** (version `0.3`)
+
+**A-Box layers.** `not built` is the expected state on a fresh checkout — these layers are generated, and the large ones need a KIPRIS key. See *What is empty, and how to fill it*.
+
+| Layer | Content | Triples |
+|---|---|---|
+| `sdkb-core-data.ttl` | curation graph, instantiated | 2,884 |
+| `sdkb-abox-patents.ttl` | SIRP rejected patents | 33,931 |
+| `sdkb-abox-prior-art.ttl` | examiner-cited prior art | 66,440 |
+| `sdkb-abox-claim-features.ttl` | claim features | 11,770,236 ¹ |
+| `sdkb-abox-b-layer-queries.ttl` | B-layer confirmation queries | 4,604 |
+| `sdkb-abox-experts-problems.ttl` | experts and problems | 8,483 |
+| `sdkb-abox-vendors.ttl` | equipment vendors | 2,601 |
+| `sdkb-governance-kr-instances.ttl` | Korea regulatory instances | 175 |
+| `sdkb-governance-us-instances.ttl` | US export-control instances | 105 |
+
+¹ counted by the generator that emitted the layer (`data/reports/`) rather than re-parsed here — the file is too large to re-parse on every signature run. Use `--parse-large` to re-count.
+
+<!-- sdkb:signature:end -->
+
+위 서명이 덮지 않는, 따로 동결된 수치:
 - SIRP **1,000 patents** (GT 쌍은 773-코호트 스냅샷에 고정) · 3,118 IPC 링크 · 4,696 prior-art 엣지
 - 7,500 examiner-grounded pairs (positive 2,723 + hard-neg 2,723 + easy-neg 2,054)
 - 50 stratified problems · 25 adversarial scenarios (all anchored)
 - 100 synthetic experts + 110 curated experts = **dual-track pool**
 - 7,500 examiner-grounded(객관 KIPO 인용) + 7,800 알고리즘 시뮬레이션 3-rater 합성 평점 — **인간 전문가 주석 아님** (dual-track GT). 3-rater 신뢰도: weighted κ = 0.550 / ICC(2,k) = 0.787 (합의); 투명성: Fleiss κ = 0.258 / ICC(2,1) = 0.552 — [data/experts/reliability_report.md](data/experts/reliability_report.md)
 - KR + US governance: 20 controls / 205 RDF triples
-- **75 passed / 10 skipped (85 collected) · OWL 438 triples · SHACL VALIDATION PASSED**
+- SHACL 검증 통과. 테스트 집계는 `make test` 로 확인한다 (손으로 적어 둔
+  "75 passed / 10 skipped · OWL 438 triples" 는 낡았다)
 
 ## Limitations & Bias
 
@@ -283,7 +330,7 @@ make viz-open  # 위 + 기본 브라우저로 site/index.html 자동 오픈
                  Quantitative Technology Management Lab},
   year        = {2026},
   version     = {1.0},
-  url         = {https://github.com/arkwith7/semiconductor-knowledge-base},
+  url         = {https://github.com/arkwith7/sdkb-dataset},
   license     = {CDLA-Permissive-2.0},
   note        = {Hyeonup-Project 2026-1 deliverable; seed dataset for
                  the forthcoming compliance-aware semantic collaboration

@@ -1,5 +1,15 @@
 # KIPRIS 데이터 소스 매핑 메모
 
+> **English summary.** A short decision memo on which KIPRIS Plus services this dataset draws
+> from, and why. Two services matter: the **patent/utility publication and registration gazette**
+> (bibliographic detail, classifications, claims) and the **refusal decision** service (the
+> examiner's stated grounds and the documents cited against the application). The memo records
+> the selection criteria — does the source directly produce the `refused application + examiner
+> citation` structure, how stably does it supply input fields versus ground-truth fields, and how
+> should small REST-based verification be separated from bulk collection — together with the
+> current operating status of each route. It is a provenance record, not an API tutorial: the
+> field-level mapping lives in the schema document.
+
 ## 목적
 
 이 문서는 KIPRIS Plus 서비스 설명 페이지 중 현재 데이터셋 목적과 직접 연결되는 두 소스를 정리합니다.

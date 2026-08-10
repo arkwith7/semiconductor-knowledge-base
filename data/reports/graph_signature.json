@@ -1,0 +1,189 @@
+{
+  "note": "코드가 센 값이다. 손으로 고치지 않는다 — README 의 서명 블록은 `make signature-inject` 가 다시 쓴다.",
+  "tbox_modules": [
+    {
+      "module": "sdkb-core",
+      "status": "built",
+      "classes_named": 43,
+      "classes_blank": 13,
+      "object_properties": 45,
+      "datatype_properties": 45,
+      "terms": 133,
+      "documented": 133,
+      "triples": 719
+    },
+    {
+      "module": "sdkb-patent",
+      "status": "built",
+      "classes_named": 16,
+      "classes_blank": 6,
+      "object_properties": 32,
+      "datatype_properties": 26,
+      "terms": 74,
+      "documented": 74,
+      "triples": 465
+    },
+    {
+      "module": "sdkb-rbv",
+      "status": "built",
+      "classes_named": 9,
+      "classes_blank": 0,
+      "object_properties": 6,
+      "datatype_properties": 3,
+      "terms": 18,
+      "documented": 18,
+      "triples": 82
+    },
+    {
+      "module": "sdkb-foresight",
+      "status": "built",
+      "classes_named": 6,
+      "classes_blank": 0,
+      "object_properties": 6,
+      "datatype_properties": 4,
+      "terms": 16,
+      "documented": 16,
+      "triples": 107
+    },
+    {
+      "module": "sdkb-commercialization",
+      "status": "built",
+      "classes_named": 7,
+      "classes_blank": 0,
+      "object_properties": 6,
+      "datatype_properties": 4,
+      "terms": 17,
+      "documented": 17,
+      "triples": 104
+    },
+    {
+      "module": "sdkb-governance",
+      "status": "built",
+      "classes_named": 0,
+      "classes_blank": 0,
+      "object_properties": 2,
+      "datatype_properties": 1,
+      "terms": 3,
+      "documented": 3,
+      "triples": 40
+    },
+    {
+      "module": "sdkb-governance-kr",
+      "status": "built",
+      "classes_named": 3,
+      "classes_blank": 0,
+      "object_properties": 2,
+      "datatype_properties": 2,
+      "terms": 7,
+      "documented": 7,
+      "triples": 60
+    }
+  ],
+  "tbox_total": {
+    "classes_named": 84,
+    "classes_blank": 19,
+    "object_properties": 99,
+    "datatype_properties": 85,
+    "terms": 268,
+    "documented": 268,
+    "triples": 1577
+  },
+  "curation_source": {
+    "status": "built",
+    "version": "0.3",
+    "nodes": 274,
+    "edges": 312,
+    "node_types": 15,
+    "nodes_by_type": {
+      "Equipment": 41,
+      "SubProcess": 38,
+      "Device": 34,
+      "Material": 31,
+      "FailureMode": 25,
+      "Mitigation": 20,
+      "RootCause": 20,
+      "Vendor": 16,
+      "EquipmentClass": 12,
+      "Process": 12,
+      "Skill": 12,
+      "Parameter": 5,
+      "Metrology": 3,
+      "TechnologyNode": 3,
+      "Organization": 2
+    }
+  },
+  "abox_layers": [
+    {
+      "layer": "sdkb-core-data",
+      "label": "curation graph, instantiated",
+      "status": "built",
+      "bytes": 155790,
+      "triples": 2884,
+      "triples_source": "parsed"
+    },
+    {
+      "layer": "sdkb-abox-patents",
+      "label": "SIRP rejected patents",
+      "status": "built",
+      "bytes": 3437493,
+      "triples": 33931,
+      "triples_source": "parsed"
+    },
+    {
+      "layer": "sdkb-abox-prior-art",
+      "label": "examiner-cited prior art",
+      "status": "built",
+      "bytes": 21675315,
+      "triples": 66440,
+      "triples_source": "parsed"
+    },
+    {
+      "layer": "sdkb-abox-claim-features",
+      "label": "claim features",
+      "status": "built",
+      "bytes": 899089081,
+      "triples": 11770236,
+      "triples_source": "report:abox_claim_features_report.json"
+    },
+    {
+      "layer": "sdkb-abox-b-layer-queries",
+      "label": "B-layer confirmation queries",
+      "status": "built",
+      "bytes": 566831,
+      "triples": 4604,
+      "triples_source": "parsed"
+    },
+    {
+      "layer": "sdkb-abox-experts-problems",
+      "label": "experts and problems",
+      "status": "built",
+      "bytes": 460290,
+      "triples": 8483,
+      "triples_source": "parsed"
+    },
+    {
+      "layer": "sdkb-abox-vendors",
+      "label": "equipment vendors",
+      "status": "built",
+      "bytes": 153484,
+      "triples": 2601,
+      "triples_source": "parsed"
+    },
+    {
+      "layer": "sdkb-governance-kr-instances",
+      "label": "Korea regulatory instances",
+      "status": "built",
+      "bytes": 11597,
+      "triples": 175,
+      "triples_source": "parsed"
+    },
+    {
+      "layer": "sdkb-governance-us-instances",
+      "label": "US export-control instances",
+      "status": "built",
+      "bytes": 7216,
+      "triples": 105,
+      "triples_source": "parsed"
+    }
+  ]
+}

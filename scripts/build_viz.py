@@ -19,6 +19,7 @@ underlying source files in the repository.
 from __future__ import annotations
 
 import json
+import sys
 from collections import Counter
 from html import escape
 from pathlib import Path
@@ -30,6 +31,10 @@ from pyvis.network import Network
 
 REPO = Path(__file__).resolve().parents[1]
 OUT_DIR = REPO / "site"
+
+# 발행되는 HTML 에 리포 링크가 박힌다 — 리포명은 config 한 곳에서만 정한다 (R3).
+sys.path.insert(0, str(REPO))
+from config.namespaces import REPO_URL  # noqa: E402
 
 # ── Visual palette ────────────────────────────────────────────────
 TYPE_COLORS: dict[str, str] = {
@@ -867,7 +872,7 @@ LANDING_TEMPLATE = """<!doctype html>
   <h1>반도체 지식베이스(SDKB) — 인터랙티브 탐색</h1>
   <p class="lede">반도체 <strong>공정·장비·소재·불량·특허·규제</strong> 지식을 하나의 연결된 그래프로 정리한 지식베이스입니다.
   흩어진 도메인 지식을 연결해 <strong>기업 문제↔전문가 매칭, 선행기술 검색, 기술예측·사업화 분석</strong>에 재사용합니다.</p>
-  <p class="sub muted-note">Park HyoungSik (Ph.D. 19기) · 지도 신준석 교수 · <a href="https://github.com/arkwith7/semiconductor-knowledge-base">GitHub 소스</a></p>
+  <p class="sub muted-note">Park HyoungSik (Ph.D. 19기) · 지도 신준석 교수 · <a href="{repo_url}">GitHub 소스</a></p>
 </header>
 
 <main>
@@ -971,6 +976,7 @@ def build_index(baseline_info: dict, sirp_info: dict, pillars_info: dict,
         sirp_meta=sirp_meta,
         pillars_meta=pillars_meta,
         metrics_meta=metrics_meta,
+        repo_url=REPO_URL,
     )
     out = OUT_DIR / "index.html"
     out.write_text(html, encoding="utf-8")

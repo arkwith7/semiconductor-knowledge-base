@@ -27,6 +27,79 @@ All notable changes to SDKB will be documented in this file.
 
 ## [Unreleased] — v1.0.0-dev
 
+### Changed (2026-08-10 — 어휘에 **주석 42개**를 더했다 · 점검 R5 · G5) ⚠ 하류 통보
+
+**의미 델타 0 · 주석 델타 42.** 아래 다섯 T-Box 파일의 sha256 이 바뀐다. 바뀐 것은
+`rdfs:comment` 트리플뿐이고, **클래스·술어의 수와 `rdfs:domain`/`rdfs:range` 는 한 개도
+움직이지 않았다.** 스냅샷을 핀한 하류는 재측정할 것이 없다 — 그 확인을 위해 델타를 여기 적는다.
+
+| 모듈 | 주석 보유 (전/후) | 트리플 (전/후) |
+|---|---|---|
+| `sdkb-patent.ttl` | 56/74 → **74/74** | 447 → 465 |
+| `sdkb-commercialization.ttl` | 8/17 → **17/17** | 95 → 104 |
+| `sdkb-foresight.ttl` | 8/16 → **16/16** | 99 → 107 |
+| `sdkb-rbv.ttl` | 13/18 → **18/18** | 77 → 82 |
+| `sdkb-governance-kr.ttl` | 5/7 → **7/7** | 58 → 60 |
+| `sdkb-core.ttl` | 133/133 (불변) | 718 → 719 (아래 seeAlso) |
+| **합계** | 226/268 → **268/268** | 1,534 → **1,577** |
+
+- **결손이 가장 컸던 곳은 정렬 3모듈이 아니라 특허 모듈이었다** — 74항 중 18항. 그중
+  `filingDate`·`publicationDate`·`rejectionDate` 는 서로 다른 사건인데 주석 없이 나란히
+  있었다. `CLAUDE.md` §5-4 가 경고한 자리가 정확히 여기다.
+- 방향이 이름에서 읽히지 않는 술어는 **어느 쪽이 주어인지** 적었다 — `ont:barrierOf` 는
+  barrier → segment, `ont:scenarioDriver` 는 scenario → factor.
+- **`rdfs:domain` 또는 `rdfs:range` 를 일부러 두지 않은 둘**(`ont:hasPriorArtApplicant` ·
+  `ont:fundedBy`)은 그 이유를 주석에 적었다. 비어 있는 것과 뜻이 있어 비운 것은 다르다.
+- `tests/test_graph_signature.py` 가 268/268 을 고정한다. **주석이 비어도 SHACL 은 통과하므로**
+  이것을 잡는 층은 그 테스트뿐이다.
+
+### Added (2026-08-10 — 그래프 서명을 **코드가 센다** · 점검 R4 · F4·F5)
+
+`CLAUDE.md` §4 는 *"릴리스를 만들 때 그래프 서명을 CHANGELOG 에 남긴다"* 고 요구하는데
+**그것을 이행하는 코드가 없었다.** 그래서 README 수치가 손으로 관리됐고, 원천이 2026-08-01 에
+자란 뒤 넷이 어긋났다.
+
+- **`scripts/report_graph_signature.py`** + `make signature` · `signature-inject` ·
+  `signature-check`. 산출은 `data/reports/graph_signature.json`.
+- **명명 클래스와 restriction blank node 를 분리해 센다.** `grep -c owl:Class` 는 둘을 합쳐
+  `sdkb-patent.ttl` 을 22 로 보고한다 — named 는 16 이다. 둘 다 맞는 숫자지만 같은 자리에
+  쓰면 틀린 말이 된다.
+- **없는 층은 0 이 아니라 `not built` 로 적는다.** 0 이라고 적으면 외부인이 자기 빌드가
+  실패했다고 읽는다. 같은 이유로 아무것도 빌드되지 않은 체크아웃에서는 `--inject` 가
+  **README 를 덮지 않고 실패한다.**
+- 899 MB `claim-features` 는 매번 재파싱하지 않고 생성기 리포트의 트리플 수를 읽는다
+  (`triples_source: "report"`). 돌지 않는 절차는 절차가 아니다.
+- README 두 판의 수치 자리는 **고치지 않고 없앴다** — 정본은 마커
+  (`<!-- sdkb:signature:begin -->`) 안에서 코드가 쓴다. 덤으로 낡은 것 하나가 더 나왔다:
+  `75 passed / 10 skipped · OWL 438 triples`.
+- [`ontology_guide.md`](docs/ontology_guide.md) §2.1 표의 **ObjectProperty 총계가 93 으로
+  틀려 있었다** — 모듈별 열은 처음부터 99 로 합산된다. 아무도 다시 더해 보지 않았다.
+
+### Changed (2026-08-10 — 공개 리포 이름을 **한 곳에서** 정한다 · 점검 R3 · F3)
+
+- **`config/namespaces.py` 의 `REPO_SLUG`.** 발행되는 `rdfs:seeAlso`·`CITATION.cff`·BibTeX·
+  GitHub Pages 링크가 전부 여기서 조립된다. 흩어져 있던 곳은 TTL 한 줄이 아니라 **추적 파일
+  12곳**이었고, 그중 7곳이 Pages 라이브 데모 URL 이었다.
+- 공개 대상 리포는 **`arkwith7/sdkb-dataset`** 으로 확정. 옛 슬러그는 지우지 않고
+  `config/namespaces.py` 의 `LEGACY_REPO_SLUG` 에 남긴다 — 검사기가 재유입을 잡는 데 쓴다.
+  (이 항목이 그 슬러그를 문자 그대로 적지 않는 이유는 아래 넷째 검사에 걸리기 때문이다.
+  **검사기가 이 CHANGELOG 초안을 실제로 잡았다.**)
+- `sdkb-core.ttl` 의 `seeAlso` 는 이제 **둘**이다: `docs/ontology_guide.md`(1차) ·
+  `docs/project/architecture_amendment_sdkb_centric.md`(2차). **앵커가 아니라 파일**을
+  가리킨다 — 제목이 바뀌면 앵커는 조용히 깨진다.
+- `check_public_release.py` 가 옛 슬러그를 넷째 검사로 잡는다. **첫 실행에서 스스로 한 건을
+  잡아냈다**: 그 문자열을 *정의하는* `config/namespaces.py`. 인용 허용 목록은 코드에 두고
+  사유를 적는다 — 파일이 스스로 면제를 선언하게 하면 검사가 아니라 우회로가 된다.
+- `decompose_corpus.py` 처럼 `build_viz.py` 도 리포 링크를 하드코딩하지 않는다.
+
+### Added (2026-08-10 — 공개 문서에 영문 요약 · 점검 R6 · F6)
+
+- 한국어 중심 5문서 머리에 영문 요약을 넣었다 — 데이터셋 카드 · 전체 수집 runbook · canonical
+  스키마 · KIPRIS 소스 매핑 · 비식별 프로토콜.
+- 열 이름 병기는 **언어와 무관한 사실을 담은 표에만** 걸었다(6개 헤더). **runbook 의 운영
+  표는 한국어로 남겼다** — KIPRIS/KIPO 화면과 양식의 이름이 한국어여서 옮기면 절차를
+  따라가기가 더 어려워진다. 그 판단을 요약에 적었다. 전량 번역은 하지 않았다.
+
 ### Added (2026-08-09 — 공개 경계를 원문에서 **문서와 경로**로 넓혔다 · 점검 R1·F7)
 
 - **비공개 문서 토큰 `<!-- sdkb:private -->`.** 첫 줄에 이 토큰을 단 파일은 공개 트리에

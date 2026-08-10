@@ -49,55 +49,69 @@ SDKB is a small, hand-authored **T-Box** (the vocabulary) plus generated **A-Box
 
 ### 2.1 T-Box modules
 
-| File | Purpose | Named classes | Object props | Datatype props | Triples |
-|---|---|---|---|---|---|
-| `ontology/sdkb-core.ttl` | Process · SubProcess · Equipment · Material · Metrology · FMEA (FailureMode → RootCause → Mitigation) · Skill · Expert · Device | 43 | 45 | 45 | 718 |
-| `ontology/sdkb-patent.ttl` | Patent · Claim · ClaimFeature · IPC/CPC/F-term · RejectionReason · PriorArtJudgment | 16 | 32 | 26 | 447 |
-| `ontology/sdkb-rbv.ttl` | Firm · Resource · Capability · ResourceCombination (resource-based view) | 9 | 6 | 3 | 77 |
-| `ontology/sdkb-foresight.ttl` | Scenario · STEEPVE · Signal · RealOption | 6 | 6 | 4 | 99 |
-| `ontology/sdkb-commercialization.ttl` | TRL · License · Spinoff · IPTransaction | 7 | 6 | 4 | 95 |
-| `ontology/sdkb-governance.ttl` | Jurisdiction-neutral export-control hooks | 0 | 2 | 1 | 40 |
-| `ontology/sdkb-governance-kr.ttl` | Korea Industrial Technology Protection Act — National Core Technology | 3 | 2 | 2 | 58 |
-| **Total** | | **84** | **93** | **85** | **1,534** |
+| File | Purpose |
+|---|---|
+| `ontology/sdkb-core.ttl` | Process · SubProcess · Equipment · Material · Metrology · FMEA (FailureMode → RootCause → Mitigation) · Skill · Expert · Device |
+| `ontology/sdkb-patent.ttl` | Patent · Claim · ClaimFeature · IPC/CPC/F-term · RejectionReason · PriorArtJudgment |
+| `ontology/sdkb-rbv.ttl` | Firm · Resource · Capability · ResourceCombination (resource-based view) |
+| `ontology/sdkb-foresight.ttl` | Scenario · STEEPVE · Signal · RealOption |
+| `ontology/sdkb-commercialization.ttl` | TRL · License · Spinoff · IPTransaction |
+| `ontology/sdkb-governance.ttl` | Jurisdiction-neutral export-control hooks |
+| `ontology/sdkb-governance-kr.ttl` | Korea Industrial Technology Protection Act — National Core Technology |
 
-Counts are `owl:Class` / `owl:ObjectProperty` / `owl:DatatypeProperty` subjects that are named
-IRIs. Blank nodes (OWL restrictions) are excluded — `sdkb-core.ttl` has 13 and
-`sdkb-patent.ttl` has 6, which is why a naive `grep -c "owl:Class"` over those two files reports
-56 and 22 instead of 43 and 16.
-
-Regenerate the table:
+**How big is each one? This document does not say, on purpose.** Class, predicate and triple
+counts live in one generated place — the *Release signature* block in
+[`README.md`](../README.md), written from `data/reports/graph_signature.json`:
 
 ```bash
-.venv/bin/python - <<'PY'
-from rdflib import Graph, RDF, OWL, URIRef
-import pathlib
-for f in sorted(pathlib.Path("ontology").glob("sdkb-*.ttl")):
-    if any(k in f.name for k in ("abox", "-data", "instances")):
-        continue
-    g = Graph(); g.parse(f)
-    n = lambda t: len([s for s in g.subjects(RDF.type, t) if isinstance(s, URIRef)])
-    print(f"{f.name:32s} C={n(OWL.Class):3d} OP={n(OWL.ObjectProperty):3d} "
-          f"DP={n(OWL.DatatypeProperty):3d} triples={len(g)}")
-PY
+make signature          # count, and write the JSON report
+make signature-inject   # + rewrite the signature block in both READMEs
+make signature-check    # fail if that block has gone stale
 ```
+
+Two things worth knowing before you read those counts.
+
+**Named IRIs and blank nodes are counted separately.** The counts are `owl:Class` /
+`owl:ObjectProperty` / `owl:DatatypeProperty` subjects that are *named*. OWL restrictions are
+blank nodes and are excluded — `sdkb-core.ttl` has 13 of them and `sdkb-patent.ttl` has 6, which
+is why a naive `grep -c "owl:Class"` over those two files reports 56 and 22 instead of 43 and 16.
+
+**This table used to carry the numbers, and they were wrong.** Its ObjectProperty total said 93
+while the per-module column summed to 99; nobody re-added it. The same drift hit the README in
+four places. That is why the numbers are generated now and why this table stopped repeating them —
+a figure duplicated in two documents is a figure that will disagree with itself.
 
 ### 2.2 Documentation coverage — read this before you trust a predicate
 
 Not every module is equally documented. `rdfs:comment` coverage, measured:
 
-| Module | Classes | Object props | Datatype props |
-|---|---|---|---|
-| `sdkb-core.ttl` | 43/43 | 45/45 | 45/45 |
-| `sdkb-patent.ttl` | 16/16 | 23/32 | 17/26 |
-| `sdkb-rbv.ttl` | 9/9 | **1/6** | 3/3 |
-| `sdkb-foresight.ttl` | **4/6** | **1/6** | 3/4 |
-| `sdkb-commercialization.ttl` | **5/7** | **1/6** | 2/4 |
-| `sdkb-governance-kr.ttl` | 3/3 | **1/2** | 1/2 |
+**Every named class and predicate in every T-Box module now carries an `rdfs:comment`: 268/268.**
+That was not true until 2026-08-10 — 42 terms carried only a name, and the largest gap was not in
+the alignment modules but in `sdkb-patent.ttl` (18 of its 74 terms), including three
+similarly-named date predicates sitting side by side with nothing to tell them apart.
 
-**Core and patent are the mature modules; the three alignment modules are seeds.** Their classes
-are documented but most of their predicates carry only `rdfs:domain` / `rdfs:range`. If you are
-evaluating SDKB for reuse, judge it on core + patent, and treat rbv / foresight / commercialization
-as scaffolding you would flesh out yourself.
+| Module | Documented / terms | Before 2026-08-10 |
+|---|---|---|
+| `sdkb-core.ttl` | 133/133 | 133/133 |
+| `sdkb-patent.ttl` | 74/74 | 56/74 |
+| `sdkb-rbv.ttl` | 18/18 | 13/18 |
+| `sdkb-foresight.ttl` | 16/16 | 8/16 |
+| `sdkb-commercialization.ttl` | 17/17 | 8/17 |
+| `sdkb-governance.ttl` | 3/3 | 3/3 |
+| `sdkb-governance-kr.ttl` | 7/7 | 5/7 |
+| **Total** | **268/268** | **226/268** |
+
+(Current coverage is regenerated by `make signature`; the *before* column is a historical record and is not recomputed.)
+
+**Coverage is not maturity.** Core and patent remain the modules with real instance data behind
+them; rbv / foresight / commercialization are vocabulary seeds whose A-Box is thin. A comment tells
+you what a predicate means — it does not tell you that anyone has used it. Judge reuse on
+core + patent, and treat the alignment modules as scaffolding you would flesh out yourself.
+
+For predicates whose direction is not obvious from the name, the comment states which side is the
+subject (`ont:barrierOf` reads barrier → segment; `ont:scenarioDriver` reads scenario → factor).
+Where a predicate deliberately has **no** `rdfs:domain` or `rdfs:range`, the comment says so and
+why — see `ont:hasPriorArtApplicant` and `ont:fundedBy`.
 
 ### 2.3 A-Box layers
 

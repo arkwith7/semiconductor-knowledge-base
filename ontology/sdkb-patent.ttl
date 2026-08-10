@@ -194,21 +194,24 @@ ont:hasIPC
     rdfs:subPropertyOf ont:hasClassification ;
     rdfs:domain ont:Patent ;
     rdfs:range ont:IPCSymbol ;
-    rdfs:label "has IPC"@en .
+    rdfs:label "has IPC"@en ;
+    rdfs:comment "Links a patent to an IPC symbol assigned to it. Subproperty of hasClassification. A patent normally carries several."@en .
 
 ont:hasCPC
     a owl:ObjectProperty ;
     rdfs:subPropertyOf ont:hasClassification ;
     rdfs:domain ont:Patent ;
     rdfs:range ont:CPCSymbol ;
-    rdfs:label "has CPC"@en .
+    rdfs:label "has CPC"@en ;
+    rdfs:comment "Links a patent to a CPC symbol assigned to it. Subproperty of hasClassification; use hasIPC or hasFTerm for the other two schemes."@en .
 
 ont:hasFTerm
     a owl:ObjectProperty ;
     rdfs:subPropertyOf ont:hasClassification ;
     rdfs:domain ont:Patent ;
     rdfs:range ont:FTermFacet ;
-    rdfs:label "has F-term"@en .
+    rdfs:label "has F-term"@en ;
+    rdfs:comment "Links a patent to a JPO F-term facet assigned to it. Subproperty of hasClassification. Present only for records whose bibliographic source supplied F-terms."@en .
 
 ont:cites
     a owl:ObjectProperty ;
@@ -241,7 +244,8 @@ ont:hasPriorArtApplicant
     a owl:ObjectProperty ;
     rdfs:subPropertyOf ont:hasPriorArt ;
     rdfs:domain ont:Patent ;
-    rdfs:label "has prior art (applicant-disclosed)"@en .
+    rdfs:label "has prior art (applicant-disclosed)"@en ;
+    rdfs:comment "Prior art disclosed by the applicant, as distinct from prior art found and cited by the examiner (hasPriorArtExaminer). Subproperty of hasPriorArt. **No rdfs:range is declared** — the object may be a Patent node or a non-patent literature node, and constraining it would exclude the latter."@en .
 
 ont:rejectedFor
     a owl:ObjectProperty ;
@@ -275,7 +279,8 @@ ont:realizesEquipmentClass
     a owl:ObjectProperty ;
     rdfs:domain ont:Patent ;
     rdfs:range ont:EquipmentClass ;
-    rdfs:label "realizes equipment class"@en .
+    rdfs:label "realizes equipment class"@en ;
+    rdfs:comment "Links a patent to the class of equipment its disclosure realizes or presupposes. Links to a class, not an equipment instance — a patent describes a kind of tool, not a serial number."@en .
 
 # domain 은 Patent ∪ Problem 이다. 특허만이 아니라 소부장 실문제(ont:Problem)도 소재를
 # 다루고 실패모드를 드러내며 토픽에 걸린다 — experts/problems A-Box 가 이 세 술어를
@@ -285,7 +290,8 @@ ont:involvesMaterial
     a owl:ObjectProperty ;
     rdfs:domain [ a owl:Class ; owl:unionOf ( ont:Patent ont:Problem ) ] ;
     rdfs:range ont:Material ;
-    rdfs:label "involves material"@en .
+    rdfs:label "involves material"@en ;
+    rdfs:comment "Relates a Patent or a Problem to a material it involves. The domain is deliberately the union of the two: the same predicate is used with Problem as subject, and narrowing the domain to Patent would make RDFS domain entailment type those Problems as patents."@en .
 
 ont:assignedTo
     a owl:ObjectProperty ;
@@ -314,31 +320,36 @@ ont:publicationNumber
     a owl:DatatypeProperty ;
     rdfs:domain ont:Patent ;
     rdfs:range xsd:string ;
-    rdfs:label "publication number"@en .
+    rdfs:label "publication number"@en ;
+    rdfs:comment "The publication (laid-open) number of the application. Distinct from registrationNumber, which exists only if the application was granted."@en .
 
 ont:registrationNumber
     a owl:DatatypeProperty ;
     rdfs:domain ont:Patent ;
     rdfs:range xsd:string ;
-    rdfs:label "registration number"@en .
+    rdfs:label "registration number"@en ;
+    rdfs:comment "The granted-patent number. Empty for a refused application — most records in this dataset have no value here, and its absence is information, not a gap."@en .
 
 ont:filingDate
     a owl:DatatypeProperty ;
     rdfs:domain ont:Patent ;
     rdfs:range xsd:date ;
-    rdfs:label "filing date"@en .
+    rdfs:label "filing date"@en ;
+    rdfs:comment "The date the application was filed. **Distinct from publicationDate and rejectionDate** — the three are different events and mixing them invalidates any time-series analysis. Filing is the priority-relevant date."@en .
 
 ont:publicationDate
     a owl:DatatypeProperty ;
     rdfs:domain ont:Patent ;
     rdfs:range xsd:date ;
-    rdfs:label "publication date"@en .
+    rdfs:label "publication date"@en ;
+    rdfs:comment "The date the application was laid open (publication), not the filing date and not the registration date. This is the date that decides whether a document is citable prior art against a later application."@en .
 
 ont:rejectionDate
     a owl:DatatypeProperty ;
     rdfs:domain ont:RejectedPatent ;
     rdfs:range xsd:date ;
-    rdfs:label "rejection date"@en .
+    rdfs:label "rejection date"@en ;
+    rdfs:comment "The date the examiner's decision of refusal was issued. Domain is RejectedPatent, so this predicate is present only where a refusal actually occurred."@en .
 
 ont:patentOffice
     a owl:DatatypeProperty ;
@@ -400,7 +411,8 @@ ont:noveltyValue
     a owl:DatatypeProperty ;
     rdfs:domain ont:NoveltyScore ;
     rdfs:range xsd:decimal ;
-    rdfs:label "novelty value"@en .
+    rdfs:label "novelty value"@en ;
+    rdfs:comment "The numeric value carried by a NoveltyScore node. The score is reified so that the value can be qualified by its provenance; do not read a value without reading which scorer produced it."@en .
 
 ont:noveltyMethod
     a owl:DatatypeProperty ;
@@ -517,17 +529,20 @@ ont:PriorArtJudgment
 ont:hasClaim
     a owl:ObjectProperty ;
     rdfs:domain ont:Patent ; rdfs:range ont:Claim ;
-    rdfs:label "has claim"@en .
+    rdfs:label "has claim"@en ;
+    rdfs:comment "Links a patent to one of its claims. Claim order is carried by claimNumber, not by triple order."@en .
 
 ont:claimNumber
     a owl:DatatypeProperty ;
     rdfs:domain ont:Claim ; rdfs:range xsd:integer ;
-    rdfs:label "claim number"@en .
+    rdfs:label "claim number"@en ;
+    rdfs:comment "The claim's own number as printed in the patent (1-based). Determines claim order; triple order does not."@en .
 
 ont:isIndependent
     a owl:DatatypeProperty ;
     rdfs:domain ont:Claim ; rdfs:range xsd:boolean ;
-    rdfs:label "is independent claim"@en .
+    rdfs:label "is independent claim"@en ;
+    rdfs:comment "True for an independent claim, false for a dependent one. Independent claims are the unit used as a retrieval query in prior-art work; dependent claims inherit their parent's features."@en .
 
 ont:dependsOnClaim
     a owl:ObjectProperty ;
@@ -538,12 +553,14 @@ ont:dependsOnClaim
 ont:hasFeature
     a owl:ObjectProperty ;
     rdfs:domain ont:Claim ; rdfs:range ont:ClaimFeature ;
-    rdfs:label "has feature"@en .
+    rdfs:label "has feature"@en ;
+    rdfs:comment "Links a claim to one of the technical features it recites. Subject is the Claim, not the Patent — a feature belongs to a specific claim. Recitation order is carried by featureSeq."@en .
 
 ont:featureSeq
     a owl:DatatypeProperty ;
     rdfs:domain ont:ClaimFeature ; rdfs:range xsd:integer ;
-    rdfs:label "feature sequence"@en .
+    rdfs:label "feature sequence"@en ;
+    rdfs:comment "Position of a feature within the sequence recited by its claim (1-based). Preserves recitation order, which matters for all-elements comparison."@en .
 
 ont:featureText
     a owl:DatatypeProperty ;
@@ -577,7 +594,8 @@ ont:featureConcept
 ont:hasJudgment
     a owl:ObjectProperty ;
     rdfs:domain ont:Patent ; rdfs:range ont:PriorArtJudgment ;
-    rdfs:label "has judgment"@en .
+    rdfs:label "has judgment"@en ;
+    rdfs:comment "Links a patent to an examiner's recorded judgment about a piece of prior art cited against it. The judgment is reified as its own node because it carries the ground and the cited document together."@en .
 
 ont:aboutClaim
     a owl:ObjectProperty ;

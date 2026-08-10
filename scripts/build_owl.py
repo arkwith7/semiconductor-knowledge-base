@@ -13,7 +13,7 @@ from rdflib.namespace import RDF, RDFS, OWL, XSD, DCTERMS, SKOS
 # Add parent to path for config import
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from config.namespaces import SDKB_ONT, SDKB_GOV, SDKB_BASE, PROV, PREFIX_MAP
+from config.namespaces import SDKB_ONT, SDKB_GOV, SDKB_BASE, PROV, PREFIX_MAP, REPO_BLOB
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "ontology" / "sdkb-core.ttl"
@@ -63,7 +63,8 @@ def build_ontology() -> Graph:
         "regulatory governance layers. SDKB-centric architecture: external "
         "ontologies (SemicONTO, QUDT, etc.) are REFERENCED via SKOS mappings "
         "and class-level skos:exactMatch back-links, NOT imported. See "
-        "docs/project/architecture_amendment_sdkb_centric.md.",
+        "docs/ontology_guide.md (section 3.1) for the reasoning, and "
+        "docs/project/architecture_amendment_sdkb_centric.md for the decision record.",
         lang="en"
     )))
     g.add((ont, OWL.versionInfo, Literal("1.1.0-dev")))
@@ -84,10 +85,13 @@ def build_ontology() -> Graph:
     g.add((ont, DCTERMS.references, URIRef("http://w3id.org/SemicONTO/0.2/")))
     g.add((ont, DCTERMS.references, URIRef("http://qudt.org/schema/qudt/")))
 
-    # Companion documents (architecture decisions and alignment artifacts)
+    # Companion documents (architecture decisions and alignment artifacts).
+    # URL 은 config 에서 온다 — 리포명이 바뀌면 발행된 그래프가 죽은 링크를 갖는다.
+    # 앵커(#3.1)가 아니라 파일을 가리킨다: 제목이 바뀌면 앵커는 조용히 깨지지만
+    # 파일 경로는 게이트가 잡을 수 있다.
+    g.add((ont, RDFS.seeAlso, URIRef(REPO_BLOB + "docs/ontology_guide.md")))
     g.add((ont, RDFS.seeAlso, URIRef(
-        "https://github.com/arkwith7/semiconductor-knowledge-base/blob/main/"
-        "docs/project/architecture_amendment_sdkb_centric.md"
+        REPO_BLOB + "docs/project/architecture_amendment_sdkb_centric.md"
     )))
     g.add((ont, RDFS.seeAlso, URIRef(
         "https://w3id.org/sdkb/alignment/semiconto"

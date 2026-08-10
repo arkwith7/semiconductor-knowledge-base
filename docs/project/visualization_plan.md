@@ -2,7 +2,7 @@
 
 > **Status (2026-05-12):** Phase 1 (baseline 3-view) shipped this semester.
 > **Lab agenda anchor:** Quantitative Technology Management Lab — research area ④ *Interactive technology & business data visualization*.
-> **Live URL:** [https://arkwith7.github.io/semiconductor-knowledge-base/](https://arkwith7.github.io/semiconductor-knowledge-base/)
+> **Live URL:** [https://arkwith7.github.io/sdkb-dataset/](https://arkwith7.github.io/sdkb-dataset/)
 
 This document describes how the SDKB interactive visualization site is built, deployed, and extended. It serves as the operational reference for `scripts/build_viz.py` + `.github/workflows/viz-deploy.yml`.
 
@@ -66,7 +66,7 @@ GitHub Pages must be enabled with **GitHub Actions** as the source (not "Deploy 
 
 1. Repo → **Settings** → **Pages**
 2. **Source:** *GitHub Actions*
-3. Save. On the next push to `main`, the `Build & Deploy Visualization Site` workflow will run and publish to `https://arkwith7.github.io/semiconductor-knowledge-base/`.
+3. Save. On the next push to `main`, the `Build & Deploy Visualization Site` workflow will run and publish to `https://arkwith7.github.io/sdkb-dataset/`.
 
 No `gh-pages` branch is needed — the modern `deploy-pages` action ships artifacts directly to the Pages CDN, keeping the repository free of build clutter.
 
