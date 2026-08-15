@@ -68,6 +68,27 @@ LEGACY_SLUG_ALLOWED = {
     # 여기를 빼면 슬러그를 상수로 두는 것 자체가 불가능해진다.
     "config/namespaces.py",
 }
+
+# ── 압축·열지향 파일 (하류 D-42) ──────────────────────────────────────────────
+# **이 검사기는 오랫동안 텍스트 파일만 볼 수 있었다.** 모든 파일을 read_text 로 훑는데,
+# ZSTD/gzip 으로 압축된 바이트에는 원문 지문이 그대로 남지 않는다. 실측(2026-08-15):
+# 원문 지문 "기판을 수용하는 단계로서," 가 ZSTD parquet 바이트에서 **발견되지 않았다** —
+# 그 파일에 실제로 원문이 없어서 안전했던 것이지, 있어도 못 찾는다는 것이 요점이다.
+#
+# 그리고 CR-017 이 공개 경계 안에 **첫 압축 columnar 파일**을 넣으면서 이 구멍이 실제
+# 위험이 됐다. 지금 그 파일은 제외됐지만, 다음 parquet 은 아무도 그 결정을 반복하지 않는다.
+#
+# 두 층으로 본다 — 열 이름과 열 값. 이름만 보면 `col_a` 에 담긴 원문을 놓치고,
+# 값만 보면 스키마가 이미 말해 주는 것을 비싸게 다시 확인한다.
+STRUCTURED_SUFFIXES = {".parquet", ".feather", ".gz", ".zst", ".zip"}
+
+# 원문 계열 열 이름. 생성기 쪽 테스트와 **같은 목록**을 쓴다 — 두 곳에서 갈리면
+# 한쪽만 고치는 사고가 난다.
+TEXT_COLUMN_NAMES = {
+    "feature_text", "text", "claim_text", "claims", "claim1", "claims_full",
+    "abstract", "abstract_text", "abstracttext", "firstclaimtext", "title",
+    "description", "body", "full_text", "fulltext",
+}
 # `docs/public_release_readiness_review.md` 는 2026-08-10 허용목록 전환으로 공개 트리에서
 # 빠졌다(작업 기록이므로). 그래서 면제도 함께 뺀다 — 없는 파일의 예외는 죽은 설정이고,
 # 죽은 설정은 다음 사람에게 "여기는 예외가 많다"고 잘못 알려 준다.
@@ -111,6 +132,51 @@ def build_probes(canonical: Path) -> tuple[list[tuple[str, str, str]], int]:
         for c in (tp.get("claims_full") or [])[:2]:
             add(f"claims_full[{c.get('claim_no')}]", c.get("text") or "")
     return probes, dropped
+
+
+def scan_structured(path: Path) -> tuple[list[str], str]:
+    """압축·열지향 파일을 **열어서** 읽는다. 반환 = (원문 계열 열 이름들, 검색 가능한 텍스트).
+
+    지문 대조는 호출자가 한다 — 이 함수는 *"어떻게 텍스트로 만들 것인가"* 만 안다.
+    열지 못하면 빈 값이 아니라 **예외를 올린다.** 조용히 건너뛰면 검사기가 다시 눈을 감는다.
+    """
+    suf = path.suffix.lower()
+    if suf in (".parquet", ".feather"):
+        import pyarrow.parquet as pq
+
+        tbl = pq.read_table(path) if suf == ".parquet" else __import__(
+            "pyarrow.feather", fromlist=["read_table"]).read_table(path)
+        bad = [c for c in tbl.column_names if c.lower() in TEXT_COLUMN_NAMES]
+        # 문자열 계열 열만 텍스트로 편다. 정수·불린은 지문을 담을 수 없다.
+        chunks: list[str] = []
+        for col in tbl.columns:
+            # 문자열과 문자열 리스트만 편다. pyarrow 는 pandas 유래 리스트를
+            # `list<element: string>` 으로, 직접 만든 것은 `list<item: string>` 으로 적는다 —
+            # 필드 이름으로 좁히면 한쪽을 놓치므로 `list<` 로 본다.
+            t = str(col.type)
+            if not (t.startswith(("string", "large_string")) or ("list<" in t and "string" in t)):
+                continue
+            chunks.extend(str(v) for v in col.to_pylist() if v is not None)
+        return bad, "\n".join(chunks)
+    if suf == ".gz":
+        import gzip
+
+        return [], gzip.decompress(path.read_bytes()).decode("utf-8", errors="ignore")
+    if suf == ".zst":
+        try:
+            import zstandard as zstd
+        except ImportError as exc:                      # 의존성이 없으면 **실패**다
+            raise RuntimeError(f"{path.name}: .zst 를 열 수 없다 — zstandard 미설치") from exc
+        return [], zstd.ZstdDecompressor().decompress(path.read_bytes()).decode("utf-8", errors="ignore")
+    if suf == ".zip":
+        import zipfile
+
+        out = []
+        with zipfile.ZipFile(path) as z:
+            for n in z.namelist():
+                out.append(z.read(n).decode("utf-8", errors="ignore"))
+        return [], "\n".join(out)
+    raise RuntimeError(f"{path.name}: 다룰 줄 모르는 형식 {suf}")
 
 
 def scan_boundary(files: list[Path], tree: Path) -> tuple[list[str], list[dict], list[dict]]:
@@ -211,11 +277,21 @@ def main() -> int:
                    if p.is_file() and ".git" not in p.parts and p.stat().st_size <= MAX_BYTES)
     hits: list[dict] = []
     scanned = 0
+    structured = 0
     for p in files:
-        try:
-            txt = p.read_text(encoding="utf-8", errors="ignore")
-        except Exception:
-            continue
+        # D-42 — 압축·열지향은 read_text 로 보이지 않는다. 열어서 본다.
+        if p.suffix.lower() in STRUCTURED_SUFFIXES:
+            bad_cols, txt = scan_structured(p)      # 실패하면 예외 — 조용히 넘어가지 않는다
+            structured += 1
+            for c in bad_cols:
+                hits.append({"file": str(p.relative_to(args.tree)),
+                             "application_number": "—", "field": f"열 이름 `{c}`",
+                             "probe": "원문 계열 열 이름"})
+        else:
+            try:
+                txt = p.read_text(encoding="utf-8", errors="ignore")
+            except Exception:
+                continue
         scanned += 1
         for text, (app, field) in by_text.items():
             if text in txt:
@@ -223,7 +299,7 @@ def main() -> int:
                              "application_number": app, "field": field,
                              "probe": text[:30] + "…"})
 
-    print(f"[check] {scanned}개 파일 검사 · 적중 {len(hits)}건")
+    print(f"[check] {scanned}개 파일 검사 (압축·열지향 {structured}개 포함) · 적중 {len(hits)}건")
     for h in hits[:40]:
         print(f"   ✗ {h['file']}  ← {h['application_number']} {h['field']}")
     if len(hits) > 40:

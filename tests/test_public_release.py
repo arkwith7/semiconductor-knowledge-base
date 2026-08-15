@@ -11,6 +11,7 @@
 from __future__ import annotations
 
 import json
+import random
 import sys
 from pathlib import Path
 
@@ -24,7 +25,7 @@ from build_public_release import (  # noqa: E402
     is_private_doc, scrub_abs_paths, scrub_dataset, strip_notebook, strip_private_blocks,
 )
 from check_public_release import (  # noqa: E402
-    LEGACY_SLUG_ALLOWED, build_probes, scan_boundary,
+    LEGACY_SLUG_ALLOWED, PROBE_LEN, build_probes, scan_boundary,
 )
 from config.namespaces import LEGACY_REPO_SLUG  # noqa: E402
 
@@ -110,6 +111,71 @@ def test_검사기_지문이_누출을_잡는다(tmp_path):
     assert probes, "지문이 하나도 안 나오면 검사기는 아무것도 못 잡는다"
     leaked = _record()["target_patent"]["abstract"]
     assert any(p in leaked for _, _, p in probes)
+
+
+def test_압축_parquet_안의_원문을_잡는다(tmp_path):
+    """D-42 — 검사기가 오랫동안 못 보던 자리. **실패해야 할 입력이 실패하는가.**
+
+    ZSTD 로 압축하면 원문 지문이 바이트에 남지 않는다. 예전 검사기는 파일을 read_text 로
+    훑었으므로 이 parquet 을 **통과시켰다** — 그리고 "적중 0" 을 출력했다. 거짓 안심이다.
+    """
+    import pandas as pd
+
+    from check_public_release import scan_structured
+
+    # **원문이 서로 다를 때** 압축이 실제로 걸린다. 같은 문자열을 반복하면 parquet 이
+    # 사전 인코딩으로 한 번만 저장해 바이트에 그대로 남는다 — 그래서 옛 검사기가 우연히 잡는다.
+    #
+    # 실측(2026-08-15 · 서로 다른 원문): 10행 3.8 KB 숨김 · 1,000행 49 KB 숨김 ·
+    # 20,000행 913 KB **노출**. **크기와 단조롭지 않다** — 인코딩과 페이지 배치에 달렸다.
+    # 즉 옛 검사기의 적중 여부는 내용 배치에 따라 갈리는 **우연**이었고, 그것이 D-42 다.
+    # 이 테스트는 안정적으로 숨는 쪽(1,000행)을 재현한다.
+    # 지문은 **변하는 자리**에서 뽑는다. 문서마다 같은 머리말을 쓰면 그 머리말은 압축
+    # 출력의 리터럴 구간에 한 번 그대로 남아 옛 방식으로도 보인다 — 그것은 우리가 재현하려는
+    # 상황이 아니다(실제 원문은 문서마다 다르다).
+    rng = random.Random(20260815)
+    words = ["식각", "증착", "노광", "세정", "이온주입", "평탄화", "확산", "검사"]
+    base = _record()["target_patent"]["abstract"]
+    texts = [f"{base[:20]} 제{i}항 " + " ".join(rng.choice(words) for _ in range(30))
+             for i in range(1000)]
+    leaked = texts[500][:PROBE_LEN]
+    p = tmp_path / "leaky.parquet"
+    pd.DataFrame({"doc_id": [f"kr_{i}" for i in range(1000)],
+                  "feature_text": texts}).to_parquet(p, index=False, compression="zstd")
+
+    # ① 옛 방식(바이트를 텍스트로 읽기)으로는 안 보인다 — 이것이 D-42 의 실체다.
+    assert leaked not in p.read_bytes().decode("utf-8", errors="ignore")
+
+    # ② 새 방식은 열 이름과 값 **양쪽**으로 잡는다.
+    bad_cols, text = scan_structured(p)
+    assert "feature_text" in bad_cols, "원문 계열 열 이름을 놓쳤다"
+    assert leaked in text, "열 값 안의 원문을 놓쳤다"
+
+
+def test_구조만_있는_parquet_은_통과한다(tmp_path):
+    """거짓 경보도 결함이다 — 원문 없는 투영(CR-017 형태)은 깨끗하게 통과해야 한다."""
+    import pandas as pd
+
+    from check_public_release import scan_structured
+
+    p = tmp_path / "projection.parquet"
+    pd.DataFrame({"publication_id": ["kr_1"], "claim_number": [1],
+                  "feature_seq": [1], "feature_concept": [["process:etch"]]}).to_parquet(
+        p, index=False, compression="zstd")
+
+    bad_cols, text = scan_structured(p)
+    assert bad_cols == []
+    assert "process:etch" in text, "값을 폈는지 확인 — 열지 않고 통과시키면 의미가 없다"
+
+
+def test_다룰_줄_모르는_형식은_조용히_넘어가지_않는다(tmp_path):
+    """검사기가 눈을 감는 방식은 늘 '예외를 삼키는 것'이었다. 그래서 올린다."""
+    from check_public_release import scan_structured
+
+    p = tmp_path / "x.7z"
+    p.write_bytes(b"\x00\x01")
+    with pytest.raises(RuntimeError):
+        scan_structured(p)
 
 
 def test_첫줄_토큰_문서는_비공개다():
