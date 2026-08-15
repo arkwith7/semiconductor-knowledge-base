@@ -232,16 +232,33 @@ make help            # 모든 타깃 목록
 
 | 층 | 비어 있는 것 | 왜 | 채우는 명령 | 필요한 자격 |
 |---|---|---|---|---|
-| **T-Box** (`ontology/sdkb-core.ttl`) | 없음 — 다만 파일 자체가 빌드 산출물이다 | 커밋된 `data/semiconductor_v0_3.json`(392 KB)에서 생성된다 | `make owl && make convert` | 없음 |
+| **T-Box** (`ontology/sdkb-core.ttl`) | 없음 — **파일이 커밋돼 있다**(2026-08-15) | 빌드 산출물이기도 하다: 커밋된 `data/semiconductor_v0_3.json`(392 KB)에서 **바이트 동일**하게 재생성된다 | `make owl && make convert` | 없음 |
 | **SIRP 특허 A-Box** (`ontology/sdkb-abox-patents.ttl`) | 초록·청구항 텍스트 | KIPRIS 원문은 재배포 불가 | `make refetch-fulltext && make abox-patents` | KIPRIS OpenAPI 키 |
 | **거절특허 데이터셋** (`data/patents/raw/…rejected_patents.jsonl`) | `abstract`·`claim1`·`claims_full[].text` 가 **빈 문자열**로 들어 있다. 스키마·식별자·IPC·날짜·정답 인용 라벨(`ground_truth_*`)은 **그대로 있다** | 같음 | `python scripts/refetch_rejected_patents.py` (복원본을 공표된 sha256 과 대조한다) | KIPRIS OpenAPI 키 |
 | **인용 선행기술 A-Box** (`ontology/sdkb-abox-prior-art.ttl` · 21 MB) | 파일 전체 | 수집한 원문에서 만든다 | `make refetch-fulltext && make abox-prior-art` | KIPRIS 키 (+ 비 KR 문헌은 BigQuery) |
 | **청구항 feature A-Box** (`ontology/sdkb-abox-claim-features.ttl` · 899 MB) | 파일 전체 | 청구항 텍스트의 파생물이며, 라이선스와 무관하게 배포하기엔 너무 크다 | `make abox-claim-features` | KIPRIS 키 · 수 시간 |
-| **거버넌스 인스턴스** (`ontology/sdkb-governance-*-instances.ttl`) | 파일 전체 | 커밋된 원천의 빌드 산출물 | `make compliance` | 없음 |
+| **거버넌스 인스턴스** (`ontology/sdkb-governance-*-instances.ttl`) | 없음 — **커밋돼 있다**(2026-08-15) | 커밋된 원천의 빌드 산출물이며 바이트 동일하게 재생성된다 | `make compliance` | 없음 |
 | **전문가 프로필·평점** | 없음 | 커밋돼 있다 — **합성 데이터**이고 개인정보를 담지 않는다 | `make expdataset` | 없음 |
 
 마지막 열이 "없음"인 것은 빈 체크아웃에서 그대로 재현된다. 나머지는 본인 키가 필요하다 —
 **우리가 줄 수 있는 것은 절차이지 라이선스가 걸린 원문이 아니다.**
+
+**벤더 A-Box 는 특허 A-Box 뒤에 만든다.** `build_abox_vendors_ksia.py` 는 그래프에 이미 있는
+조직 노드에 KSIA 회원사를 붙이는데, 그 노드 대부분이 특허 출원인에서 온다. 먼저 돌리면 매칭이
+31 → **2** 로 떨어져 IRI 가 갈린다(`organization/asendia_co_ltd` 대 `organization/asendia`).
+파일은 만들어지지만 공표된 것과 달라진다. `make pipeline-full` 은 이미 순서가 맞다.
+
+**재현 범위 실측 (2026-08-15 · 깨끗한 클론).**
+
+| | 받은 그대로 | 본인 키로 `refetch-fulltext` 후 |
+|---|---|---|
+| 역량 질문 | **14/31 = 0.452** (`pa` 1/8) | **27/31 = 0.871** — `em`·`tf`·`core` 전부 1.000 |
+| 특허 A-Box | 만들 수 없다 | **33,934 트리플** (논문 스냅샷 33,931 · **0.009 %**) |
+
+0.009 % 차이는 초록을 어디서 읽느냐에서 온다 — 원 수집기는 검색 응답의 `astrtCont` 를 먼저
+쓰고 복원 스크립트는 서지만 조회한다. 끝내 복구되지 않는 넷(CQ27·CQ29–31)은 전부 청구항
+한정요소 층이며, 그 층의 분해 입력이 청구항 원문 그 자체라 공개할 수 없다. 재수집해도 분해가
+언어모델을 쓰므로 바이트 단위로 같아지지는 않는다.
 
 ### 역량 질문(CQ)
 
