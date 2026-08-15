@@ -25,5 +25,15 @@
     "FailureMode": 720,
     "EquipmentClass": 407
   },
+  "projection_cr017": {
+    "rows_features": 1306191,
+    "claims": 594078,
+    "patents": 40187,
+    "features_with_concept": 369586,
+    "concept_links": 529151,
+    "distinct_concepts": 109,
+    "parquet_bytes": 5610647,
+    "meta_bytes": 10069
+  },
   "note": "feature 정규화 = build_abox_patents 와 동일 브리지. 판단 = evidence_v2 실체화. RejectionReason = rejection_reasons.jsonl 실체화(CR-004R)."
 }

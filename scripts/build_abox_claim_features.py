@@ -13,6 +13,7 @@
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 import sys
@@ -34,6 +35,10 @@ EDGES = ROOT / "data" / "patents" / "prior_art_edges.parquet"
 B_LAYER_POP = ROOT / "data" / "patents" / "b_layer_cited_population.parquet"
 OUT_TTL = ROOT / "ontology" / "sdkb-abox-claim-features.ttl"
 OUT_REPORT = ROOT / "data" / "reports" / "abox_claim_features_report.json"
+# CR-017 — 소비 가능한 투영. TTL 은 899 MB 라 벤더할 수 없다(하류 §1-5 · 저장소 실무 양쪽).
+# 자산을 새로 만들지 않고, 같은 빌드가 들고 있는 것을 **전달 가능한 형태로** 함께 낸다.
+OUT_PARQUET = ROOT / "mappings" / "claim_features.parquet"
+OUT_PROJ_META = ROOT / "mappings" / "claim_feature_release_meta.json"
 B_LOSS_REPORT = ROOT / "data" / "reports" / "b_layer_claim_decomposition_loss.json"
 
 ONT = S.ONT
@@ -77,6 +82,84 @@ def _slug(field: str) -> str:
 # 1968년 출원·1970년 등록이라 어느 원천에도 OCR 전문이 없다(재시도 1회 실패 · 하류 §1.6a).
 B_US_NO_FULLTEXT = ("US-P-03517643", "US-P-03530092")
 ENRICHED = ROOT / "data" / "patents" / "cited_enriched"
+
+
+def _sha256(path: Path) -> str:
+    h = hashlib.sha256()
+    with path.open("rb") as fh:
+        for chunk in iter(lambda: fh.read(1 << 20), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def _emit_projection(proj: list[dict], input_sha: str) -> dict:
+    """CR-017 — 투영 2종 발행. **원문(feature_text)은 넣지 않는다**(KIPRIS 비재배포).
+
+    행 = ClaimFeature 하나. 개념은 feature 당 여럿이므로 리스트 열로 두고 grain 을 지킨다 —
+    explode 하면 행이 더 이상 ClaimFeature 가 아니라 하류 조인에서 중복 계수가 난다.
+
+    결정성(성공기준 ①): 행은 (publication_id, claim_number, feature_seq) 로, 리스트는 사전순으로
+    정렬한다. 메타에 **시각을 넣지 않는다** — 타임스탬프가 들어가면 두 번 돌린 sha256 이 갈린다.
+    """
+    df = pd.DataFrame(proj).sort_values(
+        ["publication_id", "claim_number", "feature_seq"], kind="mergesort"
+    ).reset_index(drop=True)
+
+    OUT_PARQUET.parent.mkdir(parents=True, exist_ok=True)
+    df.to_parquet(OUT_PARQUET, index=False, compression="zstd")
+
+    # 개념별 df — CR-009 `concept_meta` 와 **같은 형식**이다(새 형식을 만들지 않는다).
+    # 분모를 둘 낸다: feature 단위와 특허 단위. 어느 쪽으로 가중할지는 하류 소관(비목표 ⓑ).
+    df_feature: Counter = Counter()
+    df_patent: dict[str, set] = {}
+    for pid, concepts in zip(df["publication_id"], df["feature_concept"]):
+        for c in concepts:
+            df_feature[c] += 1
+            df_patent.setdefault(c, set()).add(pid)
+
+    # 커버리지 — 질의측(rej)·후보측(cited·g1·g2)과 관할별로 나눠 센다.
+    cov: dict[str, Counter] = {"by_side": Counter(), "by_jurisdiction": Counter(),
+                               "features_with_concept_by_side": Counter()}
+    for side, pid, concepts in zip(df["side"], df["publication_id"], df["feature_concept"]):
+        cov["by_side"][side] += 1
+        cov["by_jurisdiction"][pid.split("_")[0]] += 1
+        if concepts:
+            cov["features_with_concept_by_side"][side] += 1
+
+    meta = {
+        "_README": "CR-017 청구항 한정요소 투영. 행 = ClaimFeature. **원문 없음** — 구조와 개념 "
+                   "IRI 만 싣는다(KIPRIS 비재배포). 개념 df 는 CR-009 concept_meta 와 같은 형식이며 "
+                   "가중식은 상류가 정하지 않는다(하류 사전등록 소관).",
+        "schema_version": "1.0",
+        "source": {
+            "ttl": OUT_TTL.name,
+            "ttl_sha256": input_sha,
+            "generator": Path(__file__).name,
+        },
+        "counts": {
+            "rows_features": int(len(df)),
+            "claims": int(df["claim_id"].nunique()),
+            "patents": int(df["publication_id"].nunique()),
+            "features_with_concept": int((df["feature_concept"].str.len() > 0).sum()),
+            "concept_links": int(sum(df_feature.values())),
+            "distinct_concepts": len(df_feature),
+        },
+        "df_denominator": {"features": int(len(df)), "patents": int(df["publication_id"].nunique())},
+        "concepts": {c: {"df_feature": df_feature[c], "df_patent": len(df_patent[c])}
+                     for c in sorted(df_feature)},
+        "coverage": {k: dict(sorted(v.items())) for k, v in cov.items()},
+    }
+    OUT_PROJ_META.write_text(json.dumps(meta, ensure_ascii=False, indent=2, sort_keys=False))
+
+    sizes = {"parquet_bytes": OUT_PARQUET.stat().st_size,
+             "meta_bytes": OUT_PROJ_META.stat().st_size}
+    print(f"✓ CR-017 투영 → {OUT_PARQUET.name} ({sizes['parquet_bytes']/1e6:,.1f} MB) · "
+          f"{OUT_PROJ_META.name} ({sizes['meta_bytes']/1e6:,.1f} MB)")
+    print(f"  행 {len(df):,} · 특허 {meta['counts']['patents']:,} · "
+          f"개념 보유 feature {meta['counts']['features_with_concept']:,} · "
+          f"개념 링크 {meta['counts']['concept_links']:,}")
+    print(f"  parquet sha256 {_sha256(OUT_PARQUET)}")
+    return {**meta["counts"], **sizes}
 
 
 def _b_loss_report(b_pop: "pd.DataFrame", b_claims: Counter) -> None:
@@ -171,6 +254,10 @@ def main() -> int:
     stat = Counter()
     concept_hits = Counter()
     b_claims: Counter = Counter()   # CR-011 — B층 cited_doc_id → 발행된 Claim 수
+    # CR-017 투영 — 그래프에 넣는 것과 **같은 값**을 같은 자리에서 모은다. 따로 세면 갈라진다.
+    proj: list[dict] = []
+    claim_attr: dict[str, dict] = {}   # claim IRI 지역명 → 청구항 수준 속성
+    seen_feature: set[str] = set()     # 같은 feature 가 두 행에서 나와도 parquet 행은 하나
     rows = [json.loads(line) for line in FEATURES.open()]
     seen_claim: set[str] = set()
     # 실재하는 청구항 IRI 집합 — dependsOnClaim 이 매달린 부모(존재하지 않는 참조 번호)를
@@ -200,6 +287,11 @@ def main() -> int:
                     stat["depends_on_claim"] += 1
                 else:
                     stat["depends_on_claim_dangling"] += 1
+            claim_attr[f"{pslug}_c{cno}"] = {
+                "is_independent": not dep,
+                "depends_on_claim": sorted(f"{pslug}_c{p}" for p in dep
+                                           if f"claim/{pslug}_c{p}" in present_claims),
+            }
             seen_claim.add(str(claim))
             stat["claims"] += 1
             stat["claims_dependent" if dep else "claims_independent"] += 1
@@ -220,11 +312,29 @@ def main() -> int:
             g.add((claim, R("hasFeature"), fi))
             stat["features"] += 1
             # feature → 개념 정규화
+            fconcepts: set[str] = set()
             for term, hits in br.extract_from_text(f["text"]).items():
                 for nid, typ in hits:
                     if typ in CONCEPT_TYPES:
                         g.add((fi, R("featureConcept"), _u(nid)))
                         concept_hits[typ] += 1
+                        fconcepts.add(nid)
+            # CR-017 투영 행. 원문(f["text"])은 **싣지 않는다** — 비목표 ⓐ.
+            fkey = f"{pslug}_c{cno}_f{f['seq']}"
+            if fkey not in seen_feature:
+                seen_feature.add(fkey)
+                ca = claim_attr.get(f"{pslug}_c{cno}", {})
+                proj.append({
+                    "publication_id": str(pat).rsplit("/", 1)[-1],
+                    "side": pslug.split("_", 1)[0],
+                    "claim_id": f"{pslug}_c{cno}",
+                    "claim_number": int(cno),
+                    "is_independent": bool(ca.get("is_independent", True)),
+                    "feature_seq": int(f["seq"]),
+                    "feature_concept": sorted(fconcepts),
+                    "depends_on_claim": list(ca.get("depends_on_claim", [])),
+                    "decomposition_method": r["method"],
+                })
             feat_iris.append((fi, f))
         # dependsOnFeature — '상기 X' 참조를 같은 청구항 내 앞선 feature 에 best-effort 연결
         for idx, (fi, f) in enumerate(feat_iris):
@@ -307,9 +417,11 @@ def main() -> int:
 
     OUT_TTL.parent.mkdir(parents=True, exist_ok=True)
     g.serialize(str(OUT_TTL), format="turtle")
+    projection = _emit_projection(proj, _sha256(OUT_TTL))
     report = {
         "triples": len(g), "input_claims": len(rows),
         "counts": dict(stat), "feature_concept_by_type": dict(concept_hits.most_common()),
+        "projection_cr017": projection,
         "note": "feature 정규화 = build_abox_patents 와 동일 브리지. 판단 = evidence_v2 실체화. "
                 "RejectionReason = rejection_reasons.jsonl 실체화(CR-004R).",
     }

@@ -1,0 +1,478 @@
+{
+  "_README": "CR-017 청구항 한정요소 투영. 행 = ClaimFeature. **원문 없음** — 구조와 개념 IRI 만 싣는다(KIPRIS 비재배포). 개념 df 는 CR-009 concept_meta 와 같은 형식이며 가중식은 상류가 정하지 않는다(하류 사전등록 소관).",
+  "schema_version": "1.0",
+  "source": {
+    "ttl": "sdkb-abox-claim-features.ttl",
+    "ttl_sha256": "71e053b80ff545096164b2f3ccd1c4fa0be3c4134346cd43226d43e082163d28",
+    "generator": "build_abox_claim_features.py"
+  },
+  "counts": {
+    "rows_features": 1306191,
+    "claims": 594078,
+    "patents": 40187,
+    "features_with_concept": 369586,
+    "concept_links": 529151,
+    "distinct_concepts": 109
+  },
+  "df_denominator": {
+    "features": 1306191,
+    "patents": 40187
+  },
+  "concepts": {
+    "device:3d_nand": {
+      "df_feature": 11,
+      "df_patent": 9
+    },
+    "device:bga": {
+      "df_feature": 48,
+      "df_patent": 11
+    },
+    "device:bjt": {
+      "df_feature": 76,
+      "df_patent": 16
+    },
+    "device:ccd": {
+      "df_feature": 96,
+      "df_patent": 44
+    },
+    "device:cmos": {
+      "df_feature": 372,
+      "df_patent": 87
+    },
+    "device:cmos_image_sensor": {
+      "df_feature": 7,
+      "df_patent": 6
+    },
+    "device:diode": {
+      "df_feature": 2730,
+      "df_patent": 546
+    },
+    "device:dram": {
+      "df_feature": 525,
+      "df_patent": 189
+    },
+    "device:eeprom": {
+      "df_feature": 250,
+      "df_patent": 23
+    },
+    "device:eprom": {
+      "df_feature": 15,
+      "df_patent": 7
+    },
+    "device:feram": {
+      "df_feature": 56,
+      "df_patent": 26
+    },
+    "device:finfet": {
+      "df_feature": 410,
+      "df_patent": 79
+    },
+    "device:flip_chip": {
+      "df_feature": 668,
+      "df_patent": 221
+    },
+    "device:gaa_fet": {
+      "df_feature": 35,
+      "df_patent": 6
+    },
+    "device:hbm": {
+      "df_feature": 153,
+      "df_patent": 53
+    },
+    "device:hemt": {
+      "df_feature": 102,
+      "df_patent": 15
+    },
+    "device:igbt": {
+      "df_feature": 10,
+      "df_patent": 8
+    },
+    "device:interposer": {
+      "df_feature": 110,
+      "df_patent": 44
+    },
+    "device:jfet": {
+      "df_feature": 11,
+      "df_patent": 2
+    },
+    "device:mems": {
+      "df_feature": 285,
+      "df_patent": 25
+    },
+    "device:mosfet": {
+      "df_feature": 214,
+      "df_patent": 47
+    },
+    "device:mram": {
+      "df_feature": 326,
+      "df_patent": 94
+    },
+    "device:nand_flash": {
+      "df_feature": 478,
+      "df_patent": 193
+    },
+    "device:pcram": {
+      "df_feature": 1999,
+      "df_patent": 242
+    },
+    "device:photodiode": {
+      "df_feature": 53,
+      "df_patent": 16
+    },
+    "device:reram": {
+      "df_feature": 2652,
+      "df_patent": 269
+    },
+    "device:sram": {
+      "df_feature": 502,
+      "df_patent": 136
+    },
+    "device:thyristor": {
+      "df_feature": 43,
+      "df_patent": 9
+    },
+    "device:tsv": {
+      "df_feature": 1577,
+      "df_patent": 262
+    },
+    "device:wire_bonding": {
+      "df_feature": 5,
+      "df_patent": 4
+    },
+    "equipment_class:cd_sem": {
+      "df_feature": 10,
+      "df_patent": 4
+    },
+    "equipment_class:deposition_tool": {
+      "df_feature": 190,
+      "df_patent": 27
+    },
+    "equipment_class:etcher": {
+      "df_feature": 100,
+      "df_patent": 24
+    },
+    "equipment_class:implanter": {
+      "df_feature": 3,
+      "df_patent": 1
+    },
+    "equipment_class:scanner": {
+      "df_feature": 100,
+      "df_patent": 30
+    },
+    "equipment_class:track": {
+      "df_feature": 2,
+      "df_patent": 2
+    },
+    "failuremode:bowing": {
+      "df_feature": 13,
+      "df_patent": 11
+    },
+    "failuremode:bridging": {
+      "df_feature": 21,
+      "df_patent": 4
+    },
+    "failuremode:cdu": {
+      "df_feature": 20,
+      "df_patent": 3
+    },
+    "failuremode:dishing": {
+      "df_feature": 162,
+      "df_patent": 57
+    },
+    "failuremode:erosion": {
+      "df_feature": 12,
+      "df_patent": 9
+    },
+    "failuremode:footing": {
+      "df_feature": 2,
+      "df_patent": 2
+    },
+    "failuremode:haze": {
+      "df_feature": 2,
+      "df_patent": 1
+    },
+    "failuremode:hillock": {
+      "df_feature": 1,
+      "df_patent": 1
+    },
+    "failuremode:ler": {
+      "df_feature": 37,
+      "df_patent": 8
+    },
+    "failuremode:overlay_error": {
+      "df_feature": 2,
+      "df_patent": 1
+    },
+    "failuremode:particle": {
+      "df_feature": 104,
+      "df_patent": 58
+    },
+    "failuremode:pinhole": {
+      "df_feature": 3,
+      "df_patent": 2
+    },
+    "failuremode:residue": {
+      "df_feature": 37,
+      "df_patent": 22
+    },
+    "failuremode:seam": {
+      "df_feature": 116,
+      "df_patent": 70
+    },
+    "failuremode:undercut": {
+      "df_feature": 30,
+      "df_patent": 16
+    },
+    "failuremode:void": {
+      "df_feature": 139,
+      "df_patent": 89
+    },
+    "material:aluminum": {
+      "df_feature": 6763,
+      "df_patent": 2665
+    },
+    "material:amorphous_carbon": {
+      "df_feature": 582,
+      "df_patent": 191
+    },
+    "material:barc": {
+      "df_feature": 537,
+      "df_patent": 155
+    },
+    "material:cobalt": {
+      "df_feature": 2870,
+      "df_patent": 1281
+    },
+    "material:copper": {
+      "df_feature": 6813,
+      "df_patent": 2039
+    },
+    "material:hfO2": {
+      "df_feature": 840,
+      "df_patent": 383
+    },
+    "material:hf_acid": {
+      "df_feature": 2893,
+      "df_patent": 1515
+    },
+    "material:low_k_dielectric": {
+      "df_feature": 169,
+      "df_patent": 73
+    },
+    "material:photoresist_euv": {
+      "df_feature": 6485,
+      "df_patent": 1122
+    },
+    "material:polysilicon": {
+      "df_feature": 5374,
+      "df_patent": 1583
+    },
+    "material:sin": {
+      "df_feature": 14592,
+      "df_patent": 4515
+    },
+    "material:sio2": {
+      "df_feature": 74031,
+      "df_patent": 10868
+    },
+    "material:sog": {
+      "df_feature": 90,
+      "df_patent": 48
+    },
+    "material:taC": {
+      "df_feature": 115,
+      "df_patent": 48
+    },
+    "material:teOs": {
+      "df_feature": 342,
+      "df_patent": 219
+    },
+    "material:tin": {
+      "df_feature": 2019,
+      "df_patent": 956
+    },
+    "material:tungsten": {
+      "df_feature": 4217,
+      "df_patent": 1656
+    },
+    "process:back_end": {
+      "df_feature": 76,
+      "df_patent": 49
+    },
+    "process:clean": {
+      "df_feature": 19443,
+      "df_patent": 2577
+    },
+    "process:cmp": {
+      "df_feature": 25707,
+      "df_patent": 2925
+    },
+    "process:deposition": {
+      "df_feature": 35616,
+      "df_patent": 5431
+    },
+    "process:diffusion": {
+      "df_feature": 12229,
+      "df_patent": 2951
+    },
+    "process:etch": {
+      "df_feature": 45332,
+      "df_patent": 7948
+    },
+    "process:implant": {
+      "df_feature": 16389,
+      "df_patent": 3726
+    },
+    "process:lithography": {
+      "df_feature": 21327,
+      "df_patent": 3933
+    },
+    "process:metrology": {
+      "df_feature": 13909,
+      "df_patent": 1501
+    },
+    "skill:chamber_conditioning": {
+      "df_feature": 40354,
+      "df_patent": 6394
+    },
+    "skill:defect_analysis": {
+      "df_feature": 3433,
+      "df_patent": 596
+    },
+    "skill:doe_analysis": {
+      "df_feature": 42,
+      "df_patent": 10
+    },
+    "skill:endpoint_detection": {
+      "df_feature": 194,
+      "df_patent": 57
+    },
+    "skill:film_stress_control": {
+      "df_feature": 935,
+      "df_patent": 213
+    },
+    "skill:gas_chemistry": {
+      "df_feature": 44572,
+      "df_patent": 6088
+    },
+    "skill:mask_engineering": {
+      "df_feature": 35695,
+      "df_patent": 4381
+    },
+    "skill:overlay_optimization": {
+      "df_feature": 9609,
+      "df_patent": 2183
+    },
+    "skill:plasma_diagnostics": {
+      "df_feature": 28480,
+      "df_patent": 4445
+    },
+    "skill:recipe_tuning": {
+      "df_feature": 416,
+      "df_patent": 92
+    },
+    "skill:slurry_management": {
+      "df_feature": 7687,
+      "df_patent": 847
+    },
+    "subprocess:ald": {
+      "df_feature": 2711,
+      "df_patent": 832
+    },
+    "subprocess:annealing": {
+      "df_feature": 358,
+      "df_patent": 134
+    },
+    "subprocess:cvd": {
+      "df_feature": 3208,
+      "df_patent": 990
+    },
+    "subprocess:dicing": {
+      "df_feature": 38,
+      "df_patent": 25
+    },
+    "subprocess:dry_cleaning": {
+      "df_feature": 11,
+      "df_patent": 7
+    },
+    "subprocess:duv_lithography": {
+      "df_feature": 256,
+      "df_patent": 141
+    },
+    "subprocess:epitaxial_growth": {
+      "df_feature": 96,
+      "df_patent": 60
+    },
+    "subprocess:euv_lithography": {
+      "df_feature": 4759,
+      "df_patent": 555
+    },
+    "subprocess:hardmask_etch": {
+      "df_feature": 3929,
+      "df_patent": 638
+    },
+    "subprocess:high_k_metal_gate": {
+      "df_feature": 9,
+      "df_patent": 4
+    },
+    "subprocess:in_situ_doping": {
+      "df_feature": 9,
+      "df_patent": 5
+    },
+    "subprocess:metallization": {
+      "df_feature": 63,
+      "df_patent": 19
+    },
+    "subprocess:oxidation": {
+      "df_feature": 147,
+      "df_patent": 69
+    },
+    "subprocess:packaging": {
+      "df_feature": 19,
+      "df_patent": 3
+    },
+    "subprocess:passivation": {
+      "df_feature": 135,
+      "df_patent": 49
+    },
+    "subprocess:plasma_etch": {
+      "df_feature": 1682,
+      "df_patent": 547
+    },
+    "subprocess:pvd": {
+      "df_feature": 5653,
+      "df_patent": 949
+    },
+    "subprocess:wafer_testing": {
+      "df_feature": 1,
+      "df_patent": 1
+    },
+    "subprocess:wet_cleaning": {
+      "df_feature": 4,
+      "df_patent": 4
+    },
+    "subprocess:wet_etch": {
+      "df_feature": 961,
+      "df_patent": 483
+    }
+  },
+  "coverage": {
+    "by_side": {
+      "cited": 99874,
+      "g1": 833874,
+      "g2": 337086,
+      "rej": 35357
+    },
+    "by_jurisdiction": {
+      "kr": 1274348,
+      "other": 245,
+      "us": 31598
+    },
+    "features_with_concept_by_side": {
+      "cited": 36142,
+      "g1": 173637,
+      "g2": 144470,
+      "rej": 15337
+    }
+  }
+}
