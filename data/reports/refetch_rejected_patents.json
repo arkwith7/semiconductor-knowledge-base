@@ -1,0 +1,15 @@
+{
+  "generated_at": "2026-08-15T12:48:20.842957+00:00",
+  "rows": 1000,
+  "rows_needing_fill": 995,
+  "filled": {
+    "abstract": 995,
+    "claim1": 995,
+    "claims_full": 995
+  },
+  "failed_application_numbers": [],
+  "rows_still_empty": 0,
+  "sha256": "e1b6efabb064d9361b552c386266a77a6cbf9f19f76a5239e906e5abd98a98ad",
+  "canonical_sha256": "fc142f515b3f3e5b235efba2f4bc075e583275ae0f090813928563de176b24e9",
+  "byte_identical": false
+}

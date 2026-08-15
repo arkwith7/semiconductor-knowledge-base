@@ -1,0 +1,221 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix gov: <https://w3id.org/sdkb/gov/> .
+@prefix ont: <https://w3id.org/sdkb/ont/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://w3id.org/sdkb/data/device/3d_nand> gov:subjectToControl <https://w3id.org/sdkb/data/gov/kr/tech_control/nand_128l_more> .
+
+<https://w3id.org/sdkb/data/device/dram> gov:subjectToControl <https://w3id.org/sdkb/data/gov/kr/tech_control/dram_16nm_less> .
+
+<https://w3id.org/sdkb/data/device/finfet> gov:subjectToControl <https://w3id.org/sdkb/data/gov/kr/tech_control/foundry_14nm_less> .
+
+<https://w3id.org/sdkb/data/device/gaa_fet> gov:subjectToControl <https://w3id.org/sdkb/data/gov/kr/tech_control/foundry_14nm_less> .
+
+<https://w3id.org/sdkb/data/device/gan_hemt> gov:subjectToControl <https://w3id.org/sdkb/data/gov/kr/tech_control/sic_gan_power> .
+
+<https://w3id.org/sdkb/data/device/nand_flash> gov:subjectToControl <https://w3id.org/sdkb/data/gov/kr/tech_control/nand_128l_more> .
+
+<https://w3id.org/sdkb/data/device/sic_mosfet> gov:subjectToControl <https://w3id.org/sdkb/data/gov/kr/tech_control/sic_gan_power> .
+
+<https://w3id.org/sdkb/data/device/tsv> gov:subjectToControl <https://w3id.org/sdkb/data/gov/kr/tech_control/advanced_packaging> .
+
+<https://w3id.org/sdkb/data/equipment_class/cmp_tool> gov:subjectToControl <https://w3id.org/sdkb/data/gov/kr/tech_control/cmp_advanced> .
+
+<https://w3id.org/sdkb/data/equipment_class/deposition_tool> gov:subjectToControl <https://w3id.org/sdkb/data/gov/kr/tech_control/advanced_deposition> .
+
+<https://w3id.org/sdkb/data/equipment_class/etcher> gov:subjectToControl <https://w3id.org/sdkb/data/gov/kr/tech_control/advanced_etching> .
+
+<https://w3id.org/sdkb/data/equipment_class/implanter> gov:subjectToControl <https://w3id.org/sdkb/data/gov/kr/tech_control/ion_implant_advanced> .
+
+<https://w3id.org/sdkb/data/gov/kr/tech_control/general_fab_operations> a gov:KRIndustrialTechRule ;
+    dcterms:bibliographicCitation "Catch_All" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "data/compliance/kr_standards_v1.json" ;
+    rdfs:comment "일반 팹 운영 및 수율 관리 기술 (공개 지식 수준)"@ko ;
+    rdfs:seeAlso gov:Rule_KR_ITPA ;
+    skos:prefLabel "General_Fab_Operations"@en ;
+    gov:controlLevel "LOW" ;
+    ont:interpretationType "verbatim" .
+
+<https://w3id.org/sdkb/data/gov/kr/tech_control/legacy_logic_process> a gov:KRIndustrialTechRule ;
+    dcterms:bibliographicCitation "Catch_All" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "data/compliance/kr_standards_v1.json" ;
+    rdfs:comment "28nm 이상 로직 공정 기술 (비통제 — 일반 모니터링)"@ko ;
+    rdfs:seeAlso gov:Rule_KR_ITPA ;
+    skos:prefLabel "Legacy_Logic_Process"@en ;
+    gov:controlLevel "LOW" ;
+    ont:interpretationType "verbatim" .
+
+<https://w3id.org/sdkb/data/process/clean> gov:subjectToControl <https://w3id.org/sdkb/data/gov/kr/tech_control/cleaning_contamination> .
+
+<https://w3id.org/sdkb/data/process/cmp> gov:subjectToControl <https://w3id.org/sdkb/data/gov/kr/tech_control/cmp_advanced> .
+
+<https://w3id.org/sdkb/data/process/deposition> gov:subjectToControl <https://w3id.org/sdkb/data/gov/kr/tech_control/advanced_deposition> .
+
+<https://w3id.org/sdkb/data/process/etch> gov:subjectToControl <https://w3id.org/sdkb/data/gov/kr/tech_control/advanced_etching> .
+
+<https://w3id.org/sdkb/data/process/implant> gov:subjectToControl <https://w3id.org/sdkb/data/gov/kr/tech_control/ion_implant_advanced> .
+
+<https://w3id.org/sdkb/data/subprocess/advanced_cleaning> gov:subjectToControl <https://w3id.org/sdkb/data/gov/kr/tech_control/cleaning_contamination> .
+
+<https://w3id.org/sdkb/data/subprocess/advanced_packaging> gov:subjectToControl <https://w3id.org/sdkb/data/gov/kr/tech_control/advanced_packaging> .
+
+<https://w3id.org/sdkb/data/subprocess/ald> gov:subjectToControl <https://w3id.org/sdkb/data/gov/kr/tech_control/advanced_deposition> .
+
+<https://w3id.org/sdkb/data/subprocess/cmp_metal> gov:subjectToControl <https://w3id.org/sdkb/data/gov/kr/tech_control/cmp_advanced> .
+
+<https://w3id.org/sdkb/data/gov/kr/nct/반도체_nct_01> a gov:NationalCoreTechnology ;
+    skos:notation "반도체_NCT_01" ;
+    gov:nctField gov:NCTField_Semiconductor ;
+    gov:requiresGovApproval true .
+
+<https://w3id.org/sdkb/data/gov/kr/nct/반도체_nct_02> a gov:NationalCoreTechnology ;
+    skos:notation "반도체_NCT_02" ;
+    gov:nctField gov:NCTField_Semiconductor ;
+    gov:requiresGovApproval true .
+
+<https://w3id.org/sdkb/data/gov/kr/nct/반도체_nct_03> a gov:NationalCoreTechnology ;
+    skos:notation "반도체_NCT_03" ;
+    gov:nctField gov:NCTField_Semiconductor ;
+    gov:requiresGovApproval true .
+
+<https://w3id.org/sdkb/data/gov/kr/nct/반도체_nct_04> a gov:NationalCoreTechnology ;
+    skos:notation "반도체_NCT_04" ;
+    gov:nctField gov:NCTField_Semiconductor ;
+    gov:requiresGovApproval true .
+
+<https://w3id.org/sdkb/data/gov/kr/nct/반도체_nct_05> a gov:NationalCoreTechnology ;
+    skos:notation "반도체_NCT_05" ;
+    gov:nctField gov:NCTField_Semiconductor ;
+    gov:requiresGovApproval true .
+
+<https://w3id.org/sdkb/data/gov/kr/nct/반도체_nct_06> a gov:NationalCoreTechnology ;
+    skos:notation "반도체_NCT_06" ;
+    gov:nctField gov:NCTField_Semiconductor ;
+    gov:requiresGovApproval true .
+
+<https://w3id.org/sdkb/data/gov/kr/tech_control/dram_16nm_less> a gov:KRIndustrialTechRule ;
+    dcterms:bibliographicCitation "ITA_Core_Tech" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "data/compliance/kr_standards_v1.json" ;
+    rdfs:comment "16nm급 이하 D램 설계·공정·소자기술"@ko ;
+    rdfs:seeAlso gov:Rule_KR_ITPA ;
+    skos:notation "반도체_NCT_01" ;
+    skos:prefLabel "DRAM_16nm_Less"@en ;
+    gov:controlLevel "CRITICAL" ;
+    gov:designatedAsNCT <https://w3id.org/sdkb/data/gov/kr/nct/반도체_nct_01> ;
+    gov:hasJurisdiction gov:JurisdictionKR ;
+    ont:interpretationType "verbatim" .
+
+<https://w3id.org/sdkb/data/gov/kr/tech_control/advanced_etching> a gov:KRIndustrialTechRule ;
+    dcterms:bibliographicCitation "Strategic_Tech" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "data/compliance/kr_standards_v1.json" ;
+    rdfs:comment "첨단 식각 공정 기술 (HAR etching, ALE — High Aspect Ratio 비율 >40:1)"@ko ;
+    rdfs:seeAlso gov:Rule_KR_ITPA ;
+    skos:notation "반도체_NCT_05" ;
+    skos:prefLabel "Advanced_Etching"@en ;
+    gov:controlLevel "HIGH" ;
+    gov:designatedAsNCT <https://w3id.org/sdkb/data/gov/kr/nct/반도체_nct_05> ;
+    gov:hasJurisdiction gov:JurisdictionKR ;
+    ont:interpretationType "verbatim" .
+
+<https://w3id.org/sdkb/data/gov/kr/tech_control/advanced_packaging> a gov:KRIndustrialTechRule ;
+    dcterms:bibliographicCitation "Strategic_Tech" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "data/compliance/kr_standards_v1.json" ;
+    rdfs:comment "FO-WLP, TSV 등 첨단 패키징 및 3D 적층 기술"@ko ;
+    rdfs:seeAlso gov:Rule_KR_ITPA ;
+    skos:notation "반도체_NCT_04" ;
+    skos:prefLabel "Advanced_Packaging"@en ;
+    gov:controlLevel "HIGH" ;
+    gov:designatedAsNCT <https://w3id.org/sdkb/data/gov/kr/nct/반도체_nct_04> ;
+    gov:hasJurisdiction gov:JurisdictionKR ;
+    ont:interpretationType "verbatim" .
+
+<https://w3id.org/sdkb/data/gov/kr/tech_control/cleaning_contamination> a gov:KRIndustrialTechRule ;
+    dcterms:bibliographicCitation "Catch_All" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "data/compliance/kr_standards_v1.json" ;
+    rdfs:comment "첨단 세정 및 오염 제어 기술 (5nm 이하 노드 전용 습식/건식 세정)"@ko ;
+    rdfs:seeAlso gov:Rule_KR_ITPA ;
+    skos:prefLabel "Cleaning_Contamination"@en ;
+    gov:controlLevel "MEDIUM" ;
+    gov:hasJurisdiction gov:JurisdictionKR ;
+    ont:interpretationType "verbatim" .
+
+<https://w3id.org/sdkb/data/gov/kr/tech_control/foundry_14nm_less> a gov:KRIndustrialTechRule ;
+    dcterms:bibliographicCitation "ITA_Core_Tech" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "data/compliance/kr_standards_v1.json" ;
+    rdfs:comment "14nm급 이하 파운드리 공정·소자기술 (로직·ASIC 포함)"@ko ;
+    rdfs:seeAlso gov:Rule_KR_ITPA ;
+    skos:notation "반도체_NCT_03" ;
+    skos:prefLabel "Foundry_14nm_Less"@en ;
+    gov:controlLevel "CRITICAL" ;
+    gov:designatedAsNCT <https://w3id.org/sdkb/data/gov/kr/nct/반도체_nct_03> ;
+    gov:hasJurisdiction gov:JurisdictionKR ;
+    ont:interpretationType "verbatim" .
+
+<https://w3id.org/sdkb/data/gov/kr/tech_control/ion_implant_advanced> a gov:KRIndustrialTechRule ;
+    dcterms:bibliographicCitation "Strategic_Goods" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "data/compliance/kr_standards_v1.json" ;
+    rdfs:comment "첨단 이온주입 기술 (고에너지 >MeV, 클러스터 이온주입)"@ko ;
+    rdfs:seeAlso gov:Rule_KR_ITPA ;
+    skos:prefLabel "Ion_Implant_Advanced"@en ;
+    gov:controlLevel "MEDIUM" ;
+    gov:hasJurisdiction gov:JurisdictionKR ;
+    ont:interpretationType "verbatim" .
+
+<https://w3id.org/sdkb/data/gov/kr/tech_control/nand_128l_more> a gov:KRIndustrialTechRule ;
+    dcterms:bibliographicCitation "ITA_Core_Tech" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "data/compliance/kr_standards_v1.json" ;
+    rdfs:comment "128단 이상 3D 낸드 설계·공정·소자기술"@ko ;
+    rdfs:seeAlso gov:Rule_KR_ITPA ;
+    skos:notation "반도체_NCT_02" ;
+    skos:prefLabel "NAND_128L_More"@en ;
+    gov:controlLevel "CRITICAL" ;
+    gov:designatedAsNCT <https://w3id.org/sdkb/data/gov/kr/nct/반도체_nct_02> ;
+    gov:hasJurisdiction gov:JurisdictionKR ;
+    ont:interpretationType "verbatim" .
+
+<https://w3id.org/sdkb/data/gov/kr/tech_control/sic_gan_power> a gov:KRIndustrialTechRule ;
+    dcterms:bibliographicCitation "Strategic_Goods" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "data/compliance/kr_standards_v1.json" ;
+    rdfs:comment "전력 반도체(SiC, GaN) 소자 제조 기술 (내압 >600V)"@ko ;
+    rdfs:seeAlso gov:Rule_KR_ITPA ;
+    skos:prefLabel "SiC_GaN_Power"@en ;
+    gov:controlLevel "MEDIUM" ;
+    gov:hasJurisdiction gov:JurisdictionKR ;
+    ont:interpretationType "verbatim" .
+
+<https://w3id.org/sdkb/data/gov/kr/tech_control/advanced_deposition> a gov:KRIndustrialTechRule ;
+    dcterms:bibliographicCitation "Strategic_Tech" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "data/compliance/kr_standards_v1.json" ;
+    rdfs:comment "원자층 증착(ALD) 및 첨단 박막 기술 (High-k/metal gate 기준)"@ko ;
+    rdfs:seeAlso gov:Rule_KR_ITPA ;
+    skos:notation "반도체_NCT_06" ;
+    skos:prefLabel "Advanced_Deposition"@en ;
+    gov:controlLevel "HIGH" ;
+    gov:designatedAsNCT <https://w3id.org/sdkb/data/gov/kr/nct/반도체_nct_06> ;
+    gov:hasJurisdiction gov:JurisdictionKR ;
+    ont:interpretationType "verbatim" .
+
+<https://w3id.org/sdkb/data/gov/kr/tech_control/cmp_advanced> a gov:KRIndustrialTechRule ;
+    dcterms:bibliographicCitation "Strategic_Goods" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "data/compliance/kr_standards_v1.json" ;
+    rdfs:comment "첨단 CMP 공정 기술 (다층 금속 배선용 — 7층 이상 BEOL)"@ko ;
+    rdfs:seeAlso gov:Rule_KR_ITPA ;
+    skos:prefLabel "CMP_Advanced"@en ;
+    gov:controlLevel "MEDIUM" ;
+    gov:hasJurisdiction gov:JurisdictionKR ;
+    ont:interpretationType "verbatim" .
+

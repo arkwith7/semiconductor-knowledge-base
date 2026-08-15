@@ -1,0 +1,133 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix gov: <https://w3id.org/sdkb/gov/> .
+@prefix ont: <https://w3id.org/sdkb/ont/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<https://w3id.org/sdkb/data/device/3d_nand> gov:subjectToControl <https://w3id.org/sdkb/data/gov/us/tech_control/ccl_3e001_semiconductor_tech> .
+
+<https://w3id.org/sdkb/data/device/dram> gov:subjectToControl <https://w3id.org/sdkb/data/gov/us/tech_control/ccl_3e001_semiconductor_tech> .
+
+<https://w3id.org/sdkb/data/device/finfet> gov:subjectToControl <https://w3id.org/sdkb/data/gov/us/tech_control/ccl_3a001> .
+
+<https://w3id.org/sdkb/data/device/gaa_fet> gov:subjectToControl <https://w3id.org/sdkb/data/gov/us/tech_control/ccl_3a001> .
+
+<https://w3id.org/sdkb/data/device/nand_flash> gov:subjectToControl <https://w3id.org/sdkb/data/gov/us/tech_control/ccl_3e001_semiconductor_tech> .
+
+<https://w3id.org/sdkb/data/equipment_class/cd_sem> gov:subjectToControl <https://w3id.org/sdkb/data/gov/us/tech_control/advanced_metrology>,
+        <https://w3id.org/sdkb/data/gov/us/tech_control/ccl_3b001> .
+
+<https://w3id.org/sdkb/data/equipment_class/deposition_tool> gov:subjectToControl <https://w3id.org/sdkb/data/gov/us/tech_control/ccl_3b001> .
+
+<https://w3id.org/sdkb/data/equipment_class/etcher> gov:subjectToControl <https://w3id.org/sdkb/data/gov/us/tech_control/ccl_3b001> .
+
+<https://w3id.org/sdkb/data/equipment_class/overlay_metrology> gov:subjectToControl <https://w3id.org/sdkb/data/gov/us/tech_control/ccl_3b001> .
+
+<https://w3id.org/sdkb/data/gov/us/tech_control/bis_entity_list> a gov:EARRule ;
+    dcterms:bibliographicCitation "EAR_Entity_List" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "data/compliance/us_standards_v1.json" ;
+    rdfs:comment "BIS Entity List 등재 기업·기관 대상 — 모든 EAR 해당 품목·기술에 대해 수출 전 허가(license) 필요 (presumption of denial)"@ko ;
+    rdfs:seeAlso gov:Rule_BIS_744_23 ;
+    skos:notation "N/A" ;
+    skos:prefLabel "BIS_Entity_List"@en ;
+    gov:controlLevel "CRITICAL" ;
+    gov:hasJurisdiction gov:JurisdictionUS ;
+    ont:interpretationType "verbatim" .
+
+<https://w3id.org/sdkb/data/gov/us/tech_control/ear_deemed_export_cn> a gov:EARRule ;
+    dcterms:bibliographicCitation "EAR_Deemed_Export" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "data/compliance/us_standards_v1.json" ;
+    rdfs:comment "중국 국적 외국인에게 CCL 통제기술 제공 시 자동 Deemed Export 적용 — 미국 근무 전문가가 CN 소부장 업체에 기술 자문 시 적용"@ko ;
+    rdfs:seeAlso gov:Rule_BIS_744_23 ;
+    skos:notation "N/A" ;
+    skos:prefLabel "EAR_Deemed_Export_CN"@en ;
+    gov:controlLevel "HIGH" ;
+    gov:hasJurisdiction gov:JurisdictionUS ;
+    ont:interpretationType "verbatim" .
+
+<https://w3id.org/sdkb/data/gov/us/tech_control/legacy_ccl_low> a gov:EARRule ;
+    dcterms:bibliographicCitation "EAR99" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "data/compliance/us_standards_v1.json" ;
+    rdfs:comment "EAR99 — 수출관리번호 없는 저통제 항목 (28nm 이상 일반 반도체, 공개 지식 수준)"@ko ;
+    rdfs:seeAlso gov:Rule_BIS_744_23 ;
+    skos:notation "EAR99" ;
+    skos:prefLabel "Legacy_CCL_Low"@en ;
+    gov:controlLevel "LOW" ;
+    gov:hasJurisdiction gov:JurisdictionUS ;
+    ont:interpretationType "verbatim" .
+
+<https://w3id.org/sdkb/data/material/photoresist_euv> gov:subjectToControl <https://w3id.org/sdkb/data/gov/us/tech_control/euv_process> .
+
+<https://w3id.org/sdkb/data/metrology/cd_sem> gov:subjectToControl <https://w3id.org/sdkb/data/gov/us/tech_control/advanced_metrology> .
+
+<https://w3id.org/sdkb/data/metrology/overlay> gov:subjectToControl <https://w3id.org/sdkb/data/gov/us/tech_control/advanced_metrology> .
+
+<https://w3id.org/sdkb/data/subprocess/duv_lithography> gov:subjectToControl <https://w3id.org/sdkb/data/gov/us/tech_control/ccl_3b001> .
+
+<https://w3id.org/sdkb/data/subprocess/euv_lithography> gov:subjectToControl <https://w3id.org/sdkb/data/gov/us/tech_control/ccl_3b001>,
+        <https://w3id.org/sdkb/data/gov/us/tech_control/euv_process> .
+
+<https://w3id.org/sdkb/data/gov/us/tech_control/ccl_3a001> a gov:EARRule ;
+    dcterms:bibliographicCitation "EAR_CCL" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "data/compliance/us_standards_v1.json" ;
+    rdfs:comment "첨단 반도체 소자 — 로직 집적회로 (16nm 이하, 또는 GAA/FinFET, 처리속도 기준 초과)"@ko ;
+    rdfs:seeAlso gov:Rule_BIS_744_23 ;
+    skos:notation "3A001.a.1" ;
+    skos:prefLabel "CCL_3A001"@en ;
+    gov:controlLevel "CRITICAL" ;
+    gov:hasJurisdiction gov:JurisdictionUS ;
+    ont:interpretationType "verbatim" ;
+    ont:securityLevel "RESTRICTED" .
+
+<https://w3id.org/sdkb/data/gov/us/tech_control/euv_process> a gov:EARRule ;
+    dcterms:bibliographicCitation "Wassenaar" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "data/compliance/us_standards_v1.json" ;
+    rdfs:comment "EUV 노광 공정 및 관련 소재 기술 (파장 13.5nm EUV 광원·광학계·레지스트 기술)"@ko ;
+    rdfs:seeAlso gov:Rule_BIS_744_23 ;
+    skos:notation "3B001.a.2" ;
+    skos:prefLabel "EUV_Process"@en ;
+    gov:controlLevel "HIGH" ;
+    gov:hasJurisdiction gov:JurisdictionWASSENAAR ;
+    ont:interpretationType "verbatim" .
+
+<https://w3id.org/sdkb/data/gov/us/tech_control/advanced_metrology> a gov:EARRule ;
+    dcterms:bibliographicCitation "Wassenaar" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "data/compliance/us_standards_v1.json" ;
+    rdfs:comment "나노급 측정·검사 기술 (CD-SEM, OCD, e-beam inspection — 1nm 이하 분해능)"@ko ;
+    rdfs:seeAlso gov:Rule_BIS_744_23 ;
+    skos:notation "3B001.f" ;
+    skos:prefLabel "Advanced_Metrology"@en ;
+    gov:controlLevel "HIGH" ;
+    gov:hasJurisdiction gov:JurisdictionWASSENAAR ;
+    ont:interpretationType "verbatim" .
+
+<https://w3id.org/sdkb/data/gov/us/tech_control/ccl_3e001_semiconductor_tech> a gov:EARRule ;
+    dcterms:bibliographicCitation "EAR_CCL" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "data/compliance/us_standards_v1.json" ;
+    rdfs:comment "반도체 제조·설계 관련 기술(Technology) — 3A001~3B002 장비·소재의 개발·생산에 필요한 기술 지식"@ko ;
+    rdfs:seeAlso gov:Rule_BIS_744_23 ;
+    skos:notation "3E001" ;
+    skos:prefLabel "CCL_3E001_Semiconductor_Tech"@en ;
+    gov:controlLevel "HIGH" ;
+    gov:hasJurisdiction gov:JurisdictionUS ;
+    ont:interpretationType "verbatim" .
+
+<https://w3id.org/sdkb/data/gov/us/tech_control/ccl_3b001> a gov:EARRule ;
+    dcterms:bibliographicCitation "EAR_CCL" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "data/compliance/us_standards_v1.json" ;
+    rdfs:comment "반도체 제조장비 — 리소그래피, 식각, 증착, CMP 장비 (첨단 노드 전용)"@ko ;
+    rdfs:seeAlso gov:Rule_BIS_744_23 ;
+    skos:notation "3B001.a" ;
+    skos:prefLabel "CCL_3B001"@en ;
+    gov:controlLevel "HIGH" ;
+    gov:hasJurisdiction gov:JurisdictionUS ;
+    ont:interpretationType "verbatim" .
+

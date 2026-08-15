@@ -1,0 +1,3164 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ont: <https://w3id.org/sdkb/ont/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://w3id.org/sdkb/data/device/3d_nand> a ont:Device ;
+    dcterms:bibliographicCitation "Wikidata device class (paper_data Phase D, 2026-05-16)" ;
+    dcterms:license "CC0-1.0" ;
+    dcterms:source "author-defined" ;
+    skos:altLabel "3D V-NAND"@en ;
+    skos:definition "Memory device architecture."@en ;
+    skos:prefLabel "3D V-NAND"@en ;
+    ont:interpretationType "author-defined" .
+
+<https://w3id.org/sdkb/data/device/bga> a ont:Device ;
+    dcterms:bibliographicCitation "Wikidata device class (paper_data Phase D, 2026-05-16)" ;
+    dcterms:license "CC0-1.0" ;
+    dcterms:source "wikidata" ;
+    rdfs:seeAlso <https://www.wikidata.org/wiki/Q570628> ;
+    skos:altLabel "ball grid array"@en,
+        "bga"@en,
+        "볼 그리드 배열"@ko ;
+    skos:definition "Advanced packaging / interconnect architecture."@en ;
+    skos:prefLabel "ball grid array"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/device/bjt> a ont:Device ;
+    dcterms:bibliographicCitation "Wikidata device class (paper_data Phase D, 2026-05-16)" ;
+    dcterms:license "CC0-1.0" ;
+    dcterms:source "wikidata" ;
+    rdfs:seeAlso <https://www.wikidata.org/wiki/Q188946> ;
+    skos:altLabel "BJT"@en,
+        "bipolar junction transistor"@en,
+        "bipolar transistor"@en,
+        "바이폴러 트랜지스터"@ko,
+        "접합형 트랜지스터"@ko ;
+    skos:definition "Logic/transistor device architecture."@en ;
+    skos:prefLabel "BJT"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/device/ccd> a ont:Device ;
+    dcterms:bibliographicCitation "Wikidata device class (paper_data Phase D, 2026-05-16)" ;
+    dcterms:license "CC0-1.0" ;
+    dcterms:source "wikidata" ;
+    rdfs:seeAlso <https://www.wikidata.org/wiki/Q189880> ;
+    skos:altLabel "CCD"@en,
+        "CCD image sensor"@en,
+        "charge-coupled device"@en,
+        "CCD 이미지 센서"@ko,
+        "전하 결합소자"@ko,
+        "전하결합 소자"@ko,
+        "전하결합소자"@ko ;
+    skos:definition "Sensor/imaging device."@en ;
+    skos:prefLabel "CCD"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/device/cmos> a ont:Device ;
+    dcterms:bibliographicCitation "Wikidata device class (paper_data Phase D, 2026-05-16)" ;
+    dcterms:license "CC0-1.0" ;
+    dcterms:source "wikidata" ;
+    rdfs:seeAlso <https://www.wikidata.org/wiki/Q173431> ;
+    skos:altLabel "CMOS"@en ;
+    skos:definition "Logic/transistor device architecture."@en ;
+    skos:prefLabel "CMOS"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/device/cmos_image_sensor> a ont:Device ;
+    dcterms:bibliographicCitation "Wikidata device class (paper_data Phase D, 2026-05-16)" ;
+    dcterms:license "CC0-1.0" ;
+    dcterms:source "author-defined" ;
+    skos:altLabel "CMOS image sensor"@en ;
+    skos:definition "Sensor/imaging device."@en ;
+    skos:prefLabel "CMOS image sensor"@en ;
+    ont:interpretationType "author-defined" .
+
+<https://w3id.org/sdkb/data/device/diode> a ont:Device ;
+    dcterms:bibliographicCitation "Wikidata device class (paper_data Phase D, 2026-05-16)" ;
+    dcterms:license "CC0-1.0" ;
+    dcterms:source "wikidata" ;
+    rdfs:seeAlso <https://www.wikidata.org/wiki/Q11656> ;
+    skos:altLabel "diode"@en,
+        "다이오드"@ko ;
+    skos:definition "Discrete semiconductor device (rectifying or switching component)."@en ;
+    skos:prefLabel "diode"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/device/dram> a ont:Device ;
+    dcterms:bibliographicCitation "Wikidata device class (paper_data Phase D, 2026-05-16)" ;
+    dcterms:license "CC0-1.0" ;
+    dcterms:source "wikidata" ;
+    rdfs:seeAlso <https://www.wikidata.org/wiki/Q25138504> ;
+    skos:altLabel "DRAM"@en ;
+    skos:definition "Memory device architecture."@en ;
+    skos:prefLabel "DRAM"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/device/eeprom> a ont:Device ;
+    dcterms:bibliographicCitation "Wikidata device class (paper_data Phase D, 2026-05-16)" ;
+    dcterms:license "CC0-1.0" ;
+    dcterms:source "wikidata" ;
+    rdfs:seeAlso <https://www.wikidata.org/wiki/Q205908> ;
+    skos:altLabel "E2PROM"@en,
+        "EEPROM"@en,
+        "이이피롬"@ko ;
+    skos:definition "Memory device architecture."@en ;
+    skos:prefLabel "E2PROM"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/device/eprom> a ont:Device ;
+    dcterms:bibliographicCitation "Wikidata device class (paper_data Phase D, 2026-05-16)" ;
+    dcterms:license "CC0-1.0" ;
+    dcterms:source "wikidata" ;
+    rdfs:seeAlso <https://www.wikidata.org/wiki/Q378210> ;
+    skos:altLabel "EPROM"@en ;
+    skos:definition "Memory device architecture."@en ;
+    skos:prefLabel "EPROM"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/device/fan_out_wlp> a ont:Device ;
+    dcterms:bibliographicCitation "Wikidata device class (paper_data Phase D, 2026-05-16)" ;
+    dcterms:license "CC0-1.0" ;
+    dcterms:source "author-defined" ;
+    skos:altLabel "fan-out wafer-level packaging"@en ;
+    skos:definition "Advanced packaging / interconnect architecture."@en ;
+    skos:prefLabel "fan-out wafer-level packaging"@en ;
+    ont:interpretationType "author-defined" .
+
+<https://w3id.org/sdkb/data/device/feram> a ont:Device ;
+    dcterms:bibliographicCitation "Wikidata device class (paper_data Phase D, 2026-05-16)" ;
+    dcterms:license "CC0-1.0" ;
+    dcterms:source "wikidata" ;
+    rdfs:seeAlso <https://www.wikidata.org/wiki/Q703656> ;
+    skos:altLabel "F-RAM"@en,
+        "FRAM"@en,
+        "FeRAM"@en,
+        "ferroelectric RAM"@en ;
+    skos:definition "Memory device architecture."@en ;
+    skos:prefLabel "FeRAM"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/device/finfet> a ont:Device ;
+    dcterms:bibliographicCitation "Wikidata device class (paper_data Phase D, 2026-05-16)" ;
+    dcterms:license "CC0-1.0" ;
+    dcterms:source "wikidata" ;
+    rdfs:seeAlso <https://www.wikidata.org/wiki/Q33114556> ;
+    skos:altLabel "FinFET"@en,
+        "fin field-effect transistor"@en,
+        "핀펫"@ko ;
+    skos:definition "Logic/transistor device architecture."@en ;
+    skos:prefLabel "FinFET"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/device/flip_chip> a ont:Device ;
+    dcterms:bibliographicCitation "Wikidata device class (paper_data Phase D, 2026-05-16)" ;
+    dcterms:license "CC0-1.0" ;
+    dcterms:source "wikidata" ;
+    rdfs:seeAlso <https://www.wikidata.org/wiki/Q432439> ;
+    skos:altLabel "C4"@en,
+        "FC"@en,
+        "flip chip"@en,
+        "플립칩"@ko ;
+    skos:definition "Advanced packaging / interconnect architecture."@en ;
+    skos:prefLabel "C4"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/device/gaa_fet> a ont:Device ;
+    dcterms:bibliographicCitation "Wikidata device class (paper_data Phase D, 2026-05-16)" ;
+    dcterms:license "CC0-1.0" ;
+    dcterms:source "author-defined" ;
+    skos:definition "Logic/transistor device architecture."@en ;
+    skos:prefLabel "gate-all-around field-effect transistor"@en ;
+    ont:interpretationType "author-defined" .
+
+<https://w3id.org/sdkb/data/device/gan_hemt> a ont:Device ;
+    dcterms:bibliographicCitation "Wikidata device class (paper_data Phase D, 2026-05-16)" ;
+    dcterms:license "CC0-1.0" ;
+    dcterms:source "author-defined" ;
+    skos:altLabel "gallium nitride HEMT"@en ;
+    skos:definition "Power semiconductor device."@en ;
+    skos:prefLabel "gallium nitride HEMT"@en ;
+    ont:interpretationType "author-defined" .
+
+<https://w3id.org/sdkb/data/device/hbm> a ont:Device ;
+    dcterms:bibliographicCitation "Wikidata device class (paper_data Phase D, 2026-05-16)" ;
+    dcterms:license "CC0-1.0" ;
+    dcterms:source "author-defined" ;
+    skos:altLabel "high-bandwidth memory"@en ;
+    skos:definition "Advanced packaging / interconnect architecture."@en ;
+    skos:prefLabel "high-bandwidth memory"@en ;
+    ont:interpretationType "author-defined" .
+
+<https://w3id.org/sdkb/data/device/hemt> a ont:Device ;
+    dcterms:bibliographicCitation "Wikidata device class (paper_data Phase D, 2026-05-16)" ;
+    dcterms:license "CC0-1.0" ;
+    dcterms:source "wikidata" ;
+    rdfs:seeAlso <https://www.wikidata.org/wiki/Q1617706> ;
+    skos:altLabel "HEMT"@en,
+        "HFET"@en,
+        "MODFET"@en,
+        "heterostructure FET"@en,
+        "modulation-doped FET"@en,
+        "하이 일렉트론 모빌리티 트랜지스터"@ko ;
+    skos:definition "Logic/transistor device architecture."@en ;
+    skos:prefLabel "HEMT"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/device/igbt> a ont:Device ;
+    dcterms:bibliographicCitation "Wikidata device class (paper_data Phase D, 2026-05-16)" ;
+    dcterms:license "CC0-1.0" ;
+    dcterms:source "wikidata" ;
+    rdfs:seeAlso <https://www.wikidata.org/wiki/Q176110> ;
+    skos:altLabel "절연 게이트 양극성 트랜지스터"@ko ;
+    skos:definition "Power semiconductor device."@en ;
+    skos:prefLabel "insulated-gate bipolar transistor"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/device/interposer> a ont:Device ;
+    dcterms:bibliographicCitation "Wikidata device class (paper_data Phase D, 2026-05-16)" ;
+    dcterms:license "CC0-1.0" ;
+    dcterms:source "author-defined" ;
+    skos:altLabel "silicon interposer"@en ;
+    skos:definition "Advanced packaging / interconnect architecture."@en ;
+    skos:prefLabel "silicon interposer"@en ;
+    ont:interpretationType "author-defined" .
+
+<https://w3id.org/sdkb/data/device/jfet> a ont:Device ;
+    dcterms:bibliographicCitation "Wikidata device class (paper_data Phase D, 2026-05-16)" ;
+    dcterms:license "CC0-1.0" ;
+    dcterms:source "wikidata" ;
+    rdfs:seeAlso <https://www.wikidata.org/wiki/Q385520> ;
+    skos:altLabel "JFET"@en ;
+    skos:definition "Logic/transistor device architecture."@en ;
+    skos:prefLabel "JFET"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/device/mems> a ont:Device ;
+    dcterms:bibliographicCitation "Wikidata device class (paper_data Phase D, 2026-05-16)" ;
+    dcterms:license "CC0-1.0" ;
+    dcterms:source "author-defined" ;
+    skos:altLabel "microelectromechanical systems"@en ;
+    skos:definition "Sensor/imaging device."@en ;
+    skos:prefLabel "microelectromechanical systems"@en ;
+    ont:interpretationType "author-defined" .
+
+<https://w3id.org/sdkb/data/device/mosfet> a ont:Device ;
+    dcterms:bibliographicCitation "Wikidata device class (paper_data Phase D, 2026-05-16)" ;
+    dcterms:license "CC0-1.0" ;
+    dcterms:source "wikidata" ;
+    rdfs:seeAlso <https://www.wikidata.org/wiki/Q210793> ;
+    skos:altLabel "MOSFET"@en ;
+    skos:definition "Logic/transistor device architecture."@en ;
+    skos:prefLabel "MOSFET"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/device/mram> a ont:Device ;
+    dcterms:bibliographicCitation "Wikidata device class (paper_data Phase D, 2026-05-16)" ;
+    dcterms:license "CC0-1.0" ;
+    dcterms:source "wikidata" ;
+    rdfs:seeAlso <https://www.wikidata.org/wiki/Q1061546> ;
+    skos:altLabel "MRAM"@en,
+        "magnetoresistive RAM"@en,
+        "엠램"@ko ;
+    skos:definition "Memory device architecture."@en ;
+    skos:prefLabel "MRAM"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/device/nand_flash> a ont:Device ;
+    dcterms:bibliographicCitation "Wikidata device class (paper_data Phase D, 2026-05-16)" ;
+    dcterms:license "CC0-1.0" ;
+    dcterms:source "wikidata" ;
+    rdfs:seeAlso <https://www.wikidata.org/wiki/Q13405492> ;
+    skos:altLabel "NAND"@en,
+        "NAND flash"@en,
+        "NAND flash memory"@en,
+        "solid state drive"@en,
+        "ssd"@en ;
+    skos:definition "Memory device architecture."@en ;
+    skos:prefLabel "NAND"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/device/nor_flash> a ont:Device ;
+    dcterms:bibliographicCitation "Wikidata device class (paper_data Phase D, 2026-05-16)" ;
+    dcterms:license "CC0-1.0" ;
+    dcterms:source "author-defined" ;
+    skos:altLabel "NOR flash"@en ;
+    skos:definition "Memory device architecture."@en ;
+    skos:prefLabel "NOR flash"@en ;
+    ont:interpretationType "author-defined" .
+
+<https://w3id.org/sdkb/data/device/pcram> a ont:Device ;
+    dcterms:bibliographicCitation "Wikidata device class (paper_data Phase D, 2026-05-16)" ;
+    dcterms:license "CC0-1.0" ;
+    dcterms:source "wikidata" ;
+    rdfs:seeAlso <https://www.wikidata.org/wiki/Q1153902> ;
+    skos:altLabel "C-RAM"@en,
+        "CRAM"@en,
+        "OUM"@en,
+        "PCM"@en,
+        "PCME"@en,
+        "PCRAM"@en,
+        "PRAM"@en,
+        "chalcogenide RAM"@en,
+        "ovonic unified memory"@en,
+        "phase-change RAM"@en,
+        "phase-change memory"@en,
+        "P램"@ko,
+        "상변화 메모리"@ko,
+        "상변환 메모리"@ko,
+        "피램"@ko ;
+    skos:definition "Memory device architecture."@en ;
+    skos:prefLabel "C-RAM"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/device/photodiode> a ont:Device ;
+    dcterms:bibliographicCitation "Wikidata device class (paper_data Phase D, 2026-05-16)" ;
+    dcterms:license "CC0-1.0" ;
+    dcterms:source "wikidata" ;
+    rdfs:seeAlso <https://www.wikidata.org/wiki/Q175943> ;
+    skos:altLabel "photodiode"@en,
+        "광다이오드"@ko ;
+    skos:definition "Sensor/imaging device."@en ;
+    skos:prefLabel "photodiode"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/device/reram> a ont:Device ;
+    dcterms:bibliographicCitation "Wikidata device class (paper_data Phase D, 2026-05-16)" ;
+    dcterms:license "CC0-1.0" ;
+    dcterms:source "wikidata" ;
+    rdfs:seeAlso <https://www.wikidata.org/wiki/Q1143830> ;
+    skos:altLabel "RRAM"@en,
+        "ReRAM"@en,
+        "resistive RAM"@en,
+        "resistive random-access memory"@en,
+        "저항 메모리"@ko ;
+    skos:definition "Memory device architecture."@en ;
+    skos:prefLabel "RRAM"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/device/sic_mosfet> a ont:Device ;
+    dcterms:bibliographicCitation "Wikidata device class (paper_data Phase D, 2026-05-16)" ;
+    dcterms:license "CC0-1.0" ;
+    dcterms:source "author-defined" ;
+    skos:altLabel "silicon carbide MOSFET"@en ;
+    skos:definition "Power semiconductor device."@en ;
+    skos:prefLabel "silicon carbide MOSFET"@en ;
+    ont:interpretationType "author-defined" .
+
+<https://w3id.org/sdkb/data/device/sram> a ont:Device ;
+    dcterms:bibliographicCitation "Wikidata device class (paper_data Phase D, 2026-05-16)" ;
+    dcterms:license "CC0-1.0" ;
+    dcterms:source "wikidata" ;
+    rdfs:seeAlso <https://www.wikidata.org/wiki/Q267416> ;
+    skos:altLabel "SRAM"@en,
+        "static RAM"@en,
+        "static random access memory"@en,
+        "static random-access memory"@en,
+        "에스램"@ko,
+        "정적 기억 장치"@ko,
+        "정적 램"@ko ;
+    skos:definition "Memory device architecture."@en ;
+    skos:prefLabel "SRAM"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/device/thyristor> a ont:Device ;
+    dcterms:bibliographicCitation "Wikidata device class (paper_data Phase D, 2026-05-16)" ;
+    dcterms:license "CC0-1.0" ;
+    dcterms:source "wikidata" ;
+    rdfs:seeAlso <https://www.wikidata.org/wiki/Q180805> ;
+    skos:altLabel "thyristor"@en,
+        "사이리스터"@ko,
+        "실리콘 제어 정류기"@ko,
+        "실리콘제어정류기"@ko ;
+    skos:definition "Power semiconductor device."@en ;
+    skos:prefLabel "thyristor"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/device/tsv> a ont:Device ;
+    dcterms:bibliographicCitation "Wikidata device class (paper_data Phase D, 2026-05-16)" ;
+    dcterms:license "CC0-1.0" ;
+    dcterms:source "wikidata" ;
+    rdfs:seeAlso <https://www.wikidata.org/wiki/Q1578120> ;
+    skos:altLabel "TSV"@en,
+        "through silicon via"@en,
+        "through-silicon via"@en,
+        "실리콘 관통 전극"@ko ;
+    skos:definition "Advanced packaging / interconnect architecture."@en ;
+    skos:prefLabel "TSV"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/device/wire_bonding> a ont:Device ;
+    dcterms:bibliographicCitation "Wikidata device class (paper_data Phase D, 2026-05-16)" ;
+    dcterms:license "CC0-1.0" ;
+    dcterms:source "author-defined" ;
+    skos:altLabel "wire bonding"@en ;
+    skos:definition "Advanced packaging / interconnect architecture."@en ;
+    skos:prefLabel "wire bonding"@en ;
+    ont:interpretationType "author-defined" .
+
+<https://w3id.org/sdkb/data/equipment/3m_pad> a ont:Equipment ;
+    dcterms:bibliographicCitation "Public product catalog of 3M" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:definition "CMP polishing pad"@en ;
+    skos:prefLabel "3M CMP Pad"@en ;
+    ont:interpretationType "mapped" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/cmp_tool> ;
+    ont:providedBy <https://w3id.org/sdkb/data/organization/3m_innovative_properties_company> .
+
+<https://w3id.org/sdkb/data/equipment/alarm_system> a ont:Equipment ;
+    dcterms:bibliographicCitation "Author-defined generic/facilities equipment" ;
+    dcterms:license "N/A" ;
+    dcterms:source "author" ;
+    skos:definition "Safety alarm system"@en ;
+    skos:prefLabel "Alarm System"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/facilities> ;
+    ont:providedBy <https://w3id.org/sdkb/data/vendor/generic> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/equipment/amat_centura> a ont:Equipment ;
+    dcterms:bibliographicCitation "Public product catalog of Applied Materials" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:definition "CVD/PECVD platform"@en ;
+    skos:prefLabel "Applied Materials Centura"@en ;
+    ont:interpretationType "mapped" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/deposition_tool> ;
+    ont:providedBy <https://w3id.org/sdkb/data/organization/applied_materials> .
+
+<https://w3id.org/sdkb/data/equipment/amat_endura> a ont:Equipment ;
+    dcterms:bibliographicCitation "Public product catalog of Applied Materials" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:definition "PVD platform for metal deposition"@en ;
+    skos:prefLabel "Applied Materials Endura"@en ;
+    ont:interpretationType "mapped" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/deposition_tool> ;
+    ont:providedBy <https://w3id.org/sdkb/data/organization/applied_materials> .
+
+<https://w3id.org/sdkb/data/equipment/amat_reflexion> a ont:Equipment ;
+    dcterms:bibliographicCitation "Public product catalog of Applied Materials" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:definition "CMP platform"@en ;
+    skos:prefLabel "Applied Materials Reflexion LK"@en ;
+    ont:interpretationType "mapped" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/cmp_tool> ;
+    ont:providedBy <https://w3id.org/sdkb/data/organization/applied_materials> .
+
+<https://w3id.org/sdkb/data/equipment/amat_semvision> a ont:Equipment ;
+    dcterms:bibliographicCitation "Public product catalog of Applied Materials" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:definition "Defect review SEM"@en ;
+    skos:prefLabel "Applied Materials SEMVision"@en ;
+    ont:interpretationType "mapped" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/defect_inspection> ;
+    ont:providedBy <https://w3id.org/sdkb/data/organization/applied_materials> .
+
+<https://w3id.org/sdkb/data/equipment/amat_vantage> a ont:Equipment ;
+    dcterms:bibliographicCitation "Public product catalog of Applied Materials" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:definition "Epi CVD platform"@en ;
+    skos:prefLabel "Applied Materials Producer Vantage"@en ;
+    ont:interpretationType "mapped" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/deposition_tool> ;
+    ont:providedBy <https://w3id.org/sdkb/data/organization/applied_materials> .
+
+<https://w3id.org/sdkb/data/equipment/asm_pulsar> a ont:Equipment ;
+    dcterms:bibliographicCitation "Public product catalog of Asm" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:definition "ALD platform"@en ;
+    skos:prefLabel "ASM Pulsar"@en ;
+    ont:interpretationType "mapped" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/deposition_tool> ;
+    ont:providedBy <https://w3id.org/sdkb/data/organization/asm_ip_holding_b_v> .
+
+<https://w3id.org/sdkb/data/equipment/asml_nxt> a ont:Equipment ;
+    dcterms:bibliographicCitation "Public product catalog of Asml" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:definition "ArF immersion scanner"@en ;
+    skos:prefLabel "ASML NXT"@en ;
+    ont:interpretationType "mapped" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/scanner> ;
+    ont:providedBy <https://w3id.org/sdkb/data/organization/asml> .
+
+<https://w3id.org/sdkb/data/equipment/asml_scanner> a ont:Equipment ;
+    dcterms:bibliographicCitation "Public product catalog of Asml" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:definition "DUV/EUV scanner"@en ;
+    skos:prefLabel "ASML Lithography Scanner"@en ;
+    ont:interpretationType "mapped" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/scanner> ;
+    ont:providedBy <https://w3id.org/sdkb/data/organization/asml> .
+
+<https://w3id.org/sdkb/data/equipment/axcelis_implanter> a ont:Equipment ;
+    dcterms:bibliographicCitation "Public product catalog of Axcelis" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:definition "Ion implantation system"@en ;
+    skos:prefLabel "Axcelis Implanter"@en ;
+    ont:interpretationType "mapped" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/implanter> ;
+    ont:providedBy <https://w3id.org/sdkb/data/organization/axcelis> .
+
+<https://w3id.org/sdkb/data/equipment/bruker_ellipsometer> a ont:Equipment ;
+    dcterms:bibliographicCitation "Public product catalog of Bruker" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:definition "Film thickness measurement"@en ;
+    skos:prefLabel "Bruker Ellipsometer"@en ;
+    ont:interpretationType "mapped" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/overlay_metrology> ;
+    ont:providedBy <https://w3id.org/sdkb/data/organization/bruker> .
+
+<https://w3id.org/sdkb/data/equipment/cabot_slurry> a ont:Equipment ;
+    dcterms:bibliographicCitation "Public product catalog of Cabot" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:definition "CMP slurry consumable"@en ;
+    skos:prefLabel "Cabot CMP Slurry"@en ;
+    ont:interpretationType "mapped" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/cmp_tool> ;
+    ont:providedBy <https://w3id.org/sdkb/data/organization/cabot> .
+
+<https://w3id.org/sdkb/data/equipment/coater_track> a ont:Equipment ;
+    dcterms:bibliographicCitation "Author-defined generic/facilities equipment" ;
+    dcterms:license "N/A" ;
+    dcterms:source "author" ;
+    skos:definition "Generic coater/developer"@en ;
+    skos:prefLabel "Coater Track"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/track> ;
+    ont:providedBy <https://w3id.org/sdkb/data/vendor/generic> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/equipment/contamination_monitor> a ont:Equipment ;
+    dcterms:bibliographicCitation "Author-defined generic/facilities equipment" ;
+    dcterms:license "N/A" ;
+    dcterms:source "author" ;
+    skos:definition "Particle monitoring system"@en ;
+    skos:prefLabel "Contamination Monitor"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/defect_inspection> ;
+    ont:providedBy <https://w3id.org/sdkb/data/vendor/generic> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/equipment/cvd_reactor> a ont:Equipment ;
+    dcterms:bibliographicCitation "Author-defined generic/facilities equipment" ;
+    dcterms:license "N/A" ;
+    dcterms:source "author" ;
+    skos:broader <https://w3id.org/sdkb/data/equipment_class/process_chamber> ;
+    skos:definition "Chemical vapor deposition"@en ;
+    skos:prefLabel "CVD Reactor"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/deposition_tool> ;
+    ont:providedBy <https://w3id.org/sdkb/data/vendor/generic> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/equipment/ebara_frex> a ont:Equipment ;
+    dcterms:bibliographicCitation "Public product catalog of Ebara" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:definition "CMP platform"@en ;
+    skos:prefLabel "Ebara Frex"@en ;
+    ont:interpretationType "mapped" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/cmp_tool> ;
+    ont:providedBy <https://w3id.org/sdkb/data/organization/ebara> .
+
+<https://w3id.org/sdkb/data/equipment/exhaust_line> a ont:Equipment ;
+    dcterms:bibliographicCitation "Author-defined generic/facilities equipment" ;
+    dcterms:license "N/A" ;
+    dcterms:source "author" ;
+    skos:definition "Process exhaust system"@en ;
+    skos:prefLabel "Exhaust Line"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/facilities> ;
+    ont:providedBy <https://w3id.org/sdkb/data/vendor/generic> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/equipment/exhaust_pipe> a ont:Equipment ;
+    dcterms:bibliographicCitation "Author-defined generic/facilities equipment" ;
+    dcterms:license "N/A" ;
+    dcterms:source "author" ;
+    skos:definition "Exhaust piping"@en ;
+    skos:prefLabel "Exhaust Pipe"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/facilities> ;
+    ont:providedBy <https://w3id.org/sdkb/data/vendor/generic> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/equipment/gas_lines> a ont:Equipment ;
+    dcterms:bibliographicCitation "Author-defined generic/facilities equipment" ;
+    dcterms:license "N/A" ;
+    dcterms:source "author" ;
+    skos:definition "Process gas distribution"@en ;
+    skos:prefLabel "Gas Lines"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/facilities> ;
+    ont:providedBy <https://w3id.org/sdkb/data/vendor/generic> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/equipment/gas_sensor> a ont:Equipment ;
+    dcterms:bibliographicCitation "Author-defined generic/facilities equipment" ;
+    dcterms:license "N/A" ;
+    dcterms:source "author" ;
+    skos:definition "Gas detection sensor"@en ;
+    skos:prefLabel "Gas Sensor"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/facilities> ;
+    ont:providedBy <https://w3id.org/sdkb/data/vendor/generic> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/equipment/heater_jacket> a ont:Equipment ;
+    dcterms:bibliographicCitation "Author-defined generic/facilities equipment" ;
+    dcterms:license "N/A" ;
+    dcterms:source "author" ;
+    skos:definition "Process heater component"@en ;
+    skos:prefLabel "Heater Jacket"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/facilities> ;
+    ont:providedBy <https://w3id.org/sdkb/data/vendor/generic> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/equipment/hitachi_etcher> a ont:Equipment ;
+    dcterms:bibliographicCitation "Public product catalog of Hitachi" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:definition "Plasma etch system"@en ;
+    skos:prefLabel "Hitachi Etcher"@en ;
+    ont:interpretationType "mapped" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/etcher> ;
+    ont:providedBy <https://w3id.org/sdkb/data/organization/hitachi_high_tech> .
+
+<https://w3id.org/sdkb/data/equipment/hitachi_sem> a ont:Equipment ;
+    dcterms:bibliographicCitation "Public product catalog of Hitachi" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:definition "Critical dimension SEM"@en ;
+    skos:prefLabel "Hitachi CD-SEM"@en ;
+    ont:interpretationType "mapped" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/cd_sem> ;
+    ont:providedBy <https://w3id.org/sdkb/data/organization/hitachi_high_tech> .
+
+<https://w3id.org/sdkb/data/equipment/implanter> a ont:Equipment ;
+    dcterms:bibliographicCitation "Author-defined generic/facilities equipment" ;
+    dcterms:license "N/A" ;
+    dcterms:source "author" ;
+    skos:definition "Generic implanter"@en ;
+    skos:prefLabel "Ion Implanter"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/implanter> ;
+    ont:providedBy <https://w3id.org/sdkb/data/vendor/generic> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/equipment/kla_inspector> a ont:Equipment ;
+    dcterms:bibliographicCitation "Public product catalog of Kla" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:definition "Wafer defect inspection"@en ;
+    skos:prefLabel "KLA Inspector"@en ;
+    ont:interpretationType "mapped" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/defect_inspection> ;
+    ont:providedBy <https://w3id.org/sdkb/data/organization/kla> .
+
+<https://w3id.org/sdkb/data/equipment/kla_overlay> a ont:Equipment ;
+    dcterms:bibliographicCitation "Public product catalog of Kla" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:definition "Overlay measurement system"@en ;
+    skos:prefLabel "KLA Overlay Metrology"@en ;
+    ont:interpretationType "mapped" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/overlay_metrology> ;
+    ont:providedBy <https://w3id.org/sdkb/data/organization/kla> .
+
+<https://w3id.org/sdkb/data/equipment/lam_2300> a ont:Equipment ;
+    dcterms:bibliographicCitation "Public product catalog of Lam Research" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:definition "Metal etch platform"@en ;
+    skos:prefLabel "Lam Research 2300"@en ;
+    ont:interpretationType "mapped" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/etcher> ;
+    ont:providedBy <https://w3id.org/sdkb/data/organization/lam_research> .
+
+<https://w3id.org/sdkb/data/equipment/lam_etcher> a ont:Equipment ;
+    dcterms:bibliographicCitation "Public product catalog of Lam Research" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:definition "General etch platform"@en ;
+    skos:prefLabel "Lam Research Etcher"@en ;
+    ont:interpretationType "mapped" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/etcher> ;
+    ont:providedBy <https://w3id.org/sdkb/data/organization/lam_research> .
+
+<https://w3id.org/sdkb/data/equipment/lam_flex> a ont:Equipment ;
+    dcterms:bibliographicCitation "Public product catalog of Lam Research" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:definition "Dielectric etch platform"@en ;
+    skos:prefLabel "Lam Research Flex"@en ;
+    ont:interpretationType "mapped" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/etcher> ;
+    ont:providedBy <https://w3id.org/sdkb/data/organization/lam_research> .
+
+<https://w3id.org/sdkb/data/equipment/mattson_rtp> a ont:Equipment ;
+    dcterms:bibliographicCitation "Public product catalog of Mattson" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:definition "Rapid thermal processing"@en ;
+    skos:prefLabel "Mattson RTP"@en ;
+    ont:interpretationType "mapped" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/deposition_tool> ;
+    ont:providedBy <https://w3id.org/sdkb/data/organization/mattson_technology> .
+
+<https://w3id.org/sdkb/data/equipment/monitoring_system> a ont:Equipment ;
+    dcterms:bibliographicCitation "Author-defined generic/facilities equipment" ;
+    dcterms:license "N/A" ;
+    dcterms:source "author" ;
+    skos:definition "Process monitoring"@en ;
+    skos:prefLabel "Monitoring System"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/facilities> ;
+    ont:providedBy <https://w3id.org/sdkb/data/vendor/generic> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/equipment/pvd_chamber> a ont:Equipment ;
+    dcterms:bibliographicCitation "Author-defined generic/facilities equipment" ;
+    dcterms:license "N/A" ;
+    dcterms:source "author" ;
+    skos:broader <https://w3id.org/sdkb/data/equipment_class/process_chamber> ;
+    skos:definition "Physical vapor deposition"@en ;
+    skos:prefLabel "PVD Chamber"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/deposition_tool> ;
+    ont:providedBy <https://w3id.org/sdkb/data/vendor/generic> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/equipment/screen_developer> a ont:Equipment ;
+    dcterms:bibliographicCitation "Public product catalog of Screen" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:definition "Photoresist developer"@en ;
+    skos:prefLabel "SCREEN Developer"@en ;
+    ont:interpretationType "mapped" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/track> ;
+    ont:providedBy <https://w3id.org/sdkb/data/organization/screen_holdings> .
+
+<https://w3id.org/sdkb/data/equipment/scrubber> a ont:Equipment ;
+    dcterms:bibliographicCitation "Author-defined generic/facilities equipment" ;
+    dcterms:license "N/A" ;
+    dcterms:source "author" ;
+    skos:definition "Exhaust gas treatment"@en ;
+    skos:prefLabel "Scrubber"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/facilities> ;
+    ont:providedBy <https://w3id.org/sdkb/data/vendor/generic> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/equipment/sensor_nodes> a ont:Equipment ;
+    dcterms:bibliographicCitation "Author-defined generic/facilities equipment" ;
+    dcterms:license "N/A" ;
+    dcterms:source "author" ;
+    skos:definition "Monitoring sensors"@en ;
+    skos:prefLabel "Sensor Nodes"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/facilities> ;
+    ont:providedBy <https://w3id.org/sdkb/data/vendor/generic> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/equipment/tel_alpha> a ont:Equipment ;
+    dcterms:bibliographicCitation "Public product catalog of Tokyo Electron" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:definition "Dielectric etch platform"@en ;
+    skos:prefLabel "Tokyo Electron Alpha"@en ;
+    ont:interpretationType "mapped" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/etcher> ;
+    ont:providedBy <https://w3id.org/sdkb/data/organization/tokyo_electron_limited> .
+
+<https://w3id.org/sdkb/data/equipment/tel_coater> a ont:Equipment ;
+    dcterms:bibliographicCitation "Public product catalog of Tokyo Electron" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:definition "Coater/developer track"@en ;
+    skos:prefLabel "Tokyo Electron Track"@en ;
+    ont:interpretationType "mapped" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/track> ;
+    ont:providedBy <https://w3id.org/sdkb/data/organization/tokyo_electron_limited> .
+
+<https://w3id.org/sdkb/data/equipment/tel_formula> a ont:Equipment ;
+    dcterms:bibliographicCitation "Public product catalog of Tokyo Electron" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:definition "Conductor etch platform"@en ;
+    skos:prefLabel "Tokyo Electron Formula"@en ;
+    ont:interpretationType "mapped" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/etcher> ;
+    ont:providedBy <https://w3id.org/sdkb/data/organization/tokyo_electron_limited> .
+
+<https://w3id.org/sdkb/data/equipment/tel_tactras> a ont:Equipment ;
+    dcterms:bibliographicCitation "Public product catalog of Tokyo Electron" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:definition "CVD platform"@en ;
+    skos:prefLabel "Tokyo Electron Tactras"@en ;
+    ont:interpretationType "mapped" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/deposition_tool> ;
+    ont:providedBy <https://w3id.org/sdkb/data/organization/tokyo_electron_limited> .
+
+<https://w3id.org/sdkb/data/equipment/vacuum_pump> a ont:Equipment ;
+    dcterms:bibliographicCitation "Author-defined generic/facilities equipment" ;
+    dcterms:license "N/A" ;
+    dcterms:source "author" ;
+    skos:definition "Vacuum system component"@en ;
+    skos:prefLabel "Vacuum Pump"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:isInstanceOf <https://w3id.org/sdkb/data/equipment_class/facilities> ;
+    ont:providedBy <https://w3id.org/sdkb/data/vendor/generic> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/failuremode/bowing> a ont:FailureMode ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; arXiv:2406.18114" ;
+    dcterms:license "MIT (framework code); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Curved sidewall profile in etch."@en ;
+    skos:prefLabel "Bowing"@en ;
+    ont:confidence 0.6,
+        0.7,
+        0.8 ;
+    ont:interpretationType "mapped" ;
+    ont:isDueTo <https://w3id.org/sdkb/data/rootcause/gas_flow_instability>,
+        <https://w3id.org/sdkb/data/rootcause/rf_power_variation> ;
+    ont:occursAtProcessStep <https://w3id.org/sdkb/data/subprocess/plasma_etch> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/failuremode/bridging> a ont:FailureMode ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; arXiv:2406.18114" ;
+    dcterms:license "MIT (framework code); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Unintended connection between adjacent features."@en ;
+    skos:prefLabel "Bridging"@en ;
+    ont:confidence 0.6,
+        0.7 ;
+    ont:interpretationType "mapped" ;
+    ont:isDueTo <https://w3id.org/sdkb/data/rootcause/material_contamination> ;
+    ont:occursAtProcessStep <https://w3id.org/sdkb/data/subprocess/photoresist_coat_develop> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/failuremode/cdu> a ont:FailureMode ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; arXiv:2406.18114" ;
+    dcterms:license "MIT (framework code); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:altLabel "CDU"@en ;
+    skos:definition "Critical dimension uniformity issue."@en ;
+    skos:prefLabel "CDU"@en ;
+    ont:confidence 0.7 ;
+    ont:interpretationType "mapped" ;
+    ont:isDueTo <https://w3id.org/sdkb/data/rootcause/thickness_nonuniformity> ;
+    ont:occursAtProcessStep <https://w3id.org/sdkb/data/subprocess/euv_lithography> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/failuremode/delamination> a ont:FailureMode ;
+    dcterms:bibliographicCitation "JEDEC JEP122H: Failure Mechanisms and Models for Semiconductor Devices" ;
+    dcterms:license "Free download with JEDEC account" ;
+    dcterms:source "jedec" ;
+    rdfs:seeAlso <https://www.jedec.org/standards-documents> ;
+    skos:definition "Film adhesion failure and peeling."@en ;
+    skos:prefLabel "Delamination"@en ;
+    ont:confidence 0.6,
+        0.7,
+        0.9 ;
+    ont:interpretationType "mapped" ;
+    ont:isDueTo <https://w3id.org/sdkb/data/rootcause/poor_adhesion>,
+        <https://w3id.org/sdkb/data/rootcause/stress_mismatch> ;
+    ont:occursAtProcessStep <https://w3id.org/sdkb/data/subprocess/cvd>,
+        <https://w3id.org/sdkb/data/subprocess/pvd> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/failuremode/dishing> a ont:FailureMode ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; arXiv:2406.18114" ;
+    dcterms:license "MIT (framework code); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:altLabel "디싱"@ko ;
+    skos:definition "Over-polish creating concavity in CMP."@en ;
+    skos:prefLabel "Dishing"@en ;
+    ont:confidence 0.7,
+        0.9 ;
+    ont:interpretationType "mapped" ;
+    ont:isDueTo <https://w3id.org/sdkb/data/rootcause/slurry_instability> ;
+    ont:occursAtProcessStep <https://w3id.org/sdkb/data/subprocess/cmp_metal> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/failuremode/erosion> a ont:FailureMode ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; arXiv:2406.18114" ;
+    dcterms:license "MIT (framework code); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:altLabel "에로전"@ko ;
+    skos:definition "Pattern-density dependent polish rate in CMP."@en ;
+    skos:prefLabel "Erosion"@en ;
+    ont:confidence 0.8 ;
+    ont:interpretationType "mapped" ;
+    ont:isDueTo <https://w3id.org/sdkb/data/rootcause/slurry_instability> ;
+    ont:occursAtProcessStep <https://w3id.org/sdkb/data/subprocess/cmp_oxide> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/failuremode/footing> a ont:FailureMode ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; arXiv:2406.18114" ;
+    dcterms:license "MIT (framework code); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:altLabel "풋팅"@ko ;
+    skos:definition "Profile distortion near interface in etch."@en ;
+    skos:prefLabel "Footing"@en ;
+    ont:confidence 0.7 ;
+    ont:interpretationType "mapped" ;
+    ont:isDueTo <https://w3id.org/sdkb/data/rootcause/charging> ;
+    ont:occursAtProcessStep <https://w3id.org/sdkb/data/subprocess/plasma_etch> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/failuremode/haze> a ont:FailureMode ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; arXiv:2406.18114" ;
+    dcterms:license "MIT (framework code); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Surface haze due to contamination or roughness."@en ;
+    skos:prefLabel "Haze"@en ;
+    ont:confidence 0.7,
+        0.8 ;
+    ont:interpretationType "mapped" ;
+    ont:isDueTo <https://w3id.org/sdkb/data/rootcause/material_contamination> ;
+    ont:occursAtProcessStep <https://w3id.org/sdkb/data/subprocess/wet_etch> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/failuremode/hillock> a ont:FailureMode ;
+    dcterms:bibliographicCitation "JEDEC JEP122H: Failure Mechanisms and Models for Semiconductor Devices" ;
+    dcterms:license "Free download with JEDEC account" ;
+    dcterms:source "jedec" ;
+    rdfs:seeAlso <https://www.jedec.org/standards-documents> ;
+    skos:definition "Metal surface protrusion defect."@en ;
+    skos:prefLabel "Hillock"@en ;
+    ont:confidence 0.7,
+        0.8 ;
+    ont:interpretationType "mapped" ;
+    ont:isDueTo <https://w3id.org/sdkb/data/rootcause/stress_mismatch> ;
+    ont:occursAtProcessStep <https://w3id.org/sdkb/data/subprocess/pvd> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/failuremode/ler> a ont:FailureMode ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; arXiv:2406.18114" ;
+    dcterms:license "MIT (framework code); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:altLabel "LER"@en ;
+    skos:definition "Edge roughness causing variability and yield impact."@en ;
+    skos:prefLabel "Line Edge Roughness"@en ;
+    ont:confidence 0.6,
+        0.9 ;
+    ont:interpretationType "mapped" ;
+    ont:isDueTo <https://w3id.org/sdkb/data/rootcause/mask_defect> ;
+    ont:occursAtProcessStep <https://w3id.org/sdkb/data/subprocess/euv_lithography> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/failuremode/line_width_variation> a ont:FailureMode ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; arXiv:2406.18114" ;
+    dcterms:license "MIT (framework code); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "CD variation across die or wafer."@en ;
+    skos:prefLabel "Line Width Variation"@en ;
+    ont:confidence 0.5,
+        0.7,
+        0.8 ;
+    ont:interpretationType "mapped" ;
+    ont:isDueTo <https://w3id.org/sdkb/data/rootcause/mask_defect>,
+        <https://w3id.org/sdkb/data/rootcause/temperature_drift> ;
+    ont:occursAtProcessStep <https://w3id.org/sdkb/data/subprocess/euv_lithography> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/failuremode/microtrenching> a ont:FailureMode ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; arXiv:2406.18114" ;
+    dcterms:license "MIT (framework code); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:altLabel "마이크로트렌칭"@ko ;
+    skos:definition "Sidewall/bottom profile anomaly in etch."@en ;
+    skos:prefLabel "Micro-trenching"@en ;
+    ont:confidence 0.6,
+        0.7,
+        0.9 ;
+    ont:interpretationType "mapped" ;
+    ont:isDueTo <https://w3id.org/sdkb/data/rootcause/charging>,
+        <https://w3id.org/sdkb/data/rootcause/polymer_buildup> ;
+    ont:occursAtProcessStep <https://w3id.org/sdkb/data/subprocess/plasma_etch> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/failuremode/overlay_error> a ont:FailureMode ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; arXiv:2406.18114" ;
+    dcterms:license "MIT (framework code); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Layer-to-layer misalignment exceeding spec."@en ;
+    skos:prefLabel "Overlay Error"@en ;
+    ont:confidence 0.6,
+        0.8,
+        0.9 ;
+    ont:interpretationType "mapped" ;
+    ont:isDueTo <https://w3id.org/sdkb/data/rootcause/alignment_error>,
+        <https://w3id.org/sdkb/data/rootcause/temperature_drift> ;
+    ont:occursAtProcessStep <https://w3id.org/sdkb/data/subprocess/duv_lithography>,
+        <https://w3id.org/sdkb/data/subprocess/euv_lithography> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/failuremode/particle> a ont:FailureMode ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; arXiv:2406.18114" ;
+    dcterms:license "MIT (framework code); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Particle contamination/defect."@en ;
+    skos:prefLabel "Particle"@en ;
+    ont:confidence 0.8 ;
+    ont:interpretationType "mapped" ;
+    ont:isDueTo <https://w3id.org/sdkb/data/rootcause/particle_contamination> ;
+    ont:occursAtProcessStep <https://w3id.org/sdkb/data/subprocess/wet_etch> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/failuremode/pattern_collapse> a ont:FailureMode ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; arXiv:2406.18114" ;
+    dcterms:license "MIT (framework code); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "High-aspect-ratio pattern falling over."@en ;
+    skos:prefLabel "Pattern Collapse"@en ;
+    ont:confidence 0.7,
+        0.8 ;
+    ont:interpretationType "mapped" ;
+    ont:isDueTo <https://w3id.org/sdkb/data/rootcause/humidity_variation> ;
+    ont:occursAtProcessStep <https://w3id.org/sdkb/data/subprocess/photoresist_coat_develop> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/failuremode/pinhole> a ont:FailureMode ;
+    dcterms:bibliographicCitation "JEDEC JEP122H: Failure Mechanisms and Models for Semiconductor Devices" ;
+    dcterms:license "Free download with JEDEC account" ;
+    dcterms:source "jedec" ;
+    rdfs:seeAlso <https://www.jedec.org/standards-documents> ;
+    skos:definition "Small hole defect in thin film."@en ;
+    skos:prefLabel "Pinhole"@en ;
+    ont:confidence 0.7,
+        0.8 ;
+    ont:interpretationType "mapped" ;
+    ont:isDueTo <https://w3id.org/sdkb/data/rootcause/particle_contamination> ;
+    ont:occursAtProcessStep <https://w3id.org/sdkb/data/subprocess/ald> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/failuremode/residue> a ont:FailureMode ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; arXiv:2406.18114" ;
+    dcterms:license "MIT (framework code); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Unwanted material residue after process."@en ;
+    skos:prefLabel "Residue"@en ;
+    ont:confidence 0.5,
+        0.8,
+        0.9 ;
+    ont:interpretationType "mapped" ;
+    ont:isDueTo <https://w3id.org/sdkb/data/rootcause/equipment_aging>,
+        <https://w3id.org/sdkb/data/rootcause/polymer_buildup> ;
+    ont:occursAtProcessStep <https://w3id.org/sdkb/data/subprocess/plasma_etch> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/failuremode/scratches> a ont:FailureMode ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; arXiv:2406.18114" ;
+    dcterms:license "MIT (framework code); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Physical scratch defects on wafer surface."@en ;
+    skos:prefLabel "Scratches"@en ;
+    ont:confidence 0.7,
+        0.9 ;
+    ont:interpretationType "mapped" ;
+    ont:isDueTo <https://w3id.org/sdkb/data/rootcause/particle_contamination> ;
+    ont:occursAtProcessStep <https://w3id.org/sdkb/data/subprocess/cmp_metal>,
+        <https://w3id.org/sdkb/data/subprocess/cmp_oxide> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/failuremode/scumming> a ont:FailureMode ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; arXiv:2406.18114" ;
+    dcterms:license "MIT (framework code); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Resist residue in developed areas."@en ;
+    skos:prefLabel "Scumming"@en ;
+    ont:confidence 0.6,
+        0.8,
+        0.9 ;
+    ont:interpretationType "mapped" ;
+    ont:isDueTo <https://w3id.org/sdkb/data/rootcause/humidity_variation>,
+        <https://w3id.org/sdkb/data/rootcause/material_contamination> ;
+    ont:occursAtProcessStep <https://w3id.org/sdkb/data/subprocess/photoresist_coat_develop> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/failuremode/seam> a ont:FailureMode ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; arXiv:2406.18114" ;
+    dcterms:license "MIT (framework code); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Seam formation in gap-fill."@en ;
+    skos:prefLabel "Seam"@en ;
+    ont:confidence 0.7,
+        0.8 ;
+    ont:interpretationType "mapped" ;
+    ont:isDueTo <https://w3id.org/sdkb/data/rootcause/precursor_depletion> ;
+    ont:occursAtProcessStep <https://w3id.org/sdkb/data/subprocess/cvd> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/failuremode/sidewall_angle_deviation> a ont:FailureMode ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; arXiv:2406.18114" ;
+    dcterms:license "MIT (framework code); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Etch profile angle deviating from target."@en ;
+    skos:prefLabel "Sidewall Angle Deviation"@en ;
+    ont:confidence 0.5,
+        0.6,
+        0.7,
+        0.9 ;
+    ont:interpretationType "mapped" ;
+    ont:isDueTo <https://w3id.org/sdkb/data/rootcause/charging>,
+        <https://w3id.org/sdkb/data/rootcause/polymer_buildup>,
+        <https://w3id.org/sdkb/data/rootcause/rf_power_variation> ;
+    ont:occursAtProcessStep <https://w3id.org/sdkb/data/subprocess/plasma_etch> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/failuremode/step_coverage_issue> a ont:FailureMode ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; arXiv:2406.18114" ;
+    dcterms:license "MIT (framework code); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Poor conformality on high aspect ratio features."@en ;
+    skos:prefLabel "Step Coverage Issue"@en ;
+    ont:confidence 0.6,
+        0.7,
+        0.8 ;
+    ont:interpretationType "mapped" ;
+    ont:isDueTo <https://w3id.org/sdkb/data/rootcause/precursor_depletion>,
+        <https://w3id.org/sdkb/data/rootcause/temperature_drift> ;
+    ont:occursAtProcessStep <https://w3id.org/sdkb/data/subprocess/ald>,
+        <https://w3id.org/sdkb/data/subprocess/cvd> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/failuremode/stress_induced_crack> a ont:FailureMode ;
+    dcterms:bibliographicCitation "JEDEC JEP122H: Failure Mechanisms and Models for Semiconductor Devices" ;
+    dcterms:license "Free download with JEDEC account" ;
+    dcterms:source "jedec" ;
+    rdfs:seeAlso <https://www.jedec.org/standards-documents> ;
+    skos:definition "Film cracking due to internal stress."@en ;
+    skos:prefLabel "Stress-Induced Crack"@en ;
+    ont:confidence 0.7,
+        0.9 ;
+    ont:interpretationType "mapped" ;
+    ont:isDueTo <https://w3id.org/sdkb/data/rootcause/stress_mismatch> ;
+    ont:occursAtProcessStep <https://w3id.org/sdkb/data/subprocess/cvd> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/failuremode/undercut> a ont:FailureMode ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; arXiv:2406.18114" ;
+    dcterms:license "MIT (framework code); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Excessive lateral etching under mask."@en ;
+    skos:prefLabel "Undercut"@en ;
+    ont:confidence 0.6,
+        0.7,
+        0.8 ;
+    ont:interpretationType "mapped" ;
+    ont:isDueTo <https://w3id.org/sdkb/data/rootcause/temperature_drift> ;
+    ont:occursAtProcessStep <https://w3id.org/sdkb/data/subprocess/plasma_etch>,
+        <https://w3id.org/sdkb/data/subprocess/wet_etch> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/failuremode/void> a ont:FailureMode ;
+    dcterms:bibliographicCitation "JEDEC JEP122H: Failure Mechanisms and Models for Semiconductor Devices" ;
+    dcterms:license "Free download with JEDEC account" ;
+    dcterms:source "jedec" ;
+    rdfs:seeAlso <https://www.jedec.org/standards-documents> ;
+    skos:definition "Gap or void in deposited film."@en ;
+    skos:prefLabel "Void"@en ;
+    ont:confidence 0.6,
+        0.7,
+        0.8 ;
+    ont:interpretationType "mapped" ;
+    ont:isDueTo <https://w3id.org/sdkb/data/rootcause/precursor_depletion>,
+        <https://w3id.org/sdkb/data/rootcause/vacuum_leak> ;
+    ont:occursAtProcessStep <https://w3id.org/sdkb/data/subprocess/ald>,
+        <https://w3id.org/sdkb/data/subprocess/cvd> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/material/argon> a ont:Material ;
+    dcterms:bibliographicCitation "CR-007 §3단계 결정 ①" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:broader <https://w3id.org/sdkb/data/material/process_gas> ;
+    skos:definition "Ar — inert carrier and sputtering gas."@en ;
+    skos:prefLabel "Argon"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/material/cf4> a ont:Material ;
+    dcterms:bibliographicCitation "CR-007 §3단계 결정 ①" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:broader <https://w3id.org/sdkb/data/material/process_gas> ;
+    skos:definition "CF4 — fluorocarbon etch gas."@en ;
+    skos:prefLabel "Carbon Tetrafluoride"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/material/duv_photomask> a ont:Material ;
+    dcterms:bibliographicCitation "CR-007 §3단계 결정 ①" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:broader <https://w3id.org/sdkb/data/material/photomask> ;
+    skos:definition "Transmissive photomask for DUV lithography."@en ;
+    skos:prefLabel "DUV Photomask"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/material/euv_mask> a ont:Material ;
+    dcterms:bibliographicCitation "CR-007 §3단계 결정 ①" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:broader <https://w3id.org/sdkb/data/material/photomask> ;
+    skos:definition "Reflective multilayer mask for EUV lithography."@en ;
+    skos:prefLabel "EUV Mask"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/material/oxygen_gas> a ont:Material ;
+    dcterms:bibliographicCitation "CR-007 §3단계 결정 ①" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:broader <https://w3id.org/sdkb/data/material/process_gas> ;
+    skos:definition "O2 — oxidant / ashing gas."@en ;
+    skos:prefLabel "Oxygen Gas"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/material/sf6> a ont:Material ;
+    dcterms:bibliographicCitation "CR-007 §3단계 결정 ①" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:broader <https://w3id.org/sdkb/data/material/process_gas> ;
+    skos:definition "SF6 — fluorine-source etch gas."@en ;
+    skos:prefLabel "Sulfur Hexafluoride"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/material/sog> a ont:Material ;
+    dcterms:bibliographicCitation "Venugopal et al. 2024, Scientific Data 11:217" ;
+    dcterms:license "CC-BY-4.0" ;
+    dcterms:source "matkg" ;
+    rdfs:seeAlso <https://zenodo.org/records/10144972> ;
+    skos:altLabel "SOG"@en,
+        "스핀온글래스"@ko ;
+    skos:definition "SOG planarization material."@en ;
+    skos:prefLabel "Spin-on Glass"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/metrology/ellipsometry> a ont:Metrology ;
+    dcterms:bibliographicCitation "SEMI E10 (equipment performance); IRDS Metrology Chapter" ;
+    dcterms:license "Proprietary (SEMI); Free with IEEE account (IRDS)" ;
+    dcterms:source "semi_standards" ;
+    rdfs:seeAlso <https://irds.ieee.org> ;
+    skos:definition "Film thickness and optical properties."@en ;
+    skos:prefLabel "Ellipsometry"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/organization/samsung_electronics> a ont:Organization ;
+    dcterms:bibliographicCitation "Wikidata; Korea MOTIE National Core Technology designation" ;
+    dcterms:license "CC0 (Wikidata); Government Public Notice (MOTIE)" ;
+    dcterms:source "wikidata" ;
+    rdfs:seeAlso <https://www.wikidata.org> ;
+    skos:altLabel "삼성"@ko,
+        "삼성전자"@ko ;
+    skos:definition "IDM/foundry and memory manufacturer."@en ;
+    skos:prefLabel "Samsung Electronics"@en ;
+    ont:interpretationType "verbatim" .
+
+<https://w3id.org/sdkb/data/organization/semes> a ont:Vendor ;
+    dcterms:bibliographicCitation "SEMES corporate site (https://www.semes.com)" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    rdfs:seeAlso <https://www.semes.com> ;
+    skos:definition "한국 반도체 장비 제조사 (Samsung 계열). 식각·세정·트랙·포토 장비를 공급하며 한국 소부장 생태계의 핵심 벤더."@en ;
+    skos:prefLabel "SEMES Co., Ltd."@en ;
+    ont:interpretationType "verbatim" ;
+    ont:validationRequired false .
+
+<https://w3id.org/sdkb/data/organization/sk_hynix> a ont:Organization ;
+    dcterms:bibliographicCitation "Wikidata; Korea MOTIE National Core Technology designation" ;
+    dcterms:license "CC0 (Wikidata); Government Public Notice (MOTIE)" ;
+    dcterms:source "wikidata" ;
+    rdfs:seeAlso <https://www.wikidata.org> ;
+    skos:altLabel "SK하이닉스"@ko,
+        "하이닉스"@ko ;
+    skos:definition "Memory manufacturer."@en ;
+    skos:prefLabel "SK hynix"@en ;
+    ont:interpretationType "verbatim" .
+
+<https://w3id.org/sdkb/data/parameter/temperature> a ont:Parameter ;
+    dcterms:bibliographicCitation "IEEE IRDS 2022 Edition, More Moore Chapter; SEMI E10-0814" ;
+    dcterms:license "Free with IEEE account (IRDS); Proprietary (SEMI)" ;
+    dcterms:source "irds" ;
+    rdfs:seeAlso <https://irds.ieee.org> ;
+    skos:definition "Process temperature."@en ;
+    skos:prefLabel "Temperature"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/process/advanced_modules> a ont:Process ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:definition "Device-enabling integration modules, e.g. high-k/metal gate, strain, 3D structures."@en ;
+    skos:prefLabel "Advanced Modules"@en ;
+    ont:confidence 0.9 ;
+    ont:hasSubprocess <https://w3id.org/sdkb/data/subprocess/high_k_metal_gate>,
+        <https://w3id.org/sdkb/data/subprocess/strain_engineering>,
+        <https://w3id.org/sdkb/data/subprocess/three_d_structures> ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/process/back_end> a ont:Process ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:definition "Post-FEOL processes: interconnect, passivation, thinning, test, dicing and packaging."@en ;
+    skos:prefLabel "Back-End Processes"@en ;
+    ont:confidence 0.9 ;
+    ont:hasSubprocess <https://w3id.org/sdkb/data/subprocess/advanced_packaging>,
+        <https://w3id.org/sdkb/data/subprocess/dicing>,
+        <https://w3id.org/sdkb/data/subprocess/interconnect_patterning>,
+        <https://w3id.org/sdkb/data/subprocess/metallization>,
+        <https://w3id.org/sdkb/data/subprocess/multilayer_interconnect>,
+        <https://w3id.org/sdkb/data/subprocess/packaging>,
+        <https://w3id.org/sdkb/data/subprocess/passivation>,
+        <https://w3id.org/sdkb/data/subprocess/wafer_testing>,
+        <https://w3id.org/sdkb/data/subprocess/wafer_thinning> ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/process/clean> a ont:Process ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:definition "Wet/dry cleaning steps to remove residues/particles."@en ;
+    skos:prefLabel "Clean"@en ;
+    ont:confidence 0.9 ;
+    ont:hasSubprocess <https://w3id.org/sdkb/data/subprocess/advanced_cleaning>,
+        <https://w3id.org/sdkb/data/subprocess/dry_cleaning>,
+        <https://w3id.org/sdkb/data/subprocess/wet_cleaning> ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/process/cmp> a ont:Process ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:altLabel "CMP"@en,
+        "평탄화"@ko ;
+    skos:definition "Chemical-mechanical planarization for topography control."@en ;
+    skos:prefLabel "CMP"@en ;
+    ont:confidence 0.9 ;
+    ont:hasSubprocess <https://w3id.org/sdkb/data/subprocess/cmp_metal>,
+        <https://w3id.org/sdkb/data/subprocess/cmp_oxide>,
+        <https://w3id.org/sdkb/data/subprocess/etchback_planarization> ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/process/deposition> a ont:Process ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:altLabel "증착"@ko ;
+    skos:definition "Thin film formation (CVD/PVD/ALD/epi)."@en ;
+    skos:prefLabel "Deposition"@en ;
+    ont:confidence 0.8,
+        0.9,
+        1.0 ;
+    ont:hasSubprocess <https://w3id.org/sdkb/data/subprocess/ald>,
+        <https://w3id.org/sdkb/data/subprocess/cvd>,
+        <https://w3id.org/sdkb/data/subprocess/epitaxial_growth>,
+        <https://w3id.org/sdkb/data/subprocess/oxidation>,
+        <https://w3id.org/sdkb/data/subprocess/pvd> ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/process/diffusion> a ont:Process ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:definition "Thermal processes for dopant activation and film modification."@en ;
+    skos:prefLabel "Diffusion/Anneal"@en ;
+    ont:confidence 0.9 ;
+    ont:hasSubprocess <https://w3id.org/sdkb/data/subprocess/annealing>,
+        <https://w3id.org/sdkb/data/subprocess/dopant_activation> ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/process/etch> a ont:Process ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:altLabel "식각"@ko ;
+    skos:definition "Material removal using plasma or wet chemistries."@en ;
+    skos:prefLabel "Etch"@en ;
+    ont:confidence 0.7,
+        0.8,
+        1.0 ;
+    ont:hasSubprocess <https://w3id.org/sdkb/data/subprocess/hardmask_etch>,
+        <https://w3id.org/sdkb/data/subprocess/plasma_etch>,
+        <https://w3id.org/sdkb/data/subprocess/wet_etch> ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/process/implant> a ont:Process ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:definition "Dopant implantation using ion beams."@en ;
+    skos:prefLabel "Ion Implantation"@en ;
+    ont:confidence 0.9 ;
+    ont:hasSubprocess <https://w3id.org/sdkb/data/subprocess/in_situ_doping> ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/process/lithography> a ont:Process ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:altLabel "리소그래피"@ko,
+        "포토"@ko ;
+    skos:definition "Pattern transfer using photoresist and exposure (DUV/EUV)."@en ;
+    skos:prefLabel "Lithography"@en ;
+    ont:confidence 0.7,
+        0.9,
+        1.0 ;
+    ont:hasSubprocess <https://w3id.org/sdkb/data/subprocess/duv_lithography>,
+        <https://w3id.org/sdkb/data/subprocess/euv_lithography>,
+        <https://w3id.org/sdkb/data/subprocess/overlay_control>,
+        <https://w3id.org/sdkb/data/subprocess/photoresist_coat_develop> ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/process/metrology> a ont:Process ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:definition "Measurement and inspection for CD/overlay/defects."@en ;
+    skos:prefLabel "Metrology/Inspection"@en ;
+    ont:confidence 0.9 ;
+    ont:hasSubprocess <https://w3id.org/sdkb/data/subprocess/defect_inspection>,
+        <https://w3id.org/sdkb/data/subprocess/electrical_metrology>,
+        <https://w3id.org/sdkb/data/subprocess/physical_metrology> ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/process/substrate_preparation> a ont:Process ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:definition "Wafer manufacturing, polishing and incoming cleaning, before device fabrication."@en ;
+    skos:prefLabel "Substrate Preparation"@en ;
+    ont:confidence 0.9 ;
+    ont:hasSubprocess <https://w3id.org/sdkb/data/subprocess/wafer_manufacturing>,
+        <https://w3id.org/sdkb/data/subprocess/wafer_polishing> ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/rootcause/electrostatic_discharge> a ont:RootCause ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureMode→FailureCause" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "ESD events damaging devices."@en ;
+    skos:prefLabel "Electrostatic Discharge"@en ;
+    ont:confidence 0.9 ;
+    ont:interpretationType "author-defined" ;
+    ont:mitigatedBy <https://w3id.org/sdkb/data/mitigation/esd_protection> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/rootcause/metal_interdiffusion> a ont:RootCause ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureMode→FailureCause" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Metal atoms diffusing across interfaces."@en ;
+    skos:prefLabel "Metal Interdiffusion"@en ;
+    ont:confidence 0.9 ;
+    ont:interpretationType "author-defined" ;
+    ont:mitigatedBy <https://w3id.org/sdkb/data/mitigation/diffusion_barrier> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/rootcause/oxidation> a ont:RootCause ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureMode→FailureCause" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Unwanted oxidation of sensitive materials."@en ;
+    skos:prefLabel "Oxidation"@en ;
+    ont:confidence 0.8 ;
+    ont:interpretationType "author-defined" ;
+    ont:mitigatedBy <https://w3id.org/sdkb/data/mitigation/barrier_layer> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/technode/3nm> a ont:TechnologyNode ;
+    dcterms:bibliographicCitation "IEEE IRDS 2022 Edition; Wikidata" ;
+    dcterms:license "Free with IEEE account (IRDS); CC0 (Wikidata)" ;
+    dcterms:source "irds" ;
+    rdfs:seeAlso <https://irds.ieee.org> ;
+    skos:definition "Example technology node."@en ;
+    skos:prefLabel "3nm"@en ;
+    ont:interpretationType "verbatim" .
+
+<https://w3id.org/sdkb/data/technode/5nm> a ont:TechnologyNode ;
+    dcterms:bibliographicCitation "IEEE IRDS 2022 Edition; Wikidata" ;
+    dcterms:license "Free with IEEE account (IRDS); CC0 (Wikidata)" ;
+    dcterms:source "irds" ;
+    rdfs:seeAlso <https://irds.ieee.org> ;
+    skos:definition "Example technology node."@en ;
+    skos:prefLabel "5nm"@en ;
+    ont:interpretationType "verbatim" .
+
+<https://w3id.org/sdkb/data/technode/7nm> a ont:TechnologyNode ;
+    dcterms:bibliographicCitation "IEEE IRDS 2022 Edition; Wikidata" ;
+    dcterms:license "Free with IEEE account (IRDS); CC0 (Wikidata)" ;
+    dcterms:source "irds" ;
+    rdfs:seeAlso <https://irds.ieee.org> ;
+    skos:definition "Example technology node."@en ;
+    skos:prefLabel "7nm"@en ;
+    ont:interpretationType "verbatim" .
+
+<https://w3id.org/sdkb/data/equipment_class/cd_sem> a ont:EquipmentClass ;
+    dcterms:bibliographicCitation "15 CFR Part 774, Supplement No. 1 to Part 774, Category 3B" ;
+    dcterms:license "Public Domain (U.S. Government Work)" ;
+    dcterms:source "bis_ccl" ;
+    rdfs:seeAlso <https://www.ecfr.gov/current/title-15/subtitle-B/chapter-VII/subchapter-C/part-774> ;
+    skos:altLabel "CDSEM"@en ;
+    skos:definition "Critical dimension SEM metrology."@en ;
+    skos:prefLabel "CD-SEM"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/equipment_class/wetbench> a ont:EquipmentClass ;
+    dcterms:bibliographicCitation "15 CFR Part 774, Supplement No. 1 to Part 774, Category 3B" ;
+    dcterms:license "Public Domain (U.S. Government Work)" ;
+    dcterms:source "bis_ccl" ;
+    rdfs:seeAlso <https://www.ecfr.gov/current/title-15/subtitle-B/chapter-VII/subchapter-C/part-774> ;
+    skos:definition "Wet process/etch/clean benches."@en ;
+    skos:prefLabel "Wet Bench"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/material/amorphous_carbon> a ont:Material ;
+    dcterms:bibliographicCitation "Venugopal et al. 2024, Scientific Data 11:217" ;
+    dcterms:license "CC-BY-4.0" ;
+    dcterms:source "matkg" ;
+    rdfs:seeAlso <https://zenodo.org/records/10144972> ;
+    skos:altLabel "ACL"@en,
+        "a-C"@en,
+        "비정질 탄소"@ko ;
+    skos:definition "a-C hardmask layer."@en ;
+    skos:prefLabel "Amorphous Carbon"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/material/hfO2> a ont:Material ;
+    dcterms:bibliographicCitation "Venugopal et al. 2024, Scientific Data 11:217" ;
+    dcterms:license "CC-BY-4.0" ;
+    dcterms:source "matkg" ;
+    rdfs:seeAlso <https://zenodo.org/records/10144972> ;
+    skos:altLabel "HfO2"@en,
+        "High-k"@en,
+        "하프늄 산화막"@ko ;
+    skos:broader <https://w3id.org/sdkb/data/material/dielectric>,
+        <https://w3id.org/sdkb/data/material/oxide> ;
+    skos:definition "HfO2 high-k dielectric."@en ;
+    skos:prefLabel "Hafnium Oxide"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/material/low_k_dielectric> a ont:Material ;
+    dcterms:bibliographicCitation "Venugopal et al. 2024, Scientific Data 11:217" ;
+    dcterms:license "CC-BY-4.0" ;
+    dcterms:source "matkg" ;
+    rdfs:seeAlso <https://zenodo.org/records/10144972> ;
+    skos:altLabel "Low-k"@en,
+        "저유전율 절연막"@ko ;
+    skos:broader <https://w3id.org/sdkb/data/material/dielectric> ;
+    skos:definition "Low-k ILD material."@en ;
+    skos:prefLabel "Low-k Dielectric"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/material/polysilicon> a ont:Material,
+        ont:Semiconductor ;
+    dcterms:bibliographicCitation "Venugopal et al. 2024, Scientific Data 11:217" ;
+    dcterms:license "CC-BY-4.0" ;
+    dcterms:source "matkg" ;
+    rdfs:seeAlso <https://zenodo.org/records/10144972> ;
+    skos:altLabel "Poly-Si"@en,
+        "폴리실리콘"@ko ;
+    skos:definition "Poly-Si gate electrode material."@en ;
+    skos:prefLabel "Polysilicon"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/material/taC> a ont:Material ;
+    dcterms:bibliographicCitation "Venugopal et al. 2024, Scientific Data 11:217" ;
+    dcterms:license "CC-BY-4.0" ;
+    dcterms:source "matkg" ;
+    rdfs:seeAlso <https://zenodo.org/records/10144972> ;
+    skos:altLabel "TaC"@en,
+        "탄탈륨 카바이드"@ko ;
+    skos:definition "TaC hardmask material."@en ;
+    skos:prefLabel "Tantalum Carbide"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/material/tin> a ont:Material ;
+    dcterms:bibliographicCitation "Venugopal et al. 2024, Scientific Data 11:217" ;
+    dcterms:license "CC-BY-4.0" ;
+    dcterms:source "matkg" ;
+    rdfs:seeAlso <https://zenodo.org/records/10144972> ;
+    skos:altLabel "TiN"@en,
+        "티타늄 질화막"@ko ;
+    skos:definition "TiN barrier metal."@en ;
+    skos:prefLabel "Titanium Nitride"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/metrology/cd_sem> a ont:Metrology ;
+    dcterms:bibliographicCitation "SEMI E10 (equipment performance); IRDS Metrology Chapter" ;
+    dcterms:license "Proprietary (SEMI); Free with IEEE account (IRDS)" ;
+    dcterms:source "semi_standards" ;
+    rdfs:seeAlso <https://irds.ieee.org> ;
+    skos:definition "Measure critical dimension using SEM."@en ;
+    skos:prefLabel "CD-SEM"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/metrology/overlay> a ont:Metrology ;
+    dcterms:bibliographicCitation "SEMI E10 (equipment performance); IRDS Metrology Chapter" ;
+    dcterms:license "Proprietary (SEMI); Free with IEEE account (IRDS)" ;
+    dcterms:source "semi_standards" ;
+    rdfs:seeAlso <https://irds.ieee.org> ;
+    skos:definition "Measure layer-to-layer alignment."@en ;
+    skos:prefLabel "Overlay"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/mitigation/adhesion_promoter> a ont:Mitigation ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureCause→MitigationAction" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Apply adhesion promotion treatment."@en ;
+    skos:prefLabel "Adhesion Promoter"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/mitigation/alignment_optimization> a ont:Mitigation ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureCause→MitigationAction" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Improve alignment accuracy and calibration."@en ;
+    skos:prefLabel "Alignment Optimization"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/mitigation/barrier_layer> a ont:Mitigation ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureCause→MitigationAction" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Add oxidation barrier layer."@en ;
+    skos:prefLabel "Barrier Layer"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/mitigation/diffusion_barrier> a ont:Mitigation ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureCause→MitigationAction" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Insert metal diffusion barrier."@en ;
+    skos:prefLabel "Diffusion Barrier"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/mitigation/equipment_pm> a ont:Mitigation ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureCause→MitigationAction" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Preventive maintenance on equipment."@en ;
+    skos:prefLabel "Equipment PM"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/mitigation/esd_protection> a ont:Mitigation ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureCause→MitigationAction" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Implement ESD protection measures."@en ;
+    skos:prefLabel "ESD Protection"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/mitigation/flow_rate_calibration> a ont:Mitigation ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureCause→MitigationAction" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Calibrate MFC and gas delivery system."@en ;
+    skos:prefLabel "Flow Rate Calibration"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/mitigation/gas_chemistry_change> a ont:Mitigation ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureCause→MitigationAction" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Adjust gas mix/flow to control etch."@en ;
+    skos:prefLabel "Gas Chemistry Change"@en ;
+    ont:confidence 0.7,
+        0.9 ;
+    ont:interpretationType "author-defined" ;
+    ont:requiresSkill <https://w3id.org/sdkb/data/skill/gas_chemistry>,
+        <https://w3id.org/sdkb/data/skill/plasma_diagnostics> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/mitigation/humidity_control> a ont:Mitigation ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureCause→MitigationAction" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Control ambient humidity in cleanroom."@en ;
+    skos:prefLabel "Humidity Control"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/mitigation/leak_check> a ont:Mitigation ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureCause→MitigationAction" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Perform vacuum leak detection and repair."@en ;
+    skos:prefLabel "Leak Check"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/mitigation/mask_review> a ont:Mitigation ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureCause→MitigationAction" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Inspect and repair mask defects."@en ;
+    skos:prefLabel "Mask Review/Repair"@en ;
+    ont:confidence 0.7,
+        0.9 ;
+    ont:interpretationType "author-defined" ;
+    ont:requiresSkill <https://w3id.org/sdkb/data/skill/defect_analysis>,
+        <https://w3id.org/sdkb/data/skill/mask_engineering> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/mitigation/material_qualification> a ont:Mitigation ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureCause→MitigationAction" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Qualify and verify material purity."@en ;
+    skos:prefLabel "Material Qualification"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/mitigation/power_supply_stabilization> a ont:Mitigation ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureCause→MitigationAction" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Stabilize RF power supply and matching network."@en ;
+    skos:prefLabel "Power Supply Stabilization"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/mitigation/precursor_refill> a ont:Mitigation ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureCause→MitigationAction" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Refill deposition precursors."@en ;
+    skos:prefLabel "Precursor Refill"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/mitigation/recipe_tuning> a ont:Mitigation ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureCause→MitigationAction" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Tune process recipe parameters."@en ;
+    skos:prefLabel "Recipe Tuning"@en ;
+    ont:confidence 0.7,
+        0.9 ;
+    ont:interpretationType "author-defined" ;
+    ont:requiresSkill <https://w3id.org/sdkb/data/skill/doe_analysis>,
+        <https://w3id.org/sdkb/data/skill/recipe_tuning> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/mitigation/slurry_refresh> a ont:Mitigation ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureCause→MitigationAction" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Refresh slurry and optimize pad conditioning."@en ;
+    skos:prefLabel "Slurry Refresh"@en ;
+    ont:confidence 0.9 ;
+    ont:interpretationType "author-defined" ;
+    ont:requiresSkill <https://w3id.org/sdkb/data/skill/slurry_management> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/mitigation/stress_relief_anneal> a ont:Mitigation ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureCause→MitigationAction" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Apply annealing to relieve film stress."@en ;
+    skos:prefLabel "Stress Relief Anneal"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/mitigation/temperature_control> a ont:Mitigation ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureCause→MitigationAction" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Improve temperature monitoring and control."@en ;
+    skos:prefLabel "Temperature Control"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/mitigation/thickness_optimization> a ont:Mitigation ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureCause→MitigationAction" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Optimize deposition thickness and uniformity."@en ;
+    skos:prefLabel "Thickness Optimization"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/organization/3m_innovative_properties_company> a ont:Vendor ;
+    dcterms:bibliographicCitation "3M public corporate information" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:definition "CMP consumables and materials"@en ;
+    skos:prefLabel "3M"@en ;
+    ont:interpretationType "verbatim" .
+
+<https://w3id.org/sdkb/data/organization/asm_ip_holding_b_v> a ont:Vendor ;
+    dcterms:bibliographicCitation "ASM International public corporate information" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:definition "ALD and epitaxy equipment"@en ;
+    skos:prefLabel "ASM International"@en ;
+    ont:interpretationType "verbatim" .
+
+<https://w3id.org/sdkb/data/organization/axcelis> a ont:Vendor ;
+    dcterms:bibliographicCitation "Axcelis Technologies public corporate information" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:definition "Ion implantation equipment"@en ;
+    skos:prefLabel "Axcelis Technologies"@en ;
+    ont:interpretationType "verbatim" .
+
+<https://w3id.org/sdkb/data/organization/bruker> a ont:Vendor ;
+    dcterms:bibliographicCitation "Bruker public corporate information" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:definition "Metrology and analytical equipment"@en ;
+    skos:prefLabel "Bruker"@en ;
+    ont:interpretationType "verbatim" .
+
+<https://w3id.org/sdkb/data/organization/cabot> a ont:Vendor ;
+    dcterms:bibliographicCitation "Cabot Microelectronics public corporate information" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:definition "CMP consumables"@en ;
+    skos:prefLabel "Cabot Microelectronics"@en ;
+    ont:interpretationType "verbatim" .
+
+<https://w3id.org/sdkb/data/organization/ebara> a ont:Vendor ;
+    dcterms:bibliographicCitation "Ebara public corporate information" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:definition "CMP equipment"@en ;
+    skos:prefLabel "Ebara"@en ;
+    ont:interpretationType "verbatim" .
+
+<https://w3id.org/sdkb/data/organization/mattson_technology> a ont:Vendor ;
+    dcterms:bibliographicCitation "Mattson Technology public corporate information" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:definition "Thermal processing equipment"@en ;
+    skos:prefLabel "Mattson Technology"@en ;
+    ont:interpretationType "verbatim" .
+
+<https://w3id.org/sdkb/data/organization/screen_holdings> a ont:Vendor ;
+    dcterms:bibliographicCitation "SCREEN Semiconductor Solutions public corporate information" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:definition "Coater/developer equipment"@en ;
+    skos:prefLabel "SCREEN Semiconductor Solutions"@en ;
+    ont:interpretationType "verbatim" .
+
+<https://w3id.org/sdkb/data/parameter/bias_power> a ont:Parameter ;
+    dcterms:bibliographicCitation "IEEE IRDS 2022 Edition, More Moore Chapter; SEMI E10-0814" ;
+    dcterms:license "Free with IEEE account (IRDS); Proprietary (SEMI)" ;
+    dcterms:source "irds" ;
+    rdfs:seeAlso <https://irds.ieee.org> ;
+    skos:definition "Bias power/voltage controlling ion energy."@en ;
+    skos:prefLabel "Bias Power"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/parameter/gas_flow> a ont:Parameter ;
+    dcterms:bibliographicCitation "IEEE IRDS 2022 Edition, More Moore Chapter; SEMI E10-0814" ;
+    dcterms:license "Free with IEEE account (IRDS); Proprietary (SEMI)" ;
+    dcterms:source "irds" ;
+    rdfs:seeAlso <https://irds.ieee.org> ;
+    skos:altLabel "MFC"@en ;
+    skos:definition "Gas flow rates (MFC settings)."@en ;
+    skos:prefLabel "Gas Flow"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/parameter/pressure> a ont:Parameter ;
+    dcterms:bibliographicCitation "IEEE IRDS 2022 Edition, More Moore Chapter; SEMI E10-0814" ;
+    dcterms:license "Free with IEEE account (IRDS); Proprietary (SEMI)" ;
+    dcterms:source "irds" ;
+    rdfs:seeAlso <https://irds.ieee.org> ;
+    skos:definition "Chamber pressure (mTorr/Torr)."@en ;
+    skos:prefLabel "Pressure"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/process/plasma_processing> a ont:Process ;
+    dcterms:bibliographicCitation "CR-007 §3단계 결정 ①" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:definition "Plasma-based processing in general. subprocess:plasma_etch 는 과대특정이라 Process 층에 상위를 세운다."@en ;
+    skos:prefLabel "Plasma Processing"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/rootcause/alignment_error> a ont:RootCause ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureMode→FailureCause" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Wafer or stage alignment inaccuracy."@en ;
+    skos:prefLabel "Alignment Error"@en ;
+    ont:confidence 0.9 ;
+    ont:interpretationType "author-defined" ;
+    ont:mitigatedBy <https://w3id.org/sdkb/data/mitigation/alignment_optimization> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/rootcause/equipment_aging> a ont:RootCause ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureMode→FailureCause" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Equipment component degradation over time."@en ;
+    skos:prefLabel "Equipment Aging"@en ;
+    ont:confidence 0.9 ;
+    ont:interpretationType "author-defined" ;
+    ont:mitigatedBy <https://w3id.org/sdkb/data/mitigation/equipment_pm> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/rootcause/gas_flow_instability> a ont:RootCause ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureMode→FailureCause" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "MFC or gas delivery variation."@en ;
+    skos:prefLabel "Gas Flow Instability"@en ;
+    ont:confidence 0.9 ;
+    ont:interpretationType "author-defined" ;
+    ont:mitigatedBy <https://w3id.org/sdkb/data/mitigation/flow_rate_calibration> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/rootcause/poor_adhesion> a ont:RootCause ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureMode→FailureCause" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Insufficient film-to-substrate bonding."@en ;
+    skos:prefLabel "Poor Adhesion"@en ;
+    ont:confidence 0.9 ;
+    ont:interpretationType "author-defined" ;
+    ont:mitigatedBy <https://w3id.org/sdkb/data/mitigation/adhesion_promoter> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/rootcause/thickness_nonuniformity> a ont:RootCause ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureMode→FailureCause" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Uneven film thickness distribution."@en ;
+    skos:prefLabel "Thickness Nonuniformity"@en ;
+    ont:confidence 0.8 ;
+    ont:interpretationType "author-defined" ;
+    ont:mitigatedBy <https://w3id.org/sdkb/data/mitigation/thickness_optimization> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/rootcause/vacuum_leak> a ont:RootCause ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureMode→FailureCause" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Vacuum system integrity compromised."@en ;
+    skos:prefLabel "Vacuum Leak"@en ;
+    ont:confidence 1.0 ;
+    ont:interpretationType "author-defined" ;
+    ont:mitigatedBy <https://w3id.org/sdkb/data/mitigation/leak_check> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/skill/chamber_conditioning> a ont:Skill ;
+    dcterms:bibliographicCitation "Author-defined based on semiconductor manufacturing job competency frameworks" ;
+    dcterms:license "N/A" ;
+    dcterms:source "author" ;
+    skos:altLabel "Seasoning"@en,
+        "챔버 컨디셔닝"@ko ;
+    skos:definition "챔버 컨디셔닝 및 시즈닝 역량."@en ;
+    skos:prefLabel "Chamber Conditioning"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/skill/defect_analysis> a ont:Skill ;
+    dcterms:bibliographicCitation "Author-defined based on semiconductor manufacturing job competency frameworks" ;
+    dcterms:license "N/A" ;
+    dcterms:source "author" ;
+    skos:altLabel "FA"@en,
+        "결함 분석"@ko ;
+    skos:definition "결함 분석 및 근본 원인 추적 역량."@en ;
+    skos:prefLabel "Defect Analysis"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/skill/doe_analysis> a ont:Skill ;
+    dcterms:bibliographicCitation "Author-defined based on semiconductor manufacturing job competency frameworks" ;
+    dcterms:license "N/A" ;
+    dcterms:source "author" ;
+    skos:altLabel "DOE"@en,
+        "실험계획법"@ko ;
+    skos:definition "실험계획법(DOE) 설계 및 분석 역량."@en ;
+    skos:prefLabel "DOE Analysis"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/skill/mask_engineering> a ont:Skill ;
+    dcterms:bibliographicCitation "Author-defined based on semiconductor manufacturing job competency frameworks" ;
+    dcterms:license "N/A" ;
+    dcterms:source "author" ;
+    skos:altLabel "마스크 엔지니어링"@ko ;
+    skos:definition "마스크 설계, 검사, 수리 역량."@en ;
+    skos:prefLabel "Mask Engineering"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/skill/metrology_analysis> a ont:Skill ;
+    dcterms:bibliographicCitation "Author-defined based on semiconductor manufacturing job competency frameworks" ;
+    dcterms:license "N/A" ;
+    dcterms:source "author" ;
+    skos:altLabel "계측 분석"@ko ;
+    skos:definition "계측 데이터 분석 및 해석 역량."@en ;
+    skos:prefLabel "Metrology Analysis"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/skill/recipe_tuning> a ont:Skill ;
+    dcterms:bibliographicCitation "Author-defined based on semiconductor manufacturing job competency frameworks" ;
+    dcterms:license "N/A" ;
+    dcterms:source "author" ;
+    skos:altLabel "Recipe Optimization"@en,
+        "레시피 튜닝"@ko ;
+    skos:definition "공정 레시피 파라미터 최적화 역량."@en ;
+    skos:prefLabel "Recipe Tuning"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/subprocess/advanced_cleaning> a ont:SubProcess ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:definition "Supercritical CO2 and cryogenic cleaning."@en ;
+    skos:prefLabel "Advanced Cleaning"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/subprocess/advanced_packaging> a ont:SubProcess ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:definition "TSV, wafer-level packaging, 3D integration."@en ;
+    skos:prefLabel "Advanced Packaging"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/subprocess/annealing> a ont:SubProcess ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:definition "Furnace, rapid thermal and laser annealing."@en ;
+    skos:prefLabel "Annealing"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/subprocess/defect_inspection> a ont:SubProcess ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:definition "Optical, e-beam and wafer inspection."@en ;
+    skos:prefLabel "Defect Inspection"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/subprocess/dicing> a ont:SubProcess ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:definition "Mechanical, laser and plasma dicing."@en ;
+    skos:prefLabel "Dicing"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/subprocess/dopant_activation> a ont:SubProcess ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:definition "Spike and flash annealing for dopant activation."@en ;
+    skos:prefLabel "Dopant Activation"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/subprocess/dry_cleaning> a ont:SubProcess ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:definition "Plasma and UV-ozone cleaning."@en ;
+    skos:prefLabel "Dry Cleaning"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/subprocess/electrical_metrology> a ont:SubProcess ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:definition "Sheet resistance and C-V measurement."@en ;
+    skos:prefLabel "Electrical Metrology"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/subprocess/epitaxial_growth> a ont:SubProcess ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:definition "Silicon and compound-semiconductor epitaxy."@en ;
+    skos:prefLabel "Epitaxial Growth"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/subprocess/etchback_planarization> a ont:SubProcess ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:definition "Planarisation by resist or sacrificial-layer etchback."@en ;
+    skos:prefLabel "Etchback Planarization"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/subprocess/hardmask_etch> a ont:SubProcess ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:definition "Etch of hardmask layers (SiN/SiO2/SiC etc.)."@en ;
+    skos:prefLabel "Hardmask Etch"@en ;
+    ont:confidence 0.8 ;
+    ont:interpretationType "author-defined" ;
+    ont:usesMaterial <https://w3id.org/sdkb/data/material/amorphous_carbon>,
+        <https://w3id.org/sdkb/data/material/taC> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/subprocess/high_k_metal_gate> a ont:SubProcess ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:definition "Gate dielectric and metal gate formation."@en ;
+    skos:prefLabel "High-k/Metal Gate"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/subprocess/in_situ_doping> a ont:SubProcess ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:definition "Dopant incorporation during epitaxy or deposition."@en ;
+    skos:prefLabel "In-situ Doping"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/subprocess/interconnect_patterning> a ont:SubProcess ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:definition "Damascene and dual-damascene patterning."@en ;
+    skos:prefLabel "Interconnect Patterning"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/subprocess/metallization> a ont:SubProcess ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:definition "PVD, CVD, electroplating and sputtering of interconnect metal."@en ;
+    skos:prefLabel "Metallization"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/subprocess/multilayer_interconnect> a ont:SubProcess ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:definition "Interlayer dielectric and metal layers, with CMP."@en ;
+    skos:prefLabel "Multilayer Interconnect"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/subprocess/overlay_control> a ont:SubProcess ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:definition "Overlay measurement and correction (alignment, APC)."@en ;
+    skos:prefLabel "Overlay Control"@en ;
+    ont:confidence 0.9 ;
+    ont:interpretationType "author-defined" ;
+    ont:measuredBy <https://w3id.org/sdkb/data/metrology/overlay> ;
+    ont:requiresSkill <https://w3id.org/sdkb/data/skill/overlay_optimization> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/subprocess/oxidation> a ont:SubProcess ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:definition "Growth of oxide films (thermal, plasma-enhanced, high/low pressure, anodic). Table 7 lists oxidation twice (2.1 and 7.2 Thermal Oxidation); modelled once."@en ;
+    skos:prefLabel "Oxidation"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/subprocess/packaging> a ont:SubProcess ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:definition "Die attach, wire bonding, flip-chip bonding, encapsulation."@en ;
+    skos:prefLabel "Packaging"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/subprocess/passivation> a ont:SubProcess ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:definition "Silicon nitride deposition, polyimide coating."@en ;
+    skos:prefLabel "Passivation"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/subprocess/physical_metrology> a ont:SubProcess ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:definition "Profilometry, ellipsometry, X-ray reflectometry."@en ;
+    skos:prefLabel "Physical Metrology"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/subprocess/strain_engineering> a ont:SubProcess ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:definition "Strained silicon and SiGe channels."@en ;
+    skos:prefLabel "Strain Engineering"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/subprocess/three_d_structures> a ont:SubProcess ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:definition "FinFET formation and gate-all-around structures."@en ;
+    skos:prefLabel "3D Structures"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/subprocess/wafer_manufacturing> a ont:SubProcess ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:definition "Crystal growth, wafer slicing, edge rounding."@en ;
+    skos:prefLabel "Wafer Manufacturing"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/subprocess/wafer_polishing> a ont:SubProcess ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:definition "Lapping and polishing of the incoming wafer."@en ;
+    skos:prefLabel "Wafer Polishing"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/subprocess/wafer_testing> a ont:SubProcess ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:definition "Parametric and functional test at wafer level."@en ;
+    skos:prefLabel "Wafer Testing"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/subprocess/wafer_thinning> a ont:SubProcess ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:definition "Backside grinding and chemical etching."@en ;
+    skos:prefLabel "Wafer Thinning"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/subprocess/wet_cleaning> a ont:SubProcess ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A (Table 7)" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:definition "RCA clean, piranha clean, HF dip."@en ;
+    skos:prefLabel "Wet Cleaning"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/equipment_class/implanter> a ont:EquipmentClass ;
+    dcterms:bibliographicCitation "15 CFR Part 774, Supplement No. 1 to Part 774, Category 3B" ;
+    dcterms:license "Public Domain (U.S. Government Work)" ;
+    dcterms:source "bis_ccl" ;
+    rdfs:seeAlso <https://www.ecfr.gov/current/title-15/subtitle-B/chapter-VII/subchapter-C/part-774> ;
+    skos:definition "Ion implantation systems"@en ;
+    skos:prefLabel "Ion Implanter"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/equipment_class/overlay_metrology> a ont:EquipmentClass ;
+    dcterms:bibliographicCitation "15 CFR Part 774, Supplement No. 1 to Part 774, Category 3B" ;
+    dcterms:license "Public Domain (U.S. Government Work)" ;
+    dcterms:source "bis_ccl" ;
+    rdfs:seeAlso <https://www.ecfr.gov/current/title-15/subtitle-B/chapter-VII/subchapter-C/part-774> ;
+    skos:definition "Overlay measurement tools."@en ;
+    skos:prefLabel "Overlay Metrology"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/equipment_class/process_chamber> a ont:EquipmentClass ;
+    dcterms:bibliographicCitation "CR-007 §3단계 결정 ①" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:definition "Generic process chamber. Equipment 축의 41 노드는 전부 모델·부품 단위라 일반 개념은 EquipmentClass 층에 둔다."@en ;
+    skos:prefLabel "Process Chamber"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/material/aluminum> a ont:Material ;
+    dcterms:bibliographicCitation "Venugopal et al. 2024, Scientific Data 11:217" ;
+    dcterms:license "CC-BY-4.0" ;
+    dcterms:source "matkg" ;
+    rdfs:seeAlso <https://zenodo.org/records/10144972> ;
+    skos:altLabel "Al"@en,
+        "알루미늄"@ko ;
+    skos:definition "Al metallization."@en ;
+    skos:prefLabel "Aluminum"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/material/barc> a ont:Material ;
+    dcterms:bibliographicCitation "Venugopal et al. 2024, Scientific Data 11:217" ;
+    dcterms:license "CC-BY-4.0" ;
+    dcterms:source "matkg" ;
+    rdfs:seeAlso <https://zenodo.org/records/10144972> ;
+    skos:altLabel "BARC"@en,
+        "반사방지막"@ko ;
+    skos:definition "BARC layer for lithography."@en ;
+    skos:prefLabel "Bottom Anti-Reflective Coating"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/material/cmp_slurry> a ont:Material ;
+    dcterms:bibliographicCitation "CR-007 §3단계 결정 ①" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:definition "CMP slurry superclass of cmp_slurry_cu · cmp_slurry_oxide."@en ;
+    skos:prefLabel "CMP Slurry"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/material/cmp_slurry_cu> a ont:Material ;
+    dcterms:bibliographicCitation "Venugopal et al. 2024, Scientific Data 11:217" ;
+    dcterms:license "CC-BY-4.0" ;
+    dcterms:source "matkg" ;
+    rdfs:seeAlso <https://zenodo.org/records/10144972> ;
+    skos:altLabel "Cu Slurry"@en,
+        "구리 슬러리"@ko ;
+    skos:broader <https://w3id.org/sdkb/data/material/cmp_slurry> ;
+    skos:definition "Slurry for copper CMP."@en ;
+    skos:prefLabel "Cu CMP Slurry"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/material/cmp_slurry_oxide> a ont:Material ;
+    dcterms:bibliographicCitation "Venugopal et al. 2024, Scientific Data 11:217" ;
+    dcterms:license "CC-BY-4.0" ;
+    dcterms:source "matkg" ;
+    rdfs:seeAlso <https://zenodo.org/records/10144972> ;
+    skos:altLabel "산화막 슬러리"@ko ;
+    skos:broader <https://w3id.org/sdkb/data/material/cmp_slurry> ;
+    skos:definition "Slurry for oxide CMP."@en ;
+    skos:prefLabel "Oxide CMP Slurry"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/material/cobalt> a ont:Material ;
+    dcterms:bibliographicCitation "Venugopal et al. 2024, Scientific Data 11:217" ;
+    dcterms:license "CC-BY-4.0" ;
+    dcterms:source "matkg" ;
+    rdfs:seeAlso <https://zenodo.org/records/10144972> ;
+    skos:altLabel "Co"@en,
+        "코발트"@ko ;
+    skos:definition "Co liner/barrier for advanced nodes."@en ;
+    skos:prefLabel "Cobalt"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/material/hf_acid> a ont:Material ;
+    dcterms:bibliographicCitation "Venugopal et al. 2024, Scientific Data 11:217" ;
+    dcterms:license "CC-BY-4.0" ;
+    dcterms:source "matkg" ;
+    rdfs:seeAlso <https://zenodo.org/records/10144972> ;
+    skos:altLabel "HF"@en,
+        "불산"@ko ;
+    skos:definition "HF wet etch chemistry."@en ;
+    skos:prefLabel "Hydrofluoric Acid"@en ;
+    ont:confidence 1.0 ;
+    ont:incompatibleWith <https://w3id.org/sdkb/data/material/aluminum> ;
+    ont:interpretationType "mapped" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/material/photomask> a ont:Material ;
+    dcterms:bibliographicCitation "CR-007 §3단계 결정 ①" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:definition "Photomask / reticle. Device 34 노드는 전부 반도체 소자라 마스크 자리가 없다."@en ;
+    skos:prefLabel "Photomask"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/material/teOs> a ont:Material ;
+    dcterms:bibliographicCitation "Venugopal et al. 2024, Scientific Data 11:217" ;
+    dcterms:license "CC-BY-4.0" ;
+    dcterms:source "matkg" ;
+    rdfs:seeAlso <https://zenodo.org/records/10144972> ;
+    skos:altLabel "TEOS"@en,
+        "테오스 산화막"@ko ;
+    skos:broader <https://w3id.org/sdkb/data/material/oxide> ;
+    skos:definition "TEOS CVD oxide."@en ;
+    skos:prefLabel "TEOS Oxide"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/material/tungsten> a ont:Material ;
+    dcterms:bibliographicCitation "Venugopal et al. 2024, Scientific Data 11:217" ;
+    dcterms:license "CC-BY-4.0" ;
+    dcterms:source "matkg" ;
+    rdfs:seeAlso <https://zenodo.org/records/10144972> ;
+    skos:altLabel "W"@en,
+        "텅스텐"@ko ;
+    skos:definition "W contact/via fill metal."@en ;
+    skos:prefLabel "Tungsten"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/mitigation/chamber_clean> a ont:Mitigation ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureCause→MitigationAction" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Clean/condition chamber to stabilize process."@en ;
+    skos:prefLabel "Chamber Clean/Conditioning"@en ;
+    ont:confidence 0.9 ;
+    ont:interpretationType "author-defined" ;
+    ont:requiresSkill <https://w3id.org/sdkb/data/skill/chamber_conditioning> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/organization/hitachi_high_tech> a ont:Vendor ;
+    dcterms:bibliographicCitation "Hitachi High-Tech public corporate information" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:definition "Etch and metrology equipment"@en ;
+    skos:prefLabel "Hitachi High-Tech"@en ;
+    ont:interpretationType "verbatim" .
+
+<https://w3id.org/sdkb/data/parameter/rf_power> a ont:Parameter ;
+    dcterms:bibliographicCitation "IEEE IRDS 2022 Edition, More Moore Chapter; SEMI E10-0814" ;
+    dcterms:license "Free with IEEE account (IRDS); Proprietary (SEMI)" ;
+    dcterms:source "irds" ;
+    rdfs:seeAlso <https://irds.ieee.org> ;
+    skos:definition "RF power applied to plasma."@en ;
+    skos:prefLabel "RF Power"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/rootcause/humidity_variation> a ont:RootCause ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureMode→FailureCause" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Ambient humidity affecting process."@en ;
+    skos:prefLabel "Humidity Variation"@en ;
+    ont:confidence 0.9 ;
+    ont:interpretationType "author-defined" ;
+    ont:mitigatedBy <https://w3id.org/sdkb/data/mitigation/humidity_control> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/rootcause/mask_defect> a ont:RootCause ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureMode→FailureCause" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Mask-related defect or roughness."@en ;
+    skos:prefLabel "Mask Defect"@en ;
+    ont:confidence 0.8 ;
+    ont:interpretationType "author-defined" ;
+    ont:mitigatedBy <https://w3id.org/sdkb/data/mitigation/mask_review> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/rootcause/rf_power_variation> a ont:RootCause ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureMode→FailureCause" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Unstable RF power affecting plasma uniformity."@en ;
+    skos:prefLabel "RF Power Variation"@en ;
+    ont:confidence 0.9 ;
+    ont:interpretationType "author-defined" ;
+    ont:mitigatedBy <https://w3id.org/sdkb/data/mitigation/power_supply_stabilization> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/rootcause/slurry_instability> a ont:RootCause ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureMode→FailureCause" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "CMP slurry aging/instability affecting rate/defects."@en ;
+    skos:prefLabel "Slurry Instability"@en ;
+    ont:confidence 0.8 ;
+    ont:interpretationType "author-defined" ;
+    ont:mitigatedBy <https://w3id.org/sdkb/data/mitigation/slurry_refresh> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/skill/endpoint_detection> a ont:Skill ;
+    dcterms:bibliographicCitation "Author-defined based on semiconductor manufacturing job competency frameworks" ;
+    dcterms:license "N/A" ;
+    dcterms:source "author" ;
+    skos:altLabel "EPD"@en,
+        "종점 검출"@ko ;
+    skos:definition "공정 종점 검출 및 제어 역량."@en ;
+    skos:prefLabel "Endpoint Detection"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/skill/film_stress_control> a ont:Skill ;
+    dcterms:bibliographicCitation "Author-defined based on semiconductor manufacturing job competency frameworks" ;
+    dcterms:license "N/A" ;
+    dcterms:source "author" ;
+    skos:definition "박막 스트레스 제어 및 최적화 역량."@en ;
+    skos:prefLabel "Film Stress Control"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/skill/gas_chemistry> a ont:Skill ;
+    dcterms:bibliographicCitation "Author-defined based on semiconductor manufacturing job competency frameworks" ;
+    dcterms:license "N/A" ;
+    dcterms:source "author" ;
+    skos:altLabel "가스 케미스트리"@ko ;
+    skos:definition "가스 화학 및 플라즈마 케미스트리 역량."@en ;
+    skos:prefLabel "Gas Chemistry"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/skill/overlay_optimization> a ont:Skill ;
+    dcterms:bibliographicCitation "Author-defined based on semiconductor manufacturing job competency frameworks" ;
+    dcterms:license "N/A" ;
+    dcterms:source "author" ;
+    skos:altLabel "APC"@en,
+        "오버레이 최적화"@ko ;
+    skos:definition "오버레이 제어 및 APC 최적화 역량."@en ;
+    skos:prefLabel "Overlay Optimization"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/skill/plasma_diagnostics> a ont:Skill ;
+    dcterms:bibliographicCitation "Author-defined based on semiconductor manufacturing job competency frameworks" ;
+    dcterms:license "N/A" ;
+    dcterms:source "author" ;
+    skos:altLabel "플라즈마 진단"@ko ;
+    skos:definition "플라즈마 진단 및 특성 분석 역량."@en ;
+    skos:prefLabel "Plasma Diagnostics"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/skill/slurry_management> a ont:Skill ;
+    dcterms:bibliographicCitation "Author-defined based on semiconductor manufacturing job competency frameworks" ;
+    dcterms:license "N/A" ;
+    dcterms:source "author" ;
+    skos:altLabel "슬러리 관리"@ko ;
+    skos:definition "CMP 슬러리/패드 관리 및 최적화 역량."@en ;
+    skos:prefLabel "Slurry Management"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/equipment_class/defect_inspection> a ont:EquipmentClass ;
+    dcterms:bibliographicCitation "15 CFR Part 774, Supplement No. 1 to Part 774, Category 3B" ;
+    dcterms:license "Public Domain (U.S. Government Work)" ;
+    dcterms:source "bis_ccl" ;
+    rdfs:seeAlso <https://www.ecfr.gov/current/title-15/subtitle-B/chapter-VII/subchapter-C/part-774> ;
+    skos:definition "Optical/e-beam inspection."@en ;
+    skos:prefLabel "Defect Inspection"@en ;
+    ont:confidence 0.7 ;
+    ont:interpretationType "mapped" ;
+    ont:madeBy <https://w3id.org/sdkb/data/organization/kla> .
+
+<https://w3id.org/sdkb/data/material/oxide> a ont:Material ;
+    dcterms:bibliographicCitation "CR-007 §3단계 결정 ①" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:definition "Oxide material superclass of sio2 · teOs · hfO2."@en ;
+    skos:prefLabel "Oxide Material"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/material/sin> a ont:Material ;
+    dcterms:bibliographicCitation "Venugopal et al. 2024, Scientific Data 11:217" ;
+    dcterms:license "CC-BY-4.0" ;
+    dcterms:source "matkg" ;
+    rdfs:seeAlso <https://zenodo.org/records/10144972> ;
+    skos:altLabel "Nitride"@en,
+        "실리콘 질화막"@ko,
+        "질화막"@ko ;
+    skos:broader <https://w3id.org/sdkb/data/material/dielectric> ;
+    skos:definition "SiN hardmask/spacer material."@en ;
+    skos:prefLabel "Silicon Nitride"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/material/sio2> a ont:Material ;
+    dcterms:bibliographicCitation "Venugopal et al. 2024, Scientific Data 11:217" ;
+    dcterms:license "CC-BY-4.0" ;
+    dcterms:source "matkg" ;
+    rdfs:seeAlso <https://zenodo.org/records/10144972> ;
+    skos:altLabel "Oxide"@en,
+        "산화막"@ko,
+        "실리콘 산화막"@ko ;
+    skos:broader <https://w3id.org/sdkb/data/material/dielectric>,
+        <https://w3id.org/sdkb/data/material/oxide> ;
+    skos:definition "SiO2 dielectric material."@en ;
+    skos:prefLabel "Silicon Dioxide"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/organization/asml> a ont:Vendor ;
+    dcterms:bibliographicCitation "ASML public corporate information" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:altLabel "에이에스엠엘"@ko ;
+    skos:definition "Lithography tool vendor."@en ;
+    skos:prefLabel "ASML"@en ;
+    ont:interpretationType "verbatim" .
+
+<https://w3id.org/sdkb/data/organization/kla> a ont:Vendor ;
+    dcterms:bibliographicCitation "KLA public corporate information" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:definition "Inspection and metrology vendor."@en ;
+    skos:prefLabel "KLA"@en ;
+    ont:interpretationType "verbatim" .
+
+<https://w3id.org/sdkb/data/rootcause/charging> a ont:RootCause ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureMode→FailureCause" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Charge build-up causing profile/defect issues."@en ;
+    skos:prefLabel "Charging"@en ;
+    ont:confidence 0.8 ;
+    ont:interpretationType "author-defined" ;
+    ont:mitigatedBy <https://w3id.org/sdkb/data/mitigation/recipe_tuning> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/rootcause/material_contamination> a ont:RootCause ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureMode→FailureCause" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Impurities in process materials."@en ;
+    skos:prefLabel "Material Contamination"@en ;
+    ont:confidence 0.8 ;
+    ont:interpretationType "author-defined" ;
+    ont:mitigatedBy <https://w3id.org/sdkb/data/mitigation/material_qualification> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/rootcause/particle_contamination> a ont:RootCause ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureMode→FailureCause" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Particle source from tool/material/environment."@en ;
+    skos:prefLabel "Particle Contamination"@en ;
+    ont:confidence 0.7 ;
+    ont:interpretationType "author-defined" ;
+    ont:mitigatedBy <https://w3id.org/sdkb/data/mitigation/chamber_clean> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/rootcause/polymer_buildup> a ont:RootCause ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureMode→FailureCause" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Polymer deposition affecting etch profile."@en ;
+    skos:prefLabel "Polymer Build-up"@en ;
+    ont:confidence 0.6,
+        0.9 ;
+    ont:interpretationType "author-defined" ;
+    ont:mitigatedBy <https://w3id.org/sdkb/data/mitigation/chamber_clean>,
+        <https://w3id.org/sdkb/data/mitigation/gas_chemistry_change> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/rootcause/precursor_depletion> a ont:RootCause ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureMode→FailureCause" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Deposition precursor running low."@en ;
+    skos:prefLabel "Precursor Depletion"@en ;
+    ont:confidence 1.0 ;
+    ont:interpretationType "author-defined" ;
+    ont:mitigatedBy <https://w3id.org/sdkb/data/mitigation/precursor_refill> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/rootcause/stress_mismatch> a ont:RootCause ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureMode→FailureCause" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Film stress incompatibility causing defects."@en ;
+    skos:prefLabel "Stress Mismatch"@en ;
+    ont:confidence 0.8 ;
+    ont:interpretationType "author-defined" ;
+    ont:mitigatedBy <https://w3id.org/sdkb/data/mitigation/stress_relief_anneal> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/subprocess/cmp_metal> a ont:SubProcess ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:definition "Planarization of metal films (Cu/W/Co etc.)."@en ;
+    skos:prefLabel "Metal CMP"@en ;
+    ont:confidence 0.6,
+        0.7,
+        0.8,
+        0.9,
+        1.0 ;
+    ont:interpretationType "author-defined" ;
+    ont:notAllowedWith <https://w3id.org/sdkb/data/material/cmp_slurry_oxide> ;
+    ont:requiresSkill <https://w3id.org/sdkb/data/skill/endpoint_detection>,
+        <https://w3id.org/sdkb/data/skill/slurry_management> ;
+    ont:usesEquipmentClass <https://w3id.org/sdkb/data/equipment_class/cmp_tool> ;
+    ont:usesMaterial <https://w3id.org/sdkb/data/material/cmp_slurry_cu>,
+        <https://w3id.org/sdkb/data/material/cobalt>,
+        <https://w3id.org/sdkb/data/material/copper>,
+        <https://w3id.org/sdkb/data/material/tungsten> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/subprocess/cmp_oxide> a ont:SubProcess ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:definition "Planarization of oxide films."@en ;
+    skos:prefLabel "Oxide CMP"@en ;
+    ont:confidence 0.6,
+        0.9,
+        1.0 ;
+    ont:interpretationType "author-defined" ;
+    ont:notAllowedWith <https://w3id.org/sdkb/data/material/cmp_slurry_cu> ;
+    ont:usesEquipmentClass <https://w3id.org/sdkb/data/equipment_class/cmp_tool> ;
+    ont:usesMaterial <https://w3id.org/sdkb/data/material/cmp_slurry_oxide>,
+        <https://w3id.org/sdkb/data/material/low_k_dielectric>,
+        <https://w3id.org/sdkb/data/material/sio2>,
+        <https://w3id.org/sdkb/data/material/teOs> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/subprocess/duv_lithography> a ont:SubProcess ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:altLabel "ArF"@en,
+        "DUV"@en,
+        "KrF"@en ;
+    skos:definition "Deep ultraviolet exposure (ArF/KrF/i-line)."@en ;
+    skos:prefLabel "DUV Lithography"@en ;
+    ont:confidence 0.8,
+        1.0 ;
+    ont:interpretationType "mapped" ;
+    ont:notAllowedWith <https://w3id.org/sdkb/data/material/photoresist_euv> ;
+    ont:usesEquipmentClass <https://w3id.org/sdkb/data/equipment_class/scanner> ;
+    ont:usesMaterial <https://w3id.org/sdkb/data/material/barc>,
+        <https://w3id.org/sdkb/data/material/photoresist_arF> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/subprocess/pvd> a ont:SubProcess ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:altLabel "물리 기상 증착"@ko,
+        "물리 기상 퇴적"@ko,
+        "물리기상증착"@ko,
+        "물리기상퇴적"@ko,
+        "스퍼터"@ko,
+        "스퍼터링"@ko ;
+    skos:definition "Physical vapor deposition (sputter)."@en ;
+    skos:prefLabel "PVD"@en ;
+    ont:confidence 0.7,
+        0.8,
+        0.9,
+        1.0 ;
+    ont:incompatibleWith <https://w3id.org/sdkb/data/material/photoresist_euv> ;
+    ont:interpretationType "mapped" ;
+    ont:usesEquipmentClass <https://w3id.org/sdkb/data/equipment_class/deposition_tool> ;
+    ont:usesMaterial <https://w3id.org/sdkb/data/material/aluminum>,
+        <https://w3id.org/sdkb/data/material/cobalt>,
+        <https://w3id.org/sdkb/data/material/copper>,
+        <https://w3id.org/sdkb/data/material/tungsten> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/equipment_class/scanner> a ont:EquipmentClass ;
+    dcterms:bibliographicCitation "15 CFR Part 774, Supplement No. 1 to Part 774, Category 3B" ;
+    dcterms:license "Public Domain (U.S. Government Work)" ;
+    dcterms:source "bis_ccl" ;
+    rdfs:seeAlso <https://www.ecfr.gov/current/title-15/subtitle-B/chapter-VII/subchapter-C/part-774> ;
+    skos:definition "Exposure tool (DUV/EUV)."@en ;
+    skos:prefLabel "Lithography Scanner"@en ;
+    ont:confidence 0.8,
+        1.0 ;
+    ont:incompatibleWith <https://w3id.org/sdkb/data/material/copper> ;
+    ont:interpretationType "mapped" ;
+    ont:madeBy <https://w3id.org/sdkb/data/organization/asml> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/equipment_class/track> a ont:EquipmentClass ;
+    dcterms:bibliographicCitation "15 CFR Part 774, Supplement No. 1 to Part 774, Category 3B" ;
+    dcterms:license "Public Domain (U.S. Government Work)" ;
+    dcterms:source "bis_ccl" ;
+    rdfs:seeAlso <https://www.ecfr.gov/current/title-15/subtitle-B/chapter-VII/subchapter-C/part-774> ;
+    skos:definition "Resist coat/develop track."@en ;
+    skos:prefLabel "Coater/Developer Track"@en ;
+    ont:confidence 0.7 ;
+    ont:interpretationType "mapped" ;
+    ont:madeBy <https://w3id.org/sdkb/data/organization/tokyo_electron_limited> .
+
+<https://w3id.org/sdkb/data/material/dielectric> a ont:Material ;
+    dcterms:bibliographicCitation "CR-007 §3단계 결정 ①" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:definition "Dielectric material superclass of sio2 · sin · low_k_dielectric · hfO2."@en ;
+    skos:prefLabel "Dielectric Material"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/material/photoresist_arF> a ont:Material ;
+    dcterms:bibliographicCitation "Venugopal et al. 2024, Scientific Data 11:217" ;
+    dcterms:license "CC-BY-4.0" ;
+    dcterms:source "matkg" ;
+    rdfs:seeAlso <https://zenodo.org/records/10144972> ;
+    skos:altLabel "193nm PR"@en,
+        "ArF 포토레지스트"@ko ;
+    skos:definition "193nm ArF photoresist."@en ;
+    skos:prefLabel "ArF Photoresist"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/material/process_gas> a ont:Material ;
+    dcterms:bibliographicCitation "CR-007 §3단계 결정 ①" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:definition "Generic process gas consumed in etch/deposition. 소모재는 Material 축 (hf_acid·barc 선례)."@en ;
+    skos:prefLabel "Process Gas"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/organization/lam_research> a ont:Vendor ;
+    dcterms:bibliographicCitation "Lam Research public corporate information" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:altLabel "LAM"@en ;
+    skos:definition "Etch and deposition vendor."@en ;
+    skos:prefLabel "Lam Research"@en ;
+    ont:interpretationType "verbatim" .
+
+<https://w3id.org/sdkb/data/rootcause/temperature_drift> a ont:RootCause ;
+    dcterms:bibliographicCitation "Bahr et al. 2025, J. Industrial Information Integration; FMEA triple: FailureMode→FailureCause" ;
+    dcterms:license "MIT (framework); semiconductor data author-defined" ;
+    dcterms:source "fmea_framework" ;
+    rdfs:seeAlso <https://github.com/lukasbahr/kg-rag-fmea> ;
+    skos:definition "Process temperature variation or instability."@en ;
+    skos:prefLabel "Temperature Drift"@en ;
+    ont:confidence 0.9 ;
+    ont:interpretationType "author-defined" ;
+    ont:mitigatedBy <https://w3id.org/sdkb/data/mitigation/temperature_control> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/subprocess/ald> a ont:SubProcess ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:altLabel "원자층 증착"@ko,
+        "원자층 퇴적"@ko,
+        "원자층증착"@ko,
+        "원자층퇴적"@ko ;
+    skos:definition "Atomic layer deposition for conformal ultra-thin films."@en ;
+    skos:prefLabel "ALD"@en ;
+    ont:confidence 0.7,
+        0.9,
+        1.0 ;
+    ont:incompatibleWith <https://w3id.org/sdkb/data/material/copper> ;
+    ont:interpretationType "mapped" ;
+    ont:notAllowedWith <https://w3id.org/sdkb/data/material/photoresist_arF> ;
+    ont:requiresSkill <https://w3id.org/sdkb/data/skill/film_stress_control> ;
+    ont:usesEquipmentClass <https://w3id.org/sdkb/data/equipment_class/deposition_tool> ;
+    ont:usesMaterial <https://w3id.org/sdkb/data/material/hfO2>,
+        <https://w3id.org/sdkb/data/material/tin> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/subprocess/photoresist_coat_develop> a ont:SubProcess ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:definition "Photoresist coating, bake, develop track steps."@en ;
+    skos:prefLabel "Coat/Develop"@en ;
+    ont:confidence 0.5,
+        1.0 ;
+    ont:interpretationType "mapped" ;
+    ont:usesEquipmentClass <https://w3id.org/sdkb/data/equipment_class/track> ;
+    ont:usesMaterial <https://w3id.org/sdkb/data/material/photoresist_arF>,
+        <https://w3id.org/sdkb/data/material/photoresist_euv> .
+
+<https://w3id.org/sdkb/data/subprocess/wet_etch> a ont:SubProcess ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:altLabel "습식 식각"@ko,
+        "습식식각"@ko ;
+    skos:definition "Etch using liquid chemistries."@en ;
+    skos:prefLabel "Wet Etch"@en ;
+    ont:confidence 0.9,
+        1.0 ;
+    ont:interpretationType "mapped" ;
+    ont:notAllowedWith <https://w3id.org/sdkb/data/parameter/rf_power> ;
+    ont:usesEquipmentClass <https://w3id.org/sdkb/data/equipment_class/wetbench> ;
+    ont:usesMaterial <https://w3id.org/sdkb/data/material/hf_acid> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/material/copper> a ont:Material ;
+    dcterms:bibliographicCitation "Venugopal et al. 2024, Scientific Data 11:217" ;
+    dcterms:license "CC-BY-4.0" ;
+    dcterms:source "matkg" ;
+    rdfs:seeAlso <https://zenodo.org/records/10144972> ;
+    skos:altLabel "Cu"@en,
+        "구리"@ko ;
+    skos:definition "Cu interconnect metal."@en ;
+    skos:prefLabel "Copper"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/organization/tokyo_electron_limited> a ont:Vendor ;
+    dcterms:bibliographicCitation "Tokyo Electron public corporate information" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:altLabel "TEL"@en ;
+    skos:definition "Coat/develop, etch, deposition vendor."@en ;
+    skos:prefLabel "Tokyo Electron"@en ;
+    ont:interpretationType "verbatim" .
+
+<https://w3id.org/sdkb/data/subprocess/euv_lithography> a ont:SubProcess ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:altLabel "EUV"@en ;
+    skos:definition "Extreme ultraviolet exposure for advanced nodes."@en ;
+    skos:prefLabel "EUV Lithography"@en ;
+    ont:confidence 0.5,
+        0.7,
+        0.8,
+        1.0 ;
+    ont:interpretationType "mapped" ;
+    ont:measuredBy <https://w3id.org/sdkb/data/metrology/cd_sem> ;
+    ont:notAllowedWith <https://w3id.org/sdkb/data/material/photoresist_arF>,
+        <https://w3id.org/sdkb/data/subprocess/duv_lithography> ;
+    ont:requiresSkill <https://w3id.org/sdkb/data/skill/metrology_analysis>,
+        <https://w3id.org/sdkb/data/skill/overlay_optimization> ;
+    ont:usesEquipmentClass <https://w3id.org/sdkb/data/equipment_class/scanner> ;
+    ont:usesMaterial <https://w3id.org/sdkb/data/material/barc>,
+        <https://w3id.org/sdkb/data/material/photoresist_euv>,
+        <https://w3id.org/sdkb/data/material/sin> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/equipment_class/cmp_tool> a ont:EquipmentClass ;
+    dcterms:bibliographicCitation "15 CFR Part 774, Supplement No. 1 to Part 774, Category 3B" ;
+    dcterms:license "Public Domain (U.S. Government Work)" ;
+    dcterms:source "bis_ccl" ;
+    rdfs:seeAlso <https://www.ecfr.gov/current/title-15/subtitle-B/chapter-VII/subchapter-C/part-774> ;
+    skos:definition "CMP polishing tool."@en ;
+    skos:prefLabel "CMP Tool"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/material/photoresist_euv> a ont:Material ;
+    dcterms:bibliographicCitation "Venugopal et al. 2024, Scientific Data 11:217" ;
+    dcterms:license "CC-BY-4.0" ;
+    dcterms:source "matkg" ;
+    rdfs:seeAlso <https://zenodo.org/records/10144972> ;
+    skos:altLabel "EUV PR"@en,
+        "EUV 포토레지스트"@ko ;
+    skos:definition "Photoresist optimized for EUV lithography."@en ;
+    skos:prefLabel "EUV Photoresist"@en ;
+    ont:confidence 0.8 ;
+    ont:incompatibleWith <https://w3id.org/sdkb/data/material/hf_acid> ;
+    ont:interpretationType "mapped" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/organization/applied_materials> a ont:Vendor ;
+    dcterms:bibliographicCitation "Applied Materials public corporate information" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:altLabel "AMAT"@en ;
+    skos:definition "Deposition, etch, CMP, metrology vendor."@en ;
+    skos:prefLabel "Applied Materials"@en ;
+    ont:interpretationType "verbatim" .
+
+<https://w3id.org/sdkb/data/subprocess/cvd> a ont:SubProcess ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:altLabel "화학 기상 증착"@ko,
+        "화학 기상 퇴적"@ko,
+        "화학기상증착"@ko,
+        "화학기상퇴적"@ko ;
+    skos:definition "Chemical vapor deposition."@en ;
+    skos:prefLabel "CVD"@en ;
+    ont:confidence 0.7,
+        0.8,
+        0.9,
+        1.0 ;
+    ont:incompatibleWith <https://w3id.org/sdkb/data/material/photoresist_euv> ;
+    ont:interpretationType "mapped" ;
+    ont:requiresSkill <https://w3id.org/sdkb/data/skill/film_stress_control> ;
+    ont:usesEquipmentClass <https://w3id.org/sdkb/data/equipment_class/deposition_tool> ;
+    ont:usesMaterial <https://w3id.org/sdkb/data/material/polysilicon>,
+        <https://w3id.org/sdkb/data/material/sin>,
+        <https://w3id.org/sdkb/data/material/sio2>,
+        <https://w3id.org/sdkb/data/material/teOs> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/equipment_class/etcher> a ont:EquipmentClass ;
+    dcterms:bibliographicCitation "15 CFR Part 774, Supplement No. 1 to Part 774, Category 3B" ;
+    dcterms:license "Public Domain (U.S. Government Work)" ;
+    dcterms:source "bis_ccl" ;
+    rdfs:seeAlso <https://www.ecfr.gov/current/title-15/subtitle-B/chapter-VII/subchapter-C/part-774> ;
+    skos:definition "Dry etch tool (RIE/ICP)."@en ;
+    skos:prefLabel "Plasma Etcher"@en ;
+    ont:confidence 0.7,
+        0.9 ;
+    ont:incompatibleWith <https://w3id.org/sdkb/data/material/copper> ;
+    ont:interpretationType "mapped" ;
+    ont:madeBy <https://w3id.org/sdkb/data/organization/lam_research> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/subprocess/plasma_etch> a ont:SubProcess ;
+    dcterms:bibliographicCitation "Nguyen et al. 2024, arXiv:2411.13802, Appendix A" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "semikong" ;
+    rdfs:seeAlso <https://github.com/aitomatic/semikong> ;
+    skos:altLabel "건식 식각"@ko,
+        "건식식각"@ko,
+        "플라즈마 식각"@ko ;
+    skos:broader <https://w3id.org/sdkb/data/process/plasma_processing> ;
+    skos:definition "Dry etch using RF plasma (RIE/ICP)."@en ;
+    skos:prefLabel "Plasma Etch"@en ;
+    ont:confidence 0.6,
+        0.7,
+        0.8,
+        0.9,
+        1.0 ;
+    ont:hasParameter <https://w3id.org/sdkb/data/parameter/bias_power>,
+        <https://w3id.org/sdkb/data/parameter/gas_flow>,
+        <https://w3id.org/sdkb/data/parameter/pressure>,
+        <https://w3id.org/sdkb/data/parameter/rf_power> ;
+    ont:incompatibleWith <https://w3id.org/sdkb/data/material/photoresist_euv> ;
+    ont:interpretationType "mapped" ;
+    ont:requiresSkill <https://w3id.org/sdkb/data/skill/endpoint_detection>,
+        <https://w3id.org/sdkb/data/skill/gas_chemistry>,
+        <https://w3id.org/sdkb/data/skill/plasma_diagnostics> ;
+    ont:usesEquipmentClass <https://w3id.org/sdkb/data/equipment_class/etcher> ;
+    ont:usesMaterial <https://w3id.org/sdkb/data/material/sin>,
+        <https://w3id.org/sdkb/data/material/sio2> ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/equipment_class/facilities> a ont:EquipmentClass ;
+    dcterms:bibliographicCitation "15 CFR Part 774, Supplement No. 1 to Part 774, Category 3B" ;
+    dcterms:license "Public Domain (U.S. Government Work)" ;
+    dcterms:source "bis_ccl" ;
+    rdfs:seeAlso <https://www.ecfr.gov/current/title-15/subtitle-B/chapter-VII/subchapter-C/part-774> ;
+    skos:definition "Facility support equipment (pumps, sensors, exhaust)"@en ;
+    skos:prefLabel "Facilities Equipment"@en ;
+    ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/equipment_class/deposition_tool> a ont:EquipmentClass ;
+    dcterms:bibliographicCitation "15 CFR Part 774, Supplement No. 1 to Part 774, Category 3B" ;
+    dcterms:license "Public Domain (U.S. Government Work)" ;
+    dcterms:source "bis_ccl" ;
+    rdfs:seeAlso <https://www.ecfr.gov/current/title-15/subtitle-B/chapter-VII/subchapter-C/part-774> ;
+    skos:definition "ALD/CVD/PVD tool families."@en ;
+    skos:prefLabel "Deposition Tool"@en ;
+    ont:confidence 0.7 ;
+    ont:interpretationType "mapped" ;
+    ont:madeBy <https://w3id.org/sdkb/data/organization/applied_materials> .
+
+<https://w3id.org/sdkb/data/vendor/generic> a ont:Vendor ;
+    dcterms:bibliographicCitation "Generic Equipment public corporate information" ;
+    dcterms:license "Public information" ;
+    dcterms:source "vendor_public" ;
+    skos:definition "Generic and facilities equipment"@en ;
+    skos:prefLabel "Generic Equipment"@en ;
+    ont:interpretationType "verbatim" .
+
