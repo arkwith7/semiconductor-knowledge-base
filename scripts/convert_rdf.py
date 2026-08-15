@@ -171,7 +171,21 @@ def main():
     print(f"✓ RDF/Turtle ({len(g)} triples) → {OUT_TTL}")
 
     # ── Serialize JSON-LD ─────────────────────────────────────
-    g.serialize(str(OUT_JSONLD), format="json-ld")
+    # **결정적으로 쓴다.** rdflib 의 json-ld 직렬화는 노드·키 순서를 보장하지 않아, 같은
+    # 그래프를 두 번 써도 바이트가 달라진다(실측 2026-08-15: 내용은 노드 274개 전부 동일한데
+    # 9,534줄이 diff 로 잡혔다). 커밋되는 산출물이므로 그대로 두면 재빌드마다 거짓 변경이 나고,
+    # "같은 입력 → 같은 그래프" 라는 이 저장소의 규칙이 이 파일에서만 깨진다.
+    # 그래서 한 번 더 정규화한다 — @graph 를 @id 로 정렬하고 키를 사전순으로 고정한다.
+    import json as _json
+
+    doc = _json.loads(g.serialize(format="json-ld"))
+    if isinstance(doc, list):
+        doc = sorted(doc, key=lambda n: _json.dumps(n, sort_keys=True, ensure_ascii=False))
+    elif isinstance(doc, dict) and isinstance(doc.get("@graph"), list):
+        doc["@graph"] = sorted(doc["@graph"],
+                               key=lambda n: _json.dumps(n, sort_keys=True, ensure_ascii=False))
+    OUT_JSONLD.write_text(
+        _json.dumps(doc, sort_keys=True, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"✓ JSON-LD → {OUT_JSONLD}")
 
 
