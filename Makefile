@@ -147,6 +147,12 @@ PUBLIC_OUT ?= build/public
 
 public-release:
 	$(PYTHON) scripts/build_public_release.py --out $(PUBLIC_OUT) --force
+# CQ 실행 결과는 **공개 트리 안에서 다시 낸다.** 리포지토리의 cq_report.json 은 원문이 전량
+# 있는 개발 환경의 값(2026-08-15 실측 0.871)인데, 공개본을 받은 사람이 그대로 돌리면 0.452 가
+# 나온다 — 특허 A-Box 가 없어 특허를 묻는 질의가 실패하기 때문이다. 개발 환경 값을 그대로
+# 실으면 **발행된 숫자가 소비 가능한 상태를 기술하지 않는다**(D-19 계열).
+# 재인출 뒤에는 0.871 로 올라가며 그 쌍을 CHANGELOG 에 적는다.
+	cd $(PUBLIC_OUT) && $(abspath $(PYTHON)) scripts/run_cq.py
 
 check-public:
 	$(PYTHON) scripts/check_public_release.py --tree $(PUBLIC_OUT) \
