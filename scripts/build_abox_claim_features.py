@@ -92,6 +92,51 @@ def _sha256(path: Path) -> str:
     return h.hexdigest()
 
 
+def _duplicate_key_stats(rows: list[dict]) -> dict:
+    """CR-019 — 원천의 중복 `(patent, claim_no)` 키를 **버리지 않고 센다**.
+
+    `decompose_corpus.py` 산출에 같은 키가 두 번 실리면 그 행의 feature 가 다시 방출된다.
+    그래프는 rdflib 가 합쳐 멀쩡하지만 계수기는 겹세기를 했고, 그 숫자가 발행돼 하류의
+    판단을 틀리게 만들었다(D-41). 원인을 고치는 것은 이 함수가 아니라 원천 생성기 소관이며,
+    여기서는 **얼마나 겹쳤는지를 리포트에 남기는 것**까지만 한다.
+    """
+    seen: set[tuple] = set()
+    dup_keys: set[tuple] = set()
+    by_side: Counter = Counter()
+    dup_rows = 0
+    for r in rows:
+        key = (r["patent"], r["claim_no"])
+        if key in seen:
+            dup_rows += 1
+            if key not in dup_keys:
+                dup_keys.add(key)
+                side = r["patent"].split(":")[0] if ":" in r["patent"] else "rej"
+                by_side[side] += 1
+        seen.add(key)
+    return {"input_duplicate_keys": len(dup_keys), "input_duplicate_rows": dup_rows,
+            "duplicate_keys_by_side": dict(sorted(by_side.items()))}
+
+
+def _assert_count_integrity(report: dict) -> None:
+    """계수와 투영이 어긋난 리포트는 **쓰지 않는다** — CR-019 의 재발 방지선.
+
+    틀린 숫자를 발행하느니 산출물이 없는 편이 낫다. 발행된 틀린 숫자가 정확히 D-41 의
+    피해였고, 하류는 자기 쪽에서 정확히 세고도 자기 계수를 의심했다.
+    """
+    counts, proj = report["counts"], report["projection_cr017"]
+    problems = []
+    if counts["features"] != proj["rows_features"]:
+        problems.append(f"counts.features {counts['features']:,} != "
+                        f"projection.rows_features {proj['rows_features']:,}")
+    by_type = sum(report["feature_concept_by_type"].values())
+    if by_type != proj["concept_links"]:
+        problems.append(f"Σfeature_concept_by_type {by_type:,} != "
+                        f"projection.concept_links {proj['concept_links']:,}")
+    if problems:
+        raise SystemExit("CR-019 계수 무결성 위반 — 리포트를 쓰지 않는다:\n  "
+                         + "\n  ".join(problems))
+
+
 def _emit_projection(proj: list[dict], input_sha: str) -> dict:
     """CR-017 — 투영 2종 발행. **원문(feature_text)은 넣지 않는다**(KIPRIS 비재배포).
 
@@ -260,6 +305,11 @@ def main() -> int:
     seen_feature: set[str] = set()     # 같은 feature 가 두 행에서 나와도 parquet 행은 하나
     rows = [json.loads(line) for line in FEATURES.open()]
     seen_claim: set[str] = set()
+    # CR-019 — 중복 입력 행의 계수. rdflib 는 같은 트리플을 합치므로 **방출 횟수를 세는
+    # 계수기는 그래프를 기술하지 않는다.** 고유 기준으로 세되, 버려지는 방출은 지우지 않고
+    # 따로 계상한다 — 조용히 합치면 다음 진단이 막힌다(D-25).
+    seen_row: set[tuple] = set()
+    dupstat = _duplicate_key_stats(rows)
     # 실재하는 청구항 IRI 집합 — dependsOnClaim 이 매달린 부모(존재하지 않는 참조 번호)를
     # 만들지 않도록. 일부 거절특허는 청구항 재번호/OCR 로 존재하지 않는 부모항을 참조한다.
     present_claims = {f"claim/{_slug(r['patent'])}_c{r['claim_no']}" for r in rows}
@@ -271,6 +321,10 @@ def main() -> int:
             continue
         pslug = _slug(r["patent"])
         cno = r["claim_no"]
+        # CR-019 — 같은 (patent, claim_no) 가 두 번 오면 아래 루프들이 같은 트리플을 다시
+        # add 한다. 그래프는 합쳐져 멀쩡하므로 **add 는 그대로 두고 계수만 가른다.**
+        row_first = (r["patent"], cno) not in seen_row
+        seen_row.add((r["patent"], cno))
         claim = _u(f"claim/{pslug}_c{cno}")
         if str(claim) not in seen_claim:
             dep = r.get("depends_on") or []
@@ -304,24 +358,40 @@ def main() -> int:
         feat_iris: list[tuple[URIRef, dict]] = []
         for f in r["features"]:
             fi = _u(f"feature/{pslug}_c{cno}_f{f['seq']}")
+            # CR-019 — dedup 판정을 **계수와 투영이 공유한다.** 판정을 둘 두면 다시 갈리고,
+            # 갈린 상태가 D-41 이었다(계수기는 방출을, 투영은 고유를 셌다).
+            fkey = f"{pslug}_c{cno}_f{f['seq']}"
+            first = fkey not in seen_feature
             g.add((fi, RDF.type, R("ClaimFeature")))
             g.add((fi, R("featureSeq"), Literal(int(f["seq"]), datatype=XSD.integer)))
             g.add((fi, R("featureText"), Literal(f["text"])))
             g.add((fi, R("decompositionMethod"), Literal(r["method"])))
             g.add((fi, DCTERMS.license, Literal(LICENSE, datatype=XSD.string)))
             g.add((claim, R("hasFeature"), fi))
-            stat["features"] += 1
+            if first:
+                stat["features"] += 1
+            else:
+                stat["features_duplicate_emissions"] += 1
             # feature → 개념 정규화
             fconcepts: set[str] = set()
+            fconcept_type: dict[str, str] = {}
             for term, hits in br.extract_from_text(f["text"]).items():
                 for nid, typ in hits:
                     if typ in CONCEPT_TYPES:
                         g.add((fi, R("featureConcept"), _u(nid)))
-                        concept_hits[typ] += 1
                         fconcepts.add(nid)
+                        # 한 개념이 두 유형으로 오면 **먼저 온 것을 쓴다** — 마지막 승자
+                        # 방식은 추출 순서에 흔들려 결정성을 깬다.
+                        fconcept_type.setdefault(nid, typ)
+                        stat["concept_hits_raw"] += 1
+            # 개념 계수는 **(feature, concept) 고유**로 센다. 한 feature 가 같은 개념을 여러
+            # 표면형으로 맞추면("EUV 포토레지스트"·"포토레지스트") 적중은 여럿이지만 그래프에
+            # 남는 트리플은 하나다. 계수는 그래프가 세는 것과 같은 것을 세야 한다.
+            if first:
+                for nid in sorted(fconcepts):
+                    concept_hits[fconcept_type[nid]] += 1
             # CR-017 투영 행. 원문(f["text"])은 **싣지 않는다** — 비목표 ⓐ.
-            fkey = f"{pslug}_c{cno}_f{f['seq']}"
-            if fkey not in seen_feature:
+            if first:
                 seen_feature.add(fkey)
                 ca = claim_attr.get(f"{pslug}_c{cno}", {})
                 proj.append({
@@ -342,7 +412,9 @@ def main() -> int:
                 for pj, pf in feat_iris[:idx]:
                     if ref and ref in pf["text"]:
                         g.add((fi, R("dependsOnFeature"), pj))
-                        stat["depends"] += 1
+                        # CR-019 — 중복 행은 같은 트리플을 다시 add 한다. 그래프는 불변이고
+                        # 계수만 겹쳤으므로 계수를 가른다.
+                        stat["depends" if row_first else "depends_duplicate_emissions"] += 1
                         break
 
     # 거절-판단 패턴 → PriorArtJudgment. 두 원천을 union 한다:
@@ -419,12 +491,23 @@ def main() -> int:
     g.serialize(str(OUT_TTL), format="turtle")
     projection = _emit_projection(proj, _sha256(OUT_TTL))
     report = {
+        "_README": "CR-019 — `counts.*` 와 `feature_concept_by_type` 은 **그래프 고유 기준**이고 "
+                   "(rdflib 가 같은 트리플을 합치므로 방출 횟수는 그래프를 기술하지 않는다), "
+                   "`*_duplicate_emissions`·`concept_hits_raw` 는 버리지 않고 계상한 재방출이다. "
+                   "**두 계열을 더하지 말 것.** `input_claims` 는 원천 행 수라 고유 청구항 수와 "
+                   "`input_duplicate_keys` 만큼 다르다.",
         "triples": len(g), "input_claims": len(rows),
-        "counts": dict(stat), "feature_concept_by_type": dict(concept_hits.most_common()),
+        "counts": {**dict(stat),
+                   "input_duplicate_keys": dupstat["input_duplicate_keys"],
+                   "input_duplicate_rows": dupstat["input_duplicate_rows"]},
+        "feature_concept_by_type": dict(concept_hits.most_common()),
+        "duplicate_keys_by_side": dupstat["duplicate_keys_by_side"],
         "projection_cr017": projection,
         "note": "feature 정규화 = build_abox_patents 와 동일 브리지. 판단 = evidence_v2 실체화. "
                 "RejectionReason = rejection_reasons.jsonl 실체화(CR-004R).",
     }
+    # 계수와 투영이 어긋나면 **쓰지 않는다** — 틀린 숫자를 발행하느니 산출물이 없는 편이 낫다.
+    _assert_count_integrity(report)
     OUT_REPORT.parent.mkdir(parents=True, exist_ok=True)
     OUT_REPORT.write_text(json.dumps(report, ensure_ascii=False, indent=2))
     print(f"✓ ({len(g):,} 트리플) → {OUT_TTL.name}")

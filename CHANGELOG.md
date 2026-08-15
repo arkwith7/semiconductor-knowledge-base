@@ -27,6 +27,46 @@ All notable changes to SDKB will be documented in this file.
 
 ## [Unreleased] — v1.0.0-dev
 
+### Fixed (2026-08-16 — 발행 계수가 그래프보다 많이 세고 있었다 · CR-019 / D-41) ⚠ 하류 통보
+
+**계수만 바뀌었다. 그래프는 한 트리플도 바뀌지 않았고, 세 산출물의 sha256 은 전부 그대로다**
+(`sdkb-abox-claim-features.ttl` `71e053b8…` · `claim_features.parquet` `2b21465c…` ·
+`claim_feature_release_meta.json` `41e01f91…`). 바뀐 것은 `abox_claim_features_report.json`
+하나다.
+
+rdflib 는 같은 트리플을 합친다. 그래서 `g.add()` 호출을 세는 계수기는 **정의상 그래프를
+기술하지 않는다.** 같은 파일 안에서 두 계열이 갈려 있었고 — 계수기는 방출을, CR-017 투영은
+고유를 셌다 — 그 차가 발행돼 하류가 **자기 쪽에서 정확히 세고도 자기 계수를 의심했다**.
+
+| 필드 | 구 발행값 | 정정값 | 차 | 원인 |
+|---|---|---|---|---|
+| `counts.features` | 1,306,419 | **1,306,191** | −228 | 중복 입력 행 143개(전량 `cited:`)의 feature 재방출 |
+| `counts.depends` | 653,539 | **653,510** | −29 | 같은 중복 행이 `dependsOnFeature` 를 재방출 |
+| `Σ feature_concept_by_type` | 592,779 | **529,151** | **−63,628** | 한 feature 가 같은 개념을 여러 표면형으로 맞춤 — *"EUV 포토레지스트"* 와 *"포토레지스트"* 가 같은 노드를 각각 적중 |
+
+셋째 행은 CR-019 조사 중 **새로 발견**된 것으로, 기전이 앞의 둘과 다르고 규모가 279배 크다.
+`counts.claims`(594,078)·`claims_independent`·`depends_on_claim` 계열은 **원래 정확했다** —
+청구항 중복은 이미 막혀 있었고 feature 중복만 막히지 않았다.
+
+**버린 것을 지우지 않는다.** 조용히 합치면 다음 진단이 막히므로(D-25) 재방출을 별도 필드로
+남긴다 — `features_duplicate_emissions` 228 · `depends_duplicate_emissions` 29 ·
+`input_duplicate_keys` 143 · `input_duplicate_rows` 143 · `duplicate_keys_by_side` ·
+`concept_hits_raw` 592,779. `_README` 에 *"두 계열을 더하지 말 것"* 을 박았다.
+`input_claims`(594,221)는 **이름을 바꾸지 않았다** — 하류 소비자가 있을 수 있고, 고유 청구항
+수와의 차 143 은 신설 필드가 같은 자리에서 설명한다.
+
+**재발 방지선은 생성기 안에 있다.** `_assert_count_integrity()` 가 `counts.features ==
+projection.rows_features` 와 `Σfeature_concept_by_type == projection.concept_links` 를
+빌드 시점에 검사하고, 어긋나면 `SystemExit` 으로 죽어 **리포트를 쓰지 않는다.** 틀린 숫자를
+발행하느니 산출물이 없는 편이 낫다.
+
+**중복 143쌍은 전부 바이트 단위로 동일했다** — 고유 기준으로 세도 버려지는 내용이 없다.
+**중복의 발생 경로(`decompose_corpus.py` 증분 저장)는 이번 범위 밖이다** — 원천을 바꾸면
+그래프가 움직이므로 별건이다.
+
+검증: 256 passed · 10 skipped · ruff 통과 · 신규 `tests/test_claim_feature_counts.py` 10건
+(어긋난 리포트가 실제로 거부되는지를 포함).
+
 ### Changed (2026-08-15 — 공개본이 **자기 CQ 값을 싣는다** · CR-015 ③④) ⚠ 하류 통보
 
 **리포에 실려 있던 CQ 통과율은 이 리포를 받은 사람이 얻는 값이 아니었다.** 개발 환경에는

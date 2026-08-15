@@ -1,29 +1,38 @@
 {
+  "_README": "CR-019 — `counts.*` 와 `feature_concept_by_type` 은 **그래프 고유 기준**이고 (rdflib 가 같은 트리플을 합치므로 방출 횟수는 그래프를 기술하지 않는다), `*_duplicate_emissions`·`concept_hits_raw` 는 버리지 않고 계상한 재방출이다. **두 계열을 더하지 말 것.** `input_claims` 는 원천 행 수라 고유 청구항 수와 `input_duplicate_keys` 만큼 다르다.",
   "triples": 11770236,
   "input_claims": 594221,
   "counts": {
     "claims": 594078,
     "claims_independent": 143485,
-    "features": 1306419,
-    "depends": 653539,
+    "features": 1306191,
+    "concept_hits_raw": 592779,
+    "depends": 653510,
     "depends_on_claim": 489814,
     "claims_dependent": 450593,
     "depends_on_claim_dangling": 54,
+    "features_duplicate_emissions": 228,
+    "depends_duplicate_emissions": 29,
     "judgment_no_ground": 7,
     "reextract_rows": 545,
     "judgments": 635,
     "about_claim": 5917,
     "judgment_cited_unresolved": 24,
-    "rejection_reasons": 2749
+    "rejection_reasons": 2749,
+    "input_duplicate_keys": 143,
+    "input_duplicate_rows": 143
   },
   "feature_concept_by_type": {
-    "Process": 226658,
-    "Skill": 180822,
-    "Material": 140160,
-    "SubProcess": 29619,
-    "Device": 14393,
-    "FailureMode": 720,
-    "EquipmentClass": 407
+    "Process": 190028,
+    "Skill": 171417,
+    "Material": 128732,
+    "SubProcess": 24049,
+    "Device": 13819,
+    "FailureMode": 701,
+    "EquipmentClass": 405
+  },
+  "duplicate_keys_by_side": {
+    "cited": 143
   },
   "projection_cr017": {
     "rows_features": 1306191,
