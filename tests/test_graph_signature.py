@@ -55,8 +55,13 @@ def test_README_서명_블록이_최신이다():
     실제로 공개 트리 pytest 에서 그렇게 걸렸다. 검사가 의미를 갖는 것은 전량 빌드일 때다.
     """
     sig = build()
-    if any(r["status"] != "built" for r in sig["tbox_modules"]):
-        pytest.skip("T-Box 가 전량 빌드되지 않았다 — `make owl convert` 후에만 의미가 있다")
+    unbuilt = ([r["module"] for r in sig["tbox_modules"] if r["status"] != "built"]
+               + [r["layer"] for r in sig["abox_layers"] if r["status"] != "built"])
+    if unbuilt:
+        # 갓 체크아웃한 트리에서는 A-Box 가 비어 있는 것이 **설계**다(KIPRIS 키 선행).
+        # 그 상태의 부분 서명을 전량 빌드의 블록과 비교하면 거짓 실패가 난다 — 실제로
+        # 새 공개 리포에서 `make pipeline` 이 이것 하나로 죽었다.
+        pytest.skip(f"전량 빌드가 아니다({len(unbuilt)}층 미적재) — 이 계약은 전량 빌드에서만 의미가 있다")
     block = render_block(sig)
     for name in ("README.md", "README.ko.md"):
         s = (ROOT / name).read_text(encoding="utf-8")

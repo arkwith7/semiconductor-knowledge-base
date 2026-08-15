@@ -396,6 +396,9 @@ def main() -> int:
         dst.write_bytes(raw)
         copied += 1
 
+    from collections import Counter
+    by_dir = Counter(r.split("/")[0] if "/" in r else "(root)" for r in not_allowed)
+
     manifest = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "source_rev": args.rev or "working-tree",
@@ -403,8 +406,11 @@ def main() -> int:
         "dataset_scrub": scrub_stats,
         # 뺀 목록을 남긴다 — 수가 조용히 0 이 되는 것을 막는 유일한 장치다.
         "private_docs_excluded": sorted(private_excluded),
+        # **경로 목록은 싣지 않는다 — 건수만 싣는다.** 전체 목록은 공개할 필요가 없는
+        # 비공개 리포의 파일 인벤토리다. 감사에 필요한 것은 "얼마나 빠졌는가"이고,
+        # "무엇이 빠졌는가"는 상류에서 본다(아래 full 매니페스트).
         "not_allowlisted_count": len(not_allowed),
-        "not_allowlisted": sorted(not_allowed),
+        "not_allowlisted_by_dir": dict(sorted(by_dir.items())),
         "private_blocks_stripped": blocks_stripped,
         "dead_links_flattened": links_flattened,
         "absolute_paths_scrubbed": abs_scrubbed,
@@ -414,8 +420,12 @@ def main() -> int:
     (out / "data" / "reports" / "public_release_manifest.json").write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
 
-    from collections import Counter
-    by_dir = Counter(r.split("/")[0] if "/" in r else "(root)" for r in not_allowed)
+    # 전체 제외 목록은 **트리 밖**에 쓴다. 감사에는 필요하고 공개에는 불필요하다.
+    full = out.parent / f"{out.name}_manifest_full.json"
+    full.write_text(json.dumps(
+        {**manifest, "not_allowlisted": sorted(not_allowed)},
+        ensure_ascii=False, indent=2), encoding="utf-8")
+
     print(f"[public] {copied}개 파일 → {out}  (추적 {len(files)} · 허용목록 밖 {len(not_allowed)} 제외)")
     print(f"[public] 허용목록 밖 구성: {dict(by_dir.most_common())}")
     print(f"[public] 데이터셋 비움: {scrub_stats}")

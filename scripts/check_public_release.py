@@ -153,7 +153,10 @@ def scan_closure(tree: Path) -> tuple[list[str], list[dict], list[dict]]:
     ②③ 이 필요한 이유는 하나다 — 허용목록은 파일을 빼지만, **그 파일을 가리키던 참조는
     빼 주지 않는다.** 빠진 것을 세는 것과 남은 것이 성립하는지는 다른 질문이다.
     """
-    present = {str(p.relative_to(tree)) for p in tree.rglob("*") if p.is_file()}
+    # `.git/` 은 트리의 내용물이 아니라 그것을 담는 그릇이다. 지문 검사는 처음부터
+    # 제외했는데 여기서는 빠뜨렸고, **실제 로컬 리포에 검사기를 걸자마자 드러났다.**
+    present = {str(p.relative_to(tree)) for p in tree.rglob("*")
+               if p.is_file() and ".git" not in p.parts}
     stray = sorted(r for r in present if not is_allowed(r)
                    and r != "data/reports/public_release_manifest.json")
 
