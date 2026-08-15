@@ -20,7 +20,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from build_public_release import (  # noqa: E402
-    PRIVATE_TOKEN, is_private_doc, scrub_abs_paths, scrub_dataset, strip_notebook,
+    BLOCK_BEGIN, BLOCK_END, PRIVATE_TOKEN, flatten_dead_links, is_allowed,
+    is_private_doc, scrub_abs_paths, scrub_dataset, strip_notebook, strip_private_blocks,
 )
 from check_public_release import (  # noqa: E402
     LEGACY_SLUG_ALLOWED, build_probes, scan_boundary,
@@ -178,3 +179,72 @@ def test_남기는_필드와_겹치는_지문은_버린다(tmp_path):
     probes, dropped = build_probes(canonical)
     assert dropped >= 1
     assert all(field != "abstract" for _, field, _ in probes)
+
+
+# ═══════════════════════════════════════════════════════════════════
+# 허용목록 전환 (2026-08-10) — 목록의 방향이 뒤집혔다.
+# 예전 계약은 "빼기로 한 것이 빠졌는가"였고, 새 계약은 **"넣기로 한 것만 들어왔는가"** 다.
+# ═══════════════════════════════════════════════════════════════════
+
+def test_모르는_파일은_공개되지_않는다():
+    """허용목록의 존재 이유 — **새로 생긴 파일이 기본값으로 공개되지 않는다.**"""
+    assert not is_allowed("notebooks/99_new_experiment.ipynb")
+    assert not is_allowed("docs/plan_next_quarter.md")        # docs 는 파일 열거다
+    assert not is_allowed("secrets.env")
+    assert not is_allowed("data/patents/rejection_decisions/structured/1020200000000.json")
+    assert is_allowed("ontology/sdkb-patent.ttl")
+    assert is_allowed("docs/ontology_guide.md")
+    assert is_allowed("scripts/build_abox_patents.py")
+    assert is_allowed("tests/test_owl.py")
+
+
+def test_제외_결정이_조용히_뒤집히지_않는다():
+    """사용자 결정(2026-08-10)을 코드에 고정한다. 되돌리려면 이 테스트를 함께 고쳐야 한다."""
+    assert not is_allowed("scripts/build_viz.py")            # 시각화·Pages
+    assert not is_allowed("scripts/eval_prior_art_realgt.py")  # 평가
+    assert not is_allowed("scripts/build_rejection_decisions.py")
+    # 이름이 노트북 헬퍼처럼 보이지만 tests/ 가 임포트한다 — 이름이 아니라 쓰임으로 판단한다.
+    assert is_allowed("scripts/sdkb_nb.py")
+
+
+def test_비공개_블록은_자기_줄에_혼자_있어야_인정된다():
+    """마커를 **설명하는** 줄이 마커가 되면 안 된다. 실제로 그래서 빌드가 죽었다."""
+    body = ("살린다\n"
+            f"# {BLOCK_BEGIN}\n지운다\n# {BLOCK_END}\n"
+            f"`{BLOCK_BEGIN}` 와 `{BLOCK_END}` 를 설명하는 줄은 마커가 아니다\n").encode()
+    out, dropped = strip_private_blocks(body, "t.md")
+    text = out.decode()
+    assert "지운다" not in text and "살린다" in text
+    assert "설명하는 줄은 마커가 아니다" in text
+    assert dropped == 3
+
+
+def test_닫히지_않은_블록은_빌드를_세운다():
+    """조용히 파일 끝까지 지우면 그 사실이 아무에게도 보이지 않는다."""
+    with pytest.raises(ValueError):
+        strip_private_blocks(f"# {BLOCK_BEGIN}\n본문\n".encode(), "t.md")
+
+
+def test_없는_문서를_가리키는_링크는_평문이_된다():
+    """허용목록은 파일을 빼 주지만 그 파일을 가리키던 문장은 빼 주지 않는다."""
+    published = {"docs/ontology_guide.md"}
+    raw = ("[가이드](ontology_guide.md) 와 [계획서](plan_secret.md) 와 "
+           "[외부](https://example.org/x.md)\n").encode()
+    out, n = flatten_dead_links(raw, "docs/README.md", published)
+    text = out.decode()
+    assert n == 1
+    assert "[가이드](ontology_guide.md)" in text      # 살아 있는 링크는 그대로
+    assert "계획서" in text and "plan_secret.md" not in text
+    assert "https://example.org/x.md" in text          # 외부 URL 은 검사 대상이 아니다
+
+
+def test_없는_문서만_가리키는_표_행은_통째로_빠진다():
+    """행이 통째로 없는 문서를 소개하면 색인이 아니라 오답이 된다."""
+    published = {"docs/ontology_guide.md"}
+    raw = ("| Doc | What |\n|---|---|\n"
+           "| [가이드](ontology_guide.md) | 스펙 |\n"
+           "| [계획서](plan_secret.md) | 계획 |\n").encode()
+    out, _ = flatten_dead_links(raw, "docs/README.md", published)
+    text = out.decode()
+    assert "가이드" in text
+    assert "계획" not in text

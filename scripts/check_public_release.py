@@ -1,11 +1,18 @@
 #!/usr/bin/env python3
 """공개 트리 검사기 — 원문·비공개 문서·홈 절대경로·옛 리포 URL 이 남지 않았는지 **기계로** 센다.
 
-넷을 본다 (CR-015 성공기준 ①② + R1·F7 + R3).
+일곱을 본다 (CR-015 성공기준 ①② + R1·F7 + R3 + 허용목록 전환).
   ① KIPRIS 원문 지문 — 아래 본문
   ② **비공개 토큰**: 첫 줄이 `<!-- sdkb:private -->` 인 파일이 트리에 있는가
   ③ **홈 절대경로**: 사용자 홈으로 시작하는 파일시스템 경로가 남았는가
   ④ **옛 리포 URL**: 공개 전 리포 슬러그를 가리키는 링크가 남았는가 (R3 · 점검 F3)
+
+  ⑤ **허용목록 밖 파일**: 넣기로 한 것만 들어왔는가 (2026-08-10 전환)
+  ⑥ **죽은 Makefile 참조**: 공개 Makefile 이 없는 스크립트를 부르는가
+  ⑦ **죽은 문서 링크**: 공개 문서의 상대 링크가 트리 밖을 가리키는가
+
+⑤⑥⑦ 이 한 묶음인 이유 — 허용목록은 파일을 빼 주지만 **그 파일을 가리키던 참조는 빼 주지
+않는다.** 빠진 것을 세는 것과 남은 것이 성립하는지는 다른 질문이다.
 
 ④ 가 필요한 이유는 ③ 과 같다 — 한 번 발행되면 되돌릴 수 없고, 죽은 링크는 공개 첫날 보인다.
 잡는 것은 **슬러그 문자열 전량**이지 URL 형태만이 아니다: BibTeX·CITATION·Pages 링크가 서로
@@ -37,12 +44,15 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from build_public_release import _ABS_PATH, PRIVATE_TOKEN, is_private_doc  # noqa: E402
+from build_public_release import (  # noqa: E402
+    _ABS_PATH, PRIVATE_TOKEN, is_allowed, is_private_doc,
+)
 from config.namespaces import LEGACY_REPO_SLUG  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -54,13 +64,13 @@ MAX_BYTES = 200 * 1024 * 1024
 # 옛 슬러그를 **인용하는 것이 그 파일의 일**인 곳. 목록은 코드에 두고 사유를 적는다 —
 # 파일이 스스로 면제를 선언하게 하면(인라인 마커) 그것은 검사가 아니라 우회로가 된다(§1-6).
 LEGACY_SLUG_ALLOWED = {
-    # F3 은 "온톨로지가 옛 리포를 가리킨다"가 결함이라는 증거로 그 URL 을 그대로 인용한다.
-    # 인용을 지우면 무엇이 왜 틀렸는지 읽을 수 없게 된다.
-    "docs/public_release_readiness_review.md",
     # 이 검사가 찾는 문자열을 **정의하는** 파일. 검사기가 첫 실행에서 스스로 잡아냈다 —
     # 여기를 빼면 슬러그를 상수로 두는 것 자체가 불가능해진다.
     "config/namespaces.py",
 }
+# `docs/public_release_readiness_review.md` 는 2026-08-10 허용목록 전환으로 공개 트리에서
+# 빠졌다(작업 기록이므로). 그래서 면제도 함께 뺀다 — 없는 파일의 예외는 죽은 설정이고,
+# 죽은 설정은 다음 사람에게 "여기는 예외가 많다"고 잘못 알려 준다.
 
 
 def build_probes(canonical: Path) -> tuple[list[tuple[str, str, str]], int]:
@@ -129,6 +139,51 @@ def scan_boundary(files: list[Path], tree: Path) -> tuple[list[str], list[dict],
     return private, abs_hits, legacy_hits
 
 
+_MD_LINK = re.compile(r"\[[^\]]*\]\(([^)\s#]+)(?:#[^)]*)?\)")
+_MK_SCRIPT = re.compile(r"scripts/[A-Za-z0-9_/]+\.py")
+
+
+def scan_closure(tree: Path) -> tuple[list[str], list[dict], list[dict]]:
+    """트리가 **자기 안에서 닫히는가**. 허용목록 전환으로 새로 생긴 실패 양식 셋이다.
+
+    ① 허용목록 밖 파일이 남았는가 (손으로 만든 트리를 잡는다 — 생성기는 이미 거른다)
+    ② 공개 Makefile 이 **없는 스크립트**를 부르는가 → 돌지 않는 명령을 가진 리포가 된다
+    ③ 공개 문서의 상대 링크가 **트리 밖**을 가리키는가 → 공개 첫날 죽은 링크
+
+    ②③ 이 필요한 이유는 하나다 — 허용목록은 파일을 빼지만, **그 파일을 가리키던 참조는
+    빼 주지 않는다.** 빠진 것을 세는 것과 남은 것이 성립하는지는 다른 질문이다.
+    """
+    present = {str(p.relative_to(tree)) for p in tree.rglob("*") if p.is_file()}
+    stray = sorted(r for r in present if not is_allowed(r)
+                   and r != "data/reports/public_release_manifest.json")
+
+    dead_targets: list[dict] = []
+    mk = tree / "Makefile"
+    if mk.exists():
+        for i, line in enumerate(mk.read_text(encoding="utf-8").splitlines(), 1):
+            for m in _MK_SCRIPT.finditer(line):
+                if m.group(0) not in present:
+                    dead_targets.append({"file": "Makefile", "line": i, "ref": m.group(0)})
+
+    dead_links: list[dict] = []
+    for p in sorted(tree.rglob("*.md")):
+        rel = str(p.relative_to(tree))
+        base = p.parent
+        for m in _MD_LINK.finditer(p.read_text(encoding="utf-8", errors="ignore")):
+            target = m.group(1)
+            if target.startswith(("http://", "https://", "mailto:", "<")):
+                continue
+            resolved = (base / target).resolve()
+            try:
+                key = str(resolved.relative_to(tree.resolve()))
+            except ValueError:
+                dead_links.append({"file": rel, "link": target, "why": "트리 밖"})
+                continue
+            if key not in present and not resolved.is_dir():
+                dead_links.append({"file": rel, "link": target, "why": "없는 파일"})
+    return stray, dead_targets, dead_links
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--tree", type=Path, required=True, help="검사할 공개 트리")
@@ -171,6 +226,16 @@ def main() -> int:
     if len(hits) > 40:
         print(f"   … 그리고 {len(hits) - 40}건 더")
 
+    stray, dead_targets, dead_links = scan_closure(args.tree)
+    print(f"[check] 허용목록 밖 파일 {len(stray)}건 · 죽은 Makefile 참조 {len(dead_targets)}건 · "
+          f"죽은 문서 링크 {len(dead_links)}건")
+    for r in stray[:20]:
+        print(f"   ✗ {r}  ← 허용목록에 없다")
+    for h in dead_targets[:20]:
+        print(f"   ✗ Makefile:{h['line']}  ← 없는 스크립트 {h['ref']}")
+    for h in dead_links[:20]:
+        print(f"   ✗ {h['file']}  ← {h['link']} ({h['why']})")
+
     private, abs_hits, legacy_hits = scan_boundary(files, args.tree)
     print(f"[check] 비공개 토큰({PRIVATE_TOKEN}) 적중 {len(private)}건 · "
           f"홈 절대경로 적중 {len(abs_hits)}건 · "
@@ -196,17 +261,23 @@ def main() -> int:
              "files_scanned": scanned, "hits": hits,
              "private_token_hits": private, "absolute_path_hits": abs_hits,
              "legacy_repo_slug_hits": legacy_hits,
-             "legacy_repo_slug_allowed": sorted(LEGACY_SLUG_ALLOWED)},
+             "legacy_repo_slug_allowed": sorted(LEGACY_SLUG_ALLOWED),
+             "not_allowlisted_in_tree": stray,
+             "dead_makefile_refs": dead_targets,
+             "dead_doc_links": dead_links},
             ensure_ascii=False, indent=2), encoding="utf-8")
 
-    if hits or private or abs_hits or legacy_hits:
+    if hits or private or abs_hits or legacy_hits or stray or dead_targets or dead_links:
         why = " · ".join(w for w, n in (("원문", len(hits)), ("비공개 문서", len(private)),
                                         ("홈 절대경로", len(abs_hits)),
-                                        ("옛 리포 URL", len(legacy_hits))) if n)
+                                        ("옛 리포 URL", len(legacy_hits)),
+                                        ("허용목록 밖 파일", len(stray)),
+                                        ("죽은 Makefile 참조", len(dead_targets)),
+                                        ("죽은 문서 링크", len(dead_links))) if n)
         print(f"\n[check] ❌ 실패 — {why} 가 남아 있다. **푸시하지 않는다.**")
         return 1
-    print("\n[check] ✅ 통과 — 지문·비공개 토큰·홈 절대경로·옛 리포 URL "
-          "어느 것도 공개 트리에 없다.")
+    print("\n[check] ✅ 통과 — 지문·비공개 토큰·홈 절대경로·옛 리포 URL 어느 것도 없고, "
+          "트리가 자기 안에서 닫힌다.")
     return 0
 
 

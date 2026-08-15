@@ -26,6 +26,8 @@ credentials.
 licence position, and its limits) → the *"What is empty, and how to fill it"* table in the root
 README.
 
+<!-- 공개본에서 뺀다: runbook · 점검 · references 는 공개본에 없다 -->
+<!-- sdkb:private-begin -->
 **"I want to rebuild the patent layers myself."**
 → [`dataset_full_collection_runbook.md`](dataset_full_collection_runbook.md) →
 [`semiconductor_industry_rejected_patents_schema.md`](semiconductor_industry_rejected_patents_schema.md)
@@ -38,6 +40,7 @@ still gets wrong, measured) → [`leakage_protocol.md`](leakage_protocol.md) →
 [`deidentification_protocol.md`](deidentification_protocol.md) →
 [`references/`](references/).
 
+<!-- sdkb:private-end -->
 ---
 
 ## Normative documents — the ones that constrain the data
@@ -75,6 +78,8 @@ document containing secrets from a document discussing them gets ignored.
 | [`paper_dataset_alignment.md`](paper_dataset_alignment.md) | KO | Which dataset asset backs which downstream analysis. |
 | [`legacy_etching_poc_schema.md`](legacy_etching_poc_schema.md) | KO | Schema of the etching proof-of-concept that preceded the current curation graph. |
 
+<!-- 공개본에서 뺀다: 평가 기록과 문헌 노트는 개발 과정이라 공개본에서 뺀다 -->
+<!-- sdkb:private-begin -->
 ## Assessments
 
 | Document | Lang | Contents |
@@ -87,6 +92,7 @@ document containing secrets from a document discussing them gets ignored.
 `kg-ontology/` · `prior-art-matching/` · `expert-matching/` · `methodology/` · `compliance/` ·
 `lab-shin/`. Format: [`references/_template.md`](references/_template.md).
 
+<!-- sdkb:private-end -->
 ## Architecture and alignment
 
 [`project/`](project/) holds the documents that explain *why the artifact is shaped this way*:
@@ -99,11 +105,14 @@ document containing secrets from a document discussing them gets ignored.
 | [`project/research_alignment.md`](project/research_alignment.md) | How each SDKB module maps to a research line. |
 | [`project/visualization_plan.md`](project/visualization_plan.md) | How the interactive explorer is built and deployed. |
 
+<!-- 공개본에서 뺀다: 판정 근거 문서가 공개본에 없다 -->
+<!-- sdkb:private-begin -->
 Plan amendments, status reports, change-request replies, risk reviews and commercialization
 strategy are **not part of the public tree** — they are development process, not documentation
 of the artifact, and some are proprietary or identify individuals. See
 [`public_release_readiness_review.md`](public_release_readiness_review.md) §1 for the criterion
 and the file-by-file ruling.
+<!-- sdkb:private-end -->
 
 ---
 

@@ -48,8 +48,16 @@ def test_모든_명명_항이_주석을_갖는다(module):
 
 
 def test_README_서명_블록이_최신이다():
-    """`make signature-inject` 를 잊었으면 여기서 실패한다."""
-    block = render_block(build())
+    """`make signature-inject` 를 잊었으면 여기서 실패한다.
+
+    **빌드되지 않은 트리에서는 건너뛴다.** 공개본 체크아웃에는 `sdkb-core.ttl` 이 없고
+    (gitignore 된 빌드 산출물), 그러면 서명이 실물과 달라 이 계약이 **거짓으로 실패한다** —
+    실제로 공개 트리 pytest 에서 그렇게 걸렸다. 검사가 의미를 갖는 것은 전량 빌드일 때다.
+    """
+    sig = build()
+    if any(r["status"] != "built" for r in sig["tbox_modules"]):
+        pytest.skip("T-Box 가 전량 빌드되지 않았다 — `make owl convert` 후에만 의미가 있다")
+    block = render_block(sig)
     for name in ("README.md", "README.ko.md"):
         s = (ROOT / name).read_text(encoding="utf-8")
         assert MARK_BEGIN in s and MARK_END in s, f"{name}: 서명 블록 마커가 없다"

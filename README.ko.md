@@ -24,7 +24,11 @@ size_categories:
 > 운영: 성균관대학교 기술경영전문대학원 [계량기술경영 연구실](#연구실-컨텍스트) (Quantitative Technology Management Lab, PI: 신준석 교수)
 >
 > 🌐 English version: [README.md](README.md)
+<!-- 공개본에서 뺀다: 시각화·Pages 는 공개본에 없다 -->
+<!-- sdkb:private-begin -->
 > 🔗 **Live demo (GitHub Pages):** [`arkwith7.github.io/sdkb-dataset`](https://arkwith7.github.io/sdkb-dataset/) — 큐레이션 그래프 · SIRP 상위 50특허 + 선행기술 · 4-pillar 클래스 골격 인터랙티브 3-뷰
+<!-- sdkb:private-end -->
+
 
 ## 한 줄 포지셔닝
 
@@ -69,7 +73,11 @@ SDKB는 반도체 **공정 · 장비 · 결함 · 스킬** 지식, **특허 분�
 | 특허·시장·산업 데이터 기반 **기술예측** | `sdkb-patent.ttl` + SIRP + Topic / Novelty 노드 | [활용 사례 1](#활용-사례) |
 | **유망기술 기회 발굴** | Novelty-focused patent mapping, emerging-memory 토픽 클러스터 | [활용 사례 1](#활용-사례), 🚧 [notebook 02](notebooks/02_patent_opportunity_demo.ipynb) |
 | **중소기업 혁신 성과 분석 / 전문가 매칭** | SDKB-Match Expert + 합성 100 + 큐레이션 110 전문가 풀 + 다중관할 컴플라이언스 게이트 | [활용 사례 2](#활용-사례), 🚧 [notebook 01](notebooks/01_matching_baseline_expert.ipynb), ✅ [notebook 05](notebooks/05_synthetic_vs_curated_comparison.ipynb) |
+<!-- 공개본에서 뺀다: 시각화·Pages 는 공개본에 없다 -->
+<!-- sdkb:private-begin -->
 | **인터랙티브 기술 · 비즈니스 시각화** | Pyvis 3-뷰 익스플로러 · GitHub Pages 자동 배포 | [Live demo](https://arkwith7.github.io/sdkb-dataset/), [docs/project/visualization_plan.md](docs/project/visualization_plan.md) |
+<!-- sdkb:private-end -->
+
 | 조직적 R&D 관리 / 혁신 디자인 (보조축) | RBV 핵심자원 조합 + TRL / 실물옵션 시드 노드 | [활용 사례 4](#활용-사례), 🚧 [notebook 03](notebooks/03_rbv_resource_combo_demo.ipynb) |
 
 ## Why / For / How
@@ -91,7 +99,11 @@ SDKB는 반도체 **공정 · 장비 · 결함 · 스킬** 지식, **특허 분�
 | 3 | **SDKB-Match (PriorArt)** — 특허출원 ↔ 선행기술 매칭 (examiner GT 기반) | IP-R&D 컨설팅 / 선행기술 분석 | core + patent + SIRP | ✅ [04](notebooks/04_prior_art_baseline.ipynb) | PatentMatch, CLEF-IP 패밀리 |
 | 4 | **Key resource combinations** — 반도체 fabless 시장진입 분석 | 조직적 R&D / 핵심자원 분석 | core + rbv | 🚧 [03](notebooks/03_rbv_resource_combo_demo.ipynb) (데이터 대기 — 정렬 트랙) | Cho/Shin (PLoS ONE 2025), Bae/Shin (IEEE Access 2022) |
 | 5 | **복합실물옵션** — EUV vs High-NA 로드맵 가치평가 | 기술가치평가 (후속 학기) | core + foresight + commercialization | _(2026-2 예정)_ | 연구실 실물옵션 라인 |
+<!-- 공개본에서 뺀다: 시각화·Pages 는 공개본에 없다 -->
+<!-- sdkb:private-begin -->
 | 6 | **인터랙티브 KG 익스플로러** — 3-뷰(베이스라인 / SIRP / 4-pillar) GitHub Pages 배포 | 인터랙티브 시각화 | core + patent + rbv + foresight + commercialization | ✅ [Live](https://arkwith7.github.io/sdkb-dataset/) · `scripts/build_viz.py` | 연구실 시각화 트랙 |
+<!-- sdkb:private-end -->
+
 
 4-pillar 상세 매핑: [docs/project/research_alignment.md](docs/project/research_alignment.md).
 
@@ -137,12 +149,16 @@ docs/
 validation/shapes.ttl               # SHACL
 provenance/prov.ttl                 # PROV-O 체인
 examples/sparql/                    # 예시 쿼리
+<!-- 공개본에서 뺀다: 노트북은 공개본에 없다 -->
+<!-- sdkb:private-begin -->
 notebooks/
   01_matching_baseline_expert.ipynb  # ✅ Use Case 2 (SDKB-Match Expert floor baseline)
   02_patent_opportunity_demo.ipynb   # 🚧 Use Case 1 (novelty-focused mapping)
   03_rbv_resource_combo_demo.ipynb   # 🚧 Use Case 4 (RBV — 데이터 대기)
   04_prior_art_baseline.ipynb        # ✅ Use Case 3 (SDKB-Match PriorArt 베이스라인)
   05_synthetic_vs_curated_comparison.ipynb  # ✅ UC2 용 GT 타당성 진단
+<!-- sdkb:private-end -->
+
 CITATION.cff                        # advisor 명시
 ```
 

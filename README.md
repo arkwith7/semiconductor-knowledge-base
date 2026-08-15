@@ -24,7 +24,11 @@ size_categories:
 > Maintained by the [Quantitative Technology Management Lab](#lab-context) at Sungkyunkwan University's Graduate School of Management of Technology (PI: Prof. Juneseuk Shin).
 >
 > 🇰🇷 한국어 버전: [README.ko.md](README.ko.md)
+<!-- 공개본에서 뺀다: 시각화·Pages 는 공개본에 없다 -->
+<!-- sdkb:private-begin -->
 > 🔗 **Live demo (GitHub Pages):** [`arkwith7.github.io/sdkb-dataset`](https://arkwith7.github.io/sdkb-dataset/) — interactive 3-view explorer (curation graph · SIRP top-50 + prior art · 4-pillar class skeleton)
+<!-- sdkb:private-end -->
+
 
 ## One-line positioning
 
@@ -69,7 +73,11 @@ Prof. Shin's Quantitative Technology Management Lab combines patent / market / i
 | Patent-/market-/industry-driven **tech foresight** | `sdkb-patent.ttl` + SIRP + Topic / Novelty nodes | [Use case 1](#use-cases) |
 | Promising-technology **opportunity discovery** | Novelty-focused patent mapping, emerging-memory topic clusters | [Use case 1](#use-cases), 🚧 [notebook 02](notebooks/02_patent_opportunity_demo.ipynb) |
 | **SME innovation analysis / expert matching** | SDKB-Match Expert + synthetic-100 + curated-110 expert pool + multi-jurisdiction compliance gate | [Use case 2](#use-cases), 🚧 [notebook 01](notebooks/01_matching_baseline_expert.ipynb), ✅ [notebook 05](notebooks/05_synthetic_vs_curated_comparison.ipynb) |
+<!-- 공개본에서 뺀다: 시각화·Pages 는 공개본에 없다 -->
+<!-- sdkb:private-begin -->
 | **Interactive tech / business visualization** | Pyvis 3-view explorer with automatic GitHub Pages deploy | [Live demo](https://arkwith7.github.io/sdkb-dataset/), [docs/project/visualization_plan.md](docs/project/visualization_plan.md) |
+<!-- sdkb:private-end -->
+
 | Organizational R&D / innovation design (secondary) | RBV core-resource combinations + TRL / real-option seed nodes | [Use case 4](#use-cases), 🚧 [notebook 03](notebooks/03_rbv_resource_combo_demo.ipynb) |
 
 ## Why / For / How
@@ -91,7 +99,11 @@ Each use case instantiates a lab research line on SDKB's shared graph.
 | 3 | **SDKB-Match (PriorArt)** — patent application ↔ prior art using examiner-cited ground truth | IP-R&D consulting / prior-art analysis | core + patent + SIRP | ✅ [04](notebooks/04_prior_art_baseline.ipynb) | PatentMatch, CLEF-IP family |
 | 4 | **Key resource combinations** — semiconductor fabless market-entry analysis | Organizational R&D / core-resource analysis | core + rbv | 🚧 [03](notebooks/03_rbv_resource_combo_demo.ipynb) (data pending — alignment track) | Cho/Shin (PLoS ONE 2025), Bae/Shin (IEEE Access 2022) |
 | 5 | **Compound real options** — EUV vs. High-NA roadmap valuation | Technology valuation (later term) | core + foresight + commercialization | _(2026-2 planned)_ | Lab real-options line |
+<!-- 공개본에서 뺀다: 시각화·Pages 는 공개본에 없다 -->
+<!-- sdkb:private-begin -->
 | 6 | **Interactive KG explorer** — 3-view (baseline / SIRP / 4-pillar) GitHub Pages deploy | Interactive visualization | core + patent + rbv + foresight + commercialization | ✅ [Live](https://arkwith7.github.io/sdkb-dataset/) · `scripts/build_viz.py` | Lab visualization track |
+<!-- sdkb:private-end -->
+
 
 Detailed 4-pillar mapping: [docs/project/research_alignment.md](docs/project/research_alignment.md).
 
@@ -137,12 +149,16 @@ docs/
 validation/shapes.ttl               # SHACL
 provenance/prov.ttl                 # PROV-O chain
 examples/sparql/                    # example queries
+<!-- 공개본에서 뺀다: 노트북은 공개본에 없다 -->
+<!-- sdkb:private-begin -->
 notebooks/
   01_matching_baseline_expert.ipynb  # ✅ Use Case 2 (SDKB-Match Expert floor baseline)
   02_patent_opportunity_demo.ipynb   # 🚧 Use Case 1 (novelty-focused mapping)
   03_rbv_resource_combo_demo.ipynb   # 🚧 Use Case 4 (RBV — data pending)
   04_prior_art_baseline.ipynb        # ✅ Use Case 3 (SDKB-Match PriorArt baseline)
   05_synthetic_vs_curated_comparison.ipynb  # ✅ GT validity diagnostics for UC2
+<!-- sdkb:private-end -->
+
 CITATION.cff                        # advisor explicit
 ```
 
@@ -239,6 +255,8 @@ The 31 questions carry their own metadata (`# suite:` — `pa` prior-art, `em` e
 fail**; the report's `graph_files_missing` names the files, so a failure tells you what to build
 rather than that the ontology is broken.
 
+<!-- 공개본에서 뺀다: 시각화·Pages 는 공개본에 없다 -->
+<!-- sdkb:private-begin -->
 ### Interactive visualization (GitHub Pages)
 ```bash
 make viz       # build baseline / SIRP / 4-pillar HTML into site/
@@ -247,6 +265,8 @@ make viz-open  # build + open site/index.html in the default browser
 - `site/` is gitignored and rebuilt by [.github/workflows/viz-deploy.yml](.github/workflows/viz-deploy.yml) on every push to `main`
 - One-time setup: repository **Settings → Pages → Source: GitHub Actions**
 - Details: [docs/project/visualization_plan.md](docs/project/visualization_plan.md)
+<!-- sdkb:private-end -->
+
 
 ### Release signature
 

@@ -5,7 +5,6 @@
         public-release check-public signature signature-inject signature-check \
         superordinate-concepts concept-mapping \
         semiconto-fetch semiconto-analyze semiconto-align semiconto-enrich semiconto-phase0 \
-        viz viz-clean viz-open \
         pipeline pipeline-sirp pipeline-full pipeline-with-expdataset help
 
 PYTHON ?= python3
@@ -51,9 +50,11 @@ help:
 	@echo "  semiconto-align    Build SDKB↔SemicONTO SKOS alignment (mappings/)"
 	@echo "  semiconto-enrich   Identify enrichment candidates (Bucket A/B)"
 	@echo "  semiconto-phase0   fetch + analyze + align + enrich (SDKB-centric Phase 0)"
+# sdkb:private-begin
 	@echo "  viz             Build interactive GitHub Pages site → site/"
 	@echo "  viz-open        Build viz and open site/index.html in default browser"
 	@echo "  viz-clean       Remove site/ build artifacts"
+# sdkb:private-end
 	@echo "  pipeline        parse + owl + convert + validate + test"
 	@echo "  pipeline-sirp   pipeline + sirp"
 	@echo "  pipeline-full   pipeline + sirp + experts"
@@ -265,7 +266,12 @@ semiconto-enrich: semiconto-align
 
 semiconto-phase0: semiconto-fetch semiconto-analyze semiconto-align semiconto-enrich
 
+# sdkb:private-begin
 # ── Visualization (GitHub Pages demo) ─────────────────────────────
+# .PHONY 를 여기 둔다 — 위쪽 목록은 `\` 로 이어져 있어 그 사이에 주석을 넣으면
+# 이어붙이기가 깨진다(실측: "missing separator"). 공개본에서는 이 블록째 사라진다.
+.PHONY: viz viz-clean viz-open
+
 viz:
 	$(PYTHON) scripts/build_viz.py
 
@@ -276,6 +282,7 @@ viz-open: viz
 
 viz-clean:
 	rm -rf site/
+# sdkb:private-end
 
 # ── Composed pipelines ────────────────────────────────────────────
 pipeline: parse owl convert validate test
