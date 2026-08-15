@@ -233,16 +233,35 @@ graph the paper cites. What follows says exactly what is missing, why, and which
 
 | Layer | What is empty | Why | Command to fill | Credentials needed |
 |---|---|---|---|---|
-| **T-Box** (`ontology/sdkb-core.ttl`) | nothing — but the file itself is a build artifact | generated from the committed `data/semiconductor_v0_3.json` (392 KB) | `make owl && make convert` | none |
+| **T-Box** (`ontology/sdkb-core.ttl`) | nothing — **the file is committed** (2026-08-15) | it is also a build artifact: `data/semiconductor_v0_3.json` (392 KB) regenerates it **byte-identically** | `make owl && make convert` | none |
 | **SIRP patent A-Box** (`ontology/sdkb-abox-patents.ttl`) | abstracts and claim text | KIPRIS full text is not redistributable | `make refetch-fulltext && make abox-patents` | KIPRIS OpenAPI key |
 | **Rejected-patent dataset** (`data/patents/raw/…rejected_patents.jsonl`) | `abstract`, `claim1`, `claims_full[].text` are present as **empty strings** — the schema, the identifiers, the IPC/date metadata and the `ground_truth_*` citation labels are all intact | same | `python scripts/refetch_rejected_patents.py` (verifies the restored file against a published sha256) | KIPRIS OpenAPI key |
 | **Cited prior-art A-Box** (`ontology/sdkb-abox-prior-art.ttl`, 21 MB) | the whole file | built from collected full text | `make refetch-fulltext && make abox-prior-art` | KIPRIS key (+ BigQuery for non-KR documents) |
 | **Claim-feature A-Box** (`ontology/sdkb-abox-claim-features.ttl`, 899 MB) | the whole file | derived from claim text; too large to distribute regardless of licence | `make abox-claim-features` | KIPRIS key; several hours |
-| **Governance instances** (`ontology/sdkb-governance-*-instances.ttl`) | the whole files | build artifacts of committed sources | `make compliance` | none |
+| **Governance instances** (`ontology/sdkb-governance-*-instances.ttl`) | nothing — **committed** (2026-08-15) | build artifacts of committed sources; regenerate byte-identically | `make compliance` | none |
 | **Expert profiles and ratings** | nothing | committed — they are **synthetic**, generated for method evaluation, and contain no personal data | `make expdataset` | none |
 
 Everything with "none" in the last column reproduces from an empty checkout. Everything else
 needs your own key: we can give you the procedure, not the licensed text.
+
+**Build the patent A-Box before the vendor A-Box.** `build_abox_vendors_ksia.py` matches KSIA
+members against organisation nodes that already exist in the graph, and most of those nodes come
+from patent applicants. Run it first and 31 matches drop to 2, producing different IRI slugs
+(`organization/asendia_co_ltd` instead of `organization/asendia`) — the file still builds, it just
+will not match the published one. `make pipeline-full` already orders this correctly.
+
+**Measured reproduction (2026-08-15).** From a clean clone of this repository:
+
+| | Out of the box | After `refetch-fulltext` with your own key |
+|---|---|---|
+| Competency questions | **14/31 = 0.452** (`pa` 1/8) | **27/31 = 0.871** — `em`, `tf`, `core` all 1.000 |
+| Patent A-Box | not buildable | **33,934 triples** vs 33,931 in the paper's snapshot (**0.009 %**) |
+
+The 0.009 % gap comes from where the abstract is read: the original collector preferred the search
+response's `astrtCont` and the restore script queries bibliographic data only. The four questions
+that never recover (CQ27, CQ29–31) all need the claim-feature layer, whose decomposition input is
+the claim text itself — that layer cannot be published, and re-collecting it does not reproduce
+byte-for-byte because the decomposition uses a language model.
 
 ### Competency questions
 
