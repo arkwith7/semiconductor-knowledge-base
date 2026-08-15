@@ -207,6 +207,23 @@ def test_제외_결정이_조용히_뒤집히지_않는다():
     assert is_allowed("scripts/sdkb_nb.py")
 
 
+def test_청구항_투영은_공개되지_않는다():
+    """사용자 결정(2026-08-15) — 청구항 구조 1,306,191행은 공개 트리에 넣지 않는다.
+
+    **접두사 허용이 기본 비공개 원칙을 무력화한 자리**라서 테스트로 고정한다.
+    `mappings/` 는 통째 허용이므로 이 파일은 아무도 결정하지 않아도 공개된다 —
+    실제로 그렇게 될 뻔했다. 원문이 0열이라 KIPRIS 조건과 충돌하지는 않지만,
+    **범주가 다른 자산**(어휘·T-Box·shape·CQ·메타가 아니라 청구항 분해 구조)이다.
+
+    되돌리려면 이 테스트를 함께 고쳐야 한다 — 그것이 이 테스트의 목적이다.
+    """
+    assert not is_allowed("mappings/claim_features.parquet")
+    # 메타는 남는다 — 개념별 df 와 커버리지 집계뿐이고 행 단위 구조가 없다.
+    assert is_allowed("mappings/claim_feature_release_meta.json")
+    # 같은 접두사의 기존 자산은 그대로 공개된다(이 제외가 mappings/ 를 통째로 닫지 않는다).
+    assert is_allowed("mappings/concept_mapping.json")
+
+
 def test_비공개_블록은_자기_줄에_혼자_있어야_인정된다():
     """마커를 **설명하는** 줄이 마커가 되면 안 된다. 실제로 그래서 빌드가 죽었다."""
     body = ("살린다\n"
