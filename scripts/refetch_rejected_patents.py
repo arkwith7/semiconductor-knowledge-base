@@ -45,6 +45,9 @@ from enrich_targets_b3_b5 import _extract_claims_full  # noqa: E402
 from kipris_dataset.kipris import KiprisClient  # noqa: E402
 
 DATASET = ROOT / "data" / "patents" / "raw" / "semiconductor_industry_rejected_patents.jsonl"
+# 복원본이 가는 곳. **추적되지 않는다**(.gitignore) — 위 파일은 원문이 비어 있는 공개본이고,
+# 그것을 제자리에서 채우면 `git commit -a` 한 번에 KIPRIS 원문이 공개된다.
+FULLTEXT_NAME = "semiconductor_industry_rejected_patents.fulltext.jsonl"
 CACHE = ROOT / "data" / "interim" / "refetch_biblio_cache.jsonl"
 REPORT = ROOT / "data" / "reports" / "refetch_rejected_patents.json"
 
@@ -94,6 +97,8 @@ def missing_fields(tp: dict) -> list[str]:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--dataset", type=Path, default=DATASET)
+    ap.add_argument("--in-place", action="store_true",
+                    help="추적 파일을 제자리에서 갱신한다(비공개 개발 리포 전용).")
     ap.add_argument("--limit", type=int, default=None, help="앞의 N 건만 (스모크)")
     ap.add_argument("--dry-run", action="store_true", help="비어 있는 것만 세고 끝낸다")
     ap.add_argument("--max-calls", type=int, default=5000)
@@ -167,12 +172,21 @@ def main() -> int:
         if n % 50 == 0:
             print(f"      {n}/{len(todo)} · 호출 {budget.used}")
 
-    # 원본과 같은 직렬화로 되쓴다 — ensure_ascii=False 왕복이 바이트 동일임을 확인했다.
-    tmp = args.dataset.with_suffix(".jsonl.tmp")
+    # **복원본은 추적 파일을 덮지 않는다(2026-08-15).** 예전에는 args.dataset 을 제자리에서
+    # 갈아치웠는데, 그 파일은 git 추적 대상이라 재인출 직후 `git status` 가 원문 1,000행을
+    # 변경으로 잡는다 — `git commit -a` 한 번이면 KIPRIS 원문이 공개 리포에 올라간다.
+    # 실제로 깨끗한 클론에서 재현했다(2026-08-15 · 1,000 insertions).
+    # 그래서 기본 출력은 **gitignore 된 옆 파일**이고, 소비자(ingest)가 그것을 먼저 읽는다.
+    # 제자리 갱신이 필요하면 --in-place 로 명시한다 — 비공개 개발 리포의 용법이다.
+    out = args.dataset if args.in_place else args.dataset.with_name(FULLTEXT_NAME)
+    tmp = out.with_suffix(".jsonl.tmp")
     with tmp.open("w", encoding="utf-8") as fh:
         for r in rows:
             fh.write(json.dumps(r, ensure_ascii=False) + "\n")
-    tmp.replace(args.dataset)
+    tmp.replace(out)
+    args.dataset = out
+    if not args.in_place:
+        print(f"[refetch] 원문은 추적되지 않는 옆 파일에 쓴다 → {out.name}")
 
     digest = sha256_of(args.dataset)
     match = digest == CANONICAL_SHA256

@@ -31,7 +31,13 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from kipris_dataset import citation_norm as CN  # noqa: E402  흡수 2026-08-09 (CR-016 §4)
 
 ROOT = Path(__file__).resolve().parent.parent
-IN_PATH = ROOT / "data" / "patents" / "raw" / "semiconductor_industry_rejected_patents.jsonl"
+_RAW = ROOT / "data" / "patents" / "raw"
+# **복원본이 있으면 그것을 먼저 읽는다(2026-08-15).** 공개본의 추적 파일은 원문이 비어 있고,
+# 재인출은 그것을 덮지 않고 옆에 `.fulltext.jsonl` 로 쓴다(refetch_rejected_patents.py).
+# 그렇게 갈라 둔 이유는 하나다 — 추적 파일을 제자리에서 채우면 `git commit -a` 한 번에
+# KIPRIS 원문이 공개 리포에 올라간다. 깨끗한 클론에서 실제로 재현했다.
+_FULLTEXT = _RAW / "semiconductor_industry_rejected_patents.fulltext.jsonl"
+IN_PATH = _FULLTEXT if _FULLTEXT.exists() else _RAW / "semiconductor_industry_rejected_patents.jsonl"
 OUT_DIR = ROOT / "data" / "patents"
 OUT_META = OUT_DIR / "rejected_patents_meta.parquet"
 OUT_IPC = OUT_DIR / "ipc_links.parquet"
