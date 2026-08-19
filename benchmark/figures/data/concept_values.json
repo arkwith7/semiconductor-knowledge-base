@@ -1,0 +1,268 @@
+{
+  "note": "개념 그림이 인용하는 수치의 동결본. 손으로 고치지 않는다 — 산출물을 갱신한 뒤 `make figure-data` 로 재동결한다 (CLAUDE.md §1-1 · 그림 규격 F6).",
+  "values": {
+    "ep3.concepts_per_doc.before": {
+      "value": 1.545,
+      "source": "01.code_spec/archive/PLAN-035-h2-linker-preregistration.md",
+      "how": "자원 델타 표 · 문서당 개념 (O 팔)"
+    },
+    "ep3.concepts_per_doc.after": {
+      "value": 3.779,
+      "source": "01.code_spec/archive/PLAN-035-h2-linker-preregistration.md",
+      "how": "자원 델타 표 · 문서당 개념 (O′ 팔)"
+    },
+    "ep3.concept_vocab.before": {
+      "value": 141,
+      "source": "01.code_spec/archive/PLAN-035-h2-linker-preregistration.md",
+      "how": "자원 델타 표 · 개념 어휘 (O 팔)"
+    },
+    "ep3.concept_vocab.after": {
+      "value": 199,
+      "source": "01.code_spec/archive/PLAN-035-h2-linker-preregistration.md",
+      "how": "자원 델타 표 · 개념 어휘 (O′ 팔)"
+    },
+    "ep3.b5.before": {
+      "value": 0.18,
+      "source": "01.code_spec/archive/PLAN-035-h2-linker-preregistration.md",
+      "how": "절대값 표 · B5 온톨로지 단독 R@100 (O 팔)"
+    },
+    "ep3.b5.after": {
+      "value": 0.2282,
+      "source": "01.code_spec/archive/PLAN-035-h2-linker-preregistration.md",
+      "how": "절대값 표 · B5 온톨로지 단독 R@100 (O′ 팔)"
+    },
+    "ep3.p1.before": {
+      "value": 0.4849,
+      "source": "01.code_spec/archive/PLAN-035-h2-linker-preregistration.md",
+      "how": "T1 판정행 · 교체 대상 구성 R@100 (O 팔)"
+    },
+    "ep3.p1.after": {
+      "value": 0.4556,
+      "source": "01.code_spec/archive/PLAN-035-h2-linker-preregistration.md",
+      "how": "T1 판정행 · 교체 대상 구성 R@100 (O′ 팔)"
+    },
+    "ep3.p1.delta": {
+      "value": -0.0293,
+      "source": "01.code_spec/archive/PLAN-035-h2-linker-preregistration.md",
+      "how": "T1 판정행 · ΔR₁₀₀ (부호는 음수)"
+    },
+    "ep3.p1.ci_lo": {
+      "value": -0.0542,
+      "source": "01.code_spec/archive/PLAN-035-h2-linker-preregistration.md",
+      "how": "T1 판정행 · 95% CI 하한"
+    },
+    "ep3.p1.ci_hi": {
+      "value": -0.0053,
+      "source": "01.code_spec/archive/PLAN-035-h2-linker-preregistration.md",
+      "how": "T1 판정행 · 95% CI 상한"
+    },
+    "ep3.t2_max_drop": {
+      "value": 0.0401,
+      "source": "01.code_spec/archive/PLAN-035-h2-linker-preregistration.md",
+      "how": "T2 판정행 · 하위집단 최대 하락"
+    },
+    "ep4.p1_gain.delta": {
+      "value": 0.053387045053711724,
+      "source": "data/processed/ir/ir_increment_delta_test.csv",
+      "how": "증분 CSV · 온톨로지 추가 행"
+    },
+    "ep4.p1_gain.lb95": {
+      "value": 0.014469897386564052,
+      "source": "data/processed/ir/ir_increment_delta_test.csv",
+      "how": "증분 CSV · 온톨로지 추가 행"
+    },
+    "ep4.p1_gain.ub95": {
+      "value": 0.09255701859868526,
+      "source": "data/processed/ir/ir_increment_delta_test.csv",
+      "how": "증분 CSV · 온톨로지 추가 행"
+    },
+    "ep4.p1_gain.p": {
+      "value": 0.008,
+      "source": "data/processed/ir/ir_increment_delta_test.csv",
+      "how": "증분 CSV · 온톨로지 추가 행"
+    },
+    "ep4.n_queries": {
+      "value": 198,
+      "source": "data/processed/ir/ir_increment_delta_test.csv",
+      "how": "증분 CSV · 평가 질의 수"
+    },
+    "ep4b.p1_gain.delta": {
+      "value": 0.03425925925925926,
+      "source": "data/processed/ir/ir_performance_test_b.csv",
+      "how": "성능 CSV(B층) · 부차 구성의 Δ family Recall@100"
+    },
+    "ep4b.p1_gain.lb95": {
+      "value": 0.009427609427609429,
+      "source": "data/processed/ir/ir_performance_test_b.csv",
+      "how": "성능 CSV(B층) · 부차 구성의 95% CI 하한"
+    },
+    "effort.median_reduction_pct": {
+      "value": 0.0,
+      "source": "paper/tables/ir_effort_test.md",
+      "how": "Candidate Reduction 표 · R=0.5 행"
+    },
+    "effort.win_tie_loss": {
+      "value": "62/16/64",
+      "source": "paper/tables/ir_effort_test.md",
+      "how": "Candidate Reduction 표 · R=0.5 행"
+    },
+    "t4.citation_precision.delta": {
+      "value": 0.023559236421512086,
+      "source": "data/processed/ir/rag/scores/rag_t4_verdict_test_b.json",
+      "how": "T4 판정 JSON · 주 지표 점추정"
+    },
+    "t4.citation_precision.lb95": {
+      "value": -0.02052976958545555,
+      "source": "data/processed/ir/rag/scores/rag_t4_verdict_test_b.json",
+      "how": "T4 판정 JSON · 주 지표 95% CI 하한"
+    },
+    "t4.eps": {
+      "value": 0.02,
+      "source": "data/processed/ir/rag/scores/rag_t4_verdict_test_b.json",
+      "how": "T4 판정 JSON · 동결 마진 ε_T4"
+    },
+    "t4.hallucination.delta": {
+      "value": -0.005908869976269217,
+      "source": "data/processed/ir/rag/scores/rag_t4_verdict_test_b.json",
+      "how": "T4 판정 JSON · 환각률 점추정"
+    },
+    "t4.precision_noninferior": {
+      "value": false,
+      "source": "data/processed/ir/rag/scores/rag_t4_verdict_test_b.json",
+      "how": "T4 판정 JSON · 인용 정확도 비열등 조건"
+    },
+    "t4.hallucination_bounded": {
+      "value": true,
+      "source": "data/processed/ir/rag/scores/rag_t4_verdict_test_b.json",
+      "how": "T4 판정 JSON · 환각률 상한 조건"
+    },
+    "ep2.t3_only": {
+      "value": "12/45",
+      "source": "paper/tables/fault_matrix_v4.md",
+      "how": "τ 민감도 표 · 주 τ=0.05 행 · T3 단독 검출"
+    },
+    "ep2.t3_detected": {
+      "value": "16/45",
+      "source": "paper/tables/fault_matrix_v4.md",
+      "how": "τ 민감도 표 · 주 τ=0.05 행 · T3 검출"
+    },
+    "ep2.l3_detected": {
+      "value": "2/45",
+      "source": "paper/tables/fault_matrix_v4.md",
+      "how": "τ 민감도 표 · 주 τ=0.05 행 · L3 검출"
+    },
+    "ep2.false_positive": {
+      "value": "0/27",
+      "source": "paper/tables/fault_matrix_v4.md",
+      "how": "τ 민감도 표 · 주 τ=0.05 행 · 위양성"
+    },
+    "ep2.mcnemar_p": {
+      "value": 0.0001,
+      "source": "paper/tables/fault_matrix_v4.md",
+      "how": "τ 민감도 표 · 주 τ=0.05 행 · McNemar p"
+    },
+    "gate.epsilon": {
+      "value": 0.02,
+      "source": "data/processed/tgate_report_test.json",
+      "how": "T-gate 판정 보고 · T1 비열등 마진"
+    },
+    "gate.delta": {
+      "value": 0.05,
+      "source": "data/processed/tgate_report_test.json",
+      "how": "T-gate 판정 보고 · T2 하위집단 임계"
+    },
+    "ep3.t3_suites": {
+      "value": "em 6/6 · tf 5/5 · core 12/12 — 전부 1.000 → 1.000",
+      "source": "01.code_spec/archive/PLAN-035-h2-linker-preregistration.md",
+      "how": "T3 판정행 · 스위트별 통과율"
+    },
+    "views.match": {
+      "value": [
+        "전문가 매칭",
+        "`Problem`·`RootCause`·`FailureMode`·`Mitigation`·`Skill`·`Expert`·`ExpertCase`",
+        "11·12·15–18·20·28",
+        "비식별·생성 인스턴스",
+        "표현 타당성 + **음성 대조군**(§5.12) · 성능 미평가"
+      ],
+      "source": "paper/supplementary/S5-submission-full-v2.md",
+      "how": "표 3 · 전문가 매칭 행"
+    },
+    "views.priorart": {
+      "value": [
+        "선행기술조사",
+        "`Patent`·`Claim`·`ClaimFeature`·`PriorArtJudgment`·`Rejection`·`ClassificationSymbol`",
+        "09·10·22·27 (+29–31 측정)",
+        "거절특허 1,000 · 심사관 인용 2,534 · claim sidecar",
+        "**주 정량 검증** (Recall@K·nDCG·게이트)"
+      ],
+      "source": "paper/supplementary/S5-submission-full-v2.md",
+      "how": "표 3 · 선행기술조사 행"
+    },
+    "views.foresight": {
+      "value": [
+        "기술예측",
+        "`TechnologyNode`·`Scenario`·`STEEPVEFactor`·`RealOption`·`TRL`",
+        "01–08·23–26",
+        "G1·G2 시계열",
+        "2차 재사용 증거 (§7.4)"
+      ],
+      "source": "paper/supplementary/S5-submission-full-v2.md",
+      "how": "표 3 · 기술예측 행"
+    },
+    "flow.pool_depth": {
+      "value": 1000,
+      "source": "src/sdkb_paper/retrieval/systems.py",
+      "how": "재랭크 풀 깊이 상수 POOL_K"
+    },
+    "flow.rrf_c": {
+      "value": 60,
+      "source": "src/sdkb_paper/retrieval/hybrid.py",
+      "how": "순위 융합 상수 RRF_C"
+    },
+    "flow.b4_r100": {
+      "value": 0.185990860990861,
+      "source": "data/processed/ir/ir_performance_test.csv",
+      "how": "성능 CSV · 분류 단독 구성의 family Recall@100"
+    },
+    "ceiling.pool_ratio": {
+      "value": 0.6033402922755741,
+      "source": "data/processed/ir/rerank_ceiling_test.json",
+      "how": "상한 JSON · 후보 풀 안의 정답 비율 (문서 단위)"
+    },
+    "ceiling.pool_hits": {
+      "value": 289,
+      "source": "data/processed/ir/rerank_ceiling_test.json",
+      "how": "상한 JSON · 후보 풀 안의 정답 엣지 수"
+    },
+    "ceiling.edges": {
+      "value": 479,
+      "source": "data/processed/ir/rerank_ceiling_test.json",
+      "how": "상한 JSON · 분모 (확증 분할의 정답 엣지)"
+    },
+    "cq.pa": {
+      "value": 5,
+      "source": "queries/cq",
+      "how": "L3 가 관찰하는 주 태스크 스위트"
+    },
+    "cq.em": {
+      "value": 6,
+      "source": "queries/cq",
+      "how": "T3 스위트 · 전문가 매칭"
+    },
+    "cq.tf": {
+      "value": 5,
+      "source": "queries/cq",
+      "how": "T3 스위트 · 기술예측"
+    },
+    "cq.core": {
+      "value": 12,
+      "source": "queries/cq",
+      "how": "T3 스위트 · 공유 코어"
+    },
+    "cq.total": {
+      "value": 28,
+      "source": "queries/cq",
+      "how": "게이트가 세는 CQ 전량"
+    }
+  }
+}

@@ -1,0 +1,1811 @@
+{
+  "run_id": "w4b_n03",
+  "split": "dev",
+  "reps": 3,
+  "strengths": [
+    0.01,
+    0.05,
+    0.1
+  ],
+  "workers": 9,
+  "elapsed_s": 162.7,
+  "summary": {
+    "n_instances": 0,
+    "n_errors": 0,
+    "false_positive": {
+      "n_normal": 9,
+      "n_rejected": 0,
+      "rate": 0.0,
+      "rejected": []
+    },
+    "by_fault": {
+      "N03": {
+        "label": "정상 델타(완전중복 병합)",
+        "expected": "none",
+        "cross_task": false,
+        "n": 9,
+        "rates": {
+          "L0": 0.0,
+          "L1": 0.0,
+          "L2": 0.0,
+          "L3": 0.0,
+          "leak": 0.0,
+          "T1": 0.0,
+          "T2": 0.0,
+          "T3": 0.0
+        },
+        "first_layer": null,
+        "undetected": 9
+      }
+    },
+    "mcnemar": {
+      "b": 0,
+      "c": 0,
+      "n_discordant": 0,
+      "p": 1.0,
+      "test": "none(불일치 0)"
+    },
+    "h1": {
+      "n_cross_instances": 0,
+      "n_t3_only": 0,
+      "rate_t3_only": 0.0
+    }
+  },
+  "instances": [
+    {
+      "fault": "N03",
+      "label": "정상 델타(완전중복 병합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 0,
+      "seed": 3762214255,
+      "workspace": "/home/arkwith/Dev/SKKU/sdkb-foresight-paper/data/quarantine/w4b_n03/N03_s01_r0",
+      "stats": {
+        "criterion": "IRI 제외 트리플 집합 완전 동일",
+        "n_candidates": 13,
+        "n_affected": 1,
+        "n_entities_merged": 4
+      },
+      "detected": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "n_cq_pass": 27,
+      "t3": {
+        "gate": "T3",
+        "suites": [
+          "em",
+          "tf",
+          "core"
+        ],
+        "rows": [
+          {
+            "suite": "em",
+            "rate_old": 1.0,
+            "rate_new": 1.0,
+            "drop": 0.0,
+            "n_pass_new": 6,
+            "n_total_new": 6,
+            "n_total_old": 6,
+            "regressed": false
+          },
+          {
+            "suite": "tf",
+            "rate_old": 1.0,
+            "rate_new": 1.0,
+            "drop": 0.0,
+            "n_pass_new": 5,
+            "n_total_new": 5,
+            "n_total_old": 5,
+            "regressed": false
+          },
+          {
+            "suite": "core",
+            "rate_old": 1.0,
+            "rate_new": 1.0,
+            "drop": 0.0,
+            "n_pass_new": 12,
+            "n_total_new": 12,
+            "n_total_old": 12,
+            "regressed": false
+          }
+        ],
+        "regressed": [],
+        "waived": false,
+        "waiver_reason": null,
+        "pass": true
+      },
+      "leak": {
+        "g1_doc_as_concept": 0,
+        "g3_gold_concept_copy_pairs": 552,
+        "g3_exceeds": false
+      },
+      "t1": {
+        "gate": "T1",
+        "metric": "family Recall@100",
+        "epsilon": 0.02,
+        "delta": 0.04247038917089678,
+        "lb95": 0.012859560067681892,
+        "ub95": 0.0733502538071066,
+        "mean_new": 0.41950688905003625,
+        "mean_old": 0.3770364998791395,
+        "n_queries": 197,
+        "n_boot": 10000,
+        "seed": 20260726,
+        "pass": true
+      },
+      "t2": {
+        "gate": "T2",
+        "metric": "family Recall@100",
+        "delta": 0.05,
+        "min_n": 20,
+        "dims": [
+          {
+            "dim": "pos_lang",
+            "max_drop": -0.022180451127819523,
+            "n_reliable": 2,
+            "worst_group": "has_foreign",
+            "rows": [
+              {
+                "group": "has_foreign",
+                "n": 133,
+                "r_new": 0.24706408879341207,
+                "r_old": 0.22488363766559255,
+                "drop": -0.022180451127819523,
+                "reliable": true
+              },
+              {
+                "group": "kr_only",
+                "n": 64,
+                "r_new": 0.7778645833333333,
+                "r_old": 0.6932291666666667,
+                "drop": -0.08463541666666663,
+                "reliable": true
+              }
+            ]
+          },
+          {
+            "dim": "proc_group",
+            "max_drop": -0.0474658869395711,
+            "n_reliable": 1,
+            "worst_group": "process",
+            "rows": [
+              {
+                "group": "device",
+                "n": 16,
+                "r_new": 0.4380952380952381,
+                "r_old": 0.4068452380952381,
+                "drop": -0.03125,
+                "reliable": false
+              },
+              {
+                "group": "other",
+                "n": 10,
+                "r_new": 0.2533333333333333,
+                "r_old": 0.2783333333333333,
+                "drop": 0.025000000000000022,
+                "reliable": false
+              },
+              {
+                "group": "process",
+                "n": 171,
+                "r_new": 0.427485380116959,
+                "r_old": 0.3800194931773879,
+                "drop": -0.0474658869395711,
+                "reliable": true
+              }
+            ]
+          },
+          {
+            "dim": "rejection",
+            "max_drop": -0.03197674418604651,
+            "n_reliable": 2,
+            "worst_group": "unlabeled",
+            "rows": [
+              {
+                "group": "inventiveness",
+                "n": 107,
+                "r_new": 0.4121495327102804,
+                "r_old": 0.3690031152647975,
+                "drop": -0.043146417445482865,
+                "reliable": true
+              },
+              {
+                "group": "novelty+inventiveness",
+                "n": 4,
+                "r_new": 0.5,
+                "r_old": 0.25,
+                "drop": -0.25,
+                "reliable": false
+              },
+              {
+                "group": "unlabeled",
+                "n": 86,
+                "r_new": 0.4249169435215947,
+                "r_old": 0.3929401993355482,
+                "drop": -0.03197674418604651,
+                "reliable": true
+              }
+            ]
+          }
+        ],
+        "max_drop": -0.022180451127819523,
+        "worst": {
+          "dim": "pos_lang",
+          "group": "has_foreign"
+        },
+        "undetermined": false,
+        "pass": true
+      },
+      "elapsed_s": 158.7,
+      "first_layer": null
+    },
+    {
+      "fault": "N03",
+      "label": "정상 델타(완전중복 병합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 1,
+      "seed": 1935934312,
+      "workspace": "/home/arkwith/Dev/SKKU/sdkb-foresight-paper/data/quarantine/w4b_n03/N03_s01_r1",
+      "stats": {
+        "criterion": "IRI 제외 트리플 집합 완전 동일",
+        "n_candidates": 13,
+        "n_affected": 1,
+        "n_entities_merged": 4
+      },
+      "detected": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "n_cq_pass": 27,
+      "t3": {
+        "gate": "T3",
+        "suites": [
+          "em",
+          "tf",
+          "core"
+        ],
+        "rows": [
+          {
+            "suite": "em",
+            "rate_old": 1.0,
+            "rate_new": 1.0,
+            "drop": 0.0,
+            "n_pass_new": 6,
+            "n_total_new": 6,
+            "n_total_old": 6,
+            "regressed": false
+          },
+          {
+            "suite": "tf",
+            "rate_old": 1.0,
+            "rate_new": 1.0,
+            "drop": 0.0,
+            "n_pass_new": 5,
+            "n_total_new": 5,
+            "n_total_old": 5,
+            "regressed": false
+          },
+          {
+            "suite": "core",
+            "rate_old": 1.0,
+            "rate_new": 1.0,
+            "drop": 0.0,
+            "n_pass_new": 12,
+            "n_total_new": 12,
+            "n_total_old": 12,
+            "regressed": false
+          }
+        ],
+        "regressed": [],
+        "waived": false,
+        "waiver_reason": null,
+        "pass": true
+      },
+      "leak": {
+        "g1_doc_as_concept": 0,
+        "g3_gold_concept_copy_pairs": 552,
+        "g3_exceeds": false
+      },
+      "t1": {
+        "gate": "T1",
+        "metric": "family Recall@100",
+        "epsilon": 0.02,
+        "delta": 0.04247038917089678,
+        "lb95": 0.012859560067681892,
+        "ub95": 0.0733502538071066,
+        "mean_new": 0.41950688905003625,
+        "mean_old": 0.3770364998791395,
+        "n_queries": 197,
+        "n_boot": 10000,
+        "seed": 20260726,
+        "pass": true
+      },
+      "t2": {
+        "gate": "T2",
+        "metric": "family Recall@100",
+        "delta": 0.05,
+        "min_n": 20,
+        "dims": [
+          {
+            "dim": "pos_lang",
+            "max_drop": -0.022180451127819523,
+            "n_reliable": 2,
+            "worst_group": "has_foreign",
+            "rows": [
+              {
+                "group": "has_foreign",
+                "n": 133,
+                "r_new": 0.24706408879341207,
+                "r_old": 0.22488363766559255,
+                "drop": -0.022180451127819523,
+                "reliable": true
+              },
+              {
+                "group": "kr_only",
+                "n": 64,
+                "r_new": 0.7778645833333333,
+                "r_old": 0.6932291666666667,
+                "drop": -0.08463541666666663,
+                "reliable": true
+              }
+            ]
+          },
+          {
+            "dim": "proc_group",
+            "max_drop": -0.0474658869395711,
+            "n_reliable": 1,
+            "worst_group": "process",
+            "rows": [
+              {
+                "group": "device",
+                "n": 16,
+                "r_new": 0.4380952380952381,
+                "r_old": 0.4068452380952381,
+                "drop": -0.03125,
+                "reliable": false
+              },
+              {
+                "group": "other",
+                "n": 10,
+                "r_new": 0.2533333333333333,
+                "r_old": 0.2783333333333333,
+                "drop": 0.025000000000000022,
+                "reliable": false
+              },
+              {
+                "group": "process",
+                "n": 171,
+                "r_new": 0.427485380116959,
+                "r_old": 0.3800194931773879,
+                "drop": -0.0474658869395711,
+                "reliable": true
+              }
+            ]
+          },
+          {
+            "dim": "rejection",
+            "max_drop": -0.03197674418604651,
+            "n_reliable": 2,
+            "worst_group": "unlabeled",
+            "rows": [
+              {
+                "group": "inventiveness",
+                "n": 107,
+                "r_new": 0.4121495327102804,
+                "r_old": 0.3690031152647975,
+                "drop": -0.043146417445482865,
+                "reliable": true
+              },
+              {
+                "group": "novelty+inventiveness",
+                "n": 4,
+                "r_new": 0.5,
+                "r_old": 0.25,
+                "drop": -0.25,
+                "reliable": false
+              },
+              {
+                "group": "unlabeled",
+                "n": 86,
+                "r_new": 0.4249169435215947,
+                "r_old": 0.3929401993355482,
+                "drop": -0.03197674418604651,
+                "reliable": true
+              }
+            ]
+          }
+        ],
+        "max_drop": -0.022180451127819523,
+        "worst": {
+          "dim": "pos_lang",
+          "group": "has_foreign"
+        },
+        "undetermined": false,
+        "pass": true
+      },
+      "elapsed_s": 161.1,
+      "first_layer": null
+    },
+    {
+      "fault": "N03",
+      "label": "정상 델타(완전중복 병합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 2,
+      "seed": 803836902,
+      "workspace": "/home/arkwith/Dev/SKKU/sdkb-foresight-paper/data/quarantine/w4b_n03/N03_s01_r2",
+      "stats": {
+        "criterion": "IRI 제외 트리플 집합 완전 동일",
+        "n_candidates": 13,
+        "n_affected": 1,
+        "n_entities_merged": 1
+      },
+      "detected": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "n_cq_pass": 27,
+      "t3": {
+        "gate": "T3",
+        "suites": [
+          "em",
+          "tf",
+          "core"
+        ],
+        "rows": [
+          {
+            "suite": "em",
+            "rate_old": 1.0,
+            "rate_new": 1.0,
+            "drop": 0.0,
+            "n_pass_new": 6,
+            "n_total_new": 6,
+            "n_total_old": 6,
+            "regressed": false
+          },
+          {
+            "suite": "tf",
+            "rate_old": 1.0,
+            "rate_new": 1.0,
+            "drop": 0.0,
+            "n_pass_new": 5,
+            "n_total_new": 5,
+            "n_total_old": 5,
+            "regressed": false
+          },
+          {
+            "suite": "core",
+            "rate_old": 1.0,
+            "rate_new": 1.0,
+            "drop": 0.0,
+            "n_pass_new": 12,
+            "n_total_new": 12,
+            "n_total_old": 12,
+            "regressed": false
+          }
+        ],
+        "regressed": [],
+        "waived": false,
+        "waiver_reason": null,
+        "pass": true
+      },
+      "leak": {
+        "g1_doc_as_concept": 0,
+        "g3_gold_concept_copy_pairs": 552,
+        "g3_exceeds": false
+      },
+      "t1": {
+        "gate": "T1",
+        "metric": "family Recall@100",
+        "epsilon": 0.02,
+        "delta": 0.04247038917089678,
+        "lb95": 0.012859560067681892,
+        "ub95": 0.0733502538071066,
+        "mean_new": 0.41950688905003625,
+        "mean_old": 0.3770364998791395,
+        "n_queries": 197,
+        "n_boot": 10000,
+        "seed": 20260726,
+        "pass": true
+      },
+      "t2": {
+        "gate": "T2",
+        "metric": "family Recall@100",
+        "delta": 0.05,
+        "min_n": 20,
+        "dims": [
+          {
+            "dim": "pos_lang",
+            "max_drop": -0.022180451127819523,
+            "n_reliable": 2,
+            "worst_group": "has_foreign",
+            "rows": [
+              {
+                "group": "has_foreign",
+                "n": 133,
+                "r_new": 0.24706408879341207,
+                "r_old": 0.22488363766559255,
+                "drop": -0.022180451127819523,
+                "reliable": true
+              },
+              {
+                "group": "kr_only",
+                "n": 64,
+                "r_new": 0.7778645833333333,
+                "r_old": 0.6932291666666667,
+                "drop": -0.08463541666666663,
+                "reliable": true
+              }
+            ]
+          },
+          {
+            "dim": "proc_group",
+            "max_drop": -0.0474658869395711,
+            "n_reliable": 1,
+            "worst_group": "process",
+            "rows": [
+              {
+                "group": "device",
+                "n": 16,
+                "r_new": 0.4380952380952381,
+                "r_old": 0.4068452380952381,
+                "drop": -0.03125,
+                "reliable": false
+              },
+              {
+                "group": "other",
+                "n": 10,
+                "r_new": 0.2533333333333333,
+                "r_old": 0.2783333333333333,
+                "drop": 0.025000000000000022,
+                "reliable": false
+              },
+              {
+                "group": "process",
+                "n": 171,
+                "r_new": 0.427485380116959,
+                "r_old": 0.3800194931773879,
+                "drop": -0.0474658869395711,
+                "reliable": true
+              }
+            ]
+          },
+          {
+            "dim": "rejection",
+            "max_drop": -0.03197674418604651,
+            "n_reliable": 2,
+            "worst_group": "unlabeled",
+            "rows": [
+              {
+                "group": "inventiveness",
+                "n": 107,
+                "r_new": 0.4121495327102804,
+                "r_old": 0.3690031152647975,
+                "drop": -0.043146417445482865,
+                "reliable": true
+              },
+              {
+                "group": "novelty+inventiveness",
+                "n": 4,
+                "r_new": 0.5,
+                "r_old": 0.25,
+                "drop": -0.25,
+                "reliable": false
+              },
+              {
+                "group": "unlabeled",
+                "n": 86,
+                "r_new": 0.4249169435215947,
+                "r_old": 0.3929401993355482,
+                "drop": -0.03197674418604651,
+                "reliable": true
+              }
+            ]
+          }
+        ],
+        "max_drop": -0.022180451127819523,
+        "worst": {
+          "dim": "pos_lang",
+          "group": "has_foreign"
+        },
+        "undetermined": false,
+        "pass": true
+      },
+      "elapsed_s": 160.9,
+      "first_layer": null
+    },
+    {
+      "fault": "N03",
+      "label": "정상 델타(완전중복 병합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 0,
+      "seed": 4260107335,
+      "workspace": "/home/arkwith/Dev/SKKU/sdkb-foresight-paper/data/quarantine/w4b_n03/N03_s05_r0",
+      "stats": {
+        "criterion": "IRI 제외 트리플 집합 완전 동일",
+        "n_candidates": 13,
+        "n_affected": 1,
+        "n_entities_merged": 27
+      },
+      "detected": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "n_cq_pass": 27,
+      "t3": {
+        "gate": "T3",
+        "suites": [
+          "em",
+          "tf",
+          "core"
+        ],
+        "rows": [
+          {
+            "suite": "em",
+            "rate_old": 1.0,
+            "rate_new": 1.0,
+            "drop": 0.0,
+            "n_pass_new": 6,
+            "n_total_new": 6,
+            "n_total_old": 6,
+            "regressed": false
+          },
+          {
+            "suite": "tf",
+            "rate_old": 1.0,
+            "rate_new": 1.0,
+            "drop": 0.0,
+            "n_pass_new": 5,
+            "n_total_new": 5,
+            "n_total_old": 5,
+            "regressed": false
+          },
+          {
+            "suite": "core",
+            "rate_old": 1.0,
+            "rate_new": 1.0,
+            "drop": 0.0,
+            "n_pass_new": 12,
+            "n_total_new": 12,
+            "n_total_old": 12,
+            "regressed": false
+          }
+        ],
+        "regressed": [],
+        "waived": false,
+        "waiver_reason": null,
+        "pass": true
+      },
+      "leak": {
+        "g1_doc_as_concept": 0,
+        "g3_gold_concept_copy_pairs": 552,
+        "g3_exceeds": false
+      },
+      "t1": {
+        "gate": "T1",
+        "metric": "family Recall@100",
+        "epsilon": 0.02,
+        "delta": 0.04247038917089678,
+        "lb95": 0.012859560067681892,
+        "ub95": 0.0733502538071066,
+        "mean_new": 0.41950688905003625,
+        "mean_old": 0.3770364998791395,
+        "n_queries": 197,
+        "n_boot": 10000,
+        "seed": 20260726,
+        "pass": true
+      },
+      "t2": {
+        "gate": "T2",
+        "metric": "family Recall@100",
+        "delta": 0.05,
+        "min_n": 20,
+        "dims": [
+          {
+            "dim": "pos_lang",
+            "max_drop": -0.022180451127819523,
+            "n_reliable": 2,
+            "worst_group": "has_foreign",
+            "rows": [
+              {
+                "group": "has_foreign",
+                "n": 133,
+                "r_new": 0.24706408879341207,
+                "r_old": 0.22488363766559255,
+                "drop": -0.022180451127819523,
+                "reliable": true
+              },
+              {
+                "group": "kr_only",
+                "n": 64,
+                "r_new": 0.7778645833333333,
+                "r_old": 0.6932291666666667,
+                "drop": -0.08463541666666663,
+                "reliable": true
+              }
+            ]
+          },
+          {
+            "dim": "proc_group",
+            "max_drop": -0.0474658869395711,
+            "n_reliable": 1,
+            "worst_group": "process",
+            "rows": [
+              {
+                "group": "device",
+                "n": 16,
+                "r_new": 0.4380952380952381,
+                "r_old": 0.4068452380952381,
+                "drop": -0.03125,
+                "reliable": false
+              },
+              {
+                "group": "other",
+                "n": 10,
+                "r_new": 0.2533333333333333,
+                "r_old": 0.2783333333333333,
+                "drop": 0.025000000000000022,
+                "reliable": false
+              },
+              {
+                "group": "process",
+                "n": 171,
+                "r_new": 0.427485380116959,
+                "r_old": 0.3800194931773879,
+                "drop": -0.0474658869395711,
+                "reliable": true
+              }
+            ]
+          },
+          {
+            "dim": "rejection",
+            "max_drop": -0.03197674418604651,
+            "n_reliable": 2,
+            "worst_group": "unlabeled",
+            "rows": [
+              {
+                "group": "inventiveness",
+                "n": 107,
+                "r_new": 0.4121495327102804,
+                "r_old": 0.3690031152647975,
+                "drop": -0.043146417445482865,
+                "reliable": true
+              },
+              {
+                "group": "novelty+inventiveness",
+                "n": 4,
+                "r_new": 0.5,
+                "r_old": 0.25,
+                "drop": -0.25,
+                "reliable": false
+              },
+              {
+                "group": "unlabeled",
+                "n": 86,
+                "r_new": 0.4249169435215947,
+                "r_old": 0.3929401993355482,
+                "drop": -0.03197674418604651,
+                "reliable": true
+              }
+            ]
+          }
+        ],
+        "max_drop": -0.022180451127819523,
+        "worst": {
+          "dim": "pos_lang",
+          "group": "has_foreign"
+        },
+        "undetermined": false,
+        "pass": true
+      },
+      "elapsed_s": 143.3,
+      "first_layer": null
+    },
+    {
+      "fault": "N03",
+      "label": "정상 델타(완전중복 병합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 1,
+      "seed": 3063404963,
+      "workspace": "/home/arkwith/Dev/SKKU/sdkb-foresight-paper/data/quarantine/w4b_n03/N03_s05_r1",
+      "stats": {
+        "criterion": "IRI 제외 트리플 집합 완전 동일",
+        "n_candidates": 13,
+        "n_affected": 1,
+        "n_entities_merged": 4
+      },
+      "detected": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "n_cq_pass": 27,
+      "t3": {
+        "gate": "T3",
+        "suites": [
+          "em",
+          "tf",
+          "core"
+        ],
+        "rows": [
+          {
+            "suite": "em",
+            "rate_old": 1.0,
+            "rate_new": 1.0,
+            "drop": 0.0,
+            "n_pass_new": 6,
+            "n_total_new": 6,
+            "n_total_old": 6,
+            "regressed": false
+          },
+          {
+            "suite": "tf",
+            "rate_old": 1.0,
+            "rate_new": 1.0,
+            "drop": 0.0,
+            "n_pass_new": 5,
+            "n_total_new": 5,
+            "n_total_old": 5,
+            "regressed": false
+          },
+          {
+            "suite": "core",
+            "rate_old": 1.0,
+            "rate_new": 1.0,
+            "drop": 0.0,
+            "n_pass_new": 12,
+            "n_total_new": 12,
+            "n_total_old": 12,
+            "regressed": false
+          }
+        ],
+        "regressed": [],
+        "waived": false,
+        "waiver_reason": null,
+        "pass": true
+      },
+      "leak": {
+        "g1_doc_as_concept": 0,
+        "g3_gold_concept_copy_pairs": 552,
+        "g3_exceeds": false
+      },
+      "t1": {
+        "gate": "T1",
+        "metric": "family Recall@100",
+        "epsilon": 0.02,
+        "delta": 0.04247038917089678,
+        "lb95": 0.012859560067681892,
+        "ub95": 0.0733502538071066,
+        "mean_new": 0.41950688905003625,
+        "mean_old": 0.3770364998791395,
+        "n_queries": 197,
+        "n_boot": 10000,
+        "seed": 20260726,
+        "pass": true
+      },
+      "t2": {
+        "gate": "T2",
+        "metric": "family Recall@100",
+        "delta": 0.05,
+        "min_n": 20,
+        "dims": [
+          {
+            "dim": "pos_lang",
+            "max_drop": -0.022180451127819523,
+            "n_reliable": 2,
+            "worst_group": "has_foreign",
+            "rows": [
+              {
+                "group": "has_foreign",
+                "n": 133,
+                "r_new": 0.24706408879341207,
+                "r_old": 0.22488363766559255,
+                "drop": -0.022180451127819523,
+                "reliable": true
+              },
+              {
+                "group": "kr_only",
+                "n": 64,
+                "r_new": 0.7778645833333333,
+                "r_old": 0.6932291666666667,
+                "drop": -0.08463541666666663,
+                "reliable": true
+              }
+            ]
+          },
+          {
+            "dim": "proc_group",
+            "max_drop": -0.0474658869395711,
+            "n_reliable": 1,
+            "worst_group": "process",
+            "rows": [
+              {
+                "group": "device",
+                "n": 16,
+                "r_new": 0.4380952380952381,
+                "r_old": 0.4068452380952381,
+                "drop": -0.03125,
+                "reliable": false
+              },
+              {
+                "group": "other",
+                "n": 10,
+                "r_new": 0.2533333333333333,
+                "r_old": 0.2783333333333333,
+                "drop": 0.025000000000000022,
+                "reliable": false
+              },
+              {
+                "group": "process",
+                "n": 171,
+                "r_new": 0.427485380116959,
+                "r_old": 0.3800194931773879,
+                "drop": -0.0474658869395711,
+                "reliable": true
+              }
+            ]
+          },
+          {
+            "dim": "rejection",
+            "max_drop": -0.03197674418604651,
+            "n_reliable": 2,
+            "worst_group": "unlabeled",
+            "rows": [
+              {
+                "group": "inventiveness",
+                "n": 107,
+                "r_new": 0.4121495327102804,
+                "r_old": 0.3690031152647975,
+                "drop": -0.043146417445482865,
+                "reliable": true
+              },
+              {
+                "group": "novelty+inventiveness",
+                "n": 4,
+                "r_new": 0.5,
+                "r_old": 0.25,
+                "drop": -0.25,
+                "reliable": false
+              },
+              {
+                "group": "unlabeled",
+                "n": 86,
+                "r_new": 0.4249169435215947,
+                "r_old": 0.3929401993355482,
+                "drop": -0.03197674418604651,
+                "reliable": true
+              }
+            ]
+          }
+        ],
+        "max_drop": -0.022180451127819523,
+        "worst": {
+          "dim": "pos_lang",
+          "group": "has_foreign"
+        },
+        "undetermined": false,
+        "pass": true
+      },
+      "elapsed_s": 161.3,
+      "first_layer": null
+    },
+    {
+      "fault": "N03",
+      "label": "정상 델타(완전중복 병합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 2,
+      "seed": 2745189888,
+      "workspace": "/home/arkwith/Dev/SKKU/sdkb-foresight-paper/data/quarantine/w4b_n03/N03_s05_r2",
+      "stats": {
+        "criterion": "IRI 제외 트리플 집합 완전 동일",
+        "n_candidates": 13,
+        "n_affected": 1,
+        "n_entities_merged": 4
+      },
+      "detected": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "n_cq_pass": 27,
+      "t3": {
+        "gate": "T3",
+        "suites": [
+          "em",
+          "tf",
+          "core"
+        ],
+        "rows": [
+          {
+            "suite": "em",
+            "rate_old": 1.0,
+            "rate_new": 1.0,
+            "drop": 0.0,
+            "n_pass_new": 6,
+            "n_total_new": 6,
+            "n_total_old": 6,
+            "regressed": false
+          },
+          {
+            "suite": "tf",
+            "rate_old": 1.0,
+            "rate_new": 1.0,
+            "drop": 0.0,
+            "n_pass_new": 5,
+            "n_total_new": 5,
+            "n_total_old": 5,
+            "regressed": false
+          },
+          {
+            "suite": "core",
+            "rate_old": 1.0,
+            "rate_new": 1.0,
+            "drop": 0.0,
+            "n_pass_new": 12,
+            "n_total_new": 12,
+            "n_total_old": 12,
+            "regressed": false
+          }
+        ],
+        "regressed": [],
+        "waived": false,
+        "waiver_reason": null,
+        "pass": true
+      },
+      "leak": {
+        "g1_doc_as_concept": 0,
+        "g3_gold_concept_copy_pairs": 552,
+        "g3_exceeds": false
+      },
+      "t1": {
+        "gate": "T1",
+        "metric": "family Recall@100",
+        "epsilon": 0.02,
+        "delta": 0.04247038917089678,
+        "lb95": 0.012859560067681892,
+        "ub95": 0.0733502538071066,
+        "mean_new": 0.41950688905003625,
+        "mean_old": 0.3770364998791395,
+        "n_queries": 197,
+        "n_boot": 10000,
+        "seed": 20260726,
+        "pass": true
+      },
+      "t2": {
+        "gate": "T2",
+        "metric": "family Recall@100",
+        "delta": 0.05,
+        "min_n": 20,
+        "dims": [
+          {
+            "dim": "pos_lang",
+            "max_drop": -0.022180451127819523,
+            "n_reliable": 2,
+            "worst_group": "has_foreign",
+            "rows": [
+              {
+                "group": "has_foreign",
+                "n": 133,
+                "r_new": 0.24706408879341207,
+                "r_old": 0.22488363766559255,
+                "drop": -0.022180451127819523,
+                "reliable": true
+              },
+              {
+                "group": "kr_only",
+                "n": 64,
+                "r_new": 0.7778645833333333,
+                "r_old": 0.6932291666666667,
+                "drop": -0.08463541666666663,
+                "reliable": true
+              }
+            ]
+          },
+          {
+            "dim": "proc_group",
+            "max_drop": -0.0474658869395711,
+            "n_reliable": 1,
+            "worst_group": "process",
+            "rows": [
+              {
+                "group": "device",
+                "n": 16,
+                "r_new": 0.4380952380952381,
+                "r_old": 0.4068452380952381,
+                "drop": -0.03125,
+                "reliable": false
+              },
+              {
+                "group": "other",
+                "n": 10,
+                "r_new": 0.2533333333333333,
+                "r_old": 0.2783333333333333,
+                "drop": 0.025000000000000022,
+                "reliable": false
+              },
+              {
+                "group": "process",
+                "n": 171,
+                "r_new": 0.427485380116959,
+                "r_old": 0.3800194931773879,
+                "drop": -0.0474658869395711,
+                "reliable": true
+              }
+            ]
+          },
+          {
+            "dim": "rejection",
+            "max_drop": -0.03197674418604651,
+            "n_reliable": 2,
+            "worst_group": "unlabeled",
+            "rows": [
+              {
+                "group": "inventiveness",
+                "n": 107,
+                "r_new": 0.4121495327102804,
+                "r_old": 0.3690031152647975,
+                "drop": -0.043146417445482865,
+                "reliable": true
+              },
+              {
+                "group": "novelty+inventiveness",
+                "n": 4,
+                "r_new": 0.5,
+                "r_old": 0.25,
+                "drop": -0.25,
+                "reliable": false
+              },
+              {
+                "group": "unlabeled",
+                "n": 86,
+                "r_new": 0.4249169435215947,
+                "r_old": 0.3929401993355482,
+                "drop": -0.03197674418604651,
+                "reliable": true
+              }
+            ]
+          }
+        ],
+        "max_drop": -0.022180451127819523,
+        "worst": {
+          "dim": "pos_lang",
+          "group": "has_foreign"
+        },
+        "undetermined": false,
+        "pass": true
+      },
+      "elapsed_s": 161.2,
+      "first_layer": null
+    },
+    {
+      "fault": "N03",
+      "label": "정상 델타(완전중복 병합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 0,
+      "seed": 1543811676,
+      "workspace": "/home/arkwith/Dev/SKKU/sdkb-foresight-paper/data/quarantine/w4b_n03/N03_s10_r0",
+      "stats": {
+        "criterion": "IRI 제외 트리플 집합 완전 동일",
+        "n_candidates": 13,
+        "n_affected": 1,
+        "n_entities_merged": 4
+      },
+      "detected": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "n_cq_pass": 27,
+      "t3": {
+        "gate": "T3",
+        "suites": [
+          "em",
+          "tf",
+          "core"
+        ],
+        "rows": [
+          {
+            "suite": "em",
+            "rate_old": 1.0,
+            "rate_new": 1.0,
+            "drop": 0.0,
+            "n_pass_new": 6,
+            "n_total_new": 6,
+            "n_total_old": 6,
+            "regressed": false
+          },
+          {
+            "suite": "tf",
+            "rate_old": 1.0,
+            "rate_new": 1.0,
+            "drop": 0.0,
+            "n_pass_new": 5,
+            "n_total_new": 5,
+            "n_total_old": 5,
+            "regressed": false
+          },
+          {
+            "suite": "core",
+            "rate_old": 1.0,
+            "rate_new": 1.0,
+            "drop": 0.0,
+            "n_pass_new": 12,
+            "n_total_new": 12,
+            "n_total_old": 12,
+            "regressed": false
+          }
+        ],
+        "regressed": [],
+        "waived": false,
+        "waiver_reason": null,
+        "pass": true
+      },
+      "leak": {
+        "g1_doc_as_concept": 0,
+        "g3_gold_concept_copy_pairs": 552,
+        "g3_exceeds": false
+      },
+      "t1": {
+        "gate": "T1",
+        "metric": "family Recall@100",
+        "epsilon": 0.02,
+        "delta": 0.04247038917089678,
+        "lb95": 0.012859560067681892,
+        "ub95": 0.0733502538071066,
+        "mean_new": 0.41950688905003625,
+        "mean_old": 0.3770364998791395,
+        "n_queries": 197,
+        "n_boot": 10000,
+        "seed": 20260726,
+        "pass": true
+      },
+      "t2": {
+        "gate": "T2",
+        "metric": "family Recall@100",
+        "delta": 0.05,
+        "min_n": 20,
+        "dims": [
+          {
+            "dim": "pos_lang",
+            "max_drop": -0.022180451127819523,
+            "n_reliable": 2,
+            "worst_group": "has_foreign",
+            "rows": [
+              {
+                "group": "has_foreign",
+                "n": 133,
+                "r_new": 0.24706408879341207,
+                "r_old": 0.22488363766559255,
+                "drop": -0.022180451127819523,
+                "reliable": true
+              },
+              {
+                "group": "kr_only",
+                "n": 64,
+                "r_new": 0.7778645833333333,
+                "r_old": 0.6932291666666667,
+                "drop": -0.08463541666666663,
+                "reliable": true
+              }
+            ]
+          },
+          {
+            "dim": "proc_group",
+            "max_drop": -0.0474658869395711,
+            "n_reliable": 1,
+            "worst_group": "process",
+            "rows": [
+              {
+                "group": "device",
+                "n": 16,
+                "r_new": 0.4380952380952381,
+                "r_old": 0.4068452380952381,
+                "drop": -0.03125,
+                "reliable": false
+              },
+              {
+                "group": "other",
+                "n": 10,
+                "r_new": 0.2533333333333333,
+                "r_old": 0.2783333333333333,
+                "drop": 0.025000000000000022,
+                "reliable": false
+              },
+              {
+                "group": "process",
+                "n": 171,
+                "r_new": 0.427485380116959,
+                "r_old": 0.3800194931773879,
+                "drop": -0.0474658869395711,
+                "reliable": true
+              }
+            ]
+          },
+          {
+            "dim": "rejection",
+            "max_drop": -0.03197674418604651,
+            "n_reliable": 2,
+            "worst_group": "unlabeled",
+            "rows": [
+              {
+                "group": "inventiveness",
+                "n": 107,
+                "r_new": 0.4121495327102804,
+                "r_old": 0.3690031152647975,
+                "drop": -0.043146417445482865,
+                "reliable": true
+              },
+              {
+                "group": "novelty+inventiveness",
+                "n": 4,
+                "r_new": 0.5,
+                "r_old": 0.25,
+                "drop": -0.25,
+                "reliable": false
+              },
+              {
+                "group": "unlabeled",
+                "n": 86,
+                "r_new": 0.4249169435215947,
+                "r_old": 0.3929401993355482,
+                "drop": -0.03197674418604651,
+                "reliable": true
+              }
+            ]
+          }
+        ],
+        "max_drop": -0.022180451127819523,
+        "worst": {
+          "dim": "pos_lang",
+          "group": "has_foreign"
+        },
+        "undetermined": false,
+        "pass": true
+      },
+      "elapsed_s": 160.6,
+      "first_layer": null
+    },
+    {
+      "fault": "N03",
+      "label": "정상 델타(완전중복 병합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 1,
+      "seed": 2325735470,
+      "workspace": "/home/arkwith/Dev/SKKU/sdkb-foresight-paper/data/quarantine/w4b_n03/N03_s10_r1",
+      "stats": {
+        "criterion": "IRI 제외 트리플 집합 완전 동일",
+        "n_candidates": 13,
+        "n_affected": 1,
+        "n_entities_merged": 4
+      },
+      "detected": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "n_cq_pass": 27,
+      "t3": {
+        "gate": "T3",
+        "suites": [
+          "em",
+          "tf",
+          "core"
+        ],
+        "rows": [
+          {
+            "suite": "em",
+            "rate_old": 1.0,
+            "rate_new": 1.0,
+            "drop": 0.0,
+            "n_pass_new": 6,
+            "n_total_new": 6,
+            "n_total_old": 6,
+            "regressed": false
+          },
+          {
+            "suite": "tf",
+            "rate_old": 1.0,
+            "rate_new": 1.0,
+            "drop": 0.0,
+            "n_pass_new": 5,
+            "n_total_new": 5,
+            "n_total_old": 5,
+            "regressed": false
+          },
+          {
+            "suite": "core",
+            "rate_old": 1.0,
+            "rate_new": 1.0,
+            "drop": 0.0,
+            "n_pass_new": 12,
+            "n_total_new": 12,
+            "n_total_old": 12,
+            "regressed": false
+          }
+        ],
+        "regressed": [],
+        "waived": false,
+        "waiver_reason": null,
+        "pass": true
+      },
+      "leak": {
+        "g1_doc_as_concept": 0,
+        "g3_gold_concept_copy_pairs": 552,
+        "g3_exceeds": false
+      },
+      "t1": {
+        "gate": "T1",
+        "metric": "family Recall@100",
+        "epsilon": 0.02,
+        "delta": 0.04247038917089678,
+        "lb95": 0.012859560067681892,
+        "ub95": 0.0733502538071066,
+        "mean_new": 0.41950688905003625,
+        "mean_old": 0.3770364998791395,
+        "n_queries": 197,
+        "n_boot": 10000,
+        "seed": 20260726,
+        "pass": true
+      },
+      "t2": {
+        "gate": "T2",
+        "metric": "family Recall@100",
+        "delta": 0.05,
+        "min_n": 20,
+        "dims": [
+          {
+            "dim": "pos_lang",
+            "max_drop": -0.022180451127819523,
+            "n_reliable": 2,
+            "worst_group": "has_foreign",
+            "rows": [
+              {
+                "group": "has_foreign",
+                "n": 133,
+                "r_new": 0.24706408879341207,
+                "r_old": 0.22488363766559255,
+                "drop": -0.022180451127819523,
+                "reliable": true
+              },
+              {
+                "group": "kr_only",
+                "n": 64,
+                "r_new": 0.7778645833333333,
+                "r_old": 0.6932291666666667,
+                "drop": -0.08463541666666663,
+                "reliable": true
+              }
+            ]
+          },
+          {
+            "dim": "proc_group",
+            "max_drop": -0.0474658869395711,
+            "n_reliable": 1,
+            "worst_group": "process",
+            "rows": [
+              {
+                "group": "device",
+                "n": 16,
+                "r_new": 0.4380952380952381,
+                "r_old": 0.4068452380952381,
+                "drop": -0.03125,
+                "reliable": false
+              },
+              {
+                "group": "other",
+                "n": 10,
+                "r_new": 0.2533333333333333,
+                "r_old": 0.2783333333333333,
+                "drop": 0.025000000000000022,
+                "reliable": false
+              },
+              {
+                "group": "process",
+                "n": 171,
+                "r_new": 0.427485380116959,
+                "r_old": 0.3800194931773879,
+                "drop": -0.0474658869395711,
+                "reliable": true
+              }
+            ]
+          },
+          {
+            "dim": "rejection",
+            "max_drop": -0.03197674418604651,
+            "n_reliable": 2,
+            "worst_group": "unlabeled",
+            "rows": [
+              {
+                "group": "inventiveness",
+                "n": 107,
+                "r_new": 0.4121495327102804,
+                "r_old": 0.3690031152647975,
+                "drop": -0.043146417445482865,
+                "reliable": true
+              },
+              {
+                "group": "novelty+inventiveness",
+                "n": 4,
+                "r_new": 0.5,
+                "r_old": 0.25,
+                "drop": -0.25,
+                "reliable": false
+              },
+              {
+                "group": "unlabeled",
+                "n": 86,
+                "r_new": 0.4249169435215947,
+                "r_old": 0.3929401993355482,
+                "drop": -0.03197674418604651,
+                "reliable": true
+              }
+            ]
+          }
+        ],
+        "max_drop": -0.022180451127819523,
+        "worst": {
+          "dim": "pos_lang",
+          "group": "has_foreign"
+        },
+        "undetermined": false,
+        "pass": true
+      },
+      "elapsed_s": 160.6,
+      "first_layer": null
+    },
+    {
+      "fault": "N03",
+      "label": "정상 델타(완전중복 병합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 2,
+      "seed": 899842288,
+      "workspace": "/home/arkwith/Dev/SKKU/sdkb-foresight-paper/data/quarantine/w4b_n03/N03_s10_r2",
+      "stats": {
+        "criterion": "IRI 제외 트리플 집합 완전 동일",
+        "n_candidates": 13,
+        "n_affected": 1,
+        "n_entities_merged": 4
+      },
+      "detected": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "n_cq_pass": 27,
+      "t3": {
+        "gate": "T3",
+        "suites": [
+          "em",
+          "tf",
+          "core"
+        ],
+        "rows": [
+          {
+            "suite": "em",
+            "rate_old": 1.0,
+            "rate_new": 1.0,
+            "drop": 0.0,
+            "n_pass_new": 6,
+            "n_total_new": 6,
+            "n_total_old": 6,
+            "regressed": false
+          },
+          {
+            "suite": "tf",
+            "rate_old": 1.0,
+            "rate_new": 1.0,
+            "drop": 0.0,
+            "n_pass_new": 5,
+            "n_total_new": 5,
+            "n_total_old": 5,
+            "regressed": false
+          },
+          {
+            "suite": "core",
+            "rate_old": 1.0,
+            "rate_new": 1.0,
+            "drop": 0.0,
+            "n_pass_new": 12,
+            "n_total_new": 12,
+            "n_total_old": 12,
+            "regressed": false
+          }
+        ],
+        "regressed": [],
+        "waived": false,
+        "waiver_reason": null,
+        "pass": true
+      },
+      "leak": {
+        "g1_doc_as_concept": 0,
+        "g3_gold_concept_copy_pairs": 552,
+        "g3_exceeds": false
+      },
+      "t1": {
+        "gate": "T1",
+        "metric": "family Recall@100",
+        "epsilon": 0.02,
+        "delta": 0.04247038917089678,
+        "lb95": 0.012859560067681892,
+        "ub95": 0.0733502538071066,
+        "mean_new": 0.41950688905003625,
+        "mean_old": 0.3770364998791395,
+        "n_queries": 197,
+        "n_boot": 10000,
+        "seed": 20260726,
+        "pass": true
+      },
+      "t2": {
+        "gate": "T2",
+        "metric": "family Recall@100",
+        "delta": 0.05,
+        "min_n": 20,
+        "dims": [
+          {
+            "dim": "pos_lang",
+            "max_drop": -0.022180451127819523,
+            "n_reliable": 2,
+            "worst_group": "has_foreign",
+            "rows": [
+              {
+                "group": "has_foreign",
+                "n": 133,
+                "r_new": 0.24706408879341207,
+                "r_old": 0.22488363766559255,
+                "drop": -0.022180451127819523,
+                "reliable": true
+              },
+              {
+                "group": "kr_only",
+                "n": 64,
+                "r_new": 0.7778645833333333,
+                "r_old": 0.6932291666666667,
+                "drop": -0.08463541666666663,
+                "reliable": true
+              }
+            ]
+          },
+          {
+            "dim": "proc_group",
+            "max_drop": -0.0474658869395711,
+            "n_reliable": 1,
+            "worst_group": "process",
+            "rows": [
+              {
+                "group": "device",
+                "n": 16,
+                "r_new": 0.4380952380952381,
+                "r_old": 0.4068452380952381,
+                "drop": -0.03125,
+                "reliable": false
+              },
+              {
+                "group": "other",
+                "n": 10,
+                "r_new": 0.2533333333333333,
+                "r_old": 0.2783333333333333,
+                "drop": 0.025000000000000022,
+                "reliable": false
+              },
+              {
+                "group": "process",
+                "n": 171,
+                "r_new": 0.427485380116959,
+                "r_old": 0.3800194931773879,
+                "drop": -0.0474658869395711,
+                "reliable": true
+              }
+            ]
+          },
+          {
+            "dim": "rejection",
+            "max_drop": -0.03197674418604651,
+            "n_reliable": 2,
+            "worst_group": "unlabeled",
+            "rows": [
+              {
+                "group": "inventiveness",
+                "n": 107,
+                "r_new": 0.4121495327102804,
+                "r_old": 0.3690031152647975,
+                "drop": -0.043146417445482865,
+                "reliable": true
+              },
+              {
+                "group": "novelty+inventiveness",
+                "n": 4,
+                "r_new": 0.5,
+                "r_old": 0.25,
+                "drop": -0.25,
+                "reliable": false
+              },
+              {
+                "group": "unlabeled",
+                "n": 86,
+                "r_new": 0.4249169435215947,
+                "r_old": 0.3929401993355482,
+                "drop": -0.03197674418604651,
+                "reliable": true
+              }
+            ]
+          }
+        ],
+        "max_drop": -0.022180451127819523,
+        "worst": {
+          "dim": "pos_lang",
+          "group": "has_foreign"
+        },
+        "undetermined": false,
+        "pass": true
+      },
+      "elapsed_s": 161.8,
+      "first_layer": null
+    }
+  ]
+}

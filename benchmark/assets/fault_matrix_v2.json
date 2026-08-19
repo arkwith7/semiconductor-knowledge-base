@@ -1,0 +1,8145 @@
+{
+  "runs": [
+    "w4_r3",
+    "w4b_n03"
+  ],
+  "taus": [
+    0.0,
+    0.05,
+    0.1
+  ],
+  "rule_version": "v2",
+  "tau_main": 0.05,
+  "elapsed_s": 51.0,
+  "summary": {
+    "0.00": {
+      "tau": 0.0,
+      "n_instances": 108,
+      "by_fault": {
+        "F01": {
+          "label": "신선도·무결성",
+          "expected": "L0",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 1.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "first_layer": "L0",
+          "undetected": 0,
+          "cross_cqs": []
+        },
+        "F02": {
+          "label": "구조(필수 속성 누락)",
+          "expected": "L1",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 1.0,
+            "L2": 0.0,
+            "L3": 1.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 1.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 9,
+          "v2_T3": 9,
+          "first_layer": "L1",
+          "undetected": 0,
+          "cross_cqs": [
+            "CQ02_recent_patents_by_step",
+            "CQ04_concept_annual_series",
+            "CQ05_concept_vs_ipc_series",
+            "CQ06_concepts_without_recent_patents"
+          ]
+        },
+        "F03": {
+          "label": "논리(순환·타입 모순)",
+          "expected": "L2",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.1111111111111111,
+            "L2": 0.0,
+            "L3": 1.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 1.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 9,
+          "v2_T3": 9,
+          "first_layer": "L3",
+          "undetected": 0,
+          "cross_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ]
+        },
+        "F04": {
+          "label": "기능(CQ 경로 삭제)",
+          "expected": "L3",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 1.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 1.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 9,
+          "v2_T3": 9,
+          "first_layer": "L3",
+          "undetected": 0,
+          "cross_cqs": [
+            "CQ01_patents_per_process_step",
+            "CQ02_recent_patents_by_step",
+            "CQ04_concept_annual_series",
+            "CQ07_device_process_crosswalk",
+            "CQ12_problem_process_equipment_expert",
+            "CQ15_failure_causal_chain",
+            "CQ19_process_control_and_metrology",
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        },
+        "F05": {
+          "label": "의미 정렬 오류",
+          "expected": "T1",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 1.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.4444444444444444
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 9,
+          "v2_T3": 4,
+          "first_layer": "L3",
+          "undetected": 0,
+          "cross_cqs": [
+            "CQ02_recent_patents_by_step"
+          ]
+        },
+        "F06": {
+          "label": "계층 평탄화",
+          "expected": "T1(+L3)",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 1.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 1.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 9,
+          "v2_T3": 9,
+          "first_layer": "L3",
+          "undetected": 0,
+          "cross_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        },
+        "F07": {
+          "label": "판단 문맥 치환",
+          "expected": "T1·T2",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.4444444444444444,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 4,
+          "v2_T3": 0,
+          "first_layer": null,
+          "undetected": 5,
+          "cross_cqs": []
+        },
+        "F08": {
+          "label": "메타데이터 삭제",
+          "expected": "T1(약)",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 1.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 1.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 9,
+          "v2_T3": 9,
+          "first_layer": "L3",
+          "undetected": 0,
+          "cross_cqs": [
+            "CQ05_concept_vs_ipc_series",
+            "CQ08_applicant_process_portfolio",
+            "CQ13_value_chain_vendor_portfolio"
+          ]
+        },
+        "F09": {
+          "label": "시간 누출",
+          "expected": "L0/누출감사",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 1.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "first_layer": "leak",
+          "undetected": 0,
+          "cross_cqs": []
+        },
+        "F10": {
+          "label": "qrel 누출",
+          "expected": "누출감사",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 1.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "first_layer": "leak",
+          "undetected": 0,
+          "cross_cqs": []
+        },
+        "F11": {
+          "label": "동의어 오병합(교차)",
+          "expected": "T3",
+          "cross_task": true,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.6666666666666666,
+            "leak": 0.6666666666666666,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.6666666666666666
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 6,
+          "v2_T3": 6,
+          "first_layer": "L3",
+          "undetected": 1,
+          "cross_cqs": [
+            "CQ18_patents_by_skill",
+            "CQ23_concept_export_control"
+          ]
+        },
+        "F12": {
+          "label": "공유 계층 역전(교차)",
+          "expected": "T3",
+          "cross_task": true,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "first_layer": null,
+          "undetected": 9,
+          "cross_cqs": []
+        },
+        "N01": {
+          "label": "정상 델타(실제 병합 부분집합)",
+          "expected": "none",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "first_layer": null,
+          "undetected": 9,
+          "cross_cqs": []
+        },
+        "N02": {
+          "label": "정상 델타(의미보존 보강)",
+          "expected": "none",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "first_layer": null,
+          "undetected": 9,
+          "cross_cqs": []
+        },
+        "N03": {
+          "label": "정상 델타(완전중복 병합)",
+          "expected": "none",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.3333333333333333,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.3333333333333333
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 3,
+          "v2_T3": 3,
+          "first_layer": null,
+          "undetected": 6,
+          "cross_cqs": [
+            "CQ12_problem_process_equipment_expert",
+            "CQ17_material_problem_expert"
+          ]
+        }
+      },
+      "n_t3_v1": 0,
+      "n_t3_v2": 55,
+      "n_l3_v1": 0,
+      "n_l3_v2": 64,
+      "false_positive": {
+        "n_normal": 27,
+        "n_rejected": 3,
+        "rate": 0.1111111111111111,
+        "rejected": [
+          {
+            "fault": "N03",
+            "strength": 0.01
+          },
+          {
+            "fault": "N03",
+            "strength": 0.05
+          },
+          {
+            "fault": "N03",
+            "strength": 0.1
+          }
+        ]
+      },
+      "mcnemar": {
+        "b": 18,
+        "c": 0,
+        "n_discordant": 18,
+        "p": 7.62939453125e-06,
+        "test": "exact binomial"
+      },
+      "h1p": {
+        "n_cross_instances": 18,
+        "n_t3_only": 0,
+        "n_t3_detected": 6,
+        "rate_t3_only": 0.0
+      }
+    },
+    "0.05": {
+      "tau": 0.05,
+      "n_instances": 108,
+      "by_fault": {
+        "F01": {
+          "label": "신선도·무결성",
+          "expected": "L0",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 1.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "first_layer": "L0",
+          "undetected": 0,
+          "cross_cqs": []
+        },
+        "F02": {
+          "label": "구조(필수 속성 누락)",
+          "expected": "L1",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 1.0,
+            "L2": 0.0,
+            "L3": 0.4444444444444444,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.4444444444444444
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 4,
+          "v2_T3": 4,
+          "first_layer": "L1",
+          "undetected": 0,
+          "cross_cqs": [
+            "CQ02_recent_patents_by_step",
+            "CQ05_concept_vs_ipc_series"
+          ]
+        },
+        "F03": {
+          "label": "논리(순환·타입 모순)",
+          "expected": "L2",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.1111111111111111,
+            "L2": 0.0,
+            "L3": 1.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 1.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 9,
+          "v2_T3": 9,
+          "first_layer": "L3",
+          "undetected": 0,
+          "cross_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ]
+        },
+        "F04": {
+          "label": "기능(CQ 경로 삭제)",
+          "expected": "L3",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.6666666666666666,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.6666666666666666
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 6,
+          "v2_T3": 6,
+          "first_layer": "L3",
+          "undetected": 3,
+          "cross_cqs": [
+            "CQ01_patents_per_process_step",
+            "CQ02_recent_patents_by_step",
+            "CQ04_concept_annual_series",
+            "CQ07_device_process_crosswalk",
+            "CQ12_problem_process_equipment_expert",
+            "CQ15_failure_causal_chain",
+            "CQ19_process_control_and_metrology",
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        },
+        "F05": {
+          "label": "의미 정렬 오류",
+          "expected": "T1",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "first_layer": null,
+          "undetected": 9,
+          "cross_cqs": []
+        },
+        "F06": {
+          "label": "계층 평탄화",
+          "expected": "T1(+L3)",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.6666666666666666,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.6666666666666666
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 6,
+          "v2_T3": 6,
+          "first_layer": "L3",
+          "undetected": 3,
+          "cross_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        },
+        "F07": {
+          "label": "판단 문맥 치환",
+          "expected": "T1·T2",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "first_layer": null,
+          "undetected": 9,
+          "cross_cqs": []
+        },
+        "F08": {
+          "label": "메타데이터 삭제",
+          "expected": "T1(약)",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.3333333333333333,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.3333333333333333
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 3,
+          "v2_T3": 3,
+          "first_layer": null,
+          "undetected": 6,
+          "cross_cqs": [
+            "CQ05_concept_vs_ipc_series",
+            "CQ08_applicant_process_portfolio",
+            "CQ13_value_chain_vendor_portfolio"
+          ]
+        },
+        "F09": {
+          "label": "시간 누출",
+          "expected": "L0/누출감사",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 1.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "first_layer": "leak",
+          "undetected": 0,
+          "cross_cqs": []
+        },
+        "F10": {
+          "label": "qrel 누출",
+          "expected": "누출감사",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 1.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "first_layer": "leak",
+          "undetected": 0,
+          "cross_cqs": []
+        },
+        "F11": {
+          "label": "동의어 오병합(교차)",
+          "expected": "T3",
+          "cross_task": true,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.6666666666666666,
+            "leak": 0.6666666666666666,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.6666666666666666
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 6,
+          "v2_T3": 6,
+          "first_layer": "L3",
+          "undetected": 1,
+          "cross_cqs": [
+            "CQ18_patents_by_skill"
+          ]
+        },
+        "F12": {
+          "label": "공유 계층 역전(교차)",
+          "expected": "T3",
+          "cross_task": true,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "first_layer": null,
+          "undetected": 9,
+          "cross_cqs": []
+        },
+        "N01": {
+          "label": "정상 델타(실제 병합 부분집합)",
+          "expected": "none",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "first_layer": null,
+          "undetected": 9,
+          "cross_cqs": []
+        },
+        "N02": {
+          "label": "정상 델타(의미보존 보강)",
+          "expected": "none",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "first_layer": null,
+          "undetected": 9,
+          "cross_cqs": []
+        },
+        "N03": {
+          "label": "정상 델타(완전중복 병합)",
+          "expected": "none",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.1111111111111111,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.1111111111111111
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 1,
+          "v2_T3": 1,
+          "first_layer": null,
+          "undetected": 8,
+          "cross_cqs": [
+            "CQ17_material_problem_expert"
+          ]
+        }
+      },
+      "n_t3_v1": 0,
+      "n_t3_v2": 34,
+      "n_l3_v1": 0,
+      "n_l3_v2": 34,
+      "false_positive": {
+        "n_normal": 27,
+        "n_rejected": 1,
+        "rate": 0.037037037037037035,
+        "rejected": [
+          {
+            "fault": "N03",
+            "strength": 0.05
+          }
+        ]
+      },
+      "mcnemar": {
+        "b": 14,
+        "c": 0,
+        "n_discordant": 14,
+        "p": 0.0001220703125,
+        "test": "exact binomial"
+      },
+      "h1p": {
+        "n_cross_instances": 18,
+        "n_t3_only": 0,
+        "n_t3_detected": 6,
+        "rate_t3_only": 0.0
+      }
+    },
+    "0.10": {
+      "tau": 0.1,
+      "n_instances": 108,
+      "by_fault": {
+        "F01": {
+          "label": "신선도·무결성",
+          "expected": "L0",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 1.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "first_layer": "L0",
+          "undetected": 0,
+          "cross_cqs": []
+        },
+        "F02": {
+          "label": "구조(필수 속성 누락)",
+          "expected": "L1",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 1.0,
+            "L2": 0.0,
+            "L3": 0.1111111111111111,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.1111111111111111
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 1,
+          "v2_T3": 1,
+          "first_layer": "L1",
+          "undetected": 0,
+          "cross_cqs": [
+            "CQ02_recent_patents_by_step"
+          ]
+        },
+        "F03": {
+          "label": "논리(순환·타입 모순)",
+          "expected": "L2",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.1111111111111111,
+            "L2": 0.0,
+            "L3": 1.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 1.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 9,
+          "v2_T3": 9,
+          "first_layer": "L3",
+          "undetected": 0,
+          "cross_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ]
+        },
+        "F04": {
+          "label": "기능(CQ 경로 삭제)",
+          "expected": "L3",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.5555555555555556,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.4444444444444444
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 5,
+          "v2_T3": 4,
+          "first_layer": "L3",
+          "undetected": 4,
+          "cross_cqs": [
+            "CQ01_patents_per_process_step",
+            "CQ02_recent_patents_by_step",
+            "CQ04_concept_annual_series",
+            "CQ07_device_process_crosswalk",
+            "CQ12_problem_process_equipment_expert",
+            "CQ15_failure_causal_chain",
+            "CQ19_process_control_and_metrology",
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        },
+        "F05": {
+          "label": "의미 정렬 오류",
+          "expected": "T1",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "first_layer": null,
+          "undetected": 9,
+          "cross_cqs": []
+        },
+        "F06": {
+          "label": "계층 평탄화",
+          "expected": "T1(+L3)",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.3333333333333333,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.3333333333333333
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 3,
+          "v2_T3": 3,
+          "first_layer": null,
+          "undetected": 6,
+          "cross_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        },
+        "F07": {
+          "label": "판단 문맥 치환",
+          "expected": "T1·T2",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "first_layer": null,
+          "undetected": 9,
+          "cross_cqs": []
+        },
+        "F08": {
+          "label": "메타데이터 삭제",
+          "expected": "T1(약)",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.1111111111111111,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.1111111111111111
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 1,
+          "v2_T3": 1,
+          "first_layer": null,
+          "undetected": 8,
+          "cross_cqs": [
+            "CQ13_value_chain_vendor_portfolio"
+          ]
+        },
+        "F09": {
+          "label": "시간 누출",
+          "expected": "L0/누출감사",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 1.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "first_layer": "leak",
+          "undetected": 0,
+          "cross_cqs": []
+        },
+        "F10": {
+          "label": "qrel 누출",
+          "expected": "누출감사",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 1.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "first_layer": "leak",
+          "undetected": 0,
+          "cross_cqs": []
+        },
+        "F11": {
+          "label": "동의어 오병합(교차)",
+          "expected": "T3",
+          "cross_task": true,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.1111111111111111,
+            "leak": 0.6666666666666666,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 1,
+          "v2_T3": 0,
+          "first_layer": "leak",
+          "undetected": 3,
+          "cross_cqs": []
+        },
+        "F12": {
+          "label": "공유 계층 역전(교차)",
+          "expected": "T3",
+          "cross_task": true,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "first_layer": null,
+          "undetected": 9,
+          "cross_cqs": []
+        },
+        "N01": {
+          "label": "정상 델타(실제 병합 부분집합)",
+          "expected": "none",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "first_layer": null,
+          "undetected": 9,
+          "cross_cqs": []
+        },
+        "N02": {
+          "label": "정상 델타(의미보존 보강)",
+          "expected": "none",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "first_layer": null,
+          "undetected": 9,
+          "cross_cqs": []
+        },
+        "N03": {
+          "label": "정상 델타(완전중복 병합)",
+          "expected": "none",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.1111111111111111,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.1111111111111111
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 1,
+          "v2_T3": 1,
+          "first_layer": null,
+          "undetected": 8,
+          "cross_cqs": [
+            "CQ17_material_problem_expert"
+          ]
+        }
+      },
+      "n_t3_v1": 0,
+      "n_t3_v2": 18,
+      "n_l3_v1": 0,
+      "n_l3_v2": 20,
+      "false_positive": {
+        "n_normal": 27,
+        "n_rejected": 1,
+        "rate": 0.037037037037037035,
+        "rejected": [
+          {
+            "fault": "N03",
+            "strength": 0.05
+          }
+        ]
+      },
+      "mcnemar": {
+        "b": 19,
+        "c": 0,
+        "n_discordant": 19,
+        "p": 3.814697265625e-06,
+        "test": "exact binomial"
+      },
+      "h1p": {
+        "n_cross_instances": 18,
+        "n_t3_only": 0,
+        "n_t3_detected": 0,
+        "rate_t3_only": 0.0
+      }
+    }
+  },
+  "instances": [
+    {
+      "fault": "F01",
+      "label": "신선도·무결성",
+      "expected": "L0",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 0,
+      "v1": {
+        "L0": true,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F01",
+      "label": "신선도·무결성",
+      "expected": "L0",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 1,
+      "v1": {
+        "L0": true,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F01",
+      "label": "신선도·무결성",
+      "expected": "L0",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 2,
+      "v1": {
+        "L0": true,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F01",
+      "label": "신선도·무결성",
+      "expected": "L0",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 0,
+      "v1": {
+        "L0": true,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F01",
+      "label": "신선도·무결성",
+      "expected": "L0",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 1,
+      "v1": {
+        "L0": true,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F01",
+      "label": "신선도·무결성",
+      "expected": "L0",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 2,
+      "v1": {
+        "L0": true,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F01",
+      "label": "신선도·무결성",
+      "expected": "L0",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 0,
+      "v1": {
+        "L0": true,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F01",
+      "label": "신선도·무결성",
+      "expected": "L0",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 1,
+      "v1": {
+        "L0": true,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F01",
+      "label": "신선도·무결성",
+      "expected": "L0",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 2,
+      "v1": {
+        "L0": true,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F02",
+      "label": "구조(필수 속성 누락)",
+      "expected": "L1",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": true,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 24,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ02_recent_patents_by_step",
+            "CQ04_concept_annual_series",
+            "CQ05_concept_vs_ipc_series"
+          ],
+          "cross_regressed_cqs": [
+            "CQ02_recent_patents_by_step",
+            "CQ04_concept_annual_series",
+            "CQ05_concept_vs_ipc_series"
+          ]
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F02",
+      "label": "구조(필수 속성 누락)",
+      "expected": "L1",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": true,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 24,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ02_recent_patents_by_step",
+            "CQ04_concept_annual_series",
+            "CQ05_concept_vs_ipc_series"
+          ],
+          "cross_regressed_cqs": [
+            "CQ02_recent_patents_by_step",
+            "CQ04_concept_annual_series",
+            "CQ05_concept_vs_ipc_series"
+          ]
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F02",
+      "label": "구조(필수 속성 누락)",
+      "expected": "L1",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": true,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ04_concept_annual_series",
+            "CQ05_concept_vs_ipc_series"
+          ],
+          "cross_regressed_cqs": [
+            "CQ04_concept_annual_series",
+            "CQ05_concept_vs_ipc_series"
+          ]
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F02",
+      "label": "구조(필수 속성 누락)",
+      "expected": "L1",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": true,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 24,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ02_recent_patents_by_step",
+            "CQ04_concept_annual_series",
+            "CQ05_concept_vs_ipc_series"
+          ],
+          "cross_regressed_cqs": [
+            "CQ02_recent_patents_by_step",
+            "CQ04_concept_annual_series",
+            "CQ05_concept_vs_ipc_series"
+          ]
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F02",
+      "label": "구조(필수 속성 누락)",
+      "expected": "L1",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": true,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 24,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ02_recent_patents_by_step",
+            "CQ04_concept_annual_series",
+            "CQ05_concept_vs_ipc_series"
+          ],
+          "cross_regressed_cqs": [
+            "CQ02_recent_patents_by_step",
+            "CQ04_concept_annual_series",
+            "CQ05_concept_vs_ipc_series"
+          ]
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F02",
+      "label": "구조(필수 속성 누락)",
+      "expected": "L1",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": true,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 23,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ02_recent_patents_by_step",
+            "CQ04_concept_annual_series",
+            "CQ05_concept_vs_ipc_series",
+            "CQ06_concepts_without_recent_patents"
+          ],
+          "cross_regressed_cqs": [
+            "CQ02_recent_patents_by_step",
+            "CQ04_concept_annual_series",
+            "CQ05_concept_vs_ipc_series",
+            "CQ06_concepts_without_recent_patents"
+          ]
+        },
+        "0.05": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ02_recent_patents_by_step"
+          ],
+          "cross_regressed_cqs": [
+            "CQ02_recent_patents_by_step"
+          ]
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F02",
+      "label": "구조(필수 속성 누락)",
+      "expected": "L1",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": true,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 24,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ02_recent_patents_by_step",
+            "CQ04_concept_annual_series",
+            "CQ05_concept_vs_ipc_series"
+          ],
+          "cross_regressed_cqs": [
+            "CQ02_recent_patents_by_step",
+            "CQ04_concept_annual_series",
+            "CQ05_concept_vs_ipc_series"
+          ]
+        },
+        "0.05": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ02_recent_patents_by_step",
+            "CQ05_concept_vs_ipc_series"
+          ],
+          "cross_regressed_cqs": [
+            "CQ02_recent_patents_by_step",
+            "CQ05_concept_vs_ipc_series"
+          ]
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F02",
+      "label": "구조(필수 속성 누락)",
+      "expected": "L1",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": true,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 24,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ02_recent_patents_by_step",
+            "CQ04_concept_annual_series",
+            "CQ05_concept_vs_ipc_series"
+          ],
+          "cross_regressed_cqs": [
+            "CQ02_recent_patents_by_step",
+            "CQ04_concept_annual_series",
+            "CQ05_concept_vs_ipc_series"
+          ]
+        },
+        "0.05": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ02_recent_patents_by_step",
+            "CQ05_concept_vs_ipc_series"
+          ],
+          "cross_regressed_cqs": [
+            "CQ02_recent_patents_by_step",
+            "CQ05_concept_vs_ipc_series"
+          ]
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F02",
+      "label": "구조(필수 속성 누락)",
+      "expected": "L1",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": true,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 23,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ02_recent_patents_by_step",
+            "CQ04_concept_annual_series",
+            "CQ05_concept_vs_ipc_series",
+            "CQ06_concepts_without_recent_patents"
+          ],
+          "cross_regressed_cqs": [
+            "CQ02_recent_patents_by_step",
+            "CQ04_concept_annual_series",
+            "CQ05_concept_vs_ipc_series",
+            "CQ06_concepts_without_recent_patents"
+          ]
+        },
+        "0.05": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ02_recent_patents_by_step",
+            "CQ05_concept_vs_ipc_series"
+          ],
+          "cross_regressed_cqs": [
+            "CQ02_recent_patents_by_step",
+            "CQ05_concept_vs_ipc_series"
+          ]
+        },
+        "0.10": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ02_recent_patents_by_step"
+          ],
+          "cross_regressed_cqs": [
+            "CQ02_recent_patents_by_step"
+          ]
+        }
+      }
+    },
+    {
+      "fault": "F03",
+      "label": "논리(순환·타입 모순)",
+      "expected": "L2",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ],
+          "cross_regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ]
+        },
+        "0.05": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ],
+          "cross_regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ]
+        },
+        "0.10": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ],
+          "cross_regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ]
+        }
+      }
+    },
+    {
+      "fault": "F03",
+      "label": "논리(순환·타입 모순)",
+      "expected": "L2",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ],
+          "cross_regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ]
+        },
+        "0.05": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ],
+          "cross_regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ]
+        },
+        "0.10": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ],
+          "cross_regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ]
+        }
+      }
+    },
+    {
+      "fault": "F03",
+      "label": "논리(순환·타입 모순)",
+      "expected": "L2",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ],
+          "cross_regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ]
+        },
+        "0.05": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ],
+          "cross_regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ]
+        },
+        "0.10": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ],
+          "cross_regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ]
+        }
+      }
+    },
+    {
+      "fault": "F03",
+      "label": "논리(순환·타입 모순)",
+      "expected": "L2",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ],
+          "cross_regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ]
+        },
+        "0.05": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ],
+          "cross_regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ]
+        },
+        "0.10": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ],
+          "cross_regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ]
+        }
+      }
+    },
+    {
+      "fault": "F03",
+      "label": "논리(순환·타입 모순)",
+      "expected": "L2",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ],
+          "cross_regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ]
+        },
+        "0.05": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ],
+          "cross_regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ]
+        },
+        "0.10": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ],
+          "cross_regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ]
+        }
+      }
+    },
+    {
+      "fault": "F03",
+      "label": "논리(순환·타입 모순)",
+      "expected": "L2",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ],
+          "cross_regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ]
+        },
+        "0.05": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ],
+          "cross_regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ]
+        },
+        "0.10": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ],
+          "cross_regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ]
+        }
+      }
+    },
+    {
+      "fault": "F03",
+      "label": "논리(순환·타입 모순)",
+      "expected": "L2",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ],
+          "cross_regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ]
+        },
+        "0.05": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ],
+          "cross_regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ]
+        },
+        "0.10": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ],
+          "cross_regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ]
+        }
+      }
+    },
+    {
+      "fault": "F03",
+      "label": "논리(순환·타입 모순)",
+      "expected": "L2",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ],
+          "cross_regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ]
+        },
+        "0.05": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ],
+          "cross_regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ]
+        },
+        "0.10": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ],
+          "cross_regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ]
+        }
+      }
+    },
+    {
+      "fault": "F03",
+      "label": "논리(순환·타입 모순)",
+      "expected": "L2",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": true,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ],
+          "cross_regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ]
+        },
+        "0.05": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ],
+          "cross_regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ]
+        },
+        "0.10": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ],
+          "cross_regressed_cqs": [
+            "CQ03_uncovered_process_steps",
+            "CQ06_concepts_without_recent_patents"
+          ]
+        }
+      }
+    },
+    {
+      "fault": "F04",
+      "label": "기능(CQ 경로 삭제)",
+      "expected": "L3",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 22,
+          "regressed_suites": [
+            "tf",
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ01_patents_per_process_step",
+            "CQ02_recent_patents_by_step",
+            "CQ04_concept_annual_series",
+            "CQ07_device_process_crosswalk",
+            "CQ21_process_hierarchy_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ01_patents_per_process_step",
+            "CQ02_recent_patents_by_step",
+            "CQ04_concept_annual_series",
+            "CQ07_device_process_crosswalk",
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F04",
+      "label": "기능(CQ 경로 삭제)",
+      "expected": "L3",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F04",
+      "label": "기능(CQ 경로 삭제)",
+      "expected": "L3",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F04",
+      "label": "기능(CQ 경로 삭제)",
+      "expected": "L3",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ16_material_incompatibility",
+            "CQ21_process_hierarchy_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        },
+        "0.05": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ16_material_incompatibility",
+            "CQ21_process_hierarchy_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        },
+        "0.10": {
+          "L3": true,
+          "T3": false,
+          "n_cq_pass": 26,
+          "regressed_suites": [],
+          "regressed_cqs": [
+            "CQ16_material_incompatibility"
+          ],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F04",
+      "label": "기능(CQ 경로 삭제)",
+      "expected": "L3",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        },
+        "0.05": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F04",
+      "label": "기능(CQ 경로 삭제)",
+      "expected": "L3",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 21,
+          "regressed_suites": [
+            "em",
+            "tf",
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ01_patents_per_process_step",
+            "CQ02_recent_patents_by_step",
+            "CQ04_concept_annual_series",
+            "CQ07_device_process_crosswalk",
+            "CQ12_problem_process_equipment_expert",
+            "CQ21_process_hierarchy_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ01_patents_per_process_step",
+            "CQ02_recent_patents_by_step",
+            "CQ04_concept_annual_series",
+            "CQ07_device_process_crosswalk",
+            "CQ12_problem_process_equipment_expert",
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        },
+        "0.05": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 23,
+          "regressed_suites": [
+            "em",
+            "tf",
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ04_concept_annual_series",
+            "CQ07_device_process_crosswalk",
+            "CQ12_problem_process_equipment_expert",
+            "CQ21_process_hierarchy_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ04_concept_annual_series",
+            "CQ07_device_process_crosswalk",
+            "CQ12_problem_process_equipment_expert",
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        },
+        "0.10": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "em",
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ12_problem_process_equipment_expert",
+            "CQ21_process_hierarchy_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ12_problem_process_equipment_expert",
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        }
+      }
+    },
+    {
+      "fault": "F04",
+      "label": "기능(CQ 경로 삭제)",
+      "expected": "L3",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 18,
+          "regressed_suites": [
+            "em",
+            "tf",
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ01_patents_per_process_step",
+            "CQ02_recent_patents_by_step",
+            "CQ04_concept_annual_series",
+            "CQ07_device_process_crosswalk",
+            "CQ12_problem_process_equipment_expert",
+            "CQ15_failure_causal_chain",
+            "CQ16_material_incompatibility",
+            "CQ19_process_control_and_metrology",
+            "CQ21_process_hierarchy_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ01_patents_per_process_step",
+            "CQ02_recent_patents_by_step",
+            "CQ04_concept_annual_series",
+            "CQ07_device_process_crosswalk",
+            "CQ12_problem_process_equipment_expert",
+            "CQ15_failure_causal_chain",
+            "CQ19_process_control_and_metrology",
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        },
+        "0.05": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 18,
+          "regressed_suites": [
+            "em",
+            "tf",
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ01_patents_per_process_step",
+            "CQ02_recent_patents_by_step",
+            "CQ04_concept_annual_series",
+            "CQ07_device_process_crosswalk",
+            "CQ12_problem_process_equipment_expert",
+            "CQ15_failure_causal_chain",
+            "CQ16_material_incompatibility",
+            "CQ19_process_control_and_metrology",
+            "CQ21_process_hierarchy_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ01_patents_per_process_step",
+            "CQ02_recent_patents_by_step",
+            "CQ04_concept_annual_series",
+            "CQ07_device_process_crosswalk",
+            "CQ12_problem_process_equipment_expert",
+            "CQ15_failure_causal_chain",
+            "CQ19_process_control_and_metrology",
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        },
+        "0.10": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 18,
+          "regressed_suites": [
+            "em",
+            "tf",
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ01_patents_per_process_step",
+            "CQ02_recent_patents_by_step",
+            "CQ04_concept_annual_series",
+            "CQ07_device_process_crosswalk",
+            "CQ12_problem_process_equipment_expert",
+            "CQ15_failure_causal_chain",
+            "CQ16_material_incompatibility",
+            "CQ19_process_control_and_metrology",
+            "CQ21_process_hierarchy_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ01_patents_per_process_step",
+            "CQ02_recent_patents_by_step",
+            "CQ04_concept_annual_series",
+            "CQ07_device_process_crosswalk",
+            "CQ12_problem_process_equipment_expert",
+            "CQ15_failure_causal_chain",
+            "CQ19_process_control_and_metrology",
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        }
+      }
+    },
+    {
+      "fault": "F04",
+      "label": "기능(CQ 경로 삭제)",
+      "expected": "L3",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 22,
+          "regressed_suites": [
+            "tf",
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ01_patents_per_process_step",
+            "CQ02_recent_patents_by_step",
+            "CQ04_concept_annual_series",
+            "CQ07_device_process_crosswalk",
+            "CQ21_process_hierarchy_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ01_patents_per_process_step",
+            "CQ02_recent_patents_by_step",
+            "CQ04_concept_annual_series",
+            "CQ07_device_process_crosswalk",
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        },
+        "0.05": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 24,
+          "regressed_suites": [
+            "tf",
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ04_concept_annual_series",
+            "CQ07_device_process_crosswalk",
+            "CQ21_process_hierarchy_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ04_concept_annual_series",
+            "CQ07_device_process_crosswalk",
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        },
+        "0.10": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        }
+      }
+    },
+    {
+      "fault": "F04",
+      "label": "기능(CQ 경로 삭제)",
+      "expected": "L3",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 21,
+          "regressed_suites": [
+            "em",
+            "tf",
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ01_patents_per_process_step",
+            "CQ02_recent_patents_by_step",
+            "CQ04_concept_annual_series",
+            "CQ07_device_process_crosswalk",
+            "CQ12_problem_process_equipment_expert",
+            "CQ21_process_hierarchy_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ01_patents_per_process_step",
+            "CQ02_recent_patents_by_step",
+            "CQ04_concept_annual_series",
+            "CQ07_device_process_crosswalk",
+            "CQ12_problem_process_equipment_expert",
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        },
+        "0.05": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 22,
+          "regressed_suites": [
+            "em",
+            "tf",
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ02_recent_patents_by_step",
+            "CQ04_concept_annual_series",
+            "CQ07_device_process_crosswalk",
+            "CQ12_problem_process_equipment_expert",
+            "CQ21_process_hierarchy_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ02_recent_patents_by_step",
+            "CQ04_concept_annual_series",
+            "CQ07_device_process_crosswalk",
+            "CQ12_problem_process_equipment_expert",
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        },
+        "0.10": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 24,
+          "regressed_suites": [
+            "tf",
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ02_recent_patents_by_step",
+            "CQ07_device_process_crosswalk",
+            "CQ21_process_hierarchy_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ02_recent_patents_by_step",
+            "CQ07_device_process_crosswalk",
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        }
+      }
+    },
+    {
+      "fault": "F05",
+      "label": "의미 정렬 오류",
+      "expected": "T1",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": false,
+          "n_cq_pass": 26,
+          "regressed_suites": [],
+          "regressed_cqs": [
+            "CQ26_patent_export_control_exposure"
+          ],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F05",
+      "label": "의미 정렬 오류",
+      "expected": "T1",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": false,
+          "n_cq_pass": 26,
+          "regressed_suites": [],
+          "regressed_cqs": [
+            "CQ26_patent_export_control_exposure"
+          ],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F05",
+      "label": "의미 정렬 오류",
+      "expected": "T1",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": false,
+          "n_cq_pass": 26,
+          "regressed_suites": [],
+          "regressed_cqs": [
+            "CQ26_patent_export_control_exposure"
+          ],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F05",
+      "label": "의미 정렬 오류",
+      "expected": "T1",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": false,
+          "n_cq_pass": 26,
+          "regressed_suites": [],
+          "regressed_cqs": [
+            "CQ26_patent_export_control_exposure"
+          ],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F05",
+      "label": "의미 정렬 오류",
+      "expected": "T1",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ02_recent_patents_by_step",
+            "CQ26_patent_export_control_exposure"
+          ],
+          "cross_regressed_cqs": [
+            "CQ02_recent_patents_by_step"
+          ]
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F05",
+      "label": "의미 정렬 오류",
+      "expected": "T1",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": false,
+          "n_cq_pass": 26,
+          "regressed_suites": [],
+          "regressed_cqs": [
+            "CQ26_patent_export_control_exposure"
+          ],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F05",
+      "label": "의미 정렬 오류",
+      "expected": "T1",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ02_recent_patents_by_step",
+            "CQ26_patent_export_control_exposure"
+          ],
+          "cross_regressed_cqs": [
+            "CQ02_recent_patents_by_step"
+          ]
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F05",
+      "label": "의미 정렬 오류",
+      "expected": "T1",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ02_recent_patents_by_step",
+            "CQ26_patent_export_control_exposure"
+          ],
+          "cross_regressed_cqs": [
+            "CQ02_recent_patents_by_step"
+          ]
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F05",
+      "label": "의미 정렬 오류",
+      "expected": "T1",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ02_recent_patents_by_step",
+            "CQ26_patent_export_control_exposure"
+          ],
+          "cross_regressed_cqs": [
+            "CQ02_recent_patents_by_step"
+          ]
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F06",
+      "label": "계층 평탄화",
+      "expected": "T1(+L3)",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F06",
+      "label": "계층 평탄화",
+      "expected": "T1(+L3)",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F06",
+      "label": "계층 평탄화",
+      "expected": "T1(+L3)",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F06",
+      "label": "계층 평탄화",
+      "expected": "T1(+L3)",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        },
+        "0.05": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F06",
+      "label": "계층 평탄화",
+      "expected": "T1(+L3)",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        },
+        "0.05": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F06",
+      "label": "계층 평탄화",
+      "expected": "T1(+L3)",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        },
+        "0.05": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F06",
+      "label": "계층 평탄화",
+      "expected": "T1(+L3)",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        },
+        "0.05": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        },
+        "0.10": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        }
+      }
+    },
+    {
+      "fault": "F06",
+      "label": "계층 평탄화",
+      "expected": "T1(+L3)",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        },
+        "0.05": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        },
+        "0.10": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        }
+      }
+    },
+    {
+      "fault": "F06",
+      "label": "계층 평탄화",
+      "expected": "T1(+L3)",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        },
+        "0.05": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        },
+        "0.10": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ21_process_hierarchy_portfolio"
+          ]
+        }
+      }
+    },
+    {
+      "fault": "F07",
+      "label": "판단 문맥 치환",
+      "expected": "T1·T2",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F07",
+      "label": "판단 문맥 치환",
+      "expected": "T1·T2",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F07",
+      "label": "판단 문맥 치환",
+      "expected": "T1·T2",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F07",
+      "label": "판단 문맥 치환",
+      "expected": "T1·T2",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": false,
+          "n_cq_pass": 26,
+          "regressed_suites": [],
+          "regressed_cqs": [
+            "CQ09_rejection_prior_art"
+          ],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F07",
+      "label": "판단 문맥 치환",
+      "expected": "T1·T2",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F07",
+      "label": "판단 문맥 치환",
+      "expected": "T1·T2",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F07",
+      "label": "판단 문맥 치환",
+      "expected": "T1·T2",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": false,
+          "n_cq_pass": 26,
+          "regressed_suites": [],
+          "regressed_cqs": [
+            "CQ09_rejection_prior_art"
+          ],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F07",
+      "label": "판단 문맥 치환",
+      "expected": "T1·T2",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": false,
+          "n_cq_pass": 26,
+          "regressed_suites": [],
+          "regressed_cqs": [
+            "CQ09_rejection_prior_art"
+          ],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F07",
+      "label": "판단 문맥 치환",
+      "expected": "T1·T2",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": false,
+          "n_cq_pass": 26,
+          "regressed_suites": [],
+          "regressed_cqs": [
+            "CQ09_rejection_prior_art"
+          ],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F08",
+      "label": "메타데이터 삭제",
+      "expected": "T1(약)",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf",
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ05_concept_vs_ipc_series",
+            "CQ08_applicant_process_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ05_concept_vs_ipc_series",
+            "CQ08_applicant_process_portfolio"
+          ]
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F08",
+      "label": "메타데이터 삭제",
+      "expected": "T1(약)",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf",
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ05_concept_vs_ipc_series",
+            "CQ08_applicant_process_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ05_concept_vs_ipc_series",
+            "CQ08_applicant_process_portfolio"
+          ]
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F08",
+      "label": "메타데이터 삭제",
+      "expected": "T1(약)",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "tf"
+          ],
+          "regressed_cqs": [
+            "CQ05_concept_vs_ipc_series"
+          ],
+          "cross_regressed_cqs": [
+            "CQ05_concept_vs_ipc_series"
+          ]
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F08",
+      "label": "메타데이터 삭제",
+      "expected": "T1(약)",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf",
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ05_concept_vs_ipc_series",
+            "CQ08_applicant_process_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ05_concept_vs_ipc_series",
+            "CQ08_applicant_process_portfolio"
+          ]
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F08",
+      "label": "메타데이터 삭제",
+      "expected": "T1(약)",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf",
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ05_concept_vs_ipc_series",
+            "CQ08_applicant_process_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ05_concept_vs_ipc_series",
+            "CQ08_applicant_process_portfolio"
+          ]
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F08",
+      "label": "메타데이터 삭제",
+      "expected": "T1(약)",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf",
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ05_concept_vs_ipc_series",
+            "CQ08_applicant_process_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ05_concept_vs_ipc_series",
+            "CQ08_applicant_process_portfolio"
+          ]
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F08",
+      "label": "메타데이터 삭제",
+      "expected": "T1(약)",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 24,
+          "regressed_suites": [
+            "tf",
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ05_concept_vs_ipc_series",
+            "CQ08_applicant_process_portfolio",
+            "CQ13_value_chain_vendor_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ05_concept_vs_ipc_series",
+            "CQ08_applicant_process_portfolio",
+            "CQ13_value_chain_vendor_portfolio"
+          ]
+        },
+        "0.05": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 24,
+          "regressed_suites": [
+            "tf",
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ05_concept_vs_ipc_series",
+            "CQ08_applicant_process_portfolio",
+            "CQ13_value_chain_vendor_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ05_concept_vs_ipc_series",
+            "CQ08_applicant_process_portfolio",
+            "CQ13_value_chain_vendor_portfolio"
+          ]
+        },
+        "0.10": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ13_value_chain_vendor_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ13_value_chain_vendor_portfolio"
+          ]
+        }
+      }
+    },
+    {
+      "fault": "F08",
+      "label": "메타데이터 삭제",
+      "expected": "T1(약)",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf",
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ05_concept_vs_ipc_series",
+            "CQ08_applicant_process_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ05_concept_vs_ipc_series",
+            "CQ08_applicant_process_portfolio"
+          ]
+        },
+        "0.05": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf",
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ05_concept_vs_ipc_series",
+            "CQ08_applicant_process_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ05_concept_vs_ipc_series",
+            "CQ08_applicant_process_portfolio"
+          ]
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F08",
+      "label": "메타데이터 삭제",
+      "expected": "T1(약)",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 24,
+          "regressed_suites": [
+            "tf",
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ05_concept_vs_ipc_series",
+            "CQ08_applicant_process_portfolio",
+            "CQ13_value_chain_vendor_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ05_concept_vs_ipc_series",
+            "CQ08_applicant_process_portfolio",
+            "CQ13_value_chain_vendor_portfolio"
+          ]
+        },
+        "0.05": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "tf",
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ05_concept_vs_ipc_series",
+            "CQ08_applicant_process_portfolio"
+          ],
+          "cross_regressed_cqs": [
+            "CQ05_concept_vs_ipc_series",
+            "CQ08_applicant_process_portfolio"
+          ]
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F09",
+      "label": "시간 누출",
+      "expected": "L0/누출감사",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": true,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F09",
+      "label": "시간 누출",
+      "expected": "L0/누출감사",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": true,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F09",
+      "label": "시간 누출",
+      "expected": "L0/누출감사",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": true,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F09",
+      "label": "시간 누출",
+      "expected": "L0/누출감사",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": true,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F09",
+      "label": "시간 누출",
+      "expected": "L0/누출감사",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": true,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F09",
+      "label": "시간 누출",
+      "expected": "L0/누출감사",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": true,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F09",
+      "label": "시간 누출",
+      "expected": "L0/누출감사",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": true,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F09",
+      "label": "시간 누출",
+      "expected": "L0/누출감사",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": true,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F09",
+      "label": "시간 누출",
+      "expected": "L0/누출감사",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": true,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F10",
+      "label": "qrel 누출",
+      "expected": "누출감사",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": true,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F10",
+      "label": "qrel 누출",
+      "expected": "누출감사",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": true,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F10",
+      "label": "qrel 누출",
+      "expected": "누출감사",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": true,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F10",
+      "label": "qrel 누출",
+      "expected": "누출감사",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": true,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F10",
+      "label": "qrel 누출",
+      "expected": "누출감사",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": true,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F10",
+      "label": "qrel 누출",
+      "expected": "누출감사",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": true,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F10",
+      "label": "qrel 누출",
+      "expected": "누출감사",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": true,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F10",
+      "label": "qrel 누출",
+      "expected": "누출감사",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": true,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F10",
+      "label": "qrel 누출",
+      "expected": "누출감사",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": true,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F11",
+      "label": "동의어 오병합(교차)",
+      "expected": "T3",
+      "cross_task": true,
+      "strength": 0.01,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": true,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ],
+          "cross_regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ]
+        },
+        "0.05": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ],
+          "cross_regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ]
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F11",
+      "label": "동의어 오병합(교차)",
+      "expected": "T3",
+      "cross_task": true,
+      "strength": 0.01,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": true,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F11",
+      "label": "동의어 오병합(교차)",
+      "expected": "T3",
+      "cross_task": true,
+      "strength": 0.01,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": true,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F11",
+      "label": "동의어 오병합(교차)",
+      "expected": "T3",
+      "cross_task": true,
+      "strength": 0.05,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ],
+          "cross_regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ]
+        },
+        "0.05": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ],
+          "cross_regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ]
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F11",
+      "label": "동의어 오병합(교차)",
+      "expected": "T3",
+      "cross_task": true,
+      "strength": 0.05,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F11",
+      "label": "동의어 오병합(교차)",
+      "expected": "T3",
+      "cross_task": true,
+      "strength": 0.05,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": true,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ],
+          "cross_regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ]
+        },
+        "0.05": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ],
+          "cross_regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ]
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F11",
+      "label": "동의어 오병합(교차)",
+      "expected": "T3",
+      "cross_task": true,
+      "strength": 0.1,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ],
+          "cross_regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ]
+        },
+        "0.05": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ],
+          "cross_regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ]
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F11",
+      "label": "동의어 오병합(교차)",
+      "expected": "T3",
+      "cross_task": true,
+      "strength": 0.1,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": true,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 24,
+          "regressed_suites": [
+            "em",
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ16_material_incompatibility",
+            "CQ18_patents_by_skill",
+            "CQ23_concept_export_control"
+          ],
+          "cross_regressed_cqs": [
+            "CQ18_patents_by_skill",
+            "CQ23_concept_export_control"
+          ]
+        },
+        "0.05": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ16_material_incompatibility",
+            "CQ18_patents_by_skill"
+          ],
+          "cross_regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ]
+        },
+        "0.10": {
+          "L3": true,
+          "T3": false,
+          "n_cq_pass": 26,
+          "regressed_suites": [],
+          "regressed_cqs": [
+            "CQ16_material_incompatibility"
+          ],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F11",
+      "label": "동의어 오병합(교차)",
+      "expected": "T3",
+      "cross_task": true,
+      "strength": 0.1,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": true,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ],
+          "cross_regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ]
+        },
+        "0.05": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ],
+          "cross_regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ]
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F12",
+      "label": "공유 계층 역전(교차)",
+      "expected": "T3",
+      "cross_task": true,
+      "strength": 0.01,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F12",
+      "label": "공유 계층 역전(교차)",
+      "expected": "T3",
+      "cross_task": true,
+      "strength": 0.01,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F12",
+      "label": "공유 계층 역전(교차)",
+      "expected": "T3",
+      "cross_task": true,
+      "strength": 0.01,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F12",
+      "label": "공유 계층 역전(교차)",
+      "expected": "T3",
+      "cross_task": true,
+      "strength": 0.05,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F12",
+      "label": "공유 계층 역전(교차)",
+      "expected": "T3",
+      "cross_task": true,
+      "strength": 0.05,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F12",
+      "label": "공유 계층 역전(교차)",
+      "expected": "T3",
+      "cross_task": true,
+      "strength": 0.05,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F12",
+      "label": "공유 계층 역전(교차)",
+      "expected": "T3",
+      "cross_task": true,
+      "strength": 0.1,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F12",
+      "label": "공유 계층 역전(교차)",
+      "expected": "T3",
+      "cross_task": true,
+      "strength": 0.1,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F12",
+      "label": "공유 계층 역전(교차)",
+      "expected": "T3",
+      "cross_task": true,
+      "strength": 0.1,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N01",
+      "label": "정상 델타(실제 병합 부분집합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N01",
+      "label": "정상 델타(실제 병합 부분집합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N01",
+      "label": "정상 델타(실제 병합 부분집합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N01",
+      "label": "정상 델타(실제 병합 부분집합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N01",
+      "label": "정상 델타(실제 병합 부분집합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N01",
+      "label": "정상 델타(실제 병합 부분집합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N01",
+      "label": "정상 델타(실제 병합 부분집합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N01",
+      "label": "정상 델타(실제 병합 부분집합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N01",
+      "label": "정상 델타(실제 병합 부분집합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N02",
+      "label": "정상 델타(의미보존 보강)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N02",
+      "label": "정상 델타(의미보존 보강)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N02",
+      "label": "정상 델타(의미보존 보강)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N02",
+      "label": "정상 델타(의미보존 보강)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N02",
+      "label": "정상 델타(의미보존 보강)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N02",
+      "label": "정상 델타(의미보존 보강)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N02",
+      "label": "정상 델타(의미보존 보강)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N02",
+      "label": "정상 델타(의미보존 보강)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N02",
+      "label": "정상 델타(의미보존 보강)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N03",
+      "label": "정상 델타(완전중복 병합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ12_problem_process_equipment_expert"
+          ],
+          "cross_regressed_cqs": [
+            "CQ12_problem_process_equipment_expert"
+          ]
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N03",
+      "label": "정상 델타(완전중복 병합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N03",
+      "label": "정상 델타(완전중복 병합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N03",
+      "label": "정상 델타(완전중복 병합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ17_material_problem_expert"
+          ],
+          "cross_regressed_cqs": [
+            "CQ17_material_problem_expert"
+          ]
+        },
+        "0.05": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ17_material_problem_expert"
+          ],
+          "cross_regressed_cqs": [
+            "CQ17_material_problem_expert"
+          ]
+        },
+        "0.10": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ17_material_problem_expert"
+          ],
+          "cross_regressed_cqs": [
+            "CQ17_material_problem_expert"
+          ]
+        }
+      }
+    },
+    {
+      "fault": "N03",
+      "label": "정상 델타(완전중복 병합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N03",
+      "label": "정상 델타(완전중복 병합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N03",
+      "label": "정상 델타(완전중복 병합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 0,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": true,
+          "T3": true,
+          "n_cq_pass": 26,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ12_problem_process_equipment_expert"
+          ],
+          "cross_regressed_cqs": [
+            "CQ12_problem_process_equipment_expert"
+          ]
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N03",
+      "label": "정상 델타(완전중복 병합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 1,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N03",
+      "label": "정상 델타(완전중복 병합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 2,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    }
+  ]
+}

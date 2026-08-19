@@ -1,0 +1,6676 @@
+{
+  "runs": [
+    "w9_holdout"
+  ],
+  "taus": [
+    0.0,
+    0.05,
+    0.1
+  ],
+  "rule_version": "v2",
+  "tau_main": 0.05,
+  "elapsed_s": 31.0,
+  "l3_suites": [
+    "pa"
+  ],
+  "t3_suites": [
+    "em",
+    "tf",
+    "core"
+  ],
+  "n_exempt": 9,
+  "summary": {
+    "0.00": {
+      "tau": 0.0,
+      "attribution": "all",
+      "n_instances": 45,
+      "by_fault": {
+        "F11": {
+          "label": "동의어 오병합(교차)",
+          "expected": "T3",
+          "cross_task": true,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.7777777777777778,
+            "leak": 0.4444444444444444,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.7777777777777778
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 7,
+          "v2_T3": 7,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": "L3",
+          "undetected": 2,
+          "cross_cqs": [
+            "CQ17_material_problem_expert",
+            "CQ18_patents_by_skill",
+            "CQ23_concept_export_control"
+          ]
+        },
+        "F12": {
+          "label": "공유 계층 역전(교차)",
+          "expected": "T3",
+          "cross_task": true,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": null,
+          "undetected": 9,
+          "cross_cqs": []
+        },
+        "F13": {
+          "label": "전문가 역량 허브 집중(교차)",
+          "expected": "T3(em)",
+          "cross_task": true,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 1.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 1.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 9,
+          "v2_T3": 9,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": "L3",
+          "undetected": 0,
+          "cross_cqs": [
+            "CQ11_experts_for_process_skill",
+            "CQ12_problem_process_equipment_expert"
+          ]
+        },
+        "F14": {
+          "label": "전문가 사례–결함모드 재배치(교차)",
+          "expected": "T3(em)",
+          "cross_task": true,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.3333333333333333,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.3333333333333333
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 3,
+          "v2_T3": 3,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": null,
+          "undetected": 6,
+          "cross_cqs": [
+            "CQ28_patent_failuremode_expert"
+          ]
+        },
+        "F15": {
+          "label": "밸류체인 방향 역전(교차)",
+          "expected": "T3(core)",
+          "cross_task": true,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.2222222222222222,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.2222222222222222
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 2,
+          "v2_T3": 2,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": null,
+          "undetected": 7,
+          "cross_cqs": [
+            "CQ13_value_chain_vendor_portfolio"
+          ]
+        },
+        "N01": {
+          "label": "정상 델타(실제 병합 부분집합)",
+          "expected": "none",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": null,
+          "undetected": 9,
+          "cross_cqs": []
+        },
+        "N02": {
+          "label": "정상 델타(의미보존 보강)",
+          "expected": "none",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": null,
+          "undetected": 9,
+          "cross_cqs": []
+        },
+        "N03": {
+          "label": "정상 델타(완전중복 병합)",
+          "expected": "none",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "delta_type": "dedup",
+          "n_exempt": 9,
+          "first_layer": null,
+          "undetected": 9,
+          "cross_cqs": [
+            "CQ12_problem_process_equipment_expert"
+          ]
+        }
+      },
+      "n_t3_v1": 0,
+      "n_t3_v2": 21,
+      "n_l3_v1": 0,
+      "n_l3_v2": 21,
+      "false_positive": {
+        "n_normal": 27,
+        "n_rejected": 0,
+        "rate": 0.0,
+        "rejected": []
+      },
+      "mcnemar": {
+        "b": 0,
+        "c": 0,
+        "n_discordant": 0,
+        "p": 1.0,
+        "test": "none(불일치 0)"
+      },
+      "h1p": {
+        "n_cross_instances": 45,
+        "n_t3_only": 0,
+        "n_t3_detected": 21,
+        "rate_t3_only": 0.0
+      }
+    },
+    "0.05": {
+      "tau": 0.05,
+      "attribution": "all",
+      "n_instances": 45,
+      "by_fault": {
+        "F11": {
+          "label": "동의어 오병합(교차)",
+          "expected": "T3",
+          "cross_task": true,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.6666666666666666,
+            "leak": 0.4444444444444444,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.6666666666666666
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 6,
+          "v2_T3": 6,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": "L3",
+          "undetected": 3,
+          "cross_cqs": [
+            "CQ18_patents_by_skill"
+          ]
+        },
+        "F12": {
+          "label": "공유 계층 역전(교차)",
+          "expected": "T3",
+          "cross_task": true,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": null,
+          "undetected": 9,
+          "cross_cqs": []
+        },
+        "F13": {
+          "label": "전문가 역량 허브 집중(교차)",
+          "expected": "T3(em)",
+          "cross_task": true,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.6666666666666666,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.6666666666666666
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 6,
+          "v2_T3": 6,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": "L3",
+          "undetected": 3,
+          "cross_cqs": [
+            "CQ11_experts_for_process_skill"
+          ]
+        },
+        "F14": {
+          "label": "전문가 사례–결함모드 재배치(교차)",
+          "expected": "T3(em)",
+          "cross_task": true,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.2222222222222222,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.2222222222222222
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 2,
+          "v2_T3": 2,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": null,
+          "undetected": 7,
+          "cross_cqs": [
+            "CQ28_patent_failuremode_expert"
+          ]
+        },
+        "F15": {
+          "label": "밸류체인 방향 역전(교차)",
+          "expected": "T3(core)",
+          "cross_task": true,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.2222222222222222,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.2222222222222222
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 2,
+          "v2_T3": 2,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": null,
+          "undetected": 7,
+          "cross_cqs": [
+            "CQ13_value_chain_vendor_portfolio"
+          ]
+        },
+        "N01": {
+          "label": "정상 델타(실제 병합 부분집합)",
+          "expected": "none",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": null,
+          "undetected": 9,
+          "cross_cqs": []
+        },
+        "N02": {
+          "label": "정상 델타(의미보존 보강)",
+          "expected": "none",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": null,
+          "undetected": 9,
+          "cross_cqs": []
+        },
+        "N03": {
+          "label": "정상 델타(완전중복 병합)",
+          "expected": "none",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "delta_type": "dedup",
+          "n_exempt": 9,
+          "first_layer": null,
+          "undetected": 9,
+          "cross_cqs": []
+        }
+      },
+      "n_t3_v1": 0,
+      "n_t3_v2": 16,
+      "n_l3_v1": 0,
+      "n_l3_v2": 16,
+      "false_positive": {
+        "n_normal": 27,
+        "n_rejected": 0,
+        "rate": 0.0,
+        "rejected": []
+      },
+      "mcnemar": {
+        "b": 0,
+        "c": 0,
+        "n_discordant": 0,
+        "p": 1.0,
+        "test": "none(불일치 0)"
+      },
+      "h1p": {
+        "n_cross_instances": 45,
+        "n_t3_only": 0,
+        "n_t3_detected": 16,
+        "rate_t3_only": 0.0
+      }
+    },
+    "0.10": {
+      "tau": 0.1,
+      "attribution": "all",
+      "n_instances": 45,
+      "by_fault": {
+        "F11": {
+          "label": "동의어 오병합(교차)",
+          "expected": "T3",
+          "cross_task": true,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.2222222222222222,
+            "leak": 0.4444444444444444,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 2,
+          "v2_T3": 0,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": null,
+          "undetected": 5,
+          "cross_cqs": []
+        },
+        "F12": {
+          "label": "공유 계층 역전(교차)",
+          "expected": "T3",
+          "cross_task": true,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": null,
+          "undetected": 9,
+          "cross_cqs": []
+        },
+        "F13": {
+          "label": "전문가 역량 허브 집중(교차)",
+          "expected": "T3(em)",
+          "cross_task": true,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.1111111111111111,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.1111111111111111
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 1,
+          "v2_T3": 1,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": null,
+          "undetected": 8,
+          "cross_cqs": [
+            "CQ11_experts_for_process_skill"
+          ]
+        },
+        "F14": {
+          "label": "전문가 사례–결함모드 재배치(교차)",
+          "expected": "T3(em)",
+          "cross_task": true,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.2222222222222222,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.2222222222222222
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 2,
+          "v2_T3": 2,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": null,
+          "undetected": 7,
+          "cross_cqs": [
+            "CQ28_patent_failuremode_expert"
+          ]
+        },
+        "F15": {
+          "label": "밸류체인 방향 역전(교차)",
+          "expected": "T3(core)",
+          "cross_task": true,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.1111111111111111,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.1111111111111111
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 1,
+          "v2_T3": 1,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": null,
+          "undetected": 8,
+          "cross_cqs": [
+            "CQ13_value_chain_vendor_portfolio"
+          ]
+        },
+        "N01": {
+          "label": "정상 델타(실제 병합 부분집합)",
+          "expected": "none",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": null,
+          "undetected": 9,
+          "cross_cqs": []
+        },
+        "N02": {
+          "label": "정상 델타(의미보존 보강)",
+          "expected": "none",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": null,
+          "undetected": 9,
+          "cross_cqs": []
+        },
+        "N03": {
+          "label": "정상 델타(완전중복 병합)",
+          "expected": "none",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "delta_type": "dedup",
+          "n_exempt": 9,
+          "first_layer": null,
+          "undetected": 9,
+          "cross_cqs": []
+        }
+      },
+      "n_t3_v1": 0,
+      "n_t3_v2": 4,
+      "n_l3_v1": 0,
+      "n_l3_v2": 6,
+      "false_positive": {
+        "n_normal": 27,
+        "n_rejected": 0,
+        "rate": 0.0,
+        "rejected": []
+      },
+      "mcnemar": {
+        "b": 2,
+        "c": 0,
+        "n_discordant": 2,
+        "p": 0.5,
+        "test": "exact binomial"
+      },
+      "h1p": {
+        "n_cross_instances": 45,
+        "n_t3_only": 0,
+        "n_t3_detected": 4,
+        "rate_t3_only": 0.0
+      }
+    }
+  },
+  "summary_split": {
+    "0.00": {
+      "tau": 0.0,
+      "attribution": "split",
+      "n_instances": 45,
+      "by_fault": {
+        "F11": {
+          "label": "동의어 오병합(교차)",
+          "expected": "T3",
+          "cross_task": true,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.2222222222222222,
+            "leak": 0.4444444444444444,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.7777777777777778
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 2,
+          "v2_T3": 7,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": "T3",
+          "undetected": 2,
+          "cross_cqs": [
+            "CQ17_material_problem_expert",
+            "CQ18_patents_by_skill",
+            "CQ23_concept_export_control"
+          ]
+        },
+        "F12": {
+          "label": "공유 계층 역전(교차)",
+          "expected": "T3",
+          "cross_task": true,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": null,
+          "undetected": 9,
+          "cross_cqs": []
+        },
+        "F13": {
+          "label": "전문가 역량 허브 집중(교차)",
+          "expected": "T3(em)",
+          "cross_task": true,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 1.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 9,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": "T3",
+          "undetected": 0,
+          "cross_cqs": [
+            "CQ11_experts_for_process_skill",
+            "CQ12_problem_process_equipment_expert"
+          ]
+        },
+        "F14": {
+          "label": "전문가 사례–결함모드 재배치(교차)",
+          "expected": "T3(em)",
+          "cross_task": true,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.3333333333333333
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 3,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": null,
+          "undetected": 6,
+          "cross_cqs": [
+            "CQ28_patent_failuremode_expert"
+          ]
+        },
+        "F15": {
+          "label": "밸류체인 방향 역전(교차)",
+          "expected": "T3(core)",
+          "cross_task": true,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.2222222222222222
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 2,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": null,
+          "undetected": 7,
+          "cross_cqs": [
+            "CQ13_value_chain_vendor_portfolio"
+          ]
+        },
+        "N01": {
+          "label": "정상 델타(실제 병합 부분집합)",
+          "expected": "none",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": null,
+          "undetected": 9,
+          "cross_cqs": []
+        },
+        "N02": {
+          "label": "정상 델타(의미보존 보강)",
+          "expected": "none",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": null,
+          "undetected": 9,
+          "cross_cqs": []
+        },
+        "N03": {
+          "label": "정상 델타(완전중복 병합)",
+          "expected": "none",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "delta_type": "dedup",
+          "n_exempt": 9,
+          "first_layer": null,
+          "undetected": 9,
+          "cross_cqs": [
+            "CQ12_problem_process_equipment_expert"
+          ]
+        }
+      },
+      "n_t3_v1": 0,
+      "n_t3_v2": 21,
+      "n_l3_v1": 0,
+      "n_l3_v2": 2,
+      "false_positive": {
+        "n_normal": 27,
+        "n_rejected": 0,
+        "rate": 0.0,
+        "rejected": []
+      },
+      "mcnemar": {
+        "b": 0,
+        "c": 19,
+        "n_discordant": 19,
+        "p": 3.814697265625e-06,
+        "test": "exact binomial"
+      },
+      "h1p": {
+        "n_cross_instances": 45,
+        "n_t3_only": 19,
+        "n_t3_detected": 21,
+        "rate_t3_only": 0.4222222222222222
+      }
+    },
+    "0.05": {
+      "tau": 0.05,
+      "attribution": "split",
+      "n_instances": 45,
+      "by_fault": {
+        "F11": {
+          "label": "동의어 오병합(교차)",
+          "expected": "T3",
+          "cross_task": true,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.2222222222222222,
+            "leak": 0.4444444444444444,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.6666666666666666
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 2,
+          "v2_T3": 6,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": null,
+          "undetected": 3,
+          "cross_cqs": [
+            "CQ18_patents_by_skill"
+          ]
+        },
+        "F12": {
+          "label": "공유 계층 역전(교차)",
+          "expected": "T3",
+          "cross_task": true,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": null,
+          "undetected": 9,
+          "cross_cqs": []
+        },
+        "F13": {
+          "label": "전문가 역량 허브 집중(교차)",
+          "expected": "T3(em)",
+          "cross_task": true,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.6666666666666666
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 6,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": "T3",
+          "undetected": 3,
+          "cross_cqs": [
+            "CQ11_experts_for_process_skill"
+          ]
+        },
+        "F14": {
+          "label": "전문가 사례–결함모드 재배치(교차)",
+          "expected": "T3(em)",
+          "cross_task": true,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.2222222222222222
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 2,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": null,
+          "undetected": 7,
+          "cross_cqs": [
+            "CQ28_patent_failuremode_expert"
+          ]
+        },
+        "F15": {
+          "label": "밸류체인 방향 역전(교차)",
+          "expected": "T3(core)",
+          "cross_task": true,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.2222222222222222
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 2,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": null,
+          "undetected": 7,
+          "cross_cqs": [
+            "CQ13_value_chain_vendor_portfolio"
+          ]
+        },
+        "N01": {
+          "label": "정상 델타(실제 병합 부분집합)",
+          "expected": "none",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": null,
+          "undetected": 9,
+          "cross_cqs": []
+        },
+        "N02": {
+          "label": "정상 델타(의미보존 보강)",
+          "expected": "none",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": null,
+          "undetected": 9,
+          "cross_cqs": []
+        },
+        "N03": {
+          "label": "정상 델타(완전중복 병합)",
+          "expected": "none",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "delta_type": "dedup",
+          "n_exempt": 9,
+          "first_layer": null,
+          "undetected": 9,
+          "cross_cqs": []
+        }
+      },
+      "n_t3_v1": 0,
+      "n_t3_v2": 16,
+      "n_l3_v1": 0,
+      "n_l3_v2": 2,
+      "false_positive": {
+        "n_normal": 27,
+        "n_rejected": 0,
+        "rate": 0.0,
+        "rejected": []
+      },
+      "mcnemar": {
+        "b": 0,
+        "c": 14,
+        "n_discordant": 14,
+        "p": 0.0001220703125,
+        "test": "exact binomial"
+      },
+      "h1p": {
+        "n_cross_instances": 45,
+        "n_t3_only": 14,
+        "n_t3_detected": 16,
+        "rate_t3_only": 0.3111111111111111
+      }
+    },
+    "0.10": {
+      "tau": 0.1,
+      "attribution": "split",
+      "n_instances": 45,
+      "by_fault": {
+        "F11": {
+          "label": "동의어 오병합(교차)",
+          "expected": "T3",
+          "cross_task": true,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.2222222222222222,
+            "leak": 0.4444444444444444,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 2,
+          "v2_T3": 0,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": null,
+          "undetected": 5,
+          "cross_cqs": []
+        },
+        "F12": {
+          "label": "공유 계층 역전(교차)",
+          "expected": "T3",
+          "cross_task": true,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": null,
+          "undetected": 9,
+          "cross_cqs": []
+        },
+        "F13": {
+          "label": "전문가 역량 허브 집중(교차)",
+          "expected": "T3(em)",
+          "cross_task": true,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.1111111111111111
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 1,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": null,
+          "undetected": 8,
+          "cross_cqs": [
+            "CQ11_experts_for_process_skill"
+          ]
+        },
+        "F14": {
+          "label": "전문가 사례–결함모드 재배치(교차)",
+          "expected": "T3(em)",
+          "cross_task": true,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.2222222222222222
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 2,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": null,
+          "undetected": 7,
+          "cross_cqs": [
+            "CQ28_patent_failuremode_expert"
+          ]
+        },
+        "F15": {
+          "label": "밸류체인 방향 역전(교차)",
+          "expected": "T3(core)",
+          "cross_task": true,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.1111111111111111
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 1,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": null,
+          "undetected": 8,
+          "cross_cqs": [
+            "CQ13_value_chain_vendor_portfolio"
+          ]
+        },
+        "N01": {
+          "label": "정상 델타(실제 병합 부분집합)",
+          "expected": "none",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": null,
+          "undetected": 9,
+          "cross_cqs": []
+        },
+        "N02": {
+          "label": "정상 델타(의미보존 보강)",
+          "expected": "none",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "delta_type": "generic",
+          "n_exempt": 0,
+          "first_layer": null,
+          "undetected": 9,
+          "cross_cqs": []
+        },
+        "N03": {
+          "label": "정상 델타(완전중복 병합)",
+          "expected": "none",
+          "cross_task": false,
+          "n": 9,
+          "rates": {
+            "L0": 0.0,
+            "L1": 0.0,
+            "L2": 0.0,
+            "L3": 0.0,
+            "leak": 0.0,
+            "T1": 0.0,
+            "T2": 0.0,
+            "T3": 0.0
+          },
+          "v1_L3": 0,
+          "v1_T3": 0,
+          "v2_L3": 0,
+          "v2_T3": 0,
+          "delta_type": "dedup",
+          "n_exempt": 9,
+          "first_layer": null,
+          "undetected": 9,
+          "cross_cqs": []
+        }
+      },
+      "n_t3_v1": 0,
+      "n_t3_v2": 4,
+      "n_l3_v1": 0,
+      "n_l3_v2": 2,
+      "false_positive": {
+        "n_normal": 27,
+        "n_rejected": 0,
+        "rate": 0.0,
+        "rejected": []
+      },
+      "mcnemar": {
+        "b": 2,
+        "c": 4,
+        "n_discordant": 6,
+        "p": 0.6875,
+        "test": "exact binomial"
+      },
+      "h1p": {
+        "n_cross_instances": 45,
+        "n_t3_only": 4,
+        "n_t3_detected": 4,
+        "rate_t3_only": 0.08888888888888889
+      }
+    }
+  },
+  "invariant": {
+    "0.00": {
+      "n_checked": 72,
+      "n_violation": 0,
+      "holds": true,
+      "violations": []
+    },
+    "0.05": {
+      "n_checked": 72,
+      "n_violation": 0,
+      "holds": true,
+      "violations": []
+    },
+    "0.10": {
+      "n_checked": 72,
+      "n_violation": 0,
+      "holds": true,
+      "violations": []
+    }
+  },
+  "instances": [
+    {
+      "fault": "F11",
+      "label": "동의어 오병합(교차)",
+      "expected": "T3",
+      "cross_task": true,
+      "strength": 0.01,
+      "rep": 3,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": true,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": true,
+          "L3_pa": false,
+          "T3": true,
+          "n_cq_pass": 26,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ]
+        },
+        "0.05": {
+          "L3_all": true,
+          "L3_pa": false,
+          "T3": true,
+          "n_cq_pass": 26,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ]
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F11",
+      "label": "동의어 오병합(교차)",
+      "expected": "T3",
+      "cross_task": true,
+      "strength": 0.01,
+      "rep": 4,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F11",
+      "label": "동의어 오병합(교차)",
+      "expected": "T3",
+      "cross_task": true,
+      "strength": 0.01,
+      "rep": 5,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": true,
+          "L3_pa": false,
+          "T3": true,
+          "n_cq_pass": 26,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ]
+        },
+        "0.05": {
+          "L3_all": true,
+          "L3_pa": false,
+          "T3": true,
+          "n_cq_pass": 26,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ]
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F11",
+      "label": "동의어 오병합(교차)",
+      "expected": "T3",
+      "cross_task": true,
+      "strength": 0.05,
+      "rep": 3,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": true,
+          "L3_pa": false,
+          "T3": true,
+          "n_cq_pass": 26,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ]
+        },
+        "0.05": {
+          "L3_all": true,
+          "L3_pa": false,
+          "T3": true,
+          "n_cq_pass": 26,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ]
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F11",
+      "label": "동의어 오병합(교차)",
+      "expected": "T3",
+      "cross_task": true,
+      "strength": 0.05,
+      "rep": 4,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": true,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": true,
+          "L3_pa": false,
+          "T3": true,
+          "n_cq_pass": 26,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ]
+        },
+        "0.05": {
+          "L3_all": true,
+          "L3_pa": false,
+          "T3": true,
+          "n_cq_pass": 26,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ]
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F11",
+      "label": "동의어 오병합(교차)",
+      "expected": "T3",
+      "cross_task": true,
+      "strength": 0.05,
+      "rep": 5,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": true,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": true,
+          "L3_pa": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "n_pa_pass": 3,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ16_material_incompatibility",
+            "CQ18_patents_by_skill"
+          ],
+          "pa_regressed_cqs": [
+            "CQ16_material_incompatibility"
+          ],
+          "cross_regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ]
+        },
+        "0.05": {
+          "L3_all": true,
+          "L3_pa": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "n_pa_pass": 3,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ16_material_incompatibility",
+            "CQ18_patents_by_skill"
+          ],
+          "pa_regressed_cqs": [
+            "CQ16_material_incompatibility"
+          ],
+          "cross_regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ]
+        },
+        "0.10": {
+          "L3_all": true,
+          "L3_pa": true,
+          "T3": false,
+          "n_cq_pass": 26,
+          "n_pa_pass": 3,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [
+            "CQ16_material_incompatibility"
+          ],
+          "pa_regressed_cqs": [
+            "CQ16_material_incompatibility"
+          ],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F11",
+      "label": "동의어 오병합(교차)",
+      "expected": "T3",
+      "cross_task": true,
+      "strength": 0.1,
+      "rep": 3,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F11",
+      "label": "동의어 오병합(교차)",
+      "expected": "T3",
+      "cross_task": true,
+      "strength": 0.1,
+      "rep": 4,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": true,
+          "L3_pa": false,
+          "T3": true,
+          "n_cq_pass": 26,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ17_material_problem_expert"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ17_material_problem_expert"
+          ]
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F11",
+      "label": "동의어 오병합(교차)",
+      "expected": "T3",
+      "cross_task": true,
+      "strength": 0.1,
+      "rep": 5,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": true,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": true,
+          "L3_pa": true,
+          "T3": true,
+          "n_cq_pass": 24,
+          "n_pa_pass": 3,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "em",
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ16_material_incompatibility",
+            "CQ18_patents_by_skill",
+            "CQ23_concept_export_control"
+          ],
+          "pa_regressed_cqs": [
+            "CQ16_material_incompatibility"
+          ],
+          "cross_regressed_cqs": [
+            "CQ18_patents_by_skill",
+            "CQ23_concept_export_control"
+          ]
+        },
+        "0.05": {
+          "L3_all": true,
+          "L3_pa": true,
+          "T3": true,
+          "n_cq_pass": 25,
+          "n_pa_pass": 3,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ16_material_incompatibility",
+            "CQ18_patents_by_skill"
+          ],
+          "pa_regressed_cqs": [
+            "CQ16_material_incompatibility"
+          ],
+          "cross_regressed_cqs": [
+            "CQ18_patents_by_skill"
+          ]
+        },
+        "0.10": {
+          "L3_all": true,
+          "L3_pa": true,
+          "T3": false,
+          "n_cq_pass": 26,
+          "n_pa_pass": 3,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [
+            "CQ16_material_incompatibility"
+          ],
+          "pa_regressed_cqs": [
+            "CQ16_material_incompatibility"
+          ],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F12",
+      "label": "공유 계층 역전(교차)",
+      "expected": "T3",
+      "cross_task": true,
+      "strength": 0.01,
+      "rep": 3,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F12",
+      "label": "공유 계층 역전(교차)",
+      "expected": "T3",
+      "cross_task": true,
+      "strength": 0.01,
+      "rep": 4,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F12",
+      "label": "공유 계층 역전(교차)",
+      "expected": "T3",
+      "cross_task": true,
+      "strength": 0.01,
+      "rep": 5,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F12",
+      "label": "공유 계층 역전(교차)",
+      "expected": "T3",
+      "cross_task": true,
+      "strength": 0.05,
+      "rep": 3,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F12",
+      "label": "공유 계층 역전(교차)",
+      "expected": "T3",
+      "cross_task": true,
+      "strength": 0.05,
+      "rep": 4,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F12",
+      "label": "공유 계층 역전(교차)",
+      "expected": "T3",
+      "cross_task": true,
+      "strength": 0.05,
+      "rep": 5,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F12",
+      "label": "공유 계층 역전(교차)",
+      "expected": "T3",
+      "cross_task": true,
+      "strength": 0.1,
+      "rep": 3,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F12",
+      "label": "공유 계층 역전(교차)",
+      "expected": "T3",
+      "cross_task": true,
+      "strength": 0.1,
+      "rep": 4,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F12",
+      "label": "공유 계층 역전(교차)",
+      "expected": "T3",
+      "cross_task": true,
+      "strength": 0.1,
+      "rep": 5,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F13",
+      "label": "전문가 역량 허브 집중(교차)",
+      "expected": "T3(em)",
+      "cross_task": true,
+      "strength": 0.01,
+      "rep": 3,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": true,
+          "L3_pa": false,
+          "T3": true,
+          "n_cq_pass": 26,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ12_problem_process_equipment_expert"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ12_problem_process_equipment_expert"
+          ]
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F13",
+      "label": "전문가 역량 허브 집중(교차)",
+      "expected": "T3(em)",
+      "cross_task": true,
+      "strength": 0.01,
+      "rep": 4,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": true,
+          "L3_pa": false,
+          "T3": true,
+          "n_cq_pass": 26,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ12_problem_process_equipment_expert"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ12_problem_process_equipment_expert"
+          ]
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F13",
+      "label": "전문가 역량 허브 집중(교차)",
+      "expected": "T3(em)",
+      "cross_task": true,
+      "strength": 0.01,
+      "rep": 5,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": true,
+          "L3_pa": false,
+          "T3": true,
+          "n_cq_pass": 26,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ12_problem_process_equipment_expert"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ12_problem_process_equipment_expert"
+          ]
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F13",
+      "label": "전문가 역량 허브 집중(교차)",
+      "expected": "T3(em)",
+      "cross_task": true,
+      "strength": 0.05,
+      "rep": 3,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": true,
+          "L3_pa": false,
+          "T3": true,
+          "n_cq_pass": 25,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ11_experts_for_process_skill",
+            "CQ12_problem_process_equipment_expert"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ11_experts_for_process_skill",
+            "CQ12_problem_process_equipment_expert"
+          ]
+        },
+        "0.05": {
+          "L3_all": true,
+          "L3_pa": false,
+          "T3": true,
+          "n_cq_pass": 26,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ11_experts_for_process_skill"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ11_experts_for_process_skill"
+          ]
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F13",
+      "label": "전문가 역량 허브 집중(교차)",
+      "expected": "T3(em)",
+      "cross_task": true,
+      "strength": 0.05,
+      "rep": 4,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": true,
+          "L3_pa": false,
+          "T3": true,
+          "n_cq_pass": 26,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ11_experts_for_process_skill"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ11_experts_for_process_skill"
+          ]
+        },
+        "0.05": {
+          "L3_all": true,
+          "L3_pa": false,
+          "T3": true,
+          "n_cq_pass": 26,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ11_experts_for_process_skill"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ11_experts_for_process_skill"
+          ]
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F13",
+      "label": "전문가 역량 허브 집중(교차)",
+      "expected": "T3(em)",
+      "cross_task": true,
+      "strength": 0.05,
+      "rep": 5,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": true,
+          "L3_pa": false,
+          "T3": true,
+          "n_cq_pass": 26,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ11_experts_for_process_skill"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ11_experts_for_process_skill"
+          ]
+        },
+        "0.05": {
+          "L3_all": true,
+          "L3_pa": false,
+          "T3": true,
+          "n_cq_pass": 26,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ11_experts_for_process_skill"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ11_experts_for_process_skill"
+          ]
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F13",
+      "label": "전문가 역량 허브 집중(교차)",
+      "expected": "T3(em)",
+      "cross_task": true,
+      "strength": 0.1,
+      "rep": 3,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": true,
+          "L3_pa": false,
+          "T3": true,
+          "n_cq_pass": 26,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ11_experts_for_process_skill"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ11_experts_for_process_skill"
+          ]
+        },
+        "0.05": {
+          "L3_all": true,
+          "L3_pa": false,
+          "T3": true,
+          "n_cq_pass": 26,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ11_experts_for_process_skill"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ11_experts_for_process_skill"
+          ]
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F13",
+      "label": "전문가 역량 허브 집중(교차)",
+      "expected": "T3(em)",
+      "cross_task": true,
+      "strength": 0.1,
+      "rep": 4,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": true,
+          "L3_pa": false,
+          "T3": true,
+          "n_cq_pass": 25,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ11_experts_for_process_skill",
+            "CQ12_problem_process_equipment_expert"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ11_experts_for_process_skill",
+            "CQ12_problem_process_equipment_expert"
+          ]
+        },
+        "0.05": {
+          "L3_all": true,
+          "L3_pa": false,
+          "T3": true,
+          "n_cq_pass": 26,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ11_experts_for_process_skill"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ11_experts_for_process_skill"
+          ]
+        },
+        "0.10": {
+          "L3_all": true,
+          "L3_pa": false,
+          "T3": true,
+          "n_cq_pass": 26,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ11_experts_for_process_skill"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ11_experts_for_process_skill"
+          ]
+        }
+      }
+    },
+    {
+      "fault": "F13",
+      "label": "전문가 역량 허브 집중(교차)",
+      "expected": "T3(em)",
+      "cross_task": true,
+      "strength": 0.1,
+      "rep": 5,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": true,
+          "L3_pa": false,
+          "T3": true,
+          "n_cq_pass": 25,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ11_experts_for_process_skill",
+            "CQ12_problem_process_equipment_expert"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ11_experts_for_process_skill",
+            "CQ12_problem_process_equipment_expert"
+          ]
+        },
+        "0.05": {
+          "L3_all": true,
+          "L3_pa": false,
+          "T3": true,
+          "n_cq_pass": 26,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ11_experts_for_process_skill"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ11_experts_for_process_skill"
+          ]
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F14",
+      "label": "전문가 사례–결함모드 재배치(교차)",
+      "expected": "T3(em)",
+      "cross_task": true,
+      "strength": 0.01,
+      "rep": 3,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F14",
+      "label": "전문가 사례–결함모드 재배치(교차)",
+      "expected": "T3(em)",
+      "cross_task": true,
+      "strength": 0.01,
+      "rep": 4,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F14",
+      "label": "전문가 사례–결함모드 재배치(교차)",
+      "expected": "T3(em)",
+      "cross_task": true,
+      "strength": 0.01,
+      "rep": 5,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F14",
+      "label": "전문가 사례–결함모드 재배치(교차)",
+      "expected": "T3(em)",
+      "cross_task": true,
+      "strength": 0.05,
+      "rep": 3,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": true,
+          "L3_pa": false,
+          "T3": true,
+          "n_cq_pass": 26,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ28_patent_failuremode_expert"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ28_patent_failuremode_expert"
+          ]
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F14",
+      "label": "전문가 사례–결함모드 재배치(교차)",
+      "expected": "T3(em)",
+      "cross_task": true,
+      "strength": 0.05,
+      "rep": 4,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F14",
+      "label": "전문가 사례–결함모드 재배치(교차)",
+      "expected": "T3(em)",
+      "cross_task": true,
+      "strength": 0.05,
+      "rep": 5,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F14",
+      "label": "전문가 사례–결함모드 재배치(교차)",
+      "expected": "T3(em)",
+      "cross_task": true,
+      "strength": 0.1,
+      "rep": 3,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": true,
+          "L3_pa": false,
+          "T3": true,
+          "n_cq_pass": 26,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ28_patent_failuremode_expert"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ28_patent_failuremode_expert"
+          ]
+        },
+        "0.05": {
+          "L3_all": true,
+          "L3_pa": false,
+          "T3": true,
+          "n_cq_pass": 26,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ28_patent_failuremode_expert"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ28_patent_failuremode_expert"
+          ]
+        },
+        "0.10": {
+          "L3_all": true,
+          "L3_pa": false,
+          "T3": true,
+          "n_cq_pass": 26,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ28_patent_failuremode_expert"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ28_patent_failuremode_expert"
+          ]
+        }
+      }
+    },
+    {
+      "fault": "F14",
+      "label": "전문가 사례–결함모드 재배치(교차)",
+      "expected": "T3(em)",
+      "cross_task": true,
+      "strength": 0.1,
+      "rep": 4,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F14",
+      "label": "전문가 사례–결함모드 재배치(교차)",
+      "expected": "T3(em)",
+      "cross_task": true,
+      "strength": 0.1,
+      "rep": 5,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": true,
+          "L3_pa": false,
+          "T3": true,
+          "n_cq_pass": 26,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ28_patent_failuremode_expert"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ28_patent_failuremode_expert"
+          ]
+        },
+        "0.05": {
+          "L3_all": true,
+          "L3_pa": false,
+          "T3": true,
+          "n_cq_pass": 26,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ28_patent_failuremode_expert"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ28_patent_failuremode_expert"
+          ]
+        },
+        "0.10": {
+          "L3_all": true,
+          "L3_pa": false,
+          "T3": true,
+          "n_cq_pass": 26,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "em"
+          ],
+          "regressed_cqs": [
+            "CQ28_patent_failuremode_expert"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ28_patent_failuremode_expert"
+          ]
+        }
+      }
+    },
+    {
+      "fault": "F15",
+      "label": "밸류체인 방향 역전(교차)",
+      "expected": "T3(core)",
+      "cross_task": true,
+      "strength": 0.01,
+      "rep": 3,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F15",
+      "label": "밸류체인 방향 역전(교차)",
+      "expected": "T3(core)",
+      "cross_task": true,
+      "strength": 0.01,
+      "rep": 4,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F15",
+      "label": "밸류체인 방향 역전(교차)",
+      "expected": "T3(core)",
+      "cross_task": true,
+      "strength": 0.01,
+      "rep": 5,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F15",
+      "label": "밸류체인 방향 역전(교차)",
+      "expected": "T3(core)",
+      "cross_task": true,
+      "strength": 0.05,
+      "rep": 3,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F15",
+      "label": "밸류체인 방향 역전(교차)",
+      "expected": "T3(core)",
+      "cross_task": true,
+      "strength": 0.05,
+      "rep": 4,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F15",
+      "label": "밸류체인 방향 역전(교차)",
+      "expected": "T3(core)",
+      "cross_task": true,
+      "strength": 0.05,
+      "rep": 5,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F15",
+      "label": "밸류체인 방향 역전(교차)",
+      "expected": "T3(core)",
+      "cross_task": true,
+      "strength": 0.1,
+      "rep": 3,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": true,
+          "L3_pa": false,
+          "T3": true,
+          "n_cq_pass": 26,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ13_value_chain_vendor_portfolio"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ13_value_chain_vendor_portfolio"
+          ]
+        },
+        "0.05": {
+          "L3_all": true,
+          "L3_pa": false,
+          "T3": true,
+          "n_cq_pass": 26,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ13_value_chain_vendor_portfolio"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ13_value_chain_vendor_portfolio"
+          ]
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F15",
+      "label": "밸류체인 방향 역전(교차)",
+      "expected": "T3(core)",
+      "cross_task": true,
+      "strength": 0.1,
+      "rep": 4,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "F15",
+      "label": "밸류체인 방향 역전(교차)",
+      "expected": "T3(core)",
+      "cross_task": true,
+      "strength": 0.1,
+      "rep": 5,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": true,
+          "L3_pa": false,
+          "T3": true,
+          "n_cq_pass": 26,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ13_value_chain_vendor_portfolio"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ13_value_chain_vendor_portfolio"
+          ]
+        },
+        "0.05": {
+          "L3_all": true,
+          "L3_pa": false,
+          "T3": true,
+          "n_cq_pass": 26,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ13_value_chain_vendor_portfolio"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ13_value_chain_vendor_portfolio"
+          ]
+        },
+        "0.10": {
+          "L3_all": true,
+          "L3_pa": false,
+          "T3": true,
+          "n_cq_pass": 26,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [
+            "core"
+          ],
+          "regressed_cqs": [
+            "CQ13_value_chain_vendor_portfolio"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ13_value_chain_vendor_portfolio"
+          ]
+        }
+      }
+    },
+    {
+      "fault": "N01",
+      "label": "정상 델타(실제 병합 부분집합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 3,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N01",
+      "label": "정상 델타(실제 병합 부분집합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 4,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N01",
+      "label": "정상 델타(실제 병합 부분집합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 5,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N01",
+      "label": "정상 델타(실제 병합 부분집합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 3,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N01",
+      "label": "정상 델타(실제 병합 부분집합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 4,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N01",
+      "label": "정상 델타(실제 병합 부분집합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 5,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N01",
+      "label": "정상 델타(실제 병합 부분집합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 3,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N01",
+      "label": "정상 델타(실제 병합 부분집합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 4,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N01",
+      "label": "정상 델타(실제 병합 부분집합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 5,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N02",
+      "label": "정상 델타(의미보존 보강)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 3,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N02",
+      "label": "정상 델타(의미보존 보강)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 4,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N02",
+      "label": "정상 델타(의미보존 보강)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 5,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N02",
+      "label": "정상 델타(의미보존 보강)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 3,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N02",
+      "label": "정상 델타(의미보존 보강)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 4,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N02",
+      "label": "정상 델타(의미보존 보강)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 5,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N02",
+      "label": "정상 델타(의미보존 보강)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 3,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N02",
+      "label": "정상 델타(의미보존 보강)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 4,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N02",
+      "label": "정상 델타(의미보존 보강)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 5,
+      "exempt": false,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N03",
+      "label": "정상 델타(완전중복 병합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 3,
+      "exempt": true,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N03",
+      "label": "정상 델타(완전중복 병합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 4,
+      "exempt": true,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N03",
+      "label": "정상 델타(완전중복 병합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.01,
+      "rep": 5,
+      "exempt": true,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [
+            "CQ12_problem_process_equipment_expert"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ12_problem_process_equipment_expert"
+          ]
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N03",
+      "label": "정상 델타(완전중복 병합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 3,
+      "exempt": true,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N03",
+      "label": "정상 델타(완전중복 병합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 4,
+      "exempt": true,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [
+            "CQ12_problem_process_equipment_expert"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ12_problem_process_equipment_expert"
+          ]
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N03",
+      "label": "정상 델타(완전중복 병합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.05,
+      "rep": 5,
+      "exempt": true,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N03",
+      "label": "정상 델타(완전중복 병합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 3,
+      "exempt": true,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N03",
+      "label": "정상 델타(완전중복 병합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 4,
+      "exempt": true,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    },
+    {
+      "fault": "N03",
+      "label": "정상 델타(완전중복 병합)",
+      "expected": "none",
+      "cross_task": false,
+      "strength": 0.1,
+      "rep": 5,
+      "exempt": true,
+      "v1": {
+        "L0": false,
+        "L1": false,
+        "L2": false,
+        "L3": false,
+        "T3": false,
+        "leak": false,
+        "T1": false,
+        "T2": false
+      },
+      "v2_by_tau": {
+        "0.00": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [
+            "CQ12_problem_process_equipment_expert"
+          ],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": [
+            "CQ12_problem_process_equipment_expert"
+          ]
+        },
+        "0.05": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        },
+        "0.10": {
+          "L3_all": false,
+          "L3_pa": false,
+          "T3": false,
+          "n_cq_pass": 27,
+          "n_pa_pass": 4,
+          "base_pa_pass": 4,
+          "regressed_suites": [],
+          "regressed_cqs": [],
+          "pa_regressed_cqs": [],
+          "cross_regressed_cqs": []
+        }
+      }
+    }
+  ],
+  "holdout": {
+    "kill_switch": {
+      "pass": true,
+      "violations": [],
+      "l3_suites": [
+        "pa"
+      ],
+      "t3_suites": [
+        "core",
+        "em",
+        "tf"
+      ],
+      "n_cq": 28
+    },
+    "tau_main": 0.05,
+    "main": {
+      "tau": 0.05,
+      "attribution": "split",
+      "main": {
+        "n_cross": 45,
+        "n_t3_detected": 16,
+        "n_l3_detected": 2,
+        "n_t3_only": 12,
+        "t3_only": [
+          {
+            "fault": "F11",
+            "strength": 0.01,
+            "rep": 5
+          },
+          {
+            "fault": "F11",
+            "strength": 0.05,
+            "rep": 3
+          },
+          {
+            "fault": "F13",
+            "strength": 0.05,
+            "rep": 3
+          },
+          {
+            "fault": "F13",
+            "strength": 0.05,
+            "rep": 4
+          },
+          {
+            "fault": "F13",
+            "strength": 0.05,
+            "rep": 5
+          },
+          {
+            "fault": "F13",
+            "strength": 0.1,
+            "rep": 3
+          },
+          {
+            "fault": "F13",
+            "strength": 0.1,
+            "rep": 4
+          },
+          {
+            "fault": "F13",
+            "strength": 0.1,
+            "rep": 5
+          },
+          {
+            "fault": "F14",
+            "strength": 0.1,
+            "rep": 3
+          },
+          {
+            "fault": "F14",
+            "strength": 0.1,
+            "rep": 5
+          },
+          {
+            "fault": "F15",
+            "strength": 0.1,
+            "rep": 3
+          },
+          {
+            "fault": "F15",
+            "strength": 0.1,
+            "rep": 5
+          }
+        ],
+        "by_fault": {
+          "F11": 2,
+          "F12": 0,
+          "F13": 6,
+          "F14": 2,
+          "F15": 2
+        },
+        "mcnemar": {
+          "b": 0,
+          "c": 14,
+          "n_discordant": 14,
+          "p": 6.103515625e-05,
+          "direction": "T3",
+          "test": "exact binomial (단측 · 사전지정 방향 T3 우세)"
+        },
+        "c1_t3_only": true,
+        "c2_mcnemar": true
+      },
+      "false_positive": {
+        "n_normal": 27,
+        "n_rejected": 0,
+        "rate": 0.0,
+        "threshold": 0.05,
+        "rejected": []
+      },
+      "c3_false_positive": true,
+      "replicate_only": {
+        "n_cross": 18,
+        "n_t3_detected": 6,
+        "n_l3_detected": 2,
+        "n_t3_only": 2,
+        "t3_only": [
+          {
+            "fault": "F11",
+            "strength": 0.01,
+            "rep": 5
+          },
+          {
+            "fault": "F11",
+            "strength": 0.05,
+            "rep": 3
+          }
+        ],
+        "by_fault": {
+          "F11": 2,
+          "F12": 0
+        },
+        "mcnemar": {
+          "b": 0,
+          "c": 4,
+          "n_discordant": 4,
+          "p": 0.0625,
+          "direction": "T3",
+          "test": "exact binomial (단측 · 사전지정 방향 T3 우세)"
+        },
+        "c1_t3_only": true,
+        "c2_mcnemar": false
+      },
+      "novel_only": {
+        "n_cross": 27,
+        "n_t3_detected": 10,
+        "n_l3_detected": 0,
+        "n_t3_only": 10,
+        "t3_only": [
+          {
+            "fault": "F13",
+            "strength": 0.05,
+            "rep": 3
+          },
+          {
+            "fault": "F13",
+            "strength": 0.05,
+            "rep": 4
+          },
+          {
+            "fault": "F13",
+            "strength": 0.05,
+            "rep": 5
+          },
+          {
+            "fault": "F13",
+            "strength": 0.1,
+            "rep": 3
+          },
+          {
+            "fault": "F13",
+            "strength": 0.1,
+            "rep": 4
+          },
+          {
+            "fault": "F13",
+            "strength": 0.1,
+            "rep": 5
+          },
+          {
+            "fault": "F14",
+            "strength": 0.1,
+            "rep": 3
+          },
+          {
+            "fault": "F14",
+            "strength": 0.1,
+            "rep": 5
+          },
+          {
+            "fault": "F15",
+            "strength": 0.1,
+            "rep": 3
+          },
+          {
+            "fault": "F15",
+            "strength": 0.1,
+            "rep": 5
+          }
+        ],
+        "by_fault": {
+          "F13": 6,
+          "F14": 2,
+          "F15": 2
+        },
+        "mcnemar": {
+          "b": 0,
+          "c": 10,
+          "n_discordant": 10,
+          "p": 0.0009765625,
+          "direction": "T3",
+          "test": "exact binomial (단측 · 사전지정 방향 T3 우세)"
+        },
+        "c1_t3_only": true,
+        "c2_mcnemar": true
+      },
+      "supported": true,
+      "verdict": "지지"
+    },
+    "by_tau": {
+      "0.00": {
+        "tau": 0.0,
+        "attribution": "split",
+        "main": {
+          "n_cross": 45,
+          "n_t3_detected": 21,
+          "n_l3_detected": 2,
+          "n_t3_only": 17,
+          "t3_only": [
+            {
+              "fault": "F11",
+              "strength": 0.01,
+              "rep": 5
+            },
+            {
+              "fault": "F11",
+              "strength": 0.05,
+              "rep": 3
+            },
+            {
+              "fault": "F11",
+              "strength": 0.1,
+              "rep": 4
+            },
+            {
+              "fault": "F13",
+              "strength": 0.01,
+              "rep": 3
+            },
+            {
+              "fault": "F13",
+              "strength": 0.01,
+              "rep": 4
+            },
+            {
+              "fault": "F13",
+              "strength": 0.01,
+              "rep": 5
+            },
+            {
+              "fault": "F13",
+              "strength": 0.05,
+              "rep": 3
+            },
+            {
+              "fault": "F13",
+              "strength": 0.05,
+              "rep": 4
+            },
+            {
+              "fault": "F13",
+              "strength": 0.05,
+              "rep": 5
+            },
+            {
+              "fault": "F13",
+              "strength": 0.1,
+              "rep": 3
+            },
+            {
+              "fault": "F13",
+              "strength": 0.1,
+              "rep": 4
+            },
+            {
+              "fault": "F13",
+              "strength": 0.1,
+              "rep": 5
+            },
+            {
+              "fault": "F14",
+              "strength": 0.05,
+              "rep": 3
+            },
+            {
+              "fault": "F14",
+              "strength": 0.1,
+              "rep": 3
+            },
+            {
+              "fault": "F14",
+              "strength": 0.1,
+              "rep": 5
+            },
+            {
+              "fault": "F15",
+              "strength": 0.1,
+              "rep": 3
+            },
+            {
+              "fault": "F15",
+              "strength": 0.1,
+              "rep": 5
+            }
+          ],
+          "by_fault": {
+            "F11": 3,
+            "F12": 0,
+            "F13": 9,
+            "F14": 3,
+            "F15": 2
+          },
+          "mcnemar": {
+            "b": 0,
+            "c": 19,
+            "n_discordant": 19,
+            "p": 1.9073486328125e-06,
+            "direction": "T3",
+            "test": "exact binomial (단측 · 사전지정 방향 T3 우세)"
+          },
+          "c1_t3_only": true,
+          "c2_mcnemar": true
+        },
+        "false_positive": {
+          "n_normal": 27,
+          "n_rejected": 0,
+          "rate": 0.0,
+          "threshold": 0.05,
+          "rejected": []
+        },
+        "c3_false_positive": true,
+        "replicate_only": {
+          "n_cross": 18,
+          "n_t3_detected": 7,
+          "n_l3_detected": 2,
+          "n_t3_only": 3,
+          "t3_only": [
+            {
+              "fault": "F11",
+              "strength": 0.01,
+              "rep": 5
+            },
+            {
+              "fault": "F11",
+              "strength": 0.05,
+              "rep": 3
+            },
+            {
+              "fault": "F11",
+              "strength": 0.1,
+              "rep": 4
+            }
+          ],
+          "by_fault": {
+            "F11": 3,
+            "F12": 0
+          },
+          "mcnemar": {
+            "b": 0,
+            "c": 5,
+            "n_discordant": 5,
+            "p": 0.03125,
+            "direction": "T3",
+            "test": "exact binomial (단측 · 사전지정 방향 T3 우세)"
+          },
+          "c1_t3_only": true,
+          "c2_mcnemar": true
+        },
+        "novel_only": {
+          "n_cross": 27,
+          "n_t3_detected": 14,
+          "n_l3_detected": 0,
+          "n_t3_only": 14,
+          "t3_only": [
+            {
+              "fault": "F13",
+              "strength": 0.01,
+              "rep": 3
+            },
+            {
+              "fault": "F13",
+              "strength": 0.01,
+              "rep": 4
+            },
+            {
+              "fault": "F13",
+              "strength": 0.01,
+              "rep": 5
+            },
+            {
+              "fault": "F13",
+              "strength": 0.05,
+              "rep": 3
+            },
+            {
+              "fault": "F13",
+              "strength": 0.05,
+              "rep": 4
+            },
+            {
+              "fault": "F13",
+              "strength": 0.05,
+              "rep": 5
+            },
+            {
+              "fault": "F13",
+              "strength": 0.1,
+              "rep": 3
+            },
+            {
+              "fault": "F13",
+              "strength": 0.1,
+              "rep": 4
+            },
+            {
+              "fault": "F13",
+              "strength": 0.1,
+              "rep": 5
+            },
+            {
+              "fault": "F14",
+              "strength": 0.05,
+              "rep": 3
+            },
+            {
+              "fault": "F14",
+              "strength": 0.1,
+              "rep": 3
+            },
+            {
+              "fault": "F14",
+              "strength": 0.1,
+              "rep": 5
+            },
+            {
+              "fault": "F15",
+              "strength": 0.1,
+              "rep": 3
+            },
+            {
+              "fault": "F15",
+              "strength": 0.1,
+              "rep": 5
+            }
+          ],
+          "by_fault": {
+            "F13": 9,
+            "F14": 3,
+            "F15": 2
+          },
+          "mcnemar": {
+            "b": 0,
+            "c": 14,
+            "n_discordant": 14,
+            "p": 6.103515625e-05,
+            "direction": "T3",
+            "test": "exact binomial (단측 · 사전지정 방향 T3 우세)"
+          },
+          "c1_t3_only": true,
+          "c2_mcnemar": true
+        },
+        "supported": true,
+        "verdict": "지지"
+      },
+      "0.05": {
+        "tau": 0.05,
+        "attribution": "split",
+        "main": {
+          "n_cross": 45,
+          "n_t3_detected": 16,
+          "n_l3_detected": 2,
+          "n_t3_only": 12,
+          "t3_only": [
+            {
+              "fault": "F11",
+              "strength": 0.01,
+              "rep": 5
+            },
+            {
+              "fault": "F11",
+              "strength": 0.05,
+              "rep": 3
+            },
+            {
+              "fault": "F13",
+              "strength": 0.05,
+              "rep": 3
+            },
+            {
+              "fault": "F13",
+              "strength": 0.05,
+              "rep": 4
+            },
+            {
+              "fault": "F13",
+              "strength": 0.05,
+              "rep": 5
+            },
+            {
+              "fault": "F13",
+              "strength": 0.1,
+              "rep": 3
+            },
+            {
+              "fault": "F13",
+              "strength": 0.1,
+              "rep": 4
+            },
+            {
+              "fault": "F13",
+              "strength": 0.1,
+              "rep": 5
+            },
+            {
+              "fault": "F14",
+              "strength": 0.1,
+              "rep": 3
+            },
+            {
+              "fault": "F14",
+              "strength": 0.1,
+              "rep": 5
+            },
+            {
+              "fault": "F15",
+              "strength": 0.1,
+              "rep": 3
+            },
+            {
+              "fault": "F15",
+              "strength": 0.1,
+              "rep": 5
+            }
+          ],
+          "by_fault": {
+            "F11": 2,
+            "F12": 0,
+            "F13": 6,
+            "F14": 2,
+            "F15": 2
+          },
+          "mcnemar": {
+            "b": 0,
+            "c": 14,
+            "n_discordant": 14,
+            "p": 6.103515625e-05,
+            "direction": "T3",
+            "test": "exact binomial (단측 · 사전지정 방향 T3 우세)"
+          },
+          "c1_t3_only": true,
+          "c2_mcnemar": true
+        },
+        "false_positive": {
+          "n_normal": 27,
+          "n_rejected": 0,
+          "rate": 0.0,
+          "threshold": 0.05,
+          "rejected": []
+        },
+        "c3_false_positive": true,
+        "replicate_only": {
+          "n_cross": 18,
+          "n_t3_detected": 6,
+          "n_l3_detected": 2,
+          "n_t3_only": 2,
+          "t3_only": [
+            {
+              "fault": "F11",
+              "strength": 0.01,
+              "rep": 5
+            },
+            {
+              "fault": "F11",
+              "strength": 0.05,
+              "rep": 3
+            }
+          ],
+          "by_fault": {
+            "F11": 2,
+            "F12": 0
+          },
+          "mcnemar": {
+            "b": 0,
+            "c": 4,
+            "n_discordant": 4,
+            "p": 0.0625,
+            "direction": "T3",
+            "test": "exact binomial (단측 · 사전지정 방향 T3 우세)"
+          },
+          "c1_t3_only": true,
+          "c2_mcnemar": false
+        },
+        "novel_only": {
+          "n_cross": 27,
+          "n_t3_detected": 10,
+          "n_l3_detected": 0,
+          "n_t3_only": 10,
+          "t3_only": [
+            {
+              "fault": "F13",
+              "strength": 0.05,
+              "rep": 3
+            },
+            {
+              "fault": "F13",
+              "strength": 0.05,
+              "rep": 4
+            },
+            {
+              "fault": "F13",
+              "strength": 0.05,
+              "rep": 5
+            },
+            {
+              "fault": "F13",
+              "strength": 0.1,
+              "rep": 3
+            },
+            {
+              "fault": "F13",
+              "strength": 0.1,
+              "rep": 4
+            },
+            {
+              "fault": "F13",
+              "strength": 0.1,
+              "rep": 5
+            },
+            {
+              "fault": "F14",
+              "strength": 0.1,
+              "rep": 3
+            },
+            {
+              "fault": "F14",
+              "strength": 0.1,
+              "rep": 5
+            },
+            {
+              "fault": "F15",
+              "strength": 0.1,
+              "rep": 3
+            },
+            {
+              "fault": "F15",
+              "strength": 0.1,
+              "rep": 5
+            }
+          ],
+          "by_fault": {
+            "F13": 6,
+            "F14": 2,
+            "F15": 2
+          },
+          "mcnemar": {
+            "b": 0,
+            "c": 10,
+            "n_discordant": 10,
+            "p": 0.0009765625,
+            "direction": "T3",
+            "test": "exact binomial (단측 · 사전지정 방향 T3 우세)"
+          },
+          "c1_t3_only": true,
+          "c2_mcnemar": true
+        },
+        "supported": true,
+        "verdict": "지지"
+      },
+      "0.10": {
+        "tau": 0.1,
+        "attribution": "split",
+        "main": {
+          "n_cross": 45,
+          "n_t3_detected": 4,
+          "n_l3_detected": 2,
+          "n_t3_only": 4,
+          "t3_only": [
+            {
+              "fault": "F13",
+              "strength": 0.1,
+              "rep": 4
+            },
+            {
+              "fault": "F14",
+              "strength": 0.1,
+              "rep": 3
+            },
+            {
+              "fault": "F14",
+              "strength": 0.1,
+              "rep": 5
+            },
+            {
+              "fault": "F15",
+              "strength": 0.1,
+              "rep": 5
+            }
+          ],
+          "by_fault": {
+            "F11": 0,
+            "F12": 0,
+            "F13": 1,
+            "F14": 2,
+            "F15": 1
+          },
+          "mcnemar": {
+            "b": 2,
+            "c": 4,
+            "n_discordant": 6,
+            "p": 0.34375,
+            "direction": "T3",
+            "test": "exact binomial (단측 · 사전지정 방향 T3 우세)"
+          },
+          "c1_t3_only": true,
+          "c2_mcnemar": false
+        },
+        "false_positive": {
+          "n_normal": 27,
+          "n_rejected": 0,
+          "rate": 0.0,
+          "threshold": 0.05,
+          "rejected": []
+        },
+        "c3_false_positive": true,
+        "replicate_only": {
+          "n_cross": 18,
+          "n_t3_detected": 0,
+          "n_l3_detected": 2,
+          "n_t3_only": 0,
+          "t3_only": [],
+          "by_fault": {
+            "F11": 0,
+            "F12": 0
+          },
+          "mcnemar": {
+            "b": 2,
+            "c": 0,
+            "n_discordant": 2,
+            "p": 1.0,
+            "direction": "L3",
+            "test": "exact binomial (단측 · 사전지정 방향 T3 우세)"
+          },
+          "c1_t3_only": false,
+          "c2_mcnemar": false
+        },
+        "novel_only": {
+          "n_cross": 27,
+          "n_t3_detected": 4,
+          "n_l3_detected": 0,
+          "n_t3_only": 4,
+          "t3_only": [
+            {
+              "fault": "F13",
+              "strength": 0.1,
+              "rep": 4
+            },
+            {
+              "fault": "F14",
+              "strength": 0.1,
+              "rep": 3
+            },
+            {
+              "fault": "F14",
+              "strength": 0.1,
+              "rep": 5
+            },
+            {
+              "fault": "F15",
+              "strength": 0.1,
+              "rep": 5
+            }
+          ],
+          "by_fault": {
+            "F13": 1,
+            "F14": 2,
+            "F15": 1
+          },
+          "mcnemar": {
+            "b": 0,
+            "c": 4,
+            "n_discordant": 4,
+            "p": 0.0625,
+            "direction": "T3",
+            "test": "exact binomial (단측 · 사전지정 방향 T3 우세)"
+          },
+          "c1_t3_only": true,
+          "c2_mcnemar": false
+        },
+        "supported": false,
+        "verdict": "기각"
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "metric": "char_3gram_jaccard",
+  "agg": "mean",
+  "source_split": "dev",
+  "n_queries": 197,
+  "q1_threshold": 0.007852574966668927,
+  "median": 0.02105253367066002,
+  "q3": 0.03471628611399895,
+  "mean": 0.028502731264700095,
+  "min": 0.0,
+  "max": 0.4229607250755287,
+  "note": "low-overlap = 점수 ≤ q1_threshold. dev 에서만 산출하고 test 에 그대로 적용한다."
+}

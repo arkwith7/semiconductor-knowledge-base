@@ -70,6 +70,10 @@ ALLOW_PREFIXES = (
     "config/",          # 네임스페이스·IRI 정책
     "examples/",        # 예제 질의
     "tests/",           # 게이트가 실제로 돈다는 증거
+    # 평가 하네스 — 논문 §4 표가 코드 진입점을 적으므로 그 파일이 실재해야 표가
+    # 검증 가능한 주장이 된다. **이 디렉터리는 논문 리포가 생성해 적재한다** —
+    # 여기서 편집하면 사본이 갈린다(D-38 이 그 실패다).
+    "benchmark/",
 )
 
 # 개별로 공개하는 루트 파일
@@ -168,8 +172,13 @@ def wants_abs_scrub(rel: str) -> bool:
 
     둘뿐이다: 실행 리포트(호출 인자를 그대로 적는다)와 거절결정 인덱스(과거 실행이 남긴
     `pdf_path` 잔재 11행. 생성기는 이미 상대경로로 쓴다 — 원본 정규화는 F8 로 분리했다).
+
+    셋째는 하네스 평가 자산이다 — 결함행렬 JSON 이 격리 산출물의 **실행 경로**를 값이
+    아니라 흔적으로 담고 있고(실측 218건), 그 흔적이 이 저장소의 옛 이름을 노출한다.
     """
-    return rel == INDEX_REL or (rel.startswith("data/reports/") and rel.endswith(".json"))
+    return (rel == INDEX_REL
+            or (rel.startswith("data/reports/") and rel.endswith(".json"))
+            or rel.startswith("benchmark/assets/"))
 
 
 def is_private_doc(raw: bytes) -> bool:

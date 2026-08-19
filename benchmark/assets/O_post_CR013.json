@@ -1,0 +1,103 @@
+{
+  "label": "O_post_CR013",
+  "split": "test",
+  "created_at": "2026-08-07T20:17:55+00:00",
+  "note": "CR-013 반영 후 · 상류 4f3dbfb · PLAN-043 §5(8)",
+  "code_git": {
+    "commit": "8443f7c00644416cb8ba854cec71e712966bddf0",
+    "dirty": false,
+    "dirty_scope": [
+      "src",
+      "tests",
+      "Makefile",
+      "pyproject.toml",
+      "uv.lock"
+    ]
+  },
+  "snapshot": {
+    "sig": "dadbae511cd7b921d74db38269fc114d8c8c539673d877a96784f7b32b800fd9",
+    "short": "dadbae511cd7",
+    "upstream_commit": "4f3dbfb445b9ad8abb157b62cbeae2965152e7a4",
+    "upstream_dirty": false,
+    "n_files": 20,
+    "files": {
+      "sdkb-core.ttl": "256346fcb83bcf286e1cc66d49e131e36d3e0095701d46d1612a3e5694097f1f",
+      "sdkb-patent.ttl": "ebe1c301e5585047900575e577989c26e58b90716f8bc38e78851c40010470e8",
+      "sdkb-foresight.ttl": "1a85936074e6f00c89e9e6ecbed5b03ebd8b4abc2d78a43d87ac95fd6445164a",
+      "sdkb-core-data.ttl": "f366a764569113608e467797a7422ba5f4503cacd3b6a470671a63b2abbaa3fa",
+      "sdkb-abox-patents.ttl": "974899fa414f7444f64e578399056b4b1d014b2cfdcfe120685cbb8af458fcf5",
+      "sdkb-abox-experts-problems.ttl": "4251b65a7032363aa81b5fb218e4bbda656747f778ef38dc248fe221a252bebc",
+      "sdkb-abox-vendors.ttl": "2bed199d9afc8734ab05f375c34e7f1cd29adf6263157f0ad214cd7f89cf6d54",
+      "sdkb-abox-prior-art.ttl": "e96d987358206f75f2fe2b444753c33dfd4e972ee006d18bea3af9068d5ff76b",
+      "sdkb-commercialization.ttl": "763a4b0ed0386890ce6ec7f548d70ad313e102bddbacad60730f652c171d67aa",
+      "sdkb-rbv.ttl": "c2a260792d47d8356cde20ba6c4dacecb51c231d4cb1b2cb390f0422d0624486",
+      "sdkb-governance.ttl": "5da48ee6a916c6cf819e88afe8e6a19bc998ee9743905545da59d6908e86c5d3",
+      "sdkb-governance-kr.ttl": "193136804bc7fa90bdb1f1ed4f56aa427841dfbfa83f598748cd3a3598c4c4dd",
+      "sdkb-governance-us-instances.ttl": "ae2b670973a60b6603ba62dfbf452491e6fd14a09938661118436edbc06b1522",
+      "sdkb-governance-kr-instances.ttl": "8bf1086788172a351704fa4e943d7b263f7974400787b727879acb532662c559",
+      "concept_mapping.json": "cdf5fa5dc1dcc2b41eec61cae2c470b8c866d838eadb20ba38f93d4a4d4698f4",
+      "abox_term_aliases.json": "9c8bbeb2067beab4a0f592e54e6103906c2d95a47b6f14f0825d6b954d17030b",
+      "semiconductor_v0_3.json": "9260a395a071067c8ffd1102c435d605fc1826b16c35a04efb8cb52d4702d8b4",
+      "schema_report.json": "42d4bcd1c55109cfc7ee7b897029ebaaea1c774380f0b6d1ed03ed0243dcea64",
+      "rejection_basis.csv": "651f03010228e8b9055a1b295a317a8bd8a3348cbbe670750b7a042aa7b0315b",
+      "rejection_reasons.csv": "c0cecac96e8e47958363439213efb8bd578704431d9bd4acfa83ce7f6abbbd21"
+    }
+  },
+  "pipeline": {
+    "sig": "6eb4ca6da0152363a7e56e6fb6102e83f80a96ca7961cb5cea1f35c0cdaae01c",
+    "short": "6eb4ca6da015",
+    "parts": {
+      "ir_corpus": "55e38161ef99e7f3d7f7c507a47d1336bfdf8020ddf300d553e551a898eb0997",
+      "concept_axis": "197adc101cb60f13136ecfec03546b192338b0dba144185e10d0f844dd4f7039",
+      "graph_v1": "41094e9f053d6b4c0504bc6de0abcc391ae9c14370425c57950a2c7786164869"
+    }
+  },
+  "tbox_counts": {
+    "triples": 1534,
+    "owl_class": 103,
+    "object_property": 99,
+    "datatype_property": 85,
+    "skos_broader": 0
+  },
+  "qrel": {
+    "examiner": "10ab67f21cc1328dadafe3d94c1bbfd64462ac34268f7bafd1574b26b923d541",
+    "test_sealed": "984f8ef3dfd3befc1745bddf8928ce09dcdea03957e984150dd71e35dfbfda2c"
+  },
+  "runs": {
+    "B0_bm25": {
+      "file": "sys_B0_bm25_test.txt",
+      "sha256": "5bf390b8142e2a66ad0952ed16d9e8baee7f166c357cfba9df01123b60077758",
+      "n_queries": 198
+    },
+    "B2_dense": {
+      "file": "sys_B2_dense_test.txt",
+      "sha256": "ad97cba108ca5bd65b401fe908a8bd7e3d1fee4d7190f501302091c8a19ad466",
+      "n_queries": 198
+    },
+    "B3_rrf": {
+      "file": "sys_B3_rrf_test.txt",
+      "sha256": "8aa6a95ba8c126470d1e55c777a564cf72a005d9bc79c5b3e8cb353e008dbe9b",
+      "n_queries": 198
+    },
+    "B4_ipc": {
+      "file": "sys_B4_ipc_test.txt",
+      "sha256": "3d7d53bf1589059b1750669796e93259208d17b7852adada354a06628423f857",
+      "n_queries": 198
+    },
+    "B5_concept": {
+      "file": "sys_B5_concept_test.txt",
+      "sha256": "7786359cb0b1a6af7e563f12e46de8e47c14c98d334b2fc24ab227c137dbc0da",
+      "n_queries": 198
+    },
+    "P0star": {
+      "file": "sys_P0star_test.txt",
+      "sha256": "f20baf639d5ade44973cd546f6450d3b9356e9e26cc5f9b439a10c5374bd3c7b",
+      "n_queries": 198
+    },
+    "P1": {
+      "file": "sys_P1_test.txt",
+      "sha256": "3e45e4db5017d4c9cec4fec382761792ea4fe7499150ff766078898534407994",
+      "n_queries": 198
+    }
+  }
+}

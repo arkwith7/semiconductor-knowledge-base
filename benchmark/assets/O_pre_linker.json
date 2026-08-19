@@ -1,0 +1,93 @@
+{
+  "label": "O_pre_linker",
+  "split": "test",
+  "created_at": "2026-08-01T09:59:12+00:00",
+  "note": "개념 적용기(CR-007 하류) 도입 전 · 스냅샷 2839afb · 코드 e8eed02",
+  "code_git": {
+    "commit": "e8eed02eddefd4588e3f27bdead7c25b8ad7d1b4",
+    "dirty": false
+  },
+  "snapshot": {
+    "sig": "b98ad787d1fe5b00ce3451f39f0941dff781060daf650788f81d326f73770ae1",
+    "short": "b98ad787d1fe",
+    "upstream_commit": "2839afb87825874eb4f299e02c30d6d801d49c6a",
+    "upstream_dirty": false,
+    "n_files": 17,
+    "files": {
+      "sdkb-core.ttl": "256346fcb83bcf286e1cc66d49e131e36d3e0095701d46d1612a3e5694097f1f",
+      "sdkb-patent.ttl": "594071be3cb9d7a7ff27bcdb49f12e2b2df75b7058582bea9882df8e19f2b3a2",
+      "sdkb-foresight.ttl": "1a85936074e6f00c89e9e6ecbed5b03ebd8b4abc2d78a43d87ac95fd6445164a",
+      "sdkb-core-data.ttl": "f366a764569113608e467797a7422ba5f4503cacd3b6a470671a63b2abbaa3fa",
+      "sdkb-abox-patents.ttl": "3c16ad2597ba31db20407da0b3d3c9497cd1662f94575d471b3551f9b9583089",
+      "sdkb-abox-experts-problems.ttl": "4251b65a7032363aa81b5fb218e4bbda656747f778ef38dc248fe221a252bebc",
+      "sdkb-abox-vendors.ttl": "2bed199d9afc8734ab05f375c34e7f1cd29adf6263157f0ad214cd7f89cf6d54",
+      "sdkb-abox-prior-art.ttl": "013018db544d0a4028e9c6135197dcb492873eb4ea93f5fcaa809e1bb66c89f3",
+      "sdkb-commercialization.ttl": "763a4b0ed0386890ce6ec7f548d70ad313e102bddbacad60730f652c171d67aa",
+      "sdkb-rbv.ttl": "c2a260792d47d8356cde20ba6c4dacecb51c231d4cb1b2cb390f0422d0624486",
+      "sdkb-governance.ttl": "5da48ee6a916c6cf819e88afe8e6a19bc998ee9743905545da59d6908e86c5d3",
+      "sdkb-governance-kr.ttl": "193136804bc7fa90bdb1f1ed4f56aa427841dfbfa83f598748cd3a3598c4c4dd",
+      "sdkb-governance-us-instances.ttl": "ae2b670973a60b6603ba62dfbf452491e6fd14a09938661118436edbc06b1522",
+      "sdkb-governance-kr-instances.ttl": "8bf1086788172a351704fa4e943d7b263f7974400787b727879acb532662c559",
+      "semiconductor_v0_3.json": "9260a395a071067c8ffd1102c435d605fc1826b16c35a04efb8cb52d4702d8b4",
+      "schema_report.json": "42d4bcd1c55109cfc7ee7b897029ebaaea1c774380f0b6d1ed03ed0243dcea64",
+      "rejection_basis.csv": "651f03010228e8b9055a1b295a317a8bd8a3348cbbe670750b7a042aa7b0315b"
+    }
+  },
+  "pipeline": {
+    "sig": "156c0ccd36f537a1ecb4816ea9162ffa15ad67a577c782bbfb7f5a775be431cf",
+    "short": "156c0ccd36f5",
+    "parts": {
+      "ir_corpus": "ec5ea51b626d3ff92f62fd1279a5cbae5abcc4cdd0a07e6d0311f35af8db2b43",
+      "concept_axis": "5caac56ec3bfdd9d3809c1a204e016e84afcbe8882d4626380e8a06e73991f81",
+      "graph_v1": "41094e9f053d6b4c0504bc6de0abcc391ae9c14370425c57950a2c7786164869"
+    }
+  },
+  "tbox_counts": {
+    "triples": 1474,
+    "owl_class": 103,
+    "object_property": 98,
+    "datatype_property": 81,
+    "skos_broader": 0
+  },
+  "qrel": {
+    "examiner": "10ab67f21cc1328dadafe3d94c1bbfd64462ac34268f7bafd1574b26b923d541",
+    "test_sealed": "984f8ef3dfd3befc1745bddf8928ce09dcdea03957e984150dd71e35dfbfda2c"
+  },
+  "runs": {
+    "B0_bm25": {
+      "file": "sys_B0_bm25_test.txt",
+      "sha256": "889bebb767d982a36415a7a2316af75f3d502a5fc5dfabb414abddd581ad2ff1",
+      "n_queries": 198
+    },
+    "B2_dense": {
+      "file": "sys_B2_dense_test.txt",
+      "sha256": "028547204a9c4194aea314abbd10299a847624a436518657508fc82c5a724051",
+      "n_queries": 198
+    },
+    "B3_rrf": {
+      "file": "sys_B3_rrf_test.txt",
+      "sha256": "29cdd11bfb01d16a9b1814f600a93293d7d08935ff020c710693358af9097ab3",
+      "n_queries": 198
+    },
+    "B4_ipc": {
+      "file": "sys_B4_ipc_test.txt",
+      "sha256": "e058a20726cabb9d20191f203652eaca9ad0ede4e5248cbca3baf8902253313c",
+      "n_queries": 198
+    },
+    "B5_concept": {
+      "file": "sys_B5_concept_test.txt",
+      "sha256": "8f894d33b9a751fac3d87f2d732b87adf757e1537d978393d04a879e69fe8861",
+      "n_queries": 198
+    },
+    "P0star": {
+      "file": "sys_P0star_test.txt",
+      "sha256": "77d1413c71d6e8cc91bf9e8f2ec88a7f3d9d65ed8224c9193b034e45c684c16f",
+      "n_queries": 198
+    },
+    "P1": {
+      "file": "sys_P1_test.txt",
+      "sha256": "a1f72f92e437d4020bc1e338b4b4f1c0184209439b126e64f1e1e05fc38c5417",
+      "n_queries": 198
+    }
+  }
+}

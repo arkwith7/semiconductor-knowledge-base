@@ -2,12 +2,14 @@
   "tree": "build/public",
   "probes": 3341,
   "probes_dropped_overlapping_retained_fields": 2,
-  "files_scanned": 196,
+  "files_scanned": 322,
   "hits": [],
   "private_token_hits": [],
   "absolute_path_hits": [],
   "legacy_repo_slug_hits": [],
   "legacy_repo_slug_allowed": [
+    "benchmark/src/sdkb_paper/config.py",
+    "benchmark/src/sdkb_paper/ontology/vendor.py",
     "config/namespaces.py"
   ],
   "not_allowlisted_in_tree": [],

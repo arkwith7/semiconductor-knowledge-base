@@ -1,0 +1,89 @@
+{
+  "graph": "/home/arkwith/Dev/SKKU/sdkb-foresight-paper/data/processed/graph_v0.ttl",
+  "n_cq_pass": 27,
+  "n_cq": 28,
+  "suites": {
+    "core": {
+      "n_pass": 12,
+      "n_total": 12,
+      "rate": 1.0
+    },
+    "tf": {
+      "n_pass": 5,
+      "n_total": 5,
+      "rate": 1.0
+    },
+    "pa": {
+      "n_pass": 4,
+      "n_total": 5,
+      "rate": 0.8
+    },
+    "em": {
+      "n_pass": 6,
+      "n_total": 6,
+      "rate": 1.0
+    }
+  },
+  "cq_rows": {
+    "CQ01_patents_per_process_step": 20,
+    "CQ02_recent_patents_by_step": 365,
+    "CQ03_uncovered_process_steps": 29,
+    "CQ04_concept_annual_series": 304,
+    "CQ05_concept_vs_ipc_series": 1959,
+    "CQ06_concepts_without_recent_patents": 58,
+    "CQ07_device_process_crosswalk": 55,
+    "CQ08_applicant_process_portfolio": 316,
+    "CQ09_rejection_prior_art": 414,
+    "CQ10_prior_art_candidates_by_concept": 8,
+    "CQ11_experts_for_process_skill": 66,
+    "CQ12_problem_process_equipment_expert": 3134,
+    "CQ13_value_chain_vendor_portfolio": 21,
+    "CQ14_value_chain_role_distribution": 18,
+    "CQ15_failure_causal_chain": 6,
+    "CQ16_material_incompatibility": 3,
+    "CQ17_material_problem_expert": 35,
+    "CQ18_patents_by_skill": 10,
+    "CQ19_process_control_and_metrology": 6,
+    "CQ20_experts_by_equipment": 395,
+    "CQ21_process_hierarchy_portfolio": 38,
+    "CQ22_patent_equipment_and_technode": 9,
+    "CQ23_concept_export_control": 37,
+    "CQ24_national_core_technology": 12,
+    "CQ25_critical_control_concepts": 7,
+    "CQ26_patent_export_control_exposure": 1249,
+    "CQ27_fto_claim_readiness": 0,
+    "CQ28_patent_failuremode_expert": 40
+  },
+  "cq_suite": {
+    "CQ01_patents_per_process_step": "core",
+    "CQ02_recent_patents_by_step": "tf",
+    "CQ03_uncovered_process_steps": "tf",
+    "CQ04_concept_annual_series": "tf",
+    "CQ05_concept_vs_ipc_series": "tf",
+    "CQ06_concepts_without_recent_patents": "tf",
+    "CQ07_device_process_crosswalk": "core",
+    "CQ08_applicant_process_portfolio": "core",
+    "CQ09_rejection_prior_art": "pa",
+    "CQ10_prior_art_candidates_by_concept": "pa",
+    "CQ11_experts_for_process_skill": "em",
+    "CQ12_problem_process_equipment_expert": "em",
+    "CQ13_value_chain_vendor_portfolio": "core",
+    "CQ14_value_chain_role_distribution": "core",
+    "CQ15_failure_causal_chain": "core",
+    "CQ16_material_incompatibility": "pa",
+    "CQ17_material_problem_expert": "em",
+    "CQ18_patents_by_skill": "em",
+    "CQ19_process_control_and_metrology": "core",
+    "CQ20_experts_by_equipment": "em",
+    "CQ21_process_hierarchy_portfolio": "core",
+    "CQ22_patent_equipment_and_technode": "core",
+    "CQ23_concept_export_control": "core",
+    "CQ24_national_core_technology": "core",
+    "CQ25_critical_control_concepts": "core",
+    "CQ26_patent_export_control_exposure": "pa",
+    "CQ27_fto_claim_readiness": "pa",
+    "CQ28_patent_failuremode_expert": "em"
+  },
+  "g1_doc_as_concept": 0,
+  "g3_gold_concept_copy_pairs": 552
+}
