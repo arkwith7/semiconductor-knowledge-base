@@ -2,7 +2,7 @@
   "tree": "build/public",
   "probes": 3341,
   "probes_dropped_overlapping_retained_fields": 2,
-  "files_scanned": 322,
+  "files_scanned": 324,
   "hits": [],
   "private_token_hits": [],
   "absolute_path_hits": [],

@@ -1,9 +1,14 @@
 {
   "_README": "평가 하네스의 이관 내역. 생성기: scripts/export_benchmark.py (논문 리포). 이 디렉터리는 상류에서 편집하지 않는다 — 편집하면 사본이 갈린다.",
   "producer_repo": "sdkb-prior-art-paper",
-  "producer_commit": "c384c5fc03f41b66f7b8c106346eecc4ec7efe94",
-  "files_count": 123,
+  "producer_commit": "a836b357b47658e3d00d0589d0bba9fc39219f4f",
+  "files_count": 124,
   "files": {
+    "README.md": {
+      "sha256": "cc8dc13f1bea28b385e82a289a7633465a09305af5ee68d46e0322584d6009ea",
+      "bytes": 4013,
+      "source": "docs/benchmark/README.md"
+    },
     "assets/B_layer_readout.json": {
       "sha256": "a7e15f101982b7e13aa4eb68d4bea36d13dcbee7352ac8231e598190ecb0d86d",
       "bytes": 4776,
@@ -40,8 +45,8 @@
       "source": "paper/tables/cq_generations.md"
     },
     "assets/decision_stability.md": {
-      "sha256": "e395cfda63532de2252561420abac9dff671e3f4154983a38d66c6f90edf07cd",
-      "bytes": 1166,
+      "sha256": "edae7430793e376b83bc1f821990b892b4ab8f599a1e060c54554aa3b0779e49",
+      "bytes": 1244,
       "source": "paper/tables/decision_stability.md"
     },
     "assets/failure_typology.md": {

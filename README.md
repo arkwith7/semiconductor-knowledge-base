@@ -30,6 +30,13 @@ size_categories:
 <!-- sdkb:private-end -->
 
 
+> **Two doors.**
+> **Using the dataset** — T-Box, SHACL shapes, competency questions, mappings: run `uv sync` and
+> start below. Nothing in `benchmark/` is needed.
+> **Reproducing the paper's evaluation** — retrieval systems, release-gate conditions, frozen
+> evaluation assets: see [`benchmark/README.md`](benchmark/README.md) and run
+> `uv sync --extra benchmark`.
+
 ## One-line positioning
 
 SDKB unifies semiconductor **process / equipment / defect / skill** knowledge, **patent taxonomies** (CPC / IPC / F-term), **firm resources** (RBV), **multi-jurisdictional regulation** (US BIS · NIST · ECHA + Korea ITPA), and **standards** (SEMI / JEDEC) under a single PROV-O-tracked ontology. It is built as the shared substrate for the lab's four research lines — *tech foresight, opportunity discovery, SME innovation analysis, and interactive tech / business visualization* — and as the seed dataset for an upcoming dissertation on a **compliance-aware semantic collaboration platform**.
@@ -379,8 +386,16 @@ SDKB is a semiconductor-domain output of the **Quantitative Technology Managemen
 
 ## License
 
-CDLA-Permissive-2.0 (Open Core). The Link-Only layer is not redistributed.
-See [LICENSE.txt](LICENSE.txt).
+This repository carries two licenses, because it carries two kinds of thing.
+
+| Path | License | File |
+|---|---|---|
+| `ontology/` `data/` `mappings/` `validation/` `queries/` `provenance/` | CDLA-Permissive-2.0 | [LICENSE.txt](LICENSE.txt) |
+| `scripts/` `config/` `benchmark/src/` `Makefile` `pyproject.toml` | Apache-2.0 | [LICENSE-CODE.txt](LICENSE-CODE.txt) |
+| `docs/` `README*` | CC-BY-4.0 | — |
+
+CDLA is a data licence, so it never covered the generators; stating the code licence separately
+removes an ambiguity that predates the harness. The Link-Only layer is not redistributed.
 
 ---
 
