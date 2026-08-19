@@ -27,6 +27,16 @@ All notable changes to SDKB will be documented in this file.
 
 ## [Unreleased] — v1.0.0-dev
 
+### Added (2026-08-19 — 무결성 기록이 자산 1건만 등재하고 있었다 · 하류 재현성 P0)
+
+`scripts/build_provenance.py` — 공개 트리의 **발행 자산 전량**(194건)에 sha256·바이트를 등재한다.
+해시는 **공개 트리의 바이트**로 계산한다. 공개본은 복사되며 변형되므로(사설 블록 제거·죽은 링크
+평문화·원문 스크럽·절대경로 세척) 비공개 원본의 해시를 실으면 소비자가 계산한 값과 어긋난다.
+저장소의 `provenance/PROVENANCE.json` 은 사람이 유지하는 **큐레이션 씨앗**(generator·inputs·
+change_request)으로 남고, 그 필드는 발행본에 병합된다. 생성 시각은 싣지 않는다 — 두 번 돌려
+바이트가 같아야 무결성 기록이다. `make public-release` 가 발행하고 `make check-public` 이 대조하며,
+불일치는 rc=1 이다. 어휘·IRI·T-Box·shape 변경 0.
+
 ### Fixed (2026-08-16 — 발행 계수가 그래프보다 많이 세고 있었다 · CR-019 / D-41) ⚠ 하류 통보
 
 **계수만 바뀌었다. 그래프는 한 트리플도 바뀌지 않았고, 세 산출물의 sha256 은 전부 그대로다**

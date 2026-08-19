@@ -152,11 +152,19 @@ public-release:
 # 나온다 — 특허 A-Box 가 없어 특허를 묻는 질의가 실패하기 때문이다. 개발 환경 값을 그대로
 # 실으면 **발행된 숫자가 소비 가능한 상태를 기술하지 않는다**(D-19 계열).
 # 재인출 뒤에는 0.871 로 올라가며 그 쌍을 CHANGELOG 에 적는다.
-	cd $(PUBLIC_OUT) && $(abspath $(PYTHON)) scripts/run_cq.py
+# **cd 하지 않는다.** run_cq.py 는 경로를 `__file__` 기준으로 잡으므로(`ROOT = parents[1]`)
+# 공개 트리 안의 사본을 부르면 그 트리가 곧 ROOT 다. cd + $(abspath $(PYTHON)) 조합은
+# PYTHON 이 경로가 아닐 때 `$(CURDIR)/python3` 를 만들어 빌드를 세웠고(기본값이 `python3` 다),
+# uv 처럼 프로젝트를 탐색하는 러너에서는 공개 트리 안에 새 환경을 만든다.
+	$(PYTHON) $(PUBLIC_OUT)/scripts/run_cq.py
+# 무결성 기록은 **공개 트리의 바이트로** 낸다 — 비공개 원본은 복사되며 변형되므로(사설 블록·
+# 죽은 링크·원문 스크럽) 원본 해시를 실으면 심사자가 계산한 값과 영원히 어긋난다.
+	$(PYTHON) scripts/build_provenance.py --tree $(PUBLIC_OUT)
 
 check-public:
 	$(PYTHON) scripts/check_public_release.py --tree $(PUBLIC_OUT) \
 		--report data/reports/public_release_check.json
+	$(PYTHON) scripts/build_provenance.py --tree $(PUBLIC_OUT) --check
 
 # ── 그래프 서명 (R4 · CLAUDE.md §4) ────────────────────────────────
 # §4 는 "릴리스를 만들 때 그래프 서명을 CHANGELOG 에 남긴다" 고 요구하는데 그것을
