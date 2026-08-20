@@ -1,0 +1,31 @@
+{
+  "upload_type": "dataset",
+  "title": "SDKB — Semiconductor Domain Knowledge Base (paper release)",
+  "version": "1.1.0",
+  "language": "eng",
+  "access_right": "open",
+  "license": "other-open",
+  "creators": [
+    {
+      "name": "Park, HyoungSik",
+      "affiliation": "Sungkyunkwan University, Graduate School of Management of Technology"
+    }
+  ],
+  "description": "<p>SDKB is a provenance-grounded semiconductor domain ontology dataset carrying expert matching, prior-art search and technology foresight as task views on one shared schema (T-Box). This release is the frozen state accompanying the SDKB prior-art paper.</p><p><strong>Contents.</strong> Shared T-Box and task views (OWL/TTL), SHACL shapes, 31 competency questions, concept mappings, provenance records with per-file SHA-256 for all published assets, and <code>benchmark/</code> — the evaluation harness (retrieval systems, release-gate conditions, scoring and statistics) together with frozen evaluation assets: query and relevance-judgment identifiers, split boundaries, frozen thresholds, gate reports, fault-injection matrices and result tables.</p><p><strong>Licensing.</strong> This deposit is dual-licensed and therefore does not map to a single identifier. Data layers (ontology, mappings, validation shapes, queries, provenance) are released under CDLA-Permissive-2.0; code (generators, release chain, evaluation harness) is released under Apache-2.0; documentation under CC-BY-4.0. See LICENSE.txt and LICENSE-CODE.txt in the archive.</p><p><strong>Not included.</strong> Patent full text is not redistributable under the terms of the source database; identifiers and a refetch procedure are provided instead. Known reproduction limits are stated in benchmark/README.md.</p>",
+  "keywords": [
+    "semiconductor",
+    "ontology",
+    "knowledge graph",
+    "ontology evolution",
+    "prior-art retrieval",
+    "cross-task non-regression",
+    "design science research"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/arkwith7/sdkb-dataset/tree/v1.1-paper",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ]
+}

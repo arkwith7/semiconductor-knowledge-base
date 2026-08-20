@@ -79,7 +79,7 @@ ALLOW_PREFIXES = (
 # 개별로 공개하는 루트 파일
 ALLOW_FILES = {
     "README.md", "README.ko.md", "CHANGELOG.md", "CITATION.cff", "LICENSE.txt",
-    "LICENSE-CODE.txt",
+    "LICENSE-CODE.txt", ".zenodo.json",
     "Makefile", "pyproject.toml", "uv.lock", ".gitignore",
 }
 
