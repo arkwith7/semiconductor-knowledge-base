@@ -11,6 +11,11 @@ contact:
   - family-names: Park
     given-names: HyoungSik
     email: richphs@skku.edu
+doi: 10.5281/zenodo.22030395
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.22030396
+    description: "Version DOI — the v1.1-paper release reported in the paper"
 version: "1.1.0"
 date-released: "2026-08-20"
 license: CDLA-Permissive-2.0
