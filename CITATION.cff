@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-title: "SDKB v1.0 — Semiconductor Domain Knowledge Base"
+title: "SDKB — Semiconductor Domain Knowledge Base"
 message: "If you use this dataset, please cite both SDKB and the original sources (KIPRIS, SemiKong, SemicONTO, MatKG, BIS/NIST/ECHA)."
 type: dataset
 authors:
@@ -12,8 +12,8 @@ contact:
   - family-names: Park
     given-names: HyoungSik
     email: richphs@skku.edu
-version: "1.0.0-dev"
-date-released: "2026-05-12"
+version: "1.1.0"
+date-released: "2026-08-20"
 license: CDLA-Permissive-2.0
 repository-code: "https://github.com/arkwith7/sdkb-dataset"
 abstract: >-
