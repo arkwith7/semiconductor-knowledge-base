@@ -18,7 +18,9 @@ size_categories:
   - 1K<n<10K
 ---
 
-# SDKB v1.0 — Semiconductor Domain Knowledge Base
+# SDKB — Semiconductor Domain Knowledge Base
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22030395.svg)](https://doi.org/10.5281/zenodo.22030395)
 
 > **반도체 산업의 계량기술경영 연구를 위한 재현 가능한 시맨틱 그래프 기반.**
 > 운영: 성균관대학교 기술경영전문대학원 [계량기술경영 연구실](#연구실-컨텍스트) (Quantitative Technology Management Lab, PI: 신준석 교수)
@@ -351,25 +353,21 @@ blank nodes: `grep -c owl:Class` counts both and reports a larger number.
 본 데이터셋은 성균관대학교 기술경영전문대학원 **계량기술경영 연구실 (Quantitative Technology Management Lab, PI: 신준석 교수)** 의 연구 어젠다 — 특허·시장·산업 데이터 기반 기술예측, 유망기술 기회 발굴, 중소기업 혁신 성과 분석, 인터랙티브 기술·비즈니스 데이터 시각화 — 의 반도체 도메인 하부 산출물이다. 향후 동일 연구실에서 작성될 "**컴플라이언스 인지 시맨틱 협업 플랫폼**" 학위논문 및 관련 학술지 게재 논문에서 본 데이터셋을 실증 아티팩트로 인용할 예정이며, 그 시점에 BibTeX를 갱신한다.
 
 ```bibtex
-@dataset{sdkb_v1_2026,
-  title       = {SDKB v1.0: Semiconductor Domain Knowledge Base —
-                 a data trunk for the Quantitative Technology Management
-                 Lab's foresight, opportunity-discovery, SME-matching,
-                 and interactive-visualization research agenda},
-  author      = {Park, HyoungSik},
-  advisor     = {Shin, Juneseuk},
-  institution = {Sungkyunkwan University, Graduate School of
-                 Management of Technology,
-                 Quantitative Technology Management Lab},
-  year        = {2026},
-  version     = {1.0},
-  url         = {https://github.com/arkwith7/sdkb-dataset},
-  license     = {CDLA-Permissive-2.0},
-  note        = {Hyeonup-Project 2026-1 deliverable; seed dataset for
-                 the forthcoming compliance-aware semantic collaboration
-                 platform dissertation.}
+@dataset{sdkb_2026,
+  title     = {SDKB: Semiconductor Domain Knowledge Base},
+  author    = {Park, HyoungSik},
+  year      = {2026},
+  publisher = {Zenodo},
+  version   = {1.1.0},
+  doi       = {10.5281/zenodo.22030395},
+  url       = {https://doi.org/10.5281/zenodo.22030395}
 }
 ```
+
+DOI 는 둘이며 서로 대체되지 않는다. 데이터셋 자체를 가리킬 때는 **concept DOI**
+([10.5281/zenodo.22030395](https://doi.org/10.5281/zenodo.22030395))를, 어떤 결과가 산출된 정확한 상태를 가리킬 때는
+**version DOI**([10.5281/zenodo.22030396](https://doi.org/10.5281/zenodo.22030396))를 인용한다. 선행기술 논문이 보고하는
+판은 릴리스 `v1.1-paper` 이며 version DOI 가 그 판을 가리킨다.
 
 ## License
 

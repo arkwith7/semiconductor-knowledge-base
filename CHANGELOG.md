@@ -25,7 +25,21 @@ All notable changes to SDKB will be documented in this file.
 > the tag names the state the paper actually used. Entries here describe *what was built and why*;
 > they are not that research's results, and no experimental result is reported in this file.
 
-## [Unreleased] — v1.0.0-dev
+## [Unreleased]
+
+## [1.1.0] — 2026-08-20 · paper release
+
+Tagged `v1.1-paper` · archived at Zenodo · version DOI [10.5281/zenodo.22030396](https://doi.org/10.5281/zenodo.22030396) ·
+concept DOI [10.5281/zenodo.22030395](https://doi.org/10.5281/zenodo.22030395).
+
+**Cite this release, not `main`.** This log keeps growing after the paper is frozen, so the tag
+names the state the paper actually used. Three things enter the release that were not previously
+available: the evaluation harness under `benchmark/` (127 files, with a manifest, an exclusion
+list, and a crosswalk from the paper's system table to the code entry points), integrity records
+for **all 323 published assets** in `provenance/PROVENANCE.json` computed over the bytes of the
+published tree, and an explicit code licence (`LICENSE-CODE.txt`, Apache-2.0) alongside the data
+licence. Entries below record how each of those was built.
+
 
 ### Added (2026-08-19 — 무결성 기록이 자산 1건만 등재하고 있었다 · 하류 재현성 P0)
 

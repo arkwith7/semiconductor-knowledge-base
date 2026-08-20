@@ -18,7 +18,9 @@ size_categories:
   - 1K<n<10K
 ---
 
-# SDKB v1.0 — Semiconductor Domain Knowledge Base
+# SDKB — Semiconductor Domain Knowledge Base
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22030395.svg)](https://doi.org/10.5281/zenodo.22030395)
 
 > **A reproducible semantic-graph substrate for quantitative technology management research in the semiconductor industry.**
 > Maintained by the [Quantitative Technology Management Lab](#lab-context) at Sungkyunkwan University's Graduate School of Management of Technology (PI: Prof. Juneseuk Shin).
@@ -364,25 +366,23 @@ Other frozen counts (not covered by the signature above):
 SDKB is a semiconductor-domain output of the **Quantitative Technology Management Lab** (PI: Prof. Juneseuk Shin) at SKKU's Graduate School of Management of Technology, contributing to its research agenda — tech foresight, opportunity discovery, SME innovation analysis, and interactive tech / business visualization. The forthcoming dissertation "Compliance-aware Semantic Collaboration Platform" and related journal papers will cite this dataset as an empirical artifact; the BibTeX below will be updated at that point.
 
 ```bibtex
-@dataset{sdkb_v1_2026,
-  title       = {SDKB v1.0: Semiconductor Domain Knowledge Base —
-                 a data trunk for the Quantitative Technology Management
-                 Lab's foresight, opportunity-discovery, SME-matching,
-                 and interactive-visualization research agenda},
-  author      = {Park, HyoungSik},
-  advisor     = {Shin, Juneseuk},
-  institution = {Sungkyunkwan University, Graduate School of
-                 Management of Technology,
-                 Quantitative Technology Management Lab},
-  year        = {2026},
-  version     = {1.0},
-  url         = {https://github.com/arkwith7/sdkb-dataset},
-  license     = {CDLA-Permissive-2.0},
-  note        = {Hyeonup-Project 2026-1 deliverable; seed dataset for
-                 the forthcoming compliance-aware semantic collaboration
-                 platform dissertation.}
+@dataset{sdkb_2026,
+  title     = {SDKB: Semiconductor Domain Knowledge Base},
+  author    = {Park, HyoungSik},
+  year      = {2026},
+  publisher = {Zenodo},
+  version   = {1.1.0},
+  doi       = {10.5281/zenodo.22030395},
+  url       = {https://doi.org/10.5281/zenodo.22030395},
+  note      = {Concept DOI — resolves to the latest version.
+               The release reported in the prior-art paper is
+               v1.1-paper, DOI 10.5281/zenodo.22030396.}
 }
 ```
+
+Two DOIs are minted, and they are not interchangeable. Cite the **concept DOI**
+([10.5281/zenodo.22030395](https://doi.org/10.5281/zenodo.22030395)) when you mean the dataset; cite the **version DOI**
+([10.5281/zenodo.22030396](https://doi.org/10.5281/zenodo.22030396)) when you need the exact state some result was computed on.
 
 ## License
 
