@@ -371,18 +371,23 @@ SDKB is a semiconductor-domain output of the **Quantitative Technology Managemen
   author    = {Park, HyoungSik},
   year      = {2026},
   publisher = {Zenodo},
-  version   = {1.1.0},
+  version   = {1.1.1},
   doi       = {10.5281/zenodo.22030395},
   url       = {https://doi.org/10.5281/zenodo.22030395},
   note      = {Concept DOI — resolves to the latest version.
                The release reported in the prior-art paper is
-               v1.1-paper, DOI 10.5281/zenodo.22030396.}
+               tag v1.1.1-paper; its version DOI is listed on
+               the concept record.}
 }
 ```
 
-Two DOIs are minted, and they are not interchangeable. Cite the **concept DOI**
-([10.5281/zenodo.22030395](https://doi.org/10.5281/zenodo.22030395)) when you mean the dataset; cite the **version DOI**
-([10.5281/zenodo.22030396](https://doi.org/10.5281/zenodo.22030396)) when you need the exact state some result was computed on.
+Two kinds of DOI are minted, and they are not interchangeable. Cite the **concept DOI**
+([10.5281/zenodo.22030395](https://doi.org/10.5281/zenodo.22030395)) when you mean the dataset; cite the
+**version DOI** of a specific release when you need the exact state some result was computed on.
+Every version DOI is listed on the concept record, and each one names the tag it was cut from.
+This file does not hardcode a version DOI: the number is minted when the release is published, so a
+tagged tree can only ever state the *previous* one — which is exactly how `v1.1-paper` came to call
+itself `SDKB v1.0` and carry no DOI at all.
 
 ## License
 

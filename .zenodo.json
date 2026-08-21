@@ -1,7 +1,7 @@
 {
   "upload_type": "dataset",
   "title": "SDKB — Semiconductor Domain Knowledge Base (paper release)",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "language": "eng",
   "access_right": "open",
   "license": "other-open",
@@ -23,7 +23,7 @@
   ],
   "related_identifiers": [
     {
-      "identifier": "https://github.com/arkwith7/sdkb-dataset/tree/v1.1-paper",
+      "identifier": "https://github.com/arkwith7/sdkb-dataset/tree/v1.1.1-paper",
       "relation": "isSupplementTo",
       "scheme": "url"
     }

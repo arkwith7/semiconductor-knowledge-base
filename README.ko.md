@@ -358,16 +358,19 @@ blank nodes: `grep -c owl:Class` counts both and reports a larger number.
   author    = {Park, HyoungSik},
   year      = {2026},
   publisher = {Zenodo},
-  version   = {1.1.0},
+  version   = {1.1.1},
   doi       = {10.5281/zenodo.22030395},
   url       = {https://doi.org/10.5281/zenodo.22030395}
 }
 ```
 
-DOI 는 둘이며 서로 대체되지 않는다. 데이터셋 자체를 가리킬 때는 **concept DOI**
+DOI 는 두 종류이며 서로 대체되지 않는다. 데이터셋 자체를 가리킬 때는 **concept DOI**
 ([10.5281/zenodo.22030395](https://doi.org/10.5281/zenodo.22030395))를, 어떤 결과가 산출된 정확한 상태를 가리킬 때는
-**version DOI**([10.5281/zenodo.22030396](https://doi.org/10.5281/zenodo.22030396))를 인용한다. 선행기술 논문이 보고하는
-판은 릴리스 `v1.1-paper` 이며 version DOI 가 그 판을 가리킨다.
+그 릴리스의 **version DOI** 를 인용한다. version DOI 는 전부 concept 레코드에 열거되며 각각 자신이
+잘려 나온 태그를 밝힌다. 선행기술 논문이 보고하는 판은 태그 `v1.1.1-paper` 다.
+**이 파일은 version DOI 를 박아 두지 않는다** — 그 번호는 릴리스를 발행할 때 발급되므로, 태그된
+트리는 언제나 **직전 번호**밖에 적을 수 없다. `v1.1-paper` 가 스스로를 `SDKB v1.0` 이라 부르고
+DOI 를 하나도 담지 못한 원인이 그것이다.
 
 ## License
 

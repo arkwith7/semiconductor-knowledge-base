@@ -13,11 +13,15 @@ contact:
     email: richphs@skku.edu
 doi: 10.5281/zenodo.22030395
 identifiers:
-  - type: doi
-    value: 10.5281/zenodo.22030396
-    description: "Version DOI — the v1.1-paper release reported in the paper"
-version: "1.1.0"
-date-released: "2026-08-20"
+  # A version DOI cannot live inside the tree that produces it — it is minted when the
+  # release is published. v1.1-paper hardcoded the *previous* number and called itself
+  # "SDKB v1.0"; that is the defect this release closes. The concept DOI is stable and
+  # lists every version, so it is the only DOI this file states.
+  - type: url
+    value: "https://github.com/arkwith7/sdkb-dataset/tree/v1.1.1-paper"
+    description: "Tagged tree of this release — its version DOI is listed on the concept record."
+version: "1.1.1"
+date-released: "2026-08-21"
 license: CDLA-Permissive-2.0
 repository-code: "https://github.com/arkwith7/sdkb-dataset"
 abstract: >-
