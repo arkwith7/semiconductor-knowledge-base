@@ -85,10 +85,21 @@ class TestDeterminism:
         assert a1 == a2 and b1 == b2
 
     def test_asset_matches_generator(self, kg, aliases, asset):
-        """파일이 생성기와 어긋나면(손편집 등) 하류 재현이 깨진다."""
+        """파일이 생성기와 어긋나면(손편집 등) 하류 재현이 깨진다.
+
+        R7(CR-001B)은 표면형 df 를 입력으로 받으므로, 재생성에도 그 재료를 준다.
+        재료는 자산이 발행한 surface_meta 에서 읽는다 — A-Box 를 다시 세지 않고도
+        **자산이 자기 규칙과 정합한지**를 묻는다.
+        """
         exc = {norm(t) for t in aliases.get("_exceptions_short_ko_task_axis", [])}
+        grand = frozenset(norm(s) for s in
+                          (aliases.get("_r7_grandfathered") or {}).get("surfaces", {}))
         for profile in ("expert-tag", "patent-text"):
-            entries, blocked = collect(kg, aliases, profile, exc)
+            meta = asset["profiles"][profile]["surface_meta"]
+            denom = meta["df_denominator"]
+            ratio = {s: n / denom for s, n in meta["surfaces"].items()}
+            entries, blocked = collect(kg, aliases, profile, exc,
+                                       df_ratio=ratio, grandfathered=grand)
             assert entries == asset["profiles"][profile]["entries"]
 
 

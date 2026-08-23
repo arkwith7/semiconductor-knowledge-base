@@ -157,7 +157,11 @@
       ],
       [
         "process:deposition",
-        1370
+        1452
+      ],
+      [
+        "material:dielectric",
+        1251
       ],
       [
         "material:tin",
@@ -182,10 +186,6 @@
       [
         "material:amorphous_carbon",
         962
-      ],
-      [
-        "material:dielectric",
-        881
       ],
       [
         "material:sio2",
@@ -236,6 +236,10 @@
         366
       ],
       [
+        "parameter:pressure",
+        324
+      ],
+      [
         "process:cmp",
         288
       ],
@@ -254,10 +258,6 @@
       [
         "subprocess:ald",
         188
-      ],
-      [
-        "failuremode:ler",
-        183
       ]
     ],
     "superordinates": [
@@ -273,6 +273,6 @@
       "0": 258,
       "1": 16
     },
-    "d20_affected_note": "D-20 — CR-013 에서 해소. 단독 'hf'(→ material:hf_acid) 와 'high k'(→ material:hfO2) 를 patent-text 에서 R6 로 끄고, 'high k' 는 상위 부류 material:dielectric 로 재지정했다. 재지정이 아니라 제거인 이유는 정규화가 대소문자를 지워 Hf/HF 가 사전 층에서 갈리지 않기 때문이다(CR-013 §3.2). 현재 df: hf_acid=26 · hfO2=57 · dielectric=881. 주의 — 이 참조 적용기는 단어경계가 없는 부분문자열 포함이라 df 가 하류 값과 같지 않다(CR-013 §2.6 · 이번 범위 밖)."
+    "d20_affected_note": "D-20 — CR-013 에서 해소. 단독 'hf'(→ material:hf_acid) 와 'high k'(→ material:hfO2) 를 patent-text 에서 R6 로 끄고, 'high k' 는 상위 부류 material:dielectric 로 재지정했다. 재지정이 아니라 제거인 이유는 정규화가 대소문자를 지워 Hf/HF 가 사전 층에서 갈리지 않기 때문이다(CR-013 §3.2). 현재 df: hf_acid=26 · hfO2=57 · dielectric=1251. 주의 — 이 참조 적용기는 단어경계가 없는 부분문자열 포함이라 df 가 하류 값과 같지 않다(CR-013 §2.6 · 이번 범위 밖)."
   }
 }

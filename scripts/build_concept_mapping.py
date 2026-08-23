@@ -38,6 +38,12 @@ DF_REPORT = ROOT / "data" / "reports" / "concept_df_report.json"
 
 PROFILES = ("expert-tag", "patent-text")
 
+# CR-001B — R7-DF-CEILING. A-Box 문서빈도 비율이 이 값을 넘는 표면형은 patent-text 에서
+# entries 가 아니라 blocked 로 발행한다. 문턱은 **기존 사전 한글 표면형 154개의 A-Box df
+# 90분위 0.0561 을 올림**해 얻었고(CR-001B §9.3), 하류 성능에서 역산하지 않았다.
+# 유예: `_r7_grandfathered.surfaces` 에 오른 기존 등재 표면형에는 걸지 않는다.
+DF_CEILING = 0.06
+
 # 태스크 축 — 문서가 "무엇에 관한 것인가"가 아니라 "누가 무엇을 할 수 있는가"를
 # 담는 축이다. 자유 텍스트(특허 전문)에서 이 축으로 이월되면 축 범주 오류가 된다(D-15).
 TASK_AXES = frozenset({"Skill", "RootCause", "Mitigation"})
@@ -95,8 +101,15 @@ def suppressions(aliases: dict, profile: str) -> set[tuple[str, str]]:
 
 
 def collect(kg: dict, aliases: dict, profile: str,
-            exceptions: set[str]) -> tuple[list[dict], list[dict]]:
-    """(entries, blocked) — 이 프로파일에서 유효한 표면형 → 개념 매핑."""
+            exceptions: set[str],
+            df_ratio: dict[str, float] | None = None,
+            grandfathered: frozenset[str] = frozenset()) -> tuple[list[dict], list[dict]]:
+    """(entries, blocked) — 이 프로파일에서 유효한 표면형 → 개념 매핑.
+
+    df_ratio 가 주어지면 patent-text 에 R7-DF-CEILING 을 건다. 주지 않으면 R7 이 돌지
+    않는다 — 표면형 df 를 아직 세지 않은 호출(단위 테스트·진단)에서 조용히 다른 답을
+    내지 않게 하기 위해서다.
+    """
     node_type = {n["id"]: n["type"] for n in kg["nodes"]}
     scoped_out = {
         n["id"] for n in kg["nodes"]
@@ -158,6 +171,14 @@ def collect(kg: dict, aliases: dict, profile: str,
                 blocked.append({"surface": surface, "concept_id": nid,
                                 "concept_type": axis, "rule_id": "R4-SHORT-KO-TASK"})
                 continue
+            # R7 — 적용 순서는 R6 → R4 → R7 → R5 다(CR-001B §9.3).
+            if (profile == "patent-text" and df_ratio is not None
+                    and surface not in grandfathered
+                    and df_ratio.get(surface, 0.0) > DF_CEILING):
+                blocked.append({"surface": surface, "concept_id": nid,
+                                "concept_type": axis, "rule_id": "R7-DF-CEILING",
+                                "df_ratio": round(df_ratio.get(surface, 0.0), 4)})
+                continue
             cands.append((AXIS_RANK.get(axis, 99), nid, axis, rule, conf, lang))
         if not cands:
             continue
@@ -190,6 +211,12 @@ RULES = {
                            "쌍을 그 프로파일에서만 끈다. 지운 것이 아니라 blocked 로 옮긴 "
                            "것이며, 다른 프로파일과 원천(KG synonyms)·skos:altLabel 은 "
                            "움직이지 않는다. 억제는 R5 의 다의 판정 **앞**에 걸린다.",
+    "R7-DF-CEILING": "CR-001B — patent-text 한정. 표면형의 A-Box 문서빈도 비율이 "
+                     f"{DF_CEILING} 을 넘으면 entries 가 아니라 blocked 로 발행한다. "
+                     "문턱은 기존 사전 한글 표면형 154개의 df 90분위(0.0561)를 올린 값이며 "
+                     "하류 성능에서 역산하지 않았다. 넓은 낱말은 비가중 Jaccard 의 교집합과 "
+                     "합집합에 동시에 더해져 순위 정보를 희석한다(하류 D-23). 기존 등재 "
+                     "표면형에는 소급하지 않는다 — 사전의 _r7_grandfathered 참조.",
     "R5-AMBIGUITY": "한 표면형이 여러 개념에 걸리면 **후보를 지우지 않는다**. 더 특정한 축을 "
                     "앞에 두고(SubProcess > … > Process) 같은 순위는 node_id 사전순으로 "
                     "정렬한 뒤 ambiguous=true 로 표시한다. 어느 하나를 고르는 것은 "
@@ -253,6 +280,28 @@ def concept_df(entries: list[dict], docs: list[str]) -> dict[str, int]:
     return df
 
 
+def surface_df(surfaces: list[str], docs: list[str]) -> dict[str, int]:
+    """표면형 → **문서**빈도. concept_df 와 같은 참조 적용기(정규화 부분문자열)다.
+
+    R7 의 입력이자 하류 특이도 가중의 재료다 — 개념 단위 df 만으로는 어느 표면형이
+    넓은지 알 수 없다(한 개념에 넓은 표면형과 좁은 표면형이 함께 달린다).
+    """
+    counts = {s: 0 for s in surfaces}
+    for doc in docs:
+        if not doc:
+            continue
+        for s in surfaces:
+            if s in doc:
+                counts[s] += 1
+    return counts
+
+
+def surfaces_of(kg: dict, aliases: dict, profile: str, exceptions: set[str]) -> list[str]:
+    """R7 판정 전 후보 표면형 — R7 없이 한 번 돌려 얻는다(닭과 달걀 회피)."""
+    entries, _ = collect(kg, aliases, profile, exceptions)
+    return sorted({e["surface"] for e in entries})
+
+
 def concept_hierarchy(kg: dict) -> tuple[dict[str, int], dict[str, bool]]:
     """BROADER 엣지 → (depth, is_superordinate). 루트 = 0.
 
@@ -298,7 +347,7 @@ def main() -> int:
                    "df 는 상류가 df 계산 전용 참조 적용기로 센 값이며 하류용 적용기가 "
                    "아니다 — 하류는 자기 토큰화로 구현하고, 두 값의 어긋남은 "
                    "Spearman ρ 로 검정한다. 가중식은 상류가 정하지 않는다.",
-        "schema_version": "1.1",
+        "schema_version": "1.2",
         "source_graph": "data/semiconductor_v0_3.json",
         "profiles": {p: {} for p in PROFILES},
         "rules": RULES,
@@ -310,16 +359,30 @@ def main() -> int:
     docs = load_abox_docs()
     depth, is_super = concept_hierarchy(kg)
 
+    grandfathered = frozenset(
+        norm(s) for s in ((aliases.get("_r7_grandfathered") or {}).get("surfaces") or {}))
+
     summary = {}
     df_report: dict[str, dict] = {}
     for profile in PROFILES:
-        entries, blocked = collect(kg, aliases, profile, exceptions)
+        # R7 은 표면형 df 를 입력으로 받으므로 한 번 돌려 후보를 얻은 뒤 센다.
+        s_df = surface_df(surfaces_of(kg, aliases, profile, exceptions), docs)
+        ratio = {s: (n / len(docs) if docs else 0.0) for s, n in s_df.items()}
+        entries, blocked = collect(kg, aliases, profile, exceptions,
+                                   df_ratio=ratio, grandfathered=grandfathered)
         # 그 프로파일의 개념 **전량**이 키를 갖는다 — 빠지면 하류가 "없음"과 "0"을
         # 구별할 수 없고, 없음을 최대 특이도로 오해한다.
         df = concept_df(entries, docs)
         asset["profiles"][profile] = {
             "entries": entries,
             "blocked": sorted(blocked, key=lambda b: (b["surface"], b["concept_id"])),
+            "surface_meta": {
+                # CR-001B — 표면형 단위 df. R7 의 근거이자 하류 특이도 가중의 재료다.
+                "df_denominator": len(docs),
+                "df_ceiling": DF_CEILING,
+                "grandfathered": sorted(grandfathered),
+                "surfaces": {s: s_df[s] for s in sorted(s_df)},
+            },
             "concept_meta": {
                 # 분모를 프로파일 안에 둔다 — 지금은 두 프로파일이 같지만, 같다는 보장이
                 # 스키마에 없으면 하류가 가정하게 된다.
@@ -396,7 +459,7 @@ def main() -> int:
         "inputs": ["data/semiconductor_v0_3.json", "mappings/abox_term_aliases.json",
                    "data/patents/rejected_patents_meta.parquet",
                    "data/patents/cited_enriched/"],
-        "change_request": "CR-007, CR-009, CR-013",
+        "change_request": "CR-007, CR-009, CR-013, CR-001B",
     }
     DF_REPORT.parent.mkdir(parents=True, exist_ok=True)
     DF_REPORT.write_text(json.dumps(df_report, ensure_ascii=False, indent=2) + "\n",

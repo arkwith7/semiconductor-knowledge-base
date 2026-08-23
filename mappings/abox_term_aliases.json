@@ -301,5 +301,98 @@
   "평탄화 공정": "process:cmp",
   "연마 공정": "process:cmp",
   "도핑": "process:implant",
-  "도펀트": "process:implant"
+  "도펀트": "process:implant",
+  "_KO3": "CR-001B — 한국어 한정요소 어휘 수확 3차. 출처는 dev+train 질의 800 의 독립항 한정요소 본문과 의견제출통지서 <표 N> 구성 대비표뿐이다(test·test_b 미열람). 후보는 data/reports/ko_surface_candidates.json 이 내고, 여기 오르는 것은 **기존 개념에 정직하게 붙는 것만**이다 — 구조 요소(기판·전극·게이트·트렌치·배선·채널·소스·드레인·캐패시터·스페이서·비아·적층)는 담을 축이 그래프에 없어 ko_concept_proposals.json 으로 나가고 등재하지 않는다(CR-001B §5.6·§9.6 ㉢). 전부 patent-text 전용이다 — expert-tag 동작을 바꾸지 않는다.",
+  "절연층": {
+    "expert-tag": null,
+    "patent-text": "material:dielectric"
+  },
+  "유전체": {
+    "expert-tag": null,
+    "patent-text": "material:dielectric"
+  },
+  "유전체막": {
+    "expert-tag": null,
+    "patent-text": "material:dielectric"
+  },
+  "유전막": {
+    "expert-tag": null,
+    "patent-text": "material:dielectric"
+  },
+  "폴리실리콘막": {
+    "expert-tag": null,
+    "patent-text": "material:polysilicon"
+  },
+  "성막": {
+    "expert-tag": null,
+    "patent-text": "process:deposition"
+  },
+  "성막 장치": {
+    "expert-tag": null,
+    "patent-text": "equipment_class:deposition_tool"
+  },
+  "성막장치": {
+    "expert-tag": null,
+    "patent-text": "equipment_class:deposition_tool"
+  },
+  "증착 장치": {
+    "expert-tag": null,
+    "patent-text": "equipment_class:deposition_tool"
+  },
+  "증착장치": {
+    "expert-tag": null,
+    "patent-text": "equipment_class:deposition_tool"
+  },
+  "인터포저": {
+    "expert-tag": null,
+    "patent-text": "device:interposer"
+  },
+  "패키지": {
+    "expert-tag": null,
+    "patent-text": "subprocess:packaging"
+  },
+  "온도": {
+    "expert-tag": null,
+    "patent-text": "parameter:temperature"
+  },
+  "압력": {
+    "expert-tag": null,
+    "patent-text": "parameter:pressure"
+  },
+  "유량": {
+    "expert-tag": null,
+    "patent-text": "parameter:gas_flow"
+  },
+  "_r7_grandfathered": {
+    "_why": "CR-001B §9.3 유예 — R7-DF-CEILING 을 **기존 등재 표면형에 소급하지 않는다**. 소급하면 증착·절연막·식각 등이 조용히 빠져 자원 델타에 추가와 제거가 섞이고, 원인을 가를 수 없게 된다(DP4 가 금지하는 미구분). 소급은 별도 CR 로 다룬다. 값은 이 목록을 만든 시점의 A-Box df 비율(분모 4,513)이며 감사용 기록이다.",
+    "surfaces": {
+      "al": 0.4691,
+      "w": 0.4137,
+      "co": 0.407,
+      "tin": 0.269,
+      "sin": 0.244,
+      "fa": 0.2196,
+      "a c": 0.2072,
+      "cu": 0.1999,
+      "증착": 0.1524,
+      "절연막": 0.1471,
+      "가스": 0.1438,
+      "식각": 0.1374,
+      "플라즈마": 0.1361,
+      "챔버": 0.1137,
+      "박막": 0.1015,
+      "oxide": 0.101,
+      "마스크": 0.1008,
+      "tac": 0.0973,
+      "산화물": 0.0964,
+      "산화막": 0.0833,
+      "스퍼터": 0.0784,
+      "스퍼터링": 0.0705,
+      "패터닝": 0.0651,
+      "etch": 0.0618,
+      "deposition": 0.0603,
+      "주입": 0.06,
+      "질화막": 0.06
+    }
+  }
 }

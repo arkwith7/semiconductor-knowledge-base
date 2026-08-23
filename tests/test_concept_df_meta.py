@@ -91,7 +91,9 @@ def test_hierarchy_ignores_non_broader_edges():
 
 # ── 통합: 자산 스키마 ───────────────────────────────────────────────
 def test_schema_version_bumped(asset):
-    assert asset["schema_version"] == "1.1"
+    # 1.2 — CR-001B 가 surface_meta(표면형 단위 df)를 더했다. 스키마가 늘면 하류가
+    # 그것을 알아야 하므로 판을 올린다.
+    assert asset["schema_version"] == "1.2"
 
 
 @pytest.mark.parametrize("profile", PROFILES)
@@ -155,9 +157,26 @@ BASELINE_COMMIT = "39855bb46c95897f401986caa18e1c423c8e63c6"  # CR-008·CR-009 �
 
 # 기준선 이후 **선언된** 사전 값 변경. 새 CR 은 여기에 자기 델타를 더한다.
 #   CR-013 — 단독 `hf` 제거 · `high k` 를 상위 부류로 재지정
+#   CR-001B — 한국어 한정요소 표면형 14 추가(patent-text 전용 · expert-tag 불변) ·
+#             R7-DF-CEILING 신설로 `온도` 차단. **구조 요소는 담을 축이 없어 등재하지
+#             않았다** — 제안 목록으로 나갔다(data/reports/ko_concept_proposals.json).
 DECLARED_REMOVED = {"patent-text": {("hf", "material:hf_acid"), ("high k", "material:hfO2")}}
-DECLARED_ADDED = {"patent-text": {("high k", "material:dielectric")}}
-DECLARED_NEW_RULES = {"R6-SURFACE-SUPPRESS"}
+DECLARED_ADDED = {"patent-text": {
+    ("high k", "material:dielectric"),
+    ("절연층", "material:dielectric"), ("유전체", "material:dielectric"),
+    ("유전체막", "material:dielectric"), ("유전막", "material:dielectric"),
+    ("폴리실리콘막", "material:polysilicon"), ("성막", "process:deposition"),
+    ("성막 장치", "equipment_class:deposition_tool"),
+    ("성막장치", "equipment_class:deposition_tool"),
+    ("증착 장치", "equipment_class:deposition_tool"),
+    ("증착장치", "equipment_class:deposition_tool"),
+    ("인터포저", "device:interposer"), ("패키지", "subprocess:packaging"),
+    ("압력", "parameter:pressure"), ("유량", "parameter:gas_flow"),
+}}
+# 등재됐다가 규칙에 걸려 blocked 로 **처음부터** 간 것. 제거(removed)와 구분한다 —
+# 제거는 살아 있던 쌍이 빠진 것이고, 이것은 들어오자마자 차단된 것이다.
+DECLARED_BLOCKED_ADDED = {"patent-text": {("온도", "parameter:temperature")}}
+DECLARED_NEW_RULES = {"R6-SURFACE-SUPPRESS", "R7-DF-CEILING"}
 
 _DECLARE_HINT = (
     "\n→ 자산을 바꾼 CR 이 있다면 이 파일의 DECLARED_REMOVED/DECLARED_ADDED 에 델타를 "
@@ -192,8 +211,10 @@ def test_entries_changed_only_where_declared(asset):
             f"{profile}: 선언되지 않은 추가 {added - expect_add} · "
             f"선언됐으나 일어나지 않은 추가 {expect_add - added}{_DECLARE_HINT}")
         # 뺀 것은 blocked 로 **옮겨져야** 한다 — 조용히 사라지면 안 된다.
+        # 규칙에 걸려 들어오자마자 차단된 쌍도 여기 나타나므로 함께 선언한다.
         moved = pairs(asset, profile, "blocked") - pairs(old, profile, "blocked")
-        assert moved == expect_rm, f"{profile}: blocked 이동 기록이 어긋난다 {moved}"
+        expect_moved = expect_rm | DECLARED_BLOCKED_ADDED.get(profile, set())
+        assert moved == expect_moved, f"{profile}: blocked 이동 기록이 어긋난다 {moved}"
 
     # 규칙은 추가만 가능하다 — 기존 규칙 문구가 바뀌면 하류 해석이 달라진다.
     assert set(asset["rules"]) - set(old["rules"]) == DECLARED_NEW_RULES

@@ -1,0 +1,4698 @@
+{
+  "_README": "CR-001B 한국어 표면형 후보. **제안이지 등재가 아니다** — 등재는 mappings/abox_term_aliases.json 큐레이션으로만 이뤄진다. 원문 문장을 담지 않는다(표면형·빈도·통로만). candidates 는 **아직 등재되지 않은** 표면형이다 — 큐레이션으로 오른 것은 여기서 빠지고 concept_mapping.json 에 있다. 그래서 이 파일은 사전 재생성 **뒤에** 다시 낸다.",
+  "scope": {
+    "splits": {
+      "dev": 200,
+      "train": 600
+    },
+    "queries": 800,
+    "independent_claims": 2478,
+    "claim_docs_read": 800,
+    "notices_in_scope": 935,
+    "notices_with_table": 31,
+    "excluded_splits": [
+      "test",
+      "test_b"
+    ],
+    "split_sha256": "f93c18d28857f6304f692e821928b7189c5e525e88524e95a51ff31ca8961943"
+  },
+  "rule": {
+    "id": "R7-DF-CEILING",
+    "df_ceiling": 0.06,
+    "df_denominator": 4513,
+    "min_query_df_claim": 10,
+    "min_query_df_table": 1,
+    "note": "abox_df 는 build_concept_mapping 의 참조 적용기(정규화 부분문자열)로 센 값이며 하류 적용기와 같지 않다(CR-009 · 하류가 ρ 로 회신한다)."
+  },
+  "summary": {
+    "candidates": 404,
+    "r7_pass": 294,
+    "r7_blocked": 110,
+    "from_table": 227
+  },
+  "candidates": [
+    {
+      "surface": "가공",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 5,
+      "query_df_table": 1,
+      "abox_df": 101,
+      "abox_df_ratio": 0.0224,
+      "r7": "pass"
+    },
+    {
+      "surface": "가능하게",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 13,
+      "query_df_table": 0,
+      "abox_df": 140,
+      "abox_df_ratio": 0.031,
+      "r7": "pass"
+    },
+    {
+      "surface": "가능하도록",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 1,
+      "query_df_table": 1,
+      "abox_df": 38,
+      "abox_df_ratio": 0.0084,
+      "r7": "pass"
+    },
+    {
+      "surface": "가스압",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 3,
+      "abox_df_ratio": 0.0007,
+      "r7": "pass"
+    },
+    {
+      "surface": "가열",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 11,
+      "query_df_table": 2,
+      "abox_df": 211,
+      "abox_df_ratio": 0.0468,
+      "r7": "pass"
+    },
+    {
+      "surface": "가장",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 13,
+      "query_df_table": 0,
+      "abox_df": 134,
+      "abox_df_ratio": 0.0297,
+      "r7": "pass"
+    },
+    {
+      "surface": "가진",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 11,
+      "query_df_table": 1,
+      "abox_df": 137,
+      "abox_df_ratio": 0.0304,
+      "r7": "pass"
+    },
+    {
+      "surface": "가짐",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 11,
+      "query_df_table": 0,
+      "abox_df": 47,
+      "abox_df_ratio": 0.0104,
+      "r7": "pass"
+    },
+    {
+      "surface": "간의",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 10,
+      "query_df_table": 0,
+      "abox_df": 171,
+      "abox_df_ratio": 0.0379,
+      "r7": "pass"
+    },
+    {
+      "surface": "갈륨",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 12,
+      "query_df_table": 1,
+      "abox_df": 71,
+      "abox_df_ratio": 0.0157,
+      "r7": "pass"
+    },
+    {
+      "surface": "값이",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 5,
+      "query_df_table": 1,
+      "abox_df": 50,
+      "abox_df_ratio": 0.0111,
+      "r7": "pass"
+    },
+    {
+      "surface": "갖고",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 42,
+      "query_df_table": 0,
+      "abox_df": 278,
+      "abox_df_ratio": 0.0616,
+      "r7": "blocked"
+    },
+    {
+      "surface": "갖는",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 203,
+      "query_df_table": 2,
+      "abox_df": 1158,
+      "abox_df_ratio": 0.2566,
+      "r7": "blocked"
+    },
+    {
+      "surface": "개의",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 43,
+      "query_df_table": 0,
+      "abox_df": 400,
+      "abox_df_ratio": 0.0886,
+      "r7": "blocked"
+    },
+    {
+      "surface": "갭을",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 11,
+      "query_df_table": 0,
+      "abox_df": 47,
+      "abox_df_ratio": 0.0104,
+      "r7": "pass"
+    },
+    {
+      "surface": "걸쳐",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 10,
+      "query_df_table": 0,
+      "abox_df": 97,
+      "abox_df_ratio": 0.0215,
+      "r7": "pass"
+    },
+    {
+      "surface": "검출",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 3,
+      "query_df_table": 1,
+      "abox_df": 70,
+      "abox_df_ratio": 0.0155,
+      "r7": "pass"
+    },
+    {
+      "surface": "것은",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 10,
+      "query_df_table": 0,
+      "abox_df": 102,
+      "abox_df_ratio": 0.0226,
+      "r7": "pass"
+    },
+    {
+      "surface": "것을",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 257,
+      "query_df_table": 0,
+      "abox_df": 1653,
+      "abox_df_ratio": 0.3663,
+      "r7": "blocked"
+    },
+    {
+      "surface": "것인",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 41,
+      "query_df_table": 0,
+      "abox_df": 190,
+      "abox_df_ratio": 0.0421,
+      "r7": "pass"
+    },
+    {
+      "surface": "게이트",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 194,
+      "query_df_table": 3,
+      "abox_df": 771,
+      "abox_df_ratio": 0.1708,
+      "r7": "blocked"
+    },
+    {
+      "surface": "게이트용",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 10,
+      "query_df_table": 0,
+      "abox_df": 43,
+      "abox_df_ratio": 0.0095,
+      "r7": "pass"
+    },
+    {
+      "surface": "결정",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 9,
+      "query_df_table": 1,
+      "abox_df": 363,
+      "abox_df_ratio": 0.0804,
+      "r7": "blocked"
+    },
+    {
+      "surface": "결정립",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 1,
+      "query_df_table": 1,
+      "abox_df": 29,
+      "abox_df_ratio": 0.0064,
+      "r7": "pass"
+    },
+    {
+      "surface": "경사지게",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 1,
+      "query_df_table": 1,
+      "abox_df": 16,
+      "abox_df_ratio": 0.0035,
+      "r7": "pass"
+    },
+    {
+      "surface": "고주파",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 9,
+      "query_df_table": 1,
+      "abox_df": 61,
+      "abox_df_ratio": 0.0135,
+      "r7": "pass"
+    },
+    {
+      "surface": "공간",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 11,
+      "query_df_table": 0,
+      "abox_df": 230,
+      "abox_df_ratio": 0.051,
+      "r7": "pass"
+    },
+    {
+      "surface": "공급",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 13,
+      "query_df_table": 0,
+      "abox_df": 433,
+      "abox_df_ratio": 0.0959,
+      "r7": "blocked"
+    },
+    {
+      "surface": "공정",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 62,
+      "query_df_table": 0,
+      "abox_df": 1014,
+      "abox_df_ratio": 0.2247,
+      "r7": "blocked"
+    },
+    {
+      "surface": "과정",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 4,
+      "query_df_table": 2,
+      "abox_df": 64,
+      "abox_df_ratio": 0.0142,
+      "r7": "pass"
+    },
+    {
+      "surface": "관통",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 10,
+      "query_df_table": 1,
+      "abox_df": 307,
+      "abox_df_ratio": 0.068,
+      "r7": "blocked"
+    },
+    {
+      "surface": "관한",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 7,
+      "abox_df": 964,
+      "abox_df_ratio": 0.2136,
+      "r7": "blocked"
+    },
+    {
+      "surface": "관형",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 1,
+      "query_df_table": 1,
+      "abox_df": 4,
+      "abox_df_ratio": 0.0009,
+      "r7": "pass"
+    },
+    {
+      "surface": "구동",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 9,
+      "query_df_table": 2,
+      "abox_df": 154,
+      "abox_df_ratio": 0.0341,
+      "r7": "pass"
+    },
+    {
+      "surface": "구동부",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 1,
+      "query_df_table": 1,
+      "abox_df": 29,
+      "abox_df_ratio": 0.0064,
+      "r7": "pass"
+    },
+    {
+      "surface": "구리박",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 1,
+      "query_df_table": 1,
+      "abox_df": 2,
+      "abox_df_ratio": 0.0004,
+      "r7": "pass"
+    },
+    {
+      "surface": "구리층",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 9,
+      "abox_df_ratio": 0.002,
+      "r7": "pass"
+    },
+    {
+      "surface": "구성상",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 5,
+      "abox_df": 1,
+      "abox_df_ratio": 0.0002,
+      "r7": "pass"
+    },
+    {
+      "surface": "구조",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 36,
+      "query_df_table": 0,
+      "abox_df": 768,
+      "abox_df_ratio": 0.1702,
+      "r7": "blocked"
+    },
+    {
+      "surface": "구조물",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 27,
+      "query_df_table": 0,
+      "abox_df": 139,
+      "abox_df_ratio": 0.0308,
+      "r7": "pass"
+    },
+    {
+      "surface": "구조체",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 18,
+      "query_df_table": 0,
+      "abox_df": 98,
+      "abox_df_ratio": 0.0217,
+      "r7": "pass"
+    },
+    {
+      "surface": "그래프",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 2,
+      "abox_df_ratio": 0.0004,
+      "r7": "pass"
+    },
+    {
+      "surface": "그의",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 5,
+      "query_df_table": 1,
+      "abox_df": 100,
+      "abox_df_ratio": 0.0222,
+      "r7": "pass"
+    },
+    {
+      "surface": "금속",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 106,
+      "query_df_table": 2,
+      "abox_df": 826,
+      "abox_df_ratio": 0.183,
+      "r7": "blocked"
+    },
+    {
+      "surface": "급냉",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 3,
+      "abox_df_ratio": 0.0007,
+      "r7": "pass"
+    },
+    {
+      "surface": "기계적",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 14,
+      "query_df_table": 0,
+      "abox_df": 99,
+      "abox_df_ratio": 0.0219,
+      "r7": "pass"
+    },
+    {
+      "surface": "기상",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 11,
+      "query_df_table": 0,
+      "abox_df": 148,
+      "abox_df_ratio": 0.0328,
+      "r7": "pass"
+    },
+    {
+      "surface": "기억",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 26,
+      "query_df_table": 0,
+      "abox_df": 119,
+      "abox_df_ratio": 0.0264,
+      "r7": "pass"
+    },
+    {
+      "surface": "기판",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 403,
+      "query_df_table": 11,
+      "abox_df": 1926,
+      "abox_df_ratio": 0.4268,
+      "r7": "blocked"
+    },
+    {
+      "surface": "기판홀더",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 1,
+      "query_df_table": 2,
+      "abox_df": 4,
+      "abox_df_ratio": 0.0009,
+      "r7": "pass"
+    },
+    {
+      "surface": "낮은",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 31,
+      "query_df_table": 0,
+      "abox_df": 256,
+      "abox_df_ratio": 0.0567,
+      "r7": "pass"
+    },
+    {
+      "surface": "내로",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 16,
+      "query_df_table": 0,
+      "abox_df": 149,
+      "abox_df_ratio": 0.033,
+      "r7": "pass"
+    },
+    {
+      "surface": "내부",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 19,
+      "query_df_table": 0,
+      "abox_df": 504,
+      "abox_df_ratio": 0.1117,
+      "r7": "blocked"
+    },
+    {
+      "surface": "내에",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 120,
+      "query_df_table": 1,
+      "abox_df": 822,
+      "abox_df_ratio": 0.1821,
+      "r7": "blocked"
+    },
+    {
+      "surface": "내의",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 41,
+      "query_df_table": 0,
+      "abox_df": 316,
+      "abox_df_ratio": 0.07,
+      "r7": "blocked"
+    },
+    {
+      "surface": "내지",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 88,
+      "query_df_table": 20,
+      "abox_df": 877,
+      "abox_df_ratio": 0.1943,
+      "r7": "blocked"
+    },
+    {
+      "surface": "냉간",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 1,
+      "query_df_table": 1,
+      "abox_df": 9,
+      "abox_df_ratio": 0.002,
+      "r7": "pass"
+    },
+    {
+      "surface": "노출되도록",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 13,
+      "query_df_table": 0,
+      "abox_df": 96,
+      "abox_df_ratio": 0.0213,
+      "r7": "pass"
+    },
+    {
+      "surface": "농도",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 3,
+      "query_df_table": 1,
+      "abox_df": 204,
+      "abox_df_ratio": 0.0452,
+      "r7": "pass"
+    },
+    {
+      "surface": "높은",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 22,
+      "query_df_table": 1,
+      "abox_df": 347,
+      "abox_df_ratio": 0.0769,
+      "r7": "blocked"
+    },
+    {
+      "surface": "다는",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 2,
+      "abox_df": 21,
+      "abox_df_ratio": 0.0047,
+      "r7": "pass"
+    },
+    {
+      "surface": "다른",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 53,
+      "query_df_table": 0,
+      "abox_df": 454,
+      "abox_df_ratio": 0.1006,
+      "r7": "blocked"
+    },
+    {
+      "surface": "다와",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 0,
+      "abox_df_ratio": 0.0,
+      "r7": "pass"
+    },
+    {
+      "surface": "다이",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 18,
+      "query_df_table": 0,
+      "abox_df": 195,
+      "abox_df_ratio": 0.0432,
+      "r7": "pass"
+    },
+    {
+      "surface": "다층",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 10,
+      "query_df_table": 0,
+      "abox_df": 96,
+      "abox_df_ratio": 0.0213,
+      "r7": "pass"
+    },
+    {
+      "surface": "단일",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 12,
+      "query_df_table": 0,
+      "abox_df": 126,
+      "abox_df_ratio": 0.0279,
+      "r7": "pass"
+    },
+    {
+      "surface": "단차",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 2,
+      "query_df_table": 1,
+      "abox_df": 74,
+      "abox_df_ratio": 0.0164,
+      "r7": "pass"
+    },
+    {
+      "surface": "대해",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 40,
+      "query_df_table": 0,
+      "abox_df": 247,
+      "abox_df_ratio": 0.0547,
+      "r7": "pass"
+    },
+    {
+      "surface": "대향",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 10,
+      "query_df_table": 1,
+      "abox_df": 227,
+      "abox_df_ratio": 0.0503,
+      "r7": "pass"
+    },
+    {
+      "surface": "덮는",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 35,
+      "query_df_table": 0,
+      "abox_df": 204,
+      "abox_df_ratio": 0.0452,
+      "r7": "pass"
+    },
+    {
+      "surface": "덮도록",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 18,
+      "query_df_table": 0,
+      "abox_df": 84,
+      "abox_df_ratio": 0.0186,
+      "r7": "pass"
+    },
+    {
+      "surface": "데이터",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 10,
+      "query_df_table": 0,
+      "abox_df": 137,
+      "abox_df_ratio": 0.0304,
+      "r7": "pass"
+    },
+    {
+      "surface": "도가니",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 2,
+      "query_df_table": 1,
+      "abox_df": 5,
+      "abox_df_ratio": 0.0011,
+      "r7": "pass"
+    },
+    {
+      "surface": "도전",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 14,
+      "query_df_table": 0,
+      "abox_df": 555,
+      "abox_df_ratio": 0.123,
+      "r7": "blocked"
+    },
+    {
+      "surface": "도전막",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 31,
+      "query_df_table": 2,
+      "abox_df": 192,
+      "abox_df_ratio": 0.0425,
+      "r7": "pass"
+    },
+    {
+      "surface": "도전성",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 24,
+      "query_df_table": 0,
+      "abox_df": 165,
+      "abox_df_ratio": 0.0366,
+      "r7": "pass"
+    },
+    {
+      "surface": "도전층",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 22,
+      "query_df_table": 0,
+      "abox_df": 107,
+      "abox_df_ratio": 0.0237,
+      "r7": "pass"
+    },
+    {
+      "surface": "동박",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 1,
+      "query_df_table": 1,
+      "abox_df": 8,
+      "abox_df_ratio": 0.0018,
+      "r7": "pass"
+    },
+    {
+      "surface": "동박층",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 0,
+      "abox_df_ratio": 0.0,
+      "r7": "pass"
+    },
+    {
+      "surface": "동안",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 30,
+      "query_df_table": 1,
+      "abox_df": 253,
+      "abox_df_ratio": 0.0561,
+      "r7": "pass"
+    },
+    {
+      "surface": "동작",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 11,
+      "query_df_table": 0,
+      "abox_df": 230,
+      "abox_df_ratio": 0.051,
+      "r7": "pass"
+    },
+    {
+      "surface": "되도록",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 15,
+      "query_df_table": 0,
+      "abox_df": 605,
+      "abox_df_ratio": 0.1341,
+      "r7": "blocked"
+    },
+    {
+      "surface": "두고",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 21,
+      "query_df_table": 0,
+      "abox_df": 97,
+      "abox_df_ratio": 0.0215,
+      "r7": "pass"
+    },
+    {
+      "surface": "두께",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 12,
+      "query_df_table": 0,
+      "abox_df": 625,
+      "abox_df_ratio": 0.1385,
+      "r7": "blocked"
+    },
+    {
+      "surface": "두께나",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 1,
+      "abox_df_ratio": 0.0002,
+      "r7": "pass"
+    },
+    {
+      "surface": "듐을",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 5,
+      "abox_df_ratio": 0.0011,
+      "r7": "pass"
+    },
+    {
+      "surface": "들을",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 11,
+      "query_df_table": 0,
+      "abox_df": 569,
+      "abox_df_ratio": 0.1261,
+      "r7": "blocked"
+    },
+    {
+      "surface": "등은",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 0,
+      "abox_df_ratio": 0.0,
+      "r7": "pass"
+    },
+    {
+      "surface": "디바이스",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 30,
+      "query_df_table": 1,
+      "abox_df": 144,
+      "abox_df_ratio": 0.0319,
+      "r7": "pass"
+    },
+    {
+      "surface": "따른",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 11,
+      "query_df_table": 0,
+      "abox_df": 542,
+      "abox_df_ratio": 0.1201,
+      "r7": "blocked"
+    },
+    {
+      "surface": "때는",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 4,
+      "abox_df_ratio": 0.0009,
+      "r7": "pass"
+    },
+    {
+      "surface": "또한",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 18,
+      "query_df_table": 0,
+      "abox_df": 428,
+      "abox_df_ratio": 0.0948,
+      "r7": "blocked"
+    },
+    {
+      "surface": "라는",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 6,
+      "abox_df_ratio": 0.0013,
+      "r7": "pass"
+    },
+    {
+      "surface": "라와",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 3,
+      "abox_df_ratio": 0.0007,
+      "r7": "pass"
+    },
+    {
+      "surface": "라인",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 30,
+      "query_df_table": 0,
+      "abox_df": 374,
+      "abox_df_ratio": 0.0829,
+      "r7": "blocked"
+    },
+    {
+      "surface": "라인들",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 11,
+      "query_df_table": 0,
+      "abox_df": 84,
+      "abox_df_ratio": 0.0186,
+      "r7": "pass"
+    },
+    {
+      "surface": "레이트",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 2,
+      "query_df_table": 1,
+      "abox_df": 243,
+      "abox_df_ratio": 0.0538,
+      "r7": "pass"
+    },
+    {
+      "surface": "레인",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 2,
+      "query_df_table": 1,
+      "abox_df": 400,
+      "abox_df_ratio": 0.0886,
+      "r7": "blocked"
+    },
+    {
+      "surface": "로서",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 11,
+      "query_df_table": 0,
+      "abox_df": 1099,
+      "abox_df_ratio": 0.2435,
+      "r7": "blocked"
+    },
+    {
+      "surface": "로터리",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 4,
+      "abox_df_ratio": 0.0009,
+      "r7": "pass"
+    },
+    {
+      "surface": "롤의",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 0,
+      "abox_df_ratio": 0.0,
+      "r7": "pass"
+    },
+    {
+      "surface": "마가",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 71,
+      "abox_df_ratio": 0.0157,
+      "r7": "pass"
+    },
+    {
+      "surface": "마그네트론",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 8,
+      "query_df_table": 1,
+      "abox_df": 39,
+      "abox_df_ratio": 0.0086,
+      "r7": "pass"
+    },
+    {
+      "surface": "마는",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 32,
+      "abox_df_ratio": 0.0071,
+      "r7": "pass"
+    },
+    {
+      "surface": "막을",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 28,
+      "query_df_table": 1,
+      "abox_df": 1194,
+      "abox_df_ratio": 0.2646,
+      "r7": "blocked"
+    },
+    {
+      "surface": "막의",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 10,
+      "query_df_table": 0,
+      "abox_df": 678,
+      "abox_df_ratio": 0.1502,
+      "r7": "blocked"
+    },
+    {
+      "surface": "만큼",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 70,
+      "abox_df_ratio": 0.0155,
+      "r7": "pass"
+    },
+    {
+      "surface": "메모리",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 207,
+      "query_df_table": 0,
+      "abox_df": 649,
+      "abox_df_ratio": 0.1438,
+      "r7": "blocked"
+    },
+    {
+      "surface": "멤버",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 3,
+      "abox_df_ratio": 0.0007,
+      "r7": "pass"
+    },
+    {
+      "surface": "면의",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 8,
+      "query_df_table": 2,
+      "abox_df": 303,
+      "abox_df_ratio": 0.0671,
+      "r7": "blocked"
+    },
+    {
+      "surface": "면이",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 3,
+      "query_df_table": 1,
+      "abox_df": 243,
+      "abox_df_ratio": 0.0538,
+      "r7": "pass"
+    },
+    {
+      "surface": "모터",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 1,
+      "query_df_table": 1,
+      "abox_df": 30,
+      "abox_df_ratio": 0.0066,
+      "r7": "pass"
+    },
+    {
+      "surface": "몰리브덴",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 10,
+      "query_df_table": 0,
+      "abox_df": 67,
+      "abox_df_ratio": 0.0148,
+      "r7": "pass"
+    },
+    {
+      "surface": "물로",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 1,
+      "query_df_table": 1,
+      "abox_df": 245,
+      "abox_df_ratio": 0.0543,
+      "r7": "pass"
+    },
+    {
+      "surface": "물질",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 23,
+      "query_df_table": 0,
+      "abox_df": 622,
+      "abox_df_ratio": 0.1378,
+      "r7": "blocked"
+    },
+    {
+      "surface": "밀도",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 4,
+      "query_df_table": 1,
+      "abox_df": 193,
+      "abox_df_ratio": 0.0428,
+      "r7": "pass"
+    },
+    {
+      "surface": "및상기",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 16,
+      "query_df_table": 0,
+      "abox_df": 1047,
+      "abox_df_ratio": 0.232,
+      "r7": "blocked"
+    },
+    {
+      "surface": "밑줄",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 0,
+      "abox_df_ratio": 0.0,
+      "r7": "pass"
+    },
+    {
+      "surface": "바가",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 2,
+      "abox_df_ratio": 0.0004,
+      "r7": "pass"
+    },
+    {
+      "surface": "바디",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 11,
+      "query_df_table": 0,
+      "abox_df": 49,
+      "abox_df_ratio": 0.0109,
+      "r7": "pass"
+    },
+    {
+      "surface": "바이어스",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 10,
+      "query_df_table": 0,
+      "abox_df": 93,
+      "abox_df_ratio": 0.0206,
+      "r7": "pass"
+    },
+    {
+      "surface": "반도체",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 315,
+      "query_df_table": 3,
+      "abox_df": 1436,
+      "abox_df_ratio": 0.3182,
+      "r7": "blocked"
+    },
+    {
+      "surface": "반도체막",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 13,
+      "query_df_table": 0,
+      "abox_df": 48,
+      "abox_df_ratio": 0.0106,
+      "r7": "pass"
+    },
+    {
+      "surface": "반도체층",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 38,
+      "query_df_table": 2,
+      "abox_df": 176,
+      "abox_df_ratio": 0.039,
+      "r7": "pass"
+    },
+    {
+      "surface": "반응",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 18,
+      "query_df_table": 0,
+      "abox_df": 409,
+      "abox_df_ratio": 0.0906,
+      "r7": "blocked"
+    },
+    {
+      "surface": "발생",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 6,
+      "query_df_table": 1,
+      "abox_df": 470,
+      "abox_df_ratio": 0.1041,
+      "r7": "blocked"
+    },
+    {
+      "surface": "방열판",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 4,
+      "abox_df_ratio": 0.0009,
+      "r7": "pass"
+    },
+    {
+      "surface": "방전",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 4,
+      "query_df_table": 1,
+      "abox_df": 54,
+      "abox_df_ratio": 0.012,
+      "r7": "pass"
+    },
+    {
+      "surface": "방향",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 5,
+      "query_df_table": 1,
+      "abox_df": 604,
+      "abox_df_ratio": 0.1338,
+      "r7": "blocked"
+    },
+    {
+      "surface": "배선",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 18,
+      "query_df_table": 1,
+      "abox_df": 254,
+      "abox_df_ratio": 0.0563,
+      "r7": "pass"
+    },
+    {
+      "surface": "배선막",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 3,
+      "query_df_table": 2,
+      "abox_df": 4,
+      "abox_df_ratio": 0.0009,
+      "r7": "pass"
+    },
+    {
+      "surface": "배치시",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 7,
+      "abox_df_ratio": 0.0016,
+      "r7": "pass"
+    },
+    {
+      "surface": "백킹",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 14,
+      "query_df_table": 6,
+      "abox_df": 30,
+      "abox_df_ratio": 0.0066,
+      "r7": "pass"
+    },
+    {
+      "surface": "범위",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 13,
+      "query_df_table": 1,
+      "abox_df": 277,
+      "abox_df_ratio": 0.0614,
+      "r7": "blocked"
+    },
+    {
+      "surface": "보다",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 24,
+      "query_df_table": 0,
+      "abox_df": 883,
+      "abox_df_ratio": 0.1957,
+      "r7": "blocked"
+    },
+    {
+      "surface": "부에",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 1042,
+      "abox_df_ratio": 0.2309,
+      "r7": "blocked"
+    },
+    {
+      "surface": "부재",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 10,
+      "query_df_table": 1,
+      "abox_df": 206,
+      "abox_df_ratio": 0.0456,
+      "r7": "pass"
+    },
+    {
+      "surface": "분리",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 20,
+      "query_df_table": 0,
+      "abox_df": 393,
+      "abox_df_ratio": 0.0871,
+      "r7": "blocked"
+    },
+    {
+      "surface": "분말",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 10,
+      "query_df_table": 0,
+      "abox_df": 84,
+      "abox_df_ratio": 0.0186,
+      "r7": "pass"
+    },
+    {
+      "surface": "불순물",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 17,
+      "query_df_table": 0,
+      "abox_df": 259,
+      "abox_df_ratio": 0.0574,
+      "r7": "pass"
+    },
+    {
+      "surface": "불활성",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 16,
+      "query_df_table": 0,
+      "abox_df": 90,
+      "abox_df_ratio": 0.0199,
+      "r7": "pass"
+    },
+    {
+      "surface": "불휘발성",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 19,
+      "query_df_table": 0,
+      "abox_df": 75,
+      "abox_df_ratio": 0.0166,
+      "r7": "pass"
+    },
+    {
+      "surface": "비아",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 7,
+      "query_df_table": 1,
+      "abox_df": 86,
+      "abox_df_ratio": 0.0191,
+      "r7": "pass"
+    },
+    {
+      "surface": "비커스",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 3,
+      "query_df_table": 1,
+      "abox_df": 4,
+      "abox_df_ratio": 0.0009,
+      "r7": "pass"
+    },
+    {
+      "surface": "비트",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 11,
+      "query_df_table": 0,
+      "abox_df": 175,
+      "abox_df_ratio": 0.0388,
+      "r7": "pass"
+    },
+    {
+      "surface": "비휘발성",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 60,
+      "query_df_table": 0,
+      "abox_df": 178,
+      "abox_df_ratio": 0.0394,
+      "r7": "pass"
+    },
+    {
+      "surface": "사는",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 8,
+      "abox_df_ratio": 0.0018,
+      "r7": "pass"
+    },
+    {
+      "surface": "사이",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 12,
+      "query_df_table": 0,
+      "abox_df": 1420,
+      "abox_df_ratio": 0.3146,
+      "r7": "blocked"
+    },
+    {
+      "surface": "사인",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 1,
+      "abox_df_ratio": 0.0002,
+      "r7": "pass"
+    },
+    {
+      "surface": "산란",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 1,
+      "query_df_table": 1,
+      "abox_df": 9,
+      "abox_df_ratio": 0.002,
+      "r7": "pass"
+    },
+    {
+      "surface": "산소",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 30,
+      "query_df_table": 0,
+      "abox_df": 297,
+      "abox_df_ratio": 0.0658,
+      "r7": "blocked"
+    },
+    {
+      "surface": "산화",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 20,
+      "query_df_table": 1,
+      "abox_df": 961,
+      "abox_df_ratio": 0.2129,
+      "r7": "blocked"
+    },
+    {
+      "surface": "산화아연",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 4,
+      "query_df_table": 1,
+      "abox_df": 20,
+      "abox_df_ratio": 0.0044,
+      "r7": "pass"
+    },
+    {
+      "surface": "상대",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 3,
+      "query_df_table": 1,
+      "abox_df": 115,
+      "abox_df_ratio": 0.0255,
+      "r7": "pass"
+    },
+    {
+      "surface": "상변화",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 27,
+      "query_df_table": 0,
+      "abox_df": 74,
+      "abox_df_ratio": 0.0164,
+      "r7": "pass"
+    },
+    {
+      "surface": "상부",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 71,
+      "query_df_table": 1,
+      "abox_df": 858,
+      "abox_df_ratio": 0.1901,
+      "r7": "blocked"
+    },
+    {
+      "surface": "상에",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 343,
+      "query_df_table": 0,
+      "abox_df": 1577,
+      "abox_df_ratio": 0.3494,
+      "r7": "blocked"
+    },
+    {
+      "surface": "상의",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 50,
+      "query_df_table": 1,
+      "abox_df": 921,
+      "abox_df_ratio": 0.2041,
+      "r7": "blocked"
+    },
+    {
+      "surface": "서로",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 79,
+      "query_df_table": 1,
+      "abox_df": 511,
+      "abox_df_ratio": 0.1132,
+      "r7": "blocked"
+    },
+    {
+      "surface": "선택",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 24,
+      "query_df_table": 0,
+      "abox_df": 884,
+      "abox_df_ratio": 0.1959,
+      "r7": "blocked"
+    },
+    {
+      "surface": "선택할",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 2,
+      "abox_df": 4,
+      "abox_df_ratio": 0.0009,
+      "r7": "pass"
+    },
+    {
+      "surface": "설치",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 2,
+      "query_df_table": 1,
+      "abox_df": 273,
+      "abox_df_ratio": 0.0605,
+      "r7": "blocked"
+    },
+    {
+      "surface": "섬유",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 2,
+      "query_df_table": 1,
+      "abox_df": 23,
+      "abox_df_ratio": 0.0051,
+      "r7": "pass"
+    },
+    {
+      "surface": "성막방법",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 1,
+      "query_df_table": 1,
+      "abox_df": 2,
+      "abox_df_ratio": 0.0004,
+      "r7": "pass"
+    },
+    {
+      "surface": "성형체",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 25,
+      "abox_df_ratio": 0.0055,
+      "r7": "pass"
+    },
+    {
+      "surface": "세라믹",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 6,
+      "query_df_table": 1,
+      "abox_df": 74,
+      "abox_df_ratio": 0.0164,
+      "r7": "pass"
+    },
+    {
+      "surface": "셀을",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 24,
+      "query_df_table": 0,
+      "abox_df": 73,
+      "abox_df_ratio": 0.0162,
+      "r7": "pass"
+    },
+    {
+      "surface": "셀의",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 10,
+      "query_df_table": 0,
+      "abox_df": 76,
+      "abox_df_ratio": 0.0168,
+      "r7": "pass"
+    },
+    {
+      "surface": "소결체",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 6,
+      "query_df_table": 3,
+      "abox_df": 45,
+      "abox_df_ratio": 0.01,
+      "r7": "pass"
+    },
+    {
+      "surface": "소스",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 92,
+      "query_df_table": 2,
+      "abox_df": 429,
+      "abox_df_ratio": 0.0951,
+      "r7": "blocked"
+    },
+    {
+      "surface": "소오스",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 12,
+      "query_df_table": 0,
+      "abox_df": 128,
+      "abox_df_ratio": 0.0284,
+      "r7": "pass"
+    },
+    {
+      "surface": "소자",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 151,
+      "query_df_table": 0,
+      "abox_df": 915,
+      "abox_df_ratio": 0.2027,
+      "r7": "blocked"
+    },
+    {
+      "surface": "속도",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 3,
+      "query_df_table": 3,
+      "abox_df": 186,
+      "abox_df_ratio": 0.0412,
+      "r7": "pass"
+    },
+    {
+      "surface": "수단",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 8,
+      "query_df_table": 1,
+      "abox_df": 148,
+      "abox_df_ratio": 0.0328,
+      "r7": "pass"
+    },
+    {
+      "surface": "수소",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 35,
+      "query_df_table": 2,
+      "abox_df": 305,
+      "abox_df_ratio": 0.0676,
+      "r7": "blocked"
+    },
+    {
+      "surface": "수소선택",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 0,
+      "abox_df_ratio": 0.0,
+      "r7": "pass"
+    },
+    {
+      "surface": "수지층",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 12,
+      "abox_df_ratio": 0.0027,
+      "r7": "pass"
+    },
+    {
+      "surface": "수직",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 30,
+      "query_df_table": 0,
+      "abox_df": 335,
+      "abox_df_ratio": 0.0742,
+      "r7": "blocked"
+    },
+    {
+      "surface": "수평",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 12,
+      "query_df_table": 0,
+      "abox_df": 114,
+      "abox_df_ratio": 0.0253,
+      "r7": "pass"
+    },
+    {
+      "surface": "수행",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 4,
+      "query_df_table": 1,
+      "abox_df": 477,
+      "abox_df_ratio": 0.1057,
+      "r7": "blocked"
+    },
+    {
+      "surface": "순도",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 1,
+      "query_df_table": 3,
+      "abox_df": 39,
+      "abox_df_ratio": 0.0086,
+      "r7": "pass"
+    },
+    {
+      "surface": "스위칭",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 16,
+      "query_df_table": 0,
+      "abox_df": 61,
+      "abox_df_ratio": 0.0135,
+      "r7": "pass"
+    },
+    {
+      "surface": "스택",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 15,
+      "query_df_table": 0,
+      "abox_df": 72,
+      "abox_df_ratio": 0.016,
+      "r7": "pass"
+    },
+    {
+      "surface": "스퍼터링용",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 1,
+      "query_df_table": 3,
+      "abox_df": 13,
+      "abox_df_ratio": 0.0029,
+      "r7": "pass"
+    },
+    {
+      "surface": "시간",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 11,
+      "query_df_table": 0,
+      "abox_df": 235,
+      "abox_df_ratio": 0.0521,
+      "r7": "pass"
+    },
+    {
+      "surface": "시의",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 2,
+      "query_df_table": 1,
+      "abox_df": 38,
+      "abox_df_ratio": 0.0084,
+      "r7": "pass"
+    },
+    {
+      "surface": "시켜",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 2,
+      "query_df_table": 1,
+      "abox_df": 480,
+      "abox_df_ratio": 0.1064,
+      "r7": "blocked"
+    },
+    {
+      "surface": "시트",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 1,
+      "query_df_table": 1,
+      "abox_df": 70,
+      "abox_df_ratio": 0.0155,
+      "r7": "pass"
+    },
+    {
+      "surface": "식별번호",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 3,
+      "abox_df": 0,
+      "abox_df_ratio": 0.0,
+      "r7": "pass"
+    },
+    {
+      "surface": "신호",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 3,
+      "query_df_table": 1,
+      "abox_df": 135,
+      "abox_df_ratio": 0.0299,
+      "r7": "pass"
+    },
+    {
+      "surface": "실리콘",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 59,
+      "query_df_table": 1,
+      "abox_df": 716,
+      "abox_df_ratio": 0.1587,
+      "r7": "blocked"
+    },
+    {
+      "surface": "실시할",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 1,
+      "query_df_table": 2,
+      "abox_df": 9,
+      "abox_df_ratio": 0.002,
+      "r7": "pass"
+    },
+    {
+      "surface": "아가",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 29,
+      "abox_df_ratio": 0.0064,
+      "r7": "pass"
+    },
+    {
+      "surface": "아몰퍼스",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 2,
+      "query_df_table": 1,
+      "abox_df": 13,
+      "abox_df_ratio": 0.0029,
+      "r7": "pass"
+    },
+    {
+      "surface": "아연",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 16,
+      "query_df_table": 0,
+      "abox_df": 108,
+      "abox_df_ratio": 0.0239,
+      "r7": "pass"
+    },
+    {
+      "surface": "않고",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 8,
+      "query_df_table": 1,
+      "abox_df": 153,
+      "abox_df_ratio": 0.0339,
+      "r7": "pass"
+    },
+    {
+      "surface": "않는",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 17,
+      "query_df_table": 0,
+      "abox_df": 210,
+      "abox_df_ratio": 0.0465,
+      "r7": "pass"
+    },
+    {
+      "surface": "않은",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 19,
+      "query_df_table": 0,
+      "abox_df": 140,
+      "abox_df_ratio": 0.031,
+      "r7": "pass"
+    },
+    {
+      "surface": "알칼리",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 5,
+      "query_df_table": 1,
+      "abox_df": 40,
+      "abox_df_ratio": 0.0089,
+      "r7": "pass"
+    },
+    {
+      "surface": "알킬",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 10,
+      "query_df_table": 0,
+      "abox_df": 143,
+      "abox_df_ratio": 0.0317,
+      "r7": "pass"
+    },
+    {
+      "surface": "압연",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 5,
+      "query_df_table": 1,
+      "abox_df": 18,
+      "abox_df_ratio": 0.004,
+      "r7": "pass"
+    },
+    {
+      "surface": "압출",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 7,
+      "abox_df_ratio": 0.0016,
+      "r7": "pass"
+    },
+    {
+      "surface": "애노드",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 2,
+      "query_df_table": 1,
+      "abox_df": 24,
+      "abox_df_ratio": 0.0053,
+      "r7": "pass"
+    },
+    {
+      "surface": "액티브",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 16,
+      "query_df_table": 0,
+      "abox_df": 72,
+      "abox_df_ratio": 0.016,
+      "r7": "pass"
+    },
+    {
+      "surface": "어느",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 40,
+      "query_df_table": 0,
+      "abox_df": 710,
+      "abox_df_ratio": 0.1573,
+      "r7": "blocked"
+    },
+    {
+      "surface": "얻기",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 7,
+      "abox_df_ratio": 0.0016,
+      "r7": "pass"
+    },
+    {
+      "surface": "없고",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 15,
+      "abox_df_ratio": 0.0033,
+      "r7": "pass"
+    },
+    {
+      "surface": "없습니다",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 4,
+      "abox_df": 0,
+      "abox_df_ratio": 0.0,
+      "r7": "pass"
+    },
+    {
+      "surface": "역시",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 8,
+      "abox_df_ratio": 0.0018,
+      "r7": "pass"
+    },
+    {
+      "surface": "연결되도록",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 10,
+      "query_df_table": 0,
+      "abox_df": 48,
+      "abox_df_ratio": 0.0106,
+      "r7": "pass"
+    },
+    {
+      "surface": "연동시켜",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 1,
+      "query_df_table": 1,
+      "abox_df": 1,
+      "abox_df_ratio": 0.0002,
+      "r7": "pass"
+    },
+    {
+      "surface": "연마방법",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 9,
+      "abox_df_ratio": 0.002,
+      "r7": "pass"
+    },
+    {
+      "surface": "열린",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 1,
+      "query_df_table": 1,
+      "abox_df": 2,
+      "abox_df_ratio": 0.0004,
+      "r7": "pass"
+    },
+    {
+      "surface": "영역",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 113,
+      "query_df_table": 1,
+      "abox_df": 956,
+      "abox_df_ratio": 0.2118,
+      "r7": "blocked"
+    },
+    {
+      "surface": "영역들",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 14,
+      "query_df_table": 0,
+      "abox_df": 101,
+      "abox_df_ratio": 0.0224,
+      "r7": "pass"
+    },
+    {
+      "surface": "외측",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 12,
+      "query_df_table": 0,
+      "abox_df": 197,
+      "abox_df_ratio": 0.0437,
+      "r7": "pass"
+    },
+    {
+      "surface": "요철구조",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 2,
+      "abox_df": 5,
+      "abox_df_ratio": 0.0011,
+      "r7": "pass"
+    },
+    {
+      "surface": "원료",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 8,
+      "query_df_table": 1,
+      "abox_df": 55,
+      "abox_df_ratio": 0.0122,
+      "r7": "pass"
+    },
+    {
+      "surface": "원소",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 14,
+      "query_df_table": 0,
+      "abox_df": 180,
+      "abox_df_ratio": 0.0399,
+      "r7": "pass"
+    },
+    {
+      "surface": "원자",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 36,
+      "query_df_table": 3,
+      "abox_df": 335,
+      "abox_df_ratio": 0.0742,
+      "r7": "blocked"
+    },
+    {
+      "surface": "원자층",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 13,
+      "query_df_table": 0,
+      "abox_df": 120,
+      "abox_df_ratio": 0.0266,
+      "r7": "pass"
+    },
+    {
+      "surface": "원통형",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 5,
+      "query_df_table": 1,
+      "abox_df": 38,
+      "abox_df_ratio": 0.0084,
+      "r7": "pass"
+    },
+    {
+      "surface": "웨이퍼",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 16,
+      "query_df_table": 0,
+      "abox_df": 212,
+      "abox_df_ratio": 0.047,
+      "r7": "pass"
+    },
+    {
+      "surface": "위로",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 11,
+      "query_df_table": 0,
+      "abox_df": 126,
+      "abox_df_ratio": 0.0279,
+      "r7": "pass"
+    },
+    {
+      "surface": "위에",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 114,
+      "query_df_table": 1,
+      "abox_df": 589,
+      "abox_df_ratio": 0.1305,
+      "r7": "blocked"
+    },
+    {
+      "surface": "위의",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 34,
+      "query_df_table": 0,
+      "abox_df": 192,
+      "abox_df_ratio": 0.0425,
+      "r7": "pass"
+    },
+    {
+      "surface": "위치",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 6,
+      "query_df_table": 1,
+      "abox_df": 651,
+      "abox_df_ratio": 0.1442,
+      "r7": "blocked"
+    },
+    {
+      "surface": "위치검출장치",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 1,
+      "abox_df_ratio": 0.0002,
+      "r7": "pass"
+    },
+    {
+      "surface": "위치탐지",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 2,
+      "abox_df_ratio": 0.0004,
+      "r7": "pass"
+    },
+    {
+      "surface": "위치탐지수단",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 1,
+      "query_df_table": 1,
+      "abox_df": 2,
+      "abox_df_ratio": 0.0004,
+      "r7": "pass"
+    },
+    {
+      "surface": "위해",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 52,
+      "query_df_table": 1,
+      "abox_df": 424,
+      "abox_df_ratio": 0.094,
+      "r7": "blocked"
+    },
+    {
+      "surface": "유기",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 22,
+      "query_df_table": 0,
+      "abox_df": 274,
+      "abox_df_ratio": 0.0607,
+      "r7": "blocked"
+    },
+    {
+      "surface": "유도가열",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 1,
+      "query_df_table": 1,
+      "abox_df": 3,
+      "abox_df_ratio": 0.0007,
+      "r7": "pass"
+    },
+    {
+      "surface": "유리",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 4,
+      "query_df_table": 2,
+      "abox_df": 105,
+      "abox_df_ratio": 0.0233,
+      "r7": "pass"
+    },
+    {
+      "surface": "의한",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 14,
+      "query_df_table": 0,
+      "abox_df": 236,
+      "abox_df_ratio": 0.0523,
+      "r7": "pass"
+    },
+    {
+      "surface": "이는",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 2,
+      "abox_df": 214,
+      "abox_df_ratio": 0.0474,
+      "r7": "pass"
+    },
+    {
+      "surface": "이동",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 8,
+      "query_df_table": 1,
+      "abox_df": 214,
+      "abox_df_ratio": 0.0474,
+      "r7": "pass"
+    },
+    {
+      "surface": "이동시키지",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 0,
+      "abox_df_ratio": 0.0,
+      "r7": "pass"
+    },
+    {
+      "surface": "이루어진",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 40,
+      "query_df_table": 0,
+      "abox_df": 531,
+      "abox_df_ratio": 0.1177,
+      "r7": "blocked"
+    },
+    {
+      "surface": "이를",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 5,
+      "query_df_table": 1,
+      "abox_df": 579,
+      "abox_df_ratio": 0.1283,
+      "r7": "blocked"
+    },
+    {
+      "surface": "이온",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 31,
+      "query_df_table": 0,
+      "abox_df": 351,
+      "abox_df_ratio": 0.0778,
+      "r7": "blocked"
+    },
+    {
+      "surface": "이의",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 4,
+      "query_df_table": 1,
+      "abox_df": 640,
+      "abox_df_ratio": 0.1418,
+      "r7": "blocked"
+    },
+    {
+      "surface": "이트륨",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 2,
+      "query_df_table": 1,
+      "abox_df": 29,
+      "abox_df_ratio": 0.0064,
+      "r7": "pass"
+    },
+    {
+      "surface": "인듐",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 24,
+      "query_df_table": 1,
+      "abox_df": 101,
+      "abox_df_ratio": 0.0224,
+      "r7": "pass"
+    },
+    {
+      "surface": "인용발명",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 31,
+      "abox_df": 0,
+      "abox_df_ratio": 0.0,
+      "r7": "pass"
+    },
+    {
+      "surface": "일부",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 29,
+      "query_df_table": 0,
+      "abox_df": 554,
+      "abox_df_ratio": 0.1228,
+      "r7": "blocked"
+    },
+    {
+      "surface": "일정",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 14,
+      "query_df_table": 0,
+      "abox_df": 159,
+      "abox_df_ratio": 0.0352,
+      "r7": "pass"
+    },
+    {
+      "surface": "입경",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 1,
+      "query_df_table": 1,
+      "abox_df": 34,
+      "abox_df_ratio": 0.0075,
+      "r7": "pass"
+    },
+    {
+      "surface": "입자",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 15,
+      "query_df_table": 0,
+      "abox_df": 197,
+      "abox_df_ratio": 0.0437,
+      "r7": "pass"
+    },
+    {
+      "surface": "있고",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 35,
+      "query_df_table": 2,
+      "abox_df": 335,
+      "abox_df_ratio": 0.0742,
+      "r7": "blocked"
+    },
+    {
+      "surface": "있도록",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 13,
+      "query_df_table": 0,
+      "abox_df": 168,
+      "abox_df_ratio": 0.0372,
+      "r7": "pass"
+    },
+    {
+      "surface": "있어",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 28,
+      "abox_df": 2132,
+      "abox_df_ratio": 0.4724,
+      "r7": "blocked"
+    },
+    {
+      "surface": "있으나",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 2,
+      "abox_df": 3,
+      "abox_df_ratio": 0.0007,
+      "r7": "pass"
+    },
+    {
+      "surface": "자기",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 12,
+      "query_df_table": 0,
+      "abox_df": 165,
+      "abox_df_ratio": 0.0366,
+      "r7": "pass"
+    },
+    {
+      "surface": "자명하",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 0,
+      "abox_df_ratio": 0.0,
+      "r7": "pass"
+    },
+    {
+      "surface": "자석",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 4,
+      "query_df_table": 1,
+      "abox_df": 42,
+      "abox_df_ratio": 0.0093,
+      "r7": "pass"
+    },
+    {
+      "surface": "자연히",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 0,
+      "abox_df_ratio": 0.0,
+      "r7": "pass"
+    },
+    {
+      "surface": "작동부",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 1,
+      "query_df_table": 1,
+      "abox_df": 1,
+      "abox_df_ratio": 0.0002,
+      "r7": "pass"
+    },
+    {
+      "surface": "작은",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 27,
+      "query_df_table": 0,
+      "abox_df": 207,
+      "abox_df_ratio": 0.0459,
+      "r7": "pass"
+    },
+    {
+      "surface": "장변부보다",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 3,
+      "query_df_table": 1,
+      "abox_df": 3,
+      "abox_df_ratio": 0.0007,
+      "r7": "pass"
+    },
+    {
+      "surface": "재료",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 16,
+      "query_df_table": 0,
+      "abox_df": 328,
+      "abox_df_ratio": 0.0727,
+      "r7": "blocked"
+    },
+    {
+      "surface": "저장",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 12,
+      "query_df_table": 0,
+      "abox_df": 207,
+      "abox_df_ratio": 0.0459,
+      "r7": "pass"
+    },
+    {
+      "surface": "저장층",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 11,
+      "query_df_table": 0,
+      "abox_df": 42,
+      "abox_df_ratio": 0.0093,
+      "r7": "pass"
+    },
+    {
+      "surface": "저항",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 21,
+      "query_df_table": 0,
+      "abox_df": 282,
+      "abox_df_ratio": 0.0625,
+      "r7": "blocked"
+    },
+    {
+      "surface": "저항분포",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 1,
+      "abox_df_ratio": 0.0002,
+      "r7": "pass"
+    },
+    {
+      "surface": "저항성",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 10,
+      "query_df_table": 0,
+      "abox_df": 39,
+      "abox_df_ratio": 0.0086,
+      "r7": "pass"
+    },
+    {
+      "surface": "적은",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 2,
+      "query_df_table": 1,
+      "abox_df": 86,
+      "abox_df_ratio": 0.0191,
+      "r7": "pass"
+    },
+    {
+      "surface": "적절히",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 2,
+      "abox_df": 9,
+      "abox_df_ratio": 0.002,
+      "r7": "pass"
+    },
+    {
+      "surface": "적층",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 31,
+      "query_df_table": 0,
+      "abox_df": 568,
+      "abox_df_ratio": 0.1259,
+      "r7": "blocked"
+    },
+    {
+      "surface": "전구체",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 12,
+      "query_df_table": 0,
+      "abox_df": 127,
+      "abox_df_ratio": 0.0281,
+      "r7": "pass"
+    },
+    {
+      "surface": "전극",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 131,
+      "query_df_table": 3,
+      "abox_df": 882,
+      "abox_df_ratio": 0.1954,
+      "r7": "blocked"
+    },
+    {
+      "surface": "전극들",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 16,
+      "query_df_table": 0,
+      "abox_df": 71,
+      "abox_df_ratio": 0.0157,
+      "r7": "pass"
+    },
+    {
+      "surface": "전극층",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 17,
+      "query_df_table": 0,
+      "abox_df": 72,
+      "abox_df_ratio": 0.016,
+      "r7": "pass"
+    },
+    {
+      "surface": "전기",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 14,
+      "query_df_table": 0,
+      "abox_df": 578,
+      "abox_df_ratio": 0.1281,
+      "r7": "blocked"
+    },
+    {
+      "surface": "전달",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 1,
+      "query_df_table": 1,
+      "abox_df": 127,
+      "abox_df_ratio": 0.0281,
+      "r7": "pass"
+    },
+    {
+      "surface": "전도성",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 22,
+      "query_df_table": 0,
+      "abox_df": 127,
+      "abox_df_ratio": 0.0281,
+      "r7": "pass"
+    },
+    {
+      "surface": "전력",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 12,
+      "query_df_table": 1,
+      "abox_df": 183,
+      "abox_df_ratio": 0.0405,
+      "r7": "pass"
+    },
+    {
+      "surface": "전압",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 10,
+      "query_df_table": 0,
+      "abox_df": 262,
+      "abox_df_ratio": 0.0581,
+      "r7": "pass"
+    },
+    {
+      "surface": "전원",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 10,
+      "query_df_table": 0,
+      "abox_df": 138,
+      "abox_df_ratio": 0.0306,
+      "r7": "pass"
+    },
+    {
+      "surface": "전원소스",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 0,
+      "abox_df_ratio": 0.0,
+      "r7": "pass"
+    },
+    {
+      "surface": "전자",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 30,
+      "query_df_table": 2,
+      "abox_df": 297,
+      "abox_df_ratio": 0.0658,
+      "r7": "blocked"
+    },
+    {
+      "surface": "전체",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 22,
+      "query_df_table": 0,
+      "abox_df": 477,
+      "abox_df_ratio": 0.1057,
+      "r7": "blocked"
+    },
+    {
+      "surface": "전하",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 45,
+      "query_df_table": 0,
+      "abox_df": 269,
+      "abox_df_ratio": 0.0596,
+      "r7": "pass"
+    },
+    {
+      "surface": "절연",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 31,
+      "query_df_table": 0,
+      "abox_df": 996,
+      "abox_df_ratio": 0.2207,
+      "r7": "blocked"
+    },
+    {
+      "surface": "접촉",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 11,
+      "query_df_table": 0,
+      "abox_df": 410,
+      "abox_df_ratio": 0.0908,
+      "r7": "blocked"
+    },
+    {
+      "surface": "접합",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 12,
+      "query_df_table": 1,
+      "abox_df": 174,
+      "abox_df_ratio": 0.0386,
+      "r7": "pass"
+    },
+    {
+      "surface": "접합부",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 1,
+      "query_df_table": 1,
+      "abox_df": 16,
+      "abox_df_ratio": 0.0035,
+      "r7": "pass"
+    },
+    {
+      "surface": "정보",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 10,
+      "query_df_table": 1,
+      "abox_df": 79,
+      "abox_df_ratio": 0.0175,
+      "r7": "pass"
+    },
+    {
+      "surface": "제거",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 12,
+      "query_df_table": 0,
+      "abox_df": 737,
+      "abox_df_ratio": 0.1633,
+      "r7": "blocked"
+    },
+    {
+      "surface": "제법",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 0,
+      "abox_df_ratio": 0.0,
+      "r7": "pass"
+    },
+    {
+      "surface": "제어",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 40,
+      "query_df_table": 0,
+      "abox_df": 401,
+      "abox_df_ratio": 0.0889,
+      "r7": "blocked"
+    },
+    {
+      "surface": "제어수단",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 1,
+      "query_df_table": 1,
+      "abox_df": 6,
+      "abox_df_ratio": 0.0013,
+      "r7": "pass"
+    },
+    {
+      "surface": "제작",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 15,
+      "query_df_table": 0,
+      "abox_df": 125,
+      "abox_df_ratio": 0.0277,
+      "r7": "pass"
+    },
+    {
+      "surface": "제작방법",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 2,
+      "query_df_table": 1,
+      "abox_df": 12,
+      "abox_df_ratio": 0.0027,
+      "r7": "pass"
+    },
+    {
+      "surface": "제조",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 222,
+      "query_df_table": 3,
+      "abox_df": 1436,
+      "abox_df_ratio": 0.3182,
+      "r7": "blocked"
+    },
+    {
+      "surface": "제조방법",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 110,
+      "query_df_table": 0,
+      "abox_df": 514,
+      "abox_df_ratio": 0.1139,
+      "r7": "blocked"
+    },
+    {
+      "surface": "조립체",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 6,
+      "query_df_table": 1,
+      "abox_df": 42,
+      "abox_df_ratio": 0.0093,
+      "r7": "pass"
+    },
+    {
+      "surface": "조명용",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 1,
+      "abox_df_ratio": 0.0002,
+      "r7": "pass"
+    },
+    {
+      "surface": "조성물",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 31,
+      "query_df_table": 0,
+      "abox_df": 180,
+      "abox_df_ratio": 0.0399,
+      "r7": "pass"
+    },
+    {
+      "surface": "조절",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 3,
+      "query_df_table": 1,
+      "abox_df": 234,
+      "abox_df_ratio": 0.0519,
+      "r7": "pass"
+    },
+    {
+      "surface": "좁은",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 6,
+      "query_df_table": 1,
+      "abox_df": 52,
+      "abox_df_ratio": 0.0115,
+      "r7": "pass"
+    },
+    {
+      "surface": "주변",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 19,
+      "query_df_table": 0,
+      "abox_df": 170,
+      "abox_df_ratio": 0.0377,
+      "r7": "pass"
+    },
+    {
+      "surface": "주석",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 14,
+      "query_df_table": 0,
+      "abox_df": 79,
+      "abox_df_ratio": 0.0175,
+      "r7": "pass"
+    },
+    {
+      "surface": "중간",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 12,
+      "query_df_table": 0,
+      "abox_df": 90,
+      "abox_df_ratio": 0.0199,
+      "r7": "pass"
+    },
+    {
+      "surface": "중단",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 2,
+      "abox_df": 15,
+      "abox_df_ratio": 0.0033,
+      "r7": "pass"
+    },
+    {
+      "surface": "중에",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 4,
+      "query_df_table": 1,
+      "abox_df": 232,
+      "abox_df_ratio": 0.0514,
+      "r7": "pass"
+    },
+    {
+      "surface": "중의",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 26,
+      "query_df_table": 0,
+      "abox_df": 142,
+      "abox_df_ratio": 0.0315,
+      "r7": "pass"
+    },
+    {
+      "surface": "지지",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 17,
+      "query_df_table": 1,
+      "abox_df": 362,
+      "abox_df_ratio": 0.0802,
+      "r7": "blocked"
+    },
+    {
+      "surface": "지지부",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 10,
+      "query_df_table": 0,
+      "abox_df": 90,
+      "abox_df_ratio": 0.0199,
+      "r7": "pass"
+    },
+    {
+      "surface": "지지수단",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 1,
+      "query_df_table": 1,
+      "abox_df": 1,
+      "abox_df_ratio": 0.0002,
+      "r7": "pass"
+    },
+    {
+      "surface": "지지체",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 1,
+      "query_df_table": 1,
+      "abox_df": 24,
+      "abox_df_ratio": 0.0053,
+      "r7": "pass"
+    },
+    {
+      "surface": "직경",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 1,
+      "query_df_table": 2,
+      "abox_df": 116,
+      "abox_df_ratio": 0.0257,
+      "r7": "pass"
+    },
+    {
+      "surface": "진공",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 22,
+      "query_df_table": 0,
+      "abox_df": 200,
+      "abox_df_ratio": 0.0443,
+      "r7": "pass"
+    },
+    {
+      "surface": "진공조",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 5,
+      "abox_df_ratio": 0.0011,
+      "r7": "pass"
+    },
+    {
+      "surface": "질소",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 21,
+      "query_df_table": 1,
+      "abox_df": 230,
+      "abox_df_ratio": 0.051,
+      "r7": "pass"
+    },
+    {
+      "surface": "질화",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 14,
+      "query_df_table": 0,
+      "abox_df": 512,
+      "abox_df_ratio": 0.1135,
+      "r7": "blocked"
+    },
+    {
+      "surface": "집적",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 14,
+      "query_df_table": 0,
+      "abox_df": 146,
+      "abox_df_ratio": 0.0324,
+      "r7": "pass"
+    },
+    {
+      "surface": "차원",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 20,
+      "query_df_table": 0,
+      "abox_df": 85,
+      "abox_df_ratio": 0.0188,
+      "r7": "pass"
+    },
+    {
+      "surface": "채널",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 45,
+      "query_df_table": 0,
+      "abox_df": 291,
+      "abox_df_ratio": 0.0645,
+      "r7": "blocked"
+    },
+    {
+      "surface": "처리",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 39,
+      "query_df_table": 2,
+      "abox_df": 694,
+      "abox_df_ratio": 0.1538,
+      "r7": "blocked"
+    },
+    {
+      "surface": "최후",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 2,
+      "abox_df_ratio": 0.0004,
+      "r7": "pass"
+    },
+    {
+      "surface": "측면",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 18,
+      "query_df_table": 0,
+      "abox_df": 308,
+      "abox_df_ratio": 0.0682,
+      "r7": "blocked"
+    },
+    {
+      "surface": "측벽",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 35,
+      "query_df_table": 0,
+      "abox_df": 403,
+      "abox_df_ratio": 0.0893,
+      "r7": "blocked"
+    },
+    {
+      "surface": "측에",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 10,
+      "query_df_table": 0,
+      "abox_df": 308,
+      "abox_df_ratio": 0.0682,
+      "r7": "blocked"
+    },
+    {
+      "surface": "층간",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 35,
+      "query_df_table": 0,
+      "abox_df": 245,
+      "abox_df_ratio": 0.0543,
+      "r7": "pass"
+    },
+    {
+      "surface": "층과",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 16,
+      "query_df_table": 0,
+      "abox_df": 477,
+      "abox_df_ratio": 0.1057,
+      "r7": "blocked"
+    },
+    {
+      "surface": "층에",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 19,
+      "query_df_table": 0,
+      "abox_df": 377,
+      "abox_df_ratio": 0.0835,
+      "r7": "blocked"
+    },
+    {
+      "surface": "층은",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 21,
+      "query_df_table": 0,
+      "abox_df": 616,
+      "abox_df_ratio": 0.1365,
+      "r7": "blocked"
+    },
+    {
+      "surface": "층을",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 50,
+      "query_df_table": 0,
+      "abox_df": 1065,
+      "abox_df_ratio": 0.236,
+      "r7": "blocked"
+    },
+    {
+      "surface": "층의",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 26,
+      "query_df_table": 0,
+      "abox_df": 622,
+      "abox_df_ratio": 0.1378,
+      "r7": "blocked"
+    },
+    {
+      "surface": "캐소드",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 5,
+      "query_df_table": 1,
+      "abox_df": 46,
+      "abox_df_ratio": 0.0102,
+      "r7": "pass"
+    },
+    {
+      "surface": "컨트롤",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 14,
+      "query_df_table": 1,
+      "abox_df": 89,
+      "abox_df_ratio": 0.0197,
+      "r7": "pass"
+    },
+    {
+      "surface": "컴포넌트",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 2,
+      "query_df_table": 1,
+      "abox_df": 23,
+      "abox_df_ratio": 0.0051,
+      "r7": "pass"
+    },
+    {
+      "surface": "코어",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 4,
+      "query_df_table": 1,
+      "abox_df": 52,
+      "abox_df_ratio": 0.0115,
+      "r7": "pass"
+    },
+    {
+      "surface": "코팅용",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 3,
+      "abox_df_ratio": 0.0007,
+      "r7": "pass"
+    },
+    {
+      "surface": "콘택",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 21,
+      "query_df_table": 0,
+      "abox_df": 266,
+      "abox_df_ratio": 0.0589,
+      "r7": "pass"
+    },
+    {
+      "surface": "콘택홀",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 15,
+      "query_df_table": 0,
+      "abox_df": 131,
+      "abox_df_ratio": 0.029,
+      "r7": "pass"
+    },
+    {
+      "surface": "콘트롤",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 16,
+      "query_df_table": 0,
+      "abox_df": 59,
+      "abox_df_ratio": 0.0131,
+      "r7": "pass"
+    },
+    {
+      "surface": "크기",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 1,
+      "query_df_table": 1,
+      "abox_df": 208,
+      "abox_df_ratio": 0.0461,
+      "r7": "pass"
+    },
+    {
+      "surface": "키고",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 287,
+      "abox_df_ratio": 0.0636,
+      "r7": "blocked"
+    },
+    {
+      "surface": "타겟",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 46,
+      "query_df_table": 3,
+      "abox_df": 221,
+      "abox_df_ratio": 0.049,
+      "r7": "pass"
+    },
+    {
+      "surface": "타겟홀더",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 0,
+      "abox_df_ratio": 0.0,
+      "r7": "pass"
+    },
+    {
+      "surface": "타깃",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 35,
+      "query_df_table": 9,
+      "abox_df": 75,
+      "abox_df_ratio": 0.0166,
+      "r7": "pass"
+    },
+    {
+      "surface": "탄소",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 13,
+      "query_df_table": 1,
+      "abox_df": 229,
+      "abox_df_ratio": 0.0507,
+      "r7": "pass"
+    },
+    {
+      "surface": "탄탈",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 17,
+      "query_df_table": 1,
+      "abox_df": 136,
+      "abox_df_ratio": 0.0301,
+      "r7": "pass"
+    },
+    {
+      "surface": "탄탈륨",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 9,
+      "query_df_table": 1,
+      "abox_df": 72,
+      "abox_df_ratio": 0.016,
+      "r7": "pass"
+    },
+    {
+      "surface": "터널",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 55,
+      "query_df_table": 0,
+      "abox_df": 251,
+      "abox_df_ratio": 0.0556,
+      "r7": "pass"
+    },
+    {
+      "surface": "텅스텐계",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 0,
+      "abox_df_ratio": 0.0,
+      "r7": "pass"
+    },
+    {
+      "surface": "투과성",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 2,
+      "query_df_table": 1,
+      "abox_df": 7,
+      "abox_df_ratio": 0.0016,
+      "r7": "pass"
+    },
+    {
+      "surface": "투광성",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 4,
+      "query_df_table": 1,
+      "abox_df": 21,
+      "abox_df_ratio": 0.0047,
+      "r7": "pass"
+    },
+    {
+      "surface": "튜브",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 3,
+      "query_df_table": 1,
+      "abox_df": 54,
+      "abox_df_ratio": 0.012,
+      "r7": "pass"
+    },
+    {
+      "surface": "트랜지스터",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 50,
+      "query_df_table": 0,
+      "abox_df": 391,
+      "abox_df_ratio": 0.0866,
+      "r7": "blocked"
+    },
+    {
+      "surface": "트렌치",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 40,
+      "query_df_table": 0,
+      "abox_df": 211,
+      "abox_df_ratio": 0.0468,
+      "r7": "pass"
+    },
+    {
+      "surface": "티타늄",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 19,
+      "query_df_table": 0,
+      "abox_df": 144,
+      "abox_df_ratio": 0.0319,
+      "r7": "pass"
+    },
+    {
+      "surface": "파우더",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 12,
+      "abox_df_ratio": 0.0027,
+      "r7": "pass"
+    },
+    {
+      "surface": "패드",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 14,
+      "query_df_table": 0,
+      "abox_df": 154,
+      "abox_df_ratio": 0.0341,
+      "r7": "pass"
+    },
+    {
+      "surface": "패턴",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 73,
+      "query_df_table": 0,
+      "abox_df": 666,
+      "abox_df_ratio": 0.1476,
+      "r7": "blocked"
+    },
+    {
+      "surface": "패턴들",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 12,
+      "query_df_table": 0,
+      "abox_df": 80,
+      "abox_df_ratio": 0.0177,
+      "r7": "pass"
+    },
+    {
+      "surface": "편차",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 20,
+      "abox_df_ratio": 0.0044,
+      "r7": "pass"
+    },
+    {
+      "surface": "평균",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 14,
+      "query_df_table": 1,
+      "abox_df": 111,
+      "abox_df_ratio": 0.0246,
+      "r7": "pass"
+    },
+    {
+      "surface": "평균화",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 0,
+      "abox_df_ratio": 0.0,
+      "r7": "pass"
+    },
+    {
+      "surface": "평면",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 16,
+      "query_df_table": 1,
+      "abox_df": 137,
+      "abox_df_ratio": 0.0304,
+      "r7": "pass"
+    },
+    {
+      "surface": "평행하게",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 10,
+      "query_df_table": 0,
+      "abox_df": 64,
+      "abox_df_ratio": 0.0142,
+      "r7": "pass"
+    },
+    {
+      "surface": "포함하되",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 65,
+      "query_df_table": 0,
+      "abox_df": 282,
+      "abox_df_ratio": 0.0625,
+      "r7": "blocked"
+    },
+    {
+      "surface": "포함함",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 18,
+      "query_df_table": 0,
+      "abox_df": 104,
+      "abox_df_ratio": 0.023,
+      "r7": "pass"
+    },
+    {
+      "surface": "폭이",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 5,
+      "query_df_table": 1,
+      "abox_df": 77,
+      "abox_df_ratio": 0.0171,
+      "r7": "pass"
+    },
+    {
+      "surface": "폴리",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 11,
+      "query_df_table": 0,
+      "abox_df": 431,
+      "abox_df_ratio": 0.0955,
+      "r7": "blocked"
+    },
+    {
+      "surface": "표면",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 59,
+      "query_df_table": 4,
+      "abox_df": 886,
+      "abox_df_ratio": 0.1963,
+      "r7": "blocked"
+    },
+    {
+      "surface": "표시",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 9,
+      "query_df_table": 1,
+      "abox_df": 226,
+      "abox_df_ratio": 0.0501,
+      "r7": "pass"
+    },
+    {
+      "surface": "표적",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 2,
+      "query_df_table": 1,
+      "abox_df": 11,
+      "abox_df_ratio": 0.0024,
+      "r7": "pass"
+    },
+    {
+      "surface": "프로그램",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 8,
+      "query_df_table": 1,
+      "abox_df": 72,
+      "abox_df_ratio": 0.016,
+      "r7": "pass"
+    },
+    {
+      "surface": "프로세스",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 11,
+      "query_df_table": 0,
+      "abox_df": 116,
+      "abox_df_ratio": 0.0257,
+      "r7": "pass"
+    },
+    {
+      "surface": "프로세싱",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 10,
+      "query_df_table": 0,
+      "abox_df": 83,
+      "abox_df_ratio": 0.0184,
+      "r7": "pass"
+    },
+    {
+      "surface": "플래시",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 40,
+      "query_df_table": 0,
+      "abox_df": 128,
+      "abox_df_ratio": 0.0284,
+      "r7": "pass"
+    },
+    {
+      "surface": "플레이트",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 13,
+      "query_df_table": 1,
+      "abox_df": 140,
+      "abox_df_ratio": 0.031,
+      "r7": "pass"
+    },
+    {
+      "surface": "플로팅",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 35,
+      "query_df_table": 0,
+      "abox_df": 170,
+      "abox_df_ratio": 0.0377,
+      "r7": "pass"
+    },
+    {
+      "surface": "필름",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 13,
+      "query_df_table": 0,
+      "abox_df": 124,
+      "abox_df_ratio": 0.0275,
+      "r7": "pass"
+    },
+    {
+      "surface": "하드",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 20,
+      "query_df_table": 0,
+      "abox_df": 130,
+      "abox_df_ratio": 0.0288,
+      "r7": "pass"
+    },
+    {
+      "surface": "하부",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 45,
+      "query_df_table": 0,
+      "abox_df": 595,
+      "abox_df_ratio": 0.1318,
+      "r7": "blocked"
+    },
+    {
+      "surface": "하이",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 2,
+      "query_df_table": 1,
+      "abox_df": 177,
+      "abox_df_ratio": 0.0392,
+      "r7": "pass"
+    },
+    {
+      "surface": "함께",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 13,
+      "query_df_table": 0,
+      "abox_df": 149,
+      "abox_df_ratio": 0.033,
+      "r7": "pass"
+    },
+    {
+      "surface": "함유",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 21,
+      "query_df_table": 1,
+      "abox_df": 456,
+      "abox_df_ratio": 0.101,
+      "r7": "blocked"
+    },
+    {
+      "surface": "합금",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 11,
+      "query_df_table": 4,
+      "abox_df": 160,
+      "abox_df_ratio": 0.0355,
+      "r7": "pass"
+    },
+    {
+      "surface": "형성방법",
+      "channels": [
+        "claim",
+        "table"
+      ],
+      "query_df_claim": 15,
+      "query_df_table": 1,
+      "abox_df": 111,
+      "abox_df_ratio": 0.0246,
+      "r7": "pass"
+    },
+    {
+      "surface": "형성용",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 3,
+      "query_df_table": 1,
+      "abox_df": 47,
+      "abox_df_ratio": 0.0104,
+      "r7": "pass"
+    },
+    {
+      "surface": "형성하도록",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 12,
+      "query_df_table": 0,
+      "abox_df": 52,
+      "abox_df_ratio": 0.0115,
+      "r7": "pass"
+    },
+    {
+      "surface": "형성할",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 6,
+      "query_df_table": 1,
+      "abox_df": 151,
+      "abox_df_ratio": 0.0335,
+      "r7": "pass"
+    },
+    {
+      "surface": "혼합",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 11,
+      "query_df_table": 0,
+      "abox_df": 331,
+      "abox_df_ratio": 0.0733,
+      "r7": "blocked"
+    },
+    {
+      "surface": "홀을",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 20,
+      "query_df_table": 0,
+      "abox_df": 274,
+      "abox_df_ratio": 0.0607,
+      "r7": "blocked"
+    },
+    {
+      "surface": "홈을",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 10,
+      "query_df_table": 0,
+      "abox_df": 48,
+      "abox_df_ratio": 0.0106,
+      "r7": "pass"
+    },
+    {
+      "surface": "화소",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 10,
+      "query_df_table": 0,
+      "abox_df": 92,
+      "abox_df_ratio": 0.0204,
+      "r7": "pass"
+    },
+    {
+      "surface": "화학",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 12,
+      "query_df_table": 0,
+      "abox_df": 366,
+      "abox_df_ratio": 0.0811,
+      "r7": "blocked"
+    },
+    {
+      "surface": "화학식",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 15,
+      "query_df_table": 0,
+      "abox_df": 110,
+      "abox_df_ratio": 0.0244,
+      "r7": "pass"
+    },
+    {
+      "surface": "화학적",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 13,
+      "query_df_table": 0,
+      "abox_df": 119,
+      "abox_df_ratio": 0.0264,
+      "r7": "pass"
+    },
+    {
+      "surface": "화합물",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 25,
+      "query_df_table": 0,
+      "abox_df": 301,
+      "abox_df_ratio": 0.0667,
+      "r7": "blocked"
+    },
+    {
+      "surface": "환상",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 1,
+      "query_df_table": 1,
+      "abox_df": 21,
+      "abox_df_ratio": 0.0047,
+      "r7": "pass"
+    },
+    {
+      "surface": "활성",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 25,
+      "query_df_table": 0,
+      "abox_df": 391,
+      "abox_df_ratio": 0.0866,
+      "r7": "blocked"
+    },
+    {
+      "surface": "회로",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 30,
+      "query_df_table": 0,
+      "abox_df": 269,
+      "abox_df_ratio": 0.0596,
+      "r7": "pass"
+    },
+    {
+      "surface": "회전",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 6,
+      "query_df_table": 2,
+      "abox_df": 151,
+      "abox_df_ratio": 0.0335,
+      "r7": "pass"
+    },
+    {
+      "surface": "회전수단",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 1,
+      "query_df_table": 1,
+      "abox_df": 3,
+      "abox_df_ratio": 0.0007,
+      "r7": "pass"
+    },
+    {
+      "surface": "회절",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 5,
+      "query_df_table": 1,
+      "abox_df": 27,
+      "abox_df_ratio": 0.006,
+      "r7": "pass"
+    },
+    {
+      "surface": "획득",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 0,
+      "query_df_table": 1,
+      "abox_df": 20,
+      "abox_df_ratio": 0.0044,
+      "r7": "pass"
+    },
+    {
+      "surface": "후막",
+      "channels": [
+        "table"
+      ],
+      "query_df_claim": 3,
+      "query_df_table": 1,
+      "abox_df": 4,
+      "abox_df_ratio": 0.0009,
+      "r7": "pass"
+    },
+    {
+      "surface": "후에",
+      "channels": [
+        "claim"
+      ],
+      "query_df_claim": 20,
+      "query_df_table": 0,
+      "abox_df": 259,
+      "abox_df_ratio": 0.0574,
+      "r7": "pass"
+    }
+  ],
+  "basic_terms": {
+    "_README": "성공기준 ②′ — 기본 낱말 19 의 판정. 미판정 0 이어야 한다.",
+    "counts": {
+      "entry": 3,
+      "blocked": 1,
+      "proposal": 15
+    },
+    "terms": [
+      {
+        "surface": "감광막",
+        "abox_df": 37,
+        "abox_df_ratio": 0.0082,
+        "r7": "pass",
+        "disposition": "proposal",
+        "reason": "층위 보류 — 물질(photoresist)과 그 막의 층위가 달라 기존 노드에 붙이지 않았다."
+      },
+      {
+        "surface": "게이트",
+        "abox_df": 771,
+        "abox_df_ratio": 0.1708,
+        "r7": "blocked",
+        "disposition": "proposal",
+        "reason": "축 부재 — 구조 요소를 담을 클래스가 TBox 에 없다(CR-001B §5.6). 기존 Device·Process 축에 넣는 것은 축 범주 오류다(D-15·R4)."
+      },
+      {
+        "surface": "금속배선",
+        "abox_df": 24,
+        "abox_df_ratio": 0.0053,
+        "r7": "pass",
+        "disposition": "proposal",
+        "reason": "축 부재 — 구조 요소를 담을 클래스가 TBox 에 없다(CR-001B §5.6). 기존 Device·Process 축에 넣는 것은 축 범주 오류다(D-15·R4)."
+      },
+      {
+        "surface": "기판",
+        "abox_df": 1926,
+        "abox_df_ratio": 0.4268,
+        "r7": "blocked",
+        "disposition": "proposal",
+        "reason": "축 부재 — 구조 요소를 담을 클래스가 TBox 에 없다(CR-001B §5.6). 기존 Device·Process 축에 넣는 것은 축 범주 오류다(D-15·R4)."
+      },
+      {
+        "surface": "드레인",
+        "abox_df": 346,
+        "abox_df_ratio": 0.0767,
+        "r7": "blocked",
+        "disposition": "proposal",
+        "reason": "축 부재 — 구조 요소를 담을 클래스가 TBox 에 없다(CR-001B §5.6). 기존 Device·Process 축에 넣는 것은 축 범주 오류다(D-15·R4)."
+      },
+      {
+        "surface": "배선",
+        "abox_df": 254,
+        "abox_df_ratio": 0.0563,
+        "r7": "pass",
+        "disposition": "proposal",
+        "reason": "축 부재 — 구조 요소를 담을 클래스가 TBox 에 없다(CR-001B §5.6). 기존 Device·Process 축에 넣는 것은 축 범주 오류다(D-15·R4)."
+      },
+      {
+        "surface": "비아",
+        "abox_df": 86,
+        "abox_df_ratio": 0.0191,
+        "r7": "pass",
+        "disposition": "proposal",
+        "reason": "축 부재 — 구조 요소를 담을 클래스가 TBox 에 없다(CR-001B §5.6). 기존 Device·Process 축에 넣는 것은 축 범주 오류다(D-15·R4)."
+      },
+      {
+        "surface": "소스",
+        "abox_df": 429,
+        "abox_df_ratio": 0.0951,
+        "r7": "blocked",
+        "disposition": "proposal",
+        "reason": "축 부재 — 구조 요소를 담을 클래스가 TBox 에 없다(CR-001B §5.6). 기존 Device·Process 축에 넣는 것은 축 범주 오류다(D-15·R4)."
+      },
+      {
+        "surface": "스페이서",
+        "abox_df": 202,
+        "abox_df_ratio": 0.0448,
+        "r7": "pass",
+        "disposition": "proposal",
+        "reason": "축 부재 — 구조 요소를 담을 클래스가 TBox 에 없다(CR-001B §5.6). 기존 Device·Process 축에 넣는 것은 축 범주 오류다(D-15·R4)."
+      },
+      {
+        "surface": "압력",
+        "abox_df": 203,
+        "abox_df_ratio": 0.045,
+        "r7": "pass",
+        "disposition": "entry",
+        "concept_id": "parameter:pressure"
+      },
+      {
+        "surface": "온도",
+        "abox_df": 462,
+        "abox_df_ratio": 0.1024,
+        "r7": "blocked",
+        "disposition": "blocked",
+        "concept_id": "parameter:temperature",
+        "rule_id": "R7-DF-CEILING"
+      },
+      {
+        "surface": "웨이퍼",
+        "abox_df": 212,
+        "abox_df_ratio": 0.047,
+        "r7": "pass",
+        "disposition": "proposal",
+        "reason": "축 부재 — 구조 요소를 담을 클래스가 TBox 에 없다(CR-001B §5.6). 기존 Device·Process 축에 넣는 것은 축 범주 오류다(D-15·R4)."
+      },
+      {
+        "surface": "유량",
+        "abox_df": 147,
+        "abox_df_ratio": 0.0326,
+        "r7": "pass",
+        "disposition": "entry",
+        "concept_id": "parameter:gas_flow"
+      },
+      {
+        "surface": "유전체",
+        "abox_df": 257,
+        "abox_df_ratio": 0.0569,
+        "r7": "pass",
+        "disposition": "entry",
+        "concept_id": "material:dielectric"
+      },
+      {
+        "surface": "적층",
+        "abox_df": 568,
+        "abox_df_ratio": 0.1259,
+        "r7": "blocked",
+        "disposition": "proposal",
+        "reason": "축 부재 — 구조 요소를 담을 클래스가 TBox 에 없다(CR-001B §5.6). 기존 Device·Process 축에 넣는 것은 축 범주 오류다(D-15·R4)."
+      },
+      {
+        "surface": "전극",
+        "abox_df": 882,
+        "abox_df_ratio": 0.1954,
+        "r7": "blocked",
+        "disposition": "proposal",
+        "reason": "축 부재 — 구조 요소를 담을 클래스가 TBox 에 없다(CR-001B §5.6). 기존 Device·Process 축에 넣는 것은 축 범주 오류다(D-15·R4)."
+      },
+      {
+        "surface": "채널",
+        "abox_df": 291,
+        "abox_df_ratio": 0.0645,
+        "r7": "blocked",
+        "disposition": "proposal",
+        "reason": "축 부재 — 구조 요소를 담을 클래스가 TBox 에 없다(CR-001B §5.6). 기존 Device·Process 축에 넣는 것은 축 범주 오류다(D-15·R4)."
+      },
+      {
+        "surface": "캐패시터",
+        "abox_df": 38,
+        "abox_df_ratio": 0.0084,
+        "r7": "pass",
+        "disposition": "proposal",
+        "reason": "축 부재 — 구조 요소를 담을 클래스가 TBox 에 없다(CR-001B §5.6). 기존 Device·Process 축에 넣는 것은 축 범주 오류다(D-15·R4)."
+      },
+      {
+        "surface": "트렌치",
+        "abox_df": 211,
+        "abox_df_ratio": 0.0468,
+        "r7": "pass",
+        "disposition": "proposal",
+        "reason": "축 부재 — 구조 요소를 담을 클래스가 TBox 에 없다(CR-001B §5.6). 기존 Device·Process 축에 넣는 것은 축 범주 오류다(D-15·R4)."
+      }
+    ]
+  }
+}
