@@ -1,12 +1,12 @@
 {
   "_README": "CR-019 — `counts.*` 와 `feature_concept_by_type` 은 **그래프 고유 기준**이고 (rdflib 가 같은 트리플을 합치므로 방출 횟수는 그래프를 기술하지 않는다), `*_duplicate_emissions`·`concept_hits_raw` 는 버리지 않고 계상한 재방출이다. **두 계열을 더하지 말 것.** `input_claims` 는 원천 행 수라 고유 청구항 수와 `input_duplicate_keys` 만큼 다르다.",
-  "triples": 11770236,
+  "triples": 11856521,
   "input_claims": 594221,
   "counts": {
     "claims": 594078,
     "claims_independent": 143485,
     "features": 1306191,
-    "concept_hits_raw": 592779,
+    "concept_hits_raw": 679446,
     "depends": 653510,
     "depends_on_claim": 489814,
     "claims_dependent": 450593,
@@ -23,13 +23,13 @@
     "input_duplicate_rows": 143
   },
   "feature_concept_by_type": {
-    "Process": 190028,
-    "Skill": 171417,
-    "Material": 128732,
-    "SubProcess": 24049,
-    "Device": 13819,
-    "FailureMode": 701,
-    "EquipmentClass": 405
+    "Material": 260346,
+    "Process": 219684,
+    "SubProcess": 67505,
+    "EquipmentClass": 46175,
+    "Device": 16879,
+    "Skill": 4146,
+    "FailureMode": 701
   },
   "duplicate_keys_by_side": {
     "cited": 143
@@ -38,11 +38,11 @@
     "rows_features": 1306191,
     "claims": 594078,
     "patents": 40187,
-    "features_with_concept": 369586,
-    "concept_links": 529151,
-    "distinct_concepts": 109,
-    "parquet_bytes": 5610647,
-    "meta_bytes": 10069
+    "features_with_concept": 432305,
+    "concept_links": 615436,
+    "distinct_concepts": 122,
+    "parquet_bytes": 5709481,
+    "meta_bytes": 11149
   },
   "note": "feature 정규화 = build_abox_patents 와 동일 브리지. 판단 = evidence_v2 실체화. RejectionReason = rejection_reasons.jsonl 실체화(CR-004R)."
 }

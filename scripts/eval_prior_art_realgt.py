@@ -37,6 +37,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import sdkb_nb as S  # noqa: E402
 
 ROOT = S.find_root(Path(__file__).resolve().parent)
+
+#: CR-020 — 특허 본문을 읽는 경로는 `patent-text` 어휘로 해소한다.
+#: 기본값(`expert-tag`)에 기대지 않고 명시한다 — 암묵값이 D-49 의 원인이었다.
+PROFILE = "patent-text"
 META = ROOT / "data" / "patents" / "rejected_patents_meta.parquet"
 EDGES = ROOT / "data" / "patents" / "prior_art_edges.parquet"
 CORPUS = ROOT / "data" / "patents" / "fulltext_corpus.parquet"
@@ -129,7 +133,7 @@ def main() -> int:
     inv, idf, norms = tfidf_index(corp_text)
 
     print("extracting corpus ontology concepts …")
-    br = S.make_bridge(ROOT, morph=False)  # kiwi absent → documented substring
+    br = S.make_bridge(ROOT, morph=False, profile=PROFILE)  # kiwi absent → documented substring
     corp_concepts = [concepts(br, t) for t in corp_text]
     cdf: Counter = Counter()
     for cs in corp_concepts:

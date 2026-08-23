@@ -5,7 +5,7 @@
   "rows_in": 200,
   "typed_RejectedPatent": 200,
   "skipped_no_text": [],
-  "triples": 4604,
+  "triples": 4631,
   "text": {
     "abstractText": 200,
     "firstClaimText": 200
@@ -31,16 +31,17 @@
   },
   "concept_links": {
     "bridge_mode": "substring-only (kiwipiepy missing), title+abstract+claim1 (free-text ONLY — no structured process_family bridge)",
-    "patents_with_link": 117,
-    "orphans": 83,
-    "nodes_per_patent_mean": 1.105,
+    "patents_with_link": 126,
+    "orphans": 74,
+    "nodes_per_patent_mean": 1.24,
     "by_node_type": {
-      "Process": 93,
-      "Skill": 66,
-      "Material": 39,
-      "SubProcess": 17,
+      "Process": 105,
+      "Material": 73,
+      "SubProcess": 36,
+      "EquipmentClass": 26,
+      "Device": 4,
       "FailureMode": 3,
-      "Device": 3
+      "Skill": 1
     },
     "top_matched_terms": [
       {
@@ -58,6 +59,14 @@
       {
         "term": "박막",
         "patents": 14
+      },
+      {
+        "term": "패키지",
+        "patents": 13
+      },
+      {
+        "term": "절연층",
+        "patents": 9
       },
       {
         "term": "증착 공정",
@@ -124,10 +133,6 @@
         "patents": 4
       },
       {
-        "term": "수율",
-        "patents": 4
-      },
-      {
         "term": "스퍼터",
         "patents": 4
       },
@@ -148,6 +153,14 @@
         "patents": 4
       },
       {
+        "term": "유전체",
+        "patents": 4
+      },
+      {
+        "term": "증착 장치",
+        "patents": 4
+      },
+      {
         "term": "파티클",
         "patents": 4
       },
@@ -164,7 +177,19 @@
         "patents": 3
       },
       {
+        "term": "성막",
+        "patents": 3
+      },
+      {
         "term": "스퍼터링",
+        "patents": 3
+      },
+      {
+        "term": "압력",
+        "patents": 3
+      },
+      {
+        "term": "유량",
         "patents": 3
       },
       {
@@ -177,30 +202,6 @@
       },
       {
         "term": "c4",
-        "patents": 2
-      },
-      {
-        "term": "cmp",
-        "patents": 2
-      },
-      {
-        "term": "deposition",
-        "patents": 2
-      },
-      {
-        "term": "sio2",
-        "patents": 2
-      },
-      {
-        "term": "결함",
-        "patents": 2
-      },
-      {
-        "term": "도핑",
-        "patents": 2
-      },
-      {
-        "term": "박막 증착",
         "patents": 2
       }
     ],

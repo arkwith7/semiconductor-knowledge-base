@@ -28,6 +28,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import sdkb_nb as S  # noqa: E402
 
 ROOT = S.find_root(Path(__file__).resolve().parent)
+
+#: CR-020 — 특허 본문을 읽는 경로는 `patent-text` 어휘로 해소한다.
+#: 기본값(`expert-tag`)에 기대지 않고 명시한다 — 암묵값이 D-49 의 원인이었다.
+PROFILE = "patent-text"
 FEATURES = ROOT / "data" / "interim" / "claim_features.jsonl"
 EDGES = ROOT / "data" / "patents" / "prior_art_edges.parquet"
 # CR-011 — B층 인용 문헌은 EDGES 에 없다(CR-008 비목표 ⓒ · 질의–인용 대응 미이관).
@@ -275,9 +279,9 @@ def main() -> int:
         print(f"ERROR: {FEATURES} 없음 — decompose_corpus.py 먼저", file=sys.stderr)
         return 1
     try:
-        br = S.make_bridge(ROOT, morph=True)
+        br = S.make_bridge(ROOT, morph=True, profile=PROFILE)
     except SystemExit:
-        br = S.make_bridge(ROOT)
+        br = S.make_bridge(ROOT, profile=PROFILE)
 
     edges = pd.read_parquet(EDGES)
     # cited_id 는 source_type 별로 형식이 다르다 — 'all'/'examiner' 는 정규형('patent:kr_..A'),

@@ -55,6 +55,10 @@ from rdflib import Graph, Literal, Namespace, URIRef
 from rdflib.namespace import DCTERMS as _DCTERMS, OWL, RDF, RDFS, SKOS, XSD  # noqa: F401
 
 ROOT = Path(__file__).resolve().parent.parent
+
+#: CR-020 — 특허 본문을 읽는 경로는 `patent-text` 어휘로 해소한다.
+#: 기본값(`expert-tag`)에 기대지 않고 명시한다 — 암묵값이 D-49 의 원인이었다.
+PROFILE = "patent-text"
 sys.path.insert(0, str(ROOT / "scripts"))
 import sdkb_nb as S  # noqa: E402
 
@@ -130,10 +134,10 @@ def build() -> int:
         return 1
 
     try:
-        br = S.make_bridge(ROOT, morph=True)
+        br = S.make_bridge(ROOT, morph=True, profile=PROFILE)
         mode = "morph(Kiwi)+substring, title+abstract+claim1"
     except SystemExit:
-        br = S.make_bridge(ROOT)
+        br = S.make_bridge(ROOT, profile=PROFILE)
         mode = "substring-only (kiwipiepy missing), title+abstract+claim1"
     print(f"  bridge mode: {mode}")
 

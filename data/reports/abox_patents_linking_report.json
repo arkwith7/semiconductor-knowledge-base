@@ -1,7 +1,7 @@
 {
   "input": "data/patents/rejected_patents_meta.parquet",
   "patents": 1000,
-  "triples": 33931,
+  "triples": 34117,
   "rejection": {
     "typed_RejectedPatent": 1000,
     "rejectedFor": {
@@ -32,11 +32,11 @@
     },
     "excluded_evidence_pairs": 673
   },
-  "patents_with_ontology_link": 977,
+  "patents_with_ontology_link": 981,
   "link_provenance": {
     "structured_process_family": 793,
     "structured_device_family": 104,
-    "free_text": 850,
+    "free_text": 898,
     "process_family_map": {
       "etch": "process:etch",
       "deposition": "process:deposition",
@@ -61,13 +61,13 @@
       "3d_integration": "device:tsv"
     }
   },
-  "orphans_count": 23,
+  "orphans_count": 19,
   "orphans_split": {
     "scope_out": 1,
-    "text_miss": 22,
+    "text_miss": 18,
     "note": "scope_out = device/packaging/component family or value_chain device|component — no ontology node exists (needs the A2 device layer; NOT a lift bug). text_miss = in-domain yet unlinked — the genuinely fixable residue.",
     "text_miss_families": {
-      "general": 19,
+      "general": 15,
       "materials": 2,
       "equipment": 1
     },
@@ -83,8 +83,8 @@
       "patent:kr_1020157028308",
       "patent:kr_1020120148667",
       "patent:kr_1020120139831",
-      "patent:kr_1020120071127",
-      "patent:kr_1020237007317"
+      "patent:kr_1020187026966",
+      "patent:kr_1020150155906"
     ]
   },
   "orphans_sample": [
@@ -97,26 +97,26 @@
     "patent:kr_1020157028308",
     "patent:kr_1020120148667",
     "patent:kr_1020120139831",
-    "patent:kr_1020120071127",
-    "patent:kr_1020237007317",
     "patent:kr_1020187026966",
     "patent:kr_1020150155906",
-    "patent:kr_1020157021305",
-    "patent:kr_1020137007759"
+    "patent:kr_1020137007759",
+    "patent:kr_1020117025708",
+    "patent:kr_1020187026682",
+    "patent:kr_1020167028791"
   ],
   "nodes_per_patent": {
-    "mean": 2.909,
+    "mean": 3.095,
     "median": 3,
-    "max": 9,
-    "zero": 23
+    "max": 10,
+    "zero": 19
   },
   "concern_edges_by_node_type": {
-    "Process": 1292,
-    "Skill": 630,
-    "Material": 520,
-    "SubProcess": 273,
-    "Device": 181,
-    "EquipmentClass": 7,
+    "Process": 1465,
+    "Material": 926,
+    "SubProcess": 315,
+    "Device": 193,
+    "EquipmentClass": 176,
+    "Skill": 14,
     "FailureMode": 4,
     "TechnologyNode": 1,
     "RootCause": 1
@@ -167,6 +167,18 @@
       "patents": 91
     },
     {
+      "term": "유전체",
+      "patents": 72
+    },
+    {
+      "term": "절연층",
+      "patents": 61
+    },
+    {
+      "term": "성막",
+      "patents": 58
+    },
+    {
       "term": "에칭",
       "patents": 57
     },
@@ -187,6 +199,10 @@
       "patents": 40
     },
     {
+      "term": "유량",
+      "patents": 38
+    },
+    {
       "term": "포토",
       "patents": 36
     },
@@ -197,6 +213,10 @@
     {
       "term": "세정",
       "patents": 31
+    },
+    {
+      "term": "유전체막",
+      "patents": 29
     },
     {
       "term": "질화막",
@@ -223,15 +243,15 @@
       "patents": 25
     },
     {
-      "term": "결함",
-      "patents": 24
-    },
-    {
       "term": "식각 공정",
       "patents": 24
     },
     {
       "term": "질화물",
+      "patents": 24
+    },
+    {
+      "term": "패키지",
       "patents": 24
     },
     {
@@ -259,28 +279,8 @@
       "patents": 18
     },
     {
-      "term": "포토레지스트",
+      "term": "압력",
       "patents": 18
-    },
-    {
-      "term": "박막 증착",
-      "patents": 17
-    },
-    {
-      "term": "원자층 증착",
-      "patents": 17
-    },
-    {
-      "term": "정렬",
-      "patents": 17
-    },
-    {
-      "term": "cmp",
-      "patents": 16
-    },
-    {
-      "term": "슬러리",
-      "patents": 16
     }
   ],
   "bridge_mode": "substring-only (kiwipiepy missing), title+abstract+claim1 + structured(process_family)",

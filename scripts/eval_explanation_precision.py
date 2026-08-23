@@ -32,6 +32,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import sdkb_nb as S  # noqa: E402
 
 ROOT = S.find_root(Path(__file__).resolve().parent)
+
+#: CR-020 — 특허 본문을 읽는 경로는 `patent-text` 어휘로 해소한다.
+#: 기본값(`expert-tag`)에 기대지 않고 명시한다 — 암묵값이 D-49 의 원인이었다.
+PROFILE = "patent-text"
 META = ROOT / "data" / "patents" / "rejected_patents_meta.parquet"
 EDGES = ROOT / "data" / "patents" / "prior_art_edges.parquet"
 CORPUS = ROOT / "data" / "patents" / "fulltext_corpus.parquet"
@@ -58,7 +62,7 @@ def main() -> int:
     n_map_total = len(v2)
     n_rec_total = v2["target_patent_id"].nunique()
 
-    br = S.make_bridge(ROOT, morph=False)
+    br = S.make_bridge(ROOT, morph=False, profile=PROFILE)
     ccache: dict[str, dict] = {}
 
     rows = []

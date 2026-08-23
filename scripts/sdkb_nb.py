@@ -84,16 +84,52 @@ def load_graph(root: Path | None = None, *,
 
 
 # ── the bridge: free-text/tag → ontology node, with provenance tier ───────
+#: CR-020 — 발행 사전에서 프로파일별 `blocked` 를 읽는 자리.
+_MAPPING_FILE = "mappings/concept_mapping.json"
+
+
+def _blocked_pairs(root: Path, profile: str) -> set[tuple[str, str]]:
+    """발행 사전이 그 프로파일에서 끈 (표면형, concept_id) 쌍 (CR-020 D3).
+
+    A-Box 어휘는 KG(`semiconductor_v0_3.json`)에서 만들어지고 사전은 별도로
+    발행되므로, `blocked` 를 여기서 읽지 않으면 **사전이 끈 낱말이 A-Box 에는
+    그대로 남는다** — R4·R6·R7 이 사전 층에서만 작동하게 된다(D-49 · D-48).
+    파일이 없으면 조용히 넘어가지 않는다: 발행 자산 없이 만든 A-Box 는
+    두 층이 다시 갈렸다는 뜻이고, 그것은 이 배선이 고치려는 결함 자체다.
+    """
+    import json
+    path = root / _MAPPING_FILE
+    if not path.exists():
+        raise SystemExit(
+            f"Missing {path} — CR-020: A-Box 어휘는 발행 사전의 `blocked` 를 소비한다. "
+            "`make concept-mapping` 으로 사전을 먼저 발행하라."
+        )
+    doc = json.loads(path.read_text())
+    entry = doc.get("profiles", {}).get(profile)
+    if entry is None:
+        raise SystemExit(f"{path}: 프로파일 '{profile}' 이 없다 (CR-020 D1)")
+    return {(b["surface"], b["concept_id"]) for b in entry.get("blocked", [])}
+
+
+# ── the bridge: free-text/tag → ontology node, with provenance tier ───────
 class Bridge:
     """Resolves terms to ontology nodes via Tier-1 lexicon then Tier-2 alias,
-    and routes a matched node to an A-Box predicate by its node *type*."""
+    and routes a matched node to an A-Box predicate by its node *type*.
 
-    def __init__(self, root: Path, morph: bool = False):
+    `profile` 은 어느 어휘 프로파일로 해소할지를 정한다 (CR-020 D1). 기본값은
+    `expert-tag` 로 **뒤집지 않는다** — 뒤집으면 전문가·문제 A-Box 가 조용히
+    움직인다. 특허 본문을 읽는 호출자는 `patent-text` 를 명시한다.
+    """
+
+    def __init__(self, root: Path, morph: bool = False,
+                 profile: str = "expert-tag"):
         self._b = _load_builder(root)
         import json
         kg = json.loads((root / "data" / "semiconductor_v0_3.json").read_text())
-        self.lex, self.ntype = self._b.build_lexicon(kg)
-        self.ali = self._b.load_aliases(self.ntype)
+        self.profile = profile
+        self.lex, self.ntype = self._b.build_lexicon(kg, profile)
+        self.ali = self._b.load_aliases(self.ntype, profile)
+        self._apply_blocked(root, profile)
         self.node_label = {n["id"]: n["canonical_name"] for n in kg["nodes"]}
         # phrase keys (len≥2), longest-first, for greedy free-text scanning
         self._keys = sorted((k for k in (set(self.lex) | set(self.ali))
@@ -140,6 +176,21 @@ class Bridge:
     @property
     def PROBLEM_FIELDS(self):
         return self._b.PROBLEM_FIELDS
+
+    def _apply_blocked(self, root: Path, profile: str) -> None:
+        """발행 사전이 끈 쌍을 어휘에서 뗀다 (CR-020 D3). 쌍이 비면 표면형째 뗀다."""
+        self.blocked = _blocked_pairs(root, profile)
+        for surface, concept_id in self.blocked:
+            key = self._b.norm(surface)
+            for table in (self.lex, self.ali):
+                hits = table.get(key)
+                if not hits:
+                    continue
+                kept = [(nid, typ) for nid, typ in hits if nid != concept_id]
+                if kept:
+                    table[key] = kept
+                else:
+                    del table[key]
 
     def resolve(self, term: str) -> tuple[str, list[tuple[str, str]]]:
         """('Tier-1 lexicon'|'Tier-2 alias'|'—', [(node_id, node_type), ...])."""
@@ -208,8 +259,9 @@ class Bridge:
         return pd.DataFrame(rows)
 
 
-def make_bridge(root: Path | None = None, *, morph: bool = False) -> Bridge:
-    return Bridge(root or find_root(), morph=morph)
+def make_bridge(root: Path | None = None, *, morph: bool = False,
+                profile: str = "expert-tag") -> Bridge:
+    return Bridge(root or find_root(), morph=morph, profile=profile)
 
 
 # ── CR-013 — 단독 `hf` 는 대소문자로만 갈린다 ─────────────────────────────

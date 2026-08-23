@@ -28,6 +28,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import sdkb_nb as S  # noqa: E402
 
 ROOT = S.find_root(Path(__file__).resolve().parent)
+
+#: CR-020 — 특허 본문을 읽는 경로는 `patent-text` 어휘로 해소한다.
+#: 기본값(`expert-tag`)에 기대지 않고 명시한다 — 암묵값이 D-49 의 원인이었다.
+PROFILE = "patent-text"
 ENR = ROOT / "data" / "patents" / "cited_enriched"
 EDGES = ROOT / "data" / "patents" / "prior_art_edges.parquet"
 OUT_TTL = ROOT / "ontology" / "sdkb-abox-prior-art.ttl"
@@ -166,9 +170,9 @@ def main() -> int:
         print(f"ERROR: {ENR} 없음 — 수집 먼저", file=sys.stderr)
         return 1
     try:
-        br = S.make_bridge(ROOT, morph=True)
+        br = S.make_bridge(ROOT, morph=True, profile=PROFILE)
     except SystemExit:
-        br = S.make_bridge(ROOT)
+        br = S.make_bridge(ROOT, profile=PROFILE)
 
     edges = pd.read_parquet(EDGES)
     canon = edges[edges["cited_id"].astype(str).str.startswith("patent:")]

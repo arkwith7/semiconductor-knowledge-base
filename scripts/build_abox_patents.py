@@ -32,6 +32,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import sdkb_nb as S  # noqa: E402
 
 ROOT = S.find_root(Path(__file__).resolve().parent)
+
+#: CR-020 — 특허 본문을 읽는 경로는 `patent-text` 어휘로 해소한다.
+#: 기본값(`expert-tag`)에 기대지 않고 명시한다 — 암묵값이 D-49 의 원인이었다.
+PROFILE = "patent-text"
 META = ROOT / "data" / "patents" / "rejected_patents_meta.parquet"
 PRIOR_ART = ROOT / "data" / "patents" / "prior_art_edges.parquet"
 CORE_DATA = ROOT / "ontology" / "sdkb-core-data.ttl"
@@ -264,10 +268,10 @@ def main() -> int:
     # with the deterministic substring scan; falls back to substring-only if
     # kiwipiepy is absent so the pipeline still runs.
     try:
-        br = S.make_bridge(ROOT, morph=True)
+        br = S.make_bridge(ROOT, morph=True, profile=PROFILE)
         mode = "morph(Kiwi)+substring, title+abstract+claim1"
     except SystemExit:
-        br = S.make_bridge(ROOT)
+        br = S.make_bridge(ROOT, profile=PROFILE)
         mode = "substring-only (kiwipiepy missing), title+abstract+claim1"
     print(f"  bridge mode: {mode}")
 
