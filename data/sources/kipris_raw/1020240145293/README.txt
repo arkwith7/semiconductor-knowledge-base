@@ -1,0 +1,7 @@
+app_no: 1020240145293
+cited_count: 4
+
+01. KR1020240141050 A | resolved | 1020230034603
+02. KR1020180025901 A | resolved | 1020187002111
+03. KR1020220127267 A | resolved | 1020227025863
+04. JP2010267892 A | unresolved | (not in cache)

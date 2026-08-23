@@ -1,0 +1,5 @@
+target_app_no: 1020240000644
+citation_id: US20180211820 A1
+normalized_id: US-P-20180211820
+resolved: false
+lookup_status: pending

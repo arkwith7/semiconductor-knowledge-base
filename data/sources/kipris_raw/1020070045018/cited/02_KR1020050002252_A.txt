@@ -1,0 +1,23 @@
+target_app_no: 1020070045018
+citation_id: KR1020050002252 A
+normalized_id: KR-P-1020050002252
+resolved: true
+lookup_status: resolved
+source: kipris_plus_api
+resolved_applno: 1020030043621
+ipc: H10B 69/00
+register_number: 10-0573480-0000
+register_date: 2006.04.17
+================================================================================
+
+## TITLE
+
+반도체 소자의 제조 방법
+
+## ABSTRACT
+
+본 발명은 반도체 소자의 제조 방법에 관한 것으로, 언도프트 비정질 실리콘층을 형성한 후 작은 사이즈의 그레인 성장이 용이하도록 스파이크 급속 열처리(Spike Rapid Thermal Process)로 언도프트 비정질 실리콘 박막을 결정화시켜 줌으로써, 그레인 사이즈를 작고 균일하게 형성하면서 작은 사이즈의 그레인 단면이 원주 모양(Columnar)의 구조로써 계면의 직각 방향으로 성장된 결정을 유도하여 표면 거칠기(Surface roughness)를 감소시키고 전체 면적에서 전기적으로 균일한 특성을 얻을 수 있다. 플래시, SA-STI, columnar, 비정질 실리콘, 급속 열처리
+
+## CLAIM 1
+
+1. 삭제

@@ -1,0 +1,23 @@
+target_app_no: 1020130091970
+citation_id: KR1020060049265 A
+normalized_id: KR-P-1020060049265
+resolved: true
+lookup_status: resolved
+source: kipris_plus_api
+resolved_applno: 1020050058068
+ipc: G11C 11/15
+register_number: 10-1166356-0000
+register_date: 2012.07.11
+================================================================================
+
+## TITLE
+
+고성능 자기 터널링 접합 ＭＲＡＭ을 위한 새로운 하층
+
+## ABSTRACT
+
+저부 전극은 위에 놓인 MTJ 내에서 AFM, 피닝된(pinned), 터널 베리어, 및 자유층들에 평활하고 조밀한 성장을 지속적으로 제공하기 위하여 비정질의 TaN 캡핑층을 갖는 MRAM 구조는 공개되었다. 종래의 Ta 캡핑층과는 달리, TaN은 산화 저항성이고 터널 베리어층의 측벽들 상에서의 캡핑층의 재침착에 의해 야기되는 감지 전류를 우회시키는 것을 방지하기 위하여 고저항을 갖는다. 대안으로, -TaN 층은 MTJ 내 시드층이다. 또한, 시드층은 -TaN 층 상에 NiCr, NiFe, 또는 NiFeCr 층으로 구성된 복합층일 수 있다.-TaN 캡핑층 또는 시드층은 TMR 판독 헤드에서 또한 사용될 수 있다. -TaN 캡핑층 상에 형성된 MTJ는 높은 MR 비율, 높은 Vb, 및 최적화된 Ta 캡핑층에 기초하는 MTJ들로부터 얻어진 결과들과 유사한 RA을 갖는다.캡핑층, MTJ, 베리어층, 터널 베리어, 시드층
+
+## CLAIM 1
+
+1. 기판상에 형성된 자기 랜덤 액세스 메모리(Magnetic Random Access Memory; MRAM) 구조체에 있어서:(a) 기판 상에 형성된 시드층(seed layer), 상기 시드층 상의 도전층, 및 상기 도전층 상의 α-TaN 캡핑층(capping layer)으로 구성된 저부 전극(bottom electrode);(b) 상기 저부 전극 위에 형성된 도전선인 상부 전극(top electrode); 및(c) 상기 저부 전극과 상기 상부 전극 간에 형성된 상부 표면 및 측벽들을 갖는 자기 터널링 접합(Magnetic Tunneling Junction; MTJ) 소자로서, 상기 MTJ 소자는 상기 저부 전극 상의 시드층, 반자성(antiferromagnetic; AFM) 피닝층(pinning layer), 피닝된 층(pinned layer), 터널 베리어층(tunnel barrier layer), 자유층(free layer), 상기 상부 전극을 접촉하는 캡층(cap layer)으로 구성된 상기 MTJ 소자를 포함하는, MRAM 구조체.

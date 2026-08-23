@@ -1,0 +1,7 @@
+target_app_no: 1020200128163
+citation_id: JP-2007-009988
+resolved: false
+evidence: 일본 공개특허공보 특개 2007-009988 호 (2007.01.18.)
+source: unresolved_search
+
+Original full text could not be resolved automatically from KIPRIS search during this batch extraction.

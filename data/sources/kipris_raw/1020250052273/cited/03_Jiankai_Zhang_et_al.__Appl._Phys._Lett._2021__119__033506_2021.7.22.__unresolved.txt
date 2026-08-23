@@ -1,0 +1,5 @@
+target_app_no: 1020250052273
+citation_id: Jiankai Zhang et al., Appl. Phys. Lett. 2021, 119, 033506(2021.7.22.)
+normalized_id: UNKNOWN::Jiankai Zhang et al., Appl. Phys. Lett. 2021, 119, 033506(2021.7.22.)
+resolved: false
+lookup_status: pending

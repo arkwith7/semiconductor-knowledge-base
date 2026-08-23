@@ -1,0 +1,7 @@
+app_no: 1020220081522
+cited_count: 4
+
+01. JP2013082891 A | unresolved | (not in cache)
+02. KR1020080045687 A | resolved | 1020087004947
+03. KR1020200036042 A | resolved | 1020207008701
+04. KR102174256 B1 | resolved | 1020190095367

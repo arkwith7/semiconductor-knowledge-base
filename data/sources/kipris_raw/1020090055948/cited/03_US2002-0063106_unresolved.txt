@@ -1,0 +1,7 @@
+target_app_no: 1020090055948
+citation_id: US2002-0063106
+resolved: false
+evidence: 인용발명 3: 미국특허공보 제 2002-0063106 호
+source: unresolved_search
+
+Original full text could not be resolved automatically from KIPRIS search during this batch extraction.

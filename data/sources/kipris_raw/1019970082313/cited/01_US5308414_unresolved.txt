@@ -1,0 +1,7 @@
+target_app_no: 1019970082313
+citation_id: US5308414
+resolved: false
+evidence: 미국특허 제 5308414 호 (1994.05.03)
+source: unresolved_search
+
+Original full text could not be resolved automatically from KIPRIS search during this batch extraction.

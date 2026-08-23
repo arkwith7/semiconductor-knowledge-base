@@ -1,0 +1,7 @@
+target_app_no: 1019980061060
+citation_id: JP-H08-255787
+resolved: false
+evidence: 일본공개특허공보 평 08-255787 호 (1996.10.01)
+source: unresolved_search
+
+Original full text could not be resolved automatically from KIPRIS search during this batch extraction.

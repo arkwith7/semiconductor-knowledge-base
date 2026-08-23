@@ -1,0 +1,21 @@
+target_app_no: 1020070017918
+citation_id: KR1020010081437 A
+normalized_id: KR-P-1020010081437
+resolved: true
+lookup_status: resolved
+source: kipris_plus_api
+resolved_applno: 1020000006856
+ipc: H10W 10/10|H10P 50/00
+================================================================================
+
+## TITLE
+
+반도체 장치의 소자 격리막 형성 방법
+
+## ABSTRACT
+
+본 발명은 반도체 장치의 소자 격리막 형성 방법에 관한 것으로, STI(Shallow Trench Isolation) 방식에 의하여 소자 격리막을 형성하는 방법에서, 트렌치의 오프닝(opening) 부위를 라운드(round) 형태로 형성하는 방법을 개시한다.본 발명에 따르면, 트렌치의 오프닝 부위에서 발생하는 게이트 산화막의 씨닝(thinning) 현상을 방지하여 게이트 산화막 절연파괴 전압(oxide breakdown voltage)이 저하되는 것을 방지할 수 있으며, 이에 따라 GOI(Gate Oxide Integrity) 특성을 향상시킬 수 있게 된다. 또한 소자 격리막의 폭을 줄여 활성 영역의 폭을 증가시킬 수 있다. 그리고 트렌치를 산화막으로 채울 때, 트렌치 내부에 기공의 형성을 억제하여 트렌치 내부의 필링(filling) 특성을 향상시킬 수 있으므로 소자 격리막의 절연률을 향상시킬 수 있게 된다.
+
+## CLAIM 1
+
+1. <P INDENT="14" ALIGN="JUSTIFIED">얕은 트렌치 격리 방식에 의한 소자 격리막 형성 방법에 있어서,</P><P INDENT="14" ALIGN="JUSTIFIED">반도체 기판상에 절연막 패턴을 형성하는 단계와,</P><P INDENT="14" ALIGN="JUSTIFIED">상기 절연막 패턴의 양측벽에 스페이서를 형성하는 단계와,</P><P INDENT="14" ALIGN="JUSTIFIED">상기 스페이서 및 상기 반도체 기판을 식각하여 상부의 양 측벽이 라운드 형태를 가지는 트렌치를 형성하는 단계와,</P><P INDENT="14" ALIGN="JUSTIFIED">상기 트렌치를 채우도록 산화막을 형성하는 단계를 포함하는 것을 특징으로 하는 반도체 장치의 소자 격리막 형성 방법.</P>

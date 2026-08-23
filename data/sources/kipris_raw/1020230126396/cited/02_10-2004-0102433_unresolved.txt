@@ -1,0 +1,7 @@
+target_app_no: 1020230126396
+citation_id: 10-2004-0102433
+resolved: false
+evidence: 공개특허공보 제 10-2004-0102433 호 (2004.12.08.)
+source: unresolved_search
+
+Original full text could not be resolved automatically from KIPRIS search during this batch extraction.

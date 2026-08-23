@@ -1,0 +1,5 @@
+target_app_no: 1020130113863
+citation_id: JP4469023 B2
+normalized_id: JP-G-4469023
+resolved: false
+lookup_status: pending

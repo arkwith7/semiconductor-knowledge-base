@@ -1,0 +1,26 @@
+{
+  "legal_bases": [
+    {
+      "paragraph": "2",
+      "count": 4
+    }
+  ],
+  "cited_evidence_phrases": [
+    "1",
+    "2",
+    "3",
+    "4"
+  ],
+  "cited_evidence_map": {
+    "2": "JP-P-2001110736",
+    "3": "JP-P-10270453",
+    "4": "JP-P-2000031251"
+  },
+  "target_claims": [],
+  "decision_date": "2022-06-03",
+  "excerpt": "거절이유 등 통지에 따른 의\n견]의견서·답변서·소명서에 의하여 다시 심사한바 2021.09.15.자 거절이유를 해소하지 못\n하였으므로 이 출원에 대하여 특허법 제62조에 따라 거절결정합니다.\n[다시 심사한 결과]\n□ 심사 대상 청구항 : 제1, 6, 9, 10, 11, 12항\n□ 이 출원의 거절이유가 해소되지 않은 부분과 관련 법조항\n순번 거절이유가 해소되지 않은 부분 관련 법조항\n1 청구항 전항 특허법 제29조제2항\n[거절결정의 이유]\n이 출원의 특허청구범위의 청구항 전항에 기재된 발명은 아래와 같이 그 출원 전에 이 발명\n이 속하는 기술분야에서 통상의 지식을 가진 자(이하 ‘통상의 기술자’라 함)가 용이하게\n발명할 수 있는 것이므로 특허법 제29조제2항에 따라 특허를 받을 수 없습니다.\n- 아 래 -\n인용발명1 O. Kononchuk et. al. Novel Trends in SOI Technology for CMOS Applications,\nSolid State Phenomen",
+  "text_length": 6599,
+  "application_number": "1020217016227",
+  "ocr_method": "cached",
+  "generated_at": "2026-07-29T15:36:57.858065Z"
+}

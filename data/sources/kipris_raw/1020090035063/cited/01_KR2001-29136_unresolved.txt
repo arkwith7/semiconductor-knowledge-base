@@ -1,0 +1,7 @@
+target_app_no: 1020090035063
+citation_id: KR2001-29136
+resolved: false
+evidence: 인용문헌 1 한국 공개특허공보 제 2001-29136 호 (2001.04.06.)
+source: unresolved_search
+
+Original full text could not be resolved automatically from KIPRIS search during this batch extraction.

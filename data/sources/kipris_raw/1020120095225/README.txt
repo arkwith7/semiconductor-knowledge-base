@@ -1,0 +1,7 @@
+app_no: 1020120095225
+cited_count: 4
+
+01. KR100739530 B1 | resolved | 1020060051035
+02. KR1020080042573 A | resolved | 1020060111200
+03. KR100844930 B1 | resolved | 1020050090846
+04. US20120135580 A1 | unresolved | (not in cache)

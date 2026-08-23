@@ -1,0 +1,5 @@
+target_app_no: 1020090000944
+citation_id: US06576949 B1
+normalized_id: US-G-06576949
+resolved: false
+lookup_status: pending

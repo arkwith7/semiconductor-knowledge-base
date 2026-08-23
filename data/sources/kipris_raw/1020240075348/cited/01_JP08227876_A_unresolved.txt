@@ -1,0 +1,5 @@
+target_app_no: 1020240075348
+citation_id: JP08227876 A
+normalized_id: JP-P-08227876
+resolved: false
+lookup_status: pending

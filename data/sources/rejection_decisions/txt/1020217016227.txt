@@ -1,0 +1,149 @@
+발송번호: 9-5-2022-041391918 수신 :
+발송일자: 2022.06.03.
+제출기일
+재심사 특 허 청
+- - - 특허거절결정서 - - -
+출 원 인 성 명 소이텍 (특허고객번호: 520000288241)
+주 소
+대 리 인 명 칭 리앤목특허법인
+주 소
+지정된변리사 이영필 외 1명
+출 원 번 호 10-2021-7016227
+발 명 의 명 칭 복수개의 구조물을 생산하기 위한 프로세스
+2021.11.15. 2022.04.26.자 접수된 [명세서등 보정]보정서 및 [거절이유 등 통지에 따른 의
+견]의견서·답변서·소명서에 의하여 다시 심사한바 2021.09.15.자 거절이유를 해소하지 못
+하였으므로 이 출원에 대하여 특허법 제62조에 따라 거절결정합니다.
+[다시 심사한 결과]
+□ 심사 대상 청구항 : 제1, 6, 9, 10, 11, 12항
+□ 이 출원의 거절이유가 해소되지 않은 부분과 관련 법조항
+순번 거절이유가 해소되지 않은 부분 관련 법조항
+1 청구항 전항 특허법 제29조제2항
+[거절결정의 이유]
+이 출원의 특허청구범위의 청구항 전항에 기재된 발명은 아래와 같이 그 출원 전에 이 발명
+이 속하는 기술분야에서 통상의 지식을 가진 자(이하 ‘통상의 기술자’라 함)가 용이하게
+발명할 수 있는 것이므로 특허법 제29조제2항에 따라 특허를 받을 수 없습니다.
+- 아 래 -
+인용발명1 O. Kononchuk et. al. Novel Trends in SOI Technology for CMOS Applications,
+Solid State Phenomena. 2010, Vol. 156-158, pp 69-76
+인용발명2 일본 공개특허공보 특개2001-110736호(2001.04.20.)
+인용발명3 일본 공개특허공보 특개평10-270453호(1998.10.09.)
+인용발명4 일본 공개특허공보 특개2000-031251호(2000.01.28.)
+1/5
+[ 경과 ]
+- 의견제출통지(2021.09.15.) : 제36조제2항(제5항), 제29조제2항(청구항 제1-4, 6-13항)
+- 보정(2021.11.15.)
+- 거절결정(2022.03.30.) : 제29조제2항(청구항 전항)
+- 재심사보정(2022.04.26.)
+(1) 청구항 제1항
+[ 보정 ] 출원인은 2022.04.26.자로 보정전의 청구항 제2, 5항을 삭제한 후에 그 기술구성을
+청구항 제1항에 병합하는 보정을 수행하면서,
+[ 주장 및 검토 ] 동일자로 제출된 의견서를 통해
+(주장1) 보정된 청구항 제1항은 ‘Vf/Vd≥1000인 것’을 특징으로 하고 있으나, 인용발명1에는
+가스 흐름의 순환 속도(Vf)와 휘발성 재료가 가스 흐름 안으로 확산되는 속도(Vd)간의 비율
+을 조절하는 사항이 개시되어 있지 않고, 그 비율을 1000 이상으로 설정하는 것은 사후 고
+찰에 해당한다고 주장하나,
+(주장1에 대한 검토) ① 먼저 2021.09.15.자 의견제출통지서를 통해서도 살펴본 바와 같이 인
+용발명1은 균일한 BOX 층 두께의 확보를 기술적 과제로 하고 있고, 비산화 분위기 및 유전
+체 산화물의 산소와 활성 레이어의 반도체 재료의 반응에 의한 휘발성 재료가 생성되는 온
+도에서 적절히 열처리를 수행하는 것을 그 해결수단으로 하고 있습니다.
+다음으로 인용발명1의 아래 기재를 살펴보면, BOX 층 두께를 균일하게 하기 위해서는 BOX
+층의 용해를 위한 열처리 동안 기판 전체 표면 근방에서 균질한 가스의 흐름을 형성하도록
+공정 조건을 설정해야 함이 파악됩니다.
+70쪽 The linear parameter A depends on gas transport close to the wafer surface
+The gas transport at the wafer surface is strongly dependent on the local gas
+70쪽
+velocity close to the surface.
+The variation of A across the wafer could result in significant degradation of
+71쪽
+BOX thickness uniformity after the dissolution anneal.
+Nevertheless, it is possible to optimize the annealing recipe and furnace
+configuration in order to obtain homogeneous gas flow over the whole wafer
+71쪽
+surcface. SOI wafers with very low within wafer BOX thickness uniformity can
+be obtained (see figure 3).
+2/5
+한편 인용발명1의 “Oxygen atoms diffuse through top silicon and react with silicon at the
+top Si surface producing volatile SiO, which is evacuated from the Si surface by gas
+phase diffusion or forced convection in the furnace.”(70쪽)라는 기재로부터, 열처리를 수행
+함에 따라 기판 표면 근방에는 균질한 가스 흐름을 방해할 수 있는 휘발성 재료(SiO)가 생성
+되고, 이러한 휘발성 재료의 제거를 위해 기체상 확산 또는 강제 대류 방식을 이용할 수 있
+음이 파악됩니다.
+이를 종합하면, 인용발명1로부터 균일한 BOX 층 두께를 달성하기 위해 열처리를 수행하는
+동안 기판 표면 전체에 대해 균질한 가스 흐름이 형성되도록 공정 조건을 설정해야 하고, 이
+를 위해 기판 표면 근방에서 생성되는 휘발성 재료(SiO)를 배기시켜야 함이 쉽게 파악됩니
+다.
+이때 휘발성 재료의 기체상 확산이 체임버 내에서의 강제 대류에 의해 가스 흐름을 순환시
+키는 것보다 배기의 속도가 느리고 균일한 제어가 쉽지 않은 것은 통상의 기술자라면 쉽게
+예측 가능하므로, 기판 표면 근방에 생성된 휘발성 재료를 그 확산 속도(즉 Vd)에 의존하여
+배기시키기 보다 강제 대류에 의해 주로 배기될 수 있도록(즉 강제 대류에 의한 가스 흐름
+의 순환 속도(Vf)를 증가 시킴)하는 것은 쉽게 도출할 수 있습니다.
+② 나아가 인용발명1의 “the uniformity of BOX dissolution is critical to obtain a final
+wafer with uniform BOX thickness required for high end CMOS applications. This can be
+achieved by using starting SOI wafers with increased top Si thickness, when dissolution
+kinetics is largely driven by oxygen diffusion, and optimized anneal recipes and furnace
+design to minimize gas flow nonuniformity across the wafer.”(71쪽)의 기재로부터 BOX 두
+께의 균일성을 높이기 위해서는 BOX 층의 용해가 “oxygen diffusion”에 의해 강하게 주도될
+때 가능하다는 점이 파악되고,
+인용발명1의 “When the kinetics is driven by Oi diffusion (surface gas transport is fast
+compare to Oi diffusion), the BOX dissolution rate is inversely proportional to top silicon
+thickness. This case can be achieved using SOI wafers with thick top layers and by
+increasing gas velocity at the wafer surface.”(70쪽)의 기재로부터 BOX 층의 용해가
+“oxygen diffusion”에 의해 강하게 주도되도록 하기 위해서는 기판 표면에서의 가스 흐름의
+속도(즉 Vf)를 매우 높게 증가시켜야 함이 파악되며,
+인용발명1의 “When the kinetics is limited by transport of SiO in gas phase, the
+dissolution rate does not depend on silicon thickness.”(70쪽)의 기재로부터 BOX 층의 용해
+가 “transport of SiO in gas phase”(즉 SiO의 확산, Vd)에 의해 제한될 때에는 “oxygen
+diffusion”(즉 증가된 Vf)에 의해 주도될 때와는 다른 용해의 양상을 나타냄이 파악됩니다.
+이를 종합하면, 인용발명1에는 BOX 층의 두께 균일도를 높이기 위해 기판 표면에서의 가스
+흐름의 속도(Vf)를 매우 높게 증가시켜서 BOX 층의 용해가 휘발성 재료(SiO)의 확산(Vd)에
+의해 제한되지 않도록 하는 기술구성(즉, Vf≫Vd 이 되도록 설정하는 기술구성)이 시사되어
+3/5
+있는 것이고, 이때 휘발성 재료의 이송 속도(즉 Vd)와 가스 흐름의 속도(즉 Vf)의 구체적 비
+율은 그 수치에 대한 각별한 임계적 의의를 인정할만한 근거가 없는 것으로서, 통상의 기술
+자가 기술의 구체적 적용 환경에 따라 적절히 선택할 수 있는 사항에 불과합니다.
+③ 따라서, Vf/Vd의 비율을 1000 이상이 되도로 설정하는 것은 인용발명1에 개시된 내용으
+로부터 쉽게 도출할 수 있는 것으로 판단되므로, 상기 출원인의 (주장1)은 받아들일 수 없습
+니다.
+(주장2) 보정된 청구항 제1항에서는 비산화 분위기를 가지는 가스 흐름이 각각의 구조물의
+활성 레이어의 부근에서 순환하도록 수행되고, 가스 흐름의 주입은 체임버가 연장되는 길이
+방향 축에 대해 직각으로 지향되고 각각의 구조물을 향하도록 배향되는 것에 비해 인용발명
+1에는 체임버에서의 가스 흐름 방향이 개시되어 있지 않고, 인용발명3에 개시된 가스 유동
+구조는 단순히 기판의 온도를 균일하게 승강시키기 위한 것이어서 보정된 청구항 제1항의
+가스 흐름을 위해 채택할 수 없는 것이라고 주장하나,
+(주장2에 대한 검토) 인용발명1의 “the uniformity of BOX dissolution is critical to obtain a
+final wafer with uniform BOX thickness required for high end CMOS applications. This
+can be achieved by using starting SOI wafers with increased top Si thickness, when
+dissolution kinetics is largely driven by oxygen diffusion, and optimized anneal recipes
+and furnace design to minimize gas flow nonuniformity across the wafer.”(71쪽)의 기재로
+부터 파악되듯이, 열처리 체임버는 기판을 가로지르는 가스 흐름의 불균일성을 최소화하도록
+설계되어야 하는 것이고, 인용발명3(도면1, 단락 [15]-[28] 등)에서 수직형 체임버에 대해 수
+직방향으로부터 직각인 방향으로 가스 흐름의 주입을 지향하고 각각의 기판을 향하여 배향
+하는 것도 기판의 처리를 균일하게 수행하기 위한 하나의 가스 주입 구조에 해당하는 바, 인
+용발명1의 비산화성 가스를 주입하기 위해 인용발명3에 개시된 바와 같은 가스 주입 구조를
+도입하는 것은 쉽게 착안할 수 있을 것으로 판단되므로, 상기 출원인의 (주장2) 또한 받아들
+일 수 없습니다.
+[ 결론 ] 따라서, 이건 출원의 2022.04.26.자로 보정된 청구항 제1항 발명은 통상의 기술자가
+인용발명1 및 3의 결합으로부터 쉽게 발명할 수 있다는 전번 거절이유를 여전히 해소하지
+못하였으므로 이에 거절 결정합니다.
+(2) 청구항 제6, 9-12항 (제1항의 종속항)
+이건 출원의 2022.04.26.자로 보정된 청구항 제6, 9-12항 발명은 보정에 의해 추가된 기술구
+성이 없고, 다시 살펴본 바에 의해서도 통상의 기술자가 인용발명1 및 3의 결합으로부터 쉽
+게 발명할 수 있다는 전번 거절이유를 여전히 해소하지 못한 것으로 판단되므로 이에 거절
+결정합니다. 끝.
+4/5
+2022.06.03.
+특허청 전기통신기술심사국
+반도체심사과 심사관 김영진
+<< 거절결정 불복심판 청구 및 분할출원 안내 >>
+1. 출원인은 이 거절결정서를 송달받은 날부터 3개월 이내(심판 청구기간)에 심판을 청구할 수 있고, 심
+판 청구기간에는 분할출원도 할 수 있습니다. 그러나 재심사에 따른 거절결정이기 때문에 재심사를
+다시 청구할 수는 없습니다.
+2. 심판 청구기간은 특허법 제15조제1항에 따라 연장할 수 있습니다. 심판 청구기간을 연장하려는 경우
+에는 심판 청구기간 만료 전까지 법정기간 연장신청서(특허법 시행규칙 별지 제10호서식)를 특허청장
+에게 제출해 주시기 바랍니다.
+※ 위에서 안내한 후속 절차 또는 신청 서식 등에 관한 사항은 특허고객상담센터 ☎1544-8080로, 이 통
+지서 내용에 대한 사항은 특허청 ☎042-481-5732(담당심사관 김영진)로 문의하시기 바랍니다.
+※ 특허로(www.patent.go.kr) 또는 특허청(www.kipo.go.kr) 홈페이지를 방문하시면 심사 진행상황, 서류
+제출 및 절차에 관한 보다 많은 정보를 제공받을 수 있습니다.
+(특허청) 우 35208 대전광역시 서구 청사로 189, 4동 (둔산동, 정부대전청사)
+5/5

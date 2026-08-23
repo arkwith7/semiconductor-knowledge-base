@@ -63,6 +63,8 @@ data/patents/fulltext/
 # 경로 상수를 고쳐 쓰지 않은 이유는 수집 규칙을 갈리게 하지 않기 위해서다 —
 # 재인출본이 정본과 달라지면 복원 대조(sha256)가 무의미해진다.
 # 정본은 data/patents/raw/ 이고, 그쪽으로 옮기는 것은 refetch 스크립트의 몫이다.
+# (2026-08-23) 이 규칙은 유지한다 — 원천 계층의 정본 자리는 data/sources/ 이고
+# data/processed/ 는 이관 스크립트의 작업 자리다. 정본을 두 곳에 두지 않는다.
 data/processed/
 
 # 청구항 feature · 인용문헌 보강 — KIPRIS 비재배포 청구항/초록 원문 포함 (§1.5)
@@ -147,3 +149,14 @@ data/patents/.kipris_cache.sqlite
 # 생성기는 `git ls-files` 만 복사하므로 여기 두는 것만으로 공개에서 제외된다.
 data/patents/b_layer_cited_ids.txt
 data/patents/b_layer_query_ids.txt
+
+# ─────────────────────────────────────────────────────────────────────
+# 원천 계층 (2026-08-23 · CLAUDE.md §1-5 개정 · 사용자 승인)
+# 이 저장소는 PRIVATE 이므로 원문 텍스트를 보존한다. 공개 경계는 발행 단계
+# (build_public_release.py → sdkb-dataset)에 있고, 여기가 아니다.
+#
+# 추적하는 것   : txt · structured · parquet · 매니페스트  (약 41 MB)
+# 추적 않는 것 : pdf 원본 (약 184 MB · OCR 입력 · KIPRIS 재취득 가능)
+#                 — 워킹트리에는 두되 git 에 넣지 않는다. 델타 압축이 되지
+#                   않아 리포가 8배로 불고, 무결성은 sha256 매니페스트가 닫는다.
+data/sources/**/pdf/

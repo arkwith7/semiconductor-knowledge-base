@@ -1,0 +1,7 @@
+target_app_no: 1020230126396
+citation_id: US2015/0093880
+resolved: false
+evidence: 미국 특허출원공개공보 US2015/0093880 호 (2015.04.02.)
+source: unresolved_search
+
+Original full text could not be resolved automatically from KIPRIS search during this batch extraction.

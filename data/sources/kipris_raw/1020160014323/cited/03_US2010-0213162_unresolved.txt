@@ -1,0 +1,7 @@
+target_app_no: 1020160014323
+citation_id: US2010/0213162
+resolved: false
+evidence: 인용발명 2: 미국 특허출원공개공보 US2010/0213162 호 (2010.08.26.)
+source: unresolved_search
+
+Original full text could not be resolved automatically from KIPRIS search during this batch extraction.

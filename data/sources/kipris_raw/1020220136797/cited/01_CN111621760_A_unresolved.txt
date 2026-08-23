@@ -1,0 +1,5 @@
+target_app_no: 1020220136797
+citation_id: CN111621760 A
+normalized_id: CN-P-111621760
+resolved: false
+lookup_status: pending

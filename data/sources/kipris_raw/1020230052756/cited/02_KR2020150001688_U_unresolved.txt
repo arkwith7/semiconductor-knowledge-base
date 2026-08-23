@@ -1,0 +1,7 @@
+target_app_no: 1020230052756
+citation_id: KR2020150001688 U
+normalized_id: KR-G-2020150001688
+resolved: false
+lookup_status: not_found
+source: kipris_plus_api
+reason: registerNumber lookup empty

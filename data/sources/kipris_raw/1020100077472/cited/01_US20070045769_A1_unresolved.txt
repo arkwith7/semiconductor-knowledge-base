@@ -1,0 +1,5 @@
+target_app_no: 1020100077472
+citation_id: US20070045769 A1
+normalized_id: US-P-20070045769
+resolved: false
+lookup_status: pending

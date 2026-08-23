@@ -1,0 +1,7 @@
+target_app_no: 1020040056909
+citation_id: KR2001-46153
+resolved: false
+evidence: 대한민국 공개특허 제 2001-46153 호 (2001.06.05)
+source: unresolved_search
+
+Original full text could not be resolved automatically from KIPRIS search during this batch extraction.

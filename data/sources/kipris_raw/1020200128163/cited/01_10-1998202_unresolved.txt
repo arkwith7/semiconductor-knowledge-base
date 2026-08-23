@@ -1,0 +1,7 @@
+target_app_no: 1020200128163
+citation_id: 10-1998202
+resolved: false
+evidence: 등록특허공보 제 10-1998202 호 (2019.07.10.)
+source: unresolved_search
+
+Original full text could not be resolved automatically from KIPRIS search during this batch extraction.

@@ -1,0 +1,5 @@
+target_app_no: 1020240191295
+citation_id: JP2009253263 A
+normalized_id: JP-P-2009253263
+resolved: false
+lookup_status: pending

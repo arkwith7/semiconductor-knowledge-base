@@ -1,0 +1,5 @@
+target_app_no: 1020250052273
+citation_id: Jiming Wang et al., ACS Appl. Mater. Interfaces 2021, 13, 32495(2021.6.29.)
+normalized_id: UNKNOWN::Jiming Wang et al., ACS Appl. Mater. Interfaces 2021, 13, 32495(2021.6.29.)
+resolved: false
+lookup_status: pending

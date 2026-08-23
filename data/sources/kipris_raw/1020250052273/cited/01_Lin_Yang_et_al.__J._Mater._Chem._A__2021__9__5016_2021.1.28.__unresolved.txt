@@ -1,0 +1,5 @@
+target_app_no: 1020250052273
+citation_id: Lin Yang et al., J. Mater. Chem. A, 2021, 9, 5016(2021.1.28.)
+normalized_id: UNKNOWN::Lin Yang et al., J. Mater. Chem. A, 2021, 9, 5016(2021.1.28.)
+resolved: false
+lookup_status: pending

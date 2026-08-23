@@ -1,0 +1,5 @@
+target_app_no: 1020080091979
+citation_id: JJAP. Vol.47, 2008, pp.1435-1455, "Developments of Plasma Etching Technology for Fabricating Semiconductor Devices"
+normalized_id: UNKNOWN::JJAP. Vol.47, 2008, pp.1435-1455, "Developments of Plasma Etching Technology for Fabricating Semiconductor Devices"
+resolved: false
+lookup_status: pending

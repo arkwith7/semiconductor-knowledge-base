@@ -1,0 +1,5 @@
+target_app_no: 1020220124154
+citation_id: 김동환 외 7인, 'SnO-P2O5계 유리에서 P2O5를 B2O3로 치환시 구조와 물성에 미치는 영향, 한국세라믹학회지 제48권제1호, 2011.
+normalized_id: UNKNOWN::김동환 외 7인, 'SnO-P2O5계 유리에서 P2O5를 B2O3로 치환시 구조와 물성에 미치는 영향, 한국세라믹학회지 제48권제1호, 2011.
+resolved: false
+lookup_status: pending
