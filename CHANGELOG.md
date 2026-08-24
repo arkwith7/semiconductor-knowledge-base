@@ -27,6 +27,44 @@ All notable changes to SDKB will be documented in this file.
 
 ## [Unreleased]
 
+### Fixed (2026-08-24 — B층 인용문헌 재생성 손실 복원 · 진입점 교정 · 하류 D-52)
+
+- **CR-008 이 채운 B층 인용문헌 479 건이 CR-020 재생성에서 빠졌다가 되돌아왔다.**
+  `build_abox_prior_art.py` 는 `--population`·`--extra-enriched` 를 받을 때만 B층 모집단
+  514 를 읽도록 설계됐고(CR-008 도입기의 A층 불변 보장), 인자는 회신 문서에만 적혀 있었다.
+  그런데 CR-016 이 만든 `make abox-prior-art` 가 **인자 없이** 호출하는 바람에, CR-020 의
+  재생성이 CR-008 을 조용히 되감았다 — `CitedPatent` 3,513 → **3,034** · `filing`·`claims`·
+  문서 단위 서지 각각 CR-008 직전 값으로 복귀.
+- **고친 것은 산출물이 아니라 진입점이다.** 두 인자의 **기본값을 B층 경로로** 둔다
+  (`B_LAYER_POP` · `B_LAYER_ENRICHED` · 파일이 없는 체크아웃에서는 건너뛴다). 인자는
+  override 로 남는다. **선례는 저장소 안에 있었다** — `build_abox_claim_features.py` 는
+  CR-011 에서 같은 함정을 만나 모집단을 상수로 무조건 읽도록 고쳐 두었고, 그래서 CR-020
+  재생성에서도 멀쩡했다(`claims` 594,078 · `features` 1,306,191 불변). 되돌아간 것은 그
+  교정을 받지 못한 생성기 하나뿐이었다.
+- **진입점 계약을 테스트가 고정한다** — `--population`·`--extra-enriched` 의 기본값이 B층을
+  가리키는지 AST 로 단정하고, 기본값이 가리키는 원천의 실재를 함께 단정한다. 산출물 검사
+  (`test_b_layer_resolved_ids_became_nodes`)는 사고를 **사후에만** 잡는다.
+- **그 산출물 검사는 이미 붉었고, 아무도 읽지 않았다.** CR-020 커밋 시점부터 이 세션까지
+  `test_b_layer_resolved_ids_became_nodes`(B층 노드 482 기대 → 실측 3)와
+  `test_README_서명_블록이_최신이다`가 실패 상태였다. 후자는 이 커밋에서 `make
+  signature-inject` 로 갱신했으며, **그 갱신에는 CR-020 이 남긴 미주입분도 함께 실린다**
+  (`sdkb-abox-patents` 33,931 → 34,117 · `claim-features` 11,770,236 → 11,856,521 ·
+  `b-layer-queries` 4,604 → 4,631).
+- **B층 리포트는 CR-008 시점 파일과 바이트 단위로 같다** — 도달성 482/503 · KR 235(1.0000) ·
+  JP 186(0.8978) · US 51(0.9608) · WO 24 · CN 6 · EP 1. 복원이 재현임을 이 동일성이 보인다.
+  다만 기본값이 절대 경로여서 리포트가 기계별 경로를 적는 것을 함께 고쳤다(저장소 상대).
+- **그래프 서명** (`ontology/sdkb-abox-prior-art.ttl`): 트리플 57,700 → **67,123** ·
+  `CitedPatent` 3,034 → **3,513** · `filing` 3,034 → **3,513** · `claimText` 2,197 → **2,479** ·
+  미해결 IRI 233 → **0**. **개념 링크는 CR-020 값을 유지한다** — `concept_Skill` 262 → 296 은
+  B층 노드 479 가 더해진 만큼이며, CR-020 이전의 1,486 으로 돌아가지 **않는다**. 즉 CR-020 의
+  의도된 축 범주 교정과 이 복원은 서로를 덮지 않는다.
+- **T-Box·shape·IRI 규칙·어휘 변경 0 · 간선 0**(CR-008 비목표 ⓐ 유지 · 테스트가 단정).
+  재생성 3회 TTL 바이트 동일(`7f0a4df6…`) · SHACL conform 3/3 · pytest **292 통과** ·
+  공개 트리 적중 0(329 파일).
+- **하류 통보**: 이 복원은 벤더 대상이다. 하류는 §2.1 사전등록 동결 뒤 `make vendor` 로
+  받아 가며, G₀ 는 재조립 시 `CitedPatent` 3,513 을 회복한다. `concernsSkill` 순감(2,182 →
+  277)은 **복원 대상이 아니다** — CR-020 의 의도된 결과다.
+
 ### Changed (2026-08-23 — CR-020 · 특허 A-Box 생성기의 프로파일 배선 · 하류 D-49)
 
 - **`patent-text` 프로파일이 특허 A-Box 생성에 처음으로 쓰인다.** `Bridge` 가 프로파일을

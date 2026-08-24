@@ -37,6 +37,15 @@ EDGES = ROOT / "data" / "patents" / "prior_art_edges.parquet"
 OUT_TTL = ROOT / "ontology" / "sdkb-abox-prior-art.ttl"
 OUT_REPORT = ROOT / "data" / "reports" / "abox_prior_art_report.json"
 
+#: CR-008 이 채운 B층 인용문헌은 **기본 경로로 들어온다**(2026-08-24 · 하류 D-52 복원).
+#: 도입기에는 두 인자를 주지 않으면 A층 동작 그대로였고, 그 보장이 A층 자산 불변을 지켰다.
+#: 그러나 CR-016 이 만든 `make abox-prior-art` 가 인자 없이 호출하는 바람에, CR-020 재생성이
+#: CR-008 을 조용히 되감았다(CitedPatent 3,513 → 3,034). `build_abox_claim_features` 는
+#: CR-011 에서 같은 함정을 만나 모집단을 상수로 무조건 읽도록 고쳐 두었고, 그래서 멀쩡했다.
+#: 여기서도 같은 형태로 맞춘다 — 인자는 override 로 남고, 없는 체크아웃에서는 조용히 건너뛴다.
+B_LAYER_POP = ROOT / "data" / "patents" / "b_layer_cited_population.parquet"
+B_LAYER_ENRICHED = ("bigquery_b_layer.parquet", "bigquery_us_b_layer.parquet")
+
 ONT = S.ONT
 DCTERMS = Namespace("http://purl.org/dc/terms/")
 PROV = Namespace("http://www.w3.org/ns/prov#")
@@ -135,7 +144,8 @@ def b_report(pop_path: Path, enriched: pd.DataFrame, g: Graph) -> None:
 
     B_REPORT.parent.mkdir(parents=True, exist_ok=True)
     B_REPORT.write_text(json.dumps({
-        "ids_file": str(pop_path),
+        # 기본값이 절대 경로라 그대로 적으면 리포트가 기계마다 갈린다 — 저장소 상대로 적는다.
+        "ids_file": str(Path(pop_path).resolve().relative_to(ROOT)),
         "denominator_patent_docs": int(len(pat)),
         "npl_excluded": int(len(npl)),
         "total_ids": int(len(pop)),
@@ -161,9 +171,11 @@ def b_report(pop_path: Path, enriched: pd.DataFrame, g: Graph) -> None:
 def main() -> int:
     ap = argparse.ArgumentParser(description="인용 선행기술 A-Box 빌드")
     # CR-008 — 주면 B층 모집단의 IRI 를 **기존 맵에 병합**한다(덮어쓰지 않는다 = A층 불변).
-    ap.add_argument("--population", type=Path, default=None)
-    ap.add_argument("--extra-enriched", nargs="*", default=[],
-                    help="추가로 읽을 cited_enriched 파일명 (예: bigquery_b_layer.parquet)")
+    ap.add_argument("--population", type=Path,
+                    default=B_LAYER_POP if B_LAYER_POP.exists() else None)
+    ap.add_argument("--extra-enriched", nargs="*",
+                    default=[f for f in B_LAYER_ENRICHED if (ENR / f).exists()],
+                    help="추가로 읽을 cited_enriched 파일명 (기본값 = B층 수집분)")
     args = ap.parse_args()
 
     if not ENR.exists():

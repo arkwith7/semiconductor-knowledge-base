@@ -1,19 +1,18 @@
 {
-  "triples": 57700,
-  "input_resolved": 3267,
+  "triples": 67123,
+  "input_resolved": 3513,
   "counts": {
-    "filing": 3034,
-    "claims": 2197,
-    "concept_Material": 2522,
-    "concept_SubProcess": 746,
-    "concept_Process": 2305,
-    "with_concept": 2329,
-    "nodes": 3034,
-    "concept_EquipmentClass": 268,
-    "concept_Device": 262,
-    "concept_Skill": 262,
-    "concept_FailureMode": 74,
-    "unresolved_iri": 233
+    "filing": 3513,
+    "claims": 2479,
+    "concept_Material": 2648,
+    "concept_SubProcess": 815,
+    "concept_Process": 2454,
+    "with_concept": 2559,
+    "nodes": 3513,
+    "concept_EquipmentClass": 306,
+    "concept_Device": 275,
+    "concept_Skill": 296,
+    "concept_FailureMode": 86
   },
   "note": "인용문헌 노드 = 기존 cited IRI 에 타입·서지·초록·claimText·개념 링크 부여. feature 는 build_abox_claim_features 가 별도 실체화."
 }

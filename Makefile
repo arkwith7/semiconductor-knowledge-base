@@ -115,6 +115,8 @@ abox-b-layer-queries: convert
 # 입력은 네트워크 수집분(cited_enriched · claim_features)이라 `make refetch-fulltext`
 # 가 선행한다. 그래서 두 타깃을 pipeline 계보에 **직접 걸지 않는다** — 키 없는
 # 체크아웃에서 pipeline 이 죽으면 T-Box 재현까지 함께 막힌다.
+# B층 인용문헌(CR-008 · 479 건)은 **생성기 기본값**으로 들어온다 — 인자를 여기에만
+# 적어 두면 `python scripts/…` 직접 실행 경로가 다시 갈리고, 그 갈림이 D-52 였다.
 abox-prior-art: convert
 	$(PYTHON) scripts/build_abox_prior_art.py
 

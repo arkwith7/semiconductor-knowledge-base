@@ -145,3 +145,40 @@ def test_population_columns_match_collector_contract():
         assert col in pop.columns, f"컬럼 누락: {col}"
     assert pop.loc[~pop["is_npl"], "cited_country"].isin(
         ["KR", "JP", "US", "WO", "CN", "EP"]).all()
+
+
+# ── 4. 진입점 계약 (D-52 복원 · 2026-08-24) ─────────────────────────
+def test_b_layer_is_the_default_path():
+    """B층 경로는 **인자 없이도** 들어온다.
+
+    CR-008 은 두 인자를 주었을 때만 B층을 읽게 설계했고, 그 보장이 도입기의 A층
+    불변을 지켰다. 그러나 CR-016 이 만든 `make abox-prior-art` 는 인자 없이 호출하고,
+    그래서 CR-020 재생성이 CR-008 을 조용히 되감았다(CitedPatent 3,513 → 3,034 ·
+    하류 D-52). 산출물 검사(위 test_b_layer_resolved_ids_became_nodes)는 그 사고를
+    사후에만 잡는다 — 이 테스트는 **호출 기본값**을 고정해 사고 자체를 막는다.
+    """
+    import ast
+
+    tree = ast.parse(BUILDER.read_text(encoding="utf-8"))
+    defaults = {}
+    for node in ast.walk(tree):
+        if not (isinstance(node, ast.Call) and getattr(node.func, "attr", "") == "add_argument"):
+            continue
+        if not (node.args and isinstance(node.args[0], ast.Constant)):
+            continue
+        kw = {k.arg: k.value for k in node.keywords}
+        if "default" in kw:
+            defaults[node.args[0].value] = ast.dump(kw["default"])
+    assert "B_LAYER_POP" in defaults.get("--population", ""), \
+        "--population 의 기본값이 B층 모집단이 아니다 — 인자 없는 호출이 A층으로 되돌아간다"
+    assert "B_LAYER_ENRICHED" in defaults.get("--extra-enriched", ""), \
+        "--extra-enriched 의 기본값이 B층 수집분이 아니다"
+
+
+def test_b_layer_default_inputs_exist():
+    """기본값이 가리키는 원천이 실재한다 — 없으면 조용히 A층으로 떨어진다."""
+    import build_abox_prior_art as m
+
+    assert m.B_LAYER_POP == POP
+    missing = [f for f in m.B_LAYER_ENRICHED if not (m.ENR / f).exists()]
+    assert not missing, f"B층 수집분 누락: {missing} — 수집(collect_cited_biblio_claims)이 선행이다"
