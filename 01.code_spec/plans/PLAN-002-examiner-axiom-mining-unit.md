@@ -27,13 +27,13 @@
 > 승인 없이 2단계(분석)로 넘어가지 않는다. 코드 변경을 동반하므로 **§2.1(자원만 교체) 경로가
 > 아니다.**
 >
-> **발단:** [PLAN-071 §-1.4c](https://github.com/arkwith7/sdkb-prior-art-paper/blob/main/01.code_spec/plans/PLAN-071-followup-paper-axiomatized-resource-redesign.md) — 어휘
+> **발단:** [PLAN-071 §-1.4c](https://github.com/arkwith7/sdkb-prior-art-paper/blob/main/01.code_spec/archive/PLAN-071-followup-paper-axiomatized-resource-redesign.md) — 어휘
 > 확충 후 재계수에서 문턱은 174 → 187 문장에 머물렀고, 미해소 쌍 지시 문장 495건 가운데
 > **389건(78.6 %)이 표면형을 하나도 걸지 못한다.** 그 389건은 사전이 작아서가 아니라 문장이
 > 기술 내용을 담고 있지 않기 때문에 걸리지 않으며, 따라서 **어휘만으로 도달 가능한 상한은
 > 293 문장**이다(추정). 병목은 채굴기의 어휘가 아니라 **쌍 추출 단위가 문장이라는 것**이다.
 >
-> **선행 결정:** [PLAN-071 §-1.4d](https://github.com/arkwith7/sdkb-prior-art-paper/blob/main/01.code_spec/plans/PLAN-071-followup-paper-axiomatized-resource-redesign.md)
+> **선행 결정:** [PLAN-071 §-1.4d](https://github.com/arkwith7/sdkb-prior-art-paper/blob/main/01.code_spec/archive/PLAN-071-followup-paper-axiomatized-resource-redesign.md)
 > 결정 A(2026-08-23 승인) — `SemanticPathRecall` 의 목표 층은 **청구항 도달**이다. 이 계획은
 > 그 결정을 전제로 서며, 명세서 본문 수집 CR 은 발행하지 않는다.
 >

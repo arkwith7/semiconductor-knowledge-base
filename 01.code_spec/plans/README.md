@@ -32,3 +32,4 @@
 |---|---|---|---|
 | **PLAN-001** | [선행기술조사 온톨로지 재구성 — T-Box·R-Box·A-Box](PLAN-001-prior-art-axiom-resource-redesign.md) | 하류 PLAN-071 1부 | 요구 정의 · **승인 대기 🛑** |
 | **PLAN-002** | [판단 쌍 추출 단위를 문장에서 문서 맥락으로](PLAN-002-examiner-axiom-mining-unit.md) | 하류 PLAN-074 | 요구 정의 + 실행된 계수 · **착수 판정 *부분*** |
+| **PLAN-003** | [온톨로지 우선 검색 실험 재설계 — E1–E5](PLAN-003-ontology-first-retrieval-experiment.md) | 하류 PLAN-071 2부·부록 | 요구 정의 · **승인 대기 🛑** · 실행은 하류 |
