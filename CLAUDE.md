@@ -221,24 +221,42 @@ make test             # pytest
 
 ---
 
-## 8. 현재 알려진 부채 (2026-07 확인, 근거 있는 사실)
+## 8. 부채 대장 (2026-09-05 재확인 — **네 건 모두 해소**)
 
-아래는 추정이 아니라 실행으로 확인된 결함이다. 정비 중이며, 새 코드가 이것을 **답습하지 않도록** 적는다.
+**아래 넷은 2026-07 에 실행으로 확인된 결함이었고, 2026-09-05 재계수에서 모두 해소된 것으로
+확인됐다.** 해소 사실을 적는 이유는 하나다 — **있지도 않은 결함을 새 작업이 우회하기 때문이다.**
+원 진단은 지우지 않는다. 규칙이 그 사고에서 나왔기 때문이다.
 
-1. **`rejected_patents_meta.parquet` 의 `filing_date` 는 출원일이 아니라 공개일이다.**
-   KIPRIS 권위 조회 결과 출원번호 `10-2021-0184131` 의 `applicationDate` 는 2021-12-21,
-   `openDate` 는 2023-06-28 인데 parquet 의 `filing_date` 에는 **2023-06-28**(공개일)이 들어 있다.
-   `filing_date == publication_date` 가 99%, 출원번호가 인코딩한 출원연도와의 일치율은 34% 다.
-   → 시계열 연구(기술예측)에서 시점이 1~2년 밀린다. **§1.3 규칙이 여기서 나왔다.**
-2. **특허 ABox 가 TBox 에 없는 술어를 쓴다.** `ont:concernsProcess`(1,558 트리플)는
-   `sdkb-patent.ttl` TBox 에 정의가 없고 ABox 안에서 인라인 선언된다. TBox 가 정의한 것은
-   `ont:realizesProcess`(domain Patent, range Process) 다. `primaryIpc` 도 마찬가지로 TBox 어휘
-   (`hasIPC`)와 어긋난다.
-3. **특허 인스턴스에 `ont:filingDate` 가 0% 다.** 1,000건 전부 출원일 술어가 없다.
-4. **patent shape 가 실물 특허 ABox 에 걸린 적이 없다.** `validation/shapes_patent.ttl` 을
-   `ontology/sdkb-abox-patents.ttl` 에 적용하면 **3,000건 위반**(`dcterms:license`·`dcterms:source`·
-   `prov:wasGeneratedBy` 각 1,000건)이 나온다. `make validate` 의 기본 대상이 코어 데이터 그래프라
-   특허 ABox 는 검증되지 않았다.
+| # | 원 진단 (2026-07) | 재확인 (2026-09-05) | 증거 |
+|---|---|---|---|
+| 1 | `rejected_patents_meta.parquet` 의 `filing_date` 가 **공개일**이었다 (`filing_date == publication_date` 99%) | **해소** — `filing_date == publication_date` **0.0%** (n=1,000). 사례 `10-2021-0184131` 이 KIPRIS 권위값 그대로 `filing_date=2021-12-21` · `publication_date=2023-06-28` | `data/patents/rejected_patents_meta.parquet` |
+| 2 | 특허 ABox 가 TBox 에 없는 `ont:concernsProcess`(1,558) · `primaryIpc` 사용 | **해소** — ABox·TBox 양쪽 **0건** | `grep -c concernsProcess ontology/sdkb-abox-patents.ttl` |
+| 3 | 특허 인스턴스에 `ont:filingDate` **0%** | **해소** — **1,000건**(100%) | `grep -c 'ont:filingDate' ontology/sdkb-abox-patents.ttl` |
+| 4 | patent shape 가 실물 특허 ABox 에 걸린 적 없음 (3,000 위반) | **해소** — `make validate` 가 `shapes_patent.ttl × sdkb-abox-patents.ttl` 을 **명시 실행** | `Makefile:218-219` |
+
+> **§1.3 규칙(이름이 의미와 다른 필드를 만들지 않는다)은 위 1번 사고에서 나왔고, 그대로 유효하다.**
+> 결함이 고쳐졌다고 규칙이 사라지는 것이 아니다.
+
+**1번의 잔여 불일치는 결함이 아니라 PCT 구조다 (2026-09-05 실측).**
+출원번호가 인코딩한 연도와 `filing_date` 연도의 일치율은 74.4% 인데, 불일치 **256건이 전부
+일련번호 `7`(PCT 국내단계)** 이다. 통상출원(일련번호 `0`) 742건은 **일치율 100%** 이고, PCT
+국내단계 258건은 99.2% 불일치한다 — **국내단계 진입 연도와 국제출원일이 다른 것이 정상**이며
+선행기술 시점으로 옳은 것은 후자다. **이 값을 결함으로 다시 등재하지 말 것.**
+
+---
+
+## 8.1 지금의 부채 — 선행기술조사 도구로서의 결손 (2026-09-05 진단)
+
+위 넷이 닫히면서 부채의 성격이 바뀌었다. **지금 남은 것은 데이터 결함이 아니라 자원 부적격이다.**
+전문은 `01.code_spec/reports/PLAN-005-diagnosis.md` 이며, 모든 수치는 재현 명령과 함께 있다.
+
+| 층 | 실측 | 처리 계획 |
+|---|---|---|
+| **어휘** | 기술요소·조합·포함·치환·결합을 담는 클래스 **0개**. 구조요소 15개가 *"축 부재"* 로 등재 보류(`data/reports/ko_concept_proposals.json`) | PLAN-001 §1.2 · §1.10 |
+| **R-Box** | 자체 T-Box 추론 공리 **8건**이 전부 · `inverseOf`·`propertyChainAxiom`·`disjointWith` 각 **0** · 명명 클래스 47% 계층 고립 | PLAN-001 §1.3 · PLAN-002 |
+| **A-Box** | ClaimFeature 1,306,191건 중 개념 접지 **33.1%**(개념 122종) · 비 KR/US 인용문헌 청구항 분해 **0%** · `PriorArtJudgment` 635건 중 신규성 근거 **9건** | PLAN-005 §4 단계 2·5 |
+| **검증** | CQ 31개 **전량 ground BGP**(property path 0) · 추론기 타깃 없음 · `onto` 랭커 R@50 **0.1606** 대 tfidf **0.4330** | PLAN-005 §5 V1–V6 |
+| **이식성** | `featureConcept` range 가 반도체 클래스 합집합 · `noticeType`·`examinationStatus`·`groundClause` 가 KR 절차를 리터럴로 고정 | PLAN-001 §1.10 (`pa:` 슬롯) |
 
 **SIRP 는 1,000건이다** (초기 코호트 스냅샷이 773건이었고 GT 페어가 그 시점에 동결되어 있다 —
 두 숫자를 혼동하지 말 것).

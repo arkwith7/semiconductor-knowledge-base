@@ -15,6 +15,12 @@
 > 판정 공리인지 후보 생성 공리인지**를 §1.9 가 구분한다. 특히 §1.3 의 `propertyChainAxiom` 넷은
 > **후보 생성 공리이며 신규성·진보성 판정이 아니다** — 그 구분 없이는 "체인 4개 신설"이 적격
 > 충족으로 오독된다. 근거는 [PLAN-005](PLAN-005-prior-art-tool-qualification.md) §3.
+>
+> **이식성 판정 추가 (2026-09-05 · 사용자 승인 · §1.10 신설).** 안 **C′-full** 이 채택되어
+> **§1.2(b) 의 문서종 클래스 선언과 `owl:disjointWith` 는 §1.10(c) 로 대체된다.** 이 계획은
+> 이제 *"반도체 전용 아닌가"* 와 *"한국 특허청 전용 아닌가"* 두 질문에 **설계로 답한다** —
+> `pa:` 이름공간의 도메인·관할 **슬롯 두 축**, 그리고 `pa:underJurisdiction` 을 MinedAxiom
+> 의 **필수 provenance** 로 두는 것이 그 답이다. 검증은 PLAN-005 §5 **V6**.
 
 > **지위: 요구 정의 · 승인 대기 🛑.** 이 문서는 [CLAUDE.md §2](../../CLAUDE.md) 5단계의
 > **1단계**이며, 승인 없이 2단계(분석)로 넘어가지 않는다. **이 파일이 저장소에 있다는 사실을
@@ -349,3 +355,118 @@ provenance 를 우회한다. 대칭+전이는 개념 그래프를 연결성분 �
 - **특이도**: `≥60%` 단일 임계에는 퇴화 최적해가 있다 — 흔한 개념 하나를 모든 문헌에 붙이면
   도달률이 1.0 에 접근한다. 진입 조건을 셋으로 한다: (i) 기준선 대비 유의 상승 (ii) 절대 하한
   통과 (iii) **`|Reach(q)|` 중앙값이 기준선 대비 증가하지 않음.**
+
+---
+
+## 1.10 이식성 판정 — 도메인 슬롯과 관할 슬롯 (2026-09-05 · 사용자 승인 · 안 C′-full)
+
+> **§1.2(b) 는 이 절로 대체된다.** §1.1–§1.8 은 이관 원문이므로 **한 글자도 고치지 않는다**(머리말
+> 규율). 그러나 §1.2(b) 의 문서종 클래스 선언은 아래 (c) 가 **명시적으로 대체**하며, 구현은 이
+> 절을 따른다. §1.9 가 *역할*을 구분했다면 이 절은 *경계*를 긋는다.
+>
+> **발단.** 하류 논문이 반복해서 받는 질문 둘 — *"반도체 전용 아닌가(바이오로 가면?)"* 와
+> *"한국 특허청 전용 아닌가(US·EP 로 가면?)"* — 에 대해 **이 계획은 답할 근거를 갖고 있지
+> 않았다.** 이식성은 PLAN-001~005 어디에도 목표로도 비목표로도 적혀 있지 않았다.
+> 사용자 결정으로 **목표에 넣는다**(2026-09-05).
+
+### (a) 실패 지점은 두 곳이고, 형태가 같다
+
+| 축 | 실패 지점 | 실측 |
+|---|---|---|
+| **도메인** | `ont:featureConcept` 의 range 가 **반도체 클래스 합집합**으로 못박혀 있다 | `ontology/sdkb-patent.ttl:587-589` — `Process ⊔ SubProcess ⊔ Device ⊔ Material ⊔ Skill ⊔ FailureMode ⊔ EquipmentClass`. 뒤 셋은 FMEA·전문가매칭 계열 |
+| **관할** | `ont:noticeType`(`xsd:string`, *"의견제출통지서/거절결정서"*) · `ont:examinationStatus` · `ont:groundClause`(*"조-항-호"*) 가 **KR 절차·법조문을 리터럴로 고정** | `sdkb-patent.ttl:431-451` |
+
+**둘은 같은 실패다** — 슬롯이어야 할 자리를 **열거로 굳힌 것**이다. 그러므로 **메커니즘 하나로
+둘 다 푼다.**
+
+**§1.2 는 이 시험을 통과하지 못한다.** §1.2(a) 는 새 태스크층을 *"기존 Process/SubProcess 재사용 ·
+기존 Material 재사용"* 으로 **다시 반도체 클래스에 묶고**, §1.2(b) 는 KR 문서종 둘을 **T-Box 클래스로
+굳히고 `owl:disjointWith` 까지 건다.** 계획대로 지으면 재구성을 완료해도 바이오·US 이식은 여전히
+T-Box 수정을 요구한다. **이것은 지금만 고칠 수 있다** — TTL 이 발행되고 하류가 vendor 한 뒤에는
+IRI 변경이 §0 계약 위반이다.
+
+### (b) 저장소 안에 선례가 있다 — 발명하지 않는다
+
+`ontology/sdkb-governance.ttl:15-18` 이 이미 적어 두었다 — *"The Korean Industrial Technology
+Protection Act is in a separate module (`sdkb-governance-kr.ttl`) to keep jurisdictions
+decomposable."* `gov:JurisdictionUS`·`gov:JurisdictionEU`·`gov:JurisdictionKR` 가 `skos:Concept`
+로 있고 모듈이 관할별로 갈려 있다. **선행기술 축에 같은 패턴을 적용한다.**
+
+**그리고 `RejectionType` 은 이미 개체 패턴이다** — `ont:Rejection_Novelty a ont:RejectionType ;
+skos:notation "KIPO-29-1"`(`sdkb-patent.ttl:109-113`). 관할이 클래스가 아니라 **개체 속성**에
+들어 있으므로, 이 부분에 한해서는 *"인스턴스만 추가"* 가 이미 성립한다. §1.2(b) 가 되돌리려는
+것이 바로 그 성질이다.
+
+### (c) 모듈 배치 — core 는 도메인 어휘 0 · 관할 어휘 0
+
+```turtle
+# ① sdkb-priorart-core.ttl  ·  https://w3id.org/sdkb/pa/   ← 신설 이름공간
+pa:TechnicalConcept     a owl:Class .        # 도메인 슬롯 — 하위를 여기서 선언하지 않는다
+pa:LegalGround          a owl:Class .        # 관할 슬롯 — ont:RejectionType 의 중립화
+pa:ExaminationDocument  a owl:Class .
+pa:ExaminationDocumentType a owl:Class .
+pa:documentRole   → { pa:FirstAction, pa:SubsequentAction, pa:FinalAction }   # 절차 역할은 중립
+pa:citationStatus → { pa:Provisional, pa:Maintained, pa:Withdrawn }           # 이미 중립(아래 (d))
+pa:featureConcept rdfs:range pa:TechnicalConcept .    # ← union 이 아니다. 도메인 축의 답
+pa:onGround       rdfs:range pa:LegalGround .         # ← 관할 축의 답
+pa:ClaimProfile · pa:Disclosure · pa:coveredBy · pa:uncoveredConcept
+
+# ② sdkb-priorart-semi.ttl — 도메인 바인딩 (기존 파일은 한 줄도 고치지 않는다)
+semi:StructuralElement rdfs:subClassOf pa:TechnicalConcept .
+ont:Process            rdfs:subClassOf pa:TechnicalConcept .   # 기존 클래스를 여기서 끌어온다
+
+# ③ sdkb-priorart-kr.ttl — 관할 바인딩
+kr:Ground_29_1     a pa:LegalGround ; skos:notation "KIPO-29-1" .
+kr:NoticeOfReasons a pa:ExaminationDocumentType ; pa:documentRole pa:FirstAction .
+kr:FinalRejection  a pa:ExaminationDocumentType ; pa:documentRole pa:FinalAction .
+kr:NoticeOfReasons owl:differentFrom kr:FinalRejection .   # §1.2(b) 의 disjointWith 가 내려온 자리
+
+# → 바이오는 ②만, US 는 ③만 새로 쓴다. ① 은 두 경우 모두 **0줄**.
+```
+
+**§1.2(b) 의 `ont:NotificationOfReasons`·`ont:FinalRejectionDecision` 클래스 선언과 그 사이의
+`owl:disjointWith` 는 채택하지 않는다.** US 는 non-final/final Office Action, EP 는 Art.94(3)
+communication 으로 **절차 구조·개수·배타 관계가 다르다.** 클래스로 굳히면 US 이식이 클래스 신설과
+공리 수정을 요구한다. 문서종은 **`pa:documentRole` 을 갖는 개체**로 두고, 배타성은 관할 모듈에서
+말한다. §1.2(b) 의 나머지(`examRound`·`issuedDate`·`ClaimVersion`·`citationStatus` 확장)는
+**그대로 살아 있다.**
+
+### (d) 설계에서 이미 관할 중립인 축 하나 — 그 사실을 명시한다
+
+`citationStatus ∈ {Provisional, Maintained, Withdrawn}` 는 **문서종의 이름이 아니라 문서 계열의
+시간순에서 파생된다**(§1.2(b) · `derive_citation_status.py`). 그러므로 *"먼저 온 문서 / 나중
+문서에서 생존 / 소멸"* 은 KR·US·EP 에서 그대로 성립한다. **PLAN-001 은 의도치 않게 관할 중립적인
+축을 이미 갖고 있었고**, §1.2(b) 의 KR 문서종 클래스가 그것을 가리고 있었다.
+
+### (e) `pa:underJurisdiction` — MinedAxiom 의 **필수** provenance (2026-09-05 승인)
+
+§1.2(c) 의 provenance 블록에 한 줄을 더한다.
+
+```turtle
+ont:substitutableWith_sio2_sion a pa:MinedAxiom ;
+    ont:axiomConfidence "confirmed" ; ont:supportCount 7 ; ont:counterCount 1 ;
+    prov:wasDerivedFrom <reason_id...> ;
+    pa:underJurisdiction gov:JurisdictionKR .   # ← 필수. 없으면 SHACL 위반
+```
+
+**왜 필수인가.** `combinableWith` 의 의미가 관할별로 다르다 — KR 의 결합 용이성과 US §103 의
+KSR/TSM motivation-to-combine 은 같은 판단이 아니다. 관할 표기 없이 두 출처의 공리를 한 그래프에
+넣으면 *"KR 심사관이 치환 가능하다고 본 것"* 과 *"US 심사관이 자명하다고 본 것"* 이 같은 추론
+경로에 섞이며, 이는 §1-3(이름이 의미와 다른 필드 금지)이 막는 종류의 오염이다.
+**관할 혼합 추론은 금지하며, 그 금지의 기계적 근거가 이 술어다.**
+
+### (f) 무엇이 이식되고 무엇이 이식되지 않는가 — 네 층
+
+| 층 | 바이오 이식 | US 이식 |
+|---|---|---|
+| **L1 판단·절차층**(`pa:`) | **0줄** | **0줄** |
+| **L2 슬롯 바인딩** | 개념 스킴 교체(②) | 법조문·문서종 개체 추가(③) — **싸다** |
+| **L3 채굴 공리** | 공리는 이식 불가 · **채굴기는 그대로 돈다**(KIPRIS 서식 동일) | **파서 전량 재작성**(USPTO 서식·인용 지시 문법이 다름) · 법리도 다름((e)) |
+| **L4 인스턴스** | 추가 | 추가 |
+
+**그러므로 방어하는 명제는 *"인스턴스만 추가하면 된다"* 가 아니다** — 그 명제는 마쿠쉬 구조·서열
+목록·의약용도로 즉시 반례가 나온다. 방어하는 명제는 **"L1 0줄 변경 · L2 슬롯 교체 · L3 같은
+생성기 재실행 · L4 인스턴스 추가"** 이며, **이식되는 것은 공리가 아니라 공리를 만드는 방법이다.**
+
+**검증은 PLAN-005 §5 V6 이 진다** — 도메인은 실물 이식(V6a)으로 실증하고, 관할은 종이 이식(V6b)과
+CI 불변식으로 설계 보증한다. **US 문헌 회수 성능은 재지 않으며 그렇게 적는다**(§1-4).

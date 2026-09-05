@@ -1,0 +1,174 @@
+{
+  "generated": "2026-09-05",
+  "plan": "PLAN-005 단계 1 (V1–V3 기준선)",
+  "read_only": true,
+  "V1_axiom_ablation": {
+    "axioms_total": 8,
+    "consumed": 0,
+    "unconsumed": 8,
+    "cq_count": 31,
+    "cq_baseline_rows_total": 9470,
+    "graphs_loaded": [
+      "ontology/sdkb-core.ttl",
+      "ontology/sdkb-core-data.ttl",
+      "ontology/sdkb-patent.ttl",
+      "ontology/sdkb-governance.ttl",
+      "ontology/sdkb-governance-kr.ttl",
+      "ontology/sdkb-governance-kr-instances.ttl",
+      "ontology/sdkb-governance-us-instances.ttl",
+      "ontology/sdkb-abox-experts-problems.ttl",
+      "ontology/sdkb-abox-patents.ttl",
+      "ontology/sdkb-abox-vendors.ttl",
+      "ontology/sdkb-abox-b-layer-queries.ttl"
+    ],
+    "graphs_missing": [],
+    "detail": [
+      {
+        "kind": "TransitiveProperty",
+        "term": "hasSubStep",
+        "target": null,
+        "present_in_graph": true,
+        "cq_changed": [],
+        "consumed": false
+      },
+      {
+        "kind": "TransitiveProperty",
+        "term": "broaderClassification",
+        "target": null,
+        "present_in_graph": true,
+        "cq_changed": [],
+        "consumed": false
+      },
+      {
+        "kind": "subPropertyOf",
+        "term": "hasIPC",
+        "target": "hasClassification",
+        "present_in_graph": true,
+        "cq_changed": [],
+        "consumed": false
+      },
+      {
+        "kind": "subPropertyOf",
+        "term": "hasCPC",
+        "target": "hasClassification",
+        "present_in_graph": true,
+        "cq_changed": [],
+        "consumed": false
+      },
+      {
+        "kind": "subPropertyOf",
+        "term": "hasFTerm",
+        "target": "hasClassification",
+        "present_in_graph": true,
+        "cq_changed": [],
+        "consumed": false
+      },
+      {
+        "kind": "subPropertyOf",
+        "term": "hasPriorArtExaminer",
+        "target": "hasPriorArt",
+        "present_in_graph": true,
+        "cq_changed": [],
+        "consumed": false
+      },
+      {
+        "kind": "subPropertyOf",
+        "term": "hasPriorArtApplicant",
+        "target": "hasPriorArt",
+        "present_in_graph": true,
+        "cq_changed": [],
+        "consumed": false
+      },
+      {
+        "kind": "equivalentClass",
+        "term": "Dopant",
+        "target": "n5a09cb07797a455ea0cb8a780a48bb41b43",
+        "present_in_graph": false,
+        "cq_changed": [],
+        "consumed": false
+      }
+    ],
+    "limitation": "8건 중 7건만 실제로 절제됐다. equivalentClass Dopant 는 목적어가 공백노드라 트리플 동일성 매칭에 실패해 그래프에서 제거되지 않았다(present_in_graph=false). 계수기는 교정했으나 이 실행분의 수는 소급 수정하지 않는다 — 그 공리는 반도체 물리이고 특허 CQ 와 무관하므로 결론(소비 0건)은 바뀌지 않을 것으로 보나, 확인 전까지 가정이다.",
+    "interpretation": "소비 0건의 원인은 공리가 무의미해서가 아니라 소비자가 추론기를 돌리지 않기 때문이다 — run_cq.py 가 '추론은 쓰지 않는다'고 명시하므로 subPropertyOf·TransitiveProperty 는 구성상 비활성이다. 이것이 진단 §2.4('추론기는 파이프라인에 타깃이 없다')의 정량형이다."
+  },
+  "V2_semantic_path_recall": {
+    "queries": 759,
+    "queries_dropped_no_query_concept": 80,
+    "corpus_docs_grounded": 31808,
+    "target_node": "인용문헌 노드 (퇴화형) — ont:Disclosure 는 클래스·인스턴스 0건이라 오늘 잴 수 없다",
+    "masking": "구성으로 충족 — Reach 계산이 정답 간선을 읽지 않는다",
+    "target_size_median": 2,
+    "reach_size_median": 11348,
+    "reach_size_mean": 10922.5,
+    "reach_size_max": 25955,
+    "reach_zero_queries": 0,
+    "hit_rate_any_S": 0.9288537549407114,
+    "SemanticPathRecall@100": 0.005270092226613966,
+    "SemanticPathRecall@1000": 0.05006587615283267,
+    "SemanticPathRecall@inf": 0.9288537549407114
+  },
+  "V3_coverage": {
+    "queries": 759,
+    "essential_concepts_per_query": {
+      "median": 3.0,
+      "mean": 3.01,
+      "p10": 1.0,
+      "p90": 5.0
+    },
+    "best_single_coverage": {
+      "median": 0.8,
+      "mean": 0.7218,
+      "eq0": 54,
+      "eq1": 349,
+      "saturated_frac": 0.531
+    },
+    "pair_queries": 468,
+    "delta_coverage": {
+      "median": 0.0,
+      "mean": 0.0484,
+      "gt0_frac": 0.188
+    }
+  },
+  "V4_query_independence": {
+    "status": "미산출",
+    "reason": "요약·의역 질의 생성이 선행되어야 한다(PLAN-005 §5 V4-1). 실제 연구노트 소표본(V4-2)은 2인 독립 판정이 필요하므로 사람 자원에 걸린다."
+  },
+  "control_group": {
+    "decision": "2026-09-05 · 사용자 승인 — 기존 리포트 값을 그대로 쓴다. 재실행하지 않는다.",
+    "source": "data/reports/prior_art_realgt_report.json (scripts/eval_prior_art_realgt.py 산출)",
+    "n_queries": 974,
+    "tfidf": {
+      "Recall@50": 0.433,
+      "Recall@10": 0.2758,
+      "MRR": 0.2753,
+      "NDCG@5": 0.3088
+    },
+    "onto": {
+      "Recall@50": 0.1606,
+      "Recall@10": 0.0614,
+      "MRR": 0.0612,
+      "NDCG@5": 0.0662
+    },
+    "onto_idf": {
+      "Recall@50": 0.1684,
+      "Recall@10": 0.0678,
+      "MRR": 0.0656,
+      "NDCG@5": 0.0717
+    },
+    "hybrid": {
+      "Recall@50": 0.4234,
+      "Recall@10": 0.2226,
+      "MRR": 0.2098,
+      "NDCG@5": 0.2453
+    },
+    "language_stratified_R@50": {
+      "tfidf_KR": 0.6708,
+      "tfidf_FOREIGN": 0.0074,
+      "hybrid_KR": 0.6272,
+      "hybrid_FOREIGN": 0.0599,
+      "gt_positives_KR": 1376,
+      "gt_positives_FOREIGN": 952
+    },
+    "caveat": "대조군 0.4330 은 단일 수로 읽으면 안 된다 — 언어로 가르면 KR 0.6708 · FOREIGN 0.0074 다. 온톨로지가 넘어야 할 선은 층별로 완전히 다르며, FOREIGN 층에서는 tfidf 가 사실상 0 이다. 이 층화를 무시하면 '온톨로지가 tfidf 를 못 넘었다'와 '온톨로지가 tfidf 가 못 하는 층에서 이겼다'가 같은 수 하나에 뭉개진다(PLAN-003 §2.5 T2 하위집단 '언어')."
+  }
+}

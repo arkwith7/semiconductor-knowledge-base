@@ -1,0 +1,69 @@
+{
+  "generated": "2026-09-06",
+  "plan": "PLAN-005 §5 V4-2 (LLM 1차 스크리닝)",
+  "judges": {
+    "j1": "gemma3:27b",
+    "j2": "global.anthropic.claude-sonnet-5"
+  },
+  "candidate_pool": {
+    "grounded_corpus": 31808,
+    "with_text": 2926,
+    "coverage": 0.092,
+    "note": "읽을 수 없는 문헌은 판정할 수 없다. V4-2 는 텍스트 보유 문헌으로 한정된 범위의 측정이다(진단 §2.3)."
+  },
+  "pairs": 560,
+  "judged_by_both": 558,
+  "j1_relevant_rate": 0.1201,
+  "j2_relevant_rate": 0.0269,
+  "observed_agreement": 0.8996,
+  "cohen_kappa_llm_llm": 0.2857,
+  "disagreements": 56,
+  "human_queue": {
+    "note": "사람 2인 코딩 대상 — 이 스크립트는 정답을 만들지 않는다. 불일치 전량 + 일치분 층화 표본을 사람이 판정하고 κ 는 **사람 2인 사이**에서 낸다.",
+    "disagreement_rows": 56
+  },
+  "by_topic": {
+    "deposition": {
+      "pairs": 80,
+      "j1": 0.1,
+      "j2": 0.0125,
+      "agree": 0.9125
+    },
+    "etch": {
+      "pairs": 79,
+      "j1": 0.08860759493670886,
+      "j2": 0.0,
+      "agree": 0.9114
+    },
+    "implant": {
+      "pairs": 80,
+      "j1": 0.05,
+      "j2": 0.0,
+      "agree": 0.95
+    },
+    "memory": {
+      "pairs": 80,
+      "j1": 0.2875,
+      "j2": 0.0875,
+      "agree": 0.8
+    },
+    "metallization": {
+      "pairs": 79,
+      "j1": 0.06329113924050633,
+      "j2": 0.0253,
+      "agree": 0.962
+    },
+    "oxidation_diffusion": {
+      "pairs": 80,
+      "j1": 0.05,
+      "j2": 0.0,
+      "agree": 0.95
+    },
+    "photo": {
+      "pairs": 80,
+      "j1": 0.2,
+      "j2": 0.0625,
+      "agree": 0.8125
+    }
+  }
+}

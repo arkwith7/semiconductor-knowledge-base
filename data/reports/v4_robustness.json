@@ -1,0 +1,90 @@
+{
+  "generated": "2026-09-05",
+  "plan": "PLAN-005 §5 V4-1 (표현 강건성)",
+  "read_only": true,
+  "linker": "표면형 사전 patent-text (결정적, LLM 아님)",
+  "surface_forms": 665,
+  "note": "변형 claim 이 이 리포트의 기준선이다. V2 기준선과는 링커가 달라 값이 다를 수 있으므로, 판정 대상은 **변형 간 비교**다.",
+  "by_variant": {
+    "L1": {
+      "queries": 759,
+      "concepts_per_query_median": 2,
+      "zero_concept_queries": 42,
+      "reach_median": 10200,
+      "hit_rate": 0.8617,
+      "SemanticPathRecall@100": 0.004,
+      "SemanticPathRecall@1000": 0.054,
+      "jaccard_to_claim_median": 0.4286
+    },
+    "L2": {
+      "queries": 759,
+      "concepts_per_query_median": 2,
+      "zero_concept_queries": 46,
+      "reach_median": 9956,
+      "hit_rate": 0.8669,
+      "SemanticPathRecall@100": 0.0079,
+      "SemanticPathRecall@1000": 0.0619,
+      "jaccard_to_claim_median": 0.2353
+    },
+    "L3": {
+      "queries": 759,
+      "concepts_per_query_median": 2,
+      "zero_concept_queries": 40,
+      "reach_median": 10707,
+      "hit_rate": 0.8762,
+      "SemanticPathRecall@100": 0.0066,
+      "SemanticPathRecall@1000": 0.0408,
+      "jaccard_to_claim_median": 0.1974
+    },
+    "abstract": {
+      "queries": 759,
+      "concepts_per_query_median": 2,
+      "zero_concept_queries": 44,
+      "reach_median": 9877,
+      "hit_rate": 0.8735,
+      "SemanticPathRecall@100": 0.0066,
+      "SemanticPathRecall@1000": 0.0316,
+      "jaccard_to_claim_median": 0.5079
+    },
+    "claim": {
+      "queries": 759,
+      "concepts_per_query_median": 2,
+      "zero_concept_queries": 40,
+      "reach_median": 10183,
+      "hit_rate": 0.8669,
+      "SemanticPathRecall@100": 0.004,
+      "SemanticPathRecall@1000": 0.0553,
+      "jaccard_to_claim_median": 1.0
+    }
+  },
+  "llm_jaccard_quartiles": {
+    "Q1_먼": {
+      "n": 573,
+      "jaccard_median": 0.1642,
+      "hit_rate": 0.8639,
+      "concepts_median": 2.0,
+      "reach_median": 9148.0
+    },
+    "Q2": {
+      "n": 566,
+      "jaccard_median": 0.2228,
+      "hit_rate": 0.8728,
+      "concepts_median": 2.0,
+      "reach_median": 10811.0
+    },
+    "Q3": {
+      "n": 571,
+      "jaccard_median": 0.2988,
+      "hit_rate": 0.8739,
+      "concepts_median": 2.0,
+      "reach_median": 10954.0
+    },
+    "Q4_가까운": {
+      "n": 567,
+      "jaccard_median": 0.4615,
+      "hit_rate": 0.8624,
+      "concepts_median": 3.0,
+      "reach_median": 10665.0
+    }
+  }
+}
