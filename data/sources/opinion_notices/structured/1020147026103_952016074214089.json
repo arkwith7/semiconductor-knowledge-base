@@ -1,0 +1,45 @@
+{
+ "application_number": "1020147026103",
+ "sections": [
+  {
+   "section": 1,
+   "legal_bases": [
+    "§29②"
+   ],
+   "cited_ids": [
+    "JP-P-2010126789"
+   ],
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    8,
+    10
+   ]
+  },
+  {
+   "section": 3,
+   "legal_bases": [
+    "§42"
+   ],
+   "cited_ids": [],
+   "target_claims": [
+    5
+   ]
+  },
+  {
+   "section": 4,
+   "legal_bases": [
+    "§42"
+   ],
+   "cited_ids": [],
+   "target_claims": [
+    5
+   ]
+  }
+ ],
+ "source_file": "1020147026103_952016074214089.txt",
+ "generator": "build_notice_evidence.py"
+}

@@ -1,0 +1,22 @@
+{
+ "application_number": "1020127024854",
+ "sections": [
+  {
+   "section": 1,
+   "legal_bases": [
+    "§29②"
+   ],
+   "cited_ids": [
+    "JP-P-10032167",
+    "JP-P-10070089",
+    "JP-P-10196788",
+    "JP-P-2001102170",
+    "JP-P-2003193243",
+    "JP-P-2008091484"
+   ],
+   "target_claims": []
+  }
+ ],
+ "source_file": "1020127024854_952017056513341.txt",
+ "generator": "build_notice_evidence.py"
+}

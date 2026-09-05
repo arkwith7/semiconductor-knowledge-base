@@ -1,0 +1,82 @@
+{
+ "application_number": "1020110096810",
+ "sections": [
+  {
+   "section": 1,
+   "legal_bases": [
+    "§42"
+   ],
+   "cited_ids": [],
+   "target_claims": [
+    5,
+    6,
+    12,
+    14,
+    15,
+    16,
+    19,
+    21,
+    28,
+    29,
+    30,
+    31,
+    32
+   ]
+  },
+  {
+   "section": 2,
+   "legal_bases": [
+    "§29①"
+   ],
+   "cited_ids": [
+    "KR-P-1020060016418"
+   ],
+   "target_claims": [
+    1,
+    4,
+    5,
+    12,
+    21,
+    28
+   ]
+  },
+  {
+   "section": 3,
+   "legal_bases": [
+    "§29②"
+   ],
+   "cited_ids": [
+    "KR-P-1020070025612",
+    "KR-P-1020080002500"
+   ],
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    10,
+    11,
+    12,
+    13,
+    15,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31
+   ]
+  }
+ ],
+ "source_file": "1020110096810_952013015388128.txt",
+ "generator": "build_notice_evidence.py"
+}

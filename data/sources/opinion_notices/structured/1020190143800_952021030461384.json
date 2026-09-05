@@ -1,0 +1,28 @@
+{
+ "application_number": "1020190143800",
+ "sections": [
+  {
+   "section": 1,
+   "legal_bases": [
+    "§29②"
+   ],
+   "cited_ids": [
+    "KR-P-1020010098415",
+    "KR-P-1020170063092"
+   ],
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    10
+   ]
+  }
+ ],
+ "source_file": "1020190143800_952021030461384.txt",
+ "generator": "build_notice_evidence.py"
+}

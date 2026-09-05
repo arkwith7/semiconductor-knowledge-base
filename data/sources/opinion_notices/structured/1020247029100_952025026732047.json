@@ -1,0 +1,29 @@
+{
+ "application_number": "1020247029100",
+ "sections": [
+  {
+   "section": 1,
+   "legal_bases": [
+    "§29①"
+   ],
+   "cited_ids": [
+    "JP-P-2019212910",
+    "US-G-6490145"
+   ],
+   "target_claims": []
+  },
+  {
+   "section": 2,
+   "legal_bases": [
+    "§29②"
+   ],
+   "cited_ids": [
+    "JP-P-2019212910",
+    "US-G-6490145"
+   ],
+   "target_claims": []
+  }
+ ],
+ "source_file": "1020247029100_952025026732047.txt",
+ "generator": "build_notice_evidence.py"
+}

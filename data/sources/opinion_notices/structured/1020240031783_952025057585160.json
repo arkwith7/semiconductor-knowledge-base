@@ -1,0 +1,50 @@
+{
+ "application_number": "1020240031783",
+ "sections": [
+  {
+   "section": 1,
+   "legal_bases": [
+    "§29①"
+   ],
+   "cited_ids": [
+    "US-G-5195729"
+   ],
+   "target_claims": [
+    1,
+    2
+   ]
+  },
+  {
+   "section": 2,
+   "legal_bases": [
+    "§29②"
+   ],
+   "cited_ids": [
+    "US-G-5195729",
+    "US-G-6343784",
+    "US-P-20070218664",
+    "US-P-20130276704"
+   ],
+   "target_claims": [
+    1,
+    2,
+    3,
+    5,
+    6,
+    7,
+    8,
+    9,
+    11,
+    12,
+    13,
+    14,
+    15,
+    17,
+    18,
+    19
+   ]
+  }
+ ],
+ "source_file": "1020240031783_952025057585160.txt",
+ "generator": "build_notice_evidence.py"
+}
