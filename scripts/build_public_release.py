@@ -115,6 +115,13 @@ DENY_PREFIXES = (
     # pdf 는 .gitignore 로도 막히지만 txt·structured 는 **git 에 추적되므로**
     # `git ls-files` 를 읽는 이 생성기에는 이 DENY 가 유일한 방어선이다.
     "data/sources/",
+    # ── 평가 질의 세트 (2026-09-05 · PLAN-005 §5 V4)
+    # `data/queries/v4/` 는 거절특허 **청구항 원문**(variant=claim)·**초록**(abstract)과
+    # 그것을 LLM 으로 다시 쓴 의역문을 담는다. 원문은 KIPRIS 수집물이므로 §1-5 재배포
+    # 금지에 걸리고, 의역문은 그 원문에서 파생된 것이라 같은 조건을 물려받는다.
+    # **`data/` 가 통째로 ALLOW 이므로, 이 한 줄이 없으면 그대로 발행된다.**
+    # 새 평가 자산을 `data/` 아래 새 디렉터리로 만들 때는 여기부터 확인할 것.
+    "data/queries/",
 )
 
 DENY_FILES = {

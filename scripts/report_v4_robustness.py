@@ -31,7 +31,7 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "data" / "reports" / "v4_robustness.json"
-QUERIES = ROOT / "data" / "processed" / "v4_paraphrase_queries.parquet"
+QUERIES = ROOT / "data" / "queries" / "v4" / "v4_paraphrase_queries.parquet"
 
 
 def build_linker() -> list[tuple[str, str]]:

@@ -45,7 +45,9 @@ except ImportError:
 MODEL = os.getenv("V4_GEN_MODEL", "global.anthropic.claude-opus-5")
 REGION = os.getenv("AWS_REGION", "ap-northeast-2")
 CACHE = ROOT / "data" / "interim" / "v4_paraphrase_cache.sqlite"
-OUT = ROOT / "data" / "processed" / "v4_paraphrase_queries.parquet"
+# data/processed 는 gitignore 다. 질의 세트는 파생 산출이 아니라 **평가 자산**이며
+# sha256 과 함께 동결·커밋되어야 하므로(PLAN-005 §5 V4) 추적되는 경로에 둔다.
+OUT = ROOT / "data" / "queries" / "v4" / "v4_paraphrase_queries.parquet"
 
 LEVELS = {
     "L1": ("청구항 문체를 유지하되 표현만 바꾼다. 구성요소와 단계는 하나도 빠뜨리지 않는다. "

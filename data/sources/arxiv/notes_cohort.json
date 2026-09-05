@@ -1,0 +1,620 @@
+{
+  "generated": "2026-09-05",
+  "plan": "PLAN-005 §5 V4-2 (연구노트 프록시 코호트)",
+  "proxy_note": "arXiv 초록은 연구노트가 아니라 **프록시**다 — 학술 논문 문체이며 비정형 연구 메모가 아니다. 단독으로 '연구노트에서 작동한다'의 근거가 되지 않는다.",
+  "cohort_rationale": "검색어는 코퍼스 process_family 분포(deposition 330 · etch 234 · metallization 82 · memory 58 · oxidation_diffusion 47 · photo 46 · implant 38)에서 유도했다. 임의 선정이 아니다.",
+  "license": {
+    "source": "arXiv API",
+    "terms": "https://arxiv.org/help/api/tou",
+    "scope": "메타데이터(제목·초록)만. 전문 PDF 는 받지 않는다.",
+    "note": "재배포 조건은 arXiv 약관을 따른다 — 공개 파생 경로에 넣지 않는다(§1-5)."
+  },
+  "n": 56,
+  "items": [
+    {
+      "arxiv_id": "0308477v1",
+      "topic": "deposition",
+      "title": "Local gating of carbon nanotubes",
+      "abstract": "Local effects of multiple electrostatic gates placed beneath carbon nanotubes grown by chemical vapor deposition (CVD) are reported. Single-walled carbon nanotubes were grown by CVD from Fe catalyst islands across thin Mo \"finger gates\" (150 x 10nm). Prior to tube growth, several finger gates were patterned lithogrpahically and subsequently coated with a patterned high-k dielectric using low-temperature atomic layer deposition. Transport measurements demonstrate that local finger gates have a distinct effect from a global backgate.",
+      "published": "2003-08-24",
+      "categories": [
+        "cond-mat.mes-hall",
+        "cond-mat.mtrl-sci"
+      ]
+    },
+    {
+      "arxiv_id": "1706.01704v2",
+      "topic": "deposition",
+      "title": "Passivation of Edge States in Etched InAs Sidewalls",
+      "abstract": "We investigate different methods of passivating sidewalls of wet etched InAs heterostructures in order to suppress inherent edge conduction that is presumed to occur due to band bending at the surface leading to charge carrier accumulation. Passivation techniques including sulfur, positively charged compensation dopants and plasma enhanced chemical vapor deposition of $\\mathrm{SiN}_{\\mathrm{x}}$ do not show an improvement. Surprisingly, atomic layer deposition of $\\mathrm{Al}_{\\mathrm{2}}\\mathrm{O}_{\\mathrm{3}}$ leads to an increase in edge resistivity of more than an order of magnitude. While the mechanism behind this change is not fully understood, possible reasons are suggested.",
+      "published": "2017-06-06",
+      "categories": [
+        "cond-mat.mes-hall"
+      ]
+    },
+    {
+      "arxiv_id": "2209.13033v1",
+      "topic": "deposition",
+      "title": "Efficient thermo-optic micro-ring phase shifter made of PECVD silicon-rich amorphous silicon carbide",
+      "abstract": "In this work, the thermo-optic coefficient (TOC) of the silicon-rich amorphous silicon carbide (a-SiC) thin film deposited by plasma-enhanced chemical vapor deposition is characterized. We found that the TOC of the film increases as its silicon content increases. A more than three-fold improvement in the TOC is measured, reaching a TOC as high as $1.88 \\times 10^{-4} K^{-1}$, which is comparable to that of crystalline silicon. An efficient thermo-optic phase shifter has also been demonstrated by integrating the silicon-rich a-SiC micro-ring structure with a NiCr heater. Its tuning efficiency $P_π$ as low as 4.4 mW has been measured at an optical wavelength of 1550 nm. These findings make silicon-rich a-SiC a good material candidate for thermo-optic applications in photonic integrated circuits.",
+      "published": "2022-09-26",
+      "categories": [
+        "physics.optics",
+        "physics.app-ph"
+      ]
+    },
+    {
+      "arxiv_id": "1308.1128v1",
+      "topic": "deposition",
+      "title": "Embedding a carbon nanotube across the diameter of a solid state nanopore",
+      "abstract": "A fabrication method for positioning and embedding a single-walled carbon nanotube (SWNT) across the diameter of a solid state nanopore is presented. Chemical vapor deposition (CVD) is used to grow SWNTs over arrays of focused ion beam (FIB) milled pores in a thin silicon nitride membrane. This typically yields at least one pore whose diameter is centrally crossed by a SWNT. The final diameter of the FIB pore is adjusted to create a nanopore of any desired diameter by atomic layer deposition (ALD), simultaneously embedding and insulating the SWNT everywhere but in the region that crosses the diameter of the final nanopore, where it remains pristine and bare. This nanotube-articulated nanopore is an important step towards the realization of a new type of detector for biomolecule sensing and electronic characterization, including DNA sequencing.",
+      "published": "2013-08-05",
+      "categories": [
+        "physics.bio-ph",
+        "cond-mat.mes-hall",
+        "cond-mat.mtrl-sci",
+        "cond-mat.soft",
+        "physics.ins-det"
+      ]
+    },
+    {
+      "arxiv_id": "0908.3525v1",
+      "topic": "deposition",
+      "title": "Bipolar resistive switching in amorphous titanium oxide thin films",
+      "abstract": "Using isothermal and temperature-dependent electrical measurements, we investigated the resistive switching mechanism of amorphous titanium oxide thin films deposited by a plasma-enhanced atomic layer deposition method between two aluminum electrodes. We found a bipolar resistive switching behavior in the high temperature region (> 140 K), and two activation energies of shallow traps, 0.055 eV and 0.126 eV in the ohmic current regime. We also proposed that the bipolar resistive switching of amorphous TiO2 thin films is governed by the transition of conduction mode from a bulk-limited SCLC model (Off state) to an interface-limited Schottky emission (On state), generated by the ionic movement of oxygen vacancies.",
+      "published": "2009-08-25",
+      "categories": [
+        "cond-mat.mtrl-sci",
+        "cond-mat.mes-hall"
+      ]
+    },
+    {
+      "arxiv_id": "1303.0086v1",
+      "topic": "deposition",
+      "title": "High mobility and high on/off ratio field-effect transistors based on chemical vapor deposited single-crystal MoS2 grains",
+      "abstract": "We report field-effect transistors (FETs) with single-crystal molybdenum disulfide (MoS2) channels synthesized by chemical vapor deposition (CVD). For a bilayer MoS2 FET, the mobility is ~17 cm2V-1s-1 and the on/off current ratio is ~108, which are much higher than those of FETs based on CVD polycrystalline MoS2 films. By avoiding the detrimental effects of the grain boundaries and the contamination introduced by the transfer process, the quality of the CVD MoS2 atomic layers deposited directly on SiO2 is comparable to the best exfoliated MoS2 flakes. It shows that CVD is a viable method to synthesize high quality MoS2 atomic layers.",
+      "published": "2013-03-01",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ]
+    },
+    {
+      "arxiv_id": "0611098v1",
+      "topic": "deposition",
+      "title": "Parallel Core-Shell Metal-Dielectric-Semiconductor Germanium Nanowires for High Current Surround Gate Field Effect Transistors",
+      "abstract": "Core-shell germanium nanowire (GeNW) is formed with a single-crystalline Ge core and concentric shells of nitride and silicon passivation layer by chemical vapor deposition (CVD), an Al2O3 gate dielectric layer by atomic layer deposition (ALD) and an Al metal surround-gate (SG) shell by isotropic magnetron sputter deposition. Surround gate nanowire field effect transistors (FETs) are then constructed using a novel self-aligned fabrication approach. Individual SG GeNW FETs show improved switching over GeNW FETs with planar gate stacks owing to improved electrostatics. FET devices comprised of multiple quasi-aligned SG GeNWs in parallel are also constructed. Collectively, tens of SG GeNWs afford on-currents exceeding 0.1mA at low source-drain bias voltages. The self-aligned surround gate scheme can be generalized to various semiconductor nanowire materials.",
+      "published": "2006-11-03",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ]
+    },
+    {
+      "arxiv_id": "0504484v1",
+      "topic": "deposition",
+      "title": "Modulation of the high mobility two-dimensional electrons in Si/SiGe using atomic-layer-deposited gate dielectric",
+      "abstract": "Metal-oxide-semiconductor field-effect transistors (MOSFET's) using atomic-layer-deposited (ALD) Al$_2$O$_3$ as the gate dielectric are fabricated on the Si/Si$_{1-x}$Ge$_x$ heterostructures. The low-temperature carrier density of a two-dimensional electron system (2DES) in the strained Si quantum well can be controllably tuned from 2.5$\\times10^{11}$cm$^{-2}$ to 4.5$\\times10^{11}$cm$^{-2}$, virtually without any gate leakage current. Magnetotransport data show the homogeneous depletion of 2DES under gate biases. The characteristic of vertical modulation using ALD dielectric is shown to be better than that using Schottky barrier or the SiO$_2$ dielectric formed by plasma-enhanced chemical-vapor-deposition(PECVD).",
+      "published": "2005-04-19",
+      "categories": [
+        "cond-mat.mes-hall"
+      ]
+    },
+    {
+      "arxiv_id": "1305.4428v1",
+      "topic": "etch",
+      "title": "Optimization of graphene dry etching conditions via combined microscopic and spectroscopic analysis",
+      "abstract": "Single-layer graphene structures and devices are commonly defined using reactive ion etching and plasma etching with O2 or Ar as the gaseous etchants. Although optical microscopy and Raman spectroscopy are widely used to determine the appropriate duration of dry etching, additional characterization with atomic force microscopy (AFM) reveals that residual graphene and/or etching byproducts persist beyond the point where the aforementioned methods suggest complete graphene etching. Recognizing that incomplete etching may have deleterious effects on devices and/or downstream processing, AFM characterization is used here to determine optimal etching conditions that eliminate graphene dry etching residues.",
+      "published": "2013-05-20",
+      "categories": [
+        "cond-mat.mtrl-sci",
+        "cond-mat.mes-hall"
+      ]
+    },
+    {
+      "arxiv_id": "2310.20546v1",
+      "topic": "etch",
+      "title": "Analytical Study of KOH Wet Etch Surface Passivation for III-Nitride Micropillars",
+      "abstract": "III-Nitride micropillar structures show great promise for applications in micro light-emitting diodes and vertical power transistors due to their excellent scalability and outstanding electrical properties. Typically, III-Nitride micropillars are fabricated through a top-down approach using reactive ion etch which leads to roughened, non-vertical sidewalls that results in significant performance degradation. Thus, it is essential to remove this plasma etch induced surface damage. Here, we show that potassium hydroxide (KOH) acts as a crystallographic etchant for III-Nitride micropillars, preferentially exposing the vertical <1-100> m-plane, and effectively removing dry etch damage and reducing the structure diameter at up to 36.6 nm/min. Both KOH solution temperature and concentration have a dramatic effect on this wet etch progression. We found that a solution of 20% AZ400K (2% KOH) at 90 C is effective at producing smooth, highly vertical sidewalls with RMS surface roughness as low as 2.59 nm, ideal for high-performance electronic and optoelectronic devices.",
+      "published": "2023-10-31",
+      "categories": [
+        "physics.app-ph"
+      ]
+    },
+    {
+      "arxiv_id": "1503.01921v2",
+      "topic": "etch",
+      "title": "Graphene nanoribbons: relevance of etching process",
+      "abstract": "Most graphene nanoribbons in the experimental literature are patterned using plasma etching. Various etching processes induce different types of defects and do not necessarily result in the same electronic and structural ribbon properties. This study focuses on two frequently used etching techniques, namely oxygen plasma ashing and oxygen/argon reactive ion etching (RIE). Oxygen plasma ashing represents an alternative to RIE physical etching for sensitive substrates, as it is a more gentle chemical process. We find that plasma ashing creates defective graphene in the exposed trenches, resulting in instabilities in the ribbon transport. These are probably caused by more or larger localized states at the edges of the ashed device compared to the RIE defined device.",
+      "published": "2015-03-06",
+      "categories": [
+        "cond-mat.mes-hall"
+      ]
+    },
+    {
+      "arxiv_id": "1909.06881v1",
+      "topic": "etch",
+      "title": "Ar/Cl$_{2}$ etching of GaAs optomechanical microdisks fabricated with positive electroresist",
+      "abstract": "A method to fabricate GaAs microcavities using only a soft mask with an electrolithographic pattern in an inductively coupled plasma etching is presented. A careful characterization of the fabrication process pinpointing the main routes for a smooth device sidewall is discussed. Using the final recipe, optomechanical microdisk resonators are fabricated. The results show a very high optical quality factors of $Q_\\text{opt}>2\\times 10^{5}$, among the largest already reported for dry-etching devices. The final devices are also shown to present high mechanical quality factors and an optomechanical vacuum coupling constant of $g_{0}=2π\\times 13.6$ kHz enabling self-sustainable mechanical oscillations for an optical input power above $1$ mW.",
+      "published": "2019-09-15",
+      "categories": [
+        "physics.app-ph",
+        "cond-mat.mes-hall",
+        "cond-mat.mtrl-sci"
+      ]
+    },
+    {
+      "arxiv_id": "1506.00376v1",
+      "topic": "etch",
+      "title": "Soft-mask fabrication of gallium arsenide nanomembranes for integrated quantum photonics",
+      "abstract": "We report on the fabrication of quantum photonic integrated circuits based on suspended GaAs membranes. The fabrication process consists of a single lithographic step followed by inductively-coupled-plasma dry etching through an electron-beam-resist mask and wet etching of a sacrificial layer. This method does not require depositing, etching, and stripping a hard mask, greatly reducing fabrication time and costs, while at the same time yielding devices of excellent structural quality. We discuss in detail the procedures for cleaning the resist residues caused by the plasma etching and present a statistical analysis of the etched feature size after each fabrication step.",
+      "published": "2015-06-01",
+      "categories": [
+        "physics.optics",
+        "cond-mat.mtrl-sci",
+        "quant-ph"
+      ]
+    },
+    {
+      "arxiv_id": "2004.03423v1",
+      "topic": "etch",
+      "title": "Crystallographic Orientation Dependent Reactive Ion Etch in Single Crystal Diamond",
+      "abstract": "Sculpturing desired shapes in single crystal diamond is ever more crucial in the realization of complex devices for nanophotonics, quantum computing, and quantum optics. The crystallographic orientation dependent wet etch of single crystalline silicon in potassium hydroxide (KOH) allows a range of shapes formed and has significant impacts on MEMS (microelectromechanical systems), AFM (atomic force microscopy), and microfluidics. Here, a crystal direction dependent dry etching principle in an inductively-coupled plasma reactive ion etcher is presented, which allows to selectively reveal desired crystal planes in monocrystalline diamond by controlling the etching conditions. The principle is demonstrated when the kinetic energy of incident ions on diamond surfaces is reduced below a certain threshold leading to anisotropic etching and faceting along specific crystal planes. Using the principle, monolithic diamond nanopillars for magnetometry using nitrogen vacancy centers are fabricated. In these nanopillars, a half-tapering angle up to 21° is achieved, the highest angle reported, which leads to a high photon efficiency and high mechanical strength of the nanopillar. These results represent the first demonstration of crystallographic orientation dependent reactive ion etch principle, which opens a new window for shaping specific nanostructures which is at the heart of nanotechnology. It is believed that this principle will prove to be valuable for structuring and patterning of other single crystal materials as well.",
+      "published": "2020-04-07",
+      "categories": [
+        "physics.app-ph",
+        "cond-mat.mes-hall",
+        "cond-mat.mtrl-sci",
+        "physics.optics"
+      ]
+    },
+    {
+      "arxiv_id": "1804.03639v1",
+      "topic": "etch",
+      "title": "Phosphorus oxide gate dielectric for black phosphorus field effect transistors",
+      "abstract": "The environmental stability of the layered semiconductor black phosphorus (bP) remains a challenge. Passivation of the bP surface with phosphorus oxide, POx, grown by a reactive ion etch with oxygen plasma is known to improve photoluminescence efficiency of exfoliated bP flakes. We apply phosphorus oxide passivation in the fabrication of bP field effect transistors using a gate stack consisting of a POx layer grown by reactive ion etching followed by atomic layer deposition of Al2O3. We observe room temperature top-gate mobilities of 115 cm2/Vs in ambient conditions, which we attribute to the low defect density of the bP/POx interface.",
+      "published": "2018-04-10",
+      "categories": [
+        "cond-mat.mes-hall",
+        "physics.app-ph"
+      ]
+    },
+    {
+      "arxiv_id": "2104.02763v1",
+      "topic": "etch",
+      "title": "Reduced etch lag and high aspect ratios by deep reactive ion etching (DRIE)",
+      "abstract": "Deep reactive ion etching (DRIE) with the Bosch process is one of the key procedures used to manufacture micron-sized structures for MEMS and microfluidic applications in silicon and, hence, of increasing importance for miniaturization in biomedical research. While guaranteeing high aspect ratio structures and providing high design flexibility, the etching procedure suffers from reactive ion etching lag and often relies on complex oxide masks to enable deep etching. In this work, we introduce an optimized Bosch process that reduces the etch lag to below 1.5 %. Furthermore, we improved a three-step Bosch process, allowing the fabrication of structures with 6 micrometre thickness at depths up to 180 micrometre while maintaining their stability.",
+      "published": "2021-04-06",
+      "categories": [
+        "physics.plasm-ph",
+        "physics.app-ph"
+      ]
+    },
+    {
+      "arxiv_id": "2310.20485v2",
+      "topic": "metallization",
+      "title": "Al$_3$Sc thin films for advanced interconnect applications",
+      "abstract": "Al$_x$Sc$_{1-x}$ thin films have been studied with compositions around Al$_3$Sc ($x$ = 0.75) for potential interconnect metallization applications. As-deposited 25 nm thick films were x-ray amorphous but crystallized at 190°C, followed by recrystallization at 440°C. After annealing at 500°C, 24 nm thick stoichiometric Al$_3$Sc showed a resistivity of 12.6 $μΩ$cm, limited by a combination of grain boundary and point defect (disorder) scattering. Together with ab initio calculations that found a mean free path of the charge carriers of 7 nm for stoichiometric Al$_3$Sc, these results indicate that Al$_3$Sc bears promise for future interconnect metallization schemes. Challenges remain in minimizing the formation of secondary phases as well as in the control of the non-stoichiometric surface oxidation and interfacial reactions with underlying dielectrics.",
+      "published": "2023-10-31",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ]
+    },
+    {
+      "arxiv_id": "1607.06131v2",
+      "topic": "metallization",
+      "title": "Performance of Topological Insulator Interconnects",
+      "abstract": "The poor performance of copper interconnects at the nanometer scale calls for new material solutions for continued scaling of integrated circuits. We propose the use of three dimensional time-reversal-invariant topological insulators (TIs), which host backscattering-protected surface states, for this purpose. Using semiclassical methods, we demonstrate that nanoscale TI interconnects have a resistance 1-3 orders of magnitude lower than copper interconnects and graphene nanoribbons at the nanometer scale. We use the nonequilibrium Green function (NEGF) formalism to measure the change in conductance of nanoscale TI and metal interconnects caused by the presence of impurity disorder. We show that metal interconnects suffer a resistance increase, relative to the clean limit, in excess of 500% due to disorder while the TI's surface states increase less than 35% in the same regime.",
+      "published": "2016-07-20",
+      "categories": [
+        "cond-mat.mes-hall"
+      ]
+    },
+    {
+      "arxiv_id": "2405.02046v1",
+      "topic": "metallization",
+      "title": "Cu$_x$Al$_{1-x}$ films as Alternatives to Copper for Advanced Interconnect Metallization",
+      "abstract": "Cu$_x$Al$_{1-x}$ thin films with $0.2 \\le x \\le 0.7$ have been studied as potential alternatives for the metallization of advanced interconnects. First-principles simulations were used to obtain the Cu$_x$Al$_{1-x}$ electronic structure and cohesive energy to benchmark different intermetallics and their prospects for interconnect metallization. Next, thin Cu$_x$Al$_{1-x}$ films were deposited by PVD with thicknesses in the range between 3 and 28 nm. The lowest resistivities of 9.5 $μΩ$cm were obtained for 28 nm thick stochiometric CuAl and CuAl$_2$ after 400$^\\circ$C post-deposition annealing. Based on the experimental results, we discuss the main challenges for the studied aluminides from an interconnect point of view, namely the control of the film stoichiometry, the phase separation observed for off-stoichiometric CuAl and CuAl$_2$, as well as the presence of a nonstoichiometric surface oxide.",
+      "published": "2024-05-03",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ]
+    },
+    {
+      "arxiv_id": "2402.14112v3",
+      "topic": "metallization",
+      "title": "Nonlinear longitudinal current of band-geometric origin in wires of finite thickness",
+      "abstract": "The miniaturization of integrated circuits is facing an obstruction due to the escalating electrical resistivity of conventional copper interconnects. The underlying reason for this problem was unveiled by Fuchs and Sondheimer, who showed that thinner wires are more resistive because current-carrying electrons encounter the rough surfaces of the wire more frequently therein. Here, we present a generalization of the Fuchs-Sondheimer theory to Dirac and Weyl materials, which are candidates for next-generation interconnects. We predict a nonlinear longitudinal electric current originating from the combined action of the Berry curvature and non-specular surface-scattering.",
+      "published": "2024-02-21",
+      "categories": [
+        "cond-mat.mes-hall",
+        "cond-mat.mtrl-sci"
+      ]
+    },
+    {
+      "arxiv_id": "2001.03295v1",
+      "topic": "metallization",
+      "title": "A barrier/seed system for electroless metallization on complex surfaces using (aminomethylaminoethyl)phenethyltrimethoxysilane self-assembled films",
+      "abstract": "High frequency signals propagate along the edges of conductors. If the conductors are electroplated, then the seed layer forms at least one edge, so care must be taken to insure the electrical quality of these layers. In this work, we study the initial quality of SAM-based seed layers that are compatible with complex surfaces including through-silicon vias (TSVs), as are used in via-last three-dimensional semiconductor device packaging. The conformal and electrical quality of the seed metal is very important. Also important for a multifunction seed layer is its ability as a barrier layer, which protects the substrate from high temperature diffusion of the deposited metal. Thus, the barrier layer must be robust enough to withstand diffusion, yet thin enough to provide a conformal surface that allows metal seed layer deposition. Standard barrier layer deposition methods such as evaporation or sputtering require either a line of sight from the source or aspect ratios large enough to provide scattering from the background gas within the structure to coat all surfaces. Electrochemical and chemical vapor deposition provide alternatives, but concerns arise about contamination and compatibility with radio frequency or high-speed digital signals. We propose a barrier layer based on an aromatic self-assembled monolayer (SAM) for use in electroless copper seed layer deposition. The viability of the SAM barrier layer is determined by the quality of the deposited copper seed film, judged quantitatively by thin film resistivity and qualitatively by surface adhesion and morphological properties such as cracks and bubbles. Insights to the origins of problems and an optimal scheme are described. Extensions for use as a photolithographic resist layer are suggested. Our SAM approach for TSV applications yields a 'smart' seed layer that can be used with a 'simple,' scalloped, easy to fabricate, via hole.",
+      "published": "2020-01-10",
+      "categories": [
+        "physics.app-ph",
+        "cond-mat.mtrl-sci"
+      ]
+    },
+    {
+      "arxiv_id": "0706.2726v2",
+      "topic": "metallization",
+      "title": "Probing the Role of the Barrier Layer in Magnetic Tunnel Junction Transport",
+      "abstract": "Magnetic tunnel junctions with a ferrimagnetic barrier layer have been studied to understand the role of the barrier layer in the tunneling process - a factor that has been largely overlooked until recently. Epitaxial oxide junctions of highly spin polarized La0.7Sr0.3MnO3 and Fe3O4 electrodes with magnetic NiMn2O4 (NMO) insulating barrier layers provide a magnetic tunnel junction system in which we can probe the effect of the barrier by comparing junction behavior above and below the Curie temperature of the barrier layer. When the barrier is paramagnetic, the spin polarized transport is dominated by interface scattering and surface spin waves; however, when the barrier is ferrimagnetic, spin flip scattering due to spin waves within the NMO barrier dominates the transport.",
+      "published": "2007-06-19",
+      "categories": [
+        "cond-mat.str-el",
+        "cond-mat.mtrl-sci"
+      ]
+    },
+    {
+      "arxiv_id": "1307.5972v1",
+      "topic": "metallization",
+      "title": "Dielectric Environment Effect on Carrier Mobility of Graphene Double-Layer Structure",
+      "abstract": "We have theoretically studied the dielectric environment effect on the charged-impurity-limited carrier mobility of graphene double-layer structure (GDLS) on the basis of the Boltzmann transport theory. In this system, two graphene layers are separated by a dielectric barrier layer. It is pointed out that the carrier mobility strongly depends on the dielectric constant of the barrier layer when the interlayer distance becomes larger than the inverse of the Fermi wave vector. Moreover, the conditions to improve the charged-impurity-limited carrier mobility of the GDLS are evaluated.",
+      "published": "2013-07-23",
+      "categories": [
+        "cond-mat.mes-hall",
+        "cond-mat.mtrl-sci"
+      ]
+    },
+    {
+      "arxiv_id": "2502.12827v1",
+      "topic": "metallization",
+      "title": "Orientation Dependent Resistivity Scaling in Mesoscopic NbP Crystals",
+      "abstract": "The scaling of Si transistor technology has resulted in a remarkable improvement in the performance of integrated circuits over the last decades. However, scaled transistors also require reduced electrical interconnect dimensions, which lead to greater losses and power dissipation at circuit level. This is mainly caused by enhanced surface scattering of charge carriers in copper interconnect wires at dimensions below 30 nm. A promising approach to mitigate this issue is to use directional conductors, i.e. materials with anisotropic Fermi surface, where proper alignment of crystalline orientation and transport direction can minimize surface scattering. In this work, we perform a resistivity scaling study of the anisotropic semimetal NbP as a function of crystalline orientation. We use here focused ion beam to pattern and scale down NbP crystallites to dimensions comparable to the electron scattering length at cryogenic temperatures. The experimental transport properties are correlated with the Fermi surface characteristics through a theoretical model, thus identifying the physical mechanisms that influence the resistivity scaling of anisotropic conductors. Our methodology provides an effective approach for early evaluation of anisotropic materials as future ultra-scalable interconnects, even when they are unavailable as epitaxial films.",
+      "published": "2025-02-18",
+      "categories": [
+        "cond-mat.mes-hall",
+        "cond-mat.mtrl-sci"
+      ]
+    },
+    {
+      "arxiv_id": "2310.01268v1",
+      "topic": "photo",
+      "title": "Resistless EUV lithography: photon-induced oxide patterning on silicon",
+      "abstract": "In this work, we show the feasibility of extreme ultraviolet (EUV) patterning on an HF-treated Si(100) surface in the absence of a photoresist. EUV lithography is the leading lithography technique in semiconductor manufacturing due to its high resolution and throughput, but future progress in resolution can be hampered because of the inherent limitations of the resists. We show that EUV photons can induce surface reactions on a partially H-terminated Si surface and assist the growth of an oxide layer, which serves as an etch mask. This mechanism is different from the H-desorption in scanning tunneling microscopy-based lithography. We achieve SiO2/Si gratings with 75 nm half-pitch and 31 nm height, demonstrating the efficacy of the method and the feasibility of patterning with EUV lithography without the use of a photoresist. Further development of the resistless EUV lithography method can be a viable approach to nm-scale lithography by overcoming the inherent resolution and roughness limitations of photoresist materials.",
+      "published": "2023-10-02",
+      "categories": [
+        "physics.app-ph",
+        "cond-mat.mtrl-sci"
+      ]
+    },
+    {
+      "arxiv_id": "2406.05148v1",
+      "topic": "photo",
+      "title": "Photoemission Spectroscopy on photoresist materials: A protocol for analysis of radiation sensitive materials",
+      "abstract": "Device architectures and dimensions are now at an unimaginable level not thought possible even 10 years ago. The continued downscaling, following the so-called Moore's law, has motivated the development and use of extreme ultraviolet (EUV) lithography scanners with specialized photoresists. Since the quality and precision of the transferred circuit pattern is determined by the EUV induced chemical changes in the photoresist, having a deep understanding of these chemical changes is of pivotal importance. For this purpose, several spectroscopic and material characterization techniques have already been employed so far. Among them, photoemission can be essential as it not only allows direct probing of chemical bonds in a quantitative way but also provides useful information regarding the generation and distribution of primary and secondary electrons. However, since high energy photons are being employed for characterization of a photosensitive material, modification of the sample during the measurement is possible and this must be considered when investigating the chemical changes in the photoresist before and after exposure to EUV light.",
+      "published": "2024-05-30",
+      "categories": [
+        "physics.chem-ph",
+        "cond-mat.mtrl-sci"
+      ]
+    },
+    {
+      "arxiv_id": "2003.10961v1",
+      "topic": "photo",
+      "title": "XUV Induced Bleaching of a Tin Oxo Cage Photoresist Studied by High Harmonic Absorption Spectroscopy",
+      "abstract": "Inorganic molecular materials such as tin oxo cages are a promising generation of photoresists compatible with the demands of the recently developed Extreme UltraViolet (EUV) lithography technology. Therefore, a detailed understanding of the photon-induced reactions which occur in photoresists after exposure is important. We used XUV broadband laser pulses in the range of 25-40 eV from a table-top high-harmonic source to expose thin films of the tin oxo cage resist to shed light on some of the photo-induced chemistry via XUV absorption spectroscopy. During the exposure, the transmitted spectra were recorded and a noticeable absorbance decrease was observed in the resist. Dill parameters were extracted to quantify the XUV induced conversion and compared to EUV exposure results at 92 eV. Based on the absorption changes, we estimate that approximately 60% of tin-carbon bonds are cleaved at the end of the exposure.",
+      "published": "2020-03-24",
+      "categories": [
+        "physics.app-ph",
+        "cond-mat.mtrl-sci"
+      ]
+    },
+    {
+      "arxiv_id": "2504.15078v4",
+      "topic": "photo",
+      "title": "Scalable High-Precision Microfabrication on Various Lithography-Incompatible Substrates and Materials Enabled by Wafer-Scale Transfer Lithography of Commercial Photoresists",
+      "abstract": "Photolithography conventionally requires flat, rigid and stable substrates, limiting its applications in flexible, curved, and transient electronics. In this study, a breakthrough approach is reported that employs a reversibly adhesion-switchable phase-changing polymer to universally transfer commercial photoresists onto previously inaccessible substrates, overcoming fundamental limitations of conventional photolithography.",
+      "published": "2025-04-21",
+      "categories": [
+        "physics.app-ph"
+      ]
+    },
+    {
+      "arxiv_id": "2505.07346v1",
+      "topic": "photo",
+      "title": "Unraveling the Reaction Mechanisms in a Chemically Amplified EUV Photoresist from a Combined Theoretical and Experimental Approach",
+      "abstract": "Extreme ultraviolet (EUV) lithography has revolutionized high-volume manufacturing of nanoscale components, enabling the production of smaller, denser, and more energy efficient integrated circuit devices. Yet, the use of EUV light results in ionization driven chemistry within the imaging materials of lithography, the photoresists. The complex interplay of ionization, generation of primary and secondary electrons, and the subsequent chemical mechanisms leading to image formation in photoresists has been notoriously difficult to study. In this work, we deploy photoemission spectroscopy with a 92 eV EUV light source combined with first-principles simulations to unravel the chemical changes occurring during exposure in a model chemically amplified photoresist. The results reveal a surprising chemical reaction pathway, namely the EUV-induced breakdown of the photoacid generator (PAG), which is a critical component in the EUV mechanism. This previously unobserved reaction mechanism manifests as changes in intensity of the valence band peaks of the EUV photoemission spectrum, which are linked to degradation of the PAG via an advanced atomistic simulation framework. Our combined experimental and theoretical approach shows that EUV photoemission can simultaneously resolve chemical dynamics and the production of primary and secondary electrons, giving unique insights into the chemical transformation of photoresist materials. Our results pave the way for utilizing accessible, table-top EUV spectroscopy systems for observing EUV photoresist chemical dynamics, with the potential for time-resolved measurements of photoemission processes in the future.",
+      "published": "2025-05-12",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ]
+    },
+    {
+      "arxiv_id": "1912.01495v1",
+      "topic": "photo",
+      "title": "Reduction of Spikes on the Sides of Patterned Thin Films for Magnetic Tunnel Junction Based Molecular Device Fabrication",
+      "abstract": "Sputter thin film deposition after photolithography often produces unwanted spikes along the side edges. These spikes are a significant issue for the development of magnetic tunnel junction (MTJ)-based memory and molecular spintronics devices, microelectronics, and micro-electro-mechanical systems because they influence the properties of the other films deposited on the top. Our molecular spintronics devices that utilize MTJ as the testbed are almost short-lived and encountered high background current that masked the effect of molecular transport channels placed along the sides of MTJs. Therefore, tapered thin film edges are critically needed in devices. Here, we report a very cost-efficient and fast way of creating an optimum photoresist profile for the production of spike-free patterned films. This approach is based on performing a soaking in the photoresist developer after baking and before the UV exposure. However, the success of this method depends on multiple factors accounted for during photolithography - photoresist thickness (spin speed), baking temperature, soaking time and exposure time. Our recent experiments systematically studied the effect of these factors by following the L9 experimental scheme of the Taguchi Design of the experiment (TDOE). We discovered that baking temperature was the most influential parameter; presoak time and photoresist thickness were two other influential factors; exposure time was the least effective factor. We also found that 4000 rpm, 100 C soft baking, 60 s soaking, and 15 s UV exposure yielded the best results. Finally, the paper also discusses the interdependence of selected factors, and the impact of the individual levels of each factor. This study is expected to benefit MEMS and micro/nanoelectronics device researchers because it attempts at finding a cheaper and faster alternative to creating an optimum photoresist profile.",
+      "published": "2019-12-03",
+      "categories": [
+        "physics.app-ph",
+        "cond-mat.mtrl-sci"
+      ]
+    },
+    {
+      "arxiv_id": "1402.3117v1",
+      "topic": "photo",
+      "title": "Colloidal pattern replication through contact photolithography operated in a \"Talbot-Fabry-Perot\" regime",
+      "abstract": "We detail on a continuous colloidal pattern replication by using contact photolithography. Chrome on quartz masks are fabricated using colloidal nanosphere lithography and subsequently used as photolithography stamps. Hexagonal pattern arrangements with different dimensions (980, 620 and 480 nm, using colloidal particles with respective diameters) have been studied. When the mask and the imaged resist layer were in intimate contact, a high fidelity pattern replica was obtained after photolithography exposure and processing. In turn, the presence of an air-gap in between has been found to affect the projected image onto the photoresist layer, strongly dependent on the mask feature size and air-gap height. Pattern replication, inversion and hybridization was achieved for 980 nm-period mask; no hybridization for the 620 nm; and only pattern replication for the 480 nm. These results are interpreted in the framework of a \"Talbot-Fabry-Perot\" effect. Numerical simulations corroborate with the experimental findings providing insight into the involved processes highlighting the important parameters affecting the exposure pattern. The approach allows complex subwavelength patterning and is relevant for a 3D layer-by-layer printing.",
+      "published": "2014-02-13",
+      "categories": [
+        "physics.optics",
+        "cond-mat.mes-hall",
+        "cond-mat.mtrl-sci"
+      ]
+    },
+    {
+      "arxiv_id": "2001.07239v1",
+      "topic": "photo",
+      "title": "Embedded Waveguide Structures Fabricated in Porous Silicon by means of Lithography",
+      "abstract": "We report the fabrication of diverse light guiding structures embedded in oxidised porous silicon (OPS) by means of patterned pore filling through a single photoresist mask. The pores of OPS were filled with KDP salt from unsaturated solution applied on the sample's surface. Photolithography was used to create the mask. The created structures include straight, bent and tapered waveguides of different widths, and Y-splitters. Light guiding was demonstrated and characterised at wavelength of 1.064 microns.",
+      "published": "2020-01-20",
+      "categories": [
+        "physics.app-ph"
+      ]
+    },
+    {
+      "arxiv_id": "2211.10252v1",
+      "topic": "oxidation_diffusion",
+      "title": "Investigation of the SiO2-SiC interface using low energy muon spin rotation spectroscopy",
+      "abstract": "Using positive muons as local probes implanted at low energy enables gathering information about the material of interest with nanometer depth resolution (low energy muon spin rotation spectroscopy (LE-$μ$SR). In this work, we leverage the capabilities of LE-$μ$SR to perform an investigation of the SiO$_\\text{2}$-SiC interface. Thermally oxidized samples are investigated before and after annealing in nitric oxide (NO) and argon (Ar) ambience. Thermal oxidation is found to result in structural changes both in the SiC crystal close to the interface and at the interface itself. Annealing in NO environment is known to passivate the defects leading to a reduction of the density of interface traps (D$_{it}$); LE-$μ$SR further reveals that the NO annealing results in a thin layer of high carrier concentration in SiC, extending to more than 50 nm depending on the annealing conditions. We also see indications of Si vacancy (V$_{Si}$) formation in SiC after thermal oxidation. Following NO annealing, nitrogen occupies the V$_{Si}$ sites, leading to the reduction in D$_{it}$ and at the same time, creating a charge-carrier-rich region near the interface. By comparing the LE-$μ$SR data from a sample with known doping density, we perform a high-resolution quantification of the free carrier concentration near the interface after NO annealing and discuss the origin of observed near-surface variations. Finally, the depletion of carriers in a MOS capacitor in the region below the interface is shown using LE-$μ$SR. The NO annealed sample shows the narrowest depletion region, likely due to the reduced D$_{it}$ and charge-carrier-rich region near the interface. Our findings demonstrate the many benefits of utilizing LE-$μ$SR to study critical regions of semiconductor devices that have been inaccessible with other techniques while retaining nanoscale depth resolution and a non-destructive approach.",
+      "published": "2022-11-18",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ]
+    },
+    {
+      "arxiv_id": "2501.07168v1",
+      "topic": "oxidation_diffusion",
+      "title": "Impact of impurities on leakage current induced by High-Energy Density Pulsed Laser Annealing in Si diodes",
+      "abstract": "For semiconductor device fabrication, Pulsed Laser Annealing (PLA) offers significant advantages over conventional thermal processes. Notably, it can provide ultrafast (~ns) and high temperature profiles ($>1000^\\circ$C). When the maximum temperature exceeds the melting point, a solid-liquid phase transition is observed, immediately followed by rapid recrystallization. This unique annealing mechanism gives raises questions about dopant diffusion and residual defects, in not only in the recrystallized region, but also just below it. As power devices require micrometer-sized junctions, high laser energy densities are needed, which were proved to promote the incorporation of complex impurities from the surface and the creation of defects at the liquid/solid interface. This paper reports on the impact of laser annealing at high energy densities (up to 8.0 J/cm$^2$) on the leakage current, using Schottky and PN diodes, and DLTS measurements. Various laser annealing conditions were used: energy densities between 1.7 and 8.0 J/cm$^2$ with 1 to 10 pulses. Our results suggest that the liquid and solid solubility of vacancies in silicon are fixed by the maximum temperature reached, so to the energy density. Increasing the number of laser pulses allows, not only to reach this maximum vacancy concentration but also to promote their diffusion towards the surface. Concomitantly, the in-diffusion of complex impurities inside the melted region allows the coupling between both defect types to create trap centers, responsible for the degradation of the leakage current.",
+      "published": "2025-01-13",
+      "categories": [
+        "cond-mat.mtrl-sci",
+        "physics.app-ph"
+      ]
+    },
+    {
+      "arxiv_id": "2411.10777v2",
+      "topic": "oxidation_diffusion",
+      "title": "Prolonging Carrier Lifetime in P-type 4H-SiC Epilayer by Thermal Oxidation and Hydrogen Annealing",
+      "abstract": "A minority carrier lifetime of 25.46 $μ$s in a P-type 4H-SiC epilayer has been attained through sequential thermal oxidation and hydrogen annealing. Thermal oxidation can enhance the minority carrier lifetime in the 4H-SiC epilayer by reducing carbon vacancies. However, this process also generates carbon clusters with limited diffusivity and contributes to the enlargement of surface pits on the 4H-SiC. High-temperature hydrogen annealing effectively reduces stacking fault and dislocation density. Moreover, electron spin resonance analysis indicates a significant reduction in carbon vacancy defects after hydrogen annealing. The mechanisms of the elimination of carbon vacancies by hydrogen annealing include the decomposition of carbon clusters formed during thermal oxidation and the low-pressure selective etching by hydrogen, which increases the carbon content on the 4H-SiC surface and facilitates carbon diffusion. Consequently, the combination of thermal oxidation and hydrogen annealing eliminates carbon vacancies more effectively, substantially enhancing the minority carrier lifetime in P-type 4H-SiC. This improvement is advantageous for the application of high-voltage SiC bipolar devices.",
+      "published": "2024-11-16",
+      "categories": [
+        "cond-mat.mtrl-sci",
+        "cond-mat.mes-hall"
+      ]
+    },
+    {
+      "arxiv_id": "2202.01777v3",
+      "topic": "oxidation_diffusion",
+      "title": "Tuning carrier density and phase transitions in oxide semiconductors using focused ion beams",
+      "abstract": "We demonstrate spatial modification of the optical properties of thin-film metal oxides, zinc oxide and vanadium dioxide as representatives, using a commercial focused ion beam (FIB) system. Using a Ga+ FIB and thermal annealing, we demonstrated variable doping of a band semiconductor, zinc oxide (ZnO), achieving carrier concentrations from 10^18 cm-3 to 10^20 cm-3. Using the same FIB without subsequent thermal annealing, we defect-engineered a correlated semiconductor, vanadium dioxide (VO2), locally modifying its insulator-to-metal transition (IMT) temperature by range of ~25 degrees C. Such area-selective modification of metal oxides by direct writing using a FIB provides a simple, mask-less route to the fabrication of optical structures, especially when multiple or continuous levels of doping or defect density are required.",
+      "published": "2022-02-03",
+      "categories": [
+        "cond-mat.mtrl-sci",
+        "physics.app-ph",
+        "physics.optics"
+      ]
+    },
+    {
+      "arxiv_id": "0501298v2",
+      "topic": "oxidation_diffusion",
+      "title": "Nanoengineered Curie Temperature in Laterally-Patterned Ferromagnetic Semiconductor Heterostructures",
+      "abstract": "We demonstrate the manipulation of the Curie temperature of buried layers of the ferromagnetic semiconductor (Ga,Mn)As using nanolithography to enhance the effect of annealing. Patterning the GaAs-capped ferromagnetic layers into nanowires exposes free surfaces at the sidewalls of the patterned (Ga,Mn)As layers and thus allows the removal of Mn interstitials using annealing. This leads to an enhanced Curie temperature and reduced resistivity compared to unpatterned samples. For a fixed annealing time, the enhancement of the Curie temperature is larger for narrower nanowires.",
+      "published": "2005-01-12",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ]
+    },
+    {
+      "arxiv_id": "1704.02495v2",
+      "topic": "oxidation_diffusion",
+      "title": "Effect of annealing temperatures on the electrical conductivity and dielectric properties of Ni1.5Fe1.5O4 spinel ferrite prepared by chemical reaction at different pH values",
+      "abstract": "The electrical conductivity and dielectric properties of Ni1.5Fe1.5O4 ferrite has been controlled by varying the annealing temperature of the chemical routed samples. The frequency activated conductivity obeyed Jonschers power law and universal scaling suggested semiconductor nature. An unusual metal like state has been revealed in the measurement temperature scale in between two semiconductor states with different activation energy. The metal like state has been affected by thermal annealing of the material. The analysis of electrical impedance and modulus spectra has confirmed non-Debye dielectric relaxation with contributions from grains and grain boundaries. The dielectric relaxation process is thermally activated in terms of measurement temperature and annealing temperature of the samples. The hole hopping process, due to presence of Ni3+ ions in the present Ni rich ferrite, played a significant role in determining the thermal activated conduction mechanism. This work has successfully applied the technique of a combined variation of annealing temperature and pH value during chemical reaction for tuning electrical parameters in a wide range; for example dc limit of conductivity 10power(-4) -10power(-12) S/cm, and unusually high activation energy 0.17-1.36 eV.",
+      "published": "2017-04-08",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ]
+    },
+    {
+      "arxiv_id": "2302.14394v2",
+      "topic": "oxidation_diffusion",
+      "title": "Exploring Layer Thinning of Exfoliated \\b{eta}-Tellurene and Room Temperature Photoluminescence with Large Exciton Binding Energy Revealed in TeO2",
+      "abstract": "Due to its tunable band gap, anisotropic behavior, and superior thermoelectric properties, device applications using layered tellurene (Te) are becoming attractive. Here, we report a thinning technique for exfoliated tellurene nanosheets using thermal annealing in an oxygen environment. We characterize different thinning parameters including temperature and annealing time. Based on our measurements, we show that controlled layer thinning occurs in the narrow temperature range of 325 oC to 350 oC. We also show a reliable method to form \\b{eta}-tellurene oxide (\\b{eta}- TeO2), which is an emerging wide band gap semiconductor with promising electronic and optoelectronic properties. This wide band gap semiconductor exhibits a broad photoluminescence (PL) spectrum with multiple peaks covering the range 1.76 eV to 2.08 eV. This PL emission coupled with Raman spectra are strong evidence of the formation of 2D \\b{eta}- TeO2. We discuss the results obtained and the mechanisms of Te thinning and \\b{eta}-TeO2 formation at different temperature regimes. We also discuss the optical band gap of \\b{eta}-TeO2 and show the existence of pronounced excitonic effects evident by the large exciton binding energy in this 2D \\b{eta}-TeO2 system that reach 1.54 eV to 1.62 eV for bulk to monolayer, respectively. Our work can be utilized to have better control over Te nanosheet thickness. It also sheds light on the formation of well-controlled \\b{eta}-TeO2 layered semiconductor for electronic and optoelectronic applications.",
+      "published": "2023-02-28",
+      "categories": [
+        "cond-mat.mtrl-sci",
+        "cond-mat.mes-hall",
+        "physics.app-ph"
+      ]
+    },
+    {
+      "arxiv_id": "1808.08303v1",
+      "topic": "oxidation_diffusion",
+      "title": "Thermally Oxidized Two-dimensional TaS2 as a High-\\k{appa} Gate Dielectric for MoS2 Field-Effect Transistors",
+      "abstract": "We report a new approach to integrating high-\\k{appa} dielectrics in both bottom- and top-gated MoS2 field-effect transistors (FETs) through thermal oxidation and mechanical assembly of layered twodimensional (2D) TaS2. Combined X-ray photoelectron spectroscopy (XPS), optical microscopy, atomic force microscopy (AFM), and capacitance-voltage (C-V) measurements confirm that multilayer TaS2 flakes can be uniformly transformed to Ta2O5 with a high dielectric constant of ~ 15.5 via thermal oxidation, while preserving the geometry and ultra-smooth surfaces of 2D TMDs. Top-gated MoS2 FETs fabricated using the thermally oxidized Ta2O5 as gate dielectric demonstrate a high current on/off ratio approaching 106, a subthreshold swing (SS) down to 61 mV/dec, and a field-effect mobility exceeding 60 cm2V-1 s-1 at room temperature, indicating high dielectric quality and low interface trap density.",
+      "published": "2018-08-24",
+      "categories": [
+        "physics.app-ph",
+        "cond-mat.mes-hall"
+      ]
+    },
+    {
+      "arxiv_id": "1804.03302v1",
+      "topic": "memory",
+      "title": "Purely electronic nanometallic ReRAM",
+      "abstract": "Resistance switching random access memory (ReRAM), with the ability to repeatedly modulate electrical resistance, has been highlighted as a feasible high-density memory with the potential to replace negative-AND (NAND) flash memory. Such resistance modulation usually involves ion migration and filament formation, which usually lead to relatively low device reliability and yield. Resistance switching can also come from an entirely electronic origin, as in nanometallic memory, by electron trapping and detrapping. Recent research has revealed additional merits of its mechanism, which entails smart, atomic-sized floating gates that can be easily engineered in amorphous Si, oxides, and nitrides. This article addresses the basic ideas of nanometallic ReRAM, which may also be a contender for analogue computing and non-von Neumann-type computation.",
+      "published": "2018-04-10",
+      "categories": [
+        "cond-mat.mes-hall"
+      ]
+    },
+    {
+      "arxiv_id": "1706.07565v2",
+      "topic": "memory",
+      "title": "Quantum Annealing Machine based on Floating Gate Array",
+      "abstract": "Quantum annealing machines based on superconducting qubits, which have the potential to solve optimization problems faster than digital computers, are of great interest not only to researchers but also to the general public. Here, we propose a quantum annealing machine based on a semiconductor floating gate (FG) array. We use the same device structure as that of the commercial FG NAND flash memory except for small differences such as thinner tunneling barrier. We theoretically derive an Ising Hamiltonian from the FG system in its single-electron region. Recent high-density NAND flash memories are subject to several problems that originate from their small FG cells. In order to store information reliably, the number of electrons in each FG cell should be sufficiently large. However, the number of electrons stored in each FG cell becomes smaller and can be countable. So we utilize the countable electron region to operate single-electron effects of FG cells. Second, in the conventional NAND flash memory, the high density of FG cells induces the problem of cell-to-cell interference through their mutual capacitive couplings. This interference problem is usually solved by various methods using a software of error-correcting codes. We derive the Ising interaction from this natural capacitive coupling. Considering the size of the cell, 10 nm, the operation temperature is expected to be approximately that of a liquid nitrogen. If a commercial 64 Gbit NAND flash memory is used, ideally we expect it to be possible to construct 2 megabytes (MB) entangled qubits by using the conventional fabrication processes in the same factory as is used for manufacture of NAND flash memory. A qubit system of highest density will be obtained as a natural extension of the miniaturization of commonly used memories in this society.",
+      "published": "2017-06-23",
+      "categories": [
+        "quant-ph",
+        "cond-mat.mes-hall"
+      ]
+    },
+    {
+      "arxiv_id": "2005.01033v1",
+      "topic": "memory",
+      "title": "Resistive Switching Behaviour of Organic Molecules",
+      "abstract": "Organic electronics is very promising due to the flexibility, modifiability as well as variety of the available organic molecules. Efforts are going on to use organic materials for the realization of memory devices. In this regard resistive switching devices surely will play a key role. In this paper an effort has been made to illustrate the general information about resistive switching devices as well as switching mechanisms involving organic materials. As a whole a general overview of the emerging topic resistive switching has been given.",
+      "published": "2020-05-03",
+      "categories": [
+        "physics.app-ph",
+        "cond-mat.mtrl-sci"
+      ]
+    },
+    {
+      "arxiv_id": "1110.2844v2",
+      "topic": "memory",
+      "title": "The critical temperature regions in resistive switching",
+      "abstract": "Critical temperature regions for resistive switching were found based on HfAlO resistive switching memory. From 5 K to 300 K, the resistive switching appears at 60 K, and then a reversible bipolar switching between the two states is observed at above 150 K. It is suggested that the resistive switching characteristics of the binary transitional metal oxides are governed by thermal assisted percolating conductive paths. The process of charge trap/de-trapping under the external electrical field plays a dominated role with the assumption of the same Joule heating generated by internal conductive filament at different temperatures.",
+      "published": "2011-10-13",
+      "categories": [
+        "cond-mat.mes-hall"
+      ]
+    },
+    {
+      "arxiv_id": "2606.25679v1",
+      "topic": "memory",
+      "title": "Rate Programmable Ionic-Redox Switching with Tunable Volatility in CuCrP2S6",
+      "abstract": "Metal thiophosphates are emerging as a multifunctional material platform for neuromorphic electronics due to their accessible polar phases and ion dynamics on biologically relevant timescales. While resistive switching in these materials is frequently attributed to ferroelectric or antiferroelectric polarization, the intrinsic role of ion dynamics remains underexplored. Here, we isolate and demonstrate purely ion-driven resistive switching in paraelectric CuCrP2S6. Robust and reproducible resistive switching is observed in the absence of measurable ferroelectricity. The conductance can be tuned through both voltage amplitude and sweep rate, revealing a rate dependence characteristic of ion dynamics. The resulting resistance states exhibit controllable volatility, where switching rate determines the decay time constant of the readout current, attributed to ionic relaxation. Using either inert or reactive electrodes, we observe electrical evidence of solid-state redox activity associated with the interfacial reduction of native Cu+ ions, enabling controlled formation of filamentary conduction pathways. Analysis of this process allows extraction of the Cu+ diffusion coefficient, providing quantitative insight into the underlying transport kinetics. The understanding of ionic-redox based resistive switching in CuCrP2S6 is crucial for unleashing its full potential as a material platform for dual- or multi-mode operation.",
+      "published": "2026-06-24",
+      "categories": [
+        "cond-mat.mtrl-sci",
+        "cond-mat.mes-hall",
+        "physics.app-ph"
+      ]
+    },
+    {
+      "arxiv_id": "2009.12536v2",
+      "topic": "memory",
+      "title": "Optical imaging of strain-mediated phase coexistence during electrothermal switching in a Mott insulator",
+      "abstract": "Resistive-switching -- the current-/voltage-induced electrical resistance change -- is at the core of memristive devices, which play an essential role in the emerging field of neuromorphic computing. This study is about resistive switching in a Mott-insulator, which undergoes a thermally driven metal-to-insulator transition. Two distinct switching mechanisms were reported for such a system: electric-field-driven resistive switching and electrothermal resistive switching. The latter results from an instability caused by Joule heating. Here, we present the visualization of the reversible resistive switching in a planar V$_2$O$_3$ thin-film device using high-resolution wide-field microscopy in combination with electric transport measurements. We investigate the interaction of the electrothermal instability with the strain-induced spontaneous phase-separation in the V$_2$O$_3$ thin film at the Mott-transition. The photomicrographs show the formation of a narrow metallic filament with a minimum width $\\lesssim$ 500\\,nm. Although the filament formation and the overall shape of the current-voltage characteristics (IVCs) are typical of an electrothermal breakdown, we also observe atypical effects like oblique filaments, filament splitting, and hysteretic IVCs with sawtooth-like jumps at high currents in the low-resistance regime. We were able to reproduce the experimental results in a numerical model based on a two-dimensional resistor network. This model demonstrates that resistive switching, in this case, is indeed electrothermal and that the intrinsic heterogeneity is responsible for the atypical effects. This heterogeneity is strongly influenced by strain, thereby establishing a link between switching dynamics and structural properties.",
+      "published": "2020-09-26",
+      "categories": [
+        "cond-mat.mtrl-sci",
+        "physics.app-ph"
+      ]
+    },
+    {
+      "arxiv_id": "2202.04477v2",
+      "topic": "memory",
+      "title": "Scalable $\\rm Al_2O_3-TiO_2$ Conductive Oxide Interfaces as Defect Reservoirs for Resistive Switching Devices",
+      "abstract": "Resistive switching devices herald a transformative technology for memory and computation, offering considerable advantages in performance and energy efficiency. Here we employ a simple and scalable material system of conductive oxide interfaces and leverage their unique properties for a new type of resistive switching device. For the first time, we demonstrate an $\\rm Al_2O_3-TiO_2$ based valence-change resistive switching device, where the conductive oxide interface serves both as the back electrode and as a reservoir of defects for switching. The amorphous-polycrystalline $\\rm Al_2O_3-TiO_2$ conductive interface is obtained following the technological path of simplifying the fabrication of the two-dimensional electron gases (2DEGs), making them more scalable for practical mass integration. We combine physical analysis of the device chemistry and microstructure with comprehensive electrical analysis of its switching behavior and performance. We pinpoint the origin of the resistive switching to the conductive oxide interface, which serves as the bottom electrode and as a reservoir of oxygen vacancies. The latter plays a key role in valence-change resistive switching devices. The new device, based on scalable and complementary metal-oxide-semiconductor (CMOS) technology-compatible fabrication processes, opens new design spaces towards increased tunability and simplification of the device selection challenge.",
+      "published": "2022-02-09",
+      "categories": [
+        "physics.app-ph",
+        "cond-mat.mtrl-sci"
+      ]
+    },
+    {
+      "arxiv_id": "1605.06014v1",
+      "topic": "memory",
+      "title": "Resistive Switching Phenomena of HfO2 Films Grown by MOCVD for Resistive Switching Memory Devices",
+      "abstract": "The resistive switching phenomena of HfO2 films grown by metalorganic chemical vapor deposition was studied for the application of ReRAM devices. In the fabricated Pt/HfO2/TiN memory cells, the bipolar resistive switching characteristics were observed, and the set and reset states were measured to be as low as 7 uA and 4 uA, respectively, at VREAD = 1 V. Regarding the resistive switching performance, the stable RS performance was observed under 40 repetitive dc cycling test with the small variations of set/reset voltages and currents, and good retention characteristics over 105 s in both LRS and HRS. These results show the possibility of MOCVD grown HfO2 films as a promising resistive switching materials for ReRAM applications.",
+      "published": "2016-05-19",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ]
+    },
+    {
+      "arxiv_id": "1701.07087v2",
+      "topic": "implant",
+      "title": "Ion-Beam-Induced Defects in CMOS Technology: Methods of Study",
+      "abstract": "Ion implantation is a non-equilibrium doping technique which introduces impurity atoms into a solid regardless of thermodynamic considerations. The formation of metastable alloys above the solubility limit, minimized contribution of lateral diffusion processes in device fabrication, and possibility to reach high concentrations of doping impurities can be considered as distinct advantages of ion implantation. Owing to excellent controllability, uniformity, and the dose insensitive relative accuracy ion implantation has grown to be the principal doping technology used in the manufacturing of integrated circuits. Originally developed from particle accelerator technology ion implanters operate in the energy range from tens eV to several MeV (corresponding to a few nm to several microns in depth). The main feature of ion implantation is the formation of point defects in the energetic ion collisions. Very minute concentrations of defects and impurities in semiconductors drastically alter their electrical and optical properties. This chapter presents methods of defect spectroscopy to study the defect origin and characterize the defect density of states in thin film and semiconductor interfaces. The methods considered are positron annihilation spectroscopy, electron spin resonance, and approaches for electrical characterization of semiconductor devices.",
+      "published": "2017-01-24",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ]
+    },
+    {
+      "arxiv_id": "1103.5322v1",
+      "topic": "implant",
+      "title": "Metastable giant moments in Gd-implanted GaN, Si, and sapphire",
+      "abstract": "We report on Gd ion implantation and magnetic characterization of GaN films on sapphire substrates and of bare sapphire and Si substrates to shed light on the mechanism underlying the induced magnetism upon Gd ion implantation. For all three hosts, giant magnetic moments per Gd ion were observed at temperatures of 5 through 300 K. The maximum moment per Gd in GaN was 1800 mu_B, while the moments in Gd-implanted Si and sapphire were only slightly smaller. The apparent induced ferromagnetic response was found to be metastable, disappearing after on the order of 50 days at room temperature, except for the implanted sapphire. We argue that our findings support a defect-based picture of magnetism in Gd-implanted semiconductors and insulators.",
+      "published": "2011-03-28",
+      "categories": [
+        "cond-mat.mtrl-sci",
+        "cond-mat.dis-nn"
+      ]
+    },
+    {
+      "arxiv_id": "1002.4934v1",
+      "topic": "implant",
+      "title": "Deep level transient spectroscopy study for the development of ion-implanted silicon field-effect transistors for spin-dependent transport",
+      "abstract": "A deep level transient spectroscopy (DLTS) study of defects created by low-fluence, low-energy ion implantation for development of ion-implanted silicon field-effect transistors for spin-dependent transport experiments is presented. Standard annealing strategies are considered to activate the implanted dopants and repair the implantation damage in test metal-oxide-semiconductor (MOS) capacitors. Fixed oxide charge, interface trapped charge and the role of minority carriers in DLTS are investigated. A furnace anneal at 950 $\\rm ^{o}$C was found to activate the dopants but did not repair the implantation damage as efficiently as a 1000 $\\rm ^{o}$C rapid thermal anneal. No evidence of bulk traps was observed after either of these anneals. The ion- implanted spin-dependent transport device is shown to have expected characteristics using the processing strategy determined in this study.",
+      "published": "2010-02-26",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ]
+    },
+    {
+      "arxiv_id": "0809.1113v1",
+      "topic": "implant",
+      "title": "Solution of the nonstationary diffusion equation for interstitial impurity atoms by the method of Green functions",
+      "abstract": "On the basis of the Green function method, analytical solutions of the diffusion equation which describes nonstationary migration of nonequilibrium interstitial impurity atoms have been derived. It is supposed that the initial distribution of nonequilibrium impurity interstitials is formed due to ion implantation and, therefore, is described by the Gaussian function. The condition of the constant concentration of impurity interstitials (the Dirichlet boundary condition) or reflecting boundary condition was imposed on the surface of a semiconductor. The Dirichlet boundary condition was also enforced for the concentration of impurity interstitials in the infinity, i.e., in the bulk of a semiconductor. On the basis of the solutions derived the redistribution of ion-implanted boron in silicon substrate during low-temperature thermal treatment has been simulated. The calculated profile of boron atoms after annealing agrees well with experimental data. It means that the analytical solutions derived can be used both for verifying the numerical results and for modeling the long-range migration of nonequilibrium impurity interstitials during low-temperature thermal treatments.",
+      "published": "2008-09-05",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ]
+    },
+    {
+      "arxiv_id": "2507.17972v1",
+      "topic": "implant",
+      "title": "Tuning chiral anomaly signature in a Dirac semimetal via fast-ion implantation",
+      "abstract": "Cd$_3$As$_2$ is a prototypical Dirac semimetal that hosts a chiral anomaly and thereby functions as a platform to test high-energy physics hypotheses and to realize energy efficient applications. Here we use a combination of accelerator-based fast ion implantation and theory-driven planning to enhance the negative longitudinal magnetoresistance (NLMR)--a signature of a chiral anomaly--in Nb-doped Cd$_3$As$_2$ thin films. High-energy ion implantation is commonly used to investigate semiconductors and nuclear materials but is rarely employed to study quantum materials. We use electrical transport and transmission electron microscopy to characterize the NLMR and the crystallinity of Nb-doped Cd$_3$As$_2$ thin films. We find surface-doped Nb-Cd$_3$As$_2$ thin films display a maximum NLMR around $B = 7$ T and bulk-doped Nb-Cd$_3$As$_2$ thin films display a maximum NLMR over $B = 9$ T--all while maintaining crystallinity. This is more than a 100% relative enhancement of the maximum NLMR compared to pristine Cd$_3$As$_2$ thin films ($B = 4$ T). Our work demonstrates the potential of high-energy ion implantation as a practical route to realize chiralitronic functionalities in topological semimetals.",
+      "published": "2025-07-23",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ]
+    },
+    {
+      "arxiv_id": "2508.04715v1",
+      "topic": "implant",
+      "title": "Impact of Au Ion Implantation on 2D $Cr_2Ge_2Te_6$ for Spintronics",
+      "abstract": "Advancements in 2D magnetic materials highlight their potential in semiconductors, magnetism, and spintronics, particularly in tuning magnetic properties for spintronic applications. This study investigates the impact of low-energy (30 KeV) Au ion implantation on 2D layered exfoliated $Cr_2Ge_2Te_6$ flakes prepared on Si/SiO$_2$ substrates using the Scotch tape method. Five different ion doses (5$\\times10^{13}$, 1$\\times10^{14}$, 5$\\times10^{14}$, 1$\\times10^{15}$, and 2.5$\\times10^{15}$ ions/cm$^2$) were used to modify the morphology, composition, structural, and vibrational properties of the samples. The implantation introduces significant changes in morphology and magnetic behavior, leading to an increase in Curie temperature and an attribution from superexchange to double exchange interactions. The reduced exchange energy gaps and modified magnetic moments attribute to Au ions intercalation in $Cr_2Ge_2Te_6$ underscore the potential of ions implantation to tune the magnetic properties of 2D materials for advanced spintronic applications.",
+      "published": "2025-08-02",
+      "categories": [
+        "physics.app-ph",
+        "cond-mat.mes-hall",
+        "cond-mat.mtrl-sci"
+      ]
+    },
+    {
+      "arxiv_id": "2603.06398v1",
+      "topic": "implant",
+      "title": "Understanding the anisotropic response of $β$-Ga$_2$O$_3$ to ion implantation",
+      "abstract": "While $β$-Ga$_2$O$_3$ is considered a promising wide bandgap semiconductor, the impact of ion-induced defect formation and anisotropic elasticity remains poorly understood. Here, we combine a simulation and experiment X-ray diffraction (XRD) study of the strain-stress dynamics induced by ion implantation into $β$-Ga$_2$O$_3$ single-crystals with different surface orientations. The strain accumulation in the out-of-plane direction is observed by XRD to occur in an anisotropic manner, with compressive strain along the [010] direction and tensile strain along the directions perpendicular to (100) and (001). An anisotropic stress/strain accumulation model is proposed and probed via Molecular Dynamics (MD), showing an excellent agreement with the experiments. For higher damage levels, pole figures obtained both experimentally and by MD via a novel reciprocal-space projection method reveal an orientation-independent $β$-to-$γ$ phase transition, with a fixed crystallographic relationship between the polymorphs. By exploring the strain-stress dynamics in anisotropic systems, this work establishes a method to directly compare macroscale diffraction experiments and atomistic simulations and opens a new path to engineer the properties of such systems utilizing their anisotropic response to ion implantation/irradiation.",
+      "published": "2026-03-06",
+      "categories": [
+        "cond-mat.mtrl-sci",
+        "cond-mat.mes-hall"
+      ]
+    },
+    {
+      "arxiv_id": "1004.0568v1",
+      "topic": "implant",
+      "title": "Hysteresis in the magneto-transport of Manganese-doped Germanium: evidence for carrier-mediated ferromagnetism",
+      "abstract": "We report the fabrication of Ge:Mn ferromagnetic semiconductors by Mn-ion implantation into Ge followed by pulsed laser annealing. Benefiting from the short time annealing, the hole concentration in Mn-implanted Ge has been increased by two orders of magnitude from 10$^{18}$ to over 10$^{20}$ cm$^{-3}$. Likely due to the high hole concentration, we observe that the longitudinal and Hall resistances exhibit the same hysteresis as the magnetization, which is usually considered as a sign of carrier-mediated ferromagnetism.",
+      "published": "2010-04-05",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ]
+    }
+  ]
+}
