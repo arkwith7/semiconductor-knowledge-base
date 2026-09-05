@@ -122,6 +122,12 @@ DENY_PREFIXES = (
     # **`data/` 가 통째로 ALLOW 이므로, 이 한 줄이 없으면 그대로 발행된다.**
     # 새 평가 자산을 `data/` 아래 새 디렉터리로 만들 때는 여기부터 확인할 것.
     "data/queries/",
+    # ── 작업 캐시·코딩 시트 (2026-09-06 · PLAN-005 §5 V4-2)
+    # `data/interim/` 은 LLM 캐시와 **사람 코딩 시트**가 사는 곳이고, 시트는 청구항 원문과
+    # arXiv 초록을 그대로 담는다. `.gitignore` 로도 막히지만 **이중으로 막는다** —
+    # 위 `data/sources/` 와 같은 이유다: 누군가 한 파일이라도 추적하는 순간
+    # `git ls-files` 를 읽는 이 생성기에는 DENY 만이 방어선이 된다.
+    "data/interim/",
 )
 
 DENY_FILES = {
