@@ -1,0 +1,26 @@
+{
+ "application_number": "1020137022174",
+ "sections": [
+  {
+   "section": 1,
+   "legal_bases": [
+    "§42"
+   ],
+   "cited_ids": [],
+   "target_claims": []
+  },
+  {
+   "section": 2,
+   "legal_bases": [
+    "§29②"
+   ],
+   "cited_ids": [
+    "US-G-6740605",
+    "US-P-20040185647"
+   ],
+   "target_claims": []
+  }
+ ],
+ "source_file": "1020137022174_952014048451733.txt",
+ "generator": "build_notice_evidence.py"
+}

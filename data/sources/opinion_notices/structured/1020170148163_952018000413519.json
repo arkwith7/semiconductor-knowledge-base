@@ -1,0 +1,25 @@
+{
+ "application_number": "1020170148163",
+ "sections": [
+  {
+   "section": 1,
+   "legal_bases": [
+    "§29②"
+   ],
+   "cited_ids": [
+    "US-G-5306950",
+    "US-G-5320984"
+   ],
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ]
+  }
+ ],
+ "source_file": "1020170148163_952018000413519.txt",
+ "generator": "build_notice_evidence.py"
+}

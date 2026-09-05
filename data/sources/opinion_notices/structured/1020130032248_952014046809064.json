@@ -1,0 +1,36 @@
+{
+ "application_number": "1020130032248",
+ "sections": [
+  {
+   "section": 1,
+   "legal_bases": [
+    "§42"
+   ],
+   "cited_ids": [],
+   "target_claims": [
+    5,
+    6
+   ]
+  },
+  {
+   "section": 2,
+   "legal_bases": [
+    "§29②"
+   ],
+   "cited_ids": [
+    "JP-P-2004139879",
+    "JP-P-2006313652"
+   ],
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    7
+   ]
+  }
+ ],
+ "source_file": "1020130032248_952014046809064.txt",
+ "generator": "build_notice_evidence.py"
+}

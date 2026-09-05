@@ -131,6 +131,13 @@ DENY_PREFIXES = (
 )
 
 DENY_FILES = {
+    # ── 통지서 유래 거절근거 정본 (2026-09-06 · PLAN-005 §10 · 사용자 결정)
+    # 원문이 아니라 파생 구조((출원, 인용문헌, 근거, 절, 청구항))라 §1-5 재배포 금지에는
+    # 걸리지 않는다. 그럼에도 발행하지 않기로 했다 — **어느 인용문헌이 어느 조항으로
+    # 걸렸는가**는 심사 판단의 세부이고, 한 번 발행하면 회수가 어렵다.
+    # 재현성은 생성기가 진다: `scripts/build_notice_evidence.py` 는 발행되고 결정적이므로,
+    # 원문을 가진 사람은 동일 산출을 다시 만들 수 있다.
+    "data/patents/notice_legal_basis.parquet",
     # ── 일회성 백필·정정 (한 번 돌고 끝난 코드)
     "scripts/backfill_admin_docs.py",
     "scripts/backfill_pdfinfo_v2.py",

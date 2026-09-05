@@ -1,0 +1,38 @@
+{
+ "application_number": "1020160016943",
+ "sections": [
+  {
+   "section": 1,
+   "legal_bases": [
+    "§42"
+   ],
+   "cited_ids": [],
+   "target_claims": []
+  },
+  {
+   "section": 2,
+   "legal_bases": [
+    "§29①"
+   ],
+   "cited_ids": [
+    "JP-P-2011249439"
+   ],
+   "target_claims": []
+  },
+  {
+   "section": 3,
+   "legal_bases": [
+    "§29②",
+    "§29①"
+   ],
+   "cited_ids": [
+    "JP-P-2011249439",
+    "KR-P-1020070007967",
+    "US-P-20150279722"
+   ],
+   "target_claims": []
+  }
+ ],
+ "source_file": "1020160016943_952022031252878.txt",
+ "generator": "build_notice_evidence.py"
+}

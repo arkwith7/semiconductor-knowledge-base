@@ -1,0 +1,36 @@
+{
+ "application_number": "1020080033916",
+ "sections": [
+  {
+   "section": 1,
+   "legal_bases": [
+    "§29①"
+   ],
+   "cited_ids": [
+    "US-P-20070272950"
+   ],
+   "target_claims": [
+    1
+   ]
+  },
+  {
+   "section": 2,
+   "legal_bases": [
+    "§29②",
+    "§29①"
+   ],
+   "cited_ids": [
+    "US-P-20070020797",
+    "US-P-20070272950"
+   ],
+   "target_claims": [
+    1,
+    2,
+    9,
+    16
+   ]
+  }
+ ],
+ "source_file": "1020080033916_952014022643659.txt",
+ "generator": "build_notice_evidence.py"
+}

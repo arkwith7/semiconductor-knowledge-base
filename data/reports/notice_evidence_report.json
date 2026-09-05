@@ -1,0 +1,41 @@
+{
+  "generated": "2026-09-06",
+  "plan": "PLAN-005 §10 (단계 2-A)",
+  "deterministic": true,
+  "llm_used": false,
+  "canonical_artifact": "data/patents/notice_legal_basis.parquet",
+  "note": "정본은 이 parquet 이다. 엣지 parquet 은 빌드 산출물이라 재빌드 시 지워지므로 --apply 를 다시 돌린다(§1-1). legal_basis 는 정답 간선의 속성이며 평가 하위집단 분해에만 쓴다 — 랭커 입력 금지(§1.6-4).",
+  "documents": 1155,
+  "sections": 1994,
+  "documents_without_section": 16,
+  "sections_with_citation": 935,
+  "canonical_rows": 1900,
+  "distinct_app_cited_pairs": 1725,
+  "examiner_edges": 2534,
+  "legal_basis_untouched_on_examiner": 0,
+  "legal_bases_filled": 1663,
+  "multi_ground_edges": 169,
+  "fill_rate": 0.6563,
+  "by_legal_basis": {
+    "§29②": 1617,
+    "§29①": 213,
+    "§42": 2
+  },
+  "cross_check_vs_evidence_v2": {
+    "gate": false,
+    "why_not_gate": "단일값 비교는 폐기된 tie-break 를 재고, 집합 비교는 결과를 본 뒤의 수다(§10.10). 서술 통계로만 싣는다.",
+    "overlapping_pairs": 588,
+    "exact_equality": 0.8656,
+    "containment": 0.9524
+  },
+  "primary_gate": {
+    "name": "주-2′ 사람 표본 원문 대조",
+    "threshold": 0.9,
+    "status": "충족",
+    "n": 30,
+    "correct": 28,
+    "rate": 0.9333,
+    "residual_error_mode": "틀린 건은 절 경계 오귀속이다 — `이 출원은/의` 앵커가 근거 진술이 아닌 논의 문장에도 걸려, 이웃 구간의 근거가 잘못 붙는다(§42 논의에 §29② 가 붙은 사례 확인)."
+  },
+  "applied_to_edges": true
+}
