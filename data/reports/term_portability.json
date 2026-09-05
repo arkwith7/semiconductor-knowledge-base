@@ -1,0 +1,3718 @@
+{
+  "generated": "2026-09-05",
+  "plan": "PLAN-005 단계 1 (이식성 4분류)",
+  "read_only": true,
+  "terms_total": 289,
+  "axes": {
+    "도메인": 91,
+    "판단필요": 165,
+    "관할": 27,
+    "원천": 6
+  },
+  "by_file": {
+    "sdkb-core.ttl": {
+      "도메인": 73,
+      "판단필요": 53,
+      "원천": 1
+    },
+    "sdkb-patent.ttl": {
+      "판단필요": 42,
+      "관할": 27,
+      "도메인": 13,
+      "원천": 5
+    },
+    "sdkb-commercialization.ttl": {
+      "판단필요": 26,
+      "도메인": 1
+    },
+    "sdkb-foresight.ttl": {
+      "판단필요": 29
+    },
+    "sdkb-rbv.ttl": {
+      "판단필요": 15,
+      "도메인": 4
+    },
+    "sdkb-governance.ttl": {},
+    "sdkb-governance-kr.ttl": {}
+  },
+  "detail": [
+    {
+      "term": "Acceptor",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "subClassOf*": [
+          "Dopant",
+          "Material"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "Assignment",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-commercialization.ttl"
+      ]
+    },
+    {
+      "term": "CPCSymbol",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "Capability",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-rbv.ttl"
+      ]
+    },
+    {
+      "term": "CitedPatent",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "관할",
+      "evidence": {
+        "text_jur": [
+          "심사관"
+        ]
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "Claim",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "ClaimFeature",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "ClassificationSymbol",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "ConstraintType",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "Device",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "root": "Device"
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "Donor",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "subClassOf*": [
+          "Dopant",
+          "Material"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "Dopant",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "subClassOf*": [
+          "Material"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "DopingRelation",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "root": "DopingRelation"
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "ElectronBeamLithography",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "subClassOf*": [
+          "Process",
+          "SubProcess"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "EntryBarrier",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-rbv.ttl"
+      ]
+    },
+    {
+      "term": "Equipment",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "root": "Equipment"
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "EquipmentClass",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "root": "EquipmentClass"
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "EquipmentModel",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "root": "EquipmentModel"
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "Expert",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "ExpertCase",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "ExtrinsicSemiconductor",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "subClassOf*": [
+          "Material"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "FTermFacet",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "text_dom": [
+          "deposition"
+        ]
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "FailureMode",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "root": "FailureMode"
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "FieldEffectMeasurement",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "subClassOf*": [
+          "Metrology"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "Firm",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "text_dom": [
+          "semiconductor"
+        ]
+      },
+      "files": [
+        "sdkb-rbv.ttl"
+      ]
+    },
+    {
+      "term": "FundingProgram",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-commercialization.ttl"
+      ]
+    },
+    {
+      "term": "GrantedPatent",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "HallEffectMeasurement",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "subClassOf*": [
+          "Metrology"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "HumanResource",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-rbv.ttl"
+      ]
+    },
+    {
+      "term": "IPCSymbol",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "IPTransaction",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-commercialization.ttl"
+      ]
+    },
+    {
+      "term": "IntangibleResource",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-rbv.ttl"
+      ]
+    },
+    {
+      "term": "IntrinsicSemiconductor",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "subClassOf*": [
+          "Material"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "License",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-commercialization.ttl"
+      ]
+    },
+    {
+      "term": "MarketSegment",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-rbv.ttl"
+      ]
+    },
+    {
+      "term": "Material",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "root": "Material"
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "MaterialProperty",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "Metrology",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "root": "Metrology"
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "Mitigation",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "root": "Mitigation"
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "NTypeSemiconductor",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "subClassOf*": [
+          "ExtrinsicSemiconductor",
+          "Material"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "NoveltyScore",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "OptionType",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-foresight.ttl"
+      ]
+    },
+    {
+      "term": "Option_Abandon",
+      "rdf_type": [
+        "https://w3id.org/sdkb/ont/OptionType"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-foresight.ttl"
+      ]
+    },
+    {
+      "term": "Option_Defer",
+      "rdf_type": [
+        "https://w3id.org/sdkb/ont/OptionType"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-foresight.ttl"
+      ]
+    },
+    {
+      "term": "Option_Expand",
+      "rdf_type": [
+        "https://w3id.org/sdkb/ont/OptionType"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-foresight.ttl"
+      ]
+    },
+    {
+      "term": "Option_Stage",
+      "rdf_type": [
+        "https://w3id.org/sdkb/ont/OptionType"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-foresight.ttl"
+      ]
+    },
+    {
+      "term": "Option_Switch",
+      "rdf_type": [
+        "https://w3id.org/sdkb/ont/OptionType"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-foresight.ttl"
+      ]
+    },
+    {
+      "term": "Organization",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "PTypeSemiconductor",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "subClassOf*": [
+          "ExtrinsicSemiconductor",
+          "Material"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "Parameter",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "root": "Parameter"
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "Patent",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "PendingPatent",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "PhotoelectronSpectroscopy",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "subClassOf*": [
+          "Metrology"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "PriorArtJudgment",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "관할",
+      "evidence": {
+        "text_jur": [
+          "심사관"
+        ]
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "Problem",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "text_dom": [
+          "equipment"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "Process",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "root": "Process"
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "Quantity",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "RealOption",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-foresight.ttl"
+      ]
+    },
+    {
+      "term": "RejectedPatent",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "RejectionReason",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "관할",
+      "evidence": {
+        "text_jur": [
+          "\\bKIPO\\b",
+          "\\bUSPTO\\b"
+        ]
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "RejectionType",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "Rejection_AmendmentScope",
+      "rdf_type": [
+        "https://w3id.org/sdkb/ont/RejectionType"
+      ],
+      "axis": "관할",
+      "evidence": {
+        "notation": "KIPO-47-2"
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "Rejection_ClaimFormat",
+      "rdf_type": [
+        "https://w3id.org/sdkb/ont/RejectionType"
+      ],
+      "axis": "관할",
+      "evidence": {
+        "notation": "KIPO-42-8"
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "Rejection_ClaimRequirements",
+      "rdf_type": [
+        "https://w3id.org/sdkb/ont/RejectionType"
+      ],
+      "axis": "관할",
+      "evidence": {
+        "notation": "KIPO-42-4"
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "Rejection_ClarityScope",
+      "rdf_type": [
+        "https://w3id.org/sdkb/ont/RejectionType"
+      ],
+      "axis": "관할",
+      "evidence": {
+        "notation": "KIPO-42"
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "Rejection_Disclosure",
+      "rdf_type": [
+        "https://w3id.org/sdkb/ont/RejectionType"
+      ],
+      "axis": "관할",
+      "evidence": {
+        "notation": "KIPO-42-3"
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "Rejection_DivisionalScope",
+      "rdf_type": [
+        "https://w3id.org/sdkb/ont/RejectionType"
+      ],
+      "axis": "관할",
+      "evidence": {
+        "notation": "KIPO-52-1"
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "Rejection_Eligibility",
+      "rdf_type": [
+        "https://w3id.org/sdkb/ont/RejectionType"
+      ],
+      "axis": "관할",
+      "evidence": {
+        "notation": "KIPO-2"
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "Rejection_ExpandedPriorFiling",
+      "rdf_type": [
+        "https://w3id.org/sdkb/ont/RejectionType"
+      ],
+      "axis": "관할",
+      "evidence": {
+        "notation": "KIPO-29-3"
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "Rejection_Inventiveness",
+      "rdf_type": [
+        "https://w3id.org/sdkb/ont/RejectionType"
+      ],
+      "axis": "관할",
+      "evidence": {
+        "notation": "KIPO-29-2"
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "Rejection_Novelty",
+      "rdf_type": [
+        "https://w3id.org/sdkb/ont/RejectionType"
+      ],
+      "axis": "관할",
+      "evidence": {
+        "notation": "KIPO-29-1"
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "Rejection_SameDayFiling",
+      "rdf_type": [
+        "https://w3id.org/sdkb/ont/RejectionType"
+      ],
+      "axis": "관할",
+      "evidence": {
+        "notation": "KIPO-36-2"
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "Rejection_UnityOfInvention",
+      "rdf_type": [
+        "https://w3id.org/sdkb/ont/RejectionType"
+      ],
+      "axis": "관할",
+      "evidence": {
+        "notation": "KIPO-45"
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "Resource",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-rbv.ttl"
+      ]
+    },
+    {
+      "term": "ResourceCombination",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-rbv.ttl"
+      ]
+    },
+    {
+      "term": "RootCause",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "root": "RootCause"
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "STEEPVEDimension",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-foresight.ttl"
+      ]
+    },
+    {
+      "term": "STEEPVEFactor",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-foresight.ttl"
+      ]
+    },
+    {
+      "term": "STEEPVE_Economic",
+      "rdf_type": [
+        "https://w3id.org/sdkb/ont/STEEPVEDimension"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-foresight.ttl"
+      ]
+    },
+    {
+      "term": "STEEPVE_Environmental",
+      "rdf_type": [
+        "https://w3id.org/sdkb/ont/STEEPVEDimension"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-foresight.ttl"
+      ]
+    },
+    {
+      "term": "STEEPVE_Ethical",
+      "rdf_type": [
+        "https://w3id.org/sdkb/ont/STEEPVEDimension"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-foresight.ttl"
+      ]
+    },
+    {
+      "term": "STEEPVE_Political",
+      "rdf_type": [
+        "https://w3id.org/sdkb/ont/STEEPVEDimension"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-foresight.ttl"
+      ]
+    },
+    {
+      "term": "STEEPVE_Social",
+      "rdf_type": [
+        "https://w3id.org/sdkb/ont/STEEPVEDimension"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-foresight.ttl"
+      ]
+    },
+    {
+      "term": "STEEPVE_Technological",
+      "rdf_type": [
+        "https://w3id.org/sdkb/ont/STEEPVEDimension"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-foresight.ttl"
+      ]
+    },
+    {
+      "term": "STEEPVE_Values",
+      "rdf_type": [
+        "https://w3id.org/sdkb/ont/STEEPVEDimension"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-foresight.ttl"
+      ]
+    },
+    {
+      "term": "Scenario",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-foresight.ttl"
+      ]
+    },
+    {
+      "term": "Semiconductor",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "subClassOf*": [
+          "Material"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "Signal",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-foresight.ttl"
+      ]
+    },
+    {
+      "term": "Skill",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "root": "Skill"
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "Spinoff",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-commercialization.ttl"
+      ]
+    },
+    {
+      "term": "StandardAdoption",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "text_dom": [
+          "equipment"
+        ]
+      },
+      "files": [
+        "sdkb-commercialization.ttl"
+      ]
+    },
+    {
+      "term": "SubProcess",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "subClassOf*": [
+          "Process"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "TRL_1",
+      "rdf_type": [
+        "https://w3id.org/sdkb/ont/TechnologyReadinessLevel"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-commercialization.ttl"
+      ]
+    },
+    {
+      "term": "TRL_2",
+      "rdf_type": [
+        "https://w3id.org/sdkb/ont/TechnologyReadinessLevel"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-commercialization.ttl"
+      ]
+    },
+    {
+      "term": "TRL_3",
+      "rdf_type": [
+        "https://w3id.org/sdkb/ont/TechnologyReadinessLevel"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-commercialization.ttl"
+      ]
+    },
+    {
+      "term": "TRL_4",
+      "rdf_type": [
+        "https://w3id.org/sdkb/ont/TechnologyReadinessLevel"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-commercialization.ttl"
+      ]
+    },
+    {
+      "term": "TRL_5",
+      "rdf_type": [
+        "https://w3id.org/sdkb/ont/TechnologyReadinessLevel"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-commercialization.ttl"
+      ]
+    },
+    {
+      "term": "TRL_6",
+      "rdf_type": [
+        "https://w3id.org/sdkb/ont/TechnologyReadinessLevel"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-commercialization.ttl"
+      ]
+    },
+    {
+      "term": "TRL_7",
+      "rdf_type": [
+        "https://w3id.org/sdkb/ont/TechnologyReadinessLevel"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-commercialization.ttl"
+      ]
+    },
+    {
+      "term": "TRL_8",
+      "rdf_type": [
+        "https://w3id.org/sdkb/ont/TechnologyReadinessLevel"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-commercialization.ttl"
+      ]
+    },
+    {
+      "term": "TRL_9",
+      "rdf_type": [
+        "https://w3id.org/sdkb/ont/TechnologyReadinessLevel"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-commercialization.ttl"
+      ]
+    },
+    {
+      "term": "TangibleResource",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "text_dom": [
+          "equipment"
+        ]
+      },
+      "files": [
+        "sdkb-rbv.ttl"
+      ]
+    },
+    {
+      "term": "TechnologyNode",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "root": "TechnologyNode"
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "TechnologyReadinessLevel",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-commercialization.ttl"
+      ]
+    },
+    {
+      "term": "ThermalEvaporation",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "subClassOf*": [
+          "Process",
+          "SubProcess"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "TopicCluster",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "Vendor",
+      "rdf_type": [
+        "Class"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "text_dom": [
+          "equipment"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "aboutClaim",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "관할",
+      "evidence": {
+        "jur_structure": [
+          "PriorArtJudgment"
+        ]
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "abstractText",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "원천",
+      "evidence": {
+        "text_prov": [
+          "\\bKIPRIS\\b"
+        ]
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "affectsMetric",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "FailureMode",
+          "Parameter"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "age",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "applicationNumber",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "assignedTo",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "barrierOf",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-rbv.ttl"
+      ]
+    },
+    {
+      "term": "belongsToFunction",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "원천",
+      "evidence": {
+        "text_prov": [
+          "\\bNIST\\b"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "broaderClassification",
+      "rdf_type": [
+        "ObjectProperty",
+        "TransitiveProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "caseFailureMode",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "FailureMode"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "caseMitigation",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "Mitigation"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "caseParameter",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "Parameter"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "caseProcess",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "Process",
+          "SubProcess"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "caseRootCause",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "RootCause"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "caseSource",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "changeSet",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "cites",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "claimCount",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "원천",
+      "evidence": {
+        "text_prov": [
+          "\\bKIPRIS\\b"
+        ]
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "claimNumber",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "claimText",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "원천",
+      "evidence": {
+        "text_prov": [
+          "\\bKIPRIS\\b"
+        ]
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "clientCountry",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "com",
+      "rdf_type": [
+        "Ontology"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-commercialization.ttl"
+      ]
+    },
+    {
+      "term": "combines",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-rbv.ttl"
+      ]
+    },
+    {
+      "term": "companyType",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "text_dom": [
+          "equipment"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "complianceFlag",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "complianceSensitivity",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "concernsDevice",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "Device"
+        ]
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "concernsEquipment",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "Equipment",
+          "EquipmentClass",
+          "Metrology"
+        ]
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "concernsSkill",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "Skill"
+        ]
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "concernsTechnologyNode",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "TechnologyNode"
+        ]
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "confidence",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "conflictNote",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "consultingAvailability",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "controlledBy",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "currentStatus",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "decompositionMethod",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "dependsOnClaim",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "dependsOnFeature",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "deprecatedId",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "education",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "effectiveDate",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "enablesCapability",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-rbv.ttl"
+      ]
+    },
+    {
+      "term": "examinationStatus",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "exerciseDate",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-foresight.ttl"
+      ]
+    },
+    {
+      "term": "exhibitsFailureMode",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "FailureMode"
+        ]
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "featureConcept",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "Device",
+          "EquipmentClass",
+          "FailureMode",
+          "Material",
+          "Process",
+          "Skill",
+          "SubProcess"
+        ]
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "featureSeq",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "featureText",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "원천",
+      "evidence": {
+        "text_prov": [
+          "\\bKIPRIS\\b"
+        ]
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "filingDate",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "firmTargets",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-rbv.ttl"
+      ]
+    },
+    {
+      "term": "firmType",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "text_dom": [
+          "equipment"
+        ]
+      },
+      "files": [
+        "sdkb-rbv.ttl"
+      ]
+    },
+    {
+      "term": "firstClaimText",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "원천",
+      "evidence": {
+        "text_prov": [
+          "\\bKIPRIS\\b"
+        ]
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "fore",
+      "rdf_type": [
+        "Ontology"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-foresight.ttl"
+      ]
+    },
+    {
+      "term": "formerEmployer",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "fundedBy",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-commercialization.ttl"
+      ]
+    },
+    {
+      "term": "granularity",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "groundClause",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "관할",
+      "evidence": {
+        "text_jur": [
+          "조-항-호"
+        ]
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "hardConstraint",
+      "rdf_type": [
+        "NamedIndividual",
+        "https://w3id.org/sdkb/ont/ConstraintType"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "hasAcceptor",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "ExtrinsicSemiconductor",
+          "Material"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "hasCPC",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "hasCaseExperience",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "hasCertification",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "hasClaim",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "hasClassification",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "hasCommunicationProtocol",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "Equipment"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "hasDimension",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-foresight.ttl"
+      ]
+    },
+    {
+      "term": "hasDonor",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "ExtrinsicSemiconductor",
+          "Material"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "hasECCN",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "EquipmentClass"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "hasEquipment",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "Equipment",
+          "SubProcess"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "hasEquipmentExperience",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "Equipment",
+          "EquipmentClass",
+          "EquipmentModel",
+          "Metrology"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "hasEquipmentState",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "Equipment"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "hasFTerm",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "hasFeature",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "hasIPC",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "hasJudgment",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "관할",
+      "evidence": {
+        "jur_structure": [
+          "PriorArtJudgment"
+        ]
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "hasMaterialExpertise",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "Material"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "hasMeasuredProperty",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "SubProcess"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "hasNCT",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "hasNextStep",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "SubProcess"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "hasNumericValue",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "hasParameter",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "Parameter",
+          "SubProcess"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "hasPriorArt",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "hasPriorArtApplicant",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "hasPriorArtExaminer",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "hasProcessExpertise",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "Process",
+          "TechnologyNode"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "hasProperty",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "Material"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "hasRealOption",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-foresight.ttl"
+      ]
+    },
+    {
+      "term": "hasSVHC",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "Material"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "hasSkill",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "Mitigation",
+          "Skill"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "hasSubStep",
+      "rdf_type": [
+        "ObjectProperty",
+        "TransitiveProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "SubProcess"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "hasSubprocess",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "Process",
+          "SubProcess"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "hasTRL",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-commercialization.ttl"
+      ]
+    },
+    {
+      "term": "hasUnitSymbol",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "holdsResource",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-rbv.ttl"
+      ]
+    },
+    {
+      "term": "hourlyRateRange",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "incompatibleWith",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "EquipmentClass",
+          "Material",
+          "SubProcess"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "interpretationType",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "involvesEquipment",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "Equipment",
+          "EquipmentClass",
+          "Metrology"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "involvesMaterial",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "Material"
+        ]
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "involvesProcess",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "Process"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "isDueTo",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "FailureMode",
+          "RootCause"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "isIndependent",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "isInstanceOf",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "Equipment",
+          "EquipmentClass"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "language",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "lastActivity",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "licenseExclusivity",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-commercialization.ttl"
+      ]
+    },
+    {
+      "term": "licensee",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-commercialization.ttl"
+      ]
+    },
+    {
+      "term": "licensesPatent",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-commercialization.ttl"
+      ]
+    },
+    {
+      "term": "licensor",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-commercialization.ttl"
+      ]
+    },
+    {
+      "term": "madeBy",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "EquipmentClass",
+          "Material"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "majorProject",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "measuredBy",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "Metrology",
+          "SubProcess"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "mitigatedBy",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "FailureMode",
+          "Mitigation",
+          "RootCause"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "mitigationProvidesSkill",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "Mitigation",
+          "Skill"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "nationality",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "notAllowedWith",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "Material",
+          "Parameter",
+          "SubProcess"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "noticeDate",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "관할",
+      "evidence": {
+        "jur_structure": [
+          "RejectionReason"
+        ]
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "noticeRound",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "관할",
+      "evidence": {
+        "jur_structure": [
+          "RejectionReason"
+        ]
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "noticeType",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "관할",
+      "evidence": {
+        "text_jur": [
+          "의견제출통지서",
+          "거절결정서"
+        ]
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "noveltyMethod",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "noveltyValue",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "occursAtProcessStep",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "FailureMode",
+          "SubProcess"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "onGround",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "관할",
+      "evidence": {
+        "jur_structure": [
+          "PriorArtJudgment"
+        ]
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "optionType",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-foresight.ttl"
+      ]
+    },
+    {
+      "term": "optionUnderScenario",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-foresight.ttl"
+      ]
+    },
+    {
+      "term": "optionValue",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-foresight.ttl"
+      ]
+    },
+    {
+      "term": "overPriorArt",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "관할",
+      "evidence": {
+        "jur_structure": [
+          "PriorArtJudgment"
+        ]
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "overlappingFeature",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "관할",
+      "evidence": {
+        "jur_structure": [
+          "PriorArtJudgment"
+        ]
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "patent",
+      "rdf_type": [
+        "Ontology"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "patentCount",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "patentOffice",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "preferredProjectType",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "probability",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "problemCategory",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "processFamily",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "text_dom": [
+          "\\betch\\w*",
+          "deposition"
+        ]
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "profileSummary",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "providedBy",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "Equipment"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "publicationCount",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "publicationDate",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "publicationNumber",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "rbv",
+      "rdf_type": [
+        "Ontology"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "text_dom": [
+          "semiconductor"
+        ]
+      },
+      "files": [
+        "sdkb-rbv.ttl"
+      ]
+    },
+    {
+      "term": "realizesEquipmentClass",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "EquipmentClass"
+        ]
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "realizesProcess",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "Process"
+        ]
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "reasonGround",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "관할",
+      "evidence": {
+        "jur_structure": [
+          "RejectionReason"
+        ]
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "reducesBarrier",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-rbv.ttl"
+      ]
+    },
+    {
+      "term": "region",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "registrationNumber",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "rejectedFor",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "rejectionDate",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "rejectionEvidence",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "관할",
+      "evidence": {
+        "jur_structure": [
+          "RejectionReason"
+        ]
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "rejectionPassage",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "관할",
+      "evidence": {
+        "text_jur": [
+          "거절결정서"
+        ]
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "relatedToTopic",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "Mitigation",
+          "RootCause"
+        ]
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "relevantForTechNode",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "SubProcess",
+          "TechnologyNode"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "relevantOutcome",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "Equipment"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "requiresSkill",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "Mitigation",
+          "Skill",
+          "SubProcess"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "resourceMembership",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-rbv.ttl"
+      ]
+    },
+    {
+      "term": "retirementYear",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "retrievedDate",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "reviewStatus",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "scenarioDriver",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-foresight.ttl"
+      ]
+    },
+    {
+      "term": "scenarioProbability",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-foresight.ttl"
+      ]
+    },
+    {
+      "term": "securityClearance",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "securityLevel",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "signalStrength",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-foresight.ttl"
+      ]
+    },
+    {
+      "term": "signalsFactor",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-foresight.ttl"
+      ]
+    },
+    {
+      "term": "softConstraint",
+      "rdf_type": [
+        "NamedIndividual",
+        "https://w3id.org/sdkb/ont/ConstraintType"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "specialization",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "text_dom": [
+          "litho\\w*",
+          "\\bCMP\\b",
+          "metrology"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "spinoffFrom",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-commercialization.ttl"
+      ]
+    },
+    {
+      "term": "standardRef",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "EquipmentClass"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "svhcConcentration",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "toeicScore",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "tppValue",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "transactionDate",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-commercialization.ttl"
+      ]
+    },
+    {
+      "term": "transactionValue",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-commercialization.ttl"
+      ]
+    },
+    {
+      "term": "trlLevel",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-commercialization.ttl"
+      ]
+    },
+    {
+      "term": "usesEquipmentClass",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "EquipmentClass",
+          "SubProcess"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "usesMaterial",
+      "rdf_type": [
+        "ObjectProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "domain_range": [
+          "Material",
+          "SubProcess"
+        ]
+      },
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "validationRequired",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "valueChainStage",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "도메인",
+      "evidence": {
+        "text_dom": [
+          "equipment"
+        ]
+      },
+      "files": [
+        "sdkb-patent.ttl"
+      ]
+    },
+    {
+      "term": "vrioValue",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-rbv.ttl"
+      ]
+    },
+    {
+      "term": "workHistoryCountry",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    },
+    {
+      "term": "yearsExperience",
+      "rdf_type": [
+        "DatatypeProperty"
+      ],
+      "axis": "판단필요",
+      "evidence": {},
+      "files": [
+        "sdkb-core.ttl"
+      ]
+    }
+  ]
+}
