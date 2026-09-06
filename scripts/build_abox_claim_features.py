@@ -37,6 +37,9 @@ EDGES = ROOT / "data" / "patents" / "prior_art_edges.parquet"
 # CR-011 — B층 인용 문헌은 EDGES 에 없다(CR-008 비목표 ⓒ · 질의–인용 대응 미이관).
 # 503건 중 EDGES 정규형 맵에 있는 것은 3건뿐이라, 이 맵 없이는 500건이 patent_unresolved 로 버려진다.
 B_LAYER_POP = ROOT / "data" / "patents" / "b_layer_cited_population.parquet"
+# PLAN-005 단계 2-B — 의견제출통지서 유래 근거(단계 2-A 산출). 판단 union 의 세 번째 원천이다.
+# 이것 없이는 신규성(§29①) 판단이 10건뿐이라 근거별 하위집단 분석의 축이 서지 않는다.
+NOTICE_LB = ROOT / "data" / "patents" / "notice_legal_basis.parquet"
 OUT_TTL = ROOT / "ontology" / "sdkb-abox-claim-features.ttl"
 OUT_REPORT = ROOT / "data" / "reports" / "abox_claim_features_report.json"
 # CR-017 — 소비 가능한 투영. TTL 은 899 MB 라 벤더할 수 없다(하류 §1-5 · 저장소 실무 양쪽).
@@ -54,6 +57,12 @@ LICENSE = "KIPRIS terms — academic use, no redistribution of full text"
 CONCEPT_TYPES = {"Process", "SubProcess", "Device", "Material", "Skill", "FailureMode", "EquipmentClass"}
 # §29 항 → 기존 RejectionType 개체
 GROUND = {"§29①": "Rejection_Novelty", "§29②": "Rejection_Inventiveness"}
+#: 판단 노드의 dcterms:source 표기. 원천 **파일명이 아니라 생성기와 산출물**을 가리킨다.
+JUDGMENT_SOURCE = {
+    "evidence_v2": "scripts/build_prior_art_pairs.py -> data/patents/prior_art_edges.parquet (evidence_v2)",
+    "decision_ocr": "scripts/reextract_claim_judgments.py -> data/interim/reextracted_judgments.jsonl",
+    "opinion_notice": "scripts/build_notice_evidence.py -> data/patents/notice_legal_basis.parquet",
+}
 
 
 def _u(curie_or_path: str) -> URIRef:
@@ -421,10 +430,12 @@ def main() -> int:
                         stat["depends" if row_first else "depends_duplicate_emissions"] += 1
                         break
 
-    # 거절-판단 패턴 → PriorArtJudgment. 두 원천을 union 한다:
-    #  evidence_v2 (656행, GT — 노이즈 포함) + OCR 재추출 (거절결정 표, authoritative).
+    # 거절-판단 패턴 → PriorArtJudgment. 세 원천을 union 한다:
+    #  evidence_v2 (656행, GT — 노이즈 포함) + OCR 재추출 (거절결정 표, authoritative)
+    #  + PLAN-005 단계 2-B: 의견제출통지서 근거(notice_legal_basis.parquet).
     # 키 (target특허, cited_doc, ground) 로 병합하고 청구항 집합을 합친다.
     judg: dict[tuple, set[int]] = {}
+    judg_src: dict[tuple, set[str]] = {}   # 키 → 원천 태그. 같은 키에 여러 원천이 겹칠 수 있다.
     ev = edges[edges["source_type"] == "evidence_v2"].drop_duplicates(["target_patent_id", "cited_id", "legal_basis"])
     for _, e in ev.iterrows():
         ground = GROUND.get(str(e["legal_basis"]))
@@ -434,6 +445,7 @@ def main() -> int:
         key = (str(e["target_patent_id"]), str(e["cited_doc_id"]), ground)  # ground = RejectionType 개체명
         cl = {int(x) for x in str(e["target_claims"] or "").split("|") if x.strip().isdigit()}
         judg.setdefault(key, set()).update(cl)
+        judg_src.setdefault(key, set()).add("evidence_v2")
     # OCR 재추출 (data/interim/reextracted_judgments.jsonl). ground("§29②")를 evidence_v2 와
     # 같은 RejectionType 개체명으로 매핑해야 키가 병합되고 onGround IRI 가 유효해진다.
     rxf = ROOT / "data" / "interim" / "reextracted_judgments.jsonl"
@@ -445,12 +457,33 @@ def main() -> int:
                 continue
             key = (f"patent:kr_{r['target_patent']}", str(r["cited_doc"]), gr)
             judg.setdefault(key, set()).update(int(x) for x in r["target_claims"])
+            judg_src.setdefault(key, set()).add("decision_ocr")
             stat["reextract_rows"] += 1
 
-    for (tgt_id, cited_doc, ground), claims in judg.items():
+    # PLAN-005 단계 2-B — 통지서 근거. 인용 해소는 **새로 하지 않는다**: 위에서 만든 정규형
+    # cited_map 을 그대로 쓰고, 맵에 없는 문헌은 아래 방출 루프에서 unresolved 로 계상된다.
+    # target_claims 는 단계 2-A 값을 그대로 옮긴다 — 범위(`제1항 내지 제13항`) 미전개가
+    # 알려져 있으나(2단계 관찰 §3), 청구항 접지 규칙 교정은 별도 작업이다(부채 등재).
+    if NOTICE_LB.exists():
+        nlb = pd.read_parquet(NOTICE_LB)
+        for _, r in nlb.iterrows():
+            gr = GROUND.get(str(r["legal_basis"]))
+            if gr is None:                      # §29③·§42 — RejectionType 개체가 없다
+                stat["notice_no_ground"] += 1
+                continue
+            key = (f"patent:kr_{r['application_number']}", str(r["cited_doc_id"]), gr)
+            cl = {int(x) for x in str(r["target_claims"] or "").split(",") if x.strip().isdigit()}
+            judg.setdefault(key, set()).update(cl)
+            judg_src.setdefault(key, set()).add("opinion_notice")
+            stat["notice_rows"] += 1
+
+    for key in sorted(judg):                    # 결정적: 같은 원천 → 같은 순서
+        (tgt_id, cited_doc, ground), claims = key, judg[key]
         canon = cited_map.get(cited_doc)
         if not canon:
             stat["judgment_cited_unresolved"] += 1
+            for tag in sorted(judg_src.get(key, ())):   # 손실을 원천별로 가른다 — 합계만 세면
+                stat["judgment_cited_unresolved__" + tag] += 1   # 어느 원천이 새는지 안 보인다
             continue
         tgt = _u(tgt_id.replace("patent:", "patent/"))
         cited = _u(canon.replace("patent:", "patent/"))
@@ -459,7 +492,18 @@ def main() -> int:
         g.add((j, R("onGround"), R(ground)))
         g.add((j, R("overPriorArt"), cited))
         g.add((tgt, R("hasJudgment"), j))
+        # 원천 표기는 **생성기와 원천 parquet 을 가리키고 통지서 원문 파일명은 담지 않는다**
+        # (§1-5 발행 경계 — 원문 경로가 공개 파생 리포로 새지 않게).
+        srcs = sorted(judg_src.get(key, ()))
+        for tag in srcs:
+            g.add((j, DCTERMS.source, Literal(JUDGMENT_SOURCE[tag], datatype=XSD.string)))
         stat["judgments"] += 1
+        stat["judgments_by_ground__" + ground] += 1
+        for tag in srcs:
+            stat["judgments_by_source__" + tag] += 1
+        if srcs == ["opinion_notice"]:
+            stat["judgments_notice_only"] += 1
+            stat["judgments_notice_only__" + ground] += 1
         appno = tgt_id.replace("patent:kr_", "")
         for cn in sorted(claims):
             cl = _u(f"claim/{_slug('rej:'+appno)}_c{cn}")

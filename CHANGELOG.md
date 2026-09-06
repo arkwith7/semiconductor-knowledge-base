@@ -27,6 +27,68 @@ All notable changes to SDKB will be documented in this file.
 
 ## [Unreleased]
 
+### Added (2026-09-06 — PLAN-005 단계 2-B · 통지서 근거의 판단 승격 · 사용자 승인)
+
+- **신규성 판단이 9건에서 202건이 됐다.** `PriorArtJudgment` 는 635 → **1,812** 이고,
+  그중 `Rejection_Novelty` 202 · `Rejection_Inventiveness` 1,610 이다. 그전까지 신규성 축은
+  9건이라 근거별 하위집단 분석의 축이 사실상 없었다(PLAN-005 §4 진단).
+- **새로 한 것은 인용 해소가 아니라 union 이다.** 단계 2-A 가 만든
+  `data/patents/notice_legal_basis.parquet`(1,900행 · 697출원)을
+  `build_abox_claim_features.py` 의 판단 union 에 **세 번째 원천**으로 넣었다. 인용 문헌
+  해소는 기존 정규형 맵(`prior_art_edges` + `b_layer_cited_population`)을 **그대로 재사용**하며
+  새 해소 로직을 만들지 않는다(§1.3 — 검증 못 한 인용 해소를 쓰지 않는다).
+  키는 기존과 같은 `(대상특허, cited_doc, ground)` 라, 같은 키면 기존 판단과 **합쳐지고**
+  청구항 집합만 union 된다 — 즉 기존 판단 IRI 는 하나도 움직이지 않는다.
+- **어휘·shape·IRI 규칙은 바뀌지 않았다.** `PriorArtJudgment`·`onGround`·`overPriorArt`·
+  `aboutClaim`·`hasJudgment` 전부 기존 T-Box 항이다. 판단 노드에는 `dcterms:source` 로
+  **생성기와 산출 parquet** 을 적는다 — 통지서 **원문 파일명은 넣지 않는다**(§1-5 발행 경계).
+- **원천별 손실을 가른다.** 통지서 1,897행 중 3행은 §29③·§42 라 `RejectionType` 개체가 없어
+  제외됐고, 172건은 인용문헌이 정규형 맵에 없어 방출되지 않았다(대부분 `KR-G-`/`US-G-`
+  등록공보 표기). 합계만 세면 어느 원천이 새는지 보이지 않으므로
+  `judgment_cited_unresolved__{원천}` 으로 계상한다.
+
+- **`aboutClaim` 은 단계 2-A 값을 그대로 옮겼고, 그 값은 이름만큼 넓지 않다(부채).**
+  2-A 의 청구항 추출식 `청구항\s*(\d+([,~]\d+)*)` 은 **`제1항 내지 제13항` 의 범위를
+  펼치지 않고 `제N항` 의 `제` 접두도 잡지 못한다.** 실측 사례 `10-2006-0038703` 은 원문
+  §29② 가 청구항 1–13 인데 값이 `1,7,12,13` 이다. `내지` 표현은 통지서 **700/1,155(60.6%)**
+  에 있다. 이번 작업에서 **고치지 않은 이유**는 교정 방향이 한 쪽으로 정해지지 않기
+  때문이다 — `[심사결과]` 표와 대조하면 표가 더 넓은 행이 912, 본문이 더 넓은 행이 510,
+  일치 241, 교차 214 다. 청구항 접지 규칙 교정은 사람 대조가 다시 필요한 별도 작업이다.
+- **뜻밖의 교차검증 — 2-A 의 근거 부착이 독립 경로로 98.7% 재현된다.** 2-A 가 쓰지 않은
+  `[심사결과]` 표(순번 × 청구항범위 × 법조항)를 따로 파싱해 `section` 으로 붙이면 법조항이
+  **1,852 / 1,877 행에서 일치**한다. 2-A 의 사람 표본 0.9333(n=30)과 별개의 증거다.
+
+- **`shapes_claim_features.ttl` 은 작성된 뒤로 어디에도 배선되어 있지 않았다 — 이번에
+  배선했다.** `grep -rn shapes_claim_features Makefile scripts/ tests/` 가 빈 출력이었고,
+  이는 부채 대장 4번(특허 shape 미배선)과 **같은 양식**이다(§4 — 쓰여만 있고 돌지 않는
+  shape 은 게이트가 아니라 장식). `make validate` 가 이제
+  `shapes_claim_features.ttl × sdkb-abox-claim-features.ttl` 을 명시 실행한다.
+- **추론은 끄고 돌린다 — 느슨하게 한 것이 아니라 필요 없는 비용을 뺀 것이다.** 이 A-Box 는
+  11,871,397 트리플 · 907 MB 이고, 파싱만으로 최대 RSS 15.7 GB 다(가용 25 GB). 이 층의
+  shape 들은 `targetClass`·`sh:class` 가 A-Box·T-Box 에 **명시 타이핑**되어 있어 추론 없이
+  타깃을 잡는다 — 실측으로 파싱 244초 + 검증 186초에 완주하고 **위반 0**.
+  `validate_shacl.py` 에 `--inference` 를 더했고 **기본값은 rdfs 그대로**다.
+- **통과가 vacuous 가 아님을 출력이 증명한다.** 검증기가 shape 별 타깃 수를 함께 찍는다 —
+  `PriorArtJudgment` **1,812** · `Claim` 594,078 · `ClaimFeature` 1,306,191.
+  **`CitedPatent` 은 0 이다(⚠ vacuous)** — 인용문헌 실체 3,513건은 이 A-Box 가 아니라
+  `sdkb-abox-prior-art.ttl` 에 있어, 그 shape 은 이 짝에서 아무것도 검사하지 않는다.
+  **이번 범위에서 고치지 않고 부채로 등재한다** — 짝을 바로잡는 것은 별도 승인 사안이다.
+- **거부해야 할 입력이 거부되는지 확인했다.** 근거 없음 · 근거 2개 · 근거가 `RejectionType`
+  이 아님 · 대비 선행기술 없음 — 넷 다 위반으로 잡히고 정상 1건은 통과한다.
+  `tests/test_judgment_shape_gate.py` 가 이 계약과 **Makefile 배선**을 함께 고정한다.
+  배선이 끊기면 위반 델타 검사가 통과해도 릴리스 경로는 무검사이므로 둘은 같이 걸려야 한다.
+
+- **재현성** — 같은 원천으로 두 번 빌드해 **동일한 그래프**가 나온다
+  (`sha256 4418f96a3f3617d9d0af23c89df4cca36f873da4ddcc517526732bbf7a6a9f50`, 각 24분 44초).
+  판단 방출 순서를 키 정렬로 고정했다.
+- **그래프 서명** (`ontology/sdkb-abox-claim-features.ttl`): 트리플 11,856,521 →
+  **11,871,397** · `PriorArtJudgment` 635 → **1,812**(`Rejection_Novelty` 9 → **202** ·
+  `Rejection_Inventiveness` 626 → **1,610**) · `aboutClaim` 5,917 → **13,207** ·
+  `Claim` 594,078 **불변** · `ClaimFeature` 1,306,191 **불변** · `RejectionReason` 2,749 불변.
+  `make test` 292 통과 / 10 skip.
+- **하류 통보** — 판단 수가 세 배가 되므로 스냅샷을 핀한 소비자(§0)의 서명이 달라진다.
+  기존 판단 IRI 와 A층 IRI 는 불변이고, 늘어난 것은 통지서 유래 신규 판단 1,177건이다.
+
 ### Fixed (2026-08-24 — B층 인용문헌 재생성 손실 복원 · 진입점 교정 · 하류 D-52)
 
 - **CR-008 이 채운 B층 인용문헌 479 건이 CR-020 재생성에서 빠졌다가 되돌아왔다.**
