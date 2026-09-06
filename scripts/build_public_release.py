@@ -138,6 +138,14 @@ DENY_FILES = {
     # 재현성은 생성기가 진다: `scripts/build_notice_evidence.py` 는 발행되고 결정적이므로,
     # 원문을 가진 사람은 동일 산출을 다시 만들 수 있다.
     "data/patents/notice_legal_basis.parquet",
+    # ── 통지서 구성 대비표 유래 구성요소 판정 (2026-09-06 · PLAN-005 §11 · 사용자 결정)
+    # 위 2-A 산출물과 **같은 이유이며, 더 강하게 적용된다.** 이쪽은 (출원, 청구항,
+    # 구성요소, 판정) 이라 심사 판단의 세부가 한 단계 더 내려간다 — 어느 구성요소가
+    # 인용발명과 동일하다고 판정됐는지까지 담는다. 원문은 없으므로 §1-5 재배포 금지에는
+    # 걸리지 않고, 순수한 발행 판단이다.
+    # 재현성은 생성기가 진다: `scripts/build_notice_element_judgments.py` 는 발행되고
+    # 결정적이므로, 원문을 가진 사람은 동일 산출을 다시 만들 수 있다.
+    "data/patents/notice_element_judgments.parquet",
     # ── 일회성 백필·정정 (한 번 돌고 끝난 코드)
     "scripts/backfill_admin_docs.py",
     "scripts/backfill_pdfinfo_v2.py",

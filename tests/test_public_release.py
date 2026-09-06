@@ -269,6 +269,12 @@ def test_제외_결정이_조용히_뒤집히지_않는다():
     assert not is_allowed("scripts/build_viz.py")            # 시각화·Pages
     assert not is_allowed("scripts/eval_prior_art_realgt.py")  # 평가
     assert not is_allowed("scripts/build_rejection_decisions.py")
+    # 2026-09-06 · PLAN-005 §11 — 구성요소 단위 심사 판단. 2-A 정본과 같은 이유로 뺀다.
+    assert not is_allowed("data/patents/notice_element_judgments.parquet")
+    assert not is_allowed("data/patents/notice_legal_basis.parquet")
+    # 생성기와 집계 리포트는 발행한다 — 재현 경로를 남기기 위해서다.
+    assert is_allowed("scripts/build_notice_element_judgments.py")
+    assert is_allowed("data/reports/notice_element_judgments_report.json")
     # 이름이 노트북 헬퍼처럼 보이지만 tests/ 가 임포트한다 — 이름이 아니라 쓰임으로 판단한다.
     assert is_allowed("scripts/sdkb_nb.py")
 

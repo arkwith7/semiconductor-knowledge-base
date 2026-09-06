@@ -1,0 +1,54 @@
+{
+ "generated": "2026-09-06",
+ "plan": "PLAN-005 §11 (단계 2-C)",
+ "deterministic": true,
+ "llm_used": false,
+ "canonical_artifact": "data/patents/notice_element_judgments.parquet",
+ "note": "구조 키만 담는다 — 텍스트 열은 OCR 로 무너져 있어 담지 않는다(§11.1). 그래프에 들어가는 것은 단계 4 이며 별도 승인 대상이다. 누출 범위는 harvest_scope_dev_train.json 하나이고 check_leakage.py 는 없다.",
+ "leakage_scope": {
+  "file": "data/sources/harvest_scope_dev_train.json",
+  "applications": 800
+ },
+ "documents_scanned": 1155,
+ "documents_with_table_rows": 28,
+ "rows_all": 305,
+ "rows_out_of_scope": 0,
+ "documents_out_of_scope": 0,
+ "rows": 305,
+ "applications": 26,
+ "element_groups": 67,
+ "caption_claim_resolved": 267,
+ "caption_differs_from_group": 9,
+ "judgment_distribution": {
+  "Identical": 188,
+  "Different": 113,
+  "Corresponding": 4
+ },
+ "judgment_raw_distribution": {
+  "실질적 동일": 188,
+  "차이": 113,
+  "대응": 4
+ },
+ "gate": {
+  "name": "주 · 사람 표본 원문 대조",
+  "threshold": 0.9,
+  "source": "data/interim/notice_element_judgments_sample_result.csv",
+  "status": "충족",
+  "n": 30,
+  "correct": 30,
+  "rate": 1.0,
+  "instrument_corrections": [
+   {
+    "n": 1,
+    "what": "`구성 N-M` 앞 숫자를 claim_no 라 부른 것을 element_group 으로 개명하고 caption_claim_no 를 분리 (§11.1-a)",
+    "found_by": "사용자 지적"
+   },
+   {
+    "n": 2,
+    "what": "대조 시트가 다른 표의 캡션을 보여줬다 — 블록을 table_index 로 고르도록 교정",
+    "found_by": "1차 대조 25/30 의 오답 5건 전량이 이 형태였다",
+    "rate_before_correction": 0.8333
+   }
+  ]
+ }
+}
