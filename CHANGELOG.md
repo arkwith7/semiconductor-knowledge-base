@@ -27,6 +27,42 @@ All notable changes to SDKB will be documented in this file.
 
 ## [Unreleased]
 
+### Fixed (2026-09-06 — 인용문헌 shape 배선 · 조건부 게이트 종료코드 · 사용자 승인)
+
+- **검사되지 않던 인용문헌 3,513건이 검사 대상이 됐다.** `Shape_CitedPatent` 는
+  `validation/shapes_claim_features.ttl` 에 있었으나 `make validate` 가 그 shape 파일을
+  `sdkb-abox-claim-features.ttl` 하고만 짝지어, 정작 `ont:CitedPatent` 가 사는
+  `sdkb-abox-prior-art.ttl` 은 한 번도 읽지 않았다 — **타깃 0**. 부채 대장 4번(특허 shape
+  미배선)과 같은 양식이고, CLAUDE.md §4 의 "쓰여만 있고 돌지 않는 shape 은 게이트가 아니라
+  장식"이 그대로 걸린 상태였다. 짝을 배선했고 현재 `target CitedPatent: 3513 노드` ·
+  **위반 0** 이다.
+- **조건부 짝 셋이 "실패할 수 없는 게이트"였다.** `@test -f X && cmd || echo skip` 은
+  파일이 있고 `cmd` 가 실패해도 `|| echo` 가 받아 **exit 0** 이 된다
+  (`sh -c 'test -f /etc/hostname && false || echo skip'` → `exit=0`). 배선되어 있어도
+  SHACL 위반이 `make validate` 를 세우지 못했다는 뜻이며, 위반이 0 인 동안은 드러나지
+  않으므로 더 위험하다. B층 질의 · claim-features · prior-art 세 블록을 모두 종료코드를
+  보존하는 `if/else` 로 바꿨다.
+- **끝단에서 실패를 확인했다** (게이트가 진짜인지의 증거). 위반 1건을 주입하면
+  `make validate` 가 **exit 2** 로 죽는다 — prior-art 에 매달린 `ont:CitedPatent`
+  (license · source · `sh:or` 셋 다 적발), B층 질의에 빈 `ont:Patent`. 주입 제거 후
+  exit 0 · `VALIDATION PASSED` 5회. 종전 형태였다면 둘 다 통과했다.
+- **회귀 고정** — `tests/test_cited_patent_shape_gate.py` (신규 9건). 거부해야 할 인용문헌
+  (license 없음 · source 없음 · 매달린 IRI)이 거부되는지, 정상 둘(`filingDate` 갈래 ·
+  `abstractText` 갈래)이 통과하는지, Makefile 이 prior-art A-Box 와 짝지어 실행하는지,
+  그리고 **조건부 짝 셋 모두**가 `if/else` 인지를 건다. 세 번째 계약을 셋 다에 거는 이유는
+  한 곳만 고치면 다음 배선이 옛 형태를 복사해 오기 때문이다(실제로 그렇게 번졌다).
+- **`sdkb-abox-prior-art.ttl` 을 재빌드했고 산출물은 바이트 단위로 같다** — sha256
+  `7f0a4df6b29c2ee1232bd0f21b40e8178782672007eaac6b344405867011b13b`, 21,722,067 bytes,
+  67,123 트리플 · CitedPatent 3,513 · `filingDate` 3,513(100%) · claims 2,479 ·
+  미해결 IRI 0. `make abox-prior-art` 는 로컬 커밋 원천만 읽으며 `refetch-fulltext`
+  (KIPRIS 키)를 타지 않는다. 9/6 에 갱신된 `prior_art_edges.parquet` 은 이 A-Box 를
+  움직이지 않았다.
+
+**§0 소비자에게 달라지는 것 — 그래프는 하나도 바뀌지 않았다.** TTL · T-Box · shape 문구 ·
+IRI 규칙 · 어휘 무변경이고 **그래프 서명도 불변**이라, 스냅샷을 핀한 소비자가 갱신할 숫자는
+없다. 달라진 것은 **릴리스 게이트의 엄격도**뿐이다 — 앞으로 인용문헌 층의 결손과 조건부
+짝의 SHACL 위반은 `make validate` 를 세운다.
+
 ### Added (2026-09-06 — PLAN-005 단계 2-B · 통지서 근거의 판단 승격 · 사용자 승인)
 
 - **신규성 판단이 9건에서 202건이 됐다.** `PriorArtJudgment` 는 635 → **1,812** 이고,
