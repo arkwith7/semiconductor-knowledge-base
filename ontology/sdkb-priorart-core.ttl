@@ -1,0 +1,357 @@
+# ═══════════════════════════════════════════════════════════════════
+# SDKB Prior-Art Core (pa:) — 도메인 어휘 0 · 관할 어휘 0
+#
+# **생성물이다. 손으로 고치지 않는다** — scripts/build_priorart_modules.py 가 만든다
+# (CLAUDE.md §1-1 · PLAN-005 §7-7). 고치면 다음 빌드에 조용히 사라지고, 그 사이에
+# vendor 해 간 하류는 유령 데이터를 갖는다.
+#
+# 재생성: make priorart
+# 검사  : make validate  (scripts/check_priorart_invariants.py 가 이식성 불변식을 건다)
+# ═══════════════════════════════════════════════════════════════════
+
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix pa:      <https://w3id.org/sdkb/pa/> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+<https://w3id.org/sdkb/pa>
+    dcterms:license <https://spdx.org/licenses/CDLA-Permissive-2.0.html> ;
+    dcterms:modified "2026-09-06"^^xsd:date ;
+    owl:versionInfo "0.1.0-dev" ;
+    rdf:type owl:Ontology ;
+    rdfs:comment "선행기술 판단·심사절차의 도메인 중립·관할 중립 core. 도메인 어휘(반도체)는 sdkb-priorart-semi.ttl, 관할 어휘(KR)는 sdkb-priorart-kr.ttl 이 슬롯에 바인딩한다. 이 파일에 ont:·gov:·pakr: IRI 가 등장하면 이식성 주장이 깨지며, scripts/check_priorart_invariants.py 가 그것을 실패로 만든다."@ko ;
+    rdfs:label "SDKB Prior-Art Core — task layer"@en .
+
+pa:CitationStatus
+    rdf:type owl:Class ;
+    rdfs:comment "문서 계열의 시간순에서 파생된다. 문서종 이름에 기대지 않으므로 이미 관할 중립이다(PLAN-001 §1.10(d))."@ko ;
+    rdfs:label "citation status"@en .
+
+pa:ClaimProfile
+    rdf:type owl:Class ;
+    rdfs:comment "질의·문헌 공통의 의미 단위. 특허가 아니어도 만들 수 있다(연구노트·아이디어) — 그것이 §3.4 '특허 종속 해소'의 실체다."@ko ;
+    rdfs:label "claim profile"@en .
+
+pa:ClaimVersion
+    rdf:type owl:Class ;
+    rdfs:comment "라운드 2+ 는 보정된 청구항을 대비한다 — 버전 없이 붙이면 오접지된다."@ko ;
+    rdfs:label "claim version"@en .
+
+pa:Disclosure
+    rdf:type owl:Class ;
+    rdfs:comment "문헌이 실제로 개시한 것. 도달 목표 노드."@ko ;
+    rdfs:label "disclosure"@en .
+
+pa:DocumentRole
+    rdf:type owl:Class ;
+    rdfs:comment "절차상 역할 — 관할 중립."@ko ;
+    rdfs:label "document role"@en .
+
+pa:ElementVerdict
+    rdf:type owl:Class ;
+    rdfs:comment "구성요소 대비의 판정 어휘. 법리 종속 어휘(주지관용·설계변경)는 여기 두지 않고 관할 모듈이 개체로 더한다."@ko ;
+    rdfs:label "element verdict"@en .
+
+pa:ExaminationDocument
+    rdf:type owl:Class ;
+    rdfs:comment "심사 과정에서 발행된 문서 하나. prov:Entity 라 출처 추적이 그대로 붙는다."@ko ;
+    rdfs:label "examination document"@en ;
+    rdfs:subClassOf prov:Entity .
+
+pa:ExaminationDocumentType
+    rdf:type owl:Class ;
+    rdfs:comment "문서종은 **개체**다. 클래스로 굳히면 US non-final/final · EP Art.94(3) 이식이 클래스 신설을 요구한다(PLAN-001 §1.10(c))."@ko ;
+    rdfs:label "examination document type"@en .
+
+pa:ExaminerElement
+    rdf:type owl:Class ;
+    rdfs:comment "심사관이 구성 대비표에서 직접 나눈 구성요소. **우리 청구항 분해(ClaimFeature)와 동일시하지 않는다** — 실측에서 요소 개수가 일치하는 청구항 단위가 53개 중 8개(15.1%)뿐이다. 접지는 청구항 단위로만 하며, 요소↔요소 정렬 술어는 만들지 않는다(PLAN-005 단계 4 · 사용자 승인 결정 1)."@ko ;
+    rdfs:label "examiner element"@en .
+
+pa:FeatureRole
+    rdf:type owl:Class ;
+    rdfs:comment "한정요소의 역할 **슬롯**. 열거를 클래스로 굳히지 않는 이유는 §5 V6a 실패예측 1번이다 — 서열·투여용법·마쿠쉬 선택지가 갈 자리가 없으면 L1 이 오염된 것이다."@ko ;
+    rdfs:label "feature role"@en .
+
+pa:FinalAction
+    rdf:type pa:DocumentRole ;
+    skos:prefLabel "final action"@en ;
+    skos:prefLabel "최종 처분"@ko .
+
+pa:FirstAction
+    rdf:type pa:DocumentRole ;
+    skos:prefLabel "first action"@en ;
+    skos:prefLabel "최초 통지"@ko .
+
+pa:LegalGround
+    rdf:type owl:Class ;
+    rdfs:comment "관할 슬롯. KR §29 · US §102/§103 · EP Art.54/56 이 각각 개체로 들어온다."@ko ;
+    rdfs:label "legal ground"@en .
+
+pa:Maintained
+    rdf:type pa:CitationStatus ;
+    rdfs:comment "후속 문서까지 생존."@ko ;
+    skos:prefLabel "maintained"@en ;
+    skos:prefLabel "유지"@ko .
+
+pa:MinedAxiom
+    rdf:type owl:Class ;
+    rdfs:comment "심사문서에서 채굴된 공리. pa:underJurisdiction 이 **없으면 SHACL 위반**이다 (PLAN-001 §1.10(e)) — KR 결합용이성과 US §103 을 한 추론에 섞지 않기 위해서다."@ko ;
+    rdfs:label "mined axiom"@en .
+
+pa:Provisional
+    rdf:type pa:CitationStatus ;
+    rdfs:comment "선행 문서에만 등장."@ko ;
+    skos:prefLabel "provisional"@en ;
+    skos:prefLabel "잠정"@ko .
+
+pa:SubsequentAction
+    rdf:type pa:DocumentRole ;
+    skos:prefLabel "subsequent action"@en ;
+    skos:prefLabel "후속 통지"@ko .
+
+pa:TechnicalConcept
+    rdf:type owl:Class ;
+    rdfs:comment "도메인 슬롯. **하위 클래스를 여기서 선언하지 않는다** — 반도체 하위는 sdkb-priorart-semi.ttl, 바이오는 그 자리를 갈아끼운다."@ko ;
+    rdfs:label "technical concept"@en .
+
+pa:VerdictCorresponding
+    rdf:type pa:ElementVerdict ;
+    skos:prefLabel "corresponding"@en ;
+    skos:prefLabel "대응"@ko .
+
+pa:VerdictDifferent
+    rdf:type pa:ElementVerdict ;
+    skos:prefLabel "different"@en ;
+    skos:prefLabel "차이"@ko .
+
+pa:VerdictIdentical
+    rdf:type pa:ElementVerdict ;
+    skos:prefLabel "substantially identical"@en ;
+    skos:prefLabel "실질적 동일"@ko .
+
+pa:VerdictSimilar
+    rdf:type pa:ElementVerdict ;
+    skos:prefLabel "similar"@en ;
+    skos:prefLabel "유사"@ko .
+
+pa:Withdrawn
+    rdf:type pa:CitationStatus ;
+    rdfs:comment "후속 문서에서 소멸 — 반례의 원천."@ko ;
+    skos:prefLabel "withdrawn"@en ;
+    skos:prefLabel "철회"@ko .
+
+pa:aboutClaimVersion
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "판단이 겨냥한 청구항의 **그 라운드 버전**. 보정 뒤 원본에 붙이면 오접지다."@ko ;
+    rdfs:label "about claim version"@en ;
+    rdfs:range pa:ClaimVersion .
+
+pa:achievesEffect
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "이 프로파일이 주장하는 기술적 효과."@ko ;
+    rdfs:domain pa:ClaimProfile ;
+    rdfs:label "achieves effect"@en ;
+    rdfs:range pa:TechnicalConcept .
+
+pa:amendedFrom
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "직전 라운드의 청구항 버전. 보정 이력의 사슬이다."@ko ;
+    rdfs:domain pa:ClaimVersion ;
+    rdfs:label "amended from"@en ;
+    rdfs:range pa:ClaimVersion .
+
+pa:assertedIn
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "이 주장이 실린 심사문서."@ko ;
+    rdfs:label "asserted in"@en ;
+    rdfs:range pa:ExaminationDocument .
+
+pa:atRound
+    rdf:type owl:DatatypeProperty ;
+    rdfs:comment "이 청구항 버전이 속한 라운드."@ko ;
+    rdfs:label "at round"@en ;
+    rdfs:range xsd:integer .
+
+pa:axiomConfidence
+    rdf:type owl:DatatypeProperty ;
+    rdfs:comment "provisional | confirmed"@ko ;
+    rdfs:label "axiom confidence"@en ;
+    rdfs:range xsd:string .
+
+pa:broaderConcept
+    rdf:type owl:ObjectProperty ;
+    rdf:type owl:TransitiveProperty ;
+    rdfs:comment "상위 개념. 전이다 — 개념 계층의 확장은 판단이 아니라 어휘의 성질이다."@ko ;
+    rdfs:domain pa:TechnicalConcept ;
+    rdfs:label "broader concept"@en ;
+    rdfs:range pa:TechnicalConcept ;
+    rdfs:subPropertyOf pa:coveredBy .
+
+pa:citationStatus
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "인용이 후속 문서에서 살아남았는가. 문서 계열의 시간순에서 파생하며 손으로 적지 않는다."@ko ;
+    rdfs:label "citation status"@en ;
+    rdfs:range pa:CitationStatus .
+
+pa:conceptOfFeature
+    owl:inverseOf pa:featureConcept ;
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "featureConcept 의 역관계. 문헌 쪽에서 질의 쪽으로 거슬러 오르는 경로에 필수다."@ko ;
+    rdfs:label "concept of feature"@en .
+
+pa:concernsClaim
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "심사관 구성요소가 속한 청구항. **표 캡션이 말하는 청구항 번호로만 만든다** — 표 안의 '구성 N-M' 앞 숫자(elementGroup)로 만들면 실측 9건이 다른 청구항에 조용히 붙고 38건은 검증 불가다(§1-3 · 부채 대장 1번과 같은 양식)."@ko ;
+    rdfs:domain pa:ExaminerElement ;
+    rdfs:label "concerns claim"@en .
+
+pa:counterCount
+    rdf:type owl:DatatypeProperty ;
+    rdfs:comment "반례 수 — 철회(Withdrawn)된 인용에서 나온다."@ko ;
+    rdfs:label "counter count"@en ;
+    rdfs:range xsd:integer .
+
+pa:coveredBy
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "원소층 충족 — 질의 개념이 문헌 개념으로 덮인다. **전이로 선언하지 않는다**(§3.3): 전이를 붙이면 'SiO2↔SiON, SiON↔Si3N4' 두 판단에서 심사관이 한 적 없는 'SiO2↔Si3N4' 가 생기고 supportCount/counterCount provenance 를 우회한다. 확장 깊이는 의미론이 아니라 질의 시점의 동결된 설정값이다."@ko ;
+    rdfs:domain pa:TechnicalConcept ;
+    rdfs:label "covered by"@en ;
+    rdfs:range pa:TechnicalConcept .
+
+pa:discloses
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "문헌이 개시한 개념. 신규성의 우변 — 이것이 없으면 Disclosure 는 도달 목표 노드로 선언만 되고 질의가 닿을 수 없다."@ko ;
+    rdfs:domain pa:Disclosure ;
+    rdfs:label "discloses"@en ;
+    rdfs:range pa:TechnicalConcept .
+
+pa:documentRole
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "문서종의 절차상 역할. KR 의견제출통지서와 US non-final Office Action 이 여기서 만난다."@ko ;
+    rdfs:domain pa:ExaminationDocumentType ;
+    rdfs:label "document role"@en ;
+    rdfs:range pa:DocumentRole .
+
+pa:elementGroup
+    rdf:type owl:DatatypeProperty ;
+    rdfs:comment "구성 대비표 안의 **표 단위 그룹 번호**. 청구항 번호가 아니다 — 원천 구조로만 보존하며 접지 키로 쓰지 않는다."@ko ;
+    rdfs:label "element group"@en ;
+    rdfs:range xsd:integer .
+
+pa:elementNo
+    rdf:type owl:DatatypeProperty ;
+    rdfs:comment "그룹 안의 구성요소 번호."@ko ;
+    rdfs:label "element no"@en ;
+    rdfs:range xsd:integer .
+
+pa:essentialConcept
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "독립항 필수구성 — 신규성 판단의 좌변."@ko ;
+    rdfs:domain pa:ClaimProfile ;
+    rdfs:label "essential concept"@en ;
+    rdfs:range pa:TechnicalConcept .
+
+pa:examRound
+    rdf:type owl:DatatypeProperty ;
+    rdfs:comment "심사 라운드 번호 (1 = 최초 통지)."@ko ;
+    rdfs:label "exam round"@en ;
+    rdfs:range xsd:integer .
+
+pa:featureConcept
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "한정요소가 가리키는 개념. range 가 **합집합이 아니라 슬롯**인 것이 도메인 축의 답이다. rdfs:domain 은 여기서 선언하지 않는다 — 그것이 곧 도메인 어휘이기 때문이다."@ko ;
+    rdfs:label "feature concept"@en ;
+    rdfs:range pa:TechnicalConcept .
+
+pa:featureRole
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "한정요소의 역할. 개체는 바인딩 모듈이 넣는다."@ko ;
+    rdfs:label "feature role"@en ;
+    rdfs:range pa:FeatureRole .
+
+pa:hasVerdict
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "심사관이 그 구성요소에 내린 판정. 중립 판정은 core, 법리 판정은 관할 모듈에 있다."@ko ;
+    rdfs:domain pa:ExaminerElement ;
+    rdfs:label "has verdict"@en ;
+    rdfs:range pa:ElementVerdict .
+
+pa:issuedDate
+    rdf:type owl:DatatypeProperty ;
+    rdfs:comment "문서 발송일. citationStatus 파생의 정렬 키다."@ko ;
+    rdfs:label "issued date"@en ;
+    rdfs:range xsd:date .
+
+pa:ofDocumentType
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "문서가 어느 종에 속하는가. 종이 개체이므로 관할마다 개수가 달라도 어휘가 견딘다."@ko ;
+    rdfs:domain pa:ExaminationDocument ;
+    rdfs:label "of document type"@en ;
+    rdfs:range pa:ExaminationDocumentType .
+
+pa:onGround
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "판단의 법적 근거. range 가 슬롯인 것이 관할 축의 답이다."@ko ;
+    rdfs:label "on ground"@en ;
+    rdfs:range pa:LegalGround .
+
+pa:optionalConcept
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "종속항 부가구성."@ko ;
+    rdfs:domain pa:ClaimProfile ;
+    rdfs:label "optional concept"@en ;
+    rdfs:range pa:TechnicalConcept .
+
+pa:solvesProblem
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "이 프로파일이 겨냥한 해결과제. 문제 축의 도달 경로가 된다."@ko ;
+    rdfs:domain pa:ClaimProfile ;
+    rdfs:label "solves problem"@en ;
+    rdfs:range pa:TechnicalConcept .
+
+pa:substitutableWith
+    rdf:type owl:ObjectProperty ;
+    rdf:type owl:SymmetricProperty ;
+    rdfs:comment "치환 가능(단순 설계변경·재료 치환). 대칭이나 **전이가 아니다**."@ko ;
+    rdfs:domain pa:TechnicalConcept ;
+    rdfs:label "substitutable with"@en ;
+    rdfs:range pa:TechnicalConcept ;
+    rdfs:subPropertyOf pa:coveredBy .
+
+pa:supportCount
+    rdf:type owl:DatatypeProperty ;
+    rdfs:comment "이 공리를 지지한 심사 사례 수."@ko ;
+    rdfs:label "support count"@en ;
+    rdfs:range xsd:integer .
+
+pa:tableIndex
+    rdf:type owl:DatatypeProperty ;
+    rdfs:comment "문서 안 <표 N> 의 N."@ko ;
+    rdfs:label "table index"@en ;
+    rdfs:range xsd:integer .
+
+pa:uncoveredConcept
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "판정의 잔여 — 덮이지 않은 질의 개념. 설명가능성의 본체다."@ko ;
+    rdfs:label "uncovered concept"@en ;
+    rdfs:range pa:TechnicalConcept .
+
+pa:underJurisdiction
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "채굴 공리·법적 근거가 선 관할. **rdfs:domain 을 선언하지 않는다** — MinedAxiom 에만 걸면 LegalGround 개체가 추론으로 MinedAxiom 이 된다. 필수 조건은 SHACL (validation/shapes_priorart.ttl)이 건다."@ko ;
+    rdfs:label "under jurisdiction"@en ;
+    rdfs:range skos:Concept .
+
+pa:versionOf
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "어느 청구항의 버전인가. range 는 도메인 어휘라 바인딩 모듈이 채운다."@ko ;
+    rdfs:domain pa:ClaimVersion ;
+    rdfs:label "version of"@en .
+
+skos:exactMatch
+    rdfs:subPropertyOf pa:coveredBy .

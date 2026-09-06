@@ -1,0 +1,148 @@
+# ═══════════════════════════════════════════════════════════════════
+# SDKB Prior-Art — 반도체 도메인 바인딩 (ont: → pa:)
+#
+# **생성물이다. 손으로 고치지 않는다** — scripts/build_priorart_modules.py 가 만든다
+# (CLAUDE.md §1-1 · PLAN-005 §7-7). 고치면 다음 빌드에 조용히 사라지고, 그 사이에
+# vendor 해 간 하류는 유령 데이터를 갖는다.
+#
+# 재생성: make priorart
+# 검사  : make validate  (scripts/check_priorart_invariants.py 가 이식성 불변식을 건다)
+# ═══════════════════════════════════════════════════════════════════
+
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ont:     <https://w3id.org/sdkb/ont/> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix pa:      <https://w3id.org/sdkb/pa/> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+ont:Device
+    rdfs:subClassOf pa:TechnicalConcept .
+
+ont:Material
+    rdfs:subClassOf pa:TechnicalConcept .
+
+ont:Parameter
+    rdfs:subClassOf pa:TechnicalConcept .
+
+ont:Problem
+    rdfs:subClassOf pa:TechnicalConcept .
+
+ont:Process
+    rdfs:subClassOf pa:TechnicalConcept .
+
+ont:ProcessCondition
+    rdf:type owl:Class ;
+    rdfs:comment "온도·압력·가스비·두께 등 조건."@ko ;
+    rdfs:label "process condition"@en ;
+    rdfs:subClassOf pa:TechnicalConcept .
+
+ont:Role_Condition
+    rdf:type pa:FeatureRole ;
+    skos:prefLabel "condition"@en ;
+    skos:prefLabel "조건"@ko .
+
+ont:Role_Effect
+    rdf:type pa:FeatureRole ;
+    skos:prefLabel "effect"@en ;
+    skos:prefLabel "효과"@ko .
+
+ont:Role_Function
+    rdf:type pa:FeatureRole ;
+    skos:prefLabel "function"@en ;
+    skos:prefLabel "작용"@ko .
+
+ont:Role_Material
+    rdf:type pa:FeatureRole ;
+    skos:prefLabel "material"@en ;
+    skos:prefLabel "재료"@ko .
+
+ont:Role_Means
+    rdf:type pa:FeatureRole ;
+    skos:prefLabel "means"@en ;
+    skos:prefLabel "수단"@ko .
+
+ont:Role_Step
+    rdf:type pa:FeatureRole ;
+    skos:prefLabel "step"@en ;
+    skos:prefLabel "단계"@ko .
+
+ont:Role_Structure
+    rdf:type pa:FeatureRole ;
+    skos:prefLabel "structure"@en ;
+    skos:prefLabel "구조"@ko .
+
+ont:StructuralElement
+    owl:disjointWith ont:Material ;
+    owl:disjointWith ont:Process ;
+    rdf:type owl:Class ;
+    rdfs:comment "층·패턴·전극·게이트·스페이서·비아 등 구조물. 이 축이 없어 data/reports/ko_concept_proposals.json 의 구조요소 15개가 '축 부재'로 등재 보류돼 있었다(§8.1)."@ko ;
+    rdfs:label "structural element"@en ;
+    rdfs:subClassOf pa:TechnicalConcept .
+
+ont:SubProcess
+    rdfs:subClassOf pa:TechnicalConcept .
+
+ont:TechnicalEffect
+    owl:disjointWith ont:StructuralElement ;
+    rdf:type owl:Class ;
+    rdfs:comment "누설전류 감소·스텝커버리지 향상 등 효과."@ko ;
+    rdfs:label "technical effect"@en ;
+    rdfs:subClassOf pa:TechnicalConcept .
+
+ont:TechnicalFunction
+    owl:disjointWith ont:StructuralElement ;
+    rdf:type owl:Class ;
+    rdfs:comment "'~을 방지하기 위한' · '~을 제어하는' 작용."@ko ;
+    rdfs:label "technical function"@en ;
+    rdfs:subClassOf pa:TechnicalConcept .
+
+ont:aboutClaim
+    rdfs:subPropertyOf pa:concernsClaim .
+
+ont:claimOf
+    owl:inverseOf ont:hasClaim ;
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "hasClaim 의 역관계."@ko ;
+    rdfs:domain ont:Claim ;
+    rdfs:label "claim of"@en ;
+    rdfs:range ont:Patent .
+
+ont:featureConcept
+    rdfs:subPropertyOf pa:featureConcept .
+
+ont:featureOf
+    owl:inverseOf ont:hasFeature ;
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "hasFeature 의 역관계."@ko ;
+    rdfs:domain ont:ClaimFeature ;
+    rdfs:label "feature of"@en ;
+    rdfs:range ont:Claim .
+
+ont:onGround
+    rdfs:subPropertyOf pa:onGround .
+
+pa:concernsClaim
+    rdfs:range ont:Claim .
+
+pa:featureConcept
+    rdfs:domain ont:ClaimFeature .
+
+pa:featureRole
+    rdfs:domain ont:ClaimFeature .
+
+pa:semi
+    dcterms:license <https://spdx.org/licenses/CDLA-Permissive-2.0.html> ;
+    dcterms:modified "2026-09-06"^^xsd:date ;
+    owl:imports <https://w3id.org/sdkb/pa> ;
+    owl:imports ont:patent ;
+    owl:versionInfo "0.1.0-dev" ;
+    rdf:type owl:Ontology ;
+    rdfs:comment "pa: 의 도메인 슬롯에 이 저장소의 반도체 어휘를 건다. 바이오 이식에서 **교체되는 유일한 파일**이며(그리고 kr 모듈), core 는 0줄 바뀐다. 기존 파일은 한 줄도 고치지 않고 subClassOf·subPropertyOf 로만 끌어온다 — 하류가 핀한 sha256 을 지키기 위해서다(§0)."@ko ;
+    rdfs:label "SDKB Prior-Art — semiconductor domain binding"@en .
+
+pa:versionOf
+    rdfs:range ont:Claim .
