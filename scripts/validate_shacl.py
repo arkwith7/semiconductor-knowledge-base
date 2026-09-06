@@ -25,6 +25,13 @@ def main():
                              "A-Box 를 빼놓고 검증하면 그 A-Box 에 걸리는 shape 이 vacuous 해진다.")
     parser.add_argument("--shapes", type=Path, default=DEFAULT_SHAPES, help="SHACL shapes (TTL)")
     parser.add_argument("--owl",    type=Path, default=DEFAULT_OWL,    help="OWL ontology (TTL)")
+    # PLAN-005 단계 2-B — claim-features A-Box(11.87M 트리플)는 rdfs 물질화를 얹으면 이 기계에서
+    # 돌지 않는다(파싱만으로 최대 RSS 15.7 GB · 가용 25 GB). 그 층의 shape 들은 targetClass 와
+    # sh:class 가 A-Box·T-Box 에 **명시 타이핑**되어 있어 추론 없이도 타깃을 잡는다 —
+    # 실측: inference=none 으로 186초에 완주하고 위반 0. 느슨하게 만든 것이 아니라,
+    # 추론이 필요 없는 shape 에서 추론 비용만 뺀 것이다. 기본값은 rdfs 그대로 둔다.
+    parser.add_argument("--inference", default="rdfs", choices=["rdfs", "owlrl", "both", "none"],
+                        help="pySHACL 추론 모드 (기본 rdfs)")
     args = parser.parse_args()
 
     data_paths = args.data if isinstance(args.data, list) else [args.data]
@@ -45,12 +52,21 @@ def main():
     shapes_graph = Graph()
     shapes_graph.parse(str(args.shapes), format="turtle")
     print(f"Loaded shapes: {len(shapes_graph)} triples")
+    # 타깃 계수 — shape 이 **실물에 걸렸는지** 를 출력으로 남긴다. 0 이면 vacuous 통과이고,
+    # 그것은 통과가 아니라 게이트 부재다(§4 · 부채 대장 4번이 그 사고였다).
+    from rdflib.namespace import RDF as _RDF
+    import rdflib as _rl
+    SH = _rl.Namespace("http://www.w3.org/ns/shacl#")
+    for cls in sorted({str(o) for o in shapes_graph.objects(None, SH.targetClass)}):
+        n = len(set(data_graph.subjects(_RDF.type, _rl.URIRef(cls))))
+        print(f"  target {cls.rsplit('/', 1)[-1].rsplit('#', 1)[-1]}: {n} 노드"
+              + ("   ← ⚠ 타깃 0 (vacuous)" if n == 0 else ""))
 
     # Validate
     conforms, results_graph, results_text = validate(
         data_graph,
         shacl_graph=shapes_graph,
-        inference="rdfs",
+        inference=args.inference,
         abort_on_first=False,
     )
 

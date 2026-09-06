@@ -3,7 +3,7 @@
   "schema_version": "1.0",
   "source": {
     "ttl": "sdkb-abox-claim-features.ttl",
-    "ttl_sha256": "0528d776b2d1dde442801ef69fe9b32119e67954283bb1cea7f9f97f88460852",
+    "ttl_sha256": "4418f96a3f3617d9d0af23c89df4cca36f873da4ddcc517526732bbf7a6a9f50",
     "generator": "build_abox_claim_features.py"
   },
   "counts": {

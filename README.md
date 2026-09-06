@@ -332,7 +332,7 @@ blank nodes: `grep -c owl:Class` counts both and reports a larger number.
 | `sdkb-core-data.ttl` | curation graph, instantiated | 2,884 |
 | `sdkb-abox-patents.ttl` | SIRP rejected patents | 34,117 |
 | `sdkb-abox-prior-art.ttl` | examiner-cited prior art | 67,123 |
-| `sdkb-abox-claim-features.ttl` | claim features | 11,856,521 ¹ |
+| `sdkb-abox-claim-features.ttl` | claim features | 11,871,397 ¹ |
 | `sdkb-abox-b-layer-queries.ttl` | B-layer confirmation queries | 4,631 |
 | `sdkb-abox-experts-problems.ttl` | experts and problems | 8,483 |
 | `sdkb-abox-vendors.ttl` | equipment vendors | 2,601 |

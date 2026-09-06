@@ -224,6 +224,15 @@ validate:
 		$(PYTHON) scripts/validate_shacl.py --shapes validation/shapes_patent.ttl \
 			--data ontology/sdkb-abox-b-layer-queries.ttl ontology/sdkb-core-data.ttl ontology/sdkb-patent.ttl \
 		|| echo "  (B층 질의 A-Box 미빌드 — 건너뜀. 빌드: make abox-b-layer-queries)"
+	@# PLAN-005 단계 2-B — `shapes_claim_features.ttl` 은 **어디에도 배선되어 있지 않았다.**
+	@# 부채 대장 4번(특허 shape 미배선)과 같은 양식이며, 쓰여만 있고 돌지 않는 shape 은
+	@# 게이트가 아니라 장식이다(§4). 판단 승격(635→1,812)으로 이 층이 커진 지금 배선한다.
+	@# 추론은 none — 근거는 validate_shacl.py 의 `--inference` 주석(실측 수치 포함).
+	@test -f ontology/sdkb-abox-claim-features.ttl && \
+		$(PYTHON) scripts/validate_shacl.py --shapes validation/shapes_claim_features.ttl \
+			--inference none \
+			--data ontology/sdkb-abox-claim-features.ttl ontology/sdkb-patent.ttl \
+		|| echo "  (claim-features A-Box 미빌드 — 건너뜀. 빌드: make abox-claim-features)"
 
 test:
 	$(PYTHON) -m pytest tests/ -v --tb=short
