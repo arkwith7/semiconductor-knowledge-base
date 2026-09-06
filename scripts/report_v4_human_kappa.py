@@ -79,15 +79,29 @@ def main() -> int:
                               "a_relevant": round(float(g.a.mean()), 4),
                               "b_relevant": round(float(g.b.mean()), 4)}
 
-    # 사람 준거
+    # ── 사람 준거 ────────────────────────────────────────────────────────────
+    # **조정 파일은 준거를 보강한다. 대체하지 않는다 (2026-09-06 결함 수정).**
+    # 종전 구현은 `both.merge(adj)` 로 inner join 을 걸어, 조정 파일에 있는 행만 준거로
+    # 남기고 **두 코더가 이미 합의한 행을 통째로 버렸다.** 이 스크립트 자신이 안내하는
+    # 흐름(`v4_to_adjudicate.csv` = 갈린 행만 → `--adjudicated`)을 그대로 따르면
+    # 준거가 129 → 20 으로 줄고, 그 20 행은 정의상 두 코더가 갈린 행이라 기저율이
+    # 편향돼 있다. 실측으로 `j2` 가 0.0, 위음성 추정이 489/489(100%)로 나왔다 —
+    # 데이터가 아니라 버그의 모양이었다.
+    #
+    # 올바른 준거는 **일치행의 합의값 + 갈린 행의 조정값**이다. 조정 파일이 일치행을
+    # 다시 판정했다면 그쪽이 이긴다(조정자가 되짚어 본 결과이므로).
+    ref = both.copy()
+    ref["h"] = ref.a.where(ref.a == ref.b)          # 갈린 행은 NaN 으로 남는다
     if args.adjudicated.exists():
         adj = pd.read_csv(args.adjudicated)[["item_id", "relevance"]]
         adj["h"] = adj.relevance.map(norm)
-        ref = both.merge(adj[["item_id", "h"]], on="item_id").dropna(subset=["h"])
-        ref_src = f"조정 파일 {args.adjudicated.name}"
+        override = dict(zip(adj.item_id, adj.h))
+        ref["h"] = [override.get(i, h) for i, h in zip(ref.item_id, ref.h)]
+        n_adj = int(sum(1 for i in ref.item_id if i in override))
+        ref_src = (f"일치행 합의값 + 조정 파일 {args.adjudicated.name} ({n_adj}행 조정)")
     else:
-        ref = both[both.a == both.b].copy(); ref["h"] = ref.a
         ref_src = "두 코더 일치행만 (조정 파일 없음 — 갈린 행은 제외했다)"
+    ref = ref.dropna(subset=["h"])
 
     llm = {}
     for j in ("j1", "j2"):
