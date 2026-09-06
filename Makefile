@@ -217,22 +217,44 @@ validate:
 	$(PYTHON) scripts/validate_shacl.py --data ontology/sdkb-core-data.ttl ontology/sdkb-abox-experts-problems.ttl
 	$(PYTHON) scripts/validate_shacl.py --shapes validation/shapes_patent.ttl \
 		--data ontology/sdkb-abox-patents.ttl ontology/sdkb-core-data.ttl ontology/sdkb-patent.ttl
+	@# ── 조건부 배선은 `if/else` 로 쓴다(2026-09-06). ─────────────────────
+	@# 종전 `@test -f X && cmd || echo skip` 은 **실패할 수 없는 게이트**였다:
+	@# 파일이 있고 cmd 가 실패해도 `|| echo` 가 받아 exit 0 이 되고, make 는 통과한다
+	@# (`sh -c 'test -f /etc/hostname && false || echo skip'` → exit=0 으로 확인).
+	@# 위반이 0 인 동안은 드러나지 않으므로 더 위험하다 — 부채 대장 4번과 같은 양식이다.
+	@# `if/else` 는 검증기의 종료코드를 그대로 make 에 전달한다. 회귀는
+	@# tests/test_cited_patent_shape_gate.py 가 세 블록 모두에 대해 고정한다.
 	@# CR-012 B층 질의도 같은 shape 을 탄다. A층과 **따로** 돌리는 이유는 인용 면제가
 	@# B층에만 걸린다는 것을 실행으로 보이기 위해서다 — 합쳐 돌리면 A층이 통과시켜 준
 	@# 것인지 면제가 걸린 것인지 출력만 봐서는 갈리지 않는다.
-	@test -f ontology/sdkb-abox-b-layer-queries.ttl && \
+	@if [ -f ontology/sdkb-abox-b-layer-queries.ttl ]; then \
 		$(PYTHON) scripts/validate_shacl.py --shapes validation/shapes_patent.ttl \
-			--data ontology/sdkb-abox-b-layer-queries.ttl ontology/sdkb-core-data.ttl ontology/sdkb-patent.ttl \
-		|| echo "  (B층 질의 A-Box 미빌드 — 건너뜀. 빌드: make abox-b-layer-queries)"
+			--data ontology/sdkb-abox-b-layer-queries.ttl ontology/sdkb-core-data.ttl ontology/sdkb-patent.ttl ; \
+	else \
+		echo "  (B층 질의 A-Box 미빌드 — 건너뜀. 빌드: make abox-b-layer-queries)" ; \
+	fi
 	@# PLAN-005 단계 2-B — `shapes_claim_features.ttl` 은 **어디에도 배선되어 있지 않았다.**
 	@# 부채 대장 4번(특허 shape 미배선)과 같은 양식이며, 쓰여만 있고 돌지 않는 shape 은
 	@# 게이트가 아니라 장식이다(§4). 판단 승격(635→1,812)으로 이 층이 커진 지금 배선한다.
 	@# 추론은 none — 근거는 validate_shacl.py 의 `--inference` 주석(실측 수치 포함).
-	@test -f ontology/sdkb-abox-claim-features.ttl && \
+	@if [ -f ontology/sdkb-abox-claim-features.ttl ]; then \
 		$(PYTHON) scripts/validate_shacl.py --shapes validation/shapes_claim_features.ttl \
 			--inference none \
-			--data ontology/sdkb-abox-claim-features.ttl ontology/sdkb-patent.ttl \
-		|| echo "  (claim-features A-Box 미빌드 — 건너뜀. 빌드: make abox-claim-features)"
+			--data ontology/sdkb-abox-claim-features.ttl ontology/sdkb-patent.ttl ; \
+	else \
+		echo "  (claim-features A-Box 미빌드 — 건너뜀. 빌드: make abox-claim-features)" ; \
+	fi
+	@# PLAN-005 후속 — `Shape_CitedPatent` 은 **겨냥한 그래프에 한 번도 걸린 적이 없다.**
+	@# 2-B 가 `shapes_claim_features.ttl` 을 배선했지만 짝은 claim-features A-Box 뿐이었고,
+	@# 정작 `ont:CitedPatent` 3,513 건은 `sdkb-abox-prior-art.ttl` 에 있다 → 타깃 0.
+	@# 부채 대장 4번과 같은 양식이라 같은 방식으로 닫는다(§4).
+	@if [ -f ontology/sdkb-abox-prior-art.ttl ]; then \
+		$(PYTHON) scripts/validate_shacl.py --shapes validation/shapes_claim_features.ttl \
+			--inference none \
+			--data ontology/sdkb-abox-prior-art.ttl ontology/sdkb-patent.ttl ; \
+	else \
+		echo "  (prior-art A-Box 미빌드 — 건너뜀. 빌드: make abox-prior-art)" ; \
+	fi
 
 test:
 	$(PYTHON) -m pytest tests/ -v --tb=short
