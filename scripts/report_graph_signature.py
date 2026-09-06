@@ -56,6 +56,11 @@ TBOX_MODULES = [
     "sdkb-commercialization",
     "sdkb-governance",
     "sdkb-governance-kr",
+    # PLAN-005 단계 4. 서명에 넣지 않으면 하류가 자기 스냅샷을 이 숫자로 검증할 수 없고,
+    # README 의 어휘 규모가 조용히 낡는다(§1-4 · §4).
+    "sdkb-priorart-core",
+    "sdkb-priorart-semi",
+    "sdkb-priorart-kr",
 ]
 
 # A-Box 층 → 트리플 수를 적어 두는 생성기 리포트. 큰 파일은 이 리포트에서 읽는다.

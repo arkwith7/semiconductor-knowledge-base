@@ -897,3 +897,65 @@ data/patents/notice_element_judgments.parquet
 5. `citationStatus` 파생 — 단계 4
 6. `check_leakage.py` 신설 — 별건
 7. 결정서 `cited_evidence_map` 과의 병합
+
+---
+
+## 12. 단계 4 설계와 실행 기록 — T-Box·R-Box 신설 (2026-09-06 · §2 3단계 별도 승인 🛑 완료)
+
+**결론 먼저.** `pa:` core(224 트리플 · 명명 클래스 13 · OP 23 · DP 9) + 도메인 바인딩(74) +
+KR 관할 바인딩(41) 을 `scripts/build_priorart_modules.py` 로 지었고, §5 V6(a) CI 불변식 둘을
+**같은 커밋에서** 세웠다. 기존 T-Box 는 한 줄도 바뀌지 않았다.
+
+### 12.1 2-C 이월 결정 — 접지 키는 `caption_claim_no` 다 (실측)
+
+`notice_element_judgments.parquet` 305행 × `mappings/claim_features.parquet` 조인 실측:
+
+| 측정 | 값 |
+|---|---:|
+| `caption_claim_no` 로 실재 청구항 접지 | **235 / 305 (77.0%)** |
+| `element_group` 의 겉보기 접지 | 273 / 305 — 그러나 **캡션 불일치 9건 전량이 다른 실재 청구항에 붙는다** |
+| 캡션 결측 38행에 `element_group` 사용 시 | 38행 전부 접지되나 **검증 준거 없음** |
+| `element_group` 이 표를 넘나드는가 | **0건**(65 그룹) — 표 지역 번호임이 확정 |
+| 심사관 `element_no` 최대 = 우리 `feature_seq` 최대 | **8 / 53 (15.1%)** |
+
+**결정 ①** `pa:concernsClaim` 은 캡션 청구항만 받는다. `pa:elementGroup` 은 **데이터 술어**라
+구조적으로 청구항을 가리킬 수 없고, SHACL 이 `concernsClaim` 을 필수로 건다.
+**결정 ②** 요소↔요소 정렬 술어를 만들지 않는다 — 15.1% 일치는 다른 분해라는 뜻이다.
+
+### 12.2 계획 문면과 달라진 다섯 곳 (전부 승인 시점에 명시)
+
+| # | 계획 문면 | 실행 | 이유 |
+|---|---|---|---|
+| 1 | 도메인 바인딩 이름공간 `semi:` | 기존 **`ont:`** 사용 | `build_owl.py` 의 `SEMI` 가 이미 SemicONTO — 접두어 하나가 두 뜻이면 §1-3 위반 |
+| 2 | §8 이 `sdkb-claim-semantics.ttl` 과 `pa:` 3모듈을 **둘 다** 열거 | `pa:` 3모듈만 신설 | §1.10(c) 가 §1.2(b) 를 대체한 뒤로는 같은 어휘의 두 집이 된다 |
+| 3 | 신규성 태스크 질의를 CQ 스위트에 편입 | 편입하되 **`expect-min: 0`** | A-Box 가 단계 5 산출이라 지금 0행이 정상. 1 로 올리는 것은 **단계 5 와 같은 커밋** — 문턱을 만져 통과시키지 않는다(§1-6) |
+| 4 | 술어 목록에 없던 `pa:discloses` 추가 | 추가 | `Disclosure` 가 도달 목표 노드로 선언만 되고 질의가 닿을 수 없었다 — 신규성 우변이 없으면 CQ32 가 성립하지 않는다 |
+| 5 | `pa:underJurisdiction` 의 `rdfs:domain` | **선언하지 않음** | `MinedAxiom` 에 걸면 `LegalGround` 개체가 추론으로 `MinedAxiom` 이 된다. 필수 조건은 SHACL 이 진다 |
+
+### 12.3 게이트 실행 결과 (재현 명령 병기)
+
+```
+make priorart      → core 224 · semi 74 · kr 41 트리플 · 두 번 빌드 sha256 동일
+make validate      → exit 0. 불변식 A OK(도메인·관할 IRI 0) · 불변식 B OK(1건 검사)
+                     shapes_priorart × 3모듈: LegalGround 2 · DocumentType 2 검사, 
+                     MinedAxiom·ExaminerElement 타깃 0 (vacuous 로 출력 — 숨기지 않는다)
+make test          → 352 passed · 10 skipped (신규 tests/test_priorart_modules.py 22건 포함)
+```
+
+**게이트가 무는 것을 확인했다.** core 에 `ont:`·`gov:`·`pa/kr/`·SemicONTO IRI 를 각각
+주입하면 전부 실패하고, 태스크 질의 필수부의 행정 어휘·UNION 가지·파싱 불가 질의도 실패하며,
+`OPTIONAL` 안의 같은 어휘는 통과한다. **이 회귀가 실제 결함 하나를 잡았다** — 허용 목록이
+`pa/` 접두어 비교라 `pa/kr/…` 가 core 를 통과했다(고침: 로컬명에 `/` 가 없을 때만 자기 자신).
+
+### 12.4 하류 조치 (§0 — 자동으로 도달하지 않는다)
+
+하류 `sdkb-prior-art-paper` 의 vendor 대상은 하드코딩 목록이라 신규 3종이 복사되지 않는다.
+`ontology/vendor.py:VENDOR_FILES` **와** `ontology/baseline.py:BASELINE_PARTS` **양쪽에**
+넣어야 한다 — 하나만 고치면 스냅샷에는 들어오고 G₀ 에는 안 들어온다(하류 PLAN-045 D5).
+기존 `sdkb-patent.ttl` 의 핀 sha256 `0a317389…9829` 은 **불변**임을 확인했다.
+
+### 12.5 다음 (단계 5 이후에 넘기는 것)
+
+`propertyChainAxiom` 넷(§1.9(b) 후보생성기) · `combinableWith`(진보성 관통) ·
+`ClaimProfile`/`Disclosure` A-Box 실체화 · CQ32 `expect-min` 1 승격 ·
+CQ10 의 행정 어휘 필수부 사용(단계 6·7) · `citationStatus` 파생.

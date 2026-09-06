@@ -27,6 +27,65 @@ All notable changes to SDKB will be documented in this file.
 
 ## [Unreleased]
 
+### Added (2026-09-06 — PLAN-005 단계 4 · 선행기술 판단층 T-Box·R-Box 신설 · 사용자 승인)
+
+- **판단 어휘가 생겼다 — 그리고 core 는 반도체도 한국도 모른다.** 세 모듈을 신설했다:
+  `ontology/sdkb-priorart-core.ttl`(`pa:` · 명명 클래스 13 · OP 23 · DP 9 · 224 트리플) ·
+  `sdkb-priorart-semi.ttl`(도메인 바인딩 · 74) · `sdkb-priorart-kr.ttl`(관할 바인딩 · 41).
+  진단 §8.1 이 *"기술요소·조합·포함·치환·결합을 담는 클래스 0개"* 로 적은 자리가 채워졌다.
+  셋 다 `scripts/build_priorart_modules.py` 가 만든다 — **손으로 고치면 다음 빌드에 사라진다**(§1-1).
+- **기존 T-Box 는 한 줄도 바뀌지 않았다.** 결합은 신규 → 기존 방향의 `owl:imports` 와
+  `rdfs:subClassOf`/`subPropertyOf` 뿐이다. 하류 `sdkb-prior-art-paper` 가 핀한
+  `sdkb-patent.ttl` 의 sha256 `0a317389…9829` 은 그대로다(확인함). 기존 어휘·IRI·의미 불변.
+- **⚠ 하류 조치 필요 — 자동으로 도달하지 않는다.** 하류의 vendor 대상은 하드코딩된 목록이라
+  신규 3종은 복사되지 않는다. `src/sdkb_paper/ontology/vendor.py:VENDOR_FILES` **와**
+  `src/sdkb_paper/ontology/baseline.py:BASELINE_PARTS` **양쪽에** 추가해야 한다 —
+  하나만 고치면 스냅샷에는 들어오고 G₀ 에는 안 들어온다(하류 PLAN-045 D5 가 적어 둔 함정).
+- **이식성이 주장에서 기계 보증으로 바뀌었다** (PLAN-005 §5 V6(a) · 단계 4 와 같은 커밋).
+  `scripts/check_priorart_invariants.py` 가 `make validate` 에서 **무조건** 돈다:
+  ① core 에 도메인(`ont:`)·관할(`gov:`·`pa/kr/`·`pa/us/`) IRI 가 있으면 실패 —
+  허용 목록 방식이라 새 이름공간이 생겨도 뚫리지 않는다.
+  ② `# task-neutral: required` 질의의 `WHERE` **필수부**에 행정 어휘 5종이 있으면 실패.
+  정규식이 아니라 **SPARQL 대수를 걸어** `OPTIONAL` 안팎을 가른다.
+  기존 CQ 31개는 대상이 아니며, **CQ10 은 설계상 이 규칙에 걸린다**(`?prior a ont:Patent`) —
+  그 교정은 단계 6·7 의 몫이고 이번 범위 밖이다.
+- **접지 키를 `caption_claim_no` 로 확정했다** (2-C 이월 결정 · 실측 근거).
+  `element_group`(표 안 그룹 번호)으로 접지하면 305행 중 **9행이 다른 청구항에 조용히 붙고
+  38행은 검증 불가**다. 겉보기 접지율 89.5% 는 표 번호 1·2·3 이 청구항 번호와 우연히
+  같아서 나온 수다 — §1-3 이 막는 형태이며 부채 대장 1번(`filing_date`=공개일)과 같은 양식이다.
+  그래서 `pa:concernsClaim` 은 캡션 청구항만 받고, `pa:elementGroup` 은 **데이터 술어**로
+  두어 구조적으로 청구항을 가리킬 수 없게 했다. SHACL 이 `concernsClaim` 을 필수로 건다.
+- **요소↔요소 정렬 술어는 만들지 않았다.** 심사관의 구성 개수와 우리 `feature_seq` 개수가
+  일치하는 청구항 단위는 **53개 중 8개(15.1%)** 뿐이다. 두 분해는 다른 분해이고,
+  같다고 두면 하지 않은 정렬을 한 것이 된다.
+- **`coveredBy` 를 전이로 선언하지 않았다**(§3.3). 확장자 셋(`broaderConcept` 전이 ·
+  `substitutableWith` 대칭 · `skos:exactMatch`)은 **하위 술어**로 살아 있다 — 역할이
+  판정의 결정자에서 원소층 충족의 확장자로 바뀐 것이지 사라진 것이 아니다.
+  `propertyChainAxiom` 넷은 **넣지 않았다** — V1 절제(단계 6)로 소비를 확인하기 전에
+  넣으면 "표를 채우려고 만든 공리"가 된다(§7-6).
+- **SHACL `validation/shapes_priorart.ttl` 을 지금 배선했다.** `MinedAxiom`·`ExaminerElement`
+  타깃은 현재 **0**(A-Box 는 단계 5)이고 검증기가 그 사실을 `vacuous` 로 출력한다 —
+  0 을 숨기지 않는 것이 부채 대장 4번에서 배운 것이다. `LegalGround` 2 ·
+  `ExaminationDocumentType` 2 는 지금도 실제로 검사된다.
+- **신규 태스크 질의** `queries/cq/CQ32_novelty_uncovered_essential_concepts.rq` —
+  필수부에 행정 어휘가 없어 **특허가 아닌 ClaimProfile 도 같은 질의로 검색된다**.
+  `expect-min` 은 **0**이며 그 이유를 파일에 적었다: 겨냥하는 A-Box 가 단계 5 산출이라
+  지금 0행이 정상이다. 1 로 올리는 시점은 **단계 5 와 같은 커밋**이다.
+- **게이트가 실제로 무는지 확인했다** — `tests/test_priorart_modules.py` 22건.
+  core 에 `ont:`·`gov:`·`pa/kr/`·SemicONTO IRI 를 주입하면 각각 실패하고, 필수부
+  행정 어휘·UNION 가지·파싱 불가 질의도 실패하며, `OPTIONAL` 안의 같은 어휘는 통과한다.
+  관할 없는 `MinedAxiom` 과 청구항 접지 없는 `ExaminerElement` 는 SHACL 위반으로 걸린다.
+  **회귀 테스트가 계측기 결함 둘을 잡았고, 그 전후를 남긴다.**
+  ① 허용 목록이 `pa/` 로 접두어 비교를 해서 `pa/kr/…` 관할 IRI 가 core 를 통과했다
+  (고침: 로컬명에 `/` 가 없을 때만 자기 자신).
+  ② 불변식 B 가 BGP 만 걸어 `VALUES ?t { ont:Patent }` 를 통째로 놓쳤다 — 삼중항이
+  아니라 바인딩 집합이기 때문이다. 막는 과정에서 `CompValue` 가 `dict` 하위라 새 분기가
+  재귀를 가로채 기존 검출 둘이 죽었고, 그것도 테스트가 잡았다(분기 순서로 고침).
+- **그래프 서명 갱신** — T-Box 명명 클래스 84 → **101** · OP 99 → **124** ·
+  DP 85 → **94** · 주석 **319/319** · 트리플 1,577 → **1,916**
+  (`scripts/report_graph_signature.py --inject` 가 README 두 판을 다시 썼다).
+
+
 ### Added (2026-09-06 — PLAN-005 단계 2-C · 구성 대비표에서 구성요소 판정 채굴 · 사용자 승인)
 
 - **심사관이 직접 짝지은 구성요소 단위 판정 305건을 얻었다.** 의견제출통지서의

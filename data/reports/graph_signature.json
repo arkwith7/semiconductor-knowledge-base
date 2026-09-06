@@ -77,16 +77,49 @@
       "terms": 7,
       "documented": 7,
       "triples": 60
+    },
+    {
+      "module": "sdkb-priorart-core",
+      "status": "built",
+      "classes_named": 13,
+      "classes_blank": 0,
+      "object_properties": 23,
+      "datatype_properties": 9,
+      "terms": 45,
+      "documented": 45,
+      "triples": 224
+    },
+    {
+      "module": "sdkb-priorart-semi",
+      "status": "built",
+      "classes_named": 4,
+      "classes_blank": 0,
+      "object_properties": 2,
+      "datatype_properties": 0,
+      "terms": 6,
+      "documented": 6,
+      "triples": 74
+    },
+    {
+      "module": "sdkb-priorart-kr",
+      "status": "built",
+      "classes_named": 0,
+      "classes_blank": 0,
+      "object_properties": 0,
+      "datatype_properties": 0,
+      "terms": 0,
+      "documented": 0,
+      "triples": 41
     }
   ],
   "tbox_total": {
-    "classes_named": 84,
+    "classes_named": 101,
     "classes_blank": 19,
-    "object_properties": 99,
-    "datatype_properties": 85,
-    "terms": 268,
-    "documented": 268,
-    "triples": 1577
+    "object_properties": 124,
+    "datatype_properties": 94,
+    "terms": 319,
+    "documented": 319,
+    "triples": 1916
   },
   "curation_source": {
     "status": "built",

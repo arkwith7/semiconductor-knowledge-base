@@ -1,0 +1,43 @@
+# desc: 질의 ClaimProfile 의 필수구성 중 문헌 Disclosure 가 덮지 못한 개념은 무엇인가 (신규성 원소층의 잔여)
+# suite: pa
+# monotone: up
+# expect-min: 0
+# task-neutral: required
+#
+# PLAN-005 단계 4 산출(§8). **expect-min 을 0 으로 둔 것은 임시이며 그 이유를 적는다** —
+# 이 질의가 겨냥하는 A-Box(pa:ClaimProfile · pa:Disclosure 실체화)는 단계 5 에서 만들어지고,
+# 지금은 0행이 정상이다. 1 로 올리는 시점은 **단계 5 와 같은 커밋**이다. 지금 1 로 두면
+# 게이트가 빨갛게 남고, 그것을 참으려고 문턱을 만지는 것이 §1-6(게이트 우회)이다.
+#
+# 이 질의가 증명하는 것은 회수 성능이 아니라 **어휘의 태스크 중립성**이다:
+# WHERE 필수부에 ont:Patent · ont:RejectionType 따위 행정 어휘가 하나도 없으므로,
+# 특허가 아직 없는 연구노트로 만든 ClaimProfile 도 같은 질의로 검색된다(§3.4).
+# 심사관 증거는 OPTIONAL 블록에만 있다 — 있으면 설명에 쓰고, 없어도 판정은 선다.
+# scripts/check_priorart_invariants.py 가 이 성질을 CI 에서 강제한다.
+
+PREFIX pa:  <https://w3id.org/sdkb/pa/>
+PREFIX ont: <https://w3id.org/sdkb/ont/>
+
+SELECT ?profile ?disclosure ?uncovered ?examinerGround
+WHERE {
+  # ── 태스크 필수부: 질의도 문헌도 '특허'일 필요가 없다 ──
+  ?profile    a pa:ClaimProfile ;
+              pa:essentialConcept ?uncovered .
+  ?disclosure a pa:Disclosure .
+
+  # 이 필수구성이 이 문헌에 덮이지 **않았다**는 것이 신규성 잔여의 정의다.
+  # coveredBy 는 전이가 아니므로(§3.3) 확장은 broaderConcept·substitutableWith
+  # 한 단계로만 들어온다 — 그 둘이 coveredBy 의 하위 술어다.
+  FILTER NOT EXISTS {
+    ?disclosure pa:discloses ?found .
+    ?uncovered  pa:coveredBy ?found .
+  }
+
+  # ── 증거층은 OPTIONAL 로만 붙는다 (§3.4 검사 규칙) ──
+  OPTIONAL {
+    ?judgment a ont:PriorArtJudgment ;
+              ont:onGround ?examinerGround .
+  }
+}
+ORDER BY ?profile ?disclosure ?uncovered
+LIMIT 200

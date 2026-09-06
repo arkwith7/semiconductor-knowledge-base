@@ -1,0 +1,77 @@
+# ═══════════════════════════════════════════════════════════════════
+# SDKB Prior-Art — KR 관할 바인딩 (pakr: → pa:)
+#
+# **생성물이다. 손으로 고치지 않는다** — scripts/build_priorart_modules.py 가 만든다
+# (CLAUDE.md §1-1 · PLAN-005 §7-7). 고치면 다음 빌드에 조용히 사라지고, 그 사이에
+# vendor 해 간 하류는 유령 데이터를 갖는다.
+#
+# 재생성: make priorart
+# 검사  : make validate  (scripts/check_priorart_invariants.py 가 이식성 불변식을 건다)
+# ═══════════════════════════════════════════════════════════════════
+
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix gov:     <https://w3id.org/sdkb/gov/> .
+@prefix ont:     <https://w3id.org/sdkb/ont/> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix pa:      <https://w3id.org/sdkb/pa/> .
+@prefix pakr:    <https://w3id.org/sdkb/pa/kr/> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+pa:kr
+    dcterms:license <https://spdx.org/licenses/CDLA-Permissive-2.0.html> ;
+    dcterms:modified "2026-09-06"^^xsd:date ;
+    owl:imports <https://w3id.org/sdkb/pa> ;
+    owl:imports ont:patent ;
+    owl:versionInfo "0.1.0-dev" ;
+    rdf:type owl:Ontology ;
+    rdfs:comment "KR 특허법 조문·문서종·법리 어휘를 pa: 슬롯에 개체로 넣는다. US 이식(단계 8)은 이 파일에 대응하는 sdkb-priorart-us.ttl 만 새로 쓰며 core 는 0줄 바뀐다. 문서종을 클래스가 아니라 개체로 두는 이유가 여기서 드러난다 — US 는 non-final/final Office Action 으로 개수와 배타 관계가 다르다."@ko ;
+    rdfs:label "SDKB Prior-Art — KR jurisdiction binding"@en .
+
+pakr:FinalRejection
+    pa:documentRole pa:FinalAction ;
+    pa:underJurisdiction gov:JurisdictionKR ;
+    rdf:type pa:ExaminationDocumentType ;
+    skos:prefLabel "final rejection decision"@en ;
+    skos:prefLabel "거절결정서"@ko .
+
+pakr:Ground_29_1
+    pa:underJurisdiction gov:JurisdictionKR ;
+    rdf:type pa:LegalGround ;
+    skos:exactMatch ont:Rejection_Novelty ;
+    skos:notation "KIPO-29-1" ;
+    skos:prefLabel "lack of novelty (KR Patent Act §29(1))"@en ;
+    skos:prefLabel "신규성 부정 (특허법 제29조 제1항)"@ko .
+
+pakr:Ground_29_2
+    pa:underJurisdiction gov:JurisdictionKR ;
+    rdf:type pa:LegalGround ;
+    skos:exactMatch ont:Rejection_Inventiveness ;
+    skos:notation "KIPO-29-2" ;
+    skos:prefLabel "lack of inventive step (KR Patent Act §29(2))"@en ;
+    skos:prefLabel "진보성 부정 (특허법 제29조 제2항)"@ko .
+
+pakr:NoticeOfReasons
+    owl:differentFrom pakr:FinalRejection ;
+    pa:documentRole pa:FirstAction ;
+    pa:underJurisdiction gov:JurisdictionKR ;
+    rdf:type pa:ExaminationDocumentType ;
+    skos:prefLabel "notification of reasons for rejection"@en ;
+    skos:prefLabel "의견제출통지서"@ko .
+
+pakr:VerdictDesignChange
+    pa:underJurisdiction gov:JurisdictionKR ;
+    rdf:type pa:ElementVerdict ;
+    rdfs:comment "KR 심사기준의 판단 어휘."@ko ;
+    skos:prefLabel "mere design change"@en ;
+    skos:prefLabel "단순 설계변경"@ko .
+
+pakr:VerdictWellKnown
+    pa:underJurisdiction gov:JurisdictionKR ;
+    rdf:type pa:ElementVerdict ;
+    rdfs:comment "KR 심사기준의 판단 어휘 — 관할 중립이 아니므로 core 에 두지 않는다."@ko ;
+    skos:prefLabel "well-known and commonly used art"@en ;
+    skos:prefLabel "주지관용기술"@ko .

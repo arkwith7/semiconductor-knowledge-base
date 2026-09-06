@@ -1,6 +1,7 @@
 .PHONY: all install venv parse owl convert align validate test clean \
         ingest-sirp sirp-pairs sirp-problems sirp experts \
         compliance curated-experts curated-ratings expdataset abox abox-patents \
+        priorart \
         abox-prior-art abox-claim-features abox-full refetch-fulltext cq \
         public-release check-public signature signature-inject signature-check \
         superordinate-concepts concept-mapping \
@@ -20,6 +21,7 @@ help:
 	@echo "  install         Install package into the active env with dev+priorart+notebook extras"
 	@echo "  parse           Baseline JSON → schema_report + parquet"
 	@echo "  owl             Build sdkb-core.ttl ontology"
+	@echo "  priorart        Build sdkb-priorart-{core,semi,kr}.ttl (PLAN-005 단계 4)"
 	@echo "  convert         JSON → RDF/JSON-LD"
 	@echo "  align           Generate mapping candidates"
 	@echo "  validate        SHACL validation"
@@ -80,6 +82,13 @@ parse:
 
 owl:
 	$(PYTHON) scripts/build_owl.py
+
+# ── 선행기술 판단층 (PLAN-005 단계 4) ─────────────────────────────
+# 세 모듈로 갈리는 이유는 이식성이다: core 는 도메인·관할 어휘 0, 바이오는 semi 만,
+# US 는 kr 대응 모듈만 새로 쓴다. 그 성질을 주장이 아니라 기계 보증으로 만드는 것이
+# `make validate` 안의 check_priorart_invariants.py 다(§5 V6(a)).
+priorart:
+	$(PYTHON) scripts/build_priorart_modules.py
 
 convert:
 	$(PYTHON) scripts/convert_rdf.py
@@ -255,6 +264,21 @@ validate:
 	else \
 		echo "  (prior-art A-Box 미빌드 — 건너뜀. 빌드: make abox-prior-art)" ; \
 	fi
+	@# ── PLAN-005 단계 4 · 선행기술 판단층 ────────────────────────────────
+	@# **조건부로 걸지 않는다.** 세 모듈은 커밋된 파일이라 항상 있고, 조건부는
+	@# `@if [ -f ... ]` 로 쓰더라도 "파일이 없으면 통과"라는 뒷문을 남긴다 —
+	@# 이 층은 그 뒷문을 가질 이유가 없다.
+	@# ① 워킹트리가 생성기와 일치하는가 (손으로 고친 TTL 을 잡는다 · §1-1)
+	$(PYTHON) scripts/build_priorart_modules.py --check
+	@# ② 이식성 불변식 — core 순도 + 태스크 질의의 행정 어휘 금지 (§5 V6(a) · §3.4)
+	$(PYTHON) scripts/check_priorart_invariants.py
+	@# ③ shape 를 **겨냥한 그래프에** 건다. 지금 MinedAxiom·ExaminerElement 타깃은
+	@#   0 이고(A-Box 는 단계 5), 검증기가 그 사실을 vacuous 로 출력한다 — 0 을 숨기지
+	@#   않는 것이 부채 대장 4번에서 배운 것이다.
+	$(PYTHON) scripts/validate_shacl.py --shapes validation/shapes_priorart.ttl \
+		--owl ontology/sdkb-priorart-core.ttl \
+		--data ontology/sdkb-priorart-core.ttl ontology/sdkb-priorart-semi.ttl \
+		       ontology/sdkb-priorart-kr.ttl ontology/sdkb-patent.ttl ontology/sdkb-governance.ttl
 
 test:
 	$(PYTHON) -m pytest tests/ -v --tb=short
@@ -332,7 +356,7 @@ viz-clean:
 # sdkb:private-end
 
 # ── Composed pipelines ────────────────────────────────────────────
-pipeline: parse owl convert validate test
+pipeline: parse owl convert priorart validate test
 
 pipeline-sirp: pipeline sirp
 

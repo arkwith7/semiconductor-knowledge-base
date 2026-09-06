@@ -31,6 +31,14 @@ SDKB_ONT  = Namespace(SDKB_BASE + "ont/")
 SDKB_DATA = Namespace(SDKB_BASE + "data/")
 SDKB_GOV  = Namespace(SDKB_BASE + "gov/")
 
+# ── 선행기술 판단층 (PLAN-005 단계 4) ────────────────────────────
+# `pa:` 는 도메인·관할 중립 core 의 이름공간이다. 바인딩은 두 곳으로만 갈린다:
+#   · 도메인(반도체) → 기존 `ont:` 를 쓴다. **`semi:` 를 새로 만들지 않는다** —
+#     scripts/build_owl.py 의 `SEMI` 가 이미 SemicONTO 라 접두어가 두 뜻을 갖는다(§1-3).
+#   · 관할(KR)      → `pakr:`. US 이식은 이 자리에 대응 모듈만 새로 쓴다.
+SDKB_PA    = Namespace(SDKB_BASE + "pa/")
+SDKB_PA_KR = Namespace(SDKB_BASE + "pa/kr/")
+
 # ── Public release identity ─────────────────────────────────────
 # 리포 이름은 발행되는 그래프(rdfs:seeAlso)와 인용 메타데이터(CITATION.cff)에 박힌다.
 # 12곳에 흩어져 있던 것이 공개 첫날 404 의 원인이었으므로 한 곳에서만 정한다.
@@ -53,6 +61,8 @@ PREFIX_MAP: dict[str, Namespace | str] = {
     "ont":     SDKB_ONT,
     "data":    SDKB_DATA,
     "gov":     SDKB_GOV,
+    "pa":      SDKB_PA,
+    "pakr":    SDKB_PA_KR,
     "prov":    PROV,
     "skos":    SKOS,
     "dcterms": "http://purl.org/dc/terms/",

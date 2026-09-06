@@ -1,0 +1,91 @@
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix pa:      <https://w3id.org/sdkb/pa/> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ═══════════════════════════════════════════════════════════════════
+# SDKB SHACL Shapes — 선행기술 판단층 (PLAN-005 단계 4)
+#
+# **지금 배선한다. 인스턴스가 적다는 것은 미루는 이유가 아니다** — 부채 대장 4번이
+# 정확히 "shape 은 썼는데 어떤 타깃도 실행하지 않았다"의 결과였고, 그 사이 3,000 위반이
+# 통과했다. `make validate` 가 이 파일을 세 모듈에 **명시적으로** 짝지어 돌린다.
+#
+# 실행: scripts/validate_shacl.py --shapes validation/shapes_priorart.ttl \
+#         --data ontology/sdkb-priorart-{core,semi,kr}.ttl
+# ═══════════════════════════════════════════════════════════════════
+
+# ── 관할 혼합 추론 금지의 기계적 근거 (PLAN-001 §1.10(e) · 완료기준 7) ──
+# KR 심사관의 '치환 가능'과 US §103 의 KSR/TSM motivation-to-combine 은 같은 판단이
+# 아니다. 관할 표기 없는 공리를 한 그래프에 넣으면 둘이 같은 추론 경로에 섞이며,
+# 그것은 §1-3 이 막는 종류의 오염이다.
+pa:Shape_MinedAxiom
+    a sh:NodeShape ;
+    sh:targetClass pa:MinedAxiom ;
+    sh:property [
+        sh:path pa:underJurisdiction ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:message "MinedAxiom 은 pa:underJurisdiction 이 필수다 — 없으면 관할이 다른 공리가 한 추론에 섞인다 (PLAN-001 §1.10(e))." ;
+    ] ;
+    sh:property [
+        sh:path pa:axiomConfidence ;
+        sh:minCount 1 ;
+        sh:in ( "provisional" "confirmed" ) ;
+        sh:message "axiomConfidence 는 provisional | confirmed 뿐이다." ;
+    ] .
+
+# ── 법적 근거는 관할과 조문 표기를 함께 갖는다 ──
+# 표기가 없으면 'KR §29①' 과 'US §102' 가 같은 슬롯에서 구별되지 않는다.
+pa:Shape_LegalGround
+    a sh:NodeShape ;
+    sh:targetClass pa:LegalGround ;
+    sh:property [
+        sh:path skos:notation ;
+        sh:minCount 1 ;
+        sh:message "LegalGround 는 skos:notation (예: KIPO-29-1) 이 필수다." ;
+    ] ;
+    sh:property [
+        sh:path pa:underJurisdiction ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:message "LegalGround 는 어느 관할의 조문인지 밝혀야 한다." ;
+    ] .
+
+# ── 문서종은 절차 역할을 갖는다 (클래스로 굳히지 않은 대가로 지는 의무) ──
+pa:Shape_ExaminationDocumentType
+    a sh:NodeShape ;
+    sh:targetClass pa:ExaminationDocumentType ;
+    sh:property [
+        sh:path pa:documentRole ;
+        sh:minCount 1 ;
+        sh:class pa:DocumentRole ;
+        sh:message "문서종 개체는 pa:documentRole 을 가져야 한다 — 역할이 없으면 관할 간 대응이 성립하지 않는다." ;
+    ] .
+
+# ── 심사관 구성요소의 접지 계약 (단계 4 · 사용자 승인 결정 1) ──
+# **캡션 청구항으로만 접지한다.** 표 안의 '구성 N-M' 앞 숫자(elementGroup)로 접지하면
+# 실측 9건이 다른 청구항에 조용히 붙고 38건은 검증 불가다. 그래서 elementGroup 이
+# 있어도 concernsClaim 을 대신하지 못하며, 이 shape 이 그것을 강제한다.
+pa:Shape_ExaminerElement
+    a sh:NodeShape ;
+    sh:targetClass pa:ExaminerElement ;
+    sh:property [
+        sh:path pa:concernsClaim ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:message "ExaminerElement 는 캡션이 말하는 청구항 하나에 접지되어야 한다 (elementGroup 으로 대신할 수 없다)." ;
+    ] ;
+    sh:property [
+        sh:path pa:hasVerdict ;
+        sh:minCount 1 ;
+        sh:class pa:ElementVerdict ;
+        sh:message "ExaminerElement 는 판정을 하나 이상 갖는다." ;
+    ] ;
+    sh:property [
+        sh:path pa:elementNo ;
+        sh:minCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:message "elementNo 는 정수다 (원천 구조 보존)." ;
+    ] .
