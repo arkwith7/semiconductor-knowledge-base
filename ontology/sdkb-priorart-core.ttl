@@ -20,7 +20,7 @@
 
 <https://w3id.org/sdkb/pa>
     dcterms:license <https://spdx.org/licenses/CDLA-Permissive-2.0.html> ;
-    dcterms:modified "2026-09-06"^^xsd:date ;
+    dcterms:modified "2026-09-07"^^xsd:date ;
     owl:versionInfo "0.1.0-dev" ;
     rdf:type owl:Ontology ;
     rdfs:comment "선행기술 판단·심사절차의 도메인 중립·관할 중립 core. 도메인 어휘(반도체)는 sdkb-priorart-semi.ttl, 관할 어휘(KR)는 sdkb-priorart-kr.ttl 이 슬롯에 바인딩한다. 이 파일에 ont:·gov:·pakr: IRI 가 등장하면 이식성 주장이 깨지며, scripts/check_priorart_invariants.py 가 그것을 실패로 만든다."@ko ;
@@ -230,6 +230,12 @@ pa:discloses
     rdfs:label "discloses"@en ;
     rdfs:range pa:TechnicalConcept .
 
+pa:disclosureOf
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "이 개시집합이 속한 문헌. range 는 바인딩 모듈이 채운다."@ko ;
+    rdfs:domain pa:Disclosure ;
+    rdfs:label "disclosure of"@en .
+
 pa:documentRole
     rdf:type owl:ObjectProperty ;
     rdfs:comment "문서종의 절차상 역할. KR 의견제출통지서와 US non-final Office Action 이 여기서 만난다."@ko ;
@@ -306,6 +312,12 @@ pa:optionalConcept
     rdfs:domain pa:ClaimProfile ;
     rdfs:label "optional concept"@en ;
     rdfs:range pa:TechnicalConcept .
+
+pa:profileOf
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "이 프로파일이 요약한 원천 단위. range 는 도메인 어휘라 바인딩 모듈이 채운다 — 특허 청구항이 아닌 연구노트도 올 수 있다(§3.4)."@ko ;
+    rdfs:domain pa:ClaimProfile ;
+    rdfs:label "profile of"@en .
 
 pa:solvesProblem
     rdf:type owl:ObjectProperty ;

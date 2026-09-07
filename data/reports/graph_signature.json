@@ -83,11 +83,11 @@
       "status": "built",
       "classes_named": 13,
       "classes_blank": 0,
-      "object_properties": 23,
+      "object_properties": 25,
       "datatype_properties": 9,
-      "terms": 45,
-      "documented": 45,
-      "triples": 224
+      "terms": 47,
+      "documented": 47,
+      "triples": 232
     },
     {
       "module": "sdkb-priorart-semi",
@@ -98,7 +98,7 @@
       "datatype_properties": 0,
       "terms": 6,
       "documented": 6,
-      "triples": 74
+      "triples": 76
     },
     {
       "module": "sdkb-priorart-kr",
@@ -115,11 +115,11 @@
   "tbox_total": {
     "classes_named": 101,
     "classes_blank": 19,
-    "object_properties": 124,
+    "object_properties": 126,
     "datatype_properties": 94,
-    "terms": 319,
-    "documented": 319,
-    "triples": 1916
+    "terms": 321,
+    "documented": 321,
+    "triples": 1926
   },
   "curation_source": {
     "status": "built",
@@ -185,6 +185,14 @@
       "bytes": 569142,
       "triples": 4631,
       "triples_source": "parsed"
+    },
+    {
+      "layer": "sdkb-abox-priorart",
+      "label": "prior-art claim profiles, disclosures, examiner elements",
+      "status": "built",
+      "bytes": 53251137,
+      "triples": 675934,
+      "triples_source": "report:abox_priorart_report.json"
     },
     {
       "layer": "sdkb-abox-experts-problems",

@@ -247,6 +247,7 @@ graph the paper cites. What follows says exactly what is missing, why, and which
 | **Rejected-patent dataset** (`data/patents/raw/…rejected_patents.jsonl`) | `abstract`, `claim1`, `claims_full[].text` are present as **empty strings** — the schema, the identifiers, the IPC/date metadata and the `ground_truth_*` citation labels are all intact | same | `python scripts/refetch_rejected_patents.py` (verifies the restored file against a published sha256) | KIPRIS OpenAPI key |
 | **Cited prior-art A-Box** (`ontology/sdkb-abox-prior-art.ttl`, 21 MB) | the whole file | built from collected full text | `make refetch-fulltext && make abox-prior-art` | KIPRIS key (+ BigQuery for non-KR documents) |
 | **Claim-feature A-Box** (`ontology/sdkb-abox-claim-features.ttl`, 899 MB) | the whole file | derived from claim text; too large to distribute regardless of licence | `make abox-claim-features` | KIPRIS key; several hours |
+| **Prior-art judgment A-Box** (`ontology/sdkb-abox-priorart.ttl`, 53 MB) | the whole file | ClaimProfile / Disclosure / ExaminerElement over the `pa:` vocabulary; carries a derivative of the unpublished examiner-table judgments | `make abox-priorart` | none — every input is committed; ~30 s |
 | **Governance instances** (`ontology/sdkb-governance-*-instances.ttl`) | nothing — **committed** (2026-08-15) | build artifacts of committed sources; regenerate byte-identically | `make compliance` | none |
 | **Expert profiles and ratings** | nothing | committed — they are **synthetic**, generated for method evaluation, and contain no personal data | `make expdataset` | none |
 
@@ -319,10 +320,10 @@ blank nodes: `grep -c owl:Class` counts both and reports a larger number.
 | `sdkb-commercialization.ttl` | 7 | 0 | 6 | 4 | 17/17 | 104 |
 | `sdkb-governance.ttl` | 0 | 0 | 2 | 1 | 3/3 | 40 |
 | `sdkb-governance-kr.ttl` | 3 | 0 | 2 | 2 | 7/7 | 60 |
-| `sdkb-priorart-core.ttl` | 13 | 0 | 23 | 9 | 45/45 | 224 |
-| `sdkb-priorart-semi.ttl` | 4 | 0 | 2 | 0 | 6/6 | 74 |
+| `sdkb-priorart-core.ttl` | 13 | 0 | 25 | 9 | 47/47 | 232 |
+| `sdkb-priorart-semi.ttl` | 4 | 0 | 2 | 0 | 6/6 | 76 |
 | `sdkb-priorart-kr.ttl` | 0 | 0 | 0 | 0 | 0/0 | 41 |
-| **Total** | **101** | 19 | **124** | **94** | **319/319** | 1,916 |
+| **Total** | **101** | 19 | **126** | **94** | **321/321** | 1,926 |
 
 **Curation graph** (`data/semiconductor_v0_3.json` — the hand-curated source the core A-Box is generated from).
 
@@ -337,6 +338,7 @@ blank nodes: `grep -c owl:Class` counts both and reports a larger number.
 | `sdkb-abox-prior-art.ttl` | examiner-cited prior art | 67,123 |
 | `sdkb-abox-claim-features.ttl` | claim features | 11,871,397 ¹ |
 | `sdkb-abox-b-layer-queries.ttl` | B-layer confirmation queries | 4,631 |
+| `sdkb-abox-priorart.ttl` | prior-art claim profiles, disclosures, examiner elements | 675,934 ¹ |
 | `sdkb-abox-experts-problems.ttl` | experts and problems | 8,483 |
 | `sdkb-abox-vendors.ttl` | equipment vendors | 2,601 |
 | `sdkb-governance-kr-instances.ttl` | Korea regulatory instances | 175 |

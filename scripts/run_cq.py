@@ -60,6 +60,15 @@ DEFAULT_DATA = [
     ROOT / "ontology" / "sdkb-abox-patents.ttl",
     ROOT / "ontology" / "sdkb-abox-vendors.ttl",
     ROOT / "ontology" / "sdkb-abox-b-layer-queries.ttl",
+    # PLAN-005 단계 4·5-A — 선행기술 판단층. T-Box 셋은 커밋된 파일이고, A-Box 는
+    # gitignore 된 빌드 산출물이다(`make abox-priorart`). 없으면 CQ32 가 0행으로 실패하며
+    # 그것은 온톨로지 결함이 아니라 **아직 안 지은 A-Box** 다.
+    # 비용 실측(2026-09-07): A-Box 675,934 트리플 · 53 MB → 기본 그래프 730,214 트리플,
+    # `make cq` 전체 2분 47초. 899 MB 를 뺀 사유와는 자릿수가 다르다.
+    ROOT / "ontology" / "sdkb-priorart-core.ttl",
+    ROOT / "ontology" / "sdkb-priorart-semi.ttl",
+    ROOT / "ontology" / "sdkb-priorart-kr.ttl",
+    ROOT / "ontology" / "sdkb-abox-priorart.ttl",
 ]
 
 

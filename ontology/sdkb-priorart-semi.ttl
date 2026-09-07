@@ -128,15 +128,21 @@ ont:onGround
 pa:concernsClaim
     rdfs:range ont:Claim .
 
+pa:disclosureOf
+    rdfs:range ont:Patent .
+
 pa:featureConcept
     rdfs:domain ont:ClaimFeature .
 
 pa:featureRole
     rdfs:domain ont:ClaimFeature .
 
+pa:profileOf
+    rdfs:range ont:Claim .
+
 pa:semi
     dcterms:license <https://spdx.org/licenses/CDLA-Permissive-2.0.html> ;
-    dcterms:modified "2026-09-06"^^xsd:date ;
+    dcterms:modified "2026-09-07"^^xsd:date ;
     owl:imports <https://w3id.org/sdkb/pa> ;
     owl:imports ont:patent ;
     owl:versionInfo "0.1.0-dev" ;

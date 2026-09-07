@@ -239,6 +239,7 @@ make help            # 모든 타깃 목록
 | **거절특허 데이터셋** (`data/patents/raw/…rejected_patents.jsonl`) | `abstract`·`claim1`·`claims_full[].text` 가 **빈 문자열**로 들어 있다. 스키마·식별자·IPC·날짜·정답 인용 라벨(`ground_truth_*`)은 **그대로 있다** | 같음 | `python scripts/refetch_rejected_patents.py` (복원본을 공표된 sha256 과 대조한다) | KIPRIS OpenAPI 키 |
 | **인용 선행기술 A-Box** (`ontology/sdkb-abox-prior-art.ttl` · 21 MB) | 파일 전체 | 수집한 원문에서 만든다 | `make refetch-fulltext && make abox-prior-art` | KIPRIS 키 (+ 비 KR 문헌은 BigQuery) |
 | **청구항 feature A-Box** (`ontology/sdkb-abox-claim-features.ttl` · 899 MB) | 파일 전체 | 청구항 텍스트의 파생물이며, 라이선스와 무관하게 배포하기엔 너무 크다 | `make abox-claim-features` | KIPRIS 키 · 수 시간 |
+| **선행기술 판단층 A-Box** (`ontology/sdkb-abox-priorart.ttl` · 53 MB) | 파일 전체 | `pa:` 어휘의 ClaimProfile / Disclosure / ExaminerElement. 발행하지 않는 구성 대비표 판정의 파생을 담는다 | `make abox-priorart` | 없음 — 입력이 전부 커밋돼 있다 · 약 30초 |
 | **거버넌스 인스턴스** (`ontology/sdkb-governance-*-instances.ttl`) | 없음 — **커밋돼 있다**(2026-08-15) | 커밋된 원천의 빌드 산출물이며 바이트 동일하게 재생성된다 | `make compliance` | 없음 |
 | **전문가 프로필·평점** | 없음 | 커밋돼 있다 — **합성 데이터**이고 개인정보를 담지 않는다 | `make expdataset` | 없음 |
 
@@ -306,10 +307,10 @@ blank nodes: `grep -c owl:Class` counts both and reports a larger number.
 | `sdkb-commercialization.ttl` | 7 | 0 | 6 | 4 | 17/17 | 104 |
 | `sdkb-governance.ttl` | 0 | 0 | 2 | 1 | 3/3 | 40 |
 | `sdkb-governance-kr.ttl` | 3 | 0 | 2 | 2 | 7/7 | 60 |
-| `sdkb-priorart-core.ttl` | 13 | 0 | 23 | 9 | 45/45 | 224 |
-| `sdkb-priorart-semi.ttl` | 4 | 0 | 2 | 0 | 6/6 | 74 |
+| `sdkb-priorart-core.ttl` | 13 | 0 | 25 | 9 | 47/47 | 232 |
+| `sdkb-priorart-semi.ttl` | 4 | 0 | 2 | 0 | 6/6 | 76 |
 | `sdkb-priorart-kr.ttl` | 0 | 0 | 0 | 0 | 0/0 | 41 |
-| **Total** | **101** | 19 | **124** | **94** | **319/319** | 1,916 |
+| **Total** | **101** | 19 | **126** | **94** | **321/321** | 1,926 |
 
 **Curation graph** (`data/semiconductor_v0_3.json` — the hand-curated source the core A-Box is generated from).
 
@@ -324,6 +325,7 @@ blank nodes: `grep -c owl:Class` counts both and reports a larger number.
 | `sdkb-abox-prior-art.ttl` | examiner-cited prior art | 67,123 |
 | `sdkb-abox-claim-features.ttl` | claim features | 11,871,397 ¹ |
 | `sdkb-abox-b-layer-queries.ttl` | B-layer confirmation queries | 4,631 |
+| `sdkb-abox-priorart.ttl` | prior-art claim profiles, disclosures, examiner elements | 675,934 ¹ |
 | `sdkb-abox-experts-problems.ttl` | experts and problems | 8,483 |
 | `sdkb-abox-vendors.ttl` | equipment vendors | 2,601 |
 | `sdkb-governance-kr-instances.ttl` | Korea regulatory instances | 175 |

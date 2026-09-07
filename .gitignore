@@ -89,6 +89,10 @@ data/patents/raw/*.fulltext.jsonl
 data/interim/rejection_reasons.jsonl
 ontology/sdkb-abox-claim-features.ttl
 ontology/sdkb-abox-prior-art.ttl
+# PLAN-005 단계 5-A — 선행기술 판단층 A-Box. 발행 거부(DENY)된
+# data/patents/notice_element_judgments.parquet 의 파생(ExaminerElement)을 담으므로
+# 추적하면 그 발행 판단을 우회하게 된다. 재현: make abox-priorart (자격 불필요).
+ontology/sdkb-abox-priorart.ttl
 
 # ── CR-012 · B층 확증분할 질의 (하류 논문 평가자산) ────────────────
 # 이 저장소는 공개되는 기반 온톨로지이고, 이 둘은 반도체 도메인 지식이 아니라
