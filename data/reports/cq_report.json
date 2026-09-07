@@ -10,18 +10,22 @@
     "ontology/sdkb-abox-experts-problems.ttl",
     "ontology/sdkb-abox-patents.ttl",
     "ontology/sdkb-abox-vendors.ttl",
-    "ontology/sdkb-abox-b-layer-queries.ttl"
+    "ontology/sdkb-abox-b-layer-queries.ttl",
+    "ontology/sdkb-priorart-core.ttl",
+    "ontology/sdkb-priorart-semi.ttl",
+    "ontology/sdkb-priorart-kr.ttl",
+    "ontology/sdkb-abox-priorart.ttl"
   ],
   "graph_files_missing": [],
-  "graph_triples": 53697,
-  "n_cq": 31,
-  "n_passed": 27,
-  "pass_rate": 0.871,
+  "graph_triples": 730214,
+  "n_cq": 32,
+  "n_passed": 28,
+  "pass_rate": 0.875,
   "by_suite": {
     "pa": {
-      "total": 8,
-      "passed": 4,
-      "pass_rate": 0.5,
+      "total": 9,
+      "passed": 5,
+      "pass_rate": 0.5556,
       "failures": [
         "CQ27_fto_claim_readiness",
         "CQ29_claim_level_rejection_judgment",
@@ -52,37 +56,37 @@
     {
       "name": "CQ01_patents_per_process_step",
       "suite": "core",
-      "rows": 20,
+      "rows": 23,
       "expect_min": 1,
       "passed": true,
-      "seconds": 0.35,
+      "seconds": 0.36,
       "error": null
     },
     {
       "name": "CQ02_recent_patents_by_step",
       "suite": "tf",
-      "rows": 365,
+      "rows": 441,
       "expect_min": 1,
       "passed": true,
-      "seconds": 0.109,
+      "seconds": 0.089,
       "error": null
     },
     {
       "name": "CQ03_uncovered_process_steps",
       "suite": "tf",
-      "rows": 30,
+      "rows": 27,
       "expect_min": 0,
       "passed": true,
-      "seconds": 0.282,
+      "seconds": 0.292,
       "error": null
     },
     {
       "name": "CQ04_concept_annual_series",
       "suite": "tf",
-      "rows": 312,
+      "rows": 371,
       "expect_min": 1,
       "passed": true,
-      "seconds": 1.139,
+      "seconds": 1.185,
       "error": null
     },
     {
@@ -91,34 +95,34 @@
       "rows": 2339,
       "expect_min": 1,
       "passed": true,
-      "seconds": 0.369,
+      "seconds": 0.383,
       "error": null
     },
     {
       "name": "CQ06_concepts_without_recent_patents",
       "suite": "tf",
-      "rows": 59,
+      "rows": 55,
       "expect_min": 0,
       "passed": true,
-      "seconds": 0.535,
+      "seconds": 0.542,
       "error": null
     },
     {
       "name": "CQ07_device_process_crosswalk",
       "suite": "core",
-      "rows": 55,
+      "rows": 67,
       "expect_min": 1,
       "passed": true,
-      "seconds": 0.017,
+      "seconds": 0.016,
       "error": null
     },
     {
       "name": "CQ08_applicant_process_portfolio",
       "suite": "core",
-      "rows": 316,
+      "rows": 324,
       "expect_min": 1,
       "passed": true,
-      "seconds": 0.055,
+      "seconds": 0.059,
       "error": null
     },
     {
@@ -127,7 +131,7 @@
       "rows": 414,
       "expect_min": 1,
       "passed": true,
-      "seconds": 0.157,
+      "seconds": 0.16,
       "error": null
     },
     {
@@ -145,7 +149,7 @@
       "rows": 66,
       "expect_min": 1,
       "passed": true,
-      "seconds": 0.117,
+      "seconds": 0.116,
       "error": null
     },
     {
@@ -154,7 +158,7 @@
       "rows": 3134,
       "expect_min": 1,
       "passed": true,
-      "seconds": 0.56,
+      "seconds": 0.588,
       "error": null
     },
     {
@@ -163,7 +167,7 @@
       "rows": 21,
       "expect_min": 1,
       "passed": true,
-      "seconds": 0.235,
+      "seconds": 0.247,
       "error": null
     },
     {
@@ -172,7 +176,7 @@
       "rows": 18,
       "expect_min": 1,
       "passed": true,
-      "seconds": 5.431,
+      "seconds": 5.633,
       "error": null
     },
     {
@@ -181,7 +185,7 @@
       "rows": 6,
       "expect_min": 1,
       "passed": true,
-      "seconds": 130.399,
+      "seconds": 136.847,
       "error": null
     },
     {
@@ -190,7 +194,7 @@
       "rows": 3,
       "expect_min": 1,
       "passed": true,
-      "seconds": 0.093,
+      "seconds": 0.05,
       "error": null
     },
     {
@@ -199,16 +203,16 @@
       "rows": 35,
       "expect_min": 1,
       "passed": true,
-      "seconds": 0.1,
+      "seconds": 0.097,
       "error": null
     },
     {
       "name": "CQ18_patents_by_skill",
       "suite": "em",
-      "rows": 10,
+      "rows": 4,
       "expect_min": 1,
       "passed": true,
-      "seconds": 0.023,
+      "seconds": 0.011,
       "error": null
     },
     {
@@ -217,7 +221,7 @@
       "rows": 6,
       "expect_min": 1,
       "passed": true,
-      "seconds": 0.096,
+      "seconds": 0.098,
       "error": null
     },
     {
@@ -226,7 +230,7 @@
       "rows": 395,
       "expect_min": 1,
       "passed": true,
-      "seconds": 2.026,
+      "seconds": 2.139,
       "error": null
     },
     {
@@ -235,16 +239,16 @@
       "rows": 38,
       "expect_min": 1,
       "passed": true,
-      "seconds": 0.359,
+      "seconds": 0.351,
       "error": null
     },
     {
       "name": "CQ22_patent_equipment_and_technode",
       "suite": "core",
-      "rows": 9,
+      "rows": 204,
       "expect_min": 1,
       "passed": true,
-      "seconds": 0.094,
+      "seconds": 1.13,
       "error": null
     },
     {
@@ -253,7 +257,7 @@
       "rows": 37,
       "expect_min": 1,
       "passed": true,
-      "seconds": 0.008,
+      "seconds": 0.007,
       "error": null
     },
     {
@@ -277,10 +281,10 @@
     {
       "name": "CQ26_patent_export_control_exposure",
       "suite": "pa",
-      "rows": 1324,
+      "rows": 1331,
       "expect_min": 1,
       "passed": true,
-      "seconds": 0.187,
+      "seconds": 0.222,
       "error": null
     },
     {
@@ -289,7 +293,7 @@
       "rows": 0,
       "expect_min": 1,
       "passed": false,
-      "seconds": 0.014,
+      "seconds": 0.015,
       "error": null
     },
     {
@@ -298,7 +302,7 @@
       "rows": 84,
       "expect_min": 1,
       "passed": true,
-      "seconds": 0.521,
+      "seconds": 0.553,
       "error": null
     },
     {
@@ -307,7 +311,7 @@
       "rows": 0,
       "expect_min": 1,
       "passed": false,
-      "seconds": 0.006,
+      "seconds": 0.005,
       "error": null
     },
     {
@@ -326,6 +330,15 @@
       "expect_min": 1,
       "passed": false,
       "seconds": 0.005,
+      "error": null
+    },
+    {
+      "name": "CQ32_novelty_uncovered_essential_concepts",
+      "suite": "pa",
+      "rows": 200,
+      "expect_min": 1,
+      "passed": true,
+      "seconds": 0.053,
       "error": null
     }
   ]

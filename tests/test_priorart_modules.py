@@ -156,12 +156,15 @@ def test_shipped_task_query_is_neutral_and_discovered():
         assert check_query(q) == [], q.name
 
 
-def test_task_query_expect_min_is_zero_until_stage5():
-    """A-Box 가 없는 동안 0행이 정상이다. 1 로 올리는 시점은 단계 5 와 같은 커밋."""
+def test_task_query_expect_min_is_one_after_stage5():
+    """단계 5-A 가 A-Box 를 넣었으므로 0행은 이제 실패다. 확장 깊이는 `?`({0,1}) 로 동결.
+    ORDER BY 는 크로스곱 전량 실체화를 강요하므로 두지 않는다."""
     text = (ROOT / "queries" / "cq" /
             "CQ32_novelty_uncovered_essential_concepts.rq").read_text(encoding="utf-8")
-    assert "# expect-min: 0" in text
-    assert "단계 5" in text
+    assert "# expect-min: 1" in text
+    body = "\n".join(ln for ln in text.splitlines() if not ln.lstrip().startswith("#"))
+    assert "pa:coveredBy? ?found" in body
+    assert "ORDER BY" not in body        # 주석은 그 이유를 적으므로 본문만 본다
 
 
 # ── ④ 접지 계약 (단계 4 승인 결정 1) ────────────────────────────────

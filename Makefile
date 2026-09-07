@@ -1,7 +1,7 @@
 .PHONY: all install venv parse owl convert align validate test clean \
         ingest-sirp sirp-pairs sirp-problems sirp experts \
         compliance curated-experts curated-ratings expdataset abox abox-patents \
-        priorart \
+        priorart abox-priorart \
         abox-prior-art abox-claim-features abox-full refetch-fulltext cq \
         public-release check-public signature signature-inject signature-check \
         superordinate-concepts concept-mapping \
@@ -90,6 +90,14 @@ owl:
 priorart:
 	$(PYTHON) scripts/build_priorart_modules.py
 
+# ── 선행기술 판단층 A-Box (PLAN-005 단계 5-A) ─────────────────────
+# ClaimProfile·Disclosure·ExaminerElement 를 실체화한다. 입력은 전부 커밋된 파일
+# (mappings/claim_features.parquet · data/patents/notice_element_judgments.parquet ·
+# core-data · semi · scope)이라 자격이 필요 없다 — 그래서 `validate` 가 없으면 짓는다.
+# 산출 TTL 은 gitignore — DENY 된 notice parquet 의 파생을 담는다.
+abox-priorart: priorart
+	$(PYTHON) scripts/build_abox_priorart.py
+
 convert:
 	$(PYTHON) scripts/convert_rdf.py
 
@@ -139,7 +147,7 @@ refetch-fulltext:
 	$(PYTHON) scripts/collect_cited_biblio_claims.py
 
 # A-Box 전량 — 자격(KIPRIS 키)과 시간이 드는 경로를 한 이름으로 묶는다.
-abox-full: abox abox-patents abox-vendors abox-prior-art abox-claim-features
+abox-full: abox abox-patents abox-vendors abox-prior-art abox-claim-features abox-priorart
 
 # ── CQ 스위트 (CR-016 §2 출력 (3)) ─────────────────────────────────────
 # CQ 는 평가 하네스가 아니라 **온톨로지가 무엇에 답할 수 있는가의 명세**, 즉 도메인
@@ -272,13 +280,18 @@ validate:
 	$(PYTHON) scripts/build_priorart_modules.py --check
 	@# ② 이식성 불변식 — core 순도 + 태스크 질의의 행정 어휘 금지 (§5 V6(a) · §3.4)
 	$(PYTHON) scripts/check_priorart_invariants.py
-	@# ③ shape 를 **겨냥한 그래프에** 건다. 지금 MinedAxiom·ExaminerElement 타깃은
-	@#   0 이고(A-Box 는 단계 5), 검증기가 그 사실을 vacuous 로 출력한다 — 0 을 숨기지
-	@#   않는 것이 부채 대장 4번에서 배운 것이다.
+	@# ③ shape 를 **겨냥한 그래프에** 건다. 단계 5-A 부터 A-Box(ClaimProfile ·
+	@#   Disclosure · ExaminerElement)가 같이 실린다 — 없으면 짓는다(입력이 전부 커밋돼
+	@#   있어 자격이 필요 없다). MinedAxiom 타깃은 여전히 0 이고(채굴 쌍은 이 저장소에
+	@#   없다 — 5-A 비목표), 검증기가 그 사실을 vacuous 로 출력한다. 0 을 숨기지 않는
+	@#   것이 부채 대장 4번에서 배운 것이다. core-data 를 싣는 이유: sh:class
+	@#   pa:TechnicalConcept 가 개념 개체의 rdf:type 을 데이터 그래프에서 읽는다.
+	@test -f ontology/sdkb-abox-priorart.ttl || $(MAKE) PYTHON=$(PYTHON) abox-priorart
 	$(PYTHON) scripts/validate_shacl.py --shapes validation/shapes_priorart.ttl \
-		--owl ontology/sdkb-priorart-core.ttl \
+		--owl ontology/sdkb-priorart-core.ttl --inference none \
 		--data ontology/sdkb-priorart-core.ttl ontology/sdkb-priorart-semi.ttl \
-		       ontology/sdkb-priorart-kr.ttl ontology/sdkb-patent.ttl ontology/sdkb-governance.ttl
+		       ontology/sdkb-priorart-kr.ttl ontology/sdkb-patent.ttl ontology/sdkb-governance.ttl \
+		       ontology/sdkb-core-data.ttl ontology/sdkb-abox-priorart.ttl
 
 test:
 	$(PYTHON) -m pytest tests/ -v --tb=short

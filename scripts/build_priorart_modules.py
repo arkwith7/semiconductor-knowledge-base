@@ -52,7 +52,7 @@ PA, ONT, GOV, PAKR = SDKB_PA, SDKB_ONT, SDKB_GOV, SDKB_PA_KR
 
 # 발행 메타. **상수다** — `datetime.now()` 를 쓰면 빌드마다 그래프가 달라지고
 # 하류의 sha256 핀이 매일 깨진다(§0).
-MODIFIED = "2026-09-06"
+MODIFIED = "2026-09-07"
 VERSION = "0.1.0-dev"
 LICENSE = URIRef("https://spdx.org/licenses/CDLA-Permissive-2.0.html")
 
@@ -204,6 +204,17 @@ def build_core() -> Graph:
     _prop(g, PA.achievesEffect, OWL.ObjectProperty, "achieves effect",
           "이 프로파일이 주장하는 기술적 효과.",
           domain=PA.ClaimProfile, range_=PA.TechnicalConcept)
+    # 단계 5-A (2026-09-07 · 사용자 승인) — 판단 단위를 원천에 잇는 술어 둘. 단계 4 에는
+    # 없었고, 그래서 ClaimProfile·Disclosure 가 어느 청구항·문헌의 것인지 그래프가 말할 수
+    # 없었다. range 는 비운다 — 특허 청구항이 아닌 연구노트도 프로파일의 원천일 수 있고
+    # (§3.4), 그것을 채우는 것은 바인딩 모듈의 몫이다.
+    _prop(g, PA.profileOf, OWL.ObjectProperty, "profile of",
+          "이 프로파일이 요약한 원천 단위. range 는 도메인 어휘라 바인딩 모듈이 채운다 — "
+          "특허 청구항이 아닌 연구노트도 올 수 있다(§3.4).",
+          domain=PA.ClaimProfile)
+    _prop(g, PA.disclosureOf, OWL.ObjectProperty, "disclosure of",
+          "이 개시집합이 속한 문헌. range 는 바인딩 모듈이 채운다.",
+          domain=PA.Disclosure)
 
     # ── 절차·증거 술어 ──
     _prop(g, PA.onGround, OWL.ObjectProperty, "on ground",
@@ -337,6 +348,9 @@ def build_semi() -> Graph:
     g.add((PA.featureRole, RDFS.domain, ONT.ClaimFeature))
     g.add((PA.concernsClaim, RDFS.range, ONT.Claim))
     g.add((PA.versionOf, RDFS.range, ONT.Claim))
+    # 단계 5-A — 프로파일은 청구항의, 개시집합은 특허 문헌의 것이다(이 도메인에서는).
+    g.add((PA.profileOf, RDFS.range, ONT.Claim))
+    g.add((PA.disclosureOf, RDFS.range, ONT.Patent))
     # 기존 술어를 중립 상위로 끌어올린다. 기존 IRI·의미는 그대로다.
     g.add((ONT.featureConcept, RDFS.subPropertyOf, PA.featureConcept))
     g.add((ONT.onGround, RDFS.subPropertyOf, PA.onGround))

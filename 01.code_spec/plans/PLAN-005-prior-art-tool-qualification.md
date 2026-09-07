@@ -957,5 +957,89 @@ make test          → 352 passed · 10 skipped (신규 tests/test_priorart_modu
 ### 12.5 다음 (단계 5 이후에 넘기는 것)
 
 `propertyChainAxiom` 넷(§1.9(b) 후보생성기) · `combinableWith`(진보성 관통) ·
-`ClaimProfile`/`Disclosure` A-Box 실체화 · CQ32 `expect-min` 1 승격 ·
+~~`ClaimProfile`/`Disclosure` A-Box 실체화 · CQ32 `expect-min` 1 승격~~(→ §13 · 5-A 완료) ·
 CQ10 의 행정 어휘 필수부 사용(단계 6·7) · `citationStatus` 파생.
+
+---
+
+## 13. 단계 5-A 설계와 실행 기록 — A-Box 실체화 (2026-09-07 · §2 3단계 🛑 사용자 승인)
+
+**결론 먼저.** `scripts/build_abox_priorart.py` 가 `pa:ClaimProfile` **55,510** ·
+`pa:Disclosure` **31,114** · `pa:ExaminerElement` **235** · `pa:broaderConcept`=`coveredBy` **16**
+을 `ontology/sdkb-abox-priorart.ttl`(675,934 트리플 · gitignore)에 실체화했고, 단계 4 가
+vacuous 로 남긴 셋 — CQ32(0 → 200행 · `expect-min` 1) · SHACL priorart shape(실 타깃에 위반 0) ·
+V2 목표 노드 `Disclosure` — 이 처음 성립했다. 미매핑률 리포트
+`data/reports/abox_priorart_report.json` 이 **5-B 의 기준선**이다.
+
+### 13.1 사용자 결정 셋 (착수 전 · AskUserQuestion)
+
+| # | 결정 | 이유 |
+|---|---|---|
+| 1 | **단계 5 를 5-A(실체화) / 5-B(접지율 개선)로 나눈다.** 이번은 5-A | 접지율 개선(구조요소 15개 등록 → `concept_mapping` 재생성 → 130만 feature 재접지)은 906 MB TTL 과 `claim_features.parquet` 의 sha 를 바꾼다 — 파급이 크고, 5-A 의 미매핑률 리포트 없이는 개선을 잴 눈금이 없다 |
+| 2 | **core 에 OP 둘 추가** — `pa:profileOf` · `pa:disclosureOf` | 단계 4 T-Box 에 ClaimProfile↔청구항 · Disclosure↔문헌 연결 술어가 없었다(실측). 대안(ClaimVersion 경유 · `prov:wasDerivedFrom`)은 14만 개의 자명한 노드를 만들거나 이름이 의미를 약하게 담는다(§1-3) |
+| 3 | **미바인딩 개념 34종은 제외하고 계수** | `FailureMode` 16 · `Skill` 11 · `EquipmentClass` 7 은 semi 가 `pa:TechnicalConcept` 에 걸지 않았다. 넣으면 `sh:class` 가 문다. 단계 4 의 바인딩 결정을 이번에 건드리지 않고 `EquipmentClass` 바인딩은 5-B 의 측정 가능한 레버로 둔다 |
+
+### 13.2 설계 요지
+
+- **Disclosure 는 문헌 단위**다 — 신규성이 *"요소 집합 ⊆ 단일 문헌 개시 집합"* 이므로.
+  `discloses` = 문헌 전 청구항 개념의 합집합. **ClaimProfile 은 독립항 단위**, `essentialConcept`
+  = 그 항의 개념, `optionalConcept` = 그 항을 루트로 갖는 종속항 개념(essential 제외 · 루트는
+  `depends_on_claim` 메모이즈 DFS · 다중 루트면 전부). 개념 0 인 독립항은 만들지 않는다 —
+  좌변이 공집합인 프로파일은 어떤 문헌에도 "덮인" 것이 된다. **cited 측도 같은 경로**로
+  방출한다(PLAN-001 §1.4-2 동일 해상도).
+- **바인딩 타입은 T-Box 에서 읽는다.** semi 의 `subClassOf* pa:TechnicalConcept` → core-data 의
+  개념 개체 → CURIE 집합. 하드코딩 0.
+- **`coveredBy` 1홉 실체화, 전이 폐쇄 없음.** `run_cq.py` 는 추론기를 돌리지 않으므로
+  `broaderConcept ⊑ coveredBy` 함의를 단언으로 두지 않으면 확장이 0건 작동한다. §3.3 의
+  확장 깊이 {0,1} 은 질의의 `pa:coveredBy?` 가 든다. 단계 6 V1 절제는 둘을 함께 뺀다.
+- **ExaminerElement 는 캡션 청구항이 그래프에 실재할 때만.** IRI
+  `examiner_element/{stem}_t{표}_g{그룹}_e{번호}` · `assertedIn examdoc/{stem}`(stem =
+  통지서 파일명의 출원번호+발송번호 — 행정 식별자이며 성명이 아니다 · `check-public` 0 적중).
+  `dcterms:source` 는 생성기→parquet 이고 파일명을 담지 않는다(2-B 선례). scope 밖 행이
+  있으면 `SystemExit`.
+- **원천에 없는 것은 내지 않는다** — `issuedDate`·`examRound` 는 2-C parquet 에 없다(§1-4).
+
+### 13.3 동결 기준 → 실측 (재현 명령 병기)
+
+| 기준 | 동결(실행 전) | 실측 | 명령 |
+|---|---:|---:|---|
+| ClaimProfile / Disclosure | 55,510 / 31,114 | **55,510 / 31,114** | `make abox-priorart` |
+| ExaminerElement / ExaminationDocument | 235 (=305−38−32) / 19 | **235 / 19** | 〃 · 리포트 `examiner_elements` |
+| broaderConcept = coveredBy | 16 = 16 · 폐쇄 0 | **16 = 16** | 리포트 `hierarchy` |
+| 결정성 | 두 빌드 sha256 동일 | **동일** (`41ca3ac46dff…`) | 두 번 빌드 후 `sha256sum` |
+| SHACL | 위반 0 · 세 타깃 non-vacuous | **PASSED** · 55,510 / 31,114 / 235 검사 · MinedAxiom 0(vacuous) | `make validate` |
+| CQ32 | ≥1행 · 불변식 B 통과 | **200행 · 0.05초** · B OK | `make cq` · `check_priorart_invariants.py` |
+| 술어 계약 · 인라인 선언 | ⊂ T-Box · 0 | 통과 | `tests/test_abox_priorart.py` |
+| 누출 | ExaminerElement 출원 ⊂ scope 800 · 인용 간선 0 | 통과 (out_of_scope 0) | 〃 |
+| 공개 경계 | check-public 0 · TTL gitignore | **적중 0 · 363 파일** · 미추적 아님 | `make check-public` · `git status` |
+| 테스트 | 기존 전량 + 신규 | **374 passed · 10 skipped** | `make test` |
+
+**미매핑률 (5-B 기준선 · 바인딩 개념 88종 기준).** 독립항: rej 3,541 중 미매핑 998
+(**28.2%**) · cited 60.5% · g1 62.1% · g2 62.7%. 문헌: rej 9.3% · cited 9.8% · g1 28.2% ·
+g2 15.5%. 제외된 34 개념 때문에 빠진 프로파일 2,018 · Disclosure 694. 종속항 개념 중
+루트 독립항에 프로파일이 없어 버린 것 23,208 링크(`optional_dropped_root_has_no_profile`).
+
+### 13.4 계측기 교정 (전후를 남긴다)
+
+① 단계 4 테스트를 `expect-min: 1` 로 갱신하며 "ORDER BY 없음" 검사를 파일 전체에 걸었고,
+CQ32 주석("ORDER BY 를 두지 않는다")에 걸려 실패했다 → 본문(주석 제외)만 보도록 고쳤다.
+② 커밋돼 있던 `cq_report.json`(2026-08-09)과 새 실행의 기존 CQ 행 수가 달라 보였다.
+priorart 넷을 뺀 옛 그래프 목록으로 다시 돌려 대조 → **31개 전부 동일, CQ32 만 0 → 200**.
+차이는 8/25·9/6 의 A-Box 재빌드에서 온 것이다. ③ 병렬로 `signature-inject`·`check-public`
+이 파일을 다시 쓰는 동안 돌린 첫 `make test` 에서 1건이 실패했으나 출력이 잘려 이름이 남지
+않았다. 아무것도 돌지 않는 상태에서 재실행 → 374 passed.
+
+### 13.5 하류 조치 (§0)
+
+`sdkb-priorart-{core,semi,kr}.ttl` 의 sha256 이 바뀌었다(core·semi 어휘 추가 · kr 은
+`dcterms:modified`). 하류 `vendor.py:VENDOR_FILES` 와 `baseline.py:BASELINE_PARTS` 를
+**양쪽** 갱신할 것. A-Box 는 gitignore 라 git 으로 오지 않으며 `make abox-priorart` 로
+로컬 빌드한다(결정적 · 자격 불필요). 단계 7 재측정 시 `report_priorart_baseline.py` 의
+V2 목표 노드를 인용문헌 노드(퇴화형)에서 `disclosure/{publication_id}` 로 교체한다.
+
+### 13.6 다음
+
+**5-B · 접지율 개선(§2 1단계 🛑 별도)** — 기준선은 §13.3 의 미매핑률. 레버 후보:
+구조요소 15개(`ko_concept_proposals.json`) → `ont:StructuralElement` 등록 · `EquipmentClass`
+바인딩 · concept_mapping 재생성 → 재접지. 그 뒤 단계 6(V1 절제) · 7(V2–V4 재측정 ·
+τ 동결) · MinedAxiom 실체화(PLAN-002 채굴 쌍이 이 저장소에 들어온 뒤).

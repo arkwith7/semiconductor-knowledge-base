@@ -1,13 +1,21 @@
 # desc: 질의 ClaimProfile 의 필수구성 중 문헌 Disclosure 가 덮지 못한 개념은 무엇인가 (신규성 원소층의 잔여)
 # suite: pa
 # monotone: up
-# expect-min: 0
+# expect-min: 1
 # task-neutral: required
 #
-# PLAN-005 단계 4 산출(§8). **expect-min 을 0 으로 둔 것은 임시이며 그 이유를 적는다** —
-# 이 질의가 겨냥하는 A-Box(pa:ClaimProfile · pa:Disclosure 실체화)는 단계 5 에서 만들어지고,
-# 지금은 0행이 정상이다. 1 로 올리는 시점은 **단계 5 와 같은 커밋**이다. 지금 1 로 두면
-# 게이트가 빨갛게 남고, 그것을 참으려고 문턱을 만지는 것이 §1-6(게이트 우회)이다.
+# PLAN-005 단계 4 산출(§8) · 단계 5-A 에서 expect-min 을 0 → 1 로 올렸다 (같은 커밋에
+# A-Box 가 들어왔다 — ontology/sdkb-abox-priorart.ttl · scripts/build_abox_priorart.py).
+#
+# `pa:coveredBy?` 의 `?` 가 §3.3 이 말한 **동결된 확장 깊이 {0,1}** 이다:
+#   0홉 — 같은 개념이 그대로 개시됐다 (coveredBy 는 반사가 아니므로 경로가 그 경우를 든다)
+#   1홉 — broaderConcept·substitutableWith·exactMatch 의 sub-property 함의를 생성기가
+#         `pa:coveredBy` 로 실체화한 것. 이 질의는 추론기 없이 단언 트리플만 본다.
+# 전이는 없다 — SiO₂↔SiON↔Si₃N₄ 가 심사관이 한 적 없는 판단으로 이어지지 않는다.
+#
+# ORDER BY 를 두지 않는다. 필수부가 profile × essential × disclosure 의 크로스곱이라
+# 정렬은 그 전량을 실체화하게 만들고, 이 질의의 판정(rows ≥ expect-min)에는 순서가
+# 아무 의미가 없다.
 #
 # 이 질의가 증명하는 것은 회수 성능이 아니라 **어휘의 태스크 중립성**이다:
 # WHERE 필수부에 ont:Patent · ont:RejectionType 따위 행정 어휘가 하나도 없으므로,
@@ -26,11 +34,10 @@ WHERE {
   ?disclosure a pa:Disclosure .
 
   # 이 필수구성이 이 문헌에 덮이지 **않았다**는 것이 신규성 잔여의 정의다.
-  # coveredBy 는 전이가 아니므로(§3.3) 확장은 broaderConcept·substitutableWith
-  # 한 단계로만 들어온다 — 그 둘이 coveredBy 의 하위 술어다.
+  # coveredBy 는 전이가 아니므로(§3.3) 확장은 한 단계(`?`)로만 들어온다.
   FILTER NOT EXISTS {
     ?disclosure pa:discloses ?found .
-    ?uncovered  pa:coveredBy ?found .
+    ?uncovered  pa:coveredBy? ?found .
   }
 
   # ── 증거층은 OPTIONAL 로만 붙는다 (§3.4 검사 규칙) ──
@@ -39,5 +46,4 @@ WHERE {
               ont:onGround ?examinerGround .
   }
 }
-ORDER BY ?profile ?disclosure ?uncovered
 LIMIT 200

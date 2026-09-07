@@ -27,6 +27,85 @@ All notable changes to SDKB will be documented in this file.
 
 ## [Unreleased]
 
+### Added (2026-09-07 — PLAN-005 단계 5-A · 선행기술 판단층 A-Box 실체화 · 사용자 승인)
+
+- **판단 어휘에 첫 인스턴스가 들어갔다.** 신규 생성기 `scripts/build_abox_priorart.py` 가
+  `ontology/sdkb-abox-priorart.ttl`(**675,934 트리플** · 53 MB · gitignore)과
+  `data/reports/abox_priorart_report.json` 을 낸다. `pa:ClaimProfile` **55,510** ·
+  `pa:Disclosure` **31,114** · `pa:ExaminerElement` **235** · `pa:ExaminationDocument` 19 ·
+  `pa:broaderConcept` 16 (= `pa:coveredBy` 실체화 16). 두 번 빌드해 sha256 이 같다
+  (`41ca3ac46dff…`). 입력이 전부 커밋된 파일이라 **자격이 필요 없고 약 30초**다.
+- **단계 4 가 vacuous 로 남겨 둔 것 셋이 처음 성립했다.** ① CQ32 `expect-min` **0 → 1**
+  (실측 200행 · 0.05초). ② SHACL `shapes_priorart.ttl` 이 실제 타깃(55,510 · 31,114 · 235)에
+  걸려 **위반 0**. `MinedAxiom` 만 여전히 타깃 0 이고 그 이유는 아래 비목표에 있다.
+  ③ V2 의 정본 목표 노드 `Disclosure` 가 존재한다 — 재측정은 단계 7 의 몫이다.
+- **T-Box 는 추가만 했다** (`pa:` core 224 → **232** · semi 74 → **76** · kr 41 불변).
+  `pa:profileOf`(ClaimProfile → 원천 단위) · `pa:disclosureOf`(Disclosure → 문헌) 둘이며
+  core 에서는 range 를 비우고 semi 가 `ont:Claim`·`ont:Patent` 로 바인딩한다 — 단계 4 의
+  슬롯 규율 그대로다. 기존 IRI·의미 불변. 불변식 A(core 순도)는 그대로 통과한다.
+  shape 둘을 더했다(`Shape_ClaimProfile` · `Shape_Disclosure` — 조이는 방향).
+- **CQ32 를 두 곳 고쳤다.** `pa:coveredBy` → **`pa:coveredBy?`** — `?` 가 §3.3 이 말한
+  동결된 확장 깊이 {0,1} 이다(0홉 = 같은 개념이 개시됨. coveredBy 는 반사가 아니라 경로가
+  그 경우를 든다). `ORDER BY` 를 **뺐다** — 필수부가 profile × essential × disclosure
+  크로스곱이라 정렬이 전량 실체화를 강요하고, 판정(rows ≥ expect-min)에 순서는 무의미하다.
+- **`coveredBy` 를 1홉 실체화한다, 전이 폐쇄는 없다.** 소비자(`run_cq.py`)는 추론기를
+  돌리지 않으므로 `broaderConcept ⊑ coveredBy` 함의를 단언으로 두지 않으면 확장이 0건
+  작동한다. 생성기가 `broaderConcept` 1건마다 `coveredBy` 1건을 함께 낸다(16 = 16).
+  단계 6 V1 절제는 둘을 **함께** 빼야 하며 리포트가 그 사실을 적는다
+  (`covered_by_materialized_from_broader`). 실측 계층 깊이는 1 이라 오늘은 폐쇄 = 단언집합이지만,
+  계층이 자라도 생성기는 폐쇄를 만들지 않는다 — 테스트가 고정한다.
+- **미바인딩 개념 34종은 제외하고 셌다** (사용자 결정 3). 접지에 쓰인 122 개념 중
+  `FailureMode` 16 · `Skill` 11 · `EquipmentClass` 7 은 semi 가 `pa:TechnicalConcept` 에
+  걸지 않은 타입이라 `sh:class` 가 문다(회귀 테스트로 확인). 그래서 빠진 것이 프로파일
+  2,018 · Disclosure 694 이고 리포트 `concepts.unbound_list` 에 전부 있다. `EquipmentClass`
+  바인딩은 **5-B(접지율 개선)의 측정 가능한 레버**로 넘긴다. 바인딩 타입은 하드코딩하지
+  않고 semi 의 `subClassOf* pa:TechnicalConcept` 를 읽는다.
+- **미매핑률 기준선이 생겼다 — 5-B 는 이 수를 움직여야 한다.** 독립항 미매핑률
+  rej **28.2%** · cited 60.5% · g1 62.1% · g2 62.7% (바인딩 개념 기준). 문헌 결손
+  rej 9.3% · cited 9.8% · g1 28.2% · g2 15.5%. 개념별 df(feature·문헌 수준)를 리포트에 실었다.
+- **ExaminerElement 235 / 305 — 탈락 70 의 사유를 전부 센다.** 캡션 없음 38(단계 4 결정 1:
+  `elementGroup` 으로 대신하지 않는다) · 캡션은 있으나 그 청구항이 그래프에 없음 32(출원
+  2건). 판정 Identical 152 · Different 79 · Corresponding 4. `dcterms:source` 는 생성기와
+  parquet 을 가리키고 **통지서 파일명은 담지 않는다**(2-B 선례). scope(dev+train 800 출원)
+  밖 행이 하나라도 있으면 **빌드가 죽는다** — 실측 0.
+- **누출 진술.** ClaimProfile·Disclosure 는 청구항 텍스트의 파생이며 심사관 판단을 한
+  조각도 담지 않으므로 분할 제한이 없다. 이 A-Box 에 인용 간선(`overPriorArt` 등)은 없다 —
+  테스트가 고정한다.
+- **인용측 분해 결손 처리 방침(§4)** — 청구항이 분해되지 않은 문헌(비 KR/US 인용문헌)은
+  Disclosure 를 **만들지 않는다.** 지어내지 않고 결손으로 센다(cited 미분해 kr 175 · us 68 은
+  개념 0 인 문헌이며, JP/WO/CN/EP 는 애초에 청구항 행이 없어 분모에도 없다).
+- **배선.** `make abox-priorart`(신규 · `abox-full` 포함) · `make validate` 가 A-Box 없으면
+  짓고 `shapes_priorart × {core,semi,kr,patent,governance,core-data,abox-priorart}` 를
+  **무조건** 건다(`if [ -f ]` 뒷문 없음) · `run_cq.py` 기본 그래프에 priorart 넷 추가
+  (730,214 트리플 · `make cq` 2분 47초) · 서명 `ABOX_LAYERS` 에 층 등록.
+  **`.gitignore` 에 넣었다** — 발행 거부(DENY)된 `notice_element_judgments.parquet` 의
+  파생을 담으므로 추적하면 그 발행 판단을 우회한다.
+- **CQ 리포트의 기존 31개 행 수가 달라 보이는 것은 이번 변경이 아니다.** 커밋돼 있던
+  `cq_report.json` 은 2026-08-09 판이고 그 뒤 A-Box 가 두 번(8/25 · 9/6) 재빌드됐다.
+  priorart 넷을 뺀 옛 그래프 목록으로 다시 돌려 대조하니 **31개 전부 행 수 동일, CQ32 만
+  0 → 200** 이다. pa 스위트의 실패 4건(CQ27·29·30·31)은 전과 같이 899 MB 층이 필요한 질의다.
+- **게이트가 무는지 확인했다** — `tests/test_abox_priorart.py` 20건. 필수구성 없는
+  프로파일·개시 없는 Disclosure·`ont:Skill` 을 필수구성으로 넣은 프로파일은 SHACL 이
+  거부하고(같은 자리에 `ont:Material` 은 통과), scope 밖 출원은 `SystemExit`, 3단 계층에서
+  전이 폐쇄가 생기면 실패한다. 리포트의 `ttl_sha256` 이 실물과 다르면 실패한다.
+  **계측기 교정 1건**: 단계 4 테스트를 갱신하며 "ORDER BY 없음" 검사를 파일 전체에 걸어
+  주석("ORDER BY 를 두지 않는다")에 걸렸다 — 본문(주석 제외)만 보도록 고쳤다.
+- **게이트 실행 결과.** `make priorart` 232/76/41 · `--check` OK · 불변식 A/B OK ·
+  `make validate` exit 0(위 SHACL 포함) · `make cq` 28/32(pa 5/9) · `make test`
+  **374 passed · 10 skipped** · `make check-public` 지문 적중 0 · 363 파일
+  (신규 생성기·테스트·리포트 포함) · `make signature-check` 최신.
+- **그래프 서명 갱신** — T-Box OP 124 → **126** · 주석 **321/321** · 트리플 1,916 → **1,926** ·
+  A-Box 적재 **10/10층**.
+- **⚠ 하류 조치.** `sdkb-priorart-core.ttl`·`-semi.ttl`·`-kr.ttl` 의 sha256 이 바뀌었다
+  (core·semi 는 어휘 추가, kr 은 `dcterms:modified` 만). 하류 `vendor.py:VENDOR_FILES` 와
+  `baseline.py:BASELINE_PARTS` 의 핀을 **양쪽** 갱신할 것(단계 4 와 같은 함정).
+  `sdkb-abox-priorart.ttl` 은 gitignore 라 git vendor 로 오지 않는다 — 하류는
+  `make abox-priorart` 로 로컬 빌드한다(결정적 · 자격 불필요).
+- **비목표(사용자 승인 · 5-A 범위 밖).** `pa:MinedAxiom`·`substitutableWith`·`exactMatch`
+  실체화(PLAN-002 채굴 쌍 산출물이 **이 저장소에 없다**) · `ClaimVersion`/`amendedFrom` ·
+  `citationStatus` 파생 · `issuedDate`/`examRound`(원천 없음) · 접지율 개선(**5-B** —
+  구조요소 15개 등록 → 재접지 · 별도 요구 정의) · V1–V3 재측정(단계 6·7) · CQ10 교정.
+
 ### Added (2026-09-06 — PLAN-005 단계 4 · 선행기술 판단층 T-Box·R-Box 신설 · 사용자 승인)
 
 - **판단 어휘가 생겼다 — 그리고 core 는 반도체도 한국도 모른다.** 세 모듈을 신설했다:

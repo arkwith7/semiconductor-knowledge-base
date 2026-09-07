@@ -12,7 +12,10 @@
 # 통과했다. `make validate` 가 이 파일을 세 모듈에 **명시적으로** 짝지어 돌린다.
 #
 # 실행: scripts/validate_shacl.py --shapes validation/shapes_priorart.ttl \
-#         --data ontology/sdkb-priorart-{core,semi,kr}.ttl
+#         --data ontology/sdkb-priorart-{core,semi,kr}.ttl ontology/sdkb-core-data.ttl \
+#                ontology/sdkb-abox-priorart.ttl
+#   (단계 5-A 부터 A-Box 와 개념 개체가 같이 실린다 — sh:class pa:TechnicalConcept 는
+#    개념 개체의 rdf:type 과 semi 의 subClassOf 를 데이터 그래프에서 따라간다)
 # ═══════════════════════════════════════════════════════════════════
 
 # ── 관할 혼합 추론 금지의 기계적 근거 (PLAN-001 §1.10(e) · 완료기준 7) ──
@@ -88,4 +91,45 @@ pa:Shape_ExaminerElement
         sh:minCount 1 ;
         sh:datatype xsd:integer ;
         sh:message "elementNo 는 정수다 (원천 구조 보존)." ;
+    ] .
+
+# ── 판단 단위의 계약 (PLAN-005 단계 5-A · 사용자 승인) ──
+# ClaimProfile 은 원천 하나를 가리키고 필수구성을 하나 이상 갖는다. 필수구성이 없는
+# 프로파일은 신규성 좌변이 비어 어떤 문헌에도 '덮인' 것이 되므로 만들지 않는다.
+# sh:class pa:TechnicalConcept 는 미바인딩 타입(예: ont:Skill)의 개체를 거부한다 —
+# 단계 5-A 결정 3(미바인딩 34 개념 제외)의 기계적 근거다.
+pa:Shape_ClaimProfile
+    a sh:NodeShape ;
+    sh:targetClass pa:ClaimProfile ;
+    sh:property [
+        sh:path pa:profileOf ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:message "ClaimProfile 은 원천 단위 하나(pa:profileOf)를 가리켜야 한다." ;
+    ] ;
+    sh:property [
+        sh:path pa:essentialConcept ;
+        sh:minCount 1 ;
+        sh:class pa:TechnicalConcept ;
+        sh:message "ClaimProfile 은 pa:TechnicalConcept 인 필수구성을 하나 이상 가져야 한다 — 없으면 신규성 좌변이 공집합이다." ;
+    ] .
+
+# Disclosure 는 문헌 하나의 개시집합이며 비어 있지 않다. 개시 개념이 0인 문헌은
+# Disclosure 를 만들지 않고 결손으로 센다(비 KR/US 인용문헌 분해 0% 가 그 자리다).
+pa:Shape_Disclosure
+    a sh:NodeShape ;
+    sh:targetClass pa:Disclosure ;
+    sh:property [
+        sh:path pa:disclosureOf ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:message "Disclosure 는 문헌 하나(pa:disclosureOf)에 속해야 한다." ;
+    ] ;
+    sh:property [
+        sh:path pa:discloses ;
+        sh:minCount 1 ;
+        sh:class pa:TechnicalConcept ;
+        sh:message "Disclosure 는 pa:TechnicalConcept 를 하나 이상 개시해야 한다 — 빈 개시집합은 결손이지 노드가 아니다." ;
     ] .
