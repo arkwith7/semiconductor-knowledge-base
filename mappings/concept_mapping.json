@@ -8484,6 +8484,15 @@
           "ambiguous": false
         },
         {
+          "surface": "capacitor",
+          "lang": "en",
+          "concept_id": "structural_element:capacitor",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-CANONICAL",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
           "surface": "carbon tetrafluoride",
           "lang": "en",
           "concept_id": "material:cf4",
@@ -8625,6 +8634,24 @@
           "concept_type": "Skill",
           "rule_id": "T2-ALIAS",
           "confidence": 0.8,
+          "ambiguous": false
+        },
+        {
+          "surface": "channel",
+          "lang": "und",
+          "concept_id": "structural_element:channel",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-IDLOCAL",
+          "confidence": 0.9,
+          "ambiguous": false
+        },
+        {
+          "surface": "channel region",
+          "lang": "en",
+          "concept_id": "structural_element:channel",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-CANONICAL",
+          "confidence": 1.0,
           "ambiguous": false
         },
         {
@@ -9136,6 +9163,24 @@
           "lang": "en",
           "concept_id": "subprocess:dopant_activation",
           "concept_type": "SubProcess",
+          "rule_id": "T1-CANONICAL",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
+          "surface": "drain",
+          "lang": "und",
+          "concept_id": "structural_element:drain",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-IDLOCAL",
+          "confidence": 0.9,
+          "ambiguous": false
+        },
+        {
+          "surface": "drain region",
+          "lang": "en",
+          "concept_id": "structural_element:drain",
+          "concept_type": "StructuralElement",
           "rule_id": "T1-CANONICAL",
           "confidence": 1.0,
           "ambiguous": false
@@ -10455,6 +10500,15 @@
           "ambiguous": false
         },
         {
+          "surface": "metal wiring",
+          "lang": "en",
+          "concept_id": "structural_element:metal_wiring",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-CANONICAL",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
           "surface": "metallization",
           "lang": "en",
           "concept_id": "subprocess:metallization",
@@ -11001,6 +11055,15 @@
           "concept_type": "Material",
           "rule_id": "T1-IDLOCAL",
           "confidence": 0.9,
+          "ambiguous": false
+        },
+        {
+          "surface": "photoresist layer",
+          "lang": "en",
+          "concept_id": "structural_element:photoresist_layer",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-CANONICAL",
+          "confidence": 1.0,
           "ambiguous": false
         },
         {
@@ -11661,6 +11724,24 @@
           "ambiguous": false
         },
         {
+          "surface": "source region",
+          "lang": "en",
+          "concept_id": "structural_element:source",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-CANONICAL",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
+          "surface": "spacer",
+          "lang": "en",
+          "concept_id": "structural_element:spacer",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-CANONICAL",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
           "surface": "spin on glass",
           "lang": "en",
           "concept_id": "material:sog",
@@ -11702,6 +11783,24 @@
           "concept_id": "device:nand_flash",
           "concept_type": "Device",
           "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
+          "surface": "stack",
+          "lang": "und",
+          "concept_id": "structural_element:stack",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-IDLOCAL",
+          "confidence": 0.9,
+          "ambiguous": false
+        },
+        {
+          "surface": "stacked structure",
+          "lang": "en",
+          "concept_id": "structural_element:stack",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-CANONICAL",
           "confidence": 1.0,
           "ambiguous": false
         },
@@ -12084,6 +12183,15 @@
           "ambiguous": false
         },
         {
+          "surface": "trench",
+          "lang": "en",
+          "concept_id": "structural_element:trench",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-CANONICAL",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
           "surface": "tsv",
           "lang": "en",
           "concept_id": "device:tsv",
@@ -12129,6 +12237,15 @@
           "ambiguous": false
         },
         {
+          "surface": "via",
+          "lang": "en",
+          "concept_id": "structural_element:via",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-CANONICAL",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
           "surface": "void",
           "lang": "en",
           "concept_id": "failuremode:void",
@@ -12143,6 +12260,15 @@
           "concept_id": "material:tungsten",
           "concept_type": "Material",
           "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
+          "surface": "wafer",
+          "lang": "en",
+          "concept_id": "structural_element:wafer",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-CANONICAL",
           "confidence": 1.0,
           "ambiguous": false
         },
@@ -12246,6 +12372,15 @@
           "ambiguous": false
         },
         {
+          "surface": "wiring",
+          "lang": "en",
+          "concept_id": "structural_element:wiring",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-CANONICAL",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
           "surface": "yield",
           "lang": "und",
           "concept_id": "skill:defect_analysis",
@@ -12304,6 +12439,15 @@
           "lang": "ko",
           "concept_id": "skill:gas_chemistry",
           "concept_type": "Skill",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
+          "surface": "감광막",
+          "lang": "ko",
+          "concept_id": "structural_element:photoresist_layer",
+          "concept_type": "StructuralElement",
           "rule_id": "T1-SYNONYM",
           "confidence": 1.0,
           "ambiguous": false
@@ -12441,6 +12585,15 @@
           "concept_type": "SubProcess",
           "rule_id": "T2-ALIAS",
           "confidence": 0.8,
+          "ambiguous": false
+        },
+        {
+          "surface": "금속배선",
+          "lang": "ko",
+          "concept_id": "structural_element:metal_wiring",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
           "ambiguous": false
         },
         {
@@ -12633,6 +12786,15 @@
           "ambiguous": false
         },
         {
+          "surface": "배선",
+          "lang": "ko",
+          "concept_id": "structural_element:wiring",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
           "surface": "볼 그리드 배열",
           "lang": "ko",
           "concept_id": "device:bga",
@@ -12646,6 +12808,15 @@
           "lang": "ko",
           "concept_id": "material:hf_acid",
           "concept_type": "Material",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
+          "surface": "비아",
+          "lang": "ko",
+          "concept_id": "structural_element:via",
+          "concept_type": "StructuralElement",
           "rule_id": "T1-SYNONYM",
           "confidence": 1.0,
           "ambiguous": false
@@ -12817,6 +12988,15 @@
           "lang": "ko",
           "concept_id": "subprocess:pvd",
           "concept_type": "SubProcess",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
+          "surface": "스페이서",
+          "lang": "ko",
+          "concept_id": "structural_element:spacer",
+          "concept_type": "StructuralElement",
           "rule_id": "T1-SYNONYM",
           "confidence": 1.0,
           "ambiguous": false
@@ -13137,6 +13317,15 @@
           "ambiguous": false
         },
         {
+          "surface": "웨이퍼",
+          "lang": "ko",
+          "concept_id": "structural_element:wafer",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
           "surface": "유량",
           "lang": "und",
           "concept_id": "parameter:gas_flow",
@@ -13452,6 +13641,15 @@
           "ambiguous": false
         },
         {
+          "surface": "캐패시터",
+          "lang": "ko",
+          "concept_id": "structural_element:capacitor",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
           "surface": "코발트",
           "lang": "ko",
           "concept_id": "material:cobalt",
@@ -13494,6 +13692,15 @@
           "concept_type": "Process",
           "rule_id": "T2-ALIAS",
           "confidence": 0.8,
+          "ambiguous": false
+        },
+        {
+          "surface": "트렌치",
+          "lang": "ko",
+          "concept_id": "structural_element:trench",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
           "ambiguous": false
         },
         {
@@ -13769,6 +13976,20 @@
       ],
       "blocked": [
         {
+          "surface": "electrode",
+          "concept_id": "structural_element:electrode",
+          "concept_type": "StructuralElement",
+          "rule_id": "R7-DF-CEILING",
+          "df_ratio": 0.0893
+        },
+        {
+          "surface": "gate",
+          "concept_id": "structural_element:gate",
+          "concept_type": "StructuralElement",
+          "rule_id": "R7-DF-CEILING",
+          "df_ratio": 0.0707
+        },
+        {
           "surface": "hf",
           "concept_id": "material:hf_acid",
           "concept_type": "Material",
@@ -13781,6 +14002,41 @@
           "rule_id": "R6-SURFACE-SUPPRESS"
         },
         {
+          "surface": "source",
+          "concept_id": "structural_element:source",
+          "concept_type": "StructuralElement",
+          "rule_id": "R7-DF-CEILING",
+          "df_ratio": 0.0629
+        },
+        {
+          "surface": "substrate",
+          "concept_id": "structural_element:substrate",
+          "concept_type": "StructuralElement",
+          "rule_id": "R7-DF-CEILING",
+          "df_ratio": 0.1651
+        },
+        {
+          "surface": "게이트",
+          "concept_id": "structural_element:gate",
+          "concept_type": "StructuralElement",
+          "rule_id": "R7-DF-CEILING",
+          "df_ratio": 0.1708
+        },
+        {
+          "surface": "기판",
+          "concept_id": "structural_element:substrate",
+          "concept_type": "StructuralElement",
+          "rule_id": "R7-DF-CEILING",
+          "df_ratio": 0.4268
+        },
+        {
+          "surface": "드레인",
+          "concept_id": "structural_element:drain",
+          "concept_type": "StructuralElement",
+          "rule_id": "R7-DF-CEILING",
+          "df_ratio": 0.0767
+        },
+        {
           "surface": "레시피",
           "concept_id": "skill:recipe_tuning",
           "concept_type": "Skill",
@@ -13791,6 +14047,13 @@
           "concept_id": "skill:mask_engineering",
           "concept_type": "Skill",
           "rule_id": "R4-SHORT-KO-TASK"
+        },
+        {
+          "surface": "소스",
+          "concept_id": "structural_element:source",
+          "concept_type": "StructuralElement",
+          "rule_id": "R7-DF-CEILING",
+          "df_ratio": 0.0951
         },
         {
           "surface": "오버레이",
@@ -13812,6 +14075,20 @@
           "rule_id": "R4-SHORT-KO-TASK"
         },
         {
+          "surface": "적층",
+          "concept_id": "structural_element:stack",
+          "concept_type": "StructuralElement",
+          "rule_id": "R7-DF-CEILING",
+          "df_ratio": 0.1259
+        },
+        {
+          "surface": "전극",
+          "concept_id": "structural_element:electrode",
+          "concept_type": "StructuralElement",
+          "rule_id": "R7-DF-CEILING",
+          "df_ratio": 0.1954
+        },
+        {
           "surface": "종료점",
           "concept_id": "skill:endpoint_detection",
           "concept_type": "Skill",
@@ -13822,6 +14099,13 @@
           "concept_id": "skill:endpoint_detection",
           "concept_type": "Skill",
           "rule_id": "R4-SHORT-KO-TASK"
+        },
+        {
+          "surface": "채널",
+          "concept_id": "structural_element:channel",
+          "concept_type": "StructuralElement",
+          "rule_id": "R7-DF-CEILING",
+          "df_ratio": 0.0645
         }
       ],
       "surface_meta": {
@@ -13935,6 +14219,7 @@
           "cabot cmp slurry": 0,
           "cabot microelectronics": 0,
           "cabot slurry": 0,
+          "capacitor": 51,
           "carbon tetrafluoride": 0,
           "ccd": 3,
           "ccd image sensor": 0,
@@ -13949,6 +14234,8 @@
           "chamber clean conditioning": 0,
           "chamber conditioning": 0,
           "chamber matching": 0,
+          "channel": 131,
+          "channel region": 43,
           "characterization": 0,
           "charge coupled device": 3,
           "charging": 11,
@@ -14004,6 +14291,8 @@
           "doe analysis": 0,
           "doe study": 0,
           "dopant activation": 0,
+          "drain": 165,
+          "drain region": 61,
           "dram": 22,
           "dry cleaning": 0,
           "dry etch": 21,
@@ -14015,6 +14304,7 @@
           "ebara frex": 0,
           "eeprom": 19,
           "electrical metrology": 0,
+          "electrode": 403,
           "electrostatic discharge": 1,
           "ellipsometry": 0,
           "endpoint": 3,
@@ -14071,6 +14361,7 @@
           "gas flow instability": 0,
           "gas lines": 3,
           "gas sensor": 1,
+          "gate": 319,
           "gate all around field effect transistor": 0,
           "gate oxide": 16,
           "generic": 0,
@@ -14147,6 +14438,7 @@
           "metal cmp": 1,
           "metal deposition": 0,
           "metal interdiffusion": 0,
+          "metal wiring": 4,
           "metallization": 19,
           "metrology": 0,
           "metrology analysis": 0,
@@ -14202,6 +14494,7 @@
           "photoresist arf": 0,
           "photoresist coat develop": 0,
           "photoresist euv": 0,
+          "photoresist layer": 16,
           "physical metrology": 0,
           "physical vapor deposition": 25,
           "pinhole": 1,
@@ -14273,11 +14566,16 @@
           "slurry refresh": 0,
           "sog": 17,
           "solid state drive": 2,
+          "source": 284,
+          "source region": 27,
+          "spacer": 71,
           "spin on glass": 8,
           "sputter": 233,
           "sputtering": 205,
           "sram": 10,
           "ssd": 2,
+          "stack": 131,
+          "stacked structure": 5,
           "static ram": 0,
           "static random access memory": 2,
           "statistical analysis": 0,
@@ -14287,6 +14585,7 @@
           "stress induced crack": 0,
           "stress mismatch": 0,
           "stress relief anneal": 0,
+          "substrate": 745,
           "substrate preparation": 0,
           "sulfur hexafluoride": 0,
           "tac": 439,
@@ -14320,13 +14619,16 @@
           "tokyo electron track": 0,
           "tool matching": 0,
           "track": 2,
+          "trench": 104,
           "tsv": 13,
           "tungsten": 64,
           "undercut": 9,
           "vacuum leak": 0,
           "vacuum pump": 4,
+          "via": 167,
           "void": 48,
           "w": 1867,
+          "wafer": 139,
           "wafer manufacturing": 0,
           "wafer polishing": 0,
           "wafer testing": 0,
@@ -14338,6 +14640,7 @@
           "wet etch": 20,
           "wetbench": 0,
           "wire bonding": 4,
+          "wiring": 89,
           "yield": 43,
           "yield enhancement": 0,
           "yield improvement": 0,
@@ -14345,10 +14648,12 @@
           "yield ramp": 0,
           "가스": 649,
           "가스 케미스트리": 0,
+          "감광막": 37,
           "감광제": 4,
           "건식 식각": 40,
           "건식식각": 25,
           "검사": 24,
+          "게이트": 771,
           "게이트 산화막": 34,
           "결함 검사": 0,
           "결함 분석": 0,
@@ -14360,12 +14665,15 @@
           "구리": 157,
           "구리 슬러리": 0,
           "극자외선": 9,
+          "금속배선": 24,
+          "기판": 1926,
           "노광": 72,
           "노광 공정": 7,
           "노광 장비": 1,
           "다이오드": 79,
           "도펀트": 63,
           "도핑": 204,
+          "드레인": 346,
           "디싱": 8,
           "레시피 튜닝": 0,
           "리소그래피": 36,
@@ -14381,8 +14689,10 @@
           "박막 응력": 1,
           "박막 증착": 35,
           "반사방지막": 24,
+          "배선": 254,
           "볼 그리드 배열": 0,
           "불산": 22,
+          "비아": 86,
           "비정질 탄소": 15,
           "사이리스터": 1,
           "산화 공정": 31,
@@ -14398,9 +14708,11 @@
           "성막장치": 3,
           "세정": 127,
           "세척": 22,
+          "소스": 429,
           "수율 향상": 4,
           "스퍼터": 354,
           "스퍼터링": 318,
+          "스페이서": 202,
           "스핀온글래스": 0,
           "슬러리": 61,
           "슬러리 관리": 0,
@@ -14437,6 +14749,7 @@
           "원자층 퇴적": 3,
           "원자층증착": 14,
           "원자층퇴적": 0,
+          "웨이퍼": 212,
           "유량": 147,
           "유전막": 80,
           "유전체": 257,
@@ -14448,6 +14761,8 @@
           "인터포저": 31,
           "저유전율 절연막": 2,
           "저항 메모리": 16,
+          "적층": 568,
+          "전극": 882,
           "전하 결합소자": 0,
           "전하결합 소자": 0,
           "전하결합소자": 0,
@@ -14469,14 +14784,17 @@
           "질화 티타늄": 3,
           "질화막": 271,
           "질화물": 167,
+          "채널": 291,
           "챔버": 513,
           "챔버 세정": 0,
           "챔버 컨디셔닝": 0,
+          "캐패시터": 38,
           "코발트": 82,
           "탄탈륨 카바이드": 1,
           "텅스텐": 201,
           "테오스 산화막": 0,
           "퇴적": 40,
+          "트렌치": 211,
           "티타늄 질화막": 2,
           "파티클": 43,
           "패키지": 87,
@@ -15669,6 +15987,66 @@
           },
           "skill:slurry_management": {
             "df_abox": 13,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "structural_element:capacitor": {
+            "df_abox": 89,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "structural_element:channel": {
+            "df_abox": 131,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "structural_element:drain": {
+            "df_abox": 165,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "structural_element:metal_wiring": {
+            "df_abox": 28,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "structural_element:photoresist_layer": {
+            "df_abox": 53,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "structural_element:source": {
+            "df_abox": 27,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "structural_element:spacer": {
+            "df_abox": 256,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "structural_element:stack": {
+            "df_abox": 131,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "structural_element:trench": {
+            "df_abox": 299,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "structural_element:via": {
+            "df_abox": 239,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "structural_element:wafer": {
+            "df_abox": 338,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "structural_element:wiring": {
+            "df_abox": 342,
             "depth": 0,
             "is_superordinate": false
           },

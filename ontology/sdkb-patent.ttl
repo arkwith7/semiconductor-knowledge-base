@@ -586,7 +586,8 @@ ont:featureConcept
     rdfs:domain ont:ClaimFeature ;
     rdfs:range [ a owl:Class ; owl:unionOf
         ( ont:Process ont:SubProcess ont:Device ont:Material
-          ont:Skill ont:FailureMode ont:EquipmentClass ) ] ;
+          ont:Skill ont:FailureMode ont:EquipmentClass
+          ont:StructuralElement ) ] ;   # PLAN-005 5-B — 구조요소 축 편입(build_abox_claim_features.CONCEPT_TYPES 와 정합)
     rdfs:label "feature concept"@en ;
     rdfs:comment "한정요소가 지시하는 SDKB 개념. prefLabel/altLabel 브리지로 결정적 매핑. 언어중립 대비의 축."@ko .
 

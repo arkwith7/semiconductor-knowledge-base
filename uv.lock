@@ -5021,6 +5021,9 @@ full = [
     { name = "scikit-learn" },
     { name = "sentence-transformers" },
 ]
+llm = [
+    { name = "boto3" },
+]
 nlp = [
     { name = "kiwipiepy" },
 ]
@@ -5039,6 +5042,7 @@ viz = [
 [package.metadata]
 requires-dist = [
     { name = "boto3", marker = "extra == 'benchmark'", specifier = ">=1.34" },
+    { name = "boto3", marker = "extra == 'llm'", specifier = ">=1.34" },
     { name = "faiss-cpu", marker = "extra == 'benchmark'", specifier = ">=1.8" },
     { name = "jsonschema", specifier = ">=4.22" },
     { name = "jupyter", marker = "extra == 'notebook'", specifier = ">=1.0" },
@@ -5065,7 +5069,7 @@ requires-dist = [
     { name = "sentence-transformers", marker = "extra == 'align'", specifier = ">=3.0" },
     { name = "xmltodict", specifier = ">=0.13" },
 ]
-provides-extras = ["align", "priorart", "notebook", "viz", "nlp", "benchmark", "dev", "full"]
+provides-extras = ["align", "priorart", "llm", "notebook", "viz", "nlp", "benchmark", "dev", "full"]
 
 [[package]]
 name = "secretstorage"

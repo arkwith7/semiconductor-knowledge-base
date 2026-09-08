@@ -3,16 +3,21 @@
   "schema_version": "1.0",
   "source": {
     "ttl": "sdkb-abox-claim-features.ttl",
-    "ttl_sha256": "4418f96a3f3617d9d0af23c89df4cca36f873da4ddcc517526732bbf7a6a9f50",
-    "generator": "build_abox_claim_features.py"
+    "ttl_sha256": "5069d7e0533d3b198293156f97cad292f71c439146102c2f208b5cd260a18e0c",
+    "generator": "build_abox_claim_features.py",
+    "linker": {
+      "profile": "patent-text",
+      "morph": true,
+      "kiwipiepy": "0.23.2"
+    }
   },
   "counts": {
     "rows_features": 1306191,
     "claims": 594078,
     "patents": 40187,
-    "features_with_concept": 432305,
-    "concept_links": 615436,
-    "distinct_concepts": 122
+    "features_with_concept": 503960,
+    "concept_links": 746012,
+    "distinct_concepts": 138
   },
   "df_denominator": {
     "features": 1306191,
@@ -44,8 +49,8 @@
       "df_patent": 6
     },
     "device:diode": {
-      "df_feature": 2730,
-      "df_patent": 546
+      "df_feature": 2731,
+      "df_patent": 547
     },
     "device:dram": {
       "df_feature": 525,
@@ -56,8 +61,8 @@
       "df_patent": 23
     },
     "device:eprom": {
-      "df_feature": 15,
-      "df_patent": 7
+      "df_feature": 20,
+      "df_patent": 8
     },
     "device:feram": {
       "df_feature": 56,
@@ -68,8 +73,8 @@
       "df_patent": 79
     },
     "device:flip_chip": {
-      "df_feature": 668,
-      "df_patent": 221
+      "df_feature": 670,
+      "df_patent": 223
     },
     "device:gaa_fet": {
       "df_feature": 35,
@@ -80,8 +85,8 @@
       "df_patent": 53
     },
     "device:hemt": {
-      "df_feature": 102,
-      "df_patent": 15
+      "df_feature": 103,
+      "df_patent": 16
     },
     "device:igbt": {
       "df_feature": 10,
@@ -108,7 +113,7 @@
       "df_patent": 94
     },
     "device:nand_flash": {
-      "df_feature": 478,
+      "df_feature": 480,
       "df_patent": 193
     },
     "device:pcram": {
@@ -120,8 +125,8 @@
       "df_patent": 16
     },
     "device:reram": {
-      "df_feature": 2652,
-      "df_patent": 269
+      "df_feature": 4358,
+      "df_patent": 403
     },
     "device:sram": {
       "df_feature": 502,
@@ -132,20 +137,20 @@
       "df_patent": 9
     },
     "device:tsv": {
-      "df_feature": 1577,
-      "df_patent": 262
+      "df_feature": 1583,
+      "df_patent": 265
     },
     "device:wire_bonding": {
       "df_feature": 5,
       "df_patent": 4
     },
     "equipment_class:cd_sem": {
-      "df_feature": 10,
-      "df_patent": 4
+      "df_feature": 12,
+      "df_patent": 5
     },
     "equipment_class:deposition_tool": {
-      "df_feature": 5456,
-      "df_patent": 672
+      "df_feature": 5478,
+      "df_patent": 680
     },
     "equipment_class:etcher": {
       "df_feature": 100,
@@ -211,6 +216,10 @@
       "df_feature": 104,
       "df_patent": 58
     },
+    "failuremode:pattern_collapse": {
+      "df_feature": 1,
+      "df_patent": 1
+    },
     "failuremode:pinhole": {
       "df_feature": 3,
       "df_patent": 2
@@ -232,12 +241,12 @@
       "df_patent": 89
     },
     "material:aluminum": {
-      "df_feature": 6763,
-      "df_patent": 2665
+      "df_feature": 7407,
+      "df_patent": 2916
     },
     "material:amorphous_carbon": {
-      "df_feature": 582,
-      "df_patent": 191
+      "df_feature": 684,
+      "df_patent": 256
     },
     "material:argon": {
       "df_feature": 63,
@@ -255,13 +264,17 @@
       "df_feature": 7664,
       "df_patent": 842
     },
+    "material:cmp_slurry_cu": {
+      "df_feature": 1,
+      "df_patent": 1
+    },
     "material:cobalt": {
-      "df_feature": 2870,
-      "df_patent": 1281
+      "df_feature": 3281,
+      "df_patent": 1432
     },
     "material:copper": {
-      "df_feature": 6813,
-      "df_patent": 2039
+      "df_feature": 6857,
+      "df_patent": 2055
     },
     "material:dielectric": {
       "df_feature": 91936,
@@ -284,8 +297,8 @@
       "df_patent": 73
     },
     "material:oxide": {
-      "df_feature": 17800,
-      "df_patent": 4309
+      "df_feature": 17824,
+      "df_patent": 4315
     },
     "material:oxygen_gas": {
       "df_feature": 6,
@@ -295,13 +308,17 @@
       "df_feature": 33550,
       "df_patent": 4234
     },
+    "material:photoresist_arF": {
+      "df_feature": 5,
+      "df_patent": 5
+    },
     "material:photoresist_euv": {
       "df_feature": 6485,
       "df_patent": 1122
     },
     "material:polysilicon": {
-      "df_feature": 5374,
-      "df_patent": 1583
+      "df_feature": 5377,
+      "df_patent": 1585
     },
     "material:process_gas": {
       "df_feature": 44572,
@@ -312,12 +329,12 @@
       "df_patent": 94
     },
     "material:sin": {
-      "df_feature": 14592,
-      "df_patent": 4515
+      "df_feature": 14686,
+      "df_patent": 4544
     },
     "material:sio2": {
-      "df_feature": 12103,
-      "df_patent": 3489
+      "df_feature": 12160,
+      "df_patent": 3510
     },
     "material:sog": {
       "df_feature": 90,
@@ -332,12 +349,12 @@
       "df_patent": 219
     },
     "material:tin": {
-      "df_feature": 2019,
-      "df_patent": 956
+      "df_feature": 2020,
+      "df_patent": 957
     },
     "material:tungsten": {
-      "df_feature": 4217,
-      "df_patent": 1656
+      "df_feature": 6506,
+      "df_patent": 2581
     },
     "process:back_end": {
       "df_feature": 76,
@@ -356,8 +373,8 @@
       "df_patent": 5690
     },
     "process:diffusion": {
-      "df_feature": 12229,
-      "df_patent": 2951
+      "df_feature": 12238,
+      "df_patent": 2954
     },
     "process:etch": {
       "df_feature": 45332,
@@ -368,8 +385,8 @@
       "df_patent": 3726
     },
     "process:lithography": {
-      "df_feature": 21327,
-      "df_patent": 3933
+      "df_feature": 21366,
+      "df_patent": 3935
     },
     "process:metrology": {
       "df_feature": 13909,
@@ -380,24 +397,24 @@
       "df_patent": 4278
     },
     "skill:chamber_conditioning": {
-      "df_feature": 200,
-      "df_patent": 35
+      "df_feature": 408,
+      "df_patent": 100
     },
     "skill:defect_analysis": {
-      "df_feature": 507,
-      "df_patent": 124
+      "df_feature": 564,
+      "df_patent": 146
     },
     "skill:doe_analysis": {
       "df_feature": 42,
       "df_patent": 10
     },
     "skill:endpoint_detection": {
-      "df_feature": 97,
-      "df_patent": 28
+      "df_feature": 119,
+      "df_patent": 35
     },
     "skill:film_stress_control": {
-      "df_feature": 9,
-      "df_patent": 5
+      "df_feature": 18,
+      "df_patent": 9
     },
     "skill:gas_chemistry": {
       "df_feature": 1,
@@ -412,8 +429,8 @@
       "df_patent": 10
     },
     "skill:plasma_diagnostics": {
-      "df_feature": 1448,
-      "df_patent": 455
+      "df_feature": 1468,
+      "df_patent": 456
     },
     "skill:recipe_tuning": {
       "df_feature": 10,
@@ -422,6 +439,54 @@
     "skill:slurry_management": {
       "df_feature": 38,
       "df_patent": 15
+    },
+    "structural_element:capacitor": {
+      "df_feature": 3923,
+      "df_patent": 640
+    },
+    "structural_element:channel": {
+      "df_feature": 541,
+      "df_patent": 170
+    },
+    "structural_element:drain": {
+      "df_feature": 769,
+      "df_patent": 170
+    },
+    "structural_element:metal_wiring": {
+      "df_feature": 705,
+      "df_patent": 144
+    },
+    "structural_element:photoresist_layer": {
+      "df_feature": 1434,
+      "df_patent": 314
+    },
+    "structural_element:source": {
+      "df_feature": 118,
+      "df_patent": 17
+    },
+    "structural_element:spacer": {
+      "df_feature": 21771,
+      "df_patent": 3126
+    },
+    "structural_element:stack": {
+      "df_feature": 435,
+      "df_patent": 121
+    },
+    "structural_element:trench": {
+      "df_feature": 19408,
+      "df_patent": 2872
+    },
+    "structural_element:via": {
+      "df_feature": 16854,
+      "df_patent": 2521
+    },
+    "structural_element:wafer": {
+      "df_feature": 21007,
+      "df_patent": 2459
+    },
+    "structural_element:wiring": {
+      "df_feature": 37622,
+      "df_patent": 4384
     },
     "subprocess:ald": {
       "df_feature": 2711,
@@ -432,8 +497,8 @@
       "df_patent": 134
     },
     "subprocess:cvd": {
-      "df_feature": 3208,
-      "df_patent": 990
+      "df_feature": 3338,
+      "df_patent": 1041
     },
     "subprocess:dicing": {
       "df_feature": 38,
@@ -444,8 +509,8 @@
       "df_patent": 7
     },
     "subprocess:duv_lithography": {
-      "df_feature": 256,
-      "df_patent": 141
+      "df_feature": 257,
+      "df_patent": 142
     },
     "subprocess:epitaxial_growth": {
       "df_feature": 96,
@@ -488,15 +553,19 @@
       "df_patent": 49
     },
     "subprocess:plasma_etch": {
-      "df_feature": 1682,
-      "df_patent": 547
+      "df_feature": 1709,
+      "df_patent": 558
     },
     "subprocess:pvd": {
-      "df_feature": 5653,
-      "df_patent": 949
+      "df_feature": 5690,
+      "df_patent": 962
     },
     "subprocess:wafer_testing": {
       "df_feature": 1,
+      "df_patent": 1
+    },
+    "subprocess:wafer_thinning": {
+      "df_feature": 7,
       "df_patent": 1
     },
     "subprocess:wet_cleaning": {
@@ -521,10 +590,10 @@
       "us": 31598
     },
     "features_with_concept_by_side": {
-      "cited": 39527,
-      "g1": 229153,
-      "g2": 146444,
-      "rej": 17181
+      "cited": 44060,
+      "g1": 289700,
+      "g2": 151824,
+      "rej": 18376
     }
   }
 }

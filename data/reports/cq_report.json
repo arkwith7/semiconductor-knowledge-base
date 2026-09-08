@@ -17,7 +17,7 @@
     "ontology/sdkb-abox-priorart.ttl"
   ],
   "graph_files_missing": [],
-  "graph_triples": 730214,
+  "graph_triples": 851076,
   "n_cq": 32,
   "n_passed": 28,
   "pass_rate": 0.875,
@@ -59,7 +59,7 @@
       "rows": 23,
       "expect_min": 1,
       "passed": true,
-      "seconds": 0.36,
+      "seconds": 0.347,
       "error": null
     },
     {
@@ -68,7 +68,7 @@
       "rows": 441,
       "expect_min": 1,
       "passed": true,
-      "seconds": 0.089,
+      "seconds": 0.085,
       "error": null
     },
     {
@@ -77,7 +77,7 @@
       "rows": 27,
       "expect_min": 0,
       "passed": true,
-      "seconds": 0.292,
+      "seconds": 0.276,
       "error": null
     },
     {
@@ -86,7 +86,7 @@
       "rows": 371,
       "expect_min": 1,
       "passed": true,
-      "seconds": 1.185,
+      "seconds": 1.141,
       "error": null
     },
     {
@@ -95,7 +95,7 @@
       "rows": 2339,
       "expect_min": 1,
       "passed": true,
-      "seconds": 0.383,
+      "seconds": 0.36,
       "error": null
     },
     {
@@ -104,7 +104,7 @@
       "rows": 55,
       "expect_min": 0,
       "passed": true,
-      "seconds": 0.542,
+      "seconds": 0.513,
       "error": null
     },
     {
@@ -122,7 +122,7 @@
       "rows": 324,
       "expect_min": 1,
       "passed": true,
-      "seconds": 0.059,
+      "seconds": 0.055,
       "error": null
     },
     {
@@ -131,7 +131,7 @@
       "rows": 414,
       "expect_min": 1,
       "passed": true,
-      "seconds": 0.16,
+      "seconds": 0.149,
       "error": null
     },
     {
@@ -149,7 +149,7 @@
       "rows": 66,
       "expect_min": 1,
       "passed": true,
-      "seconds": 0.116,
+      "seconds": 0.112,
       "error": null
     },
     {
@@ -158,7 +158,7 @@
       "rows": 3134,
       "expect_min": 1,
       "passed": true,
-      "seconds": 0.588,
+      "seconds": 0.542,
       "error": null
     },
     {
@@ -167,7 +167,7 @@
       "rows": 21,
       "expect_min": 1,
       "passed": true,
-      "seconds": 0.247,
+      "seconds": 0.231,
       "error": null
     },
     {
@@ -176,7 +176,7 @@
       "rows": 18,
       "expect_min": 1,
       "passed": true,
-      "seconds": 5.633,
+      "seconds": 5.393,
       "error": null
     },
     {
@@ -185,7 +185,7 @@
       "rows": 6,
       "expect_min": 1,
       "passed": true,
-      "seconds": 136.847,
+      "seconds": 132.426,
       "error": null
     },
     {
@@ -194,7 +194,7 @@
       "rows": 3,
       "expect_min": 1,
       "passed": true,
-      "seconds": 0.05,
+      "seconds": 0.049,
       "error": null
     },
     {
@@ -203,7 +203,7 @@
       "rows": 35,
       "expect_min": 1,
       "passed": true,
-      "seconds": 0.097,
+      "seconds": 0.101,
       "error": null
     },
     {
@@ -212,7 +212,7 @@
       "rows": 4,
       "expect_min": 1,
       "passed": true,
-      "seconds": 0.011,
+      "seconds": 0.01,
       "error": null
     },
     {
@@ -221,7 +221,7 @@
       "rows": 6,
       "expect_min": 1,
       "passed": true,
-      "seconds": 0.098,
+      "seconds": 0.088,
       "error": null
     },
     {
@@ -230,7 +230,7 @@
       "rows": 395,
       "expect_min": 1,
       "passed": true,
-      "seconds": 2.139,
+      "seconds": 2.065,
       "error": null
     },
     {
@@ -239,7 +239,7 @@
       "rows": 38,
       "expect_min": 1,
       "passed": true,
-      "seconds": 0.351,
+      "seconds": 0.352,
       "error": null
     },
     {
@@ -248,7 +248,7 @@
       "rows": 204,
       "expect_min": 1,
       "passed": true,
-      "seconds": 1.13,
+      "seconds": 1.136,
       "error": null
     },
     {
@@ -284,7 +284,7 @@
       "rows": 1331,
       "expect_min": 1,
       "passed": true,
-      "seconds": 0.222,
+      "seconds": 0.206,
       "error": null
     },
     {
@@ -293,7 +293,7 @@
       "rows": 0,
       "expect_min": 1,
       "passed": false,
-      "seconds": 0.015,
+      "seconds": 0.014,
       "error": null
     },
     {
@@ -302,7 +302,7 @@
       "rows": 84,
       "expect_min": 1,
       "passed": true,
-      "seconds": 0.553,
+      "seconds": 0.544,
       "error": null
     },
     {
@@ -329,7 +329,7 @@
       "rows": 0,
       "expect_min": 1,
       "passed": false,
-      "seconds": 0.005,
+      "seconds": 0.006,
       "error": null
     },
     {
@@ -338,7 +338,7 @@
       "rows": 200,
       "expect_min": 1,
       "passed": true,
-      "seconds": 0.053,
+      "seconds": 0.035,
       "error": null
     }
   ]

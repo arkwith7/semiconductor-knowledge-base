@@ -135,8 +135,8 @@
   },
   "patent-text": {
     "df_denominator": 4513,
-    "concepts": 274,
-    "concepts_with_df_gt0": 147,
+    "concepts": 286,
+    "concepts_with_df_gt0": 159,
     "concepts_with_df_0": 127,
     "top30": [
       [
@@ -236,8 +236,20 @@
         366
       ],
       [
+        "structural_element:wiring",
+        342
+      ],
+      [
+        "structural_element:wafer",
+        338
+      ],
+      [
         "parameter:pressure",
         324
+      ],
+      [
+        "structural_element:trench",
+        299
       ],
       [
         "process:cmp",
@@ -246,18 +258,6 @@
       [
         "subprocess:cvd",
         263
-      ],
-      [
-        "skill:plasma_diagnostics",
-        223
-      ],
-      [
-        "parameter:temperature",
-        213
-      ],
-      [
-        "subprocess:ald",
-        188
       ]
     ],
     "superordinates": [
@@ -270,7 +270,7 @@
       "process:plasma_processing"
     ],
     "depth_distribution": {
-      "0": 258,
+      "0": 270,
       "1": 16
     },
     "d20_affected_note": "D-20 — CR-013 에서 해소. 단독 'hf'(→ material:hf_acid) 와 'high k'(→ material:hfO2) 를 patent-text 에서 R6 로 끄고, 'high k' 는 상위 부류 material:dielectric 로 재지정했다. 재지정이 아니라 제거인 이유는 정규화가 대소문자를 지워 Hf/HF 가 사전 층에서 갈리지 않기 때문이다(CR-013 §3.2). 현재 df: hf_acid=26 · hfO2=57 · dielectric=1251. 주의 — 이 참조 적용기는 단어경계가 없는 부분문자열 포함이라 df 가 하류 값과 같지 않다(CR-013 §2.6 · 이번 범위 밖)."

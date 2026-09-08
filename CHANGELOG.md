@@ -27,6 +27,81 @@ All notable changes to SDKB will be documented in this file.
 
 ## [Unreleased]
 
+### Changed (2026-09-08 — PLAN-005 단계 5-B · 개념 접지율 개선 · 사용자 승인)
+
+**결론.** feature 접지 **33.1% → 38.6%**(432,305 → **503,960** / 1,306,191) · rej 독립항 프로파일 미매핑
+**28.2% → 24.0%**. 1단계에서 결과를 보기 전에 동결한 목표(rej ≤ 25.0% · feature ≥ 37.0% · g1·g2 각 ≥ 3pt)
+를 **전부 충족**했다. 변동은 세 레버로 분리 측정했고 **설명되지 않는 변동은 0** 이다.
+전문은 `01.code_spec/plans/PLAN-005-prior-art-tool-qualification.md` §14.
+
+| 레버 | 무엇이 바뀌었나 | feature 접지 | rej 미매핑 | cited | g1 | g2 | 미바인딩 |
+|---|---|---:|---:|---:|---:|---:|---:|
+| 기준선(5-A) | — | 33.10% | 28.18% | 60.45% | 62.12% | 62.65% | 34 |
+| **L0** 링커 모드 | substring → **Kiwi 0.23.2 형태소**(아래) | 33.31% | 27.90% | 60.23% | 61.82% | 62.60% | 35 |
+| **L1** `EquipmentClass` 바인딩 | semi 1 트리플 | 〃 | 26.04% | 59.60% | 61.48% | 59.37% | 28 |
+| **L2** 구조요소 15 등록 | KG +15 노드 · 재접지 | **38.58%** | **23.95%** | **56.94%** | **56.07%** | **58.66%** | 28 |
+
+- **L0 — 링커 모드가 기록되지 않았고, 커밋된 투영은 문서와 달랐다.** 5-B 착수 시 재현 사전검사(KG 를
+  바꾸지 않고 `make abox-claim-features`)에서 parquet sha 가 커밋값(`16f8300d…`)과 달랐다(`bce4b9f0…`).
+  원인 실측: `build_abox_claim_features.py` 는 `morph=True` 를 요청하되 kiwipiepy 가 없으면 `except SystemExit`
+  로 **substring 모드로 조용히 떨어졌고**, 이 환경에 kiwipiepy 가 없었으므로 CR-020·2-B 가 낸 parquet 는
+  문서(CR-020 계획 §1.5 "생성기는 morph=True")와 달리 substring 산출물이었다. 2-B 의 두 번 빌드 재현은
+  그 모드 안에서의 재현이었다. **사용자 결정: Kiwi 모드를 새 기준선으로.** 생성기는 이제 폴백 없이 죽고
+  (`uv sync --extra nlp` · uv.lock 이 0.23.2 핀), `claim_feature_release_meta.json` 의 `source.linker` 에
+  `{profile, morph, kiwipiepy}` 를 기록한다(시각이 아니라 모드 — 결정적). L0 만의 효과: 접지 feature
+  +2,739 · 행 5,856 변경 · **손실 0** · 개념 122 → 126. 회복된 것에는 정당한 것(`저항성 메모리` → `device:reram`
+  +1,706 · `텅스텐을` 등 활용형)과 **CR-013 이 막았던 1글자 원소기호의 재유입**(`Ti, Ni, …, W, Co` 목록의 `W`
+  → `material:tungsten` +2,289 — substring 경로는 1글자 키를 스캔하지 않지만 형태소 후보는 어휘집을 직접
+  조회한다)이 섞여 있다. **후자는 별도 안건으로 남긴다**(D-20 계열 · 이번 범위에서 고치지 않았다).
+- **L1 — `ont:EquipmentClass ⊑ pa:TechnicalConcept`** (`scripts/build_priorart_modules.py` · semi 76 → **77**
+  트리플 · core·kr 불변 — `MODIFIED` 를 올리지 않았다). 5-A 결정 3 이 남겨 둔 레버다. 귀속: 직접
+  `equipment_class:*` 7종 11,612 링크(`process_chamber` 10,552 · `deposition_tool` 975 · …) + 간접 602
+  (루트 독립항이 프로파일을 얻어 붙게 된 종속항 개념 · `optional_dropped_root_has_no_profile` 23,481 → 22,879).
+  ClaimProfile 55,821 → **57,673** · Disclosure 31,245 → **31,892**. 상호배제는 걸지 않았다(기존 클래스 간 배제 금지).
+- **L2 — 구조요소 15 노드 `StructuralElement`** (`scripts/add_structural_elements.py` · `make structural-elements` ·
+  체인 밖 인젝터 · 멱등). KG 274 → **289** 노드 · synonyms 203 → **218**(한글 표면형 1건씩 · `lexicon_profile:
+  patent-text` 라 expert-tag 사전 델타 **0**). `build_owl.py` 가 core 에 클래스를 선언한다(Device 선례 · semi 의
+  선언과 같은 IRI). `sdkb-patent.ttl` 의 `featureConcept` range 합집합과 `build_abox_claim_features.CONCEPT_TYPES`
+  에 `StructuralElement` 를 넣었다 — **후자가 없으면 노드를 등록해도 링커가 버려 재빌드가 0 효과**였고,
+  이 어긋남은 `tests/test_stage5b_grounding.py` 가 이제 양방향으로 단정한다. `validation/shapes.ttl` 의
+  `Shape_CoreNode`·`Shape_Provenance` 타깃에 추가(조이는 방향). 사전 `patent-text` entries 666 → **689** ·
+  blocked 9 → **20**: 한글 7개(기판 0.427 · 전극 0.195 · 게이트 0.171 · 적층 0.126 · 소스 0.095 · 드레인 0.077 ·
+  채널 0.0645)와 영문 4개(substrate · electrode · gate · source)가 **R7-DF-CEILING 에 걸려 등록됐으되 접지에
+  쓰이지 않는다**(사용자 결정 · R7 예외는 별도 안건). 접지 효과는 8개분 — 신규 12 개념 df(feature):
+  `wiring` 37,622 · `spacer` 21,771 · `wafer` 21,007 · `trench` 19,408 · `via` 16,854 · `capacitor` 3,923 ·
+  `photoresist_layer` 1,434 · `drain` 769 · `metal_wiring` 705 · `channel` 541 · `stack` 435 · `source` 118.
+  영문 `drain`·`channel`·`stack` 은 US 문헌에서 온다(각 614 · 371 · 319) — R7 이 통과시킨 범용 영단어라
+  **정밀도는 관찰 대상**이다. 구조요소 밖의 유일한 변동 `material:sin` **+77** 은 새 한글 표면형이 Kiwi 사용자
+  사전에 들어가 `질화규소` 가 `질화 규소` 로 분절되며 기존 표면형에 닿은 것이다(손실 0 · Kiwi 모드는 사전
+  추가가 비국소적으로 작용한다는 관찰). ClaimProfile 57,673 → **62,926** · Disclosure 31,892 → **33,274** ·
+  Disclosure 미매핑 rej 7.8 → **6.6%** · g1 27.4 → **22.6%**.
+- **테스트.** `tests/test_baseline.py` 타입 집합 +`StructuralElement` · `tests/test_cr001b_r7.py` 의 `274` 상수를
+  "basic_terms 15 는 5-B 가 등록했고 proposals 294 는 등록되지 않았다"로 재작성 · `tests/test_concept_df_meta.py`
+  원장에 23 추가 + 11 차단 선언(`make concept-mapping` 출력에서 옮겨 적음) · 신규 `tests/test_stage5b_grounding.py`
+  (원천 15 · 인젝터 멱등 · 링커↔range↔semi 계약 · shape 타깃 · 사전 7/8 · 링커 모드 기록 · **동결 목표 게이트**).
+- **재현성.** 같은 원천으로 두 번 빌드해 **바이트 동일** — `claim_features.parquet` `1e8b14ca…` ·
+  `claim_feature_release_meta.json` `9af97816…` · `sdkb-abox-claim-features.ttl` `5069d7e0…`(**12,001,973** 트리플) ·
+  `sdkb-abox-priorart.ttl` `4c726e98…`(**796,656**) · 두 리포트 `cmp` 동일. 각 34분(Kiwi 모드 · RSS 17.7 GB).
+- **게이트(실행 출력).** `make validate` **PASSED** 7 짝 전부 · `Shape_CoreNode` 타깃에 `StructuralElement` **15 노드**
+  (vacuous 아님) · 불변식 B OK (8분 12초 · RSS 16.5 GB) · `make cq` CQ32 **200행 pass**(2분 43초) ·
+  `make signature-inject` T-Box 클래스 101 → **102** · 주석 **322/322** · 트리플 1,926 → **1,932**(core 719 → 722 ·
+  patent 465 → 467 · semi 76 → 77) · A-Box core-data 3,019 · claim-features 12,001,973 · priorart 796,656 ·
+  `make test` **382 passed · 10 skipped**(5-A 374 → +8 신규) · `make public-release && make check-public`
+  **365 파일 · 적중 0 · 죽은 참조 0 · ✅ 통과**(첫 실행은 미추적 신규 스크립트 때문에 죽은 Makefile 참조 1건 →
+  스테이징 후 재검사 통과).
+- **⚠ 하류 조치(§0).** sha256 이 바뀐 벤더 대상 파일: `data/semiconductor_v0_3.json` `d4e89291…` ·
+  `data/schema_report.json` `7c78d497…` · `ontology/sdkb-core.ttl` `2ac65e7d…`(클래스 +1) · `ontology/sdkb-core-data.ttl`
+  `7142201d…`(2,884 → **3,019** 트리플) · `ontology/sdkb-priorart-semi.ttl` `667a6f4b…` · `mappings/concept_mapping.json`
+  `e12b04fd…` · `mappings/claim_features.parquet` `1e8b14ca…`(16f8300d → · 행 불변 · featureConcept 615,436 → **746,012**) ·
+  `mappings/claim_feature_release_meta.json` `9af97816…`. 하류 `vendor.py:VENDOR_FILES` 와 `baseline.py:BASELINE_PARTS` 를 **양쪽** 갱신할 것(단계 4·5-A 와
+  같은 함정 · `VENDOR_FILES` 의 parquet 설명 "featureConcept 529,151" 도 낡았다 → 746,012). gitignore 된
+  `sdkb-abox-claim-features.ttl`(12,001,973 트리플)·`sdkb-abox-priorart.ttl`(796,656)은 로컬 빌드하며 **전자는
+  kiwipiepy 0.23.2 가 필요하다**(`uv sync --extra nlp` · 약 34분 · RSS 17.7 GB). 이 변경이 검색을 개선한다고
+  주장하지 않는다 — 자원 지표가 태스크 지표로 이어지지 않은 관측이 셋 있다(D-23·D-48). 단계 7 재측정이 판정한다.
+- **비목표(그대로).** R7 문턱·grandfather 변경 · FailureMode·Skill 바인딩 · 변형 철자 · 특허 단위
+  StructuralElement 라우팅 술어 · `AXIS_RANK` · 1글자 원소기호 재유입 처리 · `decompose_corpus.py` 재실행.
+- 부수: `uv.lock` 이 pyproject 의 `llm` extra 를 따라잡았다(5-B 와 무관한 lock 드리프트 해소 · 의존성 추가 없음).
+
 ### Added (2026-09-07 — PLAN-005 단계 5-A · 선행기술 판단층 A-Box 실체화 · 사용자 승인)
 
 - **판단 어휘에 첫 인스턴스가 들어갔다.** 신규 생성기 `scripts/build_abox_priorart.py` 가

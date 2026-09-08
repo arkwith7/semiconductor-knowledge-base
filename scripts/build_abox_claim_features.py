@@ -53,8 +53,12 @@ DCTERMS = Namespace("http://purl.org/dc/terms/")
 SKOS = Namespace("http://www.w3.org/2004/02/skos/core#")
 LICENSE = "KIPRIS terms — academic use, no redistribution of full text"
 
-# feature 정규화에 계상할 개념 축(build_abox_patents PATENT_ROUTING 과 정합).
-CONCEPT_TYPES = {"Process", "SubProcess", "Device", "Material", "Skill", "FailureMode", "EquipmentClass"}
+# feature 정규화에 계상할 개념 축. `ont:featureConcept` 의 range 합집합(sdkb-patent.ttl)과 정합해야
+# 한다 — tests/test_stage5b_grounding.py 가 양방향으로 단정한다.
+# StructuralElement 는 PLAN-005 5-B 에서 추가됐다. 특허 단위 라우팅(build_abox_patents PATENT_ROUTING)
+# 에는 대응 술어가 없어 넣지 않는다 — 그 층은 `.get(typ)` 으로 건너뛴다(feature 층만 갈라진다).
+CONCEPT_TYPES = {"Process", "SubProcess", "Device", "Material", "Skill", "FailureMode", "EquipmentClass",
+                 "StructuralElement"}
 # §29 항 → 기존 RejectionType 개체
 GROUND = {"§29①": "Rejection_Novelty", "§29②": "Rejection_Inventiveness"}
 #: 판단 노드의 dcterms:source 표기. 원천 **파일명이 아니라 생성기와 산출물**을 가리킨다.
@@ -150,7 +154,7 @@ def _assert_count_integrity(report: dict) -> None:
                          + "\n  ".join(problems))
 
 
-def _emit_projection(proj: list[dict], input_sha: str) -> dict:
+def _emit_projection(proj: list[dict], input_sha: str, linker: dict) -> dict:
     """CR-017 — 투영 2종 발행. **원문(feature_text)은 넣지 않는다**(KIPRIS 비재배포).
 
     행 = ClaimFeature 하나. 개념은 feature 당 여럿이므로 리스트 열로 두고 grain 을 지킨다 —
@@ -193,6 +197,9 @@ def _emit_projection(proj: list[dict], input_sha: str) -> dict:
             "ttl": OUT_TTL.name,
             "ttl_sha256": input_sha,
             "generator": Path(__file__).name,
+            # 링커 모드 — 같은 원천·같은 생성기라도 형태소 분석기 유무·버전이 다르면 다른 투영이 나온다
+            # (5-B L0 실측: substring → Kiwi 0.23.2 로 접지 feature +2,739). 시각이 아니라 모드다 — 결정적.
+            "linker": linker,
         },
         "counts": {
             "rows_features": int(len(df)),
@@ -287,10 +294,13 @@ def main() -> int:
     if not FEATURES.exists():
         print(f"ERROR: {FEATURES} 없음 — decompose_corpus.py 먼저", file=sys.stderr)
         return 1
-    try:
-        br = S.make_bridge(ROOT, morph=True, profile=PROFILE)
-    except SystemExit:
-        br = S.make_bridge(ROOT, profile=PROFILE)
+    # PLAN-005 5-B(L0 · 사용자 결정 2026-09-08): Kiwi 형태소 모드가 **기준선**이다. 이전에는 kiwipiepy 가
+    # 없으면 `except SystemExit` 로 substring 모드로 조용히 떨어졌고, 그래서 CR-020~2-B 가 낸 parquet
+    # (16f8300d…)는 문서가 말한 morph=True 가 아니라 substring 산출물이었다 — 모드가 어디에도 기록되지
+    # 않아 아무도 몰랐다. 이제는 폴백 없이 죽고(`uv sync --extra nlp`), 모드와 버전을 메타에 남긴다.
+    br = S.make_bridge(ROOT, morph=True, profile=PROFILE)
+    import kiwipiepy  # make_bridge 가 성공했으면 반드시 있다
+    linker = {"profile": PROFILE, "morph": True, "kiwipiepy": kiwipiepy.__version__}
 
     edges = pd.read_parquet(EDGES)
     # cited_id 는 source_type 별로 형식이 다르다 — 'all'/'examiner' 는 정규형('patent:kr_..A'),
@@ -537,7 +547,7 @@ def main() -> int:
 
     OUT_TTL.parent.mkdir(parents=True, exist_ok=True)
     g.serialize(str(OUT_TTL), format="turtle")
-    projection = _emit_projection(proj, _sha256(OUT_TTL))
+    projection = _emit_projection(proj, _sha256(OUT_TTL), linker)
     report = {
         "_README": "CR-019 — `counts.*` 와 `feature_concept_by_type` 은 **그래프 고유 기준**이고 "
                    "(rdflib 가 같은 트리플을 합치므로 방출 횟수는 그래프를 기술하지 않는다), "

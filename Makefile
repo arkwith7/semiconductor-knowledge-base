@@ -214,6 +214,11 @@ align:
 superordinate-concepts:
 	$(PYTHON) scripts/add_superordinate_concepts.py
 
+# PLAN-005 단계 5-B — 등재 보류된 구조요소 15개를 StructuralElement 로 KG 에 주입한다.
+# 위와 같은 이유로 체인 밖(커밋된 큐레이션 원천을 고친다). 주입 후 `make parse owl convert`.
+structural-elements:
+	$(PYTHON) scripts/add_structural_elements.py
+
 concept-mapping: convert
 	$(PYTHON) scripts/build_concept_mapping.py
 

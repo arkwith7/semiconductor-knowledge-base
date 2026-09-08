@@ -68,6 +68,7 @@ class TestNodeIntegrity:
             "Material", "TechnologyNode", "FailureMode", "RootCause",
             "Mitigation", "Skill",
             "Device",  # A2 device/product layer (plan §7.4-3, gap A2/B4)
+            "StructuralElement",  # PLAN-005 5-B — 등재 보류된 구조요소 15개의 축
         }
         assert types == expected, f"Unexpected types: {types - expected}, Missing: {expected - types}"
 

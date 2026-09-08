@@ -155,12 +155,27 @@ def test_basic_terms_all_judged():
 
 
 def test_proposals_do_not_register_new_iris():
-    """출력 (2)는 제안일 뿐이다 — 신규 개념 IRI 는 이 CR 에 포함되지 않는다(㉢)."""
+    """출력 (2)는 제안일 뿐이다 — 신규 개념 IRI 는 이 CR 에 포함되지 않는다(㉢).
+
+    2026-09-08(PLAN-005 5-B): `len(kg_ids) == 274` 상수를 뺐다. ㉢ 보류의 **구조요소 15개**
+    (`basic_terms`)는 5-B 가 `StructuralElement` 노드로 등록했다 — 그것이 이 테스트가 지키던
+    "이 CR 은 등록하지 않는다" 와 모순되지 않는 이유는, 등록 주체가 CR-001B 가 아니라 5-B 이고
+    제안 목록(`proposals` 294행)은 여전히 IRI 를 갖지 않기 때문이다. 아래 단정이 그 둘을 가른다.
+    """
     if not PROPOSALS.exists():
         pytest.skip("리포트 미생성")
     prop = json.loads(PROPOSALS.read_text(encoding="utf-8"))
-    kg_ids = {n["id"] for n in json.loads(KG_PATH.read_text(encoding="utf-8"))["nodes"]}
+    kg = json.loads(KG_PATH.read_text(encoding="utf-8"))
     assert prop["decision"].startswith("㉢")
     for row in prop["proposals"]:
         assert "concept_id" not in row
-    assert len(kg_ids) == 274
+    # basic_terms 15 는 전부 StructuralElement 노드의 ko synonym 으로 해소됐다(5-B).
+    se_ids = {n["id"] for n in kg["nodes"] if n["type"] == "StructuralElement"}
+    se_terms = {s["term"] for s in kg["synonyms"] if s["node_id"] in se_ids and s.get("lang") == "ko"}
+    held = {r["surface"] for r in prop["basic_terms"]}
+    assert held <= se_terms, f"5-B 가 등록하지 않은 보류 표면형: {sorted(held - se_terms)}"
+    # 제안 294 표면형 중 basic_terms 와 겹치는 넷(배선·비아·웨이퍼·트렌치)을 뺀 나머지는 KG 의 어떤
+    # 노드 이름·synonym 도 아니다 — 5-B 가 등록한 것은 basic_terms 만이다.
+    names = {n["canonical_name"].lower() for n in kg["nodes"]} | {s["term"] for s in kg["synonyms"]}
+    leaked = [r["surface"] for r in prop["proposals"] if r["surface"] in names and r["surface"] not in held]
+    assert leaked == [], f"제안 목록의 표면형이 KG 에 등록돼 있다(5-B 범위 밖): {leaked}"

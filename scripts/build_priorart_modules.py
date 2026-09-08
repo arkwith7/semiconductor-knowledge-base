@@ -310,7 +310,11 @@ def build_semi() -> Graph:
     g.add((SEMI_IRI, OWL.imports, PATENT_IRI))
 
     # ── 기존 클래스를 슬롯에 건다 (선언이 아니라 끌어오기) ──
-    for c in [ONT.Process, ONT.SubProcess, ONT.Material, ONT.Device, ONT.Parameter, ONT.Problem]:
+    # EquipmentClass — PLAN-005 단계 5-B(L1). 5-A 실측에서 equipment_class:* 7종(feature 45,257건)이
+    # 이 슬롯에 걸리지 않아 프로파일에서 제외됐다(사용자 결정 3 · 5-B 의 레버). 기존 클래스 대
+    # 기존 클래스 배제는 걸지 않는다(아래 상호배제 규칙).
+    for c in [ONT.Process, ONT.SubProcess, ONT.Material, ONT.Device, ONT.Parameter, ONT.Problem,
+              ONT.EquipmentClass]:
         g.add((c, RDFS.subClassOf, PA.TechnicalConcept))
 
     # ── 축 부재 해소 — 등재 보류된 구조요소 15개가 갈 자리 (§8.1 어휘) ──
