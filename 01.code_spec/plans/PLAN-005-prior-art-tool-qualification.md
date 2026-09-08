@@ -1111,3 +1111,83 @@ V2 목표 노드를 인용문헌 노드(퇴화형)에서 `disclosure/{publicatio
 R7 차단 7개(rej 상한 ≈14% · 단 `기판` 하나가 210,773 feature 에 걸린다) · Kiwi 모드의 1글자 원소기호
 재유입(`W` → tungsten +2,289 · CR-013 계열) · 영문 `drain`·`channel`·`stack` 의 US 측 정밀도 관찰 ·
 FailureMode·Skill 바인딩(태스크 축 · D-15). **다음**: 단계 6(V1 절제) · 7(V2–V4 재측정 · τ 동결).
+
+---
+
+## 15. 단계 6 설계와 실행 기록 — V1 절제 (2026-09-08 · 1단계 재제출 → 계획 승인 · 6-A 실행)
+
+**결론 먼저 (6-A).** V1 계측기를 §5 정의대로 완성해 R-Box·바인딩 **37건**을 절제했더니 소비 **8**
+(`broaderConcept ⊑ coveredBy` 1 + 인스턴스가 있는 바인딩 7) · 미소비 29 이고, **결과를 보기 전에 동결한
+예측표와 37건 전부 일치**했다. 그래프 바이트는 바꾸지 않았다 — A-Box sha `4c726e98…` 불변. 삭제·CQ33·게이트는
+6-B(§2 3단계 별도 승인 🛑)로 넘긴다. 대조표는 기계가 렌더한다: `01.code_spec/reports/PLAN-005-stage6-axiom-consumers.md`.
+
+### 15.1 다시 세운 이유 — 첫 초안이 놓친 것
+
+첫 1단계 초안("절제기 돌리고 미소비를 지운다")은 계획서·CHANGELOG·코드 전량 재조사에서 열두 가지를 놓친
+것으로 드러났다(계획 파일 Context 표 · 사용자 검토 지시). 골자만 적는다.
+
+| 누락 | 사실 |
+|---|---|
+| 계측기가 ②만 구현 | `report_priorart_baseline.py` 는 CQ 행 수만 본다. 추론기 없는 rdflib 에서 T-Box 공리를 빼도 BGP 행 수는 **구조적으로** 불변 — 단계 1 의 "8건 중 소비 0" 은 공리의 무의미가 아니라 계측기의 맹점이었다 |
+| 신설 공리가 보이지 않음 | `ont:` 주어만 세고 TBOX 목록에 priorart 3모듈이 없어 단계 4 의 core 6 · semi 9 · kr 3 이 열거에서 빠졌다 |
+| 소비가 하드코딩 | `build_abox_priorart.py:356-358` 이 broaderConcept → coveredBy 를 고정 방출해 공리를 빼도 A-Box 가 그대로였다 — 설계 중심 공리가 미소비로 판정될 자리 |
+| CQ32 포화 | `LIMIT 200` 에 닿아 있어(rows=200) 행 수로는 coveredBy 소비가 보이지 않는다. LIMIT 제거는 134,762 × 33,274 크로스곱이라 불가 |
+| 이월 항목 | §12.5 가 단계 6 로 넘긴 propertyChainAxiom 넷 · CQ10 행정 어휘 교정 · citationStatus 파생을 초안이 전부 비목표로만 적었다 |
+| 순환 | chain 넷은 자원에 없고(§7-6 으로 보류) §9-5 는 "자원에 남은 공리"만 본다. PLAN-004 C-2 는 반대로 "각 0 을 벗어나고"를 요구 → 문면 충돌 |
+| 구 8건의 자리 | 6건은 손으로 쓴 `sdkb-patent.ttl`(하류 핀 `0a317389…`) — 삭제 불가 |
+| C5 오염 경로 | `skos:exactMatch ⊑ coveredBy` 는 kr 의 `Ground_29_x skos:exactMatch Rejection_*` 와 core 의 클래스 정렬 23건까지 coveredBy 로 끌어들인다 |
+| C1 모순 | `broaderConcept` 전이 선언은 동결 깊이 {0,1}(§3.3) 과 모순 — 추론기가 붙는 순간 coveredBy 가 사실상 전이 |
+| 단계 3 미수행 | PLAN-002 `Prec ≥ 0.60` 은 산출된 적이 없다(2인 코더 배정 대기). 단계 4 는 **어휘만** 지었으므로 "공리 신설" 선행조건에 걸리지 않았다는 해석을 여기 처음 적는다. MinedAxiom·substitutableWith 유량 0 의 구조적 이유 |
+| τ | 단계 7 의 절대 하한 τ 는 어디에도 동결돼 있지 않고 V2 기준선은 이미 본 수다 → **단계 7 1단계에서 결과를 보기 전에 정의**한다(§11.5·§10.10 의 실패 형태 재발 방지) |
+
+### 15.2 사용자 결정 (2026-09-08)
+
+| # | 결정 |
+|---|---|
+| D1 | 단계 6 을 **6-A(계측 완성·절제 측정) / 6-B(삭제·CQ·게이트)** 로 나눈다. 6-A 에 생성기 변경 1건(coveredBy 실체화 대상을 core 의 `⊑ pa:coveredBy` 공리에서 읽음)을 포함하되 **A-Box sha `4c726e98…` 바이트 불변**이 승인 조건 |
+| D2 | `substitutableWith`(대칭 · ⊑coveredBy): **보존 + 일몰** — 단계 7 착수 시점까지 PLAN-002 3단계(Prec) 미착수면 삭제. `skos:exactMatch ⊑ coveredBy` 는 삭제 |
+| D3 | semi `disjointWith` 4건: **불변식 C 신설**(배제쌍 동시 타이핑 개체 0)로 소비자를 부여하고 validate 에 배선 |
+| D4 | CQ10: **CQ33 신설**(pa:Disclosure 기반 · task-neutral) + CQ10 은 헤더에 "증거층 CQ" 명기·불변 |
+
+기본값(계획 승인): 구 8건 보존(§7-2 · 핀) · **chain 넷 미투입**(무추론 §3.3 배치에서 소비자가 성립할 수 없고
+실체화하면 §1.9(b) 의 동점 블록 · 후보생성은 V2 Reach 가 parquet 로 수행 → PLAN-004 C-2 문면 개정안을 6-B 에서
+제안) · inverseOf 3·K3·C1 은 예측대로면 6-B 삭제 · S18–S20·K1–K2 는 바인딩으로 재분류 · citationStatus·combinableWith
+·MinedAxiom 실체화는 별건.
+
+### 15.3 동결한 조작적 정의와 예측 (결과를 보기 전에)
+
+공리 a 가 **소비된다** ⟺ O∖a 에서 ② CQ 32개 행 수 벡터 · ③ 생성기 실체화 입력(coveredBy 쌍 수 · 바인딩 개념 수) ·
+④ 태스크 커버 — "u 가 프로파일 p 의 필수개념이고 u 의 coveredBy 상위 f 를 문헌 d 가 개시하되 u 자체는 개시하지
+않는" (p,u) 쌍 수 — 중 하나가 변한다. **경로**(읽는 소비자가 있다)와 **유량**(이 데이터에서 결과가 변했다)을
+분리한다. ④ 는 파이썬 집합 계수다 — 같은 정의의 rdflib COUNT 는 15분 넘게 미완(실측 · 중단).
+예측표는 `scripts/report_v1_ablation.py:FROZEN`(37건)이며 테스트가 열거와 표의 일치를 고정한다 — 결과를 본 뒤
+표를 늘리지 못한다.
+
+### 15.4 6-A 실행 (재현 명령 병기)
+
+| 항목 | 명령 | 결과 |
+|---|---|---|
+| A1 생성기 T-Box 주도화 | `make abox-priorart` | 796,656 트리플 · sha **`4c726e98…` 불변** · 리포트에 `covered_by_by_subproperty {broaderConcept 16 · substitutableWith 0 · exactMatch 0}` 추가 · 원천 표에 없는 `⊑ coveredBy` 술어는 `SystemExit` |
+| 스팟체크(원천 사실) | 읽기 전용 | `skos:broader` 18쌍 중 길이-2 사슬 **0** · core-data `exactMatch` **0**(sdkb-core 클래스 정렬 23) · plasma_etch 개시 Disclosure **558** · ④ 기준선 (p,u) **4,306** · (p,d,u) 40,024,841 · 1.5초 |
+| A2 절제 ③④ | `report_v1_ablation.py --skip-cq` | 37건 · 소비 8 · 미소비 29 · **예측 불일치 0** · 64초 |
+| A2 절제 ② 전량 | `make v1-ablation` | 26건(rbox 21 + 바인딩-술어 3 + 바인딩-매치 2) 전부 **변화 없음** — 예측대로 구조적 0 · 기준선 32 CQ · 9,670행 · 회당 145–161초 · 합 3,913초(65분) · subClassOf 바인딩 11건은 ② 를 건너뛰고 ③ 이 검출 |
+| 게이트 | `make validate` · `make test` | `make validate` **exit 0**(불변식 A·B OK · SHACL 6블록 PASSED) · `make test` **392 passed · 12 skipped**(6-A 신규 12건 포함) · `make v1-ablation` exit 0 · 예측 불일치 **0** · `make check-public` **367 파일 · 적중 0 ✅** · `make signature-check` 최신(T-Box 불변) |
+
+소비 8 의 내역: `broaderConcept ⊑ coveredBy`(coveredBy −16 · ④ −4,306) · 바인딩 Material(coveredBy −15 · bound −31 ·
+④ −3,945) · Process(−1 · −12 · −361) · SubProcess(−1 · −38 · −361) · Device(bound −34) · EquipmentClass(−12) ·
+Parameter(−5) · StructuralElement(−15). 경로만 있고 유량 0: `substitutableWith` 대칭·⊑coveredBy · `skos:exactMatch ⊑
+coveredBy` · Problem·ProcessCondition·TechnicalEffect·TechnicalFunction 바인딩(core-data 인스턴스 0).
+pa: 모듈의 R-Box 미소비 12건 = C1 · C3 · C4 · C5 · C6 · S16 · S17 · S12–S15 · K3 — 6-B 의 삭제·유예·불변식 C 후보이며
+**6-A 는 아무것도 지우지 않았다.**
+
+### 15.5 하류 조치 (§0)
+
+6-A 는 TTL 바이트를 바꾸지 않는다 — vendor 목록·sha 핀 변동 0. 리포트 `abox_priorart_report.json` 은 키 추가만
+(`inputs` 에 core sha · `hierarchy.covered_by_*`). 6-B 가 core/semi/kr sha 를 바꾸며 그때 `VENDOR_FILES`·`BASELINE_PARTS`
+양쪽 통보.
+
+### 15.6 다음
+
+**6-B**(§2 3단계 별도 승인 🛑): C1·C5·C6·S16·S17·K3 삭제(역술어는 선언까지) · C3·C4 보존+일몰 주석 · 불변식 C ·
+CQ33 신설 + CQ10 증거층 명기 · `test_stage6_ablation.py` 2부(RETAINED 허용목록 게이트) · `make signature-inject` ·
+PLAN-004 C-2 개정안 · 절제 재실행으로 "pa: R-Box ∖ RETAINED 중 미소비 0" 확인. 그 뒤 단계 7(τ 를 결과 전에 동결).

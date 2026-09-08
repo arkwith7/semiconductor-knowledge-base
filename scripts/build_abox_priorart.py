@@ -8,6 +8,7 @@ V2 의 정본 목표 노드(Disclosure)는 잴 수 없었다. 이 생성기가 �
   mappings/claim_features.parquet                 청구항 → feature → 개념(CURIE) 투영 (1,306,191행)
   data/patents/notice_element_judgments.parquet   심사관 구성 대비표 판정 305행 (2-C · 선택 입력)
   ontology/sdkb-core-data.ttl                     개념 개체의 rdf:type · skos:broader
+  ontology/sdkb-priorart-core.ttl                 어느 술어가 `⊑ pa:coveredBy` 인가 (단계 6-A)
   ontology/sdkb-priorart-semi.ttl                 어느 ont: 클래스가 pa:TechnicalConcept 인가
   data/sources/harvest_scope_dev_train.json       누출 통제 범위 (ExaminerElement 만 해당)
 
@@ -28,6 +29,11 @@ V2 의 정본 목표 노드(Disclosure)는 잴 수 없었다. 이 생성기가 �
                  **pa:coveredBy 로도 실체화**한다 — 소비자(run_cq)는 추론기를 돌리지
                  않으므로 sub-property 함의를 단언으로 두지 않으면 확장이 0건 작동한다.
                  전이 폐쇄는 만들지 않는다(§3.3 · 확장 깊이 {0,1} 은 질의의 `?` 가 든다).
+                 **어느 술어를 coveredBy 로 비출지는 core 의 `rdfs:subPropertyOf pa:coveredBy`
+                 공리에서 읽는다(단계 6-A).** 5-A 는 broaderConcept 하나를 하드코딩했는데,
+                 그러면 공리를 T-Box 에서 빼도 A-Box 가 그대로라 V1 절제(§5)가 그 공리의
+                 소비를 검출할 수 없었다. 하위 술어마다 원천이 있어야 하며(아래
+                 EXPANSION_SOURCES) core 에 있는데 원천 표에 없는 술어는 빌드가 죽는다.
 
 무엇을 만들지 않는가 (5-A 비목표 · 사용자 승인)
   MinedAxiom·substitutableWith(채굴 쌍 산출물이 이 저장소에 없다) · ClaimVersion ·
@@ -68,6 +74,7 @@ PA, PAKR, ONT, DATA = SDKB_PA, SDKB_PA_KR, SDKB_ONT, SDKB_DATA
 FEATURES = ROOT / "mappings" / "claim_features.parquet"
 ELEMENTS = ROOT / "data" / "patents" / "notice_element_judgments.parquet"
 CORE_DATA = ROOT / "ontology" / "sdkb-core-data.ttl"
+CORE = ROOT / "ontology" / "sdkb-priorart-core.ttl"
 SEMI = ROOT / "ontology" / "sdkb-priorart-semi.ttl"
 SCOPE = ROOT / "data" / "sources" / "harvest_scope_dev_train.json"
 OUT_TTL = ROOT / "ontology" / "sdkb-abox-priorart.ttl"
@@ -263,12 +270,12 @@ def build_disclosures(df: pd.DataFrame,
     return out, stat
 
 
-def build_hierarchy(core_data: Graph, bound: set[str]) -> tuple[list[tuple[URIRef, URIRef]], Counter]:
-    """skos:broader(a, b) 중 양끝이 바인딩 개념인 것. 전이 폐쇄는 만들지 않는다."""
-    stat: Counter = Counter()
+def _bound_pairs(core_data: Graph, pred: URIRef, bound: set[str], stat: Counter,
+                 key: str) -> list[tuple[URIRef, URIRef]]:
+    """core-data 의 pred(a, b) 중 양끝이 바인딩 개념 개체인 것. 전이 폐쇄는 만들지 않는다."""
     out: list[tuple[URIRef, URIRef]] = []
-    for a, b in core_data.subject_objects(SKOS.broader):
-        stat["skos_broader_in_source"] += 1
+    for a, b in core_data.subject_objects(pred):
+        stat[f"{key}_in_source"] += 1
         if not (str(a).startswith(str(DATA)) and str(b).startswith(str(DATA))):
             stat["excluded_non_data_iri"] += 1
             continue
@@ -276,7 +283,61 @@ def build_hierarchy(core_data: Graph, bound: set[str]) -> tuple[list[tuple[URIRe
             out.append((a, b))
         else:
             stat["excluded_unbound"] += 1
-    return sorted(out), stat
+    return sorted(out)
+
+
+def build_hierarchy(core_data: Graph, bound: set[str]) -> tuple[list[tuple[URIRef, URIRef]], Counter]:
+    """skos:broader(a, b) 중 양끝이 바인딩 개념인 것. 전이 폐쇄는 만들지 않는다."""
+    stat: Counter = Counter()
+    return _bound_pairs(core_data, SKOS.broader, bound, stat, "skos_broader"), stat
+
+
+def _mined_substitutions(core_data: Graph, bound: set[str]) -> tuple[list[tuple[URIRef, URIRef]], Counter]:
+    """치환 쌍 — PLAN-002 채굴 산출물이 이 저장소에 없다(5-A 비목표). 원천이 생기면 여기서 읽는다."""
+    stat: Counter = Counter({"source_absent": 1})
+    return [], stat
+
+
+def _concept_exact_matches(core_data: Graph, bound: set[str]) -> tuple[list[tuple[URIRef, URIRef]], Counter]:
+    """개념 개체 간 skos:exactMatch — 클래스 정렬(sdkb-core 의 SemicONTO 매핑)은 data/ IRI 가 아니라 걸러진다."""
+    stat: Counter = Counter()
+    return _bound_pairs(core_data, SKOS.exactMatch, bound, stat, "skos_exactmatch"), stat
+
+
+#: `p ⊑ pa:coveredBy` 인 술어 p 마다 그 쌍을 어디서 읽는지. **core 가 선언한 하위 술어가 이 표에
+#: 없으면 빌드가 죽는다** — 조용히 건너뛰면 공리는 있는데 실체화가 없는 상태가 검출되지 않는다.
+EXPANSION_SOURCES = {
+    PA.broaderConcept: build_hierarchy,
+    PA.substitutableWith: _mined_substitutions,
+    SKOS.exactMatch: _concept_exact_matches,
+}
+
+
+def covered_by_sources(core: Graph, core_data: Graph,
+                       bound: set[str]) -> tuple[dict[URIRef, list[tuple[URIRef, URIRef]]], Counter]:
+    """core 의 `rdfs:subPropertyOf pa:coveredBy` 공리를 읽어 술어별 확장 쌍을 모은다.
+
+    반환 dict 의 키 집합이 곧 A-Box 가 coveredBy 로 비추는 술어 집합이다 — 공리를 빼면
+    그 술어의 쌍이 사라지고, V1 절제(단계 6)는 그 차이로 공리의 소비를 검출한다.
+    대칭 술어(owl:SymmetricProperty)는 양방향으로 낸다.
+    """
+    stat: Counter = Counter()
+    out: dict[URIRef, list[tuple[URIRef, URIRef]]] = {}
+    for p in sorted(core.subjects(RDFS.subPropertyOf, PA.coveredBy)):
+        if p not in EXPANSION_SOURCES:
+            raise SystemExit(f"ERROR: core 가 {p} ⊑ pa:coveredBy 를 선언했으나 원천 표"
+                             f"(EXPANSION_SOURCES)에 없다 — 생성기를 고치거나 공리를 빼라(§1-3)")
+        pairs, s = EXPANSION_SOURCES[p](core_data, bound)
+        if (p, RDF.type, OWL.SymmetricProperty) in core:
+            pairs = sorted({*pairs, *((b, a) for a, b in pairs)})
+        stat.update({f"{_local(p)}__{k}": v for k, v in s.items()})
+        stat[f"{_local(p)}__emitted"] = len(pairs)
+        out[p] = pairs
+    return out, stat
+
+
+def _local(iri: URIRef) -> str:
+    return str(iri).rsplit("/", 1)[-1].rsplit("#", 1)[-1]
 
 
 def build_examiner_elements(elements: pd.DataFrame | None, claim_ids: set[str],
@@ -318,7 +379,7 @@ def build_examiner_elements(elements: pd.DataFrame | None, claim_ids: set[str],
 
 # ── 그래프 ──────────────────────────────────────────────────────────
 def emit_graph(profiles: list[Profile], disclosures: list[Disclosure],
-               hierarchy: list[tuple[URIRef, URIRef]], elements: list[Element]) -> Graph:
+               expansions: dict[URIRef, list[tuple[URIRef, URIRef]]], elements: list[Element]) -> Graph:
     g = Graph()
     for p, ns in (("pa", PA), ("pakr", PAKR), ("ont", ONT), ("data", DATA), ("prov", PROV),
                   ("dcterms", DCTERMS), ("skos", SKOS), ("xsd", XSD), ("rdfs", RDFS)):
@@ -353,9 +414,11 @@ def emit_graph(profiles: list[Profile], disclosures: list[Disclosure],
             g.add((node, PA.discloses, _u(c)))
         _stamp(node, src_f)
 
-    for a, b in hierarchy:
-        g.add((a, PA.broaderConcept, b))
-        g.add((a, PA.coveredBy, b))        # sub-property 함의의 1홉 실체화 — 전이 폐쇄 아님
+    # 술어 p 는 core 가 `p ⊑ pa:coveredBy` 로 선언한 것만 온다(covered_by_sources).
+    for p in sorted(expansions):
+        for a, b in expansions[p]:
+            g.add((a, p, b))
+            g.add((a, PA.coveredBy, b))    # sub-property 함의의 1홉 실체화 — 전이 폐쇄 아님
 
     docs: set[str] = set()
     for e in sorted(elements):
@@ -394,7 +457,7 @@ def _side_table(stat: Counter, total_key: str, missing_key: str, sides: list[str
 def build_report(g: Graph, ttl_sha: str, classes: set[URIRef], bound: set[str],
                  unbound_concepts: list[str], profiles: list[Profile], p_stat: Counter,
                  disclosures: list[Disclosure], d_stat: Counter, c_stat: Counter,
-                 hierarchy: list, h_stat: Counter, elements: list[Element], e_stat: Counter,
+                 expansions: dict, x_stat: Counter, elements: list[Element], e_stat: Counter,
                  scope_n: int) -> dict:
     sides = sorted({s for s in ("rej", "cited", "g1", "g2")})
     feature_df: Counter = Counter()
@@ -412,7 +475,7 @@ def build_report(g: Graph, ttl_sha: str, classes: set[URIRef], bound: set[str],
         "triples": len(g),
         "ttl_sha256": ttl_sha,
         "inputs": {str(p.relative_to(ROOT)): _sha256(p)
-                   for p in (FEATURES, ELEMENTS, CORE_DATA, SEMI, SCOPE) if p.exists()},
+                   for p in (FEATURES, ELEMENTS, CORE_DATA, CORE, SEMI, SCOPE) if p.exists()},
         "technical_concept_classes": sorted(str(c).rsplit("/", 1)[-1] for c in classes),
         "concepts": {
             "bound_in_core_data": len(bound),
@@ -453,12 +516,18 @@ def build_report(g: Graph, ttl_sha: str, classes: set[URIRef], bound: set[str],
             "doc_level": dict(sorted(doc_df.items())),
         },
         "hierarchy": {
-            "skos_broader_in_source": h_stat["skos_broader_in_source"],
-            "broader_emitted": len(hierarchy),
-            "covered_by_materialized_from_broader": len(hierarchy),
-            "excluded_unbound": h_stat["excluded_unbound"],
-            "excluded_non_data_iri": h_stat["excluded_non_data_iri"],
+            "skos_broader_in_source": x_stat["broaderConcept__skos_broader_in_source"],
+            "broader_emitted": len(expansions.get(PA.broaderConcept, [])),
+            "covered_by_materialized_from_broader": len(expansions.get(PA.broaderConcept, [])),
+            "excluded_unbound": x_stat["broaderConcept__excluded_unbound"],
+            "excluded_non_data_iri": x_stat["broaderConcept__excluded_non_data_iri"],
             "transitive_closure": False,
+            # 단계 6-A — 어느 술어가 coveredBy 로 비춰졌는지는 core 의 공리가 정한다.
+            # 키 집합이 core 의 `⊑ pa:coveredBy` 하위 술어 집합과 같아야 한다(테스트가 고정).
+            "covered_by_by_subproperty": {_local(p): len(pairs) for p, pairs in sorted(expansions.items())},
+            "covered_by_total": sum(len(pairs) for pairs in expansions.values()),
+            "source_absent": sorted(_local(p) for p in expansions
+                                    if x_stat.get(f"{_local(p)}__source_absent")),
         },
         "examiner_elements": {
             "source": "absent" if e_stat.get("source_absent") else str(ELEMENTS.relative_to(ROOT)),
@@ -487,11 +556,12 @@ def build_report(g: Graph, ttl_sha: str, classes: set[URIRef], bound: set[str],
 
 
 def main() -> int:
-    for p in (FEATURES, CORE_DATA, SEMI, SCOPE):
+    for p in (FEATURES, CORE_DATA, CORE, SEMI, SCOPE):
         if not p.exists():
             print(f"ERROR: {p.relative_to(ROOT)} 없음", file=sys.stderr)
             return 1
     core_data = Graph(); core_data.parse(CORE_DATA, format="turtle")
+    core = Graph(); core.parse(CORE, format="turtle")
     semi = Graph(); semi.parse(SEMI, format="turtle")
     classes = technical_concept_classes(semi)
     bound = bound_concepts(core_data, classes)
@@ -509,23 +579,24 @@ def main() -> int:
     profiles, p_stat = build_profiles(claims, concepts, roots)
     p_stat.update(r_stat)
     disclosures, d_stat = build_disclosures(df, concepts)
-    hierarchy, h_stat = build_hierarchy(core_data, bound)
+    expansions, x_stat = covered_by_sources(core, core_data, bound)
 
     scope = scope_applications()
     elements_df = pd.read_parquet(ELEMENTS) if ELEMENTS.exists() else None
     elements, e_stat = build_examiner_elements(elements_df, set(is_indep), scope)
 
-    g = emit_graph(profiles, disclosures, hierarchy, elements)
+    g = emit_graph(profiles, disclosures, expansions, elements)
     OUT_TTL.parent.mkdir(parents=True, exist_ok=True)
     g.serialize(str(OUT_TTL), format="turtle")
     report = build_report(g, _sha256(OUT_TTL), classes, bound, unbound_concepts,
                           profiles, p_stat, disclosures, d_stat, c_stat,
-                          hierarchy, h_stat, elements, e_stat, len(scope))
+                          expansions, x_stat, elements, e_stat, len(scope))
     OUT_REPORT.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    cov = report["hierarchy"]["covered_by_by_subproperty"]
     print(f"✓ {OUT_TTL.relative_to(ROOT)}  {len(g):,} triples · sha256 {report['ttl_sha256'][:12]}…")
     print(f"  ClaimProfile {len(profiles):,} · Disclosure {len(disclosures):,} · "
           f"ExaminerElement {len(elements)} (of {e_stat['rows']}) · "
-          f"broaderConcept={len(hierarchy)} · unbound concepts {len(unbound_concepts)}")
+          f"coveredBy={cov} · unbound concepts {len(unbound_concepts)}")
     print(f"→ {OUT_REPORT.relative_to(ROOT)}")
     return 0
 
