@@ -5977,6 +5977,276 @@
         "validation_required": true,
         "note": "Superordinate concept introduced so that over-general surface forms can be re-targeted off the Skill axis (D-15)."
       }
+    },
+    {
+      "id": "structural_element:substrate",
+      "type": "StructuralElement",
+      "canonical_name": "Substrate",
+      "description": "Substrate on which layers are formed — wafer body or carrier as a structural element.",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Structural element registered by PLAN-005 stage 5-B; the surface form was harvested from KR claim texts (CR-001B) and held back for lack of an axis."
+      }
+    },
+    {
+      "id": "structural_element:electrode",
+      "type": "StructuralElement",
+      "canonical_name": "Electrode",
+      "description": "Conductive electrode structure (gate/source/drain/capacitor electrodes in general).",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Structural element registered by PLAN-005 stage 5-B; the surface form was harvested from KR claim texts (CR-001B) and held back for lack of an axis."
+      }
+    },
+    {
+      "id": "structural_element:gate",
+      "type": "StructuralElement",
+      "canonical_name": "Gate",
+      "description": "Gate structure of a transistor (gate electrode and gate stack).",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Structural element registered by PLAN-005 stage 5-B; the surface form was harvested from KR claim texts (CR-001B) and held back for lack of an axis."
+      }
+    },
+    {
+      "id": "structural_element:stack",
+      "type": "StructuralElement",
+      "canonical_name": "Stacked Structure",
+      "description": "Stacked (laminated) layer structure — multilayer stack as a structural element.",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Structural element registered by PLAN-005 stage 5-B; the surface form was harvested from KR claim texts (CR-001B) and held back for lack of an axis."
+      }
+    },
+    {
+      "id": "structural_element:source",
+      "type": "StructuralElement",
+      "canonical_name": "Source Region",
+      "description": "Source region/electrode of a transistor.",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Structural element registered by PLAN-005 stage 5-B; the surface form was harvested from KR claim texts (CR-001B) and held back for lack of an axis."
+      }
+    },
+    {
+      "id": "structural_element:drain",
+      "type": "StructuralElement",
+      "canonical_name": "Drain Region",
+      "description": "Drain region/electrode of a transistor.",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Structural element registered by PLAN-005 stage 5-B; the surface form was harvested from KR claim texts (CR-001B) and held back for lack of an axis."
+      }
+    },
+    {
+      "id": "structural_element:channel",
+      "type": "StructuralElement",
+      "canonical_name": "Channel Region",
+      "description": "Channel region of a transistor between source and drain.",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Structural element registered by PLAN-005 stage 5-B; the surface form was harvested from KR claim texts (CR-001B) and held back for lack of an axis."
+      }
+    },
+    {
+      "id": "structural_element:wiring",
+      "type": "StructuralElement",
+      "canonical_name": "Wiring",
+      "description": "Interconnect wiring line as a structural element.",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Structural element registered by PLAN-005 stage 5-B; the surface form was harvested from KR claim texts (CR-001B) and held back for lack of an axis."
+      }
+    },
+    {
+      "id": "structural_element:wafer",
+      "type": "StructuralElement",
+      "canonical_name": "Wafer",
+      "description": "Semiconductor wafer as a structural object in a claim.",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Structural element registered by PLAN-005 stage 5-B; the surface form was harvested from KR claim texts (CR-001B) and held back for lack of an axis."
+      }
+    },
+    {
+      "id": "structural_element:trench",
+      "type": "StructuralElement",
+      "canonical_name": "Trench",
+      "description": "Trench structure formed in a substrate or layer.",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Structural element registered by PLAN-005 stage 5-B; the surface form was harvested from KR claim texts (CR-001B) and held back for lack of an axis."
+      }
+    },
+    {
+      "id": "structural_element:spacer",
+      "type": "StructuralElement",
+      "canonical_name": "Spacer",
+      "description": "Sidewall spacer structure.",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Structural element registered by PLAN-005 stage 5-B; the surface form was harvested from KR claim texts (CR-001B) and held back for lack of an axis."
+      }
+    },
+    {
+      "id": "structural_element:via",
+      "type": "StructuralElement",
+      "canonical_name": "Via",
+      "description": "Vertical via / contact hole structure connecting wiring levels.",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Structural element registered by PLAN-005 stage 5-B; the surface form was harvested from KR claim texts (CR-001B) and held back for lack of an axis."
+      }
+    },
+    {
+      "id": "structural_element:capacitor",
+      "type": "StructuralElement",
+      "canonical_name": "Capacitor",
+      "description": "Capacitor structure (e.g. DRAM cell capacitor) as a structural element.",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Structural element registered by PLAN-005 stage 5-B; the surface form was harvested from KR claim texts (CR-001B) and held back for lack of an axis."
+      }
+    },
+    {
+      "id": "structural_element:photoresist_layer",
+      "type": "StructuralElement",
+      "canonical_name": "Photoresist Layer",
+      "description": "Photoresist film/layer as a structural layer — distinct from the photoresist material nodes (material:photoresist_*): a different level of description.",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Structural element registered by PLAN-005 stage 5-B; the surface form was harvested from KR claim texts (CR-001B) and held back for lack of an axis."
+      }
+    },
+    {
+      "id": "structural_element:metal_wiring",
+      "type": "StructuralElement",
+      "canonical_name": "Metal Wiring",
+      "description": "Metal interconnect wiring.",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Structural element registered by PLAN-005 stage 5-B; the surface form was harvested from KR claim texts (CR-001B) and held back for lack of an axis."
+      }
     }
   ],
   "edges": [
@@ -11378,6 +11648,111 @@
       "lang": "ko",
       "term_type": "synonym",
       "source": "sdkb_curation_ko"
+    },
+    {
+      "node_id": "structural_element:substrate",
+      "term": "기판",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "ko_concept_proposals.basic_terms"
+    },
+    {
+      "node_id": "structural_element:electrode",
+      "term": "전극",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "ko_concept_proposals.basic_terms"
+    },
+    {
+      "node_id": "structural_element:gate",
+      "term": "게이트",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "ko_concept_proposals.basic_terms"
+    },
+    {
+      "node_id": "structural_element:stack",
+      "term": "적층",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "ko_concept_proposals.basic_terms"
+    },
+    {
+      "node_id": "structural_element:source",
+      "term": "소스",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "ko_concept_proposals.basic_terms"
+    },
+    {
+      "node_id": "structural_element:drain",
+      "term": "드레인",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "ko_concept_proposals.basic_terms"
+    },
+    {
+      "node_id": "structural_element:channel",
+      "term": "채널",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "ko_concept_proposals.basic_terms"
+    },
+    {
+      "node_id": "structural_element:wiring",
+      "term": "배선",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "ko_concept_proposals.basic_terms"
+    },
+    {
+      "node_id": "structural_element:wafer",
+      "term": "웨이퍼",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "ko_concept_proposals.basic_terms"
+    },
+    {
+      "node_id": "structural_element:trench",
+      "term": "트렌치",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "ko_concept_proposals.basic_terms"
+    },
+    {
+      "node_id": "structural_element:spacer",
+      "term": "스페이서",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "ko_concept_proposals.basic_terms"
+    },
+    {
+      "node_id": "structural_element:via",
+      "term": "비아",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "ko_concept_proposals.basic_terms"
+    },
+    {
+      "node_id": "structural_element:capacitor",
+      "term": "캐패시터",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "ko_concept_proposals.basic_terms"
+    },
+    {
+      "node_id": "structural_element:photoresist_layer",
+      "term": "감광막",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "ko_concept_proposals.basic_terms"
+    },
+    {
+      "node_id": "structural_element:metal_wiring",
+      "term": "금속배선",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "ko_concept_proposals.basic_terms"
     }
   ],
   "cases": [

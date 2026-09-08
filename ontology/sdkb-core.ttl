@@ -82,6 +82,10 @@ ont:PhotoelectronSpectroscopy a owl:Class ;
     rdfs:subClassOf ont:Metrology ;
     skos:exactMatch <http://w3id.org/SemicONTO/PhotoelectronSpectroscopy> .
 
+ont:StructuralElement a owl:Class ;
+    rdfs:label "StructuralElement"@en ;
+    rdfs:comment "A structural element of a device or process stack — layer, pattern, electrode, gate, spacer, via, trench (구조 요소)."@en .
+
 ont:ThermalEvaporation a owl:Class ;
     rdfs:label "ThermalEvaporation"@en ;
     rdfs:comment "PVD sub-process where material is vaporized by resistive or e-beam heating in vacuum."@en ;

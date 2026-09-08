@@ -252,9 +252,9 @@ make test             # pytest
 
 | 층 | 실측 | 처리 계획 |
 |---|---|---|
-| **어휘** | 기술요소·조합·포함·치환·결합을 담는 클래스 **0개**. 구조요소 15개가 *"축 부재"* 로 등재 보류(`data/reports/ko_concept_proposals.json`) | PLAN-001 §1.2 · §1.10 |
+| **어휘** | 기술요소·조합·포함·치환·결합을 담는 클래스 **0개**. ~~구조요소 15개가 *"축 부재"* 로 등재 보류~~ → **5-B(2026-09-08)에서 `StructuralElement` 15 노드로 등록** — 단 7개(기판·전극·게이트·적층·소스·드레인·채널)는 R7-DF-CEILING 에 걸려 접지에 쓰이지 않는다(별도 안건) | PLAN-001 §1.2 · §1.10 |
 | **R-Box** | 자체 T-Box 추론 공리 **8건**이 전부 · `inverseOf`·`propertyChainAxiom`·`disjointWith` 각 **0** · 명명 클래스 47% 계층 고립 | PLAN-001 §1.3 · PLAN-002 |
-| **A-Box** | ClaimFeature 1,306,191건 중 개념 접지 **33.1%**(개념 122종) · 비 KR/US 인용문헌 청구항 분해 **0%** · `PriorArtJudgment` 635건 중 신규성 근거 **9건** | PLAN-005 §4 단계 2·5 |
+| **A-Box** | ClaimFeature 1,306,191건 중 개념 접지 ~~33.1%(122종)~~ → **38.6%**(138종 · 5-B 2026-09-08 실측 · Kiwi 링커 기준선) · rej 독립항 미매핑 28.2 → **24.0%** · 비 KR/US 인용문헌 청구항 분해 **0%** · `PriorArtJudgment` 635건 중 신규성 근거 **9건** | PLAN-005 §4 단계 2·5 · §14 |
 | **검증** | CQ 31개 **전량 ground BGP**(property path 0) · 추론기 타깃 없음 · `onto` 랭커 R@50 **0.1606** 대 tfidf **0.4330** | PLAN-005 §5 V1–V6 |
 | **이식성** | `featureConcept` range 가 반도체 클래스 합집합 · `noticeType`·`examinationStatus`·`groundClause` 가 KR 절차를 리터럴로 고정 | PLAN-001 §1.10 (`pa:` 슬롯) |
 

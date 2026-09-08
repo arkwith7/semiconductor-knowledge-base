@@ -1522,6 +1522,156 @@
     ont:mitigatedBy <https://w3id.org/sdkb/data/mitigation/barrier_layer> ;
     ont:validationRequired true .
 
+<https://w3id.org/sdkb/data/structural_element/capacitor> a ont:StructuralElement ;
+    dcterms:bibliographicCitation "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:altLabel "캐패시터"@ko ;
+    skos:definition "Capacitor structure (e.g. DRAM cell capacitor) as a structural element."@en ;
+    skos:prefLabel "Capacitor"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/structural_element/channel> a ont:StructuralElement ;
+    dcterms:bibliographicCitation "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:altLabel "채널"@ko ;
+    skos:definition "Channel region of a transistor between source and drain."@en ;
+    skos:prefLabel "Channel Region"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/structural_element/drain> a ont:StructuralElement ;
+    dcterms:bibliographicCitation "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:altLabel "드레인"@ko ;
+    skos:definition "Drain region/electrode of a transistor."@en ;
+    skos:prefLabel "Drain Region"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/structural_element/electrode> a ont:StructuralElement ;
+    dcterms:bibliographicCitation "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:altLabel "전극"@ko ;
+    skos:definition "Conductive electrode structure (gate/source/drain/capacitor electrodes in general)."@en ;
+    skos:prefLabel "Electrode"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/structural_element/gate> a ont:StructuralElement ;
+    dcterms:bibliographicCitation "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:altLabel "게이트"@ko ;
+    skos:definition "Gate structure of a transistor (gate electrode and gate stack)."@en ;
+    skos:prefLabel "Gate"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/structural_element/metal_wiring> a ont:StructuralElement ;
+    dcterms:bibliographicCitation "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:altLabel "금속배선"@ko ;
+    skos:definition "Metal interconnect wiring."@en ;
+    skos:prefLabel "Metal Wiring"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/structural_element/photoresist_layer> a ont:StructuralElement ;
+    dcterms:bibliographicCitation "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:altLabel "감광막"@ko ;
+    skos:definition "Photoresist film/layer as a structural layer — distinct from the photoresist material nodes (material:photoresist_*): a different level of description."@en ;
+    skos:prefLabel "Photoresist Layer"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/structural_element/source> a ont:StructuralElement ;
+    dcterms:bibliographicCitation "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:altLabel "소스"@ko ;
+    skos:definition "Source region/electrode of a transistor."@en ;
+    skos:prefLabel "Source Region"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/structural_element/spacer> a ont:StructuralElement ;
+    dcterms:bibliographicCitation "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:altLabel "스페이서"@ko ;
+    skos:definition "Sidewall spacer structure."@en ;
+    skos:prefLabel "Spacer"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/structural_element/stack> a ont:StructuralElement ;
+    dcterms:bibliographicCitation "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:altLabel "적층"@ko ;
+    skos:definition "Stacked (laminated) layer structure — multilayer stack as a structural element."@en ;
+    skos:prefLabel "Stacked Structure"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/structural_element/substrate> a ont:StructuralElement ;
+    dcterms:bibliographicCitation "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:altLabel "기판"@ko ;
+    skos:definition "Substrate on which layers are formed — wafer body or carrier as a structural element."@en ;
+    skos:prefLabel "Substrate"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/structural_element/trench> a ont:StructuralElement ;
+    dcterms:bibliographicCitation "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:altLabel "트렌치"@ko ;
+    skos:definition "Trench structure formed in a substrate or layer."@en ;
+    skos:prefLabel "Trench"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/structural_element/via> a ont:StructuralElement ;
+    dcterms:bibliographicCitation "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:altLabel "비아"@ko ;
+    skos:definition "Vertical via / contact hole structure connecting wiring levels."@en ;
+    skos:prefLabel "Via"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/structural_element/wafer> a ont:StructuralElement ;
+    dcterms:bibliographicCitation "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:altLabel "웨이퍼"@ko ;
+    skos:definition "Semiconductor wafer as a structural object in a claim."@en ;
+    skos:prefLabel "Wafer"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/structural_element/wiring> a ont:StructuralElement ;
+    dcterms:bibliographicCitation "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:altLabel "배선"@ko ;
+    skos:definition "Interconnect wiring line as a structural element."@en ;
+    skos:prefLabel "Wiring"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
 <https://w3id.org/sdkb/data/technode/3nm> a ont:TechnologyNode ;
     dcterms:bibliographicCitation "IEEE IRDS 2022 Edition; Wikidata" ;
     dcterms:license "Free with IEEE account (IRDS); CC0 (Wikidata)" ;

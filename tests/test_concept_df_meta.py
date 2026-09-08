@@ -172,10 +172,35 @@ DECLARED_ADDED = {"patent-text": {
     ("증착장치", "equipment_class:deposition_tool"),
     ("인터포저", "device:interposer"), ("패키지", "subprocess:packaging"),
     ("압력", "parameter:pressure"), ("유량", "parameter:gas_flow"),
+    # PLAN-005 5-B(2026-09-08) — 구조요소 15 노드 등록(StructuralElement · patent-text 전용).
+    # 표면형은 Tier-1 자동 수집(canonical · id-local · ko synonym)이며, 아래는 `make concept-mapping`
+    # 출력에서 **옮겨 적은** 것이다. 15개 중 7개 한글과 영문 4개는 R7 에 걸려 아래 BLOCKED_ADDED 로 갔다.
+    ("capacitor", "structural_element:capacitor"), ("캐패시터", "structural_element:capacitor"),
+    ("channel", "structural_element:channel"), ("channel region", "structural_element:channel"),
+    ("drain", "structural_element:drain"), ("drain region", "structural_element:drain"),
+    ("metal wiring", "structural_element:metal_wiring"), ("금속배선", "structural_element:metal_wiring"),
+    ("photoresist layer", "structural_element:photoresist_layer"), ("감광막", "structural_element:photoresist_layer"),
+    ("source region", "structural_element:source"),
+    ("spacer", "structural_element:spacer"), ("스페이서", "structural_element:spacer"),
+    ("stack", "structural_element:stack"), ("stacked structure", "structural_element:stack"),
+    ("trench", "structural_element:trench"), ("트렌치", "structural_element:trench"),
+    ("via", "structural_element:via"), ("비아", "structural_element:via"),
+    ("wafer", "structural_element:wafer"), ("웨이퍼", "structural_element:wafer"),
+    ("wiring", "structural_element:wiring"), ("배선", "structural_element:wiring"),
 }}
 # 등재됐다가 규칙에 걸려 blocked 로 **처음부터** 간 것. 제거(removed)와 구분한다 —
 # 제거는 살아 있던 쌍이 빠진 것이고, 이것은 들어오자마자 차단된 것이다.
-DECLARED_BLOCKED_ADDED = {"patent-text": {("온도", "parameter:temperature")}}
+DECLARED_BLOCKED_ADDED = {"patent-text": {
+    ("온도", "parameter:temperature"),
+    # PLAN-005 5-B — R7-DF-CEILING(0.06 · 분모 4,513). 노드는 등록됐고 접지에는 쓰이지 않는다(사용자 결정).
+    ("기판", "structural_element:substrate"), ("substrate", "structural_element:substrate"),
+    ("전극", "structural_element:electrode"), ("electrode", "structural_element:electrode"),
+    ("게이트", "structural_element:gate"), ("gate", "structural_element:gate"),
+    ("적층", "structural_element:stack"),
+    ("소스", "structural_element:source"), ("source", "structural_element:source"),
+    ("드레인", "structural_element:drain"),
+    ("채널", "structural_element:channel"),
+}}
 DECLARED_NEW_RULES = {"R6-SURFACE-SUPPRESS", "R7-DF-CEILING"}
 
 _DECLARE_HINT = (

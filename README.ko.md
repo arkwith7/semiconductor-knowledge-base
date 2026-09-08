@@ -300,32 +300,32 @@ blank nodes: `grep -c owl:Class` counts both and reports a larger number.
 
 | Module | Classes (named) | (blank) | ObjectProperty | DatatypeProperty | `rdfs:comment` | Triples |
 |---|---|---|---|---|---|---|
-| `sdkb-core.ttl` | 43 | 13 | 45 | 45 | 133/133 | 719 |
-| `sdkb-patent.ttl` | 16 | 6 | 32 | 26 | 74/74 | 465 |
+| `sdkb-core.ttl` | 44 | 13 | 45 | 45 | 134/134 | 722 |
+| `sdkb-patent.ttl` | 16 | 6 | 32 | 26 | 74/74 | 467 |
 | `sdkb-rbv.ttl` | 9 | 0 | 6 | 3 | 18/18 | 82 |
 | `sdkb-foresight.ttl` | 6 | 0 | 6 | 4 | 16/16 | 107 |
 | `sdkb-commercialization.ttl` | 7 | 0 | 6 | 4 | 17/17 | 104 |
 | `sdkb-governance.ttl` | 0 | 0 | 2 | 1 | 3/3 | 40 |
 | `sdkb-governance-kr.ttl` | 3 | 0 | 2 | 2 | 7/7 | 60 |
 | `sdkb-priorart-core.ttl` | 13 | 0 | 25 | 9 | 47/47 | 232 |
-| `sdkb-priorart-semi.ttl` | 4 | 0 | 2 | 0 | 6/6 | 76 |
+| `sdkb-priorart-semi.ttl` | 4 | 0 | 2 | 0 | 6/6 | 77 |
 | `sdkb-priorart-kr.ttl` | 0 | 0 | 0 | 0 | 0/0 | 41 |
-| **Total** | **101** | 19 | **126** | **94** | **321/321** | 1,926 |
+| **Total** | **102** | 19 | **126** | **94** | **322/322** | 1,932 |
 
 **Curation graph** (`data/semiconductor_v0_3.json` — the hand-curated source the core A-Box is generated from).
 
-- **274 nodes / 312 edges** across **15 node types** (version `0.3`)
+- **289 nodes / 312 edges** across **16 node types** (version `0.3`)
 
 **A-Box layers.** `not built` is the expected state on a fresh checkout — these layers are generated, and the large ones need a KIPRIS key. See *What is empty, and how to fill it*.
 
 | Layer | Content | Triples |
 |---|---|---|
-| `sdkb-core-data.ttl` | curation graph, instantiated | 2,884 |
+| `sdkb-core-data.ttl` | curation graph, instantiated | 3,019 |
 | `sdkb-abox-patents.ttl` | SIRP rejected patents | 34,117 |
 | `sdkb-abox-prior-art.ttl` | examiner-cited prior art | 67,123 |
-| `sdkb-abox-claim-features.ttl` | claim features | 11,871,397 ¹ |
+| `sdkb-abox-claim-features.ttl` | claim features | 12,001,973 ¹ |
 | `sdkb-abox-b-layer-queries.ttl` | B-layer confirmation queries | 4,631 |
-| `sdkb-abox-priorart.ttl` | prior-art claim profiles, disclosures, examiner elements | 675,934 ¹ |
+| `sdkb-abox-priorart.ttl` | prior-art claim profiles, disclosures, examiner elements | 796,656 ¹ |
 | `sdkb-abox-experts-problems.ttl` | experts and problems | 8,483 |
 | `sdkb-abox-vendors.ttl` | equipment vendors | 2,601 |
 | `sdkb-governance-kr-instances.ttl` | Korea regulatory instances | 175 |

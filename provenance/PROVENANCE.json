@@ -2,7 +2,7 @@
   "_README": "릴리스 자산의 무결성 기록. 하류는 이 해시로 자기 스냅샷을 검증한다.",
   "assets": {
     "mappings/concept_mapping.json": {
-      "sha256": "d306d6a08e361a6448ed743492e05ee6f42bad0be7371b7dddbad2baf8779459",
+      "sha256": "e12b04fdba4f77188f14da46416f0bc0a3390c2e56c546975145025cbe0fa366",
       "generator": "scripts/build_concept_mapping.py",
       "inputs": [
         "data/semiconductor_v0_3.json",

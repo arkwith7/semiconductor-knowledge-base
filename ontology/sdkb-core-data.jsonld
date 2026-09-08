@@ -12764,6 +12764,756 @@
     ]
   },
   {
+    "@id": "https://w3id.org/sdkb/data/structural_element/capacitor",
+    "@type": [
+      "https://w3id.org/sdkb/ont/StructuralElement"
+    ],
+    "http://purl.org/dc/terms/bibliographicCitation": [
+      {
+        "@value": "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms"
+      }
+    ],
+    "http://purl.org/dc/terms/license": [
+      {
+        "@value": "CDLA-Permissive-2.0"
+      }
+    ],
+    "http://purl.org/dc/terms/source": [
+      {
+        "@value": "author"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#altLabel": [
+      {
+        "@language": "ko",
+        "@value": "캐패시터"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#definition": [
+      {
+        "@language": "en",
+        "@value": "Capacitor structure (e.g. DRAM cell capacitor) as a structural element."
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "Capacitor"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/interpretationType": [
+      {
+        "@value": "author-defined"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/validationRequired": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/sdkb/data/structural_element/channel",
+    "@type": [
+      "https://w3id.org/sdkb/ont/StructuralElement"
+    ],
+    "http://purl.org/dc/terms/bibliographicCitation": [
+      {
+        "@value": "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms"
+      }
+    ],
+    "http://purl.org/dc/terms/license": [
+      {
+        "@value": "CDLA-Permissive-2.0"
+      }
+    ],
+    "http://purl.org/dc/terms/source": [
+      {
+        "@value": "author"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#altLabel": [
+      {
+        "@language": "ko",
+        "@value": "채널"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#definition": [
+      {
+        "@language": "en",
+        "@value": "Channel region of a transistor between source and drain."
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "Channel Region"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/interpretationType": [
+      {
+        "@value": "author-defined"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/validationRequired": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/sdkb/data/structural_element/drain",
+    "@type": [
+      "https://w3id.org/sdkb/ont/StructuralElement"
+    ],
+    "http://purl.org/dc/terms/bibliographicCitation": [
+      {
+        "@value": "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms"
+      }
+    ],
+    "http://purl.org/dc/terms/license": [
+      {
+        "@value": "CDLA-Permissive-2.0"
+      }
+    ],
+    "http://purl.org/dc/terms/source": [
+      {
+        "@value": "author"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#altLabel": [
+      {
+        "@language": "ko",
+        "@value": "드레인"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#definition": [
+      {
+        "@language": "en",
+        "@value": "Drain region/electrode of a transistor."
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "Drain Region"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/interpretationType": [
+      {
+        "@value": "author-defined"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/validationRequired": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/sdkb/data/structural_element/electrode",
+    "@type": [
+      "https://w3id.org/sdkb/ont/StructuralElement"
+    ],
+    "http://purl.org/dc/terms/bibliographicCitation": [
+      {
+        "@value": "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms"
+      }
+    ],
+    "http://purl.org/dc/terms/license": [
+      {
+        "@value": "CDLA-Permissive-2.0"
+      }
+    ],
+    "http://purl.org/dc/terms/source": [
+      {
+        "@value": "author"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#altLabel": [
+      {
+        "@language": "ko",
+        "@value": "전극"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#definition": [
+      {
+        "@language": "en",
+        "@value": "Conductive electrode structure (gate/source/drain/capacitor electrodes in general)."
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "Electrode"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/interpretationType": [
+      {
+        "@value": "author-defined"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/validationRequired": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/sdkb/data/structural_element/gate",
+    "@type": [
+      "https://w3id.org/sdkb/ont/StructuralElement"
+    ],
+    "http://purl.org/dc/terms/bibliographicCitation": [
+      {
+        "@value": "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms"
+      }
+    ],
+    "http://purl.org/dc/terms/license": [
+      {
+        "@value": "CDLA-Permissive-2.0"
+      }
+    ],
+    "http://purl.org/dc/terms/source": [
+      {
+        "@value": "author"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#altLabel": [
+      {
+        "@language": "ko",
+        "@value": "게이트"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#definition": [
+      {
+        "@language": "en",
+        "@value": "Gate structure of a transistor (gate electrode and gate stack)."
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "Gate"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/interpretationType": [
+      {
+        "@value": "author-defined"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/validationRequired": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/sdkb/data/structural_element/metal_wiring",
+    "@type": [
+      "https://w3id.org/sdkb/ont/StructuralElement"
+    ],
+    "http://purl.org/dc/terms/bibliographicCitation": [
+      {
+        "@value": "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms"
+      }
+    ],
+    "http://purl.org/dc/terms/license": [
+      {
+        "@value": "CDLA-Permissive-2.0"
+      }
+    ],
+    "http://purl.org/dc/terms/source": [
+      {
+        "@value": "author"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#altLabel": [
+      {
+        "@language": "ko",
+        "@value": "금속배선"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#definition": [
+      {
+        "@language": "en",
+        "@value": "Metal interconnect wiring."
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "Metal Wiring"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/interpretationType": [
+      {
+        "@value": "author-defined"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/validationRequired": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/sdkb/data/structural_element/photoresist_layer",
+    "@type": [
+      "https://w3id.org/sdkb/ont/StructuralElement"
+    ],
+    "http://purl.org/dc/terms/bibliographicCitation": [
+      {
+        "@value": "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms"
+      }
+    ],
+    "http://purl.org/dc/terms/license": [
+      {
+        "@value": "CDLA-Permissive-2.0"
+      }
+    ],
+    "http://purl.org/dc/terms/source": [
+      {
+        "@value": "author"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#altLabel": [
+      {
+        "@language": "ko",
+        "@value": "감광막"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#definition": [
+      {
+        "@language": "en",
+        "@value": "Photoresist film/layer as a structural layer — distinct from the photoresist material nodes (material:photoresist_*): a different level of description."
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "Photoresist Layer"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/interpretationType": [
+      {
+        "@value": "author-defined"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/validationRequired": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/sdkb/data/structural_element/source",
+    "@type": [
+      "https://w3id.org/sdkb/ont/StructuralElement"
+    ],
+    "http://purl.org/dc/terms/bibliographicCitation": [
+      {
+        "@value": "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms"
+      }
+    ],
+    "http://purl.org/dc/terms/license": [
+      {
+        "@value": "CDLA-Permissive-2.0"
+      }
+    ],
+    "http://purl.org/dc/terms/source": [
+      {
+        "@value": "author"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#altLabel": [
+      {
+        "@language": "ko",
+        "@value": "소스"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#definition": [
+      {
+        "@language": "en",
+        "@value": "Source region/electrode of a transistor."
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "Source Region"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/interpretationType": [
+      {
+        "@value": "author-defined"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/validationRequired": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/sdkb/data/structural_element/spacer",
+    "@type": [
+      "https://w3id.org/sdkb/ont/StructuralElement"
+    ],
+    "http://purl.org/dc/terms/bibliographicCitation": [
+      {
+        "@value": "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms"
+      }
+    ],
+    "http://purl.org/dc/terms/license": [
+      {
+        "@value": "CDLA-Permissive-2.0"
+      }
+    ],
+    "http://purl.org/dc/terms/source": [
+      {
+        "@value": "author"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#altLabel": [
+      {
+        "@language": "ko",
+        "@value": "스페이서"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#definition": [
+      {
+        "@language": "en",
+        "@value": "Sidewall spacer structure."
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "Spacer"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/interpretationType": [
+      {
+        "@value": "author-defined"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/validationRequired": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/sdkb/data/structural_element/stack",
+    "@type": [
+      "https://w3id.org/sdkb/ont/StructuralElement"
+    ],
+    "http://purl.org/dc/terms/bibliographicCitation": [
+      {
+        "@value": "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms"
+      }
+    ],
+    "http://purl.org/dc/terms/license": [
+      {
+        "@value": "CDLA-Permissive-2.0"
+      }
+    ],
+    "http://purl.org/dc/terms/source": [
+      {
+        "@value": "author"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#altLabel": [
+      {
+        "@language": "ko",
+        "@value": "적층"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#definition": [
+      {
+        "@language": "en",
+        "@value": "Stacked (laminated) layer structure — multilayer stack as a structural element."
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "Stacked Structure"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/interpretationType": [
+      {
+        "@value": "author-defined"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/validationRequired": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/sdkb/data/structural_element/substrate",
+    "@type": [
+      "https://w3id.org/sdkb/ont/StructuralElement"
+    ],
+    "http://purl.org/dc/terms/bibliographicCitation": [
+      {
+        "@value": "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms"
+      }
+    ],
+    "http://purl.org/dc/terms/license": [
+      {
+        "@value": "CDLA-Permissive-2.0"
+      }
+    ],
+    "http://purl.org/dc/terms/source": [
+      {
+        "@value": "author"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#altLabel": [
+      {
+        "@language": "ko",
+        "@value": "기판"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#definition": [
+      {
+        "@language": "en",
+        "@value": "Substrate on which layers are formed — wafer body or carrier as a structural element."
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "Substrate"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/interpretationType": [
+      {
+        "@value": "author-defined"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/validationRequired": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/sdkb/data/structural_element/trench",
+    "@type": [
+      "https://w3id.org/sdkb/ont/StructuralElement"
+    ],
+    "http://purl.org/dc/terms/bibliographicCitation": [
+      {
+        "@value": "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms"
+      }
+    ],
+    "http://purl.org/dc/terms/license": [
+      {
+        "@value": "CDLA-Permissive-2.0"
+      }
+    ],
+    "http://purl.org/dc/terms/source": [
+      {
+        "@value": "author"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#altLabel": [
+      {
+        "@language": "ko",
+        "@value": "트렌치"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#definition": [
+      {
+        "@language": "en",
+        "@value": "Trench structure formed in a substrate or layer."
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "Trench"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/interpretationType": [
+      {
+        "@value": "author-defined"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/validationRequired": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/sdkb/data/structural_element/via",
+    "@type": [
+      "https://w3id.org/sdkb/ont/StructuralElement"
+    ],
+    "http://purl.org/dc/terms/bibliographicCitation": [
+      {
+        "@value": "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms"
+      }
+    ],
+    "http://purl.org/dc/terms/license": [
+      {
+        "@value": "CDLA-Permissive-2.0"
+      }
+    ],
+    "http://purl.org/dc/terms/source": [
+      {
+        "@value": "author"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#altLabel": [
+      {
+        "@language": "ko",
+        "@value": "비아"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#definition": [
+      {
+        "@language": "en",
+        "@value": "Vertical via / contact hole structure connecting wiring levels."
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "Via"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/interpretationType": [
+      {
+        "@value": "author-defined"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/validationRequired": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/sdkb/data/structural_element/wafer",
+    "@type": [
+      "https://w3id.org/sdkb/ont/StructuralElement"
+    ],
+    "http://purl.org/dc/terms/bibliographicCitation": [
+      {
+        "@value": "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms"
+      }
+    ],
+    "http://purl.org/dc/terms/license": [
+      {
+        "@value": "CDLA-Permissive-2.0"
+      }
+    ],
+    "http://purl.org/dc/terms/source": [
+      {
+        "@value": "author"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#altLabel": [
+      {
+        "@language": "ko",
+        "@value": "웨이퍼"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#definition": [
+      {
+        "@language": "en",
+        "@value": "Semiconductor wafer as a structural object in a claim."
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "Wafer"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/interpretationType": [
+      {
+        "@value": "author-defined"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/validationRequired": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/sdkb/data/structural_element/wiring",
+    "@type": [
+      "https://w3id.org/sdkb/ont/StructuralElement"
+    ],
+    "http://purl.org/dc/terms/bibliographicCitation": [
+      {
+        "@value": "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms"
+      }
+    ],
+    "http://purl.org/dc/terms/license": [
+      {
+        "@value": "CDLA-Permissive-2.0"
+      }
+    ],
+    "http://purl.org/dc/terms/source": [
+      {
+        "@value": "author"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#altLabel": [
+      {
+        "@language": "ko",
+        "@value": "배선"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#definition": [
+      {
+        "@language": "en",
+        "@value": "Interconnect wiring line as a structural element."
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "Wiring"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/interpretationType": [
+      {
+        "@value": "author-defined"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/validationRequired": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ]
+  },
+  {
     "@id": "https://w3id.org/sdkb/data/subprocess/advanced_cleaning",
     "@type": [
       "https://w3id.org/sdkb/ont/SubProcess"

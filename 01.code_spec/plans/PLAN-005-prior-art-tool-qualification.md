@@ -1042,4 +1042,72 @@ V2 목표 노드를 인용문헌 노드(퇴화형)에서 `disclosure/{publicatio
 **5-B · 접지율 개선(§2 1단계 🛑 별도)** — 기준선은 §13.3 의 미매핑률. 레버 후보:
 구조요소 15개(`ko_concept_proposals.json`) → `ont:StructuralElement` 등록 · `EquipmentClass`
 바인딩 · concept_mapping 재생성 → 재접지. 그 뒤 단계 6(V1 절제) · 7(V2–V4 재측정 ·
-τ 동결) · MinedAxiom 실체화(PLAN-002 채굴 쌍이 이 저장소에 들어온 뒤).
+τ 동결) · MinedAxiom 실체화(PLAN-002 채굴 쌍이 이 저장소에 들어온 뒤). → **§14 로 실행됐다.**
+
+---
+
+## 14. 단계 5-B 설계와 실행 기록 — 개념 접지율 개선 (2026-09-07 1단계 · 2026-09-08 2–5단계 · 사용자 승인)
+
+**결론 먼저.** feature 접지 **33.1% → 38.6%** · rej 독립항 미매핑 **28.2% → 24.0%**. 동결 목표 전부 충족.
+변동은 L0(링커 모드) · L1(`EquipmentClass` 바인딩) · L2(구조요소 15 등록) 로 분리 측정했고 설명되지 않는
+변동은 0 이다. 요약과 하류 조치는 CHANGELOG 2026-09-08 항목, 계획 전문은 세션 계획 파일에 있다.
+
+### 14.1 1단계 — 동결 목표 (2026-09-07 · 결과를 보기 전에)
+
+| 눈금 | 기준선(5-A) | 동결 목표 | 실측(L2) |
+|---|---:|---:|---:|
+| rej 독립항 미매핑 | 28.18% | **≤ 25.0%** | **23.95%** ✓ |
+| feature 접지 | 33.10% | **≥ 37.0%** | **38.58%** ✓ |
+| g1 미매핑 | 62.12% | ≤ 59.12% (−3pt) | **56.07%** ✓ |
+| g2 미매핑 | 62.65% | ≤ 59.65% (−3pt) | **58.66%** ✓ |
+| 행 수 | 1,306,191 | 불변 | 1,306,191 ✓ |
+
+사용자 결정 셋(1단계): ① 목표를 위 표로 동결 ② 구조요소 **15개 등록 + 7개 R7 차단 유지**(규칙 불변 · 효과는
+8개분) ③ R7 예외는 별도 안건. 앞 세션이 "확보했다"고 한 목표 수치는 저장소에 기록돼 있지 않았고, 이 표의
+목표는 parquet 실측 상한(L1 26.3% · L2-8 +76건 · 합 ≈24.1%)에서 다시 계산해 동결한 것이다.
+
+### 14.2 2단계 — 실측 넷
+
+| 확인 항목 | 사실 |
+|---|---|
+| 개념 등록 경로 | `convert_rdf.py:88` 은 타입을 검사하지 않고 IRI 를 찍는다 · `build_owl.py` 는 고정 dict 라 클래스 선언이 따로 필요 · 사전은 canonical·id-local·synonym 을 자동 수집 · **링커 타입 필터 `CONCEPT_TYPES` 에 StructuralElement 가 없어 이것 없이는 재빌드가 0 효과** · `build_abox_priorart.py` 는 semi 의 `subClassOf*` 를 런타임에 읽어 변경 0 |
+| 재접지 비용 | `make abox-claim-features` 실측 **34분 · RSS 17.7 GB**(문서의 25분은 substring 모드) · 입력 전부 로컬 · 네트워크·LLM 0 |
+| parquet sha 핀 | 저장소 안 핀은 `abox_priorart_report.json.inputs`(리포트 · 자동) 뿐 · 테스트는 산출 TTL sha 만 단정 · 공개 리포는 parquet 제외·meta 포함 · 하류 `VENDOR_FILES` 가 벤더 |
+| 레버 분리 순서 | L0 → L1(semi + abox-priorart 30초) → L2 · 각 단계 리포트 스냅샷 · `concept_df` 차분으로 개념 단위 귀속 |
+
+**2단계에서 걸린 것 — 링커 모드.** `.venv` 에 kiwipiepy 가 없었고 생성기는 조용히 substring 으로 떨어졌다.
+사용자 결정(2026-09-08): Kiwi 설치 + KG 변경 전 재현 사전검사 → **sha 불일치**(`16f8300d…` → `bce4b9f0…`) →
+원인 실측(커밋 parquet 는 substring 산출물) → **Kiwi 모드를 새 기준선(L0)으로**. 생성기는 폴백을 버리고
+모드·버전을 `release_meta.source.linker` 에 기록한다.
+
+### 14.3 3단계 — 설계 요지
+
+- **T-Box/shape**: semi 바인딩 +`EquipmentClass`(배제 없음 · `MODIFIED` 불변) · core `StructuralElement` 클래스
+  선언(`pa:` 언급 없이) · `featureConcept` range 합집합 +`StructuralElement` · `Shape_CoreNode`·`Shape_Provenance`
+  타깃 +`StructuralElement`.
+- **원천**: `scripts/add_structural_elements.py`(상위개념 인젝터 선례 · 멱등 · `lexicon_profile: patent-text` ·
+  synonyms 에 한글 1건씩 · provenance author/CDLA). id 접두 `structural_element:` · 범용 영단어는 canonical 을
+  `… Region` 으로.
+- **생성기**: `CONCEPT_TYPES` +`StructuralElement` · 링커 모드 기록 · 폴백 제거. `AXIS_RANK`·특허 단위 라우팅은 불변.
+- **테스트**: 깨지는 넷(타입 집합 · 274 상수 · 사전 원장 · README 서명) 같은 커밋에서 · 신규
+  `tests/test_stage5b_grounding.py` 에 생성기↔range↔semi 양방향 계약과 **동결 목표 게이트**.
+
+### 14.4 4·5단계 — 실행과 검증 (재현 명령 병기)
+
+| 단계 | 명령 | 결과 |
+|---|---|---|
+| 0 | `uv sync --extra nlp` · 재현 사전검사 | kiwipiepy 0.23.2 · **불일치 → L0 로 채택**(위) |
+| L0 | `python scripts/build_abox_priorart.py`(semi 불변) | 접지 435,044 · rej 27.90% · 미바인딩 35 |
+| L1 | `make priorart` → `build_abox_priorart.py` | rej 26.04% · g2 59.37% · 미바인딩 28 · semi 77 트리플 |
+| L2 | `make structural-elements parse owl convert concept-mapping abox-claim-features` → `build_abox_priorart.py` | 접지 503,960(38.58%) · rej 23.95% · 개념 138 · ClaimProfile 62,926 · Disclosure 33,274 |
+| 결정성 | `make abox-claim-features` 재실행 · `abox-priorart` 재실행 | **바이트 동일** — parquet `1e8b14ca…` · meta `9af97816…` · TTL `5069d7e0…`(12,001,973) · priorart `4c726e98…`(796,656) · 리포트 `cmp` 동일 · 각 34분 |
+| 게이트 | `make validate` · `make cq` · `make signature-inject` · `make test` · `make public-release && make check-public` | validate **PASSED**(StructuralElement 타깃 15 · 8분 12초) · CQ32 200행 pass · 서명 1,926 → 1,932 · **382 passed · 10 skipped** · check-public 365 파일 적중 0 ✅ |
+
+귀속(개념 단위): L1 = `equipment_class:*` 7종 11,612 + 종속항 간접 602 · L2 = 신규 12 개념 + `material:sin` +77
+(Kiwi 사용자 사전 비국소 효과 · `질화규소` → `질화 규소`) · 그 밖 **0**.
+
+### 14.5 남긴 것 (별도 안건)
+
+R7 차단 7개(rej 상한 ≈14% · 단 `기판` 하나가 210,773 feature 에 걸린다) · Kiwi 모드의 1글자 원소기호
+재유입(`W` → tungsten +2,289 · CR-013 계열) · 영문 `drain`·`channel`·`stack` 의 US 측 정밀도 관찰 ·
+FailureMode·Skill 바인딩(태스크 축 · D-15). **다음**: 단계 6(V1 절제) · 7(V2–V4 재측정 · τ 동결).

@@ -19,7 +19,8 @@ ont:Shape_CoreNode
     sh:targetClass ont:Process, ont:SubProcess, ont:EquipmentClass,
         ont:Equipment, ont:Vendor, ont:Organization, ont:Parameter,
         ont:Metrology, ont:Material, ont:TechnologyNode,
-        ont:FailureMode, ont:RootCause, ont:Mitigation, ont:Skill ;
+        ont:FailureMode, ont:RootCause, ont:Mitigation, ont:Skill,
+        ont:StructuralElement ;   # PLAN-005 5-B — 구조요소 15 노드도 같은 게이트를 받는다
     sh:property [
         sh:path skos:prefLabel ;
         sh:minCount 1 ;
@@ -240,7 +241,8 @@ ont:Shape_Provenance
     a sh:NodeShape ;
     sh:targetClass ont:Process, ont:SubProcess, ont:EquipmentClass,
         ont:Equipment, ont:Material, ont:FailureMode,
-        ont:RootCause, ont:Mitigation, ont:Skill ;
+        ont:RootCause, ont:Mitigation, ont:Skill,
+        ont:StructuralElement ;   # PLAN-005 5-B
     sh:property [
         sh:path dcterms:source ;
         sh:minCount 1 ;

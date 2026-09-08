@@ -31,7 +31,8 @@ PROV_PATH = ROOT / "provenance" / "PROVENANCE.json"
 
 # CR-009 — df 의 문서 모집단. **TTL 이 아니라 `data/**` 를 읽는다**(§1-1: TTL 은 빌드 산출물).
 # 두 파일은 A-Box 생성기가 쓰는 것과 **같은 원천**이므로, 여기서 센 df 의 분모는
-# 그래프에 실제로 들어간 문서 수와 일치한다(실측 1,000 + 3,034 = 4,034).
+# 그래프에 실제로 들어간 문서 수와 일치한다(실측 1,000 + 3,513 = 4,513 · CR-008 B층 479 포함 —
+# tests/test_concept_df_meta.py 가 핀한다).
 SIRP_META = ROOT / "data" / "patents" / "rejected_patents_meta.parquet"
 CITED_ENRICHED = ROOT / "data" / "patents" / "cited_enriched"
 DF_REPORT = ROOT / "data" / "reports" / "concept_df_report.json"

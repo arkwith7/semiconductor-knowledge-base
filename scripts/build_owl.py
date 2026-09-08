@@ -118,6 +118,12 @@ def build_ontology() -> Graph:
         # Device 는 core-data 에 31개 인스턴스가 있는데 클래스 선언이 없었다 —
         # 선언되지 않은 클래스는 추론기·SHACL 이 검증할 수 없다 (CLAUDE.md §1.2).
         "Device":         "A device/product architecture (e.g. DRAM, BGA, CMOS image sensor).",
+        # StructuralElement — PLAN-005 단계 5-B. 단계 4 가 sdkb-priorart-semi.ttl 에서 이 축을
+        # 세웠지만(pa:TechnicalConcept 하위) 인스턴스가 0 이었다. 5-B 가 core-data 에 구조요소
+        # 15개를 등록하므로, core-data 만 읽는 소비자에게도 클래스가 선언돼 있어야 한다
+        # (Device 와 같은 결함을 미리 막는다 · CLAUDE.md §1.2). 여기서는 클래스만 선언한다 —
+        # pa: 슬롯에 거는 것은 semi 의 몫이다(core 는 pa: 를 언급하지 않는다).
+        "StructuralElement": "A structural element of a device or process stack — layer, pattern, electrode, gate, spacer, via, trench (구조 요소).",
         # Expert·Problem 은 sdkb-abox-experts-problems.ttl 이 **A-Box 안에서 인라인
         # 선언**하고 있었다 (Expert 110 · Problem 226 인스턴스). Device 와 같은 결함이다 —
         # TBox 를 읽는 소비자에게는 존재하지 않는 클래스이고, 추론기·SHACL 이 검증할 수 없다.

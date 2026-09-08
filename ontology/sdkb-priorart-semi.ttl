@@ -22,6 +22,9 @@
 ont:Device
     rdfs:subClassOf pa:TechnicalConcept .
 
+ont:EquipmentClass
+    rdfs:subClassOf pa:TechnicalConcept .
+
 ont:Material
     rdfs:subClassOf pa:TechnicalConcept .
 

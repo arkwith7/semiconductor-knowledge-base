@@ -4,13 +4,13 @@
     {
       "module": "sdkb-core",
       "status": "built",
-      "classes_named": 43,
+      "classes_named": 44,
       "classes_blank": 13,
       "object_properties": 45,
       "datatype_properties": 45,
-      "terms": 133,
-      "documented": 133,
-      "triples": 719
+      "terms": 134,
+      "documented": 134,
+      "triples": 722
     },
     {
       "module": "sdkb-patent",
@@ -21,7 +21,7 @@
       "datatype_properties": 26,
       "terms": 74,
       "documented": 74,
-      "triples": 465
+      "triples": 467
     },
     {
       "module": "sdkb-rbv",
@@ -98,7 +98,7 @@
       "datatype_properties": 0,
       "terms": 6,
       "documented": 6,
-      "triples": 76
+      "triples": 77
     },
     {
       "module": "sdkb-priorart-kr",
@@ -113,20 +113,20 @@
     }
   ],
   "tbox_total": {
-    "classes_named": 101,
+    "classes_named": 102,
     "classes_blank": 19,
     "object_properties": 126,
     "datatype_properties": 94,
-    "terms": 321,
-    "documented": 321,
-    "triples": 1926
+    "terms": 322,
+    "documented": 322,
+    "triples": 1932
   },
   "curation_source": {
     "status": "built",
     "version": "0.3",
-    "nodes": 274,
+    "nodes": 289,
     "edges": 312,
-    "node_types": 15,
+    "node_types": 16,
     "nodes_by_type": {
       "Equipment": 41,
       "SubProcess": 38,
@@ -136,6 +136,7 @@
       "Mitigation": 20,
       "RootCause": 20,
       "Vendor": 16,
+      "StructuralElement": 15,
       "EquipmentClass": 12,
       "Process": 12,
       "Skill": 12,
@@ -150,8 +151,8 @@
       "layer": "sdkb-core-data",
       "label": "curation graph, instantiated",
       "status": "built",
-      "bytes": 155790,
-      "triples": 2884,
+      "bytes": 163673,
+      "triples": 3019,
       "triples_source": "parsed"
     },
     {
@@ -174,8 +175,8 @@
       "layer": "sdkb-abox-claim-features",
       "label": "claim features",
       "status": "built",
-      "bytes": 906798859,
-      "triples": 11871397,
+      "bytes": 916206974,
+      "triples": 12001973,
       "triples_source": "report:abox_claim_features_report.json"
     },
     {
@@ -190,8 +191,8 @@
       "layer": "sdkb-abox-priorart",
       "label": "prior-art claim profiles, disclosures, examiner elements",
       "status": "built",
-      "bytes": 53251137,
-      "triples": 675934,
+      "bytes": 62382427,
+      "triples": 796656,
       "triples_source": "report:abox_priorart_report.json"
     },
     {
