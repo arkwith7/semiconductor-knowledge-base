@@ -65,7 +65,8 @@ def _tiny_graph():
     roots, _ = m.root_independents(is_indep, parents)
     profiles, _ = m.build_profiles(claims, concepts, roots)
     disclosures, _ = m.build_disclosures(df, concepts)
-    hier = [(URIRef(DATA + "material/sio2"), URIRef(DATA + "material/dielectric"))]
+    hier = {URIRef(PA + "broaderConcept"):
+            [(URIRef(DATA + "material/sio2"), URIRef(DATA + "material/dielectric"))]}
     return profiles, disclosures, hier
 
 
@@ -233,10 +234,53 @@ def test_examiner_element_out_of_scope_aborts():
 def test_covered_by_is_materialized_one_hop_without_closure():
     """a→b→c 계층에서 coveredBy 는 (a,b)·(b,c) 뿐 — (a,c) 가 있으면 전이 폐쇄를 만든 것이다."""
     a, b, c = (URIRef(DATA + f"material/{x}") for x in "abc")
-    g = m.emit_graph([], [], [(a, b), (b, c)], [])
+    g = m.emit_graph([], [], {URIRef(PA + "broaderConcept"): [(a, b), (b, c)]}, [])
     cov = set(g.subject_objects(URIRef(PA + "coveredBy")))
     assert cov == {(a, b), (b, c)}
     assert cov == set(g.subject_objects(URIRef(PA + "broaderConcept")))
+
+
+def _core_with(*subprops: str, symmetric: tuple[str, ...] = ()) -> Graph:
+    g = Graph()
+    for p in subprops:
+        g.add((URIRef(PA + p), RDFS.subPropertyOf, URIRef(PA + "coveredBy")))
+    for p in symmetric:
+        g.add((URIRef(PA + p), RDF.type, OWL.SymmetricProperty))
+    return g
+
+
+def _core_data_with_broader() -> tuple[Graph, set[str]]:
+    a, b = URIRef(DATA + "material/a"), URIRef(DATA + "material/b")
+    g = Graph(); g.add((a, SKOS.broader, b))
+    return g, {"material:a", "material:b"}
+
+
+def test_covered_by_sources_reads_subproperty_axioms_from_core():
+    """단계 6-A — 어느 술어가 coveredBy 로 비춰지는지는 core 의 공리가 정한다. 공리를 빼면 0 이 된다."""
+    cd, bound = _core_data_with_broader()
+    with_axiom, _ = m.covered_by_sources(_core_with("broaderConcept"), cd, bound)
+    assert {str(p).rsplit("/", 1)[-1]: len(v) for p, v in with_axiom.items()} == {"broaderConcept": 1}
+    without, _ = m.covered_by_sources(_core_with(), cd, bound)
+    assert without == {}
+    g = m.emit_graph([], [], without, [])
+    assert not list(g.subject_objects(URIRef(PA + "coveredBy")))
+
+
+def test_covered_by_sources_rejects_subproperty_without_source():
+    """core 가 원천 표에 없는 술어를 ⊑ coveredBy 로 선언하면 빌드가 죽는다 — 조용히 건너뛰지 않는다."""
+    cd, bound = _core_data_with_broader()
+    with pytest.raises(SystemExit):
+        m.covered_by_sources(_core_with("someNewExpansion"), cd, bound)
+
+
+def test_covered_by_sources_emits_symmetric_pairs_both_ways(monkeypatch):
+    cd, bound = _core_data_with_broader()
+    a, b = URIRef(DATA + "material/a"), URIRef(DATA + "material/b")
+    monkeypatch.setitem(m.EXPANSION_SOURCES, URIRef(PA + "substitutableWith"),
+                        lambda core_data, bound: ([(a, b)], {}))
+    out, _ = m.covered_by_sources(_core_with("substitutableWith", symmetric=("substitutableWith",)),
+                                  cd, bound)
+    assert out[URIRef(PA + "substitutableWith")] == sorted([(a, b), (b, a)])
 
 
 # ── ⑤ 실물 계수·누출 ─────────────────────────────────────────────────
@@ -252,7 +296,17 @@ def test_graph_counts_match_report(abox):
     assert e["emitted"] + e["dropped_no_caption"] + e["dropped_caption_claim_not_in_graph"] == e["rows"]
     h = rep["hierarchy"]
     assert h["broader_emitted"] == h["covered_by_materialized_from_broader"]
-    assert len(list(abox.subject_objects(URIRef(PA + "coveredBy")))) == h["broader_emitted"]
+    # 단계 6-A — coveredBy 는 core 가 `⊑ pa:coveredBy` 로 선언한 술어들의 합이다.
+    assert h["covered_by_total"] == sum(h["covered_by_by_subproperty"].values())
+    assert len(list(abox.subject_objects(URIRef(PA + "coveredBy")))) == h["covered_by_total"]
+    core = Graph(); core.parse(ONT_DIR / "sdkb-priorart-core.ttl", format="turtle")
+    declared = {str(p).rsplit("/", 1)[-1].rsplit("#", 1)[-1]
+                for p in core.subjects(RDFS.subPropertyOf, URIRef(PA + "coveredBy"))}
+    assert set(h["covered_by_by_subproperty"]) == declared
+    for name, n in h["covered_by_by_subproperty"].items():
+        pred = next(p for p in core.subjects(RDFS.subPropertyOf, URIRef(PA + "coveredBy"))
+                    if str(p).endswith(name))
+        assert len(list(abox.subject_objects(pred))) == n, name
 
 
 @needs_abox

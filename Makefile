@@ -1,7 +1,7 @@
 .PHONY: all install venv parse owl convert align validate test clean \
         ingest-sirp sirp-pairs sirp-problems sirp experts \
         compliance curated-experts curated-ratings expdataset abox abox-patents \
-        priorart abox-priorart \
+        priorart abox-priorart v1-ablation \
         abox-prior-art abox-claim-features abox-full refetch-fulltext cq \
         public-release check-public signature signature-inject signature-check \
         superordinate-concepts concept-mapping \
@@ -42,6 +42,7 @@ help:
 	@echo "  abox-full       all A-Box layers (needs KIPRIS key)"
 	@echo "  refetch-fulltext  re-fetch KIPRIS full text into the emptied A-Box inputs"
 	@echo "  cq              run the competency-question suite → report"
+	@echo "  v1-ablation     PLAN-005 V1 axiom ablation → priorart_v1_ablation.json + 대조표 (≈66 min)"
 	@echo "  public-release  build the public tree (KIPRIS full text emptied) into PUBLIC_OUT"
 	@echo "  check-public    scan that tree with fingerprints from the private canonical"
 	@echo "  signature       count classes / predicates / instances → data/reports/graph_signature.json"
@@ -154,6 +155,15 @@ abox-full: abox abox-patents abox-vendors abox-prior-art abox-claim-features abo
 # 자산이다. 하류 논문 저장소에만 있으면 "CQ 를 공개한다"는 서술이 거짓이 된다.
 cq: convert
 	$(PYTHON) scripts/run_cq.py
+
+# ── PLAN-005 단계 6-A · V1 공리 단위 절제 ───────────────────────────────
+# 공리마다 O∖a 를 만들어 ② CQ 전량 · ③ coveredBy 실체화 · ④ 태스크 커버를 재는다.
+# ② 가 공리당 ≈146초(CQ15 혼자 132초)라 전량은 ≈66분 — 그래서 `validate` 에 넣지 않는다.
+# 신선도는 tests/test_stage6_ablation.py 가 리포트의 inputs sha 로 잡는다.
+# 그래프는 바꾸지 않는다. 대조표는 스크립트가 렌더한다(§5 — 손으로 쓰지 않는다).
+v1-ablation: priorart convert abox-priorart
+	$(PYTHON) scripts/report_v1_ablation.py \
+		--markdown 01.code_spec/reports/PLAN-005-stage6-axiom-consumers.md
 
 # ── 공개본 (CR-015) ────────────────────────────────────────────────────
 # 공개할 트리를 **매번 코드가 만든다.** 손으로 지우면 다음에 또 어긋난다 — 원고 §10.3 이

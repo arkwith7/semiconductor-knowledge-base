@@ -27,6 +27,42 @@ All notable changes to SDKB will be documented in this file.
 
 ## [Unreleased]
 
+### Changed (2026-09-08 — PLAN-005 단계 6-A · V1 절제 계측 완성 · 사용자 승인)
+
+**결론.** V1 공리 단위 절제(§5)를 정의대로 완성해 R-Box·바인딩 **37건**을 절제했다 — 소비 **8** · 미소비 29 ·
+**결과를 보기 전에 동결한 예측표와 37건 전부 일치.** 그래프 바이트는 바꾸지 않았다(A-Box sha `4c726e98…` 불변 ·
+T-Box 3모듈 불변). 삭제·CQ33·게이트는 6-B(§2 3단계 별도 승인)다. 전문은
+`01.code_spec/plans/PLAN-005-prior-art-tool-qualification.md` §15, 대조표는
+`01.code_spec/reports/PLAN-005-stage6-axiom-consumers.md`(기계 렌더).
+
+**왜 다시 쟀는가.** 단계 1 의 "8건 중 소비 0" 은 계측기의 맹점이었다 — ② CQ 행 수만 봤고, 추론기 없는 rdflib 에서
+T-Box 공리를 빼도 BGP 행 수는 구조적으로 불변이다. 게다가 `ont:` 주어만 세어 단계 4 의 `pa:` 공리 15건이 열거에서
+빠졌고, 유일한 소비 경로(`broaderConcept ⊑ coveredBy` → 생성기 실체화)는 **하드코딩**이라 공리를 빼도 A-Box 가
+그대로였다. CQ32 는 `LIMIT 200` 포화(rows=200)라 행 수로는 coveredBy 소비가 보이지 않는다.
+
+| 무엇이 바뀌었나 | 어디 | 하류(§0)에 |
+|---|---|---|
+| 생성기가 **core 의 `rdfs:subPropertyOf pa:coveredBy` 를 읽어** 실체화 대상을 정한다(`EXPANSION_SOURCES` · 원천 표에 없는 술어는 `SystemExit` · 대칭 술어는 양방향) | `scripts/build_abox_priorart.py` | TTL 바이트 **불변** — sha 핀 변동 0 |
+| 리포트에 `inputs[sdkb-priorart-core.ttl]` · `hierarchy.covered_by_by_subproperty / covered_by_total / source_absent` 추가 | `data/reports/abox_priorart_report.json` | 키 추가만 |
+| 절제기 신설 — 열거: legacy 7 + pa: 3모듈 · 주어 {ont, pa, pa/kr, skos:exactMatch} · 역할 {rbox, binding-property, binding-class, binding-match} · 검출기 ②③④ · 경로/유량 분리 · 동결 예측표 `FROZEN` | `scripts/report_v1_ablation.py` → `data/reports/priorart_v1_ablation.json` | — |
+| `make v1-ablation`(≈66분 · validate 에 넣지 않음) | `Makefile` | — |
+| 계약: 열거 == 예측표 37건 · coveredBy 공리 제거 → 실체화 0 · 미등록 술어 → `SystemExit` · ④ 집합 계수 · 공백노드 절제 · 리포트 신선도(inputs sha) · 예측 불일치 0 | `tests/test_stage6_ablation.py` · `tests/test_abox_priorart.py` | — |
+
+**소비 8 의 내역(③④).** `broaderConcept ⊑ coveredBy`: coveredBy 16 → 0 · ④ (p,u) 4,306 → 0. 바인딩 Material(coveredBy −15 ·
+bound −31 · ④ −3,945) · Process(−1 · −12 · −361) · SubProcess(−1 · −38 · −361) · Device(bound −34) · EquipmentClass(−12)
+· Parameter(−5) · StructuralElement(−15). **경로만 있고 유량 0:** `substitutableWith` 대칭·⊑coveredBy · `skos:exactMatch
+⊑ coveredBy` · Problem·ProcessCondition·TechnicalEffect·TechnicalFunction 바인딩(core-data 인스턴스 0).
+**② 전량:** 26건(rbox 21 + 바인딩-술어 3 + 바인딩-매치 2) 전부 **변화 없음** — 예측대로 구조적 0 · 기준선 32 CQ · 9,670행 · 회당 145–161초 · 합 3,913초(65분) · subClassOf 바인딩 11건은 ② 를 건너뛰고 ③ 이 검출
+
+**④ 를 SPARQL 로 쓰지 않은 이유.** 같은 정의의 rdflib `COUNT` 가 15분 넘게 끝나지 않았다(2026-09-08 실측 · 중단).
+집합 계수는 1.5초다. 스팟체크(원천 사실): `skos:broader` 18쌍 중 길이-2 사슬 0 · core-data `exactMatch` 0 ·
+plasma_etch 개시 Disclosure 558.
+
+**6-A 가 하지 않은 것.** 공리 삭제(6-B) · propertyChainAxiom 넷 투입(무추론 배치에서 소비자 불성립 — §15.2) ·
+구 8건 삭제(§7-2 · 하류 핀 `sdkb-patent.ttl 0a317389…`) · CQ10 교정(6-B · CQ33) · citationStatus.
+
+**게이트.** `make validate` **exit 0**(불변식 A·B OK · SHACL 6블록 PASSED) · `make test` **392 passed · 12 skipped**(6-A 신규 12건 포함) · `make v1-ablation` exit 0 · 예측 불일치 **0** · `make check-public` **367 파일 · 적중 0 ✅** · `make signature-check` 최신(T-Box 불변)
+
 ### Changed (2026-09-08 — PLAN-005 단계 5-B · 개념 접지율 개선 · 사용자 승인)
 
 **결론.** feature 접지 **33.1% → 38.6%**(432,305 → **503,960** / 1,306,191) · rej 독립항 프로파일 미매핑
