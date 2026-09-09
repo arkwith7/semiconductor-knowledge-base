@@ -1,7 +1,7 @@
 {
   "plan": "PLAN-005 단계 6-A · V1 공리 단위 절제 (계측 완성)",
   "generator": "scripts/report_v1_ablation.py",
-  "generated": "2026-09-08",
+  "generated": "2026-09-09",
   "read_only": true,
   "definition": {
     "consumed": "②③④ 중 하나가 O∖a 에서 변한다 (모듈 docstring)",
@@ -17,13 +17,13 @@
     "ontology/sdkb-rbv.ttl": "09f8bfaf05073a5d4ed6b091bc61b1ca376e6df10d75ed76ec86fc390c6ba6dd",
     "ontology/sdkb-governance.ttl": "5da48ee6a916c6cf819e88afe8e6a19bc998ee9743905545da59d6908e86c5d3",
     "ontology/sdkb-governance-kr.ttl": "800b471717a4949d3ab0b3a9e7e39e9aa6e2013c057a3e0dca8ca77b66f8011e",
-    "ontology/sdkb-priorart-core.ttl": "67e6693f8aac029b6b36fb4d4fd3b2fe122791668bd8466266b620580659d642",
-    "ontology/sdkb-priorart-semi.ttl": "667a6f4bc164e4e5d7d943816cf07021446d86d5282a806f2f358306b53bbd67",
-    "ontology/sdkb-priorart-kr.ttl": "f19a7e6460811ac5bebf955e3f655be657d207c1a63ccf5d00ddd60cc029383b",
+    "ontology/sdkb-priorart-core.ttl": "e565b32571889bfd5ced2ca7b49a099dc45978821820e94d85d656f5e9b10e2f",
+    "ontology/sdkb-priorart-semi.ttl": "d66c932524789269e7bd1a0f936b7987dc020c26abae0aaa2d3487f5c768e6ef",
+    "ontology/sdkb-priorart-kr.ttl": "4e5ed9739f648cf6bc0ba4f91079459895bb56695d6b089389b90784ea56bcf2",
     "ontology/sdkb-core-data.ttl": "7142201d34966f3cb7871499db56655478a502b0455f3e800d0c2f04e125a0dc",
     "ontology/sdkb-abox-priorart.ttl": "4c726e98fa03c761c3c5c86b0435404d2e75b9f16e39036e3e8520931aba6599",
     "scripts/build_abox_priorart.py": "a11ed717cc009b04228c3bd8fa09306cfb3cfe74280236c7478a2aec60b3497a",
-    "queries/cq/*.rq": "f2b6a720d0e322e4ee7ebd10129d652e58492e66521b4635788bf3608d3160f3"
+    "queries/cq/*.rq": "f7914657c025e6337e66f668d27f29c844ee72562e150fd5b08dbf5b4e14863e"
   },
   "graphs_loaded": [
     "ontology/sdkb-core.ttl",
@@ -44,13 +44,12 @@
   ],
   "graphs_missing": [],
   "baseline": {
-    "cq_count": 32,
-    "cq_rows_total": 9670,
+    "cq_count": 33,
+    "cq_rows_total": 10210,
     "cq32_rows": 200,
     "bound_concepts": 147,
     "technical_concept_classes": 11,
     "covered_by_by_subproperty": {
-      "exactMatch": 0,
       "broaderConcept": 16,
       "substitutableWith": 0
     },
@@ -60,12 +59,12 @@
     "abox_covered_by_matches_tbox_driven": true
   },
   "summary": {
-    "axioms_total": 37,
+    "axioms_total": 31,
     "consumed": 8,
-    "unconsumed": 29,
+    "unconsumed": 23,
     "by_role": {
       "rbox": {
-        "total": 21,
+        "total": 15,
         "consumed": 1
       },
       "binding-property": {
@@ -83,17 +82,11 @@
     },
     "unconsumed_rbox_in_pa_modules": [
       "core:SymmetricProperty:pa:substitutableWith",
-      "core:TransitiveProperty:pa:broaderConcept",
-      "core:inverseOf:pa:conceptOfFeature→pa:featureConcept",
       "core:subPropertyOf:pa:substitutableWith→pa:coveredBy",
-      "core:subPropertyOf:skos:exactMatch→pa:coveredBy",
-      "kr:differentFrom:pa/kr:NoticeOfReasons→pa/kr:FinalRejection",
       "semi:disjointWith:ont:StructuralElement→ont:Material",
       "semi:disjointWith:ont:StructuralElement→ont:Process",
       "semi:disjointWith:ont:TechnicalEffect→ont:StructuralElement",
-      "semi:disjointWith:ont:TechnicalFunction→ont:StructuralElement",
-      "semi:inverseOf:ont:claimOf→ont:hasClaim",
-      "semi:inverseOf:ont:featureOf→ont:hasFeature"
+      "semi:disjointWith:ont:TechnicalFunction→ont:StructuralElement"
     ],
     "prediction_mismatches": [],
     "not_in_frozen_table": []
@@ -112,7 +105,6 @@
         "bound_concepts": 147,
         "technical_concept_classes": 11,
         "covered_by_by_subproperty": {
-          "exactMatch": 0,
           "broaderConcept": 16,
           "substitutableWith": 0
         },
@@ -127,7 +119,7 @@
       "cq_skipped": false,
       "cq_mentions_subject": [],
       "path": false,
-      "cq_seconds": 148.7,
+      "cq_seconds": 155.5,
       "consumed": false,
       "consumed_by": [],
       "flow": false,
@@ -149,7 +141,6 @@
         "bound_concepts": 147,
         "technical_concept_classes": 11,
         "covered_by_by_subproperty": {
-          "exactMatch": 0,
           "broaderConcept": 16,
           "substitutableWith": 0
         },
@@ -164,7 +155,7 @@
       "cq_skipped": false,
       "cq_mentions_subject": [],
       "path": false,
-      "cq_seconds": 148.0,
+      "cq_seconds": 155.8,
       "consumed": false,
       "consumed_by": [],
       "flow": false,
@@ -186,7 +177,6 @@
         "bound_concepts": 147,
         "technical_concept_classes": 11,
         "covered_by_by_subproperty": {
-          "exactMatch": 0,
           "broaderConcept": 16,
           "substitutableWith": 0
         },
@@ -201,7 +191,7 @@
       "cq_skipped": false,
       "cq_mentions_subject": [],
       "path": false,
-      "cq_seconds": 148.2,
+      "cq_seconds": 157.1,
       "consumed": false,
       "consumed_by": [],
       "flow": false,
@@ -223,7 +213,6 @@
         "bound_concepts": 147,
         "technical_concept_classes": 11,
         "covered_by_by_subproperty": {
-          "exactMatch": 0,
           "broaderConcept": 16,
           "substitutableWith": 0
         },
@@ -238,7 +227,7 @@
       "cq_skipped": false,
       "cq_mentions_subject": [],
       "path": false,
-      "cq_seconds": 149.5,
+      "cq_seconds": 151.3,
       "consumed": false,
       "consumed_by": [],
       "flow": false,
@@ -260,7 +249,6 @@
         "bound_concepts": 147,
         "technical_concept_classes": 11,
         "covered_by_by_subproperty": {
-          "exactMatch": 0,
           "broaderConcept": 16,
           "substitutableWith": 0
         },
@@ -275,7 +263,7 @@
       "cq_skipped": false,
       "cq_mentions_subject": [],
       "path": false,
-      "cq_seconds": 151.9,
+      "cq_seconds": 150.6,
       "consumed": false,
       "consumed_by": [],
       "flow": false,
@@ -297,7 +285,6 @@
         "bound_concepts": 147,
         "technical_concept_classes": 11,
         "covered_by_by_subproperty": {
-          "exactMatch": 0,
           "broaderConcept": 16,
           "substitutableWith": 0
         },
@@ -314,7 +301,7 @@
         "CQ05_concept_vs_ipc_series"
       ],
       "path": false,
-      "cq_seconds": 155.1,
+      "cq_seconds": 151.4,
       "consumed": false,
       "consumed_by": [],
       "flow": false,
@@ -336,7 +323,6 @@
         "bound_concepts": 147,
         "technical_concept_classes": 11,
         "covered_by_by_subproperty": {
-          "exactMatch": 0,
           "broaderConcept": 16,
           "substitutableWith": 0
         },
@@ -351,7 +337,7 @@
       "cq_skipped": false,
       "cq_mentions_subject": [],
       "path": false,
-      "cq_seconds": 160.9,
+      "cq_seconds": 152.7,
       "consumed": false,
       "consumed_by": [],
       "flow": false,
@@ -373,7 +359,6 @@
         "bound_concepts": 147,
         "technical_concept_classes": 11,
         "covered_by_by_subproperty": {
-          "exactMatch": 0,
           "broaderConcept": 16,
           "substitutableWith": 0
         },
@@ -390,7 +375,7 @@
         "CQ09_rejection_prior_art"
       ],
       "path": false,
-      "cq_seconds": 159.3,
+      "cq_seconds": 151.0,
       "consumed": false,
       "consumed_by": [],
       "flow": false,
@@ -398,43 +383,6 @@
       "prediction_ok": true,
       "proposed_action": "보존 (§7-2 · 하류 핀)",
       "reason": "단계 1 재현 · legacy T-Box 는 제자리 불변 · sdkb-patent.ttl 0a317389… 핀"
-    },
-    {
-      "id": "core:TransitiveProperty:pa:broaderConcept",
-      "module": "core",
-      "kind": "TransitiveProperty",
-      "role": "rbox",
-      "subject": "pa:broaderConcept",
-      "object": null,
-      "present_in_graph": true,
-      "triples_removed": 1,
-      "materialization_after": {
-        "bound_concepts": 147,
-        "technical_concept_classes": 11,
-        "covered_by_by_subproperty": {
-          "exactMatch": 0,
-          "broaderConcept": 16,
-          "substitutableWith": 0
-        },
-        "covered_by_total": 16
-      },
-      "covered_by_delta": 0,
-      "bound_concepts_delta": 0,
-      "task_pu_after": 4306,
-      "task_pdu_after": 40024841,
-      "task_pu_delta": 0,
-      "cq_changed": [],
-      "cq_skipped": false,
-      "cq_mentions_subject": [],
-      "path": false,
-      "cq_seconds": 155.9,
-      "consumed": false,
-      "consumed_by": [],
-      "flow": false,
-      "predicted_consumed": false,
-      "prediction_ok": true,
-      "proposed_action": "삭제 (6-B)",
-      "reason": "skos:broader 18쌍 중 길이-2 사슬 0 · 전이는 동결 깊이 {0,1}(§3.3) 과 모순"
     },
     {
       "id": "core:SymmetricProperty:pa:substitutableWith",
@@ -449,7 +397,6 @@
         "bound_concepts": 147,
         "technical_concept_classes": 11,
         "covered_by_by_subproperty": {
-          "exactMatch": 0,
           "broaderConcept": 16,
           "substitutableWith": 0
         },
@@ -464,7 +411,7 @@
       "cq_skipped": false,
       "cq_mentions_subject": [],
       "path": true,
-      "cq_seconds": 156.3,
+      "cq_seconds": 152.0,
       "consumed": false,
       "consumed_by": [],
       "flow": false,
@@ -472,42 +419,6 @@
       "prediction_ok": true,
       "proposed_action": "보존 + 일몰 (D2)",
       "reason": "경로 有(생성기가 읽음) · 유량 0 — PLAN-002 채굴 쌍 없음 · 단계 7 착수까지 Prec 미착수면 삭제"
-    },
-    {
-      "id": "core:subPropertyOf:skos:exactMatch→pa:coveredBy",
-      "module": "core",
-      "kind": "subPropertyOf",
-      "role": "rbox",
-      "subject": "skos:exactMatch",
-      "object": "pa:coveredBy",
-      "present_in_graph": true,
-      "triples_removed": 1,
-      "materialization_after": {
-        "bound_concepts": 147,
-        "technical_concept_classes": 11,
-        "covered_by_by_subproperty": {
-          "broaderConcept": 16,
-          "substitutableWith": 0
-        },
-        "covered_by_total": 16
-      },
-      "covered_by_delta": 0,
-      "bound_concepts_delta": 0,
-      "task_pu_after": 4306,
-      "task_pdu_after": 40024841,
-      "task_pu_delta": 0,
-      "cq_changed": [],
-      "cq_skipped": false,
-      "cq_mentions_subject": [],
-      "path": true,
-      "cq_seconds": 155.1,
-      "consumed": false,
-      "consumed_by": [],
-      "flow": false,
-      "predicted_consumed": false,
-      "prediction_ok": true,
-      "proposed_action": "삭제 (6-B)",
-      "reason": "유량 0 (core-data exactMatch 0) · 가능한 유량은 클래스 정렬 23 + LegalGround 2 = 오염뿐"
     },
     {
       "id": "core:subPropertyOf:pa:broaderConcept→pa:coveredBy",
@@ -522,7 +433,6 @@
         "bound_concepts": 147,
         "technical_concept_classes": 11,
         "covered_by_by_subproperty": {
-          "exactMatch": 0,
           "substitutableWith": 0
         },
         "covered_by_total": 0
@@ -536,7 +446,7 @@
       "cq_skipped": false,
       "cq_mentions_subject": [],
       "path": true,
-      "cq_seconds": 154.8,
+      "cq_seconds": 152.1,
       "consumed": true,
       "consumed_by": [
         "materialization",
@@ -561,7 +471,6 @@
         "bound_concepts": 147,
         "technical_concept_classes": 11,
         "covered_by_by_subproperty": {
-          "exactMatch": 0,
           "broaderConcept": 16
         },
         "covered_by_total": 16
@@ -575,7 +484,7 @@
       "cq_skipped": false,
       "cq_mentions_subject": [],
       "path": true,
-      "cq_seconds": 156.1,
+      "cq_seconds": 152.9,
       "consumed": false,
       "consumed_by": [],
       "flow": false,
@@ -583,43 +492,6 @@
       "prediction_ok": true,
       "proposed_action": "보존 + 일몰 (D2)",
       "reason": "경로 有(생성기가 읽음) · 유량 0 — PLAN-002 채굴 쌍 없음 · 단계 7 착수까지 Prec 미착수면 삭제"
-    },
-    {
-      "id": "core:inverseOf:pa:conceptOfFeature→pa:featureConcept",
-      "module": "core",
-      "kind": "inverseOf",
-      "role": "rbox",
-      "subject": "pa:conceptOfFeature",
-      "object": "pa:featureConcept",
-      "present_in_graph": true,
-      "triples_removed": 1,
-      "materialization_after": {
-        "bound_concepts": 147,
-        "technical_concept_classes": 11,
-        "covered_by_by_subproperty": {
-          "exactMatch": 0,
-          "broaderConcept": 16,
-          "substitutableWith": 0
-        },
-        "covered_by_total": 16
-      },
-      "covered_by_delta": 0,
-      "bound_concepts_delta": 0,
-      "task_pu_after": 4306,
-      "task_pdu_after": 40024841,
-      "task_pu_delta": 0,
-      "cq_changed": [],
-      "cq_skipped": false,
-      "cq_mentions_subject": [],
-      "path": false,
-      "cq_seconds": 153.4,
-      "consumed": false,
-      "consumed_by": [],
-      "flow": false,
-      "predicted_consumed": false,
-      "prediction_ok": true,
-      "proposed_action": "삭제 (6-B · 술어 포함)",
-      "reason": "역술어를 읽는 소비자 없음 — run_cq 무추론 · SHACL inference none"
     },
     {
       "id": "semi:subPropertyOf:ont:aboutClaim→pa:concernsClaim",
@@ -634,7 +506,6 @@
         "bound_concepts": 147,
         "technical_concept_classes": 11,
         "covered_by_by_subproperty": {
-          "exactMatch": 0,
           "broaderConcept": 16,
           "substitutableWith": 0
         },
@@ -651,7 +522,7 @@
         "CQ29_claim_level_rejection_judgment"
       ],
       "path": false,
-      "cq_seconds": 146.6,
+      "cq_seconds": 152.3,
       "consumed": false,
       "consumed_by": [],
       "flow": false,
@@ -673,7 +544,6 @@
         "bound_concepts": 147,
         "technical_concept_classes": 11,
         "covered_by_by_subproperty": {
-          "exactMatch": 0,
           "broaderConcept": 16,
           "substitutableWith": 0
         },
@@ -688,7 +558,7 @@
       "cq_skipped": false,
       "cq_mentions_subject": [],
       "path": false,
-      "cq_seconds": 147.6,
+      "cq_seconds": 151.7,
       "consumed": false,
       "consumed_by": [],
       "flow": false,
@@ -710,7 +580,6 @@
         "bound_concepts": 147,
         "technical_concept_classes": 11,
         "covered_by_by_subproperty": {
-          "exactMatch": 0,
           "broaderConcept": 16,
           "substitutableWith": 0
         },
@@ -728,7 +597,7 @@
         "CQ32_novelty_uncovered_essential_concepts"
       ],
       "path": false,
-      "cq_seconds": 147.2,
+      "cq_seconds": 151.3,
       "consumed": false,
       "consumed_by": [],
       "flow": false,
@@ -736,80 +605,6 @@
       "prediction_ok": true,
       "proposed_action": "보존 (바인딩 재분류)",
       "reason": "V6b 이식용 슬롯 바인딩 — R-Box 가 아니라 subClassOf 11건과 같은 급"
-    },
-    {
-      "id": "semi:inverseOf:ont:claimOf→ont:hasClaim",
-      "module": "semi",
-      "kind": "inverseOf",
-      "role": "rbox",
-      "subject": "ont:claimOf",
-      "object": "ont:hasClaim",
-      "present_in_graph": true,
-      "triples_removed": 1,
-      "materialization_after": {
-        "bound_concepts": 147,
-        "technical_concept_classes": 11,
-        "covered_by_by_subproperty": {
-          "exactMatch": 0,
-          "broaderConcept": 16,
-          "substitutableWith": 0
-        },
-        "covered_by_total": 16
-      },
-      "covered_by_delta": 0,
-      "bound_concepts_delta": 0,
-      "task_pu_after": 4306,
-      "task_pdu_after": 40024841,
-      "task_pu_delta": 0,
-      "cq_changed": [],
-      "cq_skipped": false,
-      "cq_mentions_subject": [],
-      "path": false,
-      "cq_seconds": 148.7,
-      "consumed": false,
-      "consumed_by": [],
-      "flow": false,
-      "predicted_consumed": false,
-      "prediction_ok": true,
-      "proposed_action": "삭제 (6-B · 술어 포함)",
-      "reason": "역술어를 읽는 소비자 없음 — run_cq 무추론 · SHACL inference none"
-    },
-    {
-      "id": "semi:inverseOf:ont:featureOf→ont:hasFeature",
-      "module": "semi",
-      "kind": "inverseOf",
-      "role": "rbox",
-      "subject": "ont:featureOf",
-      "object": "ont:hasFeature",
-      "present_in_graph": true,
-      "triples_removed": 1,
-      "materialization_after": {
-        "bound_concepts": 147,
-        "technical_concept_classes": 11,
-        "covered_by_by_subproperty": {
-          "exactMatch": 0,
-          "broaderConcept": 16,
-          "substitutableWith": 0
-        },
-        "covered_by_total": 16
-      },
-      "covered_by_delta": 0,
-      "bound_concepts_delta": 0,
-      "task_pu_after": 4306,
-      "task_pdu_after": 40024841,
-      "task_pu_delta": 0,
-      "cq_changed": [],
-      "cq_skipped": false,
-      "cq_mentions_subject": [],
-      "path": false,
-      "cq_seconds": 148.8,
-      "consumed": false,
-      "consumed_by": [],
-      "flow": false,
-      "predicted_consumed": false,
-      "prediction_ok": true,
-      "proposed_action": "삭제 (6-B · 술어 포함)",
-      "reason": "역술어를 읽는 소비자 없음 — run_cq 무추론 · SHACL inference none"
     },
     {
       "id": "semi:disjointWith:ont:StructuralElement→ont:Material",
@@ -824,7 +619,6 @@
         "bound_concepts": 147,
         "technical_concept_classes": 11,
         "covered_by_by_subproperty": {
-          "exactMatch": 0,
           "broaderConcept": 16,
           "substitutableWith": 0
         },
@@ -838,8 +632,8 @@
       "cq_changed": [],
       "cq_skipped": false,
       "cq_mentions_subject": [],
-      "path": false,
-      "cq_seconds": 145.7,
+      "path": true,
+      "cq_seconds": 151.7,
       "consumed": false,
       "consumed_by": [],
       "flow": false,
@@ -861,7 +655,6 @@
         "bound_concepts": 147,
         "technical_concept_classes": 11,
         "covered_by_by_subproperty": {
-          "exactMatch": 0,
           "broaderConcept": 16,
           "substitutableWith": 0
         },
@@ -875,8 +668,8 @@
       "cq_changed": [],
       "cq_skipped": false,
       "cq_mentions_subject": [],
-      "path": false,
-      "cq_seconds": 147.0,
+      "path": true,
+      "cq_seconds": 152.8,
       "consumed": false,
       "consumed_by": [],
       "flow": false,
@@ -898,7 +691,6 @@
         "bound_concepts": 147,
         "technical_concept_classes": 11,
         "covered_by_by_subproperty": {
-          "exactMatch": 0,
           "broaderConcept": 16,
           "substitutableWith": 0
         },
@@ -912,8 +704,8 @@
       "cq_changed": [],
       "cq_skipped": false,
       "cq_mentions_subject": [],
-      "path": false,
-      "cq_seconds": 146.2,
+      "path": true,
+      "cq_seconds": 150.6,
       "consumed": false,
       "consumed_by": [],
       "flow": false,
@@ -935,7 +727,6 @@
         "bound_concepts": 147,
         "technical_concept_classes": 11,
         "covered_by_by_subproperty": {
-          "exactMatch": 0,
           "broaderConcept": 16,
           "substitutableWith": 0
         },
@@ -949,8 +740,8 @@
       "cq_changed": [],
       "cq_skipped": false,
       "cq_mentions_subject": [],
-      "path": false,
-      "cq_seconds": 146.7,
+      "path": true,
+      "cq_seconds": 152.8,
       "consumed": false,
       "consumed_by": [],
       "flow": false,
@@ -972,7 +763,6 @@
         "bound_concepts": 113,
         "technical_concept_classes": 10,
         "covered_by_by_subproperty": {
-          "exactMatch": 0,
           "broaderConcept": 16,
           "substitutableWith": 0
         },
@@ -1013,7 +803,6 @@
         "bound_concepts": 135,
         "technical_concept_classes": 10,
         "covered_by_by_subproperty": {
-          "exactMatch": 0,
           "broaderConcept": 16,
           "substitutableWith": 0
         },
@@ -1055,7 +844,6 @@
         "bound_concepts": 116,
         "technical_concept_classes": 10,
         "covered_by_by_subproperty": {
-          "exactMatch": 0,
           "broaderConcept": 1,
           "substitutableWith": 0
         },
@@ -1096,7 +884,6 @@
         "bound_concepts": 142,
         "technical_concept_classes": 10,
         "covered_by_by_subproperty": {
-          "exactMatch": 0,
           "broaderConcept": 16,
           "substitutableWith": 0
         },
@@ -1136,7 +923,6 @@
         "bound_concepts": 147,
         "technical_concept_classes": 10,
         "covered_by_by_subproperty": {
-          "exactMatch": 0,
           "broaderConcept": 16,
           "substitutableWith": 0
         },
@@ -1176,7 +962,6 @@
         "bound_concepts": 135,
         "technical_concept_classes": 10,
         "covered_by_by_subproperty": {
-          "exactMatch": 0,
           "broaderConcept": 15,
           "substitutableWith": 0
         },
@@ -1221,7 +1006,6 @@
         "bound_concepts": 147,
         "technical_concept_classes": 10,
         "covered_by_by_subproperty": {
-          "exactMatch": 0,
           "broaderConcept": 16,
           "substitutableWith": 0
         },
@@ -1257,7 +1041,6 @@
         "bound_concepts": 132,
         "technical_concept_classes": 10,
         "covered_by_by_subproperty": {
-          "exactMatch": 0,
           "broaderConcept": 16,
           "substitutableWith": 0
         },
@@ -1295,7 +1078,6 @@
         "bound_concepts": 109,
         "technical_concept_classes": 10,
         "covered_by_by_subproperty": {
-          "exactMatch": 0,
           "broaderConcept": 15,
           "substitutableWith": 0
         },
@@ -1340,7 +1122,6 @@
         "bound_concepts": 147,
         "technical_concept_classes": 10,
         "covered_by_by_subproperty": {
-          "exactMatch": 0,
           "broaderConcept": 16,
           "substitutableWith": 0
         },
@@ -1376,7 +1157,6 @@
         "bound_concepts": 147,
         "technical_concept_classes": 10,
         "covered_by_by_subproperty": {
-          "exactMatch": 0,
           "broaderConcept": 16,
           "substitutableWith": 0
         },
@@ -1400,43 +1180,6 @@
       "reason": "경로 有 · core-data 인스턴스 0 이라 유량 0"
     },
     {
-      "id": "kr:differentFrom:pa/kr:NoticeOfReasons→pa/kr:FinalRejection",
-      "module": "kr",
-      "kind": "differentFrom",
-      "role": "rbox",
-      "subject": "pa/kr:NoticeOfReasons",
-      "object": "pa/kr:FinalRejection",
-      "present_in_graph": true,
-      "triples_removed": 1,
-      "materialization_after": {
-        "bound_concepts": 147,
-        "technical_concept_classes": 11,
-        "covered_by_by_subproperty": {
-          "exactMatch": 0,
-          "broaderConcept": 16,
-          "substitutableWith": 0
-        },
-        "covered_by_total": 16
-      },
-      "covered_by_delta": 0,
-      "bound_concepts_delta": 0,
-      "task_pu_after": 4306,
-      "task_pdu_after": 40024841,
-      "task_pu_delta": 0,
-      "cq_changed": [],
-      "cq_skipped": false,
-      "cq_mentions_subject": [],
-      "path": false,
-      "cq_seconds": 144.7,
-      "consumed": false,
-      "consumed_by": [],
-      "flow": false,
-      "predicted_consumed": false,
-      "prediction_ok": true,
-      "proposed_action": "삭제 (6-B)",
-      "reason": "개체 상이성을 읽는 소비자 없음"
-    },
-    {
       "id": "kr:exactMatch:pa/kr:Ground_29_1→ont:Rejection_Novelty",
       "module": "kr",
       "kind": "exactMatch",
@@ -1449,7 +1192,6 @@
         "bound_concepts": 147,
         "technical_concept_classes": 11,
         "covered_by_by_subproperty": {
-          "exactMatch": 0,
           "broaderConcept": 16,
           "substitutableWith": 0
         },
@@ -1464,7 +1206,7 @@
       "cq_skipped": false,
       "cq_mentions_subject": [],
       "path": false,
-      "cq_seconds": 145.9,
+      "cq_seconds": 152.1,
       "consumed": false,
       "consumed_by": [],
       "flow": false,
@@ -1486,7 +1228,6 @@
         "bound_concepts": 147,
         "technical_concept_classes": 11,
         "covered_by_by_subproperty": {
-          "exactMatch": 0,
           "broaderConcept": 16,
           "substitutableWith": 0
         },
@@ -1501,7 +1242,7 @@
       "cq_skipped": false,
       "cq_mentions_subject": [],
       "path": false,
-      "cq_seconds": 144.6,
+      "cq_seconds": 151.7,
       "consumed": false,
       "consumed_by": [],
       "flow": false,

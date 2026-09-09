@@ -27,6 +27,44 @@ All notable changes to SDKB will be documented in this file.
 
 ## [Unreleased]
 
+### Changed (2026-09-09 — PLAN-005 단계 6-B · 소비되지 않는 공리 삭제 · CQ33 · 불변식 C · 사용자 승인)
+
+**결론.** 6-A 절제가 미소비로 판정한 `pa:` R-Box 12건 중 **6건을 지웠고**(역술어 셋은 선언까지), 남긴 6건에는
+전부 **사유가 코드와 게이트에 있다** — `substitutableWith` 2건(일몰 조항) · `disjointWith` 4건(신설 불변식 C 가
+읽는다). 절제를 다시 돌려 **"pa: R-Box ∖ RETAINED 중 미소비 0"** 을 확인했다(§9-5). CQ10 의 행정 어휘 필수부
+(§12.5 이월)는 CQ10 을 고치지 않고 태스크 중립 판 **CQ33** 을 신설해 닫았다. A-Box sha `4c726e98…` 은 **불변**.
+전문은 계획서 §15.7, 대조표는 `01.code_spec/reports/PLAN-005-stage6-axiom-consumers.md`(재렌더).
+
+**§0 하류 — `pa:` 3모듈 sha 가 바뀐다.** `sdkb-patent.ttl`·`sdkb-core.ttl`·A-Box 는 불변. 하류 `vendor.py:VENDOR_FILES`
+와 `baseline.py:BASELINE_PARTS` **양쪽** 갱신할 것(§12.4 · 하나만 고치면 스냅샷엔 들어오고 G₀ 엔 안 들어온다).
+
+| 파일 | 트리플 | sha256 (앞 12) 전 → 후 |
+|---|---:|---|
+| `sdkb-priorart-core.ttl` | 232 → **226** | `67e6693f8aac` → **`e565b3257188`** |
+| `sdkb-priorart-semi.ttl` | 77 → **65** | `667a6f4bc164` → **`d66c93252478`** |
+| `sdkb-priorart-kr.ttl` | 41 → **40** | `f19a7e646081` → **`4e5ed9739f64`** |
+
+서명(README 두 판 · `graph_signature.json`): T-Box Total 1,932 → **1,913** · OP 126 → **123**(`pa:conceptOfFeature` ·
+`ont:featureOf` · `ont:claimOf` 삭제). `MODIFIED` 2026-09-07 → 2026-09-09.
+
+| 무엇 | 왜 | 어디 |
+|---|---|---|
+| **삭제 6** — `pa:broaderConcept` 전이 · `skos:exactMatch ⊑ pa:coveredBy` · `pa:conceptOfFeature`(inverseOf · 선언까지) · `ont:featureOf`·`ont:claimOf`(inverseOf · 선언까지) · `pakr:NoticeOfReasons owl:differentFrom` | 6-A 절제 ②③④ 전부 무변화 · 읽는 소비자 없음(무추론). 전이는 §3.3 깊이 {0,1} 과 모순(실측 길이-2 사슬 0). exactMatch 는 유량 0 이고 가능한 유량이 오염(클래스 정렬 23 · LegalGround 2)뿐 | `scripts/build_priorart_modules.py` |
+| **보존 + 일몰 2** — `pa:substitutableWith` 대칭 · ⊑coveredBy | 경로 有(생성기 `EXPANSION_SOURCES` 가 읽음) · 유량 0(PLAN-002 채굴 쌍 없음). **단계 7 착수까지 PLAN-002 3단계(Prec) 미착수면 삭제**(D2) — 생성기 주석과 `tests/test_stage6_ablation.py:RETAINED` 에 못박음 | 〃 |
+| **불변식 C 신설** — semi 의 `owl:disjointWith` 를 **T-Box 에서 읽어** core-data·A-Box 개체의 배제쌍 동시 타이핑을 검사(하위 클래스 폐포 포함 · 대상 0 이면 경고 · 없는 파일은 실패). 4쌍 · 개체 96 검사 · 위반 0 | disjointWith 4건에 소비자를 부여(D3). 추론기 없는 파이프라인에서 이 공리를 읽는 유일한 자리 | `scripts/check_priorart_invariants.py` · `Makefile` validate(데이터 그래프 명시) |
+| **CQ33 신설** `CQ33_prior_art_disclosures_by_concept.rq` — 필수부 `pa:Disclosure`·`pa:discloses` 뿐, 출원일은 OPTIONAL · `# task-neutral: required` · **540행** | CQ10 은 `?prior a ont:Patent` 로 시작해 §3.4 에 설계상 걸린다. CQ 이름은 하류 게이트와 공유하는 규약이라 제자리 의미 변경은 §7-2 위반에 가까움(D4). CQ10 은 본문 불변 · 헤더 `# layer: evidence` | `queries/cq/` · 불변식 B 검사 대상 1 → **2** · CQ 33개 · 29 통과(실패 4건은 기존 그대로) |
+| 절제기 — `disjointWith` 경로 판정(불변식 C) · 예측표는 기록으로 유지(열거 ⊆ 표 · 표 ∖ 열거 == 삭제 6) | 6-A 표를 사후에 고치지 않는다 | `scripts/report_v1_ablation.py` |
+| 계약 — 하위 술어 정확히 {broaderConcept, substitutableWith} · inverseOf·differentFrom 0 · 삭제 술어 선언 0 · disjointWith 4 · 불변식 C 가 실물 통과 & 주입 위반(직접·하위클래스 경유)을 문다 & 없는 파일은 실패 · **pa: R-Box 는 소비되거나 RETAINED 에 사유가 있어야 한다**(허용목록 · 실물에 없는 RETAINED 항목도 실패) · CQ33 발견·중립·행 ≥ 1 · CQ10 증거층 표기 | §2 5단계(b) | `tests/test_priorart_modules.py` · `tests/test_stage6_ablation.py` |
+
+**하지 않은 것.** `propertyChainAxiom` 넷 투입(무추론 §3.3 배치에서 소비자 불성립 — 실체화는 §1.9(b) 의 동점 블록 ·
+CQ 경로는 공리를 필요로 하지 않음 · 후보생성은 V2 Reach 가 parquet 로 수행) · 구 8건 삭제(§7-2 · 하류 핀) ·
+PLAN-004 편집(개정안만 계획서 §15.7 에 적었다 — "각 0 을 벗어나고" → "소비 경로가 기계로 확인된 것만") ·
+citationStatus · MinedAxiom 실체화.
+
+**절제 재실행.** 31건(삭제 6 반영) · 소비 8 · 미소비 23 · **pa: R-Box 미소비 6 = RETAINED 정확히**(substitutableWith 2 · disjointWith 4 · 전부 경로 有) · 예측 불일치 0 · ② 20건 전부 무변화(회당 151–157초 · 합 3,049초) · CQ 33개 10,210행 · ④ 기준선 4,306 불변
+
+**게이트.** `make validate` **exit 0**(불변식 A·B·C OK · SHACL 6블록 PASSED) · `make test` **400 passed · 10 skipped**(6-B 신규 8건 포함 · RETAINED 게이트 통과) · `make cq` 33개 29 통과 · `make check-public` **369 파일 · 적중 0 ✅** · `make signature-inject` 반영
+
 ### Changed (2026-09-08 — PLAN-005 단계 6-A · V1 절제 계측 완성 · 사용자 승인)
 
 **결론.** V1 공리 단위 절제(§5)를 정의대로 완성해 R-Box·바인딩 **37건**을 절제했다 — 소비 **8** · 미소비 29 ·

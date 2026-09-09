@@ -293,15 +293,19 @@ validate:
 	@# 이 층은 그 뒷문을 가질 이유가 없다.
 	@# ① 워킹트리가 생성기와 일치하는가 (손으로 고친 TTL 을 잡는다 · §1-1)
 	$(PYTHON) scripts/build_priorart_modules.py --check
-	@# ② 이식성 불변식 — core 순도 + 태스크 질의의 행정 어휘 금지 (§5 V6(a) · §3.4)
-	$(PYTHON) scripts/check_priorart_invariants.py
-	@# ③ shape 를 **겨냥한 그래프에** 건다. 단계 5-A 부터 A-Box(ClaimProfile ·
-	@#   Disclosure · ExaminerElement)가 같이 실린다 — 없으면 짓는다(입력이 전부 커밋돼
-	@#   있어 자격이 필요 없다). MinedAxiom 타깃은 여전히 0 이고(채굴 쌍은 이 저장소에
-	@#   없다 — 5-A 비목표), 검증기가 그 사실을 vacuous 로 출력한다. 0 을 숨기지 않는
-	@#   것이 부채 대장 4번에서 배운 것이다. core-data 를 싣는 이유: sh:class
-	@#   pa:TechnicalConcept 가 개념 개체의 rdf:type 을 데이터 그래프에서 읽는다.
+	@# A-Box 는 ②·③ 둘 다의 검사 대상이다 — 없으면 짓는다(입력이 전부 커밋돼 있어 자격이
+	@#   필요 없다).
 	@test -f ontology/sdkb-abox-priorart.ttl || $(MAKE) PYTHON=$(PYTHON) abox-priorart
+	@# ② 이식성 불변식 — A core 순도 · B 태스크 질의의 행정 어휘 금지 (§5 V6(a) · §3.4) ·
+	@#   C 배제쌍 동시 타이핑 금지 (단계 6-B — semi 의 disjointWith 를 읽는 유일한 소비자.
+	@#   데이터 그래프를 **명시**한다: 기본값에 기대면 A-Box 를 빼먹어도 통과한다).
+	$(PYTHON) scripts/check_priorart_invariants.py \
+		--data ontology/sdkb-core-data.ttl ontology/sdkb-abox-priorart.ttl
+	@# ③ shape 를 **겨냥한 그래프에** 건다. 단계 5-A 부터 A-Box(ClaimProfile ·
+	@#   Disclosure · ExaminerElement)가 같이 실린다. MinedAxiom 타깃은 여전히 0 이고(채굴
+	@#   쌍은 이 저장소에 없다 — 5-A 비목표), 검증기가 그 사실을 vacuous 로 출력한다. 0 을
+	@#   숨기지 않는 것이 부채 대장 4번에서 배운 것이다. core-data 를 싣는 이유: sh:class
+	@#   pa:TechnicalConcept 가 개념 개체의 rdf:type 을 데이터 그래프에서 읽는다.
 	$(PYTHON) scripts/validate_shacl.py --shapes validation/shapes_priorart.ttl \
 		--owl ontology/sdkb-priorart-core.ttl --inference none \
 		--data ontology/sdkb-priorart-core.ttl ontology/sdkb-priorart-semi.ttl \

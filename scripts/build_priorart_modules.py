@@ -25,6 +25,15 @@
 뿐이다. 역방향이면 `sdkb-patent.ttl` 이 바뀌어 하류(`sdkb-prior-art-paper`)가 핀한
 sha256 `0a317389…9829` 이 깨진다(§0).
 
+**단계 6-B(2026-09-09 · 사용자 승인) — V1 절제로 소비가 확인되지 않은 공리를 뺐다.** 절제
+리포트(`data/reports/priorart_v1_ablation.json` · 37건 · 예측 불일치 0)에서 미소비였던 것 중
+`broaderConcept` 전이 · `skos:exactMatch ⊑ coveredBy` · 역술어 셋(`pa:conceptOfFeature` ·
+`ont:featureOf` · `ont:claimOf` — 선언까지) · `pakr:NoticeOfReasons owl:differentFrom` 을 지웠다.
+남긴 미소비는 둘뿐이고 사유가 코드에 있다: `substitutableWith`(경로 有 · PLAN-002 채굴 쌍 대기
+· **일몰**) · `disjointWith` 4건(불변식 C 가 읽는다). `propertyChainAxiom` 넷은 넣지 않는다 —
+추론기 없는 §3.3 배치에서 소비자가 성립할 수 없다. tests/test_stage6_ablation.py 가
+"pa: R-Box ∖ RETAINED 중 미소비 0" 을 게이트로 건다.
+
 **결정성.** 시각·난수를 쓰지 않고, blank node 를 하나도 만들지 않으며, 직렬화는 rdflib 가
 아니라 아래 `_emit` 이 (주어, 술어, 목적어) 사전순으로 한다. 같은 원천 → 같은 바이트다
 (tests/test_priorart_modules.py 가 두 번 빌드해 고정한다).
@@ -52,7 +61,7 @@ PA, ONT, GOV, PAKR = SDKB_PA, SDKB_ONT, SDKB_GOV, SDKB_PA_KR
 
 # 발행 메타. **상수다** — `datetime.now()` 를 쓰면 빌드마다 그래프가 달라지고
 # 하류의 sha256 핀이 매일 깨진다(§0).
-MODIFIED = "2026-09-07"
+MODIFIED = "2026-09-09"
 VERSION = "0.1.0-dev"
 LICENSE = URIRef("https://spdx.org/licenses/CDLA-Permissive-2.0.html")
 
@@ -164,17 +173,23 @@ def build_core() -> Graph:
           "확장 깊이는 의미론이 아니라 질의 시점의 동결된 설정값이다.",
           domain=PA.TechnicalConcept, range_=PA.TechnicalConcept)
     _prop(g, PA.broaderConcept, OWL.ObjectProperty, "broader concept",
-          "상위 개념. 전이다 — 개념 계층의 확장은 판단이 아니라 어휘의 성질이다.",
+          "상위 개념. **전이로 선언하지 않는다**(6-B) — 전이면 coveredBy 가 하위 술어를 통해 "
+          "사실상 전이가 되어 §3.3 의 동결 깊이 {0,1} 과 모순이고, 실측(skos:broader 18쌍 중 "
+          "길이-2 사슬 0)으로도 함의 차이가 0 이다. 계층의 확장은 질의의 `?` 가 든다.",
           domain=PA.TechnicalConcept, range_=PA.TechnicalConcept)
-    g.add((PA.broaderConcept, RDF.type, OWL.TransitiveProperty))
     g.add((PA.broaderConcept, RDFS.subPropertyOf, PA.coveredBy))
+    # substitutableWith — 6-B 일몰 조항(사용자 결정 D2). 생성기가 읽는 경로는 있으나
+    # (build_abox_priorart.EXPANSION_SOURCES) PLAN-002 채굴 쌍이 없어 유량 0 이다.
+    # **단계 7 착수 시점까지 PLAN-002 3단계(Prec) 가 착수되지 않으면 이 둘을 지운다.**
     _prop(g, PA.substitutableWith, OWL.ObjectProperty, "substitutable with",
-          "치환 가능(단순 설계변경·재료 치환). 대칭이나 **전이가 아니다**.",
+          "치환 가능(단순 설계변경·재료 치환). 대칭이나 **전이가 아니다**. "
+          "인스턴스는 PLAN-002 채굴 쌍이 들어온 뒤에 생긴다(일몰 조항 — 생성기 주석).",
           domain=PA.TechnicalConcept, range_=PA.TechnicalConcept)
     g.add((PA.substitutableWith, RDF.type, OWL.SymmetricProperty))
     g.add((PA.substitutableWith, RDFS.subPropertyOf, PA.coveredBy))
-    # 외부 어휘를 확장자로 끌어온다. skos: 는 도메인·관할 어휘가 아니므로 core 에 허용된다.
-    g.add((SKOS.exactMatch, RDFS.subPropertyOf, PA.coveredBy))
+    # `skos:exactMatch ⊑ pa:coveredBy` 는 6-B 에서 뺐다 — 유량 0 이고, 가능한 유량은 sdkb-core 의
+    # 클래스 정렬 23건과 kr 의 LegalGround↔RejectionType 2건뿐이라 오염 경로였다. 개념 동일성
+    # 쌍이 채굴되면 그때 pa: 소유의 하위 술어를 새로 만든다(§7-6 · 지금 만들지 않는다).
     _prop(g, PA.discloses, OWL.ObjectProperty, "discloses",
           "문헌이 개시한 개념. 신규성의 우변 — 이것이 없으면 Disclosure 는 도달 목표 노드로 "
           "선언만 되고 질의가 닿을 수 없다.",
@@ -188,9 +203,8 @@ def build_core() -> Graph:
           "한정요소가 가리키는 개념. range 가 **합집합이 아니라 슬롯**인 것이 도메인 축의 답이다. "
           "rdfs:domain 은 여기서 선언하지 않는다 — 그것이 곧 도메인 어휘이기 때문이다.",
           range_=PA.TechnicalConcept)
-    _prop(g, PA.conceptOfFeature, OWL.ObjectProperty, "concept of feature",
-          "featureConcept 의 역관계. 문헌 쪽에서 질의 쪽으로 거슬러 오르는 경로에 필수다.")
-    g.add((PA.conceptOfFeature, OWL.inverseOf, PA.featureConcept))
+    # `pa:conceptOfFeature owl:inverseOf pa:featureConcept` 는 6-B 에서 선언까지 뺐다 — 역술어를
+    # 읽는 소비자가 없다(run_cq 무추론 · SHACL inference none). 거슬러 오르는 경로는 질의의 `^` 가 든다.
     _prop(g, PA.featureRole, OWL.ObjectProperty, "feature role",
           "한정요소의 역할. 개체는 바인딩 모듈이 넣는다.", range_=PA.FeatureRole)
     _prop(g, PA.essentialConcept, OWL.ObjectProperty, "essential concept",
@@ -332,6 +346,8 @@ def build_semi() -> Graph:
     # ── 상호배제. **신규 클래스 대 기존 클래스로만 건다** ──
     # 기존 둘(예: Process·Material) 사이에 걸면 이미 실린 인스턴스가 비일관이 될 수 있고,
     # 그것은 이 단계가 약속한 '기존 어휘 불변'을 깨는 것이다.
+    # 소비자는 불변식 C(check_priorart_invariants.check_disjointness · 6-B) — 이 쌍을 여기서 읽어
+    # core-data·A-Box 개체가 양쪽으로 타이핑됐는지 검사한다. 추론기가 없으므로 그것이 유일한 소비다.
     for a, b in [
         (ONT.StructuralElement, ONT.Process), (ONT.StructuralElement, ONT.Material),
         (ONT.TechnicalFunction, ONT.StructuralElement),
@@ -339,13 +355,7 @@ def build_semi() -> Graph:
     ]:
         g.add((a, OWL.disjointWith, b))
 
-    # ── 역관계 (R-Box) ──
-    _prop(g, ONT.featureOf, OWL.ObjectProperty, "feature of",
-          "hasFeature 의 역관계.", domain=ONT.ClaimFeature, range_=ONT.Claim)
-    g.add((ONT.featureOf, OWL.inverseOf, ONT.hasFeature))
-    _prop(g, ONT.claimOf, OWL.ObjectProperty, "claim of",
-          "hasClaim 의 역관계.", domain=ONT.Claim, range_=ONT.Patent)
-    g.add((ONT.claimOf, OWL.inverseOf, ONT.hasClaim))
+    # 역관계 `ont:featureOf`·`ont:claimOf`(inverseOf) 는 6-B 에서 선언까지 뺐다 — 읽는 소비자가 없다.
 
     # ── 슬롯 채우기: core 가 비워 둔 domain/range ──
     g.add((PA.featureConcept, RDFS.domain, ONT.ClaimFeature))
@@ -411,8 +421,8 @@ def build_kr() -> Graph:
            "거절결정서", "final rejection decision")
     g.add((PAKR.FinalRejection, PA.documentRole, PA.FinalAction))
     g.add((PAKR.FinalRejection, PA.underJurisdiction, GOV.JurisdictionKR))
-    # PLAN-001 §1.2(b) 의 owl:disjointWith 가 내려온 자리. 클래스가 아니므로 differentFrom 이다.
-    g.add((PAKR.NoticeOfReasons, OWL.differentFrom, PAKR.FinalRejection))
+    # PLAN-001 §1.2(b) 의 owl:disjointWith 가 내려온 자리였다. 클래스가 아니라 differentFrom 으로
+    # 두었으나 6-B 에서 뺐다 — 개체 상이성을 읽는 소비자가 없고(무추론), 두 문서종은 IRI 가 다르다.
 
     # ── KR 법리 판정 어휘. 중립 판정 넷은 core 에 있다 ──
     for local, ko, en, com in [

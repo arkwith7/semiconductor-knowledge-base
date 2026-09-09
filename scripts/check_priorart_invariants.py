@@ -22,13 +22,21 @@
 필수로 본다 — 한 가지에서만 특허를 요구해도 그 가지는 특허 종속이다.
 
 **대상은 헤더로 고른다.** `# task-neutral: required` 가 붙은 질의만 검사한다. 기존 CQ 31개
-는 이번 단계의 비목표(§7-2 기존 어휘 불변)이며, 그중 **CQ10 은 설계상 이 규칙에 걸린다**
-(`?prior a ont:Patent` 로 시작) — 그 교정은 단계 6·7 의 몫이다. 여기서 손대면 승인 범위
-밖이고, 반대로 규칙을 느슨하게 하면 게이트가 아니라 장식이 된다(§4).
+는 단계 4 의 비목표(§7-2 기존 어휘 불변)이며, 그중 **CQ10 은 설계상 이 규칙에 걸린다**
+(`?prior a ont:Patent` 로 시작). 단계 6-B(2026-09-09 · 사용자 결정 D4)는 CQ10 을 고치지 않고
+**CQ33** 을 태스크 판으로 신설했다 — CQ 이름은 하류 게이트와 공유하는 규약이라 제자리 의미
+변경은 §7-2 위반에 가깝다. CQ10 은 헤더에 증거층(`# layer: evidence`)으로 명기했다.
+
+**불변식 C — 배제쌍 동시 타이핑 금지 (단계 6-B · 사용자 결정 D3).** semi 의 `owl:disjointWith`
+쌍을 **T-Box 에서 읽어**(하드코딩 0) core-data·A-Box 의 개체가 양쪽 클래스(하위 포함)로
+타이핑됐으면 실패. 추론기가 없는 파이프라인에서 이 공리를 읽는 유일한 소비자이며, V1 절제가
+"소비자 없음"으로 판정한 4건에 소비자를 부여한 것이다. 검사 대상 개체가 0 이면 경고한다 —
+0 을 검사한 통과는 아무것도 말하지 않는다.
 
 CLI:
     python scripts/check_priorart_invariants.py
-    python scripts/check_priorart_invariants.py --core PATH --queries DIR
+    python scripts/check_priorart_invariants.py --core PATH --queries DIR \
+        --semi PATH --tbox PATH... --data PATH...
 """
 from __future__ import annotations
 
@@ -36,12 +44,16 @@ import argparse
 from pathlib import Path
 
 from rdflib import Graph, Literal, URIRef
+from rdflib.namespace import RDF, RDFS, OWL
 from rdflib.plugins.sparql.algebra import translateQuery
 from rdflib.plugins.sparql.parser import parseQuery
 from rdflib.term import Variable
 
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_CORE = ROOT / "ontology" / "sdkb-priorart-core.ttl"
+DEFAULT_SEMI = ROOT / "ontology" / "sdkb-priorart-semi.ttl"
+DEFAULT_TBOX = [ROOT / "ontology" / "sdkb-core.ttl", ROOT / "ontology" / "sdkb-patent.ttl"]
+DEFAULT_DATA = [ROOT / "ontology" / "sdkb-core-data.ttl"]
 DEFAULT_QUERIES = ROOT / "queries"
 
 # core 에서 허용되는 이름공간. 여기 없는 IRI 는 전부 위반이다(허용 목록 방식).
@@ -179,10 +191,60 @@ def task_queries(qdir: Path) -> list[Path]:
     return out
 
 
+# ── 불변식 C ────────────────────────────────────────────────────────
+def _subclass_closure(hier: Graph, cls: URIRef) -> set[URIRef]:
+    out, frontier = {cls}, [cls]
+    while frontier:
+        c = frontier.pop()
+        for s in hier.subjects(RDFS.subClassOf, c):
+            if s not in out:
+                out.add(s)
+                frontier.append(s)
+    return out
+
+
+def check_disjointness(semi: Path, tbox: list[Path], data: list[Path]) -> tuple[list[str], dict]:
+    """semi 의 disjointWith 쌍마다, 데이터 개체가 양쪽(하위 클래스 포함)으로 타이핑됐는지.
+
+    반환: (위반 문장들, {"pairs": n, "individuals_checked": m}). 쌍은 T-Box 에서 읽는다 —
+    표를 코드에 두면 공리를 지워도 검사가 남아 절제가 소비를 잘못 본다.
+    """
+    sg = Graph(); sg.parse(semi, format="turtle")
+    pairs = sorted({(a, b) for a, b in sg.subject_objects(OWL.disjointWith)}, key=lambda p: (str(p[0]), str(p[1])))
+    hier = Graph()
+    for p in [semi, *tbox]:
+        if p.exists():
+            hier.parse(p, format="turtle")
+    types: dict[URIRef, set[URIRef]] = {}
+    for p in data:
+        if not p.exists():
+            shown = p.relative_to(ROOT) if p.is_relative_to(ROOT) else p
+            return [f"{shown} 가 없다 — 검사 대상 없이 통과시키지 않는다"], {"pairs": len(pairs), "individuals_checked": 0}
+        dg = Graph(); dg.parse(p, format="turtle")
+        for s, o in dg.subject_objects(RDF.type):
+            if isinstance(s, URIRef) and isinstance(o, URIRef):
+                types.setdefault(s, set()).add(o)
+    fails: list[str] = []
+    checked: set[URIRef] = set()
+    for a, b in pairs:
+        ca, cb = _subclass_closure(hier, a), _subclass_closure(hier, b)
+        for s, ts in types.items():
+            if ts & (ca | cb):
+                checked.add(s)
+            if ts & ca and ts & cb:
+                fails.append(f"불변식 C 위반: {s} 가 {a.split('/')[-1]} 와 {b.split('/')[-1]} 로 함께 타이핑됐다")
+    return fails, {"pairs": len(pairs), "individuals_checked": len(checked)}
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--core", type=Path, default=DEFAULT_CORE)
     ap.add_argument("--queries", type=Path, default=DEFAULT_QUERIES)
+    ap.add_argument("--semi", type=Path, default=DEFAULT_SEMI)
+    ap.add_argument("--tbox", type=Path, nargs="*", default=DEFAULT_TBOX,
+                    help="subClassOf 폐포에 쓸 T-Box (기본: sdkb-core · sdkb-patent)")
+    ap.add_argument("--data", type=Path, nargs="*", default=DEFAULT_DATA,
+                    help="불변식 C 의 검사 대상 개체 그래프 (기본: core-data)")
     args = ap.parse_args()
 
     fails = check_core(args.core)
@@ -199,9 +261,15 @@ def main() -> int:
         print("  (경고: '# task-neutral: required' 가 붙은 질의가 하나도 없다 — "
               "검사 대상이 0이면 통과는 아무것도 말하지 않는다)")
 
-    for line in fails + qfails:
+    dfails, dstat = check_disjointness(args.semi, args.tbox, args.data)
+    print(f"불변식 C · 배제쌍 동시 타이핑 ({dstat['pairs']}쌍 · 개체 {dstat['individuals_checked']:,} 검사 · "
+          f"{', '.join(p.name for p in args.data)}): {'FAIL' if dfails else 'OK — 위반 0건'}")
+    if not dstat["individuals_checked"]:
+        print("  (경고: 배제쌍 클래스로 타이핑된 개체가 0 — 검사 대상이 0이면 통과는 아무것도 말하지 않는다)")
+
+    for line in fails + qfails + dfails:
         print(f"  ✗ {line}")
-    return 1 if (fails or qfails) else 0
+    return 1 if (fails or qfails or dfails) else 0
 
 
 if __name__ == "__main__":

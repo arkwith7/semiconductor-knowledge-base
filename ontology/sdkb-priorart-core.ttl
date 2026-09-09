@@ -20,7 +20,7 @@
 
 <https://w3id.org/sdkb/pa>
     dcterms:license <https://spdx.org/licenses/CDLA-Permissive-2.0.html> ;
-    dcterms:modified "2026-09-07"^^xsd:date ;
+    dcterms:modified "2026-09-09"^^xsd:date ;
     owl:versionInfo "0.1.0-dev" ;
     rdf:type owl:Ontology ;
     rdfs:comment "선행기술 판단·심사절차의 도메인 중립·관할 중립 core. 도메인 어휘(반도체)는 sdkb-priorart-semi.ttl, 관할 어휘(KR)는 sdkb-priorart-kr.ttl 이 슬롯에 바인딩한다. 이 파일에 ont:·gov:·pakr: IRI 가 등장하면 이식성 주장이 깨지며, scripts/check_priorart_invariants.py 가 그것을 실패로 만든다."@ko ;
@@ -185,8 +185,7 @@ pa:axiomConfidence
 
 pa:broaderConcept
     rdf:type owl:ObjectProperty ;
-    rdf:type owl:TransitiveProperty ;
-    rdfs:comment "상위 개념. 전이다 — 개념 계층의 확장은 판단이 아니라 어휘의 성질이다."@ko ;
+    rdfs:comment "상위 개념. **전이로 선언하지 않는다**(6-B) — 전이면 coveredBy 가 하위 술어를 통해 사실상 전이가 되어 §3.3 의 동결 깊이 {0,1} 과 모순이고, 실측(skos:broader 18쌍 중 길이-2 사슬 0)으로도 함의 차이가 0 이다. 계층의 확장은 질의의 `?` 가 든다."@ko ;
     rdfs:domain pa:TechnicalConcept ;
     rdfs:label "broader concept"@en ;
     rdfs:range pa:TechnicalConcept ;
@@ -197,12 +196,6 @@ pa:citationStatus
     rdfs:comment "인용이 후속 문서에서 살아남았는가. 문서 계열의 시간순에서 파생하며 손으로 적지 않는다."@ko ;
     rdfs:label "citation status"@en ;
     rdfs:range pa:CitationStatus .
-
-pa:conceptOfFeature
-    owl:inverseOf pa:featureConcept ;
-    rdf:type owl:ObjectProperty ;
-    rdfs:comment "featureConcept 의 역관계. 문헌 쪽에서 질의 쪽으로 거슬러 오르는 경로에 필수다."@ko ;
-    rdfs:label "concept of feature"@en .
 
 pa:concernsClaim
     rdf:type owl:ObjectProperty ;
@@ -329,7 +322,7 @@ pa:solvesProblem
 pa:substitutableWith
     rdf:type owl:ObjectProperty ;
     rdf:type owl:SymmetricProperty ;
-    rdfs:comment "치환 가능(단순 설계변경·재료 치환). 대칭이나 **전이가 아니다**."@ko ;
+    rdfs:comment "치환 가능(단순 설계변경·재료 치환). 대칭이나 **전이가 아니다**. 인스턴스는 PLAN-002 채굴 쌍이 들어온 뒤에 생긴다(일몰 조항 — 생성기 주석)."@ko ;
     rdfs:domain pa:TechnicalConcept ;
     rdfs:label "substitutable with"@en ;
     rdfs:range pa:TechnicalConcept ;
@@ -364,6 +357,3 @@ pa:versionOf
     rdfs:comment "어느 청구항의 버전인가. range 는 도메인 어휘라 바인딩 모듈이 채운다."@ko ;
     rdfs:domain pa:ClaimVersion ;
     rdfs:label "version of"@en .
-
-skos:exactMatch
-    rdfs:subPropertyOf pa:coveredBy .
