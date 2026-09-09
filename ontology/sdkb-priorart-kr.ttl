@@ -23,7 +23,7 @@
 
 pa:kr
     dcterms:license <https://spdx.org/licenses/CDLA-Permissive-2.0.html> ;
-    dcterms:modified "2026-09-07"^^xsd:date ;
+    dcterms:modified "2026-09-09"^^xsd:date ;
     owl:imports <https://w3id.org/sdkb/pa> ;
     owl:imports ont:patent ;
     owl:versionInfo "0.1.0-dev" ;
@@ -55,7 +55,6 @@ pakr:Ground_29_2
     skos:prefLabel "진보성 부정 (특허법 제29조 제2항)"@ko .
 
 pakr:NoticeOfReasons
-    owl:differentFrom pakr:FinalRejection ;
     pa:documentRole pa:FirstAction ;
     pa:underJurisdiction gov:JurisdictionKR ;
     rdf:type pa:ExaminationDocumentType ;

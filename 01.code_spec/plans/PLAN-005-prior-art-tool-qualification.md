@@ -1191,3 +1191,40 @@ pa: 모듈의 R-Box 미소비 12건 = C1 · C3 · C4 · C5 · C6 · S16 · S17 �
 **6-B**(§2 3단계 별도 승인 🛑): C1·C5·C6·S16·S17·K3 삭제(역술어는 선언까지) · C3·C4 보존+일몰 주석 · 불변식 C ·
 CQ33 신설 + CQ10 증거층 명기 · `test_stage6_ablation.py` 2부(RETAINED 허용목록 게이트) · `make signature-inject` ·
 PLAN-004 C-2 개정안 · 절제 재실행으로 "pa: R-Box ∖ RETAINED 중 미소비 0" 확인. 그 뒤 단계 7(τ 를 결과 전에 동결).
+
+### 15.7 6-B 실행 기록 — 삭제 · CQ33 · 불변식 C (2026-09-09 · §2 3단계 별도 승인 · 사용자 승인)
+
+**결론 먼저.** 미소비 12건 중 **6건 삭제**(`broaderConcept` 전이 · `skos:exactMatch ⊑ coveredBy` · 역술어 셋 선언까지 ·
+`differentFrom`), **6건 보존에 사유**(`substitutableWith` 2 = 일몰 · `disjointWith` 4 = 신설 불변식 C 가 읽음). 절제
+재실행으로 §9-5 를 **`pa:` 3모듈 범위**에서 닫았다 — "pa: R-Box ∖ RETAINED 중 미소비 0". 구 8건은 §7-2·하류 핀으로
+보존하며 §9-5 의 "자원" 은 이 범위로 읽는다(15.2 기본값). A-Box sha `4c726e98…` 불변.
+
+| 항목 | 명령 | 결과 |
+|---|---|---|
+| B1 삭제 | `make priorart` · `--check` | core 232 → **226** · semi 77 → **65** · kr 41 → **40** · OK |
+| A-Box | `make abox-priorart` | sha **불변** · `covered_by_by_subproperty {broaderConcept 16 · substitutableWith 0}` |
+| B2 불변식 C | `check_priorart_invariants.py --data core-data abox-priorart` | 4쌍 · 개체 **96** 검사 · 위반 0 · 주입 위반(직접·SubProcess 경유)은 문다 |
+| B3 CQ33 | `make cq` | **540행**(plasma_etch 개시 558 중 2015 이후 출원 제외) · 33 CQ · 29 통과 · 불변식 B 대상 2 |
+| 서명 | `make signature-inject` | Total 1,932 → **1,913** · OP 126 → **123** |
+| 절제 재실행 | `make v1-ablation` | 31건(삭제 6 반영) · 소비 8 · 미소비 23 · **pa: R-Box 미소비 6 = RETAINED 정확히**(substitutableWith 2 · disjointWith 4 · 전부 경로 有) · 예측 불일치 0 · ② 20건 전부 무변화(회당 151–157초 · 합 3,049초) · CQ 33개 10,210행 · ④ 기준선 4,306 불변 |
+| 게이트 | `make validate` · `make test` · `make check-public` | `make validate` **exit 0**(불변식 A·B·C OK · SHACL 6블록 PASSED) · `make test` **400 passed · 10 skipped**(6-B 신규 8건 포함 · RETAINED 게이트 통과) · `make cq` 33개 29 통과 · `make check-public` **369 파일 · 적중 0 ✅** · `make signature-inject` 반영 |
+
+sha256(앞 12): core `67e6693f8aac` → `e565b3257188` · semi `667a6f4bc164` → `d66c93252478` · kr `f19a7e646081` → `4e5ed9739f64`.
+
+**PLAN-004 C-2 개정안 (제안 · PLAN-004 편집은 별도 승인).** 현 문면(PLAN-004:108) *"`inverseOf`·`propertyChainAxiom`·
+`disjointWith` 가 각 0 을 벗어나고, 각 공리가 어느 CQ 또는 태스크 경로에 쓰이는지 기계로 확인됨"* 은 앞 절과 뒤 절이
+충돌한다 — 6-A 절제가 `inverseOf` 3건 전부를 소비자 없음으로 판정했고, `propertyChainAxiom` 은 추론기 없는 §3.3
+배치에서 소비자가 성립할 수 없다. 개정안: *"R-Box 공리마다 **소비 경로가 기계로 확인**된다(PLAN-005 §5 V1 절제 ·
+경로/유량 구분). 종류별 최소 개수는 두지 않는다 — 개수 조건은 표를 채우려고 공리를 만들게 한다(§7-6)."* 종류별 0 이
+결손인 것이 아니라, 소비자 없는 공리가 결손이다.
+
+**단계 3 미수행의 지위.** PLAN-002 `Prec ≥ 0.60` 은 2인 코더 배정 대기로 미산출이다. 단계 4 는 어휘만 지었고 채굴
+공리 인스턴스(`MinedAxiom`)는 0 이므로 "공리 신설" 선행조건에 걸리지 않았다 — 이 해석은 15.1 에 처음 적었고 여기서
+재확인한다. `substitutableWith` 일몰은 이 게이트에 묶여 있다.
+
+### 15.8 다음
+
+**단계 7** — V2–V4 재측정. **1단계에서 τ 를 결과를 보기 전에 동결**한다(단계 1 의 V2 기준선 `SPR@100 0.0053` 등은
+이미 본 수이므로 τ 의 근거는 그 수가 아니라 §5 V2 의 세 조건과 대조군 tfidf 층별 값에서 끌어낸다). V2 목표 노드를
+인용문헌 노드(퇴화형)에서 `disclosure/{publication_id}` 로 교체(§13.5). `substitutableWith` 일몰 판정(PLAN-002 3단계
+착수 여부). 별건: citationStatus 파생 · combinableWith · MinedAxiom 실체화 · R7 예외 · FailureMode·Skill 바인딩.

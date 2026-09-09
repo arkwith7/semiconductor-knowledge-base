@@ -35,27 +35,54 @@ def modules() -> dict[str, Graph]:
     return {f: Graph().parse(ROOT / "ontology" / f, format="turtle") for f in v1.MODULES}
 
 
+#: 6-B(2026-09-09 · 사용자 승인)가 지운 여섯 — 예측표에는 기록으로 남고 열거에서는 사라져야 한다.
+DELETED_6B = {
+    "core:TransitiveProperty:pa:broaderConcept",
+    "core:subPropertyOf:skos:exactMatch→pa:coveredBy",
+    "core:inverseOf:pa:conceptOfFeature→pa:featureConcept",
+    "semi:inverseOf:ont:claimOf→ont:hasClaim",
+    "semi:inverseOf:ont:featureOf→ont:hasFeature",
+    "kr:differentFrom:pa/kr:NoticeOfReasons→pa/kr:FinalRejection",
+}
+#: 6-B 이후에도 미소비로 남는 pa: R-Box — 사유가 있는 것만. 여기 없는 미소비는 게이트가 잡는다.
+RETAINED = {
+    "core:SymmetricProperty:pa:substitutableWith":
+        "경로 有(생성기 양방향 방출) · 유량 0 — PLAN-002 채굴 쌍 대기 · 단계 7 착수까지 Prec 미착수면 삭제(D2)",
+    "core:subPropertyOf:pa:substitutableWith→pa:coveredBy":
+        "경로 有(EXPANSION_SOURCES) · 유량 0 — 같은 일몰 조항(D2)",
+    "semi:disjointWith:ont:StructuralElement→ont:Material": "불변식 C 가 읽는다(경로) · 위반 0 이라 유량 0(D3)",
+    "semi:disjointWith:ont:StructuralElement→ont:Process": "불변식 C 가 읽는다(경로) · 위반 0 이라 유량 0(D3)",
+    "semi:disjointWith:ont:TechnicalEffect→ont:StructuralElement": "불변식 C 가 읽는다(경로) · 위반 0 이라 유량 0(D3)",
+    "semi:disjointWith:ont:TechnicalFunction→ont:StructuralElement": "불변식 C 가 읽는다(경로) · 위반 0 이라 유량 0(D3)",
+}
+
+
 # ── ① 열거 — 동결 목록과 정확히 같다 ──────────────────────────────────
 def test_enumeration_matches_frozen_table(modules):
-    """공리가 늘거나 줄면 예측표를 **먼저** 고쳐야 한다 — 결과를 본 뒤 표를 늘리는 것을 막는다."""
+    """공리가 늘면 예측표를 **먼저** 고쳐야 한다 — 결과를 본 뒤 표를 늘리는 것을 막는다.
+    줄어든 것은 6-B 의 삭제 여섯뿐이어야 한다."""
     ids = [ax.id for ax in v1.enumerate_axioms(modules)]
     assert len(ids) == len(set(ids)), "중복 id"
-    assert set(ids) == set(v1.FROZEN), {
-        "열거만": sorted(set(ids) - set(v1.FROZEN)), "표만": sorted(set(v1.FROZEN) - set(ids))}
-    assert len(ids) == 37
+    assert set(ids) - set(v1.FROZEN) == set(), sorted(set(ids) - set(v1.FROZEN))
+    assert set(v1.FROZEN) - set(ids) == DELETED_6B
+    assert len(ids) == 31
+    assert set(RETAINED) <= set(ids), "RETAINED 에 열거되지 않는 항목이 있다"
 
 
 def test_enumeration_sees_pa_and_skos_subjects_and_legacy_eight(modules):
-    """단계 1 의 맹점 — `ont:` 주어만 세면 core 6 · semi 9 · kr 3 이 보이지 않는다."""
+    """단계 1 의 맹점 — `ont:` 주어만 세면 pa: 공리가 보이지 않는다. 6-B 이후 core 3 · semi 7 · kr 2."""
     by_mod = {}
     for ax in v1.enumerate_axioms(modules):
         by_mod.setdefault(ax.module, []).append(ax)
     assert len([a for a in by_mod["legacy:core"] + by_mod["legacy:patent"]]) == 8
-    assert sum(1 for a in by_mod["core"] if a.role == "rbox") == 6
-    assert any(a.subject == "skos:exactMatch" for a in by_mod["core"])
+    assert sum(1 for a in by_mod["core"] if a.role == "rbox") == 3
+    assert not any(a.subject == "skos:exactMatch" for a in by_mod["core"])     # C5 삭제
     assert {a.role for a in by_mod["semi"]} == {"rbox", "binding-property", "binding-class"}
     assert sum(1 for a in by_mod["semi"] if a.role == "binding-class") == 11
-    assert {a.kind for a in by_mod["kr"]} == {"differentFrom", "exactMatch"}
+    assert sum(1 for a in by_mod["semi"] if a.kind == "disjointWith") == 4
+    assert {a.kind for a in by_mod["kr"]} == {"exactMatch"}                      # K3 삭제
+    assert not any(a.kind in ("inverseOf", "TransitiveProperty", "differentFrom")
+                   for m in ("core", "semi", "kr") for a in by_mod[m])
 
 
 # ── ② ③ 검출기 — 게이트가 문다 ────────────────────────────────────────
@@ -115,6 +142,9 @@ def test_path_column_is_structural():
     inv = v1.Axiom("z", "core", "inverseOf", "pa:conceptOfFeature", "pa:featureConcept", "rbox",
                    [(URIRef(PA + "conceptOfFeature"), OWL.inverseOf, URIRef(PA + "featureConcept"))])
     assert v1.has_reader(sub, core) and v1.has_reader(sym, core) and not v1.has_reader(inv, core)
+    dis = v1.Axiom("w", "semi", "disjointWith", "ont:A", "ont:B", "rbox",
+                   [(URIRef("https://w3id.org/sdkb/ont/A"), OWL.disjointWith, URIRef("https://w3id.org/sdkb/ont/B"))])
+    assert v1.has_reader(dis, core)                       # 6-B 불변식 C
 
 
 def test_task_measure_is_task_neutral(tmp_path):
@@ -136,7 +166,7 @@ def test_report_describes_current_files():
         else:
             assert sha == hashlib.sha256((ROOT / rel).read_bytes()).hexdigest(), f"{rel} 가 리포트 이후 바뀌었다"
     assert rep["baseline"]["abox_covered_by_matches_tbox_driven"] is True
-    assert TABLE.exists() and rep["summary"]["axioms_total"] == 37
+    assert TABLE.exists() and rep["summary"]["axioms_total"] == 31
 
 
 @needs_report
@@ -147,3 +177,49 @@ def test_report_matches_frozen_prediction():
     assert rep["summary"]["prediction_mismatches"] == []
     consumed = {r["id"] for r in rep["detail"] if r["consumed"]}
     assert "core:subPropertyOf:pa:broaderConcept→pa:coveredBy" in consumed
+
+
+# ── ⑤ 6-B 게이트 — pa: R-Box 는 소비되거나 사유가 있어야 한다 (§9-5) ──────
+@needs_report
+def test_pa_rbox_axioms_are_consumed_or_retained():
+    """허용목록 방식(불변식 A 선례). RETAINED 에 없는 미소비가 하나라도 있으면 실패 —
+    표를 채우려고 공리를 만들지도, 사유 없이 남기지도 않는다(§7-6 · §9-5)."""
+    rep = json.loads(REPORT.read_text(encoding="utf-8"))
+    pa_rbox = [r for r in rep["detail"] if r["role"] == "rbox" and r["module"] in ("core", "semi", "kr")]
+    assert pa_rbox, "pa: 모듈에 R-Box 가 하나도 없다"
+    bad = [r["id"] for r in pa_rbox if not r["consumed"] and r["id"] not in RETAINED]
+    assert bad == [], f"소비 경로도 사유도 없는 공리: {bad}"
+    stale = [i for i in RETAINED if i not in {r["id"] for r in pa_rbox}]
+    assert stale == [], f"RETAINED 에 실물에 없는 항목: {stale}"
+    for r in pa_rbox:
+        if r["id"] in RETAINED:
+            assert r["path"] is True, f"{r['id']} 는 사유가 '경로 有' 인데 리포트의 path 가 False 다"
+    assert rep["summary"]["unconsumed_rbox_in_pa_modules"] == sorted(RETAINED)
+
+
+# ── ⑥ CQ33 — 태스크 중립 판이 발견되고, 중립이며, 행이 있다 ──────────────
+def test_cq33_is_discovered_neutral_and_cq10_is_marked_evidence():
+    from scripts.check_priorart_invariants import task_queries
+    qdir = ROOT / "queries" / "cq"
+    found = {p.name for p in task_queries(qdir)}
+    assert found == {"CQ32_novelty_uncovered_essential_concepts.rq",
+                     "CQ33_prior_art_disclosures_by_concept.rq"}
+    for name in found:
+        assert check_query(qdir / name) == []
+    cq10 = (qdir / "CQ10_prior_art_candidates_by_concept.rq").read_text(encoding="utf-8")
+    assert "# layer: evidence" in cq10 and "task-neutral" not in cq10.split("PREFIX", 1)[0].replace(
+        "`task-neutral` 마커를", "")
+    assert "?prior a ont:Patent" in cq10                  # 본문 불변
+
+
+@pytest.mark.skipif(not (ROOT / "ontology" / "sdkb-abox-priorart.ttl").exists(),
+                    reason="priorart A-Box 미빌드")
+def test_cq33_returns_rows_on_shipped_abox():
+    from scripts.run_cq import load_graph, parse_cq
+    q = ROOT / "queries" / "cq" / "CQ33_prior_art_disclosures_by_concept.rq"
+    cq = parse_cq(q)
+    assert cq.suite == "pa" and cq.expect_min == 1
+    g, _, _ = load_graph([ROOT / "ontology" / f for f in
+                          ("sdkb-priorart-core.ttl", "sdkb-patent.ttl", "sdkb-abox-priorart.ttl",
+                           "sdkb-abox-patents.ttl")])
+    assert len(list(g.query(cq.query))) >= 1

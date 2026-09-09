@@ -92,10 +92,53 @@ def test_covered_by_is_not_transitive():
     g = Graph(); g.parse(CORE, format="turtle")
     cov = URIRef(PA + "coveredBy")
     assert (cov, RDF.type, OWL.TransitiveProperty) not in g
-    # 확장자 셋은 하위 술어로 살아 있어야 한다 (역할이 바뀔 뿐 사라지지 않는다).
+    # 6-B — 하위 술어도 전이가 아니다: broaderConcept 가 전이면 coveredBy 가 사실상 전이가 된다.
+    assert (URIRef(PA + "broaderConcept"), RDF.type, OWL.TransitiveProperty) not in g
+    # 확장자는 둘 — broaderConcept(소비 확인) · substitutableWith(일몰 조항 · D2).
+    # skos:exactMatch ⊑ coveredBy 는 6-B 에서 뺐다 — 오염 경로(클래스 정렬·LegalGround 가 coveredBy 가 된다).
     subs = set(g.subjects(RDFS.subPropertyOf, cov))
-    assert URIRef(PA + "broaderConcept") in subs
-    assert URIRef(PA + "substitutableWith") in subs
+    assert subs == {URIRef(PA + "broaderConcept"), URIRef(PA + "substitutableWith")}
+
+
+def test_unconsumed_inverse_and_different_from_axioms_are_gone():
+    """6-B — 절제로 소비자가 없음이 확인된 역술어 셋·differentFrom 은 선언까지 없다."""
+    g = Graph()
+    for p in (CORE, SEMI, KR):
+        g.parse(p, format="turtle")
+    assert not list(g.triples((None, OWL.inverseOf, None)))
+    assert not list(g.triples((None, OWL.differentFrom, None)))
+    for term in (PA + "conceptOfFeature", ONT + "featureOf", ONT + "claimOf"):
+        assert (URIRef(term), None, None) not in g, term
+    # disjointWith 4건은 남는다 — 불변식 C 가 읽는다(D3).
+    assert len(list(g.triples((None, OWL.disjointWith, None)))) == 4
+
+
+# ── 불변식 C — 배제쌍 동시 타이핑 ────────────────────────────────────
+def test_disjointness_gate_passes_on_shipped_data_and_is_not_vacuous():
+    from scripts.check_priorart_invariants import check_disjointness, DEFAULT_TBOX
+    fails, stat = check_disjointness(SEMI, DEFAULT_TBOX, [ONT_DIR / "sdkb-core-data.ttl"])
+    assert fails == []
+    assert stat["pairs"] == 4 and stat["individuals_checked"] > 0
+
+
+def test_disjointness_gate_rejects_individual_typed_on_both_sides(tmp_path):
+    """**게이트가 무는가.** StructuralElement 이면서 Material 인 개체를 넣으면 죽어야 한다."""
+    from scripts.check_priorart_invariants import check_disjointness, DEFAULT_TBOX
+    bad = tmp_path / "data_bad.ttl"
+    bad.write_text(
+        f"<https://w3id.org/sdkb/data/structural_element/x> a <{ONT}StructuralElement> , <{ONT}Material> .\n",
+        encoding="utf-8")
+    fails, _ = check_disjointness(SEMI, DEFAULT_TBOX, [bad])
+    assert fails and "structural_element/x" in fails[0]
+    # 하위 클래스로도 잡힌다 — SubProcess ⊑ Process 이므로 StructuralElement ∧ SubProcess 도 위반이다.
+    bad.write_text(
+        f"<https://w3id.org/sdkb/data/structural_element/y> a <{ONT}StructuralElement> , <{ONT}SubProcess> .\n",
+        encoding="utf-8")
+    fails, _ = check_disjointness(SEMI, DEFAULT_TBOX, [bad])
+    assert fails, "하위 클래스 경유 위반을 놓쳤다"
+    # 없는 데이터 파일은 통과가 아니라 실패다.
+    fails, _ = check_disjointness(SEMI, DEFAULT_TBOX, [tmp_path / "missing.ttl"])
+    assert fails
 
 
 def test_imports_flow_one_way_and_existing_files_untouched():

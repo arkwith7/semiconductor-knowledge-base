@@ -150,7 +150,9 @@ def enumerate_axioms(graphs: dict[str, Graph]) -> list[Axiom]:
 
 # ── 동결 예측 (계획 파일 2026-09-08 · 결과를 보기 전에) ────────────────────────
 #: id → (예측 consumed, 제안 조치, 사유). 여기 없는 공리가 열거되면 리포트가 그것을 표시한다 —
-#: 예측표를 사후에 늘리지 않기 위해서다. 조치는 6-B 의 안이며 6-A 는 아무것도 지우지 않는다.
+#: 예측표를 사후에 늘리지 않기 위해서다. 조치는 6-B 의 안이며 6-A 는 아무것도 지우지 않았다.
+#: 6-B(2026-09-09) 가 "삭제" 로 표시된 6건을 실제로 지웠다 — 표에는 기록으로 남긴다.
+#: tests/test_stage6_ablation.py 가 열거 ⊆ 표, 표 ∖ 열거 == 6-B 삭제분 을 고정한다.
 _KEEP_LEGACY = ("보존 (§7-2 · 하류 핀)", "단계 1 재현 · legacy T-Box 는 제자리 불변 · sdkb-patent.ttl 0a317389… 핀")
 _SUNSET = ("보존 + 일몰 (D2)", "경로 有(생성기가 읽음) · 유량 0 — PLAN-002 채굴 쌍 없음 · 단계 7 착수까지 Prec 미착수면 삭제")
 _INVERSE = ("삭제 (6-B · 술어 포함)", "역술어를 읽는 소비자 없음 — run_cq 무추론 · SHACL inference none")
@@ -273,6 +275,8 @@ def has_reader(ax: Axiom, core: Graph) -> bool:
         return True                                      # 〃 (양방향 방출)
     if ax.kind == "subClassOf":
         return True                                      # technical_concept_classes · SHACL sh:class
+    if ax.kind == "disjointWith":
+        return True                                      # check_priorart_invariants.check_disjointness (6-B 불변식 C)
     return False                                         # run_cq 무추론 · SHACL inference none
 
 

@@ -2,6 +2,12 @@
 # suite: pa
 # monotone: up
 # expect-min: 1
+# layer: evidence
+#
+# 단계 6-B(2026-09-09) — 이 질의는 **증거층** CQ 다. 필수부가 `?prior a ont:Patent` 로 시작해
+# §3.4 검사 규칙(행정 어휘는 OPTIONAL 에서만)에 설계상 걸리며, 그래서 `task-neutral` 마커를
+# 붙이지 않는다. 태스크 중립 판은 CQ33(pa:Disclosure 기반)이다. 본문은 바꾸지 않았다 —
+# CQ 이름과 응답은 하류 게이트가 공유하는 규약이다(§7-2).
 PREFIX ont:  <https://w3id.org/sdkb/ont/>
 PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
 # 개념과 기준일은 질의의 파라미터다. 태스크는 "내 아이디어(개념 C, 착상 시점 T)에 대한

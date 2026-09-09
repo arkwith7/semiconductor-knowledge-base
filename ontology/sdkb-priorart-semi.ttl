@@ -106,24 +106,8 @@ ont:TechnicalFunction
 ont:aboutClaim
     rdfs:subPropertyOf pa:concernsClaim .
 
-ont:claimOf
-    owl:inverseOf ont:hasClaim ;
-    rdf:type owl:ObjectProperty ;
-    rdfs:comment "hasClaim 의 역관계."@ko ;
-    rdfs:domain ont:Claim ;
-    rdfs:label "claim of"@en ;
-    rdfs:range ont:Patent .
-
 ont:featureConcept
     rdfs:subPropertyOf pa:featureConcept .
-
-ont:featureOf
-    owl:inverseOf ont:hasFeature ;
-    rdf:type owl:ObjectProperty ;
-    rdfs:comment "hasFeature 의 역관계."@ko ;
-    rdfs:domain ont:ClaimFeature ;
-    rdfs:label "feature of"@en ;
-    rdfs:range ont:Claim .
 
 ont:onGround
     rdfs:subPropertyOf pa:onGround .
@@ -145,7 +129,7 @@ pa:profileOf
 
 pa:semi
     dcterms:license <https://spdx.org/licenses/CDLA-Permissive-2.0.html> ;
-    dcterms:modified "2026-09-07"^^xsd:date ;
+    dcterms:modified "2026-09-09"^^xsd:date ;
     owl:imports <https://w3id.org/sdkb/pa> ;
     owl:imports ont:patent ;
     owl:versionInfo "0.1.0-dev" ;

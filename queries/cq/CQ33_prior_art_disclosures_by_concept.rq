@@ -1,0 +1,35 @@
+# desc: 아이디어를 개념(여기서는 plasma_etch)으로 표현했을 때, 같은 개념을 개시한 문헌은 무엇이고 그중 특허라면 출원일이 기준일보다 앞선 것은? — CQ10 의 태스크 중립 판
+# suite: pa
+# monotone: up
+# expect-min: 1
+# task-neutral: required
+#
+# PLAN-005 단계 6-B 산출(2026-09-09 · 사용자 결정 D4). CQ10 은 `?prior a ont:Patent` 로
+# 시작해 §3.4 검사 규칙(행정 어휘는 OPTIONAL 증거 블록에서만)에 설계상 걸린다. CQ10 을
+# 제자리에서 고치지 않는 이유는 CQ 이름이 하류 게이트와 공유하는 규약이라 의미 변경이
+# §7-2 위반에 가깝기 때문이다. CQ10 은 증거층으로 남고(헤더 `# layer: evidence`), 이 질의가
+# 태스크 판이다 — 필수부는 pa:Disclosure · pa:discloses 뿐이라 **특허가 아닌 문헌**(연구노트
+# 로 만든 Disclosure)도 같은 질의로 검색된다. 출원일은 특허일 때만 OPTIONAL 로 붙고,
+# 붙었을 때만 기준일(2015-01-01 · CQ10 과 같은 상수)로 거른다.
+#
+# 실측(2026-09-08 스팟체크): subprocess/plasma_etch 를 개시한 Disclosure 558건.
+# scripts/check_priorart_invariants.py 불변식 B 가 이 질의의 중립성을 CI 에서 강제한다.
+
+PREFIX pa:  <https://w3id.org/sdkb/pa/>
+PREFIX ont: <https://w3id.org/sdkb/ont/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?disclosure ?filed
+WHERE {
+  # ── 태스크 필수부: 문헌이 '특허'일 필요가 없다 ──
+  ?disclosure a pa:Disclosure ;
+              pa:discloses <https://w3id.org/sdkb/data/subprocess/plasma_etch> .
+
+  # ── 증거층은 OPTIONAL 로만 붙는다 (§3.4 검사 규칙) ──
+  OPTIONAL {
+    ?disclosure pa:disclosureOf ?patent .
+    ?patent a ont:Patent ;
+            ont:filingDate ?filed .
+  }
+  FILTER(!BOUND(?filed) || ?filed < "2015-01-01"^^xsd:date)
+}

@@ -7,8 +7,8 @@
     "mappings/claim_features.parquet": "1e8b14cae533f0039b54afbf906490d2c7f6ca5ce53a92af96b4e35ccf8b9238",
     "data/patents/notice_element_judgments.parquet": "e46cdeb9bd6689092d5714f3793c0dd8ad4d9a19a96c0727ba395816eabdb4d3",
     "ontology/sdkb-core-data.ttl": "7142201d34966f3cb7871499db56655478a502b0455f3e800d0c2f04e125a0dc",
-    "ontology/sdkb-priorart-core.ttl": "67e6693f8aac029b6b36fb4d4fd3b2fe122791668bd8466266b620580659d642",
-    "ontology/sdkb-priorart-semi.ttl": "667a6f4bc164e4e5d7d943816cf07021446d86d5282a806f2f358306b53bbd67",
+    "ontology/sdkb-priorart-core.ttl": "e565b32571889bfd5ced2ca7b49a099dc45978821820e94d85d656f5e9b10e2f",
+    "ontology/sdkb-priorart-semi.ttl": "d66c932524789269e7bd1a0f936b7987dc020c26abae0aaa2d3487f5c768e6ef",
     "data/sources/harvest_scope_dev_train.json": "543c027126307445e82300e54ee6cd01786563a3fded9dfaefe47834deefed11"
   },
   "technical_concept_classes": [
@@ -375,7 +375,6 @@
     "excluded_non_data_iri": 0,
     "transitive_closure": false,
     "covered_by_by_subproperty": {
-      "exactMatch": 0,
       "broaderConcept": 16,
       "substitutableWith": 0
     },
