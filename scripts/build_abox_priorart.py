@@ -36,7 +36,8 @@ V2 의 정본 목표 노드(Disclosure)는 잴 수 없었다. 이 생성기가 �
                  EXPANSION_SOURCES) core 에 있는데 원천 표에 없는 술어는 빌드가 죽는다.
 
 무엇을 만들지 않는가 (5-A 비목표 · 사용자 승인)
-  MinedAxiom·substitutableWith(채굴 쌍 산출물이 이 저장소에 없다) · ClaimVersion ·
+  MinedAxiom(채굴 쌍 산출물이 이 저장소에 없다 · substitutableWith 는 7-0 일몰로 술어 자체가
+  없다) · ClaimVersion ·
   citationStatus · issuedDate/examRound(원천에 없다 — 지어내지 않는다) · 비 KR/US
   인용문헌의 Disclosure(청구항 분해 0% — 결손으로 센다) · 미바인딩 타입 34 개념
   (FailureMode·Skill·EquipmentClass — semi 가 pa:TechnicalConcept 에 걸지 않았다. 넣으면
@@ -292,12 +293,6 @@ def build_hierarchy(core_data: Graph, bound: set[str]) -> tuple[list[tuple[URIRe
     return _bound_pairs(core_data, SKOS.broader, bound, stat, "skos_broader"), stat
 
 
-def _mined_substitutions(core_data: Graph, bound: set[str]) -> tuple[list[tuple[URIRef, URIRef]], Counter]:
-    """치환 쌍 — PLAN-002 채굴 산출물이 이 저장소에 없다(5-A 비목표). 원천이 생기면 여기서 읽는다."""
-    stat: Counter = Counter({"source_absent": 1})
-    return [], stat
-
-
 def _concept_exact_matches(core_data: Graph, bound: set[str]) -> tuple[list[tuple[URIRef, URIRef]], Counter]:
     """개념 개체 간 skos:exactMatch — 클래스 정렬(sdkb-core 의 SemicONTO 매핑)은 data/ IRI 가 아니라 걸러진다."""
     stat: Counter = Counter()
@@ -306,9 +301,11 @@ def _concept_exact_matches(core_data: Graph, bound: set[str]) -> tuple[list[tupl
 
 #: `p ⊑ pa:coveredBy` 인 술어 p 마다 그 쌍을 어디서 읽는지. **core 가 선언한 하위 술어가 이 표에
 #: 없으면 빌드가 죽는다** — 조용히 건너뛰면 공리는 있는데 실체화가 없는 상태가 검출되지 않는다.
+#: `pa:substitutableWith` 항목은 7-0 일몰 실행(2026-09-09)으로 뺐다 — 채굴 쌍 원천이 생기면
+#: 술어 선언과 함께 여기도 다시 넣는다. `skos:exactMatch` 는 core 가 더는 선언하지 않지만
+#: (6-B) 원천 읽기는 남겨 둔다 — 공리가 돌아오면 실체화가 즉시 검출되도록.
 EXPANSION_SOURCES = {
     PA.broaderConcept: build_hierarchy,
-    PA.substitutableWith: _mined_substitutions,
     SKOS.exactMatch: _concept_exact_matches,
 }
 
@@ -548,7 +545,7 @@ def build_report(g: Graph, ttl_sha: str, classes: set[URIRef], bound: set[str],
                          "않으므로 분할 제한이 없다. ExaminerElement 는 심사관 판단이라 scope "
                          "밖 행이 있으면 빌드가 실패한다. 인용 간선은 이 A-Box 에 없다.",
         },
-        "non_goals": ["MinedAxiom / substitutableWith / exactMatch 실체화 (채굴 쌍 산출물 없음)",
+        "non_goals": ["MinedAxiom / exactMatch 실체화 (채굴 쌍 산출물 없음 · substitutableWith 는 7-0 일몰로 술어 없음)",
                       "ClaimVersion / amendedFrom", "citationStatus 파생",
                       "issuedDate / examRound (원천 없음)", "비 KR/US 인용문헌 Disclosure",
                       "접지율 개선 (5-B)"],

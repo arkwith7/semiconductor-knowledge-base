@@ -307,10 +307,10 @@ blank nodes: `grep -c owl:Class` counts both and reports a larger number.
 | `sdkb-commercialization.ttl` | 7 | 0 | 6 | 4 | 17/17 | 104 |
 | `sdkb-governance.ttl` | 0 | 0 | 2 | 1 | 3/3 | 40 |
 | `sdkb-governance-kr.ttl` | 3 | 0 | 2 | 2 | 7/7 | 60 |
-| `sdkb-priorart-core.ttl` | 13 | 0 | 24 | 9 | 46/46 | 226 |
+| `sdkb-priorart-core.ttl` | 13 | 0 | 23 | 9 | 45/45 | 219 |
 | `sdkb-priorart-semi.ttl` | 4 | 0 | 0 | 0 | 4/4 | 65 |
 | `sdkb-priorart-kr.ttl` | 0 | 0 | 0 | 0 | 0/0 | 40 |
-| **Total** | **102** | 19 | **123** | **94** | **319/319** | 1,913 |
+| **Total** | **102** | 19 | **122** | **94** | **318/318** | 1,906 |
 
 **Curation graph** (`data/semiconductor_v0_3.json` — the hand-curated source the core A-Box is generated from).
 

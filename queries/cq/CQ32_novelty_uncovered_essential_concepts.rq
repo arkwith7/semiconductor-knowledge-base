@@ -9,8 +9,9 @@
 #
 # `pa:coveredBy?` 의 `?` 가 §3.3 이 말한 **동결된 확장 깊이 {0,1}** 이다:
 #   0홉 — 같은 개념이 그대로 개시됐다 (coveredBy 는 반사가 아니므로 경로가 그 경우를 든다)
-#   1홉 — broaderConcept·substitutableWith·exactMatch 의 sub-property 함의를 생성기가
-#         `pa:coveredBy` 로 실체화한 것. 이 질의는 추론기 없이 단언 트리플만 본다.
+#   1홉 — broaderConcept 의 sub-property 함의를 생성기가 `pa:coveredBy` 로 실체화한 것
+#         (exactMatch 는 6-B, substitutableWith 는 7-0 일몰에서 뺐다 — 유량 0).
+#         이 질의는 추론기 없이 단언 트리플만 본다.
 # 전이는 없다 — SiO₂↔SiON↔Si₃N₄ 가 심사관이 한 적 없는 판단으로 이어지지 않는다.
 #
 # ORDER BY 를 두지 않는다. 필수부가 profile × essential × disclosure 의 크로스곱이라

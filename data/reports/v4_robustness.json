@@ -1,59 +1,110 @@
 {
-  "generated": "2026-09-05",
+  "generated": "2026-09-09",
   "plan": "PLAN-005 §5 V4-1 (표현 강건성)",
   "read_only": true,
   "linker": "표면형 사전 patent-text (결정적, LLM 아님)",
-  "surface_forms": 665,
+  "surface_forms": 688,
   "note": "변형 claim 이 이 리포트의 기준선이다. V2 기준선과는 링커가 달라 값이 다를 수 있으므로, 판정 대상은 **변형 간 비교**다.",
+  "conj_disclosure": "단계 7 — 각 변형의 `conj_disclosure` 는 R∀(바인딩 개념 전부 개시) · Disclosure 목표 · coveredBy 확장 on(L_C) 이다. 정의는 report_stage7_remeasure.py",
   "by_variant": {
     "L1": {
+      "conj_disclosure": {
+        "queries": 759,
+        "queries_with_disclosure_target": 759,
+        "zero_bound_concept_queries": 38,
+        "reach_median": 243,
+        "hit_rate": 0.4453,
+        "SemanticPathRecall@50": 0.0264,
+        "SemanticPathRecall@100": 0.0448,
+        "SemanticPathRecall@1000": 0.2069
+      },
       "queries": 759,
       "concepts_per_query_median": 2,
-      "zero_concept_queries": 42,
-      "reach_median": 10200,
-      "hit_rate": 0.8617,
+      "zero_concept_queries": 38,
+      "reach_median": 10602,
+      "hit_rate": 0.8735,
       "SemanticPathRecall@100": 0.004,
-      "SemanticPathRecall@1000": 0.054,
+      "SemanticPathRecall@1000": 0.0474,
       "jaccard_to_claim_median": 0.4286
     },
     "L2": {
+      "conj_disclosure": {
+        "queries": 759,
+        "queries_with_disclosure_target": 759,
+        "zero_bound_concept_queries": 39,
+        "reach_median": 309,
+        "hit_rate": 0.4717,
+        "SemanticPathRecall@50": 0.0277,
+        "SemanticPathRecall@100": 0.0461,
+        "SemanticPathRecall@1000": 0.2213
+      },
       "queries": 759,
       "concepts_per_query_median": 2,
-      "zero_concept_queries": 46,
-      "reach_median": 9956,
-      "hit_rate": 0.8669,
+      "zero_concept_queries": 39,
+      "reach_median": 10328,
+      "hit_rate": 0.8788,
       "SemanticPathRecall@100": 0.0079,
-      "SemanticPathRecall@1000": 0.0619,
+      "SemanticPathRecall@1000": 0.054,
       "jaccard_to_claim_median": 0.2353
     },
     "L3": {
+      "conj_disclosure": {
+        "queries": 759,
+        "queries_with_disclosure_target": 759,
+        "zero_bound_concept_queries": 33,
+        "reach_median": 225,
+        "hit_rate": 0.3953,
+        "SemanticPathRecall@50": 0.0264,
+        "SemanticPathRecall@100": 0.0448,
+        "SemanticPathRecall@1000": 0.1989
+      },
       "queries": 759,
-      "concepts_per_query_median": 2,
-      "zero_concept_queries": 40,
-      "reach_median": 10707,
-      "hit_rate": 0.8762,
-      "SemanticPathRecall@100": 0.0066,
-      "SemanticPathRecall@1000": 0.0408,
+      "concepts_per_query_median": 3,
+      "zero_concept_queries": 33,
+      "reach_median": 10999,
+      "hit_rate": 0.888,
+      "SemanticPathRecall@100": 0.0053,
+      "SemanticPathRecall@1000": 0.0343,
       "jaccard_to_claim_median": 0.1974
     },
     "abstract": {
+      "conj_disclosure": {
+        "queries": 759,
+        "queries_with_disclosure_target": 759,
+        "zero_bound_concept_queries": 37,
+        "reach_median": 213,
+        "hit_rate": 0.4018,
+        "SemanticPathRecall@50": 0.029,
+        "SemanticPathRecall@100": 0.054,
+        "SemanticPathRecall@1000": 0.2055
+      },
       "queries": 759,
-      "concepts_per_query_median": 2,
-      "zero_concept_queries": 44,
-      "reach_median": 9877,
-      "hit_rate": 0.8735,
+      "concepts_per_query_median": 3,
+      "zero_concept_queries": 36,
+      "reach_median": 10395,
+      "hit_rate": 0.8854,
       "SemanticPathRecall@100": 0.0066,
-      "SemanticPathRecall@1000": 0.0316,
+      "SemanticPathRecall@1000": 0.0277,
       "jaccard_to_claim_median": 0.5079
     },
     "claim": {
+      "conj_disclosure": {
+        "queries": 759,
+        "queries_with_disclosure_target": 759,
+        "zero_bound_concept_queries": 36,
+        "reach_median": 288,
+        "hit_rate": 0.4585,
+        "SemanticPathRecall@50": 0.0264,
+        "SemanticPathRecall@100": 0.0435,
+        "SemanticPathRecall@1000": 0.2134
+      },
       "queries": 759,
       "concepts_per_query_median": 2,
-      "zero_concept_queries": 40,
-      "reach_median": 10183,
-      "hit_rate": 0.8669,
+      "zero_concept_queries": 36,
+      "reach_median": 10393,
+      "hit_rate": 0.8788,
       "SemanticPathRecall@100": 0.004,
-      "SemanticPathRecall@1000": 0.0553,
+      "SemanticPathRecall@1000": 0.0487,
       "jaccard_to_claim_median": 1.0
     }
   },
@@ -61,30 +112,38 @@
     "Q1_먼": {
       "n": 573,
       "jaccard_median": 0.1642,
-      "hit_rate": 0.8639,
+      "hit_rate": 0.8778,
       "concepts_median": 2.0,
-      "reach_median": 9148.0
+      "reach_median": 9536.0,
+      "hit_rate_conj": 0.4433,
+      "reach_conj_median": 305.0
     },
     "Q2": {
       "n": 566,
       "jaccard_median": 0.2228,
-      "hit_rate": 0.8728,
-      "concepts_median": 2.0,
-      "reach_median": 10811.0
+      "hit_rate": 0.8816,
+      "concepts_median": 3.0,
+      "reach_median": 11348.0,
+      "hit_rate_conj": 0.424,
+      "reach_conj_median": 231.5
     },
     "Q3": {
       "n": 571,
       "jaccard_median": 0.2988,
-      "hit_rate": 0.8739,
+      "hit_rate": 0.8862,
       "concepts_median": 2.0,
-      "reach_median": 10954.0
+      "reach_median": 11348.0,
+      "hit_rate_conj": 0.4658,
+      "reach_conj_median": 314.0
     },
     "Q4_가까운": {
       "n": 567,
       "jaccard_median": 0.4615,
-      "hit_rate": 0.8624,
+      "hit_rate": 0.8748,
       "concepts_median": 3.0,
-      "reach_median": 10665.0
+      "reach_median": 10999.0,
+      "hit_rate_conj": 0.4162,
+      "reach_conj_median": 210.0
     }
   }
 }

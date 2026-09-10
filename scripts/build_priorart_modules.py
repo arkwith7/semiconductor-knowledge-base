@@ -34,6 +34,13 @@ sha256 `0a317389…9829` 이 깨진다(§0).
 추론기 없는 §3.3 배치에서 소비자가 성립할 수 없다. tests/test_stage6_ablation.py 가
 "pa: R-Box ∖ RETAINED 중 미소비 0" 을 게이트로 건다.
 
+**단계 7-0(2026-09-09 · 사용자 승인 D-S) — 일몰 조항을 실행했다.** 단계 7 착수 시점에
+PLAN-002 3단계(`Prec` · 2인 코더)가 착수되지 않았으므로(저장소 안 흔적 0 · 머리말 "코더 배정
+대기" 그대로) `pa:substitutableWith` 를 대칭·`⊑ coveredBy`·선언까지 지웠다(6-B 역술어 선례).
+채굴 쌍이 들어오면 그때 pa: 소유의 하위 술어를 다시 만든다(§7-6 — 지금 만들지 않는다).
+이제 core 의 R-Box 는 `broaderConcept ⊑ coveredBy` 하나이고, 남은 미소비 pa: R-Box 는
+semi 의 `disjointWith` 4건(불변식 C)뿐이다.
+
 **결정성.** 시각·난수를 쓰지 않고, blank node 를 하나도 만들지 않으며, 직렬화는 rdflib 가
 아니라 아래 `_emit` 이 (주어, 술어, 목적어) 사전순으로 한다. 같은 원천 → 같은 바이트다
 (tests/test_priorart_modules.py 가 두 번 빌드해 고정한다).
@@ -178,15 +185,9 @@ def build_core() -> Graph:
           "길이-2 사슬 0)으로도 함의 차이가 0 이다. 계층의 확장은 질의의 `?` 가 든다.",
           domain=PA.TechnicalConcept, range_=PA.TechnicalConcept)
     g.add((PA.broaderConcept, RDFS.subPropertyOf, PA.coveredBy))
-    # substitutableWith — 6-B 일몰 조항(사용자 결정 D2). 생성기가 읽는 경로는 있으나
-    # (build_abox_priorart.EXPANSION_SOURCES) PLAN-002 채굴 쌍이 없어 유량 0 이다.
-    # **단계 7 착수 시점까지 PLAN-002 3단계(Prec) 가 착수되지 않으면 이 둘을 지운다.**
-    _prop(g, PA.substitutableWith, OWL.ObjectProperty, "substitutable with",
-          "치환 가능(단순 설계변경·재료 치환). 대칭이나 **전이가 아니다**. "
-          "인스턴스는 PLAN-002 채굴 쌍이 들어온 뒤에 생긴다(일몰 조항 — 생성기 주석).",
-          domain=PA.TechnicalConcept, range_=PA.TechnicalConcept)
-    g.add((PA.substitutableWith, RDF.type, OWL.SymmetricProperty))
-    g.add((PA.substitutableWith, RDFS.subPropertyOf, PA.coveredBy))
+    # `pa:substitutableWith`(대칭 · ⊑coveredBy)는 6-B 일몰 조항(D2)에 따라 **7-0 에서 뺐다** —
+    # 단계 7 착수 시점까지 PLAN-002 3단계(Prec)가 착수되지 않았다(모듈 docstring). 치환 쌍이
+    # 채굴되면 그때 술어를 다시 선언한다(§7-6 · 지금 만들지 않는다).
     # `skos:exactMatch ⊑ pa:coveredBy` 는 6-B 에서 뺐다 — 유량 0 이고, 가능한 유량은 sdkb-core 의
     # 클래스 정렬 23건과 kr 의 LegalGround↔RejectionType 2건뿐이라 오염 경로였다. 개념 동일성
     # 쌍이 채굴되면 그때 pa: 소유의 하위 술어를 새로 만든다(§7-6 · 지금 만들지 않는다).

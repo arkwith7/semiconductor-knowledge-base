@@ -319,15 +319,6 @@ pa:solvesProblem
     rdfs:label "solves problem"@en ;
     rdfs:range pa:TechnicalConcept .
 
-pa:substitutableWith
-    rdf:type owl:ObjectProperty ;
-    rdf:type owl:SymmetricProperty ;
-    rdfs:comment "치환 가능(단순 설계변경·재료 치환). 대칭이나 **전이가 아니다**. 인스턴스는 PLAN-002 채굴 쌍이 들어온 뒤에 생긴다(일몰 조항 — 생성기 주석)."@ko ;
-    rdfs:domain pa:TechnicalConcept ;
-    rdfs:label "substitutable with"@en ;
-    rdfs:range pa:TechnicalConcept ;
-    rdfs:subPropertyOf pa:coveredBy .
-
 pa:supportCount
     rdf:type owl:DatatypeProperty ;
     rdfs:comment "이 공리를 지지한 심사 사례 수."@ko ;

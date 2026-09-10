@@ -57,6 +57,8 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", type=Path, default=OUT)
     ap.add_argument("--queries", type=Path, default=QUERIES)
+    ap.add_argument("--with-conj-disclosure", action="store_true",
+                    help="단계 7 — R∀(개념 전부 개시) · Disclosure 목표 키를 **추가**한다(기존 키 불변)")
     a = ap.parse_args()
 
     import sys
@@ -67,6 +69,12 @@ def main() -> int:
     for d, cs in doc.items():
         for c in cs:
             inv.setdefault(c, set()).add(d)
+    conj = None
+    if a.with_conj_disclosure:
+        # 단계 7 주 정의 R∀ 를 같은 질의 세트 위에서 함께 잰다. 텍스트 링커가 뽑은 개념 중
+        # pa: 경로(바인딩 개념)에 없는 것은 ClaimProfile 이 그러듯 거른다 — 정의는 remeasure 스크립트.
+        from report_stage7_remeasure import layers_current, conj_reach
+        conj, _ = layers_current(expand=True)
 
     entries = build_linker()
     df = pd.read_parquet(a.queries)
@@ -75,6 +83,7 @@ def main() -> int:
     per_variant, per_query = {}, []
     for variant, sub in df.groupby("variant"):
         sizes, hits, ecount, jac = [], [], [], []
+        csizes, chits, czero = [], [], 0
         for pid, text in zip(sub.publication_id, sub.text):
             T = gt.get(pid, set()) & doc.keys()
             if not T:
@@ -88,12 +97,32 @@ def main() -> int:
             j = (len(tok(base[pid]) & tok(text)) / len(tok(base[pid]) | tok(text))
                  if pid in base else None)
             jac.append(j)
-            per_query.append({"publication_id": pid, "variant": variant, "n_concepts": len(E),
-                              "reach": len(R), "hit": bool(T & R), "jaccard": j})
+            rec = {"publication_id": pid, "variant": variant, "n_concepts": len(E),
+                   "reach": len(R), "hit": bool(T & R), "jaccard": j}
+            if conj is not None:
+                Tc = (gt.get(pid, set()) & conj.disc.keys()) - {pid}
+                Eb = frozenset(E) & conj.bound
+                Rc = conj_reach(conj, Eb, pid)
+                czero += int(not Eb)
+                csizes.append(len(Rc)); chits.append(bool(Tc and (Tc & Rc)))
+                rec.update({"hit_conj": bool(Tc and (Tc & Rc)), "reach_conj": len(Rc),
+                            "n_bound_concepts": len(Eb), "has_disclosure_target": bool(Tc)})
+            per_query.append(rec)
         if not sizes:
             continue
         n = len(sizes)
-        per_variant[variant] = {
+        if conj is not None:
+            per_variant.setdefault(variant, {})["conj_disclosure"] = {
+                "queries": n, "queries_with_disclosure_target": sum(
+                    1 for r in per_query if r["variant"] == variant and r["has_disclosure_target"]),
+                "zero_bound_concept_queries": czero,
+                "reach_median": st.median(csizes),
+                "hit_rate": round(sum(chits) / n, 4),
+                **{f"SemanticPathRecall@{S}": round(
+                    sum(1 for h, r in zip(chits, csizes) if h and r <= S) / n, 4) for S in (50, 100, 1000)},
+            }
+        per_variant.setdefault(variant, {})
+        per_variant[variant] = {**per_variant[variant], **{
             "queries": n,
             "concepts_per_query_median": st.median(ecount),
             "zero_concept_queries": sum(1 for e in ecount if e == 0),
@@ -105,7 +134,7 @@ def main() -> int:
                 sum(1 for h, r in zip(hits, sizes) if h and r <= 1000) / n, 4),
             "jaccard_to_claim_median": (round(st.median([j for j in jac if j is not None]), 4)
                                         if any(j is not None for j in jac) else None),
-        }
+        }}
 
     pq = pd.DataFrame(per_query)
     strat = {}
@@ -116,7 +145,9 @@ def main() -> int:
         strat = {str(k): {"n": int(len(g)), "jaccard_median": round(float(g.jaccard.median()), 4),
                           "hit_rate": round(float(g.hit.mean()), 4),
                           "concepts_median": float(g.n_concepts.median()),
-                          "reach_median": float(g.reach.median())}
+                          "reach_median": float(g.reach.median()),
+                          **({"hit_rate_conj": round(float(g.hit_conj.mean()), 4),
+                              "reach_conj_median": float(g.reach_conj.median())} if conj is not None else {})}
                  for k, g in llm.groupby("q", observed=True)}
 
     rep = {"generated": str(date.today()), "plan": "PLAN-005 §5 V4-1 (표현 강건성)",
@@ -125,6 +156,9 @@ def main() -> int:
            "surface_forms": len(entries),
            "note": ("변형 claim 이 이 리포트의 기준선이다. V2 기준선과는 링커가 달라 값이 다를 수 "
                     "있으므로, 판정 대상은 **변형 간 비교**다."),
+           "conj_disclosure": ("단계 7 — 각 변형의 `conj_disclosure` 는 R∀(바인딩 개념 전부 개시) · "
+                               "Disclosure 목표 · coveredBy 확장 on(L_C) 이다. 정의는 report_stage7_remeasure.py"
+                               if conj is not None else None),
            "by_variant": per_variant, "llm_jaccard_quartiles": strat}
     a.out.parent.mkdir(parents=True, exist_ok=True)
     a.out.write_text(json.dumps(rep, ensure_ascii=False, indent=2), encoding="utf-8")
