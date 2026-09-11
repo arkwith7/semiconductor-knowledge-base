@@ -94,10 +94,12 @@ def test_covered_by_is_not_transitive():
     assert (cov, RDF.type, OWL.TransitiveProperty) not in g
     # 6-B — 하위 술어도 전이가 아니다: broaderConcept 가 전이면 coveredBy 가 사실상 전이가 된다.
     assert (URIRef(PA + "broaderConcept"), RDF.type, OWL.TransitiveProperty) not in g
-    # 확장자는 둘 — broaderConcept(소비 확인) · substitutableWith(일몰 조항 · D2).
-    # skos:exactMatch ⊑ coveredBy 는 6-B 에서 뺐다 — 오염 경로(클래스 정렬·LegalGround 가 coveredBy 가 된다).
+    # 확장자는 하나 — broaderConcept(소비 확인). substitutableWith 는 7-0 일몰 실행(D-S)으로
+    # 선언까지 없고, skos:exactMatch ⊑ coveredBy 는 6-B 에서 뺐다(오염 경로).
     subs = set(g.subjects(RDFS.subPropertyOf, cov))
-    assert subs == {URIRef(PA + "broaderConcept"), URIRef(PA + "substitutableWith")}
+    assert subs == {URIRef(PA + "broaderConcept")}
+    assert (URIRef(PA + "substitutableWith"), None, None) not in g
+    assert not list(g.triples((None, RDF.type, OWL.SymmetricProperty)))
 
 
 def test_unconsumed_inverse_and_different_from_axioms_are_gone():

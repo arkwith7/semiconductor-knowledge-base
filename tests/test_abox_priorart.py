@@ -276,11 +276,12 @@ def test_covered_by_sources_rejects_subproperty_without_source():
 def test_covered_by_sources_emits_symmetric_pairs_both_ways(monkeypatch):
     cd, bound = _core_data_with_broader()
     a, b = URIRef(DATA + "material/a"), URIRef(DATA + "material/b")
-    monkeypatch.setitem(m.EXPANSION_SOURCES, URIRef(PA + "substitutableWith"),
+    # 합성 술어 — 7-0 이후 실물 core 에는 대칭 확장자가 없다. 대칭 처리 자체의 계약만 고정한다.
+    monkeypatch.setitem(m.EXPANSION_SOURCES, URIRef(PA + "someSymmetricExpansion"),
                         lambda core_data, bound: ([(a, b)], {}))
-    out, _ = m.covered_by_sources(_core_with("substitutableWith", symmetric=("substitutableWith",)),
+    out, _ = m.covered_by_sources(_core_with("someSymmetricExpansion", symmetric=("someSymmetricExpansion",)),
                                   cd, bound)
-    assert out[URIRef(PA + "substitutableWith")] == sorted([(a, b), (b, a)])
+    assert out[URIRef(PA + "someSymmetricExpansion")] == sorted([(a, b), (b, a)])
 
 
 # ── ⑤ 실물 계수·누출 ─────────────────────────────────────────────────

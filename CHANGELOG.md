@@ -27,6 +27,44 @@ All notable changes to SDKB will be documented in this file.
 
 ## [Unreleased]
 
+### Changed (2026-09-09 — PLAN-005 단계 7 · V2–V4 재측정 · 동결 목표 대조 · `substitutableWith` 일몰 실행(7-0) · 사용자 승인)
+
+**결론.** 결과를 보기 전에 동결한 문턱(τ = 대조군 tfidf KR R@50 0.6708 · S=50 · 주 정의 R∀ · 사용자 결정 2026-09-09)과
+대조한 판정은 **V2 FAIL(조건 i·ii) · V3 PASS · V4 FAIL** 이다. §6 대로 멈춘다 — *"도달과 문체 비종속을 현 자원이
+지지하지 않는다"* 는 측정 결과이고 진보성 결합 커버는 지지한다. 계측기는 단계 1 값을 그대로 재현했고 두 실행이
+바이트 동일하다. 전문은 계획서 §16, 판정 리포트는 `01.code_spec/reports/PLAN-005-stage7-verdict.md`(기계 렌더).
+
+**§0 하류 — `sdkb-priorart-core.ttl` 만 바뀐다(7-0).** semi·kr·`sdkb-patent.ttl`·`sdkb-core.ttl`·A-Box(`4c726e98…`) 불변.
+하류 `vendor.py:VENDOR_FILES` 와 `baseline.py:BASELINE_PARTS` **양쪽** 갱신할 것.
+
+| 파일 | 트리플 | sha256 (앞 12) 전 → 후 |
+|---|---:|---|
+| `sdkb-priorart-core.ttl` | 226 → **219** | `e565b3257188` → **`307875eb7696`** |
+
+서명(README 두 판 · `graph_signature.json`): T-Box Total 1,913 → **1,906** · OP 123 → **122**(`pa:substitutableWith` 선언까지 삭제).
+
+| 무엇 | 왜 | 어디 |
+|---|---|---|
+| **7-0 일몰 실행** — `pa:substitutableWith` 대칭 · `⊑ coveredBy` · 선언 삭제 | 6-B 결정 D2: 단계 7 착수 시점까지 PLAN-002 3단계(Prec)가 미착수면 삭제. 저장소 안 착수 흔적 0(9/5 이후 PLAN-002 커밋 0 · 코딩 시트 0). 유량 0 이라 A-Box 불변 | `scripts/build_priorart_modules.py` · `build_abox_priorart.py`(`EXPANSION_SOURCES` 항목·`_mined_substitutions` 삭제) · `report_v1_ablation.py`(`FROZEN` 라벨만 · 기록 유지) · 테스트 셋(`DELETED_70` · RETAINED = disjointWith 4 · 열거 29) |
+| **재측정기 신설** `scripts/report_stage7_remeasure.py` → `data/reports/priorart_stage7_remeasure.json` + 판정 MD | V2·V3 를 동결 정의로 계산하고 PASS/FAIL 을 적는다. 사다리 L_A(단계 1 커밋 `460806d` parquet · git 에서 꺼냄 · sha 동결) / L_B / L_C · 순수 집합 계수 · seed 고정 부트스트랩 · parquet 재파생이 A-Box 리포트와 어긋나면 `SystemExit` | `Makefile` `stage7-remeasure` |
+| **V4 계측기 확장** `--with-conj-disclosure` | 각 변형에 R∀·Disclosure 목표 키 `conj_disclosure` **추가**(기존 키 불변) · 텍스트 링커 개념은 바인딩 개념으로 거른다(ClaimProfile 과 같은 규칙) | `scripts/report_v4_robustness.py` · `data/reports/v4_robustness.json` |
+| **계약** `tests/test_stage7_remeasure.py`(16) | `FROZEN` = 계획 · Reach 두 정의의 의미 · **실패해야 할 입력이 실패한다**(흔한 개념 전 문헌 부착 → (iii) FAIL · τ 아래 → (ii) FAIL · CI 가 0 포함 → (i) FAIL · V4 5pt 초과 저하 FAIL · R∀ 미산출이면 판정 None) · 단계 1 재현 · 입력 신선도 · V4 질의 세트 sha `cda3d667…` 동결 | — |
+
+**판정 (재현: `make stage7-remeasure`).**
+- **V2 FAIL** — (i) SPR∀@50 L_A 0.0277 → L_C 0.0316 · Δ +0.0040 · 95% CI [−0.0040, 0.0119] · McNemar p 0.508 ✗ · (ii) Q_KR 681 의
+  SPR∀@50 **0.0323** < τ 0.6708 ✗ · (iii) median|R∀| 1,046 → 961 ✓. 귀속: 데이터 효과(5-B) +0.0020 · 공리 확장 +0.0013.
+- **V3 PASS** — §29② 포함 층 · 2문헌+ q=285 · Δ(best_pair−best_single) 평균 0.0562 · 95% CI [0.0435, 0.0696]. 신규성 정량 판정 없음(§29①-only 14 질의).
+- **V4 FAIL** — R∃ 는 전 변형 통과(L3 +0.0092), **R∀ 에서 L3 회수율 0.3953 대 claim 0.4585(저하 0.0632 > 0.05)** ✗. 자카드 Q1/Q4 통과.
+- 계측기: L_A·R∃ 가 `priorart_baseline.json` V2·V3 값 전부 일치 · 두 실행 `cmp` 동일(JSON 둘 · MD). 서술: Q 759/774/774 · 인용문헌 2,321 중 Disclosure 없음 804(jp 596).
+
+**하지 않은 것.** 미달을 보고 문턱·정의 수정(§1-2) · 다음 단계 제안(§6) · tfidf/hybrid 재실행 · V4-2 재코딩 · MinedAxiom·combinableWith·citationStatus.
+
+**게이트.** `make validate` **exit 0**(불변식 A·B·C OK — C 는 4쌍 · 개체 96 · SHACL 6블록 PASSED) · `make test` **416 passed · 10 skipped**
+(단계 7 신규 16 포함) · `make v1-ablation`(7-0 반영) **29건 · 소비 8 · 미소비 21 · pa: R-Box 미소비 4 = RETAINED(disjointWith)
+정확히 · 예측 불일치 0** · ② 18건 무변화(회당 151–162초 · 합 2,816초) · CQ 33개 10,210행 · ④ 기준선 4,306 불변 ·
+`make public-release && make check-public` **372 파일 · 적중 0 · 죽은 참조 0 ✅** · `make signature-inject` 반영 ·
+재측정 결정성 두 실행 `cmp` 동일.
+
 ### Changed (2026-09-09 — PLAN-005 단계 6-B · 소비되지 않는 공리 삭제 · CQ33 · 불변식 C · 사용자 승인)
 
 **결론.** 6-A 절제가 미소비로 판정한 `pa:` R-Box 12건 중 **6건을 지웠고**(역술어 셋은 선언까지), 남긴 6건에는

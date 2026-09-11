@@ -83,11 +83,11 @@
       "status": "built",
       "classes_named": 13,
       "classes_blank": 0,
-      "object_properties": 24,
+      "object_properties": 23,
       "datatype_properties": 9,
-      "terms": 46,
-      "documented": 46,
-      "triples": 226
+      "terms": 45,
+      "documented": 45,
+      "triples": 219
     },
     {
       "module": "sdkb-priorart-semi",
@@ -115,11 +115,11 @@
   "tbox_total": {
     "classes_named": 102,
     "classes_blank": 19,
-    "object_properties": 123,
+    "object_properties": 122,
     "datatype_properties": 94,
-    "terms": 319,
-    "documented": 319,
-    "triples": 1913
+    "terms": 318,
+    "documented": 318,
+    "triples": 1906
   },
   "curation_source": {
     "status": "built",

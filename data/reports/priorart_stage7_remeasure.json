@@ -1,0 +1,554 @@
+{
+  "plan": "PLAN-005 단계 7 · V2–V4 재측정 · 동결 목표 대조",
+  "generator": "scripts/report_stage7_remeasure.py",
+  "generated": "2026-09-09",
+  "read_only": true,
+  "frozen": {
+    "tau": 0.6708,
+    "tau_source": "data/reports/priorart_baseline.json · control_group.language_stratified_R@50.tfidf_KR",
+    "tau_stratum": "Q_KR = {q ∈ Q_C : Target(q) 에 KR 인용문헌 있음}",
+    "S_primary": 50,
+    "S_all": [
+      50,
+      100,
+      1000,
+      "inf"
+    ],
+    "primary_reach": "R∀",
+    "bootstrap_B": 10000,
+    "seed": 20260909,
+    "ci": 0.95,
+    "v4_drop_max": 0.05,
+    "v4_quartile_drop_max": 0.1,
+    "baseline_commit": "460806d",
+    "baseline_parquet_sha256_prefix": "16f8300dbf15",
+    "gate": "L_C 대 L_A (§1 '기준선 대비') · L_B 는 귀속(데이터 효과 / 공리 효과)",
+    "v3_gate_stratum": "§29② 포함 층 (§29②-only ∪ §29①∧②) · 인용 2문헌 이상",
+    "predictions_registered": {
+      "P1": "Δ>0 비율은 §29②-only 층이 §29①-only 층보다 높다 (게이트 아님 · §29①-only 는 저검정력)",
+      "P2": "L_C 의 best_single 중앙값 ≥ L_B (확장은 단일 문헌 포함률을 내리지 않는다)"
+    }
+  },
+  "inputs": {
+    "baseline_parquet_sha256": "16f8300dbf15a42b1e8bb5ab38ee9fcb40e7d1ed50877159a7a202115aab9b3c",
+    "mappings/claim_features.parquet": "1e8b14cae533f0039b54afbf906490d2c7f6ca5ce53a92af96b4e35ccf8b9238",
+    "ontology/sdkb-priorart-core.ttl": "307875eb7696154d4c2b38b742d89efdc7e332bcf9c70591b1168d1667036d70",
+    "ontology/sdkb-core-data.ttl": "7142201d34966f3cb7871499db56655478a502b0455f3e800d0c2f04e125a0dc",
+    "ontology/sdkb-priorart-semi.ttl": "d66c932524789269e7bd1a0f936b7987dc020c26abae0aaa2d3487f5c768e6ef",
+    "data/patents/prior_art_edges.parquet": "bc893c93210c4d7c88de6df0c36698c753969a620e11f840ae71ca56426ec5f9",
+    "data/reports/abox_priorart_report.json": "3886f9efb1323e21667d1b3496d0aebd92cc9ed03ae3f8408fcc7d48131c1f44",
+    "data/reports/v4_robustness.json": "3448e43a0ca325d3e605831dbe70a36c94a034217e35878019ac716fbdd6a905"
+  },
+  "identity_check_vs_abox_report": {
+    "profiles": [
+      62926,
+      62926
+    ],
+    "disclosures": [
+      33274,
+      33274
+    ],
+    "essential_links": [
+      134762,
+      134762
+    ],
+    "covered_by_pairs": [
+      16,
+      16
+    ],
+    "bound_concepts": [
+      147,
+      147
+    ],
+    "cited_without_disclosure_by_prefix": {
+      "kr": 135,
+      "us": 30
+    }
+  },
+  "stage1_reproduction": {
+    "V2": {
+      "queries": [
+        759,
+        759
+      ],
+      "target_size_median": [
+        2,
+        2
+      ],
+      "reach_size_median": [
+        11348,
+        11348
+      ],
+      "reach_size_mean": [
+        10922.5,
+        10922.5
+      ],
+      "reach_size_max": [
+        25955,
+        25955
+      ],
+      "hit_rate_any_S": [
+        0.9288537549407114,
+        0.928854
+      ],
+      "SemanticPathRecall@100": [
+        0.005270092226613966,
+        0.005270092226613966
+      ],
+      "SemanticPathRecall@1000": [
+        0.05006587615283267,
+        0.05006587615283267
+      ],
+      "SemanticPathRecall@inf": [
+        0.9288537549407114,
+        0.9288537549407114
+      ]
+    },
+    "V3": {
+      "queries": [
+        759,
+        759
+      ],
+      "pair_queries": [
+        468,
+        468
+      ],
+      "best_single_mean": [
+        0.7218,
+        0.7218
+      ],
+      "eq1": [
+        349,
+        349
+      ],
+      "delta_mean": [
+        0.0484,
+        0.0484
+      ],
+      "delta_gt0_frac": [
+        0.188,
+        0.188
+      ]
+    },
+    "ok": true
+  },
+  "descriptive": {
+    "Q": {
+      "L_A": 759,
+      "L_B": 774,
+      "L_C": 774
+    },
+    "Q_A_and_Q_C": 759,
+    "Q_C_strata": {
+      "없음": 221,
+      "§29①∧②": 126,
+      "§29②-only": 413,
+      "§29①-only": 14
+    },
+    "gt_targets_total": 1000
+  },
+  "ladder": {
+    "L_A": {
+      "reach": {
+        "queries": 759,
+        "target_size_median": 2,
+        "queries_kr": 670,
+        "queries_us": 198,
+        "exist": {
+          "reach_median": 11348,
+          "reach_mean": 10922.5,
+          "reach_max": 25955,
+          "reach_zero_queries": 0,
+          "hit_rate_any_S": 0.928854,
+          "SPR@50": 0.005270092226613966,
+          "SPR@100": 0.005270092226613966,
+          "SPR@1000": 0.05006587615283267,
+          "SPR@inf": 0.9288537549407114,
+          "SPR@50_KR": 0.004477611940298508,
+          "SPR@50_US": 0.015151515151515152
+        },
+        "all": {
+          "reach_median": 1046,
+          "reach_mean": 3019.7,
+          "reach_max": 18095,
+          "reach_zero_queries": 6,
+          "hit_rate_any_S": 0.624506,
+          "SPR@50": 0.02766798418972332,
+          "SPR@100": 0.04479578392621871,
+          "SPR@1000": 0.22661396574440051,
+          "SPR@inf": 0.6245059288537549,
+          "SPR@50_KR": 0.028358208955223882,
+          "SPR@50_US": 0.020202020202020204
+        }
+      },
+      "coverage": {
+        "queries": 759,
+        "essential_concepts_per_query": {
+          "median": 3.0,
+          "mean": 3.01,
+          "p10": 1.0,
+          "p90": 5.0
+        },
+        "best_single_coverage": {
+          "median": 0.8,
+          "mean": 0.7218,
+          "eq0": 54,
+          "eq1": 349,
+          "saturated_frac": 0.531
+        },
+        "pair_queries": 468,
+        "delta_coverage": {
+          "median": 0.0,
+          "mean": 0.0484,
+          "gt0_frac": 0.188
+        },
+        "by_stratum": {
+          "§29①-only": {
+            "queries": 14,
+            "pair_queries": 5,
+            "best_single_median": 1.0,
+            "delta_mean": 0.05,
+            "delta_gt0_frac": 0.2
+          },
+          "§29①∧②": {
+            "queries": 120,
+            "pair_queries": 67,
+            "best_single_median": 0.8452380952380952,
+            "delta_mean": 0.0385,
+            "delta_gt0_frac": 0.1642
+          },
+          "§29②-only": {
+            "queries": 405,
+            "pair_queries": 277,
+            "best_single_median": 0.75,
+            "delta_mean": 0.0535,
+            "delta_gt0_frac": 0.2022
+          },
+          "없음": {
+            "queries": 220,
+            "pair_queries": 119,
+            "best_single_median": 0.8,
+            "delta_mean": 0.0422,
+            "delta_gt0_frac": 0.1681
+          }
+        }
+      }
+    },
+    "L_B": {
+      "reach": {
+        "queries": 774,
+        "target_size_median": 2.0,
+        "queries_kr": 681,
+        "queries_us": 209,
+        "exist": {
+          "reach_median": 11410.0,
+          "reach_mean": 11225.1,
+          "reach_max": 28292,
+          "reach_zero_queries": 0,
+          "hit_rate_any_S": 0.930233,
+          "SPR@50": 0.00516795865633075,
+          "SPR@100": 0.00516795865633075,
+          "SPR@1000": 0.040051679586563305,
+          "SPR@inf": 0.9302325581395349,
+          "SPR@50_KR": 0.004405286343612335,
+          "SPR@50_US": 0.014354066985645933
+        },
+        "all": {
+          "reach_median": 894.0,
+          "reach_mean": 2600.8,
+          "reach_max": 20031,
+          "reach_zero_queries": 6,
+          "hit_rate_any_S": 0.583979,
+          "SPR@50": 0.029715762273901807,
+          "SPR@100": 0.05167958656330749,
+          "SPR@1000": 0.23772609819121446,
+          "SPR@inf": 0.5839793281653747,
+          "SPR@50_KR": 0.030837004405286344,
+          "SPR@50_US": 0.023923444976076555
+        }
+      },
+      "coverage": {
+        "queries": 774,
+        "essential_concepts_per_query": {
+          "median": 3.0,
+          "mean": 3.26,
+          "p10": 1.0,
+          "p90": 6.0
+        },
+        "best_single_coverage": {
+          "median": 0.75,
+          "mean": 0.7018,
+          "eq0": 54,
+          "eq1": 322,
+          "saturated_frac": 0.4858
+        },
+        "pair_queries": 481,
+        "delta_coverage": {
+          "median": 0.0,
+          "mean": 0.0559,
+          "gt0_frac": 0.2225
+        },
+        "by_stratum": {
+          "§29①-only": {
+            "queries": 14,
+            "pair_queries": 5,
+            "best_single_median": 1.0,
+            "delta_mean": 0.05,
+            "delta_gt0_frac": 0.2
+          },
+          "§29①∧②": {
+            "queries": 126,
+            "pair_queries": 71,
+            "best_single_median": 0.75,
+            "delta_mean": 0.0662,
+            "delta_gt0_frac": 0.2394
+          },
+          "§29②-only": {
+            "queries": 413,
+            "pair_queries": 285,
+            "best_single_median": 0.75,
+            "delta_mean": 0.0579,
+            "delta_gt0_frac": 0.2316
+          },
+          "없음": {
+            "queries": 221,
+            "pair_queries": 120,
+            "best_single_median": 0.75,
+            "delta_mean": 0.0453,
+            "delta_gt0_frac": 0.1917
+          }
+        }
+      }
+    },
+    "L_C": {
+      "reach": {
+        "queries": 774,
+        "target_size_median": 2.0,
+        "queries_kr": 681,
+        "queries_us": 209,
+        "exist": {
+          "reach_median": 11706.0,
+          "reach_mean": 11664.6,
+          "reach_max": 28600,
+          "reach_zero_queries": 0,
+          "hit_rate_any_S": 0.932817,
+          "SPR@50": 0.00516795865633075,
+          "SPR@100": 0.00516795865633075,
+          "SPR@1000": 0.040051679586563305,
+          "SPR@inf": 0.9328165374677002,
+          "SPR@50_KR": 0.004405286343612335,
+          "SPR@50_US": 0.014354066985645933
+        },
+        "all": {
+          "reach_median": 961.0,
+          "reach_mean": 2747.9,
+          "reach_max": 20687,
+          "reach_zero_queries": 4,
+          "hit_rate_any_S": 0.596899,
+          "SPR@50": 0.031007751937984496,
+          "SPR@100": 0.05167958656330749,
+          "SPR@1000": 0.24160206718346253,
+          "SPR@inf": 0.5968992248062015,
+          "SPR@50_KR": 0.032305433186490456,
+          "SPR@50_US": 0.023923444976076555
+        }
+      },
+      "coverage": {
+        "queries": 774,
+        "essential_concepts_per_query": {
+          "median": 3.0,
+          "mean": 3.26,
+          "p10": 1.0,
+          "p90": 6.0
+        },
+        "best_single_coverage": {
+          "median": 0.75,
+          "mean": 0.7132,
+          "eq0": 52,
+          "eq1": 332,
+          "saturated_frac": 0.4961
+        },
+        "pair_queries": 481,
+        "delta_coverage": {
+          "median": 0.0,
+          "mean": 0.0521,
+          "gt0_frac": 0.21
+        },
+        "by_stratum": {
+          "§29①-only": {
+            "queries": 14,
+            "pair_queries": 5,
+            "best_single_median": 1.0,
+            "delta_mean": 0.05,
+            "delta_gt0_frac": 0.2
+          },
+          "§29①∧②": {
+            "queries": 126,
+            "pair_queries": 71,
+            "best_single_median": 0.75,
+            "delta_mean": 0.0599,
+            "delta_gt0_frac": 0.2254
+          },
+          "§29②-only": {
+            "queries": 413,
+            "pair_queries": 285,
+            "best_single_median": 0.75,
+            "delta_mean": 0.0562,
+            "delta_gt0_frac": 0.2246
+          },
+          "없음": {
+            "queries": 221,
+            "pair_queries": 120,
+            "best_single_median": 0.8,
+            "delta_mean": 0.038,
+            "delta_gt0_frac": 0.1667
+          }
+        }
+      }
+    }
+  },
+  "attribution": {
+    "measure": "SPR∀@50",
+    "data_effect_B_minus_A": 0.002047778084178487,
+    "axiom_effect_C_minus_B": 0.0012919896640826885,
+    "total_C_minus_A": 0.0033397677482611757
+  },
+  "verdict": {
+    "V2": {
+      "i_significant_rise": {
+        "pass": false,
+        "common_queries": 759,
+        "SPR_all@50_A": 0.02766798418972332,
+        "SPR_all@50_C": 0.03162055335968379,
+        "bootstrap": {
+          "n": 759,
+          "delta": 0.003952569169960472,
+          "ci": [
+            -0.003952569169960472,
+            0.011857707509881424
+          ],
+          "B": 10000,
+          "seed": 20260909
+        },
+        "mcnemar": {
+          "c_only": 6,
+          "a_only": 3,
+          "p": 0.5078125
+        }
+      },
+      "ii_tau": {
+        "pass": false,
+        "tau": 0.6708,
+        "SPR_all@50_KR_C": 0.032305433186490456,
+        "queries_kr": 681
+      },
+      "iii_specificity": {
+        "pass": true,
+        "reach_all_median_A": 1046,
+        "reach_all_median_C": 961.0
+      },
+      "pass": false,
+      "failed_conditions": [
+        "i",
+        "ii"
+      ]
+    },
+    "V3": {
+      "gate_stratum": "§29② 포함 층 (§29②-only ∪ §29①∧②) · 인용 2문헌 이상",
+      "gate_queries": 285,
+      "delta_mean_C": 0.05616148958254221,
+      "bootstrap": {
+        "n": 285,
+        "delta": 0.05616148958254221,
+        "ci": [
+          0.04351288574972785,
+          0.06961784195336826
+        ],
+        "B": 10000,
+        "seed": 20260909
+      },
+      "pass": true,
+      "novelty": "정량 판정 없음 (§5 · §29① 표본 < 문서 254건 규모) — by_stratum 서술만",
+      "P1": {
+        "frac_29_2_only": 0.22456140350877193,
+        "n_29_2_only": 285,
+        "frac_29_1_only": 0.2,
+        "n_29_1_only": 5,
+        "underpowered": true,
+        "diff_bootstrap": {
+          "delta": 0.024561403508771923,
+          "ci": [
+            -0.38596491228070173,
+            0.2596491228070175
+          ]
+        },
+        "holds": true
+      },
+      "P2": {
+        "best_single_median_B": 0.75,
+        "best_single_median_C": 0.75,
+        "holds": true
+      }
+    },
+    "V4": {
+      "status": "산출",
+      "checks": {
+        "exist": {
+          "claim_hit_rate": 0.8788,
+          "variants": {
+            "L1": {
+              "hit_rate": 0.8735,
+              "drop": 0.005299999999999971,
+              "pass": true
+            },
+            "L2": {
+              "hit_rate": 0.8788,
+              "drop": 0.0,
+              "pass": true
+            },
+            "L3": {
+              "hit_rate": 0.888,
+              "drop": -0.009199999999999986,
+              "pass": true
+            }
+          },
+          "pass": true
+        },
+        "all": {
+          "claim_hit_rate": 0.4585,
+          "variants": {
+            "L1": {
+              "hit_rate": 0.4453,
+              "drop": 0.013200000000000045,
+              "pass": true
+            },
+            "L2": {
+              "hit_rate": 0.4717,
+              "drop": -0.01319999999999999,
+              "pass": true
+            },
+            "L3": {
+              "hit_rate": 0.3953,
+              "drop": 0.06320000000000003,
+              "pass": false
+            }
+          },
+          "pass": false
+        }
+      },
+      "quartile": {
+        "Q1": 0.8778,
+        "Q4": 0.8748,
+        "pass": true
+      },
+      "human_coding_reference": "data/reports/v4_human_coding.json (κ 0.6934 · 재코딩 없음)",
+      "pass": false
+    }
+  },
+  "limitations": [
+    "SPR 은 순위 없는 후보집합이 S 이하여야 하는 지표이고 τ 의 원천 tfidf R@50 은 순위 지표다 — 비대칭은 τ 를 유리하게 하지 않는다 (계획 파일 · 결과 전 명시).",
+    "Disclosure 는 KR/US 분해 문헌에만 있다 — 인용문헌 중 JP 등 비 KR/US 는 목표에서 빠진다 (§4 결손 · 수는 identity_check 에).",
+    "§29①-only 층은 질의가 적어 P1 은 저검정력이다 — 결론을 얹지 않는다.",
+    "V4-2(사람 코딩)는 재실행하지 않고 인용한다."
+  ]
+}

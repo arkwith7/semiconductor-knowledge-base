@@ -44,12 +44,13 @@ DELETED_6B = {
     "semi:inverseOf:ont:featureOf→ont:hasFeature",
     "kr:differentFrom:pa/kr:NoticeOfReasons→pa/kr:FinalRejection",
 }
-#: 6-B 이후에도 미소비로 남는 pa: R-Box — 사유가 있는 것만. 여기 없는 미소비는 게이트가 잡는다.
+#: 7-0(2026-09-09 · 사용자 결정 D-S)이 일몰 조항(D2)대로 지운 둘 — 단계 7 착수 시점에 PLAN-002 3단계 미착수.
+DELETED_70 = {
+    "core:SymmetricProperty:pa:substitutableWith",
+    "core:subPropertyOf:pa:substitutableWith→pa:coveredBy",
+}
+#: 7-0 이후에도 미소비로 남는 pa: R-Box — 사유가 있는 것만. 여기 없는 미소비는 게이트가 잡는다.
 RETAINED = {
-    "core:SymmetricProperty:pa:substitutableWith":
-        "경로 有(생성기 양방향 방출) · 유량 0 — PLAN-002 채굴 쌍 대기 · 단계 7 착수까지 Prec 미착수면 삭제(D2)",
-    "core:subPropertyOf:pa:substitutableWith→pa:coveredBy":
-        "경로 有(EXPANSION_SOURCES) · 유량 0 — 같은 일몰 조항(D2)",
     "semi:disjointWith:ont:StructuralElement→ont:Material": "불변식 C 가 읽는다(경로) · 위반 0 이라 유량 0(D3)",
     "semi:disjointWith:ont:StructuralElement→ont:Process": "불변식 C 가 읽는다(경로) · 위반 0 이라 유량 0(D3)",
     "semi:disjointWith:ont:TechnicalEffect→ont:StructuralElement": "불변식 C 가 읽는다(경로) · 위반 0 이라 유량 0(D3)",
@@ -60,23 +61,25 @@ RETAINED = {
 # ── ① 열거 — 동결 목록과 정확히 같다 ──────────────────────────────────
 def test_enumeration_matches_frozen_table(modules):
     """공리가 늘면 예측표를 **먼저** 고쳐야 한다 — 결과를 본 뒤 표를 늘리는 것을 막는다.
-    줄어든 것은 6-B 의 삭제 여섯뿐이어야 한다."""
+    줄어든 것은 6-B 의 삭제 여섯과 7-0 의 일몰 둘뿐이어야 한다."""
     ids = [ax.id for ax in v1.enumerate_axioms(modules)]
     assert len(ids) == len(set(ids)), "중복 id"
     assert set(ids) - set(v1.FROZEN) == set(), sorted(set(ids) - set(v1.FROZEN))
-    assert set(v1.FROZEN) - set(ids) == DELETED_6B
-    assert len(ids) == 31
+    assert set(v1.FROZEN) - set(ids) == DELETED_6B | DELETED_70
+    assert len(ids) == 29
     assert set(RETAINED) <= set(ids), "RETAINED 에 열거되지 않는 항목이 있다"
 
 
 def test_enumeration_sees_pa_and_skos_subjects_and_legacy_eight(modules):
-    """단계 1 의 맹점 — `ont:` 주어만 세면 pa: 공리가 보이지 않는다. 6-B 이후 core 3 · semi 7 · kr 2."""
+    """단계 1 의 맹점 — `ont:` 주어만 세면 pa: 공리가 보이지 않는다. 7-0 이후 core 1 · semi 7 · kr 2."""
     by_mod = {}
     for ax in v1.enumerate_axioms(modules):
         by_mod.setdefault(ax.module, []).append(ax)
     assert len([a for a in by_mod["legacy:core"] + by_mod["legacy:patent"]]) == 8
-    assert sum(1 for a in by_mod["core"] if a.role == "rbox") == 3
+    assert sum(1 for a in by_mod["core"] if a.role == "rbox") == 1
     assert not any(a.subject == "skos:exactMatch" for a in by_mod["core"])     # C5 삭제
+    assert not any("substitutableWith" in a.id for m in ("core", "semi", "kr") for a in by_mod[m])  # 7-0 일몰
+    assert not any(a.kind == "SymmetricProperty" for m in ("core", "semi", "kr") for a in by_mod[m])
     assert {a.role for a in by_mod["semi"]} == {"rbox", "binding-property", "binding-class"}
     assert sum(1 for a in by_mod["semi"] if a.role == "binding-class") == 11
     assert sum(1 for a in by_mod["semi"] if a.kind == "disjointWith") == 4
@@ -133,12 +136,13 @@ def test_blank_node_object_is_removed_by_subject_predicate():
 
 
 def test_path_column_is_structural():
+    """합성 공리로 경로 판정을 고정한다 — 술어 이름은 임의(7-0 이후 실물에는 대칭 확장자가 없다)."""
     core = Graph()
-    core.add((URIRef(PA + "substitutableWith"), RDFS.subPropertyOf, URIRef(PA + "coveredBy")))
-    sub = v1.Axiom("x", "core", "subPropertyOf", "pa:substitutableWith", "pa:coveredBy", "rbox",
-                   [(URIRef(PA + "substitutableWith"), RDFS.subPropertyOf, URIRef(PA + "coveredBy"))])
-    sym = v1.Axiom("y", "core", "SymmetricProperty", "pa:substitutableWith", None, "rbox",
-                   [(URIRef(PA + "substitutableWith"), RDF.type, OWL.SymmetricProperty)])
+    core.add((URIRef(PA + "someExpansion"), RDFS.subPropertyOf, URIRef(PA + "coveredBy")))
+    sub = v1.Axiom("x", "core", "subPropertyOf", "pa:someExpansion", "pa:coveredBy", "rbox",
+                   [(URIRef(PA + "someExpansion"), RDFS.subPropertyOf, URIRef(PA + "coveredBy"))])
+    sym = v1.Axiom("y", "core", "SymmetricProperty", "pa:someExpansion", None, "rbox",
+                   [(URIRef(PA + "someExpansion"), RDF.type, OWL.SymmetricProperty)])
     inv = v1.Axiom("z", "core", "inverseOf", "pa:conceptOfFeature", "pa:featureConcept", "rbox",
                    [(URIRef(PA + "conceptOfFeature"), OWL.inverseOf, URIRef(PA + "featureConcept"))])
     assert v1.has_reader(sub, core) and v1.has_reader(sym, core) and not v1.has_reader(inv, core)
@@ -166,7 +170,7 @@ def test_report_describes_current_files():
         else:
             assert sha == hashlib.sha256((ROOT / rel).read_bytes()).hexdigest(), f"{rel} 가 리포트 이후 바뀌었다"
     assert rep["baseline"]["abox_covered_by_matches_tbox_driven"] is True
-    assert TABLE.exists() and rep["summary"]["axioms_total"] == 31
+    assert TABLE.exists() and rep["summary"]["axioms_total"] == 29
 
 
 @needs_report

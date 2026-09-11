@@ -2,13 +2,13 @@
 
 > 생성: `scripts/report_v1_ablation.py` · 2026-09-09 · **손으로 고치지 않는다** — `make v1-ablation` 이 다시 만든다. 정의는 스크립트 docstring, 예측은 `FROZEN` 표.
 
-**결론.** 공리 31건 중 소비 **8** · 미소비 23. pa: 모듈의 R-Box 미소비: 6건. 예측 불일치: 0건.
+**결론.** 공리 29건 중 소비 **8** · 미소비 21. pa: 모듈의 R-Box 미소비: 4건. 예측 불일치: 0건.
 
 | 기준선 | 값 |
 |---|---:|
 | CQ 수 / 행 합 | 33 / 10210 |
 | CQ32 행 (LIMIT 200) | 200 |
-| coveredBy 쌍 (술어별) | 16 {'broaderConcept': 16, 'substitutableWith': 0} |
+| coveredBy 쌍 (술어별) | 16 {'broaderConcept': 16} |
 | 바인딩 개념 / 클래스 | 147 / 11 |
 | ④ (p,u) / (p,d,u) | 4,306 / 40,024,841 |
 
@@ -22,29 +22,27 @@
 | 6 | `legacy:patent:subPropertyOf:ont:hasIPC→ont:hasClassification` | legacy:patent | subPropertyOf | rbox | — | +0 · +0 | +0 | — | — | 미소비 | 보존 (§7-2 · 하류 핀) | 단계 1 재현 · legacy T-Box 는 제자리 불변 · sdkb-patent.ttl 0a317389… 핀 |
 | 7 | `legacy:patent:subPropertyOf:ont:hasPriorArtApplicant→ont:hasPriorArt` | legacy:patent | subPropertyOf | rbox | — | +0 · +0 | +0 | — | — | 미소비 | 보존 (§7-2 · 하류 핀) | 단계 1 재현 · legacy T-Box 는 제자리 불변 · sdkb-patent.ttl 0a317389… 핀 |
 | 8 | `legacy:patent:subPropertyOf:ont:hasPriorArtExaminer→ont:hasPriorArt` | legacy:patent | subPropertyOf | rbox | — | +0 · +0 | +0 | — | — | 미소비 | 보존 (§7-2 · 하류 핀) | 단계 1 재현 · legacy T-Box 는 제자리 불변 · sdkb-patent.ttl 0a317389… 핀 |
-| 9 | `core:SymmetricProperty:pa:substitutableWith` | core | SymmetricProperty | rbox | — | +0 · +0 | +0 | ✓ | — | 미소비 | 보존 + 일몰 (D2) | 경로 有(생성기가 읽음) · 유량 0 — PLAN-002 채굴 쌍 없음 · 단계 7 착수까지 Prec 미착수면 삭제 |
-| 10 | `core:subPropertyOf:pa:broaderConcept→pa:coveredBy` | core | subPropertyOf | rbox | — | -16 · +0 | -4306 | ✓ | ✓ | 소비 | 유지 | 생성기가 읽어 coveredBy 16쌍 실체화 · ④ 4,306 쌍이 이 공리에 걸린다 |
-| 11 | `core:subPropertyOf:pa:substitutableWith→pa:coveredBy` | core | subPropertyOf | rbox | — | +0 · +0 | +0 | ✓ | — | 미소비 | 보존 + 일몰 (D2) | 경로 有(생성기가 읽음) · 유량 0 — PLAN-002 채굴 쌍 없음 · 단계 7 착수까지 Prec 미착수면 삭제 |
-| 12 | `semi:subPropertyOf:ont:aboutClaim→pa:concernsClaim` | semi | subPropertyOf | binding-property | — | +0 · +0 | +0 | — | — | 미소비 | 보존 (바인딩 재분류) | V6b 이식용 슬롯 바인딩 — R-Box 가 아니라 subClassOf 11건과 같은 급 |
-| 13 | `semi:subPropertyOf:ont:featureConcept→pa:featureConcept` | semi | subPropertyOf | binding-property | — | +0 · +0 | +0 | — | — | 미소비 | 보존 (바인딩 재분류) | V6b 이식용 슬롯 바인딩 — R-Box 가 아니라 subClassOf 11건과 같은 급 |
-| 14 | `semi:subPropertyOf:ont:onGround→pa:onGround` | semi | subPropertyOf | binding-property | — | +0 · +0 | +0 | — | — | 미소비 | 보존 (바인딩 재분류) | V6b 이식용 슬롯 바인딩 — R-Box 가 아니라 subClassOf 11건과 같은 급 |
-| 15 | `semi:disjointWith:ont:StructuralElement→ont:Material` | semi | disjointWith | rbox | — | +0 · +0 | +0 | ✓ | — | 미소비 | 불변식 C 신설 (D3) | 현 파이프라인에 소비자 없음 → 6-B 가 배제쌍 동시 타이핑 검사를 validate 에 배선 |
-| 16 | `semi:disjointWith:ont:StructuralElement→ont:Process` | semi | disjointWith | rbox | — | +0 · +0 | +0 | ✓ | — | 미소비 | 불변식 C 신설 (D3) | 현 파이프라인에 소비자 없음 → 6-B 가 배제쌍 동시 타이핑 검사를 validate 에 배선 |
-| 17 | `semi:disjointWith:ont:TechnicalEffect→ont:StructuralElement` | semi | disjointWith | rbox | — | +0 · +0 | +0 | ✓ | — | 미소비 | 불변식 C 신설 (D3) | 현 파이프라인에 소비자 없음 → 6-B 가 배제쌍 동시 타이핑 검사를 validate 에 배선 |
-| 18 | `semi:disjointWith:ont:TechnicalFunction→ont:StructuralElement` | semi | disjointWith | rbox | — | +0 · +0 | +0 | ✓ | — | 미소비 | 불변식 C 신설 (D3) | 현 파이프라인에 소비자 없음 → 6-B 가 배제쌍 동시 타이핑 검사를 validate 에 배선 |
-| 19 | `semi:subClassOf:ont:Device→pa:TechnicalConcept` | semi | subClassOf | binding-class | skip | +0 · -34 | +0 | ✓ | ✓ | 소비 | 보존 (바인딩) | 생성기 technical_concept_classes · SHACL sh:class 가 읽음 |
-| 20 | `semi:subClassOf:ont:EquipmentClass→pa:TechnicalConcept` | semi | subClassOf | binding-class | skip | +0 · -12 | +0 | ✓ | ✓ | 소비 | 보존 (바인딩) | 생성기 technical_concept_classes · SHACL sh:class 가 읽음 |
-| 21 | `semi:subClassOf:ont:Material→pa:TechnicalConcept` | semi | subClassOf | binding-class | skip | -15 · -31 | -3945 | ✓ | ✓ | 소비 | 보존 (바인딩) | 생성기 technical_concept_classes · SHACL sh:class 가 읽음 |
-| 22 | `semi:subClassOf:ont:Parameter→pa:TechnicalConcept` | semi | subClassOf | binding-class | skip | +0 · -5 | +0 | ✓ | ✓ | 소비 | 보존 (바인딩) | 생성기 technical_concept_classes · SHACL sh:class 가 읽음 |
-| 23 | `semi:subClassOf:ont:Problem→pa:TechnicalConcept` | semi | subClassOf | binding-class | skip | +0 · +0 | +0 | ✓ | — | 미소비 | 보존 (바인딩 · 인스턴스 대기) | 경로 有 · core-data 인스턴스 0 이라 유량 0 |
-| 24 | `semi:subClassOf:ont:Process→pa:TechnicalConcept` | semi | subClassOf | binding-class | skip | -1 · -12 | -361 | ✓ | ✓ | 소비 | 보존 (바인딩) | 생성기 technical_concept_classes · SHACL sh:class 가 읽음 |
-| 25 | `semi:subClassOf:ont:ProcessCondition→pa:TechnicalConcept` | semi | subClassOf | binding-class | skip | +0 · +0 | +0 | ✓ | — | 미소비 | 보존 (바인딩 · 인스턴스 대기) | 경로 有 · core-data 인스턴스 0 이라 유량 0 |
-| 26 | `semi:subClassOf:ont:StructuralElement→pa:TechnicalConcept` | semi | subClassOf | binding-class | skip | +0 · -15 | +0 | ✓ | ✓ | 소비 | 보존 (바인딩) | 생성기 technical_concept_classes · SHACL sh:class 가 읽음 |
-| 27 | `semi:subClassOf:ont:SubProcess→pa:TechnicalConcept` | semi | subClassOf | binding-class | skip | -1 · -38 | -361 | ✓ | ✓ | 소비 | 보존 (바인딩) | 생성기 technical_concept_classes · SHACL sh:class 가 읽음 |
-| 28 | `semi:subClassOf:ont:TechnicalEffect→pa:TechnicalConcept` | semi | subClassOf | binding-class | skip | +0 · +0 | +0 | ✓ | — | 미소비 | 보존 (바인딩 · 인스턴스 대기) | 경로 有 · core-data 인스턴스 0 이라 유량 0 |
-| 29 | `semi:subClassOf:ont:TechnicalFunction→pa:TechnicalConcept` | semi | subClassOf | binding-class | skip | +0 · +0 | +0 | ✓ | — | 미소비 | 보존 (바인딩 · 인스턴스 대기) | 경로 有 · core-data 인스턴스 0 이라 유량 0 |
-| 30 | `kr:exactMatch:pa/kr:Ground_29_1→ont:Rejection_Novelty` | kr | exactMatch | binding-match | — | +0 · +0 | +0 | — | — | 미소비 | 보존 (크로스워크 바인딩) | C5 제거 후 R-Box 아님 · LegalGround↔RejectionType 해소 |
-| 31 | `kr:exactMatch:pa/kr:Ground_29_2→ont:Rejection_Inventiveness` | kr | exactMatch | binding-match | — | +0 · +0 | +0 | — | — | 미소비 | 보존 (크로스워크 바인딩) | C5 제거 후 R-Box 아님 · LegalGround↔RejectionType 해소 |
+| 9 | `core:subPropertyOf:pa:broaderConcept→pa:coveredBy` | core | subPropertyOf | rbox | — | -16 · +0 | -4306 | ✓ | ✓ | 소비 | 유지 | 생성기가 읽어 coveredBy 16쌍 실체화 · ④ 4,306 쌍이 이 공리에 걸린다 |
+| 10 | `semi:subPropertyOf:ont:aboutClaim→pa:concernsClaim` | semi | subPropertyOf | binding-property | — | +0 · +0 | +0 | — | — | 미소비 | 보존 (바인딩 재분류) | V6b 이식용 슬롯 바인딩 — R-Box 가 아니라 subClassOf 11건과 같은 급 |
+| 11 | `semi:subPropertyOf:ont:featureConcept→pa:featureConcept` | semi | subPropertyOf | binding-property | — | +0 · +0 | +0 | — | — | 미소비 | 보존 (바인딩 재분류) | V6b 이식용 슬롯 바인딩 — R-Box 가 아니라 subClassOf 11건과 같은 급 |
+| 12 | `semi:subPropertyOf:ont:onGround→pa:onGround` | semi | subPropertyOf | binding-property | — | +0 · +0 | +0 | — | — | 미소비 | 보존 (바인딩 재분류) | V6b 이식용 슬롯 바인딩 — R-Box 가 아니라 subClassOf 11건과 같은 급 |
+| 13 | `semi:disjointWith:ont:StructuralElement→ont:Material` | semi | disjointWith | rbox | — | +0 · +0 | +0 | ✓ | — | 미소비 | 불변식 C 신설 (D3) | 현 파이프라인에 소비자 없음 → 6-B 가 배제쌍 동시 타이핑 검사를 validate 에 배선 |
+| 14 | `semi:disjointWith:ont:StructuralElement→ont:Process` | semi | disjointWith | rbox | — | +0 · +0 | +0 | ✓ | — | 미소비 | 불변식 C 신설 (D3) | 현 파이프라인에 소비자 없음 → 6-B 가 배제쌍 동시 타이핑 검사를 validate 에 배선 |
+| 15 | `semi:disjointWith:ont:TechnicalEffect→ont:StructuralElement` | semi | disjointWith | rbox | — | +0 · +0 | +0 | ✓ | — | 미소비 | 불변식 C 신설 (D3) | 현 파이프라인에 소비자 없음 → 6-B 가 배제쌍 동시 타이핑 검사를 validate 에 배선 |
+| 16 | `semi:disjointWith:ont:TechnicalFunction→ont:StructuralElement` | semi | disjointWith | rbox | — | +0 · +0 | +0 | ✓ | — | 미소비 | 불변식 C 신설 (D3) | 현 파이프라인에 소비자 없음 → 6-B 가 배제쌍 동시 타이핑 검사를 validate 에 배선 |
+| 17 | `semi:subClassOf:ont:Device→pa:TechnicalConcept` | semi | subClassOf | binding-class | skip | +0 · -34 | +0 | ✓ | ✓ | 소비 | 보존 (바인딩) | 생성기 technical_concept_classes · SHACL sh:class 가 읽음 |
+| 18 | `semi:subClassOf:ont:EquipmentClass→pa:TechnicalConcept` | semi | subClassOf | binding-class | skip | +0 · -12 | +0 | ✓ | ✓ | 소비 | 보존 (바인딩) | 생성기 technical_concept_classes · SHACL sh:class 가 읽음 |
+| 19 | `semi:subClassOf:ont:Material→pa:TechnicalConcept` | semi | subClassOf | binding-class | skip | -15 · -31 | -3945 | ✓ | ✓ | 소비 | 보존 (바인딩) | 생성기 technical_concept_classes · SHACL sh:class 가 읽음 |
+| 20 | `semi:subClassOf:ont:Parameter→pa:TechnicalConcept` | semi | subClassOf | binding-class | skip | +0 · -5 | +0 | ✓ | ✓ | 소비 | 보존 (바인딩) | 생성기 technical_concept_classes · SHACL sh:class 가 읽음 |
+| 21 | `semi:subClassOf:ont:Problem→pa:TechnicalConcept` | semi | subClassOf | binding-class | skip | +0 · +0 | +0 | ✓ | — | 미소비 | 보존 (바인딩 · 인스턴스 대기) | 경로 有 · core-data 인스턴스 0 이라 유량 0 |
+| 22 | `semi:subClassOf:ont:Process→pa:TechnicalConcept` | semi | subClassOf | binding-class | skip | -1 · -12 | -361 | ✓ | ✓ | 소비 | 보존 (바인딩) | 생성기 technical_concept_classes · SHACL sh:class 가 읽음 |
+| 23 | `semi:subClassOf:ont:ProcessCondition→pa:TechnicalConcept` | semi | subClassOf | binding-class | skip | +0 · +0 | +0 | ✓ | — | 미소비 | 보존 (바인딩 · 인스턴스 대기) | 경로 有 · core-data 인스턴스 0 이라 유량 0 |
+| 24 | `semi:subClassOf:ont:StructuralElement→pa:TechnicalConcept` | semi | subClassOf | binding-class | skip | +0 · -15 | +0 | ✓ | ✓ | 소비 | 보존 (바인딩) | 생성기 technical_concept_classes · SHACL sh:class 가 읽음 |
+| 25 | `semi:subClassOf:ont:SubProcess→pa:TechnicalConcept` | semi | subClassOf | binding-class | skip | -1 · -38 | -361 | ✓ | ✓ | 소비 | 보존 (바인딩) | 생성기 technical_concept_classes · SHACL sh:class 가 읽음 |
+| 26 | `semi:subClassOf:ont:TechnicalEffect→pa:TechnicalConcept` | semi | subClassOf | binding-class | skip | +0 · +0 | +0 | ✓ | — | 미소비 | 보존 (바인딩 · 인스턴스 대기) | 경로 有 · core-data 인스턴스 0 이라 유량 0 |
+| 27 | `semi:subClassOf:ont:TechnicalFunction→pa:TechnicalConcept` | semi | subClassOf | binding-class | skip | +0 · +0 | +0 | ✓ | — | 미소비 | 보존 (바인딩 · 인스턴스 대기) | 경로 有 · core-data 인스턴스 0 이라 유량 0 |
+| 28 | `kr:exactMatch:pa/kr:Ground_29_1→ont:Rejection_Novelty` | kr | exactMatch | binding-match | — | +0 · +0 | +0 | — | — | 미소비 | 보존 (크로스워크 바인딩) | C5 제거 후 R-Box 아님 · LegalGround↔RejectionType 해소 |
+| 29 | `kr:exactMatch:pa/kr:Ground_29_2→ont:Rejection_Inventiveness` | kr | exactMatch | binding-match | — | +0 · +0 | +0 | — | — | 미소비 | 보존 (크로스워크 바인딩) | C5 제거 후 R-Box 아님 · LegalGround↔RejectionType 해소 |
 
 ## 한계
 

@@ -1228,3 +1228,102 @@ sha256(앞 12): core `67e6693f8aac` → `e565b3257188` · semi `667a6f4bc164` �
 이미 본 수이므로 τ 의 근거는 그 수가 아니라 §5 V2 의 세 조건과 대조군 tfidf 층별 값에서 끌어낸다). V2 목표 노드를
 인용문헌 노드(퇴화형)에서 `disclosure/{publication_id}` 로 교체(§13.5). `substitutableWith` 일몰 판정(PLAN-002 3단계
 착수 여부). 별건: citationStatus 파생 · combinableWith · MinedAxiom 실체화 · R7 예외 · FailureMode·Skill 바인딩.
+
+---
+
+## 16. 단계 7 설계와 실행 기록 — V2–V4 재측정 · 동결 목표 대조 (2026-09-09 · 1–3단계 사용자 승인 · 4·5단계 실행)
+
+**결론 먼저.** 결과를 보기 전에 동결한 문턱과 대조한 판정은 **V2 FAIL(조건 i·ii) · V3 PASS · V4 FAIL** 이다.
+§6 대로 **여기서 멈춘다** — 이것은 실패가 아니라 *"도달(V2)과 문체 비종속(V4) 이 업무 목적을 현 자원이 지지하지
+않는다"* 는 측정 결과이며, 진보성 결합 커버(V3)는 지지한다. 계측기는 단계 1 값을 소수점 그대로 재현했고 두 번
+실행이 바이트 동일하다. 판정 리포트는 기계가 렌더한다: `01.code_spec/reports/PLAN-005-stage7-verdict.md`
+(원천 `data/reports/priorart_stage7_remeasure.json` · `v4_robustness.json`). 미달을 보고 문턱·정의를 고치지 않았다.
+
+### 16.1 1단계 — 사용자 결정 셋 (2026-09-09 · 결과를 보기 전에)
+
+| # | 결정 | 선택 |
+|---|---|---|
+| D-τ | V2 절대 하한 τ 의 근거 | **대조군 층별 tfidf KR R@50 = 0.6708 · S=50**(§5 V5 "tfidf 가 넘어야 할 선" 문면 · 목표 노드가 KR/US Disclosure 뿐이라 비교 층은 KR). 단계 1 의 V2 수치(`SPR@100 0.0053`)는 이미 본 수라 근거로 쓰지 않았다 |
+| D-R | Reach 주 정의 | **R∀**(프로파일 필수개념 ⊆ Disc\*(d) · CQ32 의 신규성 경로) 주 · R∃(단계 1 정의) 병기. 기준선 L_A 는 단계 1 커밋 `460806d` 의 parquet(sha `16f8300d…`)로 소급 산출 |
+| D-S | `substitutableWith` 일몰(6-B D2) | **삭제 — 7-0 으로 먼저 실행**(T-Box · §2 3단계 별도 승인). 저장소 안에 PLAN-002 3단계(Prec) 착수 흔적 0 |
+
+동결 정의 전문은 세션 계획 파일(`wise-stargazing-flute.md`)과 `scripts/report_stage7_remeasure.py:FROZEN`
+(테스트가 일치를 고정). 요지: Disc\*(d) = Disc(d) ∪ {u : u coveredBy f ∈ Disc(d)} (깊이 1) · Target(q) =
+심사관 인용 ∩ Disclosure 노드 ∖ {q} · 사다리 L_A(단계 1 parquet · 확장 off · 퇴화형 목표) / L_B(현 parquet ·
+바인딩 · 확장 off · Disclosure) / L_C(L_B + coveredBy 확장) · **게이트는 L_C 대 L_A**, L_B 는 귀속용.
+V2 PASS ⟺ (i) Q_A∩Q_C 페어드 부트스트랩(B 10,000 · seed 20260909) 95% CI 가 0 배제 ∧ Δ>0 · (ii) Q_KR 의
+SPR∀@50 ≥ 0.6708 · (iii) median|R∀| 비증가. V3 PASS ⟺ §29② 포함 층 · 인용 2문헌+ · Δ(best_pair−best_single)
+평균 CI 가 0 배제 ∧ 양수(신규성은 정량 판정 없음). V4 PASS ⟺ L1–L3 회수율이 claim 대비 −0.05 이내(R∃·R∀ 각각)
+∧ 자카드 Q1 ≥ Q4 − 0.10.
+
+### 16.2 2단계 — 실측 (읽기 전용)
+
+`substitutableWith` 등장 자리 코드 6곳·주석 1곳(shapes·docs 0) · `MODIFIED` 는 3모듈 공유 상수이나 값이 오늘이라
+core sha 만 변함 · 단계 1 parquet 스키마 현재와 동일(9열 · 1,306,191행) · parquet 재파생 = A-Box 리포트(ClaimProfile
+62,926 · Disclosure 33,274 · essential 134,762 · coveredBy 16 — 전부 일치) · `legal_bases` 1,663/2,534 채움.
+서술 통계: Q_C 774 · Q_A 759(⊂ Q_C) · Q_KR 681 · Q_US 209 · 층 §29②-only 413 · ①∧② 126 · **①-only 14** · 없음 221 ·
+인용문헌 2,321 중 Disclosure 없음 804(jp 596 · kr 74 · wo 62 · 기타 31 · cn 18 · us 15). 놀라운 점 둘 — §29①-only 층은
+14 질의(2문헌+ 5)라 P1 은 판정 불가, 목표 노드 교체가 빼는 것은 주로 JP 문헌(§4 결손 그대로).
+
+### 16.3 7-0 — 일몰 실행 (T-Box · 사용자 승인)
+
+| 항목 | 명령 | 결과 |
+|---|---|---|
+| 삭제 | `make priorart` · `--check` | core **226 → 219** 트리플(선언·라벨·주석·domain·range·대칭·⊑coveredBy) · `--check` OK · semi 65 · kr 40 불변 |
+| A-Box | `make abox-priorart` | sha **`4c726e98…` 불변** · `covered_by_by_subproperty {broaderConcept 16}` |
+| 생성기 | `build_abox_priorart.py` | `EXPANSION_SOURCES` 에서 항목 제거 · `_mined_substitutions` 삭제(죽은 코드) |
+| 절제기·테스트 | `report_v1_ablation.py` · `test_stage6_ablation.py` · `test_priorart_modules.py` · `test_abox_priorart.py` | `FROZEN` 표는 기록으로 유지(라벨 "삭제 (7-0 · 일몰 조항 실행)") · `DELETED_70` 신설 · RETAINED = disjointWith 4 · 열거 31 → 29 · core rbox 1 · 합성 픽스처는 이름만 |
+| 서명 | `make signature-inject` | Total 1,913 → **1,906** · OP 123 → **122** |
+
+sha256(앞 12): core `e565b3257188` → **`307875eb7696`** · semi `d66c93252478` · kr `4e5ed9739f64` 불변.
+
+### 16.4 4·5단계 — 재측정 실행과 판정 (재현 명령 병기)
+
+```bash
+make stage7-remeasure     # = report_v4_robustness.py --with-conj-disclosure → report_stage7_remeasure.py --markdown …
+```
+
+| 검증 | 판정 | 걸린 조건 · 값 |
+|---|:-:|---|
+| **V2 도달** | **FAIL** | (i) SPR∀@50 A 0.0277 → C 0.0316 · Δ **+0.0040** · 95% CI [−0.0040, 0.0119] · McNemar C만 6 / A만 3 · p 0.508 → ✗. (ii) Q_KR(681) SPR∀@50 **0.0323** < τ 0.6708 → ✗. (iii) median\|R∀\| 1,046 → 961 → ✓ |
+| **V3 진보성** | **PASS** | §29② 포함 층 · 2문헌+ q=285 · Δ 평균 **0.0562** · 95% CI [0.0435, 0.0696]. P1 성립(0.2246 대 0.2000)이나 §29①-only n=5 라 **저검정력 — 결론 없음** · P2 성립(best_single 중앙 0.75 = 0.75). 신규성 정량 판정 없음 |
+| **V4 비종속** | **FAIL** | R∃: L1 −0.0053 · L2 0 · L3 +0.0092 → 통과. **R∀: L3 회수율 0.3953 대 claim 0.4585 → 저하 0.0632 > 0.05** → ✗ (L1 −0.0132 · L2 +0.0132 통과). 자카드 Q1 0.8778 ≥ Q4 0.8748 − 0.10 통과 |
+
+사다리(주 지표 SPR∀@50 · 전 표는 판정 리포트):
+
+| 층 | Q | R∃ @50 / @1000 / ∞ / median | R∀ @50 / @1000 / ∞ / median | R∀ @50 KR |
+|---|---:|---|---|---:|
+| L_A | 759 | 0.0053 / 0.0501 / 0.9289 / 11,348 | 0.0277 / 0.2266 / 0.6245 / 1,046 | 0.0284 |
+| L_B | 774 | 0.0052 / 0.0401 / 0.9302 / 11,410 | 0.0297 / 0.2377 / 0.5840 / 894 | 0.0308 |
+| L_C | 774 | 0.0052 / 0.0401 / 0.9328 / 11,706 | 0.0310 / 0.2416 / 0.5969 / 961 | 0.0323 |
+
+귀속(SPR∀@50): 데이터 효과(5-B) B−A **+0.0020** · 공리 확장 효과 C−B **+0.0013** · 합 +0.0033. 계측기 검사: L_A·R∃ 가
+단계 1 리포트의 V2·V3 값 전부와 일치(Q 759 · SPR@100 0.005270092… · 중앙값 11,348 · best_single 평균 0.7218 · Δ>0 0.188).
+결정성: `report_stage7_remeasure.json`·`v4_robustness.json`·판정 MD 두 실행 **바이트 동일**(`cmp`).
+
+**수치가 말하는 것(해석 · 계획 제안 아님).** R∀ 의 ∞ 적중이 0.60 이라 질의의 40% 는 어느 인용문헌도 독립항 개념
+집합을 통째로 개시하지 않고, 적중하더라도 후보집합 중앙값이 ~1,000 이라 50 이하로 좁히지 못한다 — 개념 138종 ·
+독립항당 ~3개의 어휘 해상도에서 나오는 구조적 한계이며, coveredBy 16쌍의 확장은 +0.0013 밖에 움직이지 못한다.
+V4 의 R∀ 실패는 같은 원인의 다른 얼굴이다(문체가 멀어지면 텍스트 링커가 개념 하나를 놓쳐 전부-개시 조건이 깨진다).
+V3 는 통과한다 — 심사관이 결합한 층에서 두 문헌 합집합이 단일 최대를 실제로 넘는다.
+
+### 16.5 게이트 (§2 5단계)
+
+| 게이트 | 결과 |
+|---|---|
+| `make validate` | **exit 0** — 불변식 A(core 순도 0건) · B(태스크 질의 2건 · 적중 0) · C(4쌍 · 개체 96 · 위반 0) OK · SHACL 6블록 PASSED |
+| `make test` | **416 passed · 10 skipped** (단계 7 신규 16 · 6-A/6-B 갱신분 포함) |
+| `make v1-ablation` (7-0 반영) | **29건 · 소비 8 · 미소비 21 · pa: R-Box 미소비 4 = RETAINED(disjointWith) 정확히 · 예측 불일치 0** · ② 18건 무변화(회당 151–162초 · 합 2,816초) · CQ 33개 10,210행 · ④ 기준선 4,306 불변 · 대조표 재렌더 |
+| `make public-release && make check-public` | **372 파일 · 적중 0 · 허용목록 밖 0 · 죽은 Makefile 참조 0 ✅** (첫 실행은 신규 스크립트가 untracked 라 "죽은 참조 1" — 스테이징 후 통과 · `git ls-files` 기반) |
+| 결정성 | `report_stage7_remeasure.json` · `v4_robustness.json` · 판정 MD 두 실행 `cmp` **동일** |
+| `make signature-inject` | Total 1,906 · OP 122 반영(README 두 판) |
+
+### 16.6 하류 조치 (§0)
+
+7-0 으로 `sdkb-priorart-core.ttl` 만 바뀐다(sha `307875eb7696`). 하류 `vendor.py:VENDOR_FILES`·`baseline.py:BASELINE_PARTS`
+양쪽 갱신. semi·kr·`sdkb-patent.ttl`·`sdkb-core.ttl`·A-Box 는 불변. IRI·의미 변경 0. 재측정 산출물 셋은 신규 파일.
+
+### 16.7 다음
+
+**§6 대로 멈춘다.** V2·V4 미달은 측정 결과이며, 이 계획은 미달을 보고 다음 단계를 제안하지 않는다. 남는 별건은
+§15.8 그대로(citationStatus · combinableWith · MinedAxiom · R7 · FailureMode·Skill 바인딩 · 단계 8·9 V6b/V6a).

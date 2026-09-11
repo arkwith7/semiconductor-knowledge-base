@@ -7,7 +7,7 @@
     "mappings/claim_features.parquet": "1e8b14cae533f0039b54afbf906490d2c7f6ca5ce53a92af96b4e35ccf8b9238",
     "data/patents/notice_element_judgments.parquet": "e46cdeb9bd6689092d5714f3793c0dd8ad4d9a19a96c0727ba395816eabdb4d3",
     "ontology/sdkb-core-data.ttl": "7142201d34966f3cb7871499db56655478a502b0455f3e800d0c2f04e125a0dc",
-    "ontology/sdkb-priorart-core.ttl": "e565b32571889bfd5ced2ca7b49a099dc45978821820e94d85d656f5e9b10e2f",
+    "ontology/sdkb-priorart-core.ttl": "307875eb7696154d4c2b38b742d89efdc7e332bcf9c70591b1168d1667036d70",
     "ontology/sdkb-priorart-semi.ttl": "d66c932524789269e7bd1a0f936b7987dc020c26abae0aaa2d3487f5c768e6ef",
     "data/sources/harvest_scope_dev_train.json": "543c027126307445e82300e54ee6cd01786563a3fded9dfaefe47834deefed11"
   },
@@ -375,13 +375,10 @@
     "excluded_non_data_iri": 0,
     "transitive_closure": false,
     "covered_by_by_subproperty": {
-      "broaderConcept": 16,
-      "substitutableWith": 0
+      "broaderConcept": 16
     },
     "covered_by_total": 16,
-    "source_absent": [
-      "substitutableWith"
-    ]
+    "source_absent": []
   },
   "examiner_elements": {
     "source": "data/patents/notice_element_judgments.parquet",
@@ -404,7 +401,7 @@
     "statement": "ClaimProfile·Disclosure 는 청구항 텍스트의 파생이며 심사관 판단을 담지 않으므로 분할 제한이 없다. ExaminerElement 는 심사관 판단이라 scope 밖 행이 있으면 빌드가 실패한다. 인용 간선은 이 A-Box 에 없다."
   },
   "non_goals": [
-    "MinedAxiom / substitutableWith / exactMatch 실체화 (채굴 쌍 산출물 없음)",
+    "MinedAxiom / exactMatch 실체화 (채굴 쌍 산출물 없음 · substitutableWith 는 7-0 일몰로 술어 없음)",
     "ClaimVersion / amendedFrom",
     "citationStatus 파생",
     "issuedDate / examRound (원천 없음)",

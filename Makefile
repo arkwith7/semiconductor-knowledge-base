@@ -1,7 +1,7 @@
 .PHONY: all install venv parse owl convert align validate test clean \
         ingest-sirp sirp-pairs sirp-problems sirp experts \
         compliance curated-experts curated-ratings expdataset abox abox-patents \
-        priorart abox-priorart v1-ablation \
+        priorart abox-priorart v1-ablation stage7-remeasure \
         abox-prior-art abox-claim-features abox-full refetch-fulltext cq \
         public-release check-public signature signature-inject signature-check \
         superordinate-concepts concept-mapping \
@@ -164,6 +164,15 @@ cq: convert
 v1-ablation: priorart convert abox-priorart
 	$(PYTHON) scripts/report_v1_ablation.py \
 		--markdown 01.code_spec/reports/PLAN-005-stage6-axiom-consumers.md
+
+# ── PLAN-005 단계 7 · V2–V4 재측정 · 동결 목표 대조 ─────────────────────
+# 정의·문턱은 report_stage7_remeasure.py:FROZEN(결과 전 동결). 기준선 L_A 는 단계 1 커밋의
+# parquet 를 git 에서 꺼내 소급 산출한다. V4 는 먼저 R∀·Disclosure 키를 덧붙여 다시 낸다.
+# 그래프는 바꾸지 않는다. 판정 리포트는 스크립트가 렌더한다(§5 — 손으로 쓰지 않는다).
+stage7-remeasure: abox-priorart
+	$(PYTHON) scripts/report_v4_robustness.py --with-conj-disclosure
+	$(PYTHON) scripts/report_stage7_remeasure.py \
+		--markdown 01.code_spec/reports/PLAN-005-stage7-verdict.md
 
 # ── 공개본 (CR-015) ────────────────────────────────────────────────────
 # 공개할 트리를 **매번 코드가 만든다.** 손으로 지우면 다음에 또 어긋난다 — 원고 §10.3 이
