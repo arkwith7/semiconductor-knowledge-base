@@ -81,7 +81,11 @@ def test_grandfathered_surfaces_survive_r7(kg, aliases):
     entries, blocked = collect(kg, aliases, "patent-text", set(),
                                df_ratio=ratio, grandfathered=frozenset(grand))
     kept = {e["surface"] for e in entries}
-    assert grand <= kept
+    # PLAN-005 7-A′(2026-09-10) — R8-SHORT-ASCII 는 유예가 없다: 유예 목록의 ASCII ≤2 표면형(al·w·co·fa·cu)은
+    # R7 이 아니라 R8 에 막힌다. 유예가 지키는 것은 R7 소급 금지뿐이다.
+    short = {s for s in grand if s.isascii() and len(s) <= 2}
+    assert grand - short <= kept
+    assert {b["surface"] for b in blocked if b["rule_id"] == "R8-SHORT-ASCII"} >= short
     assert not [b for b in blocked if b["rule_id"] == "R7-DF-CEILING"]
 
 
@@ -90,6 +94,8 @@ def test_grandfather_list_matches_measured_ratios(asset, aliases):
     meta = asset["profiles"]["patent-text"]["surface_meta"]
     denom = meta["df_denominator"]
     for surface, recorded in aliases["_r7_grandfathered"]["surfaces"].items():
+        if norm(surface).isascii() and len(norm(surface)) <= 2:
+            continue        # R8(7-A′)에 막혀 발행되지 않는다 — 감사 기록은 그대로 두고 대조만 건너뛴다
         counted = meta["surfaces"].get(norm(surface))
         assert counted is not None, f"유예 목록의 {surface} 가 발행 표면형에 없다"
         assert round(counted / denom, 4) == pytest.approx(recorded, abs=1e-4)
@@ -177,5 +183,10 @@ def test_proposals_do_not_register_new_iris():
     # 제안 294 표면형 중 basic_terms 와 겹치는 넷(배선·비아·웨이퍼·트렌치)을 뺀 나머지는 KG 의 어떤
     # 노드 이름·synonym 도 아니다 — 5-B 가 등록한 것은 basic_terms 만이다.
     names = {n["canonical_name"].lower() for n in kg["nodes"]} | {s["term"] for s in kg["synonyms"]}
-    leaked = [r["surface"] for r in prop["proposals"] if r["surface"] in names and r["surface"] not in held]
-    assert leaked == [], f"제안 목록의 표면형이 KG 에 등록돼 있다(5-B 범위 밖): {leaked}"
+    # PLAN-005 7-A′(2026-09-10 · 사용자 승인)가 제안 목록 중 저-df 표면형 일부를 **승인된 인젝터로** 등록했다.
+    # 등록 주체는 CR-001B 가 아니라 7-A′ 이며, 그 밖의 제안 표면형은 여전히 IRI 를 갖지 않는다.
+    import add_claim_concepts_7a as C7
+    approved = {ko for *_, kos, _p, _d in C7.NODES for ko in kos} | {t for _, t in C7.EXTRA_SYNONYMS}
+    leaked = [r["surface"] for r in prop["proposals"]
+              if r["surface"] in names and r["surface"] not in held and r["surface"] not in approved]
+    assert leaked == [], f"제안 목록의 표면형이 승인 없이 KG 에 등록돼 있다: {leaked}"

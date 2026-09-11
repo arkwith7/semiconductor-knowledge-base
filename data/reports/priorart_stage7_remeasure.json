@@ -1,8 +1,9 @@
 {
-  "plan": "PLAN-005 단계 7 · V2–V4 재측정 · 동결 목표 대조",
+  "plan": "PLAN-005 단계 7 · V2–V4 재측정 · 동결 목표 대조 · 7-A′ 레버 판정",
   "generator": "scripts/report_stage7_remeasure.py",
-  "generated": "2026-09-09",
+  "generated": "2026-09-10",
   "read_only": true,
+  "mode": "stage7a",
   "frozen": {
     "tau": 0.6708,
     "tau_source": "data/reports/priorart_baseline.json · control_group.language_stratified_R@50.tfidf_KR",
@@ -27,42 +28,129 @@
     "predictions_registered": {
       "P1": "Δ>0 비율은 §29②-only 층이 §29①-only 층보다 높다 (게이트 아님 · §29①-only 는 저검정력)",
       "P2": "L_C 의 best_single 중앙값 ≥ L_B (확장은 단일 문헌 포함률을 내리지 않는다)"
+    },
+    "stage7a": {
+      "c_commit": "0a9344b",
+      "c_parquet_sha256_prefix": "1e8b14cae533",
+      "rej_unmapped_max": 0.2,
+      "hit_drop_max": 0.02,
+      "lever_gate": "median|R∀| 감소(L_D−L_C)의 페어드 95% CI 가 0 을 배제 ∧ Δ<0",
+      "gate": "레버는 L_D 대 L_C · V2 세 조건은 L_D 대 L_A · τ 불변"
     }
   },
   "inputs": {
     "baseline_parquet_sha256": "16f8300dbf15a42b1e8bb5ab38ee9fcb40e7d1ed50877159a7a202115aab9b3c",
-    "mappings/claim_features.parquet": "1e8b14cae533f0039b54afbf906490d2c7f6ca5ce53a92af96b4e35ccf8b9238",
+    "mappings/claim_features.parquet": "cbd73414c09d198c298aa84c4e4f9652594dfce697611e76d05d3d9c7429bad3",
     "ontology/sdkb-priorart-core.ttl": "307875eb7696154d4c2b38b742d89efdc7e332bcf9c70591b1168d1667036d70",
-    "ontology/sdkb-core-data.ttl": "7142201d34966f3cb7871499db56655478a502b0455f3e800d0c2f04e125a0dc",
+    "ontology/sdkb-core-data.ttl": "c781889219dd99cb0ae4ecc5d3f87430bd2ec82b183fd60c2dbb7c58094045b6",
     "ontology/sdkb-priorart-semi.ttl": "d66c932524789269e7bd1a0f936b7987dc020c26abae0aaa2d3487f5c768e6ef",
     "data/patents/prior_art_edges.parquet": "bc893c93210c4d7c88de6df0c36698c753969a620e11f840ae71ca56426ec5f9",
-    "data/reports/abox_priorart_report.json": "3886f9efb1323e21667d1b3496d0aebd92cc9ed03ae3f8408fcc7d48131c1f44",
-    "data/reports/v4_robustness.json": "3448e43a0ca325d3e605831dbe70a36c94a034217e35878019ac716fbdd6a905"
+    "data/reports/abox_priorart_report.json": "aafe066e53ea673dee15dd89b128c79674773ebaf1037003eaddbd049de3d163",
+    "data/reports/v4_robustness.json": "9b4ebce20b72d64e5824571ffa92c79a1257b06853bf9311aed057b688ea769d",
+    "layer_parquet_sha256[L_C]": "1e8b14cae533f0039b54afbf906490d2c7f6ca5ce53a92af96b4e35ccf8b9238",
+    "layer_parquet_sha256[L_D0]": "ab1634f5a7a37d1c0963c947d0a4428deb9e3626d8a418bd17a924e0f6a27da6",
+    "layer_parquet_sha256[L_D]": "cbd73414c09d198c298aa84c4e4f9652594dfce697611e76d05d3d9c7429bad3"
   },
   "identity_check_vs_abox_report": {
     "profiles": [
-      62926,
-      62926
+      75125,
+      75125
     ],
     "disclosures": [
-      33274,
-      33274
+      36880,
+      36880
     ],
     "essential_links": [
-      134762,
-      134762
+      182748,
+      182748
     ],
     "covered_by_pairs": [
       16,
       16
     ],
     "bound_concepts": [
-      147,
-      147
+      166,
+      166
     ],
+    "rej_independent_unmapped_rate": 0.1861,
+    "parquet_sha256": "cbd73414c09d198c298aa84c4e4f9652594dfce697611e76d05d3d9c7429bad3",
     "cited_without_disclosure_by_prefix": {
-      "kr": 135,
-      "us": 30
+      "kr": 114,
+      "us": 33
+    }
+  },
+  "layer_identity": {
+    "L_C": {
+      "profiles": [
+        62926,
+        null
+      ],
+      "disclosures": [
+        33274,
+        null
+      ],
+      "essential_links": [
+        134762,
+        null
+      ],
+      "covered_by_pairs": [
+        16,
+        null
+      ],
+      "bound_concepts": [
+        166,
+        null
+      ],
+      "rej_independent_unmapped_rate": 0.2395,
+      "parquet_sha256": "1e8b14cae533f0039b54afbf906490d2c7f6ca5ce53a92af96b4e35ccf8b9238"
+    },
+    "L_D0": {
+      "profiles": [
+        62754,
+        null
+      ],
+      "disclosures": [
+        33177,
+        null
+      ],
+      "essential_links": [
+        133596,
+        null
+      ],
+      "covered_by_pairs": [
+        16,
+        null
+      ],
+      "bound_concepts": [
+        166,
+        null
+      ],
+      "rej_independent_unmapped_rate": 0.2468,
+      "parquet_sha256": "ab1634f5a7a37d1c0963c947d0a4428deb9e3626d8a418bd17a924e0f6a27da6"
+    },
+    "L_D": {
+      "profiles": [
+        75125,
+        75125
+      ],
+      "disclosures": [
+        36880,
+        36880
+      ],
+      "essential_links": [
+        182748,
+        182748
+      ],
+      "covered_by_pairs": [
+        16,
+        16
+      ],
+      "bound_concepts": [
+        166,
+        166
+      ],
+      "rej_independent_unmapped_rate": 0.1861,
+      "parquet_sha256": "cbd73414c09d198c298aa84c4e4f9652594dfce697611e76d05d3d9c7429bad3"
     }
   },
   "stage1_reproduction": {
@@ -135,14 +223,15 @@
   "descriptive": {
     "Q": {
       "L_A": 759,
-      "L_B": 774,
-      "L_C": 774
+      "L_C": 774,
+      "L_D0": 767,
+      "L_D": 804
     },
     "Q_A_and_Q_C": 759,
     "Q_C_strata": {
-      "없음": 221,
-      "§29①∧②": 126,
-      "§29②-only": 413,
+      "없음": 235,
+      "§29①∧②": 129,
+      "§29②-only": 426,
       "§29①-only": 14
     },
     "gt_targets_total": 1000
@@ -234,92 +323,6 @@
         }
       }
     },
-    "L_B": {
-      "reach": {
-        "queries": 774,
-        "target_size_median": 2.0,
-        "queries_kr": 681,
-        "queries_us": 209,
-        "exist": {
-          "reach_median": 11410.0,
-          "reach_mean": 11225.1,
-          "reach_max": 28292,
-          "reach_zero_queries": 0,
-          "hit_rate_any_S": 0.930233,
-          "SPR@50": 0.00516795865633075,
-          "SPR@100": 0.00516795865633075,
-          "SPR@1000": 0.040051679586563305,
-          "SPR@inf": 0.9302325581395349,
-          "SPR@50_KR": 0.004405286343612335,
-          "SPR@50_US": 0.014354066985645933
-        },
-        "all": {
-          "reach_median": 894.0,
-          "reach_mean": 2600.8,
-          "reach_max": 20031,
-          "reach_zero_queries": 6,
-          "hit_rate_any_S": 0.583979,
-          "SPR@50": 0.029715762273901807,
-          "SPR@100": 0.05167958656330749,
-          "SPR@1000": 0.23772609819121446,
-          "SPR@inf": 0.5839793281653747,
-          "SPR@50_KR": 0.030837004405286344,
-          "SPR@50_US": 0.023923444976076555
-        }
-      },
-      "coverage": {
-        "queries": 774,
-        "essential_concepts_per_query": {
-          "median": 3.0,
-          "mean": 3.26,
-          "p10": 1.0,
-          "p90": 6.0
-        },
-        "best_single_coverage": {
-          "median": 0.75,
-          "mean": 0.7018,
-          "eq0": 54,
-          "eq1": 322,
-          "saturated_frac": 0.4858
-        },
-        "pair_queries": 481,
-        "delta_coverage": {
-          "median": 0.0,
-          "mean": 0.0559,
-          "gt0_frac": 0.2225
-        },
-        "by_stratum": {
-          "§29①-only": {
-            "queries": 14,
-            "pair_queries": 5,
-            "best_single_median": 1.0,
-            "delta_mean": 0.05,
-            "delta_gt0_frac": 0.2
-          },
-          "§29①∧②": {
-            "queries": 126,
-            "pair_queries": 71,
-            "best_single_median": 0.75,
-            "delta_mean": 0.0662,
-            "delta_gt0_frac": 0.2394
-          },
-          "§29②-only": {
-            "queries": 413,
-            "pair_queries": 285,
-            "best_single_median": 0.75,
-            "delta_mean": 0.0579,
-            "delta_gt0_frac": 0.2316
-          },
-          "없음": {
-            "queries": 221,
-            "pair_queries": 120,
-            "best_single_median": 0.75,
-            "delta_mean": 0.0453,
-            "delta_gt0_frac": 0.1917
-          }
-        }
-      }
-    },
     "L_C": {
       "reach": {
         "queries": 774,
@@ -405,64 +408,238 @@
           }
         }
       }
+    },
+    "L_D0": {
+      "reach": {
+        "queries": 767,
+        "target_size_median": 2,
+        "queries_kr": 674,
+        "queries_us": 208,
+        "exist": {
+          "reach_median": 11737,
+          "reach_mean": 11655.7,
+          "reach_max": 28457,
+          "reach_zero_queries": 0,
+          "hit_rate_any_S": 0.933507,
+          "SPR@50": 0.005215123859191656,
+          "SPR@100": 0.005215123859191656,
+          "SPR@1000": 0.041720990873533245,
+          "SPR@inf": 0.9335071707953064,
+          "SPR@50_KR": 0.004451038575667656,
+          "SPR@50_US": 0.014423076923076924
+        },
+        "all": {
+          "reach_median": 961,
+          "reach_mean": 2827.9,
+          "reach_max": 20687,
+          "reach_zero_queries": 4,
+          "hit_rate_any_S": 0.595828,
+          "SPR@50": 0.03129074315514994,
+          "SPR@100": 0.04563233376792699,
+          "SPR@1000": 0.2320730117340287,
+          "SPR@inf": 0.5958279009126467,
+          "SPR@50_KR": 0.032640949554896145,
+          "SPR@50_US": 0.02403846153846154
+        }
+      },
+      "coverage": {
+        "queries": 767,
+        "essential_concepts_per_query": {
+          "median": 3.0,
+          "mean": 3.23,
+          "p10": 1.0,
+          "p90": 6.0
+        },
+        "best_single_coverage": {
+          "median": 0.75,
+          "mean": 0.712,
+          "eq0": 51,
+          "eq1": 329,
+          "saturated_frac": 0.4954
+        },
+        "pair_queries": 474,
+        "delta_coverage": {
+          "median": 0.0,
+          "mean": 0.0532,
+          "gt0_frac": 0.2131
+        },
+        "by_stratum": {
+          "§29①-only": {
+            "queries": 14,
+            "pair_queries": 5,
+            "best_single_median": 1.0,
+            "delta_mean": 0.05,
+            "delta_gt0_frac": 0.2
+          },
+          "§29①∧②": {
+            "queries": 124,
+            "pair_queries": 69,
+            "best_single_median": 0.75,
+            "delta_mean": 0.0645,
+            "delta_gt0_frac": 0.2464
+          },
+          "§29②-only": {
+            "queries": 409,
+            "pair_queries": 281,
+            "best_single_median": 0.75,
+            "delta_mean": 0.0568,
+            "delta_gt0_frac": 0.2278
+          },
+          "없음": {
+            "queries": 220,
+            "pair_queries": 119,
+            "best_single_median": 0.75,
+            "delta_mean": 0.0384,
+            "delta_gt0_frac": 0.1597
+          }
+        }
+      }
+    },
+    "L_D": {
+      "reach": {
+        "queries": 804,
+        "target_size_median": 2.0,
+        "queries_kr": 704,
+        "queries_us": 221,
+        "exist": {
+          "reach_median": 12031.0,
+          "reach_mean": 11803.1,
+          "reach_max": 28511,
+          "reach_zero_queries": 0,
+          "hit_rate_any_S": 0.929104,
+          "SPR@50": 0.0024875621890547263,
+          "SPR@100": 0.0024875621890547263,
+          "SPR@1000": 0.03855721393034826,
+          "SPR@inf": 0.9291044776119403,
+          "SPR@50_KR": 0.0014204545454545455,
+          "SPR@50_US": 0.00904977375565611
+        },
+        "all": {
+          "reach_median": 509.0,
+          "reach_mean": 1831.8,
+          "reach_max": 20781,
+          "reach_zero_queries": 21,
+          "hit_rate_any_S": 0.493781,
+          "SPR@50": 0.048507462686567165,
+          "SPR@100": 0.06840796019900497,
+          "SPR@1000": 0.24378109452736318,
+          "SPR@inf": 0.4937810945273632,
+          "SPR@50_KR": 0.052556818181818184,
+          "SPR@50_US": 0.03619909502262444
+        }
+      },
+      "coverage": {
+        "queries": 804,
+        "essential_concepts_per_query": {
+          "median": 3.0,
+          "mean": 3.91,
+          "p10": 1.0,
+          "p90": 7.0
+        },
+        "best_single_coverage": {
+          "median": 0.6666666666666666,
+          "mean": 0.6654,
+          "eq0": 57,
+          "eq1": 276,
+          "saturated_frac": 0.4142
+        },
+        "pair_queries": 500,
+        "delta_coverage": {
+          "median": 0.0,
+          "mean": 0.0595,
+          "gt0_frac": 0.25
+        },
+        "by_stratum": {
+          "§29①-only": {
+            "queries": 14,
+            "pair_queries": 5,
+            "best_single_median": 1.0,
+            "delta_mean": 0.05,
+            "delta_gt0_frac": 0.2
+          },
+          "§29①∧②": {
+            "queries": 129,
+            "pair_queries": 73,
+            "best_single_median": 0.7142857142857143,
+            "delta_mean": 0.0712,
+            "delta_gt0_frac": 0.274
+          },
+          "§29②-only": {
+            "queries": 426,
+            "pair_queries": 294,
+            "best_single_median": 0.6666666666666666,
+            "delta_mean": 0.0617,
+            "delta_gt0_frac": 0.2585
+          },
+          "없음": {
+            "queries": 235,
+            "pair_queries": 128,
+            "best_single_median": 0.625,
+            "delta_mean": 0.048,
+            "delta_gt0_frac": 0.2188
+          }
+        }
+      }
     }
   },
   "attribution": {
     "measure": "SPR∀@50",
-    "data_effect_B_minus_A": 0.002047778084178487,
-    "axiom_effect_C_minus_B": 0.0012919896640826885,
-    "total_C_minus_A": 0.0033397677482611757
+    "steps": {
+      "L_C−L_A": 0.0033397677482611757,
+      "L_D0−L_C": 0.0002829912171654417,
+      "L_D−L_D0": 0.017216719531417228
+    },
+    "total_L_D−L_A": 0.020839478496843845
   },
   "verdict": {
     "V2": {
       "i_significant_rise": {
-        "pass": false,
-        "common_queries": 759,
-        "SPR_all@50_A": 0.02766798418972332,
-        "SPR_all@50_C": 0.03162055335968379,
+        "pass": true,
+        "common_queries": 756,
+        "SPR_all@50_A": 0.027777777777777776,
+        "SPR_all@50_C": 0.05026455026455026,
         "bootstrap": {
-          "n": 759,
-          "delta": 0.003952569169960472,
+          "n": 756,
+          "delta": 0.022486772486772486,
           "ci": [
-            -0.003952569169960472,
-            0.011857707509881424
+            0.009259259259259259,
+            0.03571428571428571
           ],
           "B": 10000,
           "seed": 20260909
         },
         "mcnemar": {
-          "c_only": 6,
-          "a_only": 3,
-          "p": 0.5078125
+          "c_only": 22,
+          "a_only": 5,
+          "p": 0.0015137195587158203
         }
       },
       "ii_tau": {
         "pass": false,
         "tau": 0.6708,
-        "SPR_all@50_KR_C": 0.032305433186490456,
-        "queries_kr": 681
+        "SPR_all@50_KR_C": 0.052556818181818184,
+        "queries_kr": 704
       },
       "iii_specificity": {
         "pass": true,
         "reach_all_median_A": 1046,
-        "reach_all_median_C": 961.0
+        "reach_all_median_C": 509.0
       },
       "pass": false,
       "failed_conditions": [
-        "i",
         "ii"
       ]
     },
     "V3": {
       "gate_stratum": "§29② 포함 층 (§29②-only ∪ §29①∧②) · 인용 2문헌 이상",
-      "gate_queries": 285,
-      "delta_mean_C": 0.05616148958254221,
+      "gate_queries": 294,
+      "delta_mean_C": 0.061716288246900494,
       "bootstrap": {
-        "n": 285,
-        "delta": 0.05616148958254221,
+        "n": 294,
+        "delta": 0.061716288246900494,
         "ci": [
-          0.04351288574972785,
-          0.06961784195336826
+          0.04914057361761444,
+          0.07479958722305662
         ],
         "B": 10000,
         "seed": 20260909
@@ -470,66 +647,66 @@
       "pass": true,
       "novelty": "정량 판정 없음 (§5 · §29① 표본 < 문서 254건 규모) — by_stratum 서술만",
       "P1": {
-        "frac_29_2_only": 0.22456140350877193,
-        "n_29_2_only": 285,
+        "frac_29_2_only": 0.2585034013605442,
+        "n_29_2_only": 294,
         "frac_29_1_only": 0.2,
         "n_29_1_only": 5,
         "underpowered": true,
         "diff_bootstrap": {
-          "delta": 0.024561403508771923,
+          "delta": 0.058503401360544216,
           "ci": [
-            -0.38596491228070173,
-            0.2596491228070175
+            -0.3517857142857142,
+            0.29591836734693877
           ]
         },
         "holds": true
       },
       "P2": {
         "best_single_median_B": 0.75,
-        "best_single_median_C": 0.75,
-        "holds": true
+        "best_single_median_C": 0.6666666666666666,
+        "holds": false
       }
     },
     "V4": {
       "status": "산출",
       "checks": {
         "exist": {
-          "claim_hit_rate": 0.8788,
+          "claim_hit_rate": 0.9009,
           "variants": {
             "L1": {
-              "hit_rate": 0.8735,
-              "drop": 0.005299999999999971,
+              "hit_rate": 0.8956,
+              "drop": 0.005300000000000082,
               "pass": true
             },
             "L2": {
-              "hit_rate": 0.8788,
-              "drop": 0.0,
+              "hit_rate": 0.9036,
+              "drop": -0.0026999999999999247,
               "pass": true
             },
             "L3": {
-              "hit_rate": 0.888,
-              "drop": -0.009199999999999986,
+              "hit_rate": 0.9115,
+              "drop": -0.010599999999999943,
               "pass": true
             }
           },
           "pass": true
         },
         "all": {
-          "claim_hit_rate": 0.4585,
+          "claim_hit_rate": 0.391,
           "variants": {
             "L1": {
-              "hit_rate": 0.4453,
-              "drop": 0.013200000000000045,
+              "hit_rate": 0.3804,
+              "drop": 0.010599999999999998,
               "pass": true
             },
             "L2": {
-              "hit_rate": 0.4717,
-              "drop": -0.01319999999999999,
+              "hit_rate": 0.3963,
+              "drop": -0.005299999999999971,
               "pass": true
             },
             "L3": {
-              "hit_rate": 0.3953,
-              "drop": 0.06320000000000003,
+              "hit_rate": 0.3342,
+              "drop": 0.05680000000000002,
               "pass": false
             }
           },
@@ -537,12 +714,85 @@
         }
       },
       "quartile": {
-        "Q1": 0.8778,
-        "Q4": 0.8748,
+        "Q1": 0.8934,
+        "Q4": 0.9011,
         "pass": true
       },
       "human_coding_reference": "data/reports/v4_human_coding.json (κ 0.6934 · 재코딩 없음)",
       "pass": false
+    },
+    "lever": {
+      "gate": "레버는 L_D 대 L_C · V2 세 조건은 L_D 대 L_A · τ 불변",
+      "common_queries": 771,
+      "rej_unmapped": {
+        "pass": true,
+        "rate": 0.1861,
+        "max": 0.2
+      },
+      "reach_median_decrease": {
+        "pass": true,
+        "median_C": 961,
+        "median_D": 492,
+        "bootstrap": {
+          "n": 771,
+          "delta": -469.0,
+          "ci": [
+            -538.0,
+            -290.0
+          ],
+          "B": 10000,
+          "seed": 20260909
+        }
+      },
+      "hit_inf_drop": {
+        "pass": false,
+        "hit_C": 0.5966277561608301,
+        "hit_D": 0.4980544747081712,
+        "drop": 0.09857328145265887,
+        "max": 0.02
+      },
+      "pass": false,
+      "failed_conditions": [
+        "hit_drop"
+      ],
+      "extra_layers_vs_L_C": {
+        "L_D0": {
+          "gate": "레버는 L_D 대 L_C · V2 세 조건은 L_D 대 L_A · τ 불변",
+          "common_queries": 767,
+          "rej_unmapped": {
+            "pass": false,
+            "rate": 0.2468,
+            "max": 0.2
+          },
+          "reach_median_decrease": {
+            "pass": false,
+            "median_C": 961,
+            "median_D": 961,
+            "bootstrap": {
+              "n": 767,
+              "delta": 0.0,
+              "ci": [
+                0.0,
+                161.0
+              ],
+              "B": 10000,
+              "seed": 20260909
+            }
+          },
+          "hit_inf_drop": {
+            "pass": true,
+            "hit_C": 0.5984354628422425,
+            "hit_D": 0.5958279009126467,
+            "drop": 0.0026075619295957697,
+            "max": 0.02
+          },
+          "pass": false,
+          "failed_conditions": [
+            "rej_unmapped",
+            "reach_median"
+          ]
+        }
+      }
     }
   },
   "limitations": [

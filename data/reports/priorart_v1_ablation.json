@@ -1,7 +1,7 @@
 {
   "plan": "PLAN-005 단계 6-A · V1 공리 단위 절제 (계측 완성)",
   "generator": "scripts/report_v1_ablation.py",
-  "generated": "2026-09-09",
+  "generated": "2026-09-10",
   "read_only": true,
   "definition": {
     "consumed": "②③④ 중 하나가 O∖a 에서 변한다 (모듈 docstring)",
@@ -20,8 +20,8 @@
     "ontology/sdkb-priorart-core.ttl": "307875eb7696154d4c2b38b742d89efdc7e332bcf9c70591b1168d1667036d70",
     "ontology/sdkb-priorart-semi.ttl": "d66c932524789269e7bd1a0f936b7987dc020c26abae0aaa2d3487f5c768e6ef",
     "ontology/sdkb-priorart-kr.ttl": "4e5ed9739f648cf6bc0ba4f91079459895bb56695d6b089389b90784ea56bcf2",
-    "ontology/sdkb-core-data.ttl": "7142201d34966f3cb7871499db56655478a502b0455f3e800d0c2f04e125a0dc",
-    "ontology/sdkb-abox-priorart.ttl": "4c726e98fa03c761c3c5c86b0435404d2e75b9f16e39036e3e8520931aba6599",
+    "ontology/sdkb-core-data.ttl": "c781889219dd99cb0ae4ecc5d3f87430bd2ec82b183fd60c2dbb7c58094045b6",
+    "ontology/sdkb-abox-priorart.ttl": "46271d8f35b8f9a2c4a3be767ff2779f0f5b2ba56442462ec06324f4b77da3c5",
     "scripts/build_abox_priorart.py": "64ac270fc6d972f3698b96f4c3342269809ea67d6287fcc4de348bb3f6232f3b",
     "queries/cq/*.rq": "903f4c233208765887632fa156328b872e30eafd1de23a6959ac856f5c4569d8"
   },
@@ -45,9 +45,9 @@
   "graphs_missing": [],
   "baseline": {
     "cq_count": 33,
-    "cq_rows_total": 10210,
+    "cq_rows_total": 10213,
     "cq32_rows": 200,
-    "bound_concepts": 147,
+    "bound_concepts": 166,
     "technical_concept_classes": 11,
     "covered_by_by_subproperty": {
       "broaderConcept": 16
@@ -99,7 +99,7 @@
       "present_in_graph": true,
       "triples_removed": 1,
       "materialization_after": {
-        "bound_concepts": 147,
+        "bound_concepts": 166,
         "technical_concept_classes": 11,
         "covered_by_by_subproperty": {
           "broaderConcept": 16
@@ -115,7 +115,7 @@
       "cq_skipped": false,
       "cq_mentions_subject": [],
       "path": false,
-      "cq_seconds": 153.9,
+      "cq_seconds": 149.4,
       "consumed": false,
       "consumed_by": [],
       "flow": false,
@@ -134,7 +134,7 @@
       "present_in_graph": true,
       "triples_removed": 1,
       "materialization_after": {
-        "bound_concepts": 147,
+        "bound_concepts": 166,
         "technical_concept_classes": 11,
         "covered_by_by_subproperty": {
           "broaderConcept": 16
@@ -150,7 +150,7 @@
       "cq_skipped": false,
       "cq_mentions_subject": [],
       "path": false,
-      "cq_seconds": 160.4,
+      "cq_seconds": 150.6,
       "consumed": false,
       "consumed_by": [],
       "flow": false,
@@ -169,7 +169,7 @@
       "present_in_graph": true,
       "triples_removed": 1,
       "materialization_after": {
-        "bound_concepts": 147,
+        "bound_concepts": 166,
         "technical_concept_classes": 11,
         "covered_by_by_subproperty": {
           "broaderConcept": 16
@@ -185,7 +185,7 @@
       "cq_skipped": false,
       "cq_mentions_subject": [],
       "path": false,
-      "cq_seconds": 162.4,
+      "cq_seconds": 150.2,
       "consumed": false,
       "consumed_by": [],
       "flow": false,
@@ -204,7 +204,7 @@
       "present_in_graph": true,
       "triples_removed": 1,
       "materialization_after": {
-        "bound_concepts": 147,
+        "bound_concepts": 166,
         "technical_concept_classes": 11,
         "covered_by_by_subproperty": {
           "broaderConcept": 16
@@ -220,7 +220,7 @@
       "cq_skipped": false,
       "cq_mentions_subject": [],
       "path": false,
-      "cq_seconds": 161.4,
+      "cq_seconds": 150.2,
       "consumed": false,
       "consumed_by": [],
       "flow": false,
@@ -239,7 +239,7 @@
       "present_in_graph": true,
       "triples_removed": 1,
       "materialization_after": {
-        "bound_concepts": 147,
+        "bound_concepts": 166,
         "technical_concept_classes": 11,
         "covered_by_by_subproperty": {
           "broaderConcept": 16
@@ -255,7 +255,7 @@
       "cq_skipped": false,
       "cq_mentions_subject": [],
       "path": false,
-      "cq_seconds": 159.6,
+      "cq_seconds": 149.0,
       "consumed": false,
       "consumed_by": [],
       "flow": false,
@@ -274,7 +274,7 @@
       "present_in_graph": true,
       "triples_removed": 1,
       "materialization_after": {
-        "bound_concepts": 147,
+        "bound_concepts": 166,
         "technical_concept_classes": 11,
         "covered_by_by_subproperty": {
           "broaderConcept": 16
@@ -292,7 +292,7 @@
         "CQ05_concept_vs_ipc_series"
       ],
       "path": false,
-      "cq_seconds": 158.6,
+      "cq_seconds": 150.6,
       "consumed": false,
       "consumed_by": [],
       "flow": false,
@@ -311,7 +311,7 @@
       "present_in_graph": true,
       "triples_removed": 1,
       "materialization_after": {
-        "bound_concepts": 147,
+        "bound_concepts": 166,
         "technical_concept_classes": 11,
         "covered_by_by_subproperty": {
           "broaderConcept": 16
@@ -327,7 +327,7 @@
       "cq_skipped": false,
       "cq_mentions_subject": [],
       "path": false,
-      "cq_seconds": 157.7,
+      "cq_seconds": 149.8,
       "consumed": false,
       "consumed_by": [],
       "flow": false,
@@ -346,7 +346,7 @@
       "present_in_graph": true,
       "triples_removed": 1,
       "materialization_after": {
-        "bound_concepts": 147,
+        "bound_concepts": 166,
         "technical_concept_classes": 11,
         "covered_by_by_subproperty": {
           "broaderConcept": 16
@@ -364,7 +364,7 @@
         "CQ09_rejection_prior_art"
       ],
       "path": false,
-      "cq_seconds": 158.5,
+      "cq_seconds": 149.6,
       "consumed": false,
       "consumed_by": [],
       "flow": false,
@@ -383,7 +383,7 @@
       "present_in_graph": true,
       "triples_removed": 1,
       "materialization_after": {
-        "bound_concepts": 147,
+        "bound_concepts": 166,
         "technical_concept_classes": 11,
         "covered_by_by_subproperty": {},
         "covered_by_total": 0
@@ -397,7 +397,7 @@
       "cq_skipped": false,
       "cq_mentions_subject": [],
       "path": true,
-      "cq_seconds": 159.4,
+      "cq_seconds": 148.5,
       "consumed": true,
       "consumed_by": [
         "materialization",
@@ -419,7 +419,7 @@
       "present_in_graph": true,
       "triples_removed": 1,
       "materialization_after": {
-        "bound_concepts": 147,
+        "bound_concepts": 166,
         "technical_concept_classes": 11,
         "covered_by_by_subproperty": {
           "broaderConcept": 16
@@ -437,7 +437,7 @@
         "CQ29_claim_level_rejection_judgment"
       ],
       "path": false,
-      "cq_seconds": 154.7,
+      "cq_seconds": 150.1,
       "consumed": false,
       "consumed_by": [],
       "flow": false,
@@ -456,7 +456,7 @@
       "present_in_graph": true,
       "triples_removed": 1,
       "materialization_after": {
-        "bound_concepts": 147,
+        "bound_concepts": 166,
         "technical_concept_classes": 11,
         "covered_by_by_subproperty": {
           "broaderConcept": 16
@@ -472,7 +472,7 @@
       "cq_skipped": false,
       "cq_mentions_subject": [],
       "path": false,
-      "cq_seconds": 155.1,
+      "cq_seconds": 149.1,
       "consumed": false,
       "consumed_by": [],
       "flow": false,
@@ -491,7 +491,7 @@
       "present_in_graph": true,
       "triples_removed": 1,
       "materialization_after": {
-        "bound_concepts": 147,
+        "bound_concepts": 166,
         "technical_concept_classes": 11,
         "covered_by_by_subproperty": {
           "broaderConcept": 16
@@ -510,7 +510,7 @@
         "CQ32_novelty_uncovered_essential_concepts"
       ],
       "path": false,
-      "cq_seconds": 154.9,
+      "cq_seconds": 150.0,
       "consumed": false,
       "consumed_by": [],
       "flow": false,
@@ -529,7 +529,7 @@
       "present_in_graph": true,
       "triples_removed": 1,
       "materialization_after": {
-        "bound_concepts": 147,
+        "bound_concepts": 166,
         "technical_concept_classes": 11,
         "covered_by_by_subproperty": {
           "broaderConcept": 16
@@ -545,7 +545,7 @@
       "cq_skipped": false,
       "cq_mentions_subject": [],
       "path": true,
-      "cq_seconds": 152.8,
+      "cq_seconds": 151.1,
       "consumed": false,
       "consumed_by": [],
       "flow": false,
@@ -564,7 +564,7 @@
       "present_in_graph": true,
       "triples_removed": 1,
       "materialization_after": {
-        "bound_concepts": 147,
+        "bound_concepts": 166,
         "technical_concept_classes": 11,
         "covered_by_by_subproperty": {
           "broaderConcept": 16
@@ -580,7 +580,7 @@
       "cq_skipped": false,
       "cq_mentions_subject": [],
       "path": true,
-      "cq_seconds": 150.6,
+      "cq_seconds": 149.8,
       "consumed": false,
       "consumed_by": [],
       "flow": false,
@@ -599,7 +599,7 @@
       "present_in_graph": true,
       "triples_removed": 1,
       "materialization_after": {
-        "bound_concepts": 147,
+        "bound_concepts": 166,
         "technical_concept_classes": 11,
         "covered_by_by_subproperty": {
           "broaderConcept": 16
@@ -615,7 +615,7 @@
       "cq_skipped": false,
       "cq_mentions_subject": [],
       "path": true,
-      "cq_seconds": 153.0,
+      "cq_seconds": 151.5,
       "consumed": false,
       "consumed_by": [],
       "flow": false,
@@ -634,7 +634,7 @@
       "present_in_graph": true,
       "triples_removed": 1,
       "materialization_after": {
-        "bound_concepts": 147,
+        "bound_concepts": 166,
         "technical_concept_classes": 11,
         "covered_by_by_subproperty": {
           "broaderConcept": 16
@@ -650,7 +650,7 @@
       "cq_skipped": false,
       "cq_mentions_subject": [],
       "path": true,
-      "cq_seconds": 152.3,
+      "cq_seconds": 149.2,
       "consumed": false,
       "consumed_by": [],
       "flow": false,
@@ -669,7 +669,7 @@
       "present_in_graph": true,
       "triples_removed": 1,
       "materialization_after": {
-        "bound_concepts": 113,
+        "bound_concepts": 129,
         "technical_concept_classes": 10,
         "covered_by_by_subproperty": {
           "broaderConcept": 16
@@ -677,7 +677,7 @@
         "covered_by_total": 16
       },
       "covered_by_delta": 0,
-      "bound_concepts_delta": -34,
+      "bound_concepts_delta": -37,
       "task_pu_after": 4306,
       "task_pdu_after": 40024841,
       "task_pu_delta": 0,
@@ -708,7 +708,7 @@
       "present_in_graph": true,
       "triples_removed": 1,
       "materialization_after": {
-        "bound_concepts": 135,
+        "bound_concepts": 154,
         "technical_concept_classes": 10,
         "covered_by_by_subproperty": {
           "broaderConcept": 16
@@ -748,7 +748,7 @@
       "present_in_graph": true,
       "triples_removed": 1,
       "materialization_after": {
-        "bound_concepts": 116,
+        "bound_concepts": 131,
         "technical_concept_classes": 10,
         "covered_by_by_subproperty": {
           "broaderConcept": 1
@@ -756,7 +756,7 @@
         "covered_by_total": 1
       },
       "covered_by_delta": -15,
-      "bound_concepts_delta": -31,
+      "bound_concepts_delta": -35,
       "task_pu_after": 361,
       "task_pdu_after": 1450137,
       "task_pu_delta": -3945,
@@ -787,7 +787,7 @@
       "present_in_graph": true,
       "triples_removed": 1,
       "materialization_after": {
-        "bound_concepts": 142,
+        "bound_concepts": 161,
         "technical_concept_classes": 10,
         "covered_by_by_subproperty": {
           "broaderConcept": 16
@@ -825,7 +825,7 @@
       "present_in_graph": true,
       "triples_removed": 1,
       "materialization_after": {
-        "bound_concepts": 147,
+        "bound_concepts": 166,
         "technical_concept_classes": 10,
         "covered_by_by_subproperty": {
           "broaderConcept": 16
@@ -863,7 +863,7 @@
       "present_in_graph": true,
       "triples_removed": 1,
       "materialization_after": {
-        "bound_concepts": 135,
+        "bound_concepts": 154,
         "technical_concept_classes": 10,
         "covered_by_by_subproperty": {
           "broaderConcept": 15
@@ -906,7 +906,7 @@
       "present_in_graph": true,
       "triples_removed": 1,
       "materialization_after": {
-        "bound_concepts": 147,
+        "bound_concepts": 166,
         "technical_concept_classes": 10,
         "covered_by_by_subproperty": {
           "broaderConcept": 16
@@ -940,7 +940,7 @@
       "present_in_graph": true,
       "triples_removed": 1,
       "materialization_after": {
-        "bound_concepts": 132,
+        "bound_concepts": 139,
         "technical_concept_classes": 10,
         "covered_by_by_subproperty": {
           "broaderConcept": 16
@@ -948,7 +948,7 @@
         "covered_by_total": 16
       },
       "covered_by_delta": 0,
-      "bound_concepts_delta": -15,
+      "bound_concepts_delta": -27,
       "task_pu_after": 4306,
       "task_pdu_after": 40024841,
       "task_pu_delta": 0,
@@ -976,7 +976,7 @@
       "present_in_graph": true,
       "triples_removed": 1,
       "materialization_after": {
-        "bound_concepts": 109,
+        "bound_concepts": 128,
         "technical_concept_classes": 10,
         "covered_by_by_subproperty": {
           "broaderConcept": 15
@@ -1019,7 +1019,7 @@
       "present_in_graph": true,
       "triples_removed": 1,
       "materialization_after": {
-        "bound_concepts": 147,
+        "bound_concepts": 166,
         "technical_concept_classes": 10,
         "covered_by_by_subproperty": {
           "broaderConcept": 16
@@ -1053,7 +1053,7 @@
       "present_in_graph": true,
       "triples_removed": 1,
       "materialization_after": {
-        "bound_concepts": 147,
+        "bound_concepts": 166,
         "technical_concept_classes": 10,
         "covered_by_by_subproperty": {
           "broaderConcept": 16
@@ -1087,7 +1087,7 @@
       "present_in_graph": true,
       "triples_removed": 1,
       "materialization_after": {
-        "bound_concepts": 147,
+        "bound_concepts": 166,
         "technical_concept_classes": 11,
         "covered_by_by_subproperty": {
           "broaderConcept": 16
@@ -1103,7 +1103,7 @@
       "cq_skipped": false,
       "cq_mentions_subject": [],
       "path": false,
-      "cq_seconds": 156.0,
+      "cq_seconds": 149.5,
       "consumed": false,
       "consumed_by": [],
       "flow": false,
@@ -1122,7 +1122,7 @@
       "present_in_graph": true,
       "triples_removed": 1,
       "materialization_after": {
-        "bound_concepts": 147,
+        "bound_concepts": 166,
         "technical_concept_classes": 11,
         "covered_by_by_subproperty": {
           "broaderConcept": 16
@@ -1138,7 +1138,7 @@
       "cq_skipped": false,
       "cq_mentions_subject": [],
       "path": false,
-      "cq_seconds": 155.0,
+      "cq_seconds": 151.9,
       "consumed": false,
       "consumed_by": [],
       "flow": false,

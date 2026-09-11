@@ -3,7 +3,7 @@
   "schema_version": "1.0",
   "source": {
     "ttl": "sdkb-abox-claim-features.ttl",
-    "ttl_sha256": "5069d7e0533d3b198293156f97cad292f71c439146102c2f208b5cd260a18e0c",
+    "ttl_sha256": "ae27578a3b92e1ee92946c7c38238434a0675f32d56bc0ce9b1662cdd5479cdf",
     "generator": "build_abox_claim_features.py",
     "linker": {
       "profile": "patent-text",
@@ -15,9 +15,9 @@
     "rows_features": 1306191,
     "claims": 594078,
     "patents": 40187,
-    "features_with_concept": 503960,
-    "concept_links": 746012,
-    "distinct_concepts": 138
+    "features_with_concept": 626464,
+    "concept_links": 975460,
+    "distinct_concepts": 156
   },
   "df_denominator": {
     "features": 1306191,
@@ -72,9 +72,13 @@
       "df_feature": 410,
       "df_patent": 79
     },
+    "device:flash_memory": {
+      "df_feature": 2867,
+      "df_patent": 371
+    },
     "device:flip_chip": {
-      "df_feature": 670,
-      "df_patent": 223
+      "df_feature": 261,
+      "df_patent": 56
     },
     "device:gaa_fet": {
       "df_feature": 35,
@@ -116,9 +120,13 @@
       "df_feature": 480,
       "df_patent": 193
     },
+    "device:nonvolatile_memory": {
+      "df_feature": 25910,
+      "df_patent": 2255
+    },
     "device:pcram": {
-      "df_feature": 1999,
-      "df_patent": 242
+      "df_feature": 4056,
+      "df_patent": 493
     },
     "device:photodiode": {
       "df_feature": 53,
@@ -135,6 +143,10 @@
     "device:thyristor": {
       "df_feature": 43,
       "df_patent": 9
+    },
+    "device:transistor": {
+      "df_feature": 978,
+      "df_patent": 260
     },
     "device:tsv": {
       "df_feature": 1583,
@@ -241,8 +253,8 @@
       "df_patent": 89
     },
     "material:aluminum": {
-      "df_feature": 7407,
-      "df_patent": 2916
+      "df_feature": 5137,
+      "df_patent": 2094
     },
     "material:amorphous_carbon": {
       "df_feature": 684,
@@ -269,12 +281,12 @@
       "df_patent": 1
     },
     "material:cobalt": {
-      "df_feature": 3281,
-      "df_patent": 1432
+      "df_feature": 1568,
+      "df_patent": 703
     },
     "material:copper": {
-      "df_feature": 6857,
-      "df_patent": 2055
+      "df_feature": 5793,
+      "df_patent": 1624
     },
     "material:dielectric": {
       "df_feature": 91936,
@@ -292,9 +304,17 @@
       "df_feature": 614,
       "df_patent": 411
     },
+    "material:indium": {
+      "df_feature": 2397,
+      "df_patent": 867
+    },
     "material:low_k_dielectric": {
       "df_feature": 169,
       "df_patent": 73
+    },
+    "material:nitrogen_gas": {
+      "df_feature": 6062,
+      "df_patent": 2088
     },
     "material:oxide": {
       "df_feature": 17824,
@@ -328,6 +348,10 @@
       "df_feature": 144,
       "df_patent": 94
     },
+    "material:silicide": {
+      "df_feature": 4153,
+      "df_patent": 1003
+    },
     "material:sin": {
       "df_feature": 14686,
       "df_patent": 4544
@@ -349,12 +373,16 @@
       "df_patent": 219
     },
     "material:tin": {
-      "df_feature": 2020,
-      "df_patent": 957
+      "df_feature": 2019,
+      "df_patent": 956
+    },
+    "material:titanium": {
+      "df_feature": 4714,
+      "df_patent": 1847
     },
     "material:tungsten": {
-      "df_feature": 6506,
-      "df_patent": 2581
+      "df_feature": 4217,
+      "df_patent": 1656
     },
     "process:back_end": {
       "df_feature": 76,
@@ -401,8 +429,8 @@
       "df_patent": 100
     },
     "skill:defect_analysis": {
-      "df_feature": 564,
-      "df_patent": 146
+      "df_feature": 554,
+      "df_patent": 141
     },
     "skill:doe_analysis": {
       "df_feature": 42,
@@ -440,17 +468,53 @@
       "df_feature": 38,
       "df_patent": 15
     },
+    "structural_element:active_region": {
+      "df_feature": 16167,
+      "df_patent": 2008
+    },
+    "structural_element:bit_line": {
+      "df_feature": 35592,
+      "df_patent": 5143
+    },
     "structural_element:capacitor": {
-      "df_feature": 3923,
-      "df_patent": 640
+      "df_feature": 11795,
+      "df_patent": 2061
     },
     "structural_element:channel": {
       "df_feature": 541,
       "df_patent": 170
     },
+    "structural_element:charge_storage_layer": {
+      "df_feature": 1203,
+      "df_patent": 214
+    },
+    "structural_element:conductive_layer": {
+      "df_feature": 15708,
+      "df_patent": 2451
+    },
+    "structural_element:contact_plug": {
+      "df_feature": 36113,
+      "df_patent": 4343
+    },
+    "structural_element:device_isolation": {
+      "df_feature": 10443,
+      "df_patent": 2056
+    },
     "structural_element:drain": {
       "df_feature": 769,
       "df_patent": 170
+    },
+    "structural_element:floating_gate": {
+      "df_feature": 2017,
+      "df_patent": 344
+    },
+    "structural_element:hard_mask": {
+      "df_feature": 6791,
+      "df_patent": 1059
+    },
+    "structural_element:interlayer_dielectric": {
+      "df_feature": 14510,
+      "df_patent": 2469
     },
     "structural_element:metal_wiring": {
       "df_feature": 705,
@@ -459,6 +523,10 @@
     "structural_element:photoresist_layer": {
       "df_feature": 1434,
       "df_patent": 314
+    },
+    "structural_element:semiconductor_layer": {
+      "df_feature": 7959,
+      "df_patent": 1025
     },
     "structural_element:source": {
       "df_feature": 118,
@@ -476,6 +544,10 @@
       "df_feature": 19408,
       "df_patent": 2872
     },
+    "structural_element:tunnel_dielectric": {
+      "df_feature": 1974,
+      "df_patent": 523
+    },
     "structural_element:via": {
       "df_feature": 16854,
       "df_patent": 2521
@@ -487,6 +559,10 @@
     "structural_element:wiring": {
       "df_feature": 37622,
       "df_patent": 4384
+    },
+    "structural_element:word_line": {
+      "df_feature": 35646,
+      "df_patent": 4428
     },
     "subprocess:ald": {
       "df_feature": 2711,
@@ -519,10 +595,6 @@
     "subprocess:euv_lithography": {
       "df_feature": 4759,
       "df_patent": 555
-    },
-    "subprocess:hardmask_etch": {
-      "df_feature": 3929,
-      "df_patent": 638
     },
     "subprocess:high_k_metal_gate": {
       "df_feature": 9,
@@ -590,10 +662,10 @@
       "us": 31598
     },
     "features_with_concept_by_side": {
-      "cited": 44060,
-      "g1": 289700,
-      "g2": 151824,
-      "rej": 18376
+      "cited": 48589,
+      "g1": 404287,
+      "g2": 153552,
+      "rej": 20036
     }
   }
 }

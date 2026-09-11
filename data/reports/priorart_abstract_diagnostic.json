@@ -1,0 +1,110 @@
+{
+  "plan": "PLAN-005 단계 7-B′ · 초록 개시 진단 (판정 밖)",
+  "generator": "scripts/report_abstract_disclosure_diagnostic.py",
+  "generated": "2026-09-10",
+  "read_only": true,
+  "verdict_use": false,
+  "why_not_verdict": "대조 문헌 g1·g2 에 초록이 없어 인용문헌만 보강하면 목표 쪽만 유리하다 — 제한 코퍼스 안의 페어드 차이만 해석한다(계획서 §17).",
+  "inputs": {
+    "mappings/claim_features.parquet": "cbd73414c09d198c298aa84c4e4f9652594dfce697611e76d05d3d9c7429bad3",
+    "data/patents/fulltext_corpus.parquet": "5961f0a15784b7af48bd4f3cd910e05d81f7af4fabc2ac561596d0c92f157a58"
+  },
+  "identity_check_vs_abox_report": {
+    "profiles": [
+      75125,
+      75125
+    ],
+    "disclosures": [
+      36880,
+      36880
+    ],
+    "essential_links": [
+      182748,
+      182748
+    ],
+    "covered_by_pairs": [
+      16,
+      16
+    ],
+    "bound_concepts": [
+      166,
+      166
+    ],
+    "rej_independent_unmapped_rate": 0.1861,
+    "parquet_sha256": "cbd73414c09d198c298aa84c4e4f9652594dfce697611e76d05d3d9c7429bad3"
+  },
+  "abstracts": {
+    "documents_with_abstract": 4159,
+    "abstract_grounded_nonempty": 3654,
+    "sources": {
+      "source__fulltext_corpus": 2926,
+      "source__kipris_jsonl": 1960,
+      "source__rejected_meta": 1000
+    },
+    "concepts_per_abstract_median": 2
+  },
+  "restricted_corpus": {
+    "documents": 2947,
+    "share_of_disclosures": 0.0799
+  },
+  "paired_comparison": {
+    "queries": 777,
+    "hit_inf_claims_only": 0.4929214929214929,
+    "hit_inf_claims_plus_abstract": 0.5135135135135135,
+    "hit_inf_delta_bootstrap": {
+      "n": 777,
+      "delta": 0.020592020592020588,
+      "ci": [
+        0.01158301158301156,
+        0.030888030888030937
+      ],
+      "B": 10000,
+      "seed": 20260909
+    },
+    "reach_all_median": [
+      88,
+      101
+    ],
+    "SPR_all@50": [
+      0.11454311454311454,
+      0.11711711711711711
+    ],
+    "SPR_all@1000": [
+      0.4247104247104247,
+      0.444015444015444
+    ],
+    "best_single_coverage_median": [
+      0.6666666666666666,
+      0.7142857142857143
+    ],
+    "disc_size_median": [
+      6,
+      6
+    ]
+  },
+  "cited_without_disclosure": {
+    "total": 789,
+    "by_prefix": {
+      "cn": 18,
+      "ep": 8,
+      "jp": 596,
+      "kr": 57,
+      "other": 31,
+      "us": 17,
+      "wo": 62
+    },
+    "gain_nonempty_abstract_set": 519,
+    "gain_by_prefix": {
+      "cn": 11,
+      "jp": 452,
+      "kr": 10,
+      "us": 2,
+      "wo": 44
+    }
+  },
+  "limitations": [
+    "제한 코퍼스는 초록이 있는 문헌뿐이라 N 이 작다 — 후보 수·SPR 절대값은 단계 7 사다리와 비교 불가.",
+    "JP·US 초록은 영어라 한글 표면형은 닿지 않고 영문 canonical·synonym 만 걸린다.",
+    "초록 접지가 비지 않는 인용문헌이 목표 노드가 되려면 대조군도 같은 원천을 가져야 한다(별도 1단계)."
+  ]
+}

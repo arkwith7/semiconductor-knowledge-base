@@ -1,7 +1,7 @@
 .PHONY: all install venv parse owl convert align validate test clean \
         ingest-sirp sirp-pairs sirp-problems sirp experts \
         compliance curated-experts curated-ratings expdataset abox abox-patents \
-        priorart abox-priorart v1-ablation stage7-remeasure \
+        priorart abox-priorart v1-ablation stage7-remeasure claim-concepts-7a abstract-diagnostic \
         abox-prior-art abox-claim-features abox-full refetch-fulltext cq \
         public-release check-public signature signature-inject signature-check \
         superordinate-concepts concept-mapping \
@@ -237,6 +237,16 @@ superordinate-concepts:
 # 위와 같은 이유로 체인 밖(커밋된 큐레이션 원천을 고친다). 주입 후 `make parse owl convert`.
 structural-elements:
 	$(PYTHON) scripts/add_structural_elements.py
+
+# PLAN-005 단계 7-A′ — 저-df 신규 개념(구조요소·소자·재료·파라미터)과 표면형을 KG 에 주입한다.
+# 멱등. 뒤에 parse owl convert concept-mapping abox-claim-features abox-priorart 가 따른다.
+claim-concepts-7a:
+	$(PYTHON) scripts/add_claim_concepts_7a.py
+
+# PLAN-005 단계 7-B′ — 초록 개시 진단(판정 밖 · 읽기 전용). 대조 문헌 g1·g2 에 초록이 없어
+# V2 판정에는 쓰지 않는다 — 초록 있는 문헌만의 제한 코퍼스에서 페어드 비교만 한다.
+abstract-diagnostic:
+	$(PYTHON) scripts/report_abstract_disclosure_diagnostic.py
 
 concept-mapping: convert
 	$(PYTHON) scripts/build_concept_mapping.py

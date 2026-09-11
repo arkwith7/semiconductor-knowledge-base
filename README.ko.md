@@ -314,18 +314,18 @@ blank nodes: `grep -c owl:Class` counts both and reports a larger number.
 
 **Curation graph** (`data/semiconductor_v0_3.json` — the hand-curated source the core A-Box is generated from).
 
-- **289 nodes / 312 edges** across **16 node types** (version `0.3`)
+- **308 nodes / 312 edges** across **16 node types** (version `0.3`)
 
 **A-Box layers.** `not built` is the expected state on a fresh checkout — these layers are generated, and the large ones need a KIPRIS key. See *What is empty, and how to fill it*.
 
 | Layer | Content | Triples |
 |---|---|---|
-| `sdkb-core-data.ttl` | curation graph, instantiated | 3,019 |
+| `sdkb-core-data.ttl` | curation graph, instantiated | 3,207 |
 | `sdkb-abox-patents.ttl` | SIRP rejected patents | 34,117 |
 | `sdkb-abox-prior-art.ttl` | examiner-cited prior art | 67,123 |
-| `sdkb-abox-claim-features.ttl` | claim features | 12,001,973 ¹ |
+| `sdkb-abox-claim-features.ttl` | claim features | 12,231,421 ¹ |
 | `sdkb-abox-b-layer-queries.ttl` | B-layer confirmation queries | 4,631 |
-| `sdkb-abox-priorart.ttl` | prior-art claim profiles, disclosures, examiner elements | 796,656 ¹ |
+| `sdkb-abox-priorart.ttl` | prior-art claim profiles, disclosures, examiner elements | 973,363 ¹ |
 | `sdkb-abox-experts-problems.ttl` | experts and problems | 8,483 |
 | `sdkb-abox-vendors.ttl` | equipment vendors | 2,601 |
 | `sdkb-governance-kr-instances.ttl` | Korea regulatory instances | 175 |

@@ -28,13 +28,20 @@ D-τ · D-R · D-S · 계획서 §16). 이 스크립트가 하는 일은 그 정
   V4 PASS ⟺ (report_v4_robustness.py 의 산출을 읽어) L1·L2·L3 의 회수율이 claim 대비 −0.05 이내(R∃·R∀ 각각)
            ∧ 자카드 Q1 회수율 ≥ Q4 − 0.10.
 
+**단계 7-A′ 모드 (2026-09-10 · 사용자 승인 · 계획서 §17).** 현 parquet 의 sha 가 단계 7 판정 커밋
+(`0a9344b` · `1e8b14ca…`)과 다르면 사다리를 L_A · L_C(그 커밋의 parquet 소급 · 확장 on) · [추가 층] ·
+L_D(현 parquet · 확장 on) 로 세우고, **레버 게이트는 L_D 대 L_C**, V2 세 조건은 **L_D 대 L_A** · τ 불변으로
+다시 판정한다. 레버 게이트(FROZEN["stage7a"] · 결과 전 동결): rej 독립항 미매핑 ≤ 0.20 ∧ median|R∀| 감소의
+페어드 95% CI 가 0 배제 ∧ 적중(∞) 저하 ≤ 0.02.
+
 마스킹은 구성으로 충족된다 — Reach 계산은 정답 간선을 읽지 않는다. 계산은 전부 파이썬 집합이다
-(같은 정의의 rdflib COUNT 는 6-A 실측에서 15분 넘게 미완). L_B·L_C 의 프로파일·개시집합은 A-Box
+(같은 정의의 rdflib COUNT 는 6-A 실측에서 15분 넘게 미완). 현 parquet 층의 프로파일·개시집합은 A-Box
 생성기의 함수로 재파생하고 `abox_priorart_report.json` 의 수와 대조한다 — 어긋나면 죽는다.
 
 CLI:
     python scripts/report_stage7_remeasure.py                       # 전량 (수 분)
     python scripts/report_stage7_remeasure.py --baseline-parquet P  # git show 대신 파일 지정
+    python scripts/report_stage7_remeasure.py --layer L_D0=PATH     # 추가 층(확장 on · 이름=parquet)
     python scripts/report_stage7_remeasure.py --markdown PATH       # 판정 리포트 렌더
 """
 from __future__ import annotations
@@ -68,7 +75,7 @@ FEATURES_REL = "mappings/claim_features.parquet"
 
 INF = float("inf")
 
-#: 결과를 보기 전에 동결한 값 — 계획 파일 2026-09-09 (사용자 결정 D-τ · D-R · D-S).
+#: 결과를 보기 전에 동결한 값 — 계획 파일 2026-09-09 (사용자 결정 D-τ · D-R · D-S) · 7-A′ 는 2026-09-10.
 FROZEN = {
     "tau": 0.6708,
     "tau_source": "data/reports/priorart_baseline.json · control_group.language_stratified_R@50.tfidf_KR",
@@ -89,6 +96,15 @@ FROZEN = {
         "P1": "Δ>0 비율은 §29②-only 층이 §29①-only 층보다 높다 (게이트 아님 · §29①-only 는 저검정력)",
         "P2": "L_C 의 best_single 중앙값 ≥ L_B (확장은 단일 문헌 포함률을 내리지 않는다)",
     },
+    # 단계 7-A′ — 레버 게이트 (2026-09-10 · 결과 전 · 사용자 승인 A)
+    "stage7a": {
+        "c_commit": "0a9344b",
+        "c_parquet_sha256_prefix": "1e8b14cae533",
+        "rej_unmapped_max": 0.20,
+        "hit_drop_max": 0.02,
+        "lever_gate": "median|R∀| 감소(L_D−L_C)의 페어드 95% CI 가 0 을 배제 ∧ Δ<0",
+        "gate": "레버는 L_D 대 L_C · V2 세 조건은 L_D 대 L_A · τ 불변",
+    },
 }
 
 
@@ -97,14 +113,21 @@ def _sha(p: Path) -> str:
     return hashlib.sha256(p.read_bytes()).hexdigest()
 
 
+def parquet_from_git(commit: str, sha_prefix: str | None = None, label: str = "") -> Path:
+    """git 커밋의 claim_features.parquet 를 임시 파일로 꺼내고 동결된 sha 접두와 대조한다."""
+    tmp = Path(tempfile.mkdtemp(prefix=f"sdkb_stage7_{label}_")) / f"claim_features_{commit}.parquet"
+    blob = subprocess.run(["git", "show", f"{commit}:{FEATURES_REL}"],
+                          cwd=ROOT, check=True, capture_output=True).stdout
+    tmp.write_bytes(blob)
+    if sha_prefix and not _sha(tmp).startswith(sha_prefix):
+        raise SystemExit(f"ERROR: {commit} 의 parquet sha 가 동결값({sha_prefix}…)과 다르다")
+    return tmp
+
+
 def baseline_parquet(path: Path | None) -> Path:
     """단계 1 커밋의 parquet. 지정이 없으면 git 에서 꺼내고, 동결된 sha 접두와 대조한다."""
     if path is None:
-        tmp = Path(tempfile.mkdtemp(prefix="sdkb_stage7_")) / "claim_features_460806d.parquet"
-        blob = subprocess.run(["git", "show", f"{FROZEN['baseline_commit']}:{FEATURES_REL}"],
-                              cwd=ROOT, check=True, capture_output=True).stdout
-        tmp.write_bytes(blob)
-        path = tmp
+        return parquet_from_git(FROZEN["baseline_commit"], FROZEN["baseline_parquet_sha256_prefix"], "A")
     if not _sha(path).startswith(FROZEN["baseline_parquet_sha256_prefix"]):
         raise SystemExit(f"ERROR: 기준선 parquet 의 sha 가 동결값({FROZEN['baseline_parquet_sha256_prefix']}…)과 다르다: {path}")
     return path
@@ -145,6 +168,7 @@ class Layer:
         for d, cs in self.disc_star.items():
             for c in cs:
                 self.inv[c].add(d)
+        self.bound: set[str] = set()
 
     def _expand(self) -> dict[str, frozenset[str]]:
         out = {}
@@ -168,15 +192,22 @@ class Layer:
     def reach_all(self, q: str) -> set[str]:
         R: set[str] = set()
         for ess in self.profiles[q]:
-            cs = sorted(ess, key=lambda c: len(self.inv.get(c, ())))
-            acc = set(self.inv.get(cs[0], set()))
-            for c in cs[1:]:
-                if not acc:
-                    break
-                acc &= self.inv.get(c, set())
-            R |= acc
-        R.discard(q)
+            R |= conj_reach(self, ess, q)
         return R
+
+
+def conj_reach(layer: Layer, essential: frozenset[str], q: str) -> set[str]:
+    """단일 필수개념 집합의 R∀ — 프로파일 하나, 또는 V4 처럼 텍스트 한 덩어리가 질의일 때."""
+    if not essential:
+        return set()
+    cs = sorted(essential, key=lambda c: len(layer.inv.get(c, ())))
+    acc = set(layer.inv.get(cs[0], set()))
+    for c in cs[1:]:
+        if not acc:
+            break
+        acc &= layer.inv.get(c, set())
+    acc.discard(q)
+    return acc
 
 
 def layer_stage1(parquet: Path) -> Layer:
@@ -192,20 +223,24 @@ def layer_stage1(parquet: Path) -> Layer:
     return Layer("L_A", dict(prof), doc, None)
 
 
-def layers_current(expand: bool) -> tuple[Layer, dict]:
-    """L_B / L_C — A-Box 생성기의 함수로 재파생한다. 리포트와 어긋나면 죽는다."""
+def layers_current(expand: bool, parquet: Path | None = None, name: str | None = None,
+                   check_identity: bool | None = None) -> tuple[Layer, dict]:
+    """A-Box 생성기의 함수로 재파생한 층. 현 parquet(기본)이면 리포트와 대조해 어긋나면 죽는다.
+    `parquet` 를 주면(git 소급 층 · 추가 층) 현 T-Box 바인딩을 그 parquet 에 적용하고 대조는 건너뛴다."""
+    if check_identity is None:
+        check_identity = parquet is None
     core_data = Graph().parse(gen.CORE_DATA, format="turtle")
     core = Graph().parse(gen.CORE, format="turtle")
     semi = Graph().parse(gen.SEMI, format="turtle")
     bound = gen.bound_concepts(core_data, gen.technical_concept_classes(semi))
-    df = gen.load_features(gen.FEATURES)
+    df = gen.load_features(parquet or gen.FEATURES)
     concepts, _ = gen.claim_concepts(df, bound)
     claims = df[["claim_id", "side", "is_independent"]].drop_duplicates("claim_id")
     is_indep = dict(zip(claims["claim_id"], claims["is_independent"].astype(bool)))
     parents = {cid: list(dep) for cid, dep in
                df[["claim_id", "depends_on_claim"]].drop_duplicates("claim_id").itertuples(index=False) if len(dep)}
     roots, _ = gen.root_independents(is_indep, parents)
-    profiles, _ = gen.build_profiles(claims, concepts, roots)
+    profiles, p_stat = gen.build_profiles(claims, concepts, roots)
     disclosures, d_stat = gen.build_disclosures(df, concepts)
     pid_of = dict(zip(df["claim_id"], df["publication_id"]))
     prof: dict[str, list[frozenset[str]]] = defaultdict(list)
@@ -218,36 +253,30 @@ def layers_current(expand: bool) -> tuple[Layer, dict]:
     expansion: dict[str, set[str]] = defaultdict(set)
     for u, f in pairs:                                   # u broaderConcept f  ⇒  u coveredBy f
         expansion[f].add(u)
-    rep = json.loads(ABOX_REPORT.read_text(encoding="utf-8"))
+    rej_total = p_stat.get("independent_total__rej", 0)
+    rej_unmapped = p_stat.get("independent_unmapped__rej", 0)
     identity = {
-        "profiles": [len(profiles), rep["profiles"]["emitted"]],
-        "disclosures": [len(disclosures), rep["disclosures"]["emitted"]],
-        "essential_links": [sum(len(p.essential) for p in profiles), rep["profiles"]["essential_links"]],
-        "covered_by_pairs": [len(pairs), rep["hierarchy"]["covered_by_total"]],
-        "bound_concepts": [len(bound), rep["concepts"]["bound_in_core_data"]],
+        "profiles": [len(profiles), None], "disclosures": [len(disclosures), None],
+        "essential_links": [sum(len(p.essential) for p in profiles), None],
+        "covered_by_pairs": [len(pairs), None], "bound_concepts": [len(bound), None],
+        "rej_independent_unmapped_rate": round(rej_unmapped / rej_total, 4) if rej_total else None,
+        "parquet_sha256": _sha(parquet or gen.FEATURES),
     }
-    bad = {k: v for k, v in identity.items() if v[0] != v[1]}
-    if bad:
-        raise SystemExit(f"ERROR: parquet 재파생이 A-Box 리포트와 다르다 — `make abox-priorart` 후 다시: {bad}")
-    identity["cited_without_disclosure_by_prefix"] = {
-        k.split("__", 1)[1]: v for k, v in d_stat.items() if k.startswith("cited_without_disclosure__")}
-    layer = Layer("L_C" if expand else "L_B", dict(prof), disc, dict(expansion) if expand else None)
+    if check_identity:
+        rep = json.loads(ABOX_REPORT.read_text(encoding="utf-8"))
+        for k, v in (("profiles", rep["profiles"]["emitted"]), ("disclosures", rep["disclosures"]["emitted"]),
+                     ("essential_links", rep["profiles"]["essential_links"]),
+                     ("covered_by_pairs", rep["hierarchy"]["covered_by_total"]),
+                     ("bound_concepts", rep["concepts"]["bound_in_core_data"])):
+            identity[k][1] = v
+        bad = {k: v for k, v in identity.items() if isinstance(v, list) and v[0] != v[1]}
+        if bad:
+            raise SystemExit(f"ERROR: parquet 재파생이 A-Box 리포트와 다르다 — `make abox-priorart` 후 다시: {bad}")
+        identity["cited_without_disclosure_by_prefix"] = {
+            k.split("__", 1)[1]: v for k, v in d_stat.items() if k.startswith("cited_without_disclosure__")}
+    layer = Layer(name or ("L_C" if expand else "L_B"), dict(prof), disc, dict(expansion) if expand else None)
     layer.bound = bound                                   # V4 가 텍스트 링커 개념을 pa: 경로에 맞춰 거를 때 쓴다
     return layer, identity
-
-
-def conj_reach(layer: Layer, essential: frozenset[str], q: str) -> set[str]:
-    """단일 필수개념 집합의 R∀ — V4 처럼 프로파일 대신 텍스트 한 덩어리가 질의일 때."""
-    if not essential:
-        return set()
-    cs = sorted(essential, key=lambda c: len(layer.inv.get(c, ())))
-    acc = set(layer.inv.get(cs[0], set()))
-    for c in cs[1:]:
-        if not acc:
-            break
-        acc &= layer.inv.get(c, set())
-    acc.discard(q)
-    return acc
 
 
 # ── V2 · V3 계수 ──────────────────────────────────────────────────────────
@@ -297,17 +326,22 @@ def summarize(recs: dict[str, dict]) -> dict:
     return out
 
 
-def paired_bootstrap(a: list[int], c: list[int], B: int, seed: int, ci: float) -> dict:
-    """같은 질의 위 두 지시자의 평균 차 Δ 와 퍼센타일 CI. 결정적(seed)."""
+def paired_bootstrap(a: list, c: list, B: int, seed: int, ci: float, stat_fn=None) -> dict:
+    """같은 질의 위 두 벡터의 통계량 차 Δ 와 퍼센타일 CI. 결정적(seed). stat_fn 기본은 평균."""
     a_, c_ = np.asarray(a, dtype=float), np.asarray(c, dtype=float)
     n = len(a_)
     if n == 0:
         return {"n": 0, "delta": None, "ci": None}
     rng = np.random.RandomState(seed)
     idx = rng.randint(0, n, size=(B, n))
-    deltas = c_[idx].mean(axis=1) - a_[idx].mean(axis=1)
+    if stat_fn is None:
+        deltas = c_[idx].mean(axis=1) - a_[idx].mean(axis=1)
+        delta = float(c_.mean() - a_.mean())
+    else:
+        deltas = stat_fn(c_[idx], axis=1) - stat_fn(a_[idx], axis=1)
+        delta = float(stat_fn(c_) - stat_fn(a_))
     lo, hi = np.percentile(deltas, [(1 - ci) / 2 * 100, (1 + ci) / 2 * 100])
-    return {"n": n, "delta": float(c_.mean() - a_.mean()), "ci": [float(lo), float(hi)], "B": B, "seed": seed}
+    return {"n": n, "delta": delta, "ci": [float(lo), float(hi)], "B": B, "seed": seed}
 
 
 def mcnemar_exact(a: list[int], c: list[int]) -> dict:
@@ -343,6 +377,33 @@ def v2_verdict(recA: dict[str, dict], recC: dict[str, dict], frozen: dict = FROZ
         "iii_specificity": {"pass": iii_ok, "reach_all_median_A": medA, "reach_all_median_C": medC},
         "pass": bool(i_ok and ii_ok and iii_ok),
         "failed_conditions": [k for k, ok in (("i", i_ok), ("ii", ii_ok), ("iii", iii_ok)) if not ok],
+    }
+
+
+def lever_verdict(recC: dict[str, dict], recD: dict[str, dict], rej_unmapped_rate: float | None,
+                  frozen: dict = FROZEN) -> dict:
+    """단계 7-A′ 레버 게이트 — L_D 대 L_C (결과 전 동결 · FROZEN['stage7a'])."""
+    f = frozen["stage7a"]
+    common = sorted(set(recC) & set(recD))
+    rc = [recC[q]["all"]["reach"] for q in common]
+    rd = [recD[q]["all"]["reach"] for q in common]
+    boot = paired_bootstrap(rc, rd, frozen["bootstrap_B"], frozen["seed"], frozen["ci"], stat_fn=np.median)
+    reach_ok = bool(boot["ci"] and boot["ci"][1] < 0 and boot["delta"] < 0)
+    hc = [int(recC[q]["all"]["hit"]) for q in common]
+    hd = [int(recD[q]["all"]["hit"]) for q in common]
+    hit_c, hit_d = (sum(hc) / len(hc)) if hc else None, (sum(hd) / len(hd)) if hd else None
+    drop = (hit_c - hit_d) if (hit_c is not None and hit_d is not None) else None
+    hit_ok = drop is not None and drop <= f["hit_drop_max"]
+    unm_ok = rej_unmapped_rate is not None and rej_unmapped_rate <= f["rej_unmapped_max"]
+    return {
+        "gate": f["gate"], "common_queries": len(common),
+        "rej_unmapped": {"pass": unm_ok, "rate": rej_unmapped_rate, "max": f["rej_unmapped_max"]},
+        "reach_median_decrease": {"pass": reach_ok, "median_C": st.median(rc) if rc else None,
+                                  "median_D": st.median(rd) if rd else None, "bootstrap": boot},
+        "hit_inf_drop": {"pass": hit_ok, "hit_C": hit_c, "hit_D": hit_d, "drop": drop, "max": f["hit_drop_max"]},
+        "pass": bool(unm_ok and reach_ok and hit_ok),
+        "failed_conditions": [k for k, ok in (("rej_unmapped", unm_ok), ("reach_median", reach_ok),
+                                              ("hit_drop", hit_ok)) if not ok],
     }
 
 
@@ -460,15 +521,33 @@ def v4_verdict(v4: dict | None, frozen: dict = FROZEN) -> dict:
 
 
 # ── 실행 ──────────────────────────────────────────────────────────────────
-def run(baseline: Path | None, log=print) -> dict:
+def run(baseline: Path | None, extra_layers: list[tuple[str, Path]] | None = None, log=print) -> dict:
     gt, lb = load_gt()
     bp = baseline_parquet(baseline)
     log("· L_A (단계 1 parquet) 적재")
     LA = layer_stage1(bp)
-    log("· L_B / L_C (현 parquet · 생성기 재파생) 적재")
-    LB, identity = layers_current(expand=False)
-    LC, _ = layers_current(expand=True)
-    layers = {"L_A": LA, "L_B": LB, "L_C": LC}
+    f7a = FROZEN["stage7a"]
+    current_sha = _sha(ROOT / FEATURES_REL)
+    mode = "stage7" if current_sha.startswith(f7a["c_parquet_sha256_prefix"]) else "stage7a"
+    layers: dict[str, Layer] = {"L_A": LA}
+    idents: dict[str, dict] = {}
+    if mode == "stage7":
+        log("· L_B / L_C (현 parquet · 생성기 재파생) 적재")
+        layers["L_B"], identity = layers_current(expand=False)
+        layers["L_C"], _ = layers_current(expand=True)
+        idents["L_C"] = identity
+        gate_layer, prev_layer = "L_C", "L_B"
+    else:
+        log(f"· L_C (커밋 {f7a['c_commit']} parquet 소급 · 확장 on) 적재")
+        cp = parquet_from_git(f7a["c_commit"], f7a["c_parquet_sha256_prefix"], "C")
+        layers["L_C"], idents["L_C"] = layers_current(expand=True, parquet=cp, name="L_C")
+        for name, path in (extra_layers or []):
+            log(f"· {name} ({path}) 적재")
+            layers[name], idents[name] = layers_current(expand=True, parquet=path, name=name)
+        log("· L_D (현 parquet · 생성기 재파생 · 확장 on) 적재")
+        layers["L_D"], identity = layers_current(expand=True, name="L_D")
+        idents["L_D"] = identity
+        gate_layer, prev_layer = "L_D", "L_C"
 
     recs = {k: per_query(L, gt) for k, L in layers.items()}
     rows = {k: v3_rows(L, gt, lb) for k, L in layers.items()}
@@ -491,40 +570,51 @@ def run(baseline: Path | None, log=print) -> dict:
     }
     repro["ok"] = all(abs(float(a) - float(b)) < 1e-6 for sec in ("V2", "V3") for a, b in repro[sec].values())
 
-    v2 = v2_verdict(recs["L_A"], recs["L_C"])
-    v3 = v3_verdict(rows["L_B"], rows["L_C"])
+    v2 = v2_verdict(recs["L_A"], recs[gate_layer])
+    v3 = v3_verdict(rows[prev_layer], rows[gate_layer])
     v4 = v4_verdict(json.loads(V4_REPORT.read_text(encoding="utf-8")) if V4_REPORT.exists() else None)
     S = FROZEN["S_primary"]
     sums = {k: summarize(r) for k, r in recs.items()}
+    names = list(layers)
+    attribution = {"measure": f"SPR∀@{S}", "steps": {}}
+    for prev, cur in zip(names, names[1:]):
+        attribution["steps"][f"{cur}−{prev}"] = sums[cur]["all"][f"SPR@{S}"] - sums[prev]["all"][f"SPR@{S}"]
+    attribution[f"total_{gate_layer}−L_A"] = sums[gate_layer]["all"][f"SPR@{S}"] - sums["L_A"]["all"][f"SPR@{S}"]
+    verdict = {"V2": v2, "V3": v3, "V4": v4}
+    if mode == "stage7a":
+        verdict["lever"] = lever_verdict(recs["L_C"], recs["L_D"], identity.get("rej_independent_unmapped_rate"))
+        # 추가 층(예: L_D0 원소기호 규칙만)은 L_C 대비 서술로만 남긴다
+        verdict["lever"]["extra_layers_vs_L_C"] = {
+            name: lever_verdict(recs["L_C"], recs[name], idents[name].get("rej_independent_unmapped_rate"))
+            for name, _ in (extra_layers or [])}
     return {
-        "plan": "PLAN-005 단계 7 · V2–V4 재측정 · 동결 목표 대조",
+        "plan": "PLAN-005 단계 7 · V2–V4 재측정 · 동결 목표 대조" + (" · 7-A′ 레버 판정" if mode == "stage7a" else ""),
         "generator": "scripts/report_stage7_remeasure.py",
         "generated": str(date.today()),
         "read_only": True,
+        "mode": mode,
         "frozen": FROZEN,
         "inputs": {
-            "baseline_parquet_sha256": _sha(bp), FEATURES_REL: _sha(ROOT / FEATURES_REL),
+            "baseline_parquet_sha256": _sha(bp), FEATURES_REL: current_sha,
             "ontology/sdkb-priorart-core.ttl": _sha(gen.CORE), "ontology/sdkb-core-data.ttl": _sha(gen.CORE_DATA),
             "ontology/sdkb-priorart-semi.ttl": _sha(gen.SEMI), "data/patents/prior_art_edges.parquet": _sha(EDGES),
             "data/reports/abox_priorart_report.json": _sha(ABOX_REPORT),
             "data/reports/v4_robustness.json": _sha(V4_REPORT) if V4_REPORT.exists() else None,
+            **{f"layer_parquet_sha256[{k}]": v["parquet_sha256"] for k, v in idents.items()},
         },
         "identity_check_vs_abox_report": identity,
+        "layer_identity": {k: {kk: vv for kk, vv in v.items() if kk != "cited_without_disclosure_by_prefix"}
+                           for k, v in idents.items()},
         "stage1_reproduction": repro,
         "descriptive": {
             "Q": {k: s["queries"] for k, s in sums.items()},
             "Q_A_and_Q_C": len(set(recs["L_A"]) & set(recs["L_C"])),
-            "Q_C_strata": dict(Counter(stratum_of(q, gt, lb) for q in recs["L_C"])),
+            "Q_C_strata": dict(Counter(stratum_of(q, gt, lb) for q in recs[gate_layer])),
             "gt_targets_total": len(gt),
         },
         "ladder": {k: {"reach": sums[k], "coverage": v3_summary(rows[k])} for k in layers},
-        "attribution": {
-            "measure": f"SPR∀@{S}",
-            "data_effect_B_minus_A": (sums["L_B"]["all"][f"SPR@{S}"] - sums["L_A"]["all"][f"SPR@{S}"]),
-            "axiom_effect_C_minus_B": (sums["L_C"]["all"][f"SPR@{S}"] - sums["L_B"]["all"][f"SPR@{S}"]),
-            "total_C_minus_A": (sums["L_C"]["all"][f"SPR@{S}"] - sums["L_A"]["all"][f"SPR@{S}"]),
-        },
-        "verdict": {"V2": v2, "V3": v3, "V4": v4},
+        "attribution": attribution,
+        "verdict": verdict,
         "limitations": [
             "SPR 은 순위 없는 후보집합이 S 이하여야 하는 지표이고 τ 의 원천 tfidf R@50 은 순위 지표다 — "
             "비대칭은 τ 를 유리하게 하지 않는다 (계획 파일 · 결과 전 명시).",
@@ -542,18 +632,33 @@ def _f(x, nd=4):
 def render_markdown(rep: dict) -> str:
     v = rep["verdict"]
     S = rep["frozen"]["S_primary"]
+    gate_layer = "L_D" if rep.get("mode") == "stage7a" else "L_C"
     L = ["# PLAN-005 단계 7 — V2–V4 재측정 · 동결 목표 대조 (기계 산출)", "",
-         f"> 생성: `scripts/report_stage7_remeasure.py` · {rep['generated']} · **손으로 고치지 않는다** — "
+         f"> 생성: `scripts/report_stage7_remeasure.py` · {rep['generated']} · 모드 {rep.get('mode')} · **손으로 고치지 않는다** — "
          "`make stage7-remeasure` 가 다시 만든다. 정의·문턱은 스크립트 `FROZEN`(결과 전 동결).", "",
-         "## 판정", "", "| 검증 | 판정 | 걸린 조건 |", "|---|:-:|---|",
-         f"| V2 도달 | **{'PASS' if v['V2']['pass'] else 'FAIL'}** | {', '.join(v['V2']['failed_conditions']) or '—'} |",
-         f"| V3 업무 목적(진보성) | **{'PASS' if v['V3']['pass'] else 'FAIL'}** | 게이트 층 q={v['V3']['gate_queries']} · Δ평균 {_f(v['V3']['delta_mean_C'])} · CI {v['V3']['bootstrap']['ci']} |",
-         f"| V4 질의 비종속성 | **{('PASS' if v['V4']['pass'] else 'FAIL') if v['V4'].get('pass') is not None else v['V4']['status']}** | — |", ""]
+         "## 판정", "", "| 검증 | 판정 | 걸린 조건 |", "|---|:-:|---|"]
+    if "lever" in v:
+        lv = v["lever"]
+        L.append(f"| 7-A′ 레버 (L_D 대 L_C) | **{'PASS' if lv['pass'] else 'FAIL'}** | {', '.join(lv['failed_conditions']) or '—'} |")
+    L += [f"| V2 도달 ({gate_layer} 대 L_A) | **{'PASS' if v['V2']['pass'] else 'FAIL'}** | {', '.join(v['V2']['failed_conditions']) or '—'} |",
+          f"| V3 업무 목적(진보성) | **{'PASS' if v['V3']['pass'] else 'FAIL'}** | 게이트 층 q={v['V3']['gate_queries']} · Δ평균 {_f(v['V3']['delta_mean_C'])} · CI {v['V3']['bootstrap']['ci']} |",
+          f"| V4 질의 비종속성 | **{('PASS' if v['V4']['pass'] else 'FAIL') if v['V4'].get('pass') is not None else v['V4']['status']}** | — |", ""]
+    if "lever" in v:
+        lv = v["lever"]
+        u, r, h = lv["rej_unmapped"], lv["reach_median_decrease"], lv["hit_inf_drop"]
+        L += ["### 7-A′ 레버 게이트 (결과 전 동결)", "", "| 조건 | 값 | 판정 |", "|---|---|:-:|",
+              f"| rej 독립항 미매핑 ≤ {u['max']} | {_f(u['rate'])} | {'✓' if u['pass'] else '✗'} |",
+              f"| median\\|R∀\\| 감소 CI 가 0 배제 · Q={lv['common_queries']} | {_f(r['median_C'])} → {_f(r['median_D'])} · Δ {_f(r['bootstrap']['delta'])} · CI {r['bootstrap']['ci']} | {'✓' if r['pass'] else '✗'} |",
+              f"| 적중(∞) 저하 ≤ {h['max']} | {_f(h['hit_C'])} → {_f(h['hit_D'])} · 저하 {_f(h['drop'])} | {'✓' if h['pass'] else '✗'} |", ""]
+        for name, x in lv.get("extra_layers_vs_L_C", {}).items():
+            r2, h2, u2 = x["reach_median_decrease"], x["hit_inf_drop"], x["rej_unmapped"]
+            L.append(f"추가 층 {name} 대 L_C(서술): 미매핑 {_f(u2['rate'])} · median|R∀| {_f(r2['median_C'])} → {_f(r2['median_D'])} · 적중(∞) {_f(h2['hit_C'])} → {_f(h2['hit_D'])}")
+        L.append("")
     i, ii, iii = v["V2"]["i_significant_rise"], v["V2"]["ii_tau"], v["V2"]["iii_specificity"]
     L += ["### V2 세 조건", "", "| 조건 | 값 | 판정 |", "|---|---|:-:|",
-          f"| (i) 유의 상승 · Q_A∩Q_C={i['common_queries']} | SPR∀@{S} A {_f(i['SPR_all@50_A'])} → C {_f(i['SPR_all@50_C'])} · Δ {_f(i['bootstrap']['delta'])} · 95% CI {i['bootstrap']['ci']} · McNemar p {_f(i['mcnemar']['p'])} | {'✓' if i['pass'] else '✗'} |",
+          f"| (i) 유의 상승 · Q_A∩Q={i['common_queries']} | SPR∀@{S} A {_f(i['SPR_all@50_A'])} → {gate_layer} {_f(i['SPR_all@50_C'])} · Δ {_f(i['bootstrap']['delta'])} · 95% CI {i['bootstrap']['ci']} · McNemar p {_f(i['mcnemar']['p'])} | {'✓' if i['pass'] else '✗'} |",
           f"| (ii) τ={ii['tau']} · Q_KR={ii['queries_kr']} | SPR∀@{S}(KR) {_f(ii['SPR_all@50_KR_C'])} | {'✓' if ii['pass'] else '✗'} |",
-          f"| (iii) 특이도 | median\\|R∀\\| A {_f(iii['reach_all_median_A'])} → C {_f(iii['reach_all_median_C'])} | {'✓' if iii['pass'] else '✗'} |", ""]
+          f"| (iii) 특이도 | median\\|R∀\\| A {_f(iii['reach_all_median_A'])} → {gate_layer} {_f(iii['reach_all_median_C'])} | {'✓' if iii['pass'] else '✗'} |", ""]
     L += ["## 사다리", "", "| 층 | Q | R | SPR@50 | SPR@100 | SPR@1000 | 적중(∞) | median\\|R\\| | SPR@50 KR | SPR@50 US |",
           "|---|---:|---|---:|---:|---:|---:|---:|---:|---:|"]
     for k, d in rep["ladder"].items():
@@ -563,15 +668,15 @@ def render_markdown(rep: dict) -> str:
             L.append(f"| {k} | {r['queries']} | {lab} | {_f(s['SPR@50'])} | {_f(s['SPR@100'])} | {_f(s['SPR@1000'])} | "
                      f"{_f(s['hit_rate_any_S'])} | {_f(s['reach_median'])} | {_f(s['SPR@50_KR'])} | {_f(s['SPR@50_US'])} |")
     a = rep["attribution"]
-    L += ["", f"귀속({a['measure']}): 데이터 효과 B−A {_f(a['data_effect_B_minus_A'])} · 공리 효과 C−B "
-          f"{_f(a['axiom_effect_C_minus_B'])} · 합 C−A {_f(a['total_C_minus_A'])}", ""]
-    L += ["## V3 커버 (층별 · L_C)", "", "| 층 | q | 2문헌+ | best_single 중앙 | Δ 평균 | Δ>0 비율 |", "|---|---:|---:|---:|---:|---:|"]
-    for s, d in rep["ladder"]["L_C"]["coverage"].get("by_stratum", {}).items():
+    L += ["", f"귀속({a['measure']}): " + " · ".join(f"{k} {_f(val)}" for k, val in a["steps"].items()) +
+          " · " + " · ".join(f"{k} {_f(val)}" for k, val in a.items() if k.startswith("total_")), ""]
+    L += [f"## V3 커버 (층별 · {gate_layer})", "", "| 층 | q | 2문헌+ | best_single 중앙 | Δ 평균 | Δ>0 비율 |", "|---|---:|---:|---:|---:|---:|"]
+    for s, d in rep["ladder"][gate_layer]["coverage"].get("by_stratum", {}).items():
         L.append(f"| {s} | {d['queries']} | {d['pair_queries']} | {_f(d['best_single_median'])} | {_f(d['delta_mean'])} | {_f(d['delta_gt0_frac'])} |")
     p1, p2 = v["V3"]["P1"], v["V3"]["P2"]
     L += ["", f"사전 등록 P1(게이트 아님): §29②-only {_f(p1['frac_29_2_only'])}(n={p1['n_29_2_only']}) 대 §29①-only "
           f"{_f(p1['frac_29_1_only'])}(n={p1['n_29_1_only']}) · 성립 {p1['holds']} · 저검정력 {p1['underpowered']}",
-          f"사전 등록 P2: best_single 중앙 B {_f(p2['best_single_median_B'])} → C {_f(p2['best_single_median_C'])} · 성립 {p2['holds']}", ""]
+          f"사전 등록 P2: best_single 중앙 이전 층 {_f(p2['best_single_median_B'])} → {gate_layer} {_f(p2['best_single_median_C'])} · 성립 {p2['holds']}", ""]
     rp = rep["stage1_reproduction"]
     L += ["## 계측기 검사 — 단계 1 재현 (L_A · R∃)", "", f"재현 {'OK' if rp['ok'] else '**실패**'}: " +
           " · ".join(f"{k} {a}→{b}" for k, (a, b) in rp["V2"].items()), ""]
@@ -582,15 +687,25 @@ def render_markdown(rep: dict) -> str:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--baseline-parquet", type=Path, default=None)
+    ap.add_argument("--layer", action="append", default=[],
+                    help="추가 층 NAME=PARQUET (확장 on · L_C 와 L_D 사이에 놓인다 · 7-A′ 모드)")
     ap.add_argument("--out", type=Path, default=OUT)
     ap.add_argument("--markdown", type=Path, default=None)
     a = ap.parse_args()
-    rep = run(a.baseline_parquet)
+    extras = []
+    for spec in a.layer:
+        name, _, path = spec.partition("=")
+        if not name or not path:
+            raise SystemExit(f"--layer 는 NAME=PATH 형식이다: {spec}")
+        extras.append((name, Path(path)))
+    rep = run(a.baseline_parquet, extras)
     a.out.parent.mkdir(parents=True, exist_ok=True)
     a.out.write_text(json.dumps(rep, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     if a.markdown:
         a.markdown.write_text(render_markdown(rep), encoding="utf-8")
     v = rep["verdict"]
+    if "lever" in v:
+        print(f"7-A′ 레버 {'PASS' if v['lever']['pass'] else 'FAIL ' + str(v['lever']['failed_conditions'])}")
     print(f"V2 {'PASS' if v['V2']['pass'] else 'FAIL ' + str(v['V2']['failed_conditions'])} · "
           f"V3 {'PASS' if v['V3']['pass'] else 'FAIL'} · V4 {v['V4'].get('pass')} ({v['V4']['status']})")
     print(f"단계 1 재현 {'OK' if rep['stage1_reproduction']['ok'] else 'FAIL'} · "

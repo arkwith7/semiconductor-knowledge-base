@@ -4839,6 +4839,15 @@
           "ambiguous": false
         },
         {
+          "surface": "상변화",
+          "lang": "ko",
+          "concept_id": "device:pcram",
+          "concept_type": "Device",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
           "surface": "상변화 메모리",
           "lang": "ko",
           "concept_id": "device:pcram",
@@ -6351,6 +6360,7 @@
           "산화물": 435,
           "삼성": 0,
           "삼성전자": 0,
+          "상변화": 74,
           "상변화 메모리": 41,
           "상변환 메모리": 3,
           "세정": 127,
@@ -6593,7 +6603,7 @@
             "is_superordinate": false
           },
           "device:pcram": {
-            "df_abox": 71,
+            "df_abox": 103,
             "depth": 0,
             "is_superordinate": false
           },
@@ -7809,15 +7819,6 @@
           "ambiguous": false
         },
         {
-          "surface": "3m",
-          "lang": "en",
-          "concept_id": "organization:3m_innovative_properties_company",
-          "concept_type": "Vendor",
-          "rule_id": "T1-CANONICAL",
-          "confidence": 1.0,
-          "ambiguous": false
-        },
-        {
           "surface": "3m cmp pad",
           "lang": "en",
           "concept_id": "equipment:3m_pad",
@@ -7890,6 +7891,15 @@
           "ambiguous": false
         },
         {
+          "surface": "active region",
+          "lang": "en",
+          "concept_id": "structural_element:active_region",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-CANONICAL",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
           "surface": "adhesion promoter",
           "lang": "en",
           "concept_id": "mitigation:adhesion_promoter",
@@ -7922,15 +7932,6 @@
           "concept_id": "subprocess:advanced_packaging",
           "concept_type": "SubProcess",
           "rule_id": "T1-CANONICAL",
-          "confidence": 1.0,
-          "ambiguous": false
-        },
-        {
-          "surface": "al",
-          "lang": "en",
-          "concept_id": "material:aluminum",
-          "concept_type": "Material",
-          "rule_id": "T1-SYNONYM",
           "confidence": 1.0,
           "ambiguous": false
         },
@@ -8376,6 +8377,15 @@
           "ambiguous": false
         },
         {
+          "surface": "bit line",
+          "lang": "en",
+          "concept_id": "structural_element:bit_line",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-CANONICAL",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
           "surface": "bjt",
           "lang": "en",
           "concept_id": "device:bjt",
@@ -8433,15 +8443,6 @@
           "surface": "c ram",
           "lang": "en",
           "concept_id": "device:pcram",
-          "concept_type": "Device",
-          "rule_id": "T1-CANONICAL",
-          "confidence": 1.0,
-          "ambiguous": false
-        },
-        {
-          "surface": "c4",
-          "lang": "en",
-          "concept_id": "device:flip_chip",
           "concept_type": "Device",
           "rule_id": "T1-CANONICAL",
           "confidence": 1.0,
@@ -8673,6 +8674,15 @@
           "ambiguous": false
         },
         {
+          "surface": "charge storage layer",
+          "lang": "en",
+          "concept_id": "structural_element:charge_storage_layer",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-CANONICAL",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
           "surface": "charging",
           "lang": "en",
           "concept_id": "rootcause:charging",
@@ -8799,15 +8809,6 @@
           "ambiguous": false
         },
         {
-          "surface": "co",
-          "lang": "en",
-          "concept_id": "material:cobalt",
-          "concept_type": "Material",
-          "rule_id": "T1-SYNONYM",
-          "confidence": 1.0,
-          "ambiguous": false
-        },
-        {
           "surface": "coat develop",
           "lang": "en",
           "concept_id": "subprocess:photoresist_coat_develop",
@@ -8839,6 +8840,24 @@
           "lang": "en",
           "concept_id": "material:cobalt",
           "concept_type": "Material",
+          "rule_id": "T1-CANONICAL",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
+          "surface": "conductive layer",
+          "lang": "en",
+          "concept_id": "structural_element:conductive_layer",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-CANONICAL",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
+          "surface": "contact plug",
+          "lang": "en",
+          "concept_id": "structural_element:contact_plug",
+          "concept_type": "StructuralElement",
           "rule_id": "T1-CANONICAL",
           "confidence": 1.0,
           "ambiguous": false
@@ -8893,15 +8912,6 @@
           "lang": "en",
           "concept_id": "device:pcram",
           "concept_type": "Device",
-          "rule_id": "T1-SYNONYM",
-          "confidence": 1.0,
-          "ambiguous": false
-        },
-        {
-          "surface": "cu",
-          "lang": "en",
-          "concept_id": "material:copper",
-          "concept_type": "Material",
           "rule_id": "T1-SYNONYM",
           "confidence": 1.0,
           "ambiguous": false
@@ -9057,6 +9067,15 @@
           "concept_type": "Skill",
           "rule_id": "T2-ALIAS",
           "confidence": 0.8,
+          "ambiguous": false
+        },
+        {
+          "surface": "device isolation",
+          "lang": "en",
+          "concept_id": "structural_element:device_isolation",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-CANONICAL",
+          "confidence": 1.0,
           "ambiguous": false
         },
         {
@@ -9546,15 +9565,6 @@
           "ambiguous": false
         },
         {
-          "surface": "fa",
-          "lang": "en",
-          "concept_id": "skill:defect_analysis",
-          "concept_type": "Skill",
-          "rule_id": "T1-SYNONYM",
-          "confidence": 1.0,
-          "ambiguous": false
-        },
-        {
           "surface": "facilities",
           "lang": "und",
           "concept_id": "equipment_class:facilities",
@@ -9597,15 +9607,6 @@
           "concept_type": "Device",
           "rule_id": "T1-IDLOCAL",
           "confidence": 0.9,
-          "ambiguous": false
-        },
-        {
-          "surface": "fc",
-          "lang": "en",
-          "concept_id": "device:flip_chip",
-          "concept_type": "Device",
-          "rule_id": "T1-SYNONYM",
-          "confidence": 1.0,
           "ambiguous": false
         },
         {
@@ -9672,11 +9673,29 @@
           "ambiguous": false
         },
         {
+          "surface": "flash memory",
+          "lang": "en",
+          "concept_id": "device:flash_memory",
+          "concept_type": "Device",
+          "rule_id": "T1-CANONICAL",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
           "surface": "flip chip",
           "lang": "en",
           "concept_id": "device:flip_chip",
           "concept_type": "Device",
           "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
+          "surface": "floating gate",
+          "lang": "en",
+          "concept_id": "structural_element:floating_gate",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-CANONICAL",
           "confidence": 1.0,
           "ambiguous": false
         },
@@ -9838,6 +9857,15 @@
           "lang": "en",
           "concept_id": "material:hfO2",
           "concept_type": "Material",
+          "rule_id": "T1-CANONICAL",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
+          "surface": "hard mask",
+          "lang": "en",
+          "concept_id": "structural_element:hard_mask",
+          "concept_type": "StructuralElement",
           "rule_id": "T1-CANONICAL",
           "confidence": 1.0,
           "ambiguous": false
@@ -10086,6 +10114,15 @@
           "ambiguous": false
         },
         {
+          "surface": "indium",
+          "lang": "en",
+          "concept_id": "material:indium",
+          "concept_type": "Material",
+          "rule_id": "T1-CANONICAL",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
           "surface": "inspection",
           "lang": "und",
           "concept_id": "process:metrology",
@@ -10108,6 +10145,15 @@
           "lang": "en",
           "concept_id": "subprocess:interconnect_patterning",
           "concept_type": "SubProcess",
+          "rule_id": "T1-CANONICAL",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
+          "surface": "interlayer dielectric",
+          "lang": "en",
+          "concept_id": "structural_element:interlayer_dielectric",
+          "concept_type": "StructuralElement",
           "rule_id": "T1-CANONICAL",
           "confidence": 1.0,
           "ambiguous": false
@@ -10677,6 +10723,33 @@
           "concept_type": "Material",
           "rule_id": "T1-SYNONYM",
           "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
+          "surface": "nitrogen gas",
+          "lang": "en",
+          "concept_id": "material:nitrogen_gas",
+          "concept_type": "Material",
+          "rule_id": "T1-CANONICAL",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
+          "surface": "non volatile memory",
+          "lang": "en",
+          "concept_id": "device:nonvolatile_memory",
+          "concept_type": "Device",
+          "rule_id": "T1-CANONICAL",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
+          "surface": "nonvolatile memory",
+          "lang": "und",
+          "concept_id": "device:nonvolatile_memory",
+          "concept_type": "Device",
+          "rule_id": "T1-IDLOCAL",
+          "confidence": 0.9,
           "ambiguous": false
         },
         {
@@ -11553,6 +11626,15 @@
           "ambiguous": false
         },
         {
+          "surface": "semiconductor layer",
+          "lang": "en",
+          "concept_id": "structural_element:semiconductor_layer",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-CANONICAL",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
           "surface": "sensor nodes",
           "lang": "en",
           "concept_id": "equipment:sensor_nodes",
@@ -11584,6 +11666,15 @@
           "lang": "en",
           "concept_id": "failuremode:sidewall_angle_deviation",
           "concept_type": "FailureMode",
+          "rule_id": "T1-CANONICAL",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
+          "surface": "silicide",
+          "lang": "en",
+          "concept_id": "material:silicide",
+          "concept_type": "Material",
           "rule_id": "T1-CANONICAL",
           "confidence": 1.0,
           "ambiguous": false
@@ -12102,6 +12193,15 @@
           "ambiguous": false
         },
         {
+          "surface": "titanium",
+          "lang": "en",
+          "concept_id": "material:titanium",
+          "concept_type": "Material",
+          "rule_id": "T1-CANONICAL",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
           "surface": "titanium nitride",
           "lang": "en",
           "concept_id": "material:tin",
@@ -12183,6 +12283,15 @@
           "ambiguous": false
         },
         {
+          "surface": "transistor",
+          "lang": "en",
+          "concept_id": "device:transistor",
+          "concept_type": "Device",
+          "rule_id": "T1-CANONICAL",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
           "surface": "trench",
           "lang": "en",
           "concept_id": "structural_element:trench",
@@ -12205,6 +12314,15 @@
           "lang": "en",
           "concept_id": "material:tungsten",
           "concept_type": "Material",
+          "rule_id": "T1-CANONICAL",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
+          "surface": "tunnel dielectric",
+          "lang": "en",
+          "concept_id": "structural_element:tunnel_dielectric",
+          "concept_type": "StructuralElement",
           "rule_id": "T1-CANONICAL",
           "confidence": 1.0,
           "ambiguous": false
@@ -12251,15 +12369,6 @@
           "concept_id": "failuremode:void",
           "concept_type": "FailureMode",
           "rule_id": "T1-CANONICAL",
-          "confidence": 1.0,
-          "ambiguous": false
-        },
-        {
-          "surface": "w",
-          "lang": "en",
-          "concept_id": "material:tungsten",
-          "concept_type": "Material",
-          "rule_id": "T1-SYNONYM",
           "confidence": 1.0,
           "ambiguous": false
         },
@@ -12375,6 +12484,15 @@
           "surface": "wiring",
           "lang": "en",
           "concept_id": "structural_element:wiring",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-CANONICAL",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
+          "surface": "word line",
+          "lang": "en",
+          "concept_id": "structural_element:word_line",
           "concept_type": "StructuralElement",
           "rule_id": "T1-CANONICAL",
           "confidence": 1.0,
@@ -12633,6 +12751,24 @@
           "ambiguous": false
         },
         {
+          "surface": "도전막",
+          "lang": "ko",
+          "concept_id": "structural_element:conductive_layer",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
+          "surface": "도전층",
+          "lang": "ko",
+          "concept_id": "structural_element:conductive_layer",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
           "surface": "도펀트",
           "lang": "und",
           "concept_id": "process:implant",
@@ -12777,6 +12913,15 @@
           "ambiguous": false
         },
         {
+          "surface": "반도체층",
+          "lang": "ko",
+          "concept_id": "structural_element:semiconductor_layer",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
           "surface": "반사방지막",
           "lang": "ko",
           "concept_id": "material:barc",
@@ -12813,6 +12958,15 @@
           "ambiguous": false
         },
         {
+          "surface": "불휘발성 메모리",
+          "lang": "ko",
+          "concept_id": "device:nonvolatile_memory",
+          "concept_type": "Device",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
           "surface": "비아",
           "lang": "ko",
           "concept_id": "structural_element:via",
@@ -12826,6 +12980,42 @@
           "lang": "ko",
           "concept_id": "material:amorphous_carbon",
           "concept_type": "Material",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
+          "surface": "비트 라인",
+          "lang": "ko",
+          "concept_id": "structural_element:bit_line",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
+          "surface": "비트라인",
+          "lang": "ko",
+          "concept_id": "structural_element:bit_line",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
+          "surface": "비휘발성 기억",
+          "lang": "ko",
+          "concept_id": "device:nonvolatile_memory",
+          "concept_type": "Device",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
+          "surface": "비휘발성 메모리",
+          "lang": "ko",
+          "concept_id": "device:nonvolatile_memory",
+          "concept_type": "Device",
           "rule_id": "T1-SYNONYM",
           "confidence": 1.0,
           "ambiguous": false
@@ -12903,6 +13093,15 @@
           "ambiguous": false
         },
         {
+          "surface": "상변화",
+          "lang": "ko",
+          "concept_id": "device:pcram",
+          "concept_type": "Device",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
           "surface": "상변화 메모리",
           "lang": "ko",
           "concept_id": "device:pcram",
@@ -12963,6 +13162,24 @@
           "concept_type": "Process",
           "rule_id": "T2-ALIAS",
           "confidence": 0.8,
+          "ambiguous": false
+        },
+        {
+          "surface": "소자 분리",
+          "lang": "ko",
+          "concept_id": "structural_element:device_isolation",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
+          "surface": "소자분리",
+          "lang": "ko",
+          "concept_id": "structural_element:device_isolation",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
           "ambiguous": false
         },
         {
@@ -13080,6 +13297,15 @@
           "concept_type": "Process",
           "rule_id": "T2-ALIAS",
           "confidence": 0.8,
+          "ambiguous": false
+        },
+        {
+          "surface": "실리사이드",
+          "lang": "ko",
+          "concept_id": "material:silicide",
+          "concept_type": "Material",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
           "ambiguous": false
         },
         {
@@ -13281,6 +13507,24 @@
           "ambiguous": false
         },
         {
+          "surface": "워드 라인",
+          "lang": "ko",
+          "concept_id": "structural_element:word_line",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
+          "surface": "워드라인",
+          "lang": "ko",
+          "concept_id": "structural_element:word_line",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
           "surface": "원자층 증착",
           "lang": "ko",
           "concept_id": "subprocess:ald",
@@ -13398,6 +13642,15 @@
           "ambiguous": false
         },
         {
+          "surface": "인듐",
+          "lang": "ko",
+          "concept_id": "material:indium",
+          "concept_type": "Material",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
           "surface": "인터포저",
           "lang": "und",
           "concept_id": "device:interposer",
@@ -13429,6 +13682,33 @@
           "lang": "ko",
           "concept_id": "device:ccd",
           "concept_type": "Device",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
+          "surface": "전하 저장층",
+          "lang": "ko",
+          "concept_id": "structural_element:charge_storage_layer",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
+          "surface": "전하 축적층",
+          "lang": "ko",
+          "concept_id": "structural_element:charge_storage_layer",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
+          "surface": "전하 트랩층",
+          "lang": "ko",
+          "concept_id": "structural_element:charge_storage_layer",
+          "concept_type": "StructuralElement",
           "rule_id": "T1-SYNONYM",
           "confidence": 1.0,
           "ambiguous": false
@@ -13578,6 +13858,15 @@
           "ambiguous": false
         },
         {
+          "surface": "질소",
+          "lang": "ko",
+          "concept_id": "material:nitrogen_gas",
+          "concept_type": "Material",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
           "surface": "질화 규소",
           "lang": "und",
           "concept_id": "material:sin",
@@ -13641,7 +13930,34 @@
           "ambiguous": false
         },
         {
+          "surface": "층간 절연막",
+          "lang": "ko",
+          "concept_id": "structural_element:interlayer_dielectric",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
+          "surface": "층간절연막",
+          "lang": "ko",
+          "concept_id": "structural_element:interlayer_dielectric",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
           "surface": "캐패시터",
+          "lang": "ko",
+          "concept_id": "structural_element:capacitor",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
+          "surface": "커패시터",
           "lang": "ko",
           "concept_id": "structural_element:capacitor",
           "concept_type": "StructuralElement",
@@ -13659,10 +13975,55 @@
           "ambiguous": false
         },
         {
+          "surface": "콘택",
+          "lang": "ko",
+          "concept_id": "structural_element:contact_plug",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
+          "surface": "콘택 플러그",
+          "lang": "ko",
+          "concept_id": "structural_element:contact_plug",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
           "surface": "탄탈륨 카바이드",
           "lang": "ko",
           "concept_id": "material:taC",
           "concept_type": "Material",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
+          "surface": "터널 산화막",
+          "lang": "ko",
+          "concept_id": "structural_element:tunnel_dielectric",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
+          "surface": "터널 유전막",
+          "lang": "ko",
+          "concept_id": "structural_element:tunnel_dielectric",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
+          "surface": "터널 절연막",
+          "lang": "ko",
+          "concept_id": "structural_element:tunnel_dielectric",
+          "concept_type": "StructuralElement",
           "rule_id": "T1-SYNONYM",
           "confidence": 1.0,
           "ambiguous": false
@@ -13699,6 +14060,15 @@
           "lang": "ko",
           "concept_id": "structural_element:trench",
           "concept_type": "StructuralElement",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
+          "surface": "티타늄",
+          "lang": "ko",
+          "concept_id": "material:titanium",
+          "concept_type": "Material",
           "rule_id": "T1-SYNONYM",
           "confidence": 1.0,
           "ambiguous": false
@@ -13848,6 +14218,33 @@
           "ambiguous": false
         },
         {
+          "surface": "플래시 메모리",
+          "lang": "ko",
+          "concept_id": "device:flash_memory",
+          "concept_type": "Device",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
+          "surface": "플래시메모리",
+          "lang": "ko",
+          "concept_id": "device:flash_memory",
+          "concept_type": "Device",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
+          "surface": "플로팅 게이트",
+          "lang": "ko",
+          "concept_id": "structural_element:floating_gate",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
           "surface": "플립칩",
           "lang": "ko",
           "concept_id": "device:flip_chip",
@@ -13875,13 +14272,31 @@
           "ambiguous": false
         },
         {
+          "surface": "하드 마스크",
+          "lang": "ko",
+          "concept_id": "structural_element:hard_mask",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
           "surface": "하드마스크",
           "lang": "und",
           "concept_id": "subprocess:hardmask_etch",
           "concept_type": "SubProcess",
           "rule_id": "T2-ALIAS",
           "confidence": 0.8,
-          "ambiguous": false
+          "ambiguous": true
+        },
+        {
+          "surface": "하드마스크",
+          "lang": "ko",
+          "concept_id": "structural_element:hard_mask",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": true
         },
         {
           "surface": "하이 일렉트론 모빌리티 트랜지스터",
@@ -13972,15 +14387,75 @@
           "rule_id": "T2-ALIAS",
           "confidence": 0.8,
           "ambiguous": false
+        },
+        {
+          "surface": "활성 영역",
+          "lang": "ko",
+          "concept_id": "structural_element:active_region",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
+        },
+        {
+          "surface": "활성영역",
+          "lang": "ko",
+          "concept_id": "structural_element:active_region",
+          "concept_type": "StructuralElement",
+          "rule_id": "T1-SYNONYM",
+          "confidence": 1.0,
+          "ambiguous": false
         }
       ],
       "blocked": [
+        {
+          "surface": "3m",
+          "concept_id": "organization:3m_innovative_properties_company",
+          "concept_type": "Vendor",
+          "rule_id": "R8-SHORT-ASCII"
+        },
+        {
+          "surface": "al",
+          "concept_id": "material:aluminum",
+          "concept_type": "Material",
+          "rule_id": "R8-SHORT-ASCII"
+        },
+        {
+          "surface": "c4",
+          "concept_id": "device:flip_chip",
+          "concept_type": "Device",
+          "rule_id": "R8-SHORT-ASCII"
+        },
+        {
+          "surface": "co",
+          "concept_id": "material:cobalt",
+          "concept_type": "Material",
+          "rule_id": "R8-SHORT-ASCII"
+        },
+        {
+          "surface": "cu",
+          "concept_id": "material:copper",
+          "concept_type": "Material",
+          "rule_id": "R8-SHORT-ASCII"
+        },
         {
           "surface": "electrode",
           "concept_id": "structural_element:electrode",
           "concept_type": "StructuralElement",
           "rule_id": "R7-DF-CEILING",
           "df_ratio": 0.0893
+        },
+        {
+          "surface": "fa",
+          "concept_id": "skill:defect_analysis",
+          "concept_type": "Skill",
+          "rule_id": "R8-SHORT-ASCII"
+        },
+        {
+          "surface": "fc",
+          "concept_id": "device:flip_chip",
+          "concept_type": "Device",
+          "rule_id": "R8-SHORT-ASCII"
         },
         {
           "surface": "gate",
@@ -14014,6 +14489,12 @@
           "concept_type": "StructuralElement",
           "rule_id": "R7-DF-CEILING",
           "df_ratio": 0.1651
+        },
+        {
+          "surface": "w",
+          "concept_id": "material:tungsten",
+          "concept_type": "Material",
+          "rule_id": "R8-SHORT-ASCII"
         },
         {
           "surface": "게이트",
@@ -14106,6 +14587,13 @@
           "concept_type": "StructuralElement",
           "rule_id": "R7-DF-CEILING",
           "df_ratio": 0.0645
+        },
+        {
+          "surface": "트랜지스터",
+          "concept_id": "device:transistor",
+          "concept_type": "Device",
+          "rule_id": "R7-DF-CEILING",
+          "df_ratio": 0.0866
         }
       ],
       "surface_meta": {
@@ -14145,7 +14633,6 @@
           "3d nand": 3,
           "3d structures": 0,
           "3d v nand": 0,
-          "3m": 7,
           "3m cmp pad": 0,
           "3m innovative properties company": 0,
           "3m pad": 0,
@@ -14154,11 +14641,11 @@
           "7nm": 3,
           "a c": 935,
           "acl": 10,
+          "active region": 23,
           "adhesion promoter": 2,
           "advanced cleaning": 0,
           "advanced modules": 0,
           "advanced packaging": 0,
-          "al": 2117,
           "alarm system": 0,
           "ald": 119,
           "alignment": 28,
@@ -14207,6 +14694,7 @@
           "bias power": 5,
           "bipolar junction transistor": 0,
           "bipolar transistor": 4,
+          "bit line": 45,
           "bjt": 0,
           "bottom anti reflective coating": 1,
           "bowing": 4,
@@ -14214,7 +14702,6 @@
           "bruker": 0,
           "bruker ellipsometer": 0,
           "c ram": 0,
-          "c4": 44,
           "cabot": 0,
           "cabot cmp slurry": 0,
           "cabot microelectronics": 0,
@@ -14238,6 +14725,7 @@
           "channel region": 43,
           "characterization": 0,
           "charge coupled device": 3,
+          "charge storage layer": 17,
           "charging": 11,
           "chemical mechanical planarization": 3,
           "chemical vapor deposition": 82,
@@ -14252,18 +14740,18 @@
           "cmp slurry cu": 0,
           "cmp slurry oxide": 0,
           "cmp tool": 0,
-          "co": 1837,
           "coat develop": 0,
           "coater developer track": 0,
           "coater track": 0,
           "cobalt": 31,
+          "conductive layer": 62,
+          "contact plug": 9,
           "contamination": 10,
           "contamination control": 0,
           "contamination detected": 0,
           "contamination monitor": 0,
           "copper": 97,
           "cram": 4,
-          "cu": 902,
           "cu cmp slurry": 0,
           "cu interconnect": 0,
           "cu slurry": 0,
@@ -14279,6 +14767,7 @@
           "deposition": 272,
           "deposition tool": 2,
           "design of experiments": 0,
+          "device isolation": 3,
           "dicing": 19,
           "dielectric": 220,
           "dielectric material": 49,
@@ -14334,13 +14823,11 @@
           "exhaust line": 2,
           "exhaust pipe": 0,
           "f ram": 0,
-          "fa": 991,
           "facilities": 0,
           "facilities equipment": 0,
           "failure analysis": 1,
           "fan out wafer level packaging": 0,
           "fan out wlp": 0,
-          "fc": 21,
           "feram": 1,
           "ferroelectric ram": 0,
           "film deposition": 23,
@@ -14348,7 +14835,9 @@
           "film stress control": 0,
           "fin field effect transistor": 2,
           "finfet": 11,
+          "flash memory": 20,
           "flip chip": 7,
+          "floating gate": 53,
           "flow rate calibration": 0,
           "footing": 1,
           "fram": 39,
@@ -14367,6 +14856,7 @@
           "generic": 0,
           "generic equipment": 0,
           "hafnium oxide": 15,
+          "hard mask": 20,
           "hardmask etch": 0,
           "haze": 0,
           "hbm": 0,
@@ -14393,9 +14883,11 @@
           "implantation": 24,
           "implanter": 1,
           "in situ doping": 4,
+          "indium": 65,
           "inspection": 6,
           "insulated gate bipolar transistor": 3,
           "interconnect patterning": 0,
+          "interlayer dielectric": 11,
           "interposer": 14,
           "ion implantation": 18,
           "ion implanter": 0,
@@ -14458,6 +14950,9 @@
           "nand flash": 5,
           "nand flash memory": 4,
           "nitride": 183,
+          "nitrogen gas": 9,
+          "non volatile memory": 44,
+          "nonvolatile memory": 31,
           "nor flash": 0,
           "opc": 1,
           "optical proximity correction": 0,
@@ -14547,10 +15042,12 @@
           "seasoning": 0,
           "semes": 0,
           "semes co , ltd": 0,
+          "semiconductor layer": 101,
           "sensor nodes": 0,
           "sf6": 17,
           "sic mosfet": 0,
           "sidewall angle deviation": 0,
+          "silicide": 47,
           "silicon carbide mosfet": 2,
           "silicon dioxide": 28,
           "silicon interposer": 1,
@@ -14610,6 +15107,7 @@
           "thyristor": 2,
           "tin": 1214,
           "tin barrier": 0,
+          "titanium": 82,
           "titanium nitride": 26,
           "tokyo electron": 0,
           "tokyo electron alpha": 0,
@@ -14619,15 +15117,16 @@
           "tokyo electron track": 0,
           "tool matching": 0,
           "track": 2,
+          "transistor": 199,
           "trench": 104,
           "tsv": 13,
           "tungsten": 64,
+          "tunnel dielectric": 7,
           "undercut": 9,
           "vacuum leak": 0,
           "vacuum pump": 4,
           "via": 167,
           "void": 48,
-          "w": 1867,
           "wafer": 139,
           "wafer manufacturing": 0,
           "wafer polishing": 0,
@@ -14641,6 +15140,7 @@
           "wetbench": 0,
           "wire bonding": 4,
           "wiring": 89,
+          "word line": 45,
           "yield": 43,
           "yield enhancement": 0,
           "yield improvement": 0,
@@ -14671,6 +15171,8 @@
           "노광 공정": 7,
           "노광 장비": 1,
           "다이오드": 79,
+          "도전막": 192,
+          "도전층": 107,
           "도펀트": 63,
           "도핑": 204,
           "드레인": 346,
@@ -14688,12 +15190,18 @@
           "박막": 458,
           "박막 응력": 1,
           "박막 증착": 35,
+          "반도체층": 176,
           "반사방지막": 24,
           "배선": 254,
           "볼 그리드 배열": 0,
           "불산": 22,
+          "불휘발성 메모리": 38,
           "비아": 86,
           "비정질 탄소": 15,
+          "비트 라인": 66,
+          "비트라인": 74,
+          "비휘발성 기억": 4,
+          "비휘발성 메모리": 148,
           "사이리스터": 1,
           "산화 공정": 31,
           "산화막": 376,
@@ -14701,6 +15209,7 @@
           "산화물": 435,
           "삼성": 0,
           "삼성전자": 0,
+          "상변화": 74,
           "상변화 메모리": 41,
           "상변환 메모리": 3,
           "성막": 143,
@@ -14709,6 +15218,8 @@
           "세정": 127,
           "세척": 22,
           "소스": 429,
+          "소자 분리": 76,
+          "소자분리": 79,
           "수율 향상": 4,
           "스퍼터": 354,
           "스퍼터링": 318,
@@ -14722,6 +15233,7 @@
           "식각 공정": 131,
           "식각 장비": 7,
           "식각액": 17,
+          "실리사이드": 131,
           "실리콘 관통 전극": 0,
           "실리콘 산화막": 71,
           "실리콘 제어 정류기": 0,
@@ -14745,6 +15257,8 @@
           "오염": 47,
           "오염 제어": 0,
           "온도": 462,
+          "워드 라인": 57,
+          "워드라인": 51,
           "원자층 증착": 80,
           "원자층 퇴적": 3,
           "원자층증착": 14,
@@ -14758,12 +15272,16 @@
           "이온 주입": 62,
           "이온주입": 65,
           "이이피롬": 8,
+          "인듐": 101,
           "인터포저": 31,
           "저유전율 절연막": 2,
           "저항 메모리": 16,
           "적층": 568,
           "전극": 882,
           "전하 결합소자": 0,
+          "전하 저장층": 27,
+          "전하 축적층": 24,
+          "전하 트랩층": 9,
           "전하결합 소자": 0,
           "전하결합소자": 0,
           "절연 게이트 양극성 트랜지스터": 0,
@@ -14780,6 +15298,7 @@
           "증착 장비": 7,
           "증착 장치": 36,
           "증착장치": 13,
+          "질소": 230,
           "질화 규소": 11,
           "질화 티타늄": 3,
           "질화막": 271,
@@ -14788,13 +15307,23 @@
           "챔버": 513,
           "챔버 세정": 0,
           "챔버 컨디셔닝": 0,
+          "층간 절연막": 106,
+          "층간절연막": 92,
           "캐패시터": 38,
+          "커패시터": 54,
           "코발트": 82,
+          "콘택": 266,
+          "콘택 플러그": 40,
           "탄탈륨 카바이드": 1,
+          "터널 산화막": 62,
+          "터널 유전막": 1,
+          "터널 절연막": 78,
           "텅스텐": 201,
           "테오스 산화막": 0,
           "퇴적": 40,
+          "트랜지스터": 391,
           "트렌치": 211,
+          "티타늄": 144,
           "티타늄 질화막": 2,
           "파티클": 43,
           "패키지": 87,
@@ -14811,9 +15340,13 @@
           "플라즈마": 614,
           "플라즈마 식각": 39,
           "플라즈마 진단": 0,
+          "플래시 메모리": 110,
+          "플래시메모리": 4,
+          "플로팅 게이트": 150,
           "플립칩": 3,
           "피램": 0,
           "핀펫": 1,
+          "하드 마스크": 59,
           "하드마스크": 59,
           "하이 일렉트론 모빌리티 트랜지스터": 0,
           "하이닉스": 0,
@@ -14824,7 +15357,9 @@
           "화학기계적연마": 3,
           "화학기상증착": 43,
           "화학기상퇴적": 0,
-          "확산": 148
+          "확산": 148,
+          "활성 영역": 43,
+          "활성영역": 53
         }
       },
       "concept_meta": {
@@ -14895,8 +15430,13 @@
             "depth": 0,
             "is_superordinate": false
           },
+          "device:flash_memory": {
+            "df_abox": 132,
+            "depth": 0,
+            "is_superordinate": false
+          },
           "device:flip_chip": {
-            "df_abox": 74,
+            "df_abox": 10,
             "depth": 0,
             "is_superordinate": false
           },
@@ -14955,13 +15495,18 @@
             "depth": 0,
             "is_superordinate": false
           },
+          "device:nonvolatile_memory": {
+            "df_abox": 260,
+            "depth": 0,
+            "is_superordinate": false
+          },
           "device:nor_flash": {
             "df_abox": 0,
             "depth": 0,
             "is_superordinate": false
           },
           "device:pcram": {
-            "df_abox": 71,
+            "df_abox": 103,
             "depth": 0,
             "is_superordinate": false
           },
@@ -14987,6 +15532,11 @@
           },
           "device:thyristor": {
             "df_abox": 3,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "device:transistor": {
+            "df_abox": 199,
             "depth": 0,
             "is_superordinate": false
           },
@@ -15391,7 +15941,7 @@
             "is_superordinate": false
           },
           "material:aluminum": {
-            "df_abox": 2212,
+            "df_abox": 347,
             "depth": 0,
             "is_superordinate": false
           },
@@ -15431,12 +15981,12 @@
             "is_superordinate": false
           },
           "material:cobalt": {
-            "df_abox": 1879,
+            "df_abox": 111,
             "depth": 0,
             "is_superordinate": false
           },
           "material:copper": {
-            "df_abox": 1044,
+            "df_abox": 251,
             "depth": 0,
             "is_superordinate": false
           },
@@ -15465,9 +16015,19 @@
             "depth": 0,
             "is_superordinate": false
           },
+          "material:indium": {
+            "df_abox": 157,
+            "depth": 0,
+            "is_superordinate": false
+          },
           "material:low_k_dielectric": {
             "df_abox": 26,
             "depth": 1,
+            "is_superordinate": false
+          },
+          "material:nitrogen_gas": {
+            "df_abox": 239,
+            "depth": 0,
             "is_superordinate": false
           },
           "material:oxide": {
@@ -15510,6 +16070,11 @@
             "depth": 1,
             "is_superordinate": false
           },
+          "material:silicide": {
+            "df_abox": 172,
+            "depth": 0,
+            "is_superordinate": false
+          },
           "material:sin": {
             "df_abox": 1512,
             "depth": 1,
@@ -15540,8 +16105,13 @@
             "depth": 0,
             "is_superordinate": false
           },
+          "material:titanium": {
+            "df_abox": 222,
+            "depth": 0,
+            "is_superordinate": false
+          },
           "material:tungsten": {
-            "df_abox": 1981,
+            "df_abox": 261,
             "depth": 0,
             "is_superordinate": false
           },
@@ -15661,7 +16231,7 @@
             "is_superordinate": false
           },
           "organization:3m_innovative_properties_company": {
-            "df_abox": 7,
+            "df_abox": 0,
             "depth": 0,
             "is_superordinate": false
           },
@@ -15936,7 +16506,7 @@
             "is_superordinate": false
           },
           "skill:defect_analysis": {
-            "df_abox": 1024,
+            "df_abox": 89,
             "depth": 0,
             "is_superordinate": false
           },
@@ -15990,8 +16560,18 @@
             "depth": 0,
             "is_superordinate": false
           },
+          "structural_element:active_region": {
+            "df_abox": 109,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "structural_element:bit_line": {
+            "df_abox": 171,
+            "depth": 0,
+            "is_superordinate": false
+          },
           "structural_element:capacitor": {
-            "df_abox": 89,
+            "df_abox": 138,
             "depth": 0,
             "is_superordinate": false
           },
@@ -16000,8 +16580,43 @@
             "depth": 0,
             "is_superordinate": false
           },
+          "structural_element:charge_storage_layer": {
+            "df_abox": 76,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "structural_element:conductive_layer": {
+            "df_abox": 354,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "structural_element:contact_plug": {
+            "df_abox": 274,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "structural_element:device_isolation": {
+            "df_abox": 146,
+            "depth": 0,
+            "is_superordinate": false
+          },
           "structural_element:drain": {
             "df_abox": 165,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "structural_element:floating_gate": {
+            "df_abox": 198,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "structural_element:hard_mask": {
+            "df_abox": 133,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "structural_element:interlayer_dielectric": {
+            "df_abox": 202,
             "depth": 0,
             "is_superordinate": false
           },
@@ -16012,6 +16627,11 @@
           },
           "structural_element:photoresist_layer": {
             "df_abox": 53,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "structural_element:semiconductor_layer": {
+            "df_abox": 277,
             "depth": 0,
             "is_superordinate": false
           },
@@ -16035,6 +16655,11 @@
             "depth": 0,
             "is_superordinate": false
           },
+          "structural_element:tunnel_dielectric": {
+            "df_abox": 146,
+            "depth": 0,
+            "is_superordinate": false
+          },
           "structural_element:via": {
             "df_abox": 239,
             "depth": 0,
@@ -16047,6 +16672,11 @@
           },
           "structural_element:wiring": {
             "df_abox": 342,
+            "depth": 0,
+            "is_superordinate": false
+          },
+          "structural_element:word_line": {
+            "df_abox": 144,
             "depth": 0,
             "is_superordinate": false
           },
@@ -16270,6 +16900,7 @@
     "R3-TIER2": "큐레이션 브리지 사전(0.8). 값이 프로파일 객체면 해당 프로파일 타깃만 쓰고, null 이면 그 프로파일에서 비활성이다.",
     "R4-SHORT-KO-TASK": "patent-text 한정 — 공백 없는 ≤4자 한글 표면형은 태스크 축(Skill·RootCause·Mitigation)으로 이월하지 않는다. 예외는 사전의 _exceptions_short_ko_task_axis 에 명시한다.",
     "R6-SURFACE-SUPPRESS": "CR-013 — 사전의 _suppress_tier1_surface 에 오른 (표면형, 개념) 쌍을 그 프로파일에서만 끈다. 지운 것이 아니라 blocked 로 옮긴 것이며, 다른 프로파일과 원천(KG synonyms)·skos:altLabel 은 움직이지 않는다. 억제는 R5 의 다의 판정 **앞**에 걸린다.",
+    "R8-SHORT-ASCII": "PLAN-005 7-A′ — patent-text 한정. 정규화 후 ASCII 만으로 된 ≤2 글자 표면형(원소기호 `w`·`co`·`al`·`cu` 등)은 entries 가 아니라 blocked 로 발행한다. Kiwi 형태소 경로가 CR-013 의 1글자 차단을 우회해 tungsten 을 +2,289 링크 재유입시킨 것을 막는다(계획서 §14.5). 유예 없음 · 다른 프로파일 불변.",
     "R7-DF-CEILING": "CR-001B — patent-text 한정. 표면형의 A-Box 문서빈도 비율이 0.06 을 넘으면 entries 가 아니라 blocked 로 발행한다. 문턱은 기존 사전 한글 표면형 154개의 df 90분위(0.0561)를 올린 값이며 하류 성능에서 역산하지 않았다. 넓은 낱말은 비가중 Jaccard 의 교집합과 합집합에 동시에 더해져 순위 정보를 희석한다(하류 D-23). 기존 등재 표면형에는 소급하지 않는다 — 사전의 _r7_grandfathered 참조.",
     "R5-AMBIGUITY": "한 표면형이 여러 개념에 걸리면 **후보를 지우지 않는다**. 더 특정한 축을 앞에 두고(SubProcess > … > Process) 같은 순위는 node_id 사전순으로 정렬한 뒤 ambiguous=true 로 표시한다. 어느 하나를 고르는 것은 적용기(하류)의 판단이며, 그 판단에 필요한 재료를 전부 넘긴다.",
     "CONFIDENCE": "측정값이 아니라 **출처 강도의 규약**이다: 그래프가 그렇게 부른다=1.0 · slug 파생=0.9 · 큐레이션 브리지=0.8."

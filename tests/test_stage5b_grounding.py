@@ -68,7 +68,8 @@ def kg() -> dict:
 
 
 def test_kg_has_fifteen_structural_elements_with_ko_synonyms(kg):
-    nodes = [n for n in kg["nodes"] if n["type"] == SE.TYPE]
+    # 7-A′(2026-09-10)가 같은 클래스에 12개를 더 넣었다 — 5-B 의 15개는 그대로 있어야 한다(부분집합).
+    nodes = [n for n in kg["nodes"] if n["type"] == SE.TYPE and n["id"] in SE.NEW_IDS]
     assert {n["id"] for n in nodes} == SE.NEW_IDS and len(nodes) == 15
     for n in nodes:
         assert n["props"].get("lexicon_profile") == "patent-text", n["id"]
@@ -80,7 +81,9 @@ def test_kg_has_fifteen_structural_elements_with_ko_synonyms(kg):
         if s["node_id"] in SE.NEW_IDS and s.get("lang") == "ko":
             ko_by_node.setdefault(s["node_id"], set()).add(s["term"])
     assert set(ko_by_node) == SE.NEW_IDS, "한글 synonym 이 없는 구조요소가 있다"
-    assert set().union(*ko_by_node.values()) == KO_SURFACES
+    # 7-A′ 가 `structural_element:capacitor` 에 `커패시터` 를 보탰다 — 5-B 의 15개 표면형은 그대로 있어야 한다.
+    assert KO_SURFACES <= set().union(*ko_by_node.values())
+    assert set().union(*ko_by_node.values()) - KO_SURFACES <= {"커패시터"}
 
 
 def test_injector_is_idempotent(tmp_path, monkeypatch):
@@ -93,7 +96,7 @@ def test_injector_is_idempotent(tmp_path, monkeypatch):
     assert SE.main() == 0
     twice = json.loads(copy.read_text(encoding="utf-8"))
     assert len(once["nodes"]) == len(twice["nodes"]) and len(once["synonyms"]) == len(twice["synonyms"])
-    assert sum(n["type"] == SE.TYPE for n in twice["nodes"]) == 15
+    assert sum(n["id"] in SE.NEW_IDS for n in twice["nodes"]) == 15
 
 
 # ── 2. 생성기 ↔ T-Box 계약 ──────────────────────────────────────────
