@@ -702,6 +702,60 @@
     ]
   },
   {
+    "@id": "https://w3id.org/sdkb/data/device/flash_memory",
+    "@type": [
+      "https://w3id.org/sdkb/ont/Device"
+    ],
+    "http://purl.org/dc/terms/bibliographicCitation": [
+      {
+        "@value": "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측"
+      }
+    ],
+    "http://purl.org/dc/terms/license": [
+      {
+        "@value": "CDLA-Permissive-2.0"
+      }
+    ],
+    "http://purl.org/dc/terms/source": [
+      {
+        "@value": "author"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#altLabel": [
+      {
+        "@language": "ko",
+        "@value": "플래시 메모리"
+      },
+      {
+        "@language": "ko",
+        "@value": "플래시메모리"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#definition": [
+      {
+        "@language": "en",
+        "@value": "Flash memory device (superordinate of NAND/NOR flash)."
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "Flash Memory"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/interpretationType": [
+      {
+        "@value": "author-defined"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/validationRequired": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ]
+  },
+  {
     "@id": "https://w3id.org/sdkb/data/device/flip_chip",
     "@type": [
       "https://w3id.org/sdkb/ont/Device"
@@ -1315,6 +1369,64 @@
     ]
   },
   {
+    "@id": "https://w3id.org/sdkb/data/device/nonvolatile_memory",
+    "@type": [
+      "https://w3id.org/sdkb/ont/Device"
+    ],
+    "http://purl.org/dc/terms/bibliographicCitation": [
+      {
+        "@value": "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측"
+      }
+    ],
+    "http://purl.org/dc/terms/license": [
+      {
+        "@value": "CDLA-Permissive-2.0"
+      }
+    ],
+    "http://purl.org/dc/terms/source": [
+      {
+        "@value": "author"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#altLabel": [
+      {
+        "@language": "ko",
+        "@value": "비휘발성 메모리"
+      },
+      {
+        "@language": "ko",
+        "@value": "불휘발성 메모리"
+      },
+      {
+        "@language": "ko",
+        "@value": "비휘발성 기억"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#definition": [
+      {
+        "@language": "en",
+        "@value": "Non-volatile memory device in general."
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "Non-volatile Memory"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/interpretationType": [
+      {
+        "@value": "author-defined"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/validationRequired": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ]
+  },
+  {
     "@id": "https://w3id.org/sdkb/data/device/nor_flash",
     "@type": [
       "https://w3id.org/sdkb/ont/Device"
@@ -1443,6 +1555,10 @@
       {
         "@language": "ko",
         "@value": "피램"
+      },
+      {
+        "@language": "ko",
+        "@value": "상변화"
       }
     ],
     "http://www.w3.org/2004/02/skos/core#definition": [
@@ -1756,6 +1872,56 @@
     "https://w3id.org/sdkb/ont/interpretationType": [
       {
         "@value": "mapped"
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/sdkb/data/device/transistor",
+    "@type": [
+      "https://w3id.org/sdkb/ont/Device"
+    ],
+    "http://purl.org/dc/terms/bibliographicCitation": [
+      {
+        "@value": "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측"
+      }
+    ],
+    "http://purl.org/dc/terms/license": [
+      {
+        "@value": "CDLA-Permissive-2.0"
+      }
+    ],
+    "http://purl.org/dc/terms/source": [
+      {
+        "@value": "author"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#altLabel": [
+      {
+        "@language": "ko",
+        "@value": "트랜지스터"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#definition": [
+      {
+        "@language": "en",
+        "@value": "Transistor in general — superordinate of MOSFET/FinFET/BJT nodes. R7 decides whether the surface is admitted in patent-text."
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "Transistor"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/interpretationType": [
+      {
+        "@value": "author-defined"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/validationRequired": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
       }
     ]
   },
@@ -7185,6 +7351,56 @@
     ]
   },
   {
+    "@id": "https://w3id.org/sdkb/data/material/indium",
+    "@type": [
+      "https://w3id.org/sdkb/ont/Material"
+    ],
+    "http://purl.org/dc/terms/bibliographicCitation": [
+      {
+        "@value": "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측"
+      }
+    ],
+    "http://purl.org/dc/terms/license": [
+      {
+        "@value": "CDLA-Permissive-2.0"
+      }
+    ],
+    "http://purl.org/dc/terms/source": [
+      {
+        "@value": "author"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#altLabel": [
+      {
+        "@language": "ko",
+        "@value": "인듐"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#definition": [
+      {
+        "@language": "en",
+        "@value": "Indium (In) — e.g. InGaZnO oxide semiconductors, In-based compounds."
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "Indium"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/interpretationType": [
+      {
+        "@value": "author-defined"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/validationRequired": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ]
+  },
+  {
     "@id": "https://w3id.org/sdkb/data/material/low_k_dielectric",
     "@type": [
       "https://w3id.org/sdkb/ont/Material"
@@ -7239,6 +7455,56 @@
     "https://w3id.org/sdkb/ont/interpretationType": [
       {
         "@value": "mapped"
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/sdkb/data/material/nitrogen_gas",
+    "@type": [
+      "https://w3id.org/sdkb/ont/Material"
+    ],
+    "http://purl.org/dc/terms/bibliographicCitation": [
+      {
+        "@value": "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측"
+      }
+    ],
+    "http://purl.org/dc/terms/license": [
+      {
+        "@value": "CDLA-Permissive-2.0"
+      }
+    ],
+    "http://purl.org/dc/terms/source": [
+      {
+        "@value": "author"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#altLabel": [
+      {
+        "@language": "ko",
+        "@value": "질소"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#definition": [
+      {
+        "@language": "en",
+        "@value": "Nitrogen (N2) as a process/carrier gas or nitridation source."
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "Nitrogen Gas"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/interpretationType": [
+      {
+        "@value": "author-defined"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/validationRequired": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
       }
     ]
   },
@@ -7650,6 +7916,56 @@
     ]
   },
   {
+    "@id": "https://w3id.org/sdkb/data/material/silicide",
+    "@type": [
+      "https://w3id.org/sdkb/ont/Material"
+    ],
+    "http://purl.org/dc/terms/bibliographicCitation": [
+      {
+        "@value": "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측"
+      }
+    ],
+    "http://purl.org/dc/terms/license": [
+      {
+        "@value": "CDLA-Permissive-2.0"
+      }
+    ],
+    "http://purl.org/dc/terms/source": [
+      {
+        "@value": "author"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#altLabel": [
+      {
+        "@language": "ko",
+        "@value": "실리사이드"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#definition": [
+      {
+        "@language": "en",
+        "@value": "Metal silicide (e.g. CoSi2, NiSi, TiSi2) contact/gate material."
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "Silicide"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/interpretationType": [
+      {
+        "@value": "author-defined"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/validationRequired": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ]
+  },
+  {
     "@id": "https://w3id.org/sdkb/data/material/sin",
     "@type": [
       "https://w3id.org/sdkb/ont/Material"
@@ -7990,6 +8306,56 @@
     "https://w3id.org/sdkb/ont/interpretationType": [
       {
         "@value": "mapped"
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/sdkb/data/material/titanium",
+    "@type": [
+      "https://w3id.org/sdkb/ont/Material"
+    ],
+    "http://purl.org/dc/terms/bibliographicCitation": [
+      {
+        "@value": "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측"
+      }
+    ],
+    "http://purl.org/dc/terms/license": [
+      {
+        "@value": "CDLA-Permissive-2.0"
+      }
+    ],
+    "http://purl.org/dc/terms/source": [
+      {
+        "@value": "author"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#altLabel": [
+      {
+        "@language": "ko",
+        "@value": "티타늄"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#definition": [
+      {
+        "@language": "en",
+        "@value": "Titanium (Ti) metal — distinct from titanium nitride (material:tin)."
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "Titanium"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/interpretationType": [
+      {
+        "@value": "author-defined"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/validationRequired": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
       }
     ]
   },
@@ -12764,6 +13130,114 @@
     ]
   },
   {
+    "@id": "https://w3id.org/sdkb/data/structural_element/active_region",
+    "@type": [
+      "https://w3id.org/sdkb/ont/StructuralElement"
+    ],
+    "http://purl.org/dc/terms/bibliographicCitation": [
+      {
+        "@value": "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측"
+      }
+    ],
+    "http://purl.org/dc/terms/license": [
+      {
+        "@value": "CDLA-Permissive-2.0"
+      }
+    ],
+    "http://purl.org/dc/terms/source": [
+      {
+        "@value": "author"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#altLabel": [
+      {
+        "@language": "ko",
+        "@value": "활성 영역"
+      },
+      {
+        "@language": "ko",
+        "@value": "활성영역"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#definition": [
+      {
+        "@language": "en",
+        "@value": "Active region of a substrate defined by device isolation."
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "Active Region"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/interpretationType": [
+      {
+        "@value": "author-defined"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/validationRequired": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/sdkb/data/structural_element/bit_line",
+    "@type": [
+      "https://w3id.org/sdkb/ont/StructuralElement"
+    ],
+    "http://purl.org/dc/terms/bibliographicCitation": [
+      {
+        "@value": "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측"
+      }
+    ],
+    "http://purl.org/dc/terms/license": [
+      {
+        "@value": "CDLA-Permissive-2.0"
+      }
+    ],
+    "http://purl.org/dc/terms/source": [
+      {
+        "@value": "author"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#altLabel": [
+      {
+        "@language": "ko",
+        "@value": "비트라인"
+      },
+      {
+        "@language": "ko",
+        "@value": "비트 라인"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#definition": [
+      {
+        "@language": "en",
+        "@value": "Bit line of a memory array."
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "Bit Line"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/interpretationType": [
+      {
+        "@value": "author-defined"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/validationRequired": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ]
+  },
+  {
     "@id": "https://w3id.org/sdkb/data/structural_element/capacitor",
     "@type": [
       "https://w3id.org/sdkb/ont/StructuralElement"
@@ -12787,6 +13261,10 @@
       {
         "@language": "ko",
         "@value": "캐패시터"
+      },
+      {
+        "@language": "ko",
+        "@value": "커패시터"
       }
     ],
     "http://www.w3.org/2004/02/skos/core#definition": [
@@ -12849,6 +13327,226 @@
       {
         "@language": "en",
         "@value": "Channel Region"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/interpretationType": [
+      {
+        "@value": "author-defined"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/validationRequired": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/sdkb/data/structural_element/charge_storage_layer",
+    "@type": [
+      "https://w3id.org/sdkb/ont/StructuralElement"
+    ],
+    "http://purl.org/dc/terms/bibliographicCitation": [
+      {
+        "@value": "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측"
+      }
+    ],
+    "http://purl.org/dc/terms/license": [
+      {
+        "@value": "CDLA-Permissive-2.0"
+      }
+    ],
+    "http://purl.org/dc/terms/source": [
+      {
+        "@value": "author"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#altLabel": [
+      {
+        "@language": "ko",
+        "@value": "전하 저장층"
+      },
+      {
+        "@language": "ko",
+        "@value": "전하 트랩층"
+      },
+      {
+        "@language": "ko",
+        "@value": "전하 축적층"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#definition": [
+      {
+        "@language": "en",
+        "@value": "Charge storage / charge trap layer of a memory cell (e.g. nitride trap layer)."
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "Charge Storage Layer"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/interpretationType": [
+      {
+        "@value": "author-defined"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/validationRequired": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/sdkb/data/structural_element/conductive_layer",
+    "@type": [
+      "https://w3id.org/sdkb/ont/StructuralElement"
+    ],
+    "http://purl.org/dc/terms/bibliographicCitation": [
+      {
+        "@value": "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측"
+      }
+    ],
+    "http://purl.org/dc/terms/license": [
+      {
+        "@value": "CDLA-Permissive-2.0"
+      }
+    ],
+    "http://purl.org/dc/terms/source": [
+      {
+        "@value": "author"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#altLabel": [
+      {
+        "@language": "ko",
+        "@value": "도전막"
+      },
+      {
+        "@language": "ko",
+        "@value": "도전층"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#definition": [
+      {
+        "@language": "en",
+        "@value": "Conductive film/layer as a structural layer in a claim."
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "Conductive Layer"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/interpretationType": [
+      {
+        "@value": "author-defined"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/validationRequired": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/sdkb/data/structural_element/contact_plug",
+    "@type": [
+      "https://w3id.org/sdkb/ont/StructuralElement"
+    ],
+    "http://purl.org/dc/terms/bibliographicCitation": [
+      {
+        "@value": "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측"
+      }
+    ],
+    "http://purl.org/dc/terms/license": [
+      {
+        "@value": "CDLA-Permissive-2.0"
+      }
+    ],
+    "http://purl.org/dc/terms/source": [
+      {
+        "@value": "author"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#altLabel": [
+      {
+        "@language": "ko",
+        "@value": "콘택"
+      },
+      {
+        "@language": "ko",
+        "@value": "콘택 플러그"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#definition": [
+      {
+        "@language": "en",
+        "@value": "Contact / contact plug connecting a device region to wiring."
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "Contact Plug"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/interpretationType": [
+      {
+        "@value": "author-defined"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/validationRequired": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/sdkb/data/structural_element/device_isolation",
+    "@type": [
+      "https://w3id.org/sdkb/ont/StructuralElement"
+    ],
+    "http://purl.org/dc/terms/bibliographicCitation": [
+      {
+        "@value": "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측"
+      }
+    ],
+    "http://purl.org/dc/terms/license": [
+      {
+        "@value": "CDLA-Permissive-2.0"
+      }
+    ],
+    "http://purl.org/dc/terms/source": [
+      {
+        "@value": "author"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#altLabel": [
+      {
+        "@language": "ko",
+        "@value": "소자분리"
+      },
+      {
+        "@language": "ko",
+        "@value": "소자 분리"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#definition": [
+      {
+        "@language": "en",
+        "@value": "Device isolation structure (e.g. STI) separating active regions."
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "Device Isolation"
       }
     ],
     "https://w3id.org/sdkb/ont/interpretationType": [
@@ -12964,6 +13662,56 @@
     ]
   },
   {
+    "@id": "https://w3id.org/sdkb/data/structural_element/floating_gate",
+    "@type": [
+      "https://w3id.org/sdkb/ont/StructuralElement"
+    ],
+    "http://purl.org/dc/terms/bibliographicCitation": [
+      {
+        "@value": "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측"
+      }
+    ],
+    "http://purl.org/dc/terms/license": [
+      {
+        "@value": "CDLA-Permissive-2.0"
+      }
+    ],
+    "http://purl.org/dc/terms/source": [
+      {
+        "@value": "author"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#altLabel": [
+      {
+        "@language": "ko",
+        "@value": "플로팅 게이트"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#definition": [
+      {
+        "@language": "en",
+        "@value": "Floating gate of a charge-storage (flash) memory cell."
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "Floating Gate"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/interpretationType": [
+      {
+        "@value": "author-defined"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/validationRequired": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ]
+  },
+  {
     "@id": "https://w3id.org/sdkb/data/structural_element/gate",
     "@type": [
       "https://w3id.org/sdkb/ont/StructuralElement"
@@ -12999,6 +13747,114 @@
       {
         "@language": "en",
         "@value": "Gate"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/interpretationType": [
+      {
+        "@value": "author-defined"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/validationRequired": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/sdkb/data/structural_element/hard_mask",
+    "@type": [
+      "https://w3id.org/sdkb/ont/StructuralElement"
+    ],
+    "http://purl.org/dc/terms/bibliographicCitation": [
+      {
+        "@value": "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측"
+      }
+    ],
+    "http://purl.org/dc/terms/license": [
+      {
+        "@value": "CDLA-Permissive-2.0"
+      }
+    ],
+    "http://purl.org/dc/terms/source": [
+      {
+        "@value": "author"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#altLabel": [
+      {
+        "@language": "ko",
+        "@value": "하드마스크"
+      },
+      {
+        "@language": "ko",
+        "@value": "하드 마스크"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#definition": [
+      {
+        "@language": "en",
+        "@value": "Hard mask layer as a structure — a different level from subprocess:hardmask_etch (the step)."
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "Hard Mask"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/interpretationType": [
+      {
+        "@value": "author-defined"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/validationRequired": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/sdkb/data/structural_element/interlayer_dielectric",
+    "@type": [
+      "https://w3id.org/sdkb/ont/StructuralElement"
+    ],
+    "http://purl.org/dc/terms/bibliographicCitation": [
+      {
+        "@value": "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측"
+      }
+    ],
+    "http://purl.org/dc/terms/license": [
+      {
+        "@value": "CDLA-Permissive-2.0"
+      }
+    ],
+    "http://purl.org/dc/terms/source": [
+      {
+        "@value": "author"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#altLabel": [
+      {
+        "@language": "ko",
+        "@value": "층간 절연막"
+      },
+      {
+        "@language": "ko",
+        "@value": "층간절연막"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#definition": [
+      {
+        "@language": "en",
+        "@value": "Interlayer dielectric (ILD) separating wiring levels — a layer, distinct from the dielectric material nodes."
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "Interlayer Dielectric"
       }
     ],
     "https://w3id.org/sdkb/ont/interpretationType": [
@@ -13099,6 +13955,56 @@
       {
         "@language": "en",
         "@value": "Photoresist Layer"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/interpretationType": [
+      {
+        "@value": "author-defined"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/validationRequired": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/sdkb/data/structural_element/semiconductor_layer",
+    "@type": [
+      "https://w3id.org/sdkb/ont/StructuralElement"
+    ],
+    "http://purl.org/dc/terms/bibliographicCitation": [
+      {
+        "@value": "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측"
+      }
+    ],
+    "http://purl.org/dc/terms/license": [
+      {
+        "@value": "CDLA-Permissive-2.0"
+      }
+    ],
+    "http://purl.org/dc/terms/source": [
+      {
+        "@value": "author"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#altLabel": [
+      {
+        "@language": "ko",
+        "@value": "반도체층"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#definition": [
+      {
+        "@language": "en",
+        "@value": "Semiconductor layer (e.g. channel/body layer) as a structural layer."
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "Semiconductor Layer"
       }
     ],
     "https://w3id.org/sdkb/ont/interpretationType": [
@@ -13364,6 +14270,64 @@
     ]
   },
   {
+    "@id": "https://w3id.org/sdkb/data/structural_element/tunnel_dielectric",
+    "@type": [
+      "https://w3id.org/sdkb/ont/StructuralElement"
+    ],
+    "http://purl.org/dc/terms/bibliographicCitation": [
+      {
+        "@value": "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측"
+      }
+    ],
+    "http://purl.org/dc/terms/license": [
+      {
+        "@value": "CDLA-Permissive-2.0"
+      }
+    ],
+    "http://purl.org/dc/terms/source": [
+      {
+        "@value": "author"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#altLabel": [
+      {
+        "@language": "ko",
+        "@value": "터널 절연막"
+      },
+      {
+        "@language": "ko",
+        "@value": "터널 산화막"
+      },
+      {
+        "@language": "ko",
+        "@value": "터널 유전막"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#definition": [
+      {
+        "@language": "en",
+        "@value": "Tunnel dielectric/oxide layer through which carriers tunnel into a storage node."
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "Tunnel Dielectric"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/interpretationType": [
+      {
+        "@value": "author-defined"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/validationRequired": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ]
+  },
+  {
     "@id": "https://w3id.org/sdkb/data/structural_element/via",
     "@type": [
       "https://w3id.org/sdkb/ont/StructuralElement"
@@ -13499,6 +14463,60 @@
       {
         "@language": "en",
         "@value": "Wiring"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/interpretationType": [
+      {
+        "@value": "author-defined"
+      }
+    ],
+    "https://w3id.org/sdkb/ont/validationRequired": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/sdkb/data/structural_element/word_line",
+    "@type": [
+      "https://w3id.org/sdkb/ont/StructuralElement"
+    ],
+    "http://purl.org/dc/terms/bibliographicCitation": [
+      {
+        "@value": "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측"
+      }
+    ],
+    "http://purl.org/dc/terms/license": [
+      {
+        "@value": "CDLA-Permissive-2.0"
+      }
+    ],
+    "http://purl.org/dc/terms/source": [
+      {
+        "@value": "author"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#altLabel": [
+      {
+        "@language": "ko",
+        "@value": "워드라인"
+      },
+      {
+        "@language": "ko",
+        "@value": "워드 라인"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#definition": [
+      {
+        "@language": "en",
+        "@value": "Word line of a memory array."
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "Word Line"
       }
     ],
     "https://w3id.org/sdkb/ont/interpretationType": [

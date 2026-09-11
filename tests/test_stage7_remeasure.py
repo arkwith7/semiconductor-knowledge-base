@@ -153,6 +153,8 @@ def test_report_reproduces_stage1_and_describes_current_files():
     for rel, sha in rep["inputs"].items():
         if rel == "baseline_parquet_sha256":
             assert sha.startswith(s7.FROZEN["baseline_parquet_sha256_prefix"])
+        elif rel.startswith("layer_parquet_sha256["):
+            continue                                   # git 소급·추가 층의 parquet — 저장소 경로가 아니다
         elif sha is not None:
             assert sha == hashlib.sha256((ROOT / rel).read_bytes()).hexdigest(), f"{rel} 가 리포트 이후 바뀌었다"
     ident = rep["identity_check_vs_abox_report"]

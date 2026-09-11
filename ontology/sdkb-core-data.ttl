@@ -151,6 +151,17 @@
     skos:prefLabel "FinFET"@en ;
     ont:interpretationType "mapped" .
 
+<https://w3id.org/sdkb/data/device/flash_memory> a ont:Device ;
+    dcterms:bibliographicCitation "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:altLabel "플래시 메모리"@ko,
+        "플래시메모리"@ko ;
+    skos:definition "Flash memory device (superordinate of NAND/NOR flash)."@en ;
+    skos:prefLabel "Flash Memory"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
 <https://w3id.org/sdkb/data/device/flip_chip> a ont:Device ;
     dcterms:bibliographicCitation "Wikidata device class (paper_data Phase D, 2026-05-16)" ;
     dcterms:license "CC0-1.0" ;
@@ -279,6 +290,18 @@
     skos:prefLabel "NAND"@en ;
     ont:interpretationType "mapped" .
 
+<https://w3id.org/sdkb/data/device/nonvolatile_memory> a ont:Device ;
+    dcterms:bibliographicCitation "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:altLabel "불휘발성 메모리"@ko,
+        "비휘발성 기억"@ko,
+        "비휘발성 메모리"@ko ;
+    skos:definition "Non-volatile memory device in general."@en ;
+    skos:prefLabel "Non-volatile Memory"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
 <https://w3id.org/sdkb/data/device/nor_flash> a ont:Device ;
     dcterms:bibliographicCitation "Wikidata device class (paper_data Phase D, 2026-05-16)" ;
     dcterms:license "CC0-1.0" ;
@@ -305,6 +328,7 @@
         "phase-change RAM"@en,
         "phase-change memory"@en,
         "P램"@ko,
+        "상변화"@ko,
         "상변화 메모리"@ko,
         "상변환 메모리"@ko,
         "피램"@ko ;
@@ -374,6 +398,16 @@
     skos:definition "Power semiconductor device."@en ;
     skos:prefLabel "thyristor"@en ;
     ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/device/transistor> a ont:Device ;
+    dcterms:bibliographicCitation "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:altLabel "트랜지스터"@ko ;
+    skos:definition "Transistor in general — superordinate of MOSFET/FinFET/BJT nodes. R7 decides whether the surface is admitted in patent-text."@en ;
+    skos:prefLabel "Transistor"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
 
 <https://w3id.org/sdkb/data/device/tsv> a ont:Device ;
     dcterms:bibliographicCitation "Wikidata device class (paper_data Phase D, 2026-05-16)" ;
@@ -1245,6 +1279,26 @@
     ont:interpretationType "author-defined" ;
     ont:validationRequired true .
 
+<https://w3id.org/sdkb/data/material/indium> a ont:Material ;
+    dcterms:bibliographicCitation "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:altLabel "인듐"@ko ;
+    skos:definition "Indium (In) — e.g. InGaZnO oxide semiconductors, In-based compounds."@en ;
+    skos:prefLabel "Indium"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/material/nitrogen_gas> a ont:Material ;
+    dcterms:bibliographicCitation "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:altLabel "질소"@ko ;
+    skos:definition "Nitrogen (N2) as a process/carrier gas or nitridation source."@en ;
+    skos:prefLabel "Nitrogen Gas"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
 <https://w3id.org/sdkb/data/material/oxygen_gas> a ont:Material ;
     dcterms:bibliographicCitation "CR-007 §3단계 결정 ①" ;
     dcterms:license "CDLA-Permissive-2.0" ;
@@ -1265,6 +1319,16 @@
     ont:interpretationType "author-defined" ;
     ont:validationRequired true .
 
+<https://w3id.org/sdkb/data/material/silicide> a ont:Material ;
+    dcterms:bibliographicCitation "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:altLabel "실리사이드"@ko ;
+    skos:definition "Metal silicide (e.g. CoSi2, NiSi, TiSi2) contact/gate material."@en ;
+    skos:prefLabel "Silicide"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
 <https://w3id.org/sdkb/data/material/sog> a ont:Material ;
     dcterms:bibliographicCitation "Venugopal et al. 2024, Scientific Data 11:217" ;
     dcterms:license "CC-BY-4.0" ;
@@ -1275,6 +1339,16 @@
     skos:definition "SOG planarization material."@en ;
     skos:prefLabel "Spin-on Glass"@en ;
     ont:interpretationType "mapped" .
+
+<https://w3id.org/sdkb/data/material/titanium> a ont:Material ;
+    dcterms:bibliographicCitation "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:altLabel "티타늄"@ko ;
+    skos:definition "Titanium (Ti) metal — distinct from titanium nitride (material:tin)."@en ;
+    skos:prefLabel "Titanium"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
 
 <https://w3id.org/sdkb/data/metrology/ellipsometry> a ont:Metrology ;
     dcterms:bibliographicCitation "SEMI E10 (equipment performance); IRDS Metrology Chapter" ;
@@ -1522,11 +1596,34 @@
     ont:mitigatedBy <https://w3id.org/sdkb/data/mitigation/barrier_layer> ;
     ont:validationRequired true .
 
+<https://w3id.org/sdkb/data/structural_element/active_region> a ont:StructuralElement ;
+    dcterms:bibliographicCitation "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:altLabel "활성 영역"@ko,
+        "활성영역"@ko ;
+    skos:definition "Active region of a substrate defined by device isolation."@en ;
+    skos:prefLabel "Active Region"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/structural_element/bit_line> a ont:StructuralElement ;
+    dcterms:bibliographicCitation "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:altLabel "비트 라인"@ko,
+        "비트라인"@ko ;
+    skos:definition "Bit line of a memory array."@en ;
+    skos:prefLabel "Bit Line"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
 <https://w3id.org/sdkb/data/structural_element/capacitor> a ont:StructuralElement ;
     dcterms:bibliographicCitation "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms" ;
     dcterms:license "CDLA-Permissive-2.0" ;
     dcterms:source "author" ;
-    skos:altLabel "캐패시터"@ko ;
+    skos:altLabel "캐패시터"@ko,
+        "커패시터"@ko ;
     skos:definition "Capacitor structure (e.g. DRAM cell capacitor) as a structural element."@en ;
     skos:prefLabel "Capacitor"@en ;
     ont:interpretationType "author-defined" ;
@@ -1539,6 +1636,51 @@
     skos:altLabel "채널"@ko ;
     skos:definition "Channel region of a transistor between source and drain."@en ;
     skos:prefLabel "Channel Region"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/structural_element/charge_storage_layer> a ont:StructuralElement ;
+    dcterms:bibliographicCitation "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:altLabel "전하 저장층"@ko,
+        "전하 축적층"@ko,
+        "전하 트랩층"@ko ;
+    skos:definition "Charge storage / charge trap layer of a memory cell (e.g. nitride trap layer)."@en ;
+    skos:prefLabel "Charge Storage Layer"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/structural_element/conductive_layer> a ont:StructuralElement ;
+    dcterms:bibliographicCitation "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:altLabel "도전막"@ko,
+        "도전층"@ko ;
+    skos:definition "Conductive film/layer as a structural layer in a claim."@en ;
+    skos:prefLabel "Conductive Layer"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/structural_element/contact_plug> a ont:StructuralElement ;
+    dcterms:bibliographicCitation "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:altLabel "콘택"@ko,
+        "콘택 플러그"@ko ;
+    skos:definition "Contact / contact plug connecting a device region to wiring."@en ;
+    skos:prefLabel "Contact Plug"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/structural_element/device_isolation> a ont:StructuralElement ;
+    dcterms:bibliographicCitation "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:altLabel "소자 분리"@ko,
+        "소자분리"@ko ;
+    skos:definition "Device isolation structure (e.g. STI) separating active regions."@en ;
+    skos:prefLabel "Device Isolation"@en ;
     ont:interpretationType "author-defined" ;
     ont:validationRequired true .
 
@@ -1562,6 +1704,16 @@
     ont:interpretationType "author-defined" ;
     ont:validationRequired true .
 
+<https://w3id.org/sdkb/data/structural_element/floating_gate> a ont:StructuralElement ;
+    dcterms:bibliographicCitation "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:altLabel "플로팅 게이트"@ko ;
+    skos:definition "Floating gate of a charge-storage (flash) memory cell."@en ;
+    skos:prefLabel "Floating Gate"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
 <https://w3id.org/sdkb/data/structural_element/gate> a ont:StructuralElement ;
     dcterms:bibliographicCitation "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms" ;
     dcterms:license "CDLA-Permissive-2.0" ;
@@ -1569,6 +1721,28 @@
     skos:altLabel "게이트"@ko ;
     skos:definition "Gate structure of a transistor (gate electrode and gate stack)."@en ;
     skos:prefLabel "Gate"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/structural_element/hard_mask> a ont:StructuralElement ;
+    dcterms:bibliographicCitation "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:altLabel "하드 마스크"@ko,
+        "하드마스크"@ko ;
+    skos:definition "Hard mask layer as a structure — a different level from subprocess:hardmask_etch (the step)."@en ;
+    skos:prefLabel "Hard Mask"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/structural_element/interlayer_dielectric> a ont:StructuralElement ;
+    dcterms:bibliographicCitation "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:altLabel "층간 절연막"@ko,
+        "층간절연막"@ko ;
+    skos:definition "Interlayer dielectric (ILD) separating wiring levels — a layer, distinct from the dielectric material nodes."@en ;
+    skos:prefLabel "Interlayer Dielectric"@en ;
     ont:interpretationType "author-defined" ;
     ont:validationRequired true .
 
@@ -1589,6 +1763,16 @@
     skos:altLabel "감광막"@ko ;
     skos:definition "Photoresist film/layer as a structural layer — distinct from the photoresist material nodes (material:photoresist_*): a different level of description."@en ;
     skos:prefLabel "Photoresist Layer"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/structural_element/semiconductor_layer> a ont:StructuralElement ;
+    dcterms:bibliographicCitation "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:altLabel "반도체층"@ko ;
+    skos:definition "Semiconductor layer (e.g. channel/body layer) as a structural layer."@en ;
+    skos:prefLabel "Semiconductor Layer"@en ;
     ont:interpretationType "author-defined" ;
     ont:validationRequired true .
 
@@ -1642,6 +1826,18 @@
     ont:interpretationType "author-defined" ;
     ont:validationRequired true .
 
+<https://w3id.org/sdkb/data/structural_element/tunnel_dielectric> a ont:StructuralElement ;
+    dcterms:bibliographicCitation "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:altLabel "터널 산화막"@ko,
+        "터널 유전막"@ko,
+        "터널 절연막"@ko ;
+    skos:definition "Tunnel dielectric/oxide layer through which carriers tunnel into a storage node."@en ;
+    skos:prefLabel "Tunnel Dielectric"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
 <https://w3id.org/sdkb/data/structural_element/via> a ont:StructuralElement ;
     dcterms:bibliographicCitation "PLAN-005 §14 (단계 5-B) · CR-001B data/reports/ko_concept_proposals.json basic_terms" ;
     dcterms:license "CDLA-Permissive-2.0" ;
@@ -1669,6 +1865,17 @@
     skos:altLabel "배선"@ko ;
     skos:definition "Interconnect wiring line as a structural element."@en ;
     skos:prefLabel "Wiring"@en ;
+    ont:interpretationType "author-defined" ;
+    ont:validationRequired true .
+
+<https://w3id.org/sdkb/data/structural_element/word_line> a ont:StructuralElement ;
+    dcterms:bibliographicCitation "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측" ;
+    dcterms:license "CDLA-Permissive-2.0" ;
+    dcterms:source "author" ;
+    skos:altLabel "워드 라인"@ko,
+        "워드라인"@ko ;
+    skos:definition "Word line of a memory array."@en ;
+    skos:prefLabel "Word Line"@en ;
     ont:interpretationType "author-defined" ;
     ont:validationRequired true .
 

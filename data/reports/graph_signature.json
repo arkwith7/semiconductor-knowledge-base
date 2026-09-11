@@ -124,19 +124,19 @@
   "curation_source": {
     "status": "built",
     "version": "0.3",
-    "nodes": 289,
+    "nodes": 308,
     "edges": 312,
     "node_types": 16,
     "nodes_by_type": {
       "Equipment": 41,
       "SubProcess": 38,
-      "Device": 34,
-      "Material": 31,
+      "Device": 37,
+      "Material": 35,
+      "StructuralElement": 27,
       "FailureMode": 25,
       "Mitigation": 20,
       "RootCause": 20,
       "Vendor": 16,
-      "StructuralElement": 15,
       "EquipmentClass": 12,
       "Process": 12,
       "Skill": 12,
@@ -151,8 +151,8 @@
       "layer": "sdkb-core-data",
       "label": "curation graph, instantiated",
       "status": "built",
-      "bytes": 163673,
-      "triples": 3019,
+      "bytes": 175783,
+      "triples": 3207,
       "triples_source": "parsed"
     },
     {
@@ -175,8 +175,8 @@
       "layer": "sdkb-abox-claim-features",
       "label": "claim features",
       "status": "built",
-      "bytes": 916206974,
-      "triples": 12001973,
+      "bytes": 933939954,
+      "triples": 12231421,
       "triples_source": "report:abox_claim_features_report.json"
     },
     {
@@ -191,8 +191,8 @@
       "layer": "sdkb-abox-priorart",
       "label": "prior-art claim profiles, disclosures, examiner elements",
       "status": "built",
-      "bytes": 62382427,
-      "triples": 796656,
+      "bytes": 76332679,
+      "triples": 973363,
       "triples_source": "report:abox_priorart_report.json"
     },
     {

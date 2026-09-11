@@ -74,6 +74,11 @@ def is_short_korean(surface: str) -> bool:
     return bool(_HANGUL.search(surface)) and " " not in surface and len(surface) <= 4
 
 
+def is_short_ascii(surface: str) -> bool:
+    """R8 판정 — 정규화된 표면형이 ASCII 만이고 ≤2 글자인가 (PLAN-005 7-A′)."""
+    return surface.isascii() and len(surface) <= 2
+
+
 def _alias_targets(value: object, profile: str) -> list[str]:
     """프로파일 객체 · 문자열 · 리스트 세 형태를 모두 받는다."""
     if isinstance(value, dict):
@@ -172,6 +177,14 @@ def collect(kg: dict, aliases: dict, profile: str,
                 blocked.append({"surface": surface, "concept_id": nid,
                                 "concept_type": axis, "rule_id": "R4-SHORT-KO-TASK"})
                 continue
+            # R8 — PLAN-005 단계 7-A′(2026-09-10 · 사용자 승인). patent-text 에서 ASCII ≤2 글자 표면형은
+            # 막는다. 5-B 의 Kiwi 모드가 CR-013 이 막았던 1글자 원소기호(`W` → tungsten +2,289)를
+            # 어휘집 직접 조회로 다시 들여왔다 — 형태소 후보는 substring 경로의 길이 검사를 거치지 않는다.
+            # 적용 순서는 R6 → R4 → R8 → R7 → R5.
+            if profile == "patent-text" and is_short_ascii(surface):
+                blocked.append({"surface": surface, "concept_id": nid,
+                                "concept_type": axis, "rule_id": "R8-SHORT-ASCII"})
+                continue
             # R7 — 적용 순서는 R6 → R4 → R7 → R5 다(CR-001B §9.3).
             if (profile == "patent-text" and df_ratio is not None
                     and surface not in grandfathered
@@ -212,6 +225,10 @@ RULES = {
                            "쌍을 그 프로파일에서만 끈다. 지운 것이 아니라 blocked 로 옮긴 "
                            "것이며, 다른 프로파일과 원천(KG synonyms)·skos:altLabel 은 "
                            "움직이지 않는다. 억제는 R5 의 다의 판정 **앞**에 걸린다.",
+    "R8-SHORT-ASCII": "PLAN-005 7-A′ — patent-text 한정. 정규화 후 ASCII 만으로 된 ≤2 글자 표면형"
+                      "(원소기호 `w`·`co`·`al`·`cu` 등)은 entries 가 아니라 blocked 로 발행한다. "
+                      "Kiwi 형태소 경로가 CR-013 의 1글자 차단을 우회해 tungsten 을 +2,289 링크 "
+                      "재유입시킨 것을 막는다(계획서 §14.5). 유예 없음 · 다른 프로파일 불변.",
     "R7-DF-CEILING": "CR-001B — patent-text 한정. 표면형의 A-Box 문서빈도 비율이 "
                      f"{DF_CEILING} 을 넘으면 entries 가 아니라 blocked 로 발행한다. "
                      "문턱은 기존 사전 한글 표면형 154개의 df 90분위(0.0561)를 올린 값이며 "

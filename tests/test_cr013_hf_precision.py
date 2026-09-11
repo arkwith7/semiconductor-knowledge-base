@@ -128,9 +128,14 @@ class TestSuppressionActuallyDoesTheWork:
         off = copy.deepcopy(aliases)
         off.pop("_suppress_tier1_surface", None)
         exc = {norm(t) for t in off.get("_exceptions_short_ko_task_axis", [])}
-        entries, _ = collect(kg, off, "patent-text", exc)
+        entries, blocked = collect(kg, off, "patent-text", exc)
         pairs = {(e["surface"], e["concept_id"]) for e in entries}
-        assert SUPPRESSED <= pairs, "억제를 껐는데도 안 돌아왔다 — 다른 것이 지우고 있다"
+        # PLAN-005 7-A′(2026-09-10) — `hf` 는 ASCII 2글자라 억제와 무관하게 R8-SHORT-ASCII 가 막는다.
+        # 억제가 하던 일을 R8 이 대신하는 것이 아니라(둘은 다른 규칙), 되살아나는 것은 `high k` 뿐이다.
+        returns = {p for p in SUPPRESSED if not (p[0].isascii() and len(p[0]) <= 2)}
+        assert returns <= pairs, "억제를 껐는데도 안 돌아왔다 — 다른 것이 지우고 있다"
+        assert ("hf", "material:hf_acid") in {(b["surface"], b["concept_id"]) for b in blocked
+                                              if b["rule_id"] == "R8-SHORT-ASCII"}
         # 억제가 없으면 `high k` 는 두 개념에 걸려 다의가 된다 — 그래서 뗀 것이다.
         hk = [e for e in entries if e["surface"] == "high k"]
         assert len(hk) == 2 and all(e["ambiguous"] for e in hk)

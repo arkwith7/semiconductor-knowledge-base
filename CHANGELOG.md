@@ -27,6 +27,43 @@ All notable changes to SDKB will be documented in this file.
 
 ## [Unreleased]
 
+### Changed (2026-09-10 — PLAN-005 단계 7 개선 사이클 · 7-A′ 저-df 개념 19 노드 + R8 원소기호 규칙 · 7-B′ 초록 진단 · 사용자 승인)
+
+**결론.** 단계 7 이 확정한 병목(어휘 해상도)에 자원 쪽 레버를 하나 넣었다 — 청구항이 구별하는 저-df 개념 **19 노드**
+(StructuralElement 12 · Device 3 · Material 4 · T-Box 불변)와 patent-text 의 ASCII ≤2 표면형 차단(R8). 해상도는 올랐다:
+rej 독립항 미매핑 **24.0 → 18.6%** · 후보 중앙값 **961 → 492** · SPR∀@50 **0.031 → 0.049** · V2 (i) 유의 상승 **첫 통과**
+(L_A 대비 Δ +0.0225 · CI [0.0093, 0.0357]). 그러나 결과 전에 동결한 레버 게이트의 "적중(∞) 저하 ≤ 0.02" 에 걸려
+**레버 FAIL**(0.597 → 0.498) — R∀ 아래에서 해상도와 적중 상한이 상충한다는 실측이다. V2 는 (ii) τ 만 남기고 FAIL(KR 0.053) ·
+V3 PASS · V4 FAIL(R∀ L3 저하 0.057). 7-B′ 진단: 초록 보강은 적중∞ +0.021 뿐(`verdict_use: false`). 문턱·정의 불변.
+전문은 계획서 §17, 판정 리포트 `01.code_spec/reports/PLAN-005-stage7-verdict.md`(7-A′ 모드 재렌더).
+
+**§0 하류 — A-Box·원천이 바뀐다 (T-Box 불변).** `mappings/claim_features.parquet` `1e8b14ca…` → **`cbd73414c09d`** ·
+`sdkb-abox-priorart.ttl` `4c726e98…` → **`46271d8f35b8`**(973,363 트리플) · `sdkb-core-data.ttl` 노드 +19 · `sdkb-abox-claim-features.ttl`
+재생성. pa: 3모듈 · `sdkb-patent.ttl` · `sdkb-core.ttl` 불변. IRI 추가만.
+
+| 무엇 | 왜 | 어디 |
+|---|---|---|
+| **개념 19 노드 + 표면형 36** — floating_gate · tunnel_dielectric · charge_storage_layer · interlayer_dielectric · contact_plug · bit_line · word_line · conductive_layer · semiconductor_layer · active_region · hard_mask · device_isolation · flash_memory · nonvolatile_memory · transistor · indium · titanium · nitrogen_gas · silicide (+ `pcram` ← 상변화 · `capacitor` ← 커패시터) | 2단계 실측: 미접지 feature 47.5% 의 본체가 없는 노드(메모리 485 · 트랜지스터 182 · 비휘발 174 · 전하·터널·플로팅·층간·콘택 …) · `ko_concept_proposals` R7 통과 후보와 일치. 35 entries · `트랜지스터` 만 R7(0.0866). `parameter:voltage` 는 Parameter 축이 링커 축·featureConcept range 밖이라 제외(사용자 결정) | `scripts/add_claim_concepts_7a.py` · `make claim-concepts-7a` · KG 289 → 308 노드 |
+| **R8-SHORT-ASCII** | 5-B Kiwi 모드가 CR-013 의 1글자 차단을 우회해 `W`→tungsten +2,289 를 재유입시켰다. blocked 8(`w`·`co`·`al`·`cu`·`c4`·`fc`·`fa`·`3m`) · 효과는 접지 감소(23.95 → 24.68%)라 별도 층 L_D0 으로 귀속(+0.0003) | `scripts/build_concept_mapping.py` |
+| **재측정기 7-A′ 모드** — 사다리 L_A · L_C(커밋 `0a9344b` parquet 를 git 에서 소급 · 확장 on) · `--layer` 추가 층 · L_D(현) · 레버 게이트 L_D 대 L_C · V2 는 L_D 대 L_A · τ 불변 | 단계 7 판정 상태를 페어드 기준선으로 고정 | `scripts/report_stage7_remeasure.py` · `FROZEN["stage7a"]` |
+| **7-B′ 진단** `scripts/report_abstract_disclosure_diagnostic.py` → `priorart_abstract_diagnostic.json` | 7-B(인용문헌 초록 개시)는 대조 문헌 g1·g2 에 초록이 없어 목표 쪽만 유리한 편향 → 판정 밖 진단으로 강등(사용자 결정 A) | `make abstract-diagnostic` |
+| **계약** `tests/test_stage7a_concepts.py`(10) | 원천·멱등·충돌 거부 · 새 클래스가 pa:TechnicalConcept 바인딩 ∧ 링커 축 · R8 술어/합성/실물 8건 · 새 표면형은 entries 이거나 R7 · 레버 판정 자기일관성 · τ 불변 | — |
+
+**판정 (재현 `make stage7-remeasure` · 결과 전 동결).** 레버: 미매핑 0.1861 ✓ · median|R∀| 961 → 492(CI [−538, −290]) ✓ ·
+적중(∞) 0.5966 → 0.4981(저하 0.0986 > 0.02) **✗ → FAIL**. V2(L_D 대 L_A): (i) 0.0278 → 0.0503 · McNemar p 0.0015 ✓ · (ii) KR 0.0526 < 0.6708 ✗ ·
+(iii) 1,046 → 509 ✓. V3: §29② 층 q=294 · Δ 0.0617 · CI [0.0491, 0.0748] ✓(P2 불성립). V4: R∃ 통과 · R∀ L3 0.3342 대 0.3910 ✗.
+귀속 SPR∀@50: L_C−L_A +0.0033 · R8 +0.0003 · 노드 19 **+0.0172**. 7-B′: 제한 코퍼스 2,947 · 질의 777 · 적중∞ 0.4929 → 0.5135(CI [0.0116, 0.0309]) ·
+Disclosure 없는 인용 789 중 초록 접지 비지 않음 519(jp 452).
+
+**하지 않은 것.** R7 차단 7개 해제 · Parameter 축 편입(T-Box) · g1·g2 초록 수집 · 문턱·정의 수정 · 설계·시장 영역 확장(코퍼스에 질의 6건).
+
+**게이트.** 결정성: `make abox-claim-features && make abox-priorart` 두 번 → parquet(`cbd73414c09d`)·`abox_priorart_report.json`
+**바이트 동일**(`cmp`) · `make validate` **exit 0**(불변식 A·B·C OK — C 는 4쌍 · 개체 112 · SHACL 6블록 PASSED) · `make test`
+**426 passed · 10 skipped**(7-A′ 신규 10 · 계약 갱신 5: 사전 원장 델타 선언 · R7 유예는 R8 예외 · CR-013 억제 대 R8 · 후보 등록은
+승인 인젝터만 · 5-B 15개는 부분집합) · `make v1-ablation` **29건 · 소비 8 · 미소비 21 · pa: R-Box 미소비 4 = RETAINED · 예측
+불일치 0** · CQ 33개 10,213행 · ④ 기준선 4,306 · 바인딩 개념 166 · `make public-release && make check-public` **376 파일 · 적중 0 ·
+죽은 참조 0 ✅** · `make signature-inject` KG 289 → **308** 노드(T-Box 1,906 · OP 122 불변) · README 두 판 갱신.
+
 ### Changed (2026-09-09 — PLAN-005 단계 7 · V2–V4 재측정 · 동결 목표 대조 · `substitutableWith` 일몰 실행(7-0) · 사용자 승인)
 
 **결론.** 결과를 보기 전에 동결한 문턱(τ = 대조군 tfidf KR R@50 0.6708 · S=50 · 주 정의 R∀ · 사용자 결정 2026-09-09)과

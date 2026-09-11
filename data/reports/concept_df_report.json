@@ -135,22 +135,10 @@
   },
   "patent-text": {
     "df_denominator": 4513,
-    "concepts": 286,
-    "concepts_with_df_gt0": 159,
-    "concepts_with_df_0": 127,
+    "concepts": 305,
+    "concepts_with_df_gt0": 177,
+    "concepts_with_df_0": 128,
     "top30": [
-      [
-        "material:aluminum",
-        2212
-      ],
-      [
-        "material:tungsten",
-        1981
-      ],
-      [
-        "material:cobalt",
-        1879
-      ],
       [
         "material:sin",
         1512
@@ -174,14 +162,6 @@
       [
         "process:etch",
         1086
-      ],
-      [
-        "material:copper",
-        1044
-      ],
-      [
-        "skill:defect_analysis",
-        1024
       ],
       [
         "material:amorphous_carbon",
@@ -236,6 +216,14 @@
         366
       ],
       [
+        "structural_element:conductive_layer",
+        354
+      ],
+      [
+        "material:aluminum",
+        347
+      ],
+      [
         "structural_element:wiring",
         342
       ],
@@ -256,8 +244,20 @@
         288
       ],
       [
+        "structural_element:semiconductor_layer",
+        277
+      ],
+      [
+        "structural_element:contact_plug",
+        274
+      ],
+      [
         "subprocess:cvd",
         263
+      ],
+      [
+        "material:tungsten",
+        261
       ]
     ],
     "superordinates": [
@@ -270,7 +270,7 @@
       "process:plasma_processing"
     ],
     "depth_distribution": {
-      "0": 270,
+      "0": 289,
       "1": 16
     },
     "d20_affected_note": "D-20 — CR-013 에서 해소. 단독 'hf'(→ material:hf_acid) 와 'high k'(→ material:hfO2) 를 patent-text 에서 R6 로 끄고, 'high k' 는 상위 부류 material:dielectric 로 재지정했다. 재지정이 아니라 제거인 이유는 정규화가 대소문자를 지워 Hf/HF 가 사전 층에서 갈리지 않기 때문이다(CR-013 §3.2). 현재 df: hf_acid=26 · hfO2=57 · dielectric=1251. 주의 — 이 참조 적용기는 단어경계가 없는 부분문자열 포함이라 df 가 하류 값과 같지 않다(CR-013 §2.6 · 이번 범위 밖)."

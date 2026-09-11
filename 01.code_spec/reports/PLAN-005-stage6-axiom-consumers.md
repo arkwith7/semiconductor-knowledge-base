@@ -1,15 +1,15 @@
 # PLAN-005 단계 6-A — 공리↔소비자 대조표 (V1 절제 · 기계 산출)
 
-> 생성: `scripts/report_v1_ablation.py` · 2026-09-09 · **손으로 고치지 않는다** — `make v1-ablation` 이 다시 만든다. 정의는 스크립트 docstring, 예측은 `FROZEN` 표.
+> 생성: `scripts/report_v1_ablation.py` · 2026-09-10 · **손으로 고치지 않는다** — `make v1-ablation` 이 다시 만든다. 정의는 스크립트 docstring, 예측은 `FROZEN` 표.
 
 **결론.** 공리 29건 중 소비 **8** · 미소비 21. pa: 모듈의 R-Box 미소비: 4건. 예측 불일치: 0건.
 
 | 기준선 | 값 |
 |---|---:|
-| CQ 수 / 행 합 | 33 / 10210 |
+| CQ 수 / 행 합 | 33 / 10213 |
 | CQ32 행 (LIMIT 200) | 200 |
 | coveredBy 쌍 (술어별) | 16 {'broaderConcept': 16} |
-| 바인딩 개념 / 클래스 | 147 / 11 |
+| 바인딩 개념 / 클래스 | 166 / 11 |
 | ④ (p,u) / (p,d,u) | 4,306 / 40,024,841 |
 
 | # | 공리 | 모듈 | 종류 | 역할 | ② CQ 변화 | ③ coveredBy Δ · bound Δ | ④ (p,u) Δ | 경로 | 유량 | 예측 | 제안 | 사유 |
@@ -30,14 +30,14 @@
 | 14 | `semi:disjointWith:ont:StructuralElement→ont:Process` | semi | disjointWith | rbox | — | +0 · +0 | +0 | ✓ | — | 미소비 | 불변식 C 신설 (D3) | 현 파이프라인에 소비자 없음 → 6-B 가 배제쌍 동시 타이핑 검사를 validate 에 배선 |
 | 15 | `semi:disjointWith:ont:TechnicalEffect→ont:StructuralElement` | semi | disjointWith | rbox | — | +0 · +0 | +0 | ✓ | — | 미소비 | 불변식 C 신설 (D3) | 현 파이프라인에 소비자 없음 → 6-B 가 배제쌍 동시 타이핑 검사를 validate 에 배선 |
 | 16 | `semi:disjointWith:ont:TechnicalFunction→ont:StructuralElement` | semi | disjointWith | rbox | — | +0 · +0 | +0 | ✓ | — | 미소비 | 불변식 C 신설 (D3) | 현 파이프라인에 소비자 없음 → 6-B 가 배제쌍 동시 타이핑 검사를 validate 에 배선 |
-| 17 | `semi:subClassOf:ont:Device→pa:TechnicalConcept` | semi | subClassOf | binding-class | skip | +0 · -34 | +0 | ✓ | ✓ | 소비 | 보존 (바인딩) | 생성기 technical_concept_classes · SHACL sh:class 가 읽음 |
+| 17 | `semi:subClassOf:ont:Device→pa:TechnicalConcept` | semi | subClassOf | binding-class | skip | +0 · -37 | +0 | ✓ | ✓ | 소비 | 보존 (바인딩) | 생성기 technical_concept_classes · SHACL sh:class 가 읽음 |
 | 18 | `semi:subClassOf:ont:EquipmentClass→pa:TechnicalConcept` | semi | subClassOf | binding-class | skip | +0 · -12 | +0 | ✓ | ✓ | 소비 | 보존 (바인딩) | 생성기 technical_concept_classes · SHACL sh:class 가 읽음 |
-| 19 | `semi:subClassOf:ont:Material→pa:TechnicalConcept` | semi | subClassOf | binding-class | skip | -15 · -31 | -3945 | ✓ | ✓ | 소비 | 보존 (바인딩) | 생성기 technical_concept_classes · SHACL sh:class 가 읽음 |
+| 19 | `semi:subClassOf:ont:Material→pa:TechnicalConcept` | semi | subClassOf | binding-class | skip | -15 · -35 | -3945 | ✓ | ✓ | 소비 | 보존 (바인딩) | 생성기 technical_concept_classes · SHACL sh:class 가 읽음 |
 | 20 | `semi:subClassOf:ont:Parameter→pa:TechnicalConcept` | semi | subClassOf | binding-class | skip | +0 · -5 | +0 | ✓ | ✓ | 소비 | 보존 (바인딩) | 생성기 technical_concept_classes · SHACL sh:class 가 읽음 |
 | 21 | `semi:subClassOf:ont:Problem→pa:TechnicalConcept` | semi | subClassOf | binding-class | skip | +0 · +0 | +0 | ✓ | — | 미소비 | 보존 (바인딩 · 인스턴스 대기) | 경로 有 · core-data 인스턴스 0 이라 유량 0 |
 | 22 | `semi:subClassOf:ont:Process→pa:TechnicalConcept` | semi | subClassOf | binding-class | skip | -1 · -12 | -361 | ✓ | ✓ | 소비 | 보존 (바인딩) | 생성기 technical_concept_classes · SHACL sh:class 가 읽음 |
 | 23 | `semi:subClassOf:ont:ProcessCondition→pa:TechnicalConcept` | semi | subClassOf | binding-class | skip | +0 · +0 | +0 | ✓ | — | 미소비 | 보존 (바인딩 · 인스턴스 대기) | 경로 有 · core-data 인스턴스 0 이라 유량 0 |
-| 24 | `semi:subClassOf:ont:StructuralElement→pa:TechnicalConcept` | semi | subClassOf | binding-class | skip | +0 · -15 | +0 | ✓ | ✓ | 소비 | 보존 (바인딩) | 생성기 technical_concept_classes · SHACL sh:class 가 읽음 |
+| 24 | `semi:subClassOf:ont:StructuralElement→pa:TechnicalConcept` | semi | subClassOf | binding-class | skip | +0 · -27 | +0 | ✓ | ✓ | 소비 | 보존 (바인딩) | 생성기 technical_concept_classes · SHACL sh:class 가 읽음 |
 | 25 | `semi:subClassOf:ont:SubProcess→pa:TechnicalConcept` | semi | subClassOf | binding-class | skip | -1 · -38 | -361 | ✓ | ✓ | 소비 | 보존 (바인딩) | 생성기 technical_concept_classes · SHACL sh:class 가 읽음 |
 | 26 | `semi:subClassOf:ont:TechnicalEffect→pa:TechnicalConcept` | semi | subClassOf | binding-class | skip | +0 · +0 | +0 | ✓ | — | 미소비 | 보존 (바인딩 · 인스턴스 대기) | 경로 有 · core-data 인스턴스 0 이라 유량 0 |
 | 27 | `semi:subClassOf:ont:TechnicalFunction→pa:TechnicalConcept` | semi | subClassOf | binding-class | skip | +0 · +0 | +0 | ✓ | — | 미소비 | 보존 (바인딩 · 인스턴스 대기) | 경로 有 · core-data 인스턴스 0 이라 유량 0 |

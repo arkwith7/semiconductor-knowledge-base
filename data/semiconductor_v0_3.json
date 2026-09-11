@@ -6247,6 +6247,355 @@
         "validation_required": true,
         "note": "Structural element registered by PLAN-005 stage 5-B; the surface form was harvested from KR claim texts (CR-001B) and held back for lack of an axis."
       }
+    },
+    {
+      "id": "structural_element:floating_gate",
+      "type": "StructuralElement",
+      "canonical_name": "Floating Gate",
+      "description": "Floating gate of a charge-storage (flash) memory cell.",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Registered by PLAN-005 stage 7-A prime to raise concept-layer resolution: the surface form is frequent in KR independent claims, unmapped before, and below the R7 df ceiling where measured."
+      }
+    },
+    {
+      "id": "structural_element:tunnel_dielectric",
+      "type": "StructuralElement",
+      "canonical_name": "Tunnel Dielectric",
+      "description": "Tunnel dielectric/oxide layer through which carriers tunnel into a storage node.",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Registered by PLAN-005 stage 7-A prime to raise concept-layer resolution: the surface form is frequent in KR independent claims, unmapped before, and below the R7 df ceiling where measured."
+      }
+    },
+    {
+      "id": "structural_element:charge_storage_layer",
+      "type": "StructuralElement",
+      "canonical_name": "Charge Storage Layer",
+      "description": "Charge storage / charge trap layer of a memory cell (e.g. nitride trap layer).",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Registered by PLAN-005 stage 7-A prime to raise concept-layer resolution: the surface form is frequent in KR independent claims, unmapped before, and below the R7 df ceiling where measured."
+      }
+    },
+    {
+      "id": "structural_element:interlayer_dielectric",
+      "type": "StructuralElement",
+      "canonical_name": "Interlayer Dielectric",
+      "description": "Interlayer dielectric (ILD) separating wiring levels — a layer, distinct from the dielectric material nodes.",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Registered by PLAN-005 stage 7-A prime to raise concept-layer resolution: the surface form is frequent in KR independent claims, unmapped before, and below the R7 df ceiling where measured."
+      }
+    },
+    {
+      "id": "structural_element:contact_plug",
+      "type": "StructuralElement",
+      "canonical_name": "Contact Plug",
+      "description": "Contact / contact plug connecting a device region to wiring.",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Registered by PLAN-005 stage 7-A prime to raise concept-layer resolution: the surface form is frequent in KR independent claims, unmapped before, and below the R7 df ceiling where measured."
+      }
+    },
+    {
+      "id": "structural_element:bit_line",
+      "type": "StructuralElement",
+      "canonical_name": "Bit Line",
+      "description": "Bit line of a memory array.",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Registered by PLAN-005 stage 7-A prime to raise concept-layer resolution: the surface form is frequent in KR independent claims, unmapped before, and below the R7 df ceiling where measured."
+      }
+    },
+    {
+      "id": "structural_element:word_line",
+      "type": "StructuralElement",
+      "canonical_name": "Word Line",
+      "description": "Word line of a memory array.",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Registered by PLAN-005 stage 7-A prime to raise concept-layer resolution: the surface form is frequent in KR independent claims, unmapped before, and below the R7 df ceiling where measured."
+      }
+    },
+    {
+      "id": "structural_element:conductive_layer",
+      "type": "StructuralElement",
+      "canonical_name": "Conductive Layer",
+      "description": "Conductive film/layer as a structural layer in a claim.",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Registered by PLAN-005 stage 7-A prime to raise concept-layer resolution: the surface form is frequent in KR independent claims, unmapped before, and below the R7 df ceiling where measured."
+      }
+    },
+    {
+      "id": "structural_element:semiconductor_layer",
+      "type": "StructuralElement",
+      "canonical_name": "Semiconductor Layer",
+      "description": "Semiconductor layer (e.g. channel/body layer) as a structural layer.",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Registered by PLAN-005 stage 7-A prime to raise concept-layer resolution: the surface form is frequent in KR independent claims, unmapped before, and below the R7 df ceiling where measured."
+      }
+    },
+    {
+      "id": "structural_element:active_region",
+      "type": "StructuralElement",
+      "canonical_name": "Active Region",
+      "description": "Active region of a substrate defined by device isolation.",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Registered by PLAN-005 stage 7-A prime to raise concept-layer resolution: the surface form is frequent in KR independent claims, unmapped before, and below the R7 df ceiling where measured."
+      }
+    },
+    {
+      "id": "structural_element:hard_mask",
+      "type": "StructuralElement",
+      "canonical_name": "Hard Mask",
+      "description": "Hard mask layer as a structure — a different level from subprocess:hardmask_etch (the step).",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Registered by PLAN-005 stage 7-A prime to raise concept-layer resolution: the surface form is frequent in KR independent claims, unmapped before, and below the R7 df ceiling where measured."
+      }
+    },
+    {
+      "id": "structural_element:device_isolation",
+      "type": "StructuralElement",
+      "canonical_name": "Device Isolation",
+      "description": "Device isolation structure (e.g. STI) separating active regions.",
+      "props": {
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Registered by PLAN-005 stage 7-A prime to raise concept-layer resolution: the surface form is frequent in KR independent claims, unmapped before, and below the R7 df ceiling where measured."
+      }
+    },
+    {
+      "id": "device:flash_memory",
+      "type": "Device",
+      "canonical_name": "Flash Memory",
+      "description": "Flash memory device (superordinate of NAND/NOR flash).",
+      "props": {
+        "category": "memory",
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Registered by PLAN-005 stage 7-A prime to raise concept-layer resolution: the surface form is frequent in KR independent claims, unmapped before, and below the R7 df ceiling where measured."
+      }
+    },
+    {
+      "id": "device:nonvolatile_memory",
+      "type": "Device",
+      "canonical_name": "Non-volatile Memory",
+      "description": "Non-volatile memory device in general.",
+      "props": {
+        "category": "memory",
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Registered by PLAN-005 stage 7-A prime to raise concept-layer resolution: the surface form is frequent in KR independent claims, unmapped before, and below the R7 df ceiling where measured."
+      }
+    },
+    {
+      "id": "device:transistor",
+      "type": "Device",
+      "canonical_name": "Transistor",
+      "description": "Transistor in general — superordinate of MOSFET/FinFET/BJT nodes. R7 decides whether the surface is admitted in patent-text.",
+      "props": {
+        "category": "logic",
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Registered by PLAN-005 stage 7-A prime to raise concept-layer resolution: the surface form is frequent in KR independent claims, unmapped before, and below the R7 df ceiling where measured."
+      }
+    },
+    {
+      "id": "material:indium",
+      "type": "Material",
+      "canonical_name": "Indium",
+      "description": "Indium (In) — e.g. InGaZnO oxide semiconductors, In-based compounds.",
+      "props": {
+        "category": "metal",
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Registered by PLAN-005 stage 7-A prime to raise concept-layer resolution: the surface form is frequent in KR independent claims, unmapped before, and below the R7 df ceiling where measured."
+      }
+    },
+    {
+      "id": "material:titanium",
+      "type": "Material",
+      "canonical_name": "Titanium",
+      "description": "Titanium (Ti) metal — distinct from titanium nitride (material:tin).",
+      "props": {
+        "category": "metal",
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Registered by PLAN-005 stage 7-A prime to raise concept-layer resolution: the surface form is frequent in KR independent claims, unmapped before, and below the R7 df ceiling where measured."
+      }
+    },
+    {
+      "id": "material:nitrogen_gas",
+      "type": "Material",
+      "canonical_name": "Nitrogen Gas",
+      "description": "Nitrogen (N2) as a process/carrier gas or nitridation source.",
+      "props": {
+        "category": "gas",
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Registered by PLAN-005 stage 7-A prime to raise concept-layer resolution: the surface form is frequent in KR independent claims, unmapped before, and below the R7 df ceiling where measured."
+      }
+    },
+    {
+      "id": "material:silicide",
+      "type": "Material",
+      "canonical_name": "Silicide",
+      "description": "Metal silicide (e.g. CoSi2, NiSi, TiSi2) contact/gate material.",
+      "props": {
+        "category": "compound",
+        "lexicon_profile": "patent-text"
+      },
+      "provenance": {
+        "source": "author",
+        "reference": "PLAN-005 §17 (단계 7-A′) · 계획서 §16 판정 · CR-001B data/reports/ko_concept_proposals.json proposals · 단계 7-A′ 2단계 미접지 명사 실측",
+        "license": "CDLA-Permissive-2.0",
+        "modified": false,
+        "interpretation": "author-defined",
+        "validation_required": true,
+        "note": "Registered by PLAN-005 stage 7-A prime to raise concept-layer resolution: the surface form is frequent in KR independent claims, unmapped before, and below the R7 df ceiling where measured."
+      }
     }
   ],
   "edges": [
@@ -11753,6 +12102,258 @@
       "lang": "ko",
       "term_type": "synonym",
       "source": "ko_concept_proposals.basic_terms"
+    },
+    {
+      "node_id": "structural_element:floating_gate",
+      "term": "플로팅 게이트",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "PLAN-005 stage 7-A prime (ko_concept_proposals.proposals / unmapped-noun census)"
+    },
+    {
+      "node_id": "structural_element:tunnel_dielectric",
+      "term": "터널 절연막",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "PLAN-005 stage 7-A prime (ko_concept_proposals.proposals / unmapped-noun census)"
+    },
+    {
+      "node_id": "structural_element:tunnel_dielectric",
+      "term": "터널 산화막",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "PLAN-005 stage 7-A prime (ko_concept_proposals.proposals / unmapped-noun census)"
+    },
+    {
+      "node_id": "structural_element:tunnel_dielectric",
+      "term": "터널 유전막",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "PLAN-005 stage 7-A prime (ko_concept_proposals.proposals / unmapped-noun census)"
+    },
+    {
+      "node_id": "structural_element:charge_storage_layer",
+      "term": "전하 저장층",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "PLAN-005 stage 7-A prime (ko_concept_proposals.proposals / unmapped-noun census)"
+    },
+    {
+      "node_id": "structural_element:charge_storage_layer",
+      "term": "전하 트랩층",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "PLAN-005 stage 7-A prime (ko_concept_proposals.proposals / unmapped-noun census)"
+    },
+    {
+      "node_id": "structural_element:charge_storage_layer",
+      "term": "전하 축적층",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "PLAN-005 stage 7-A prime (ko_concept_proposals.proposals / unmapped-noun census)"
+    },
+    {
+      "node_id": "structural_element:interlayer_dielectric",
+      "term": "층간 절연막",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "PLAN-005 stage 7-A prime (ko_concept_proposals.proposals / unmapped-noun census)"
+    },
+    {
+      "node_id": "structural_element:interlayer_dielectric",
+      "term": "층간절연막",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "PLAN-005 stage 7-A prime (ko_concept_proposals.proposals / unmapped-noun census)"
+    },
+    {
+      "node_id": "structural_element:contact_plug",
+      "term": "콘택",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "PLAN-005 stage 7-A prime (ko_concept_proposals.proposals / unmapped-noun census)"
+    },
+    {
+      "node_id": "structural_element:contact_plug",
+      "term": "콘택 플러그",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "PLAN-005 stage 7-A prime (ko_concept_proposals.proposals / unmapped-noun census)"
+    },
+    {
+      "node_id": "structural_element:bit_line",
+      "term": "비트라인",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "PLAN-005 stage 7-A prime (ko_concept_proposals.proposals / unmapped-noun census)"
+    },
+    {
+      "node_id": "structural_element:bit_line",
+      "term": "비트 라인",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "PLAN-005 stage 7-A prime (ko_concept_proposals.proposals / unmapped-noun census)"
+    },
+    {
+      "node_id": "structural_element:word_line",
+      "term": "워드라인",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "PLAN-005 stage 7-A prime (ko_concept_proposals.proposals / unmapped-noun census)"
+    },
+    {
+      "node_id": "structural_element:word_line",
+      "term": "워드 라인",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "PLAN-005 stage 7-A prime (ko_concept_proposals.proposals / unmapped-noun census)"
+    },
+    {
+      "node_id": "structural_element:conductive_layer",
+      "term": "도전막",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "PLAN-005 stage 7-A prime (ko_concept_proposals.proposals / unmapped-noun census)"
+    },
+    {
+      "node_id": "structural_element:conductive_layer",
+      "term": "도전층",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "PLAN-005 stage 7-A prime (ko_concept_proposals.proposals / unmapped-noun census)"
+    },
+    {
+      "node_id": "structural_element:semiconductor_layer",
+      "term": "반도체층",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "PLAN-005 stage 7-A prime (ko_concept_proposals.proposals / unmapped-noun census)"
+    },
+    {
+      "node_id": "structural_element:active_region",
+      "term": "활성 영역",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "PLAN-005 stage 7-A prime (ko_concept_proposals.proposals / unmapped-noun census)"
+    },
+    {
+      "node_id": "structural_element:active_region",
+      "term": "활성영역",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "PLAN-005 stage 7-A prime (ko_concept_proposals.proposals / unmapped-noun census)"
+    },
+    {
+      "node_id": "structural_element:hard_mask",
+      "term": "하드마스크",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "PLAN-005 stage 7-A prime (ko_concept_proposals.proposals / unmapped-noun census)"
+    },
+    {
+      "node_id": "structural_element:hard_mask",
+      "term": "하드 마스크",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "PLAN-005 stage 7-A prime (ko_concept_proposals.proposals / unmapped-noun census)"
+    },
+    {
+      "node_id": "structural_element:device_isolation",
+      "term": "소자분리",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "PLAN-005 stage 7-A prime (ko_concept_proposals.proposals / unmapped-noun census)"
+    },
+    {
+      "node_id": "structural_element:device_isolation",
+      "term": "소자 분리",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "PLAN-005 stage 7-A prime (ko_concept_proposals.proposals / unmapped-noun census)"
+    },
+    {
+      "node_id": "device:flash_memory",
+      "term": "플래시 메모리",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "PLAN-005 stage 7-A prime (ko_concept_proposals.proposals / unmapped-noun census)"
+    },
+    {
+      "node_id": "device:flash_memory",
+      "term": "플래시메모리",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "PLAN-005 stage 7-A prime (ko_concept_proposals.proposals / unmapped-noun census)"
+    },
+    {
+      "node_id": "device:nonvolatile_memory",
+      "term": "비휘발성 메모리",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "PLAN-005 stage 7-A prime (ko_concept_proposals.proposals / unmapped-noun census)"
+    },
+    {
+      "node_id": "device:nonvolatile_memory",
+      "term": "불휘발성 메모리",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "PLAN-005 stage 7-A prime (ko_concept_proposals.proposals / unmapped-noun census)"
+    },
+    {
+      "node_id": "device:nonvolatile_memory",
+      "term": "비휘발성 기억",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "PLAN-005 stage 7-A prime (ko_concept_proposals.proposals / unmapped-noun census)"
+    },
+    {
+      "node_id": "device:transistor",
+      "term": "트랜지스터",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "PLAN-005 stage 7-A prime (ko_concept_proposals.proposals / unmapped-noun census)"
+    },
+    {
+      "node_id": "material:indium",
+      "term": "인듐",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "PLAN-005 stage 7-A prime (ko_concept_proposals.proposals / unmapped-noun census)"
+    },
+    {
+      "node_id": "material:titanium",
+      "term": "티타늄",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "PLAN-005 stage 7-A prime (ko_concept_proposals.proposals / unmapped-noun census)"
+    },
+    {
+      "node_id": "material:nitrogen_gas",
+      "term": "질소",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "PLAN-005 stage 7-A prime (ko_concept_proposals.proposals / unmapped-noun census)"
+    },
+    {
+      "node_id": "material:silicide",
+      "term": "실리사이드",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "PLAN-005 stage 7-A prime (ko_concept_proposals.proposals / unmapped-noun census)"
+    },
+    {
+      "node_id": "device:pcram",
+      "term": "상변화",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "PLAN-005 stage 7-A prime (ko_concept_proposals.proposals / unmapped-noun census)"
+    },
+    {
+      "node_id": "structural_element:capacitor",
+      "term": "커패시터",
+      "lang": "ko",
+      "term_type": "synonym",
+      "source": "PLAN-005 stage 7-A prime (ko_concept_proposals.proposals / unmapped-noun census)"
     }
   ],
   "cases": [

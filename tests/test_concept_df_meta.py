@@ -160,8 +160,52 @@ BASELINE_COMMIT = "39855bb46c95897f401986caa18e1c423c8e63c6"  # CR-008·CR-009 �
 #   CR-001B — 한국어 한정요소 표면형 14 추가(patent-text 전용 · expert-tag 불변) ·
 #             R7-DF-CEILING 신설로 `온도` 차단. **구조 요소는 담을 축이 없어 등재하지
 #             않았다** — 제안 목록으로 나갔다(data/reports/ko_concept_proposals.json).
-DECLARED_REMOVED = {"patent-text": {("hf", "material:hf_acid"), ("high k", "material:hfO2")}}
-DECLARED_ADDED = {"patent-text": {
+DECLARED_REMOVED = {"patent-text": {
+    ("hf", "material:hf_acid"), ("high k", "material:hfO2"),
+    # PLAN-005 7-A′(2026-09-10) — R8-SHORT-ASCII: patent-text 의 ASCII ≤2 표면형 8건이 entries 에서 blocked 로.
+    ("3m", "organization:3m_innovative_properties_company"), ("al", "material:aluminum"),
+    ("c4", "device:flip_chip"), ("co", "material:cobalt"), ("cu", "material:copper"),
+    ("fa", "skill:defect_analysis"), ("fc", "device:flip_chip"), ("w", "material:tungsten"),
+}}
+# PLAN-005 7-A′ — 기존 노드 `device:pcram` 에 보탠 한글 표면형은 프로파일 제한이 없는 노드라 expert-tag 에도 나타난다.
+_ADDED_7A_KO_EXISTING = {("상변화", "device:pcram")}
+DECLARED_ADDED = {"expert-tag": set(_ADDED_7A_KO_EXISTING), "patent-text": {
+    # PLAN-005 7-A′(2026-09-10 · 사용자 승인) — 저-df 개념 19 노드(StructuralElement 12 · Device 3 · Material 4 ·
+    # patent-text 전용) + 기존 노드 표면형 2. 아래는 `make concept-mapping` 출력에서 옮겨 적은 것이다.
+    # `트랜지스터` 는 R7(0.0866)에 걸려 BLOCKED_ADDED 로 갔고 영문 `transistor` 만 entries 다.
+    *_ADDED_7A_KO_EXISTING, ("커패시터", "structural_element:capacitor"),
+    ("active region", "structural_element:active_region"), ("활성 영역", "structural_element:active_region"),
+    ("활성영역", "structural_element:active_region"),
+    ("bit line", "structural_element:bit_line"), ("비트 라인", "structural_element:bit_line"),
+    ("비트라인", "structural_element:bit_line"),
+    ("charge storage layer", "structural_element:charge_storage_layer"),
+    ("전하 저장층", "structural_element:charge_storage_layer"), ("전하 축적층", "structural_element:charge_storage_layer"),
+    ("전하 트랩층", "structural_element:charge_storage_layer"),
+    ("conductive layer", "structural_element:conductive_layer"), ("도전막", "structural_element:conductive_layer"),
+    ("도전층", "structural_element:conductive_layer"),
+    ("contact plug", "structural_element:contact_plug"), ("콘택", "structural_element:contact_plug"),
+    ("콘택 플러그", "structural_element:contact_plug"),
+    ("device isolation", "structural_element:device_isolation"), ("소자 분리", "structural_element:device_isolation"),
+    ("소자분리", "structural_element:device_isolation"),
+    ("floating gate", "structural_element:floating_gate"), ("플로팅 게이트", "structural_element:floating_gate"),
+    ("hard mask", "structural_element:hard_mask"), ("하드 마스크", "structural_element:hard_mask"),
+    ("하드마스크", "structural_element:hard_mask"),
+    ("interlayer dielectric", "structural_element:interlayer_dielectric"),
+    ("층간 절연막", "structural_element:interlayer_dielectric"), ("층간절연막", "structural_element:interlayer_dielectric"),
+    ("semiconductor layer", "structural_element:semiconductor_layer"), ("반도체층", "structural_element:semiconductor_layer"),
+    ("tunnel dielectric", "structural_element:tunnel_dielectric"), ("터널 산화막", "structural_element:tunnel_dielectric"),
+    ("터널 유전막", "structural_element:tunnel_dielectric"), ("터널 절연막", "structural_element:tunnel_dielectric"),
+    ("word line", "structural_element:word_line"), ("워드 라인", "structural_element:word_line"),
+    ("워드라인", "structural_element:word_line"),
+    ("flash memory", "device:flash_memory"), ("플래시 메모리", "device:flash_memory"), ("플래시메모리", "device:flash_memory"),
+    ("non volatile memory", "device:nonvolatile_memory"), ("nonvolatile memory", "device:nonvolatile_memory"),
+    ("불휘발성 메모리", "device:nonvolatile_memory"), ("비휘발성 기억", "device:nonvolatile_memory"),
+    ("비휘발성 메모리", "device:nonvolatile_memory"),
+    ("transistor", "device:transistor"),
+    ("indium", "material:indium"), ("인듐", "material:indium"),
+    ("titanium", "material:titanium"), ("티타늄", "material:titanium"),
+    ("nitrogen gas", "material:nitrogen_gas"), ("질소", "material:nitrogen_gas"),
+    ("silicide", "material:silicide"), ("실리사이드", "material:silicide"),
     ("high k", "material:dielectric"),
     ("절연층", "material:dielectric"), ("유전체", "material:dielectric"),
     ("유전체막", "material:dielectric"), ("유전막", "material:dielectric"),
@@ -200,8 +244,13 @@ DECLARED_BLOCKED_ADDED = {"patent-text": {
     ("소스", "structural_element:source"), ("source", "structural_element:source"),
     ("드레인", "structural_element:drain"),
     ("채널", "structural_element:channel"),
+    # PLAN-005 7-A′ — R8-SHORT-ASCII 8건(entries 에서 옮겨짐 · DECLARED_REMOVED 와 짝) + 신규 `트랜지스터` R7(0.0866).
+    ("3m", "organization:3m_innovative_properties_company"), ("al", "material:aluminum"),
+    ("c4", "device:flip_chip"), ("co", "material:cobalt"), ("cu", "material:copper"),
+    ("fa", "skill:defect_analysis"), ("fc", "device:flip_chip"), ("w", "material:tungsten"),
+    ("트랜지스터", "device:transistor"),
 }}
-DECLARED_NEW_RULES = {"R6-SURFACE-SUPPRESS", "R7-DF-CEILING"}
+DECLARED_NEW_RULES = {"R6-SURFACE-SUPPRESS", "R7-DF-CEILING", "R8-SHORT-ASCII"}
 
 _DECLARE_HINT = (
     "\n→ 자산을 바꾼 CR 이 있다면 이 파일의 DECLARED_REMOVED/DECLARED_ADDED 에 델타를 "
