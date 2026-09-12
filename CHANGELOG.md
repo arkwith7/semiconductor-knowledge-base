@@ -27,6 +27,40 @@ All notable changes to SDKB will be documented in this file.
 
 ## [Unreleased]
 
+### Added (2026-09-11 — PLAN-005 단계 8 · V6b US 종이 이식 · 사용자 승인)
+
+**결론.** `pa:` core 가 **0줄 바뀌지 않은 채로** US 관할 바인딩 `ontology/sdkb-priorart-us.ttl`(27 트리플)이
+들어갔다. 판정 **PASS(①–⑤ 전부)** — L1 변경 라인수 **0**(core·semi·kr sha256 셋 다 동결값 그대로) · 교차 오염 0 ·
+SHACL 위반 0 에 US 타깃 non-vacuous(LegalGround 2 · 문서종 2) · **CQ 33개 행 수 벡터가 US 유/무에서 완전히 동일**.
+단계 4 의 `build_kr()` 주석이 적어 둔 약속(*"US 이식은 이 파일에 대응하는 모듈만 새로 쓰며 core 는 0줄 바뀐다"*)의
+실행이며, 이로써 §9-8 의 절반이 닫힌다. **US 회수 성능은 재지 않았고 재지 않는다**(계획서 §7-8).
+전문은 계획서 §19, 판정 리포트 `01.code_spec/reports/PLAN-005-stage8-us-paper-port.md`(기계 렌더).
+
+**§0 하류 — 기존 파일은 하나도 바뀌지 않는다.** `sdkb-priorart-{core,semi,kr}.ttl` · `sdkb-patent.ttl` ·
+`sdkb-core.ttl` · A-Box 전부 **sha 불변** · IRI·의미 변경 **0**. 새로 생기는 것은 us 모듈 하나이고 `ontology/` 는
+공개 허용목록이라 `sdkb-dataset` 에 따라간다. 하류 `vendor.py:VENDOR_FILES`·`baseline.py:BASELINE_PARTS` **편입은
+하류의 선택**이다 — US 바인딩은 KR 코호트 실험에 쓰이지 않으므로 넣지 않아도 스냅샷이 깨지지 않는다.
+
+| 무엇 | 왜 | 어디 |
+|---|---|---|
+| **`sdkb-priorart-us.ttl`** — `paus:Ground_102`(`USPTO-102`) · `paus:Ground_103`(`USPTO-103`) · `paus:NonFinalOfficeAction`(→`pa:FirstAction`) · `paus:FinalOfficeAction`(→`pa:FinalAction`) · 전부 `pa:underJurisdiction gov:JurisdictionUS` | 관할 슬롯이 실제로 작동하는가를 **써서** 보인다. `gov:JurisdictionUS` 는 `sdkb-governance.ttl:35` 에 이미 있어 관할 개체를 발명하지 않았다 | `scripts/build_priorart_modules.py:build_us()` · `make priorart` (4 모듈) |
+| **`MODIFIED_US` 분리** | 3모듈 공유 상수 `MODIFIED` 를 US 가 쓰면 core sha 가 바뀌어 *"L1 0줄"* 을 이 커밋 스스로 깨뜨린다. 테스트가 둘이 다름을 고정 | 〃 |
+| **`SDKB_PA_US` · 접두 `paus`** | 네임스페이스는 `config/` 에서만 정한다. 불변식 A 의 `JURIS_HINT` 는 이미 `pa/us/` 를 관할로 알고 있었다 | `config/namespaces.py` |
+| **단계 8 리포트** `scripts/report_stage8_paper_port.py` → `data/reports/priorart_stage8_paper_port.json` + 판정 MD | ①L1 sha 대조(다르면 `git diff --numstat` 로 줄 수를 세어 **그 값을 적는다**) ②us 프로파일 ③교차 오염 ④SHACL non-vacuous ⑤CQ 2회 실행. ⑤ 의 기준선을 커밋된 `cq_report.json` 에서 읽지 않는다 — 그 파일은 6-B 시점(`7738d97`)이라 현 A-Box 와 맞지 않는다 | `make stage8-paper-port` |
+| **소비자 편입** | us 모듈을 읽는 자리 넷: `make validate` ③ · `run_cq.py:DEFAULT_DATA` · `report_v1_ablation.py:MODULES` · 서명 `TBOX_MODULES` | Makefile · 세 스크립트 |
+| **계약** `tests/test_priorart_modules.py`(+7) | US 대칭(개체·역할·관할·import core 만) · 발행일 분리 · 교차 오염(**무는지** 포함) · core 주입 `pa/us/`·`gov:JurisdictionUS` 거부 · 리포트 L1 0줄·결정성 | — |
+
+**넣지 않은 것 — 비대칭은 원천의 비대칭이다.** US 판정 어휘(KSR/TSM · inherency): 원천이 저장소에 없다(§1-4).
+KR 근거와의 `skos:exactMatch`: §29① 은 유예기간이 §102 와 다르고 §29② 는 §103 KSR 과 같은 판단이 아니며 읽는
+소비자도 없다(§7-6). `sdkb-patent.ttl` import · 클래스·술어 선언: 관할 바인딩은 개체만 넣는다.
+
+**게이트.** `make priorart --check` **OK(4 모듈)** · `make validate` **exit 0**(SHACL 6블록 PASSED · 불변식 A·B·C OK ·
+priorart 블록 타깃이 LegalGround 2→**4** · 문서종 2→**4** 로 늘어 US 개체가 KR 과 같은 계약을 지킴을 독립으로 보인다) ·
+`make test` **433 passed · 10 skipped** · `make check-public` **377 자산 · 적중 0 · 죽은 참조 0 ✅** ·
+`make signature-inject` T-Box 1,906 → **1,933**(us +27 · 명명 클래스 102 · OP 122 · DP 94 불변) ·
+`make v1-ablation` **29건 · 소비 8 · 미소비 21 · pa: R-Box 미소비 4 = RETAINED · 예측 불일치 0**(US 는 R-Box·바인딩 0 이라
+열거를 바꾸지 않는다) · `cq_report.json` 변동 **0** · 결정성 리포트 2회 실행 **바이트 동일**(`cmp`).
+
 ### Changed (2026-09-10 — PLAN-005 단계 7 개선 사이클 · 7-A′ 저-df 개념 19 노드 + R8 원소기호 규칙 · 7-B′ 초록 진단 · 사용자 승인)
 
 **결론.** 단계 7 이 확정한 병목(어휘 해상도)에 자원 쪽 레버를 하나 넣었다 — 청구항이 구별하는 저-df 개념 **19 노드**

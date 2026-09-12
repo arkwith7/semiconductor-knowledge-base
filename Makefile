@@ -21,7 +21,7 @@ help:
 	@echo "  install         Install package into the active env with dev+priorart+notebook extras"
 	@echo "  parse           Baseline JSON → schema_report + parquet"
 	@echo "  owl             Build sdkb-core.ttl ontology"
-	@echo "  priorart        Build sdkb-priorart-{core,semi,kr}.ttl (PLAN-005 단계 4)"
+	@echo "  priorart        Build sdkb-priorart-{core,semi,kr,us}.ttl (PLAN-005 단계 4 · 8)"
 	@echo "  convert         JSON → RDF/JSON-LD"
 	@echo "  align           Generate mapping candidates"
 	@echo "  validate        SHACL validation"
@@ -98,6 +98,14 @@ priorart:
 # 산출 TTL 은 gitignore — DENY 된 notice parquet 의 파생을 담는다.
 abox-priorart: priorart
 	$(PYTHON) scripts/build_abox_priorart.py
+
+# ── PLAN-005 단계 8 · V6b US 종이 이식 리포트 ─────────────────────
+# core·semi·kr 의 sha256 을 동결값과 대조해 L1 변경 라인수를 세고(0 이 판정), us 모듈의
+# SHACL·교차 오염·CQ 행 수 불변(US 유/무 2회 · ≈6분)을 기계로 렌더한다. A-Box 가 없으면 짓는다.
+stage8-paper-port: priorart
+	@test -f ontology/sdkb-abox-priorart.ttl || $(MAKE) PYTHON=$(PYTHON) abox-priorart
+	$(PYTHON) scripts/report_stage8_paper_port.py \
+		--markdown 01.code_spec/reports/PLAN-005-stage8-us-paper-port.md
 
 convert:
 	$(PYTHON) scripts/convert_rdf.py
@@ -328,7 +336,8 @@ validate:
 	$(PYTHON) scripts/validate_shacl.py --shapes validation/shapes_priorart.ttl \
 		--owl ontology/sdkb-priorart-core.ttl --inference none \
 		--data ontology/sdkb-priorart-core.ttl ontology/sdkb-priorart-semi.ttl \
-		       ontology/sdkb-priorart-kr.ttl ontology/sdkb-patent.ttl ontology/sdkb-governance.ttl \
+		       ontology/sdkb-priorart-kr.ttl ontology/sdkb-priorart-us.ttl \
+		       ontology/sdkb-patent.ttl ontology/sdkb-governance.ttl \
 		       ontology/sdkb-core-data.ttl ontology/sdkb-abox-priorart.ttl
 
 test:

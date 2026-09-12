@@ -110,6 +110,17 @@
       "terms": 0,
       "documented": 0,
       "triples": 40
+    },
+    {
+      "module": "sdkb-priorart-us",
+      "status": "built",
+      "classes_named": 0,
+      "classes_blank": 0,
+      "object_properties": 0,
+      "datatype_properties": 0,
+      "terms": 0,
+      "documented": 0,
+      "triples": 27
     }
   ],
   "tbox_total": {
@@ -119,7 +130,7 @@
     "datatype_properties": 94,
     "terms": 318,
     "documented": 318,
-    "triples": 1906
+    "triples": 1933
   },
   "curation_source": {
     "status": "built",

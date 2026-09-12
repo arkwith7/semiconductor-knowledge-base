@@ -48,11 +48,11 @@ from rdflib.namespace import RDF, RDFS, OWL, SKOS
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from config.namespaces import SDKB_ONT, SDKB_PA, SDKB_PA_KR  # noqa: E402
+from config.namespaces import SDKB_ONT, SDKB_PA, SDKB_PA_KR, SDKB_PA_US  # noqa: E402
 from scripts import build_abox_priorart as gen  # noqa: E402
 from scripts.run_cq import DEFAULT_DATA, CQ_DIR, parse_cq, load_graph, run as run_cqs  # noqa: E402
 
-ONT, PA, PAKR = str(SDKB_ONT), str(SDKB_PA), str(SDKB_PA_KR)
+ONT, PA, PAKR, PAUS = str(SDKB_ONT), str(SDKB_PA), str(SDKB_PA_KR), str(SDKB_PA_US)
 ONT_DIR = ROOT / "ontology"
 OUT = ROOT / "data" / "reports" / "priorart_v1_ablation.json"
 ABOX = ONT_DIR / "sdkb-abox-priorart.ttl"
@@ -65,6 +65,8 @@ MODULES = {
     "sdkb-foresight.ttl": "legacy", "sdkb-rbv.ttl": "legacy", "sdkb-governance.ttl": "legacy",
     "sdkb-governance-kr.ttl": "legacy",
     "sdkb-priorart-core.ttl": "core", "sdkb-priorart-semi.ttl": "semi", "sdkb-priorart-kr.ttl": "kr",
+    # 단계 8 — US 관할 바인딩. R-Box·바인딩 공리 0 이라 열거(FROZEN 29건)는 불변이어야 한다.
+    "sdkb-priorart-us.ttl": "us",
 }
 TYPE_KINDS = {
     OWL.TransitiveProperty: "TransitiveProperty", OWL.SymmetricProperty: "SymmetricProperty",
@@ -77,7 +79,7 @@ PRED_KINDS = {
     OWL.propertyChainAxiom: "propertyChainAxiom", OWL.disjointWith: "disjointWith",
     OWL.differentFrom: "differentFrom", OWL.hasKey: "hasKey",
 }
-PREFIXES = {ONT: "ont", PA: "pa", PAKR: "pa/kr", str(SKOS): "skos"}
+PREFIXES = {ONT: "ont", PA: "pa", PAKR: "pa/kr", PAUS: "pa/us", str(SKOS): "skos"}
 
 
 def curie(t) -> str:
@@ -92,7 +94,7 @@ def curie(t) -> str:
 
 def _ns(t) -> str | None:
     s = str(t)
-    for ns in (PAKR, PA, ONT):           # pa/kr 가 pa 보다 길어 먼저 본다
+    for ns in (PAKR, PAUS, PA, ONT):     # pa/kr · pa/us 가 pa 보다 길어 먼저 본다
         if s.startswith(ns):
             return ns
     return None

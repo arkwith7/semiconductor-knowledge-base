@@ -7,6 +7,8 @@
   ② 불변식 A    — core 에 도메인·관할 IRI 를 주입하면 **죽는가**
   ③ 불변식 B    — 태스크 질의 필수부의 행정 어휘를 **잡는가** · OPTIONAL 은 통과시키는가
   ④ 접지 계약   — 심사관 구성요소는 캡션 청구항으로만 접지된다(단계 4 승인 결정 1)
+  ⑤ 단계 8 V6b  — US 관할 바인딩이 kr 과 대칭이고, core·semi·kr 은 바이트 하나 안 바뀌었으며,
+                  관할 바인딩 둘이 서로도 도메인도 모른다(2026-09-11)
 """
 from __future__ import annotations
 
@@ -32,6 +34,7 @@ ONT_DIR = ROOT / "ontology"
 CORE = ONT_DIR / "sdkb-priorart-core.ttl"
 SEMI = ONT_DIR / "sdkb-priorart-semi.ttl"
 KR = ONT_DIR / "sdkb-priorart-kr.ttl"
+US = ONT_DIR / "sdkb-priorart-us.ttl"
 
 
 # ── ① 결정성 ────────────────────────────────────────────────────────
@@ -64,6 +67,8 @@ def test_core_is_clean():
     (ONT + "Process", "도메인"),
     ("https://w3id.org/sdkb/gov/JurisdictionKR", "관할"),
     ("https://w3id.org/sdkb/pa/kr/Ground_29_1", "관할"),
+    ("https://w3id.org/sdkb/pa/us/Ground_102", "관할(US · 단계 8)"),
+    ("https://w3id.org/sdkb/gov/JurisdictionUS", "관할(US)"),
     ("http://w3id.org/SemicONTO/Etching", "도메인(외부)"),
 ])
 def test_core_purity_gate_rejects_injected_iri(tmp_path, iri, why):
@@ -105,7 +110,7 @@ def test_covered_by_is_not_transitive():
 def test_unconsumed_inverse_and_different_from_axioms_are_gone():
     """6-B — 절제로 소비자가 없음이 확인된 역술어 셋·differentFrom 은 선언까지 없다."""
     g = Graph()
-    for p in (CORE, SEMI, KR):
+    for p in (CORE, SEMI, KR, US):
         g.parse(p, format="turtle")
     assert not list(g.triples((None, OWL.inverseOf, None)))
     assert not list(g.triples((None, OWL.differentFrom, None)))
@@ -145,7 +150,7 @@ def test_disjointness_gate_rejects_individual_typed_on_both_sides(tmp_path):
 
 def test_imports_flow_one_way_and_existing_files_untouched():
     """결합은 신규 → 기존 방향뿐이다. 역방향이면 하류가 핀한 sha256 이 깨진다(§0)."""
-    for f in (SEMI, KR):
+    for f in (SEMI, KR, US):
         g = Graph(); g.parse(f, format="turtle")
         imports = {str(o) for o in g.objects(None, OWL.imports)}
         assert "https://w3id.org/sdkb/pa" in imports
@@ -260,11 +265,79 @@ def test_shape_rejects_examiner_element_without_claim():
 
 def test_shipped_modules_conform_to_their_own_shapes():
     g = Graph()
-    for f in (CORE, SEMI, KR):
+    for f in (CORE, SEMI, KR, US):
         g.parse(f, format="turtle")
     g.parse(ONT_DIR / "sdkb-governance.ttl", format="turtle")
     conforms, text = _shacl(g)
     assert conforms, text
+
+
+# ── ⑤ 단계 8 · V6b US 종이 이식 ─────────────────────────────────────
+GOV = "https://w3id.org/sdkb/gov/"
+PAUS = "https://w3id.org/sdkb/pa/us/"
+
+
+def test_us_binding_is_kr_symmetric_and_shape_conformant():
+    """kr 과 같은 슬롯을 같은 방식으로 채운다 — LegalGround 2 · 문서종 2 · 관할 표기 · import 는 core 만."""
+    us = Graph(); us.parse(US, format="turtle")
+    grounds = sorted(us.subjects(RDF.type, URIRef(PA + "LegalGround")))
+    assert [str(s) for s in grounds] == [PAUS + "Ground_102", PAUS + "Ground_103"]
+    for s in grounds:
+        assert list(us.objects(s, URIRef("http://www.w3.org/2004/02/skos/core#notation")))
+        assert (s, URIRef(PA + "underJurisdiction"), URIRef(GOV + "JurisdictionUS")) in us
+    docs = sorted(us.subjects(RDF.type, URIRef(PA + "ExaminationDocumentType")))
+    assert [str(s) for s in docs] == [PAUS + "FinalOfficeAction", PAUS + "NonFinalOfficeAction"]
+    roles = {str(s).split("/")[-1]: str(next(us.objects(s, URIRef(PA + "documentRole")))) for s in docs}
+    assert roles == {"NonFinalOfficeAction": PA + "FirstAction", "FinalOfficeAction": PA + "FinalAction"}
+    for s in docs:
+        assert (s, URIRef(PA + "underJurisdiction"), URIRef(GOV + "JurisdictionUS")) in us
+    # import 는 core 만 — kr 이 sdkb-patent.ttl 을 끄는 이유(exactMatch)가 US 에는 없다.
+    assert {str(o) for o in us.objects(None, OWL.imports)} == {"https://w3id.org/sdkb/pa"}
+    # 넣지 않은 것: 판정 어휘(원천 없음 · §1-4) · exactMatch(§7-6) · 클래스·술어 선언(바인딩은 개체만).
+    assert not list(us.subjects(RDF.type, URIRef(PA + "ElementVerdict")))
+    assert not list(us.triples((None, URIRef("http://www.w3.org/2004/02/skos/core#exactMatch"), None)))
+    assert not list(us.subjects(RDF.type, OWL.Class))
+    assert not list(us.subjects(RDF.type, OWL.ObjectProperty))
+    # shape 계약 — us 단독(core + governance)으로도 conforms.
+    g = Graph()
+    for f in (CORE, US, ONT_DIR / "sdkb-governance.ttl"):
+        g.parse(f, format="turtle")
+    conforms, text = _shacl(g)
+    assert conforms, text
+
+
+def test_us_module_has_its_own_modified_date():
+    """공유 상수 MODIFIED 를 올리면 core 의 sha 가 바뀌어 '0줄' 판정이 자기모순이 된다."""
+    from scripts import build_priorart_modules as m
+    assert m.MODIFIED_US != m.MODIFIED
+    assert f'"{m.MODIFIED_US}"^^xsd:date' in US.read_text(encoding="utf-8")
+    assert f'"{m.MODIFIED}"^^xsd:date' in CORE.read_text(encoding="utf-8")
+
+
+def test_jurisdiction_modules_do_not_know_each_other_or_the_domain(tmp_path):
+    """관할 바인딩이 도메인이나 타관할을 알면 슬롯이 아니라 열거다 — 그리고 검사가 무는가."""
+    from scripts.report_stage8_paper_port import cross_contamination
+    assert cross_contamination() == {"us_knows_domain": 0, "us_knows_kr": 0, "kr_knows_us": 0, "clean": True}
+    bad = tmp_path / "us_bad.ttl"
+    bad.write_text(US.read_text(encoding="utf-8")
+                   + f"\n<{PAUS}Ground_102> <{RDFS.seeAlso}> <{ONT}Process> .\n", encoding="utf-8")
+    assert not cross_contamination(us=bad)["clean"]
+    bad.write_text(US.read_text(encoding="utf-8")
+                   + f"\n<{PAUS}Ground_102> <{RDFS.seeAlso}> <https://w3id.org/sdkb/pa/kr/Ground_29_1> .\n",
+                   encoding="utf-8")
+    assert not cross_contamination(us=bad)["clean"]
+
+
+def test_stage8_report_l1_unchanged_and_deterministic():
+    """V6b 의 판정량 — core·semi·kr 이 동결 sha 그대로다(L1 변경 0줄). 리포트는 두 번 렌더가 같다.
+    이 검사가 실패하는 커밋은 L1 을 바꾼 커밋이며, FROZEN 갱신과 줄 수 보고를 같은 커밋에서 한다(§9-8)."""
+    from scripts.report_stage8_paper_port import build_report, render_markdown
+    rep = build_report(skip_cq=True)
+    assert rep["l1"]["all_unchanged"] and rep["l1"]["changed_lines_total"] == 0, rep["l1"]
+    assert rep["shacl"]["conforms"] and rep["shacl"]["non_vacuous"]
+    assert rep["cross"]["clean"]
+    assert rep["verdict"] == "PASS" and rep["cq"] == {"skipped": True}
+    assert render_markdown(rep) == render_markdown(build_report(skip_cq=True))
 
 
 def test_kr_module_carries_the_jurisdiction_specific_doctrine():

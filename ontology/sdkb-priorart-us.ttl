@@ -1,0 +1,58 @@
+# ═══════════════════════════════════════════════════════════════════
+# SDKB Prior-Art — US 관할 바인딩 (paus: → pa:) · 단계 8 V6b 종이 이식
+#
+# **생성물이다. 손으로 고치지 않는다** — scripts/build_priorart_modules.py 가 만든다
+# (CLAUDE.md §1-1 · PLAN-005 §7-7). 고치면 다음 빌드에 조용히 사라지고, 그 사이에
+# vendor 해 간 하류는 유령 데이터를 갖는다.
+#
+# 재생성: make priorart
+# 검사  : make validate  (scripts/check_priorart_invariants.py 가 이식성 불변식을 건다)
+# ═══════════════════════════════════════════════════════════════════
+
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix gov:     <https://w3id.org/sdkb/gov/> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix pa:      <https://w3id.org/sdkb/pa/> .
+@prefix paus:    <https://w3id.org/sdkb/pa/us/> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+pa:us
+    dcterms:license <https://spdx.org/licenses/CDLA-Permissive-2.0.html> ;
+    dcterms:modified "2026-09-11"^^xsd:date ;
+    owl:imports <https://w3id.org/sdkb/pa> ;
+    owl:versionInfo "0.1.0-dev" ;
+    rdf:type owl:Ontology ;
+    rdfs:comment "US 특허법(35 U.S.C.) 조문·Office Action 문서종을 pa: 슬롯에 개체로 넣는다. PLAN-005 단계 8 (V6b 종이 이식) — 이 파일이 존재하는 동안 core·semi·kr 은 바이트 하나 바뀌지 않았다는 것을 scripts/report_stage8_paper_port.py 가 sha256 으로 센다. US 판정 어휘(KSR/TSM 등)는 원천이 이 저장소에 없어 넣지 않는다 — A-Box 없이 성립하는 설계 보증이며, US 회수 성능은 재지 않는다(PLAN-005 §7-8)."@ko ;
+    rdfs:label "SDKB Prior-Art — US jurisdiction binding"@en .
+
+paus:FinalOfficeAction
+    pa:documentRole pa:FinalAction ;
+    pa:underJurisdiction gov:JurisdictionUS ;
+    rdf:type pa:ExaminationDocumentType ;
+    skos:prefLabel "final Office Action"@en ;
+    skos:prefLabel "최종 거절통지 (Final Office Action)"@ko .
+
+paus:Ground_102
+    pa:underJurisdiction gov:JurisdictionUS ;
+    rdf:type pa:LegalGround ;
+    skos:notation "USPTO-102" ;
+    skos:prefLabel "lack of novelty (35 U.S.C. §102)"@en ;
+    skos:prefLabel "신규성 부정 (35 U.S.C. §102)"@ko .
+
+paus:Ground_103
+    pa:underJurisdiction gov:JurisdictionUS ;
+    rdf:type pa:LegalGround ;
+    skos:notation "USPTO-103" ;
+    skos:prefLabel "obviousness (35 U.S.C. §103)"@en ;
+    skos:prefLabel "비자명성 부정 (35 U.S.C. §103)"@ko .
+
+paus:NonFinalOfficeAction
+    pa:documentRole pa:FirstAction ;
+    pa:underJurisdiction gov:JurisdictionUS ;
+    rdf:type pa:ExaminationDocumentType ;
+    skos:prefLabel "non-final Office Action"@en ;
+    skos:prefLabel "비최종 거절통지 (Non-Final Office Action)"@ko .

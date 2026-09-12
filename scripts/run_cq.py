@@ -68,6 +68,7 @@ DEFAULT_DATA = [
     ROOT / "ontology" / "sdkb-priorart-core.ttl",
     ROOT / "ontology" / "sdkb-priorart-semi.ttl",
     ROOT / "ontology" / "sdkb-priorart-kr.ttl",
+    ROOT / "ontology" / "sdkb-priorart-us.ttl",     # 단계 8 — 관할 바인딩 둘째. 행 수는 불변이어야 한다(V6b)
     ROOT / "ontology" / "sdkb-abox-priorart.ttl",
 ]
 

@@ -1441,3 +1441,204 @@ FAIL 로 적는다. 7-B′ 가 답한 것: 개시집합을 초록으로 두껍�
 `mappings/claim_features.parquet`(`1e8b14ca…` → `cbd73414c09d`) · `ontology/sdkb-core-data.ttl`(노드 +19) · `sdkb-abox-claim-features.ttl` ·
 `sdkb-abox-priorart.ttl`(`4c726e98…` → `46271d8f35b8`) 이 바뀐다. pa: 3모듈·`sdkb-patent.ttl`·`sdkb-core.ttl` T-Box 는 불변. IRI 추가만 ·
 의미 변경 0. 서명은 `make signature-inject` 결과를 CHANGELOG 에 적는다.
+
+---
+
+## 18. 남은 작업 대장 — 단계 7 이후 (2026-09-11 · 사용자 요청 · 산재분 통합)
+
+**결론 먼저.** §6 아홉 단계 중 **미착수는 셋** — 단계 3(PLAN-002 `Prec`) · 8(V6b US 종이 이식) · 9(V6a 바이오 실물
+이식). §9 완료 기준은 8개 중 5개 충족이고, §9-7 은 `MinedAxiom` 인스턴스 0 이라 **vacuous**, §9-8 은 단계 8·9 에 걸려
+있다. 이월 별건은 §12.5 · §14.5 · §15.8 · §16.7 · §17.6 다섯 곳에 흩어져 있었고 **이 절이 그것을 한 자리에 모은다.**
+착수 순서는 제안이며, **어느 항목도 착수 시 §2 1단계를 따로 밟는다** — 이 절이 저장소에 있다는 사실은 승인이 아니다.
+
+### 18.1 §6 단계표 대조 (워킹트리 실측)
+
+> **(2026-09-11 추기)** 단계 8 은 이 절을 쓴 같은 날 **실행·완료**됐다(§19 · 판정 PASS). 아래 표의
+> 단계 8 행은 **그 시점의 기록**이며 소급 수정하지 않는다 — §18.5 Wave 1 이 그것이다.
+
+| # | 단계 | 상태 | 증거 |
+|---|---|:-:|---|
+| 0·0′ | PLAN-001 편입 · PLAN-004 §3 개정 | ✅ | plans/README |
+| 1 | V1–V4 기준선 | ✅ | `data/reports/priorart_baseline.json` |
+| 2 | 통지서 인용 해소 (2-A·2-B·2-C) | ✅ | PR #4·#5·#8 |
+| **3** | **PLAN-002 `Prec` → 착수 판정 확정** | **❌** | PLAN-002 §19 *부분* · 2인 코더 배정 대기 · 저장소 안 표본 시트 0 |
+| 4 | T-Box·R-Box (`pa:` 3모듈) | ✅ | PR #9 |
+| 5 | A-Box (5-A·5-B) | ✅ | PR #10·#11 |
+| 6 | V1 절제 (6-A·6-B) | ✅ | PR #12·#13 |
+| 7 | V2–V4 재측정 · 7-0 · 7-A′/7-B′ | ✅ 실행 · **판정 미달** | PR #14·#15 · `PLAN-005-stage7-verdict.md` |
+| **8** | **V6b US 종이 이식** | **❌** | `sdkb-priorart-us.ttl` 없음 · `build_us` 없음 (`gov:JurisdictionUS` 는 `sdkb-governance.ttl:35` 에 이미 있다) |
+| **9** | **V6a 바이오 실물 이식** | **❌** | 코호트 흔적 0 · `kipris_dataset/cohort.py` 는 식각 IPC 하드필터 |
+
+V4-2(실제 노트 사람 코딩)는 완료 — `v4_human_coding.json`(129건 · κ 0.6934 · PR #7).
+
+### 18.2 §9 완료 기준 대조
+
+| # | 기준 | 상태 |
+|---|---|:-:|
+| 1 | §2 수치 재현 (`PLAN-005-diagnosis.md`) | ✅ |
+| 2 | §4 ↔ §2 대응표 | ✅ **§18.3 에서 렌더** |
+| 3 | V1–V4 기준선·동결 목표 | ✅ |
+| 4 | §3.4 검사 규칙 CI (불변식 B) | ✅ |
+| 5 | V1 미소비 공리 0 (`pa:` 범위 · §15.7) | ✅ |
+| 6 | core 도메인·관할 IRI 0 + CI (불변식 A) | ✅ |
+| 7 | `underJurisdiction` 없는 `MinedAxiom` 0 | ⚠️ vacuous — 단계 3 → MinedAxiom 실체화 뒤 실질화 |
+| 8 | V6a·V6b 산출 · L1 라인수 | ❌ 단계 8·9 |
+
+### 18.3 §4 재구성 ↔ §2 진단 대응표 (§9-2)
+
+| §4 층 | 재구성 항목 | 대응 진단 | 실행 단계 | 상태 |
+|---|---|---|---|:-:|
+| 표본 | 통지서 인용 해소 · 근거 엣지 부착 | §2.5 (신규성 9건 · `legal_basis` 공란) | 2-A·2-B | ✅ (1,663 부착 · 판단 9→202) |
+| 어휘 | `TechnicalConcept`/`StructuralElement` 축 | §2.1 증상 ① (구조요소 15 보류) | 4 · 5-B · 7-A′ | ✅ (15+19 노드) |
+| 공리 | `coveredBy` + 확장자 · 역관계 | §2.2 (R-Box 8건 · 전이 없음) | 4 · 6-A·6-B · 7-0 | ✅ (소비 8 · 미소비 0 · `substitutableWith` 일몰) |
+| 공리 원천 | `MinedAxiom` + confidence + prov | §2.5 · PLAN-002 | **3 → 별건 C-2** | ❌ `Prec` 미산출 |
+| A-Box | `Disclosure` 실체화 · 접지율 | §2.3 (접지 33.1% · Disclosure 0) | 5-A·5-B·7-A′ | ✅ (Disclosure 36,880 · 접지 38.6%+) |
+| 질의 | §3.4 통과 신규성 SPARQL · CQ 편입 | §2.1 증상 ② · §2.4 (CQ10 특허 종속) | 4 · 6-B | ✅ (CQ32·CQ33 · 불변식 B) |
+| 검증 | V1–V4 기준선·재측정 | §2.4 (판단 능력 미측정) | 1 · 6 · 7 | ✅ 실행 · V2·V4 미달 |
+
+대응 없는 재구성 항목은 없다.
+
+### 18.4 남은 작업 전수
+
+**A. §6 미완 단계**
+
+| 항목 | 무엇 | 선행조건 | 비용 | 파급 | 막는 결정 |
+|---|---|---|---|---|---|
+| A-8 V6b | `build_us()` → `sdkb-priorart-us.ttl`(§102/§103 `LegalGround` · non-final/final OA `documentRole`) · core sha `307875eb7696` 불변 확인 · `shapes_priorart × us` · CQ32/33 무수정 · 종이 이식 리포트 | 없음 | 1 세션 | 신규 파일 1 · 기존 3모듈 불변 | D2 |
+| A-3 `Prec` | 100건 층화 표본 시트(유형×라운드 · 2-A/2-C 시트 선례 · `*_sample_result.csv` 분리) → 2인 코딩 → κ·합의율·`Prec` 집계 → PLAN-002 판정 확정 | **코더 배정(사람)** · §1-5(시트에 성명 — 저장소 안 코딩 · LLM 미사용) | 1 세션 + 사람 | 없음 | D3 |
+| A-9 V6a | KIPRIS 수집(A61K/C12N N≈30–50 · 통지서 PDF→txt · §5 프로파일) → 단계 2 생성기 재실행 → 바이오 개념 스킴(L2) → L1 라인수·L2·L3 수율·회수 리포트 · 사전등록 실패 3건 대조 | `cohort.py` 매개변수화 · KIPRIS 자격 | 3–5 세션 | 신규 원천·A-Box 모듈 | D4 |
+
+**B. 단계 7 미달의 처리 (D1).** 실측 구조: R∀ 아래 **해상도↑ ⇔ 적중∞↓**(§17.4) · τ 까지 0.05 대 0.67 · SPR(집합)과
+tfidf R@50(순위)의 비대칭(판정 리포트 §한계). 선택지 (a) 정지 확정 · **(b) 계측층 신설 — 부분 일치 랭킹(§17.1 ⑤)**:
+§3.3 "SPARQL 이 집합층을 등급으로 계산"을 `CoverageRank@50`(\|Disc(d)∩E(q)\|/\|E(q)\| 내림차순 · 동점 규칙 동결)으로 구현하고
+**V2 정의·τ·판정은 불변 · 새 검증 V7 로 기준선·목표를 결과 전에 `FROZEN`** · (c) 공리 원천 회복(§17.1 ④ · A-3 종속 · 확장
+효과 실측 +0.0013). **추천 (b)+(c) 병행** — (b) 를 택해도 V2 FAIL 은 지우지 않는다.
+
+**C. 이월 별건**
+
+| 항목 | 성격 | 선행 | 비용 | 파급 | 우선 |
+|---|---|---|---|---|---|
+| C-1 `combinableWith` 진보성 2차 관통(§4) | V3 유일 PASS 축 · `CombinedDisclosure` 는 평가 산출물 | 없음 | 2 세션 | T-Box OP 1 · 별도 승인 | **높음** |
+| C-2 `MinedAxiom` 실체화 · §9-7 실질화 | PLAN-002 쌍 → `underJurisdiction` + prov | A-3 `Prec` ≥ 0.60 | 1–2 세션 | A-Box · 하류 sha | A-3 뒤 |
+| C-3 `citationStatus` 파생 | Provisional/Maintained/Withdrawn | 없음 | 1 세션 | A-Box · shape | 중 |
+| C-4 R7 차단 7개 예외 | 접지↑ 해상도↓(§17.2-4) — 순위 계측 있어야 판단 가능 | D1(b) | 1 세션 | parquet·A-Box | (b) 뒤 |
+| C-5 FailureMode·Skill 바인딩 | 태스크 축 밖(D-15) | 없음 | 0.5 | semi sha | 낮음 |
+| C-6 Parameter 축 편입 | `featureConcept` range 는 하류 핀 — 새 모듈 `owl:imports` 로만 | 별도 1단계 | 1 세션 | T-Box·하류 | 낮음 |
+| C-7 g1·g2 초록 수집 | 36,516건 · 7-B′ 기대효과 +0.021 | KIPRIS | 2+ | 원천 | **보류** |
+| C-8 PLAN-004 C-2 개정안 편집(§15.7) | 문서 | D5 | 0.2 | 문서 | 높음 |
+| C-9 §9-2 대응표 | 문서 | — | — | — | ✅ §18.3 |
+
+### 18.5 제안 순서
+
+```
+Wave 0  문서 — 이 절(§18) · C-8(D5)
+Wave 1  A-8 V6b (1 세션 · D2)                게이트: priorart --check · validate · cq 무수정 · test · check-public · core sha 불변
+Wave 2  병렬 — D1(b) V7 순위 계측(읽기 전용 · FROZEN 선동결 · V2–V4 판정 파일 불변) ∥ A-3 Prec 시트 → 사람 코딩(D3) → C-2
+Wave 3  C-1 combinableWith (T-Box 별도 승인 · V7 있으면 순위로 함께)
+Wave 4  A-9 V6a 바이오 (D4)
+보류    C-7 · C-6 · C-5 · C-3 · C-4(Wave 2 뒤 재판단)
+```
+
+### 18.6 사용자 결정 (2026-09-11)
+
+| # | 결정 | 추천 | **결정** |
+|---|---|---|---|
+| D1 | 단계 7 미달 처리 (a)/(b)/(c) | (b)+(c) | **(b)+(c) 병행** — V7 순위 계측 신설(V2 정의·τ·판정 불변 · 결과 전 `FROZEN`) ∥ PLAN-002 `Prec` 경로 |
+| D2 | 단계 8 착수 — §6 은 8 이 7 "뒤에 선다"고 했지 7 통과를 조건으로 두지 않았고 7-A′ 로 이미 재개된 상태 | 착수 | **착수** — 1단계 서식 별도 제출 |
+| D3 | PLAN-002 정밀도 표본 2인 코더 배정 | 배정 요청 (V4-2 코더 재기용 가능) | **V4-2 코더 2인 재기용** — 시트 생성기부터 착수 가능 |
+| D4 | 바이오 코호트 IPC·N·KIPRIS 자격·시점 | Wave 4 | 대기 (Wave 4 착수 시) |
+| D5 | PLAN-004 C-2 개정안 편집 | 승인 | **승인 — 반영** (PLAN-004 §3 단계 2 행) |
+| D6 | 별건 순위 — C-1 을 C-3·C-4 앞에 | C-1 우선 | 대기 (Wave 3 착수 시) |
+
+---
+
+## 19. 단계 8 설계와 실행 기록 — V6b US 종이 이식 (2026-09-11 · 1–3단계 사용자 승인 · 4·5단계 실행)
+
+**결론 먼저.** `pa:` core 가 **0줄 바뀌지 않은 채로** US 관할 바인딩(`sdkb-priorart-us.ttl` · 27 트리플)이
+들어갔고, 판정은 **PASS(①–⑤ 전부)** 다. §9-8 의 절반(V6b)이 닫힌다. 이식된 것은 공리가 아니라 **공리를
+만드는 방법**이며(§3.5), 이 절이 그 문장을 기계 증거로 바꾼다. 판정 리포트는 기계가 렌더한다:
+`01.code_spec/reports/PLAN-005-stage8-us-paper-port.md`(원천 `data/reports/priorart_stage8_paper_port.json`).
+**US 회수 성능은 재지 않았다**(§7-8).
+
+### 19.1 2단계 실측 — 설계를 바꾼 관찰 넷 (읽기 전용)
+
+| # | 사실 | 설계에 준 영향 |
+|---|---|---|
+| 1 | 불변식 A 의 `JURIS_HINT` 가 **이미 `pa/us/` 를 관할 접두로 알고**, `_allowed()` 가 `pa/<하위>/` 전부를 core 에서 거부한다(`check_priorart_invariants.py:76-94`) | 게이트를 새로 만들지 않았다. 단계 4 가 US 를 내다보고 지은 자리이며, 이번에 **그 자리가 실제로 무는지**를 주입 테스트로 확인했다 |
+| 2 | `MODIFIED = "2026-09-09"` 가 3모듈 **공유 상수** | US 가 이 상수를 쓰면 core sha 가 바뀌어 *"L1 0줄"* 이 이 커밋 스스로 깨진다. **`MODIFIED_US` 를 따로 두었고** 테스트가 둘이 다름을 고정한다 |
+| 3 | `gov:JurisdictionUS` 가 `sdkb-governance.ttl:35` 에 **이미 있다**(`skos:Concept` · notation "US") · `sdkb-governance-us-instances.ttl` 이 US 개체 선례 | 관할 개체를 발명하지 않았다. `underJurisdiction` 의 range(`skos:Concept`)와 그대로 맞는다 |
+| 4 | 커밋된 `cq_report.json` 은 **6-B 시점(`7738d97`)** 이라 7-A′ 이후 A-Box 와 맞지 않는다 | ⑤ 의 기준선을 그 파일에서 읽지 않는다. **같은 그래프에서 US 없이/있게 2회 실행**한 행 수 벡터를 비교한다 — 계측기가 스스로 기준선을 만든다 |
+
+### 19.2 3단계 설계 — kr 의 대칭이며, 발명하지 않는다
+
+`build_us()` 는 `build_kr()` 과 같은 슬롯을 같은 방식으로 채운다: `pa:LegalGround` 개체 둘
+(§102 `USPTO-102` · §103 `USPTO-103`) · `pa:ExaminationDocumentType` 개체 둘(non-final → `pa:FirstAction` ·
+final → `pa:FinalAction`) · 전부 `pa:underJurisdiction gov:JurisdictionUS`.
+
+**넣지 않은 것과 그 이유 — 비대칭은 원천의 비대칭이다.**
+
+| 넣지 않음 | 이유 |
+|---|---|
+| US 판정 어휘(KSR/TSM · inherency) | **원천이 이 저장소에 없다**(§1-4). KR 은 `VerdictWellKnown`·`VerdictDesignChange` 를 갖는데, 그것은 통지서 실물에서 왔다 |
+| KR 근거와의 `skos:exactMatch` | §29① 은 유예기간이 §102 와 다르고 §29② 는 §103 KSR 과 **같은 판단이 아니다**. 읽는 소비자도 없다(§7-6) |
+| `sdkb-patent.ttl` import | kr 이 그것을 끄는 이유는 `ont:Rejection_*` 와의 exactMatch 인데 US 는 그 동치를 주장하지 않는다. **US 는 core 만 import 한다** |
+| 클래스·술어 선언 | 관할 바인딩은 **개체만** 넣는다. 술어를 선언하면 그것은 core 의 일이었다는 뜻이다 |
+
+### 19.3 동결 기준 → 실측 (결과 전 동결 · `report_stage8_paper_port.py:FROZEN`)
+
+| # | 판정량 | 동결 | 실측 |
+|---|---|---|---|
+| ① | **L1 변경 라인수** (core·semi·kr sha256 대 동결값 · 커밋 `ead24dd`) | **0** | **0** — `307875eb7696` · `d66c93252478` · `4e5ed9739f64` 셋 다 불변 |
+| ② | us 프로파일 | LegalGround 2 · 문서종 2 | **27 트리플** · 개체 4 · 클래스 선언 0 · 술어 선언 0 · exactMatch 0 · import `pa` 만 |
+| ③ | 교차 오염 | us→도메인 0 · us→kr 0 · kr→us 0 | **전부 0** |
+| ④ | SHACL (shapes_priorart × core+us+governance) | 위반 0 ∧ **non-vacuous** | conforms · US 타깃 LegalGround **2** · 문서종 **2** |
+| ⑤ | CQ 행 수 벡터 (US 없이/있게 · 같은 그래프) | 동일 | **33개 전부 동일** · diff `{}` |
+
+**`make validate` 가 독립으로 같은 것을 말한다** — priorart 블록의 타깃이 LegalGround 2 → **4**,
+`ExaminationDocumentType` 2 → **4** 로 늘었다(KR 2 + US 2). shape 은 한 줄도 고치지 않았고, US 개체가
+KR 과 **같은 계약**(notation · 관할 · 역할 필수)을 지킨 것이다. 그것이 V6b 가 답하려던 질문이다.
+
+### 19.4 4·5단계 — 실행과 게이트 (재현 명령 병기)
+
+```bash
+make priorart              # 4 모듈 (core 219 · semi 65 · kr 40 · us 27)
+make stage8-paper-port     # 판정 리포트 + 마크다운 (⑤ 가 CQ 2회 실행 ≈6분)
+```
+
+| 게이트 | 결과 |
+|---|---|
+| `make priorart --check` | **OK: 4 모듈이 생성기와 일치한다** |
+| `make validate` | **exit 0** — SHACL **6블록 PASSED** · 불변식 A(도메인·관할 IRI 0) · B(태스크 질의 2건 · 적중 0) · C(4쌍 · 개체 112 · 위반 0) OK |
+| `make test` | **433 passed · 10 skipped** (단계 8 신규 7 — 주입 파라미터 2 · US 대칭 · 발행일 분리 · 교차 오염(무는지 포함) · 리포트 L1·결정성) |
+| `make check-public` | **377 자산 · 허용목록 밖 0 · 적중 0 · 죽은 참조 0 ✅** (신규 둘을 `git add` 한 뒤 — `git ls-files` 기반) |
+| `make signature-inject` | T-Box 1,906 → **1,933**(us +27) · 명명 클래스 102 · OP 122 · DP 94 **불변** · README 두 판 갱신 |
+| `cq_report.json` | **변동 0** — ⑤ 와 독립으로 같은 사실을 말한다 |
+| 결정성 · `make v1-ablation` | 19.5 |
+
+### 19.5 결정성과 절제 재실행
+
+| 항목 | 명령 | 결과 |
+|---|---|---|
+| 결정성 | `make stage8-paper-port` 2회 → `cmp` | `priorart_stage8_paper_port.json` · 판정 MD **둘 다 바이트 동일** |
+| 절제 | `make v1-ablation` | **29건 · 소비 8 · 미소비 21 · pa: R-Box 미소비 4 = RETAINED(`disjointWith`) 정확히 · 예측 불일치 0** · CQ 33개 10,213행 · 회당 148–158초 |
+
+**US 는 절제 열거를 바꾸지 않는다 — 그것이 설계대로다.** us 모듈은 R-Box 공리도 바인딩 트리플도
+0 이라(개체 4 · 술어·클래스 선언 0) 열거 29건이 7-A′ 시점과 **같은 값으로 재현**된다.
+`tests/test_stage6_ablation.py` 의 `FROZEN` 일치 게이트가 무수정으로 통과한 것이 같은 사실의
+다른 표현이다. **관할 바인딩이 추론 표면을 늘리지 않는다**는 것은 §3.3 배치(무추론 · 슬롯은
+개체로만 채운다)의 직접적 귀결이며, 늘렸다면 core 가 관할을 알고 있었다는 뜻이 된다.
+
+### 19.6 하류 조치 (§0)
+
+**기존 파일은 하나도 바뀌지 않는다.** `sdkb-priorart-{core,semi,kr}.ttl` · `sdkb-patent.ttl` ·
+`sdkb-core.ttl` · A-Box 전부 sha 불변이고 IRI·의미 변경 0 이다. 새로 생기는 것은
+`ontology/sdkb-priorart-us.ttl` 하나이며, `ontology/` 는 공개 허용목록이라 `sdkb-dataset` 에 따라간다.
+하류 `vendor.py:VENDOR_FILES`·`baseline.py:BASELINE_PARTS` **편입은 하류의 선택**이다 — US 바인딩은
+현 하류 실험(KR 코호트)에 쓰이지 않으므로 넣지 않아도 스냅샷이 깨지지 않는다. README 서명 블록의
+T-Box 합계만 1,906 → 1,933 으로 움직인다.
+
+### 19.7 다음
+
+**단계 9(V6a 바이오 실물 이식)가 §9-8 의 나머지 절반이다** — 그러나 §18.5 의 순서대로 Wave 4 이며,
+D4(코호트 IPC·N·KIPRIS 자격)가 먼저 정해져야 한다. 그 앞에 Wave 2(V7 순위 계측 · PLAN-002 `Prec` 표본)와
+Wave 3(`combinableWith`)이 선다. **이 절은 US 회수 성능을 재지 않았고, 앞으로도 재지 않는다**(§7-8).

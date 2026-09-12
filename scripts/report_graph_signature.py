@@ -61,6 +61,7 @@ TBOX_MODULES = [
     "sdkb-priorart-core",
     "sdkb-priorart-semi",
     "sdkb-priorart-kr",
+    "sdkb-priorart-us",      # PLAN-005 단계 8 (V6b 종이 이식)
 ]
 
 # A-Box 층 → 트리플 수를 적어 두는 생성기 리포트. 큰 파일은 이 리포트에서 읽는다.
