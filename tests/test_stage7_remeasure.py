@@ -131,6 +131,44 @@ def test_v3_gate_uses_inventive_step_stratum_only():
     assert not s7.v3_verdict(flat, flat)["pass"]
 
 
+# ── (b′) CAL-1 · V3 게이트 교정 (§20 E-1) ──────────────────────────────
+# 이 넷은 "리포트가 실행하지 않은 정의를 인쇄하는" 부류를 막는다. 기존 테스트는 지우지 않는다.
+
+def test_mixed_stratum_label_does_not_contain_inventive_substring():
+    """결함의 뿌리를 명제로 고정한다 — §29 다음 코드포인트가 ①(U+2460)이라 부분문자열이 거짓이다."""
+    assert "§29②" not in "§29①∧②"
+    assert "§29②" in "§29②-only"
+
+
+def test_v3_gate_includes_mixed_stratum_legacy_gate_fails():
+    """혼합층에만 신호를 둔 픽스처: 구 게이트는 표본이 0이라 FAIL, 신 게이트는 PASS."""
+    rows = [{"q": f"m{i}", "nE": 3, "n_cited": 2, "best_single": .5, "best_pair": .5 + .2 * (i % 2),
+             "delta": .2 * (i % 2), "stratum": "§29①∧②"} for i in range(60)]
+    v = s7.v3_verdict(rows, rows)
+    assert v["gate_queries"] == 60 and v["pass"]
+    lg = v["legacy_substring_gate"]
+    assert lg["gate_queries"] == 0 and not lg["pass"] and "§29①∧②" in lg["strata_dropped_by_bug"]
+
+
+def test_v3_gate_membership_over_all_four_labels():
+    """네 라벨 전수 — 게이트는 §29② 포함 층 둘만 잡고 나머지 둘은 버린다."""
+    labels = ["§29②-only", "§29①∧②", "§29①-only", "없음"]
+    rows = [{"q": f"q{i}", "nE": 3, "n_cited": 2, "best_single": .5, "best_pair": .7,
+             "delta": .2, "stratum": lab} for i, lab in enumerate(labels)]
+    v = s7.v3_verdict(rows, rows)
+    assert v["gate_queries"] == 2 and sorted(v["gate_strata"]) == sorted(s7.INVENTIVE_STRATA)
+    assert v["legacy_substring_gate"]["gate_queries"] == 1  # 교정 전에는 §29②-only 하나뿐
+
+
+def test_frozen_prose_and_machine_gate_strata_agree():
+    """문면과 기계 표현이 갈리면 임포트가 죽는다 — 이 결함의 부류를 막는 검사다."""
+    s7.assert_gate_strata_agree()
+    for bad in ({"v3_gate_strata": ["§29②-only"], "v3_gate_stratum": s7.FROZEN["v3_gate_stratum"]},
+                {"v3_gate_strata": ["§29②-only", "§29①∧②"], "v3_gate_stratum": "§29②-only 뿐"}):
+        with pytest.raises(SystemExit):
+            s7.assert_gate_strata_agree(bad)
+
+
 def test_v4_verdict_flags_missing_conj_and_catches_drop():
     base = {"by_variant": {"claim": {"hit_rate": .90}, "L1": {"hit_rate": .89}, "L2": {"hit_rate": .88},
                            "L3": {"hit_rate": .87}},

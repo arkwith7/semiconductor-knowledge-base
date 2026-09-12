@@ -92,6 +92,9 @@ FROZEN = {
     "baseline_parquet_sha256_prefix": "16f8300dbf15",
     "gate": "L_C 대 L_A (§1 '기준선 대비') · L_B 는 귀속(데이터 효과 / 공리 효과)",
     "v3_gate_stratum": "§29② 포함 층 (§29②-only ∪ §29①∧②) · 인용 2문헌 이상",
+    # 문면(위)은 처음부터 옳았고 틀린 것은 코드였다 (§20 E-1 · CAL-1). 기계 표현을 병기해
+    # 리포트가 "실행하지 않은 정의를 인쇄"하는 일을 구조적으로 막는다 — 둘이 어긋나면 죽는다.
+    "v3_gate_strata": ["§29②-only", "§29①∧②"],
     "predictions_registered": {
         "P1": "Δ>0 비율은 §29②-only 층이 §29①-only 층보다 높다 (게이트 아님 · §29①-only 는 저검정력)",
         "P2": "L_C 의 best_single 중앙값 ≥ L_B (확장은 단일 문헌 포함률을 내리지 않는다)",
@@ -106,6 +109,26 @@ FROZEN = {
         "gate": "레버는 L_D 대 L_C · V2 세 조건은 L_D 대 L_A · τ 불변",
     },
 }
+
+
+#: V3 게이트가 겨냥하는 층 라벨의 기계 표현 (CAL-1 · §20 E-1).
+#: 라벨 **문자열 값은 불변**이다 — 이미 공표된 JSON 키이자 판정 리포트의 행 이름이다.
+#: 혼합 라벨 "§29①∧②" 는 "§29②" 를 부분문자열로 갖지 않는다(§29 다음 코드포인트가 ① U+2460).
+#: 그래서 부분문자열 판정은 혼합층을 조용히 버렸다 — 집합 소속으로 판정한다.
+INVENTIVE_STRATA = frozenset({"§29②-only", "§29①∧②"})
+
+
+def assert_gate_strata_agree(frozen: dict = FROZEN, strata: frozenset = INVENTIVE_STRATA) -> None:
+    """동결된 문면과 기계 표현이 같은 층을 가리키는지. 어긋나면 죽는다 (임포트 시점에 판정)."""
+    machine = set(frozen["v3_gate_strata"])
+    if machine != set(strata):
+        raise SystemExit(f"ERROR: v3_gate_strata {sorted(machine)} 가 INVENTIVE_STRATA {sorted(strata)} 와 다르다")
+    missing = [x for x in sorted(machine) if x not in frozen["v3_gate_stratum"]]
+    if missing:
+        raise SystemExit(f"ERROR: 동결 문면 v3_gate_stratum 이 층 {missing} 을 적지 않는다 — 문면과 코드가 갈렸다")
+
+
+assert_gate_strata_agree()
 
 
 # ── 원천 ─────────────────────────────────────────────────────────────────
@@ -456,8 +479,26 @@ def v3_summary(rows: list[dict]) -> dict:
     }
 
 
-def v3_verdict(rowsB: list[dict], rowsC: list[dict], frozen: dict = FROZEN) -> dict:
+def _legacy_substring_gate(rowsC: list[dict], frozen: dict = FROZEN) -> dict:
+    """교정 전(§20 E-1) 게이트를 **같은 실행에서** 재현한다 — 판정이 아니라 증거다.
+
+    `"§29②" in stratum` 은 혼합 라벨을 떨어뜨렸다. 과거 커밋을 꺼내지 않고 여기서 다시 계산해
+    리포트가 스스로 자기 교정을 증명하게 한다. 이 값은 어떤 PASS/FAIL 에도 들어가지 않는다.
+    """
     gate = [r for r in rowsC if r["n_cited"] >= 2 and "§29②" in r["stratum"]]
+    d = [r["delta"] for r in gate]
+    boot = paired_bootstrap([0.0] * len(d), d, frozen["bootstrap_B"], frozen["seed"], frozen["ci"])
+    matched = sorted({r["stratum"] for r in gate})
+    dropped = sorted(x for x in INVENTIVE_STRATA if x not in matched)
+    return {"definition": '`"§29②" in stratum` (부분문자열)',
+            "gate_queries": len(gate), "delta_mean": boot["delta"], "bootstrap": boot,
+            "pass": bool(boot["ci"] and boot["ci"][0] > 0 and boot["delta"] > 0),
+            "strata_matched": matched, "strata_dropped_by_bug": dropped,
+            "note": "판정 아님 (§20 E-1 · CAL-1). 동결 정의는 gate_strata 쪽이다."}
+
+
+def v3_verdict(rowsB: list[dict], rowsC: list[dict], frozen: dict = FROZEN) -> dict:
+    gate = [r for r in rowsC if r["n_cited"] >= 2 and r["stratum"] in INVENTIVE_STRATA]
     d = [r["delta"] for r in gate]
     boot = paired_bootstrap([0.0] * len(d), d, frozen["bootstrap_B"], frozen["seed"], frozen["ci"])
     ok = bool(boot["ci"] and boot["ci"][0] > 0 and boot["delta"] > 0)
@@ -476,8 +517,10 @@ def v3_verdict(rowsB: list[dict], rowsC: list[dict], frozen: dict = FROZEN) -> d
     medC = st.median(r["best_single"] for r in rowsC) if rowsC else None
     p2 = {"best_single_median_B": medB, "best_single_median_C": medC,
           "holds": (medC >= medB) if (medB is not None and medC is not None) else None}
-    return {"gate_stratum": frozen["v3_gate_stratum"], "gate_queries": len(gate),
+    return {"gate_stratum": frozen["v3_gate_stratum"], "gate_strata": sorted(INVENTIVE_STRATA),
+            "gate_queries": len(gate),
             "delta_mean_C": boot["delta"], "bootstrap": boot, "pass": ok,
+            "legacy_substring_gate": _legacy_substring_gate(rowsC, frozen),
             "novelty": "정량 판정 없음 (§5 · §29① 표본 < 문서 254건 규모) — by_stratum 서술만",
             "P1": p1, "P2": p2}
 
@@ -674,6 +717,13 @@ def render_markdown(rep: dict) -> str:
     for s, d in rep["ladder"][gate_layer]["coverage"].get("by_stratum", {}).items():
         L.append(f"| {s} | {d['queries']} | {d['pair_queries']} | {_f(d['best_single_median'])} | {_f(d['delta_mean'])} | {_f(d['delta_gt0_frac'])} |")
     p1, p2 = v["V3"]["P1"], v["V3"]["P2"]
+    lg = v["V3"].get("legacy_substring_gate")
+    if lg:
+        L += ["", f"게이트 정의 교정(CAL-1 · §20 E-1): 교정 전 {lg['definition']} 은 층 {lg['strata_matched']} 만 잡아 "
+              f"q={lg['gate_queries']} · Δ평균 {_f(lg['delta_mean'])} · CI {lg['bootstrap']['ci']} · "
+              f"{'PASS' if lg['pass'] else 'FAIL'} 였다 (층 {lg['strata_dropped_by_bug']} 을 떨어뜨림 · **판정 아님**). "
+              f"동결 정의 {v['V3']['gate_strata']} 로 실행한 현 게이트는 q={v['V3']['gate_queries']} · "
+              f"Δ평균 {_f(v['V3']['delta_mean_C'])} 이다."]
     L += ["", f"사전 등록 P1(게이트 아님): §29②-only {_f(p1['frac_29_2_only'])}(n={p1['n_29_2_only']}) 대 §29①-only "
           f"{_f(p1['frac_29_1_only'])}(n={p1['n_29_1_only']}) · 성립 {p1['holds']} · 저검정력 {p1['underpowered']}",
           f"사전 등록 P2: best_single 중앙 이전 층 {_f(p2['best_single_median_B'])} → {gate_layer} {_f(p2['best_single_median_C'])} · 성립 {p2['holds']}", ""]
