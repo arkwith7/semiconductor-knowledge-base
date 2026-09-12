@@ -4,6 +4,7 @@
         priorart abox-priorart v1-ablation stage7-remeasure claim-concepts-7a abstract-diagnostic \
         abox-prior-art abox-claim-features abox-full refetch-fulltext cq \
         public-release check-public signature signature-inject signature-check \
+        check-leakage \
         superordinate-concepts concept-mapping \
         semiconto-fetch semiconto-analyze semiconto-align semiconto-enrich semiconto-phase0 \
         pipeline pipeline-sirp pipeline-full pipeline-with-expdataset help
@@ -173,11 +174,18 @@ v1-ablation: priorart convert abox-priorart
 	$(PYTHON) scripts/report_v1_ablation.py \
 		--markdown 01.code_spec/reports/PLAN-005-stage6-axiom-consumers.md
 
+# ── PLAN-005 R0-CAL-0 · 누설 검사 (§20.7) ──────────────────────────────
+# 평가와 채굴이 서로의 범위를 아는지 검사한다. 그래프를 읽지도 바꾸지도 않으므로
+# validate 와 섞지 않는다 — 이것은 구조 계약이 아니라 **평가 규율**의 게이트다.
+# stage7-remeasure 의 선행조건이다: 분할을 위반한 상태에서는 재측정이 돌지 않는다.
+check-leakage:
+	$(PYTHON) scripts/check_leakage.py
+
 # ── PLAN-005 단계 7 · V2–V4 재측정 · 동결 목표 대조 ─────────────────────
 # 정의·문턱은 report_stage7_remeasure.py:FROZEN(결과 전 동결). 기준선 L_A 는 단계 1 커밋의
 # parquet 를 git 에서 꺼내 소급 산출한다. V4 는 먼저 R∀·Disclosure 키를 덧붙여 다시 낸다.
 # 그래프는 바꾸지 않는다. 판정 리포트는 스크립트가 렌더한다(§5 — 손으로 쓰지 않는다).
-stage7-remeasure: abox-priorart
+stage7-remeasure: abox-priorart check-leakage
 	$(PYTHON) scripts/report_v4_robustness.py --with-conj-disclosure
 	$(PYTHON) scripts/report_stage7_remeasure.py \
 		--markdown 01.code_spec/reports/PLAN-005-stage7-verdict.md

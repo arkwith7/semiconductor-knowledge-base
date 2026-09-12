@@ -1,0 +1,159 @@
+{
+  "plan": "PLAN-005 R0-CAL-0 · 평가 무결성 배선 (§20.7)",
+  "generator": "scripts/check_leakage.py",
+  "read_only": true,
+  "inputs": {
+    "benchmark/assets/split.csv": "714dafe033afabf5185b3cc6f1a39bbc7099c4d71b414f81031e2b48e2165108",
+    "data/sources/harvest_scope_dev_train.json": "543c027126307445e82300e54ee6cd01786563a3fded9dfaefe47834deefed11",
+    "data/reports/ko_surface_candidates.json": "b0709466f9ebd9cc18bbbd4ead3f3e47e1bfac40f2ca41232e9164f1a03e9c76",
+    "data/reports/ko_concept_proposals.json": "da0c1867e6d5d3ae89b3bb5bedb2ce808f99d5f9441d36525ad9a74ec89d3575",
+    "data/reports/notice_element_judgments_report.json": "bf2b38710bb2565b576a0327f8ada6530a7ef8a57b6afd538f662c6b964bdeb1",
+    "mappings/abox_term_aliases.json": "8c40d760c9cac5caa6e9be79fd4176a0376e522bd29e0762fc80cd2dc6a9ae5f",
+    "mappings/concept_mapping.json": "85bffb8a87ef3cb56782207c85dc0323396e74b2b017101994d1cc081838a7e1",
+    "data/patents/prior_art_edges.parquet": "bc893c93210c4d7c88de6df0c36698c753969a620e11f840ae71ca56426ec5f9",
+    "mappings/claim_features.parquet": "cbd73414c09d198c298aa84c4e4f9652594dfce697611e76d05d3d9c7429bad3"
+  },
+  "checks": [
+    {
+      "id": "K-1",
+      "status": "PASS",
+      "detail": "split.csv sha · 상류 parquet sha · dev∪train == 채굴 범위 · excluded_splits 넷 모두 일치",
+      "numbers": {
+        "scope_sha256": "543c027126307445e82300e54ee6cd01786563a3fded9dfaefe47834deefed11",
+        "split_csv_sha256": "714dafe033afabf5185b3cc6f1a39bbc7099c4d71b414f81031e2b48e2165108",
+        "upstream_parquet_sha256": "f93c18d28857f6304f692e821928b7189c5e525e88524e95a51ff31ca8961943",
+        "open_splits": [
+          "dev",
+          "train"
+        ],
+        "sealed_splits": [
+          "test",
+          "test_b"
+        ],
+        "open_queries": 800,
+        "counts": {
+          "dev": 200,
+          "train": 600
+        }
+      }
+    },
+    {
+      "id": "K-2",
+      "status": "PASS",
+      "detail": "채굴 산출물 전 문자열에 봉인 분할 문서 식별자 0건",
+      "numbers": {
+        "files_scanned": [
+          "data/reports/ko_surface_candidates.json",
+          "data/reports/ko_concept_proposals.json",
+          "data/reports/notice_element_judgments_report.json"
+        ],
+        "sealed_hits": 0,
+        "hits": {}
+      }
+    },
+    {
+      "id": "K-3",
+      "status": "PASS",
+      "detail": "별칭·개념 매핑에 문서 식별자 모양 0건",
+      "numbers": {
+        "files_scanned": [
+          "mappings/abox_term_aliases.json",
+          "mappings/concept_mapping.json"
+        ],
+        "identifier_hits": 0,
+        "hits": {}
+      }
+    },
+    {
+      "id": "K-4",
+      "status": "PENDING",
+      "detail": "평가 리포트 4종에 split·split_sha256 키가 없다 — CAL-3 이 만든다 (사용자 결정 B)",
+      "numbers": {
+        "files": {
+          "data/reports/priorart_stage7_remeasure.json": "PENDING(CAL-3)",
+          "data/reports/prior_art_realgt_report.json": "PENDING(CAL-3)",
+          "data/reports/priorart_baseline.json": "PENDING(CAL-3)",
+          "data/reports/v4_robustness.json": "PENDING(CAL-3)"
+        },
+        "pending": [
+          "data/reports/priorart_stage7_remeasure.json",
+          "data/reports/prior_art_realgt_report.json",
+          "data/reports/priorart_baseline.json",
+          "data/reports/v4_robustness.json"
+        ]
+      }
+    },
+    {
+      "id": "K-5",
+      "status": "PENDING",
+      "detail": "원장 0행 · 서식 정상. 평가 리포트에 seal_ledger_rows 키가 없다 — CAL-3 이 만든다 (사용자 결정 B 와 같은 부류)",
+      "numbers": {
+        "ledger_rows": 0
+      }
+    },
+    {
+      "id": "K-6",
+      "status": "UNMEASURABLE",
+      "detail": "질의 family 1159개가 분할을 넘지 않는다(교차 0 · 회귀 고정). 인용문헌 family·출원일은 데이터가 없어 잴 수 없다 — 0 으로 보고하지 않는다",
+      "numbers": {
+        "families": 1159,
+        "crossing": 0,
+        "unmeasurable": {
+          "cited_family": {
+            "reason": "prior_art_edges 에 인용문헌 family 열이 없다",
+            "columns_present": [
+              "target_patent_id",
+              "cited_id",
+              "cited_doc_id",
+              "cited_raw",
+              "cited_office",
+              "cited_country",
+              "cited_kind",
+              "is_npl",
+              "source_type",
+              "legal_basis",
+              "target_claims",
+              "evidence_phrase_no",
+              "legal_bases"
+            ],
+            "matched": []
+          },
+          "cited_filing_date": {
+            "reason": "prior_art_edges 에 인용문헌 출원일 열이 없다",
+            "matched": []
+          }
+        }
+      }
+    }
+  ],
+  "query_universe": {
+    "gt_bearing": {
+      "definition": "prior_art_edges 의 examiner 간선을 가진 target",
+      "n": 1000,
+      "composition": {
+        "dev": 200,
+        "test": 200,
+        "train": 600
+      },
+      "approximate": false
+    },
+    "reachable_target_approx": {
+      "definition": "위 중 인용문헌 하나 이상이 claim_features 에 publication_id 로 있고 자기 자신이 아닌 것",
+      "n": 863,
+      "composition": {
+        "dev": 171,
+        "test": 184,
+        "train": 508
+      },
+      "approximate": true,
+      "note": "평가 스크립트의 Q(개념 바인딩·Disclosure 조건)는 이보다 좁다. 정확한 구성비는 CAL-3 이 낸다 (사용자 결정 A)"
+    }
+  },
+  "summary": {
+    "pass": 3,
+    "fail": 0,
+    "pending": 2,
+    "unmeasurable": 1,
+    "ok": true
+  }
+}
