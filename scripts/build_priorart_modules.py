@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""PLAN-005 단계 4 — 선행기술 판단층 T-Box·R-Box 생성기 (3 모듈).
+"""PLAN-005 단계 4 — 선행기술 판단층 T-Box·R-Box 생성기 (3 모듈 + 단계 8 의 US 바인딩).
 
 **왜 생성기인가.** `ontology/sdkb-patent.ttl` 은 손으로 쓴 커밋된 T-Box 이고 그 선례가
 이 저장소에 있다(writer 0건 · git 이력 9커밋 전부 수기). 그럼에도 PLAN-005 §7-7 · §8 이
@@ -14,6 +14,16 @@
 
 바이오는 ②만, US 는 ③만 새로 쓴다. ① 은 두 경우 모두 **0줄**이며, 그것을 주장이 아니라
 기계 보증으로 만드는 것이 `scripts/check_priorart_invariants.py` 다(§5 V6(a)).
+
+    ④ sdkb-priorart-us.ttl     paus: 관할 바인딩 — US 35 U.S.C. §102/§103 · Office Action 문서종
+
+**단계 8 (2026-09-11 · 사용자 승인) — V6b US 종이 이식.** ④ 는 ③ 의 대칭이며 **①②③ 은 바이트
+하나 바뀌지 않는다** — 그것이 V6b 의 판정량(L1 변경 라인수 0)이고 `scripts/report_stage8_paper_port.py`
+가 세 파일의 sha256 을 동결값과 대조해 센다. 그래서 ④ 는 공유 상수 `MODIFIED` 를 쓰지 않고 자기
+발행일 `MODIFIED_US` 를 갖는다 — 공유 상수를 바꾸면 ① 의 sha 가 바뀌어 판정이 자기모순이 된다.
+④ 가 담지 않는 것: US 판정 어휘(KSR/TSM 등 — 원천이 이 저장소에 없다 · §1-4) · KR 근거와의
+`skos:exactMatch`(§29① 은 유예기간이 §102 와 다르고 §29② 는 §103 KSR 과 같은 판단이 아니며, 읽는
+소비자도 없다 · §7-6) · `ont:` 도메인 어휘(관할 바인딩은 도메인을 모른다) · `sdkb-patent.ttl` import.
 
 **`semi:` 를 새로 만들지 않는다.** PLAN-001 §1.10(c) 는 도메인 바인딩을 `semi:` 로 적었으나
 `scripts/build_owl.py` 에서 `SEMI` 는 이미 **SemicONTO**(`http://w3id.org/SemicONTO/`)다.
@@ -59,22 +69,26 @@ from rdflib import Graph, Literal, URIRef
 from rdflib.namespace import RDF, RDFS, OWL, XSD, DCTERMS, SKOS
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from config.namespaces import SDKB_ONT, SDKB_GOV, SDKB_PA, SDKB_PA_KR, PROV  # noqa: E402
+from config.namespaces import SDKB_ONT, SDKB_GOV, SDKB_PA, SDKB_PA_KR, SDKB_PA_US, PROV  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 ONT_DIR = ROOT / "ontology"
 
-PA, ONT, GOV, PAKR = SDKB_PA, SDKB_ONT, SDKB_GOV, SDKB_PA_KR
+PA, ONT, GOV, PAKR, PAUS = SDKB_PA, SDKB_ONT, SDKB_GOV, SDKB_PA_KR, SDKB_PA_US
 
 # 발행 메타. **상수다** — `datetime.now()` 를 쓰면 빌드마다 그래프가 달라지고
 # 하류의 sha256 핀이 매일 깨진다(§0).
 MODIFIED = "2026-09-09"
+# 단계 8 의 US 모듈은 자기 발행일을 갖는다 — 공유 상수 `MODIFIED` 를 올리면 core·semi·kr
+# 의 sha 가 함께 바뀌어 "L1 변경 0줄"(V6b) 을 이 커밋 스스로 깨뜨린다.
+MODIFIED_US = "2026-09-11"
 VERSION = "0.1.0-dev"
 LICENSE = URIRef("https://spdx.org/licenses/CDLA-Permissive-2.0.html")
 
 CORE_IRI = URIRef("https://w3id.org/sdkb/pa")
 SEMI_IRI = URIRef("https://w3id.org/sdkb/pa/semi")
 KR_IRI = URIRef("https://w3id.org/sdkb/pa/kr")
+US_IRI = URIRef("https://w3id.org/sdkb/pa/us")
 ONT_IRI = URIRef("https://w3id.org/sdkb/ont")
 PATENT_IRI = URIRef("https://w3id.org/sdkb/ont/patent")
 
@@ -84,6 +98,8 @@ CORE_PREFIXES = {
 }
 SEMI_PREFIXES = dict(CORE_PREFIXES, ont=str(ONT))
 KR_PREFIXES = dict(CORE_PREFIXES, ont=str(ONT), gov=str(GOV), pakr=str(PAKR))
+# US 는 `ont:` 를 모른다 — 관할 바인딩이 도메인 접두를 갖는 순간 그 파일이 도메인을 아는 것이 된다.
+US_PREFIXES = dict(CORE_PREFIXES, gov=str(GOV), paus=str(PAUS))
 
 
 def _cls(g: Graph, iri, label_en, comment=None, parent=None) -> None:
@@ -438,6 +454,49 @@ def build_kr() -> Graph:
 
 
 # ═══════════════════════════════════════════════════════════════════
+# ④ us — 관할 바인딩의 두 번째 인스턴스 (단계 8 · V6b 종이 이식).
+#    kr 과 같은 슬롯을 같은 방식으로 채운다. **core 는 손대지 않는다** — 그것이 판정이다.
+# ═══════════════════════════════════════════════════════════════════
+def build_us() -> Graph:
+    g = Graph()
+    g.add((US_IRI, RDF.type, OWL.Ontology))
+    g.add((US_IRI, RDFS.label, Literal("SDKB Prior-Art — US jurisdiction binding", lang="en")))
+    g.add((US_IRI, RDFS.comment, Literal(
+        "US 특허법(35 U.S.C.) 조문·Office Action 문서종을 pa: 슬롯에 개체로 넣는다. "
+        "PLAN-005 단계 8 (V6b 종이 이식) — 이 파일이 존재하는 동안 core·semi·kr 은 바이트 하나 "
+        "바뀌지 않았다는 것을 scripts/report_stage8_paper_port.py 가 sha256 으로 센다. "
+        "US 판정 어휘(KSR/TSM 등)는 원천이 이 저장소에 없어 넣지 않는다 — A-Box 없이 성립하는 "
+        "설계 보증이며, US 회수 성능은 재지 않는다(PLAN-005 §7-8).", lang="ko")))
+    g.add((US_IRI, OWL.versionInfo, Literal(VERSION)))
+    g.add((US_IRI, DCTERMS.modified, Literal(MODIFIED_US, datatype=XSD.date)))
+    g.add((US_IRI, DCTERMS.license, LICENSE))
+    # core 만 import 한다. kr 이 sdkb-patent.ttl 을 import 하는 이유는 ont:Rejection_* 와의
+    # exactMatch 인데, US 는 그 동치를 주장하지 않으므로 도메인 T-Box 를 끌어올 이유가 없다.
+    g.add((US_IRI, OWL.imports, CORE_IRI))
+
+    # ── 법적 근거 — shape 이 notation 과 관할을 필수로 건다 ──
+    for local, ko, en, notation in [
+        ("Ground_102", "신규성 부정 (35 U.S.C. §102)", "lack of novelty (35 U.S.C. §102)", "USPTO-102"),
+        ("Ground_103", "비자명성 부정 (35 U.S.C. §103)", "obviousness (35 U.S.C. §103)", "USPTO-103"),
+    ]:
+        iri = PAUS[local]
+        _indiv(g, iri, PA.LegalGround, ko, en)
+        g.add((iri, SKOS.notation, Literal(notation)))
+        g.add((iri, PA.underJurisdiction, GOV.JurisdictionUS))
+
+    # ── 문서종 — 개체. KR 은 둘(통지서·거절결정서), US 도 둘이지만 이름과 절차가 다르다 ──
+    _indiv(g, PAUS.NonFinalOfficeAction, PA.ExaminationDocumentType,
+           "비최종 거절통지 (Non-Final Office Action)", "non-final Office Action")
+    g.add((PAUS.NonFinalOfficeAction, PA.documentRole, PA.FirstAction))
+    g.add((PAUS.NonFinalOfficeAction, PA.underJurisdiction, GOV.JurisdictionUS))
+    _indiv(g, PAUS.FinalOfficeAction, PA.ExaminationDocumentType,
+           "최종 거절통지 (Final Office Action)", "final Office Action")
+    g.add((PAUS.FinalOfficeAction, PA.documentRole, PA.FinalAction))
+    g.add((PAUS.FinalOfficeAction, PA.underJurisdiction, GOV.JurisdictionUS))
+    return g
+
+
+# ═══════════════════════════════════════════════════════════════════
 # 결정적 직렬화 — rdflib 에 맡기지 않는다
 # ═══════════════════════════════════════════════════════════════════
 def _term(t, prefixes: dict[str, str]) -> str:
@@ -497,6 +556,8 @@ MODULES = [
      "SDKB Prior-Art — 반도체 도메인 바인딩 (ont: → pa:)"),
     ("sdkb-priorart-kr.ttl", build_kr, KR_PREFIXES,
      "SDKB Prior-Art — KR 관할 바인딩 (pakr: → pa:)"),
+    ("sdkb-priorart-us.ttl", build_us, US_PREFIXES,
+     "SDKB Prior-Art — US 관할 바인딩 (paus: → pa:) · 단계 8 V6b 종이 이식"),
 ]
 
 

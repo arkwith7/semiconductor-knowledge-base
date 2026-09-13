@@ -36,8 +36,11 @@ SDKB_GOV  = Namespace(SDKB_BASE + "gov/")
 #   · 도메인(반도체) → 기존 `ont:` 를 쓴다. **`semi:` 를 새로 만들지 않는다** —
 #     scripts/build_owl.py 의 `SEMI` 가 이미 SemicONTO 라 접두어가 두 뜻을 갖는다(§1-3).
 #   · 관할(KR)      → `pakr:`. US 이식은 이 자리에 대응 모듈만 새로 쓴다.
+#   · 관할(US)      → `paus:` (PLAN-005 단계 8 · V6b 종이 이식). core 는 이 접두를 모른다 —
+#     scripts/check_priorart_invariants.py 의 JURIS_HINT 가 `pa/us/` 를 관할 어휘로 잡는다.
 SDKB_PA    = Namespace(SDKB_BASE + "pa/")
 SDKB_PA_KR = Namespace(SDKB_BASE + "pa/kr/")
+SDKB_PA_US = Namespace(SDKB_BASE + "pa/us/")
 
 # ── Public release identity ─────────────────────────────────────
 # 리포 이름은 발행되는 그래프(rdfs:seeAlso)와 인용 메타데이터(CITATION.cff)에 박힌다.
@@ -63,6 +66,7 @@ PREFIX_MAP: dict[str, Namespace | str] = {
     "gov":     SDKB_GOV,
     "pa":      SDKB_PA,
     "pakr":    SDKB_PA_KR,
+    "paus":    SDKB_PA_US,
     "prov":    PROV,
     "skos":    SKOS,
     "dcterms": "http://purl.org/dc/terms/",

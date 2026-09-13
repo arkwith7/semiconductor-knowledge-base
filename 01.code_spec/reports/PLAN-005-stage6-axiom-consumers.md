@@ -1,6 +1,6 @@
 # PLAN-005 단계 6-A — 공리↔소비자 대조표 (V1 절제 · 기계 산출)
 
-> 생성: `scripts/report_v1_ablation.py` · 2026-09-10 · **손으로 고치지 않는다** — `make v1-ablation` 이 다시 만든다. 정의는 스크립트 docstring, 예측은 `FROZEN` 표.
+> 생성: `scripts/report_v1_ablation.py` · 2026-09-11 · **손으로 고치지 않는다** — `make v1-ablation` 이 다시 만든다. 정의는 스크립트 docstring, 예측은 `FROZEN` 표.
 
 **결론.** 공리 29건 중 소비 **8** · 미소비 21. pa: 모듈의 R-Box 미소비: 4건. 예측 불일치: 0건.
 

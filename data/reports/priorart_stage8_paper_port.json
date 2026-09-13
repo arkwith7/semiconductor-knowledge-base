@@ -1,0 +1,230 @@
+{
+  "plan": "PLAN-005 단계 8 · V6b US 종이 이식",
+  "generated": "2026-09-11",
+  "l1": {
+    "frozen_commit": "ead24dd",
+    "files": [
+      {
+        "file": "ontology/sdkb-priorart-core.ttl",
+        "frozen_sha256": "307875eb7696154d4c2b38b742d89efdc7e332bcf9c70591b1168d1667036d70",
+        "sha256": "307875eb7696154d4c2b38b742d89efdc7e332bcf9c70591b1168d1667036d70",
+        "unchanged": true,
+        "changed_lines": 0
+      },
+      {
+        "file": "ontology/sdkb-priorart-semi.ttl",
+        "frozen_sha256": "d66c932524789269e7bd1a0f936b7987dc020c26abae0aaa2d3487f5c768e6ef",
+        "sha256": "d66c932524789269e7bd1a0f936b7987dc020c26abae0aaa2d3487f5c768e6ef",
+        "unchanged": true,
+        "changed_lines": 0
+      },
+      {
+        "file": "ontology/sdkb-priorart-kr.ttl",
+        "frozen_sha256": "4e5ed9739f648cf6bc0ba4f91079459895bb56695d6b089389b90784ea56bcf2",
+        "sha256": "4e5ed9739f648cf6bc0ba4f91079459895bb56695d6b089389b90784ea56bcf2",
+        "unchanged": true,
+        "changed_lines": 0
+      }
+    ],
+    "changed_lines_total": 0,
+    "all_unchanged": true
+  },
+  "us": {
+    "file": "ontology/sdkb-priorart-us.ttl",
+    "sha256": "1a4ad2678b76c4b5e2cf0441471bb9a0427ff902e09252e45ff25ebb9e1e6207",
+    "triples": 27,
+    "imports": [
+      "https://w3id.org/sdkb/pa"
+    ],
+    "individuals": [
+      {
+        "iri": "https://w3id.org/sdkb/pa/us/Ground_102",
+        "type": "LegalGround",
+        "notation": [
+          "USPTO-102"
+        ],
+        "jurisdiction": [
+          "https://w3id.org/sdkb/gov/JurisdictionUS"
+        ],
+        "document_role": [],
+        "label_en": [
+          "lack of novelty (35 U.S.C. §102)"
+        ]
+      },
+      {
+        "iri": "https://w3id.org/sdkb/pa/us/Ground_103",
+        "type": "LegalGround",
+        "notation": [
+          "USPTO-103"
+        ],
+        "jurisdiction": [
+          "https://w3id.org/sdkb/gov/JurisdictionUS"
+        ],
+        "document_role": [],
+        "label_en": [
+          "obviousness (35 U.S.C. §103)"
+        ]
+      },
+      {
+        "iri": "https://w3id.org/sdkb/pa/us/FinalOfficeAction",
+        "type": "ExaminationDocumentType",
+        "notation": [],
+        "jurisdiction": [
+          "https://w3id.org/sdkb/gov/JurisdictionUS"
+        ],
+        "document_role": [
+          "FinalAction"
+        ],
+        "label_en": [
+          "final Office Action"
+        ]
+      },
+      {
+        "iri": "https://w3id.org/sdkb/pa/us/NonFinalOfficeAction",
+        "type": "ExaminationDocumentType",
+        "notation": [],
+        "jurisdiction": [
+          "https://w3id.org/sdkb/gov/JurisdictionUS"
+        ],
+        "document_role": [
+          "FirstAction"
+        ],
+        "label_en": [
+          "non-final Office Action"
+        ]
+      }
+    ],
+    "counts": {
+      "LegalGround": 2,
+      "ExaminationDocumentType": 2,
+      "ElementVerdict": 0
+    },
+    "declares_classes": 0,
+    "declares_properties": 0,
+    "exact_match": 0
+  },
+  "cross": {
+    "us_knows_domain": 0,
+    "us_knows_kr": 0,
+    "kr_knows_us": 0,
+    "clean": true
+  },
+  "shacl": {
+    "data": [
+      "ontology/sdkb-priorart-core.ttl",
+      "ontology/sdkb-priorart-us.ttl",
+      "ontology/sdkb-governance.ttl"
+    ],
+    "shapes": "validation/shapes_priorart.ttl",
+    "conforms": true,
+    "us_targets": {
+      "LegalGround": 2,
+      "ExaminationDocumentType": 2
+    },
+    "non_vacuous": true,
+    "report": null
+  },
+  "cq": {
+    "skipped": false,
+    "graph_files_loaded": [
+      "ontology/sdkb-core.ttl",
+      "ontology/sdkb-core-data.ttl",
+      "ontology/sdkb-patent.ttl",
+      "ontology/sdkb-governance.ttl",
+      "ontology/sdkb-governance-kr.ttl",
+      "ontology/sdkb-governance-kr-instances.ttl",
+      "ontology/sdkb-governance-us-instances.ttl",
+      "ontology/sdkb-abox-experts-problems.ttl",
+      "ontology/sdkb-abox-patents.ttl",
+      "ontology/sdkb-abox-vendors.ttl",
+      "ontology/sdkb-abox-b-layer-queries.ttl",
+      "ontology/sdkb-priorart-core.ttl",
+      "ontology/sdkb-priorart-semi.ttl",
+      "ontology/sdkb-priorart-kr.ttl",
+      "ontology/sdkb-abox-priorart.ttl"
+    ],
+    "graph_files_missing": [],
+    "n_cq": 33,
+    "rows_without_us": {
+      "CQ01_patents_per_process_step": 23,
+      "CQ02_recent_patents_by_step": 441,
+      "CQ03_uncovered_process_steps": 27,
+      "CQ04_concept_annual_series": 371,
+      "CQ05_concept_vs_ipc_series": 2339,
+      "CQ06_concepts_without_recent_patents": 58,
+      "CQ07_device_process_crosswalk": 67,
+      "CQ08_applicant_process_portfolio": 324,
+      "CQ09_rejection_prior_art": 414,
+      "CQ10_prior_art_candidates_by_concept": 8,
+      "CQ11_experts_for_process_skill": 66,
+      "CQ12_problem_process_equipment_expert": 3134,
+      "CQ13_value_chain_vendor_portfolio": 21,
+      "CQ14_value_chain_role_distribution": 18,
+      "CQ15_failure_causal_chain": 6,
+      "CQ16_material_incompatibility": 3,
+      "CQ17_material_problem_expert": 35,
+      "CQ18_patents_by_skill": 4,
+      "CQ19_process_control_and_metrology": 6,
+      "CQ20_experts_by_equipment": 395,
+      "CQ21_process_hierarchy_portfolio": 38,
+      "CQ22_patent_equipment_and_technode": 204,
+      "CQ23_concept_export_control": 37,
+      "CQ24_national_core_technology": 12,
+      "CQ25_critical_control_concepts": 7,
+      "CQ26_patent_export_control_exposure": 1331,
+      "CQ27_fto_claim_readiness": 0,
+      "CQ28_patent_failuremode_expert": 84,
+      "CQ29_claim_level_rejection_judgment": 0,
+      "CQ30_independent_claim_features": 0,
+      "CQ31_dependent_claim_hierarchy": 0,
+      "CQ32_novelty_uncovered_essential_concepts": 200,
+      "CQ33_prior_art_disclosures_by_concept": 540
+    },
+    "rows_with_us": {
+      "CQ01_patents_per_process_step": 23,
+      "CQ02_recent_patents_by_step": 441,
+      "CQ03_uncovered_process_steps": 27,
+      "CQ04_concept_annual_series": 371,
+      "CQ05_concept_vs_ipc_series": 2339,
+      "CQ06_concepts_without_recent_patents": 58,
+      "CQ07_device_process_crosswalk": 67,
+      "CQ08_applicant_process_portfolio": 324,
+      "CQ09_rejection_prior_art": 414,
+      "CQ10_prior_art_candidates_by_concept": 8,
+      "CQ11_experts_for_process_skill": 66,
+      "CQ12_problem_process_equipment_expert": 3134,
+      "CQ13_value_chain_vendor_portfolio": 21,
+      "CQ14_value_chain_role_distribution": 18,
+      "CQ15_failure_causal_chain": 6,
+      "CQ16_material_incompatibility": 3,
+      "CQ17_material_problem_expert": 35,
+      "CQ18_patents_by_skill": 4,
+      "CQ19_process_control_and_metrology": 6,
+      "CQ20_experts_by_equipment": 395,
+      "CQ21_process_hierarchy_portfolio": 38,
+      "CQ22_patent_equipment_and_technode": 204,
+      "CQ23_concept_export_control": 37,
+      "CQ24_national_core_technology": 12,
+      "CQ25_critical_control_concepts": 7,
+      "CQ26_patent_export_control_exposure": 1331,
+      "CQ27_fto_claim_readiness": 0,
+      "CQ28_patent_failuremode_expert": 84,
+      "CQ29_claim_level_rejection_judgment": 0,
+      "CQ30_independent_claim_features": 0,
+      "CQ31_dependent_claim_hierarchy": 0,
+      "CQ32_novelty_uncovered_essential_concepts": 200,
+      "CQ33_prior_art_disclosures_by_concept": 540
+    },
+    "identical": true,
+    "diff": {}
+  },
+  "conditions": {
+    "l1_changed_lines_0": true,
+    "cross_clean": true,
+    "shacl_conforms": true,
+    "shacl_non_vacuous": true,
+    "cq_identical": true
+  },
+  "verdict": "PASS",
+  "verdict_note": "①–⑤ 전부"
+}
