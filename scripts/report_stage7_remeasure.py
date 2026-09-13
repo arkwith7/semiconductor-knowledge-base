@@ -66,10 +66,18 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 import build_abox_priorart as gen  # noqa: E402
 
+sys.path.insert(0, str(ROOT))
+from scripts import seal, splits  # noqa: E402
+
 OUT = ROOT / "data" / "reports" / "priorart_stage7_remeasure.json"
 STAGE1 = ROOT / "data" / "reports" / "priorart_baseline.json"
 ABOX_REPORT = ROOT / "data" / "reports" / "abox_priorart_report.json"
 V4_REPORT = ROOT / "data" / "reports" / "v4_robustness.json"
+
+
+def v4_report_path(scope: str) -> Path:
+    """분할별 V4 산출물. `all` 은 기존 경로 그대로 — 질의 세트 sha 동결은 불변이다 (CAL-3)."""
+    return V4_REPORT if scope == "all" else V4_REPORT.with_name(f"v4_robustness.{scope}.json")
 EDGES = ROOT / "data" / "patents" / "prior_art_edges.parquet"
 FEATURES_REL = "mappings/claim_features.parquet"
 
@@ -92,6 +100,9 @@ FROZEN = {
     "baseline_parquet_sha256_prefix": "16f8300dbf15",
     "gate": "L_C 대 L_A (§1 '기준선 대비') · L_B 는 귀속(데이터 효과 / 공리 효과)",
     "v3_gate_stratum": "§29② 포함 층 (§29②-only ∪ §29①∧②) · 인용 2문헌 이상",
+    # 문면(위)은 처음부터 옳았고 틀린 것은 코드였다 (§20 E-1 · CAL-1). 기계 표현을 병기해
+    # 리포트가 "실행하지 않은 정의를 인쇄"하는 일을 구조적으로 막는다 — 둘이 어긋나면 죽는다.
+    "v3_gate_strata": ["§29②-only", "§29①∧②"],
     "predictions_registered": {
         "P1": "Δ>0 비율은 §29②-only 층이 §29①-only 층보다 높다 (게이트 아님 · §29①-only 는 저검정력)",
         "P2": "L_C 의 best_single 중앙값 ≥ L_B (확장은 단일 문헌 포함률을 내리지 않는다)",
@@ -106,6 +117,56 @@ FROZEN = {
         "gate": "레버는 L_D 대 L_C · V2 세 조건은 L_D 대 L_A · τ 불변",
     },
 }
+
+
+#: 판정 범위 (CAL-3 · §20.2 E-3). 개념 사전이 dev+train 800 통지서에서 채굴됐으므로
+#: **train 은 상한이지 성능이 아니고**, test·test_b 는 봉인이다(D17 — 코드 게이트로만 연다).
+PRIMARY_SPLIT = "dev"
+REPORT_SCOPES = ("dev", "train", "all")
+
+#: 하류가 분기하는 키 (§20.11). 같은 키(`verdict`)가 이 버전부터 **dev 주 판정**을 담는다.
+INSTRUMENT_VERSION = "R0-CAL-3"
+
+LEGACY_SCOPE_NOTE = (
+    "전량(train+dev+test) · 분할 미존중 · 교정 전 범위. 개념 사전이 dev+train 통지서에서 채굴됐으므로 "
+    "**홀드아웃 성능이 아니다** — 개발 지표로만 읽는다 (§20.2 E-3 · D13 이력 보존)."
+)
+TRAIN_SCOPE_NOTE = (
+    "개념 사전이 이 문서들에서 채굴됐다 — **상한이지 성능이 아니다** (§20.7 CAL-3)."
+)
+
+
+#: V3 게이트가 겨냥하는 층 라벨의 기계 표현 (CAL-1 · §20 E-1).
+#: 라벨 **문자열 값은 불변**이다 — 이미 공표된 JSON 키이자 판정 리포트의 행 이름이다.
+#: 혼합 라벨 "§29①∧②" 는 "§29②" 를 부분문자열로 갖지 않는다(§29 다음 코드포인트가 ① U+2460).
+#: 그래서 부분문자열 판정은 혼합층을 조용히 버렸다 — 집합 소속으로 판정한다.
+INVENTIVE_STRATA = frozenset({"§29②-only", "§29①∧②"})
+
+
+def assert_gate_strata_agree(frozen: dict = FROZEN, strata: frozenset = INVENTIVE_STRATA) -> None:
+    """동결된 문면과 기계 표현이 같은 층을 가리키는지. 어긋나면 죽는다 (임포트 시점에 판정)."""
+    machine = set(frozen["v3_gate_strata"])
+    if machine != set(strata):
+        raise SystemExit(f"ERROR: v3_gate_strata {sorted(machine)} 가 INVENTIVE_STRATA {sorted(strata)} 와 다르다")
+    missing = [x for x in sorted(machine) if x not in frozen["v3_gate_stratum"]]
+    if missing:
+        raise SystemExit(f"ERROR: 동결 문면 v3_gate_stratum 이 층 {missing} 을 적지 않는다 — 문면과 코드가 갈렸다")
+
+
+assert_gate_strata_agree()
+
+
+def assert_scope_allowed(scope: str, *, ledger_rows: int = 0) -> None:
+    """봉인 분할의 지표는 **원장에 이 실행의 행이 없으면 낼 수 없다** (D17 · §20.10).
+
+    "test 행에 숫자를 찍을 수 없다" 를 산문이 아니라 코드가 막는다 — 봉인을 여는 길은
+    `scripts/seal.py:open_sealed()` 하나뿐이고, 그것은 원장에 행을 남긴다.
+    """
+    if scope in splits.SEALED and not ledger_rows:
+        raise SystemExit(
+            f"ERROR: 봉인 분할 '{scope}' 의 지표를 내려 한다 — 봉인 원장({seal.LEDGER.name})에 행이 0이다. "
+            "seal.open_sealed() 를 거치지 않은 접근은 막는다(D17)."
+        )
 
 
 # ── 원천 ─────────────────────────────────────────────────────────────────
@@ -306,7 +367,9 @@ def _spr(recs: dict[str, dict], fam: str, S: float, qs=None) -> float | None:
     return sum(1 for q in qs if recs[q][fam]["hit"] and recs[q][fam]["reach"] <= S) / len(qs)
 
 
-def summarize(recs: dict[str, dict]) -> dict:
+def summarize(recs: dict[str, dict], qs=None) -> dict:
+    """qs 를 주면 그 질의 부분집합만 요약한다 (CAL-3 · 계산은 그대로 두고 보고 시점에 분할한다)."""
+    recs = recs if qs is None else {q: r for q, r in recs.items() if q in qs}
     out = {"queries": len(recs), "target_size_median": st.median(r["n_target"] for r in recs.values()) if recs else None,
            "queries_kr": sum(r["target_kr"] for r in recs.values()),
            "queries_us": sum(r["target_us"] for r in recs.values())}
@@ -355,8 +418,12 @@ def mcnemar_exact(a: list[int], c: list[int]) -> dict:
     return {"c_only": b01, "a_only": b10, "p": p}
 
 
-def v2_verdict(recA: dict[str, dict], recC: dict[str, dict], frozen: dict = FROZEN) -> dict:
+def v2_verdict(recA: dict[str, dict], recC: dict[str, dict], frozen: dict = FROZEN, qs=None) -> dict:
     S = frozen["S_primary"]
+    if qs is not None:                                    # CAL-3 — 판정 범위를 질의 집합으로 좁힌다
+        qs = set(qs)
+        recA = {q: r for q, r in recA.items() if q in qs}
+        recC = {q: r for q, r in recC.items() if q in qs}
     common = sorted(set(recA) & set(recC))
     a = [int(recA[q]["all"]["hit"] and recA[q]["all"]["reach"] <= S) for q in common]
     c = [int(recC[q]["all"]["hit"] and recC[q]["all"]["reach"] <= S) for q in common]
@@ -381,9 +448,13 @@ def v2_verdict(recA: dict[str, dict], recC: dict[str, dict], frozen: dict = FROZ
 
 
 def lever_verdict(recC: dict[str, dict], recD: dict[str, dict], rej_unmapped_rate: float | None,
-                  frozen: dict = FROZEN) -> dict:
+                  frozen: dict = FROZEN, qs=None) -> dict:
     """단계 7-A′ 레버 게이트 — L_D 대 L_C (결과 전 동결 · FROZEN['stage7a'])."""
     f = frozen["stage7a"]
+    if qs is not None:                                    # CAL-3
+        qs = set(qs)
+        recC = {q: r for q, r in recC.items() if q in qs}
+        recD = {q: r for q, r in recD.items() if q in qs}
     common = sorted(set(recC) & set(recD))
     rc = [recC[q]["all"]["reach"] for q in common]
     rd = [recD[q]["all"]["reach"] for q in common]
@@ -456,8 +527,34 @@ def v3_summary(rows: list[dict]) -> dict:
     }
 
 
-def v3_verdict(rowsB: list[dict], rowsC: list[dict], frozen: dict = FROZEN) -> dict:
+def _rows_in(rows: list[dict], qs) -> list[dict]:
+    return rows if qs is None else [r for r in rows if r["q"] in qs]
+
+
+def _legacy_substring_gate(rowsC: list[dict], frozen: dict = FROZEN, qs=None) -> dict:
+    """교정 전(§20 E-1) 게이트를 **같은 실행에서** 재현한다 — 판정이 아니라 증거다.
+
+    `"§29②" in stratum` 은 혼합 라벨을 떨어뜨렸다. 과거 커밋을 꺼내지 않고 여기서 다시 계산해
+    리포트가 스스로 자기 교정을 증명하게 한다. 이 값은 어떤 PASS/FAIL 에도 들어가지 않는다.
+    """
+    rowsC = _rows_in(rowsC, qs)
     gate = [r for r in rowsC if r["n_cited"] >= 2 and "§29②" in r["stratum"]]
+    d = [r["delta"] for r in gate]
+    boot = paired_bootstrap([0.0] * len(d), d, frozen["bootstrap_B"], frozen["seed"], frozen["ci"])
+    matched = sorted({r["stratum"] for r in gate})
+    dropped = sorted(x for x in INVENTIVE_STRATA if x not in matched)
+    return {"definition": '`"§29②" in stratum` (부분문자열)',
+            "gate_queries": len(gate), "delta_mean": boot["delta"], "bootstrap": boot,
+            "pass": bool(boot["ci"] and boot["ci"][0] > 0 and boot["delta"] > 0),
+            "strata_matched": matched, "strata_dropped_by_bug": dropped,
+            "note": "판정 아님 (§20 E-1 · CAL-1). 동결 정의는 gate_strata 쪽이다."}
+
+
+def v3_verdict(rowsB: list[dict], rowsC: list[dict], frozen: dict = FROZEN, qs=None) -> dict:
+    if qs is not None:                                    # CAL-3
+        qs = set(qs)
+        rowsB, rowsC = _rows_in(rowsB, qs), _rows_in(rowsC, qs)
+    gate = [r for r in rowsC if r["n_cited"] >= 2 and r["stratum"] in INVENTIVE_STRATA]
     d = [r["delta"] for r in gate]
     boot = paired_bootstrap([0.0] * len(d), d, frozen["bootstrap_B"], frozen["seed"], frozen["ci"])
     ok = bool(boot["ci"] and boot["ci"][0] > 0 and boot["delta"] > 0)
@@ -476,8 +573,10 @@ def v3_verdict(rowsB: list[dict], rowsC: list[dict], frozen: dict = FROZEN) -> d
     medC = st.median(r["best_single"] for r in rowsC) if rowsC else None
     p2 = {"best_single_median_B": medB, "best_single_median_C": medC,
           "holds": (medC >= medB) if (medB is not None and medC is not None) else None}
-    return {"gate_stratum": frozen["v3_gate_stratum"], "gate_queries": len(gate),
+    return {"gate_stratum": frozen["v3_gate_stratum"], "gate_strata": sorted(INVENTIVE_STRATA),
+            "gate_queries": len(gate),
             "delta_mean_C": boot["delta"], "bootstrap": boot, "pass": ok,
+            "legacy_substring_gate": _legacy_substring_gate(rowsC, frozen),   # 이미 qs 로 좁혀진 rowsC
             "novelty": "정량 판정 없음 (§5 · §29① 표본 < 문서 254건 규모) — by_stratum 서술만",
             "P1": p1, "P2": p2}
 
@@ -570,9 +669,40 @@ def run(baseline: Path | None, extra_layers: list[tuple[str, Path]] | None = Non
     }
     repro["ok"] = all(abs(float(a) - float(b)) < 1e-6 for sec in ("V2", "V3") for a, b in repro[sec].values())
 
-    v2 = v2_verdict(recs["L_A"], recs[gate_layer])
-    v3 = v3_verdict(rows[prev_layer], rows[gate_layer])
-    v4 = v4_verdict(json.loads(V4_REPORT.read_text(encoding="utf-8")) if V4_REPORT.exists() else None)
+    # CAL-3 — 계산(per_query·v3_rows)은 전량 1회로 끝났다. 판정만 분할별로 부른다.
+    split_map = splits.load_split()
+    ledger_n = len(seal.ledger_rows())
+    scope_qs = {sc: (None if sc == "all" else splits.queries_in(sc, split_map=split_map))
+                for sc in REPORT_SCOPES}
+
+    def _verdict(scope: str) -> dict:
+        assert_scope_allowed(scope, ledger_rows=ledger_n)
+        qs = scope_qs[scope]
+        v4p = v4_report_path(scope)
+        v4doc = json.loads(v4p.read_text(encoding="utf-8")) if v4p.exists() else None
+        out = {
+            "scope": scope,
+            "queries": {k: (len(r) if qs is None else sum(1 for q in r if q in qs)) for k, r in recs.items()},
+            "v4_source": str(v4p.relative_to(ROOT)) if v4p.exists() else None,
+            "V2": v2_verdict(recs["L_A"], recs[gate_layer], qs=qs),
+            "V3": v3_verdict(rows[prev_layer], rows[gate_layer], qs=qs),
+            "V4": v4_verdict(v4doc),
+        }
+        if mode == "stage7a":
+            out["lever"] = lever_verdict(recs["L_C"], recs["L_D"],
+                                         identity.get("rej_independent_unmapped_rate"), qs=qs)
+            # 추가 층(예: L_D0 원소기호 규칙만)은 L_C 대비 서술로만 남긴다
+            out["lever"]["extra_layers_vs_L_C"] = {
+                name: lever_verdict(recs["L_C"], recs[name],
+                                    idents[name].get("rej_independent_unmapped_rate"), qs=qs)
+                for name, _ in (extra_layers or [])}
+        return out
+
+    verdict = _verdict(PRIMARY_SPLIT)                      # 주 판정
+    verdict_legacy_all = {**_verdict("all"), "note": LEGACY_SCOPE_NOTE}
+    verdict_train = {**_verdict("train"), "note": TRAIN_SCOPE_NOTE}
+    log(f"· 판정 범위 dev n={verdict['queries'][gate_layer]} (주) · train n={verdict_train['queries'][gate_layer]} · "
+        f"전량 n={verdict_legacy_all['queries'][gate_layer]} · 봉인 원장 {ledger_n}행")
     S = FROZEN["S_primary"]
     sums = {k: summarize(r) for k, r in recs.items()}
     names = list(layers)
@@ -580,19 +710,18 @@ def run(baseline: Path | None, extra_layers: list[tuple[str, Path]] | None = Non
     for prev, cur in zip(names, names[1:]):
         attribution["steps"][f"{cur}−{prev}"] = sums[cur]["all"][f"SPR@{S}"] - sums[prev]["all"][f"SPR@{S}"]
     attribution[f"total_{gate_layer}−L_A"] = sums[gate_layer]["all"][f"SPR@{S}"] - sums["L_A"]["all"][f"SPR@{S}"]
-    verdict = {"V2": v2, "V3": v3, "V4": v4}
-    if mode == "stage7a":
-        verdict["lever"] = lever_verdict(recs["L_C"], recs["L_D"], identity.get("rej_independent_unmapped_rate"))
-        # 추가 층(예: L_D0 원소기호 규칙만)은 L_C 대비 서술로만 남긴다
-        verdict["lever"]["extra_layers_vs_L_C"] = {
-            name: lever_verdict(recs["L_C"], recs[name], idents[name].get("rej_independent_unmapped_rate"))
-            for name, _ in (extra_layers or [])}
     return {
         "plan": "PLAN-005 단계 7 · V2–V4 재측정 · 동결 목표 대조" + (" · 7-A′ 레버 판정" if mode == "stage7a" else ""),
         "generator": "scripts/report_stage7_remeasure.py",
         "generated": str(date.today()),
         "read_only": True,
         "mode": mode,
+        # ── CAL-3 선언 (§20.7 · check_leakage K-4·K-5 가 읽는다) ──────────────
+        "instrument_version": INSTRUMENT_VERSION,
+        "split": PRIMARY_SPLIT,
+        "split_sha256": splits.sha256_of(splits.SPLIT_CSV),
+        "seal_ledger_rows": ledger_n,
+        "split_composition": {k: splits.split_composition(r, split_map=split_map) for k, r in recs.items()},
         "frozen": FROZEN,
         "inputs": {
             "baseline_parquet_sha256": _sha(bp), FEATURES_REL: current_sha,
@@ -600,6 +729,9 @@ def run(baseline: Path | None, extra_layers: list[tuple[str, Path]] | None = Non
             "ontology/sdkb-priorart-semi.ttl": _sha(gen.SEMI), "data/patents/prior_art_edges.parquet": _sha(EDGES),
             "data/reports/abox_priorart_report.json": _sha(ABOX_REPORT),
             "data/reports/v4_robustness.json": _sha(V4_REPORT) if V4_REPORT.exists() else None,
+            **{f"data/reports/{v4_report_path(sc).name}": _sha(v4_report_path(sc))
+               for sc in REPORT_SCOPES if sc != "all" and v4_report_path(sc).exists()},
+            "benchmark/assets/split.csv": splits.sha256_of(splits.SPLIT_CSV),
             **{f"layer_parquet_sha256[{k}]": v["parquet_sha256"] for k, v in idents.items()},
         },
         "identity_check_vs_abox_report": identity,
@@ -615,12 +747,17 @@ def run(baseline: Path | None, extra_layers: list[tuple[str, Path]] | None = Non
         "ladder": {k: {"reach": sums[k], "coverage": v3_summary(rows[k])} for k in layers},
         "attribution": attribution,
         "verdict": verdict,
+        "verdict_legacy_all": verdict_legacy_all,
+        "verdict_train": verdict_train,
         "limitations": [
             "SPR 은 순위 없는 후보집합이 S 이하여야 하는 지표이고 τ 의 원천 tfidf R@50 은 순위 지표다 — "
             "비대칭은 τ 를 유리하게 하지 않는다 (계획 파일 · 결과 전 명시).",
             "Disclosure 는 KR/US 분해 문헌에만 있다 — 인용문헌 중 JP 등 비 KR/US 는 목표에서 빠진다 (§4 결손 · 수는 identity_check 에).",
             "§29①-only 층은 질의가 적어 P1 은 저검정력이다 — 결론을 얹지 않는다.",
             "V4-2(사람 코딩)는 재실행하지 않고 인용한다.",
+            f"주 판정은 {PRIMARY_SPLIT} 분할이다 (CAL-3 · §20.2 E-3). 분모가 작아져 검정력이 낮다 — "
+            "전량 값은 verdict_legacy_all 에 병기하되 홀드아웃이 아니다(D13).",
+            "봉인 분할(test·test_b)의 지표는 이 리포트에 없다 — 코드가 막는다(D17 · assert_scope_allowed).",
         ],
     }
 
@@ -636,13 +773,35 @@ def render_markdown(rep: dict) -> str:
     L = ["# PLAN-005 단계 7 — V2–V4 재측정 · 동결 목표 대조 (기계 산출)", "",
          f"> 생성: `scripts/report_stage7_remeasure.py` · {rep['generated']} · 모드 {rep.get('mode')} · **손으로 고치지 않는다** — "
          "`make stage7-remeasure` 가 다시 만든다. 정의·문턱은 스크립트 `FROZEN`(결과 전 동결).", "",
-         "## 판정", "", "| 검증 | 판정 | 걸린 조건 |", "|---|:-:|---|"]
+         ""]
+    va, vt = rep.get("verdict_legacy_all", {}), rep.get("verdict_train", {})
+    L += ["## 판정 범위 (CAL-3 · §20.2 E-3)", "",
+          f"> **주 판정은 `{rep.get('split')}` 분할이다.** 개념 사전이 dev+train 통지서에서 채굴됐으므로 "
+          "train 은 **상한이지 성능이 아니고**, test·test_b 는 **봉인**이다 — 숫자를 찍지 않는다(D17). "
+          f"분할표 sha256 `{str(rep.get('split_sha256', ''))[:12]}…` · 봉인 원장 **{rep.get('seal_ledger_rows')}행** · "
+          f"계측기 `{rep.get('instrument_version')}`.", "",
+          "| 분할 | 게이트 층 질의 | 지위 |", "|---|---:|---|",
+          f"| **{rep.get('split')}** | {v['queries'][gate_layer]} | **주 판정** |",
+          f"| train | {vt.get('queries', {}).get(gate_layer, '—')} | 참고 — 개념 사전이 여기서 채굴됐다(상한) |",
+          "| test · test_b | **—** | **봉인** |",
+          f"| 전량 | {va.get('queries', {}).get(gate_layer, '—')} | 개발 지표(교정 전 범위) · 병기 |", "",
+          "## 판정", "", "| 검증 | 판정 | 걸린 조건 |", "|---|:-:|---|"]
     if "lever" in v:
         lv = v["lever"]
         L.append(f"| 7-A′ 레버 (L_D 대 L_C) | **{'PASS' if lv['pass'] else 'FAIL'}** | {', '.join(lv['failed_conditions']) or '—'} |")
     L += [f"| V2 도달 ({gate_layer} 대 L_A) | **{'PASS' if v['V2']['pass'] else 'FAIL'}** | {', '.join(v['V2']['failed_conditions']) or '—'} |",
           f"| V3 업무 목적(진보성) | **{'PASS' if v['V3']['pass'] else 'FAIL'}** | 게이트 층 q={v['V3']['gate_queries']} · Δ평균 {_f(v['V3']['delta_mean_C'])} · CI {v['V3']['bootstrap']['ci']} |",
-          f"| V4 질의 비종속성 | **{('PASS' if v['V4']['pass'] else 'FAIL') if v['V4'].get('pass') is not None else v['V4']['status']}** | — |", ""]
+          f"| V4 질의 비종속성 | **{('PASS' if v['V4']['pass'] else 'FAIL') if v['V4'].get('pass') is not None else v['V4']['status']}** | — |",
+          "", "**범위 병기**(판정 아님 · D13):", ""]
+    for lab, blk in (("전량 · 교정 전 범위", va), ("train · 상한", vt)):
+        if not blk:
+            continue
+        L.append(f"- {lab}: V2 {'PASS' if blk['V2']['pass'] else 'FAIL'}"
+                 f"({', '.join(blk['V2']['failed_conditions']) or '조건 전부 충족'}) · "
+                 f"V3 {'PASS' if blk['V3']['pass'] else 'FAIL'}(q={blk['V3']['gate_queries']} · "
+                 f"Δ {_f(blk['V3']['delta_mean_C'])} · CI {[round(x, 4) for x in blk['V3']['bootstrap']['ci']] if blk['V3']['bootstrap']['ci'] else '—'})"
+                 + (f" · 레버 {'PASS' if blk['lever']['pass'] else 'FAIL'}" if 'lever' in blk else ""))
+    L += [f"- 각 범위의 근거: `verdict`(주) · `verdict_legacy_all` · `verdict_train` (JSON)", ""]
     if "lever" in v:
         lv = v["lever"]
         u, r, h = lv["rej_unmapped"], lv["reach_median_decrease"], lv["hit_inf_drop"]
@@ -674,6 +833,13 @@ def render_markdown(rep: dict) -> str:
     for s, d in rep["ladder"][gate_layer]["coverage"].get("by_stratum", {}).items():
         L.append(f"| {s} | {d['queries']} | {d['pair_queries']} | {_f(d['best_single_median'])} | {_f(d['delta_mean'])} | {_f(d['delta_gt0_frac'])} |")
     p1, p2 = v["V3"]["P1"], v["V3"]["P2"]
+    lg = v["V3"].get("legacy_substring_gate")
+    if lg:
+        L += ["", f"게이트 정의 교정(CAL-1 · §20 E-1): 교정 전 {lg['definition']} 은 층 {lg['strata_matched']} 만 잡아 "
+              f"q={lg['gate_queries']} · Δ평균 {_f(lg['delta_mean'])} · CI {lg['bootstrap']['ci']} · "
+              f"{'PASS' if lg['pass'] else 'FAIL'} 였다 (층 {lg['strata_dropped_by_bug']} 을 떨어뜨림 · **판정 아님**). "
+              f"동결 정의 {v['V3']['gate_strata']} 로 실행한 현 게이트는 q={v['V3']['gate_queries']} · "
+              f"Δ평균 {_f(v['V3']['delta_mean_C'])} 이다."]
     L += ["", f"사전 등록 P1(게이트 아님): §29②-only {_f(p1['frac_29_2_only'])}(n={p1['n_29_2_only']}) 대 §29①-only "
           f"{_f(p1['frac_29_1_only'])}(n={p1['n_29_1_only']}) · 성립 {p1['holds']} · 저검정력 {p1['underpowered']}",
           f"사전 등록 P2: best_single 중앙 이전 층 {_f(p2['best_single_median_B'])} → {gate_layer} {_f(p2['best_single_median_C'])} · 성립 {p2['holds']}", ""]

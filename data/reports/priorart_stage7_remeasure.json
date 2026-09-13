@@ -1,9 +1,30 @@
 {
   "plan": "PLAN-005 단계 7 · V2–V4 재측정 · 동결 목표 대조 · 7-A′ 레버 판정",
   "generator": "scripts/report_stage7_remeasure.py",
-  "generated": "2026-09-10",
+  "generated": "2026-09-13",
   "read_only": true,
   "mode": "stage7a",
+  "instrument_version": "R0-CAL-3",
+  "split": "dev",
+  "split_sha256": "714dafe033afabf5185b3cc6f1a39bbc7099c4d71b414f81031e2b48e2165108",
+  "seal_ledger_rows": 0,
+  "split_composition": {
+    "L_A": {
+      "dev": 153,
+      "test": 163,
+      "train": 443
+    },
+    "L_C": {
+      "dev": 155,
+      "test": 167,
+      "train": 452
+    },
+    "L_D": {
+      "dev": 159,
+      "test": 168,
+      "train": 477
+    }
+  },
   "frozen": {
     "tau": 0.6708,
     "tau_source": "data/reports/priorart_baseline.json · control_group.language_stratified_R@50.tfidf_KR",
@@ -25,6 +46,10 @@
     "baseline_parquet_sha256_prefix": "16f8300dbf15",
     "gate": "L_C 대 L_A (§1 '기준선 대비') · L_B 는 귀속(데이터 효과 / 공리 효과)",
     "v3_gate_stratum": "§29② 포함 층 (§29②-only ∪ §29①∧②) · 인용 2문헌 이상",
+    "v3_gate_strata": [
+      "§29②-only",
+      "§29①∧②"
+    ],
     "predictions_registered": {
       "P1": "Δ>0 비율은 §29②-only 층이 §29①-only 층보다 높다 (게이트 아님 · §29①-only 는 저검정력)",
       "P2": "L_C 의 best_single 중앙값 ≥ L_B (확장은 단일 문헌 포함률을 내리지 않는다)"
@@ -46,9 +71,10 @@
     "ontology/sdkb-priorart-semi.ttl": "d66c932524789269e7bd1a0f936b7987dc020c26abae0aaa2d3487f5c768e6ef",
     "data/patents/prior_art_edges.parquet": "bc893c93210c4d7c88de6df0c36698c753969a620e11f840ae71ca56426ec5f9",
     "data/reports/abox_priorart_report.json": "aafe066e53ea673dee15dd89b128c79674773ebaf1037003eaddbd049de3d163",
-    "data/reports/v4_robustness.json": "9b4ebce20b72d64e5824571ffa92c79a1257b06853bf9311aed057b688ea769d",
+    "data/reports/v4_robustness.json": "07b169010adb64f5146ab85a141256bcdbc6af2b58cc76bc15e01ca69381fc00",
+    "data/reports/v4_robustness.dev.json": "77e7155cf17e6fa930b3febf153f6334df046ce97b12a4ca7c2afec2dde7f585",
+    "benchmark/assets/split.csv": "714dafe033afabf5185b3cc6f1a39bbc7099c4d71b414f81031e2b48e2165108",
     "layer_parquet_sha256[L_C]": "1e8b14cae533f0039b54afbf906490d2c7f6ca5ce53a92af96b4e35ccf8b9238",
-    "layer_parquet_sha256[L_D0]": "ab1634f5a7a37d1c0963c947d0a4428deb9e3626d8a418bd17a924e0f6a27da6",
     "layer_parquet_sha256[L_D]": "cbd73414c09d198c298aa84c4e4f9652594dfce697611e76d05d3d9c7429bad3"
   },
   "identity_check_vs_abox_report": {
@@ -103,30 +129,6 @@
       ],
       "rej_independent_unmapped_rate": 0.2395,
       "parquet_sha256": "1e8b14cae533f0039b54afbf906490d2c7f6ca5ce53a92af96b4e35ccf8b9238"
-    },
-    "L_D0": {
-      "profiles": [
-        62754,
-        null
-      ],
-      "disclosures": [
-        33177,
-        null
-      ],
-      "essential_links": [
-        133596,
-        null
-      ],
-      "covered_by_pairs": [
-        16,
-        null
-      ],
-      "bound_concepts": [
-        166,
-        null
-      ],
-      "rej_independent_unmapped_rate": 0.2468,
-      "parquet_sha256": "ab1634f5a7a37d1c0963c947d0a4428deb9e3626d8a418bd17a924e0f6a27da6"
     },
     "L_D": {
       "profiles": [
@@ -224,7 +226,6 @@
     "Q": {
       "L_A": 759,
       "L_C": 774,
-      "L_D0": 767,
       "L_D": 804
     },
     "Q_A_and_Q_C": 759,
@@ -409,92 +410,6 @@
         }
       }
     },
-    "L_D0": {
-      "reach": {
-        "queries": 767,
-        "target_size_median": 2,
-        "queries_kr": 674,
-        "queries_us": 208,
-        "exist": {
-          "reach_median": 11737,
-          "reach_mean": 11655.7,
-          "reach_max": 28457,
-          "reach_zero_queries": 0,
-          "hit_rate_any_S": 0.933507,
-          "SPR@50": 0.005215123859191656,
-          "SPR@100": 0.005215123859191656,
-          "SPR@1000": 0.041720990873533245,
-          "SPR@inf": 0.9335071707953064,
-          "SPR@50_KR": 0.004451038575667656,
-          "SPR@50_US": 0.014423076923076924
-        },
-        "all": {
-          "reach_median": 961,
-          "reach_mean": 2827.9,
-          "reach_max": 20687,
-          "reach_zero_queries": 4,
-          "hit_rate_any_S": 0.595828,
-          "SPR@50": 0.03129074315514994,
-          "SPR@100": 0.04563233376792699,
-          "SPR@1000": 0.2320730117340287,
-          "SPR@inf": 0.5958279009126467,
-          "SPR@50_KR": 0.032640949554896145,
-          "SPR@50_US": 0.02403846153846154
-        }
-      },
-      "coverage": {
-        "queries": 767,
-        "essential_concepts_per_query": {
-          "median": 3.0,
-          "mean": 3.23,
-          "p10": 1.0,
-          "p90": 6.0
-        },
-        "best_single_coverage": {
-          "median": 0.75,
-          "mean": 0.712,
-          "eq0": 51,
-          "eq1": 329,
-          "saturated_frac": 0.4954
-        },
-        "pair_queries": 474,
-        "delta_coverage": {
-          "median": 0.0,
-          "mean": 0.0532,
-          "gt0_frac": 0.2131
-        },
-        "by_stratum": {
-          "§29①-only": {
-            "queries": 14,
-            "pair_queries": 5,
-            "best_single_median": 1.0,
-            "delta_mean": 0.05,
-            "delta_gt0_frac": 0.2
-          },
-          "§29①∧②": {
-            "queries": 124,
-            "pair_queries": 69,
-            "best_single_median": 0.75,
-            "delta_mean": 0.0645,
-            "delta_gt0_frac": 0.2464
-          },
-          "§29②-only": {
-            "queries": 409,
-            "pair_queries": 281,
-            "best_single_median": 0.75,
-            "delta_mean": 0.0568,
-            "delta_gt0_frac": 0.2278
-          },
-          "없음": {
-            "queries": 220,
-            "pair_queries": 119,
-            "best_single_median": 0.75,
-            "delta_mean": 0.0384,
-            "delta_gt0_frac": 0.1597
-          }
-        }
-      }
-    },
     "L_D": {
       "reach": {
         "queries": 804,
@@ -586,12 +501,220 @@
     "measure": "SPR∀@50",
     "steps": {
       "L_C−L_A": 0.0033397677482611757,
-      "L_D0−L_C": 0.0002829912171654417,
-      "L_D−L_D0": 0.017216719531417228
+      "L_D−L_C": 0.01749971074858267
     },
     "total_L_D−L_A": 0.020839478496843845
   },
   "verdict": {
+    "scope": "dev",
+    "queries": {
+      "L_A": 153,
+      "L_C": 155,
+      "L_D": 159
+    },
+    "v4_source": "data/reports/v4_robustness.dev.json",
+    "V2": {
+      "i_significant_rise": {
+        "pass": false,
+        "common_queries": 152,
+        "SPR_all@50_A": 0.013157894736842105,
+        "SPR_all@50_C": 0.02631578947368421,
+        "bootstrap": {
+          "n": 152,
+          "delta": 0.013157894736842105,
+          "ci": [
+            0.0,
+            0.03289473684210526
+          ],
+          "B": 10000,
+          "seed": 20260909
+        },
+        "mcnemar": {
+          "c_only": 2,
+          "a_only": 0,
+          "p": 0.5
+        }
+      },
+      "ii_tau": {
+        "pass": false,
+        "tau": 0.6708,
+        "SPR_all@50_KR_C": 0.02158273381294964,
+        "queries_kr": 139
+      },
+      "iii_specificity": {
+        "pass": true,
+        "reach_all_median_A": 948,
+        "reach_all_median_C": 772
+      },
+      "pass": false,
+      "failed_conditions": [
+        "i",
+        "ii"
+      ]
+    },
+    "V3": {
+      "gate_stratum": "§29② 포함 층 (§29②-only ∪ §29①∧②) · 인용 2문헌 이상",
+      "gate_strata": [
+        "§29①∧②",
+        "§29②-only"
+      ],
+      "gate_queries": 93,
+      "delta_mean_C": 0.07328585393101522,
+      "bootstrap": {
+        "n": 93,
+        "delta": 0.07328585393101522,
+        "ci": [
+          0.04773512777545036,
+          0.10185984266629423
+        ],
+        "B": 10000,
+        "seed": 20260909
+      },
+      "pass": true,
+      "legacy_substring_gate": {
+        "definition": "`\"§29②\" in stratum` (부분문자열)",
+        "gate_queries": 77,
+        "delta_mean": 0.08418507899027378,
+        "bootstrap": {
+          "n": 77,
+          "delta": 0.08418507899027378,
+          "ci": [
+            0.05479205318491034,
+            0.11609602518693425
+          ],
+          "B": 10000,
+          "seed": 20260909
+        },
+        "pass": true,
+        "strata_matched": [
+          "§29②-only"
+        ],
+        "strata_dropped_by_bug": [
+          "§29①∧②"
+        ],
+        "note": "판정 아님 (§20 E-1 · CAL-1). 동결 정의는 gate_strata 쪽이다."
+      },
+      "novelty": "정량 판정 없음 (§5 · §29① 표본 < 문서 254건 규모) — by_stratum 서술만",
+      "P1": {
+        "frac_29_2_only": 0.2987012987012987,
+        "n_29_2_only": 77,
+        "frac_29_1_only": 0.0,
+        "n_29_1_only": 1,
+        "underpowered": true,
+        "diff_bootstrap": {
+          "delta": 0.2987012987012987,
+          "ci": [
+            0.19480519480519481,
+            0.4025974025974026
+          ]
+        },
+        "holds": true
+      },
+      "P2": {
+        "best_single_median_B": 0.75,
+        "best_single_median_C": 0.7142857142857143,
+        "holds": false
+      }
+    },
+    "V4": {
+      "status": "산출",
+      "checks": {
+        "exist": {
+          "claim_hit_rate": 0.8627,
+          "variants": {
+            "L1": {
+              "hit_rate": 0.8627,
+              "drop": 0.0,
+              "pass": true
+            },
+            "L2": {
+              "hit_rate": 0.8693,
+              "drop": -0.006599999999999939,
+              "pass": true
+            },
+            "L3": {
+              "hit_rate": 0.8693,
+              "drop": -0.006599999999999939,
+              "pass": true
+            }
+          },
+          "pass": true
+        },
+        "all": {
+          "claim_hit_rate": 0.4248,
+          "variants": {
+            "L1": {
+              "hit_rate": 0.4118,
+              "drop": 0.013000000000000012,
+              "pass": true
+            },
+            "L2": {
+              "hit_rate": 0.4314,
+              "drop": -0.006599999999999995,
+              "pass": true
+            },
+            "L3": {
+              "hit_rate": 0.3529,
+              "drop": 0.07190000000000002,
+              "pass": false
+            }
+          },
+          "pass": false
+        }
+      },
+      "quartile": {
+        "Q1": 0.8417,
+        "Q4": 0.887,
+        "pass": true
+      },
+      "human_coding_reference": "data/reports/v4_human_coding.json (κ 0.6934 · 재코딩 없음)",
+      "pass": false
+    },
+    "lever": {
+      "gate": "레버는 L_D 대 L_C · V2 세 조건은 L_D 대 L_A · τ 불변",
+      "common_queries": 154,
+      "rej_unmapped": {
+        "pass": true,
+        "rate": 0.1861,
+        "max": 0.2
+      },
+      "reach_median_decrease": {
+        "pass": false,
+        "median_C": 815.5,
+        "median_D": 770.5,
+        "bootstrap": {
+          "n": 154,
+          "delta": -45.0,
+          "ci": [
+            -239.01249999999987,
+            94.5
+          ],
+          "B": 10000,
+          "seed": 20260909
+        }
+      },
+      "hit_inf_drop": {
+        "pass": true,
+        "hit_C": 0.5714285714285714,
+        "hit_D": 0.577922077922078,
+        "drop": -0.006493506493506551,
+        "max": 0.02
+      },
+      "pass": false,
+      "failed_conditions": [
+        "reach_median"
+      ],
+      "extra_layers_vs_L_C": {}
+    }
+  },
+  "verdict_legacy_all": {
+    "scope": "all",
+    "queries": {
+      "L_A": 759,
+      "L_C": 774,
+      "L_D": 804
+    },
+    "v4_source": "data/reports/v4_robustness.json",
     "V2": {
       "i_significant_rise": {
         "pass": true,
@@ -632,19 +755,46 @@
     },
     "V3": {
       "gate_stratum": "§29② 포함 층 (§29②-only ∪ §29①∧②) · 인용 2문헌 이상",
-      "gate_queries": 294,
-      "delta_mean_C": 0.061716288246900494,
+      "gate_strata": [
+        "§29①∧②",
+        "§29②-only"
+      ],
+      "gate_queries": 367,
+      "delta_mean_C": 0.06360598983214787,
       "bootstrap": {
-        "n": 294,
-        "delta": 0.061716288246900494,
+        "n": 367,
+        "delta": 0.06360598983214787,
         "ci": [
-          0.04914057361761444,
-          0.07479958722305662
+          0.05185297653451605,
+          0.07586341716110108
         ],
         "B": 10000,
         "seed": 20260909
       },
       "pass": true,
+      "legacy_substring_gate": {
+        "definition": "`\"§29②\" in stratum` (부분문자열)",
+        "gate_queries": 294,
+        "delta_mean": 0.061716288246900494,
+        "bootstrap": {
+          "n": 294,
+          "delta": 0.061716288246900494,
+          "ci": [
+            0.04914057361761444,
+            0.07479958722305662
+          ],
+          "B": 10000,
+          "seed": 20260909
+        },
+        "pass": true,
+        "strata_matched": [
+          "§29②-only"
+        ],
+        "strata_dropped_by_bug": [
+          "§29①∧②"
+        ],
+        "note": "판정 아님 (§20 E-1 · CAL-1). 동결 정의는 gate_strata 쪽이다."
+      },
       "novelty": "정량 판정 없음 (§5 · §29① 표본 < 문서 254건 규모) — by_stratum 서술만",
       "P1": {
         "frac_29_2_only": 0.2585034013605442,
@@ -755,50 +905,168 @@
       "failed_conditions": [
         "hit_drop"
       ],
-      "extra_layers_vs_L_C": {
-        "L_D0": {
-          "gate": "레버는 L_D 대 L_C · V2 세 조건은 L_D 대 L_A · τ 불변",
-          "common_queries": 767,
-          "rej_unmapped": {
-            "pass": false,
-            "rate": 0.2468,
-            "max": 0.2
-          },
-          "reach_median_decrease": {
-            "pass": false,
-            "median_C": 961,
-            "median_D": 961,
-            "bootstrap": {
-              "n": 767,
-              "delta": 0.0,
-              "ci": [
-                0.0,
-                161.0
-              ],
-              "B": 10000,
-              "seed": 20260909
-            }
-          },
-          "hit_inf_drop": {
-            "pass": true,
-            "hit_C": 0.5984354628422425,
-            "hit_D": 0.5958279009126467,
-            "drop": 0.0026075619295957697,
-            "max": 0.02
-          },
-          "pass": false,
-          "failed_conditions": [
-            "rej_unmapped",
-            "reach_median"
-          ]
+      "extra_layers_vs_L_C": {}
+    },
+    "note": "전량(train+dev+test) · 분할 미존중 · 교정 전 범위. 개념 사전이 dev+train 통지서에서 채굴됐으므로 **홀드아웃 성능이 아니다** — 개발 지표로만 읽는다 (§20.2 E-3 · D13 이력 보존)."
+  },
+  "verdict_train": {
+    "scope": "train",
+    "queries": {
+      "L_A": 443,
+      "L_C": 452,
+      "L_D": 477
+    },
+    "v4_source": null,
+    "V2": {
+      "i_significant_rise": {
+        "pass": true,
+        "common_queries": 442,
+        "SPR_all@50_A": 0.038461538461538464,
+        "SPR_all@50_C": 0.0746606334841629,
+        "bootstrap": {
+          "n": 442,
+          "delta": 0.03619909502262443,
+          "ci": [
+            0.01583710407239819,
+            0.058823529411764705
+          ],
+          "B": 10000,
+          "seed": 20260909
+        },
+        "mcnemar": {
+          "c_only": 20,
+          "a_only": 4,
+          "p": 0.001543879508972168
         }
+      },
+      "ii_tau": {
+        "pass": false,
+        "tau": 0.6708,
+        "SPR_all@50_KR_C": 0.08088235294117647,
+        "queries_kr": 408
+      },
+      "iii_specificity": {
+        "pass": true,
+        "reach_all_median_A": 948,
+        "reach_all_median_C": 350
+      },
+      "pass": false,
+      "failed_conditions": [
+        "ii"
+      ]
+    },
+    "V3": {
+      "gate_stratum": "§29② 포함 층 (§29②-only ∪ §29①∧②) · 인용 2문헌 이상",
+      "gate_strata": [
+        "§29①∧②",
+        "§29②-only"
+      ],
+      "gate_queries": 181,
+      "delta_mean_C": 0.0659170632927539,
+      "bootstrap": {
+        "n": 181,
+        "delta": 0.0659170632927539,
+        "ci": [
+          0.04920868112857063,
+          0.08377969712914464
+        ],
+        "B": 10000,
+        "seed": 20260909
+      },
+      "pass": true,
+      "legacy_substring_gate": {
+        "definition": "`\"§29②\" in stratum` (부분문자열)",
+        "gate_queries": 144,
+        "delta_mean": 0.05531605739939073,
+        "bootstrap": {
+          "n": 144,
+          "delta": 0.05531605739939073,
+          "ci": [
+            0.03850030563572231,
+            0.07426802749719416
+          ],
+          "B": 10000,
+          "seed": 20260909
+        },
+        "pass": true,
+        "strata_matched": [
+          "§29②-only"
+        ],
+        "strata_dropped_by_bug": [
+          "§29①∧②"
+        ],
+        "note": "판정 아님 (§20 E-1 · CAL-1). 동결 정의는 gate_strata 쪽이다."
+      },
+      "novelty": "정량 판정 없음 (§5 · §29① 표본 < 문서 254건 규모) — by_stratum 서술만",
+      "P1": {
+        "frac_29_2_only": 0.24305555555555555,
+        "n_29_2_only": 144,
+        "frac_29_1_only": 0.25,
+        "n_29_1_only": 4,
+        "underpowered": true,
+        "diff_bootstrap": {
+          "delta": -0.0069444444444444475,
+          "ci": [
+            -0.5138888888888888,
+            0.2916666666666667
+          ]
+        },
+        "holds": false
+      },
+      "P2": {
+        "best_single_median_B": 0.75,
+        "best_single_median_C": 0.6666666666666666,
+        "holds": false
       }
-    }
+    },
+    "V4": {
+      "status": "미산출",
+      "pass": null
+    },
+    "lever": {
+      "gate": "레버는 L_D 대 L_C · V2 세 조건은 L_D 대 L_A · τ 불변",
+      "common_queries": 451,
+      "rej_unmapped": {
+        "pass": true,
+        "rate": 0.1861,
+        "max": 0.2
+      },
+      "reach_median_decrease": {
+        "pass": true,
+        "median_C": 817,
+        "median_D": 302,
+        "bootstrap": {
+          "n": 451,
+          "delta": -515.0,
+          "ci": [
+            -723.0,
+            -300.0
+          ],
+          "B": 10000,
+          "seed": 20260909
+        }
+      },
+      "hit_inf_drop": {
+        "pass": false,
+        "hit_C": 0.5942350332594235,
+        "hit_D": 0.43680709534368073,
+        "drop": 0.15742793791574278,
+        "max": 0.02
+      },
+      "pass": false,
+      "failed_conditions": [
+        "hit_drop"
+      ],
+      "extra_layers_vs_L_C": {}
+    },
+    "note": "개념 사전이 이 문서들에서 채굴됐다 — **상한이지 성능이 아니다** (§20.7 CAL-3)."
   },
   "limitations": [
     "SPR 은 순위 없는 후보집합이 S 이하여야 하는 지표이고 τ 의 원천 tfidf R@50 은 순위 지표다 — 비대칭은 τ 를 유리하게 하지 않는다 (계획 파일 · 결과 전 명시).",
     "Disclosure 는 KR/US 분해 문헌에만 있다 — 인용문헌 중 JP 등 비 KR/US 는 목표에서 빠진다 (§4 결손 · 수는 identity_check 에).",
     "§29①-only 층은 질의가 적어 P1 은 저검정력이다 — 결론을 얹지 않는다.",
-    "V4-2(사람 코딩)는 재실행하지 않고 인용한다."
+    "V4-2(사람 코딩)는 재실행하지 않고 인용한다.",
+    "주 판정은 dev 분할이다 (CAL-3 · §20.2 E-3). 분모가 작아져 검정력이 낮다 — 전량 값은 verdict_legacy_all 에 병기하되 홀드아웃이 아니다(D13).",
+    "봉인 분할(test·test_b)의 지표는 이 리포트에 없다 — 코드가 막는다(D17 · assert_scope_allowed)."
   ]
 }
