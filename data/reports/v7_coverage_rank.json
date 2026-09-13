@@ -1,0 +1,875 @@
+{
+  "plan": "PLAN-005 R0-CAL-2 · V7 CoverageRank 순위 계측 · τ 대칭 사다리 (판정 없음)",
+  "generator": "scripts/report_v7_coverage_rank.py",
+  "generated": "2026-09-13",
+  "read_only": true,
+  "instrument_version": "R0-CAL-2",
+  "split": "dev",
+  "split_sha256": "714dafe033afabf5185b3cc6f1a39bbc7099c4d71b414f81031e2b48e2165108",
+  "seal_ledger_rows": 0,
+  "frozen_v7": {
+    "k": 50,
+    "layer": "L_D (현 parquet · 생성기 재파생 · coveredBy 확장 on) — report_stage7_remeasure.layers_current",
+    "score": "score(q,d) = max_p |ess(p) ∩ Disc*(d)| / |ess(p)| · 동률 argmax 는 (score, |∩|) 사전식 최대 · d ≠ q",
+    "identity": "{d : score = 1} == R∀(q) — 어긋나면 계측기 오류(결과가 아니다)",
+    "order_key": [
+      "score 내림",
+      "|∩| 내림",
+      "|Disc*(d)| 오름 (특이도)",
+      "id 사전순"
+    ],
+    "unranked": "score = 0 은 순위가 없다 = 미회수 (tfidf 도 0 점 문헌은 순위가 없다 — 대칭)",
+    "tfidf_order": "eval_prior_art_realgt.tfidf_rank 그대로 — (sim, doc_idx) 내림",
+    "tfidf_pool_restriction": "idf 는 전체 코퍼스로 고정 · 풀 안에서 상대 순서만 다시 매긴다",
+    "gt": "source_type = examiner ∧ ~is_npl ∧ cited ∈ 풀 (eval_prior_art_realgt.load_examiner_gt)",
+    "bucket": "코퍼스 country = KR 이면 KR, 아니면 FOREIGN (realgt 와 같다)",
+    "micro": "Σ 적중 / Σ 정답 쌍 — τ 대조는 이것만 (§20.7 (b))",
+    "macro": "질의별 (적중 쌍 / 쌍) 의 평균 — 병기",
+    "pools": {
+      "P_corpus": "fulltext_corpus has_content (tfidf 원 조건)",
+      "P_disc": "L_D Disclosure 보유 문헌 (배경 g1·g2 포함)",
+      "P_common": "코퍼스 ∩ Disclosure — **주**"
+    },
+    "U_common": "정답 쌍 중 cited 가 P_common 에 있는 것",
+    "tie_band": "m = 경계 키보다 엄격히 앞선 수 · g = 같은 동점 키 그룹 크기 · m+g ≤ k → 1 · m ≥ k → 0 · 그 사이 → 기대 (k−m)/g · 최선 1 · 최악 0. 동점 키: CoverageRank 는 순위 키 앞 셋 · tfidf 는 sim",
+    "tie_band_caveat": "최선·최악은 쌍별 한계다 — 모든 쌍이 동시에 최선/최악일 수는 없다",
+    "ladder": [
+      "0 원 조건",
+      "1 질의 → 페어드 Q",
+      "2 GT → U_common",
+      "3 풀 → P_common",
+      "4 범위 → dev(주)·train·all"
+    ],
+    "verdict": null,
+    "verdict_note": "판정 아님 — 사전등록된 문턱이 없다. 이 수로 PASS/FAIL 을 말하지 않는다"
+  },
+  "verdict": null,
+  "inputs": {
+    "data/patents/rejected_patents_meta.parquet": "b76baafd6d91d3328f4b1e0675490cf03fc71f19d1d3370a7a0e494dec8a045a",
+    "data/patents/prior_art_edges.parquet": "bc893c93210c4d7c88de6df0c36698c753969a620e11f840ae71ca56426ec5f9",
+    "data/patents/fulltext_corpus.parquet": "5961f0a15784b7af48bd4f3cd910e05d81f7af4fabc2ac561596d0c92f157a58",
+    "data/reports/prior_art_realgt_report.json": "4b6a3da62aa0444400c59700802f02b23613f21f6fe82637e9544415426a6e49",
+    "data/reports/abox_priorart_report.json": "aafe066e53ea673dee15dd89b128c79674773ebaf1037003eaddbd049de3d163",
+    "benchmark/assets/split.csv": "714dafe033afabf5185b3cc6f1a39bbc7099c4d71b414f81031e2b48e2165108"
+  },
+  "identity_check_vs_abox_report": {
+    "profiles": [
+      75125,
+      75125
+    ],
+    "disclosures": [
+      36880,
+      36880
+    ],
+    "essential_links": [
+      182748,
+      182748
+    ],
+    "covered_by_pairs": [
+      16,
+      16
+    ],
+    "bound_concepts": [
+      166,
+      166
+    ],
+    "rej_independent_unmapped_rate": 0.1861,
+    "parquet_sha256": "cbd73414c09d198c298aa84c4e4f9652594dfce697611e76d05d3d9c7429bad3",
+    "cited_without_disclosure_by_prefix": {
+      "kr": 114,
+      "us": 33
+    }
+  },
+  "instrument_checks": {
+    "score_eq1_is_R_all": {
+      "queries_checked": 914,
+      "mismatch": 0
+    },
+    "tau_reproduction": {
+      "tau_frozen": 0.6708,
+      "tau_reproduced": 0.6708,
+      "FOREIGN_reproduced": 0.0074,
+      "pairs": {
+        "KR": 1376,
+        "FOREIGN": 952
+      },
+      "committed_realgt": {
+        "Recall@50_tfidf": {
+          "KR": 0.6708,
+          "FOREIGN": 0.0074
+        },
+        "gt_positives_in_corpus": {
+          "KR": 1376,
+          "FOREIGN": 952
+        }
+      }
+    }
+  },
+  "pools": {
+    "P_corpus": {
+      "n": 2926,
+      "by_country": {
+        "CN": 19,
+        "EP": 1,
+        "JP": 729,
+        "KR": 1727,
+        "US": 379,
+        "WO": 71
+      }
+    },
+    "P_disc": {
+      "n": 36880,
+      "by_prefix": {
+        "kr": 36387,
+        "us": 485,
+        "other": 8
+      }
+    },
+    "P_common": {
+      "n": 2021,
+      "by_country": {
+        "KR": 1662,
+        "US": 359
+      }
+    },
+    "P_corpus_outside_common": {
+      "n": 905,
+      "by_country": {
+        "CN": 19,
+        "EP": 1,
+        "JP": 729,
+        "KR": 65,
+        "US": 20,
+        "WO": 71
+      }
+    }
+  },
+  "cited_universe_by_country": {
+    "CN": {
+      "corpus_only": 17,
+      "neither": 1
+    },
+    "EP": {
+      "neither": 8
+    },
+    "GB": {
+      "neither": 1
+    },
+    "JP": {
+      "corpus_only": 535,
+      "neither": 61
+    },
+    "KR": {
+      "corpus∧disc": 1216,
+      "corpus_only": 50,
+      "neither": 7
+    },
+    "US": {
+      "corpus∧disc": 246,
+      "disc_only": 70,
+      "neither": 5,
+      "corpus_only": 12
+    },
+    "WO": {
+      "corpus_only": 55,
+      "neither": 7
+    }
+  },
+  "queries": {
+    "realgt_targets": 974,
+    "Q_paired": 914,
+    "Q_paired_by_split": {
+      "dev": 180,
+      "test": 187,
+      "train": 547
+    }
+  },
+  "tau_ladder": [
+    {
+      "rung": 0,
+      "change": "원 조건 — realgt 질의 · 코퍼스 풀 · 코퍼스 GT · 전량",
+      "tfidf": {
+        "micro": {
+          "KR": {
+            "pairs": 1376,
+            "queries": 764,
+            "hit": 0.6707848837209303,
+            "exp": 0.6707848837209303,
+            "best": 0.6707848837209303,
+            "worst": 0.6707848837209303
+          },
+          "FOREIGN": {
+            "pairs": 952,
+            "queries": 545,
+            "hit": 0.007352941176470588,
+            "exp": 0.007352941176470588,
+            "best": 0.007352941176470588,
+            "worst": 0.007352941176470588
+          },
+          "ALL": {
+            "pairs": 2328,
+            "queries": 974,
+            "hit": 0.39948453608247425,
+            "exp": 0.39948453608247425,
+            "best": 0.39948453608247425,
+            "worst": 0.39948453608247425
+          }
+        },
+        "macro": {
+          "KR": {
+            "queries": 764,
+            "hit": 0.6854815922878751,
+            "exp": 0.6854815922878751
+          },
+          "ALL": {
+            "queries": 974,
+            "hit": 0.4330473257064633,
+            "exp": 0.4330473257064633
+          }
+        }
+      },
+      "coverage_rank": null,
+      "coverage_rank_pool": null
+    },
+    {
+      "rung": 1,
+      "change": "질의 → 페어드 Q (L_D 프로파일 보유 ∩ realgt)",
+      "tfidf": {
+        "micro": {
+          "KR": {
+            "pairs": 1303,
+            "queries": 716,
+            "hit": 0.6699923254029163,
+            "exp": 0.6699923254029163,
+            "best": 0.6699923254029163,
+            "worst": 0.6699923254029163
+          },
+          "FOREIGN": {
+            "pairs": 886,
+            "queries": 503,
+            "hit": 0.007900677200902935,
+            "exp": 0.007900677200902935,
+            "best": 0.007900677200902935,
+            "worst": 0.007900677200902935
+          },
+          "ALL": {
+            "pairs": 2189,
+            "queries": 914,
+            "hit": 0.4020100502512563,
+            "exp": 0.4020100502512563,
+            "best": 0.4020100502512563,
+            "worst": 0.4020100502512563
+          }
+        },
+        "macro": {
+          "KR": {
+            "queries": 716,
+            "hit": 0.6845781236144365,
+            "exp": 0.6845781236144365
+          },
+          "ALL": {
+            "queries": 914,
+            "hit": 0.4357585703865791,
+            "exp": 0.4357585703865791
+          }
+        }
+      },
+      "coverage_rank": null,
+      "coverage_rank_pool": null
+    },
+    {
+      "rung": 2,
+      "change": "GT → U_common (cited ∈ 코퍼스 ∩ Disclosure)",
+      "tfidf": {
+        "micro": {
+          "KR": {
+            "pairs": 1264,
+            "queries": 708,
+            "hit": 0.6732594936708861,
+            "exp": 0.6732594936708861,
+            "best": 0.6732594936708861,
+            "worst": 0.6732594936708861
+          },
+          "FOREIGN": {
+            "pairs": 243,
+            "queries": 180,
+            "hit": 0.01646090534979424,
+            "exp": 0.01646090534979424,
+            "best": 0.01646090534979424,
+            "worst": 0.01646090534979424
+          },
+          "ALL": {
+            "pairs": 1507,
+            "queries": 790,
+            "hit": 0.5673523556735236,
+            "exp": 0.5673523556735236,
+            "best": 0.5673523556735236,
+            "worst": 0.5673523556735236
+          }
+        },
+        "macro": {
+          "KR": {
+            "queries": 708,
+            "hit": 0.6880078019908529,
+            "exp": 0.6880078019908529
+          },
+          "ALL": {
+            "queries": 790,
+            "hit": 0.585328511151296,
+            "exp": 0.585328511151296
+          }
+        }
+      },
+      "coverage_rank": {
+        "micro": {
+          "KR": {
+            "pairs": 1264,
+            "queries": 708,
+            "hit": 0.10680379746835443,
+            "exp": 0.11490860651892532,
+            "best": 0.1305379746835443,
+            "worst": 0.10205696202531646
+          },
+          "FOREIGN": {
+            "pairs": 243,
+            "queries": 180,
+            "hit": 0.03292181069958848,
+            "exp": 0.051873413109988435,
+            "best": 0.053497942386831275,
+            "worst": 0.02880658436213992
+          },
+          "ALL": {
+            "pairs": 1507,
+            "queries": 790,
+            "hit": 0.0948905109489051,
+            "exp": 0.10474433843772314,
+            "best": 0.11811546118115461,
+            "worst": 0.0902455209024552
+          }
+        },
+        "macro": {
+          "KR": {
+            "queries": 708,
+            "hit": 0.12021119182136131,
+            "exp": 0.1290109132137864
+          },
+          "ALL": {
+            "queries": 790,
+            "hit": 0.10952682338758288,
+            "exp": 0.12177328790693856
+          }
+        }
+      },
+      "coverage_rank_pool": "P_disc"
+    },
+    {
+      "rung": 3,
+      "change": "풀 → P_common (둘 다)",
+      "tfidf": {
+        "micro": {
+          "KR": {
+            "pairs": 1264,
+            "queries": 708,
+            "hit": 0.6740506329113924,
+            "exp": 0.6740506329113924,
+            "best": 0.6740506329113924,
+            "worst": 0.6740506329113924
+          },
+          "FOREIGN": {
+            "pairs": 243,
+            "queries": 180,
+            "hit": 0.01646090534979424,
+            "exp": 0.01646090534979424,
+            "best": 0.01646090534979424,
+            "worst": 0.01646090534979424
+          },
+          "ALL": {
+            "pairs": 1507,
+            "queries": 790,
+            "hit": 0.5680159256801592,
+            "exp": 0.5680159256801592,
+            "best": 0.5680159256801592,
+            "worst": 0.5680159256801592
+          }
+        },
+        "macro": {
+          "KR": {
+            "queries": 708,
+            "hit": 0.6894202313693839,
+            "exp": 0.6894202313693839
+          },
+          "ALL": {
+            "queries": 790,
+            "hit": 0.586594333936106,
+            "exp": 0.586594333936106
+          }
+        }
+      },
+      "coverage_rank": {
+        "micro": {
+          "KR": {
+            "pairs": 1264,
+            "queries": 708,
+            "hit": 0.35680379746835444,
+            "exp": 0.35800506983166025,
+            "best": 0.37341772151898733,
+            "worst": 0.33939873417721517
+          },
+          "FOREIGN": {
+            "pairs": 243,
+            "queries": 180,
+            "hit": 0.13168724279835392,
+            "exp": 0.14251420732902215,
+            "best": 0.14814814814814814,
+            "worst": 0.13168724279835392
+          },
+          "ALL": {
+            "pairs": 1507,
+            "queries": 790,
+            "hit": 0.32050431320504313,
+            "exp": 0.3232577044778838,
+            "best": 0.33709356337093566,
+            "worst": 0.30590577305905775
+          }
+        },
+        "macro": {
+          "KR": {
+            "queries": 708,
+            "hit": 0.3799334140435835,
+            "exp": 0.38063369100247707
+          },
+          "ALL": {
+            "queries": 790,
+            "hit": 0.3471639541892706,
+            "exp": 0.3497500761470388
+          }
+        }
+      },
+      "coverage_rank_pool": "P_common"
+    }
+  ],
+  "by_scope_at_P_common": {
+    "dev": {
+      "tfidf": {
+        "micro": {
+          "KR": {
+            "pairs": 253,
+            "queries": 140,
+            "hit": 0.6877470355731226,
+            "exp": 0.6877470355731226,
+            "best": 0.6877470355731226,
+            "worst": 0.6877470355731226
+          },
+          "FOREIGN": {
+            "pairs": 62,
+            "queries": 40,
+            "hit": 0.03225806451612903,
+            "exp": 0.03225806451612903,
+            "best": 0.03225806451612903,
+            "worst": 0.03225806451612903
+          },
+          "ALL": {
+            "pairs": 315,
+            "queries": 158,
+            "hit": 0.5587301587301587,
+            "exp": 0.5587301587301587,
+            "best": 0.5587301587301587,
+            "worst": 0.5587301587301587
+          }
+        },
+        "macro": {
+          "KR": {
+            "queries": 140,
+            "hit": 0.6919047619047619,
+            "exp": 0.6919047619047619
+          },
+          "ALL": {
+            "queries": 158,
+            "hit": 0.5779535864978903,
+            "exp": 0.5779535864978903
+          }
+        }
+      },
+      "coverage_rank": {
+        "micro": {
+          "KR": {
+            "pairs": 253,
+            "queries": 140,
+            "hit": 0.33992094861660077,
+            "exp": 0.3381792755934632,
+            "best": 0.34782608695652173,
+            "worst": 0.3201581027667984
+          },
+          "FOREIGN": {
+            "pairs": 62,
+            "queries": 40,
+            "hit": 0.1774193548387097,
+            "exp": 0.18548387096774194,
+            "best": 0.1935483870967742,
+            "worst": 0.1774193548387097
+          },
+          "ALL": {
+            "pairs": 315,
+            "queries": 158,
+            "hit": 0.30793650793650795,
+            "exp": 0.3081249419845911,
+            "best": 0.31746031746031744,
+            "worst": 0.2920634920634921
+          }
+        },
+        "macro": {
+          "KR": {
+            "queries": 140,
+            "hit": 0.3429761904761905,
+            "exp": 0.34237016151489835
+          },
+          "ALL": {
+            "queries": 158,
+            "hit": 0.3310126582278481,
+            "exp": 0.3311085819330323
+          }
+        }
+      },
+      "coverage_rank_P_disc": {
+        "micro": {
+          "KR": {
+            "pairs": 253,
+            "queries": 140,
+            "hit": 0.1067193675889328,
+            "exp": 0.1098386272227573,
+            "best": 0.11857707509881422,
+            "worst": 0.10276679841897234
+          },
+          "FOREIGN": {
+            "pairs": 62,
+            "queries": 40,
+            "hit": 0.06451612903225806,
+            "exp": 0.07945041816009557,
+            "best": 0.08064516129032258,
+            "worst": 0.06451612903225806
+          },
+          "ALL": {
+            "pairs": 315,
+            "queries": 158,
+            "hit": 0.09841269841269841,
+            "exp": 0.10385745591518579,
+            "best": 0.1111111111111111,
+            "worst": 0.09523809523809523
+          }
+        },
+        "macro": {
+          "KR": {
+            "queries": 140,
+            "hit": 0.10869047619047618,
+            "exp": 0.11331732294721517
+          },
+          "ALL": {
+            "queries": 158,
+            "hit": 0.10632911392405063,
+            "exp": 0.11628914222702143
+          }
+        }
+      }
+    },
+    "train": {
+      "tfidf": {
+        "micro": {
+          "KR": {
+            "pairs": 701,
+            "queries": 410,
+            "hit": 0.6405135520684736,
+            "exp": 0.6405135520684736,
+            "best": 0.6405135520684736,
+            "worst": 0.6405135520684736
+          },
+          "FOREIGN": {
+            "pairs": 142,
+            "queries": 109,
+            "hit": 0.014084507042253521,
+            "exp": 0.014084507042253521,
+            "best": 0.014084507042253521,
+            "worst": 0.014084507042253521
+          },
+          "ALL": {
+            "pairs": 843,
+            "queries": 465,
+            "hit": 0.534994068801898,
+            "exp": 0.534994068801898,
+            "best": 0.534994068801898,
+            "worst": 0.534994068801898
+          }
+        },
+        "macro": {
+          "KR": {
+            "queries": 410,
+            "hit": 0.6509349593495934,
+            "exp": 0.6509349593495934
+          },
+          "ALL": {
+            "queries": 465,
+            "hit": 0.5470250896057348,
+            "exp": 0.5470250896057348
+          }
+        }
+      },
+      "coverage_rank": {
+        "micro": {
+          "KR": {
+            "pairs": 701,
+            "queries": 410,
+            "hit": 0.35805991440798857,
+            "exp": 0.3540916641012451,
+            "best": 0.3680456490727532,
+            "worst": 0.3437945791726106
+          },
+          "FOREIGN": {
+            "pairs": 142,
+            "queries": 109,
+            "hit": 0.1267605633802817,
+            "exp": 0.14176727028839703,
+            "best": 0.14788732394366197,
+            "worst": 0.1267605633802817
+          },
+          "ALL": {
+            "pairs": 843,
+            "queries": 465,
+            "hit": 0.3190984578884935,
+            "exp": 0.31832646371995865,
+            "best": 0.3309608540925267,
+            "worst": 0.30723606168446027
+          }
+        },
+        "macro": {
+          "KR": {
+            "queries": 410,
+            "hit": 0.39256097560975606,
+            "exp": 0.38844359990006583
+          },
+          "ALL": {
+            "queries": 465,
+            "hit": 0.3483512544802867,
+            "exp": 0.3482364506496787
+          }
+        }
+      },
+      "coverage_rank_P_disc": {
+        "micro": {
+          "KR": {
+            "pairs": 701,
+            "queries": 410,
+            "hit": 0.12553495007132667,
+            "exp": 0.13157802725854426,
+            "best": 0.14407988587731813,
+            "worst": 0.11840228245363767
+          },
+          "FOREIGN": {
+            "pairs": 142,
+            "queries": 109,
+            "hit": 0.028169014084507043,
+            "exp": 0.054079672252121576,
+            "best": 0.056338028169014086,
+            "worst": 0.02112676056338028
+          },
+          "ALL": {
+            "pairs": 843,
+            "queries": 465,
+            "hit": 0.10913404507710557,
+            "exp": 0.11852373732863676,
+            "best": 0.12930011862396204,
+            "worst": 0.10201660735468565
+          }
+        },
+        "macro": {
+          "KR": {
+            "queries": 410,
+            "hit": 0.1402439024390244,
+            "exp": 0.14633969904143973
+          },
+          "ALL": {
+            "queries": 465,
+            "hit": 0.12401433691756272,
+            "exp": 0.13486867384277618
+          }
+        }
+      }
+    },
+    "all": {
+      "tfidf": {
+        "micro": {
+          "KR": {
+            "pairs": 1264,
+            "queries": 708,
+            "hit": 0.6740506329113924,
+            "exp": 0.6740506329113924,
+            "best": 0.6740506329113924,
+            "worst": 0.6740506329113924
+          },
+          "FOREIGN": {
+            "pairs": 243,
+            "queries": 180,
+            "hit": 0.01646090534979424,
+            "exp": 0.01646090534979424,
+            "best": 0.01646090534979424,
+            "worst": 0.01646090534979424
+          },
+          "ALL": {
+            "pairs": 1507,
+            "queries": 790,
+            "hit": 0.5680159256801592,
+            "exp": 0.5680159256801592,
+            "best": 0.5680159256801592,
+            "worst": 0.5680159256801592
+          }
+        },
+        "macro": {
+          "KR": {
+            "queries": 708,
+            "hit": 0.6894202313693839,
+            "exp": 0.6894202313693839
+          },
+          "ALL": {
+            "queries": 790,
+            "hit": 0.586594333936106,
+            "exp": 0.586594333936106
+          }
+        }
+      },
+      "coverage_rank": {
+        "micro": {
+          "KR": {
+            "pairs": 1264,
+            "queries": 708,
+            "hit": 0.35680379746835444,
+            "exp": 0.35800506983166025,
+            "best": 0.37341772151898733,
+            "worst": 0.33939873417721517
+          },
+          "FOREIGN": {
+            "pairs": 243,
+            "queries": 180,
+            "hit": 0.13168724279835392,
+            "exp": 0.14251420732902215,
+            "best": 0.14814814814814814,
+            "worst": 0.13168724279835392
+          },
+          "ALL": {
+            "pairs": 1507,
+            "queries": 790,
+            "hit": 0.32050431320504313,
+            "exp": 0.3232577044778838,
+            "best": 0.33709356337093566,
+            "worst": 0.30590577305905775
+          }
+        },
+        "macro": {
+          "KR": {
+            "queries": 708,
+            "hit": 0.3799334140435835,
+            "exp": 0.38063369100247707
+          },
+          "ALL": {
+            "queries": 790,
+            "hit": 0.3471639541892706,
+            "exp": 0.3497500761470388
+          }
+        }
+      },
+      "coverage_rank_P_disc": {
+        "micro": {
+          "KR": {
+            "pairs": 1264,
+            "queries": 708,
+            "hit": 0.10680379746835443,
+            "exp": 0.11490860651892532,
+            "best": 0.1305379746835443,
+            "worst": 0.10205696202531646
+          },
+          "FOREIGN": {
+            "pairs": 243,
+            "queries": 180,
+            "hit": 0.03292181069958848,
+            "exp": 0.051873413109988435,
+            "best": 0.053497942386831275,
+            "worst": 0.02880658436213992
+          },
+          "ALL": {
+            "pairs": 1507,
+            "queries": 790,
+            "hit": 0.0948905109489051,
+            "exp": 0.10474433843772314,
+            "best": 0.11811546118115461,
+            "worst": 0.0902455209024552
+          }
+        },
+        "macro": {
+          "KR": {
+            "queries": 708,
+            "hit": 0.12021119182136131,
+            "exp": 0.1290109132137864
+          },
+          "ALL": {
+            "queries": 790,
+            "hit": 0.10952682338758288,
+            "exp": 0.12177328790693856
+          }
+        }
+      }
+    }
+  },
+  "paired_bootstrap_dev_KR": {
+    "definition": "dev · P_common · KR 쌍 보유 질의 · 질의별 적중률 · Δ = CoverageRank − tfidf",
+    "note": "서술 — 판정 아님",
+    "n": 140,
+    "delta": -0.3489285714285714,
+    "ci": [
+      -0.43095238095238086,
+      -0.26821428571428574
+    ],
+    "B": 10000,
+    "seed": 20260909
+  },
+  "v2_ii_reference": {
+    "SPR_all@50_KR_dev": 0.02158273381294964,
+    "queries_kr": 139,
+    "tau": 0.6708,
+    "note": "report_stage7_remeasure 의 V2 (ii) 정의 그대로 — 질의·GT·풀이 V7 과 다르다. 비교가 아니라 위치 표시다"
+  },
+  "unalignable": [
+    {
+      "what": "입력 자료",
+      "why": "tfidf 질의는 제목+초록+청구항1 텍스트·후보는 제목+초록, CoverageRank 질의는 독립항 필수개념·후보는 전 청구항 개념이다. 같은 입력을 주면 다른 랭커가 된다",
+      "direction": "부호를 말할 수 없다 — 이 사다리가 가르는 것은 입력 차이를 뺀 나머지다"
+    },
+    {
+      "what": "풀 밖 코퍼스 문헌 905건 (JP 729 · WO 71 · KR 65 · US 20 · CN 19 · EP 1)",
+      "why": "청구항 분해가 없어 Disclosure 가 없다 — CoverageRank 가 순위를 매길 수 없다",
+      "direction": "P_common 은 양쪽에서 뺀다(대칭). 그 대가로 FOREIGN 은 US 만 남는다 — JP·WO·CN 에 대해 아무것도 말하지 않는다"
+    },
+    {
+      "what": "P_disc 위 tfidf (본문 없는 문헌 34,859건)",
+      "why": "코퍼스에 제목·초록이 없다",
+      "direction": "배경 문헌 부담은 CoverageRank 에만 걸린다(사다리 2 대 3 으로 그 몫을 잰다). 그래서 2칸의 두 랭커 차는 랭커 차와 배경 부담이 섞인 값이고, 대칭 비교는 3칸이다"
+    },
+    {
+      "what": "개념 접지 손실 (rej 독립항 미매핑 0.1861)",
+      "why": "프로파일이 없는 질의는 CoverageRank 질의가 될 수 없다",
+      "direction": "선택 효과는 사다리 0→1 의 tfidf 변화로 잰다"
+    },
+    {
+      "what": "family · 공개시점 마스킹",
+      "why": "인용문헌 family·출원일 열이 없다(check_leakage K-6 UNMEASURABLE)",
+      "direction": "양쪽 모두 없다 — 대칭이지만 방향은 말할 수 없다"
+    },
+    {
+      "what": "realgt 온톨로지 랭커(onto·onto_idf·hybrid)",
+      "why": "커밋된 2026-09-05 스냅샷(onto R@50 0.1606)이 오늘 생성기로 재현되지 않고, **같은 코드도 실행마다 다르다** — 2026-09-13 실측 PYTHONHASHSEED 1 대 2 에서 onto R@50 0.2061 대 0.2177 (동점 순서가 문자열 해시에 걸린다). tfidf 블록은 시드와 무관하게 커밋본과 같다",
+      "direction": "V7 은 bridge 를 쓰지 않고 해시 시드가 달라도 바이트 동일하다 — 다만 onto 와의 비교는 이 리포트가 하지 않는다"
+    }
+  ],
+  "limitations": [
+    "판정 아님 — 사전등록된 문턱이 없다. 이 수로 PASS/FAIL 을 말하지 않는다",
+    "최선·최악은 쌍별 한계다 — 모든 쌍이 동시에 최선/최악일 수는 없다",
+    "주 범위는 dev 이다 — 분모가 작다. train 은 개념 사전이 채굴된 문서라 상한이지 성능이 아니다.",
+    "봉인 분할(test·test_b)의 수는 이 리포트에 없다 — 코드가 막는다(D17 · assert_scope_allowed)."
+  ]
+}

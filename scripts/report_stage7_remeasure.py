@@ -751,7 +751,9 @@ def run(baseline: Path | None, extra_layers: list[tuple[str, Path]] | None = Non
         "verdict_train": verdict_train,
         "limitations": [
             "SPR 은 순위 없는 후보집합이 S 이하여야 하는 지표이고 τ 의 원천 tfidf R@50 은 순위 지표다 — "
-            "비대칭은 τ 를 유리하게 하지 않는다 (계획 파일 · 결과 전 명시).",
+            "비대칭은 τ 를 유리하게 하지 않는다 (계획 파일 · 결과 전 명시). "
+            "[CAL-2 가 이 진술을 코드로 대체했다 — scripts/report_v7_coverage_rank.py 의 τ 사다리 · "
+            "data/reports/v7_coverage_rank.json]",
             "Disclosure 는 KR/US 분해 문헌에만 있다 — 인용문헌 중 JP 등 비 KR/US 는 목표에서 빠진다 (§4 결손 · 수는 identity_check 에).",
             "§29①-only 층은 질의가 적어 P1 은 저검정력이다 — 결론을 얹지 않는다.",
             "V4-2(사람 코딩)는 재실행하지 않고 인용한다.",

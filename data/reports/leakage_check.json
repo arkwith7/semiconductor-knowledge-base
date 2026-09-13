@@ -74,6 +74,7 @@
           "data/reports/prior_art_realgt_report.json": "scope=all",
           "data/reports/priorart_baseline.json": "scope=all",
           "data/reports/v4_robustness.json": "scope=all",
+          "data/reports/v7_coverage_rank.json": "split=dev · 봉인 적중 0",
           "data/reports/v4_robustness.dev.json": "split=dev · 봉인 적중 0"
         }
       }
@@ -89,6 +90,7 @@
           "data/reports/prior_art_realgt_report.json": 0,
           "data/reports/priorart_baseline.json": 0,
           "data/reports/v4_robustness.json": 0,
+          "data/reports/v7_coverage_rank.json": 0,
           "data/reports/v4_robustness.dev.json": 0
         }
       }

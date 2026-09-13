@@ -87,7 +87,12 @@ def tfidf_index(corpus_texts: list[str]):
     return inv, idf, norms
 
 
-def tfidf_rank(query: str, inv, idf, norms, n_docs: int) -> dict[int, int]:
+def tfidf_scores(query: str, inv, idf, norms) -> dict[int, float]:
+    """질의–문헌 코사인 {doc_idx: sim} — 0 이 아닌 문헌만.
+
+    순위만으로는 동점을 알 수 없어 V7 동점 띠가 점수를 요구한다 — 식을 복제하지 않으려고
+    추출했다(CAL-2 · 사용자 승인 2026-09-13).
+    """
     qtf = Counter(tokenize(query))
     qvec = {w: (1.0 + math.log(c)) * idf[w]
             for w, c in qtf.items() if w in idf}
@@ -96,7 +101,11 @@ def tfidf_rank(query: str, inv, idf, norms, n_docs: int) -> dict[int, int]:
     for w, qw in qvec.items():
         for di, dw in inv.get(w, ()):  # inverted index = only nonzero docs
             score[di] += qw * dw
-    sims = sorted(((s / (qn * norms[di]), di) for di, s in score.items()),
+    return {di: s / (qn * norms[di]) for di, s in score.items()}
+
+
+def tfidf_rank(query: str, inv, idf, norms, n_docs: int) -> dict[int, int]:
+    sims = sorted(((sim, di) for di, sim in tfidf_scores(query, inv, idf, norms).items()),
                   reverse=True)
     return {di: r + 1 for r, (_, di) in enumerate(sims)}
 
@@ -109,6 +118,33 @@ def concepts(br, text: str) -> set[str]:
 def rank_from_scores(scores: dict[int, float]) -> dict[int, int]:
     order = sorted(scores.items(), key=lambda kv: kv[1], reverse=True)
     return {di: r + 1 for r, (di, sc) in enumerate(order) if sc > 0}
+
+
+def load_examiner_gt(edges: pd.DataFrame, cidx) -> dict[str, list[str]]:
+    """심사관 인용 정답 {target_patent_id: [cited_doc_id, …]} — 코퍼스(`cidx`)에 있는 것만.
+
+    `~is_npl` 을 **명시한다.** 2026-09-13 실측으로 NPL 30행 중 코퍼스 소속은 0 이라 필터가 없어도
+    값은 같지만, 그 정합은 우연이다(§20.2 E-2 · CAL-2). V7 이 같은 함수를 쓴다.
+    """
+    ex = edges[(edges["source_type"] == "examiner") & (~edges["is_npl"])]
+    gt: dict[str, list[str]] = defaultdict(list)
+    for tp, cd in zip(ex["target_patent_id"], ex["cited_doc_id"]):
+        if cd in cidx:
+            gt[tp].append(cd)
+    return dict(gt)
+
+
+def micro_recall_at_k(ranked_pairs, k: int = 50) -> dict[str, list[int]]:
+    """정답 쌍 단위(micro) 회수 — (순위, 버킷) 들에서 버킷별 [적중, 전체]. τ 가 이 정의다.
+
+    분모가 질의가 아니라 **인용 건**이다. 질의 평균(macro)과 섞으면 §20.2 E-2 (b) 가 된다.
+    """
+    out = {"KR": [0, 0], "FOREIGN": [0, 0]}
+    for rank, bucket in ranked_pairs:
+        out[bucket][1] += 1
+        if rank <= k:
+            out[bucket][0] += 1
+    return out
 
 
 def main() -> int:
@@ -137,11 +173,7 @@ def main() -> int:
     corp_country = corp["country"].tolist()
     corp_text = [f"{t} {a}" for t, a in zip(corp["title"], corp["abstract"])]
 
-    ex = edges[(edges["source_type"] == "examiner") & (~edges["is_npl"])]
-    gt: dict[str, list[str]] = defaultdict(list)
-    for tp, cd in zip(ex["target_patent_id"], ex["cited_doc_id"]):
-        if cd in cidx:
-            gt[tp].append(cd)
+    gt = load_examiner_gt(edges, cidx)
 
     by_pid = meta.set_index("patent_id")
     targets = [t for t in gt if t in by_pid.index]
@@ -170,8 +202,8 @@ def main() -> int:
 
     METHODS = ("tfidf", "onto", "onto_idf", "hybrid")
     agg: dict[str, list[dict]] = {m: [] for m in METHODS}
-    # §5(2): recall@50 hit flags per GT positive, split KR vs foreign
-    rec_flags = {m: {"KR": [0, 0], "FOREIGN": [0, 0]} for m in METHODS}
+    # §5(2): recall@50 per GT positive, split KR vs foreign — (rank, bucket) 를 모아 micro_recall_at_k 로 센다
+    ranked_pairs: dict[str, list[tuple[int, str]]] = {m: [] for m in METHODS}
 
     for n, tp in enumerate(targets, 1):
         row = by_pid.loc[tp]
@@ -209,13 +241,12 @@ def main() -> int:
                     continue
                 pranks.append(rmap.get(di, big))
                 bucket = "KR" if corp_country[di] == "KR" else "FOREIGN"
-                rec_flags[m][bucket][1] += 1
-                if rmap.get(di, big) <= 50:
-                    rec_flags[m][bucket][0] += 1
+                ranked_pairs[m].append((rmap.get(di, big), bucket))
             if pranks:
                 agg[m].append(S.pa_metrics(pranks))
         if n % 200 == 0:
             print(f"  …{n}/{len(targets)}")
+    rec_flags = {m: micro_recall_at_k(ranked_pairs[m], k=50) for m in METHODS}
 
     def mean(rows, k):
         return round(sum(r[k] for r in rows) / len(rows), 4) if rows else 0.0
@@ -280,7 +311,7 @@ def main() -> int:
         print(f"  {b:8} tfidf={rr('tfidf', b):.4f}  hybrid={rr('hybrid', b):.4f}"
               f"  Δ={incremental['delta_hybrid_minus_tfidf'][b]:+.4f}"
               f"  (n_pos={rec_flags['tfidf'][b][1]})")
-    print(f"\n✓ report → {OUT.relative_to(ROOT)}")
+    print(f"\n✓ report → {out}")
     return 0
 
 

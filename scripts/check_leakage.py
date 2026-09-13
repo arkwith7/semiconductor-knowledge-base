@@ -56,6 +56,7 @@ EVAL_REPORTS = [
     ROOT / "data" / "reports" / "prior_art_realgt_report.json",
     ROOT / "data" / "reports" / "priorart_baseline.json",
     ROOT / "data" / "reports" / "v4_robustness.json",
+    ROOT / "data" / "reports" / "v7_coverage_rank.json",   # CAL-2 — split=dev 를 선언하므로 봉인 id 가 0 이어야 한다
 ] + sorted(                                    # CAL-3 — 분할 산출물도 같은 규율을 받는다
     p for pat in ("v4_robustness.*.json", "prior_art_realgt_report.*.json")
     for p in (ROOT / "data" / "reports").glob(pat)
