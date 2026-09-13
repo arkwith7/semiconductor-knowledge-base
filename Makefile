@@ -4,7 +4,7 @@
         priorart abox-priorart v1-ablation stage7-remeasure claim-concepts-7a abstract-diagnostic \
         abox-prior-art abox-claim-features abox-full refetch-fulltext cq \
         public-release check-public signature signature-inject signature-check \
-        check-leakage declare-scope \
+        check-leakage declare-scope v7-rank \
         superordinate-concepts concept-mapping \
         semiconto-fetch semiconto-analyze semiconto-align semiconto-enrich semiconto-phase0 \
         pipeline pipeline-sirp pipeline-full pipeline-with-expdataset help
@@ -198,6 +198,13 @@ stage7-remeasure: abox-priorart check-leakage
 	$(PYTHON) scripts/report_v4_robustness.py --with-conj-disclosure --split dev
 	$(PYTHON) scripts/report_stage7_remeasure.py \
 		--markdown 01.code_spec/reports/PLAN-005-stage7-verdict.md
+
+# ── PLAN-005 R0-CAL-2 · V7 순위 계측 · τ 대칭 사다리 ────────────────────
+# 판정이 아니다 — 사전등록된 문턱이 없다. V2 정의·τ·판정은 stage7-remeasure 가 그대로 갖는다.
+# 원 조건에서 τ(0.6708)를 재현하지 못하면 죽고, 거기서 한 번에 조건 하나씩 바꿔 비대칭의 몫을 가른다.
+v7-rank: abox-priorart check-leakage
+	$(PYTHON) scripts/report_v7_coverage_rank.py \
+		--markdown 01.code_spec/reports/PLAN-005-v7-coverage-rank.md
 
 # ── 공개본 (CR-015) ────────────────────────────────────────────────────
 # 공개할 트리를 **매번 코드가 만든다.** 손으로 지우면 다음에 또 어긋난다 — 원고 §10.3 이

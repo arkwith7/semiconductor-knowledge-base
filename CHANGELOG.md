@@ -27,6 +27,63 @@ All notable changes to SDKB will be documented in this file.
 
 ## [Unreleased]
 
+### Fixed (2026-09-13 — PLAN-005 R0 · 평가 무결성 교정 CAL-0~3 · **그래프 불변** · 사용자 승인)
+
+**결론.** 평가 계측기의 결함 셋 — E-1 V3 게이트가 혼합층을 버림 · E-2 SPR↔τ 비대칭 · E-3 평가가 분할을 모름 — 을
+고쳤고 **그래프는 한 트리플도 바뀌지 않았다**(TTL · 그래프 서명 · IRI · 어휘 불변). 주 판정은 dev(n=159)로 내려갔고
+**V2 조건 (i) 이 PASS → FAIL 로 뒤집혔다.** V3 는 PASS 를 지켰다. CAL-2 는 판정이 아니라 계측이다 — τ 를 원 조건에서
+0.6708 로 재현한 뒤 조건을 하나씩 맞추자 **dev · 같은 후보 풀에서 tfidf KR 0.6877 대 CoverageRank 0.3399** 였다.
+V2 (ii) 의 *0.0216 대 0.6708* 중 큰 몫은 지표 비대칭(주로 후보 풀)이었고, 맞춘 뒤에도 약 −0.35 가 남는다.
+전문은 계획서 §20.7·§20.13, 기계 렌더 `01.code_spec/reports/PLAN-005-stage7-verdict.md` · `PLAN-005-v7-coverage-rank.md`.
+
+**과거 항목은 고치지 않는다.** 2026-09-09 · 2026-09-10 항목의 V2 · V3 · 레버 수치는 이 시점부터
+**"전량 1,000 · 분할 미존중 · 교정 전" 개발 지표**로 읽는다(D13) — 홀드아웃 성능으로 인용할 수 없다.
+
+| 검증 | 교정 전 (그 항목의 값) | 교정 후 — **dev 주 판정** | 교정 |
+|---|---|---|---|
+| V3 | PASS · q=294 · Δ 0.0617 (`§29②-only` 단일층) | **PASS** · q=93 · Δ 0.0733 · CI [0.0477, 0.1019] | CAL-1 (전량 q=367 · Δ 0.0636) → CAL-3 |
+| V2 | FAIL `ii` · (i) Δ 0.0225 · CI [0.0093, 0.0357] | **FAIL `i`·`ii`** · (i) Δ 0.0132 · CI [0.0000, 0.0329] | CAL-3 — 문턱 불변(§1-2) |
+| 7-A′ 레버 | FAIL `hit_drop` | FAIL `reach_median` | CAL-3 — 걸린 조건이 범위에 따라 바뀐다 · **단일 수로 인용 금지** |
+| V2 (ii) τ 대조 | SPR∀@50 KR 0.0526 대 τ 0.6708 · 방어는 산문 한 줄 | dev 0.0216 · **아래 V7 사다리가 그 산문을 코드로 대체** | CAL-2 |
+
+**V7 τ 사다리** (KR micro R@50 · 한 칸에 조건 하나 · 판정 없음 · `make v7-rank`):
+
+| 칸 | 바뀐 조건 | tfidf | CoverageRank |
+|---:|---|---:|---:|
+| 0 | 원 조건 (realgt 974 질의 · 코퍼스 2,926) | **0.6708** (τ 재현 · 못 하면 죽는다) | — |
+| 1 | 질의 → 페어드 Q 914 | 0.6700 | — |
+| 2 | GT → U_common (쌍 1,264) | 0.6733 | 0.1068 (풀 Disclosure 36,880) |
+| 3 | 풀 → 코퍼스 ∩ Disclosure 2,021 | 0.6741 | 0.3568 |
+| 4 | 범위 → **dev** (쌍 253) | **0.6877** | **0.3399** (동점 띠 0.3202–0.3478) |
+
+tfidf 는 조건을 맞춰도 거의 움직이지 않고(τ 는 조건 정렬에 둔감), CoverageRank 는 **풀만 바꿔도 +0.25** 움직인다 —
+계획서 §20.2 (c) 는 인용문헌만 세어 이 비대칭(배경 문헌 33k)을 보지 못했다. 남은 차는 입력 자료 차이(정렬 불가)와
+개념 표현이 섞인 값이며 이 계측은 둘을 더 가르지 않는다.
+
+| 무엇 | 왜 | 어디 |
+|---|---|---|
+| `splits.py` · `seal.py` · `check_leakage.py`(K-1…K-6) | 채굴 범위와 평가 질의가 서로를 모르던 자리를 한 함수가 묶고, 봉인은 코드 게이트로만 연다(D17) | `make check-leakage` · `stage7-remeasure`·`v7-rank` 선행조건 (CAL-0) |
+| `INVENTIVE_STRATA` · `FROZEN["v3_gate_strata"]` | 동결 문면은 옳았고 코드가 `"§29②" in "§29①∧②"`(False)로 판정했다. 교정 전 값은 같은 실행이 재현한다 | `report_stage7_remeasure.py` (CAL-1) |
+| 판정만 분할별 · `verdict`=dev · `verdict_legacy_all` · `verdict_train` | 개념 사전이 dev+train 800 통지서에서 채굴됐다 — 평가 분모의 80% 가 학습 문서였다 | 네 현장 (CAL-3) |
+| `declare_frozen_reports.py` · 동결 스냅샷 덮어쓰기 가드 | τ 가 사는 `control_group` 블록을 만드는 코드가 없었다(손 사본) — 이제 코드가 조립하고 손 블록과 대조한다(전부 일치) | `make declare-scope` (CAL-3) |
+| **신설** `report_v7_coverage_rank.py` · `FROZEN_V7`(정의만 · 문턱 없음) | 집합 대 순위 · 질의 대 인용 건 · 후보 풀 · `~is_npl` 네 비대칭을 한 칸씩 맞춘다. `score=1 ⟺ R∀` 항등이 계측기 검사다(914 질의 불일치 0) | `make v7-rank` → `data/reports/v7_coverage_rank.json` (CAL-2) |
+| `eval_prior_art_realgt.py` 순수 함수 셋 추출(`load_examiner_gt` · `micro_recall_at_k` · `tfidf_scores`) | V7 이 점수·GT 코드를 복제하지 않게. **산출 JSON 은 리팩터 전후 바이트 동일** | CAL-2 |
+
+> ⚠ **실행 중 드러난 것 — 별도 안건이며 이 항목이 고치지 않았다.**
+> ① `priorart_baseline.json` · `prior_art_realgt_report.json` 은 2026-09-05 동결 스냅샷인데 생성기에 상태 핀이 없어
+> 재현되지 않는다(baseline 값 55개 차이 · `L_D0` 층 parquet 는 커밋된 적이 없다).
+> ② **realgt 의 온톨로지 랭커(onto · onto_idf · hybrid)는 비결정적이다** — 같은 코드가 `PYTHONHASHSEED` 1 대 2 에서
+> onto R@50 **0.2061 대 0.2177** 을 낸다(동점 순서가 문자열 해시에 걸린다). CLAUDE.md §8.1 의 `onto` R@50 0.1606 은
+> 그런 측정의 한 표본이다. tfidf · τ 는 시드와 무관하게 커밋본과 같다.
+
+**§0 하류.** 그래프 · TTL · vendor 대상 **변경 없음** — `vendor.py`/`baseline.py` 조치 없다. `priorart_stage7_remeasure.json`
+을 읽는다면 **`instrument_version` 으로 분기**한다(`R0-CAL-3` 부터 `verdict` 가 dev 주 판정 · 전량은 `verdict_legacy_all`).
+`prior_art_realgt_report.json` 은 값이 바뀌지 않았고 범위 선언 키만 더해졌다. 새 산출은 `v7_coverage_rank.json`(`R0-CAL-2`).
+
+**게이트.** `make test` **507 passed · 10 skipped** · `make validate` PASSED · `check-leakage` **PASS 5 · FAIL 0 · PENDING 0 · UNMS 1** ·
+`check-public` 통과(자산 378 · 적중 0) · `signature-check` **서명 불변**(T-Box 1,933 · 명명 클래스 102) ·
+`v7-rank` 두 실행 `cmp` 동일(해시 시드를 바꿔도 동일) · realgt 리팩터 전후 `cmp` 동일(`PYTHONHASHSEED=0` · sha256 `aacdae5e…`).
+
 ### Added (2026-09-11 — PLAN-005 단계 8 · V6b US 종이 이식 · 사용자 승인)
 
 **결론.** `pa:` core 가 **0줄 바뀌지 않은 채로** US 관할 바인딩 `ontology/sdkb-priorart-us.ttl`(27 트리플)이
