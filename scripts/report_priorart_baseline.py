@@ -42,6 +42,8 @@ from rdflib import RDF, RDFS, OWL, Graph, URIRef
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+from scripts import seal, splits  # noqa: E402
 sys.path.insert(0, str(ROOT / "scripts"))
 from run_cq import DEFAULT_DATA, CQ_DIR, parse_cq, load_graph, run as run_cqs  # noqa: E402
 
@@ -225,10 +227,31 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", type=Path, default=OUT)
     ap.add_argument("--skip-v1", action="store_true")
+    ap.add_argument("--allow-overwrite-frozen", action="store_true",
+                    help="동결 스냅샷을 덮어쓴다 — 사람이 의도할 때만")
     a = ap.parse_args()
 
+    # CAL-3 — 이 산출물은 **동결 스냅샷**이고 이 생성기에는 그 상태로 되돌릴 핀이 없다.
+    # 그대로 돌리면 단계 1 기준선(질의 759)이 아니라 오늘 값(804)이 나오고, τ 가 사는
+    # control_group 블록이 사라진다(2026-09-12 실측). 조용히 잃는 것을 막는다.
+    if a.out == OUT and OUT.exists() and "frozen_snapshot" in json.loads(OUT.read_text(encoding="utf-8")):
+        if not a.allow_overwrite_frozen:
+            raise SystemExit(
+                f"ERROR: {OUT.relative_to(ROOT)} 는 동결 스냅샷이다 (frozen_snapshot 선언됨). "
+                "오늘 원천으로 다시 재면 단계 1 기준선도 τ 출처도 사라진다 — "
+                "--out 으로 다른 경로에 쓰거나, 의도한 것이면 --allow-overwrite-frozen 을 준다."
+            )
+
+    # 이 산출물은 τ 와 단계 1 재현의 기준이다. 범위는 **전량 그대로**이고
+    # 바뀌는 것은 그 사실을 리포트가 스스로 선언한다는 것뿐이다(§20.7 · D18).
     rep = {"generated": str(date.today()), "plan": "PLAN-005 단계 1 (V1–V3 기준선)",
-           "read_only": True}
+           "read_only": True,
+           "instrument_version": "R0-CAL-3",
+           "split": "all",
+           "split_sha256": splits.sha256_of(splits.SPLIT_CSV),
+           "seal_ledger_rows": len(seal.ledger_rows()),
+           "scope_note": ("전량 범위다 — τ 의 출처이자 단계 7 stage1_reproduction 의 대조 기준이므로 "
+                          "분할을 걸지 않는다(§20.7 CAL-3). 홀드아웃 성능이 아니다.")}
     if not a.skip_v1:
         rep["V1_axiom_ablation"] = v1_ablation()
     doc, qry, gt = load_concepts()

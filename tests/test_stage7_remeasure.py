@@ -169,6 +169,70 @@ def test_frozen_prose_and_machine_gate_strata_agree():
             s7.assert_gate_strata_agree(bad)
 
 
+# ── (b″) CAL-3 · 분할 존중 (§20 E-3) ───────────────────────────────────
+
+def _recs_cal3(ids):
+    return {q: {"n_target": 1, "target_kr": True, "target_us": False,
+                "exist": {"reach": 10, "hit": True}, "all": {"reach": 10, "hit": True}} for q in ids}
+
+
+def test_qs_default_is_noop():
+    """qs 기본값은 전량이다 — 기존 호출·테스트가 그대로 돌아야 한다."""
+    r = _recs_cal3(["a", "b", "c"])
+    assert s7.summarize(r) == s7.summarize(r, qs=set(r))
+    rows = [{"q": q, "nE": 3, "n_cited": 2, "best_single": .5, "best_pair": .7, "delta": .2,
+             "stratum": "§29②-only"} for q in r]
+    assert s7.v3_verdict(rows, rows)["gate_queries"] == s7.v3_verdict(rows, rows, qs=set(r))["gate_queries"]
+
+
+def test_qs_narrows_every_verdict():
+    """분할을 주면 판정 분모가 실제로 줄어든다 — 같은 수가 나오면 분할이 먹지 않은 것이다."""
+    r = _recs_cal3([f"q{i}" for i in range(10)])
+    sub = {"q0", "q1", "q2"}
+    assert s7.summarize(r, qs=sub)["queries"] == 3
+    assert s7.v2_verdict(r, r, qs=sub)["i_significant_rise"]["common_queries"] == 3
+    assert s7.lever_verdict(r, r, 0.1, qs=sub)["common_queries"] == 3
+
+
+def test_sealed_scope_needs_ledger_row():
+    """봉인 분할의 지표는 원장에 행이 없으면 낼 수 없다 (D17) — 실패해야 할 입력이 실패하는가."""
+    for sealed in sorted(s7.splits.SEALED):
+        with pytest.raises(SystemExit):
+            s7.assert_scope_allowed(sealed, ledger_rows=0)
+        s7.assert_scope_allowed(sealed, ledger_rows=1)          # 원장에 행이 있으면 통과
+    s7.assert_scope_allowed("dev", ledger_rows=0)               # 열린 분할은 원장과 무관
+
+
+@needs_report
+def test_report_declares_split_and_primary_verdict_is_dev():
+    rep = json.loads(REPORT.read_text(encoding="utf-8"))
+    assert rep["instrument_version"] == s7.INSTRUMENT_VERSION
+    assert rep["split"] == s7.PRIMARY_SPLIT == "dev"
+    assert rep["split_sha256"] == s7.splits.SPLIT_CSV_SHA256
+    assert rep["seal_ledger_rows"] == len(s7.seal.ledger_rows())
+    assert rep["verdict"]["scope"] == "dev"
+    assert rep["verdict_legacy_all"]["scope"] == "all" and rep["verdict_legacy_all"]["note"]
+    assert rep["verdict_train"]["scope"] == "train"
+
+
+@needs_report
+def test_dev_scope_is_smaller_than_all():
+    """dev 지표와 전량 지표는 **다른 수**여야 한다 — 같으면 분할이 보고에 닿지 않은 것이다."""
+    rep = json.loads(REPORT.read_text(encoding="utf-8"))
+    gl = "L_D" if rep.get("mode") == "stage7a" else "L_C"
+    dev, alls = rep["verdict"]["queries"][gl], rep["verdict_legacy_all"]["queries"][gl]
+    assert 0 < dev < alls
+    assert rep["verdict"]["V3"]["gate_queries"] < rep["verdict_legacy_all"]["V3"]["gate_queries"]
+
+
+@needs_report
+def test_report_has_no_sealed_query_ids():
+    """봉인 질의 id 가 리포트 어디에도 없어야 한다 (K-4 와 같은 술어 · 여기서도 고정한다)."""
+    rep = REPORT.read_text(encoding="utf-8")
+    sealed = s7.splits.queries_in(sorted(s7.splits.SEALED))
+    assert not [d for d in sealed if d in rep]
+
+
 def test_v4_verdict_flags_missing_conj_and_catches_drop():
     base = {"by_variant": {"claim": {"hit_rate": .90}, "L1": {"hit_rate": .89}, "L2": {"hit_rate": .88},
                            "L3": {"hit_rate": .87}},

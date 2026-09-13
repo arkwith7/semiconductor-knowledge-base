@@ -24,12 +24,16 @@ import argparse
 import json
 import re
 import statistics as st
+import sys
 from datetime import date
 from pathlib import Path
 
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+from scripts import seal, splits  # noqa: E402
+
 OUT = ROOT / "data" / "reports" / "v4_robustness.json"
 QUERIES = ROOT / "data" / "queries" / "v4" / "v4_paraphrase_queries.parquet"
 
@@ -59,7 +63,19 @@ def main() -> int:
     ap.add_argument("--queries", type=Path, default=QUERIES)
     ap.add_argument("--with-conj-disclosure", action="store_true",
                     help="단계 7 — R∀(개념 전부 개시) · Disclosure 목표 키를 **추가**한다(기존 키 불변)")
+    ap.add_argument("--split", default="all",
+                    help="판정 범위 (CAL-3). 질의 파일은 바꾸지 않고 **읽을 때 거른다** — "
+                         "질의 세트 sha 동결은 불변이다. all 이 아니면 산출물 경로가 갈린다")
     a = ap.parse_args()
+
+    # CAL-3 — all 산출물을 분할 실행이 덮어쓰지 못하게 막는다 (τ·공표 수치의 출처를 지킨다)
+    if a.split != "all":
+        if a.split in splits.SEALED and not seal.ledger_rows():
+            raise SystemExit(f"ERROR: 봉인 분할 '{a.split}' — 봉인 원장에 행이 없다(D17)")
+        if a.out == OUT:
+            a.out = OUT.with_name(f"v4_robustness.{a.split}.json")
+        elif a.out.resolve() == OUT.resolve():
+            raise SystemExit("ERROR: 분할 실행이 전량 산출물(v4_robustness.json)을 덮어쓸 수 없다 (CAL-3)")
 
     import sys
     sys.path.insert(0, str(ROOT / "scripts"))
@@ -78,6 +94,10 @@ def main() -> int:
 
     entries = build_linker()
     df = pd.read_parquet(a.queries)
+    queries_sha = splits.sha256_of(a.queries)
+    if a.split != "all":                                   # 질의 파일은 그대로 두고 읽을 때 거른다
+        keep = splits.queries_in(a.split)
+        df = df[df.publication_id.isin(keep)].reset_index(drop=True)
     base = df[df.variant == "claim"].set_index("publication_id").text.to_dict()
 
     per_variant, per_query = {}, []
@@ -152,6 +172,14 @@ def main() -> int:
 
     rep = {"generated": str(date.today()), "plan": "PLAN-005 §5 V4-1 (표현 강건성)",
            "read_only": True,
+           # ── CAL-3 선언 (check_leakage K-4·K-5) ─────────────────────────
+           "instrument_version": "R0-CAL-3",
+           "split": a.split,
+           "split_sha256": splits.sha256_of(splits.SPLIT_CSV),
+           "seal_ledger_rows": len(seal.ledger_rows()),
+           "queries_file": str(Path(a.queries).relative_to(ROOT)),
+           "queries_sha256": queries_sha,
+           "queries_after_split_filter": int(df.publication_id.nunique()),
            "linker": "표면형 사전 patent-text (결정적, LLM 아님)",
            "surface_forms": len(entries),
            "note": ("변형 claim 이 이 리포트의 기준선이다. V2 기준선과는 링커가 달라 값이 다를 수 "

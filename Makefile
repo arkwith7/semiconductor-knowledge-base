@@ -4,7 +4,7 @@
         priorart abox-priorart v1-ablation stage7-remeasure claim-concepts-7a abstract-diagnostic \
         abox-prior-art abox-claim-features abox-full refetch-fulltext cq \
         public-release check-public signature signature-inject signature-check \
-        check-leakage \
+        check-leakage declare-scope \
         superordinate-concepts concept-mapping \
         semiconto-fetch semiconto-analyze semiconto-align semiconto-enrich semiconto-phase0 \
         pipeline pipeline-sirp pipeline-full pipeline-with-expdataset help
@@ -181,12 +181,21 @@ v1-ablation: priorart convert abox-priorart
 check-leakage:
 	$(PYTHON) scripts/check_leakage.py
 
+# ── 동결 산출물의 범위 선언 (CAL-3) ────────────────────────────────────
+# 값을 재계산하지 않는다. baseline·realgt 는 2026-09-05 동결 스냅샷인데 생성기에 상태 핀이
+# 없어 재실행이 재현되지 않는다 — 그래서 선언만 코드가 심고, τ 가 사는 control_group 은
+# realgt 산출에서 조립해 손 블록과 대조한다(다르면 죽는다). 멱등이다.
+declare-scope:
+	$(PYTHON) scripts/declare_frozen_reports.py
+
 # ── PLAN-005 단계 7 · V2–V4 재측정 · 동결 목표 대조 ─────────────────────
 # 정의·문턱은 report_stage7_remeasure.py:FROZEN(결과 전 동결). 기준선 L_A 는 단계 1 커밋의
 # parquet 를 git 에서 꺼내 소급 산출한다. V4 는 먼저 R∀·Disclosure 키를 덧붙여 다시 낸다.
 # 그래프는 바꾸지 않는다. 판정 리포트는 스크립트가 렌더한다(§5 — 손으로 쓰지 않는다).
+# CAL-3: V4 를 전량·dev 두 번 낸다 — 주 판정은 dev 이고 전량은 개발 지표로 병기한다(§20.7).
 stage7-remeasure: abox-priorart check-leakage
 	$(PYTHON) scripts/report_v4_robustness.py --with-conj-disclosure
+	$(PYTHON) scripts/report_v4_robustness.py --with-conj-disclosure --split dev
 	$(PYTHON) scripts/report_stage7_remeasure.py \
 		--markdown 01.code_spec/reports/PLAN-005-stage7-verdict.md
 

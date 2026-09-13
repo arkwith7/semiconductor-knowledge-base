@@ -169,6 +169,16 @@
       "gt_positives_KR": 1376,
       "gt_positives_FOREIGN": 952
     },
-    "caveat": "대조군 0.4330 은 단일 수로 읽으면 안 된다 — 언어로 가르면 KR 0.6708 · FOREIGN 0.0074 다. 온톨로지가 넘어야 할 선은 층별로 완전히 다르며, FOREIGN 층에서는 tfidf 가 사실상 0 이다. 이 층화를 무시하면 '온톨로지가 tfidf 를 못 넘었다'와 '온톨로지가 tfidf 가 못 하는 층에서 이겼다'가 같은 수 하나에 뭉개진다(PLAN-003 §2.5 T2 하위집단 '언어')."
+    "caveat": "대조군 0.4330 은 단일 수로 읽으면 안 된다 — 언어로 가르면 KR 0.6708 · FOREIGN 0.0074 다. 온톨로지가 넘어야 할 선은 층별로 완전히 다르며, FOREIGN 층에서는 tfidf 가 사실상 0 이다. 이 층화를 무시하면 '온톨로지가 tfidf 를 못 넘었다'와 '온톨로지가 tfidf 가 못 하는 층에서 이겼다'가 같은 수 하나에 뭉개진다(PLAN-003 §2.5 T2 하위집단 '언어').",
+    "assembled_by": "scripts/declare_frozen_reports.py (CAL-3) — 손으로 쓰지 않는다"
+  },
+  "instrument_version": "R0-CAL-3",
+  "split": "all",
+  "split_sha256": "714dafe033afabf5185b3cc6f1a39bbc7099c4d71b414f81031e2b48e2165108",
+  "seal_ledger_rows": 0,
+  "frozen_snapshot": {
+    "note": "2026-09-05 상태의 동결 스냅샷이다. 생성기에 그 상태로 되돌릴 핀이 없어 **오늘 재실행하면 다른 값이 나온다**(2026-09-12 실측 · 값 55개 차이 · V2 질의 759 → 804). 그래서 CAL-3 은 값을 재계산하지 않고 범위 선언만 심었다 — 생성기 핀 부재는 별도 안건이다(PLAN-005 §20.13).",
+    "scope_note": "전량 범위다 — τ 의 출처이자 단계 7 `stage1_reproduction` 의 대조 기준이므로 분할을 걸지 않는다(§20.7 CAL-3). **홀드아웃 성능이 아니다.**",
+    "declared_by": "scripts/declare_frozen_reports.py"
   }
 }

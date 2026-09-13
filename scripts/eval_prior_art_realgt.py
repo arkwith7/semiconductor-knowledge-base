@@ -24,6 +24,7 @@ domain ontology is expected to add the most) are reported explicitly.
 """
 from __future__ import annotations
 
+import argparse
 import json
 import math
 import re
@@ -45,6 +46,9 @@ META = ROOT / "data" / "patents" / "rejected_patents_meta.parquet"
 EDGES = ROOT / "data" / "patents" / "prior_art_edges.parquet"
 CORPUS = ROOT / "data" / "patents" / "fulltext_corpus.parquet"
 OUT = ROOT / "data" / "reports" / "prior_art_realgt_report.json"
+
+sys.path.insert(0, str(ROOT))
+from scripts import seal, splits  # noqa: E402
 
 _TOK = re.compile(r"[0-9A-Za-z]+|[가-힣]+")
 
@@ -108,6 +112,21 @@ def rank_from_scores(scores: dict[int, float]) -> dict[int, int]:
 
 
 def main() -> int:
+    # CAL-3 — 분할 범위를 받는다. 이 산출물은 **τ 의 출처**이므로 분할 실행이 전량 산출물을
+    # 덮어쓰는 것을 거부한다(§20.7 · D18 τ 0.6708 동결).
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--split", default="all")
+    ap.add_argument("--out", type=Path, default=OUT)
+    a = ap.parse_args()
+    out = a.out
+    if a.split != "all":
+        if a.split in splits.SEALED and not seal.ledger_rows():
+            raise SystemExit(f"ERROR: 봉인 분할 '{a.split}' — 봉인 원장에 행이 없다(D17)")
+        if out == OUT:
+            out = OUT.with_name(f"prior_art_realgt_report.{a.split}.json")
+        elif out.resolve() == OUT.resolve():
+            raise SystemExit("ERROR: 분할 실행이 전량 산출물을 덮어쓸 수 없다 — τ 의 출처다 (CAL-3)")
+
     meta = pd.read_parquet(META)
     edges = pd.read_parquet(EDGES)
     corp = pd.read_parquet(CORPUS)
@@ -126,6 +145,10 @@ def main() -> int:
 
     by_pid = meta.set_index("patent_id")
     targets = [t for t in gt if t in by_pid.index]
+    targets_all = len(targets)
+    if a.split != "all":                                   # 계산 전에 질의를 거른다
+        keep = splits.queries_in(a.split)
+        targets = [t for t in targets if splits.normalize_doc_id(t) in keep]
     print(f"corpus(content)={len(cid)}  evaluable targets={len(targets)} "
           f"(>=1 examiner GT in content corpus)")
 
@@ -224,6 +247,12 @@ def main() -> int:
     }
 
     report = {
+        # ── CAL-3 선언 (check_leakage K-4·K-5) ─────────────────────────
+        "instrument_version": "R0-CAL-3",
+        "split": a.split,
+        "split_sha256": splits.sha256_of(splits.SPLIT_CSV),
+        "seal_ledger_rows": len(seal.ledger_rows()),
+        "targets_before_split_filter": targets_all,
         "corpus_content_docs": len(cid),
         "evaluable_targets": len(targets),
         "ranker_summary": summary,
@@ -236,8 +265,8 @@ def main() -> int:
             "text, where the domain ontology is expected to add the most (§5-2).",
         ],
     }
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text(json.dumps(report, ensure_ascii=False, indent=2),
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(report, ensure_ascii=False, indent=2),
                    encoding="utf-8")
 
     print("\n=== ranker summary (real examiner GT) ===")

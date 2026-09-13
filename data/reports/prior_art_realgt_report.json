@@ -54,5 +54,14 @@
     "bridge morph=False (kiwipiepy absent): documented substring fallback.",
     "NPL excluded from denominator (plan §7.3-4); stub docs excluded (§7.3-2).",
     "FOREIGN = non-KR cited (JP/US/…): lexically dissimilar to KR query text, where the domain ontology is expected to add the most (§5-2)."
-  ]
+  ],
+  "instrument_version": "R0-CAL-3",
+  "split": "all",
+  "split_sha256": "714dafe033afabf5185b3cc6f1a39bbc7099c4d71b414f81031e2b48e2165108",
+  "seal_ledger_rows": 0,
+  "frozen_snapshot": {
+    "note": "2026-09-05 상태의 동결 스냅샷이다. 생성기에 그 상태로 되돌릴 핀이 없어 **오늘 재실행하면 다른 값이 나온다**(2026-09-12 실측 · 값 55개 차이 · V2 질의 759 → 804). 그래서 CAL-3 은 값을 재계산하지 않고 범위 선언만 심었다 — 생성기 핀 부재는 별도 안건이다(PLAN-005 §20.13).",
+    "scope_note": "전량 범위다 — τ 의 출처이자 단계 7 `stage1_reproduction` 의 대조 기준이므로 분할을 걸지 않는다(§20.7 CAL-3). **홀드아웃 성능이 아니다.**",
+    "declared_by": "scripts/declare_frozen_reports.py"
+  }
 }

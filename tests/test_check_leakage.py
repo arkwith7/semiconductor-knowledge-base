@@ -38,10 +38,14 @@ def test_k1_k2_k3_pass_today(split_map):
     assert CL.k3_dictionaries()["status"] == "PASS"
 
 
-def test_k4_k5_are_pending_until_cal3(split_map):
-    # 사용자 결정 B — 아직 없는 산출물에 대한 검사는 거짓 FAIL 이 아니라 PENDING 이다.
-    assert CL.k4_eval_reports(split_map)["status"] == "PENDING"
-    assert CL.k5_seal_ledger()["status"] == "PENDING"
+def test_k4_k5_pass_after_cal3(split_map):
+    """CAL-0 에서는 PENDING 이었다 (사용자 결정 B — 없는 산출물은 거짓 FAIL 이 아니라 PENDING).
+
+    **CAL-3 이 그 산출물을 만들었으므로 이제 PASS 여야 한다.** 다시 PENDING 으로 내려가면
+    누군가 리포트의 분할 선언을 떨어뜨린 것이다 — 그것이 E-3 가 돌아오는 길이다.
+    """
+    assert CL.k4_eval_reports(split_map)["status"] == "PASS"
+    assert CL.k5_seal_ledger()["status"] == "PASS"
 
 
 def test_k6_reports_unmeasurable_not_zero(split_map):
