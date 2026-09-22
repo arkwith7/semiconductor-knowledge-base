@@ -170,6 +170,9 @@ data/patents/b_layer_query_ids.txt
 #                 — 워킹트리에는 두되 git 에 넣지 않는다. 델타 압축이 되지
 #                   않아 리포가 8배로 불고, 무결성은 sha256 매니페스트가 닫는다.
 data/sources/**/pdf/
+# PLAN-005 R1 — 스크럽된 통지서 발췌. 원천에서 결정적으로 재생성되고(make scrub-notices),
+# 성명을 가렸어도 **원문 파생물**이므로 추적하지 않는다. 무결성은 _manifest.json 의 sha256 이 닫는다.
+data/sources/notice_excerpts_scrubbed/
 
 # ── 재생성 가능한 LLM 캐시 (2026-09-06 · PLAN-005 V4)
 # 의역 생성·후보 판정의 sqlite 캐시가 산다. 재생성 가능하고(캐시 키에 모델·입력이 들어간다),

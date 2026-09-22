@@ -4,7 +4,7 @@
         priorart abox-priorart v1-ablation stage7-remeasure claim-concepts-7a abstract-diagnostic \
         abox-prior-art abox-claim-features abox-full refetch-fulltext cq \
         public-release check-public signature signature-inject signature-check \
-        check-leakage declare-scope v7-rank \
+        check-leakage declare-scope v7-rank scrub-notices \
         superordinate-concepts concept-mapping \
         semiconto-fetch semiconto-analyze semiconto-align semiconto-enrich semiconto-phase0 \
         pipeline pipeline-sirp pipeline-full pipeline-with-expdataset help
@@ -187,6 +187,13 @@ check-leakage:
 # realgt 산출에서 조립해 손 블록과 대조한다(다르면 죽는다). 멱등이다.
 declare-scope:
 	$(PYTHON) scripts/declare_frozen_reports.py
+
+# ── PLAN-005 R1 · 통지서 판단 이유 발췌 스크럽 (§1-5) ────────────────────
+# 정답 사례 해부의 선행 게이트다. 통지서 원문에는 성명이 있어 그대로는 LLM 에 보낼 수 없다.
+# train 만 처리하고 산출은 gitignore 자리에 쓴다. 그래프를 읽지도 바꾸지도 않는다.
+# 산출을 LLM 에 보내기 전에 사람이 표본 20건을 확인한다 — 이 타깃은 그 확인을 대신하지 않는다.
+scrub-notices:
+	$(PYTHON) scripts/scrub_notice_excerpts.py
 
 # ── PLAN-005 단계 7 · V2–V4 재측정 · 동결 목표 대조 ─────────────────────
 # 정의·문턱은 report_stage7_remeasure.py:FROZEN(결과 전 동결). 기준선 L_A 는 단계 1 커밋의
