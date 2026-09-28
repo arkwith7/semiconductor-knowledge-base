@@ -4,7 +4,7 @@
         priorart abox-priorart v1-ablation stage7-remeasure claim-concepts-7a abstract-diagnostic \
         abox-prior-art abox-claim-features abox-full refetch-fulltext cq \
         public-release check-public signature signature-inject signature-check \
-        check-leakage declare-scope v7-rank scrub-notices \
+        check-leakage declare-scope v7-rank scrub-notices sample-dissection report-dissection \
         superordinate-concepts concept-mapping \
         semiconto-fetch semiconto-analyze semiconto-align semiconto-enrich semiconto-phase0 \
         pipeline pipeline-sirp pipeline-full pipeline-with-expdataset help
@@ -194,6 +194,22 @@ declare-scope:
 # 산출을 LLM 에 보내기 전에 사람이 표본 20건을 확인한다 — 이 타깃은 그 확인을 대신하지 않는다.
 scrub-notices:
 	$(PYTHON) scripts/scrub_notice_excerpts.py
+
+# ── PLAN-005 R1 · 정답 해부 표본 30건 (층화 · 결정적) ──────────────────────
+# 무엇을 읽을지는 코드가 정한다 — 손으로 고르면 결손 목록이 자원의 상태가 아니라 고른 사람의
+# 기대를 재게 된다. 이 타깃은 파일명·sha256 만 다루고 본문을 열지 않는다.
+# 뽑힌 30건을 사람이 전수 확인한 뒤에야 해부(LLM)로 넘어간다 — 이 타깃은 그 확인을 대신하지
+# 않는다. 확인 사실은 `--mark-verified YYYY-MM-DD` 로 기록하고, 집계기가 그 플래그를 검사한다.
+sample-dissection:
+	$(PYTHON) scripts/sample_notice_dissection.py
+
+# ── PLAN-005 R1 · 해부 카드 검사 + 표현 결손 목록 렌더 ──────────────────────
+# 어휘 인벤토리를 T-Box TTL 에서 rdflib 로 긁어 카드의 `verdict_terms` 가 그 부분집합인지
+# 검사한다 — 없는 용어로 "표현된다"고 판정할 수 없다. 해부는 LLM 산출이라 재현이 보장되지
+# 않으므로 동결되는 것은 카드 파일의 sha256 이고, 이 타깃은 생성기가 아니라 검사기다.
+report-dissection:
+	$(PYTHON) scripts/report_r1_dissection.py \
+		--markdown 01.code_spec/reports/PLAN-005-r1-dissection.md
 
 # ── PLAN-005 단계 7 · V2–V4 재측정 · 동결 목표 대조 ─────────────────────
 # 정의·문턱은 report_stage7_remeasure.py:FROZEN(결과 전 동결). 기준선 L_A 는 단계 1 커밋의

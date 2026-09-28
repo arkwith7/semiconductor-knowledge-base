@@ -1,0 +1,215 @@
+{
+  "sample_version": "S1",
+  "seed": 20260922,
+  "scope": "train",
+  "split_sha256": "714dafe033afabf5185b3cc6f1a39bbc7099c4d71b414f81031e2b48e2165108",
+  "scrub_rule_version": "N1",
+  "population": 687,
+  "population_by_stratum": {
+    "inventive": 273,
+    "mixed": 69,
+    "no_basis": 311,
+    "novelty": 12,
+    "table": 22
+  },
+  "quota": {
+    "inventive": 7,
+    "mixed": 7,
+    "no_basis": 6,
+    "novelty": 4,
+    "table": 6
+  },
+  "strata_order": [
+    "novelty",
+    "table",
+    "mixed",
+    "no_basis",
+    "inventive"
+  ],
+  "not_a_frequency_estimate": "희소 층을 일부러 과표집했다. 결손 발생률을 모집단으로 일반화하지 않는다.",
+  "human_verified": true,
+  "verified_on": "2026-09-28",
+  "pii": "사람이 30건 전수를 확인하기 전에는 본문을 LLM 에 보내지 않는다(§1-5 · §20.14(g))",
+  "files": [
+    {
+      "stratum": "novelty",
+      "source_file": "1020077006288_952008009955495.txt",
+      "application": "1020077006288",
+      "sha256": "0360f7a8195b0516fce2400930b4b93c670fa5938047247732c598bb01c6007f"
+    },
+    {
+      "stratum": "novelty",
+      "source_file": "1020110071325_952013053717845.txt",
+      "application": "1020110071325",
+      "sha256": "5cf36e71eb1573f83dcbe3ed3c397074e70e39b83bfb053b20f24d647ac1a2cf"
+    },
+    {
+      "stratum": "novelty",
+      "source_file": "1020147026472_952016008950937.txt",
+      "application": "1020147026472",
+      "sha256": "84b505fb6209ee51108e7639325dd0cdfcb1d50275d8e2bb223a48c9c94be370"
+    },
+    {
+      "stratum": "novelty",
+      "source_file": "1020167002643_952017024296197.txt",
+      "application": "1020167002643",
+      "sha256": "47d97c0fa8cee9bcf52b522dd74d848d3299d0367a71104fc4b08323e1ab5bde"
+    },
+    {
+      "stratum": "table",
+      "source_file": "1020127009380_952014000880692.txt",
+      "application": "1020127009380",
+      "sha256": "b91dea616e7724bceb493501576a7ba78717b77317fb3fc198b25200c793591b"
+    },
+    {
+      "stratum": "table",
+      "source_file": "1020127014971_952016073593505.txt",
+      "application": "1020127014971",
+      "sha256": "9ced2bb449706137c27b79da0c1070e46e8f6123eb9b1367cf8d61ecbdd33be1"
+    },
+    {
+      "stratum": "table",
+      "source_file": "1020177018680_952019031660259.txt",
+      "application": "1020177018680",
+      "sha256": "67de15967a1dbfdb0b14281995d20946cf7ebf5c8070673c8d8d2605a7d5b899"
+    },
+    {
+      "stratum": "table",
+      "source_file": "1020177021512_952019049385162.txt",
+      "application": "1020177021512",
+      "sha256": "c07dccfd331eeb2f55c65e7903d02ee629aebf20e747e67fb5f756719db5270f"
+    },
+    {
+      "stratum": "table",
+      "source_file": "1020187015558_952018044929812.txt",
+      "application": "1020187015558",
+      "sha256": "519fb2e864844f8ea7271fd8e51d547e702a87aab016e48cf600e0c7969295b3"
+    },
+    {
+      "stratum": "table",
+      "source_file": "1020197010201_952019031689126.txt",
+      "application": "1020197010201",
+      "sha256": "a6e4019d396dd5d029bc68aafac97ab63c7dc4fa88202bed8afbef042999bf87"
+    },
+    {
+      "stratum": "mixed",
+      "source_file": "1020080050188_952014006673979.txt",
+      "application": "1020080050188",
+      "sha256": "b046c6dded1555cd65ea02cd65c5572518d7e183fbac5195a911a0ecbb1c24c2"
+    },
+    {
+      "stratum": "mixed",
+      "source_file": "1020100024200_952011035553414.txt",
+      "application": "1020100024200",
+      "sha256": "76d62d8bb6aa8a27f37febbe25f5efe504cb096d39cf1fdf008b4b5cfd7b7fac"
+    },
+    {
+      "stratum": "mixed",
+      "source_file": "1020100051963_952016064852952.txt",
+      "application": "1020100051963",
+      "sha256": "2d76b3f079b51f0f678efc5db0c8c7120b53ed130873b640087a74935a9b030f"
+    },
+    {
+      "stratum": "mixed",
+      "source_file": "1020100060569_952016065555458.txt",
+      "application": "1020100060569",
+      "sha256": "95582ee9c25e666ce17e7f23e559429b77f69f92a2c157fd977d63eb2310eb59"
+    },
+    {
+      "stratum": "mixed",
+      "source_file": "1020127019678_952016084048119.txt",
+      "application": "1020127019678",
+      "sha256": "67e2c09a49d5610cc244586164ccf3faea41ef7cedf9315b6bd141b4ddf28fcf"
+    },
+    {
+      "stratum": "mixed",
+      "source_file": "1020157021305_952016067701239.txt",
+      "application": "1020157021305",
+      "sha256": "c0d4a5c6d90655ad57075b0597636369205afccb37d2bf820b0575032761682d"
+    },
+    {
+      "stratum": "mixed",
+      "source_file": "1020160063657_952022084187222.txt",
+      "application": "1020160063657",
+      "sha256": "2c57490d794932634e6d858e6290228a1f9f9e0eb2bd5262f5036bb54bdac688"
+    },
+    {
+      "stratum": "no_basis",
+      "source_file": "1020070134305_952009044791718.txt",
+      "application": "1020070134305",
+      "sha256": "4b1bab41c9a6f4cd097743e83051ba5ce5bea1887b5b1738f80af3292368ee29"
+    },
+    {
+      "stratum": "no_basis",
+      "source_file": "1020080078406_952010021830315.txt",
+      "application": "1020080078406",
+      "sha256": "55c980542ee2683b76c507d4fa095649461802b459f4b9721201f0cb57e25666"
+    },
+    {
+      "stratum": "no_basis",
+      "source_file": "1020110077018_952017043200867.txt",
+      "application": "1020110077018",
+      "sha256": "7192e258a5351bc9e7fdb3f0114cd7c08f7ba901824bd3b42a054aa8eabdddd5"
+    },
+    {
+      "stratum": "no_basis",
+      "source_file": "1020157002549_952016038093815.txt",
+      "application": "1020157002549",
+      "sha256": "037ed6059e2b62687a29ae487c473e45f287b8dc50dc1e5132f5c8cad6ef1d4f"
+    },
+    {
+      "stratum": "no_basis",
+      "source_file": "1020157034213_952017057866286.txt",
+      "application": "1020157034213",
+      "sha256": "fcfb8c0e9cd3247da76a1b9adb01f155da61fb5ab28176e1b0b7015720f2f3a8"
+    },
+    {
+      "stratum": "no_basis",
+      "source_file": "1020160002833_952017009413281.txt",
+      "application": "1020160002833",
+      "sha256": "9548044bdb6e61b0ee026e504d84bf3001a721f9e8f49539cd10214449bc2221"
+    },
+    {
+      "stratum": "inventive",
+      "source_file": "1020100086427_952012023591896.txt",
+      "application": "1020100086427",
+      "sha256": "91b85e8556bac5fb4e38ca593aef2fa1661d78ef7807fe408aad055cde9baa09"
+    },
+    {
+      "stratum": "inventive",
+      "source_file": "1020117011351_952012054658300.txt",
+      "application": "1020117011351",
+      "sha256": "b351532970302a97f7cbbe8f0e6fae26436f40c388399cb738c3a29357b848f6"
+    },
+    {
+      "stratum": "inventive",
+      "source_file": "1020130060541_952019036042359.txt",
+      "application": "1020130060541",
+      "sha256": "f32cf4c84448e500375e02f13bb9cdf4d74ad69c4a84859c23d96adddbc25555"
+    },
+    {
+      "stratum": "inventive",
+      "source_file": "1020137020128_952018017345870.txt",
+      "application": "1020137020128",
+      "sha256": "90bfa47b129e2202655951f6ca186c4fb263e6c0ef93040857c7c3a39fd54cc4"
+    },
+    {
+      "stratum": "inventive",
+      "source_file": "1020140077241_952020041450518.txt",
+      "application": "1020140077241",
+      "sha256": "4f4d4c7effaf0c9f83bdb4bbbccaa65aa50d26233524e767bd00d5daf687c918"
+    },
+    {
+      "stratum": "inventive",
+      "source_file": "1020150139161_952021093973752.txt",
+      "application": "1020150139161",
+      "sha256": "4984737c906ca508821d1ee760c42d5e365560a23261183ace3032c4e3423c52"
+    },
+    {
+      "stratum": "inventive",
+      "source_file": "1020157018025_952016072407115.txt",
+      "application": "1020157018025",
+      "sha256": "b70d5db7afde51b16c27f0e8621082a41ff25d1a80a9ea857afa8d378d301832"
+    }
+  ]
+}
