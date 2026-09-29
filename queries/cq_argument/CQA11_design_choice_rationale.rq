@@ -1,0 +1,9 @@
+# desc: 차이를 「설계선택·최적화」 논거로 메운 판단과 그 청구항은? (결손 design-choice-rationale)
+# suite: pa
+# monotone: up
+# expect-min: 1
+PREFIX pa:   <https://w3id.org/sdkb/pa/>
+PREFIX pakr: <https://w3id.org/sdkb/pa/kr/>
+SELECT DISTINCT ?j ?claim
+WHERE { ?j pa:supportedBy ?set ; pa:judgesClaim ?claim . ?set pa:hasRationale pa:RationaleDesignChoice . }
+ORDER BY ?j ?claim

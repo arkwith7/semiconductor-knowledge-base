@@ -1,0 +1,15 @@
+# desc: 청구 구간과 개시 구간이 경계값으로 계산해 겹치는 대비는? (단위가 같은 것만 · 결손 numeric-range-overlap)
+# suite: pa
+# monotone: up
+# expect-min: 1
+PREFIX pa:   <https://w3id.org/sdkb/pa/>
+PREFIX pakr: <https://w3id.org/sdkb/pa/kr/>
+SELECT ?link ?q ?cl ?ch ?dl ?dh ?unit
+WHERE {
+  ?link a pa:EvidenceLink ; pa:claimedInterval ?c ; pa:disclosedInterval ?d .
+  ?c pa:lowerBound ?cl ; pa:upperBound ?ch ; pa:unitText ?unit .
+  ?d pa:lowerBound ?dl ; pa:upperBound ?dh ; pa:unitText ?du .
+  OPTIONAL { ?c pa:quantityLabel ?q }
+  FILTER (STR(?unit) = STR(?du) && ?cl <= ?dh && ?dl <= ?ch)
+}
+ORDER BY ?link

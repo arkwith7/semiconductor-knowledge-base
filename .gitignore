@@ -179,3 +179,7 @@ data/sources/notice_excerpts_scrubbed/
 # **청구항 원문과 그 파생 의역문을 담으므로** git 에 넣지 않는다(§1-5).
 # 동결이 필요한 것은 캐시가 아니라 산출물이며 그것은 data/queries/ 에 sha256 과 함께 있다.
 data/interim/
+
+# PLAN-005 R1-스키마 — 논증층 파일럿 A-Box 는 빌드 산출물이다(원천 pilot_v1.jsonl 은 추적 · sha 동결).
+# `make abox-argument-pilot` 이 다시 만든다.
+data/sources/notice_dissection/pilot_abox.ttl

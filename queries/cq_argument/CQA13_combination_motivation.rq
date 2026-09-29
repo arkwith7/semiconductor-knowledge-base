@@ -1,0 +1,13 @@
+# desc: 결합 동기가 명시된 문헌 결합 — 어떤 문헌 쌍이 동기와 함께 결합됐는가? (결손 combination-motivation)
+# suite: pa
+# monotone: up
+# expect-min: 1
+PREFIX pa:   <https://w3id.org/sdkb/pa/>
+PREFIX pakr: <https://w3id.org/sdkb/pa/kr/>
+SELECT DISTINCT ?j ?base ?other
+WHERE {
+  ?j pa:supportedBy ?set .
+  ?set pa:hasRationale pa:RationaleCombinationMotivation ; pa:baseDocument ?base ; pa:includesDocument ?other .
+  FILTER (?other != ?base)
+}
+ORDER BY ?j ?other

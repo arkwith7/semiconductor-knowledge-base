@@ -5,6 +5,7 @@
         abox-prior-art abox-claim-features abox-full refetch-fulltext cq \
         public-release check-public signature signature-inject signature-check \
         check-leakage declare-scope v7-rank scrub-notices sample-dissection report-dissection \
+        abox-argument-pilot pilot-sample \
         superordinate-concepts concept-mapping \
         semiconto-fetch semiconto-analyze semiconto-align semiconto-enrich semiconto-phase0 \
         pipeline pipeline-sirp pipeline-full pipeline-with-expdataset help
@@ -22,7 +23,8 @@ help:
 	@echo "  install         Install package into the active env with dev+priorart+notebook extras"
 	@echo "  parse           Baseline JSON → schema_report + parquet"
 	@echo "  owl             Build sdkb-core.ttl ontology"
-	@echo "  priorart        Build sdkb-priorart-{core,semi,kr,us}.ttl (PLAN-005 단계 4 · 8)"
+	@echo "  priorart        Build sdkb-priorart-{core,semi,kr,us,argument}.ttl (PLAN-005 단계 4 · 8 · R1-스키마)"
+	@echo "  abox-argument-pilot  논증층 파일럿 A-Box (비공개 · R1 카드 54장) · pilot-sample 은 사람 확인 표본 10건"
 	@echo "  convert         JSON → RDF/JSON-LD"
 	@echo "  align           Generate mapping candidates"
 	@echo "  validate        SHACL validation"
@@ -89,8 +91,19 @@ owl:
 # 세 모듈로 갈리는 이유는 이식성이다: core 는 도메인·관할 어휘 0, 바이오는 semi 만,
 # US 는 kr 대응 모듈만 새로 쓴다. 그 성질을 주장이 아니라 기계 보증으로 만드는 것이
 # `make validate` 안의 check_priorart_invariants.py 다(§5 V6(a)).
+# ⑤ argument(R1-스키마 · 2026-09-29)도 core 와 같은 순도 불변식을 받는다 — 판단 논증층.
 priorart:
 	$(PYTHON) scripts/build_priorart_modules.py
+
+# ── PLAN-005 R1-스키마 · 논증층 파일럿 A-Box (비공개) ───────────────────────
+# R1 해부 카드 54장을 구조화한 동결 레코드(pilot_v1.jsonl · sha 핀)를 논증층 어휘로 옮긴다.
+# 산출은 data/sources/ 아래(공개 DENY)다. 구조화는 LLM 산출이라 동결되는 것은 레코드의 sha256
+# 이고, 표본 10건의 사람 확인은 `pilot-sample` 로 뽑아 `--mark-verified` 로 기록한다.
+abox-argument-pilot: priorart
+	$(PYTHON) scripts/build_abox_argument_pilot.py
+
+pilot-sample:
+	$(PYTHON) scripts/build_abox_argument_pilot.py --sample
 
 # ── 선행기술 판단층 A-Box (PLAN-005 단계 5-A) ─────────────────────
 # ClaimProfile·Disclosure·ExaminerElement 를 실체화한다. 입력은 전부 커밋된 파일
@@ -386,6 +399,20 @@ validate:
 		       ontology/sdkb-priorart-kr.ttl ontology/sdkb-priorart-us.ttl \
 		       ontology/sdkb-patent.ttl ontology/sdkb-governance.ttl \
 		       ontology/sdkb-core-data.ttl ontology/sdkb-abox-priorart.ttl
+	@# ④ 논증층 shape 를 **파일럿 A-Box 에** 건다(R1-스키마). 공개 그래프에는 아직 이 어휘의
+	@#   인스턴스가 0 이라 겨냥할 실물이 파일럿뿐이다. 조건은 산출물이 아니라 **원천**의 존재다 —
+	@#   원천 계층(data/sources/)은 공개 트리에 없고, 그 자리에서는 건너뛴다고 말하고 넘어간다.
+	@#   ExaminerElement 를 가리키는 forElement 가 있어 sh:class 검사에 A-Box 가 필요하다.
+	@if [ -f data/sources/notice_dissection/pilot_v1.jsonl ]; then \
+		$(MAKE) --no-print-directory PYTHON=$(PYTHON) abox-argument-pilot && \
+		$(PYTHON) scripts/validate_shacl.py --shapes validation/shapes_priorart_argument.ttl \
+			--owl ontology/sdkb-priorart-argument.ttl --inference none \
+			--data ontology/sdkb-priorart-core.ttl ontology/sdkb-priorart-kr.ttl \
+			       ontology/sdkb-priorart-argument.ttl ontology/sdkb-abox-priorart.ttl \
+			       data/sources/notice_dissection/pilot_abox.ttl ; \
+	else \
+		echo "  (논증층 파일럿 원천 없음 — 공개 트리. shapes_priorart_argument 는 대상 인스턴스 0 · 건너뜀)" ; \
+	fi
 
 test:
 	$(PYTHON) -m pytest tests/ -v --tb=short

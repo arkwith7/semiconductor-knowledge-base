@@ -1,0 +1,11 @@
+# desc: 문헌 둘 이상을 한 근거 묶음으로 결합해 청구항을 거절한 판단은? (결손 combination-of-documents)
+# suite: pa
+# monotone: up
+# expect-min: 1
+PREFIX pa:   <https://w3id.org/sdkb/pa/>
+PREFIX pakr: <https://w3id.org/sdkb/pa/kr/>
+SELECT ?j ?set (COUNT(DISTINCT ?doc) AS ?docs)
+WHERE { ?j a pa:ExaminerJudgment ; pa:supportedBy ?set . ?set pa:includesDocument ?doc . }
+GROUP BY ?j ?set
+HAVING (COUNT(DISTINCT ?doc) >= 2)
+ORDER BY ?j ?set

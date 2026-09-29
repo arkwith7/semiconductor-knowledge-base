@@ -1,0 +1,11 @@
+# desc: 한 판단 안에서 요소마다 다른 문헌이 대응한 것 — 요소별 문헌 분업은? (결손 element-to-document-link-missing)
+# suite: pa
+# monotone: up
+# expect-min: 1
+PREFIX pa:   <https://w3id.org/sdkb/pa/>
+PREFIX pakr: <https://w3id.org/sdkb/pa/kr/>
+SELECT ?j (COUNT(DISTINCT ?doc) AS ?docs) (COUNT(DISTINCT ?link) AS ?links)
+WHERE { ?link a pa:EvidenceLink ; pa:partOfJudgment ?j ; pa:inDocument ?doc . }
+GROUP BY ?j
+HAVING (COUNT(DISTINCT ?doc) >= 2)
+ORDER BY ?j

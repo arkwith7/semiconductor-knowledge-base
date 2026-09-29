@@ -1,0 +1,13 @@
+# desc: 다른 문헌의 재료·구성을 기준 문헌에 치환·전용한 판단 — 무엇을 어디에 옮겼는가? (결손 substitution-or-transfer)
+# suite: pa
+# monotone: up
+# expect-min: 1
+PREFIX pa:   <https://w3id.org/sdkb/pa/>
+PREFIX pakr: <https://w3id.org/sdkb/pa/kr/>
+SELECT DISTINCT ?j ?base ?donor
+WHERE {
+  ?j pa:supportedBy ?set .
+  ?set pa:hasRationale pa:RationaleSubstitution ; pa:baseDocument ?base .
+  OPTIONAL { ?set pa:includesDocument ?donor . FILTER (?donor != ?base) }
+}
+ORDER BY ?j

@@ -51,6 +51,8 @@ from rdflib.term import Variable
 
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_CORE = ROOT / "ontology" / "sdkb-priorart-core.ttl"
+# R1-스키마(2026-09-29): 논증층도 core 와 같은 순도를 약속한다 — 같은 검사를 받지 않으면 약속이 아니다.
+DEFAULT_PURE = [DEFAULT_CORE, ROOT / "ontology" / "sdkb-priorart-argument.ttl"]
 DEFAULT_SEMI = ROOT / "ontology" / "sdkb-priorart-semi.ttl"
 DEFAULT_TBOX = [ROOT / "ontology" / "sdkb-core.ttl", ROOT / "ontology" / "sdkb-patent.ttl"]
 DEFAULT_DATA = [ROOT / "ontology" / "sdkb-core-data.ttl"]
@@ -238,7 +240,8 @@ def check_disjointness(semi: Path, tbox: list[Path], data: list[Path]) -> tuple[
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--core", type=Path, default=DEFAULT_CORE)
+    ap.add_argument("--core", type=Path, nargs="+", default=DEFAULT_PURE,
+                    help="순도 불변식 A 를 걸 모듈들 (기본: core · argument)")
     ap.add_argument("--queries", type=Path, default=DEFAULT_QUERIES)
     ap.add_argument("--semi", type=Path, default=DEFAULT_SEMI)
     ap.add_argument("--tbox", type=Path, nargs="*", default=DEFAULT_TBOX,
@@ -247,9 +250,12 @@ def main() -> int:
                     help="불변식 C 의 검사 대상 개체 그래프 (기본: core-data)")
     args = ap.parse_args()
 
-    fails = check_core(args.core)
-    print(f"불변식 A · core 순도 ({args.core.name}): "
-          f"{'FAIL' if fails else 'OK — 도메인·관할 IRI 0건'}")
+    fails: list[str] = []
+    for core in args.core:
+        f = check_core(core)
+        fails += f
+        print(f"불변식 A · core 순도 ({core.name}): "
+              f"{'FAIL' if f else 'OK — 도메인·관할 IRI 0건'}")
 
     qs = task_queries(args.queries)
     qfails: list[str] = []

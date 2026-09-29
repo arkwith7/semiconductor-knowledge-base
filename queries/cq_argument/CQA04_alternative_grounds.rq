@@ -1,0 +1,11 @@
+# desc: 근거 묶음이 둘 이상인 판단 — 「A 단독 또는 A·B 결합」처럼 선택적 근거를 제시한 것은? (결손 alternative-grounds)
+# suite: pa
+# monotone: up
+# expect-min: 1
+PREFIX pa:   <https://w3id.org/sdkb/pa/>
+PREFIX pakr: <https://w3id.org/sdkb/pa/kr/>
+SELECT ?j (COUNT(DISTINCT ?set) AS ?alternatives)
+WHERE { ?j a pa:ExaminerJudgment ; pa:supportedBy ?set . }
+GROUP BY ?j
+HAVING (COUNT(DISTINCT ?set) >= 2)
+ORDER BY ?j

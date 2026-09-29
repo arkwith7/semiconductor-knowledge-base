@@ -1,0 +1,14 @@
+# desc: 심사관이 청구항 요소에 대응시킨 문헌 안의 단락·도면 좌표는? (결손 in-document-locator)
+# suite: pa
+# monotone: up
+# expect-min: 1
+PREFIX pa:   <https://w3id.org/sdkb/pa/>
+PREFIX pakr: <https://w3id.org/sdkb/pa/kr/>
+SELECT ?doc ?type ?value ?claimTerm
+WHERE {
+  VALUES ?type { pa:LocParagraph pa:LocFigure }
+  ?link a pa:EvidenceLink ; pa:inDocument ?doc ; pa:locator ?loc .
+  ?loc pa:locatorType ?type ; pa:locatorValue ?value .
+  OPTIONAL { ?link pa:claimTerm ?claimTerm }
+}
+ORDER BY ?doc ?type ?value
