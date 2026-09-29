@@ -1,0 +1,21 @@
+# desc: 청구항이 한쪽 경계(이상·이하)로 한정했는데 개시 값이 그 임계를 이미 충족하는 대비는? (결손 numeric-threshold-comparison)
+# suite: pa
+# monotone: up
+# expect-min: 1
+PREFIX pa:   <https://w3id.org/sdkb/pa/>
+PREFIX pakr: <https://w3id.org/sdkb/pa/kr/>
+SELECT ?link ?q ?claimBound ?disclosedBound ?unit
+WHERE {
+  ?link a pa:EvidenceLink ; pa:claimedInterval ?c ; pa:disclosedInterval ?d .
+  ?c pa:unitText ?unit . ?d pa:unitText ?du .
+  OPTIONAL { ?c pa:quantityLabel ?q }
+  FILTER (STR(?unit) = STR(?du))
+  {
+    ?c pa:lowerBound ?claimBound . FILTER NOT EXISTS { ?c pa:upperBound ?x }
+    ?d pa:lowerBound ?disclosedBound . FILTER (?disclosedBound >= ?claimBound)
+  } UNION {
+    ?c pa:upperBound ?claimBound . FILTER NOT EXISTS { ?c pa:lowerBound ?y }
+    ?d pa:upperBound ?disclosedBound . FILTER (?disclosedBound <= ?claimBound)
+  }
+}
+ORDER BY ?link

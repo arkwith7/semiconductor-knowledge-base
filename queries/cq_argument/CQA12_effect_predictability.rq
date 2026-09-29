@@ -1,0 +1,9 @@
+# desc: 「효과가 예측 가능하다」는 논거로 진보성을 부정한 판단은? (결손 effect-predictability)
+# suite: pa
+# monotone: up
+# expect-min: 1
+PREFIX pa:   <https://w3id.org/sdkb/pa/>
+PREFIX pakr: <https://w3id.org/sdkb/pa/kr/>
+SELECT DISTINCT ?j ?ground
+WHERE { ?j pa:supportedBy ?set ; pa:onGround ?ground . ?set pa:hasRationale pa:RationalePredictableEffect . }
+ORDER BY ?j

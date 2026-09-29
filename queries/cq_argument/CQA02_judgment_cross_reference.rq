@@ -1,0 +1,12 @@
+# desc: §29② 판단 중 같은 통지서의 §29① 판단을 전제로 재사용한 것은? (결손 judgment-cross-reference)
+# suite: pa
+# monotone: up
+# expect-min: 1
+PREFIX pa:   <https://w3id.org/sdkb/pa/>
+PREFIX pakr: <https://w3id.org/sdkb/pa/kr/>
+SELECT ?j ?premise
+WHERE {
+  ?j a pa:ExaminerJudgment ; pa:onGround pakr:Ground_29_2 ; pa:refersToJudgment ?premise .
+  ?premise pa:onGround pakr:Ground_29_1 .
+}
+ORDER BY ?j ?premise

@@ -1,0 +1,350 @@
+# ═══════════════════════════════════════════════════════════════════
+# SDKB Prior-Art Argument (pa:) — 판단 논증층 · 도메인 어휘 0 · 관할 어휘 0
+#
+# **생성물이다. 손으로 고치지 않는다** — scripts/build_priorart_modules.py 가 만든다
+# (CLAUDE.md §1-1 · PLAN-005 §7-7). 고치면 다음 빌드에 조용히 사라지고, 그 사이에
+# vendor 해 간 하류는 유령 데이터를 갖는다.
+#
+# 재생성: make priorart
+# 검사  : make validate  (scripts/check_priorart_invariants.py 가 이식성 불변식을 건다)
+# ═══════════════════════════════════════════════════════════════════
+
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix pa:      <https://w3id.org/sdkb/pa/> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+pa:DocumentLocator
+    rdf:type owl:Class ;
+    rdfs:comment "문헌 안의 좌표(단락·도면·청구항·컬럼/라인·표·실시예·쪽). 값은 원문 표기 그대로 둔다."@ko ;
+    rdfs:label "document locator"@en .
+
+pa:EvidenceLink
+    rdf:type owl:Class ;
+    rdfs:comment "청구항 요소 하나를 문헌의 **어디**에 대응시켰는가. 용어 대응(claimTerm↔documentTerm)도 여기 담는다 — 두 이름이 같은 것이 된 근거가 이 링크다."@ko ;
+    rdfs:label "evidence link"@en .
+
+pa:EvidenceSet
+    rdf:type owl:Class ;
+    rdfs:comment "판단을 받치는 근거 묶음 하나. **묶음 안은 결합(그리고), 묶음 사이는 선택(또는)** 이다 — 「인용1 단독 또는 인용1·2 결합」은 묶음 둘이다. 문헌이 0 이면 상식 근거여야 한다(SHACL)."@ko ;
+    rdfs:label "evidence set"@en .
+
+pa:ExaminerJudgment
+    rdf:type owl:Class ;
+    rdfs:comment "한 심사문서 안에서 한 근거로 청구항(또는 그 부가 한정)에 내린 판단 하나. `ont:PriorArtJudgment` 는 (출원, 인용문헌, 근거) 이분 엣지라 문헌 조합·무문헌 근거·선택적 근거를 담지 못한다 — 그래서 문헌을 키로 삼지 않는 단위를 따로 세운다."@ko ;
+    rdfs:label "examiner judgment"@en .
+
+pa:IntervalClaimedWithinDisclosed
+    rdf:type pa:IntervalRelation ;
+    rdfs:comment "청구 구간이 개시 구간보다 좁다 — 선택·최적화 논거가 붙는 자리."@ko ;
+    skos:prefLabel "claimed within disclosed"@en ;
+    skos:prefLabel "청구가 개시 범위 안"@ko .
+
+pa:IntervalDisclosedWithinClaimed
+    rdf:type pa:IntervalRelation ;
+    rdfs:comment "개시 구간(값)이 청구 구간에 포함된다 — 신규성 부정의 전형."@ko ;
+    skos:prefLabel "disclosed within claimed"@en ;
+    skos:prefLabel "개시가 청구 범위 안"@ko .
+
+pa:IntervalDisjoint
+    rdf:type pa:IntervalRelation ;
+    rdfs:comment "두 구간이 겹치지 않는다."@ko ;
+    skos:prefLabel "disjoint"@en ;
+    skos:prefLabel "겹치지 않음"@ko .
+
+pa:IntervalOverlaps
+    rdf:type pa:IntervalRelation ;
+    rdfs:comment "두 구간이 일부만 겹친다."@ko ;
+    skos:prefLabel "overlaps"@en ;
+    skos:prefLabel "일부 겹침"@ko .
+
+pa:IntervalRelation
+    rdf:type owl:Class ;
+    rdfs:comment "심사관이 적은 두 구간의 관계. 경계값에서 다시 계산할 수 있지만 심사관의 판단을 그대로 보존한다."@ko ;
+    rdfs:label "interval relation"@en .
+
+pa:JudgmentScope
+    rdf:type owl:Class ;
+    rdfs:comment "판단이 청구항 전체를 대비했는가, 종속항이 **부가한 사항만** 대비했는가."@ko ;
+    rdfs:label "judgment scope"@en .
+
+pa:LocClaim
+    rdf:type pa:LocatorType ;
+    skos:prefLabel "claim"@en ;
+    skos:prefLabel "청구항"@ko .
+
+pa:LocColumnLine
+    rdf:type pa:LocatorType ;
+    skos:prefLabel "column and line"@en ;
+    skos:prefLabel "컬럼·라인"@ko .
+
+pa:LocExample
+    rdf:type pa:LocatorType ;
+    skos:prefLabel "example"@en ;
+    skos:prefLabel "실시예"@ko .
+
+pa:LocFigure
+    rdf:type pa:LocatorType ;
+    skos:prefLabel "figure"@en ;
+    skos:prefLabel "도면"@ko .
+
+pa:LocPage
+    rdf:type pa:LocatorType ;
+    skos:prefLabel "page"@en ;
+    skos:prefLabel "쪽"@ko .
+
+pa:LocParagraph
+    rdf:type pa:LocatorType ;
+    skos:prefLabel "paragraph"@en ;
+    skos:prefLabel "단락"@ko .
+
+pa:LocTable
+    rdf:type pa:LocatorType ;
+    skos:prefLabel "table"@en ;
+    skos:prefLabel "표"@ko .
+
+pa:LocatorType
+    rdf:type owl:Class ;
+    rdfs:comment "좌표의 종류."@ko ;
+    rdfs:label "locator type"@en .
+
+pa:NumericInterval
+    rdf:type owl:Class ;
+    rdfs:comment "하한·상한·개폐·단위를 갖는 구간. 한쪽만 있으면 임계(이상·이하)다. 리터럴 한 값(`ont:hasNumericValue`)으로는 겹침·포함을 질의할 수 없어서 둔다."@ko ;
+    rdfs:label "numeric interval"@en .
+
+pa:Rationale
+    rdf:type owl:Class ;
+    rdfs:comment "차이를 메우는 정형 논거. 개체는 KR 통지서 30건에서 관찰된 것만 둔다 — 관할 중립적 이름이지만 US KSR 근거와 `skos:exactMatch` 를 선언하지 않는다(원천이 없다 · §7-6)."@ko ;
+    rdfs:label "rationale"@en .
+
+pa:RationaleCombinationMotivation
+    rdf:type pa:Rationale ;
+    rdfs:comment "기술분야·목적·효과의 공통이 결합의 동기가 된다."@ko ;
+    skos:prefLabel "combination motivation"@en ;
+    skos:prefLabel "결합 동기"@ko .
+
+pa:RationaleDesignChoice
+    rdf:type pa:Rationale ;
+    rdfs:comment "필요에 따라 적절히 선택·최적화할 수 있는 정도."@ko ;
+    skos:prefLabel "design choice"@en ;
+    skos:prefLabel "설계선택·최적화"@ko .
+
+pa:RationalePredictableEffect
+    rdf:type pa:Rationale ;
+    rdfs:comment "효과가 통상 예측되는 정도이거나 결합에서 자연히 생긴다."@ko ;
+    skos:prefLabel "predictable effect"@en ;
+    skos:prefLabel "효과 예측 가능"@ko .
+
+pa:RationaleRoutinePractice
+    rdf:type pa:Rationale ;
+    rdfs:comment "통상적으로 수행하는 정도이거나 자연히 얻어지는 구성."@ko ;
+    skos:prefLabel "routine practice"@en ;
+    skos:prefLabel "통상 수행·자명"@ko .
+
+pa:RationaleSubstitution
+    rdf:type pa:Rationale ;
+    rdfs:comment "다른 문헌의 재료·구성을 기준 문헌에 바꿔 넣거나 옮겨 적용한다. 방향은 EvidenceSet 의 baseDocument 가 든다."@ko ;
+    skos:prefLabel "substitution or transfer"@en ;
+    skos:prefLabel "치환·전용"@ko .
+
+pa:ScopeAddedLimitation
+    rdf:type pa:JudgmentScope ;
+    skos:prefLabel "added limitation"@en ;
+    skos:prefLabel "부가한 사항"@ko .
+
+pa:ScopeWholeClaim
+    rdf:type pa:JudgmentScope ;
+    skos:prefLabel "whole claim"@en ;
+    skos:prefLabel "청구항 전체"@ko .
+
+pa:argument
+    dcterms:license <https://spdx.org/licenses/CDLA-Permissive-2.0.html> ;
+    dcterms:modified "2026-09-29"^^xsd:date ;
+    owl:imports <https://w3id.org/sdkb/pa> ;
+    owl:versionInfo "0.1.0-dev" ;
+    rdf:type owl:Ontology ;
+    rdfs:comment "심사관 판단의 근거 구조 — 판단 단위(H1) · 요소↔증거 대응(H2) · 수치 구간(H3) · 논거 유형(H4). PLAN-005 R1 정답 해부의 결손 15종에서 도출했다(§20.15 · R1-스키마). core 와 같이 도메인·관할 어휘가 0 이며 scripts/check_priorart_invariants.py 가 그것을 검사한다."@ko ;
+    rdfs:label "SDKB Prior-Art Argument — examiner reasoning layer"@en .
+
+pa:baseDocument
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "결합·치환의 기준(주) 문헌 — 다른 문헌의 구성을 **이 문헌에** 옮겨 적용한다. 방향이 여기 있다. 값은 includesDocument 에도 있어야 한다(생성기가 검사)."@ko ;
+    rdfs:domain pa:EvidenceSet ;
+    rdfs:label "base document"@en .
+
+pa:claimTerm
+    rdf:type owl:DatatypeProperty ;
+    rdfs:comment "청구항 쪽 용어."@ko ;
+    rdfs:domain pa:EvidenceLink ;
+    rdfs:label "claim term"@en ;
+    rdfs:range xsd:string .
+
+pa:claimedInterval
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "청구항이 한정한 구간."@ko ;
+    rdfs:domain pa:EvidenceLink ;
+    rdfs:label "claimed interval"@en ;
+    rdfs:range pa:NumericInterval .
+
+pa:concludes
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "판단의 결론. 판정 어휘는 core·관할 모듈의 ElementVerdict 개체를 그대로 쓴다. `pa:hasVerdict` 는 domain 이 ExaminerElement 라 쓰지 않는다."@ko ;
+    rdfs:domain pa:ExaminerJudgment ;
+    rdfs:label "concludes"@en ;
+    rdfs:range pa:ElementVerdict .
+
+pa:disclosedInterval
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "문헌이 개시한 구간(또는 값)."@ko ;
+    rdfs:domain pa:EvidenceLink ;
+    rdfs:label "disclosed interval"@en ;
+    rdfs:range pa:NumericInterval .
+
+pa:documentTerm
+    rdf:type owl:DatatypeProperty ;
+    rdfs:comment "문헌 쪽 용어."@ko ;
+    rdfs:domain pa:EvidenceLink ;
+    rdfs:label "document term"@en ;
+    rdfs:range xsd:string .
+
+pa:forElement
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "대응의 좌변이 심사관 구성대비표의 요소일 때 그 요소. 표가 적재되지 않은 판단에는 없다."@ko ;
+    rdfs:domain pa:EvidenceLink ;
+    rdfs:label "for element"@en ;
+    rdfs:range pa:ExaminerElement .
+
+pa:hasRationale
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "근거 묶음이 기댄 논거 유형."@ko ;
+    rdfs:domain pa:EvidenceSet ;
+    rdfs:label "has rationale"@en ;
+    rdfs:range pa:Rationale .
+
+pa:inDocument
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "대응의 우변 문헌. range 는 바인딩 몫이라 비운다."@ko ;
+    rdfs:domain pa:EvidenceLink ;
+    rdfs:label "in document"@en .
+
+pa:includesDocument
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "묶음에 든 문헌. 둘 이상이면 결합이다. range 는 바인딩 몫이라 비운다."@ko ;
+    rdfs:domain pa:EvidenceSet ;
+    rdfs:label "includes document"@en .
+
+pa:intervalRelation
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "개시 구간이 청구 구간에 대해 갖는 관계."@ko ;
+    rdfs:domain pa:EvidenceLink ;
+    rdfs:label "interval relation"@en ;
+    rdfs:range pa:IntervalRelation .
+
+pa:judgesClaim
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "판단이 겨냥한 청구항. range 는 도메인 어휘라 비운다. `pa:concernsClaim` 을 쓰지 않는 이유는 그 domain 이 ExaminerElement 라서 판단이 추론으로 요소가 되기 때문이다."@ko ;
+    rdfs:domain pa:ExaminerJudgment ;
+    rdfs:label "judges claim"@en .
+
+pa:judgmentScope
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "청구항 전체 대비인가 부가 한정 대비인가."@ko ;
+    rdfs:domain pa:ExaminerJudgment ;
+    rdfs:label "judgment scope"@en ;
+    rdfs:range pa:JudgmentScope .
+
+pa:locator
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "문헌 안의 좌표."@ko ;
+    rdfs:domain pa:EvidenceLink ;
+    rdfs:label "locator"@en ;
+    rdfs:range pa:DocumentLocator .
+
+pa:locatorType
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "좌표의 종류."@ko ;
+    rdfs:domain pa:DocumentLocator ;
+    rdfs:label "locator type"@en ;
+    rdfs:range pa:LocatorType .
+
+pa:locatorValue
+    rdf:type owl:DatatypeProperty ;
+    rdfs:comment "원문 표기 그대로의 좌표 값(예: `[0010]~[0013]` · `도4` · `컬럼3 라인5~23`)."@ko ;
+    rdfs:domain pa:DocumentLocator ;
+    rdfs:label "locator value"@en ;
+    rdfs:range xsd:string .
+
+pa:lowerBound
+    rdf:type owl:DatatypeProperty ;
+    rdfs:comment "하한."@ko ;
+    rdfs:domain pa:NumericInterval ;
+    rdfs:label "lower bound"@en ;
+    rdfs:range xsd:decimal .
+
+pa:lowerInclusive
+    rdf:type owl:DatatypeProperty ;
+    rdfs:comment "하한 포함 여부(이상=참 · 초과=거짓)."@ko ;
+    rdfs:domain pa:NumericInterval ;
+    rdfs:label "lower inclusive"@en ;
+    rdfs:range xsd:boolean .
+
+pa:partOfJudgment
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "이 대응이 속한 판단."@ko ;
+    rdfs:domain pa:EvidenceLink ;
+    rdfs:label "part of judgment"@en ;
+    rdfs:range pa:ExaminerJudgment .
+
+pa:quantityLabel
+    rdf:type owl:DatatypeProperty ;
+    rdfs:comment "무엇의 양인가(원문 표기)."@ko ;
+    rdfs:domain pa:NumericInterval ;
+    rdfs:label "quantity label"@en ;
+    rdfs:range xsd:string .
+
+pa:refersToJudgment
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "이 판단이 근거로 재사용한 다른 판단(예: §29① 동일 판단을 §29② 의 전제로). **전이로 선언하지 않는다** — 심사관이 적은 참조만 담는다."@ko ;
+    rdfs:domain pa:ExaminerJudgment ;
+    rdfs:label "refers to judgment"@en ;
+    rdfs:range pa:ExaminerJudgment .
+
+pa:reliesOnCommonKnowledge
+    rdf:type owl:DatatypeProperty ;
+    rdfs:comment "문헌이 아니라 주지관용·통상 관행에 기댄 근거인가."@ko ;
+    rdfs:domain pa:EvidenceSet ;
+    rdfs:label "relies on common knowledge"@en ;
+    rdfs:range xsd:boolean .
+
+pa:supportedBy
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "판단의 근거 묶음. 둘 이상이면 선택적 근거다."@ko ;
+    rdfs:domain pa:ExaminerJudgment ;
+    rdfs:label "supported by"@en ;
+    rdfs:range pa:EvidenceSet .
+
+pa:unitText
+    rdf:type owl:DatatypeProperty ;
+    rdfs:comment "단위 표기. 단위 환산은 하지 않는다 — 같은 단위끼리만 비교한다."@ko ;
+    rdfs:domain pa:NumericInterval ;
+    rdfs:label "unit text"@en ;
+    rdfs:range xsd:string .
+
+pa:upperBound
+    rdf:type owl:DatatypeProperty ;
+    rdfs:comment "상한. 하한 이상이어야 한다(SHACL)."@ko ;
+    rdfs:domain pa:NumericInterval ;
+    rdfs:label "upper bound"@en ;
+    rdfs:range xsd:decimal .
+
+pa:upperInclusive
+    rdf:type owl:DatatypeProperty ;
+    rdfs:comment "상한 포함 여부(이하=참 · 미만=거짓)."@ko ;
+    rdfs:domain pa:NumericInterval ;
+    rdfs:label "upper inclusive"@en ;
+    rdfs:range xsd:boolean .

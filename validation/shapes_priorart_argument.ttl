@@ -1,0 +1,158 @@
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix pa:      <https://w3id.org/sdkb/pa/> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+# ═══════════════════════════════════════════════════════════════════
+# SDKB SHACL Shapes — 선행기술 판단 논증층 (PLAN-005 R1-스키마 · 2026-09-29)
+#
+# 대상 어휘: ontology/sdkb-priorart-argument.ttl (scripts/build_priorart_modules.py ⑤)
+# 대상 인스턴스: 지금은 **비공개 파일럿 A-Box 뿐**이다
+#   (data/sources/notice_dissection/pilot_abox.ttl · R1 해부 카드 54장에서 생성).
+#   공개 그래프에는 아직 인스턴스가 0 이다 — 정본 파서 교정 뒤 A-Box 를 재생성할 때 처음 걸린다.
+#   그래서 `make validate` 는 이 파일을 파일럿에 **명시적으로** 짝지어 돌린다(§4 · 부채 대장 4번).
+# ═══════════════════════════════════════════════════════════════════
+
+# ── H1 판단 단위 — 근거 없는 판단은 판단이 아니다 ──
+pa:Shape_ExaminerJudgment
+    a sh:NodeShape ;
+    sh:targetClass pa:ExaminerJudgment ;
+    sh:property [
+        sh:path pa:assertedIn ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:message "ExaminerJudgment 는 그것이 실린 심사문서 하나(pa:assertedIn)를 가리켜야 한다." ;
+    ] ;
+    sh:property [
+        sh:path pa:onGround ;
+        sh:minCount 1 ;
+        sh:class pa:LegalGround ;
+        sh:message "ExaminerJudgment 는 법적 근거(pa:LegalGround)를 하나 이상 가져야 한다." ;
+    ] ;
+    sh:property [
+        sh:path pa:judgesClaim ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:message "ExaminerJudgment 는 겨냥한 청구항을 하나 이상 가져야 한다." ;
+    ] ;
+    sh:property [
+        sh:path pa:supportedBy ;
+        sh:minCount 1 ;
+        sh:class pa:EvidenceSet ;
+        sh:message "ExaminerJudgment 는 근거 묶음(pa:EvidenceSet)을 하나 이상 가져야 한다 — 없으면 무엇에 기댄 판단인지 말할 수 없다." ;
+    ] ;
+    sh:property [
+        sh:path pa:judgmentScope ;
+        sh:maxCount 1 ;
+        sh:in ( pa:ScopeWholeClaim pa:ScopeAddedLimitation ) ;
+        sh:message "judgmentScope 는 ScopeWholeClaim | ScopeAddedLimitation 하나다." ;
+    ] ;
+    sh:property [
+        sh:path pa:concludes ;
+        sh:class pa:ElementVerdict ;
+        sh:message "concludes 는 판정 어휘(pa:ElementVerdict 개체)여야 한다." ;
+    ] ;
+    sh:property [
+        sh:path pa:refersToJudgment ;
+        sh:class pa:ExaminerJudgment ;
+        sh:message "refersToJudgment 는 다른 ExaminerJudgment 를 가리켜야 한다." ;
+    ] .
+
+# ── H1 근거 묶음 — 문헌도 상식도 없는 묶음은 빈 근거다 ──
+pa:Shape_EvidenceSet
+    a sh:NodeShape ;
+    sh:targetClass pa:EvidenceSet ;
+    sh:or (
+        [ sh:path pa:includesDocument ; sh:minCount 1 ]
+        [ sh:path pa:reliesOnCommonKnowledge ; sh:hasValue true ]
+    ) ;
+    sh:message "EvidenceSet 은 문헌을 하나 이상 담거나 상식 근거(reliesOnCommonKnowledge true)여야 한다." ;
+    sh:property [
+        sh:path pa:baseDocument ;
+        sh:maxCount 1 ;
+        sh:message "baseDocument(결합·치환의 기준 문헌)는 하나뿐이다." ;
+    ] ;
+    sh:property [
+        sh:path pa:reliesOnCommonKnowledge ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:boolean ;
+    ] ;
+    sh:property [
+        sh:path pa:hasRationale ;
+        sh:class pa:Rationale ;
+        sh:message "hasRationale 은 논거 유형(pa:Rationale 개체)이어야 한다." ;
+    ] .
+
+# ── H2 요소↔증거 대응 ──
+pa:Shape_EvidenceLink
+    a sh:NodeShape ;
+    sh:targetClass pa:EvidenceLink ;
+    sh:property [
+        sh:path pa:partOfJudgment ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class pa:ExaminerJudgment ;
+        sh:message "EvidenceLink 는 판단 하나에 속해야 한다." ;
+    ] ;
+    sh:property [
+        sh:path pa:inDocument ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:message "EvidenceLink 의 우변 문헌은 하나다." ;
+    ] ;
+    sh:property [
+        sh:path pa:forElement ;
+        sh:class pa:ExaminerElement ;
+        sh:message "forElement 는 심사관 구성요소(pa:ExaminerElement)여야 한다." ;
+    ] ;
+    sh:property [
+        sh:path pa:locator ;
+        sh:class pa:DocumentLocator ;
+    ] ;
+    sh:property [ sh:path pa:claimedInterval ; sh:maxCount 1 ; sh:class pa:NumericInterval ] ;
+    sh:property [ sh:path pa:disclosedInterval ; sh:maxCount 1 ; sh:class pa:NumericInterval ] ;
+    sh:property [
+        sh:path pa:intervalRelation ;
+        sh:maxCount 1 ;
+        sh:class pa:IntervalRelation ;
+    ] .
+
+pa:Shape_DocumentLocator
+    a sh:NodeShape ;
+    sh:targetClass pa:DocumentLocator ;
+    sh:property [
+        sh:path pa:locatorType ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class pa:LocatorType ;
+        sh:message "DocumentLocator 는 좌표 종류(pa:LocatorType) 하나를 가져야 한다." ;
+    ] ;
+    sh:property [
+        sh:path pa:locatorValue ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "DocumentLocator 는 원문 표기 좌표 값 하나를 가져야 한다." ;
+    ] .
+
+# ── H3 수치 구간 — 경계 없는 구간과 뒤집힌 구간을 거부한다 ──
+pa:Shape_NumericInterval
+    a sh:NodeShape ;
+    sh:targetClass pa:NumericInterval ;
+    sh:or (
+        [ sh:path pa:lowerBound ; sh:minCount 1 ]
+        [ sh:path pa:upperBound ; sh:minCount 1 ]
+    ) ;
+    sh:message "NumericInterval 은 하한 또는 상한을 하나 이상 가져야 한다." ;
+    sh:property [
+        sh:path pa:lowerBound ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:decimal ;
+        sh:lessThanOrEquals pa:upperBound ;
+        sh:message "lowerBound 는 decimal 하나이고 upperBound 이하여야 한다." ;
+    ] ;
+    sh:property [ sh:path pa:upperBound ; sh:maxCount 1 ; sh:datatype xsd:decimal ] ;
+    sh:property [ sh:path pa:lowerInclusive ; sh:maxCount 1 ; sh:datatype xsd:boolean ] ;
+    sh:property [ sh:path pa:upperInclusive ; sh:maxCount 1 ; sh:datatype xsd:boolean ] ;
+    sh:property [ sh:path pa:unitText ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path pa:quantityLabel ; sh:maxCount 1 ; sh:datatype xsd:string ] .

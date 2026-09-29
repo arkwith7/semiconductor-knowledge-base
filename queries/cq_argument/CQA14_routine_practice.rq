@@ -1,0 +1,9 @@
+# desc: 「통상 수행·자연히 얻어지는 구성」 논거에 기댄 판단은? (결손 obviousness-rationale)
+# suite: pa
+# monotone: up
+# expect-min: 1
+PREFIX pa:   <https://w3id.org/sdkb/pa/>
+PREFIX pakr: <https://w3id.org/sdkb/pa/kr/>
+SELECT DISTINCT ?j ?set
+WHERE { ?j pa:supportedBy ?set . ?set pa:hasRationale pa:RationaleRoutinePractice . }
+ORDER BY ?j

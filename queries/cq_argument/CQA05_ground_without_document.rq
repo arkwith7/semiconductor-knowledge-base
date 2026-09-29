@@ -1,0 +1,13 @@
+# desc: 인용문헌 없이 상식·통상 관행만으로 선 판단은? (결손 ground-without-document)
+# suite: pa
+# monotone: up
+# expect-min: 1
+PREFIX pa:   <https://w3id.org/sdkb/pa/>
+PREFIX pakr: <https://w3id.org/sdkb/pa/kr/>
+SELECT ?j ?set
+WHERE {
+  ?j a pa:ExaminerJudgment ; pa:supportedBy ?set .
+  ?set pa:reliesOnCommonKnowledge true .
+  FILTER NOT EXISTS { ?set pa:includesDocument ?any }
+}
+ORDER BY ?j

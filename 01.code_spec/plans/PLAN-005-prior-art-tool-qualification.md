@@ -2441,3 +2441,112 @@ source 우선순위는 `rej > g1 > g2 > cited` 다.
 
 착수 시 함께 결정할 것 둘: ① **정본 파서 교정**(별건 · 평가 층 배정에 파급) ②
 **`pa:substitutableWith` 일몰 재검토**(원천에 있고 어휘에 없다).
+
+### 20.16 R1-스키마 — 결손 15종을 판단 논증층으로 (2026-09-29 · §2 1–4단계 사용자 승인)
+
+> 이 절도 **계획이 아니라 이력**이다. 수치는 실행된 명령의 출력이다.
+
+#### (a) 결론 먼저
+
+**R1 해부의 결손 58종 중 결과 전에 동결한 규칙을 통과한 15종을, 기존 TTL 을 한 바이트도 바꾸지 않고
+새 모듈 `sdkb-priorart-argument.ttl` 에 담았다** — 클래스 9 · 술어 26(객체 16 · 데이터 10) · 개체 18.
+R1 카드 54장을 판단 60건으로 구조화한 **비공개 파일럿 A-Box** 에 새 shape 5개가 걸려 통과했고(노드 412),
+결손 1종당 하나씩 쓴 **CQ 15개가 전부 적용 전 0행 → 적용 후 ≥1행**이 됐다. 공개 그래프의 이 어휘
+인스턴스는 **아직 0** 이다 — 정본 파서 교정 뒤 A-Box 를 재생성할 때 처음 채워진다.
+
+#### (b) 1단계 — 갈림길 셋 (🛑 승인 · 권고안)
+
+| 갈림길 | 결정 |
+|---|---|
+| 어느 결손을 담는가 | **규칙을 동결**: E2 ∧ 카드 ≥5 ∧ 「스키마가 생기면 답이 바뀌는 CQ」를 적을 수 있음 · 파서 계열(G) 제외. 카드 수는 R1 에서 이미 공개돼 가릴 수 없었으므로 동결한 것은 규칙이고 목록은 규칙이 뽑은 그대로다 |
+| 별건 둘의 순서 | `substitutableWith` 는 **이 규칙 안에서** 판정 · 정본 파서 교정은 **스키마 뒤**(파서가 채울 자리를 스키마가 먼저 정한다 · 귀속 분리) |
+| 어디까지 | T-Box + shape + **카드 기반 파일럿 A-Box(비공개)**. 공개 A-Box 재생성은 파서 교정이 선행 |
+
+#### (c) 2단계 — 관찰 (🛑 승인 · 읽기 전용)
+
+규칙 적용: 58 → G 12종 제외 46 → E2·카드≥5 **16** → CQ 작성 가능 **15**. 탈락 `element-table-not-ingested`(9)
+는 어휘(`pa:ExaminerElement`)가 이미 있고 구성대비표 22출원만 적재된 **적재 결손**이라 파서 건으로 넘겼다.
+15종은 구조 넷으로 수렴한다 — **H1 판단 단위**(카드 32 · 판단 96) · **H2 요소↔증거**(32 · 97) ·
+**H3 수치 구간**(17 · 65) · **H4 논거 유형**(23 · 78). 합계 카드 54/59 · 판단 152/162. 카드 32장(54%)이
+구조 둘 이상을 동시에 요구한다 — 넷은 판단 노드를 중심으로 이어져야 한다.
+
+설계를 정한 사실: ① `ont:PriorArtJudgment` 1,812건은 **전부 `overPriorArt` 1개**이고 IRI 가 (출원, 인용, 근거)
+3키 → 조합·무문헌·선택적 근거를 담으면 IRI 의미가 바뀐다 → **새 클래스** ② `pa:ExaminerElement` 235건에
+문헌 술어 0 ③ 옛 `pa:substitutableWith` 는 **개념↔개념 대칭**(⊑ coveredBy)인데 카드의 치환은 **방향 있는 판단
+논거** → 부활하지 않고 H4 에 흡수 ④ `queries/cq/` 는 하류 T3 와 규약 공유 → 적용 전 FAIL 하는 CQ 는 밖에 둔다.
+
+#### (d) 3단계 — 설계 (🛑 승인 · T-Box 변경)
+
+**왜 새 모듈인가.** core·semi·kr 의 sha256 은 단계 8 V6b 판정("L1 변경 0줄")이 동결했다
+(`report_stage8_paper_port.FROZEN`). core 에 한 줄을 더하면 그 판정이 스스로 모순된다 — US 모듈(④) 선례대로
+⑤ 를 따로 두고 자기 발행일 `MODIFIED_ARG` 를 준다. ⑤ 는 core 만 import 하며 **불변식 A(순도)를 core 와 함께
+받는다**(`check_priorart_invariants.py --core` 가 두 모듈을 검사).
+
+| 구조 | 클래스 | 술어·개체 |
+|---|---|---|
+| H1 | `ExaminerJudgment` · `EvidenceSet` · `JudgmentScope` | `judgesClaim` · `concludes` · `judgmentScope` · `refersToJudgment` · `supportedBy`(묶음 사이 = **또는**) · `includesDocument`(묶음 안 = **결합**) · `baseDocument`(방향) · `reliesOnCommonKnowledge` · 범위 2 |
+| H2 | `EvidenceLink` · `DocumentLocator` · `LocatorType` | `partOfJudgment` · `forElement` · `inDocument` · `locator` · `locatorType` · `locatorValue` · `claimTerm` · `documentTerm` · 좌표 7종 |
+| H3 | `NumericInterval` · `IntervalRelation` | `claimedInterval` · `disclosedInterval` · `intervalRelation` · 하한·상한·개폐·단위·양 이름 · 관계 4종 |
+| H4 | `Rationale` | `hasRationale` · 설계선택 · 효과 예측 · 결합 동기 · 통상 수행 · 치환·전용 |
+
+`assertedIn`·`onGround` 는 domain 이 없어 재사용했다. `concernsClaim`·`hasVerdict` 는 domain 이 `ExaminerElement`
+라 판단 노드에 쓰면 추론으로 요소가 된다 — 그래서 `judgesClaim`·`concludes` 를 따로 뒀다. `ont:PriorArtJudgment`
+와의 연결 술어는 두지 않았다(semi 가 동결 · 공통 문헌·청구항·근거로 질의한다).
+
+#### (e) 4단계 — 구현과 설계에서 벗어난 둘
+
+| 산출 | 내용 |
+|---|---|
+| `scripts/build_priorart_modules.py` | `build_argument()` · `MODULES` ⑤ · `MODIFIED_ARG` |
+| `scripts/check_priorart_invariants.py` | `--core` 가 여러 모듈을 받는다(기본 core · argument) |
+| `validation/shapes_priorart_argument.ttl` | 5 shape — 근거 없는 판단 · 빈 묶음 · 경계 없는/뒤집힌 구간(`sh:lessThanOrEquals`) · 종류 없는 좌표 거부 |
+| `queries/cq_argument/CQA01–15.rq` | 결손 1종당 1개. 수치 둘(겹침·임계)은 심사관 라벨이 아니라 **경계값으로 계산**한다 |
+| `data/sources/notice_dissection/pilot_v1.jsonl` | 카드 54장 → 판단 **60**(청구항별로 근거가 갈린 카드 5장을 부분으로 나눴다) · sha `406b3a8c…` 동결 |
+| `scripts/build_abox_argument_pilot.py` | 결정적 생성기 + 검사기 · 산출 `pilot_abox.ttl`(gitignore · 2,432 트리플) |
+| `Makefile` | `abox-argument-pilot` · `pilot-sample` · `validate` ④ 단계 |
+| `scripts/report_graph_signature.py` | `TBOX_MODULES` 에 ⑤ |
+
+**벗어난 것 ① — 카드를 부분으로 나눴다.** 승인된 설계는 "카드 한 장 = 판단 하나"를 전제했는데, 카드 5장은
+청구항마다 근거가 다르다(예: 청4·8 은 문헌, 청7 은 상식). 한 판단에 묶음 둘로 넣으면 **"또는"(선택적 근거)으로
+잘못 읽힌다.** 그래서 레코드에 `part`·`claims` 를 두고 판단 IRI 를 `…_p{n}` 으로 갈랐다. 어휘는 바뀌지 않는다.
+
+**벗어난 것 ② — 버전 번호를 올리지 않았다.** 이 저장소의 `CITATION.cff` `version`·`date-released` 는 **태그와
+DOI 가 붙은 공개 릴리스**(v1.1.1-paper)를 가리킨다. 태그 없이 1.2.0 으로 올리면 없는 릴리스를 인용 파일이
+주장한다(§1-4). 그래서 CHANGELOG `[Unreleased]` 에 **1.2.0 후보(추가 전용)** 로 적고, 릴리스 절단은 사용자 결정으로 남겼다.
+
+**참조를 버린 것.** `1020100051963-c` 는 청구항 1 판단(카드 `-a`)을 승계하는데 `-a` 는 채택 결손 밖이라
+파일럿에 없다 — 참조 대상이 파일럿 안에 있어야 한다는 검사를 지키려고 그 참조를 뺐다. `1020160063657-b` 의
+§45·§42 문항 참조는 대상이 선행기술 판단이 아니라 담지 않았다.
+
+#### (f) 사람 게이트 — 파일럿 표본 10건 (seed 20260929)
+
+구조화는 LLM 산출이다. 동결된 것은 레코드의 sha256 이고, 표본 10건을 사람이 카드와 대조한 뒤
+`--mark-verified` 로 기록한다. **기록 전까지 생성기는 "사람 확인: 미완" 을 인쇄한다.**
+
+**통과 (2026-09-29).** 사용자가 표본 10건을 카드와 대조했다 — **이상 0건.** 확인 전에 권고한 문턱(구조 오류
+3건 이상이면 60건 전체 재검토)에 걸리지 않았다. 기록: `pilot_v1_verification.json`(파일럿 sha `406b3a8c…` 에 묶임 —
+레코드를 고치면 기록이 무효가 되고 생성기가 다시 "미완" 을 인쇄한다).
+
+#### (g′) 게이트 (§2 5단계 · 2026-09-29 · 순차 실행)
+
+| 게이트 | 결과 |
+|---|---|
+| `make validate` | **PASSED** — 기존 전 층 불변 · ④ 논증층 shape × 파일럿(판단 60 · 노드 412) PASS · 불변식 A 두 모듈 OK |
+| `make test` | 1차 **1 failed** — `test_README_서명_블록이_최신이다`(모듈 추가로 서명이 낡음 · 게이트가 의도대로 잡았다) → `signature-inject` 후 **620 passed · 10 skipped** |
+| `make signature-check` | 최신 — 클래스 102→**111** · OP 122→**138** · DP 94→**104** · T-Box 트리플 1,933→**2,156** (기존 행 불변) |
+| `make check-leakage` | PASS 5 · FAIL 0 · PENDING 0 · UNMEASURABLE 1 (불변) |
+| `make public-release` → `check-public` | **통과** — 401파일(+4: 어휘·shape·파일럿 생성기·테스트) · 적중 0 · `data/sources/`·파일럿·`queries/cq_argument/` 미발행 |
+| 결정성 | 모듈 · 파일럿 각 2회 빌드 바이트 동일 · 기존 네 TTL sha256 불변 |
+| 실패해야 할 입력 | 파일럿 검사기 14종 · shape 9종 — 전부 거부 (`tests/test_priorart_argument.py` · 68건) |
+
+#### (g) 하류 조치 (§0)
+
+**추가만 있다.** 기존 IRI·의미·TTL 바이트 변경 0. 하류가 vendor 할 파일이 하나 늘었다(`sdkb-priorart-argument.ttl`) —
+`vendor.py:VENDOR_FILES` · `baseline.py:BASELINE_PARTS` 에 더하면 된다. 공개 트리에는 어휘·shape·생성기·테스트가 실리고
+파일럿과 그 원천(`data/sources/`)은 실리지 않는다. `queries/cq_argument/` 는 공개 목록(`queries/cq/`) 밖이라 실리지 않는다.
+
+#### (h) 다음
+
+① 파일럿 표본 사람 확인 ② **정본 파서 교정**(§20.15(h) · 이제 채울 자리 — `EvidenceSet` 문헌 조합 · `EvidenceLink`
+요소↔문헌 · §29① 호 — 가 정해졌다) → 공개 A-Box 재생성 ③ R-Box: T-Box 가 섰으므로 §20.15(i) 의 규칙
+(§29①⇒§29② · 구조 자명⇒특성 자명 · 물건⇒방법 전이)이 이제 적을 자리를 갖는다 ④ 릴리스 1.2.0 절단 여부.

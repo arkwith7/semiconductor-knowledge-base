@@ -27,6 +27,49 @@ All notable changes to SDKB will be documented in this file.
 
 ## [Unreleased]
 
+### Added (2026-09-29 — PLAN-005 R1-스키마 · 판단 논증층 · **어휘 추가 전용 · 1.2.0 후보** · 사용자 승인)
+
+**결론.** 새 T-Box 모듈 `ontology/sdkb-priorart-argument.ttl`(IRI `https://w3id.org/sdkb/pa/argument` · 접두어 `pa:`)
+을 더했다 — 심사관 판단의 **근거 구조**(판단 단위 · 근거 묶음 · 요소↔문헌 좌표 · 수치 구간 · 논거 유형)를 담는다.
+**기존 TTL 은 한 바이트도 바뀌지 않았다**(core·semi·kr 은 V6b 동결 sha 와 일치 · us 불변). 기존 IRI·의미 변경 0.
+공개 그래프에는 이 어휘의 **인스턴스가 아직 0** 이다 — 정본 파서 교정 뒤 A-Box 재생성에서 채워진다.
+
+**왜.** R1 정답 해부(train 30문서 · 판단 162건)에서 심사관이 실제로 쓴 판단 중 현 어휘가 담지 못하는 것 58종을 찾았고,
+결과 전에 동결한 규칙(T-Box 결손 ∧ 카드 5장 이상 ∧ 답이 바뀌는 CQ 가 있음)이 그중 15종을 골랐다. 기존
+`ont:PriorArtJudgment` 는 (출원, 인용문헌, 근거) 이분 엣지(1,812건 전부 문헌 1개)라 문헌 결합·문헌 없는 근거·
+선택적 근거를 담을 수 없다 — 그래서 판단 단위를 새 클래스로 세웠다. 전문은 PLAN-005 §20.16.
+
+| 구조 | 클래스 | 대표 술어 |
+|---|---|---|
+| 판단 단위 | `pa:ExaminerJudgment` · `pa:EvidenceSet` · `pa:JudgmentScope` | `supportedBy`(묶음 사이 = 또는) · `includesDocument`(묶음 안 = 결합) · `baseDocument` · `refersToJudgment` · `reliesOnCommonKnowledge` |
+| 요소↔증거 | `pa:EvidenceLink` · `pa:DocumentLocator` · `pa:LocatorType` | `forElement` · `inDocument` · `locator` · `claimTerm` · `documentTerm` |
+| 수치 구간 | `pa:NumericInterval` · `pa:IntervalRelation` | `claimedInterval` · `disclosedInterval` · `lowerBound` · `upperBound` |
+| 논거 유형 | `pa:Rationale` | `hasRationale` — 설계선택 · 효과 예측 · 결합 동기 · 통상 수행 · 치환·전용 |
+
+**그래프 서명** (`make signature` · T-Box):
+
+| | 이전 | 이후 |
+|---|---:|---:|
+| 명명 클래스 | 102 | **111** |
+| 객체 술어 | 122 | **138** |
+| 데이터 술어 | 94 | **104** |
+| T-Box 트리플 | 1,933 | **2,156** |
+
+A-Box 층은 불변이다.
+
+**`pa:substitutableWith` 는 되살리지 않았다.** 옛 술어는 개념↔개념 대칭(⊑ `pa:coveredBy`)이었고, 원천의 치환은
+"한 문헌의 구성을 다른 문헌에 옮긴다"는 **방향 있는 판단 논거**다 — `pa:RationaleSubstitution` + `pa:baseDocument` 로 담는다.
+
+**하류 조치(§0).** `vendor.py:VENDOR_FILES` · `baseline.py:BASELINE_PARTS` 에 `ontology/sdkb-priorart-argument.ttl` 을
+더하면 된다. 기존 파일의 sha256 핀은 그대로 유효하다. 새 shape `validation/shapes_priorart_argument.ttl` 은 공개 그래프에서
+대상 0 이라 공개 트리의 `make validate` 는 건너뛴다고 출력한다(이 저장소에서는 비공개 파일럿 판단 60건 · 노드 412 에 걸려 통과).
+
+**게이트** (순차 · 2026-09-29): `make validate` PASSED · `make test` 620 passed · 10 skipped · `signature-check` 최신 ·
+`check-leakage` PASS 5 · FAIL 0 · UNMS 1(불변) · `check-public` 통과(401파일 · 적중 0) · 모듈·파일럿 2회 빌드 바이트 동일.
+
+**버전.** 추가 전용이므로 다음 릴리스는 **1.2.0**(minor)이 맞다. `CITATION.cff` 는 태그·DOI 가 붙는 릴리스 절단 때 올린다 —
+태그 없이 올리면 없는 릴리스를 인용 파일이 주장하게 된다.
+
 ### Fixed (2026-09-13 — PLAN-005 R0 · 평가 무결성 교정 CAL-0~3 · **그래프 불변** · 사용자 승인)
 
 **결론.** 평가 계측기의 결함 셋 — E-1 V3 게이트가 혼합층을 버림 · E-2 SPR↔τ 비대칭 · E-3 평가가 분할을 모름 — 을

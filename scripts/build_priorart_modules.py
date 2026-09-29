@@ -16,6 +16,16 @@
 기계 보증으로 만드는 것이 `scripts/check_priorart_invariants.py` 다(§5 V6(a)).
 
     ④ sdkb-priorart-us.ttl     paus: 관할 바인딩 — US 35 U.S.C. §102/§103 · Office Action 문서종
+    ⑤ sdkb-priorart-argument.ttl  pa: 판단 논증층 — 판단 단위·근거 묶음·요소↔증거·수치 구간·논거 유형
+
+**PLAN-005 R1-스키마(2026-09-29 · 사용자 승인) — ⑤ 논증층.** R1 정답 해부(§20.15)의 결손 58종 중
+결과 전에 동결한 규칙(E2 ∧ 카드 ≥5 ∧ 바뀌는 CQ 가 있음 · 파서 계열 제외)을 통과한 15종을 담는다.
+①–④ 는 바이트 하나 바뀌지 않는다 — core·semi·kr 의 sha 는 V6b 판정이 동결했고(`report_stage8_paper_port.FROZEN`),
+그것을 건드리면 과거 판정이 스스로 모순된다. 그래서 ⑤ 는 자기 발행일 `MODIFIED_ARG` 를 갖고
+core 만 import 하며, core 와 같은 순도 불변식 A(도메인·관할 IRI 0)를 받는다.
+`ont:PriorArtJudgment` 는 (출원, 인용문헌, 근거) 3키로 IRI 가 정해지는 이분 엣지라(1,812건 전부
+`overPriorArt` 1개) 조합·무문헌·선택적 근거를 담을 수 없다 — 그래서 판단 단위를 **새 클래스**로 세운다.
+옛 `pa:substitutableWith`(개념↔개념 대칭)는 되살리지 않는다: 원천의 치환은 방향 있는 판단 논거다(R1 카드 5장).
 
 **단계 8 (2026-09-11 · 사용자 승인) — V6b US 종이 이식.** ④ 는 ③ 의 대칭이며 **①②③ 은 바이트
 하나 바뀌지 않는다** — 그것이 V6b 의 판정량(L1 변경 라인수 0)이고 `scripts/report_stage8_paper_port.py`
@@ -82,6 +92,8 @@ MODIFIED = "2026-09-09"
 # 단계 8 의 US 모듈은 자기 발행일을 갖는다 — 공유 상수 `MODIFIED` 를 올리면 core·semi·kr
 # 의 sha 가 함께 바뀌어 "L1 변경 0줄"(V6b) 을 이 커밋 스스로 깨뜨린다.
 MODIFIED_US = "2026-09-11"
+# ⑤ 논증층도 같은 이유로 자기 발행일을 갖는다.
+MODIFIED_ARG = "2026-09-29"
 VERSION = "0.1.0-dev"
 LICENSE = URIRef("https://spdx.org/licenses/CDLA-Permissive-2.0.html")
 
@@ -89,6 +101,7 @@ CORE_IRI = URIRef("https://w3id.org/sdkb/pa")
 SEMI_IRI = URIRef("https://w3id.org/sdkb/pa/semi")
 KR_IRI = URIRef("https://w3id.org/sdkb/pa/kr")
 US_IRI = URIRef("https://w3id.org/sdkb/pa/us")
+ARG_IRI = URIRef("https://w3id.org/sdkb/pa/argument")
 ONT_IRI = URIRef("https://w3id.org/sdkb/ont")
 PATENT_IRI = URIRef("https://w3id.org/sdkb/ont/patent")
 
@@ -497,6 +510,159 @@ def build_us() -> Graph:
 
 
 # ═══════════════════════════════════════════════════════════════════
+# ⑤ argument — 판단 논증층. core 와 같은 순도: pa: 만 등장한다(불변식 A 가 이 파일에도 걸린다).
+# ═══════════════════════════════════════════════════════════════════
+def build_argument() -> Graph:
+    g = Graph()
+    g.add((ARG_IRI, RDF.type, OWL.Ontology))
+    g.add((ARG_IRI, RDFS.label, Literal("SDKB Prior-Art Argument — examiner reasoning layer", lang="en")))
+    g.add((ARG_IRI, RDFS.comment, Literal(
+        "심사관 판단의 근거 구조 — 판단 단위(H1) · 요소↔증거 대응(H2) · 수치 구간(H3) · 논거 유형(H4). "
+        "PLAN-005 R1 정답 해부의 결손 15종에서 도출했다(§20.15 · R1-스키마). core 와 같이 "
+        "도메인·관할 어휘가 0 이며 scripts/check_priorart_invariants.py 가 그것을 검사한다.", lang="ko")))
+    g.add((ARG_IRI, OWL.imports, CORE_IRI))
+    g.add((ARG_IRI, OWL.versionInfo, Literal(VERSION)))
+    g.add((ARG_IRI, DCTERMS.modified, Literal(MODIFIED_ARG, datatype=XSD.date)))
+    g.add((ARG_IRI, DCTERMS.license, LICENSE))
+
+    # ── H1 판단 단위 ──
+    _cls(g, PA.ExaminerJudgment, "examiner judgment",
+         "한 심사문서 안에서 한 근거로 청구항(또는 그 부가 한정)에 내린 판단 하나. "
+         "`ont:PriorArtJudgment` 는 (출원, 인용문헌, 근거) 이분 엣지라 문헌 조합·무문헌 근거·"
+         "선택적 근거를 담지 못한다 — 그래서 문헌을 키로 삼지 않는 단위를 따로 세운다.")
+    _cls(g, PA.EvidenceSet, "evidence set",
+         "판단을 받치는 근거 묶음 하나. **묶음 안은 결합(그리고), 묶음 사이는 선택(또는)** 이다 — "
+         "「인용1 단독 또는 인용1·2 결합」은 묶음 둘이다. 문헌이 0 이면 상식 근거여야 한다(SHACL).")
+    _cls(g, PA.JudgmentScope, "judgment scope",
+         "판단이 청구항 전체를 대비했는가, 종속항이 **부가한 사항만** 대비했는가.")
+    _prop(g, PA.judgesClaim, OWL.ObjectProperty, "judges claim",
+          "판단이 겨냥한 청구항. range 는 도메인 어휘라 비운다. `pa:concernsClaim` 을 쓰지 않는 이유는 "
+          "그 domain 이 ExaminerElement 라서 판단이 추론으로 요소가 되기 때문이다.",
+          domain=PA.ExaminerJudgment)
+    _prop(g, PA.concludes, OWL.ObjectProperty, "concludes",
+          "판단의 결론. 판정 어휘는 core·관할 모듈의 ElementVerdict 개체를 그대로 쓴다. "
+          "`pa:hasVerdict` 는 domain 이 ExaminerElement 라 쓰지 않는다.",
+          domain=PA.ExaminerJudgment, range_=PA.ElementVerdict)
+    _prop(g, PA.judgmentScope, OWL.ObjectProperty, "judgment scope",
+          "청구항 전체 대비인가 부가 한정 대비인가.",
+          domain=PA.ExaminerJudgment, range_=PA.JudgmentScope)
+    _prop(g, PA.refersToJudgment, OWL.ObjectProperty, "refers to judgment",
+          "이 판단이 근거로 재사용한 다른 판단(예: §29① 동일 판단을 §29② 의 전제로). "
+          "**전이로 선언하지 않는다** — 심사관이 적은 참조만 담는다.",
+          domain=PA.ExaminerJudgment, range_=PA.ExaminerJudgment)
+    _prop(g, PA.supportedBy, OWL.ObjectProperty, "supported by",
+          "판단의 근거 묶음. 둘 이상이면 선택적 근거다.",
+          domain=PA.ExaminerJudgment, range_=PA.EvidenceSet)
+    _prop(g, PA.includesDocument, OWL.ObjectProperty, "includes document",
+          "묶음에 든 문헌. 둘 이상이면 결합이다. range 는 바인딩 몫이라 비운다.",
+          domain=PA.EvidenceSet)
+    _prop(g, PA.baseDocument, OWL.ObjectProperty, "base document",
+          "결합·치환의 기준(주) 문헌 — 다른 문헌의 구성을 **이 문헌에** 옮겨 적용한다. "
+          "방향이 여기 있다. 값은 includesDocument 에도 있어야 한다(생성기가 검사).",
+          domain=PA.EvidenceSet)
+    _prop(g, PA.reliesOnCommonKnowledge, OWL.DatatypeProperty, "relies on common knowledge",
+          "문헌이 아니라 주지관용·통상 관행에 기댄 근거인가.",
+          domain=PA.EvidenceSet, range_=XSD.boolean)
+
+    # ── H4 논거 유형 ──
+    _cls(g, PA.Rationale, "rationale",
+         "차이를 메우는 정형 논거. 개체는 KR 통지서 30건에서 관찰된 것만 둔다 — 관할 중립적 "
+         "이름이지만 US KSR 근거와 `skos:exactMatch` 를 선언하지 않는다(원천이 없다 · §7-6).")
+    _prop(g, PA.hasRationale, OWL.ObjectProperty, "has rationale",
+          "근거 묶음이 기댄 논거 유형.", domain=PA.EvidenceSet, range_=PA.Rationale)
+
+    # ── H2 요소↔증거 대응 ──
+    _cls(g, PA.EvidenceLink, "evidence link",
+         "청구항 요소 하나를 문헌의 **어디**에 대응시켰는가. 용어 대응(claimTerm↔documentTerm)도 "
+         "여기 담는다 — 두 이름이 같은 것이 된 근거가 이 링크다.")
+    _cls(g, PA.DocumentLocator, "document locator",
+         "문헌 안의 좌표(단락·도면·청구항·컬럼/라인·표·실시예·쪽). 값은 원문 표기 그대로 둔다.")
+    _cls(g, PA.LocatorType, "locator type", "좌표의 종류.")
+    _prop(g, PA.partOfJudgment, OWL.ObjectProperty, "part of judgment",
+          "이 대응이 속한 판단.", domain=PA.EvidenceLink, range_=PA.ExaminerJudgment)
+    _prop(g, PA.forElement, OWL.ObjectProperty, "for element",
+          "대응의 좌변이 심사관 구성대비표의 요소일 때 그 요소. 표가 적재되지 않은 판단에는 없다.",
+          domain=PA.EvidenceLink, range_=PA.ExaminerElement)
+    _prop(g, PA.inDocument, OWL.ObjectProperty, "in document",
+          "대응의 우변 문헌. range 는 바인딩 몫이라 비운다.", domain=PA.EvidenceLink)
+    _prop(g, PA.locator, OWL.ObjectProperty, "locator",
+          "문헌 안의 좌표.", domain=PA.EvidenceLink, range_=PA.DocumentLocator)
+    _prop(g, PA.locatorType, OWL.ObjectProperty, "locator type",
+          "좌표의 종류.", domain=PA.DocumentLocator, range_=PA.LocatorType)
+    for iri, lab, rng, dom, com in [
+        (PA.locatorValue, "locator value", XSD.string, PA.DocumentLocator,
+         "원문 표기 그대로의 좌표 값(예: `[0010]~[0013]` · `도4` · `컬럼3 라인5~23`)."),
+        (PA.claimTerm, "claim term", XSD.string, PA.EvidenceLink, "청구항 쪽 용어."),
+        (PA.documentTerm, "document term", XSD.string, PA.EvidenceLink, "문헌 쪽 용어."),
+    ]:
+        _prop(g, iri, OWL.DatatypeProperty, lab, com, domain=dom, range_=rng)
+
+    # ── H3 수치 구간 ──
+    _cls(g, PA.NumericInterval, "numeric interval",
+         "하한·상한·개폐·단위를 갖는 구간. 한쪽만 있으면 임계(이상·이하)다. 리터럴 한 값"
+         "(`ont:hasNumericValue`)으로는 겹침·포함을 질의할 수 없어서 둔다.")
+    _cls(g, PA.IntervalRelation, "interval relation",
+         "심사관이 적은 두 구간의 관계. 경계값에서 다시 계산할 수 있지만 심사관의 판단을 그대로 보존한다.")
+    _prop(g, PA.claimedInterval, OWL.ObjectProperty, "claimed interval",
+          "청구항이 한정한 구간.", domain=PA.EvidenceLink, range_=PA.NumericInterval)
+    _prop(g, PA.disclosedInterval, OWL.ObjectProperty, "disclosed interval",
+          "문헌이 개시한 구간(또는 값).", domain=PA.EvidenceLink, range_=PA.NumericInterval)
+    _prop(g, PA.intervalRelation, OWL.ObjectProperty, "interval relation",
+          "개시 구간이 청구 구간에 대해 갖는 관계.",
+          domain=PA.EvidenceLink, range_=PA.IntervalRelation)
+    for iri, lab, rng, com in [
+        (PA.quantityLabel, "quantity label", XSD.string, "무엇의 양인가(원문 표기)."),
+        (PA.lowerBound, "lower bound", XSD.decimal, "하한."),
+        (PA.upperBound, "upper bound", XSD.decimal, "상한. 하한 이상이어야 한다(SHACL)."),
+        (PA.lowerInclusive, "lower inclusive", XSD.boolean, "하한 포함 여부(이상=참 · 초과=거짓)."),
+        (PA.upperInclusive, "upper inclusive", XSD.boolean, "상한 포함 여부(이하=참 · 미만=거짓)."),
+        (PA.unitText, "unit text", XSD.string, "단위 표기. 단위 환산은 하지 않는다 — 같은 단위끼리만 비교한다."),
+    ]:
+        _prop(g, iri, OWL.DatatypeProperty, lab, com, domain=PA.NumericInterval, range_=rng)
+
+    # ── 개체 ──
+    for iri, ko, en in [
+        (PA.ScopeWholeClaim, "청구항 전체", "whole claim"),
+        (PA.ScopeAddedLimitation, "부가한 사항", "added limitation"),
+    ]:
+        _indiv(g, iri, PA.JudgmentScope, ko, en)
+    for iri, ko, en in [
+        (PA.LocParagraph, "단락", "paragraph"),
+        (PA.LocFigure, "도면", "figure"),
+        (PA.LocClaim, "청구항", "claim"),
+        (PA.LocColumnLine, "컬럼·라인", "column and line"),
+        (PA.LocTable, "표", "table"),
+        (PA.LocExample, "실시예", "example"),
+        (PA.LocPage, "쪽", "page"),
+    ]:
+        _indiv(g, iri, PA.LocatorType, ko, en)
+    for iri, ko, en, com in [
+        (PA.IntervalOverlaps, "일부 겹침", "overlaps", "두 구간이 일부만 겹친다."),
+        (PA.IntervalDisclosedWithinClaimed, "개시가 청구 범위 안", "disclosed within claimed",
+         "개시 구간(값)이 청구 구간에 포함된다 — 신규성 부정의 전형."),
+        (PA.IntervalClaimedWithinDisclosed, "청구가 개시 범위 안", "claimed within disclosed",
+         "청구 구간이 개시 구간보다 좁다 — 선택·최적화 논거가 붙는 자리."),
+        (PA.IntervalDisjoint, "겹치지 않음", "disjoint", "두 구간이 겹치지 않는다."),
+    ]:
+        _indiv(g, iri, PA.IntervalRelation, ko, en, com)
+    for iri, ko, en, com in [
+        (PA.RationaleDesignChoice, "설계선택·최적화", "design choice",
+         "필요에 따라 적절히 선택·최적화할 수 있는 정도."),
+        (PA.RationalePredictableEffect, "효과 예측 가능", "predictable effect",
+         "효과가 통상 예측되는 정도이거나 결합에서 자연히 생긴다."),
+        (PA.RationaleCombinationMotivation, "결합 동기", "combination motivation",
+         "기술분야·목적·효과의 공통이 결합의 동기가 된다."),
+        (PA.RationaleRoutinePractice, "통상 수행·자명", "routine practice",
+         "통상적으로 수행하는 정도이거나 자연히 얻어지는 구성."),
+        (PA.RationaleSubstitution, "치환·전용", "substitution or transfer",
+         "다른 문헌의 재료·구성을 기준 문헌에 바꿔 넣거나 옮겨 적용한다. 방향은 "
+         "EvidenceSet 의 baseDocument 가 든다."),
+    ]:
+        _indiv(g, iri, PA.Rationale, ko, en, com)
+    return g
+
+
+# ═══════════════════════════════════════════════════════════════════
 # 결정적 직렬화 — rdflib 에 맡기지 않는다
 # ═══════════════════════════════════════════════════════════════════
 def _term(t, prefixes: dict[str, str]) -> str:
@@ -558,6 +724,8 @@ MODULES = [
      "SDKB Prior-Art — KR 관할 바인딩 (pakr: → pa:)"),
     ("sdkb-priorart-us.ttl", build_us, US_PREFIXES,
      "SDKB Prior-Art — US 관할 바인딩 (paus: → pa:) · 단계 8 V6b 종이 이식"),
+    ("sdkb-priorart-argument.ttl", build_argument, CORE_PREFIXES,
+     "SDKB Prior-Art Argument (pa:) — 판단 논증층 · 도메인 어휘 0 · 관할 어휘 0"),
 ]
 
 
