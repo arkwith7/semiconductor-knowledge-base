@@ -9,6 +9,9 @@
    "cited_ids": [
     "KR-G-1497902"
    ],
+   "cite_forms": {
+    "KR-G-1497902": "colon"
+   },
    "target_claims": [
     1,
     2,
@@ -24,7 +27,8 @@
     12,
     13,
     14
-   ]
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
@@ -34,10 +38,26 @@
    "cited_ids": [
     "KR-G-1497902"
    ],
+   "cite_forms": {
+    "KR-G-1497902": "colon"
+   },
    "target_claims": [
     1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
     14
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020190092298_952020042820981.txt",

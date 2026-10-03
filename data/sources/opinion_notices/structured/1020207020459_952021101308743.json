@@ -7,12 +7,14 @@
     "§29①"
    ],
    "cited_ids": [],
+   "cite_forms": {},
    "target_claims": [
     1,
     2,
     8,
     9
-   ]
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
@@ -22,6 +24,9 @@
    "cited_ids": [
     "US-P-20180019165"
    ],
+   "cite_forms": {
+    "US-P-20180019165": "colon"
+   },
    "target_claims": [
     1,
     2,
@@ -34,7 +39,8 @@
     9,
     10,
     12
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020207020459_952021101308743.txt",

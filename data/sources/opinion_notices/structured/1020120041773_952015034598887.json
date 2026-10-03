@@ -7,7 +7,17 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    4,
+    5,
+    9,
+    10,
+    12,
+    16,
+    17
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -15,7 +25,29 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+   ],
+   "subclause": ""
   },
   {
    "section": 3,
@@ -23,9 +55,33 @@
     "§29①"
    ],
    "cited_ids": [
+    "US-G-5065628",
     "US-P-20090261430"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "US-G-5065628": "reference",
+    "US-P-20090261430": "colon"
+   },
+   "target_claims": [
+    1,
+    2,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+   ],
+   "subclause": "2"
   },
   {
    "section": 4,
@@ -36,7 +92,32 @@
     "US-G-5065628",
     "US-P-20090261430"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "US-G-5065628": "colon",
+    "US-P-20090261430": "colon"
+   },
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020120041773_952015034598887.txt",

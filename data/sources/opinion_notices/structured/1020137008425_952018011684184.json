@@ -7,10 +7,12 @@
     "§42"
    ],
    "cited_ids": [],
+   "cite_forms": {},
    "target_claims": [
     1,
     9
-   ]
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -18,23 +20,7 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": [
-    1,
-    2,
-    4,
-    8,
-    9,
-    11,
-    12,
-    13
-   ]
-  },
-  {
-   "section": 3,
-   "legal_bases": [
-    "§29②"
-   ],
-   "cited_ids": [],
+   "cite_forms": {},
    "target_claims": [
     1,
     2,
@@ -47,10 +33,48 @@
     9,
     10,
     11,
+    12,
     13,
     14,
     15
-   ]
+   ],
+   "subclause": ""
+  },
+  {
+   "section": 3,
+   "legal_bases": [
+    "§29②"
+   ],
+   "cited_ids": [
+    "JP-P-2009043797",
+    "JP-P-2009043798",
+    "JP-P-2010050112",
+    "KR-P-1020100024569"
+   ],
+   "cite_forms": {
+    "JP-P-2009043797": "label",
+    "JP-P-2009043798": "label",
+    "JP-P-2010050112": "label",
+    "KR-P-1020100024569": "label"
+   },
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020137008425_952018011684184.txt",

@@ -7,9 +7,17 @@
     "§29②"
    ],
    "cited_ids": [
-    "US-P-20070023281"
+    "US-P-20070023281",
+    "WO-P-2005108639"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "US-P-20070023281": "colon",
+    "WO-P-2005108639": "colon"
+   },
+   "target_claims": [
+    1
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020177018680_952019031660259.txt",

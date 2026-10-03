@@ -9,7 +9,13 @@
    "cited_ids": [
     "US-P-20180211820"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "US-P-20180211820": "colon"
+   },
+   "target_claims": [
+    1
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
@@ -20,7 +26,12 @@
     "JP-P-2002281728",
     "US-P-20180211820"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-2002281728": "colon",
+    "US-P-20180211820": "colon"
+   },
+   "target_claims": [],
+   "subclause": ""
   }
  ],
  "source_file": "1020240000644_952024092825705.txt",

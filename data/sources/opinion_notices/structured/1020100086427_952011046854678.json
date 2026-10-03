@@ -10,7 +10,12 @@
     "JP-P-2005123574",
     "KR-P-1020070062435"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-2005123574": "colon",
+    "KR-P-1020070062435": "colon"
+   },
+   "target_claims": [],
+   "subclause": ""
   }
  ],
  "source_file": "1020100086427_952011046854678.txt",

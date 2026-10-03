@@ -10,7 +10,15 @@
     "JP-P-2005240160",
     "KR-P-1020140103061"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-2005240160": "colon",
+    "KR-P-1020140103061": "colon"
+   },
+   "target_claims": [
+    1,
+    2
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020200033611_952021023357256.txt",

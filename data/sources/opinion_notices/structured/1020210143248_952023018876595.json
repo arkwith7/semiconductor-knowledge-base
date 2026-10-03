@@ -11,6 +11,11 @@
     "KR-P-1020200129057",
     "KR-P-1020210010147"
    ],
+   "cite_forms": {
+    "KR-G-1531630": "colon",
+    "KR-P-1020200129057": "colon",
+    "KR-P-1020210010147": "colon"
+   },
    "target_claims": [
     1,
     2,
@@ -23,7 +28,8 @@
     9,
     10,
     11
-   ]
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -31,10 +37,12 @@
     "§42"
    ],
    "cited_ids": [],
+   "cite_forms": {},
    "target_claims": [
     4,
     10
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020210143248_952023018876595.txt",

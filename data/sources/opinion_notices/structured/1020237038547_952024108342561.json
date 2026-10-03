@@ -7,21 +7,30 @@
     "§42"
    ],
    "cited_ids": [],
+   "cite_forms": {},
    "target_claims": [
     1,
     2,
     3,
+    4,
+    5,
     6,
     7,
     8,
+    9,
     10,
     11,
     12,
+    13,
     14,
     15,
     16,
-    17
-   ]
+    17,
+    18,
+    19,
+    20
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -29,10 +38,12 @@
     "§42"
    ],
    "cited_ids": [],
+   "cite_forms": {},
    "target_claims": [
     6,
     16
-   ]
+   ],
+   "subclause": ""
   },
   {
    "section": 3,
@@ -42,13 +53,17 @@
    "cited_ids": [
     "US-P-20120052640"
    ],
+   "cite_forms": {
+    "US-P-20120052640": "colon"
+   },
    "target_claims": [
     1,
     2,
     13,
     14,
     15
-   ]
+   ],
+   "subclause": "2"
   },
   {
    "section": 4,
@@ -59,6 +74,10 @@
     "KR-P-1020200138412",
     "US-P-20120052640"
    ],
+   "cite_forms": {
+    "KR-P-1020200138412": "colon",
+    "US-P-20120052640": "colon"
+   },
    "target_claims": [
     1,
     2,
@@ -70,7 +89,8 @@
     18,
     19,
     20
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020237038547_952024108342561.txt",

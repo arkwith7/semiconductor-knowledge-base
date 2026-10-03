@@ -9,13 +9,17 @@
    "cited_ids": [
     "KR-P-1020060134563"
    ],
+   "cite_forms": {
+    "KR-P-1020060134563": "colon"
+   },
    "target_claims": [
     1,
     3,
     4,
     5,
     6
-   ]
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
@@ -24,8 +28,14 @@
    ],
    "cited_ids": [
     "JP-P-2008071786",
-    "KR-G-1120475"
+    "KR-G-1120475",
+    "KR-P-1020060134563"
    ],
+   "cite_forms": {
+    "JP-P-2008071786": "colon",
+    "KR-G-1120475": "colon",
+    "KR-P-1020060134563": "reference"
+   },
    "target_claims": [
     1,
     2,
@@ -38,7 +48,8 @@
     9,
     10,
     15
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020120056605_952013049991080.txt",

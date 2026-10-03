@@ -7,9 +7,26 @@
     "§29②"
    ],
    "cited_ids": [
+    "EP-P-01087033",
     "US-P-20110203920"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "EP-P-01087033": "colon",
+    "US-P-20110203920": "colon"
+   },
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020180035106_952020023549012.txt",

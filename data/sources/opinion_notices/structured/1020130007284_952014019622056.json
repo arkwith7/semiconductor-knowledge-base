@@ -6,8 +6,21 @@
    "legal_bases": [
     "§29②"
    ],
-   "cited_ids": [],
-   "target_claims": []
+   "cited_ids": [
+    "KR-P-1020080043696"
+   ],
+   "cite_forms": {
+    "KR-P-1020080043696": "unlabeled"
+   },
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    10,
+    11
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -15,7 +28,11 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    12
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020130007284_952014019622056.txt",

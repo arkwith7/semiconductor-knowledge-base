@@ -3,7 +3,7 @@
   "schema_version": "1.0",
   "source": {
     "ttl": "sdkb-abox-claim-features.ttl",
-    "ttl_sha256": "ae27578a3b92e1ee92946c7c38238434a0675f32d56bc0ce9b1662cdd5479cdf",
+    "ttl_sha256": "8b3fe3489212edc520acd721a28262290debc2c363924c1b91cca4fb31870648",
     "generator": "build_abox_claim_features.py",
     "linker": {
       "profile": "patent-text",

@@ -13,7 +13,22 @@
     "JP-P-2012023085",
     "JP-P-2015149385"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-2008153348": "colon",
+    "JP-P-2009105298": "colon",
+    "JP-P-2009111147": "colon",
+    "JP-P-2012023085": "colon",
+    "JP-P-2015149385": "colon"
+   },
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020180026799_952022003701012.txt",

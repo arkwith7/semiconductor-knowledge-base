@@ -6,7 +6,12 @@
    "legal_bases": [
     "§29①"
    ],
-   "cited_ids": [],
+   "cited_ids": [
+    "KR-P-1020070051680"
+   ],
+   "cite_forms": {
+    "KR-P-1020070051680": "unlabeled"
+   },
    "target_claims": [
     1,
     2,
@@ -15,17 +20,24 @@
     5,
     6,
     7
-   ]
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
    "legal_bases": [
     "§29②"
    ],
-   "cited_ids": [],
+   "cited_ids": [
+    "KR-P-1020070051680"
+   ],
+   "cite_forms": {
+    "KR-P-1020070051680": "unlabeled"
+   },
    "target_claims": [
     1
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020160170081_952024004258001.txt",

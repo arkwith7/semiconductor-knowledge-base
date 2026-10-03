@@ -7,10 +7,12 @@
     "§42"
    ],
    "cited_ids": [],
+   "cite_forms": {},
    "target_claims": [
     3,
     11
-   ]
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -18,6 +20,7 @@
     "§29②"
    ],
    "cited_ids": [],
+   "cite_forms": {},
    "target_claims": [
     1,
     2,
@@ -33,7 +36,8 @@
     12,
     13,
     14
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020070112958_952010043527794.txt",

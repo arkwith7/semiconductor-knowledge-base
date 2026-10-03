@@ -7,7 +7,18 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    11,
+    13,
+    14
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -18,7 +29,19 @@
     "US-P-20100155717",
     "US-P-20110168994"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "US-P-20100155717": "colon",
+    "US-P-20110168994": "colon"
+   },
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020207025987_952020083777101.txt",

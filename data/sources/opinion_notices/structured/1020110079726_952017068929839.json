@@ -9,9 +9,14 @@
    "cited_ids": [
     "KR-P-1020110000487"
    ],
+   "cite_forms": {
+    "KR-P-1020110000487": "colon"
+   },
    "target_claims": [
-    1
-   ]
+    1,
+    7
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020110079726_952017068929839.txt",

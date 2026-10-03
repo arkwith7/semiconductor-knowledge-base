@@ -9,6 +9,9 @@
    "cited_ids": [
     "JP-P-2017183718"
    ],
+   "cite_forms": {
+    "JP-P-2017183718": "colon"
+   },
    "target_claims": [
     1,
     2,
@@ -16,7 +19,8 @@
     4,
     5,
     6
-   ]
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -24,9 +28,11 @@
     "§42"
    ],
    "cited_ids": [],
+   "cite_forms": {},
    "target_claims": [
     6
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020217028896_952025012384944.txt",

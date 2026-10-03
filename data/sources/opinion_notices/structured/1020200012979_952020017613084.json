@@ -9,7 +9,13 @@
    "cited_ids": [
     "KR-P-1020100137379"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "KR-P-1020100137379": "colon"
+   },
+   "target_claims": [
+    1
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
@@ -20,7 +26,16 @@
     "JP-P-2007073699",
     "KR-P-1020100137379"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-2007073699": "colon",
+    "KR-P-1020100137379": "colon"
+   },
+   "target_claims": [
+    1,
+    2,
+    3
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020200012979_952020017613084.txt",

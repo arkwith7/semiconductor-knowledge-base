@@ -6,12 +6,18 @@
    "legal_bases": [
     "§29①"
    ],
-   "cited_ids": [],
+   "cited_ids": [
+    "JP-G-5781408"
+   ],
+   "cite_forms": {
+    "JP-G-5781408": "colon"
+   },
    "target_claims": [
     1,
     2,
     5
-   ]
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
@@ -19,8 +25,15 @@
     "§29②"
    ],
    "cited_ids": [
+    "JP-G-5688664",
+    "JP-G-5781408",
     "KR-P-1020120049552"
    ],
+   "cite_forms": {
+    "JP-G-5688664": "colon",
+    "JP-G-5781408": "reference",
+    "KR-P-1020120049552": "colon"
+   },
    "target_claims": [
     1,
     2,
@@ -34,8 +47,15 @@
     10,
     11,
     12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
     19
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020177024162_952018029618315.txt",

@@ -6,7 +6,14 @@
    "legal_bases": [
     "§29②"
    ],
-   "cited_ids": [],
+   "cited_ids": [
+    "JP-P-2004319676",
+    "JP-P-2005319470"
+   ],
+   "cite_forms": {
+    "JP-P-2004319676": "unlabeled",
+    "JP-P-2005319470": "unlabeled"
+   },
    "target_claims": [
     1,
     2,
@@ -15,8 +22,10 @@
     5,
     6,
     7,
+    8,
     9
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020080017256_952010024810282.txt",

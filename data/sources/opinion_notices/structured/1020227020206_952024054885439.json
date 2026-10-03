@@ -11,7 +11,35 @@
     "JP-P-2017186581",
     "KR-P-1020190065233"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-2015193863": "colon",
+    "JP-P-2017186581": "colon",
+    "KR-P-1020190065233": "colon"
+   },
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -19,7 +47,11 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    21
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020227020206_952024054885439.txt",

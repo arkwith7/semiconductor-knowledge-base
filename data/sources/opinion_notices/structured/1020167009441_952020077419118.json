@@ -7,7 +7,9 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -18,7 +20,24 @@
     "JP-P-2001118876",
     "US-P-20120280386"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-2001118876": "colon",
+    "US-P-20120280386": "colon"
+   },
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020167009441_952020077419118.txt",

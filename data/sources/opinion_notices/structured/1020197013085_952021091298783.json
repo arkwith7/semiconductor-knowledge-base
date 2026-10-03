@@ -7,9 +7,11 @@
     "§42"
    ],
    "cited_ids": [],
+   "cite_forms": {},
    "target_claims": [
     4
-   ]
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -17,8 +19,13 @@
     "§29②"
    ],
    "cited_ids": [
-    "US-P-20150325659"
+    "US-P-20150325659",
+    "WO-P-2016035696"
    ],
+   "cite_forms": {
+    "US-P-20150325659": "colon",
+    "WO-P-2016035696": "colon"
+   },
    "target_claims": [
     1,
     2,
@@ -40,7 +47,8 @@
     18,
     19,
     20
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020197013085_952021091298783.txt",

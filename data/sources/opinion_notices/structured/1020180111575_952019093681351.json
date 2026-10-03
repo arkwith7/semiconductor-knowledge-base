@@ -6,8 +6,22 @@
    "legal_bases": [
     "§29②"
    ],
-   "cited_ids": [],
-   "target_claims": []
+   "cited_ids": [
+    "JP-P-02189922",
+    "JP-P-2016015482"
+   ],
+   "cite_forms": {
+    "JP-P-02189922": "label",
+    "JP-P-2016015482": "label"
+   },
+   "target_claims": [
+    1,
+    2,
+    3,
+    5,
+    6
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020180111575_952019093681351.txt",

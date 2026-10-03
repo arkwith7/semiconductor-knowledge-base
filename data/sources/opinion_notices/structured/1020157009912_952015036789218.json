@@ -8,13 +8,20 @@
    ],
    "cited_ids": [
     "JP-P-2004232006",
-    "US-G-6716322"
+    "US-G-6716322",
+    "WO-P-2010038421"
    ],
+   "cite_forms": {
+    "JP-P-2004232006": "colon",
+    "US-G-6716322": "colon",
+    "WO-P-2010038421": "colon"
+   },
    "target_claims": [
     1,
     2,
     3
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020157009912_952015036789218.txt",

@@ -6,13 +6,23 @@
    "legal_bases": [
     "§29①"
    ],
-   "cited_ids": [],
+   "cited_ids": [
+    "CN-P-102732252"
+   ],
+   "cite_forms": {
+    "CN-P-102732252": "colon"
+   },
    "target_claims": [
     1,
+    2,
+    3,
     4,
     5,
+    6,
+    7,
     8
-   ]
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
@@ -20,15 +30,24 @@
     "§29②"
    ],
    "cited_ids": [
+    "CN-P-102732252",
     "KR-P-1020080009865"
    ],
+   "cite_forms": {
+    "CN-P-102732252": "colon",
+    "KR-P-1020080009865": "colon"
+   },
    "target_claims": [
     1,
     2,
+    3,
+    4,
+    5,
     6,
     7,
     8
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020120157415_952018024060737.txt",

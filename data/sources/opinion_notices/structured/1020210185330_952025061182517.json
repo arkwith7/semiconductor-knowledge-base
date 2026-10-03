@@ -9,11 +9,15 @@
    "cited_ids": [
     "JP-P-2008156694"
    ],
+   "cite_forms": {
+    "JP-P-2008156694": "colon"
+   },
    "target_claims": [
     1,
     2,
     3
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020210185330_952025061182517.txt",

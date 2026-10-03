@@ -6,7 +6,12 @@
    "legal_bases": [
     "§29②"
    ],
-   "cited_ids": [],
+   "cited_ids": [
+    "CN-P-202423298"
+   ],
+   "cite_forms": {
+    "CN-P-202423298": "colon"
+   },
    "target_claims": [
     1,
     2,
@@ -18,10 +23,13 @@
     8,
     9,
     10,
+    11,
     12,
+    13,
     14,
     15
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020130158174_952014089170219.txt",

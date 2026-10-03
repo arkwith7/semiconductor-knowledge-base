@@ -7,10 +7,22 @@
     "§42"
    ],
    "cited_ids": [],
+   "cite_forms": {},
    "target_claims": [
     1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
     12
-   ]
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -22,17 +34,26 @@
     "JP-P-2010278462",
     "US-P-20100133646"
    ],
+   "cite_forms": {
+    "JP-P-2004363329": "reference",
+    "JP-P-2010278462": "reference",
+    "US-P-20100133646": "reference"
+   },
    "target_claims": [
     1,
     2,
+    3,
     4,
     5,
     6,
     7,
     8,
+    9,
+    10,
     11,
     12
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020137019144_952018005274902.txt",

@@ -9,13 +9,17 @@
    "cited_ids": [
     "KR-P-1020060097066"
    ],
+   "cite_forms": {
+    "KR-P-1020060097066": "colon"
+   },
    "target_claims": [
     1,
     2,
     3,
     4,
     5
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020240147227_952024096165964.txt",

@@ -11,14 +11,28 @@
     "KR-P-1020090014513",
     "KR-P-1020090035913"
    ],
+   "cite_forms": {
+    "JP-P-2010258086": "colon",
+    "KR-P-1020090014513": "colon",
+    "KR-P-1020090035913": "colon"
+   },
    "target_claims": [
     1,
     2,
+    3,
     4,
+    5,
+    6,
     7,
+    8,
     9,
-    12
-   ]
+    10,
+    11,
+    12,
+    13,
+    14
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -26,7 +40,11 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    10
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020110143454_952014027002574.txt",

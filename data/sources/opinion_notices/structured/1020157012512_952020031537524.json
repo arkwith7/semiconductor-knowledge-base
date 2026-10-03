@@ -10,7 +10,19 @@
     "US-P-20100155717",
     "US-P-20110168994"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "US-P-20100155717": "colon",
+    "US-P-20110168994": "colon"
+   },
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020157012512_952020031537524.txt",

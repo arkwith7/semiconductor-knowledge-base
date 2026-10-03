@@ -7,7 +7,11 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    6
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -19,11 +23,13 @@
     "US-P-20060165891",
     "US-P-20080305258"
    ],
-   "target_claims": [
-    4,
-    5,
-    6
-   ]
+   "cite_forms": {
+    "US-P-20050230834": "colon",
+    "US-P-20060165891": "colon",
+    "US-P-20080305258": "colon"
+   },
+   "target_claims": [],
+   "subclause": ""
   }
  ],
  "source_file": "1020110002407_952017056742716.txt",

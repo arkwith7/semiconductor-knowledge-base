@@ -7,9 +7,15 @@
     "§29②"
    ],
    "cited_ids": [
+    "KR-G-2020150001688",
     "KR-P-1020150037075"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "KR-G-2020150001688": "colon",
+    "KR-P-1020150037075": "colon"
+   },
+   "target_claims": [],
+   "subclause": ""
   }
  ],
  "source_file": "1020230052756_952023046130061.txt",

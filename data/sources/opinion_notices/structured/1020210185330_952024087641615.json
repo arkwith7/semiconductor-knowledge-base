@@ -11,7 +11,16 @@
     "JP-P-2014062287",
     "KR-P-1020010032530"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-2007063621": "colon",
+    "JP-P-2014062287": "colon",
+    "KR-P-1020010032530": "colon"
+   },
+   "target_claims": [
+    1,
+    2
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020210185330_952024087641615.txt",

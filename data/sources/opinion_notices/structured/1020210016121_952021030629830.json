@@ -11,7 +11,20 @@
     "US-P-20060214008",
     "US-P-20070285968"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-2009223971": "colon",
+    "US-P-20060214008": "colon",
+    "US-P-20070285968": "colon"
+   },
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020210016121_952021030629830.txt",

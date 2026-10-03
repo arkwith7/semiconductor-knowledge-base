@@ -6,7 +6,12 @@
    "legal_bases": [
     "§29①"
    ],
-   "cited_ids": [],
+   "cited_ids": [
+    "WO-P-2008150032"
+   ],
+   "cite_forms": {
+    "WO-P-2008150032": "colon"
+   },
    "target_claims": [
     1,
     4,
@@ -14,7 +19,8 @@
     7,
     16,
     19
-   ]
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
@@ -22,8 +28,13 @@
     "§29②"
    ],
    "cited_ids": [
-    "US-P-20050136679"
+    "US-P-20050136679",
+    "WO-P-2008150032"
    ],
+   "cite_forms": {
+    "US-P-20050136679": "colon",
+    "WO-P-2008150032": "colon"
+   },
    "target_claims": [
     1,
     2,
@@ -32,7 +43,8 @@
     5,
     6,
     7
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020127008081_952013007706527.txt",

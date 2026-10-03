@@ -7,7 +7,15 @@
     "§29①"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    1,
+    10,
+    11,
+    13,
+    14
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
@@ -15,7 +23,30 @@
     "§29②"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020080040909_952010011235717.txt",

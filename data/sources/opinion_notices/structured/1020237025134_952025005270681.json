@@ -7,7 +7,14 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    1,
+    6,
+    9,
+    12
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020237025134_952025005270681.txt",

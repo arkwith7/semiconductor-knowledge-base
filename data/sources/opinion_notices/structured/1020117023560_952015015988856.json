@@ -7,18 +7,42 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
    "legal_bases": [
     "§29②"
    ],
-   "cited_ids": [],
+   "cited_ids": [
+    "JP-P-2002222695"
+   ],
+   "cite_forms": {
+    "JP-P-2002222695": "unlabeled"
+   },
    "target_claims": [
     9,
     21
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020117023560_952015015988856.txt",

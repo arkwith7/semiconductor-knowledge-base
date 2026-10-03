@@ -10,7 +10,14 @@
     "US-G-8282983",
     "US-P-20130141455"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "US-G-8282983": "colon",
+    "US-P-20130141455": "colon"
+   },
+   "target_claims": [
+    20
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020230103673_952025022600193.txt",

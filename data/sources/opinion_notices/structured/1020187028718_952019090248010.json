@@ -9,15 +9,55 @@
    "cited_ids": [
     "US-P-20070256933"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "US-P-20070256933": "colon"
+   },
+   "target_claims": [
+    10,
+    11,
+    14,
+    15,
+    16,
+    17
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
    "legal_bases": [
     "§29②"
    ],
-   "cited_ids": [],
-   "target_claims": []
+   "cited_ids": [
+    "JP-G-4536584",
+    "US-P-20070256933"
+   ],
+   "cite_forms": {
+    "JP-G-4536584": "colon",
+    "US-P-20070256933": "reference"
+   },
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020187028718_952019090248010.txt",

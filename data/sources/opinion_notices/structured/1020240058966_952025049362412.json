@@ -10,7 +10,18 @@
     "KR-P-1020190136438",
     "KR-P-1020210123248"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "KR-P-1020190136438": "colon",
+    "KR-P-1020210123248": "colon"
+   },
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -18,7 +29,15 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020240058966_952025049362412.txt",

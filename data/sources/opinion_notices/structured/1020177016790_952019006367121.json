@@ -6,10 +6,16 @@
    "legal_bases": [
     "§29②"
    ],
-   "cited_ids": [],
+   "cited_ids": [
+    "JP-P-2008222950"
+   ],
+   "cite_forms": {
+    "JP-P-2008222950": "unlabeled"
+   },
    "target_claims": [
     1
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020177016790_952019006367121.txt",

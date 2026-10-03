@@ -7,7 +7,11 @@
     "§29①"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    1
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
@@ -18,7 +22,23 @@
    "cited_ids": [
     "KR-G-1934026"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "KR-G-1934026": "colon"
+   },
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "subclause": "2"
   }
  ],
  "source_file": "1020210061355_952023039175400.txt",

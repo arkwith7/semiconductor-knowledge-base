@@ -9,11 +9,15 @@
    "cited_ids": [
     "US-P-20090305464"
    ],
+   "cite_forms": {
+    "US-P-20090305464": "colon"
+   },
    "target_claims": [
     1,
     4,
     5
-   ]
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
@@ -24,6 +28,10 @@
     "US-P-20090305464",
     "US-P-20100027228"
    ],
+   "cite_forms": {
+    "US-P-20090305464": "colon",
+    "US-P-20100027228": "colon"
+   },
    "target_claims": [
     1,
     2,
@@ -35,7 +43,8 @@
     8,
     9,
     10
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020100068586_952016035680151.txt",

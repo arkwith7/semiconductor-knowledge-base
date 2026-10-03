@@ -7,9 +7,12 @@
     "§42"
    ],
    "cited_ids": [],
+   "cite_forms": {},
    "target_claims": [
-    1
-   ]
+    1,
+    2
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -17,12 +20,18 @@
     "§29②"
    ],
    "cited_ids": [
-    "JP-P-2010070410"
+    "JP-P-2010070410",
+    "WO-P-2010067571"
    ],
+   "cite_forms": {
+    "JP-P-2010070410": "colon",
+    "WO-P-2010067571": "colon"
+   },
    "target_claims": [
     1,
     2
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020197006238_952020025428212.txt",

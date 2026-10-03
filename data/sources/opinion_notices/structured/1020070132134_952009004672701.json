@@ -6,8 +6,19 @@
    "legal_bases": [
     "§29②"
    ],
-   "cited_ids": [],
-   "target_claims": []
+   "cited_ids": [
+    "KR-P-1019990059117"
+   ],
+   "cite_forms": {
+    "KR-P-1019990059117": "unlabeled"
+   },
+   "target_claims": [
+    1,
+    2,
+    3,
+    4
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020070132134_952009004672701.txt",

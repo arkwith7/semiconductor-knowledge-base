@@ -7,13 +7,15 @@
     "§42"
    ],
    "cited_ids": [],
+   "cite_forms": {},
    "target_claims": [
     1,
     2,
     3,
     4,
     14
-   ]
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -23,6 +25,9 @@
    "cited_ids": [
     "KR-P-1020150002543"
    ],
+   "cite_forms": {
+    "KR-P-1020150002543": "colon"
+   },
    "target_claims": [
     1,
     2,
@@ -38,7 +43,8 @@
     12,
     13,
     14
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020230144640_952023113132147.txt",

@@ -7,11 +7,15 @@
     "§42"
    ],
    "cited_ids": [],
+   "cite_forms": {},
    "target_claims": [
     9,
     12,
-    13
-   ]
+    13,
+    14,
+    15
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -19,8 +23,13 @@
     "§29②"
    ],
    "cited_ids": [
-    "KR-G-1868703"
+    "KR-G-1868703",
+    "KR-G-2020160004136"
    ],
+   "cite_forms": {
+    "KR-G-1868703": "colon",
+    "KR-G-2020160004136": "colon"
+   },
    "target_claims": [
     1,
     2,
@@ -37,7 +46,8 @@
     13,
     14,
     15
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020230137917_952024048645447.txt",

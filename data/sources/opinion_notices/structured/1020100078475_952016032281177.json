@@ -9,7 +9,15 @@
    "cited_ids": [
     "US-G-6965142"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "US-G-6965142": "colon"
+   },
+   "target_claims": [
+    1,
+    8,
+    9
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
@@ -21,7 +29,13 @@
     "JP-P-2006245412",
     "US-G-6965142"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-2005203455": "colon",
+    "JP-P-2006245412": "colon",
+    "US-G-6965142": "colon"
+   },
+   "target_claims": [],
+   "subclause": ""
   }
  ],
  "source_file": "1020100078475_952016032281177.txt",

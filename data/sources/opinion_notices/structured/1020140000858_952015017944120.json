@@ -9,15 +9,42 @@
    "cited_ids": [
     "US-P-20120056321"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "US-P-20120056321": "colon"
+   },
+   "target_claims": [
+    1,
+    4,
+    6,
+    7,
+    9,
+    10,
+    11,
+    12,
+    18,
+    19,
+    20,
+    22,
+    23,
+    25,
+    26,
+    27
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
    "legal_bases": [
     "§29②"
    ],
-   "cited_ids": [],
-   "target_claims": []
+   "cited_ids": [
+    "US-P-20120056321"
+   ],
+   "cite_forms": {
+    "US-P-20120056321": "reference"
+   },
+   "target_claims": [],
+   "subclause": ""
   }
  ],
  "source_file": "1020140000858_952015017944120.txt",

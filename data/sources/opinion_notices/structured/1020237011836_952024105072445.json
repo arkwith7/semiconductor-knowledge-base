@@ -7,11 +7,13 @@
     "§42"
    ],
    "cited_ids": [],
+   "cite_forms": {},
    "target_claims": [
     5,
     7,
     9
-   ]
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -19,17 +21,25 @@
     "§29②"
    ],
    "cited_ids": [
+    "JP-P-2015533029",
     "JP-P-2017092357"
    ],
+   "cite_forms": {
+    "JP-P-2015533029": "colon",
+    "JP-P-2017092357": "colon"
+   },
    "target_claims": [
     1,
     2,
+    3,
     4,
     5,
     6,
     7,
+    8,
     9
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020237011836_952024105072445.txt",

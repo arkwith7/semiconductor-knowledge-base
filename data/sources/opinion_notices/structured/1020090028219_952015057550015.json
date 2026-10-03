@@ -11,7 +11,20 @@
     "KR-G-0731088",
     "US-G-6281050"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "KR-G-0520846": "colon",
+    "KR-G-0731088": "colon",
+    "US-G-6281050": "colon"
+   },
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020090028219_952015057550015.txt",

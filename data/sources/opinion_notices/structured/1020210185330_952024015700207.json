@@ -9,7 +9,14 @@
    "cited_ids": [
     "JP-P-2007063621"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-2007063621": "colon"
+   },
+   "target_claims": [
+    1,
+    2
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
@@ -20,7 +27,17 @@
     "JP-P-2007063621",
     "KR-P-1020010032530"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-2007063621": "colon",
+    "KR-P-1020010032530": "colon"
+   },
+   "target_claims": [
+    1,
+    2,
+    3,
+    4
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020210185330_952024015700207.txt",

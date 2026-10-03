@@ -10,7 +10,12 @@
     "KR-P-1020040098573",
     "US-P-20080057698"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "KR-P-1020040098573": "colon",
+    "US-P-20080057698": "colon"
+   },
+   "target_claims": [],
+   "subclause": ""
   }
  ],
  "source_file": "1020170030238_952017038922806.txt",

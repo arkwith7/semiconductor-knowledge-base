@@ -10,7 +10,12 @@
     "US-P-20080197780",
     "US-P-20170111025"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "US-P-20080197780": "colon",
+    "US-P-20170111025": "colon"
+   },
+   "target_claims": [],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -18,7 +23,15 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    16,
+    17,
+    18,
+    19,
+    20
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020237042183_952025060005093.txt",

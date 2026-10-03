@@ -7,7 +7,13 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    7,
+    10,
+    12
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -15,7 +21,9 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [],
+   "subclause": ""
   },
   {
    "section": 3,
@@ -23,12 +31,21 @@
     "§29②"
    ],
    "cited_ids": [
+    "EP-P-01890326",
     "JP-P-2005175263",
     "JP-P-2009071095",
     "JP-P-2009152372",
     "US-P-20090218560"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "EP-P-01890326": "colon",
+    "JP-P-2005175263": "colon",
+    "JP-P-2009071095": "colon",
+    "JP-P-2009152372": "colon",
+    "US-P-20090218560": "colon"
+   },
+   "target_claims": [],
+   "subclause": ""
   }
  ],
  "source_file": "1020127030180_952015081282395.txt",

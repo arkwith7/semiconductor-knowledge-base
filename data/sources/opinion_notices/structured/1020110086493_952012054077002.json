@@ -6,12 +6,20 @@
    "legal_bases": [
     "§29②"
    ],
-   "cited_ids": [],
+   "cited_ids": [
+    "JP-P-2011035228",
+    "KR-P-1020100106911"
+   ],
+   "cite_forms": {
+    "JP-P-2011035228": "label",
+    "KR-P-1020100106911": "label"
+   },
    "target_claims": [
     1,
     2,
     12
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020110086493_952012054077002.txt",

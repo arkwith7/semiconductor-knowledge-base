@@ -11,9 +11,15 @@
     "KR-G-1327380",
     "KR-G-1998202"
    ],
+   "cite_forms": {
+    "KR-G-0830068": "colon",
+    "KR-G-1327380": "colon",
+    "KR-G-1998202": "colon"
+   },
    "target_claims": [
     1
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020200128163_952022017344997.txt",

@@ -10,7 +10,12 @@
     "JP-P-2004214249",
     "KR-P-1020050051089"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-2004214249": "colon",
+    "KR-P-1020050051089": "colon"
+   },
+   "target_claims": [],
+   "subclause": ""
   }
  ],
  "source_file": "1020080055333_952008033548311.txt",

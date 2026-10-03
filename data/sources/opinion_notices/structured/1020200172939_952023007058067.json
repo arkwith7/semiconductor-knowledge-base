@@ -11,9 +11,13 @@
     "KR-P-1020180132498",
     "KR-P-1020190078468"
    ],
-   "target_claims": [
-    1
-   ]
+   "cite_forms": {
+    "JP-P-2013135490": "colon",
+    "KR-P-1020180132498": "colon",
+    "KR-P-1020190078468": "colon"
+   },
+   "target_claims": [],
+   "subclause": ""
   }
  ],
  "source_file": "1020200172939_952023007058067.txt",

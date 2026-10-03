@@ -9,9 +9,16 @@
    "cited_ids": [
     "JP-P-2003231961"
    ],
+   "cite_forms": {
+    "JP-P-2003231961": "colon"
+   },
    "target_claims": [
-    1
-   ]
+    1,
+    2,
+    3,
+    9
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
@@ -21,10 +28,23 @@
    "cited_ids": [
     "JP-P-2003231961"
    ],
+   "cite_forms": {
+    "JP-P-2003231961": "colon"
+   },
    "target_claims": [
     1,
-    2
-   ]
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020227002678_952023101189540.txt",

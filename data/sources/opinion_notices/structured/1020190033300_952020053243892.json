@@ -10,7 +10,16 @@
     "KR-P-1020110077706",
     "US-P-20130157044"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "KR-P-1020110077706": "colon",
+    "US-P-20130157044": "colon"
+   },
+   "target_claims": [
+    1,
+    2,
+    3
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020190033300_952020053243892.txt",

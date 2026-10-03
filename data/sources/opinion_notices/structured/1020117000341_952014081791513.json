@@ -9,7 +9,15 @@
    "cited_ids": [
     "KR-P-1020020005991"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "KR-P-1020020005991": "colon"
+   },
+   "target_claims": [
+    1,
+    3,
+    4
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
@@ -20,7 +28,12 @@
     "KR-P-1020020005991",
     "US-P-20040094402"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "KR-P-1020020005991": "colon",
+    "US-P-20040094402": "colon"
+   },
+   "target_claims": [],
+   "subclause": ""
   }
  ],
  "source_file": "1020117000341_952014081791513.txt",

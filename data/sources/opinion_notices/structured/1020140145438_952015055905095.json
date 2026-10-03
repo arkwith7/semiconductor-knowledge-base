@@ -6,10 +6,16 @@
    "legal_bases": [
     "§29①"
    ],
-   "cited_ids": [],
+   "cited_ids": [
+    "JP-P-2013168454"
+   ],
+   "cite_forms": {
+    "JP-P-2013168454": "unlabeled"
+   },
    "target_claims": [
     1
-   ]
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
@@ -17,7 +23,12 @@
     "§29②",
     "§29①"
    ],
-   "cited_ids": [],
+   "cited_ids": [
+    "JP-P-2013168454"
+   ],
+   "cite_forms": {
+    "JP-P-2013168454": "unlabeled"
+   },
    "target_claims": [
     1,
     2,
@@ -29,7 +40,8 @@
     8,
     9,
     10
-   ]
+   ],
+   "subclause": "2"
   }
  ],
  "source_file": "1020140145438_952015055905095.txt",

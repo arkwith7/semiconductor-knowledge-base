@@ -10,7 +10,23 @@
     "JP-P-2019212910",
     "US-G-6490145"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-2019212910": "colon",
+    "US-G-6490145": "colon"
+   },
+   "target_claims": [
+    1,
+    2,
+    7,
+    8,
+    9,
+    12,
+    15,
+    16,
+    17,
+    20
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
@@ -21,7 +37,12 @@
     "JP-P-2019212910",
     "US-G-6490145"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-2019212910": "colon",
+    "US-G-6490145": "colon"
+   },
+   "target_claims": [],
+   "subclause": ""
   }
  ],
  "source_file": "1020247029100_952025026732047.txt",

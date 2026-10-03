@@ -12,7 +12,14 @@
     "JP-P-2015198093",
     "KR-P-1020130086910"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-06177117": "colon",
+    "JP-P-2013133489": "colon",
+    "JP-P-2015198093": "colon",
+    "KR-P-1020130086910": "colon"
+   },
+   "target_claims": [],
+   "subclause": ""
   }
  ],
  "source_file": "1020197012646_952022008632098.txt",

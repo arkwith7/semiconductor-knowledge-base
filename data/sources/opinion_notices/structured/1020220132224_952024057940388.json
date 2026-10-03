@@ -9,12 +9,16 @@
    "cited_ids": [
     "KR-P-1020120030720"
    ],
+   "cite_forms": {
+    "KR-P-1020120030720": "colon"
+   },
    "target_claims": [
     1,
     2,
     3,
     4
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020220132224_952024057940388.txt",

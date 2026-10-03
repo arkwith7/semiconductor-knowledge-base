@@ -6,7 +6,14 @@
    "legal_bases": [
     "§29②"
    ],
-   "cited_ids": [],
+   "cited_ids": [
+    "JP-P-2008098641",
+    "KR-P-1020100081559"
+   ],
+   "cite_forms": {
+    "JP-P-2008098641": "colon",
+    "KR-P-1020100081559": "colon"
+   },
    "target_claims": [
     1,
     2,
@@ -20,7 +27,8 @@
     10,
     11,
     12
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020110088261_952016074437165.txt",

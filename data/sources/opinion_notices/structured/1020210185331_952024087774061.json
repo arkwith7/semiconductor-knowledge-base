@@ -10,7 +10,14 @@
     "JP-P-2007063621",
     "JP-P-2014062287"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-2007063621": "colon",
+    "JP-P-2014062287": "colon"
+   },
+   "target_claims": [
+    1
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020210185331_952024087774061.txt",

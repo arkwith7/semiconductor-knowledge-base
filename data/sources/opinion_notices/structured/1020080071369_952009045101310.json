@@ -7,7 +7,20 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    9,
+    10,
+    11,
+    12,
+    13
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -15,7 +28,17 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    12,
+    16
+   ],
+   "subclause": ""
   },
   {
    "section": 3,
@@ -23,7 +46,13 @@
     "§29①"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    5,
+    12,
+    16
+   ],
+   "subclause": ""
   },
   {
    "section": 5,
@@ -31,7 +60,11 @@
     "§29①"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    5
+   ],
+   "subclause": ""
   },
   {
    "section": 5,
@@ -39,17 +72,40 @@
     "§29①"
    ],
    "cited_ids": [
-    "JP-P-06244384"
+    "JP-P-06244384",
+    "KR-P-1020030051070"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-06244384": "colon",
+    "KR-P-1020030051070": "colon"
+   },
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "subclause": "2"
   },
   {
    "section": 6,
    "legal_bases": [
     "§29②"
    ],
-   "cited_ids": [],
-   "target_claims": []
+   "cited_ids": [
+    "JP-P-06244384"
+   ],
+   "cite_forms": {
+    "JP-P-06244384": "reference"
+   },
+   "target_claims": [
+    13,
+    14,
+    15,
+    16
+   ],
+   "subclause": ""
   },
   {
    "section": 10,
@@ -57,7 +113,13 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    9,
+    10,
+    11
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020080071369_952009045101310.txt",

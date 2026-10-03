@@ -10,7 +10,19 @@
     "JP-P-2010225735",
     "JP-P-2010245077"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-2010225735": "colon",
+    "JP-P-2010245077": "colon"
+   },
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020100119146_952016037055407.txt",

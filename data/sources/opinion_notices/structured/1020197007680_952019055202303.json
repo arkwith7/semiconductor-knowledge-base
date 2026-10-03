@@ -10,7 +10,21 @@
     "JP-P-2011127189",
     "JP-P-2012176452"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-2011127189": "colon",
+    "JP-P-2012176452": "colon"
+   },
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020197007680_952019055202303.txt",

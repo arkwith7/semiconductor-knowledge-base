@@ -7,9 +7,11 @@
     "§42"
    ],
    "cited_ids": [],
+   "cite_forms": {},
    "target_claims": [
     6
-   ]
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -20,6 +22,10 @@
     "KR-P-1020200091945",
     "US-P-20210020444"
    ],
+   "cite_forms": {
+    "KR-P-1020200091945": "colon",
+    "US-P-20210020444": "colon"
+   },
    "target_claims": [
     1,
     2,
@@ -34,7 +40,8 @@
     12,
     13,
     14
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020220140239_952025071341199.txt",
