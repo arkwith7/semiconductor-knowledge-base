@@ -1,7 +1,7 @@
 {
   "plan": "PLAN-005 R0-CAL-2 · V7 CoverageRank 순위 계측 · τ 대칭 사다리 (판정 없음)",
   "generator": "scripts/report_v7_coverage_rank.py",
-  "generated": "2026-09-13",
+  "generated": "2026-10-03",
   "read_only": true,
   "instrument_version": "R0-CAL-2",
   "split": "dev",
@@ -46,7 +46,7 @@
   "verdict": null,
   "inputs": {
     "data/patents/rejected_patents_meta.parquet": "b76baafd6d91d3328f4b1e0675490cf03fc71f19d1d3370a7a0e494dec8a045a",
-    "data/patents/prior_art_edges.parquet": "bc893c93210c4d7c88de6df0c36698c753969a620e11f840ae71ca56426ec5f9",
+    "data/patents/prior_art_edges.parquet": "ad3b69230f9250c8a97e7e11d0ad07886baa0157a78b01b3d55eaa8b5c944dda",
     "data/patents/fulltext_corpus.parquet": "5961f0a15784b7af48bd4f3cd910e05d81f7af4fabc2ac561596d0c92f157a58",
     "data/reports/prior_art_realgt_report.json": "4b6a3da62aa0444400c59700802f02b23613f21f6fe82637e9544415426a6e49",
     "data/reports/abox_priorart_report.json": "aafe066e53ea673dee15dd89b128c79674773ebaf1037003eaddbd049de3d163",

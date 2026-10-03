@@ -5,7 +5,7 @@
         abox-prior-art abox-claim-features abox-full refetch-fulltext cq \
         public-release check-public signature signature-inject signature-check \
         check-leakage declare-scope v7-rank scrub-notices sample-dissection report-dissection \
-        abox-argument-pilot pilot-sample notice-evidence \
+        abox-argument-pilot pilot-sample notice-evidence notice-edges \
         superordinate-concepts concept-mapping \
         semiconto-fetch semiconto-analyze semiconto-align semiconto-enrich semiconto-phase0 \
         pipeline pipeline-sirp pipeline-full pipeline-with-expdataset help
@@ -229,7 +229,7 @@ report-dissection:
 # parquet 를 git 에서 꺼내 소급 산출한다. V4 는 먼저 R∀·Disclosure 키를 덧붙여 다시 낸다.
 # 그래프는 바꾸지 않는다. 판정 리포트는 스크립트가 렌더한다(§5 — 손으로 쓰지 않는다).
 # CAL-3: V4 를 전량·dev 두 번 낸다 — 주 판정은 dev 이고 전량은 개발 지표로 병기한다(§20.7).
-stage7-remeasure: abox-priorart check-leakage
+stage7-remeasure: notice-edges abox-priorart check-leakage
 	$(PYTHON) scripts/report_v4_robustness.py --with-conj-disclosure
 	$(PYTHON) scripts/report_v4_robustness.py --with-conj-disclosure --split dev
 	$(PYTHON) scripts/report_stage7_remeasure.py \
@@ -238,7 +238,7 @@ stage7-remeasure: abox-priorart check-leakage
 # ── PLAN-005 R0-CAL-2 · V7 순위 계측 · τ 대칭 사다리 ────────────────────
 # 판정이 아니다 — 사전등록된 문턱이 없다. V2 정의·τ·판정은 stage7-remeasure 가 그대로 갖는다.
 # 원 조건에서 τ(0.6708)를 재현하지 못하면 죽고, 거기서 한 번에 조건 하나씩 바꿔 비대칭의 몫을 가른다.
-v7-rank: abox-priorart check-leakage
+v7-rank: notice-edges abox-priorart check-leakage
 	$(PYTHON) scripts/report_v7_coverage_rank.py \
 		--markdown 01.code_spec/reports/PLAN-005-v7-coverage-rank.md
 
@@ -424,9 +424,14 @@ ingest-sirp:
 # 통지서 거절근거 정본 + 심사관 간선 legal_bases 부착 (PLAN-005 §10 · §20.17 교정).
 # 간선 parquet 은 ingest-sirp 가 다시 만들면 legal_bases 를 잃는다 — 그 뒤 이 타깃을 다시 돌린다.
 # 기존 근거가 줄거나 바뀌면(LOSS_EXCEPTIONS 밖) 간선에 쓰지 않고 멈춘다.
-# 주의(2026-10-03): 동결 stage7 리포트가 교정 전 간선 sha 를 핀한다 — 층 재측정 작업과 함께 돌린다(PLAN-005 §20.17(h)).
 notice-evidence:
 	$(PYTHON) scripts/build_notice_evidence.py --apply --write-structured
+
+# 커밋된 정본만 읽어 간선에 붙인다 — 파싱·정본·리포트를 쓰지 않는다(PLAN-005 §20.18 층 재측정).
+# 평가 타깃의 첫 선행조건이다: check-leakage 가 간선 sha 를 핀하므로 그보다 먼저 돈다.
+# notice-evidence 를 선행조건으로 걸면 실행마다 커밋된 교정 전후 델타가 "전부 불변" 으로 덮인다.
+notice-edges:
+	$(PYTHON) scripts/build_notice_evidence.py --edges-only
 
 sirp-pairs: ingest-sirp
 	$(PYTHON) scripts/build_prior_art_pairs.py

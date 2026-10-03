@@ -10,6 +10,7 @@
   ④ **첨부 목록은 절이 아니다.** 마지막 절이 `[첨 부]` 목록을 삼켜 §42 간선이 2 → 163 이 된
      사고를 고정한다. 라벨 참조는 문서 전체의 **유일한** 정의로만 해소한다.
   ⑤ **손실 가드.** 기존 근거가 줄거나 바뀌면 `--apply` 가 멈춘다(동결 예외 1건 제외).
+  ⑥ **부착만 하는 경로(§20.18).** `--edges-only` 는 간선 말고는 아무것도 쓰지 않고, 손실이면 간선도 쓰지 않으며, 멱등이다.
 
 전부 합성 문자열이다 — 원천 통지서에는 성명이 있어 테스트에 싣지 않는다(§1-5).
 """
@@ -25,7 +26,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from build_notice_evidence import (  # noqa: E402
-    CANON, LOSS_EXCEPTIONS, _gate_result, assert_additive, cited_in_section, collapse_rows, edge_delta,
+    CANON, LOSS_EXCEPTIONS, _gate_result, assert_additive, attach_edges_only, cited_in_section, collapse_rows, edge_delta,
     label_definitions, normalize_cited, parse_claim_refs, parse_notice, subclause_of,
 )
 
@@ -186,3 +187,49 @@ def test_canonical_contract():
     assert set(c.cite_form) <= {"colon", "label", "unlabeled", "reference"}
     assert (c.loc[c.legal_basis != "§29①", "subclause"] == "").all()
     assert set(c.subclause) <= {"", "1", "2", "1|2"}
+
+
+# ── ⑥ 부착만 하는 경로 ────────────────────────────────────────────────────
+def _canon_and_edges(tmp_path, prior: list[str] | None = None):
+    canon = pd.DataFrame({"application_number": ["1020200000001", "1020200000001", "1020200000002"],
+                          "cited_doc_id": ["KR-P-1020150000001", "KR-P-1020150000001", "US-G-07118954"],
+                          "legal_basis": ["§29②", "§29①", "§29②"]})
+    ed = pd.DataFrame({"target_patent_id": ["patent:kr_1020200000001", "patent:kr_1020200000002",
+                                            "patent:kr_1020200000002", "patent:kr_1020200000003"],
+                       "cited_doc_id": ["KR-P-1020150000001", "US-G-7118954", "US-G-7118954", "KR-P-0"],
+                       "source_type": ["examiner", "examiner", "evidence_v2", "examiner"],
+                       "legal_basis": ["", "", "§29②", ""]})
+    if prior is not None:
+        ed["legal_bases"] = prior
+    cp, ep = tmp_path / "canon.parquet", tmp_path / "edges.parquet"
+    canon.to_parquet(cp, index=False)
+    ed.to_parquet(ep, index=False)
+    return cp, ep
+
+
+def test_edges_only_attaches_sets_and_writes_nothing_else(tmp_path):
+    cp, ep = _canon_and_edges(tmp_path)
+    canon_bytes = cp.read_bytes()
+    d = attach_edges_only(cp, ep)
+    got = pd.read_parquet(ep)
+    # 다중근거는 집합 · 자릿수 채움 차이(US-G-07118954 대 7118954)는 흡수 · examiner 가 아닌 간선은 빈 값
+    assert list(got.legal_bases) == ["§29①|§29②", "§29②", "", ""]
+    assert (d["newly_filled"], d["lost_or_changed"]) == (2, 0)
+    assert cp.read_bytes() == canon_bytes
+    assert sorted(x.name for x in tmp_path.iterdir()) == ["canon.parquet", "edges.parquet"]
+
+
+def test_edges_only_is_idempotent(tmp_path):
+    cp, ep = _canon_and_edges(tmp_path)
+    attach_edges_only(cp, ep)
+    once = ep.read_bytes()
+    d = attach_edges_only(cp, ep)
+    assert ep.read_bytes() == once and d["unchanged"] == 2 and d["newly_filled"] == 0
+
+
+def test_edges_only_refuses_loss_and_leaves_edges_untouched(tmp_path):
+    cp, ep = _canon_and_edges(tmp_path, prior=["§42", "", "", "§29①"])     # 정본에 없는 기존 근거 2건
+    before = ep.read_bytes()
+    with pytest.raises(SystemExit):
+        attach_edges_only(cp, ep)
+    assert ep.read_bytes() == before

@@ -19,6 +19,7 @@
 
     정본  data/patents/notice_legal_basis.parquet   ← 이 생성기의 산출물
     부착  --apply 로 엣지의 legal_basis 컬럼을 채운다 (멱등 · 재빌드 후 다시 돌리면 된다)
+          --edges-only 는 커밋된 정본만 읽어 부착만 한다 (평가 타깃 선행조건 · §20.18)
 
 **다중 근거를 뭉개지 않는다 (§10.9 개정).** 첫 설계는 한 (출원, 인용) 쌍에 근거가 여럿이면
 §29① 을 우선했고, 그 tie-break 가 결정서와의 교차 검증을 0.8807 로 끌어내렸다 — 불일치 76건
@@ -359,6 +360,52 @@ def assert_additive(delta: dict) -> None:
                          "교정은 추가만 허용한다(2단계 동결 기준 · 예외는 LOSS_EXCEPTIONS). 엣지에 쓰지 않았다.")
 
 
+def ground_sets(canon: pd.DataFrame) -> tuple[dict, dict]:
+    """정본의 (출원, 인용) 근거 집합과, 자릿수 채움 차이를 흡수한 느슨한 키 판."""
+    # §10.9 — tie-break 없음. (출원, 인용) 의 근거 **집합**을 그대로 싣는다.
+    sets = (canon.groupby(["application_number", "cited_doc_id"]).legal_basis
+                 .apply(lambda s: "|".join(sorted(set(s)))).to_dict())
+    # 자릿수 채움 차이를 흡수해 매칭한다 (교정 5) — 실측 35건이 이것만으로 갈렸다
+    loose = {}
+    for (app, cid), v in sets.items():
+        loose.setdefault((app, loose_key(cid)), set()).update(v.split("|"))
+    return sets, {k: "|".join(sorted(v)) for k, v in loose.items()}
+
+
+def _app_no(ed: pd.DataFrame) -> pd.Series:
+    return ed.target_patent_id.str.replace("^patent:kr_", "", regex=True)
+
+
+def _prior_bases(ed: pd.DataFrame) -> list[str]:
+    if "legal_bases" not in ed.columns:
+        return [""] * len(ed)
+    return list(ed["legal_bases"].fillna("").astype(str))
+
+
+def edge_values(ed: pd.DataFrame, loose: dict) -> list[str]:
+    """간선 행 순서대로 붙일 legal_bases — examiner 가 아닌 간선은 빈 값."""
+    ex = ed.source_type == "examiner"
+    return ["" if not e else loose.get((a, loose_key(c)), "")
+            for a, c, e in zip(_app_no(ed), ed.cited_doc_id, ex)]
+
+
+def attach_edges_only(canon_path: Path | None = None, edges_path: Path | None = None) -> dict:
+    """커밋된 정본만 읽어 간선에 붙인다 — 통지서를 다시 파싱하지 않고 정본·리포트·structured 를 쓰지 않는다.
+
+    평가 타깃의 선행조건이다(PLAN-005 §20.18). 전체 재생성(`main`)을 선행조건으로 걸면 실행마다
+    커밋된 리포트의 교정 전후 델타가 "전부 불변" 으로 덮인다 — 두 번째 실행부터 전이 곧 후이기 때문이다.
+    """
+    canon_path, edges_path = canon_path or CANON, edges_path or EDGES
+    ed = pd.read_parquet(edges_path)
+    _, loose = ground_sets(pd.read_parquet(canon_path))
+    applied = edge_values(ed, loose)
+    delta = edge_delta(_prior_bases(ed), applied, list(zip(_app_no(ed), ed.cited_doc_id)))
+    assert_additive(delta)
+    ed["legal_bases"] = applied
+    ed.to_parquet(edges_path, index=False)
+    return delta
+
+
 def _over_claims(canon: pd.DataFrame) -> dict:
     """서술 통계 — 공개 시점 청구항 수를 넘는 번호. **오염 판정이 아니다**: 심사 시점 청구항 수의
     권위 원천이 없고(`kipris_biblio` 에 없음), 자진보정으로 청구항이 늘었을 수 있다(2단계 실측)."""
@@ -475,7 +522,16 @@ def main() -> int:
                     help="주-2′ 사람 대조 표본 N건을 data/interim/ 에 쓴다 (시드 고정)")
     ap.add_argument("--sample-new", type=int, default=0,
                     help="주-2″ 교정으로 **새로 채워진** 쌍 N건 표본 (기준: 교정 전 커밋의 정본)")
+    ap.add_argument("--edges-only", action="store_true",
+                    help="커밋된 정본만 읽어 엣지에 붙인다 — 파싱·정본·리포트·structured 를 쓰지 않는다 (§20.18)")
     a = ap.parse_args()
+
+    if a.edges_only:
+        d = attach_edges_only()
+        print(f"엣지 legal_bases 부착 (정본 {CANON.relative_to(ROOT)}) · 채움 {d['filled_after']} · "
+              f"불변 {d['unchanged']} · 확장 {d['extended']} · 신규 {d['newly_filled']} · "
+              f"예외 {d['changed_by_exception']} · 손실 {d['lost_or_changed']}")
+        return 0
 
     files = sorted(TXT_DIR.glob("*.txt"))
     if a.limit:
@@ -517,23 +573,15 @@ def main() -> int:
 
     # ── 엣지 부착 ──────────────────────────────────────────────────────────
     ed = pd.read_parquet(EDGES)
-    ed["app_no"] = ed.target_patent_id.str.replace("^patent:kr_", "", regex=True)
+    prior = _prior_bases(ed)
+    ed["app_no"] = _app_no(ed)
     ex = ed.source_type == "examiner"
     before = int((ed.loc[ex, "legal_basis"].astype(str).str.len() > 0).sum())
-    prior = (ed["legal_bases"].fillna("").astype(str) if "legal_bases" in ed.columns
-             else pd.Series([""] * len(ed), index=ed.index))
 
-    # §10.9 — tie-break 없음. (출원, 인용) 의 근거 **집합**을 그대로 싣는다.
-    sets = (canon.groupby(["application_number", "cited_doc_id"]).legal_basis
-                 .apply(lambda s: "|".join(sorted(set(s)))).to_dict())
-    # 자릿수 채움 차이를 흡수해 매칭한다 (교정 5) — 실측 35건이 이것만으로 갈렸다
-    loose = {}
-    for (app, cid), v in sets.items():
-        loose.setdefault((app, loose_key(cid)), set()).update(v.split("|"))
-    loose = {k: "|".join(sorted(v)) for k, v in loose.items()}
-    newvals = [loose.get((r.app_no, loose_key(r.cited_doc_id)), "") for r in ed.itertuples()]
-    filled = sum(1 for v, e in zip(newvals, ex) if v and e)
-    multi = sum(1 for v, e in zip(newvals, ex) if e and "|" in v)
+    sets, loose = ground_sets(canon)
+    applied = edge_values(ed, loose)
+    filled = sum(1 for v in applied if v)
+    multi = sum(1 for v in applied if "|" in v)
 
     # ── 서술 통계: 결정서 유래(evidence_v2)와의 대조 ────────────────────────
     # **게이트가 아니다**(§10.10). 단일값 비교는 폐기된 tie-break 를 재는 것이고
@@ -545,14 +593,13 @@ def main() -> int:
     contain = float(v2.apply(lambda r: r.legal_basis in r.ns.split("|"), axis=1).mean()) if len(v2) else None
     exact = float((v2.legal_basis == v2.ns).mean()) if len(v2) else None
 
-    applied = ["" if not e else v for v, e in zip(newvals, ex)]
-    delta = edge_delta(list(prior), applied, [(r.app_no, r.cited_doc_id) for r in ed.itertuples()])
+    delta = edge_delta(prior, applied, [(r.app_no, r.cited_doc_id) for r in ed.itertuples()])
     if a.apply:
         assert_additive(delta)
         ed["legal_bases"] = applied
         ed.drop(columns=["app_no"]).to_parquet(EDGES, index=False)
 
-    by_lb = Counter(b for v, e in zip(newvals, ex) if v and e for b in v.split("|"))
+    by_lb = Counter(b for v in applied if v for b in v.split("|"))
     rep = {
         "generated": str(date.today()), "plan": "PLAN-005 §10 (단계 2-A)",
         "deterministic": True, "llm_used": False,
