@@ -2672,3 +2672,53 @@ rate 1.00 · 보류 3 → 충족**(문턱 0.90). 보류를 전부 오답으로 �
 
 ① `legal_bases` 가 빌드에 배선되지 않음(`ingest-sirp` 재실행 시 소실 · `make notice-evidence` 는 재현 명령일 뿐)
 ② 통지서 유래 미해소 277 ②′ 표본 발췌가 `reference` 행의 참조 문맥을 보여 주지 않음(표본 도구 한정) ③ 문헌×근거 데카르트 곱 · 요소↔문헌 분업(비목표 유지) ④ **층 재측정**(교정된 `legal_bases` 를 간선에 붙이고 V3 등을 다시 잰다 — (h) 결정으로 다음 작업).
+→ **④ 는 §20.18 에서 닫혔다(2026-10-03).** ① 은 평가 경로에서만 막았다(`notice-edges` 선행조건) — `ingest-sirp` 배선은 별건으로 남는다.
+
+### 20.18 층 재측정 — 교정 근거로 층을 다시 나눈다 (2026-10-03 · §2 1–4단계 사용자 승인)
+
+**결론.** §20.17 교정 근거를 간선에 붙이고 층에 기대는 값을 다시 쟀다. **V3 는 dev·train·전량 모두 PASS 를 유지한다**
+(dev q 93 → 98 · Δ 0.0733 → 0.0695 · CI [0.0452, 0.0957]). 층을 읽지 않는 값(V2·V4·레버·reach·τ·V7)은 자리수까지 그대로다.
+사전등록 P1 은 **측정 불가**가 됐다(§29①-only 2문헌+ n=0).
+
+#### (a) 1단계 (요구 정의 · 승인 10-03)
+
+범위: 층 의존 값의 재측정과 교정 전 값 병기. 비목표: 판정 정의·문턱 변경 · 게이트 재설계 · 미해소 277 · 데카르트 곱 ·
+realgt/baseline 동결 스냅샷 · test 분할. 결정: D-a 교정 전 값은 커밋 리포트 인용 · D-b `notice-edges` 를 평가 타깃
+선행조건으로 · D-c(7-B′ 재생성)는 2단계 사실로 철회.
+
+#### (b) 2단계 (분석 · 승인 10-03) — 저장소 변경 없이 scratchpad 간선 사본으로
+
+| 사실 | 값 |
+|---|---|
+| 커밋된 stage7·V7·누출·7-B′ 리포트 재현 | 날짜 외 **바이트 동일** |
+| 간선 legal_bases 를 읽는 곳 | `report_stage7_remeasure.load_gt()` 하나 (7-B′ 은 빌려 쓰지만 싣는 값이 층 무관) |
+| 교정 후 바뀌는 값 | V3 · `by_stratum` · `Q_C_strata` · 입력 sha — **그 밖 0** |
+| 층 이동 (train / dev) | 225 / 27 · 게이트 층 진입 205 / 25 · **이탈 0** |
+| "근거 없음" (train / dev) | 247 → 43 / 32 → 10 |
+| §29①-only 2문헌+ (세 범위) | 4·1·5 → **0** (전부 §29①∧② 로) |
+
+함정 1건: `notice-evidence`(전체 재생성)를 선행조건으로 걸면 실행마다 커밋된 `notice_evidence_report.json` 의 교정 전후
+델타가 "전부 불변" 으로 덮인다 → 3단계에서 부착 전용 경로로 해결.
+
+#### (c) 3단계 (설계 · 승인 10-03)
+
+S1 `build_notice_evidence.py --edges-only`(`attach_edges_only` · 부착 블록을 `ground_sets`·`edge_values` 로 추출해 두 경로 공유)
++ `make notice-edges` 를 `stage7-remeasure`·`v7-rank` 의 첫 선행조건으로(`check-leakage` 가 간선 sha 를 핀하므로 앞).
+S2 `PRE_LAYER_CORRECTION`(FROZEN 밖 — FROZEN 은 바이트 동결) · `load_pre_correction`(리포트 sha·간선 sha 대조) ·
+`layer_correction_block` → `rep["layer_correction"]` + 마크다운 전/후 표. S3 P1 n=0 은 "측정 불가" 로 렌더 · 한계 문장 데이터 구동.
+S4 테스트 — stage7 7건(핀 불일치 거부 2 · 실물 리포트 대조 1 포함) · notice 3건(다른 파일 미기록 · 멱등 · 손실이면 간선 불변).
+
+#### (d) 4–5단계 결과
+
+| 게이트 | 결과 |
+|---|---|
+| `make notice-edges` | 채움 2,258 · 불변 1,619 · 확장 43 · 신규 595 · 예외 1 · **손실 0** · 간선 sha `ad3b6923…`(2단계와 동일) · 재적용 멱등 |
+| 리팩터 회귀 | `main --apply` 출력 — 정본 바이트 동일 · 리포트는 경로·`applied_to_edges` 외 동일 |
+| stage7 | 두 실행·커밋본 `cmp` 동일 · V2/V4/레버 값 불변 · 봉인 원장 0행 |
+| V7 · 누출 · V4 | 값 불변 (입력 sha · 날짜만) · leakage PASS 5 / UNMS 1 |
+| `make validate` · `make test` | PASS · **667 passed / 10 skipped** |
+| 서명 · 공개 | `signature-check` 최신(불변) · 공개 트리 재생성 후 `check-public` 적중 0 (402파일 — PR #22 의 테스트 파일 1개가 처음 실림) |
+
+#### (e) 별건
+
+`ingest-sirp` 의 legal_bases 배선 · 통지서 유래 미해소 277 · 표본 도구 `reference` 문맥 · 1.2.0 절단 — 그대로 남는다.

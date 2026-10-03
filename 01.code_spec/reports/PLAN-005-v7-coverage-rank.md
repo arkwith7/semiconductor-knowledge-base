@@ -1,6 +1,6 @@
 # PLAN-005 R0-CAL-2 — V7 CoverageRank · τ 대칭 사다리 (기계 산출)
 
-> 생성: `scripts/report_v7_coverage_rank.py` · 2026-09-13 · 계측기 `R0-CAL-2` · **손으로 고치지 않는다** — `make v7-rank` 가 다시 만든다.
+> 생성: `scripts/report_v7_coverage_rank.py` · 2026-10-03 · 계측기 `R0-CAL-2` · **손으로 고치지 않는다** — `make v7-rank` 가 다시 만든다.
 
 > **판정이 아니다** — 사전등록된 문턱이 없어 이 수로 PASS/FAIL 을 말하지 않는다. V2 정의·τ·판정은 `PLAN-005-stage7-verdict.md` 가 그대로 갖는다. 주 범위 `dev` · 분할표 sha256 `714dafe033af…` · 봉인 원장 0행.
 

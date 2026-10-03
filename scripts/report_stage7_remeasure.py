@@ -135,6 +135,18 @@ TRAIN_SCOPE_NOTE = (
     "개념 사전이 이 문서들에서 채굴됐다 — **상한이지 성능이 아니다** (§20.7 CAL-3)."
 )
 
+#: 층 재측정(PLAN-005 §20.18)의 비교 기준 — 교정 전 간선(§20.17 이전 legal_bases)으로 낸 마지막 커밋 리포트.
+#: 교정 전 간선은 git 에 없어 다시 계산할 수 없다 → 그 리포트를 sha 로 핀해 **인용**한다.
+#: FROZEN 밖에 둔다 — FROZEN 은 결과 전 동결이라 바이트 불변이다(test_v7_coverage_rank.S7_FROZEN_SHA256).
+EDGES_REL = "data/patents/prior_art_edges.parquet"
+PRE_LAYER_CORRECTION = {
+    "commit": "7a0524e",
+    "report": "data/reports/priorart_stage7_remeasure.json",
+    "report_sha256": "0e02c98d54cd87f40846cca3b2743f62f65a2766f7e68d289cf6f30baab087f1",
+    "edges_sha256": "bc893c93210c4d7c88de6df0c36698c753969a620e11f840ae71ca56426ec5f9",
+}
+LAYER_SCOPES = ("verdict", "verdict_train", "verdict_legacy_all")
+
 
 #: V3 게이트가 겨냥하는 층 라벨의 기계 표현 (CAL-1 · §20 E-1).
 #: 라벨 **문자열 값은 불변**이다 — 이미 공표된 JSON 키이자 판정 리포트의 행 이름이다.
@@ -183,6 +195,45 @@ def parquet_from_git(commit: str, sha_prefix: str | None = None, label: str = ""
     if sha_prefix and not _sha(tmp).startswith(sha_prefix):
         raise SystemExit(f"ERROR: {commit} 의 parquet sha 가 동결값({sha_prefix}…)과 다르다")
     return tmp
+
+
+def load_pre_correction(ref: dict = PRE_LAYER_CORRECTION) -> dict:
+    """교정 전 리포트를 git 에서 꺼내 리포트 sha 와 그 리포트가 핀한 간선 sha 를 대조한다."""
+    blob = subprocess.run(["git", "show", f"{ref['commit']}:{ref['report']}"],
+                          cwd=ROOT, check=True, capture_output=True).stdout
+    got = hashlib.sha256(blob).hexdigest()
+    if got != ref["report_sha256"]:
+        raise SystemExit(f"ERROR: {ref['commit']}:{ref['report']} 의 sha({got[:12]}…)가 핀({ref['report_sha256'][:12]}…)과 다르다")
+    old = json.loads(blob)
+    if old["inputs"].get(EDGES_REL) != ref["edges_sha256"]:
+        raise SystemExit(f"ERROR: 비교 기준 리포트가 교정 전 간선({ref['edges_sha256'][:12]}…)으로 낸 것이 아니다")
+    return old
+
+
+def _layer_view(rep: dict, gate_layer: str) -> dict:
+    """리포트 하나에서 층 배정에 기대는 값만 뽑는다 — V3·P1·Q_C_strata·게이트 층 by_stratum."""
+    out = {}
+    for sc in LAYER_SCOPES:
+        v3 = rep[sc]["V3"]
+        p1 = v3["P1"]
+        out[sc] = {"gate_queries": v3["gate_queries"], "delta_mean": v3["delta_mean_C"],
+                   "ci": v3["bootstrap"]["ci"], "pass": v3["pass"],
+                   "P1_holds": p1["holds"], "P1_n_29_2_only": p1["n_29_2_only"], "P1_n_29_1_only": p1["n_29_1_only"]}
+    out["Q_C_strata"] = dict(sorted(rep["descriptive"]["Q_C_strata"].items()))
+    out["by_stratum"] = {s: {"queries": d["queries"], "pair_queries": d["pair_queries"], "delta_mean": d["delta_mean"]}
+                         for s, d in sorted(rep["ladder"][gate_layer]["coverage"].get("by_stratum", {}).items())}
+    return out
+
+
+def layer_correction_block(rep: dict, gate_layer: str, old: dict, ref: dict = PRE_LAYER_CORRECTION) -> dict:
+    """교정 전/후 층 의존 값. '전' 은 재계산이 아니라 커밋된 교정 전 리포트의 인용이다."""
+    after_sha = rep["inputs"][EDGES_REL]
+    return {"definition": "§20.17 교정 근거로 층을 다시 배정한 전/후 — 층을 읽지 않는 값(V2·V4·레버·reach·τ)은 대상이 아니다",
+            "before_source": {"commit": ref["commit"], "report": ref["report"], "report_sha256": ref["report_sha256"],
+                              "recomputed": False},
+            "edges_sha256": {"before": ref["edges_sha256"], "after": after_sha},
+            "edges_changed": after_sha != ref["edges_sha256"],
+            "before": _layer_view(old, gate_layer), "after": _layer_view(rep, gate_layer)}
 
 
 def baseline_parquet(path: Path | None) -> Path:
@@ -710,7 +761,8 @@ def run(baseline: Path | None, extra_layers: list[tuple[str, Path]] | None = Non
     for prev, cur in zip(names, names[1:]):
         attribution["steps"][f"{cur}−{prev}"] = sums[cur]["all"][f"SPR@{S}"] - sums[prev]["all"][f"SPR@{S}"]
     attribution[f"total_{gate_layer}−L_A"] = sums[gate_layer]["all"][f"SPR@{S}"] - sums["L_A"]["all"][f"SPR@{S}"]
-    return {
+    p1_absent = all(v["V3"]["P1"]["n_29_1_only"] == 0 for v in (verdict, verdict_train, verdict_legacy_all))
+    rep = {
         "plan": "PLAN-005 단계 7 · V2–V4 재측정 · 동결 목표 대조" + (" · 7-A′ 레버 판정" if mode == "stage7a" else ""),
         "generator": "scripts/report_stage7_remeasure.py",
         "generated": str(date.today()),
@@ -755,13 +807,18 @@ def run(baseline: Path | None, extra_layers: list[tuple[str, Path]] | None = Non
             "[CAL-2 가 이 진술을 코드로 대체했다 — scripts/report_v7_coverage_rank.py 의 τ 사다리 · "
             "data/reports/v7_coverage_rank.json]",
             "Disclosure 는 KR/US 분해 문헌에만 있다 — 인용문헌 중 JP 등 비 KR/US 는 목표에서 빠진다 (§4 결손 · 수는 identity_check 에).",
-            "§29①-only 층은 질의가 적어 P1 은 저검정력이다 — 결론을 얹지 않는다.",
+            ("§29①-only 층에 인용 2문헌 이상 질의가 없어 P1 은 측정 불가다 — 결론을 얹지 않는다." if p1_absent else
+             "§29①-only 층은 질의가 적어 P1 은 저검정력이다 — 결론을 얹지 않는다."),
+            "층 배정은 §20.17 교정 근거다(PLAN-005 §20.18). 교정 전 값은 layer_correction 이 커밋된 교정 전 "
+            "리포트에서 인용한다 — 재계산이 아니다(교정 전 간선은 git 에 없다).",
             "V4-2(사람 코딩)는 재실행하지 않고 인용한다.",
             f"주 판정은 {PRIMARY_SPLIT} 분할이다 (CAL-3 · §20.2 E-3). 분모가 작아져 검정력이 낮다 — "
             "전량 값은 verdict_legacy_all 에 병기하되 홀드아웃이 아니다(D13).",
             "봉인 분할(test·test_b)의 지표는 이 리포트에 없다 — 코드가 막는다(D17 · assert_scope_allowed).",
         ],
     }
+    rep["layer_correction"] = layer_correction_block(rep, gate_layer, load_pre_correction())
+    return rep
 
 
 def _f(x, nd=4):
@@ -842,14 +899,38 @@ def render_markdown(rep: dict) -> str:
               f"{'PASS' if lg['pass'] else 'FAIL'} 였다 (층 {lg['strata_dropped_by_bug']} 을 떨어뜨림 · **판정 아님**). "
               f"동결 정의 {v['V3']['gate_strata']} 로 실행한 현 게이트는 q={v['V3']['gate_queries']} · "
               f"Δ평균 {_f(v['V3']['delta_mean_C'])} 이다."]
-    L += ["", f"사전 등록 P1(게이트 아님): §29②-only {_f(p1['frac_29_2_only'])}(n={p1['n_29_2_only']}) 대 §29①-only "
-          f"{_f(p1['frac_29_1_only'])}(n={p1['n_29_1_only']}) · 성립 {p1['holds']} · 저검정력 {p1['underpowered']}",
+    p1_text = ("§29①-only 인용 2문헌+ n=0 → **측정 불가**" if p1["n_29_1_only"] == 0 else
+               f"§29①-only {_f(p1['frac_29_1_only'])}(n={p1['n_29_1_only']}) · 성립 {p1['holds']} · 저검정력 {p1['underpowered']}")
+    L += ["", f"사전 등록 P1(게이트 아님): §29②-only {_f(p1['frac_29_2_only'])}(n={p1['n_29_2_only']}) 대 {p1_text}",
           f"사전 등록 P2: best_single 중앙 이전 층 {_f(p2['best_single_median_B'])} → {gate_layer} {_f(p2['best_single_median_C'])} · 성립 {p2['holds']}", ""]
+    L += render_layer_correction(rep.get("layer_correction"))
     rp = rep["stage1_reproduction"]
     L += ["## 계측기 검사 — 단계 1 재현 (L_A · R∃)", "", f"재현 {'OK' if rp['ok'] else '**실패**'}: " +
           " · ".join(f"{k} {a}→{b}" for k, (a, b) in rp["V2"].items()), ""]
     L += ["## 한계", ""] + [f"- {x}" for x in rep["limitations"]]
     return "\n".join(L) + "\n"
+
+
+def render_layer_correction(lc: dict | None) -> list[str]:
+    if not lc:
+        return []
+    src = lc["before_source"]
+    names = {"verdict": "dev (주 판정)", "verdict_train": "train", "verdict_legacy_all": "전량 (개발 지표)"}
+    p1 = lambda d: "측정 불가(n=0)" if d["P1_n_29_1_only"] == 0 else f"{d['P1_holds']}(n={d['P1_n_29_1_only']})"  # noqa: E731
+    L = ["## 층 재측정 — 교정 전/후 (§20.18)", "",
+         f"'전' 은 커밋 `{src['commit']}` 의 `{src['report']}`(sha `{src['report_sha256'][:12]}…`) 인용이다 — 재계산이 아니다. "
+         f"간선 sha `{lc['edges_sha256']['before'][:12]}…` → `{lc['edges_sha256']['after'][:12]}…`"
+         + ("" if lc["edges_changed"] else " (**간선이 바뀌지 않았다 — 교정이 붙지 않은 상태**)") + ".", "",
+         "| 범위 | q 전→후 | Δ 평균 전→후 | CI 후 | 판정 전→후 | P1 전→후 |", "|---|---:|---:|---|---|---|"]
+    for sc, nm in names.items():
+        b, a = lc["before"][sc], lc["after"][sc]
+        L.append(f"| {nm} | {b['gate_queries']} → {a['gate_queries']} | {_f(b['delta_mean'])} → {_f(a['delta_mean'])} | "
+                 f"[{_f(a['ci'][0])}, {_f(a['ci'][1])}] | {'PASS' if b['pass'] else 'FAIL'} → {'PASS' if a['pass'] else 'FAIL'} | "
+                 f"{p1(b)} → {p1(a)} |")
+    strata = sorted(set(lc["before"]["Q_C_strata"]) | set(lc["after"]["Q_C_strata"]))
+    L += ["", "Q_C 층 구성(전량): " + " · ".join(
+        f"{s} {lc['before']['Q_C_strata'].get(s, 0)}→{lc['after']['Q_C_strata'].get(s, 0)}" for s in strata), ""]
+    return L
 
 
 def main() -> int:

@@ -6,6 +6,7 @@
     τ 아래 값은 (ii) 에 걸리며, CI 가 0 을 품으면 (i) 에 걸린다. V4 는 5pt 넘는 저하가 걸린다.
 (d) 실물 리포트 — 단계 1 재현 · 입력 신선도 · 동일성 검사. 리포트가 없으면 skip.
 (e) V4 질의 세트 sha 동결.
+(f) 층 재측정(§20.18) — 교정 전 값은 핀한 커밋 리포트의 인용이고, 핀이 어긋나면 죽는다. P1 n=0 은 측정 불가로 적는다.
 """
 from __future__ import annotations
 
@@ -281,3 +282,65 @@ def test_v4_query_set_is_frozen():
     expected = V4_SHA.read_text(encoding="utf-8").split()[0]
     actual = hashlib.sha256((V4_SHA.parent / "v4_paraphrase_queries.parquet").read_bytes()).hexdigest()
     assert actual == expected == "cda3d6679859ec491c1971fe2ea27bed3c36e702fa0acb9a97e5e0b2344fea68"
+
+
+# ── (f) 층 재측정 · 교정 전/후 (§20.18) ───────────────────────────────────
+def _fake_rep(q: int, n1: int, strata: dict) -> dict:
+    v3 = {"gate_queries": q, "delta_mean_C": 0.07, "bootstrap": {"ci": [0.04, 0.10]}, "pass": True,
+          "P1": {"holds": None if n1 == 0 else True, "n_29_2_only": 70, "n_29_1_only": n1}}
+    by = {s: {"queries": n, "pair_queries": n // 2, "delta_mean": 0.05, "best_single_median": 0.5} for s, n in strata.items()}
+    return {**{sc: {"V3": v3} for sc in s7.LAYER_SCOPES},
+            "descriptive": {"Q_C_strata": strata}, "ladder": {"L_D": {"coverage": {"by_stratum": by}}},
+            "inputs": {s7.EDGES_REL: "after-sha"}}
+
+
+def test_layer_view_takes_only_layer_dependent_values():
+    v = s7._layer_view(_fake_rep(98, 0, {"없음": 43, "§29②-only": 574}), "L_D")
+    assert set(v) == set(s7.LAYER_SCOPES) | {"Q_C_strata", "by_stratum"}
+    assert v["verdict"] == {"gate_queries": 98, "delta_mean": 0.07, "ci": [0.04, 0.10], "pass": True,
+                            "P1_holds": None, "P1_n_29_2_only": 70, "P1_n_29_1_only": 0}
+    assert v["by_stratum"]["없음"] == {"queries": 43, "pair_queries": 21, "delta_mean": 0.05}
+
+
+def test_layer_block_marks_before_as_quoted_and_flags_unchanged_edges():
+    old, new = _fake_rep(93, 1, {"없음": 235}), _fake_rep(98, 0, {"없음": 43})
+    ref = {**s7.PRE_LAYER_CORRECTION, "edges_sha256": "after-sha"}
+    lc = s7.layer_correction_block(new, "L_D", old, ref)
+    assert lc["before_source"]["recomputed"] is False and lc["edges_changed"] is False
+    assert (lc["before"]["verdict"]["gate_queries"], lc["after"]["verdict"]["gate_queries"]) == (93, 98)
+    md = "\n".join(s7.render_layer_correction(lc))
+    assert "간선이 바뀌지 않았다" in md and "True(n=1) → 측정 불가(n=0)" in md
+
+
+def test_pre_correction_report_is_pinned():
+    old = s7.load_pre_correction()
+    assert old["inputs"][s7.EDGES_REL] == s7.PRE_LAYER_CORRECTION["edges_sha256"]
+    assert old["verdict"]["V3"]["gate_queries"] == 93          # 교정 전 공표값 (CHANGELOG CAL-2 표)
+
+
+def test_pre_correction_rejects_wrong_report_sha():
+    with pytest.raises(SystemExit):
+        s7.load_pre_correction({**s7.PRE_LAYER_CORRECTION, "report_sha256": "0" * 64})
+
+
+def test_pre_correction_rejects_report_not_built_on_old_edges():
+    # 교정 이후 커밋을 기준으로 삼으려 하면(간선 sha 가 다름) 죽어야 한다 — 리포트 sha 는 그 커밋 값으로 맞춘다
+    ref = {**s7.PRE_LAYER_CORRECTION, "edges_sha256": "f" * 64}
+    with pytest.raises(SystemExit):
+        s7.load_pre_correction(ref)
+
+
+def test_p1_with_no_novelty_only_queries_renders_unmeasurable():
+    lc = s7.layer_correction_block(_fake_rep(98, 0, {}), "L_D", _fake_rep(93, 0, {}))
+    assert "측정 불가(n=0) → 측정 불가(n=0)" in "\n".join(s7.render_layer_correction(lc))
+
+
+@needs_report
+def test_report_layer_correction_matches_both_reports():
+    rep = json.loads(REPORT.read_text(encoding="utf-8"))
+    lc = rep["layer_correction"]
+    gate = "L_D" if rep["mode"] == "stage7a" else "L_C"
+    assert lc["after"] == s7._layer_view(rep, gate)
+    assert lc["before"] == s7._layer_view(s7.load_pre_correction(), gate)
+    assert lc["edges_sha256"]["after"] == rep["inputs"][s7.EDGES_REL]
+    assert lc["edges_changed"] is True, "교정 근거가 간선에 붙지 않은 상태로 리포트가 났다 — make notice-edges"
