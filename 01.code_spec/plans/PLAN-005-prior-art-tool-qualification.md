@@ -2375,6 +2375,7 @@ source 우선순위는 `rej > g1 > g2 > cited` 다.
 **치환은 원천에 있는데 어휘에서 사라졌다.** `pa:substitutableWith` 는 7-0 일몰에서 *"미소비"* 를
 근거로 삭제됐는데(§16.3), 해부에서 치환·전용 논거가 **5카드**에 나온다 — 재료 치환·기능 등가·
 용도 전용. **미소비는 원천에 없다는 뜻이 아니었다.** 일몰 판단의 재검토 안건으로 남긴다.
+→ **§20.20 에서 닫혔다(2026-10-03).**
 
 #### (h) 정본 데이터 결함 — 전수로 확인했다 (등재만 · 고치지 않음)
 
@@ -2767,3 +2768,57 @@ D4 모호·불일치는 사유 계수와 함께 미해소.
 #### (e) 별건
 
 간선 부착 규칙 통일(P/G · 연호) · 간선 이중 IRI 6쌍 · 통지서 파서 결함 6(국가 오배정 · 연도 탈락).
+
+### 20.20 `pa:substitutableWith` 일몰 재검토 — 닫음 (2026-10-03 · §2 1–4단계 사용자 승인)
+
+**결론.** §20.15 의 재검토 안건을 닫는다. 치환은 ⑤ 논증층의 `pa:RationaleSubstitution` + `pa:baseDocument` 가
+담고(§20.16(c)③ 결정), **옛 IRI `pa:substitutableWith` 는 되살리지 않는다.** 그래프·어휘·IRI·shape 는 바뀌지 않았다.
+바뀐 것은 이 결정과 반대로 약속하던 생성기 주석 3곳과 그 주석이 건드린 핀 하나다.
+
+#### (a) 1단계 (요구 정의 · 승인 10-03)
+
+범위: 닫는 기록(이 절 · §20.15 표지 · CHANGELOG)과 생성기 주석 3곳. 비목표: 공개 A-Box 에 치환 인스턴스 채우기 ·
+PLAN-001·PLAN-005 본문의 옛 설계 문단(이력) · stage2 리포트의 매핑 표 · 1.2.0 절단.
+
+#### (b) 2단계 (분석 · 승인 10-03) — 저장소 변경 없이
+
+| 사실 | 값 |
+|---|---|
+| 옛 술어 | 개념↔개념 **대칭** · ⊑ `pa:coveredBy` · 7-0(09-09)에서 선언까지 삭제 |
+| 원천의 치환 | 한 문헌의 재료·구성을 기준 문헌에 옮긴다는 **방향 있는** 판단 논거 · R1 카드 5장 |
+| 흡수한 자리 | `pa:RationaleSubstitution` · `pa:baseDocument` (shape: 기준 문헌 하나) · CQA15 |
+| 파일럿 치환 판단 | **5** (`pilot_v1.jsonl` · 카드 5장) |
+| 공개 그래프 치환 인스턴스 | **0** — 공개 A-Box 재생성 전(§20.16(a)) |
+| priorart TTL 5개 안 `substitutableWith` | 0 |
+| 결정과 충돌하는 주석 | `build_priorart_modules.py:219` · `build_abox_priorart.py:304` ("술어를 다시 선언") · 모호 1 `build_priorart_modules.py:60` |
+| PLAN-002(개념 수준 채굴) | 미착수 · 머리말 1단계 🛑 그대로 |
+| 하류 참조 | `sdkb-prior-art-paper` 보관 계획서 1건 · vendor TTL 0 |
+
+#### (c) 3단계 (설계 · 승인 10-03)
+
+주석 셋을 "옛 IRI 는 다시 쓰지 않는다 · 개념 수준 하위 술어는 새 IRI 로 §2 1단계부터 제안한다"로 맞춘다.
+7-0 당시 기록·`_SUNSET` 표·test_stage6·CQ32 주석은 일몰의 **기록**이라 그대로 둔다. 새 테스트는 두지 않는다 —
+옛 술어의 TTL 복귀는 `test_retired_substitutable_with_is_not_revived` 가 이미 막는다.
+
+#### (d) 4단계에서 발견 — 주석이 핀을 움직인다 (3단계 복귀 · 승인 10-03)
+
+`priorart_v1_ablation.json`(09-11)이 입력으로 `scripts/build_abox_priorart.py` 의 sha256 을 핀하고 있어
+`test_report_describes_current_files` 가 실패했다. 핀을 손으로 바꾸지 않고 같은 생성기로 scratchpad 에 다시 내
+대조했다(49분): **차이는 `generated` 날짜 · 그 스크립트 sha · CQ 실행 시간(`cq_seconds`) 16건뿐**이고 공리 29건의
+판정(소비 8 · 미소비 21)과 예측 대조(불일치 0)는 같다. 그 출력으로 리포트와 대조표를 교체했다.
+
+#### (e) 5단계 게이트 (순차 · 2026-10-03)
+
+| 게이트 | 결과 |
+|---|---|
+| `make abox-priorart` 2회 | priorart TTL 5개 + `sdkb-abox-priorart.ttl` sha **기준값과 동일**(argument `252e5a20…` · core `307875eb…` · kr `4e5ed973…` · semi `d66c9327…` · us `1a4ad267…` · abox `46271d8f…`) · 리포트 불변 |
+| `make validate` | PASSED |
+| `make test` | 1차 690 passed · **1 failed**((d)) → 교체 뒤 **691 passed · 10 skipped** |
+| `make signature-check` | 최신 |
+| `make public-release` + `check-public` | 적중 0 · provenance 402 · 검사 파일 402 → **403** — 이 브랜치가 아니라 §20.19 가 더한 `tests/test_claim_judgment_cited_resolution.py` 이며, 그 커밋이 검사 리포트를 갱신하지 않았다 |
+| 옛 약속 문구 grep | 0 |
+
+#### (f) 남는 조건
+
+① 공개 그래프의 치환 인스턴스는 공개 A-Box 를 논증층으로 재생성할 때 처음 생긴다. ② 개념 수준의 치환
+(재료 A ≈ 재료 B)은 판단 논거와 다른 층이다 — PLAN-002 가 정밀도를 내면 새 술어로 따로 제안한다.

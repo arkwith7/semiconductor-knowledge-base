@@ -27,6 +27,23 @@ All notable changes to SDKB will be documented in this file.
 
 ## [Unreleased]
 
+### Changed (2026-10-03 — PLAN-005 별건 · `substitutableWith` 일몰 재검토 닫음 · **그래프·어휘·IRI·shape 불변 · 생성기 주석과 V1 리포트 핀만** · 사용자 승인)
+
+**결론.** R1 해부(§20.15)가 남긴 *"`pa:substitutableWith` 일몰 재검토"* 안건을 닫았다. 치환은 R1-스키마(2026-09-29)의
+`pa:RationaleSubstitution` + `pa:baseDocument` 가 담고, **옛 IRI 는 되살리지 않는다.** 개념 수준의 치환 쌍이 앞으로
+채굴되더라도 새 IRI 로 따로 제안한다.
+
+- 생성기 주석 3곳(`build_priorart_modules.py` 둘 · `build_abox_priorart.py` 하나)이 *"채굴 쌍이 생기면 술어를 다시
+  선언한다"* 고 약속하고 있어 결정에 맞췄다. 생성 TTL 6개(priorart 5 + `sdkb-abox-priorart.ttl`)의 sha256 은 그대로다.
+- `data/reports/priorart_v1_ablation.json` 과 `PLAN-005-stage6-axiom-consumers.md` 는 같은 생성기로 다시 냈다 — 입력 핀이
+  `build_abox_priorart.py` 의 sha 를 잡고 있어서다. 판정 값은 같고, 바뀐 것은 날짜·그 핀·CQ 실행 시간뿐이다.
+- `data/reports/public_release_check.json` 검사 파일 402 → 403 은 직전 Fixed 항목이 더한 테스트 파일이다(그때 갱신 누락).
+
+**하류 조치(§0): 없다.** vendor 하는 TTL 은 바이트 동일이다.
+
+**게이트** (순차 · 2026-10-03): `make validate` PASSED · `make test` 691 passed · 10 skipped · `signature-check` 최신 ·
+`check-public` 적중 0. 전문: PLAN-005 §20.20.
+
 ### Fixed (2026-10-03 — PLAN-005 별건 · 판단 인용문헌 표기 차이 해소 · **claim-features A-Box 값 변경(추가 전용) · 어휘·IRI 규칙·간선·평가값 불변** · 1.2.0 후보 · 사용자 승인)
 
 **결론.** claim-features A-Box 의 `ont:PriorArtJudgment` 가 **2,419 → 2,614** (+195) 가 됐다. 인용문헌 IRI 를 찾지 못해
