@@ -9,7 +9,15 @@
    "cited_ids": [
     "KR-P-1020120094712"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "KR-P-1020120094712": "colon"
+   },
+   "target_claims": [
+    1,
+    2,
+    3
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
@@ -17,9 +25,15 @@
     "§29②"
    ],
    "cited_ids": [
+    "KR-P-1020120094712",
     "US-P-20090102037"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "KR-P-1020120094712": "reference",
+    "US-P-20090102037": "colon"
+   },
+   "target_claims": [],
+   "subclause": ""
   },
   {
    "section": 3,
@@ -27,7 +41,11 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    4
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020120151681_952015006210113.txt",

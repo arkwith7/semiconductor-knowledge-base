@@ -7,7 +7,9 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -17,10 +19,15 @@
    "cited_ids": [
     "KR-P-1020190116668"
    ],
+   "cite_forms": {
+    "KR-P-1020190116668": "colon"
+   },
    "target_claims": [
+    1,
     6,
     9
-   ]
+   ],
+   "subclause": "2"
   },
   {
    "section": 3,
@@ -30,7 +37,11 @@
    "cited_ids": [
     "KR-P-1020190116668"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "KR-P-1020190116668": "colon"
+   },
+   "target_claims": [],
+   "subclause": ""
   }
  ],
  "source_file": "1020220159439_952024018531819.txt",

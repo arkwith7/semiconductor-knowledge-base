@@ -7,7 +7,14 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -19,7 +26,13 @@
     "JP-P-2014236043",
     "KR-P-1020150063524"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-2012219307": "colon",
+    "JP-P-2014236043": "colon",
+    "KR-P-1020150063524": "colon"
+   },
+   "target_claims": [],
+   "subclause": ""
   }
  ],
  "source_file": "1020227008278_952022045287017.txt",

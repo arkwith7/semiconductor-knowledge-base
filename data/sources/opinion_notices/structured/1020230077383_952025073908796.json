@@ -11,7 +11,22 @@
     "KR-P-1020130011618",
     "KR-P-1020190003050"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-2016213283": "colon",
+    "KR-P-1020130011618": "colon",
+    "KR-P-1020190003050": "colon"
+   },
+   "target_claims": [
+    1,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -19,7 +34,11 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    9
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020230077383_952025073908796.txt",

@@ -9,7 +9,15 @@
    "cited_ids": [
     "JP-P-2007084842"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-2007084842": "colon"
+   },
+   "target_claims": [
+    1,
+    2,
+    3
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
@@ -17,11 +25,24 @@
     "§29②"
    ],
    "cited_ids": [
-    "JP-P-2007063649"
+    "JP-P-2007063649",
+    "JP-P-2007084842"
    ],
+   "cite_forms": {
+    "JP-P-2007063649": "colon",
+    "JP-P-2007084842": "reference"
+   },
    "target_claims": [
-    1
-   ]
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020130079498_952019082411899.txt",

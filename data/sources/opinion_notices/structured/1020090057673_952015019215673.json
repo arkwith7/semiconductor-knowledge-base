@@ -6,10 +6,16 @@
    "legal_bases": [
     "§29①"
    ],
-   "cited_ids": [],
+   "cited_ids": [
+    "JP-P-2007096038"
+   ],
+   "cite_forms": {
+    "JP-P-2007096038": "unlabeled"
+   },
    "target_claims": [
     1
-   ]
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
@@ -18,9 +24,11 @@
     "§29①"
    ],
    "cited_ids": [],
+   "cite_forms": {},
    "target_claims": [
     1
-   ]
+   ],
+   "subclause": "2"
   }
  ],
  "source_file": "1020090057673_952015019215673.txt",

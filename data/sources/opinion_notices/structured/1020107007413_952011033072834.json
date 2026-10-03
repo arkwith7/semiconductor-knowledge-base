@@ -7,7 +7,13 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    19,
+    26,
+    27
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -19,11 +25,17 @@
     "US-G-4630086",
     "US-G-6590260"
    ],
+   "cite_forms": {
+    "KR-P-1020030002298": "colon",
+    "US-G-4630086": "colon",
+    "US-G-6590260": "colon"
+   },
    "target_claims": [
     1,
     6,
     7
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020107007413_952011033072834.txt",

@@ -7,7 +7,15 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -18,7 +26,16 @@
     "JP-P-2004047063",
     "JP-P-2005116888"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-2004047063": "colon",
+    "JP-P-2005116888": "colon"
+   },
+   "target_claims": [
+    1,
+    2,
+    3
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020070060529_952013049538098.txt",

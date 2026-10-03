@@ -54,7 +54,7 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from build_rejection_decisions import (  # noqa: E402  재사용 — 재구현 금지
-    _CLAIM_FOCUS_RX, _normalize_cited_id,
+    _normalize_cited_id,
 )
 
 # **콜론을 필수로 한다 (교정 3).** 공유 `_CITED_LINE_RX` 는 콜론이 선택이라
@@ -68,6 +68,22 @@ KR_REG_DASH_RX = re.compile(r"등록특허공보\s*제\s*10[-\s]?(\d{6,7})\s*호
 JP_KOR_RX = re.compile(r"일본[^\n]{0,12}공개특허공보\s*제?\s*(?:평|소|H|S)?\s*(\d{2,4})\s*[-\s]\s*(\d{4,7})")
 
 
+# **관청별 보완 (파서 교정 2026-09-30 · §20.17).** 미채움 심사관 간선의 최대 원인은 콜론이 아니라
+# 정규화 실패였다(콜론형 정의줄 350줄 · 간선 235건). 출력 형식은 간선의 KIPRIS 식별자 형식에
+# 맞춘다 — claim-features A-Box 가 `cited_map` 을 **정확 일치**로 조회하기 때문이다.
+# 기존 규칙 **뒤에만** 둔다: 기존 규칙이 잡던 표기의 출력은 한 글자도 바뀌지 않는다.
+WO_RX = re.compile(r"WO\s*(\d{4})\s*/\s*(\d{5,6})(?!\d)")
+CN_RX = re.compile(r"(?:중국|CN)[^\n]{0,20}?(?<!\d)(\d{9})(?!\d)")
+EP_RX = re.compile(r"EP\s*(\d{6,7})(?!\d)")
+JP_TOKUHYO_RX = re.compile(r"특표\s*(\d{4})\s*-\s*(\d{1,6})(?!\d)")
+JP_GRANT_RX = re.compile(r"일본[^\n]{0,15}?특허공보[^\n]{0,6}?특허\s*제?\s*(\d{7})\s*호")
+KR_OLD_PUB_RX = re.compile(r"공개특허(?:공보)?\s*제?\s*((?:19|20)\d{2})\s*-\s*(\d{4,7})\s*호")
+KR_UTIL_RX = re.compile(r"실용신안[^\n]{0,8}?제?\s*20\s*-\s*((?:19|20)\d{2})\s*-\s*(\d{7})(?!\d)")
+US_PUB_KOR_RX = re.compile(r"미국[^\n]{0,12}?공개[^\n]{0,8}?(?:US\s*)?((?:19|20)\d{2})\s*/?\s*(\d{7})(?!\d)")
+US_PUB_WORD_RX = re.compile(r"공개\s*특허|특허\s*공개|공개\s*공보")
+US_GRANT_KOR_RX = re.compile(r"미국[^\n]{0,15}?(?:US\s*)?제?\s*(\d{7,8})(?!\d)")
+
+
 def normalize_cited(raw: str) -> str | None:
     """공유 정규화를 먼저 쓰고, 놓친 형태만 보완한다."""
     n = _normalize_cited_id("", raw)
@@ -79,7 +95,114 @@ def normalize_cited(raw: str) -> str | None:
     m = JP_KOR_RX.search(raw)
     if m:
         return f"JP-P-{m.group(1)}{m.group(2).zfill(6)}"
+    # ── 교정 2026-09-30 보완 ──
+    m = WO_RX.search(raw)
+    if m:
+        return f"WO-P-{m.group(1)}{m.group(2).zfill(6)}"
+    m = JP_TOKUHYO_RX.search(raw)
+    if m:
+        return f"JP-P-{m.group(1)}{m.group(2).zfill(6)}"
+    m = JP_GRANT_RX.search(raw)
+    if m:
+        return f"JP-G-{m.group(1)}"
+    m = CN_RX.search(raw)
+    if m:
+        return f"CN-P-{m.group(1)}"
+    m = EP_RX.search(raw)
+    if m:
+        return f"EP-P-{m.group(1).zfill(8)}"
+    m = KR_UTIL_RX.search(raw)
+    if m:
+        return f"KR-G-20{m.group(1)}{m.group(2)}"
+    m = KR_OLD_PUB_RX.search(raw)
+    if m:
+        return f"KR-P-10{m.group(1)}{m.group(2).zfill(7)}"
+    m = US_PUB_KOR_RX.search(raw)
+    if m:
+        return f"US-P-{m.group(1)}{m.group(2)}"
+    if not US_PUB_WORD_RX.search(raw):     # `(2006.10.10. 공개)` 같은 날짜 주석의 '공개' 는 막지 않는다
+        m = US_GRANT_KOR_RX.search(raw)
+        if m:
+            return f"US-G-{m.group(1).zfill(8)}"
     return None
+
+
+# ── 인용 인식 (교정 2026-09-30) ─────────────────────────────────────────────
+# 라벨은 콜론이 선택이고 용어가 넷이다(실측: 무콜론 194 · 비교대상발명 68 · 선행발명 13 · 인용문헌 3).
+# 라벨이 없는 줄도 근거절 안에서 정규화에 성공하면 인정한다(2단계 결정 ① · 151건) — 정밀도는
+# 새 채움 표본(주-2″)이 막는다.
+LABEL_RX = re.compile(r"(?:인용발명|비교대상발명|선행발명|인용문헌)\s*\d+\s*([:：])?")
+FORM_RANK = {"colon": 0, "label": 1, "unlabeled": 2, "reference": 3}
+
+
+def cited_in_section(seg: str, app: str = "") -> dict[str, str]:
+    """절 안의 인용문헌 → 인식 경로(`colon`·`label`·`unlabeled`). 본원 번호는 제외한다.
+
+    옛 콜론 규칙의 결과를 **합집합으로 보존**한다 — 교정이 기존 인식을 잃지 않게.
+    """
+    found: dict[str, str] = {}
+
+    def put(nid: str | None, form: str) -> None:
+        if not nid or (app and loose_key(nid) == loose_key(f"KR-P-{app}")):
+            return
+        if nid not in found or FORM_RANK[form] < FORM_RANK[found[nid]]:
+            found[nid] = form
+
+    for c in CITED_LINE_RX.finditer(seg):
+        put(normalize_cited(c.group(2)), "colon")
+    for line in seg.splitlines():
+        labels = list(LABEL_RX.finditer(line))
+        cuts = [0] + [m.start() for m in labels] + [len(line)]
+        for a, b in zip(cuts, cuts[1:]):
+            chunk = line[a:b]
+            if not chunk.strip():
+                continue
+            lm = LABEL_RX.match(chunk)
+            form = "unlabeled" if not lm else ("colon" if lm.group(1) else "label")
+            body = chunk[lm.end():] if lm else chunk
+            put(normalize_cited(body[:200]), form)
+    return found
+
+
+# ── 대상 청구항 (교정 2026-09-30) ───────────────────────────────────────────
+# 공유 `_CLAIM_FOCUS_RX` 는 `청구항 제N항`(6,630회)을 못 잡고 `N 내지 M`·`N~M` 의 가운데를
+# 잃는다. 공유 함수는 거절결정서 계약이라 두고, 통지서 전용으로 새로 둔다.
+CLAIM_REF_RX = re.compile(
+    r"청구항\s*(?:제\s*)?(\d{1,3})\s*(?:항)?"
+    r"((?:\s*(?:,|및|또는|내지|~|∼)\s*(?:청구항\s*)?(?:제\s*)?\d{1,3}\s*(?:항)?)*)")
+_CL_TAIL_RX = re.compile(r"\s*(,|및|또는|내지|~|∼)\s*(?:청구항\s*)?(?:제\s*)?(\d{1,3})\s*(?:항)?")
+# 인용문헌의 청구항 — `인용발명 1의 청구항 3`, `비교대상발명2에 기재된 청구항 5`
+CITED_CLAIM_CTX_RX = re.compile(
+    r"(?:인용발명|비교대상발명|선행발명|인용문헌)\s*\d+\s*(?:의|에\s*기재된)\s*(?:\S{0,8}\s*)?$")
+MAX_RANGE = 200
+
+
+def parse_claim_refs(seg: str) -> list[int]:
+    """절이 겨냥하는 본원 청구항 번호. 범위를 전개하고 인용문헌 문맥의 번호를 뺀다."""
+    out: set[int] = set()
+    for m in CLAIM_REF_RX.finditer(seg):
+        if CITED_CLAIM_CTX_RX.search(seg[max(0, m.start() - 25):m.start()]):
+            continue
+        prev = int(m.group(1))
+        nums = {prev}
+        for t in _CL_TAIL_RX.finditer(m.group(2) or ""):
+            n = int(t.group(2))
+            if t.group(1) in ("내지", "~", "∼") and prev < n <= prev + MAX_RANGE:
+                nums.update(range(prev, n + 1))
+            else:
+                nums.add(n)
+            prev = n
+        out.update(x for x in nums if x > 0)
+    return sorted(out)
+
+
+# §29① 의 호 — 제1호 공지·공연실시 / 제2호 간행물·전기통신회선. 실측 제2호 281 · 제1호 4 · 무표기 4.
+# `legal_basis` 값에 넣지 않는다: A-Box 는 `GROUND[legal_basis]`, 평가 층은 `"§29①" in x` 로 읽는다.
+SUBCLAUSE_RX = re.compile(r"제\s*29\s*조\s*(?:제)?\s*1\s*항\s*제\s*([12])\s*호")
+
+
+def subclause_of(seg: str) -> str:
+    return "|".join(sorted({m.group(1) for m in SUBCLAUSE_RX.finditer(seg)}))
 
 
 def loose_key(doc_id: str) -> str:
@@ -112,10 +235,38 @@ BASIS_42_RX = re.compile(r"제\s*42\s*조")
 LB = {"1": "§29①", "2": "§29②", "3": "§29③", "4": "§29④"}
 
 
-def parse_notice(text: str) -> list[dict]:
-    """절 단위로 (법조항, 인용발명 식별자, 대상 청구항)을 뽑는다."""
+# **첨부 목록은 절이 아니다 (교정 2026-09-30 · 4단계 발견 · 3단계 복귀 승인).** 절은 다음 절까지
+# 이어지므로 마지막 절이 통지서 끝의 `[첨 부]` 인용문헌 목록을 삼킨다. 라벨 없는 번호를 인정하자
+# 그 목록이 마지막 절의 근거에 붙었다(§42 간선 2 → 163). 표지는 1,155/1,155 에 있고 표지 뒤에서
+# 근거 절이 시작되는 문서는 0 이므로, 절은 표지 앞에서 끊는다.
+ATTACH_RX = re.compile(r"\[\s*첨\s*부\s*\]|<<\s*안\s*내\s*>>")
+# 절이 라벨로만 가리키는 문헌(`인용발명 2 에 의하여 …`)은 **문서 전체의 정의**로 해소한다 — 정의가
+# 첨부 목록에만 있는 통지서가 있다. 정의가 둘 이상으로 갈리는 라벨은 해소하지 않는다.
+LABEL_REF_RX = re.compile(r"(인용발명|비교대상발명|선행발명|인용문헌)\s*(\d+)")
+
+
+def label_definitions(body: str, app: str = "") -> dict[tuple[str, int], str]:
+    """(라벨 용어, 번호) → 문헌. 정의가 유일한 라벨만 싣는다."""
+    seen: dict[tuple[str, int], set[str]] = {}
+    for line in body.splitlines():
+        labels = list(LABEL_RX.finditer(line))
+        for i, lm in enumerate(labels):
+            end = labels[i + 1].start() if i + 1 < len(labels) else len(line)
+            nid = normalize_cited(line[lm.end():end][:200])
+            if not nid or (app and loose_key(nid) == loose_key(f"KR-P-{app}")):
+                continue
+            k = LABEL_REF_RX.match(lm.group(0))
+            seen.setdefault((k.group(1), int(k.group(2))), set()).add(nid)
+    return {k: next(iter(v)) for k, v in seen.items() if len(v) == 1}
+
+
+def parse_notice(text: str, app: str = "") -> list[dict]:
+    """절 단위로 (법조항, 인용발명 식별자, 대상 청구항, 호, 인식 경로)를 뽑는다."""
     dm = DETAIL_RX.search(text)
     body = text[dm.end():] if dm else text        # 표지가 있으면 그 뒤만 본다
+    defs = label_definitions(body, app)           # 정의는 첨부 목록까지 포함해 모은다
+    am = ATTACH_RX.search(body)
+    body = body[:am.start()] if am else body      # 절은 첨부 표지 앞에서 끊는다
     parts = list(SECTION_RX.finditer(body))
     out = []
     for i, m in enumerate(parts):
@@ -130,42 +281,187 @@ def parse_notice(text: str) -> list[dict]:
         if not bases:
             continue
 
-        cited = []
-        for c in CITED_LINE_RX.finditer(seg):
-            nid = normalize_cited(c.group(2))
-            if nid:
-                cited.append(nid)
-        claims = sorted({int(n) for cm in _CLAIM_FOCUS_RX.finditer(seg)
-                         for n in re.findall(r"\d+", cm.group(1))})
-
+        forms = cited_in_section(seg, app)
+        for r in LABEL_REF_RX.finditer(seg):
+            nid = defs.get((r.group(1), int(r.group(2))))
+            if nid and nid not in forms:
+                forms[nid] = "reference"
         out.append({"section": int(m.group(1)) if m.group(1) else i + 1, "legal_bases": bases,
-                    "cited_ids": sorted(dict.fromkeys(cited)),
-                    "target_claims": claims})
+                    "cited_ids": sorted(forms),
+                    "cite_forms": {k: forms[k] for k in sorted(forms)},
+                    "target_claims": parse_claim_refs(seg),
+                    "subclause": subclause_of(seg) if "§29①" in bases else ""})
     return out
 
 
 SAMPLE_CSV = ROOT / "data" / "interim" / "notice_legal_basis_sample.csv"
+SAMPLE_V2_CSV = ROOT / "data" / "interim" / "notice_legal_basis_sample_v2.csv"
+KEY = ["application_number", "cited_doc_id", "legal_basis"]
 
 
-def _gate_result() -> dict:
-    """주-2′ — 사람이 채운 표본이 있으면 그 값으로 게이트를 판정한다(§10.10).
+def collapse_rows(rows: list[dict]) -> pd.DataFrame:
+    """(출원, 인용, 근거) 한 행으로 모은다.
+
+    `section`·`source_file` 은 **첫 기여 절**(옛 `drop_duplicates` 와 같은 값)이고,
+    `target_claims` 는 기여한 모든 절의 **합집합**이다 — 옛 방식은 첫 절 밖의 청구항을 버렸다.
+    호는 합집합, 인식 경로는 가장 강한 것(colon > label > unlabeled).
+    """
+    cols = KEY + ["section", "target_claims", "source_file", "subclause", "cite_form"]
+    agg: dict[tuple, dict] = {}
+    for r in rows:
+        k = tuple(r[c] for c in KEY)
+        if k not in agg:
+            agg[k] = {**r, "target_claims": set(r["target_claims"]),
+                      "subclause": set(filter(None, r["subclause"].split("|")))}
+            continue
+        a = agg[k]
+        a["target_claims"].update(r["target_claims"])
+        a["subclause"].update(filter(None, r["subclause"].split("|")))
+        if FORM_RANK[r["cite_form"]] < FORM_RANK[a["cite_form"]]:
+            a["cite_form"] = r["cite_form"]
+    out = [{**a, "target_claims": ",".join(map(str, sorted(a["target_claims"]))),
+            "subclause": "|".join(sorted(a["subclause"]))} for a in agg.values()]
+    return pd.DataFrame(out, columns=cols)
+
+
+#: 손실 기준의 **동결 예외** (3단계 복귀 승인 2026-09-30). 옛 값이 첨부 목록에서 나온 오귀속이라
+#: 교정이 값을 바꾸는 간선이다. 목록 밖의 손실·변경이 하나라도 있으면 `--apply` 는 멈춘다.
+LOSS_EXCEPTIONS = {
+    ("1020120130403", "KR-P-1020070090814"): "옛 §42 는 [첨 부] 목록 유래 오귀속 → §29②",
+}
+
+
+def edge_delta(before: list[str], after: list[str], keys: list[tuple[str, str]] | None = None) -> dict:
+    """간선별 근거 집합의 전후. **손실·변경은 예외 목록 밖에서 0 이어야 한다**(추가만 허용)."""
+    d = Counter()
+    keys = keys or [("", "")] * len(before)
+    for b, a, k in zip(before, after, keys):
+        sb, sa = set(filter(None, b.split("|"))), set(filter(None, a.split("|")))
+        if not sb and not sa:
+            continue
+        d["filled_before"] += bool(sb)
+        d["filled_after"] += bool(sa)
+        if not sb:
+            d["newly_filled"] += 1
+        elif not sb <= sa:
+            d["changed_by_exception" if k in LOSS_EXCEPTIONS else "lost_or_changed"] += 1
+        elif sb < sa:
+            d["extended"] += 1
+        else:
+            d["unchanged"] += 1
+    return {k: int(d[k]) for k in ("filled_before", "filled_after", "unchanged", "extended",
+                                   "newly_filled", "changed_by_exception", "lost_or_changed")}
+
+
+def assert_additive(delta: dict) -> None:
+    if delta["lost_or_changed"]:
+        raise SystemExit(f"ERROR: 기존 legal_bases 가 줄거나 바뀐 간선 {delta['lost_or_changed']}건 — "
+                         "교정은 추가만 허용한다(2단계 동결 기준 · 예외는 LOSS_EXCEPTIONS). 엣지에 쓰지 않았다.")
+
+
+def _over_claims(canon: pd.DataFrame) -> dict:
+    """서술 통계 — 공개 시점 청구항 수를 넘는 번호. **오염 판정이 아니다**: 심사 시점 청구항 수의
+    권위 원천이 없고(`kipris_biblio` 에 없음), 자진보정으로 청구항이 늘었을 수 있다(2단계 실측)."""
+    meta = pd.read_parquet(ROOT / "data" / "patents" / "rejected_patents_meta.parquet")
+    lim = dict(zip(meta.application_number, pd.to_numeric(meta.n_claims_full, errors="coerce")))
+    checked = over = 0
+    for app, tc in zip(canon.application_number, canon.target_claims):
+        nums = [int(x) for x in str(tc).split(",") if x]
+        n = lim.get(app)
+        if not nums or n is None or n != n:
+            continue
+        checked += 1
+        over += any(x > n for x in nums)
+    return {"checked": checked, "over": over, "is_gate": False}
+
+
+def _gate_result(path: Path = SAMPLE_CSV, name: str = "주-2′ 사람 표본 원문 대조") -> dict:
+    """사람이 채운 표본이 있으면 그 값으로 게이트를 판정한다(§10.10).
 
     시트 자체는 통지서 원문 발췌를 담으므로 `data/interim/`(gitignore·발행 DENY)에 있고,
     여기에는 **집계만** 남긴다.
     """
-    g = {"name": "주-2′ 사람 표본 원문 대조", "threshold": 0.90}
-    if not SAMPLE_CSV.exists():
+    g = {"name": name, "threshold": 0.90}
+    if not path.exists():
         return {**g, "status": "미산출 — 이것 없이 A 를 완료로 보고하지 않는다"}
-    d = pd.read_csv(SAMPLE_CSV)
-    v = d["correct"].astype(str).str.strip().map({"1": 1, "0": 0}).dropna()
+    # 문자열로 읽는다 — 빈 칸(보류)이 섞이면 pandas 가 열을 실수로 읽어 `1` 이 `"1.0"` 이 되고
+    # 매핑이 전부 빠져 "미기입" 으로 오판된다(2026-10-03 실측).
+    d = pd.read_csv(path, dtype=str)
+    v = d["correct"].fillna("").str.strip().map({"1": 1, "0": 0}).dropna()
     if v.empty:
         return {**g, "status": "시트는 있으나 미기입"}
     rate = float(v.mean())
-    return {**g, "status": "충족" if rate >= 0.90 else "미달",
-            "n": int(len(v)), "correct": int(v.sum()), "rate": round(rate, 4),
-            "residual_error_mode": ("틀린 건은 절 경계 오귀속이다 — `이 출원은/의` 앵커가 "
-                                    "근거 진술이 아닌 논의 문장에도 걸려, 이웃 구간의 근거가 "
-                                    "잘못 붙는다(§42 논의에 §29② 가 붙은 사례 확인)."),}
+    res = {**g, "status": "충족" if rate >= 0.90 else "미달",
+           "n": int(len(v)), "correct": int(v.sum()), "rate": round(rate, 4),
+           "withheld": int(len(d) - len(v))}     # 판정 보류 — 분모에서 빠진 행
+    if path == SAMPLE_CSV:
+        res["residual_error_mode"] = ("틀린 건은 절 경계 오귀속이다 — `이 출원은/의` 앵커가 "
+                                      "근거 진술이 아닌 논의 문장에도 걸려, 이웃 구간의 근거가 "
+                                      "잘못 붙는다(§42 논의에 §29② 가 붙은 사례 확인).")
+    return res
+
+
+#: 교정 전 정본이 있는 커밋 — "새로 채워진 쌍" 의 기준. 엣지 상태에 기대면 `--apply` 뒤 재실행에서
+#: 새 쌍이 사라지므로 커밋에 핀한다.
+BASELINE_COMMIT = "ea72adf"
+SAMPLE_SEED = 20260930
+
+
+def _baseline_pairs() -> set[tuple[str, str]]:
+    import io
+    import subprocess
+    blob = subprocess.run(["git", "show", f"{BASELINE_COMMIT}:{CANON.relative_to(ROOT)}"],
+                          cwd=ROOT, capture_output=True, check=True).stdout
+    b = pd.read_parquet(io.BytesIO(blob))
+    return {(x, loose_key(y)) for x, y in zip(b.application_number, b.cited_doc_id)}
+
+
+def _pair_excerpt(app: str, cid: str, rows: pd.DataFrame) -> str:
+    """근거 진술(절 머리)과 그 문헌이 인식된 줄. 원문이므로 data/interim 에만 쓴다."""
+    segs = []
+    for r in rows.sort_values("section").drop_duplicates(["source_file", "section"]).itertuples():
+        t = (TXT_DIR / r.source_file).read_text(encoding="utf-8", errors="replace")
+        dm = DETAIL_RX.search(t)
+        t = t[dm.end():] if dm else t
+        parts = list(SECTION_RX.finditer(t))
+        for i, mm in enumerate(parts):
+            if (int(mm.group(1)) if mm.group(1) else i + 1) != int(r.section):
+                continue
+            seg = t[mm.start():parts[i + 1].start() if i + 1 < len(parts) else len(t)]
+            lines = seg.splitlines()
+            hit = [j for j, ln in enumerate(lines) if cid in cited_in_section(ln, app)]
+            if not hit:     # reference — 정의는 첨부 목록에 있고 절은 라벨로만 가리킨다
+                lines = t.splitlines()
+                hit = [j for j, ln in enumerate(lines) if cid in cited_in_section(ln, app)]
+            around = " / ".join(" ".join(lines[k].split()) for j in hit[:1]
+                                for k in range(max(0, j - 1), min(len(lines), j + 2)))
+            segs.append(f"[{r.legal_basis}] {' '.join(seg.split())[:250]} … ⟪{around[:400]}⟫")
+            break
+    return "\n\n".join(segs)
+
+
+def sample_new_pairs(canon: pd.DataFrame, examiner: pd.DataFrame, n: int) -> list[dict]:
+    import random
+    base = _baseline_pairs()
+    edge_keys = {(a, loose_key(c)) for a, c in zip(
+        examiner.target_patent_id.str.replace("^patent:kr_", "", regex=True), examiner.cited_doc_id)}
+    pairs = sorted({(a, c) for a, c in zip(canon.application_number, canon.cited_doc_id)
+                    if (a, loose_key(c)) in edge_keys and (a, loose_key(c)) not in base})
+    random.Random(SAMPLE_SEED).shuffle(pairs)
+    out = []
+    for app, cid in pairs[:n]:
+        rows = canon[(canon.application_number == app) & (canon.cited_doc_id == cid)]
+        out.append({"application_number": app, "cited_doc_id": cid,
+                    "extracted_legal_bases": "|".join(sorted(rows.legal_basis)),
+                    "subclause": "|".join(sorted(set(filter(None, rows.subclause)))),
+                    "cite_form": rows.cite_form.iloc[0],
+                    "target_claims": rows.target_claims.iloc[0],
+                    # 발췌가 부족하면 원문을 연다 — 파일과 절 번호(`[구체적인 거절이유]` 뒤 순서)
+                    "source_file": "|".join(sorted(set(rows.source_file))),
+                    "section": "|".join(map(str, sorted(set(rows.section)))),
+                    "notice_section_excerpt": _pair_excerpt(app, cid, rows),
+                    "correct": "", "note": ""})
+    return out
 
 
 def main() -> int:
@@ -177,6 +473,8 @@ def main() -> int:
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--sample", type=int, default=0,
                     help="주-2′ 사람 대조 표본 N건을 data/interim/ 에 쓴다 (시드 고정)")
+    ap.add_argument("--sample-new", type=int, default=0,
+                    help="주-2″ 교정으로 **새로 채워진** 쌍 N건 표본 (기준: 교정 전 커밋의 정본)")
     a = ap.parse_args()
 
     files = sorted(TXT_DIR.glob("*.txt"))
@@ -187,7 +485,7 @@ def main() -> int:
     for f in files:
         app = f.name.split("_")[0]
         text = f.read_text(encoding="utf-8", errors="replace")
-        secs = parse_notice(text)
+        secs = parse_notice(text, app)
         stat["문서"] += 1
         if not secs:
             stat["절_0"] += 1
@@ -198,8 +496,10 @@ def main() -> int:
                 for lb in s["legal_bases"]:
                     rows.append({"application_number": app, "cited_doc_id": cid,
                                  "legal_basis": lb, "section": s["section"],
-                                 "target_claims": ",".join(map(str, s["target_claims"])),
-                                 "source_file": f.name})
+                                 "target_claims": s["target_claims"],
+                                 "source_file": f.name,
+                                 "subclause": s["subclause"] if lb == "§29①" else "",
+                                 "cite_form": s["cite_forms"][cid]})
         per_doc.append({"application_number": app, "sections": secs, "source_file": f.name})
         if a.write_structured:
             STRUCT_DIR.mkdir(parents=True, exist_ok=True)
@@ -211,8 +511,7 @@ def main() -> int:
                             "source_file": f.name, "generator": "build_notice_evidence.py"},
                            ensure_ascii=False, indent=1), encoding="utf-8")
 
-    canon = pd.DataFrame(rows).drop_duplicates(
-        subset=["application_number", "cited_doc_id", "legal_basis"])
+    canon = collapse_rows(rows)
     CANON.parent.mkdir(parents=True, exist_ok=True)
     canon.to_parquet(CANON, index=False)
 
@@ -221,6 +520,8 @@ def main() -> int:
     ed["app_no"] = ed.target_patent_id.str.replace("^patent:kr_", "", regex=True)
     ex = ed.source_type == "examiner"
     before = int((ed.loc[ex, "legal_basis"].astype(str).str.len() > 0).sum())
+    prior = (ed["legal_bases"].fillna("").astype(str) if "legal_bases" in ed.columns
+             else pd.Series([""] * len(ed), index=ed.index))
 
     # §10.9 — tie-break 없음. (출원, 인용) 의 근거 **집합**을 그대로 싣는다.
     sets = (canon.groupby(["application_number", "cited_doc_id"]).legal_basis
@@ -244,8 +545,11 @@ def main() -> int:
     contain = float(v2.apply(lambda r: r.legal_basis in r.ns.split("|"), axis=1).mean()) if len(v2) else None
     exact = float((v2.legal_basis == v2.ns).mean()) if len(v2) else None
 
+    applied = ["" if not e else v for v, e in zip(newvals, ex)]
+    delta = edge_delta(list(prior), applied, [(r.app_no, r.cited_doc_id) for r in ed.itertuples()])
     if a.apply:
-        ed["legal_bases"] = ["" if not e else v for v, e in zip(newvals, ex)]
+        assert_additive(delta)
+        ed["legal_bases"] = applied
         ed.drop(columns=["app_no"]).to_parquet(EDGES, index=False)
 
     by_lb = Counter(b for v, e in zip(newvals, ex) if v and e for b in v.split("|"))
@@ -276,6 +580,17 @@ def main() -> int:
             "containment": None if contain is None else round(contain, 4)},
         "primary_gate": _gate_result(),
         "applied_to_edges": bool(a.apply),
+        # 교정 2026-09-30 (§20.17). `edges_before` 는 **이 실행 직전** 엣지 값이다 — 교정을
+        # 이미 적용한 뒤 다시 돌리면 before == after 가 되는 것이 정상(멱등).
+        "correction_2026_09_30": {
+            "edges_before_after": delta,
+            "cite_form_rows": dict(sorted(Counter(canon.cite_form).items())),
+            "subclause_on_29_1": dict(sorted(Counter(
+                canon.loc[canon.legal_basis == "§29①", "subclause"].replace("", "없음")).items())),
+            "target_claims_empty_rows": int((canon.target_claims == "").sum()),
+            "target_claims_over_n_claims": _over_claims(canon),
+            "new_pair_gate": _gate_result(SAMPLE_V2_CSV, "주-2″ 새 채움 표본 원문 대조"),
+        },
     }
     REPORT.parent.mkdir(parents=True, exist_ok=True)
     REPORT.write_text(json.dumps(rep, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -322,6 +637,13 @@ def main() -> int:
         pd.DataFrame(out).to_csv(sp, index=False, encoding="utf-8-sig")
         print(f"\n주-2′ 대조 표본 {len(out)}행 → {sp.relative_to(ROOT)}")
         print("   `correct` 에 1/0 을 적어 주십시오 — 추출된 근거가 원문 발췌와 맞는가.")
+
+    if a.sample_new:
+        out = sample_new_pairs(canon, ed[ex], a.sample_new)
+        SAMPLE_V2_CSV.parent.mkdir(parents=True, exist_ok=True)
+        pd.DataFrame(out).to_csv(SAMPLE_V2_CSV, index=False, encoding="utf-8-sig")
+        print(f"\n주-2″ 새 채움 표본 {len(out)}행 → {SAMPLE_V2_CSV.relative_to(ROOT)}")
+        print("   `correct` 에 1/0 — 이 문헌이 이 근거(와 호·청구항)로 인용되었는가.")
 
     print(f"{'적용됨' if a.apply else '미적용 (--apply 로 반영)'} · 리포트 {REPORT.relative_to(ROOT)}")
     return 0

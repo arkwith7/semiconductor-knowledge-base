@@ -11,7 +11,19 @@
     "JP-P-2007262510",
     "KR-G-0512141"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-2003303941": "colon",
+    "JP-P-2007262510": "colon",
+    "KR-G-0512141": "colon"
+   },
+   "target_claims": [
+    1,
+    2,
+    3,
+    5,
+    6
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020120021214_952013055439062.txt",

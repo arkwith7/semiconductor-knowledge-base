@@ -7,9 +7,20 @@
     "§42"
    ],
    "cited_ids": [],
+   "cite_forms": {},
    "target_claims": [
-    1
-   ]
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -17,11 +28,13 @@
     "§42"
    ],
    "cited_ids": [],
+   "cite_forms": {},
    "target_claims": [
     6,
     7,
     10
-   ]
+   ],
+   "subclause": ""
   },
   {
    "section": 3,
@@ -36,16 +49,38 @@
     "JP-P-2008226987",
     "KR-P-1020040057287"
    ],
+   "cite_forms": {
+    "JP-P-2001303245": "colon",
+    "JP-P-2003226967": "colon",
+    "JP-P-2004307989": "colon",
+    "JP-P-2006002208": "colon",
+    "JP-P-2008226987": "colon",
+    "KR-P-1020040057287": "colon"
+   },
    "target_claims": [
     1
-   ]
+   ],
+   "subclause": "2"
   },
   {
    "section": 4,
    "legal_bases": [
     "§29②"
    ],
-   "cited_ids": [],
+   "cited_ids": [
+    "JP-P-2003226967",
+    "JP-P-2004307989",
+    "JP-P-2006002208",
+    "JP-P-2008226987",
+    "KR-P-1020040057287"
+   ],
+   "cite_forms": {
+    "JP-P-2003226967": "reference",
+    "JP-P-2004307989": "reference",
+    "JP-P-2006002208": "reference",
+    "JP-P-2008226987": "reference",
+    "KR-P-1020040057287": "reference"
+   },
    "target_claims": [
     1,
     2,
@@ -57,7 +92,8 @@
     8,
     9,
     10
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020120095927_952016032368588.txt",

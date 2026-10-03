@@ -7,7 +7,12 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    3,
+    4
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -15,7 +20,11 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    3
+   ],
+   "subclause": ""
   },
   {
    "section": 3,
@@ -23,7 +32,9 @@
     "§29②"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [],
+   "subclause": ""
   }
  ],
  "source_file": "1020070062550_952009044963786.txt",

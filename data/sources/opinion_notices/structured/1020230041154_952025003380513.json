@@ -12,6 +12,12 @@
     "KR-P-1020130008203",
     "KR-P-1020140142160"
    ],
+   "cite_forms": {
+    "JP-P-2011003885": "colon",
+    "JP-P-2018111878": "colon",
+    "KR-P-1020130008203": "colon",
+    "KR-P-1020140142160": "colon"
+   },
    "target_claims": [
     1,
     2,
@@ -22,7 +28,8 @@
     7,
     8,
     9
-   ]
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -30,9 +37,11 @@
     "§42"
    ],
    "cited_ids": [],
+   "cite_forms": {},
    "target_claims": [
     6
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020230041154_952025003380513.txt",

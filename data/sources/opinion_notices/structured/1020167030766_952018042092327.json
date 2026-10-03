@@ -10,7 +10,17 @@
     "JP-P-10098041",
     "KR-P-1020120107012"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-10098041": "colon",
+    "KR-P-1020120107012": "colon"
+   },
+   "target_claims": [
+    6,
+    9,
+    10,
+    11
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020167030766_952018042092327.txt",

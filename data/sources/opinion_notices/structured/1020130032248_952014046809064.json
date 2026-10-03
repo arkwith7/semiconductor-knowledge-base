@@ -7,10 +7,12 @@
     "§42"
    ],
    "cited_ids": [],
+   "cite_forms": {},
    "target_claims": [
     5,
     6
-   ]
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -21,14 +23,20 @@
     "JP-P-2004139879",
     "JP-P-2006313652"
    ],
+   "cite_forms": {
+    "JP-P-2004139879": "colon",
+    "JP-P-2006313652": "colon"
+   },
    "target_claims": [
     1,
     2,
     3,
     4,
     5,
+    6,
     7
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020130032248_952014046809064.txt",

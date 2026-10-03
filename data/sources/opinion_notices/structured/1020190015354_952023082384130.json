@@ -13,6 +13,13 @@
     "US-P-20150203961",
     "US-P-20160085003"
    ],
+   "cite_forms": {
+    "US-P-20060141155": "colon",
+    "US-P-20080274369": "colon",
+    "US-P-20100209598": "colon",
+    "US-P-20150203961": "colon",
+    "US-P-20160085003": "colon"
+   },
    "target_claims": [
     1,
     2,
@@ -37,7 +44,8 @@
     21,
     22,
     23
-   ]
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -45,9 +53,11 @@
     "§42"
    ],
    "cited_ids": [],
+   "cite_forms": {},
    "target_claims": [
     20
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020190015354_952023082384130.txt",

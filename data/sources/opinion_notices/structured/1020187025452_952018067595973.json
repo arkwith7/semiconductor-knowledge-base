@@ -7,11 +7,17 @@
     "§29②"
    ],
    "cited_ids": [
+    "JP-P-2004502036",
     "KR-P-1020010023376"
    ],
+   "cite_forms": {
+    "JP-P-2004502036": "colon",
+    "KR-P-1020010023376": "colon"
+   },
    "target_claims": [
     1
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020187025452_952018067595973.txt",

@@ -6,8 +6,23 @@
    "legal_bases": [
     "§29②"
    ],
-   "cited_ids": [],
-   "target_claims": []
+   "cited_ids": [
+    "JP-P-05021810"
+   ],
+   "cite_forms": {
+    "JP-P-05021810": "unlabeled"
+   },
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -15,7 +30,11 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    8
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020080062219_952010017831861.txt",

@@ -7,15 +7,30 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    8
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
    "legal_bases": [
     "§29②"
    ],
-   "cited_ids": [],
-   "target_claims": []
+   "cited_ids": [
+    "JP-G-5688664",
+    "JP-G-5781408"
+   ],
+   "cite_forms": {
+    "JP-G-5688664": "colon",
+    "JP-G-5781408": "colon"
+   },
+   "target_claims": [
+    7,
+    8
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020187031762_952019039750606.txt",

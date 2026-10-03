@@ -6,8 +6,25 @@
    "legal_bases": [
     "§29②"
    ],
-   "cited_ids": [],
-   "target_claims": []
+   "cited_ids": [
+    "US-P-20090213660"
+   ],
+   "cite_forms": {
+    "US-P-20090213660": "unlabeled"
+   },
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020160109880_952017017318576.txt",

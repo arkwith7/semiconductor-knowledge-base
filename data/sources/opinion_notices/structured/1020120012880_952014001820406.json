@@ -10,7 +10,22 @@
     "US-P-20070170489",
     "US-P-20090213660"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "US-P-20070170489": "colon",
+    "US-P-20090213660": "colon"
+   },
+   "target_claims": [
+    1,
+    2,
+    4,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -18,7 +33,19 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020120012880_952014001820406.txt",

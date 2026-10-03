@@ -7,22 +7,7 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": [
-    1,
-    2,
-    3,
-    4,
-    7,
-    8,
-    9
-   ]
-  },
-  {
-   "section": 2,
-   "legal_bases": [
-    "§29②"
-   ],
-   "cited_ids": [],
+   "cite_forms": {},
    "target_claims": [
     1,
     2,
@@ -34,7 +19,33 @@
     8,
     9,
     10
-   ]
+   ],
+   "subclause": ""
+  },
+  {
+   "section": 2,
+   "legal_bases": [
+    "§29②"
+   ],
+   "cited_ids": [
+    "JP-P-2008306004"
+   ],
+   "cite_forms": {
+    "JP-P-2008306004": "unlabeled"
+   },
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020140132683_952015043636756.txt",

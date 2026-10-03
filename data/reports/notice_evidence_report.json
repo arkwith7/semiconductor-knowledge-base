@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-06",
+  "generated": "2026-10-03",
   "plan": "PLAN-005 §10 (단계 2-A)",
   "deterministic": true,
   "llm_used": false,
@@ -8,25 +8,26 @@
   "documents": 1155,
   "sections": 1994,
   "documents_without_section": 16,
-  "sections_with_citation": 935,
-  "canonical_rows": 1900,
-  "distinct_app_cited_pairs": 1725,
+  "sections_with_citation": 1292,
+  "canonical_rows": 2678,
+  "distinct_app_cited_pairs": 2388,
   "examiner_edges": 2534,
   "legal_basis_untouched_on_examiner": 0,
-  "legal_bases_filled": 1663,
-  "multi_ground_edges": 169,
-  "fill_rate": 0.6563,
+  "legal_bases_filled": 2258,
+  "multi_ground_edges": 274,
+  "fill_rate": 0.8911,
   "by_legal_basis": {
-    "§29②": 1617,
-    "§29①": 213,
-    "§42": 2
+    "§29②": 2238,
+    "§29①": 292,
+    "§29③": 1,
+    "§42": 1
   },
   "cross_check_vs_evidence_v2": {
     "gate": false,
     "why_not_gate": "단일값 비교는 폐기된 tie-break 를 재고, 집합 비교는 결과를 본 뒤의 수다(§10.10). 서술 통계로만 싣는다.",
-    "overlapping_pairs": 588,
-    "exact_equality": 0.8656,
-    "containment": 0.9524
+    "overlapping_pairs": 633,
+    "exact_equality": 0.8673,
+    "containment": 0.9874
   },
   "primary_gate": {
     "name": "주-2′ 사람 표본 원문 대조",
@@ -35,7 +36,44 @@
     "n": 30,
     "correct": 28,
     "rate": 0.9333,
+    "withheld": 0,
     "residual_error_mode": "틀린 건은 절 경계 오귀속이다 — `이 출원은/의` 앵커가 근거 진술이 아닌 논의 문장에도 걸려, 이웃 구간의 근거가 잘못 붙는다(§42 논의에 §29② 가 붙은 사례 확인)."
   },
-  "applied_to_edges": true
+  "applied_to_edges": false,
+  "correction_2026_09_30": {
+    "edges_before_after": {
+      "filled_before": 1663,
+      "filled_after": 2258,
+      "unchanged": 1619,
+      "extended": 43,
+      "newly_filled": 595,
+      "changed_by_exception": 1,
+      "lost_or_changed": 0
+    },
+    "cite_form_rows": {
+      "colon": 2222,
+      "label": 146,
+      "reference": 66,
+      "unlabeled": 244
+    },
+    "subclause_on_29_1": {
+      "1": 3,
+      "2": 306
+    },
+    "target_claims_empty_rows": 175,
+    "target_claims_over_n_claims": {
+      "checked": 2503,
+      "over": 235,
+      "is_gate": false
+    },
+    "new_pair_gate": {
+      "name": "주-2″ 새 채움 표본 원문 대조",
+      "threshold": 0.9,
+      "status": "충족",
+      "n": 27,
+      "correct": 27,
+      "rate": 1.0,
+      "withheld": 3
+    }
+  }
 }

@@ -8,9 +8,21 @@
    ],
    "cited_ids": [
     "JP-P-2008243928",
-    "JP-P-2010070410"
+    "JP-P-2010070410",
+    "KR-P-1020070116888"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-2008243928": "colon",
+    "JP-P-2010070410": "colon",
+    "KR-P-1020070116888": "colon"
+   },
+   "target_claims": [
+    1,
+    3,
+    5,
+    6
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020137016522_952014086679614.txt",

@@ -7,7 +7,9 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -19,6 +21,11 @@
     "KR-P-1020180056393",
     "KR-P-1020210004056"
    ],
+   "cite_forms": {
+    "KR-G-0954859": "colon",
+    "KR-P-1020180056393": "colon",
+    "KR-P-1020210004056": "colon"
+   },
    "target_claims": [
     1,
     2,
@@ -30,7 +37,8 @@
     8,
     9,
     10
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020220040228_952025085880248.txt",

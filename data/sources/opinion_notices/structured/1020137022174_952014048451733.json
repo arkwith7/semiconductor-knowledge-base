@@ -7,7 +7,12 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    1,
+    4
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -18,7 +23,31 @@
     "US-G-6740605",
     "US-P-20040185647"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "US-G-6740605": "colon",
+    "US-P-20040185647": "colon"
+   },
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020137022174_952014048451733.txt",

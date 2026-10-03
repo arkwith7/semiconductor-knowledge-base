@@ -7,10 +7,12 @@
     "§42"
    ],
    "cited_ids": [],
+   "cite_forms": {},
    "target_claims": [
     2,
     3
-   ]
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -21,11 +23,17 @@
     "US-G-5108569",
     "US-P-20070210296"
    ],
+   "cite_forms": {
+    "US-G-5108569": "colon",
+    "US-P-20070210296": "colon"
+   },
    "target_claims": [
     1,
     2,
+    3,
     4
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020117011351_952012054658300.txt",

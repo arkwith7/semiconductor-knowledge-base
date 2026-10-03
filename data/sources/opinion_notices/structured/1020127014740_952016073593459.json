@@ -9,11 +9,15 @@
    "cited_ids": [
     "JP-P-2008144246"
    ],
+   "cite_forms": {
+    "JP-P-2008144246": "colon"
+   },
    "target_claims": [
     1,
     7,
     8
-   ]
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
@@ -22,8 +26,14 @@
    ],
    "cited_ids": [
     "JP-P-09071860",
-    "JP-P-2003216100"
+    "JP-P-2003216100",
+    "JP-P-2008144246"
    ],
+   "cite_forms": {
+    "JP-P-09071860": "colon",
+    "JP-P-2003216100": "colon",
+    "JP-P-2008144246": "reference"
+   },
    "target_claims": [
     1,
     2,
@@ -53,9 +63,9 @@
     26,
     27,
     28,
-    29,
-    32
-   ]
+    29
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020127014740_952016073593459.txt",

@@ -9,13 +9,17 @@
    "cited_ids": [
     "JP-P-2004270035"
    ],
+   "cite_forms": {
+    "JP-P-2004270035": "colon"
+   },
    "target_claims": [
     1,
     7,
     8,
     10,
     11
-   ]
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
@@ -25,9 +29,19 @@
    "cited_ids": [
     "JP-P-2004270035"
    ],
+   "cite_forms": {
+    "JP-P-2004270035": "colon"
+   },
    "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    8,
+    9,
     11
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020237044302_952024058778209.txt",

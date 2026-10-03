@@ -9,7 +9,13 @@
    "cited_ids": [
     "JP-P-2019131859"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-2019131859": "colon"
+   },
+   "target_claims": [
+    1
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020220162358_952023085959625.txt",

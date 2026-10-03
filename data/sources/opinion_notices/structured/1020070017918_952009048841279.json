@@ -7,7 +7,13 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    1,
+    2,
+    7
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020070017918_952009048841279.txt",

@@ -9,7 +9,15 @@
    "cited_ids": [
     "JP-P-2007063621"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-2007063621": "colon"
+   },
+   "target_claims": [
+    1,
+    2,
+    3
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
@@ -19,7 +27,13 @@
    "cited_ids": [
     "JP-P-2007063621"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-2007063621": "colon"
+   },
+   "target_claims": [
+    1
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020210185331_952024015700342.txt",

@@ -6,13 +6,21 @@
    "legal_bases": [
     "§29①"
    ],
-   "cited_ids": [],
+   "cited_ids": [
+    "KR-P-1020110020951",
+    "KR-P-1020150123128"
+   ],
+   "cite_forms": {
+    "KR-P-1020110020951": "unlabeled",
+    "KR-P-1020150123128": "reference"
+   },
    "target_claims": [
     10,
     11,
     12,
     13
-   ]
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
@@ -20,7 +28,16 @@
     "§29②",
     "§29①"
    ],
-   "cited_ids": [],
+   "cited_ids": [
+    "KR-P-1020110020951",
+    "KR-P-1020140147588",
+    "KR-P-1020150123128"
+   ],
+   "cite_forms": {
+    "KR-P-1020110020951": "unlabeled",
+    "KR-P-1020140147588": "label",
+    "KR-P-1020150123128": "label"
+   },
    "target_claims": [
     1,
     2,
@@ -42,7 +59,8 @@
     18,
     19,
     20
-   ]
+   ],
+   "subclause": "2"
   }
  ],
  "source_file": "1020160002833_952017009413281.txt",

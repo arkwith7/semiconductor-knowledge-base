@@ -11,7 +11,15 @@
     "KR-P-1020050000184",
     "US-P-20150093880"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "KR-P-1020040102433": "colon",
+    "KR-P-1020050000184": "colon",
+    "US-P-20150093880": "colon"
+   },
+   "target_claims": [
+    1
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020230126396_952025008159196.txt",

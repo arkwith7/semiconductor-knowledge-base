@@ -7,7 +7,11 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    10
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -15,7 +19,11 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    10
+   ],
+   "subclause": ""
   },
   {
    "section": 3,
@@ -26,6 +34,10 @@
     "JP-P-2002060934",
     "JP-P-2005023349"
    ],
+   "cite_forms": {
+    "JP-P-2002060934": "colon",
+    "JP-P-2005023349": "colon"
+   },
    "target_claims": [
     1,
     2,
@@ -38,7 +50,8 @@
     9,
     10,
     11
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020187020399_952018054422923.txt",

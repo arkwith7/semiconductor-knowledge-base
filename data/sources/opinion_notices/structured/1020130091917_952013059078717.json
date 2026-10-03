@@ -6,8 +6,27 @@
    "legal_bases": [
     "§29②"
    ],
-   "cited_ids": [],
-   "target_claims": []
+   "cited_ids": [
+    "US-G-07291519",
+    "US-G-07542345"
+   ],
+   "cite_forms": {
+    "US-G-07291519": "colon",
+    "US-G-07542345": "colon"
+   },
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020130091917_952013059078717.txt",

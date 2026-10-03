@@ -7,15 +7,37 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    1,
+    9,
+    10
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
    "legal_bases": [
     "§29①"
    ],
-   "cited_ids": [],
-   "target_claims": []
+   "cited_ids": [
+    "US-G-6251729"
+   ],
+   "cite_forms": {
+    "US-G-6251729": "unlabeled"
+   },
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    9,
+    10,
+    11,
+    12,
+    13
+   ],
+   "subclause": "2"
   },
   {
    "section": 3,
@@ -23,7 +45,27 @@
     "§29②"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020117016840_952012074786247.txt",

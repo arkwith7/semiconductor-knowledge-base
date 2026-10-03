@@ -7,7 +7,13 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    9,
+    12,
+    13
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -15,7 +21,12 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    2,
+    9
+   ],
+   "subclause": ""
   },
   {
    "section": 4,
@@ -27,7 +38,28 @@
     "JP-P-11067697",
     "US-P-20090042366"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-01292839": "colon",
+    "JP-P-11067697": "colon",
+    "US-P-20090042366": "colon"
+   },
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020170078569_952018028013098.txt",

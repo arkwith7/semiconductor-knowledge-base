@@ -9,10 +9,19 @@
    "cited_ids": [
     "KR-P-1020110118939"
    ],
+   "cite_forms": {
+    "KR-P-1020110118939": "colon"
+   },
    "target_claims": [
+    1,
+    4,
+    5,
     6,
+    7,
+    8,
     9
-   ]
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
@@ -22,7 +31,11 @@
    "cited_ids": [
     "KR-P-1020110118939"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "KR-P-1020110118939": "colon"
+   },
+   "target_claims": [],
+   "subclause": ""
   }
  ],
  "source_file": "1020220116516_952023043682206.txt",

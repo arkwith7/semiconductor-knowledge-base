@@ -9,7 +9,16 @@
    "cited_ids": [
     "JP-P-06061234"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-06061234": "colon"
+   },
+   "target_claims": [
+    1,
+    2,
+    6,
+    7
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
@@ -20,7 +29,12 @@
     "JP-P-2010109141",
     "KR-P-1020090007362"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-2010109141": "colon",
+    "KR-P-1020090007362": "colon"
+   },
+   "target_claims": [],
+   "subclause": ""
   }
  ],
  "source_file": "1020140116106_952015034346956.txt",

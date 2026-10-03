@@ -9,13 +9,19 @@
    "cited_ids": [
     "KR-P-1020120124951"
    ],
+   "cite_forms": {
+    "KR-P-1020120124951": "colon"
+   },
    "target_claims": [
     1,
+    2,
+    3,
     4,
     5,
     7,
     16
-   ]
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -23,9 +29,11 @@
     "§42"
    ],
    "cited_ids": [],
+   "cite_forms": {},
    "target_claims": [
     3
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020230049774_952025025241872.txt",

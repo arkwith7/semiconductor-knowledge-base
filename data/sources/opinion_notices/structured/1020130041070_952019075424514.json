@@ -7,7 +7,9 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -18,9 +20,14 @@
     "JP-P-2009164399",
     "KR-P-1020130006919"
    ],
+   "cite_forms": {
+    "JP-P-2009164399": "colon",
+    "KR-P-1020130006919": "colon"
+   },
    "target_claims": [
     1
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020130041070_952019075424514.txt",

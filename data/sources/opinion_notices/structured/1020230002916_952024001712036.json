@@ -10,7 +10,12 @@
     "JP-P-2007206212",
     "JP-P-2011215454"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-2007206212": "colon",
+    "JP-P-2011215454": "colon"
+   },
+   "target_claims": [],
+   "subclause": ""
   }
  ],
  "source_file": "1020230002916_952024001712036.txt",

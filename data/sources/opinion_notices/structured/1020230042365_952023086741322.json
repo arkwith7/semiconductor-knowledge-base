@@ -10,10 +10,15 @@
     "JP-P-2003001206",
     "KR-G-1452851"
    ],
+   "cite_forms": {
+    "JP-P-2003001206": "colon",
+    "KR-G-1452851": "colon"
+   },
    "target_claims": [
     1,
     3
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020230042365_952023086741322.txt",

@@ -6,7 +6,12 @@
    "legal_bases": [
     "§29②"
    ],
-   "cited_ids": [],
+   "cited_ids": [
+    "KR-G-2226206"
+   ],
+   "cite_forms": {
+    "KR-G-2226206": "unlabeled"
+   },
    "target_claims": [
     1,
     2,
@@ -16,7 +21,8 @@
     6,
     7,
     8
-   ]
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -24,10 +30,14 @@
     "§42"
    ],
    "cited_ids": [],
+   "cite_forms": {},
    "target_claims": [
     4,
-    5
-   ]
+    5,
+    6,
+    7
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020210070651_952022040230537.txt",

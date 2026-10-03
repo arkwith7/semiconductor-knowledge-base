@@ -6,10 +6,29 @@
    "legal_bases": [
     "§29②"
    ],
-   "cited_ids": [],
+   "cited_ids": [
+    "KR-G-2439867",
+    "KR-P-1020210018380",
+    "KR-P-1020220046363"
+   ],
+   "cite_forms": {
+    "KR-G-2439867": "unlabeled",
+    "KR-P-1020210018380": "unlabeled",
+    "KR-P-1020220046363": "unlabeled"
+   },
    "target_claims": [
-    1
-   ]
+    1,
+    2,
+    4,
+    7,
+    9,
+    10,
+    11,
+    12,
+    14,
+    17
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020230042595_952025033411544.txt",

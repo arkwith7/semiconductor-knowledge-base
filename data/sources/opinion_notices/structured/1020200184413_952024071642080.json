@@ -7,11 +7,13 @@
     "§42"
    ],
    "cited_ids": [],
+   "cite_forms": {},
    "target_claims": [
     12,
     13,
     14
-   ]
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -22,7 +24,12 @@
     "KR-G-2152905",
     "US-P-20080117402"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "KR-G-2152905": "colon",
+    "US-P-20080117402": "colon"
+   },
+   "target_claims": [],
+   "subclause": ""
   }
  ],
  "source_file": "1020200184413_952024071642080.txt",

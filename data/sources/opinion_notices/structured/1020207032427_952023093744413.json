@@ -9,11 +9,14 @@
    "cited_ids": [
     "US-P-20120308739"
    ],
+   "cite_forms": {
+    "US-P-20120308739": "colon"
+   },
    "target_claims": [
     1,
-    2,
-    10
-   ]
+    2
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
@@ -23,6 +26,9 @@
    "cited_ids": [
     "US-P-20120308739"
    ],
+   "cite_forms": {
+    "US-P-20120308739": "colon"
+   },
    "target_claims": [
     1,
     2,
@@ -31,7 +37,8 @@
     5,
     8,
     12
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020207032427_952023093744413.txt",

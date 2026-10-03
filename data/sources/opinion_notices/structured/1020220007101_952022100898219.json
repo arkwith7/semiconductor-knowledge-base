@@ -9,6 +9,9 @@
    "cited_ids": [
     "JP-P-2016051745"
    ],
+   "cite_forms": {
+    "JP-P-2016051745": "colon"
+   },
    "target_claims": [
     1,
     2,
@@ -20,7 +23,8 @@
     8,
     9,
     10
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020220007101_952022100898219.txt",

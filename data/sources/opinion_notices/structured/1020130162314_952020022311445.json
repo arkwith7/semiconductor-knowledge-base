@@ -7,7 +7,11 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    10
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -19,7 +23,13 @@
     "KR-P-1020120017317",
     "US-P-20130002265"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "KR-P-1020110052412": "colon",
+    "KR-P-1020120017317": "colon",
+    "US-P-20130002265": "colon"
+   },
+   "target_claims": [],
+   "subclause": ""
   }
  ],
  "source_file": "1020130162314_952020022311445.txt",

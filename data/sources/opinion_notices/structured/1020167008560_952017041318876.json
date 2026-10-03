@@ -11,7 +11,13 @@
     "KR-P-1020100075756",
     "KR-P-1020110015240"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "KR-P-1020060093039": "colon",
+    "KR-P-1020100075756": "colon",
+    "KR-P-1020110015240": "colon"
+   },
+   "target_claims": [],
+   "subclause": ""
   }
  ],
  "source_file": "1020167008560_952017041318876.txt",

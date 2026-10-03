@@ -11,7 +11,18 @@
     "KR-G-1998202",
     "KR-P-1020100095284"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-2007009988": "colon",
+    "KR-G-1998202": "colon",
+    "KR-P-1020100095284": "colon"
+   },
+   "target_claims": [
+    1,
+    2,
+    3,
+    4
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020200128163_952021075405976.txt",

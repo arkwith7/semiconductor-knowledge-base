@@ -7,7 +7,11 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    15
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -18,11 +22,14 @@
     "JP-P-06235079",
     "KR-G-1965605"
    ],
+   "cite_forms": {
+    "JP-P-06235079": "colon",
+    "KR-G-1965605": "colon"
+   },
    "target_claims": [
-    1,
-    9,
-    12
-   ]
+    1
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020220127403_952024073160672.txt",

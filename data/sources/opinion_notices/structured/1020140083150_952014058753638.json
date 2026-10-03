@@ -10,9 +10,14 @@
     "KR-G-0827697",
     "KR-P-1020080034816"
    ],
+   "cite_forms": {
+    "KR-G-0827697": "colon",
+    "KR-P-1020080034816": "colon"
+   },
    "target_claims": [
     1
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020140083150_952014058753638.txt",

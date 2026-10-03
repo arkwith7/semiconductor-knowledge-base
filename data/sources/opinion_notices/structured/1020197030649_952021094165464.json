@@ -9,7 +9,13 @@
    "cited_ids": [
     "JP-P-2012074636"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-2012074636": "colon"
+   },
+   "target_claims": [
+    1
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
@@ -22,7 +28,21 @@
     "JP-P-2013144793",
     "JP-P-2017045891"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-2004273809": "colon",
+    "JP-P-2012074636": "colon",
+    "JP-P-2013144793": "colon",
+    "JP-P-2017045891": "colon"
+   },
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "subclause": ""
   },
   {
    "section": 3,
@@ -30,10 +50,13 @@
     "§42"
    ],
    "cited_ids": [],
+   "cite_forms": {},
    "target_claims": [
     2,
-    5
-   ]
+    5,
+    6
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020197030649_952021094165464.txt",

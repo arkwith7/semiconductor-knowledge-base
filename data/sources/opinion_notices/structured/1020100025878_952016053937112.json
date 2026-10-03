@@ -6,10 +6,18 @@
    "legal_bases": [
     "§29②"
    ],
-   "cited_ids": [],
+   "cited_ids": [
+    "KR-P-1020010004720",
+    "KR-P-1020090103821"
+   ],
+   "cite_forms": {
+    "KR-P-1020010004720": "colon",
+    "KR-P-1020090103821": "colon"
+   },
    "target_claims": [
     9
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020100025878_952016053937112.txt",

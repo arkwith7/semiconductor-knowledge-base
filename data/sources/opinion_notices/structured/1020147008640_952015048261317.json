@@ -7,7 +7,15 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    15,
+    16,
+    17,
+    18,
+    21
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -15,7 +23,9 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [],
+   "subclause": ""
   },
   {
    "section": 3,
@@ -26,7 +36,21 @@
     "KR-P-1020080114158",
     "US-G-6376339"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "KR-P-1020080114158": "colon",
+    "US-G-6376339": "colon"
+   },
+   "target_claims": [
+    1,
+    2,
+    6,
+    7,
+    11,
+    19,
+    21,
+    22
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020147008640_952015048261317.txt",

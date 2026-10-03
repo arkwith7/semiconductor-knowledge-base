@@ -9,12 +9,16 @@
    "cited_ids": [
     "KR-P-1020200006668"
    ],
+   "cite_forms": {
+    "KR-P-1020200006668": "colon"
+   },
    "target_claims": [
     1,
     2,
     3,
     4
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020200151519_952021087531519.txt",

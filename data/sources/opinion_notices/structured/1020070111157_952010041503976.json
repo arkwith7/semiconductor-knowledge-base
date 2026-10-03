@@ -10,12 +10,17 @@
     "KR-G-0346449",
     "KR-G-0440076"
    ],
+   "cite_forms": {
+    "KR-G-0346449": "colon",
+    "KR-G-0440076": "colon"
+   },
    "target_claims": [
     1,
     4,
     5,
     6
-   ]
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
@@ -27,12 +32,18 @@
     "KR-G-0440076",
     "KR-G-0724568"
    ],
+   "cite_forms": {
+    "KR-G-0346449": "colon",
+    "KR-G-0440076": "colon",
+    "KR-G-0724568": "colon"
+   },
    "target_claims": [
     1,
     2,
     3,
     4
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020070111157_952010041503976.txt",

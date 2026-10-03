@@ -5,7 +5,7 @@
         abox-prior-art abox-claim-features abox-full refetch-fulltext cq \
         public-release check-public signature signature-inject signature-check \
         check-leakage declare-scope v7-rank scrub-notices sample-dissection report-dissection \
-        abox-argument-pilot pilot-sample \
+        abox-argument-pilot pilot-sample notice-evidence \
         superordinate-concepts concept-mapping \
         semiconto-fetch semiconto-analyze semiconto-align semiconto-enrich semiconto-phase0 \
         pipeline pipeline-sirp pipeline-full pipeline-with-expdataset help
@@ -420,6 +420,13 @@ test:
 # ── SIRP (patent) track ───────────────────────────────────────────
 ingest-sirp:
 	$(PYTHON) scripts/ingest_rejected_patents.py
+
+# 통지서 거절근거 정본 + 심사관 간선 legal_bases 부착 (PLAN-005 §10 · §20.17 교정).
+# 간선 parquet 은 ingest-sirp 가 다시 만들면 legal_bases 를 잃는다 — 그 뒤 이 타깃을 다시 돌린다.
+# 기존 근거가 줄거나 바뀌면(LOSS_EXCEPTIONS 밖) 간선에 쓰지 않고 멈춘다.
+# 주의(2026-10-03): 동결 stage7 리포트가 교정 전 간선 sha 를 핀한다 — 층 재측정 작업과 함께 돌린다(PLAN-005 §20.17(h)).
+notice-evidence:
+	$(PYTHON) scripts/build_notice_evidence.py --apply --write-structured
 
 sirp-pairs: ingest-sirp
 	$(PYTHON) scripts/build_prior_art_pairs.py

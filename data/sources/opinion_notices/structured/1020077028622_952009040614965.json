@@ -6,8 +6,24 @@
    "legal_bases": [
     "§29①"
    ],
-   "cited_ids": [],
-   "target_claims": []
+   "cited_ids": [
+    "US-G-05814854"
+   ],
+   "cite_forms": {
+    "US-G-05814854": "unlabeled"
+   },
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "subclause": "2"
   },
   {
    "section": 3,
@@ -15,7 +31,27 @@
     "§29②"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    20,
+    21
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020077028622_952009040614965.txt",

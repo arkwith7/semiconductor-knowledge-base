@@ -10,7 +10,19 @@
     "JP-P-2003303941",
     "JP-P-2007262510"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-2003303941": "colon",
+    "JP-P-2007262510": "colon"
+   },
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020120021214_952013013192680.txt",

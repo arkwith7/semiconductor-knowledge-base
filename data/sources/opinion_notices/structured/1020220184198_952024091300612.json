@@ -9,10 +9,16 @@
    "cited_ids": [
     "JP-P-2004238655"
    ],
+   "cite_forms": {
+    "JP-P-2004238655": "colon"
+   },
    "target_claims": [
-    4,
-    43
-   ]
+    1,
+    2,
+    3,
+    4
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
@@ -22,7 +28,13 @@
    "cited_ids": [
     "JP-P-2004238655"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-2004238655": "colon"
+   },
+   "target_claims": [
+    1
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020220184198_952024091300612.txt",

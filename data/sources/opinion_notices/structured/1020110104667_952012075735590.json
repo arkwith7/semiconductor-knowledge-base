@@ -10,6 +10,10 @@
     "KR-G-0338768",
     "KR-P-1020090080499"
    ],
+   "cite_forms": {
+    "KR-G-0338768": "colon",
+    "KR-P-1020090080499": "colon"
+   },
    "target_claims": [
     1,
     2,
@@ -18,8 +22,10 @@
     5,
     6,
     7,
+    8,
     9
-   ]
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -27,9 +33,11 @@
     "§42"
    ],
    "cited_ids": [],
+   "cite_forms": {},
    "target_claims": [
     7
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020110104667_952012075735590.txt",

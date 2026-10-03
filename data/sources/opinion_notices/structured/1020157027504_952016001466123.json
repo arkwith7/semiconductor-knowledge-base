@@ -10,9 +10,14 @@
     "KR-P-1020040098139",
     "US-G-6818356"
    ],
+   "cite_forms": {
+    "KR-P-1020040098139": "colon",
+    "US-G-6818356": "colon"
+   },
    "target_claims": [
     1
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020157027504_952016001466123.txt",

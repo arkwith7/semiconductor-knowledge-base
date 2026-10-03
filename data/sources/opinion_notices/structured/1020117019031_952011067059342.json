@@ -7,7 +7,12 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    14,
+    18
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -16,9 +21,16 @@
    ],
    "cited_ids": [
     "JP-P-2003017496",
-    "JP-P-2006057162"
+    "JP-P-2006057162",
+    "KR-P-1020060231017"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-2003017496": "colon",
+    "JP-P-2006057162": "colon",
+    "KR-P-1020060231017": "colon"
+   },
+   "target_claims": [],
+   "subclause": ""
   }
  ],
  "source_file": "1020117019031_952011067059342.txt",

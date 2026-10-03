@@ -10,7 +10,12 @@
     "KR-P-1020140020748",
     "US-P-20130341651"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "KR-P-1020140020748": "colon",
+    "US-P-20130341651": "colon"
+   },
+   "target_claims": [],
+   "subclause": ""
   }
  ],
  "source_file": "1020150139161_952021093973752.txt",

@@ -9,7 +9,18 @@
    "cited_ids": [
     "JP-P-2003193231"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-2003193231": "colon"
+   },
+   "target_claims": [
+    2,
+    3,
+    5,
+    6,
+    7,
+    8
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -17,7 +28,16 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    2,
+    3,
+    5,
+    6,
+    7,
+    8
+   ],
+   "subclause": ""
   },
   {
    "section": 3,
@@ -27,11 +47,14 @@
    "cited_ids": [
     "KR-P-1020110027805"
    ],
+   "cite_forms": {
+    "KR-P-1020110027805": "colon"
+   },
    "target_claims": [
-    4,
-    5,
-    6
-   ]
+    1,
+    4
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020197023368_952020018191143.txt",

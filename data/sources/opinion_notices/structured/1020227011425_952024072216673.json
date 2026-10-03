@@ -10,9 +10,21 @@
     "JP-P-2015004116",
     "KR-P-1020190004702"
    ],
+   "cite_forms": {
+    "JP-P-2015004116": "colon",
+    "KR-P-1020190004702": "colon"
+   },
    "target_claims": [
-    1
-   ]
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -20,7 +32,14 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    5,
+    6,
+    7,
+    8
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020227011425_952024072216673.txt",

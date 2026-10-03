@@ -7,7 +7,17 @@
     "§29②"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    1,
+    2,
+    4,
+    5,
+    7,
+    8,
+    11
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020070017918_952010023296683.txt",

@@ -9,10 +9,14 @@
    "cited_ids": [
     "US-P-20060289943"
    ],
+   "cite_forms": {
+    "US-P-20060289943": "colon"
+   },
    "target_claims": [
     1,
     3
-   ]
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
@@ -22,10 +26,14 @@
    "cited_ids": [
     "US-P-20060289943"
    ],
+   "cite_forms": {
+    "US-P-20060289943": "colon"
+   },
    "target_claims": [
     1,
     3
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020100060569_952016065555458.txt",

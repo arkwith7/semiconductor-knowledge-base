@@ -9,6 +9,9 @@
    "cited_ids": [
     "US-G-5874131"
    ],
+   "cite_forms": {
+    "US-G-5874131": "colon"
+   },
    "target_claims": [
     1,
     2,
@@ -21,7 +24,8 @@
     9,
     14,
     16
-   ]
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
@@ -31,9 +35,21 @@
    "cited_ids": [
     "US-G-5874131"
    ],
+   "cite_forms": {
+    "US-G-5874131": "colon"
+   },
    "target_claims": [
-    1
-   ]
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020190109548_952024022954116.txt",

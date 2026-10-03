@@ -9,7 +9,13 @@
    "cited_ids": [
     "KR-P-1020230044215"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "KR-P-1020230044215": "colon"
+   },
+   "target_claims": [
+    1
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
@@ -19,7 +25,15 @@
    "cited_ids": [
     "KR-P-1020230044215"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "KR-P-1020230044215": "colon"
+   },
+   "target_claims": [
+    1,
+    2,
+    3
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020230067050_952025046528525.txt",

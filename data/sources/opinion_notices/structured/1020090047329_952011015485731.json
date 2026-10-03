@@ -9,6 +9,9 @@
    "cited_ids": [
     "KR-G-0782496"
    ],
+   "cite_forms": {
+    "KR-G-0782496": "colon"
+   },
    "target_claims": [
     1,
     2,
@@ -26,7 +29,8 @@
     14,
     15,
     16
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020090047329_952011015485731.txt",

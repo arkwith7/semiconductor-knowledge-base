@@ -6,10 +6,16 @@
    "legal_bases": [
     "§29②"
    ],
-   "cited_ids": [],
+   "cited_ids": [
+    "WO-P-2005108639"
+   ],
+   "cite_forms": {
+    "WO-P-2005108639": "colon"
+   },
    "target_claims": [
     1
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020177018680_952019008319568.txt",

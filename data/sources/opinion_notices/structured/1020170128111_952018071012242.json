@@ -10,9 +10,14 @@
     "KR-G-1576639",
     "KR-P-1020050115067"
    ],
+   "cite_forms": {
+    "KR-G-1576639": "colon",
+    "KR-P-1020050115067": "colon"
+   },
    "target_claims": [
     6
-   ]
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
@@ -23,7 +28,12 @@
     "KR-G-1576639",
     "KR-P-1020050115067"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "KR-G-1576639": "colon",
+    "KR-P-1020050115067": "colon"
+   },
+   "target_claims": [],
+   "subclause": ""
   },
   {
    "section": 3,
@@ -31,7 +41,12 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    9,
+    17
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020170128111_952018071012242.txt",

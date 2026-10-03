@@ -10,7 +10,12 @@
     "JP-P-2008166373",
     "US-P-20070187826"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-2008166373": "colon",
+    "US-P-20070187826": "colon"
+   },
+   "target_claims": [],
+   "subclause": ""
   }
  ],
  "source_file": "1020100028136_952016040363751.txt",

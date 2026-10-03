@@ -7,7 +7,13 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    1,
+    2,
+    6
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -17,7 +23,14 @@
    "cited_ids": [
     "KR-P-1020040007480"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "KR-P-1020040007480": "colon"
+   },
+   "target_claims": [
+    1,
+    6
+   ],
+   "subclause": "2"
   },
   {
    "section": 3,
@@ -29,7 +42,13 @@
     "KR-P-1020040007480",
     "KR-P-1020070113526"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "KR-G-0995725": "colon",
+    "KR-P-1020040007480": "colon",
+    "KR-P-1020070113526": "colon"
+   },
+   "target_claims": [],
+   "subclause": ""
   }
  ],
  "source_file": "1020140011201_952015002648811.txt",

@@ -7,11 +7,13 @@
     "§42"
    ],
    "cited_ids": [],
+   "cite_forms": {},
    "target_claims": [
     1,
     2,
     14
-   ]
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -21,14 +23,19 @@
    "cited_ids": [
     "JP-P-06016412"
    ],
+   "cite_forms": {
+    "JP-P-06016412": "colon"
+   },
    "target_claims": [
     1,
     2,
     11,
     12,
+    13,
     14,
     15
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020207030080_952022038586875.txt",

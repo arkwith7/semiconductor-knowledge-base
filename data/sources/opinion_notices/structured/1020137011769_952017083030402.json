@@ -7,7 +7,11 @@
     "§42"
    ],
    "cited_ids": [],
-   "target_claims": []
+   "cite_forms": {},
+   "target_claims": [
+    4
+   ],
+   "subclause": ""
   },
   {
    "section": 2,
@@ -18,9 +22,20 @@
     "JP-P-2002246621",
     "JP-P-2010202896"
    ],
+   "cite_forms": {
+    "JP-P-2002246621": "colon",
+    "JP-P-2010202896": "colon"
+   },
    "target_claims": [
-    2
-   ]
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020137011769_952017083030402.txt",

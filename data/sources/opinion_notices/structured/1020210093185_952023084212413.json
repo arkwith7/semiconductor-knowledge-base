@@ -9,9 +9,13 @@
    "cited_ids": [
     "KR-P-1020200099080"
    ],
+   "cite_forms": {
+    "KR-P-1020200099080": "colon"
+   },
    "target_claims": [
     1
-   ]
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
@@ -21,6 +25,9 @@
    "cited_ids": [
     "KR-P-1020200099080"
    ],
+   "cite_forms": {
+    "KR-P-1020200099080": "colon"
+   },
    "target_claims": [
     1,
     2,
@@ -28,7 +35,8 @@
     4,
     5,
     6
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020210093185_952023084212413.txt",

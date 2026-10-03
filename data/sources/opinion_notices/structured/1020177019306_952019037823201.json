@@ -6,8 +6,26 @@
    "legal_bases": [
     "§29②"
    ],
-   "cited_ids": [],
-   "target_claims": []
+   "cited_ids": [
+    "EP-P-00962960",
+    "WO-P-2013138286"
+   ],
+   "cite_forms": {
+    "EP-P-00962960": "colon",
+    "WO-P-2013138286": "colon"
+   },
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020177019306_952019037823201.txt",

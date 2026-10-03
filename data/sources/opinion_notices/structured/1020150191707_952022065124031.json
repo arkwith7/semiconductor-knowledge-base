@@ -9,7 +9,14 @@
    "cited_ids": [
     "JP-P-11016840"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-11016840": "colon"
+   },
+   "target_claims": [
+    1,
+    5
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
@@ -19,7 +26,21 @@
    "cited_ids": [
     "JP-P-11016840"
    ],
-   "target_claims": []
+   "cite_forms": {
+    "JP-P-11016840": "colon"
+   },
+   "target_claims": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020150191707_952022065124031.txt",

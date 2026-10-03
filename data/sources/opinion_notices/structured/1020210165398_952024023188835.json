@@ -9,11 +9,19 @@
    "cited_ids": [
     "JP-P-2002329720"
    ],
+   "cite_forms": {
+    "JP-P-2002329720": "colon"
+   },
    "target_claims": [
     1,
+    2,
     6,
-    10
-   ]
+    7,
+    10,
+    12,
+    13
+   ],
+   "subclause": "2"
   },
   {
    "section": 2,
@@ -24,12 +32,17 @@
     "JP-P-2002329720",
     "KR-P-1020040004717"
    ],
+   "cite_forms": {
+    "JP-P-2002329720": "colon",
+    "KR-P-1020040004717": "colon"
+   },
    "target_claims": [
     4,
     5,
     6,
     20
-   ]
+   ],
+   "subclause": ""
   }
  ],
  "source_file": "1020210165398_952024023188835.txt",
