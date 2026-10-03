@@ -197,8 +197,8 @@
       "layer": "sdkb-abox-claim-features",
       "label": "claim features",
       "status": "built",
-      "bytes": 935098596,
-      "triples": 12247516,
+      "bytes": 935345476,
+      "triples": 12250825,
       "triples_source": "report:abox_claim_features_report.json"
     },
     {
