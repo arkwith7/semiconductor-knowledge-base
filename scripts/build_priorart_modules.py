@@ -57,7 +57,8 @@ sha256 `0a317389…9829` 이 깨진다(§0).
 **단계 7-0(2026-09-09 · 사용자 승인 D-S) — 일몰 조항을 실행했다.** 단계 7 착수 시점에
 PLAN-002 3단계(`Prec` · 2인 코더)가 착수되지 않았으므로(저장소 안 흔적 0 · 머리말 "코더 배정
 대기" 그대로) `pa:substitutableWith` 를 대칭·`⊑ coveredBy`·선언까지 지웠다(6-B 역술어 선례).
-채굴 쌍이 들어오면 그때 pa: 소유의 하위 술어를 다시 만든다(§7-6 — 지금 만들지 않는다).
+채굴 쌍이 들어오면 그때 pa: 소유의 하위 술어를 새 IRI 로 제안한다(§7-6 — 지금 만들지 않는다) —
+옛 IRI 는 R1-스키마에서 부활하지 않기로 했다(PLAN-005 §20.16(c)③ · §20.20).
 이제 core 의 R-Box 는 `broaderConcept ⊑ coveredBy` 하나이고, 남은 미소비 pa: R-Box 는
 semi 의 `disjointWith` 4건(불변식 C)뿐이다.
 
@@ -215,8 +216,10 @@ def build_core() -> Graph:
           domain=PA.TechnicalConcept, range_=PA.TechnicalConcept)
     g.add((PA.broaderConcept, RDFS.subPropertyOf, PA.coveredBy))
     # `pa:substitutableWith`(대칭 · ⊑coveredBy)는 6-B 일몰 조항(D2)에 따라 **7-0 에서 뺐다** —
-    # 단계 7 착수 시점까지 PLAN-002 3단계(Prec)가 착수되지 않았다(모듈 docstring). 치환 쌍이
-    # 채굴되면 그때 술어를 다시 선언한다(§7-6 · 지금 만들지 않는다).
+    # 단계 7 착수 시점까지 PLAN-002 3단계(Prec)가 착수되지 않았다(모듈 docstring). 재검토 안건은
+    # PLAN-005 §20.20 에서 닫았다: 원천의 치환은 방향 있는 판단 논거라 ⑤ 논증층의
+    # `pa:RationaleSubstitution` 이 담는다. 개념 수준의 치환 쌍이 채굴되더라도 옛 IRI 는 다시 쓰지
+    # 않고 새 술어를 §2 1단계부터 제안한다(§7-6).
     # `skos:exactMatch ⊑ pa:coveredBy` 는 6-B 에서 뺐다 — 유량 0 이고, 가능한 유량은 sdkb-core 의
     # 클래스 정렬 23건과 kr 의 LegalGround↔RejectionType 2건뿐이라 오염 경로였다. 개념 동일성
     # 쌍이 채굴되면 그때 pa: 소유의 하위 술어를 새로 만든다(§7-6 · 지금 만들지 않는다).

@@ -301,8 +301,8 @@ def _concept_exact_matches(core_data: Graph, bound: set[str]) -> tuple[list[tupl
 
 #: `p ⊑ pa:coveredBy` 인 술어 p 마다 그 쌍을 어디서 읽는지. **core 가 선언한 하위 술어가 이 표에
 #: 없으면 빌드가 죽는다** — 조용히 건너뛰면 공리는 있는데 실체화가 없는 상태가 검출되지 않는다.
-#: `pa:substitutableWith` 항목은 7-0 일몰 실행(2026-09-09)으로 뺐다 — 채굴 쌍 원천이 생기면
-#: 술어 선언과 함께 여기도 다시 넣는다. `skos:exactMatch` 는 core 가 더는 선언하지 않지만
+#: `pa:substitutableWith` 항목은 7-0 일몰 실행(2026-09-09)으로 뺐다 — 개념 수준 하위 술어가 새로
+#: 승인되면 그 술어의 원천을 여기 넣는다(옛 IRI 부활 없음 · PLAN-005 §20.20). `skos:exactMatch` 는 core 가 더는 선언하지 않지만
 #: (6-B) 원천 읽기는 남겨 둔다 — 공리가 돌아오면 실체화가 즉시 검출되도록.
 EXPANSION_SOURCES = {
     PA.broaderConcept: build_hierarchy,
