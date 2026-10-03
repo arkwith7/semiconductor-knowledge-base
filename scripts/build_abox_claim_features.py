@@ -95,6 +95,45 @@ def _slug(field: str) -> str:
     return re.sub(r"[^A-Za-z0-9]+", "_", field).strip("_")
 
 
+DOC_ID_RX = re.compile(r"([A-Z]{2})-([PG])-([HS]?)(\d+)$")
+
+
+def _doc_key(doc_id: str) -> tuple[str, str] | None:
+    """같은 문헌의 표기 차이를 흡수한 (국가, 번호) 키.
+
+    통지서 정본과 KIPRIS 인용목록이 같은 문헌을 다르게 적는다(2026-10-03 실측 · 277 중 195):
+    앞자리 0(`KR-G-0697293` ↔ `KR-G-697293`) · 종류(KIPRIS 가 1998 년 US 등록특허에도 `A1` 을 붙여
+    `US-P-` 가 된다) · 일본 연호(`JP-P-08255787` ↔ `JP-P-H08255787` ↔ `JP-P-1996255787`).
+    접두 없는 JP 8자리는 YY≤31 을 헤이세이(1989–2019)로, 그 위를 쇼와로 본다 — 헤이세이는 31 년에서
+    끝나고, 겹치는 쇼와 1–31(1926–56)년 문헌은 이 코퍼스의 인용 시점에 없다.
+    """
+    m = DOC_ID_RX.match(str(doc_id))
+    if not m:
+        return None
+    country, kind, era, num = m.groups()
+    # 연호는 공개번호에만 있다 — 등록번호(`JP-G-07091636` · 특허 제7091636호)의 8자리는 0 채움이다.
+    if country == "JP" and kind == "P" and (era or len(num) == 8):
+        yy = int(num[:2])
+        base = 1925 if era == "S" or (not era and yy > 31) else 1988
+        num = f"{base + yy}{num[2:]}"
+    return country, num.lstrip("0")
+
+
+def _loose_map(cited_map: dict[str, str]) -> tuple[dict[tuple[str, str], str], set[tuple[str, str]]]:
+    """(국가, 번호) → 정규 IRI. 키가 IRI 하나로만 이어질 때만 싣는다.
+
+    같은 문헌이 이미 IRI 둘로 들어간 쌍이 있어(실측 6) 거기로 가는 키는 고를 수 없다 — 고르면
+    어느 노드에 판단이 붙는지가 맵 순서에 달린다. 그런 키는 두 번째 값으로 돌려 사유를 센다.
+    """
+    seen: dict[tuple[str, str], set[str]] = {}
+    for doc, cid in cited_map.items():
+        k = _doc_key(doc)
+        if k:
+            seen.setdefault(k, set()).add(cid)
+    unique = {k: next(iter(v)) for k, v in seen.items() if len(v) == 1}
+    return unique, {k for k, v in seen.items() if len(v) > 1}
+
+
 # CR-011 성공기준 ② — 본문 자체가 없어 분모에서 빼는 US 2건.
 # 1968년 출원·1970년 등록이라 어느 원천에도 OCR 전문이 없다(재시도 1회 실패 · 하류 §1.6a).
 B_US_NO_FULLTEXT = ("US-P-03517643", "US-P-03530092")
@@ -288,6 +327,86 @@ def _b_loss_report(b_pop: "pd.DataFrame", b_claims: Counter) -> None:
     kr, us = per_country.get("KR", {}), per_country.get("US", {})
     print(f"✓ B층 손실 리포트 → {B_LOSS_REPORT.name} "
           f"(KR {kr.get('decomposition_rate')} · US {us.get('decomposition_rate')} · 미분해 {len(unresolved)}건)")
+
+
+def _emit_judgments(g: Graph, judg: dict[tuple, set[int]], judg_src: dict[tuple, set[str]],
+                    cited_map: dict[str, str], seen_claim: set[str], stat: Counter) -> None:
+    """(출원, 인용 표기, 근거) 키 → PriorArtJudgment. 두 패스로 방출한다.
+
+    1패스는 인용 표기가 맵에 **정확히** 있는 키만, 이전과 같은 순서·같은 IRI 로 낸다 — 이미 배포된
+    판단은 움직이지 않는다. 2패스는 표기 차이만 다른 키(`_doc_key`)를 낸다. 같은 (출원, 정규 IRI,
+    근거) 판단이 이미 있으면 새 노드를 만들지 않고 거기에 청구항·원천을 더한다 — 같은 판단이 표기만
+    달리 두 노드가 되면 판단 수가 문헌 표기 수를 센다. 1패스끼리의 겹침은 이전 동작 그대로 둔다.
+    """
+    R = lambda n: URIRef(ONT + n)  # noqa: E731
+    loose, ambiguous = _loose_map(cited_map)
+    nodes: dict[tuple, dict] = {}     # (출원, 정규 IRI, 근거) → 먼저 만든 노드
+    made: list[dict] = []             # 만든 노드 전부 — 계수는 방출이 끝난 뒤 여기서 낸다
+    deferred: list[tuple[tuple, str]] = []
+
+    def emit(key: tuple, canon: str, merge: bool) -> None:
+        tgt_id, cited_doc, ground = key
+        nk = (tgt_id, canon, ground)
+        node = nodes.get(nk) if merge else None
+        if node is None:
+            tgt = _u(tgt_id.replace("patent:", "patent/"))
+            j = _u(f"judgment/{_slug(tgt_id + '__' + cited_doc + '__' + ground)}")
+            g.add((j, RDF.type, R("PriorArtJudgment")))
+            g.add((j, R("onGround"), R(ground)))
+            g.add((j, R("overPriorArt"), _u(canon.replace("patent:", "patent/"))))
+            g.add((tgt, R("hasJudgment"), j))
+            node = {"j": j, "ground": ground, "srcs": set()}
+            made.append(node)
+            nodes.setdefault(nk, node)
+        else:
+            stat["judgment_loose_merged"] += 1
+        j = node["j"]
+        # 원천 표기는 **생성기와 원천 parquet 을 가리키고 통지서 원문 파일명은 담지 않는다**
+        # (§1-5 발행 경계 — 원문 경로가 공개 파생 리포로 새지 않게).
+        for tag in sorted(judg_src.get(key, ())):
+            if tag not in node["srcs"]:
+                node["srcs"].add(tag)
+                g.add((j, DCTERMS.source, Literal(JUDGMENT_SOURCE[tag], datatype=XSD.string)))
+        appno = tgt_id.replace("patent:kr_", "")
+        for cn in sorted(judg[key]):
+            cl = _u(f"claim/{_slug('rej:'+appno)}_c{cn}")
+            if str(cl) not in seen_claim:
+                continue
+            if merge and (j, R("aboutClaim"), cl) in g:   # 병합: 이미 붙은 청구항을 다시 세지 않는다
+                continue
+            g.add((j, R("aboutClaim"), cl))
+            stat["about_claim"] += 1
+
+    for key in sorted(judg):                    # 결정적: 같은 원천 → 같은 순서
+        canon = cited_map.get(key[1])
+        if canon:
+            emit(key, canon, merge=False)
+            stat["judgment_cited_exact"] += 1
+            continue
+        dk = _doc_key(key[1])
+        if dk in loose:
+            deferred.append((key, loose[dk]))
+            continue
+        reason = "ambiguous" if dk in ambiguous else "absent"
+        stat["judgment_cited_unresolved"] += 1
+        stat["judgment_cited_unresolved__reason__" + reason] += 1
+        for tag in sorted(judg_src.get(key, ())):   # 손실을 원천별로 가른다 — 합계만 세면
+            stat["judgment_cited_unresolved__" + tag] += 1   # 어느 원천이 새는지 안 보인다
+    for key, canon in deferred:                 # sorted(judg) 순서를 그대로 이어받는다
+        emit(key, canon, merge=True)
+        stat["judgment_cited_resolved_loose"] += 1
+        for tag in sorted(judg_src.get(key, ())):
+            stat["judgment_cited_resolved_loose__" + tag] += 1
+
+    for node in made:
+        srcs = sorted(node["srcs"])
+        stat["judgments"] += 1
+        stat["judgments_by_ground__" + node["ground"]] += 1
+        for tag in srcs:
+            stat["judgments_by_source__" + tag] += 1
+        if srcs == ["opinion_notice"]:
+            stat["judgments_notice_only"] += 1
+            stat["judgments_notice_only__" + node["ground"]] += 1
 
 
 def main() -> int:
@@ -487,39 +606,7 @@ def main() -> int:
             judg_src.setdefault(key, set()).add("opinion_notice")
             stat["notice_rows"] += 1
 
-    for key in sorted(judg):                    # 결정적: 같은 원천 → 같은 순서
-        (tgt_id, cited_doc, ground), claims = key, judg[key]
-        canon = cited_map.get(cited_doc)
-        if not canon:
-            stat["judgment_cited_unresolved"] += 1
-            for tag in sorted(judg_src.get(key, ())):   # 손실을 원천별로 가른다 — 합계만 세면
-                stat["judgment_cited_unresolved__" + tag] += 1   # 어느 원천이 새는지 안 보인다
-            continue
-        tgt = _u(tgt_id.replace("patent:", "patent/"))
-        cited = _u(canon.replace("patent:", "patent/"))
-        j = _u(f"judgment/{_slug(tgt_id + '__' + cited_doc + '__' + ground)}")
-        g.add((j, RDF.type, R("PriorArtJudgment")))
-        g.add((j, R("onGround"), R(ground)))
-        g.add((j, R("overPriorArt"), cited))
-        g.add((tgt, R("hasJudgment"), j))
-        # 원천 표기는 **생성기와 원천 parquet 을 가리키고 통지서 원문 파일명은 담지 않는다**
-        # (§1-5 발행 경계 — 원문 경로가 공개 파생 리포로 새지 않게).
-        srcs = sorted(judg_src.get(key, ()))
-        for tag in srcs:
-            g.add((j, DCTERMS.source, Literal(JUDGMENT_SOURCE[tag], datatype=XSD.string)))
-        stat["judgments"] += 1
-        stat["judgments_by_ground__" + ground] += 1
-        for tag in srcs:
-            stat["judgments_by_source__" + tag] += 1
-        if srcs == ["opinion_notice"]:
-            stat["judgments_notice_only"] += 1
-            stat["judgments_notice_only__" + ground] += 1
-        appno = tgt_id.replace("patent:kr_", "")
-        for cn in sorted(claims):
-            cl = _u(f"claim/{_slug('rej:'+appno)}_c{cn}")
-            if str(cl) in seen_claim:
-                g.add((j, R("aboutClaim"), cl))
-                stat["about_claim"] += 1
+    _emit_judgments(g, judg, judg_src, cited_map, seen_claim, stat)
 
     # CR-004R: RejectionReason 실체화 — reextract_claim_judgments.py --reasons-only 산출을 읽는다.
     # 입도 = 출원 × groundClause(조-항-호 전체) × 회차. 인용문헌 불필요(§29 한정 아님) — 그 조항이
