@@ -63,6 +63,7 @@ TBOX_MODULES = [
     "sdkb-priorart-kr",
     "sdkb-priorart-us",      # PLAN-005 단계 8 (V6b 종이 이식)
     "sdkb-priorart-argument",  # PLAN-005 R1-스키마 (판단 논증층 · 2026-09-29)
+    "sdkb-priorart-rules-kr",  # PLAN-005 논증층 R-Box 규칙 (KR 추론 규칙 개체 · 2026-10-04)
 ]
 
 # A-Box 층 → 트리플 수를 적어 두는 생성기 리포트. 큰 파일은 이 리포트에서 읽는다.
@@ -75,6 +76,7 @@ ABOX_LAYERS = [
     ("sdkb-abox-claim-features", "claim features", "abox_claim_features_report.json"),
     ("sdkb-abox-b-layer-queries", "B-layer confirmation queries", "abox_b_layer_queries_report.json"),
     ("sdkb-abox-priorart", "prior-art claim profiles, disclosures, examiner elements", "abox_priorart_report.json"),
+    ("sdkb-abox-inferred", "rule-derived judgments (not examiner-asserted)", "abox_inferred_report.json"),
     ("sdkb-abox-experts-problems", "experts and problems", "abox_linking_report.json"),
     ("sdkb-abox-vendors", "equipment vendors", "abox_vendors_report.json"),
     ("sdkb-governance-kr-instances", "Korea regulatory instances", None),

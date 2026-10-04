@@ -38,6 +38,16 @@ pa:ExaminerJudgment
     rdfs:comment "한 심사문서 안에서 한 근거로 청구항(또는 그 부가 한정)에 내린 판단 하나. `ont:PriorArtJudgment` 는 (출원, 인용문헌, 근거) 이분 엣지라 문헌 조합·무문헌 근거·선택적 근거를 담지 못한다 — 그래서 문헌을 키로 삼지 않는 단위를 따로 세운다."@ko ;
     rdfs:label "examiner judgment"@en .
 
+pa:InferenceRule
+    rdf:type owl:Class ;
+    rdfs:comment "판단에서 판단을 끌어내는 규칙 하나. 실행 형식은 SPARQL CONSTRUCT(`ruleQuery`)이고 생성기가 실체화한다 — 이 배치에는 추론기가 없어 OWL 공리로는 소비자가 성립하지 않는다."@ko ;
+    rdfs:label "inference rule"@en .
+
+pa:InferredJudgment
+    rdf:type owl:Class ;
+    rdfs:comment "규칙이 기존 판단에서 끌어낸 것. **심사관이 적은 판단이 아니다** — 그래서 심사관 판단의 술어를 쓰지 않고 전용 술어로만 원 판단·청구항·근거를 가리킨다. 별도 그래프에 실리며 ExaminerJudgment·PriorArtJudgment 로 타이핑되면 SHACL 이 거부한다."@ko ;
+    rdfs:label "inferred judgment"@en .
+
 pa:IntervalClaimedWithinDisclosed
     rdf:type pa:IntervalRelation ;
     rdfs:comment "청구 구간이 개시 구간보다 좁다 — 선택·최적화 논거가 붙는 자리."@ko ;
@@ -152,6 +162,14 @@ pa:RationaleSubstitution
     skos:prefLabel "substitution or transfer"@en ;
     skos:prefLabel "치환·전용"@ko .
 
+pa:Rule_EvidenceInheritance
+    pa:ruleAuthority "심사문서 자체 — 심사관이 앞선 판단을 명시적으로 참조한다(\"앞서 살펴본 바와 같이\" · \"청구항 N 의 거절이유와 같이\" · train 34출원)"^^xsd:string ;
+    pa:ruleQuery "queries/rules/RE_argument_layer.rq"^^xsd:string ;
+    rdf:type pa:InferenceRule ;
+    rdfs:comment "판단 R 이 판단 T 를 참조하고(`refersToJudgment`) T 가 근거 묶음 S 를 가지면, R 도 S 의 뒷받침을 받는다. 한 단계만 따른다(이행 폐포 없음) · 자기 참조는 발화하지 않는다."@ko ;
+    skos:prefLabel "evidence inheritance through judgment reference"@en ;
+    skos:prefLabel "재참조 판단의 근거 승계"@ko .
+
 pa:ScopeAddedLimitation
     rdf:type pa:JudgmentScope ;
     skos:prefLabel "added limitation"@en ;
@@ -164,7 +182,7 @@ pa:ScopeWholeClaim
 
 pa:argument
     dcterms:license <https://spdx.org/licenses/CDLA-Permissive-2.0.html> ;
-    dcterms:modified "2026-09-29"^^xsd:date ;
+    dcterms:modified "2026-10-04"^^xsd:date ;
     owl:imports <https://w3id.org/sdkb/pa> ;
     owl:versionInfo "0.1.0-dev" ;
     rdf:type owl:Ontology ;
@@ -237,6 +255,32 @@ pa:includesDocument
     rdfs:comment "묶음에 든 문헌. 둘 이상이면 결합이다. range 는 바인딩 몫이라 비운다."@ko ;
     rdfs:domain pa:EvidenceSet ;
     rdfs:label "includes document"@en .
+
+pa:inferredBy
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "이 추론을 낸 규칙."@ko ;
+    rdfs:domain pa:InferredJudgment ;
+    rdfs:label "inferred by"@en ;
+    rdfs:range pa:InferenceRule .
+
+pa:inferredClaim
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "추론이 걸리는 청구항. range 는 도메인 어휘라 비운다."@ko ;
+    rdfs:domain pa:InferredJudgment ;
+    rdfs:label "inferred claim"@en .
+
+pa:inferredFrom
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "규칙의 전제가 된 판단. 판단층(`ont:PriorArtJudgment`)과 논증층(`ExaminerJudgment`) 양쪽을 가리키므로 range 를 비운다."@ko ;
+    rdfs:domain pa:InferredJudgment ;
+    rdfs:label "inferred from"@en .
+
+pa:inheritedSupport
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "재참조한 판단에서 승계한 근거 묶음. **결론은 승계하지 않는다** — 파일럿에서 참조된 판단 9건 중 7건이 결론(동일)이 참조하는 쪽의 문맥(§29②)과 달랐다."@ko ;
+    rdfs:domain pa:InferredJudgment ;
+    rdfs:label "inherited support"@en ;
+    rdfs:range pa:EvidenceSet .
 
 pa:intervalRelation
     rdf:type owl:ObjectProperty ;
@@ -320,6 +364,20 @@ pa:reliesOnCommonKnowledge
     rdfs:domain pa:EvidenceSet ;
     rdfs:label "relies on common knowledge"@en ;
     rdfs:range xsd:boolean .
+
+pa:ruleAuthority
+    rdf:type owl:DatatypeProperty ;
+    rdfs:comment "규칙이 기대는 권위 원천(심사기준 절·판례 또는 심사문서 자체)."@ko ;
+    rdfs:domain pa:InferenceRule ;
+    rdfs:label "rule authority"@en ;
+    rdfs:range xsd:string .
+
+pa:ruleQuery
+    rdf:type owl:DatatypeProperty ;
+    rdfs:comment "규칙을 실행하는 CONSTRUCT 질의의 저장소 경로. 판단층과 논증층에 따로 쓰면 둘이다."@ko ;
+    rdfs:domain pa:InferenceRule ;
+    rdfs:label "rule query"@en ;
+    rdfs:range xsd:string .
 
 pa:supportedBy
     rdf:type owl:ObjectProperty ;

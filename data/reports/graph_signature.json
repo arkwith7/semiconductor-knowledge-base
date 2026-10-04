@@ -125,23 +125,34 @@
     {
       "module": "sdkb-priorart-argument",
       "status": "built",
-      "classes_named": 9,
+      "classes_named": 11,
       "classes_blank": 0,
-      "object_properties": 16,
-      "datatype_properties": 10,
-      "terms": 35,
-      "documented": 35,
-      "triples": 223
+      "object_properties": 20,
+      "datatype_properties": 12,
+      "terms": 43,
+      "documented": 43,
+      "triples": 263
+    },
+    {
+      "module": "sdkb-priorart-rules-kr",
+      "status": "built",
+      "classes_named": 0,
+      "classes_blank": 0,
+      "object_properties": 0,
+      "datatype_properties": 0,
+      "terms": 0,
+      "documented": 0,
+      "triples": 15
     }
   ],
   "tbox_total": {
-    "classes_named": 111,
+    "classes_named": 113,
     "classes_blank": 19,
-    "object_properties": 138,
-    "datatype_properties": 104,
-    "terms": 353,
-    "documented": 353,
-    "triples": 2156
+    "object_properties": 142,
+    "datatype_properties": 106,
+    "terms": 361,
+    "documented": 361,
+    "triples": 2211
   },
   "curation_source": {
     "status": "built",
@@ -216,6 +227,14 @@
       "bytes": 76332679,
       "triples": 973363,
       "triples_source": "report:abox_priorart_report.json"
+    },
+    {
+      "layer": "sdkb-abox-inferred",
+      "label": "rule-derived judgments (not examiner-asserted)",
+      "status": "built",
+      "bytes": 52156,
+      "triples": 610,
+      "triples_source": "parsed"
     },
     {
       "layer": "sdkb-abox-experts-problems",

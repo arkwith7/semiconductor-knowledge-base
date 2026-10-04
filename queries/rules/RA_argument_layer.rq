@@ -1,0 +1,32 @@
+# rule: pakr:Rule_NoveltyImpliesInventiveness
+# layer: argument (pa:ExaminerJudgment — 논증층 A-Box)
+# §29① 판단 j 가 청구항 c 를 문헌 d 로 판단했고, 같은 c·d 를 근거 묶음에 둔 §29② 판단이 없으며,
+# j 를 전제로 참조한 §29② 판단(CQA02 의 경우)도 c 를 다루지 않으면 §29② 거절이유를 끌어낸다.
+# 문헌 없는 판단(상식 근거)은 §29① 이 될 수 없으므로 발화하지 않는다. §29③ 은 조건에 없다.
+PREFIX pa:   <https://w3id.org/sdkb/pa/>
+PREFIX pakr: <https://w3id.org/sdkb/pa/kr/>
+CONSTRUCT {
+  ?inf a pa:InferredJudgment ;
+       pa:inferredBy pakr:Rule_NoveltyImpliesInventiveness ;
+       pa:inferredFrom ?j ;
+       pa:onGround pakr:Ground_29_2 ;
+       pa:inferredClaim ?c .
+}
+WHERE {
+  ?j a pa:ExaminerJudgment ;
+     pa:onGround pakr:Ground_29_1 ;
+     pa:judgesClaim ?c ;
+     pa:supportedBy ?s .
+  ?s pa:includesDocument ?d .
+  FILTER NOT EXISTS {
+    ?j2 a pa:ExaminerJudgment ; pa:onGround pakr:Ground_29_2 ; pa:judgesClaim ?c ;
+        pa:supportedBy ?s2 .
+    ?s2 pa:includesDocument ?d .
+  }
+  FILTER NOT EXISTS {
+    ?j3 a pa:ExaminerJudgment ; pa:onGround pakr:Ground_29_2 ; pa:judgesClaim ?c ;
+        pa:refersToJudgment ?j .
+  }
+  BIND(IRI(CONCAT("https://w3id.org/sdkb/data/inferred/RA_",
+                  REPLACE(STRAFTER(STR(?j), "https://w3id.org/sdkb/data/"), "/", "_"))) AS ?inf)
+}

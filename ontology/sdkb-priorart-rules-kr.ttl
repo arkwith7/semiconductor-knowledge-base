@@ -1,0 +1,39 @@
+# ═══════════════════════════════════════════════════════════════════
+# SDKB Prior-Art — KR 추론 규칙 (pakr:) · 실행은 queries/rules/ · 실체화는 build_abox_inferred.py
+#
+# **생성물이다. 손으로 고치지 않는다** — scripts/build_priorart_modules.py 가 만든다
+# (CLAUDE.md §1-1 · PLAN-005 §7-7). 고치면 다음 빌드에 조용히 사라지고, 그 사이에
+# vendor 해 간 하류는 유령 데이터를 갖는다.
+#
+# 재생성: make priorart
+# 검사  : make validate  (scripts/check_priorart_invariants.py 가 이식성 불변식을 건다)
+# ═══════════════════════════════════════════════════════════════════
+
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix pa:      <https://w3id.org/sdkb/pa/> .
+@prefix pakr:    <https://w3id.org/sdkb/pa/kr/> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+pa:rules-kr
+    dcterms:license <https://spdx.org/licenses/CDLA-Permissive-2.0.html> ;
+    dcterms:modified "2026-10-04"^^xsd:date ;
+    owl:imports pa:argument ;
+    owl:imports pa:kr ;
+    owl:versionInfo "0.1.0-dev" ;
+    rdf:type owl:Ontology ;
+    rdfs:comment "KR 특허법 조항 사이의 추론 규칙 개체. 규칙의 실행은 queries/rules/ 의 CONSTRUCT 이고 scripts/build_abox_inferred.py 가 별도 그래프로 실체화한다(PLAN-005 논증층 R-Box 규칙)."@ko ;
+    rdfs:label "SDKB Prior-Art — KR inference rules"@en .
+
+pakr:Rule_NoveltyImpliesInventiveness
+    pa:ruleAuthority "특허·실용신안 심사기준 제3장 진보성 — \"신규성이 없다고 판단되는 발명에 대해서 진보성도 없다는 거절이유를 함께 통지할 수 있다\" · 대법원 1992.6.2. 91마540"^^xsd:string ;
+    pa:ruleQuery "queries/rules/RA_argument_layer.rq"^^xsd:string ;
+    pa:ruleQuery "queries/rules/RA_judgment_layer.rq"^^xsd:string ;
+    rdf:type pa:InferenceRule ;
+    rdfs:comment "같은 청구항·같은 문헌에 §29① 판단이 있고 §29② 판단이 없으면 §29② 거절이유를 끌어낸다. **통지할 수 있다는 뜻이지 심사관이 판단했다는 뜻이 아니다.** §29③(확대된 선원)에는 걸지 않는다 — 선원은 출원 시 공개되지 않아 진보성의 선행기술이 될 수 없다."@ko ;
+    skos:prefLabel "lack of novelty implies an inventive-step objection"@en ;
+    skos:prefLabel "신규성 부정 ⇒ 진보성 부정 거절이유"@ko .

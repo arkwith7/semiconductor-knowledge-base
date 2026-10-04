@@ -17,6 +17,7 @@
 
     ④ sdkb-priorart-us.ttl     paus: 관할 바인딩 — US 35 U.S.C. §102/§103 · Office Action 문서종
     ⑤ sdkb-priorart-argument.ttl  pa: 판단 논증층 — 판단 단위·근거 묶음·요소↔증거·수치 구간·논거 유형
+    ⑥ sdkb-priorart-rules-kr.ttl  pakr: KR 관할 추론 규칙 개체 — 규칙의 권위·범위·실행 질의
 
 **PLAN-005 R1-스키마(2026-09-29 · 사용자 승인) — ⑤ 논증층.** R1 정답 해부(§20.15)의 결손 58종 중
 결과 전에 동결한 규칙(E2 ∧ 카드 ≥5 ∧ 바뀌는 CQ 가 있음 · 파서 계열 제외)을 통과한 15종을 담는다.
@@ -26,6 +27,16 @@ core 만 import 하며, core 와 같은 순도 불변식 A(도메인·관할 IRI
 `ont:PriorArtJudgment` 는 (출원, 인용문헌, 근거) 3키로 IRI 가 정해지는 이분 엣지라(1,812건 전부
 `overPriorArt` 1개) 조합·무문헌·선택적 근거를 담을 수 없다 — 그래서 판단 단위를 **새 클래스**로 세운다.
 옛 `pa:substitutableWith`(개념↔개념 대칭)는 되살리지 않는다: 원천의 치환은 방향 있는 판단 논거다(R1 카드 5장).
+
+**PLAN-005 논증층 R-Box 규칙(2026-10-04 · 사용자 승인) — ⑤ 갱신 · ⑥ 신설.** R1 해부가 "적을 값은
+있는데 T-Box 가 없어 막혔다"고 남긴 추론 규칙 중, 결과 전에 동결한 기준(심사기준 근거 · train 발화
+≥10 · 바뀌는 CQ · 추론기 없이 실체화)을 통과한 둘을 적는다 — R-a §29①⇒§29② · R-e 재참조⇒근거 승계.
+**OWL 공리로 적지 않는다**: 이 배치에는 추론기가 없어 공리는 소비자를 갖지 못한다(6-B 가 그런 공리를
+지웠다). 규칙은 `queries/rules/*.rq` 의 CONSTRUCT 이고 `scripts/build_abox_inferred.py` 가 실행해
+**별도 그래프**에 쓴다. 여기 담는 것은 규칙 개체(권위·범위·실행 질의)와 추론 노드의 어휘다.
+추론 노드는 심사관 판단 술어(`judgesClaim`·`supportedBy`·`overPriorArt`)를 쓰지 않는다 — 그 domain
+때문에 추론이 심사관 판단으로 타이핑되기 때문이다. R-a 개체는 KR 조항을 말하므로 순도 불변식을 받는
+⑤ 가 아니라 ⑥ 에 둔다. ①–④ 는 바이트 하나 바뀌지 않는다.
 
 **단계 8 (2026-09-11 · 사용자 승인) — V6b US 종이 이식.** ④ 는 ③ 의 대칭이며 **①②③ 은 바이트
 하나 바뀌지 않는다** — 그것이 V6b 의 판정량(L1 변경 라인수 0)이고 `scripts/report_stage8_paper_port.py`
@@ -93,8 +104,9 @@ MODIFIED = "2026-09-09"
 # 단계 8 의 US 모듈은 자기 발행일을 갖는다 — 공유 상수 `MODIFIED` 를 올리면 core·semi·kr
 # 의 sha 가 함께 바뀌어 "L1 변경 0줄"(V6b) 을 이 커밋 스스로 깨뜨린다.
 MODIFIED_US = "2026-09-11"
-# ⑤ 논증층도 같은 이유로 자기 발행일을 갖는다.
-MODIFIED_ARG = "2026-09-29"
+# ⑤ 논증층도 같은 이유로 자기 발행일을 갖는다. ⑥ 규칙 모듈도 마찬가지다.
+MODIFIED_ARG = "2026-10-04"
+MODIFIED_RULES_KR = "2026-10-04"
 VERSION = "0.1.0-dev"
 LICENSE = URIRef("https://spdx.org/licenses/CDLA-Permissive-2.0.html")
 
@@ -103,6 +115,7 @@ SEMI_IRI = URIRef("https://w3id.org/sdkb/pa/semi")
 KR_IRI = URIRef("https://w3id.org/sdkb/pa/kr")
 US_IRI = URIRef("https://w3id.org/sdkb/pa/us")
 ARG_IRI = URIRef("https://w3id.org/sdkb/pa/argument")
+RULES_KR_IRI = URIRef("https://w3id.org/sdkb/pa/rules-kr")
 ONT_IRI = URIRef("https://w3id.org/sdkb/ont")
 PATENT_IRI = URIRef("https://w3id.org/sdkb/ont/patent")
 
@@ -114,6 +127,7 @@ SEMI_PREFIXES = dict(CORE_PREFIXES, ont=str(ONT))
 KR_PREFIXES = dict(CORE_PREFIXES, ont=str(ONT), gov=str(GOV), pakr=str(PAKR))
 # US 는 `ont:` 를 모른다 — 관할 바인딩이 도메인 접두를 갖는 순간 그 파일이 도메인을 아는 것이 된다.
 US_PREFIXES = dict(CORE_PREFIXES, gov=str(GOV), paus=str(PAUS))
+RULES_KR_PREFIXES = dict(CORE_PREFIXES, pakr=str(PAKR))
 
 
 def _cls(g: Graph, iri, label_en, comment=None, parent=None) -> None:
@@ -662,6 +676,71 @@ def build_argument() -> Graph:
          "EvidenceSet 의 baseDocument 가 든다."),
     ]:
         _indiv(g, iri, PA.Rationale, ko, en, com)
+
+    # ── 추론 규칙과 그 산출 (논증층 R-Box 규칙 · 2026-10-04) ──
+    _cls(g, PA.InferenceRule, "inference rule",
+         "판단에서 판단을 끌어내는 규칙 하나. 실행 형식은 SPARQL CONSTRUCT(`ruleQuery`)이고 "
+         "생성기가 실체화한다 — 이 배치에는 추론기가 없어 OWL 공리로는 소비자가 성립하지 않는다.")
+    _cls(g, PA.InferredJudgment, "inferred judgment",
+         "규칙이 기존 판단에서 끌어낸 것. **심사관이 적은 판단이 아니다** — 그래서 심사관 판단의 "
+         "술어를 쓰지 않고 전용 술어로만 원 판단·청구항·근거를 가리킨다. 별도 그래프에 실리며 "
+         "ExaminerJudgment·PriorArtJudgment 로 타이핑되면 SHACL 이 거부한다.")
+    _prop(g, PA.inferredBy, OWL.ObjectProperty, "inferred by",
+          "이 추론을 낸 규칙.", domain=PA.InferredJudgment, range_=PA.InferenceRule)
+    _prop(g, PA.inferredFrom, OWL.ObjectProperty, "inferred from",
+          "규칙의 전제가 된 판단. 판단층(`ont:PriorArtJudgment`)과 논증층(`ExaminerJudgment`) 양쪽을 "
+          "가리키므로 range 를 비운다.", domain=PA.InferredJudgment)
+    _prop(g, PA.inferredClaim, OWL.ObjectProperty, "inferred claim",
+          "추론이 걸리는 청구항. range 는 도메인 어휘라 비운다.", domain=PA.InferredJudgment)
+    _prop(g, PA.inheritedSupport, OWL.ObjectProperty, "inherited support",
+          "재참조한 판단에서 승계한 근거 묶음. **결론은 승계하지 않는다** — 파일럿에서 참조된 판단 "
+          "9건 중 7건이 결론(동일)이 참조하는 쪽의 문맥(§29②)과 달랐다.",
+          domain=PA.InferredJudgment, range_=PA.EvidenceSet)
+    _prop(g, PA.ruleAuthority, OWL.DatatypeProperty, "rule authority",
+          "규칙이 기대는 권위 원천(심사기준 절·판례 또는 심사문서 자체).",
+          domain=PA.InferenceRule, range_=XSD.string)
+    _prop(g, PA.ruleQuery, OWL.DatatypeProperty, "rule query",
+          "규칙을 실행하는 CONSTRUCT 질의의 저장소 경로. 판단층과 논증층에 따로 쓰면 둘이다.",
+          domain=PA.InferenceRule, range_=XSD.string)
+    _indiv(g, PA.Rule_EvidenceInheritance, PA.InferenceRule,
+           "재참조 판단의 근거 승계", "evidence inheritance through judgment reference",
+           "판단 R 이 판단 T 를 참조하고(`refersToJudgment`) T 가 근거 묶음 S 를 가지면, R 도 S 의 "
+           "뒷받침을 받는다. 한 단계만 따른다(이행 폐포 없음) · 자기 참조는 발화하지 않는다.")
+    g.add((PA.Rule_EvidenceInheritance, PA.ruleAuthority, Literal(
+        "심사문서 자체 — 심사관이 앞선 판단을 명시적으로 참조한다(\"앞서 살펴본 바와 같이\" · "
+        "\"청구항 N 의 거절이유와 같이\" · train 34출원)", datatype=XSD.string)))
+    g.add((PA.Rule_EvidenceInheritance, PA.ruleQuery,
+           Literal("queries/rules/RE_argument_layer.rq", datatype=XSD.string)))
+    return g
+
+
+# ═══════════════════════════════════════════════════════════════════
+# ⑥ rules-kr — KR 조항을 말하는 규칙 개체. ⑤ 의 순도를 지키려고 따로 둔다.
+# ═══════════════════════════════════════════════════════════════════
+def build_rules_kr() -> Graph:
+    g = Graph()
+    g.add((RULES_KR_IRI, RDF.type, OWL.Ontology))
+    g.add((RULES_KR_IRI, RDFS.label, Literal("SDKB Prior-Art — KR inference rules", lang="en")))
+    g.add((RULES_KR_IRI, RDFS.comment, Literal(
+        "KR 특허법 조항 사이의 추론 규칙 개체. 규칙의 실행은 queries/rules/ 의 CONSTRUCT 이고 "
+        "scripts/build_abox_inferred.py 가 별도 그래프로 실체화한다(PLAN-005 논증층 R-Box 규칙).", lang="ko")))
+    g.add((RULES_KR_IRI, OWL.versionInfo, Literal(VERSION)))
+    g.add((RULES_KR_IRI, DCTERMS.modified, Literal(MODIFIED_RULES_KR, datatype=XSD.date)))
+    g.add((RULES_KR_IRI, DCTERMS.license, LICENSE))
+    g.add((RULES_KR_IRI, OWL.imports, ARG_IRI))
+    g.add((RULES_KR_IRI, OWL.imports, KR_IRI))
+
+    r = PAKR.Rule_NoveltyImpliesInventiveness
+    _indiv(g, r, PA.InferenceRule,
+           "신규성 부정 ⇒ 진보성 부정 거절이유", "lack of novelty implies an inventive-step objection",
+           "같은 청구항·같은 문헌에 §29① 판단이 있고 §29② 판단이 없으면 §29② 거절이유를 끌어낸다. "
+           "**통지할 수 있다는 뜻이지 심사관이 판단했다는 뜻이 아니다.** §29③(확대된 선원)에는 걸지 "
+           "않는다 — 선원은 출원 시 공개되지 않아 진보성의 선행기술이 될 수 없다.")
+    g.add((r, PA.ruleAuthority, Literal(
+        "특허·실용신안 심사기준 제3장 진보성 — \"신규성이 없다고 판단되는 발명에 대해서 진보성도 "
+        "없다는 거절이유를 함께 통지할 수 있다\" · 대법원 1992.6.2. 91마540", datatype=XSD.string)))
+    for q in ("queries/rules/RA_argument_layer.rq", "queries/rules/RA_judgment_layer.rq"):
+        g.add((r, PA.ruleQuery, Literal(q, datatype=XSD.string)))
     return g
 
 
@@ -729,6 +808,8 @@ MODULES = [
      "SDKB Prior-Art — US 관할 바인딩 (paus: → pa:) · 단계 8 V6b 종이 이식"),
     ("sdkb-priorart-argument.ttl", build_argument, CORE_PREFIXES,
      "SDKB Prior-Art Argument (pa:) — 판단 논증층 · 도메인 어휘 0 · 관할 어휘 0"),
+    ("sdkb-priorart-rules-kr.ttl", build_rules_kr, RULES_KR_PREFIXES,
+     "SDKB Prior-Art — KR 추론 규칙 (pakr:) · 실행은 queries/rules/ · 실체화는 build_abox_inferred.py"),
 ]
 
 

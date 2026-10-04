@@ -1,0 +1,46 @@
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix pa:      <https://w3id.org/sdkb/pa/> .
+@prefix ont:     <https://w3id.org/sdkb/ont/> .
+
+# ═══════════════════════════════════════════════════════════════════
+# SDKB SHACL Shapes — 추론 판단 (PLAN-005 논증층 R-Box 규칙 · 2026-10-04)
+#
+# 대상 어휘: ontology/sdkb-priorart-argument.ttl ⑤ · sdkb-priorart-rules-kr.ttl ⑥
+# 대상 인스턴스: scripts/build_abox_inferred.py 의 두 산출
+#   ontology/sdkb-abox-inferred.ttl (판단층) · data/sources/notice_dissection/pilot_inferred.ttl (비공개)
+#
+# 이 파일이 지키는 계약은 하나다 — **추론은 심사관 판단이 아니다.** 규칙의 산출이 심사관 판단으로
+# 타이핑되면 정답 간선과 평가 층이 그것을 심사관이 적은 것으로 읽는다.
+# ═══════════════════════════════════════════════════════════════════
+
+pa:Shape_InferredJudgment
+    a sh:NodeShape ;
+    sh:targetClass pa:InferredJudgment ;
+    sh:not [ sh:class pa:ExaminerJudgment ] ;
+    sh:not [ sh:class ont:PriorArtJudgment ] ;
+    sh:message "추론 판단이 심사관 판단(ExaminerJudgment · PriorArtJudgment)으로 타이핑됐다 — 규칙의 산출과 심사관의 주장이 섞인다." ;
+    sh:property [
+        sh:path pa:inferredBy ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class pa:InferenceRule ;
+        sh:message "추론 판단은 그것을 낸 규칙(pa:InferenceRule) 하나를 가리켜야 한다." ;
+    ] ;
+    sh:property [
+        sh:path pa:inferredFrom ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:message "추론 판단은 전제가 된 판단을 하나 이상 가리켜야 한다 — 전제 없는 추론은 지어낸 것이다." ;
+    ] ;
+    sh:property [
+        sh:path pa:onGround ;
+        sh:class pa:LegalGround ;
+    ] ;
+    sh:property [
+        sh:path pa:inheritedSupport ;
+        sh:class pa:EvidenceSet ;
+    ] ;
+    sh:or (
+        [ sh:path pa:onGround ; sh:minCount 1 ]
+        [ sh:path pa:inheritedSupport ; sh:minCount 1 ]
+    ) .

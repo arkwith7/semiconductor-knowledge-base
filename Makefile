@@ -5,7 +5,7 @@
         abox-prior-art abox-claim-features abox-full refetch-fulltext cq \
         public-release check-public signature signature-inject signature-check \
         check-leakage declare-scope v7-rank scrub-notices sample-dissection report-dissection \
-        abox-argument-pilot pilot-sample notice-evidence notice-edges \
+        abox-argument-pilot pilot-sample abox-inferred notice-evidence notice-edges \
         superordinate-concepts concept-mapping \
         semiconto-fetch semiconto-analyze semiconto-align semiconto-enrich semiconto-phase0 \
         pipeline pipeline-sirp pipeline-full pipeline-with-expdataset help
@@ -23,8 +23,9 @@ help:
 	@echo "  install         Install package into the active env with dev+priorart+notebook extras"
 	@echo "  parse           Baseline JSON → schema_report + parquet"
 	@echo "  owl             Build sdkb-core.ttl ontology"
-	@echo "  priorart        Build sdkb-priorart-{core,semi,kr,us,argument}.ttl (PLAN-005 단계 4 · 8 · R1-스키마)"
+	@echo "  priorart        Build sdkb-priorart-{core,semi,kr,us,argument,rules-kr}.ttl (PLAN-005 단계 4 · 8 · R1-스키마 · R-Box 규칙)"
 	@echo "  abox-argument-pilot  논증층 파일럿 A-Box (비공개 · R1 카드 54장) · pilot-sample 은 사람 확인 표본 10건"
+	@echo "  abox-inferred   queries/rules/ 규칙 실행 → 추론 판단 (별도 그래프 · claim-features 선행)"
 	@echo "  convert         JSON → RDF/JSON-LD"
 	@echo "  align           Generate mapping candidates"
 	@echo "  validate        SHACL validation"
@@ -104,6 +105,15 @@ abox-argument-pilot: priorart
 
 pilot-sample:
 	$(PYTHON) scripts/build_abox_argument_pilot.py --sample
+
+# PLAN-005 논증층 R-Box 규칙 — queries/rules/ 의 CONSTRUCT 를 실행해 추론 판단을 **별도 그래프**에 쓴다.
+# 추론은 심사관 판단이 아니므로 claim-features 에 섞지 않는다. claim-features(935 MB)는 자동으로
+# 짓지 않는다 — 없으면 생성기가 무엇이 먼저인지 말하고 멈춘다. 파일럿은 원천이 있을 때만 다시 짓는다.
+abox-inferred: priorart
+	@if [ -f data/sources/notice_dissection/pilot_v1.jsonl ]; then \
+		$(MAKE) --no-print-directory PYTHON=$(PYTHON) abox-argument-pilot ; \
+	fi
+	$(PYTHON) scripts/build_abox_inferred.py
 
 # ── 선행기술 판단층 A-Box (PLAN-005 단계 5-A) ─────────────────────
 # ClaimProfile·Disclosure·ExaminerElement 를 실체화한다. 입력은 전부 커밋된 파일
@@ -412,6 +422,27 @@ validate:
 			       data/sources/notice_dissection/pilot_abox.ttl ; \
 	else \
 		echo "  (논증층 파일럿 원천 없음 — 공개 트리. shapes_priorart_argument 는 대상 인스턴스 0 · 건너뜀)" ; \
+	fi
+	@# ⑤ 추론 판단 shape 를 **두 산출 각각에** 건다(R-Box 규칙). 계약은 하나 — 추론이 심사관 판단으로
+	@#   타이핑되지 않는다. 판단층 추론은 claim-features 가 있어야 지을 수 있어 그 존재를 조건으로 한다
+	@#   (claim-features shape 와 같은 조건). 지을 수 있으면 **다시 지어서** 건다 — 낡은 산출에 걸면 장식이다.
+	@if [ -f ontology/sdkb-abox-claim-features.ttl ]; then \
+		$(MAKE) --no-print-directory PYTHON=$(PYTHON) abox-inferred && \
+		$(PYTHON) scripts/validate_shacl.py --shapes validation/shapes_priorart_inferred.ttl \
+			--owl ontology/sdkb-priorart-argument.ttl --inference none \
+			--data ontology/sdkb-priorart-core.ttl ontology/sdkb-priorart-kr.ttl \
+			       ontology/sdkb-priorart-argument.ttl ontology/sdkb-priorart-rules-kr.ttl \
+			       ontology/sdkb-abox-inferred.ttl && \
+		if [ -f data/sources/notice_dissection/pilot_inferred.ttl ]; then \
+			$(PYTHON) scripts/validate_shacl.py --shapes validation/shapes_priorart_inferred.ttl \
+				--owl ontology/sdkb-priorart-argument.ttl --inference none \
+				--data ontology/sdkb-priorart-core.ttl ontology/sdkb-priorart-kr.ttl \
+				       ontology/sdkb-priorart-argument.ttl ontology/sdkb-priorart-rules-kr.ttl \
+				       data/sources/notice_dissection/pilot_abox.ttl \
+				       data/sources/notice_dissection/pilot_inferred.ttl ; \
+		fi ; \
+	else \
+		echo "  (claim-features A-Box 미빌드 — 추론 판단 건너뜀. 빌드: make abox-claim-features && make abox-inferred)" ; \
 	fi
 
 test:
