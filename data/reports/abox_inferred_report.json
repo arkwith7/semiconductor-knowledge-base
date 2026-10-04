@@ -1,0 +1,57 @@
+{
+  "_README": "규칙별 발화(rules)와 입력이 모자라 발화하지 않은 수(not_fired). 추론은 심사관 판단이 아니다.",
+  "rule_files": {
+    "RA_judgment_layer.rq": "d38bce94317dc16b486e12a3f80b5020502f2d9bad689b0b9cfac47b18bba0d0",
+    "RA_argument_layer.rq": "13a487bdd0ab04e0229de348b0f8713d82d3e99f0fc2d5ef4fc42af6da032d67",
+    "RE_argument_layer.rq": "4b40ba5e6d9e360a9846ccdf0e84e7f2f17c9f36506e25fa5e38c897f92aa31c"
+  },
+  "layers": {
+    "judgment": {
+      "status": "built",
+      "input_triples": 40123,
+      "rules": {
+        "pakr:Rule_NoveltyImpliesInventiveness": {
+          "nodes": 70,
+          "claims": 330,
+          "inherited_support": 0
+        }
+      },
+      "not_fired": {
+        "novelty_judgment_without_claim": 2,
+        "novelty_claim_already_inventive": 1768
+      },
+      "triples": 610,
+      "input": "ontology/sdkb-abox-claim-features.ttl (판단 블록 2614)",
+      "input_sha256": "97665fe00a1e98af75126dca20fb8cf755763a8f6730885a8b0a2537e4090951",
+      "output": "ontology/sdkb-abox-inferred.ttl",
+      "output_sha256": "d7219e9766b8c5975d2d87057ab8f37a25c7bd91848f4e325ee37e62026c914c"
+    },
+    "argument": {
+      "status": "built",
+      "input_triples": 2432,
+      "rules": {
+        "pakr:Rule_NoveltyImpliesInventiveness": {
+          "nodes": 2,
+          "claims": 2,
+          "inherited_support": 0
+        },
+        "pa:Rule_EvidenceInheritance": {
+          "nodes": 12,
+          "claims": 0,
+          "inherited_support": 12
+        }
+      },
+      "not_fired": {
+        "novelty_judgment_without_document": 0,
+        "reference_target_not_a_judgment": 0,
+        "self_reference": 0
+      },
+      "triples": 70,
+      "input": "data/sources/notice_dissection/pilot_abox.ttl",
+      "input_sha256": "dff0966311a18ba451b5a2b0a3a6b453b31392db9e278df0c4cd16cbe804ca32",
+      "output": "data/sources/notice_dissection/pilot_inferred.ttl",
+      "output_sha256": "24d621079d6ed6df739207a993d429de44a3d2c66800ce93e713e66b3c83568d"
+    }
+  },
+  "triples": 610
+}

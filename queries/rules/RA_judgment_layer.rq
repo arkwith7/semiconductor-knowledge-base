@@ -1,0 +1,30 @@
+# rule: pakr:Rule_NoveltyImpliesInventiveness
+# layer: judgment (ont:PriorArtJudgment — sdkb-abox-claim-features.ttl)
+# 같은 청구항·같은 문헌에 §29① 판단이 있고 §29② 판단이 없으면 §29② 거절이유를 끌어낸다.
+# §29③ 판단은 판단층에 실체화되지 않으므로(GROUND 에 없다) 여기서 걸릴 수 없다.
+# 산출 근거 술어는 pa:onGround 다 — ont:onGround 는 domain 이 ont:PriorArtJudgment 라
+# 추론 노드가 심사관 판단으로 타이핑된다.
+PREFIX ont:  <https://w3id.org/sdkb/ont/>
+PREFIX pa:   <https://w3id.org/sdkb/pa/>
+PREFIX pakr: <https://w3id.org/sdkb/pa/kr/>
+CONSTRUCT {
+  ?inf a pa:InferredJudgment ;
+       pa:inferredBy pakr:Rule_NoveltyImpliesInventiveness ;
+       pa:inferredFrom ?j ;
+       pa:onGround pakr:Ground_29_2 ;
+       pa:inferredClaim ?c .
+}
+WHERE {
+  ?j a ont:PriorArtJudgment ;
+     ont:onGround ont:Rejection_Novelty ;
+     ont:overPriorArt ?d ;
+     ont:aboutClaim ?c .
+  FILTER NOT EXISTS {
+    ?j2 a ont:PriorArtJudgment ;
+        ont:onGround ont:Rejection_Inventiveness ;
+        ont:overPriorArt ?d ;
+        ont:aboutClaim ?c .
+  }
+  BIND(IRI(CONCAT("https://w3id.org/sdkb/data/inferred/RA_",
+                  REPLACE(STRAFTER(STR(?j), "https://w3id.org/sdkb/data/"), "/", "_"))) AS ?inf)
+}

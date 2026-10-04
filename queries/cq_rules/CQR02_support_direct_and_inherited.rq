@@ -1,0 +1,20 @@
+# desc: 판단을 받치는 근거 묶음은 무엇이고, 직접 적힌 것인가 재참조한 판단에서 승계한 것인가? (규칙 pa:Rule_EvidenceInheritance)
+# suite: pa
+# monotone: up
+# expect-min: 1
+# 승계분(?how = "inherited")은 추론 그래프가 실리기 전에는 0 행이다. 결론은 승계하지 않는다.
+PREFIX pa: <https://w3id.org/sdkb/pa/>
+SELECT DISTINCT ?judgment ?set ?how
+WHERE {
+  {
+    ?judgment a pa:ExaminerJudgment ; pa:supportedBy ?set .
+    BIND("direct" AS ?how)
+  } UNION {
+    ?i pa:inferredBy pa:Rule_EvidenceInheritance ;
+       pa:inferredFrom ?judgment ; pa:inheritedSupport ?set .
+    ?judgment pa:refersToJudgment ?t .
+    ?t pa:supportedBy ?set .
+    BIND("inherited" AS ?how)
+  }
+}
+ORDER BY ?judgment ?set ?how

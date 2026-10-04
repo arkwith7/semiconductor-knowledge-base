@@ -27,6 +27,44 @@ All notable changes to SDKB will be documented in this file.
 
 ## [Unreleased]
 
+### Added (2026-10-04 — PLAN-005 논증층 R-Box 규칙 · **어휘 추가 전용 · 새 모듈 1 · 추론은 별도 그래프 · 기존 IRI·shape·동결 TTL 불변** · 1.2.0 후보 · 사용자 승인)
+
+**결론.** R1 해부(§20.15(i))가 *"적을 값은 있는데 T-Box 가 없어 막혔다"* 고 남긴 추론 규칙 다섯 후보 중, 결과 전에
+동결한 기준 넷(심사기준 근거 · train 발화 ≥10 · 바뀌는 CQ · 추론기 없이 실체화)을 통과한 **둘**을 적었다 —
+**R-a** §29① ⇒ §29② 거절이유 · **R-e** 판단 재참조 ⇒ 근거 승계. 규칙은 OWL 공리가 아니라 `queries/rules/*.rq`
+CONSTRUCT 이고, `scripts/build_abox_inferred.py` 가 실행해 **심사관 판단과 분리된 그래프**에 쓴다.
+판단층에서 R-a 가 **70 판단 · 청구항 330** 에 §29② 거절이유를 끌어냈다(train 40 · 33출원 · 192).
+
+- **⑤ `sdkb-priorart-argument.ttl` 갱신**(관할 중립 · `MODIFIED_ARG` 2026-10-04): 클래스 `pa:InferenceRule` ·
+  `pa:InferredJudgment` · 객체 술어 `inferredBy` · `inferredFrom` · `inferredClaim` · `inheritedSupport` · 데이터 술어
+  `ruleAuthority` · `ruleQuery` · 규칙 개체 `pa:Rule_EvidenceInheritance`. 추론 노드는 심사관 판단 술어를 쓰지 않는다 —
+  `ont:onGround`·`ont:overPriorArt`(domain `ont:PriorArtJudgment`)·`pa:judgesClaim` 등이 추론으로 노드를 심사관 판단으로 만들기 때문이다.
+- **⑥ `sdkb-priorart-rules-kr.ttl` 신설**(argument·kr import): 규칙 개체 `pakr:Rule_NoveltyImpliesInventiveness` —
+  권위 "심사기준 제3장 진보성 · 대법원 91마540" · 범위 "§29③ 제외 · 통지할 수 있다는 뜻이지 심사관 판단이 아님".
+  KR 조항을 말하므로 순도 불변식(A)을 받는 ⑤ 가 아니라 따로 둔다.
+- **산출**(gitignore): `ontology/sdkb-abox-inferred.ttl`(판단층 · 610 트리플) · `pilot_inferred.ttl`(비공개 파일럿 ·
+  R-a 2 · R-e 12). 리포트 `data/reports/abox_inferred_report.json` 에 규칙별 발화와 **발화하지 않은 사유**
+  (청구항 없는 §29① 2 · 이미 §29② 가 있는 (판단, 청구항) 1,768)를 적는다.
+- **shape** `validation/shapes_priorart_inferred.ttl` — 추론 노드가 `ExaminerJudgment`·`PriorArtJudgment` 로 타이핑되면 거부 ·
+  규칙 1개 · 전제 ≥1 · 근거 또는 승계 근거 ≥1. `make validate` ⑤ 단계가 두 산출 각각에 건다.
+- **소비자 CQ** `queries/cq_rules/` CQR01(§29② 거절 가능 (청구항, 문헌) · 출처 구분) · CQR02(직접 근거 ∪ 승계 근거).
+  규칙 행: 판단층 0 → **330** · 파일럿 0 → 2 / 승계 0 → **12**. `queries/cq_argument/` 가 아닌 이유: 그 디렉터리는
+  R1-스키마 결손 1종당 1개(15)로 테스트가 고정한다.
+- **떨어진 후보**: R-b 구조⇒특성(train 3출원) · R-c 물건⇒방법(심사기준은 **반대 방향** — "물건 진보성 인정 ⇒ 제조방법 원칙적 인정") ·
+  R-d 구간 포함(2출원 · CQA 가 경계값으로 이미 계산). R-c 의 "카테고리를 달리하여"(12출원)는 규칙이 아니라 심사관이 주장하는
+  관계라 공개 A-Box 재생성 때 어휘로 다룬다.
+
+**그래프 서명**: T-Box 명명 클래스 111 → **113** · OP 138 → **142** · DP 104 → **106** · 트리플 2,156 → **2,211** ·
+A-Box 층 10 → **11**(`sdkb-abox-inferred`). OWL R-Box 공리 수는 **불변**(6-B 게이트 무관) — 규칙은 "실체화 규칙 3 파일"로 센다.
+
+**하류 조치(§0): 추가만 있다.** 기존 IRI·의미·동결 TTL(core `307875eb…`·semi `d66c9325…`·kr `4e5ed973…`) 바이트 불변.
+vendor 할 파일이 늘었다(`sdkb-priorart-rules-kr.ttl` · 추론을 쓰려면 `sdkb-abox-inferred.ttl` 과 `queries/rules/`).
+**추론 판단을 정답·평가 층으로 읽지 말 것** — 심사관이 적은 판단이 아니다.
+
+**게이트** (순차 · 2026-10-04): `make validate` PASSED(⑤ 두 산출 포함 · 불변식 A 두 모듈 OK) · `make test` **722 passed · 10 skipped** ·
+`signature-check` 최신 · `check-leakage` PASS 5 · FAIL 0 · `check-public` 적중 0(408파일 · 자산 407) · 생성기 2회 바이트 동일.
+전문: PLAN-005 §20.21.
+
 ### Changed (2026-10-03 — PLAN-005 별건 · `substitutableWith` 일몰 재검토 닫음 · **그래프·어휘·IRI·shape 불변 · 생성기 주석과 V1 리포트 핀만** · 사용자 승인)
 
 **결론.** R1 해부(§20.15)가 남긴 *"`pa:substitutableWith` 일몰 재검토"* 안건을 닫았다. 치환은 R1-스키마(2026-09-29)의

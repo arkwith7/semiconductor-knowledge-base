@@ -1,0 +1,26 @@
+# desc: 이 출원을 §29② 로 거절할 수 있는 (청구항, 문헌)은 무엇이고, 심사관이 적은 것인가 규칙이 끌어낸 것인가? (규칙 pakr:Rule_NoveltyImpliesInventiveness)
+# suite: pa
+# monotone: up
+# expect-min: 1
+# 규칙 산출(?source = "rule")은 추론 그래프가 실리기 전에는 0 행이다. 판단층과 논증층 양쪽을 읽는다.
+PREFIX ont:  <https://w3id.org/sdkb/ont/>
+PREFIX pa:   <https://w3id.org/sdkb/pa/>
+PREFIX pakr: <https://w3id.org/sdkb/pa/kr/>
+SELECT DISTINCT ?claim ?doc ?source
+WHERE {
+  {
+    ?j a ont:PriorArtJudgment ; ont:onGround ont:Rejection_Inventiveness ;
+       ont:aboutClaim ?claim ; ont:overPriorArt ?doc .
+    BIND("examiner" AS ?source)
+  } UNION {
+    ?j a pa:ExaminerJudgment ; pa:onGround pakr:Ground_29_2 ;
+       pa:judgesClaim ?claim ; pa:supportedBy/pa:includesDocument ?doc .
+    BIND("examiner" AS ?source)
+  } UNION {
+    ?i pa:inferredBy pakr:Rule_NoveltyImpliesInventiveness ;
+       pa:inferredClaim ?claim ; pa:inferredFrom ?j .
+    { ?j ont:overPriorArt ?doc } UNION { ?j pa:supportedBy/pa:includesDocument ?doc }
+    BIND("rule" AS ?source)
+  }
+}
+ORDER BY ?claim ?doc ?source

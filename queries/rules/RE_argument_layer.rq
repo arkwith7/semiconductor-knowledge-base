@@ -1,0 +1,20 @@
+# rule: pa:Rule_EvidenceInheritance
+# layer: argument (pa:ExaminerJudgment — 논증층 A-Box)
+# 판단 r 이 판단 t 를 참조하고 t 가 근거 묶음 s 를 가지면 r 은 s 의 뒷받침을 승계한다.
+# **결론(pa:concludes)은 승계하지 않는다.** 한 단계만 따른다 — 이 질의는 refersToJudgment 를
+# 한 번만 건너므로 순환 참조(r→t→r)도 r·t 각자의 한 단계로 끝난다. 자기 참조는 발화하지 않는다.
+PREFIX pa: <https://w3id.org/sdkb/pa/>
+CONSTRUCT {
+  ?inf a pa:InferredJudgment ;
+       pa:inferredBy pa:Rule_EvidenceInheritance ;
+       pa:inferredFrom ?r , ?t ;
+       pa:inheritedSupport ?s .
+}
+WHERE {
+  ?r a pa:ExaminerJudgment ; pa:refersToJudgment ?t .
+  ?t a pa:ExaminerJudgment ; pa:supportedBy ?s .
+  FILTER (?r != ?t)
+  BIND(IRI(CONCAT("https://w3id.org/sdkb/data/inferred/RE_",
+                  REPLACE(STRAFTER(STR(?r), "https://w3id.org/sdkb/data/"), "/", "_"), "__",
+                  REPLACE(STRAFTER(STR(?t), "https://w3id.org/sdkb/data/"), "/", "_"))) AS ?inf)
+}
