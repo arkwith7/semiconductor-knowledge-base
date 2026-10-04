@@ -311,9 +311,13 @@ def test_real_inferred_graph_uses_only_tbox_predicates_and_matches_report():
     inf = Graph().parse(bai.OUT)
     assert {p for _, p, _ in inf} <= _defined_predicates()
     rep = json.loads(bai.REPORT.read_text(encoding="utf-8"))
-    assert rep["triples"] == rep["layers"]["judgment"]["triples"] == len(inf)
-    assert rep["layers"]["judgment"]["rules"]["pakr:Rule_NoveltyImpliesInventiveness"]["nodes"] == \
-        len(set(inf.subjects(PA.inferredBy, RA))) > 0
+    # §20.22 — 산출 파일은 판단층과 실물 논증층(원천이 있을 때)의 추론 합이다. 노드 IRI 가 층마다 달라 겹치지 않는다.
+    built = [rep["layers"][k] for k in ("judgment", "argument_abox") if rep["layers"][k]["status"] == "built"]
+    assert rep["triples"] == sum(lay["triples"] for lay in built) == len(inf)
+    ra = "pakr:Rule_NoveltyImpliesInventiveness"
+    assert rep["layers"]["judgment"]["rules"][ra]["nodes"] > 0
+    assert sum(lay["rules"].get(ra, {}).get("nodes", 0) for lay in built) == \
+        len(set(inf.subjects(PA.inferredBy, RA)))
 
 
 @needs_pilot

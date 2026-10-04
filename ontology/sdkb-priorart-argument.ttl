@@ -195,6 +195,14 @@ pa:baseDocument
     rdfs:domain pa:EvidenceSet ;
     rdfs:label "base document"@en .
 
+pa:categoryVariantOf
+    rdf:type owl:ObjectProperty ;
+    rdfs:comment "이 판단의 청구항이 참조한 판단의 청구항을 카테고리(물건·방법 등)만 달리해 청구한 것이라고 심사관이 적었다. 그래서 그 판단의 거절이유를 그대로 쓴다. 심사관이 주장한 경우만 담는다."@ko ;
+    rdfs:domain pa:ExaminerJudgment ;
+    rdfs:label "category variant of"@en ;
+    rdfs:range pa:ExaminerJudgment ;
+    rdfs:subPropertyOf pa:refersToJudgment .
+
 pa:claimTerm
     rdf:type owl:DatatypeProperty ;
     rdfs:comment "청구항 쪽 용어."@ko ;
