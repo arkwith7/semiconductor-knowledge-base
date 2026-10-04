@@ -567,6 +567,14 @@ def build_argument() -> Graph:
           "이 판단이 근거로 재사용한 다른 판단(예: §29① 동일 판단을 §29② 의 전제로). "
           "**전이로 선언하지 않는다** — 심사관이 적은 참조만 담는다.",
           domain=PA.ExaminerJudgment, range_=PA.ExaminerJudgment)
+    # §20.22 (2026-10-04) — R-c. 심사기준은 물건⇒방법 전이를 반대 방향으로만 말하므로 규칙이 아니라
+    # 심사관이 **주장한** 관계로만 담는다. 추론기 없는 배치에서도 R-e 가 발화하도록 생성기가 상위
+    # 술어를 함께 적는다(coveredBy 선례의 1홉 실체화).
+    _prop(g, PA.categoryVariantOf, OWL.ObjectProperty, "category variant of",
+          "이 판단의 청구항이 참조한 판단의 청구항을 카테고리(물건·방법 등)만 달리해 청구한 것이라고 "
+          "심사관이 적었다. 그래서 그 판단의 거절이유를 그대로 쓴다. 심사관이 주장한 경우만 담는다.",
+          domain=PA.ExaminerJudgment, range_=PA.ExaminerJudgment)
+    g.add((PA.categoryVariantOf, RDFS.subPropertyOf, PA.refersToJudgment))
     _prop(g, PA.supportedBy, OWL.ObjectProperty, "supported by",
           "판단의 근거 묶음. 둘 이상이면 선택적 근거다.",
           domain=PA.ExaminerJudgment, range_=PA.EvidenceSet)

@@ -324,9 +324,9 @@ blank nodes: `grep -c owl:Class` counts both and reports a larger number.
 | `sdkb-priorart-semi.ttl` | 4 | 0 | 0 | 0 | 4/4 | 65 |
 | `sdkb-priorart-kr.ttl` | 0 | 0 | 0 | 0 | 0/0 | 40 |
 | `sdkb-priorart-us.ttl` | 0 | 0 | 0 | 0 | 0/0 | 27 |
-| `sdkb-priorart-argument.ttl` | 11 | 0 | 20 | 12 | 43/43 | 263 |
+| `sdkb-priorart-argument.ttl` | 11 | 0 | 21 | 12 | 44/44 | 269 |
 | `sdkb-priorart-rules-kr.ttl` | 0 | 0 | 0 | 0 | 0/0 | 15 |
-| **Total** | **113** | 19 | **142** | **106** | **361/361** | 2,211 |
+| **Total** | **113** | 19 | **143** | **106** | **362/362** | 2,217 |
 
 **Curation graph** (`data/semiconductor_v0_3.json` — the hand-curated source the core A-Box is generated from).
 
@@ -342,7 +342,8 @@ blank nodes: `grep -c owl:Class` counts both and reports a larger number.
 | `sdkb-abox-claim-features.ttl` | claim features | 12,250,825 ¹ |
 | `sdkb-abox-b-layer-queries.ttl` | B-layer confirmation queries | 4,631 |
 | `sdkb-abox-priorart.ttl` | prior-art claim profiles, disclosures, examiner elements | 973,363 ¹ |
-| `sdkb-abox-inferred.ttl` | rule-derived judgments (not examiner-asserted) | 610 |
+| `sdkb-abox-argument.ttl` | examiner argument layer (claim-block judgments) | 125,526 |
+| `sdkb-abox-inferred.ttl` | rule-derived judgments (not examiner-asserted) | 2,707 |
 | `sdkb-abox-experts-problems.ttl` | experts and problems | 8,483 |
 | `sdkb-abox-vendors.ttl` | equipment vendors | 2,601 |
 | `sdkb-governance-kr-instances.ttl` | Korea regulatory instances | 175 |

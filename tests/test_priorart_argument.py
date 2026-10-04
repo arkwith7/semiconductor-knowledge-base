@@ -68,8 +68,9 @@ def test_argument_vocabulary_matches_approved_design():
     g = Graph().parse(ARG)
     n = {k: len(set(g.subjects(RDF.type, t))) for k, t in
          [("class", OWL.Class), ("op", OWL.ObjectProperty), ("dp", OWL.DatatypeProperty)]}
-    # R1-스키마 9·16·10·18 + 논증층 R-Box 규칙(2026-10-04) 클래스 2 · 객체 4 · 데이터 2 · 규칙 개체 1.
-    assert n == {"class": 11, "op": 20, "dp": 12}
+    # R1-스키마 9·16·10·18 + 논증층 R-Box 규칙(2026-10-04) 클래스 2 · 객체 4 · 데이터 2 · 규칙 개체 1
+    # + §20.22 R-c `categoryVariantOf` 객체 1.
+    assert n == {"class": 11, "op": 21, "dp": 12}
     individuals = {s for s, o in g.subject_objects(RDF.type)
                    if o not in (OWL.Class, OWL.ObjectProperty, OWL.DatatypeProperty, OWL.Ontology)}
     assert len(individuals) == 19

@@ -47,6 +47,7 @@ RULES_DIR = ROOT / "queries" / "rules"
 CF_TTL = ONT_DIR / "sdkb-abox-claim-features.ttl"
 CF_REPORT = ROOT / "data" / "reports" / "abox_claim_features_report.json"
 PILOT = ROOT / "data" / "sources" / "notice_dissection" / "pilot_abox.ttl"
+ARG_ABOX = ONT_DIR / "sdkb-abox-argument.ttl"   # §20.22 실물 논증층 (원천이 있을 때만 지어진다)
 OUT = ONT_DIR / "sdkb-abox-inferred.ttl"
 PILOT_OUT = ROOT / "data" / "sources" / "notice_dissection" / "pilot_inferred.ttl"
 REPORT = ROOT / "data" / "reports" / "abox_inferred_report.json"
@@ -58,6 +59,8 @@ LAYER_RULES = {
     "judgment": ["RA_judgment_layer.rq"],
     "argument": ["RA_argument_layer.rq", "RE_argument_layer.rq"],
 }
+#: 같은 규칙·같은 미발화 사유를 쓰는 층 — 실물 논증층은 파일럿과 어휘가 같다.
+LAYER_RULES["argument_abox"] = LAYER_RULES["argument"]
 #: 추론 노드가 가져서는 안 되는 타입 — 심사관 판단과 섞지 않는다는 계약.
 FORBIDDEN_TYPES = (PA.ExaminerJudgment, ONT.PriorArtJudgment)
 PREFIXES = {"pa": str(PA), "pakr": str(PAKR), "rdf": str(RDF), "xsd": str(XSD)}
@@ -166,6 +169,9 @@ SKIPS = {
 }
 
 
+SKIPS["argument_abox"] = SKIPS["argument"]
+
+
 def _skips(g: Graph, layer: str) -> dict[str, int]:
     ns = {"ont": str(ONT), "pa": str(PA), "pakr": str(PAKR)}
     return {k: int(next(iter(g.query(_ASK_COUNT.format(body=b.format(**ns)))))[0])
@@ -199,10 +205,23 @@ def main() -> int:
 
     layers: dict[str, dict] = {}
     inferred, layers["judgment"] = build_layer("judgment", jg)
-    layers["judgment"].update(
-        input=f"{CF_TTL.relative_to(ROOT)} (판단 블록 {n_blocks})", input_sha256=_sha(CF_TTL),
-        output=str(OUT.relative_to(ROOT)),
-        output_sha256=_write(inferred, OUT, "SDKB 추론 판단 — 판단층 (규칙 산출 · 별도 그래프)"))
+    layers["judgment"].update(input=f"{CF_TTL.relative_to(ROOT)} (판단 블록 {n_blocks})", input_sha256=_sha(CF_TTL))
+    # §20.22 — 실물 논증층의 추론도 같은 산출 파일에 **더한다**. 노드 IRI 가 층마다 달라(RA_judgment_… ·
+    # RA_argument_…) 겹치지 않으므로 파일 트리플 수 = 두 층 트리플 수의 합이다.
+    out_g = Graph()
+    out_g += inferred
+    if ARG_ABOX.exists():
+        ag = Graph().parse(ARG_ABOX, format="turtle")
+        ainf, layers["argument_abox"] = build_layer("argument_abox", ag)
+        layers["argument_abox"].update(input=str(ARG_ABOX.relative_to(ROOT)), input_sha256=_sha(ARG_ABOX))
+        out_g += ainf
+    else:
+        layers["argument_abox"] = {"status": "not_loaded",
+                                   "why": "원천 계층(data/sources/opinion_notices/)이 없다 — 공개 트리. 0 이 아니라 미적재다."}
+    out_sha = _write(out_g, OUT, "SDKB 추론 판단 — 판단층 · 논증층 (규칙 산출 · 별도 그래프)")
+    for name in ("judgment", "argument_abox"):
+        if layers[name]["status"] == "built":
+            layers[name].update(output=str(OUT.relative_to(ROOT)), output_sha256=out_sha)
 
     if PILOT.exists():
         pg = Graph().parse(PILOT, format="turtle")
@@ -219,8 +238,8 @@ def main() -> int:
         "_README": "규칙별 발화(rules)와 입력이 모자라 발화하지 않은 수(not_fired). 추론은 심사관 판단이 아니다.",
         "rule_files": {f: _sha(RULES_DIR / f) for fs in LAYER_RULES.values() for f in fs},
         "layers": layers,
-        # 그래프 서명이 읽는 값 — 공개되는 층(판단층)의 트리플 수다.
-        "triples": layers["judgment"]["triples"],
+        # 그래프 서명이 읽는 값 — 산출 파일(sdkb-abox-inferred.ttl)의 트리플 수다.
+        "triples": len(out_g),
     }
     REPORT.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     for name, lay in layers.items():

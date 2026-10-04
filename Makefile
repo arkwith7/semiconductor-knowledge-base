@@ -1,4 +1,4 @@
-.PHONY: all install venv parse owl convert align validate test clean \
+.PHONY: all install venv parse owl convert align validate test clean abox-argument \
         ingest-sirp sirp-pairs sirp-problems sirp experts \
         compliance curated-experts curated-ratings expdataset abox abox-patents \
         priorart abox-priorart v1-ablation stage7-remeasure claim-concepts-7a abstract-diagnostic \
@@ -113,7 +113,15 @@ abox-inferred: priorart
 	@if [ -f data/sources/notice_dissection/pilot_v1.jsonl ]; then \
 		$(MAKE) --no-print-directory PYTHON=$(PYTHON) abox-argument-pilot ; \
 	fi
+	@if [ -d data/sources/opinion_notices/txt ]; then \
+		$(MAKE) --no-print-directory PYTHON=$(PYTHON) abox-argument ; \
+	fi
 	$(PYTHON) scripts/build_abox_inferred.py
+
+# PLAN-005 §20.22 — 논증층 A-Box (의견제출통지서 전량 · 청구항 블록 단위). 원천이 공개 트리에 없으므로
+# 산출 TTL 은 gitignore 이고, 리포트(계수만)는 커밋한다. 사람 대조: `--sample` → 시트 기입 → `--gate`.
+abox-argument: priorart
+	$(PYTHON) scripts/build_abox_argument.py
 
 # ── 선행기술 판단층 A-Box (PLAN-005 단계 5-A) ─────────────────────
 # ClaimProfile·Disclosure·ExaminerElement 를 실체화한다. 입력은 전부 커밋된 파일
@@ -423,7 +431,19 @@ validate:
 	else \
 		echo "  (논증층 파일럿 원천 없음 — 공개 트리. shapes_priorart_argument 는 대상 인스턴스 0 · 건너뜀)" ; \
 	fi
-	@# ⑤ 추론 판단 shape 를 **두 산출 각각에** 건다(R-Box 규칙). 계약은 하나 — 추론이 심사관 판단으로
+	@# ④′ 같은 논증층 shape 를 **실물 논증층 A-Box 에** 건다(§20.22). 조건은 ④ 와 같이 원천의 존재다.
+	@if [ -d data/sources/opinion_notices/txt ]; then \
+		$(MAKE) --no-print-directory PYTHON=$(PYTHON) abox-argument && \
+		$(PYTHON) scripts/validate_shacl.py --shapes validation/shapes_priorart_argument.ttl \
+			--owl ontology/sdkb-priorart-argument.ttl --inference none \
+			--data ontology/sdkb-priorart-core.ttl ontology/sdkb-priorart-kr.ttl \
+			       ontology/sdkb-priorart-argument.ttl ontology/sdkb-abox-priorart.ttl \
+			       ontology/sdkb-abox-argument.ttl ; \
+	else \
+		echo "  (의견제출통지서 원천 없음 — 공개 트리. 논증층 A-Box 건너뜀)" ; \
+	fi
+	@# ⑤ 추론 판단 shape 를 **두 산출 각각에** 건다(R-Box 규칙). 판단층 산출에는 실물 논증층 추론이 함께
+	@#   실려 있어(§20.22) 승계 근거 묶음의 타입을 읽도록 논증층 A-Box 를 데이터에 넣는다. 계약은 하나 — 추론이 심사관 판단으로
 	@#   타이핑되지 않는다. 판단층 추론은 claim-features 가 있어야 지을 수 있어 그 존재를 조건으로 한다
 	@#   (claim-features shape 와 같은 조건). 지을 수 있으면 **다시 지어서** 건다 — 낡은 산출에 걸면 장식이다.
 	@if [ -f ontology/sdkb-abox-claim-features.ttl ]; then \
@@ -432,6 +452,7 @@ validate:
 			--owl ontology/sdkb-priorart-argument.ttl --inference none \
 			--data ontology/sdkb-priorart-core.ttl ontology/sdkb-priorart-kr.ttl \
 			       ontology/sdkb-priorart-argument.ttl ontology/sdkb-priorart-rules-kr.ttl \
+			       $$( [ -f ontology/sdkb-abox-argument.ttl ] && echo ontology/sdkb-abox-argument.ttl ) \
 			       ontology/sdkb-abox-inferred.ttl && \
 		if [ -f data/sources/notice_dissection/pilot_inferred.ttl ]; then \
 			$(PYTHON) scripts/validate_shacl.py --shapes validation/shapes_priorart_inferred.ttl \

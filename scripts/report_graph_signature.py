@@ -76,6 +76,7 @@ ABOX_LAYERS = [
     ("sdkb-abox-claim-features", "claim features", "abox_claim_features_report.json"),
     ("sdkb-abox-b-layer-queries", "B-layer confirmation queries", "abox_b_layer_queries_report.json"),
     ("sdkb-abox-priorart", "prior-art claim profiles, disclosures, examiner elements", "abox_priorart_report.json"),
+    ("sdkb-abox-argument", "examiner argument layer (claim-block judgments)", "abox_argument_report.json"),
     ("sdkb-abox-inferred", "rule-derived judgments (not examiner-asserted)", "abox_inferred_report.json"),
     ("sdkb-abox-experts-problems", "experts and problems", "abox_linking_report.json"),
     ("sdkb-abox-vendors", "equipment vendors", "abox_vendors_report.json"),
