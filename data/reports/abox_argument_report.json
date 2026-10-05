@@ -262,7 +262,82 @@
     },
     "pass": false
   },
-  "human_gate_r5": null,
+  "human_gate_r5": {
+    "sheet": "data/interim/argument_abox_sample_r5.csv",
+    "seed": 20261009,
+    "threshold": 0.9,
+    "by_kind": {
+      "block": {
+        "rows": 30,
+        "judged": 29,
+        "correct": 26,
+        "withheld": 1,
+        "rate": 0.8966,
+        "decidable": true,
+        "pass": false
+      },
+      "DesignChoice": {
+        "rows": 10,
+        "judged": 10,
+        "correct": 9,
+        "withheld": 0,
+        "rate": 0.9,
+        "decidable": true,
+        "pass": true
+      },
+      "PredictableEffect": {
+        "rows": 10,
+        "judged": 9,
+        "correct": 9,
+        "withheld": 1,
+        "rate": 1.0,
+        "decidable": true,
+        "pass": true
+      },
+      "locator": {
+        "rows": 10,
+        "judged": 10,
+        "correct": 8,
+        "withheld": 0,
+        "rate": 0.8,
+        "decidable": true,
+        "pass": false
+      },
+      "refersToJudgment": {
+        "rows": 3,
+        "judged": 3,
+        "correct": 2,
+        "withheld": 0,
+        "rate": 0.6667,
+        "decidable": true,
+        "pass": false
+      },
+      "categoryVariantOf": {
+        "rows": 6,
+        "judged": 6,
+        "correct": 6,
+        "withheld": 0,
+        "rate": 1.0,
+        "decidable": true,
+        "pass": true
+      }
+    },
+    "over_hold": {
+      "held_block": {
+        "rows": 10,
+        "actually_correct": 0
+      },
+      "held_locator": {
+        "rows": 10,
+        "actually_correct": 0
+      },
+      "held_relation": {
+        "rows": 10,
+        "actually_correct": 0
+      }
+    },
+    "pass": false
+  },
   "variant_continuity": {
     "sheet": "data/interim/argument_abox_sample_r2.csv",
     "rows": 5,
