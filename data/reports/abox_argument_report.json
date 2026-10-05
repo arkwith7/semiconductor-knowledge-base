@@ -85,7 +85,7 @@
   },
   "human_gate": {
     "sheet": "data/interim/argument_abox_sample.csv",
-    "seed": 20261006,
+    "seed": 20261007,
     "threshold": 0.9,
     "by_kind": {
       "DesignChoice": {
@@ -94,45 +94,105 @@
         "correct": 10,
         "withheld": 0,
         "rate": 1.0,
-        "pass": true
+        "decidable": true,
+        "pass": true,
+        "by_split": {
+          "train": {
+            "judged": 10,
+            "correct": 10
+          }
+        }
       },
       "PredictableEffect": {
+        "rows": 10,
+        "judged": 10,
+        "correct": 9,
+        "withheld": 0,
+        "rate": 0.9,
+        "decidable": true,
+        "pass": true,
+        "by_split": {
+          "train": {
+            "judged": 10,
+            "correct": 9
+          }
+        }
+      },
+      "block": {
+        "rows": 30,
+        "judged": 29,
+        "correct": 23,
+        "withheld": 1,
+        "rate": 0.7931,
+        "decidable": true,
+        "pass": false,
+        "by_split": {
+          "train": {
+            "judged": 29,
+            "correct": 23
+          }
+        }
+      },
+      "categoryVariantOf": {
         "rows": 10,
         "judged": 10,
         "correct": 10,
         "withheld": 0,
         "rate": 1.0,
-        "pass": true
-      },
-      "block": {
-        "rows": 30,
-        "judged": 30,
-        "correct": 24,
-        "withheld": 0,
-        "rate": 0.8,
-        "pass": false
-      },
-      "categoryVariantOf": {
-        "carried_from_seed": 20261005,
-        "carried": 4,
-        "rejudged": 1,
-        "withheld": 0,
-        "judged": 5,
-        "correct": 5,
-        "rate": 1.0,
-        "continuity": {
-          "rows": 5,
-          "preserved": 4
+        "decidable": true,
+        "pass": true,
+        "by_split": {
+          "dev": {
+            "judged": 4,
+            "correct": 4
+          },
+          "train": {
+            "judged": 6,
+            "correct": 6
+          }
         },
-        "pass": true
+        "relation_exists": {
+          "judged": 10,
+          "yes": 10
+        }
+      },
+      "locator": {
+        "rows": 10,
+        "judged": 10,
+        "correct": 6,
+        "withheld": 0,
+        "rate": 0.6,
+        "decidable": true,
+        "pass": false,
+        "by_split": {
+          "train": {
+            "judged": 10,
+            "correct": 6
+          }
+        }
       },
       "refersToJudgment": {
         "rows": 10,
         "judged": 10,
-        "correct": 8,
+        "correct": 9,
         "withheld": 0,
-        "rate": 0.8,
-        "pass": false
+        "rate": 0.9,
+        "decidable": true,
+        "pass": true,
+        "by_split": {
+          "dev": {
+            "judged": 7,
+            "correct": 6
+          },
+          "train": {
+            "judged": 3,
+            "correct": 3
+          }
+        },
+        "relation_exists": {
+          "judged": 10,
+          "yes": 10
+        }
       }
     },
     "pass": false
@@ -261,6 +321,60 @@
           "correct": 6,
           "withheld": 0,
           "rate": 0.6,
+          "pass": false
+        }
+      },
+      "pass": false
+    },
+    {
+      "sheet": "data/interim/argument_abox_sample.csv",
+      "seed": 20261006,
+      "threshold": 0.9,
+      "by_kind": {
+        "DesignChoice": {
+          "rows": 10,
+          "judged": 10,
+          "correct": 10,
+          "withheld": 0,
+          "rate": 1.0,
+          "pass": true
+        },
+        "PredictableEffect": {
+          "rows": 10,
+          "judged": 10,
+          "correct": 10,
+          "withheld": 0,
+          "rate": 1.0,
+          "pass": true
+        },
+        "block": {
+          "rows": 30,
+          "judged": 30,
+          "correct": 24,
+          "withheld": 0,
+          "rate": 0.8,
+          "pass": false
+        },
+        "categoryVariantOf": {
+          "carried_from_seed": 20261005,
+          "carried": 4,
+          "rejudged": 1,
+          "withheld": 0,
+          "judged": 5,
+          "correct": 5,
+          "rate": 1.0,
+          "continuity": {
+            "rows": 5,
+            "preserved": 4
+          },
+          "pass": true
+        },
+        "refersToJudgment": {
+          "rows": 10,
+          "judged": 10,
+          "correct": 8,
+          "withheld": 0,
+          "rate": 0.8,
           "pass": false
         }
       },
