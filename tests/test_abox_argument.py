@@ -636,3 +636,104 @@ def test_gate5_zero_judged_is_undecidable_not_pass(tmp_path, monkeypatch):
     assert out["by_kind"]["DesignChoice"]["decidable"] is False                 # 보류 3/10 > 20%
     assert out["by_kind"]["locator"]["decidable"] is False and out["by_kind"]["locator"]["pass"] is False   # 0 건
     assert out["over_hold"]["held_block"] == {"rows": 1, "actually_correct": 1} and out["pass"] is False
+
+
+def test_e5_definition_contract_and_uniqueness():
+    """E5 (§20.24) — `A ⏎(…, 이하 '인용발명1'이라 함), B ⏎(…, 이하 '인용발명2'라 함)` 에서 1 = A · 2 = B.
+    한 문헌이 번호 여럿에 잡히면 유일하지 않으므로 쓰지 않는다."""
+    t = ("선행기술로 공개특허공보 제10-2011-0020951호\n(2011.03.03. 공개, 이하 '인용발명1'이라 함), 공개특허공보 "
+         "제10-2015-0123128호\n(2015.11.03. 공개, 이하 '인용발명2'라 함)가 있습니다.")
+    d = baa.e5_definitions(t, "1020170000000")
+    assert d[("인용발명", 1)][0][1] == "KR-P-1020110020951" and d[("인용발명", 2)][0][1] == "KR-P-1020150123128"
+    same = "공개특허공보 제10-2011-0020951호 (가, 이하 '인용발명1'이라 함), 미확인 문헌 (나, 이하 '인용발명2'라 함)"
+    assert baa.e5_definitions(same, "1020170000000") == {}
+    assert not baa.K6_FWD_RX.search("(2011.03.03. 공개, 이하 '인용발명1'이라 함), 공개특허공보 제10-2015-0123128호")
+
+
+# ── §20.24 보정 E1–E9 ─────────────────────────────────────────────────
+def test_e3_e4_mention_level_parents_and_head_continuation():
+    """E3 — 부모는 그 언급만 뺀다 · E4 — 괄호로 끊긴 머리줄 나열을 이어 읽는다(5단계 누락 10번 · 4차 71행)."""
+    assert baa.own_claims("2-2. 제2항(제1항의 종속항), 제6항 내지 제7항(제2항의 종속항) 및 제10항(제1항의 종속항)") == [2, 6, 7, 10]
+    assert baa.own_claims("2-2. 청구항 제2항 발명(제1항 인용), 제3항 발명(제2항 인용)의 한정 구성은") == [2, 3]
+    assert baa.own_claims("청구항 4(청구항 1 내지 3 인용)") == [4]
+    assert baa.own_claims("1-1. 청구항 1 발명은 청구항 2 와 비교하면") == [1]          # 나열이 아니다
+
+
+def test_e1_table_head_joins_only_a_sentence_intro():
+    """E1 — 표 머리 줄은 앞 머리줄이 비교를 예고하는 **문장**이고 판단 서술이 아직 없을 때만 그 판단에 붙는다."""
+    intro = "1-1. 청구항 1 발명과 인용발명 1을 비교해 보면 아래 표 1과 같습니다.\n청구항 1 발명 비고\n구성 A 동일\n양 발명은 동일합니다.\n"
+    assert [baa._block_claims(b) for b in baa.split_blocks(intro)] == [[1]]
+    title = "2-1. 청구항 1 내지 4 발명\n청구항 1 발명 인용발명 비고\n구성 A 동일하다.\n"
+    assert [1, 2, 3, 4] not in [baa._block_claims(b) for b in baa.split_blocks(title)]   # 제목에 붙여 범위를 남기지 않는다
+
+
+def test_e2_patent_claim_heading_form():
+    assert baa.HEAD_K3_RX.match("2-1. 본원의 특허청구 제1항은 반도체 기판에")
+    assert baa.own_claims("2-2. 본원의 특허청구 제2~4항은 제1 폴리") == [2, 3, 4]
+
+
+def test_e9_paren_number_is_deeper_than_dot_letter():
+    assert baa._mark_level("1", "1)") > baa._mark_level("나", "나.")
+    assert baa._mark_level("1", "1.") < baa._mark_level("나", "나.")
+
+
+def test_e6_common_knowledge_across_page_break():
+    import re as _re
+    t = "통상의 기술자에게는 통 - 2 - 10-2008-0030254 상적인 기술범주에 속하는 것입니다."
+    assert baa.CK_RX.search(_re.sub(r"\s*" + baa.PAGE_MARK_RX.pattern + r"\s*", "", t))
+    assert baa.CK_RX.search("통상의 기술자에게 잘 알려진 사항입니다")
+
+
+def test_e8_two_digit_paragraph_only_with_keyword():
+    got = [v for _, items in baa.locator_items("도시되어 있고[단락 84, 도면 8], 이 사건") for _, v in items]
+    assert got == ["[84]", "도8"] and all(baa.LOC_VALUE_RX.match(v) for v in got)
+    assert [v for _, items in baa.locator_items("단락 5 를 참고하면") for _, v in items] == []
+
+
+def test_e7_section_final_conclusion_reaches_covered_blocks():
+    """E7 — 절 끝 결론 `청구항 1 내지 3 은 인용발명 1, 2 의 결합` 은 블록 청구항 전체를 덮는 묶음이 하나뿐이므로 앞 블록들에도
+    문헌 근거가 된다. 묶음이 블록을 다 덮지 못하면 주지 않는다(사용자 조건 10-05)."""
+    text = ("[구체적인 거절이유]\n1. 이 출원은 특허법 제29조제2항에 따라 특허를 받을 수 없습니다.\n"
+            "인용발명 1 : 공개특허공보 제10-2010-0012345호\n인용발명 2 : 공개특허공보 제10-2011-0054321호\n"
+            "1-1. 청구항 1 발명은 인용발명 1과 대비하면 차이가 있으나 쉽게 발명할 수 있습니다.\n"
+            "1-2. 청구항 2 발명은 인용발명 1에 개시되어 있어 쉽게 발명할 수 있습니다.\n"
+            "1-3. 청구항 3 발명은 인용발명 2에 개시되어 있습니다. 따라서 청구항 1 내지 3 발명은 인용발명 1, 2의 결합으로부터 "
+            "쉽게 발명할 수 있습니다.\n")
+    recs, _ = baa.extract_notice("1020200000000_9", text)
+    by = {tuple(r["claims"]): r for r in recs}
+    assert set(by[(2,)]["labels"]) == {"KR-P-1020100012345", "KR-P-1020110054321"} and by[(2,)]["e7"]
+    narrow = text.replace("따라서 청구항 1 내지 3 발명은", "따라서 청구항 2, 3 발명은")
+    recs, _ = baa.extract_notice("1020200000000_9", narrow)
+    by = {tuple(r["claims"]): r for r in recs}
+    assert not by[(1,)]["e7"]                                    # 1 은 묶음에 들지 않는다
+
+
+def test_e7_alternative_conclusion_is_not_a_common_document_set():
+    """대안 결합 결론(`인용발명1, 또는 인용발명1,2의 결합`)은 합집합으로 귀속하지 않는다(재판정 10-05).
+    블록이 자기 결론을 가지면 그 문헌 그대로, 없으면 보류한다."""
+    base = ("[구체적인 거절이유]\n1. 이 출원은 특허법 제29조제2항에 따라 특허를 받을 수 없습니다.\n"
+            "인용발명 1 : 공개특허공보 제10-2010-0012345호\n인용발명 2 : 공개특허공보 제10-2011-0054321호\n"
+            "1-1. 청구항 1 발명은 인용발명 1과 대비하면 차이가 있으나 쉽게 발명할 수 있습니다.\n"
+            "1-2. 청구항 2 발명은 {body}\n"
+            "1-3. 청구항 3 발명은 인용발명 1, 2의 결합으로부터 쉽게 발명할 수 있습니다. 따라서 제1항 내지 제3항 발명은 당업자가 "
+            "인용발명1, 또는 인용발명1,2의 결합에 의해 쉽게 발명할 수 있습니다.\n")
+    own = base.format(body="인용발명 1의 단순한 설계변경에 불과하여 쉽게 발명할 수 있습니다.")
+    r = {tuple(x["claims"]): x for x in baa.extract_notice("1020200000000_9", own)[0]}[(2,)]
+    assert set(r["labels"]) == {"KR-P-1020100012345"} and not r["e7"] and not r["e7_ambiguous"]
+    bare = base.format(body="인용발명 1의 라인부 구성에 대응합니다.")
+    r = {tuple(x["claims"]): x for x in baa.extract_notice("1020200000000_9", bare)[0]}[(2,)]
+    assert not r["e7"] and r["e7_ambiguous"]
+
+
+def test_gate6_relations_are_undecidable_and_never_whole_pass(tmp_path, monkeypatch):
+    """§20.24 — 새 독립 관계 표본이 없으므로 관계는 판정 불가 · '논증층 전체 통과' 는 내지 않는다."""
+    import csv
+    p = tmp_path / "s.csv"
+    rows = ([{"kind": k, "correct": "1"} for k in ("block", "DesignChoice", "PredictableEffect", "locator") for _ in range(10)]
+            + [{"kind": "categoryVariantOf", "correct": "1"}])
+    with p.open("w", newline="") as fh:
+        w = csv.DictWriter(fh, fieldnames=["kind", "correct"]); w.writeheader(); w.writerows(rows)
+    monkeypatch.setattr(baa, "ROOT", tmp_path)
+    out = baa.gate5(p, relation_undecidable=True, seed=baa.SAMPLE6_SEED)
+    assert out["by_kind"]["categoryVariantOf"]["decidable"] is False and out["by_kind"]["refersToJudgment"]["decidable"] is False
+    assert out["pass_judged_kinds"] is True and out["pass"] is False

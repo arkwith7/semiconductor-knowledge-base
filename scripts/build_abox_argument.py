@@ -108,6 +108,8 @@ HEAD_RX = re.compile(r"^[ \t]*(?:" + MARK + r"[ \t]*[<\[(【]?[ \t]*" + CL_MARKE
 # K3 (§20.23 c) — 머리줄 변형: 나열 `6. 제10, 11항(…) 및 제12항` · 오탈자 `라. 청구하 제10-12항`. 표지가 있을 때만이고,
 # 새 꼴은 그 구간에 판단 서술이 있을 때만 머리줄로 받는다(split_blocks).
 CL_MARKED_K3 = (r"(?:" + CL + r"|청구\s*하\s*(?:제\s*)?\d{1,3}"
+                # E2 (§20.24) — `2-1. 본원의 특허청구 제1항은` · `특허청구범위 제2~4항은`
+                r"|(?:본원\s*(?:의\s*)?)?특허\s*청구\s*(?:범위\s*(?:의\s*)?)?\s*제\s*\d{1,3}(?:\s*[-–~∼,]\s*\d{1,3})*\s*항"
                 r"|(?:(?:독립|종속)\s*항\s*)?제\s*\d{1,3}(?:\s*[-–]\s*\d{1,3})?(?:\s*(?:,|및)\s*(?:제\s*)?\d{1,3})*\s*항)")
 HEAD_K3_RX = re.compile(r"^[ \t]*" + MARK + r"[ \t]*[<\[(【]?[ \t]*" + CL_MARKED_K3, re.M)
 JUDGE_RX = re.compile(r"(?:쉽게|용이하게)\s*(?:발명|도출|생각)|동일(?:합니다|하다|한\s*발명|하므로)|신규성|진보성|차이(?:가|점)")
@@ -128,6 +130,8 @@ TITLE_MAX = 40
 
 # ── 근거·논거 신호 ────────────────────────────────────────────────────
 CK_RX = re.compile(r"(?:주지|관용)\s*(?:의\s*)?(?:기술|수단|기법|사항|기술수단)|주지\s*관용"
+                   # E6 (§20.24) — `통상의 기술자에게 잘 알려진 사항` · `통상적인 기술범주`
+                   r"|잘\s*알려(?:진|져\s*있)|통상적인\s*기술\s*(?:범주|수단|사항)|일반적인\s*기술\s*(?:상식|수단|사항)"
                    r"|기술\s*상식|통상의\s*기술\s*상식|널리\s*(?:알려진|알려져\s*있|사용되는|사용되고\s*있|쓰이는|이용되는)")
 RATIONALE_RX = {
     "DesignChoice": re.compile(r"설계\s*(?:변경|사항|적\s*선택)"),
@@ -157,7 +161,8 @@ SENT_BOUND_RX = re.compile(r"(?:다|음|함)\s*\.|[가-힣]\.\s|\n\s*\n")
 # 도면: `도 3` (뒤 조사와 무관) · `도 4A,B` · `도 3a, 3b` · `도 2, 5` · `도 10A 내지 10C` · `도면 1(B)` · `도6 A`.
 # 도면의 하이픈(`도 1-5`)은 범위인지 복합 도면 번호(`도면 1-5, 1-6`)인지 원문이 말하지 않는다 — 읽지 않는다(C6 이 모호로 보류).
 _K1_PARA_RX = re.compile(r"(?:(?:식별\s*번호|단락|문단)\s*)?[\[【]\s*(\d{3,5})\s*(?:[-–~∼]\s*(\d{3,5})\s*)?((?:,\s*\d{3,5}\s*)*)[\]】]"
-                         r"|(?:식별\s*번호|단락|문단)\s*(\d{3,5})")
+                         # E8 (§20.24) — 키워드가 있을 때만 1–2 자리도 단락이다(`[단락 84, 도면 8]`).
+                         r"|(?:식별\s*번호|단락|문단)\s*(\d{3,5}|\d{1,2}(?=\s*[,\]】)~∼\-–]|\s*내지|\s*및))")
 _K1_PARA_NEXT_RX = re.compile(r"\s*(?:(~|∼|-|–|내지|부터)|,|및)\s*(?:[\[【]\s*(\d{3,5})\s*[\]】]|(\d{3,5})(?!\d))")
 _K1_FIG_RX = re.compile(r"(?<![가-힣])도(?:면)?\s*(\d{1,3})(?:\s*\(\s*([A-Za-z])\s*\)|\s?([A-Za-z])(?![A-Za-z]))?"
                         r"(?!\s*(?:[%℃°]|mm|nm|μm|um|㎛|cm|분|초|이상|이하|정도))")
@@ -231,7 +236,7 @@ def locator_items(text: str) -> list[tuple[int, list[tuple[str, str]]]]:
     return sorted(out, key=lambda x: x[0])
 
 
-LOC_VALUE_RX = re.compile(r"^(?:\[\d{3,5}\](?:~\[\d{3,5}\])?|도\d{1,3}[A-Za-z]?(?:~\d{1,3}[A-Za-z]?)?)$")
+LOC_VALUE_RX = re.compile(r"^(?:\[\d{1,5}\](?:~\[\d{1,5}\])?|도\d{1,3}[A-Za-z]?(?:~\d{1,3}[A-Za-z]?)?)$")
 
 
 def _sha(p: Path) -> str:
@@ -264,7 +269,7 @@ def _hyphen_range(m: re.Match) -> str:
 def _as_claim(s: str) -> str:
     """해석용 정규화 — 저장하는 원문은 바꾸지 않는다. `제2-7항` · `청구항 1-4` 는 범위다(H3)."""
     # 법조문(`특허법 제29조제2항` · `제42조 제4항`)의 `제N항` 은 청구항이 아니다 — `조` 뒤는 바꾸지 않는다.
-    s = re.sub(r"(?<!조)(?<!조\s)제\s*(\d{1,3})\s*[-–]\s*(\d{1,3})\s*항", r"청구항 \1 내지 \2", s)
+    s = re.sub(r"(?<!조)(?<!조\s)제\s*(\d{1,3})\s*[-–~∼]\s*(\d{1,3})\s*항", r"청구항 \1 내지 \2", s)
     s = re.sub(r"(?<!조)(?<!조\s)제\s*(\d{1,3})((?:\s*(?:,|및)\s*(?:제\s*)?\d{1,3})+)\s*항",      # K3 `제10, 11항`
                lambda m: "청구항 " + m.group(1) + re.sub(r"제\s*", "", m.group(2)), s)
     s = re.sub(r"(?<!청구항)(?<!청구항\s)(?<!조)(?<!조\s)제\s*(\d{1,3})\s*항", r"청구항 \1", s)
@@ -287,19 +292,42 @@ def dependency_parents(s: str) -> set[int]:
     return {n for m in DEP_RX.finditer(_as_claim(s)) for n in N.parse_claim_refs(m.group(1))}
 
 
+# E3 (§20.24 · H1 언급 단위) — 부모항은 종속관계를 설명하는 **그 언급**(`…의 종속(항)` · `…을 인용` · `…에 있어서` 가 바로
+# 뒤에 붙은 것)만 뺀다. 같은 번호라도 판단 대상으로 나오는 언급은 남긴다 — `제2항(제1항의 종속항), 제6항(제2항의 종속항)` 의
+# 2 는 6 의 부모이기도 하지만 이 블록이 판단하는 청구항이다(5단계 누락 10번).
+DEP_TAIL_RX = re.compile(r"\s*(?:의\s*(?:직\s*[·ㆍ]?\s*간접\s*)?종속|(?:을|를)?\s*(?:직\s*[·ㆍ]?\s*간접\s*(?:적으로\s*)?)?인용(?!\s*발명|\s*문헌)"
+                         r"|에\s*있어서|(?:을|를)\s*더\s*한정)")
+
+
 def judged_claims(s: str, first_only: bool = True) -> list[int]:
-    """`s` 가 판단 대상으로 적은 청구항 — 부모항 제외. first_only 면 부모항이 아닌 **첫 나열**만."""
+    """`s` 가 판단 대상으로 적은 청구항 — 부모 언급 제외. first_only 면 부모 언급이 아닌 **첫 나열**만."""
     norm = _as_claim(s)
-    parents = dependency_parents(s)
     picked: list[int] = []
     for m in N.CLAIM_REF_RX.finditer(norm):
-        nums = [n for n in N.parse_claim_refs(m.group(0)) if n not in parents]
+        if DEP_TAIL_RX.match(norm, m.end()):
+            continue                                   # 종속관계를 설명하는 언급
+        nums = N.parse_claim_refs(m.group(0))
         if not nums:
             continue
         picked.extend(nums)
         if first_only:
+            # E4 (§20.24) — 첫 나열이 괄호(종속관계 설명)로 끊겨도 `, 제N항` · `및 제N항` 으로 바로 이어지는 나열은 같은 머리줄의
+            # 판단 대상이다(`제2항(…), 제6항 내지 제7항(…) 및 제10항(…)` · `제2항 발명(…), 제3항 발명(…)의`).
+            at = m.end()
+            # 괄호 안(종속관계 설명)은 같은 길이의 공백으로 지운 사본에서 다음 나열을 찾는다.
+            blank = re.sub(r"\([^()]*\)", lambda x: " " * len(x.group(0)), norm)
+            for n in N.CLAIM_REF_RX.finditer(blank, at):
+                if not CHAIN_GAP_RX.fullmatch(blank[at:n.start()]) or not re.search(r",|및|와|과", blank[at:n.start()]):
+                    break
+                if not DEP_TAIL_RX.match(blank, n.end()):
+                    picked.extend(N.parse_claim_refs(n.group(0)))
+                at = n.end()
             break
     return sorted(set(picked))
+
+
+# 나열 사이 — `발명` · 괄호 하나 · 나열 접속(쉼표 · 및 · 와 · 과)만. 다른 말이 끼면 나열이 끝난 것이다.
+CHAIN_GAP_RX = re.compile(r"\s*(?:발명)?\s*(?:,|및|와|과)\s*")
 
 
 def own_claims(head: str) -> list[int]:
@@ -316,6 +344,27 @@ def split_blocks(seg: str) -> list[dict]:
     """
     hs = [m for m in HEAD_RX.finditer(seg)
           if (m.group("mark") or _after_sentence_end(seg, m.start())) and not _bracket_locator(seg, m)]
+    # E1 (§20.24) — 표 머리 줄(`청구항 1 발명 비고`)은 절 안에 앞선 머리줄이 있으면 새 판단을 열지 않는다. 앞 블록의 도입문
+    # (`… 비교해 보면 아래 표 1과 같습니다`)과 표가 한 판단이다(5단계 20행 · 판단 조각).
+    def _line(m):
+        nl = seg.find("\n", m.start())
+        return seg[m.start(): nl if nl != -1 else len(seg)]
+
+    def _intro_of(prev, m):
+        # 앞 머리줄부터 이 줄까지가 판단 서술 없는 도입문이고, 표 머리의 청구항이 앞 머리줄 청구항 안에 있을 때만 같은 판단이다.
+        # 표 머리가 청구항마다 판단을 여는 통지서(회귀 81·155)에서는 앞 블록에 이미 판단이 있으므로 갈라 둔다.
+        # 앞 머리줄은 표지가 있고 **문장 꼴**(비교를 예고하는 서술)이어야 한다 — 제목만 있는 줄(`2-1. 청구항 1 내지 4 발명`)에 붙이면
+        # 제목 범위가 블록에 남는다(회귀 155).
+        head = _line(prev)
+        sentence = bool(re.search(r"(?:비교|대비)[^\n]{0,30}(?:같습니다|같다|같이|있습니다)|(?:은|는)\s", head))
+        return (prev.group("mark") and sentence and not JUDGE_RX.search(seg, prev.start(), m.start())
+                and set(own_claims(_line(m))) <= set(own_claims(head)) and own_claims(_line(m)))
+    keep = []
+    for m in hs:
+        if keep and not m.group("mark") and _TABLE_HEAD_RX.search(_line(m)) and _intro_of(keep[-1], m):
+            continue
+        keep.append(m)
+    hs = keep
     # K3 — 기존 머리줄에 없는 새 꼴(나열 · 오탈자 · 위치 표기가 있는 번호 괄호 표지)을 더한다. 판단 서술이 있는 구간만.
     have = {m.start() for m in hs}
     # 표지가 줄을 넘거나 출원번호 꼴(`10-2015-0155906` · 쪽 바꿈 표기)이면 머리줄이 아니다(검토 34행).
@@ -333,12 +382,13 @@ def split_blocks(seg: str) -> list[dict]:
         end = hs[i + 1].start() if i + 1 < len(hs) else len(seg)
         nl = seg.find("\n", m.start())
         head = seg[m.start(): nl if 0 <= nl < end else end]
-        blk = {"mark": _norm_mark(m.group("mark")), "head": head, "text": seg[m.start():end]}
+        blk = {"mark": _norm_mark(m.group("mark")), "mark_raw": (m.group("mark") or "").strip(), "head": head,
+               "text": seg[m.start():end]}
         if carry is not None:
             title, sub = set(own_claims(carry["head"])), set(own_claims(blk["head"]))
             # H2 — 제목만 있는 상위 머리줄(`3-1. 청구항 1 내지 13`) 바로 아래의 **더 깊은 계층** 머리줄(`(1) 청구항 1~6,
             # 8~11`)이 그 부분집합이면 본문은 하위 범위에 대한 것이다. 계층이 같거나 부분집합이 아니면 둘을 합친다.
-            if sub and sub < title and _mark_level(blk["mark"]) > _mark_level(carry["mark"]):
+            if sub and sub < title and _mark_level(blk["mark"], blk["mark_raw"]) > _mark_level(carry["mark"], carry.get("mark_raw", "")):
                 blk = {**blk, "text": carry["text"] + blk["text"]}
             else:
                 blk = {"mark": carry["mark"] or blk["mark"], "head": carry["head"], "text": carry["text"] + blk["text"],
@@ -365,10 +415,16 @@ def split_blocks(seg: str) -> list[dict]:
     return merged
 
 
-def _mark_level(mark: str) -> int:
-    """통지서 표지의 계층 — 1. > 1-1 · 1.1 · 가. > (1) > ① > - · 기타. 표지 없음은 가장 깊다."""
+def _mark_level(mark: str, raw: str = "") -> int:
+    """통지서 표지의 계층 — 1. > 1-1 · 1.1 · 가. > 1) · (1) > 가) · ① > - · 기타. 표지 없음은 가장 깊다.
+    E9 (§20.24) — `1)` 은 `1.` 과 다르다. 정규화(괄호·점 제거) 전 원형으로 가른다. 계층은 H2 의 한 조건일 뿐이고, 제목만 있는 줄 ·
+    청구항 부분집합 조건과 함께 쓴다(표지 모양만으로 경계를 확정하지 않는다 — 사용자 조건 10-05)."""
     if not mark:
         return 9
+    if re.fullmatch(r"\d+\s*\)", raw.strip()):
+        return 3
+    if re.fullmatch(r"[가-하]\s*\)", raw.strip()):
+        return 4
     if re.fullmatch(r"\d+", mark):
         return 1
     if re.fullmatch(r"\d+[-.]\d+(?:[-.]\d+)?", mark) or re.fullmatch(r"[가-하]", mark):
@@ -447,6 +503,11 @@ def conclusion_bundles(text: str) -> list[tuple[re.Match, set[int], list[tuple[s
     return out
 
 
+ALT_RX = re.compile(r"또는|혹은")
+# 블록 자신의 결론 — 라벨과 판단 서술이 한 문장 안에(`인용발명 1의 단순 설계변경` · `인용발명 1, 2의 결합으로부터 쉽게`).
+OWN_CONCL_RX = re.compile(r"(?:인\s*용\s*발\s*명|비\s*교\s*대\s*상\s*발\s*명)\s*\d[^.。]{0,80}?(?:쉽게|용이|설계\s*변경|도출|발명할\s*수|동일한\s*발명|신규성)")
+
+
 def summary_for_block(summary: str, claims: set[int]) -> tuple[str, bool]:
     """K2 — 종합 결론에서 이 블록의 묶음 절만 문헌 근거로 쓴다. (근거 절 본문, 모호 여부).
     블록 청구항을 **모두** 덮는 묶음이 하나면 그 절, 덮는 묶음이 없는데 여러 묶음에 걸쳐 있으면 모호(보류)."""
@@ -502,7 +563,7 @@ def split_by_subject(b: dict) -> list[dict]:
         if cl and not cl & claims:
             cuts.append((m.start(), sorted(cl)))
     out = [{**b, "text": text[:cuts[0][0]] if cuts else text, "summary": summary, "summary_docs": summary_docs,
-            "k2_ambiguous": ambiguous,
+            "k2_ambiguous": ambiguous, "summary_raw": summary_text,
             "claims_extra": sorted(claims - set(own_claims(b["head"]))), "claims_concl": sorted(concl_added)}]
     for i, (at, cl) in enumerate(cuts):
         end = cuts[i + 1][0] if i + 1 < len(cuts) else len(text)
@@ -596,7 +657,8 @@ MAX_LABEL_RANGE = 10
 # K6 (§20.23 c) — 라벨 정의의 유효 범위. 정본 파서는 `라벨 : 문헌` 꼴(본문 표지 뒤)만 읽는다. 여기서는 번호 뒤 정의
 # `…호(이하 '인용발명 1')` 와 통지서 전체의 정의를 위치와 함께 모은다. 같은 절의 정의를 우선하고, 없으면 통지서 안에서 그 번호의
 # 정의가 **문헌 하나로만** 있을 때 잇는다. 서로 다른 문헌 정의가 있으면 잇지 않는다(반복 언급은 정상).
-K6_FWD_RX = re.compile(r"(" + _LABEL_TERM + r")\s*(\d{1,2})(?!\d)\s*[\]】)]?\s*(?:[:：=]|은|는|이라|로\s*칭)")
+# `이라` · `로 칭` 은 뒤 꼴(`…호(이하 '인용발명1'이라 함), B`)의 표지다 — 앞 꼴로 읽으면 라벨을 다음 문헌 B 에 잇는다(§20.24 E5).
+K6_FWD_RX = re.compile(r"(?<!이하)(?<!이하\s)(" + _LABEL_TERM + r")\s*(\d{1,2})(?!\d)\s*[\]】)]?\s*(?:[:：=]|은|는)")
 K6_BACK_RX = re.compile(r"이하\s*[,'‘\"“]?\s*(" + _LABEL_TERM + r")\s*(\d{1,2})(?!\d)")
 
 
@@ -615,6 +677,34 @@ def k6_definitions(text: str, app: str) -> dict[tuple[str, int], list[tuple[int,
             last = max(docs, key=lambda d: win.rfind(d.split("-")[-1][-5:].lstrip("0")))
             out.setdefault((re.sub(r"\s", "", m.group(1)), int(m.group(2))), []).append((m.start(), last))
     return out
+
+
+# E5 (§20.24 · 정의 계약) — `문헌 A ⏎(…, 이하 '라벨n'이라 함), 문헌 B` 에서 라벨 n 은 A 다. `이하` 를 품은 괄호의 여는 괄호 바로 앞
+# (줄 넘김 허용 · 150 자 안)의 가장 가까운 문헌이다. 정본 파서의 줄 단위 읽기는 라벨을 다음 문헌 B 에 잇는다(5단계 54 · 보류 71·77).
+E5_BACK_RX = re.compile(r"이하\s*[,'‘\"“]?\s*(" + _LABEL_TERM + r")\s*(\d{1,2})(?!\d)\s*[’'\"”]?\s*(?:이라|라|로\s*칭|로\s*지칭)")
+
+
+def e5_definitions(text: str, app: str) -> dict[tuple[str, int], list[tuple[int, str]]]:
+    out: dict[tuple[str, int], list[tuple[int, str]]] = {}
+    for m in E5_BACK_RX.finditer(text):
+        po = text.rfind("(", max(0, m.start() - 80), m.start())
+        if po == -1 or ")" in text[po:m.start()]:
+            continue                                   # `이하` 가 괄호 안에 있어야 한다
+        win = text[max(0, po - 150):po]
+        docs = N.cited_in_section(win, app)
+        if not docs:
+            continue
+        last = max(docs, key=lambda d: win.rfind(d.split("-")[-1][-5:].lstrip("0")))
+        tail_at = win.rfind(last.split("-")[-1][-5:].lstrip("0"))
+        if any(win.rfind(d.split("-")[-1][-5:].lstrip("0")) > tail_at for d in docs if d != last):
+            continue
+        out.setdefault((re.sub(r"\s", "", m.group(1)), int(m.group(2))), []).append((m.start(), last))
+    # 한 문헌이 서로 다른 번호 여럿에 정의되면(괄호 앞 문헌을 못 읽어 같은 문헌이 거듭 잡힌 경우) 그 정의들은 유일하지 않다(과잉 보류 75행).
+    by_doc: dict[str, set] = {}
+    for k, v in out.items():
+        for _, d in v:
+            by_doc.setdefault(d, set()).add(k)
+    return {k: v for k, v in out.items() if all(len(by_doc[d]) == 1 for _, d in v)}
 
 
 def k6_scope(table: dict, lo: int, hi: int) -> dict[tuple[str, int], str]:
@@ -766,6 +856,7 @@ def extract_notice(stem: str, text: str) -> tuple[list[dict], Counter]:
     stat = Counter()
     sections, defs, lines = notice_sections(text, app)
     k6_table = k6_definitions(text, app)
+    e5_table = e5_definitions(text, app)
     recs = []
     # 절 식별자 — 인쇄된 절 번호가 한 통지서에서 되풀이된다(`1,2,3,1,2,3` · 31 통지서). 번호만으로 키를 지으면 다른 판단이
     # 한 IRI 로 합쳐진다(§20.23 b⑤). 원문 순서에서 같은 번호가 k 번째(k ≥ 2) 나오면 `{no}r{k}` 로 적는다.
@@ -785,6 +876,12 @@ def extract_notice(stem: str, text: str) -> tuple[list[dict], Counter]:
         # 정의는 그 라벨을 모호로 버린다 — 절 안의 정의를 먼저 쓴다.
         sdefs = {**defs, **N.label_definitions(s["seg"], app)}
         k6 = k6_scope(k6_table, s["offset"], s["offset"] + len(s["seg"]))
+        # E5 — 유일하게 확인된 뒤 꼴 정의가 정본 대응과 다르면 덮어쓰고 기록한다(기존 · 보정 후 · 원문 위치 · 규칙).
+        e5_over = {}
+        for k, nid in k6_scope(e5_table, s["offset"], s["offset"] + len(s["seg"])).items():
+            if sdefs.get(k) != nid:
+                e5_over[k] = (sdefs.get(k, ""), nid, min(p for p, d in e5_table[k] if d == nid))
+                sdefs[k] = nid
         def_lines = {**lines, **definition_lines(s["seg"])}
         sdocs = section_docs(s["seg"], app, sdefs)
         decl_lines = declaration_lines(s["seg"], app, sdocs)
@@ -794,6 +891,26 @@ def extract_notice(stem: str, text: str) -> tuple[list[dict], Counter]:
         concl_of = {i: set(b.get("claims_concl", [])) for i, b in enumerate(blocks, 1)}
         summary_of = {i: b.get("summary", "") for i, b in enumerate(blocks, 1)}
         sdocs_of = {i: b.get("summary_docs", "") for i, b in enumerate(blocks, 1)}
+        # E7 (§20.24) — 절 끝 종합 결론(블록에 떨어진 결론 · 청구항 없는 조각의 결론)을 그 묶음이 덮는 절 안 다른 블록에도 준다.
+        # 블록 청구항 **전체**를 덮는 묶음 절이 하나로 정해질 때만이다(사용자 조건 10-05). 둘 이상이면 주지 않는다(C12 가 본다).
+        sect_concl = [b["summary_raw"] for b in blocks if b.get("summary_raw")] + \
+                     [b["text"] for b in blocks if not _block_claims(b) and CONCL_OPEN_RX.search(b["text"])]
+        e7_of, e7_amb = {}, set()
+        for i, b in enumerate(blocks, 1):
+            if sdocs_of[i] or not sect_concl:
+                continue
+            parts = {summary_for_block(ct, set(_block_claims(b)))[0] for ct in sect_concl} - {""}
+            if len(parts) != 1:
+                continue
+            part = parts.pop()
+            # 대안 결합(`인용발명1, 또는 인용발명1,2의 결합`)은 공통 문헌 집합이 아니다 — 합집합으로 귀속하지 않는다(재판정 10-05:
+            # 불인정 회귀 50·78·91·165 · 보류 4차 26 · 회귀 162). 블록 본문이 자기 결론을 갖고 있으면 그 문헌이 근거이고,
+            # 자기 결론이 없으면 어느 갈래인지 정할 수 없으므로 보류한다.
+            if ALT_RX.search(part):
+                if not OWN_CONCL_RX.search(_flat(b["text"])):
+                    e7_amb.add(i)
+                continue
+            sdocs_of[i] = e7_of[i] = part
         amb_of = {i: b.get("k2_ambiguous", False) for i, b in enumerate(blocks, 1)}
         if blocks:
             pre = s["seg"][:s["seg"].find(blocks[0]["text"])]
@@ -823,11 +940,14 @@ def extract_notice(stem: str, text: str) -> tuple[list[dict], Counter]:
                 "labels": labels,
                 "missing_labels": len(missing),
                 "summary": summ, "summary_docs": sdoc, "k2_ambiguous": amb_of.get(bi, False),
-                "head": head, "split": split_of.get(bi, False),
+                "head": head, "split": split_of.get(bi, False), "e7": bool(e7_of.get(bi)), "e7_ambiguous": bi in e7_amb,
                 "evidence": _label_evidence(labels, how, def_lines, sdocs, decl_lines),
                 "how": {nid: sorted(v, key=str) for nid, v in how.items()},
+                "e5": {f"{k[0]}{k[1]}": v for k, v in e5_over.items()
+                       if any(v[1] == nid and (k[0], k[1]) == (w[1], w[2]) for nid, ws in how.items() for w in ws if w != "direct")},
                 "sec_span": (s["offset"], s["offset"] + len(s["seg"])),
-                "ck": bool(CK_RX.search(flat)),
+                # E6 — 쪽 바꿈 표기가 낱말을 끊는다(`통 - 2 - 10-2008-0030254 상적인`). 표기를 앞뒤 공백과 함께 지우고 읽는다.
+                "ck": bool(CK_RX.search(re.sub(r"\s*" + PAGE_MARK_RX.pattern + r"\s*", "", flat))),
                 "rat": sorted(k for k, rx in RATIONALE_RX.items() if rx.search(flat)),
                 "text": text_,
             })
@@ -1144,7 +1264,7 @@ def corrections_of(r: dict) -> list[tuple[str, int]]:
         old_range = bool(old and (old.group("p3") or old.group("fn2")))
         if not old or len(items) > 1 or (any("~" in v for _, v in items) and not old_range):
             out.append(("K1", base + start))
-    if r.get("summary_docs"):
+    if r.get("summary_docs") and not r.get("e7"):            # E7 로 받은 절 결론은 K2 가 아니다(따로 센다)
         out.append(("K2", base + len(t)))
     if r["head"] and not HEAD_RX.match(r["head"]) and HEAD_K3_RX.match(r["head"]):
         out.append(("K3", base))
@@ -1155,6 +1275,10 @@ def corrections_of(r: dict) -> list[tuple[str, int]]:
             out.append(("K5", base + m.start()))
     if any(v != "direct" and v[0] == "definition_k6" for vs in r["how"].values() for v in vs):
         out.append(("K6", base))
+    if r.get("e7"):
+        out.append(("E7", base))
+    for _, (_, _, at) in sorted(r.get("e5", {}).items()):
+        out.append(("E5", at))
     return out
 
 
@@ -1175,6 +1299,8 @@ def extract_all() -> tuple[list[list[dict]], Counter]:
             r["corrections"] = corrections_of(r)
             if r.get("k2_ambiguous"):          # 종합 결론의 어느 묶음이 이 블록 것인지 정해지지 않았다
                 r["holds"]["block"] = sorted(set(r["holds"]["block"]) | {"K2_summary_ambiguous"})
+            if r.get("e7_ambiguous"):          # 대안 결합 결론 · 블록에 자기 결론이 없다
+                r["holds"]["block"] = sorted(set(r["holds"]["block"]) | {"E7_alternative_ambiguous"})
         stat.update(st)
         stat["notices"] += 1
         per_notice.append(recs)
@@ -1591,7 +1717,13 @@ SAMPLE5_CSV = ROOT / "data" / "interim" / "argument_abox_sample_r5.csv"
 MISSING5_CSV = ROOT / "data" / "interim" / "argument_abox_missing_r5.csv"
 SEEN_SHEETS = ([ROOT / "data" / "interim" / f"argument_abox_sample_r{i}.csv" for i in (1, 2, 3, 4)]
                + [ROOT / "data" / "interim" / f"argument_abox_regression_judged_v{i}.csv" for i in (1, 2, 3, 4)]
-               + [ROOT / "data" / "interim" / "mixed_review_timing.csv"])
+               + [ROOT / "data" / "interim" / "mixed_review_timing.csv"]
+               # §20.24 — 5단계 표본(정밀도 · 과잉 보류)과 누락 시트 출원은 개발용으로 돌렸다.
+               + [ROOT / "data" / "interim" / "argument_abox_sample_r5.csv", ROOT / "data" / "interim" / "argument_abox_missing_r5.csv"])
+# 6회차 검증(§20.24 · 보완 1회차 뒤 1 회) — 5단계 시트를 덮어쓰지 않는다.
+SAMPLE6_SEED = 20261010
+SAMPLE6_CSV = ROOT / "data" / "interim" / "argument_abox_sample_r6.csv"
+MISSING6_CSV = ROOT / "data" / "interim" / "argument_abox_missing_r6.csv"
 PRECISION5 = {"block": 30, "DesignChoice": 10, "PredictableEffect": 10}
 LOCATOR5 = (("Paragraph", 5), ("Figure", 5))
 HELD5 = {"held_block": 10, "held_locator": 10}
@@ -1618,7 +1750,7 @@ def _held_relation_sources(flat: list[dict]) -> list[dict]:
     return [r for r in flat if r.get("groups") and (r["key"] in held or any(k in held for _, ks in r["groups"] for k in ks))]
 
 
-def make_sample5(g: Graph, flat: list[dict]) -> tuple[list[dict], list[dict]]:
+def make_sample5(g: Graph, flat: list[dict], seed: int = SAMPLE5_SEED) -> tuple[list[dict], list[dict]]:
     """정밀도(적재된 것) · 과잉 보류(보류된 것) · 원문 출발 누락(통지서) — 서로 다른 출원에서, 미열람 출원만."""
     sp = _split_map()
     seen = seen_apps()
@@ -1627,7 +1759,7 @@ def make_sample5(g: Graph, flat: list[dict]) -> tuple[list[dict], list[dict]]:
     links = _graph_links(g)
     by_key = {r["key"]: r for r in flat}
     none = {"refers": set(), "variant": set()}
-    rng = random.Random(SAMPLE5_SEED)
+    rng = random.Random(seed)
     fresh = lambda r, splits: r["app"] not in seen and sp.get(r["app"]) in splits  # noqa: E731
     loaded = sorted((r for r in flat if r["key"] in emitted and fresh(r, ("train",))), key=lambda r: r["key"])
     rats = {r["key"]: {str(o).rsplit("Rationale", 1)[1] for o in g.objects(URIRef(f"{_jiri(r['key'])}_s1"), PA.hasRationale)}
@@ -1706,8 +1838,9 @@ def make_sample5(g: Graph, flat: list[dict]) -> tuple[list[dict], list[dict]]:
     return out, miss
 
 
-def gate5(path: Path = SAMPLE5_CSV) -> dict:
-    """5단계 판정 — 종류별 정답률 ≥ 0.90 · 평가자 보류 ≤ 20% · 판정 0 건은 판정 불가. 과잉 보류는 서술."""
+def gate5(path: Path = SAMPLE5_CSV, relation_undecidable: bool = False, seed: int = SAMPLE5_SEED) -> dict:
+    """5단계 판정 — 종류별 정답률 ≥ 0.90 · 평가자 보류 ≤ 20% · 판정 0 건은 판정 불가. 과잉 보류는 서술.
+    relation_undecidable — 새 독립 관계 표본이 없을 때(§20.24) 관계는 서술만 하고 판정 불가로 적는다."""
     df = pd.read_csv(path, dtype=str).fillna("")
     res = {}
     for kind in JUDGED5:
@@ -1719,11 +1852,17 @@ def gate5(path: Path = SAMPLE5_CSV) -> dict:
         res[kind] = {"rows": len(grp), "judged": n, "correct": c, "withheld": withheld,
                      "rate": round(c / n, 4) if n else None, "decidable": decidable,
                      "pass": bool(decidable and c / n >= HUMAN_RATE_MIN)}
+        if relation_undecidable and kind in ("refersToJudgment", "categoryVariantOf"):
+            res[kind].update(decidable=False, pass_=False, note="판정 불가 — 새 독립 관계 표본 없음(§20.24) · 서술만")
+            res[kind]["pass"] = res[kind].pop("pass_")
     over = {k: {"rows": int((df["kind"] == k).sum()),
                 "actually_correct": int(((df["kind"] == k) & (df["correct"] == "1")).sum())}
             for k in ("held_block", "held_locator", "held_relation")}
-    return {"sheet": str(path.relative_to(ROOT)), "seed": SAMPLE5_SEED, "threshold": HUMAN_RATE_MIN, "by_kind": res,
-            "over_hold": over, "pass": all(v["pass"] for v in res.values())}
+    judged = {k: v for k, v in res.items() if not (relation_undecidable and k in ("refersToJudgment", "categoryVariantOf"))}
+    return {"sheet": str(path.relative_to(ROOT)), "seed": seed, "threshold": HUMAN_RATE_MIN, "by_kind": res,
+            "over_hold": over, "pass_judged_kinds": all(v["pass"] for v in judged.values()),
+            "pass": False if relation_undecidable else all(v["pass"] for v in res.values()),
+            "_README": "relation_undecidable 이면 관계는 판정 불가라 '논증층 전체 통과' 가 아니다 — pass_judged_kinds 만 본다."}
 
 
 def main() -> int:
@@ -1733,6 +1872,8 @@ def main() -> int:
     ap.add_argument("--gate", action="store_true", help="사람 대조 시트를 집계해 리포트에 싣는다")
     ap.add_argument("--sample5", action="store_true", help="5단계 표본(정밀도 · 과잉 보류 · 원문 출발 누락)을 data/interim/ 에 쓴다")
     ap.add_argument("--gate5", action="store_true", help="5단계 판정 시트를 집계해 리포트에 싣는다")
+    ap.add_argument("--sample6", action="store_true", help="§20.24 검증 표본(시드 20261010)을 data/interim/ 에 쓴다")
+    ap.add_argument("--gate6", action="store_true", help="§20.24 검증 시트를 집계해 리포트에 싣는다(관계 판정 불가)")
     ap.add_argument("--regress", action="store_true", help="지난 표본 전 행을 지금 산출과 대조한 회귀 시트를 쓴다")
     ap.add_argument("--out", type=Path, default=OUT)
     ap.add_argument("--report", type=Path, default=REPORT)
@@ -1755,15 +1896,46 @@ def main() -> int:
         print(json.dumps(summary, ensure_ascii=False, indent=1))
         print(f"  {REGRESS_CSV.relative_to(ROOT)} · 다시 판정할 행 {sum(r['status'] == 'changed' for r in rows)}")
         return 0
-    if args.sample5:
-        rows, miss = make_sample5(g, flat)
-        for path, data in ((SAMPLE5_CSV, rows), (MISSING5_CSV, miss)):
+    if args.sample5 or args.sample6:
+        rows, miss = make_sample5(g, flat, SAMPLE6_SEED if args.sample6 else SAMPLE5_SEED)
+        outs = (SAMPLE6_CSV, MISSING6_CSV) if args.sample6 else (SAMPLE5_CSV, MISSING5_CSV)
+        if args.sample6:
+            # 보완 시트에서 판정 불가였던 칸 — 보류 전 값 · 대상 본문 · 적재된 논거·좌표 — 를 처음부터 싣는다(§20.23 g 도구 결함).
+            by_key = {r["key"]: r for r in flat}
+            emitted = {str(j).rsplit("/", 1)[1] for j in g.subjects(RDF.type, PA.ExaminerJudgment)}
+            links, rel = _graph_links(g), _graph_relations(g)
+            locs_txt = lambda d: " || ".join(f"{n}: " + ", ".join(v for _, v in sorted(l)) for n, l in sorted(d.items()))  # noqa: E731
+            for row in rows:
+                r = by_key[row["judgment"]]
+                row["prehold_locators"] = locs_txt(r["locs"])
+                row["e5_overrides"] = json.dumps(r.get("e5", {}), ensure_ascii=False) if r.get("e5") else ""
+                row["prehold_targets"] = " || ".join(
+                    f"[{kind} · 참조 청구항 {(r.get('group_claims') or [None] * len(r['groups']))[i] if kind != 'label' else '-'}] "
+                    f"{k.rsplit('_', 2)[-2]}_{k.rsplit('_', 1)[-1]} 청구항 {','.join(map(str, by_key[k]['claims']))} · "
+                    f"대상 보류 {'|'.join(by_key[k]['holds']['block']) or '없음'}: {_flat(by_key[k]['text'])[:TARGET_TEXT_MAX]}"
+                    for i, (kind, ks) in enumerate(r.get("groups", [])) for k in ks if k in by_key) if row["kind"] == "held_relation" else ""
+            for m_ in miss:
+                parts = []
+                for r in (x for x in flat if x["stem"] == m_["notice"]):
+                    k = r["key"]
+                    name = f"{k.rsplit('_', 2)[-2]}_{k.rsplit('_', 1)[-1]}"
+                    if k in emitted:
+                        rr = rel.get(k, {"refers": set(), "variant": set()})
+                        rats = " ".join(sorted(str(o).rsplit("Rationale", 1)[1] for o in g.objects(URIRef(f"{_jiri(k)}_s1"), PA.hasRationale)))
+                        parts.append(f"[적재] {name} · 청구항 {','.join(map(str, r['claims']))} · 문헌 {' '.join(sorted(r['labels']))} · "
+                                     f"상식 {int(r['ck'])} · 논거 {rats or '-'} · 좌표 {locs_txt({d.rsplit('/', 1)[1]: v for d, v in links.get(k, {}).items()}) or '-'} · "
+                                     f"관계 {' '.join(sorted(rr['refers'])) or '-'} ⟪본문⟫ {_flat(r['text'])[:1500]}")
+                    else:
+                        parts.append(f"[미적재] {name} · 청구항 {','.join(map(str, r['claims']))} · 문헌 {' '.join(sorted(r['labels']))} · "
+                                     f"사유 {'|'.join(r['holds']['block']) or '적재 제외'} ⟪본문⟫ {_flat(r['text'])[:1500]}")
+                m_["unit_detail"] = " ‖‖ ".join(parts)
+        for path, data in zip(outs, (rows, miss)):
             with path.open("w", encoding="utf-8", newline="") as fh:
                 w = csv.DictWriter(fh, fieldnames=list(data[0]))
                 w.writeheader()
                 w.writerows(data)
-        print(f"  {SAMPLE5_CSV.relative_to(ROOT)} · {dict(Counter(r['kind'] for r in rows))}")
-        print(f"  {MISSING5_CSV.relative_to(ROOT)} · 통지서 {len(miss)}")
+        print(f"  {outs[0].relative_to(ROOT)} · {dict(Counter(r['kind'] for r in rows))}")
+        print(f"  {outs[1].relative_to(ROOT)} · 통지서 {len(miss)}")
         return 0
     if args.sample:
         rows = make_sample(g, flat)
@@ -1790,6 +1962,8 @@ def main() -> int:
         "pilot_eval": eval_pilot(flat),
         "human_gate": gate(g=g, flat=flat) if args.gate else rep_old.get("human_gate"),
         "human_gate_r5": gate5() if args.gate5 else rep_old.get("human_gate_r5"),
+        "human_gate_r6": (gate5(SAMPLE6_CSV, relation_undecidable=True, seed=SAMPLE6_SEED) if args.gate6
+                          else rep_old.get("human_gate_r6")),
         "variant_continuity": variant_continuity(g, flat) if CARRY_SHEET.exists() else None,
         # 지난 회차는 지우지 않는다 — 1차 FAIL 이 3단계 복귀의 근거다.
         "human_gate_history": rep_old.get("human_gate_history", []) + (

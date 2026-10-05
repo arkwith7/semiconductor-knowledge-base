@@ -73,6 +73,8 @@ def _applicant_mentions(s: str, keep_parents: bool = False) -> list[tuple[int, i
 
 _SUBJ_TAIL = re.compile(r"\s*(?:\([^)]{0,30}\))?\s*(?:에\s*기재된\s*)?(?:발명)?\s*"
                         r"(?:의\s*(?:[가-힣]{1,10}\s*){1,3}?(?:들)?\s*)?(?:은|는)\s"
+                        # §20.24 C1′ — `제10항 발명에 부가된(한정된) 제 1, 2 소자 분리막의 두께의 구성은`
+                        r"|\s*(?:발명)?\s*에\s*(?:부가|한정|추가)(?:된|한|되어\s*있는)\s*[^.。\n]{0,40}?(?:은|는)\s"
                         r"|\s*(?:발명)?\s*(?:을|를)\s*(?:쉽게|용이하게)"
                         r"|\s*(?:발명)?\s*에\s*서\s*한정")
 
@@ -174,7 +176,8 @@ def label_numbers_used(s: str) -> set[int]:
     return out
 
 
-_DEF_FWD_RX = re.compile(r"[\[【(]?\s*(" + _TERM + r")\s*(\d{1,2})(?!\d)\s*[\]】)]?\s*(?:[:：=]|은|는|이라|로\s*칭|으로\s*칭)")
+# `이라` · `로 칭` 은 뒤 꼴(`(…, 이하 '인용발명1'이라 함)`) 표지다 — 앞 꼴로 읽지 않는다(§20.24 · 정의 계약).
+_DEF_FWD_RX = re.compile(r"(?<!이하)(?<!이하\s)[\[【(]?\s*(" + _TERM + r")\s*(\d{1,2})(?!\d)\s*[\]】)]?\s*(?:[:：=]|은|는)")
 _DEF_BACK_RX = re.compile(r"이하\s*[,'‘\"“]?\s*(" + _TERM + r")\s*(\d{1,2})(?!\d)")
 
 
@@ -270,15 +273,17 @@ def c4_country(r: dict, wins: dict[int, list[tuple[int, str, str]]]) -> list[str
 
 
 # ── C6 좌표 ─────────────────────────────────────────────────────────
-_PARA_RX = re.compile(r"(?:(?:식별\s*번호|단락|문단)\s*)?[\[【]\s*(\d{3,5})\s*(?:[-–~∼]\s*(\d{3,5})\s*)?((?:,\s*\d{3,5}\s*)*)[\]】]"
+_PARA_RX = re.compile(r"(?:(?:식별\s*번호|단락|문단)\s*)?[\[【]\s*(?:(?:식별\s*번호|단락|문단)\s*)?(\d{3,5})\s*(?:[-–~∼]\s*(\d{3,5})\s*)?((?:,\s*\d{3,5}\s*)*)[\]】]"
                       r"(?:\s*(?:~|∼|-|–|내지|부터)\s*[\[【]\s*(\d{3,5})\s*[\]】])?"
-                      r"|(?:식별\s*번호|단락|문단)\s*(\d{3,5})(?:\s*(?:[-–~∼]|내지)\s*(\d{3,5}))?((?:\s*,\s*\d{3,5})*)")
+                      # §20.24 C6′ — 키워드가 있으면 자릿수를 묻지 않는다(`[단락 84, 도면 8]`). 추출기보다 넓게 읽는다.
+                      r"|(?:식별\s*번호|단락|문단)\s*(\d{1,5})(?:\s*(?:[-–~∼]|내지)\s*(\d{1,5}))?((?:\s*,\s*\d{1,5})*)")
 _FIG_RX = re.compile(r"(?<![가-힣])도(?:면)?\s*(\d{1,3})([A-Za-z]?)"
                      r"((?:\s*(?:,|및|ㆍ|·|와|과)\s*(?:도(?:면)?\s*)?(?:\d{1,3}[A-Za-z]?|[A-Za-z])(?![A-Za-z0-9]))*)"
                      r"(?:\s*(?:~|∼|내지)\s*(?:도(?:면)?\s*)?(\d{1,3})([A-Za-z]?))?(?!\s*[%℃°]|\s*(?:mm|nm|μm|um))")
 _APPL_RX = re.compile(r"본원|이\s*출원|출원\s*발명|본\s*발명|청구항")
 _LABEL_ONE_RX = re.compile(_TERM + r"\s*(\d{1,2})(?!\d)(?!\s*" + _SEP + r"\s*\d)")
 _LABEL_LIST_RX = re.compile(_TERM + r"\s*\d{1,2}\s*" + _SEP + r"\s*\d{1,2}")
+_LABEL_BARE_RX = re.compile(_TERM + r"(?!\s*\d)(?!\s*들)")      # §20.24 C6′ — 번호 없는 `비교대상발명` 도 기준점
 _MAX_RANGE = 300
 
 
@@ -351,6 +356,8 @@ def expected_locators(r: dict) -> tuple[set[tuple[str, str, str]], int]:
     single = next(iter(r["labels"])) if len(r.get("labels", {})) == 1 else None
     anchors = [(m.end(), by_label.get(int(m.group(1)))) for m in _LABEL_ONE_RX.finditer(text)]
     anchors += [(m.end(), None) for m in _LABEL_LIST_RX.finditer(text)]          # 나열 뒤 좌표는 어느 문헌 것인지 모른다
+    # 번호 없는 라벨은 문헌이 하나뿐일 때만 그 문헌이다(데이터행 81·82·84 — 본원 쪽으로 오분류하던 원인).
+    anchors += [(m.end(), single) for m in _LABEL_BARE_RX.finditer(text)]
     for nid in r.get("labels", {}):
         tail = nid.split("-")[-1][-5:].lstrip("0")
         anchors += [(m.end(), nid) for m in re.finditer(re.escape(tail) + r"(?!\d)", text)] if tail else []
@@ -418,6 +425,182 @@ def c7_rationale(r: dict) -> dict[str, list[str]]:
     return out
 
 
+# ── §20.24 추가 검사 ─────────────────────────────────────────────────
+_DOC_NUM_RX = re.compile(r"(?:\d{2}\s*-\s*\d{4}\s*-\s*\d{5,7}|\d{4}\s*[-/]\s*\d{4,7}|(?<!\d)\d{6,8}(?!\d))")
+_BACK_DEF_RX = re.compile(r"이하\s*[,'‘\"“]?\s*(" + _TERM + r")\s*(\d{1,2})(?!\d)")
+
+
+def c3_position(r: dict, text: str) -> list[str]:
+    """C3′ — 연결 문헌의 원문 위치에서 **앞으로** 나아가 처음 만나는 `이하 라벨` 괄호가 그 라벨이어야 한다.
+    다음 문헌 번호나 절 경계를 넘어서는 찾지 않는다(정의 꼴 `A ⏎(…, 이하 '인용발명1'이라 함), B`)."""
+    lo, hi = r.get("sec_span", (0, len(text)))
+    for nid, vias in r.get("how", {}).items():
+        ns = {v[2] for v in vias if v != "direct" and v[2] is not None}
+        if not ns:
+            continue
+        if len(ns) > 1:
+            return ["C3_one_document_many_labels"]                    # 한 문헌이 라벨 번호 여럿 — 정의 대응이 무너졌다
+        tail = nid.split("-")[-1][-5:].lstrip("0")
+        if not tail:
+            continue
+        seen_ok, seen_bad = False, False
+        for m in re.finditer(re.escape(tail) + r"(?!\d)", text):
+            stop = min(len(text), m.end() + 160)
+            nxt = _DOC_NUM_RX.search(text, m.end(), stop)           # 다음 문헌 번호에서 멈춘다
+            if nxt:
+                stop = nxt.start()
+            if m.start() < hi <= stop:                               # 절 경계를 넘지 않는다
+                stop = hi
+            d = _BACK_DEF_RX.search(text, m.end(), stop)
+            if d:
+                (seen_ok := True) if int(d.group(2)) in ns else None
+                seen_bad = seen_bad or int(d.group(2)) not in ns
+        if seen_bad and not seen_ok:
+            return ["C3_definition_position"]
+    return []
+
+
+def c4_serial(r: dict, text: str) -> list[str]:
+    """C4′ — 정의 꼴과 무관하게, KR 로 이은 문헌의 일련번호를 원문에서 찾아(쉼표·공백·앞자리 0 허용) 바로 앞 30자의 국가 표기를 본다."""
+    flat = re.sub(r"(?<=\d)[,\s](?=\d)", "", text)
+    for nid in r.get("labels", {}):
+        if not nid.startswith("KR-G-"):                             # 등록번호(국가 표기 없이 숫자만 남는 꼴)
+            continue
+        serial = nid.split("-")[-1].lstrip("0")
+        if len(serial) < 6:
+            continue
+        for m in re.finditer(r"(?<!\d)0*" + re.escape(serial) + r"(?!\d)", flat):
+            if _FOREIGN.search(flat[max(0, m.start() - 30):m.start()].split("\n")[-1]):
+                return ["C4_country_serial"]
+    return []
+
+
+_CITED_SUBJ_RX = re.compile(r"^\s*(?:또한|한편|그리고)?\s*,?\s*" + _TERM + r"\s*\d{0,2}\s*(?:의\s*[가-힣\s]{0,20})?(?:은|는|에는|에서는)\s")
+_MARK_LINE_RX = re.compile(r"\n[ \t]*" + _MARK + r"[ \t]*\S")
+
+
+def rationale_scope2(r: dict, kind: str) -> tuple[set[int], bool]:
+    """C7′ — 종류별 적용 범위. 주어 없는 논거 문장은 **같은 판단 구간**의 앞 문장 주어를 잇는다.
+    머리줄·인용문헌 설명 문장을 건너야 하거나 이을 주어가 둘 이상이면 (집합, 모호=True)."""
+    body = r["text"]
+    bounds = [0] + [m.end() for m in _SENT.finditer(body)] + [len(body)]
+    sents = [(bounds[i], bounds[i + 1]) for i in range(len(bounds) - 1)]
+    def subj_of(a, z):
+        sent = body[a:z]
+        marks = list(re.finditer(r"(?:^|\n)[ \t]*" + _MARK + r"|\([가-하]\)", sent))
+        if marks:
+            sent = sent[marks[-1].end():]
+        out = set()
+        pm = _SUBJ_PREFIX_RX.match(sent)
+        if pm:
+            out |= set().union(*[n for _, _, n in _applicant_mentions(pm.group(1))] or [set()])
+        return out | subjects(sent)
+    scope, ambiguous = set(), False
+    for m in RATIONALE_TERMS[kind].finditer(body):
+        idx = max(i for i, (a, z) in enumerate(sents) if a <= m.start())
+        own = subj_of(*sents[idx])
+        if own:
+            scope |= own
+            continue
+        inherited = None
+        for j in range(idx - 1, -1, -1):
+            a, z = sents[j]
+            if _MARK_LINE_RX.search(body, a, z + 1) or _CITED_SUBJ_RX.match(body[a:z]):
+                break                                               # 새 제목·인용문헌 설명을 넘지 않는다
+            sj = subj_of(a, z)
+            if sj:
+                inherited = sj
+                break
+        if inherited is None:
+            if len(r["claims"]) > 1:
+                ambiguous = True                                    # 블록에 청구항이 여럿인데 대상이 불명확하다
+        else:
+            scope |= inherited
+    return scope, ambiguous
+
+
+def c7_rationale2(r: dict) -> dict[str, list[str]]:
+    own = set(r["claims"])
+    out = {}
+    for kind in r.get("rat", []):
+        sc, amb = rationale_scope2(r, kind)
+        if amb:
+            out[kind] = ["C7_scope_unclear"]
+        elif sc and sc != own:
+            out[kind] = ["C7_scope_partial" if sc < own else "C7_scope_mismatch"]
+    return out
+
+
+_JUDGE_WORDS = re.compile(r"동일|쉽게|용이|차이|신규성|진보성|대응|개시|부정|발명할\s*수|도출|주지|관용|볼\s*수|해당|불과|자명|같습니다|같다|공지")
+
+
+def c9_judgment_statement(r: dict) -> list[str]:
+    """C9 — 판단 서술이 없는 블록(도입문·표 머리만 남은 조각)."""
+    t = _PAGE.sub(" ", r["text"])
+    # `아래 표 1과 같습니다` · `다음과 같습니다` 는 비교를 예고할 뿐 판단이 아니다(5단계 20행).
+    t = re.sub(r"(?:아래|다음|하기)\s*(?:의\s*)?(?:<?\s*표\s*\d*\s*>?\s*)?(?:과|와)\s*같(?:습니다|다|이)", " ", t)
+    return [] if _JUDGE_WORDS.search(t) else ["C9_no_judgment"]
+
+
+_OPEN2_RX = re.compile(r"^[ \t]*" + _MARK + r"[ \t]*[<\[(【]?[ \t]*(?:본원\s*(?:의\s*)?)?(?:특허\s*청구\s*(?:범위\s*)?)?(?:(?:독립|종속)\s*)?"
+                       r"(?:청구항\s*(?:제\s*)?\d|청구하\s*(?:제\s*)?\d|제\s*\d{1,3}(?:\s*[-–~,]\s*\d{1,3})*\s*항)", re.M)
+
+
+def c10_multiple_openings(r: dict) -> list[str]:
+    """C10 — 한 단위 안에 판단을 여는 표지 줄(표지 + 출원 청구항)이 둘 이상이고 그 청구항 집합이 서로 다르면 보류.
+    같은 청구항을 문헌별로 비교하는 소항목(청구항 없음 · 같은 청구항)은 병합이 아니다."""
+    t = _PAGE.sub(" ", r["text"]).replace("청구하", "청구항")
+    sets, titles = [], []
+    for m in _OPEN2_RX.finditer(t):
+        line = t[m.start(): t.find("\n", m.start()) if "\n" in t[m.start():] else len(t)]
+        first = _applicant_mentions(re.sub(r"특허\s*청구\s*(?:범위\s*)?", "", line))
+        if not (first and first[0][0] <= 25):
+            continue
+        # 제목만 있는 줄(서술 없음 · 짧음)은 판단을 여는 줄이 아니라 상위 제목이다(사용자 조건 10-05 — 주변 제목·범위를 함께 본다).
+        if len(line.strip()) <= 40 and not re.search(r"(?:은|는|이|가)\s|다\s*\.|하여|대하여", line):
+            titles.append(frozenset(first[0][2]))
+            continue
+        sets.append(frozenset(first[0][2]))
+    if len(set(sets)) >= 2:
+        return ["C10_multiple_openings"]
+    own = set(r["claims"])
+    if len(sets) == 1 and titles and own > set(sets[0]):
+        return ["C10_title_range"]                       # 블록 청구항이 실제로 여는 줄보다 넓다 — 상위 제목 범위가 남았다
+    return []
+
+
+_CK_SENT_RX = re.compile(r"(?:통상의\s*기술자|당업자)[^.。]{0,80}?(?:잘\s*알려|널리\s*알려|알려져|주지|관용|통상적인\s*기술|기술\s*상식|일반적인\s*기술|기술\s*범주)"
+                         r"|(?:잘\s*알려|널리\s*알려|주지|관용|기술\s*상식)[^.。]{0,60}?(?:통상의\s*기술자|당업자)")
+
+
+def c11_common_knowledge(r: dict) -> list[str]:
+    """C11 — 상식 서술(통상의 기술자 + 앎·범주 술어)이 본문에 있는데 상식 표시가 없으면 보류. 쪽 바꿈 표기를 지우고 읽는다."""
+    t = re.sub(r"\s+", " ", _PAGE.sub("", r["text"]))
+    return ["C11_common_knowledge"] if _CK_SENT_RX.search(t) and not r.get("ck") else []
+
+
+def c12_section_conclusion(r: dict, text: str, recs: list[dict]) -> list[str]:
+    """C12 — 같은 절의 결론 문장(검사 자신의 읽기) 중 블록 청구항 **전체**를 덮는 묶음이 **하나**일 때, 그 묶음 구간의 라벨 번호가
+    블록에 이어진 라벨 번호 안에 있어야 한다."""
+    lo, hi = r.get("sec_span", (0, 0))
+    if hi <= lo:
+        return []
+    sec = text[lo:hi]
+    own = set(r["claims"])
+    covers = []
+    for m in re.finditer(r"(?:따라서|그러므로|결국|이상과\s*같이)", sec):
+        ends = [x.end() for x in _SENT.finditer(sec, m.end())]
+        z = ends[0] if ends else len(sec)
+        part = summary_part_for(sec[m.start():z], own)
+        if part and not re.search(r"또는|혹은", part):            # 대안 결합 결론은 공통 문헌 집합이 아니다(재판정 10-05)
+            covers.append(label_numbers_used(part))
+    if len(covers) != 1:
+        return []
+    linked = {v[2] for vs in r.get("how", {}).values() for v in vs if v != "direct" and v[2] is not None}
+    direct = sum(1 for vs in r.get("how", {}).values() if "direct" in vs)
+    return ["C12_section_conclusion"] if covers[0] - linked and len(covers[0]) > len(linked) + direct else []
+
+
 # ── 묶음 ────────────────────────────────────────────────────────────
 def check_notice(text: str, app: str, recs: list[dict]) -> dict[str, dict]:
     """통지서 하나의 판단들 → key → {block, locators, rationale}. 관계(C8)는 build 가 블록 보류로 전파한다."""
@@ -426,7 +609,9 @@ def check_notice(text: str, app: str, recs: list[dict]) -> dict[str, dict]:
     out = {}
     for r in recs:
         block = c1_claims(r) + c2_new_judgment(r) + c5_conclusion(r) + c3_documents(r, defs) + c4_country(r, wins)
-        out[r["key"]] = {"block": sorted(set(block)), "locators": c6_locators(r), "rationale": c7_rationale(r)}
+        block += (c3_position(r, text) + c4_serial(r, text) + c9_judgment_statement(r) + c10_multiple_openings(r)
+                  + c11_common_knowledge(r) + c12_section_conclusion(r, text, recs))
+        out[r["key"]] = {"block": sorted(set(block)), "locators": c6_locators(r), "rationale": c7_rationale2(r)}
     return out
 
 

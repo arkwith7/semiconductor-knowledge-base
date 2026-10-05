@@ -232,16 +232,16 @@
       "layer": "sdkb-abox-argument",
       "label": "examiner argument layer (claim-block judgments)",
       "status": "built",
-      "bytes": 9433773,
-      "triples": 110414,
+      "bytes": 9334518,
+      "triples": 109272,
       "triples_source": "parsed"
     },
     {
       "layer": "sdkb-abox-inferred",
       "label": "rule-derived judgments (not examiner-asserted)",
       "status": "built",
-      "bytes": 238358,
-      "triples": 2637,
+      "bytes": 233139,
+      "triples": 2571,
       "triples_source": "parsed"
     },
     {
