@@ -173,3 +173,72 @@ def test_c1_parallel_subject_chain_catches_dropped_first_member():
     t = "2. 제2항(제1항 인용) 및 제3항(제2항 인용)의 패턴 구조는 인용발명 1에 기재되어 있습니다."
     assert "C1_foreign_subject" in AC.c1_claims(rec([3], t))
     assert AC.c1_claims(rec([2, 3], t)) == []
+
+
+# ── §20.24 추가 검사 ─────────────────────────────────────────────────
+def test_c9_fragment_without_judgment_is_held():
+    frag = "1-1. 청구항 1 발명과 인용발명 1을 비교해 보면 아래 표 1과 같습니다.\n<표 1>\n인용발명 1\n"
+    assert AC.c9_judgment_statement(rec([1], frag)) == ["C9_no_judgment"]
+    assert AC.c9_judgment_statement(rec([1], frag + "양 발명은 실질적으로 동일합니다.")) == []
+
+
+def test_c10_distinct_openings_vs_per_document_sub_items():
+    merged = "2-1. 본원의 특허청구 제1항은 A 를 포함한다.\n2-2. 본원의 특허청구 제2~4항은 B 를 더한다.\n"
+    assert AC.c10_multiple_openings(rec([1, 2, 3, 4], merged)) == ["C10_multiple_openings"]
+    title = "나. 청구항 2 내지 10 발명\n1) 청구항 2 발명의 합금 비중은 인용발명 2와 같다.\n"
+    assert AC.c10_multiple_openings(rec(list(range(2, 11)), title)) == ["C10_title_range"]     # 제목 범위가 블록에 남음
+    assert AC.c10_multiple_openings(rec([2], title)) == []                                      # 하위 항목으로 갈라졌으면 통과
+    per_doc = "1. 청구항 1\n1) 인용발명 1과의 대비\n2) 인용발명 2와의 대비\n"
+    assert AC.c10_multiple_openings(rec([1], per_doc)) == []
+    same = "1. 청구항 1 발명\n(1) 청구항 1 발명과 인용발명 1의 대비는 동일하다.\n"
+    assert AC.c10_multiple_openings(rec([1], same)) == []
+
+
+def test_c1_subject_with_attached_limitation_form():
+    t = "2-2. 제6항(제2항의 종속항)\n제10항 발명에 부가된 제 1, 2 소자 분리막의 두께의 구성은 인용발명 1에 개시된다."
+    assert "C1_foreign_subject" in AC.c1_claims(rec([6], t))
+
+
+def test_c3_position_definition_contract():
+    """`A ⏎(…, 이하 '인용발명1'이라 함), B ⏎(…, 이하 '인용발명2'라 함)` — 라벨 1 은 A 다. B 에 이으면 잡는다."""
+    text = ("선행기술로 공개특허공보 제10-2011-0020951호\n(2011.03.03. 공개, 이하 '인용발명1'이라 함), 공개특허공보 "
+            "제10-2015-0123128호\n(2015.11.03. 공개, 이하 '인용발명2'라 함)가 있습니다.\n")
+    A_, B_ = "KR-P-1020110020951", "KR-P-1020150123128"
+    ok = rec([1], "x", labels={A_: []}, how={A_: [("definition", "인용발명", 1)]})
+    bad = rec([1], "x", labels={B_: []}, how={B_: [("definition", "인용발명", 1)]})
+    ok["sec_span"] = bad["sec_span"] = (0, len(text))
+    assert AC.c3_position(ok, text) == [] and AC.c3_position(bad, text) == ["C3_definition_position"]
+
+
+def test_c4_serial_with_commas():
+    nid = "KR-G-5836506"
+    r = rec([18], "x", labels={nid: []}, how={nid: [("definition", "인용발명", 2)]})
+    assert AC.c4_serial(r, "인용발명2[미국등록특허공보 제5,836,506호 (1998)]") == ["C4_country_serial"]
+    assert AC.c4_serial(r, "인용발명2[등록특허공보 제5836506호]") == []
+
+
+def test_c7_inherits_only_within_same_judgment_segment():
+    t = ("청구항 18 발명은 희생막을 사용하는 점에서 차이가 있다. 다만, 이는 단순한 설계변경에 불과하다.")
+    assert AC.c7_rationale2(rec([7, 8, 17, 18], t, rat=["DesignChoice"])) == {"DesignChoice": ["C7_scope_partial"]}
+    cited = "인용발명 1에는 희생막이 개시되어 있다. 이는 단순한 설계변경에 불과하다."
+    assert AC.c7_rationale2(rec([7, 8], cited, rat=["DesignChoice"])) == {"DesignChoice": ["C7_scope_unclear"]}
+    assert AC.c7_rationale2(rec([7], cited, rat=["DesignChoice"])) == {}          # 청구항 하나면 대상이 유일하다
+
+
+def test_c11_common_knowledge_across_page_break():
+    t = "기술분야의 통상의 기술자에게는 통 - 2 - 10-2008-0030254 상적인 기술범주에 속하는 것입니다."
+    assert AC.c11_common_knowledge(rec([3], t)) == ["C11_common_knowledge"]
+    r = rec([3], t); r["ck"] = True
+    assert AC.c11_common_knowledge(r) == []
+
+
+def test_c6_bare_label_anchor_and_two_digit_paragraph():
+    t = "청구항 2 발명의 구성은 비교대상발명의 불순물 함유 구성(문단 [0088] 참조)과 같다."
+    assert AC.c6_locators(rec([2], t, locs={D1: {("Paragraph", "[0088]")}})) == []      # 본원 쪽으로 오분류하지 않는다
+    t2 = "청구항 4 발명은 인용발명 1에 도시되어 있고[단락 84, 도면 8] 동일하다."
+    assert AC.c6_locators(rec([4], t2, locs={D1: {("Figure", "도8")}})) == ["C6_locators"]   # 두 자리 단락 누락을 잡는다
+
+
+def test_c3_one_document_many_labels():
+    r = rec([6], "x", labels={D1: []}, how={D1: [("definition", "인용발명", 1), ("definition", "인용발명", 2)]})
+    assert AC.c3_position(r, "x") == ["C3_one_document_many_labels"]
