@@ -247,6 +247,151 @@ def test_g6_emission_drops_relation_when_a_target_is_not_emitted():
     assert st["ref_dropped__target_not_emitted"] == 1
 
 
+# ── ②‴ 4차 H1–H6 (3차 오답 원인마다 · 보존해야 할 정상 사례와 짝) ─────────
+def test_h1_parent_in_dependency_description_is_not_judged():
+    assert baa.judged_claims("따라서 청구항 제11항(청구항 제1항의 종속항의 형식을 취하나)은", first_only=False) == [11]
+    assert baa.own_claims("청구항 4(청구항 1 내지 3 인용)의 추가적인 특징은") == [4]
+    assert baa.judged_claims("청구항 2는 청구항 1에 있어서", first_only=False) == [2]
+    # 보존: 종속관계가 아닌 나열은 그대로
+    assert baa.judged_claims("따라서 제2항 및 제3항은", first_only=False) == [2, 3]
+
+
+def test_h2_deeper_sub_head_under_title_takes_its_own_range():
+    seg = "서두\n3-1. 청구항 1 내지 13 발명\n(1) 청구항 1~6, 8~11\n인용발명 1 에 개시되어 있습니다.\n"
+    assert [baa._block_claims(b) for b in baa.split_blocks(seg)] == [[1, 2, 3, 4, 5, 6, 8, 9, 10, 11]]
+    # 보존: 같은 계층이거나 부분집합이 아니면 제목 범위를 쓴다
+    seg2 = "서두\n가. 청구항 1 발명\n청구항 1 발명은 A 에 있어서 인용발명 1 과 같습니다.\n"
+    assert [baa._block_claims(b) for b in baa.split_blocks(seg2)] == [[1]]
+
+
+def test_h3_hyphen_claim_range():
+    assert baa.own_claims("(1) 청구항 1-4,6,8 발명은 신규성이 없고") == [1, 2, 3, 4, 6, 8]
+    assert baa.own_claims("1.2 종속항 제2-7항") == [2, 3, 4, 5, 6, 7]
+
+
+def test_h4_numbered_label_never_falls_back_to_single_section_document():
+    one = {"KR-P-1020000000001"}
+    miss: list = []
+    assert baa.docs_in("인용발명2 에 개시", "X", {}, one, None, miss) == {}
+    assert miss == [("인용발명", 2)]
+    assert set(baa.docs_in("인용발명에 개시", "X", {}, one)) == one       # 보존: 번호 없는 라벨 · 문헌 하나
+    assert set(baa.docs_in("인용발명 1 에 개시", "X", {}, one)) == one    # 보존: 1 번 · 문헌 하나 — 대응이 확정된다
+    miss = []
+    assert baa.docs_in("인용발명 1, 2 에 개시", "X", {}, one, None, miss) == {} and len(miss) == 2  # 나열이면 확정 안 됨
+    miss = []
+    baa.docs_in("인용발명에서는", "X", {}, {"A", "B"}, None, miss)
+    assert miss == [("인용발명", None)]                                      # 문헌 여럿이면 미해결
+    assert baa.docs_in("인용발명들은 모두", "X", {}, {"A", "B"}) == {}      # 복수형은 특정 문헌이 아니다
+
+
+@pytest.mark.parametrize("text,kind,want", [
+    ("청구항 9는 청구항 1을 단순하게 카테고리를 달리하여 청구한 발명입니다.", "variant", [1]),
+    ("청구항 26, 27 은 청구항 3, 4 발명과 기술적 사상이 동일하고 카테고리만 달리할 뿐입니다.", "variant", [3, 4]),
+    ("청구항 13 은 청구항 1 발명의 구성 3, 9, 10에 대한 거절이유가 동일하게 적용됩니다.", "claim", [1]),
+    ("청구항 15는 청구항 1~13의 조성물을 포함하며 청구항 14의 거절이유와 동일합니다.", "claim", [14]),
+])
+def test_h5_target_is_the_list_grammatically_attached(text, kind, want):
+    rx = baa.CAT_RX if kind == "variant" else baa.REF_CLAIM_RX
+    assert baa.attached_targets(text, rx.search(text), kind) == want
+
+
+def test_h5_unattached_reference_is_not_linked():
+    text = "청구항 5는 청구항 1과 실질적으로 동일한 기술적 특징을 청구하며, 이에 대하여는 앞서 본 거절이유가 동일하게 적용됩니다."
+    assert baa.attached_targets(text, baa.REF_CLAIM_RX.search(text), "claim") is None
+
+
+def test_h6_intra_block_target_is_not_linked_elsewhere():
+    recs = [_rec("other", 2, 1, [1, 13, 24]),
+            _rec("self", 1, 0, [1, 13], text="청구항 13은 청구항 1의 거절이유와 동일합니다.")]
+    st = Counter()
+    baa.resolve_references(recs, st)
+    assert recs[1]["refers"] == set() and st["ref_claim_intra_block_targets"] == 1
+
+
+def test_label_reference_without_brackets():
+    recs = [_rec("a", 2, 2, [5], "2-2"),
+            _rec("r", 2, 4, [7], "2-4", "상기 2-2.의 거절이유에서 지적한 바와 동일한 취지입니다.")]
+    baa.resolve_references(recs, Counter())
+    assert recs[1]["refers"] == {"a"}
+
+
+# ── ②⁗ 회귀 v1 에서 찾은 결함 (사용자 재판정 10-05) ──────────────────────
+def test_locator_ranges_are_kept_as_one_range():
+    st = Counter()
+    text = "인용발명 1 의 단락 [0010]~[0013] 및 도 6 ~ 10 참조, 식별번호 0034-0049 참조"
+    labels = baa.docs_in(text, "X", {("인용발명", 1): "KR-P-1"}, {"KR-P-1"})
+    assert baa._locators(text, labels, None, st) == {
+        "KR-P-1": {("Paragraph", "[0010]~[0013]"), ("Figure", "도6~10"), ("Paragraph", "[0034]~[0049]")}}
+    assert all(baa.LOC_VALUE_RX.match(v) for _, v in {("P", "[0010]~[0013]"), ("F", "도6~10")})
+
+
+def test_law_article_is_not_a_claim():
+    assert baa.judged_claims("특허법 제29조제2항에 따라 특허를 받을 수 없습니다", first_only=False) == []
+    assert baa.judged_claims("청구항 2는 특허법 제29조 제2항의 거절이유", first_only=False) == [2]
+
+
+def test_table_head_with_document_label_keeps_its_claim():
+    assert baa.own_claims("청구항 제1항 인용발명 1 비고") == [1]                # `인용` 발명은 종속관계가 아니다
+
+
+@pytest.mark.parametrize("text,kind,want", [
+    ("청구항 8·9에 대하여는 청구항 3·4와 동일한 거절이유가 적용됩니다.", "claim", [3, 4]),
+    ("청구항 11은 청구항 2+4의 거절이유가 그대로 적용됩니다.", "claim", [2, 4]),
+    ("청구항 6은 청구항 1~5 중 어느 한 항과 기술적 특징이 같고 카테고리를 달리합니다.", "variant", [1, 2, 3, 4, 5]),
+    ("청구항 2 는 상기 청구항 1 발명에 대한 특허법 제29조제2항의 거절이유가 동일하게 적용됩니다.", "claim", [1]),
+    ("청구항 16 발명은 청구항 9 발명의 ‘메모리 장치의 제조 방법’의 발명과 그 구성이 동일한 카테고리만 다른 발명입니다.", "variant", [9]),
+])
+def test_regression_v1_reference_forms(text, kind, want):
+    rx = baa.CAT_RX if kind == "variant" else baa.REF_CLAIM_RX
+    assert baa.attached_targets(text, rx.search(text), kind) == want
+
+
+def test_subject_skips_title_line_but_not_a_sentence_starting_line():
+    titled = "1-5. 청구항 11, 12 발명\n청구항 11 발명(청구항 10 인용)의 한정사항은 청구항 2의 거절이유가 동일하게 적용됩니다."
+    assert baa.sentence_subject(titled, titled.index("거절")) == [11]
+    flowing = "청구항 16 발명은 ‘메모리 장치’에 관한 발명으로,\n청구항 9 발명과 카테고리만 다른 발명입니다."
+    assert baa.sentence_subject(flowing, flowing.index("카테고리")) == [16]
+
+
+@pytest.mark.parametrize("text,want", [
+    ("청구항 15 발명(청구항 1,2,3 중 어느 한 항 인용)의 한정사항에 대하여는 그 내용상 청구항 3 발명의 구성O에 대한 거절이유가 동일하게 적용됩니다.", [3]),
+    ("(6)청구항 제13항 및 제17항에서의 한정사항은,\n청구항 제2항 및 제8항에서의 한정사항과 같으므로 청구항 제2항 및 제8항과 동일한 취지의 거절이유가 적용됩니다.", [2, 8]),
+])
+def test_regression_v2_reference_forms(text, want):
+    m = baa.REF_CLAIM_RX.search(text)
+    assert baa.attached_targets(text, m, "claim") == want
+    assert baa.sentence_subject(text, m.start()) not in ([], want)
+
+
+def test_summary_conclusion_is_cut_from_block_text():
+    seg = ("서두\n(4) 청구항 6 내지 8\n청구항 6 은 인용발명 1 과 같습니다. 청구항 7 은 설계변경입니다. 청구항 8 은 주지입니다. "
+           "따라서 청구항 3 내지 8 은 쉽게 발명할 수 있습니다.\n")
+    b = baa.split_blocks(seg)[0]
+    assert "청구항 3 내지 8" not in b["text"] and baa._block_claims(b) == [6, 7, 8]
+    assert "청구항 3 내지 8" in b["summary"]          # 블록 청구항을 모두 덮으므로 별도 표시 · 문헌 근거로 남긴다
+
+
+def test_own_limitation_mention_counts_as_discussed():
+    seg = ("서두\n(1) 청구항 1-4 발명\n청구항 1-4 발명은 인용발명 1 로부터 도출할 수 있습니다. 청구항 9 발명의 한정 구성은 단순 선택입니다. "
+           "따라서 청구항 1-4,9 발명은 쉽게 발명할 수 있습니다.\n")
+    b = baa.split_blocks(seg)[0]
+    assert baa._block_claims(b) == [1, 2, 3, 4, 9] and not b["summary"]
+
+
+def test_covering_summary_supplies_documents_for_reference_only_block():
+    seg = ("서두\n- 청구항 9 내지 12는 각각 청구항 1 및 3 내지 5를 단순히 카테고리를 달리하여 청구한 발명입니다.\n"
+           "따라서 청구항 7 내지 12 발명은 인용발명 1 의 조합으로부터 쉽게 발명할 수 있습니다.\n")
+    b = baa.split_blocks(seg)[0]
+    assert "인용발명 1" in b["summary"] and "인용발명 1" not in b["text"]
+
+
+def test_summary_conclusion_does_not_widen_block_or_make_intra_relation():
+    seg = ("서두\n(3) 청구항 9 내지 11\n청구항 9 내지 11은 청구항 1의 구성과 같습니다. "
+           "따라서 청구항 1 내지 11은 쉽게 발명할 수 있습니다.\n")
+    blocks = baa.split_blocks(seg)
+    assert baa._block_claims(blocks[0]) == [9, 10, 11]
+
+
 # ── ③ 검사기 · shape: 실패해야 할 입력 ────────────────────────────────
 class _Resolver:
     def __call__(self, nid, stat):
