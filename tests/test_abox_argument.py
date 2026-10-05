@@ -115,8 +115,9 @@ def test_locator_attribution_near_label_single_doc_and_applicant_side():
     assert baa._locators("단락 [0100] 에 개시", {}, None, st) == {} and st["locator_unattributed"] == 1
 
 
-def _rec(key, section, block, claims, mark="", text=""):
-    return {"key": key, "section": section, "block": block, "claims": claims, "mark": mark, "text": text}
+def _rec(key, section, block, claims, mark="", text="", sid=None, repeated=False):
+    return {"key": key, "section": section, "sid": sid or str(section), "section_repeated": repeated,
+            "block": block, "claims": claims, "mark": mark, "text": text}
 
 
 def test_label_reference_category_variant_and_ambiguity():
@@ -275,7 +276,9 @@ def test_h4_numbered_label_never_falls_back_to_single_section_document():
     assert baa.docs_in("인용발명2 에 개시", "X", {}, one, None, miss) == {}
     assert miss == [("인용발명", 2)]
     assert set(baa.docs_in("인용발명에 개시", "X", {}, one)) == one       # 보존: 번호 없는 라벨 · 문헌 하나
-    assert set(baa.docs_in("인용발명 1 에 개시", "X", {}, one)) == one    # 보존: 1 번 · 문헌 하나 — 대응이 확정된다
+    miss = []
+    # §20.23 c — 단독 `인용발명 1` 도 정의 없이는 잇지 않는다(그 문헌이 `[인용발명 2]` 로 선언된 경우가 있었다).
+    assert baa.docs_in("인용발명 1 에 개시", "X", {}, one, None, miss) == {} and miss == [("인용발명", 1)]
     miss = []
     assert baa.docs_in("인용발명 1, 2 에 개시", "X", {}, one, None, miss) == {} and len(miss) == 2  # 나열이면 확정 안 됨
     miss = []
@@ -399,7 +402,8 @@ class _Resolver:
 
 
 def _full_rec(key, claims, labels, ck=False, refers=(), variant=()):
-    return {"key": key, "stem": "1020000000000_9", "app": "1020000000000", "section": 1, "block": 1,
+    return {"key": key, "stem": "1020000000000_9", "app": "1020000000000", "section": 1, "sid": "1",
+            "section_repeated": False, "block": 1,
             "mark": "", "grounds": ["§29②"], "claims": claims, "scope": "whole", "labels": labels,
             "ck": ck, "rat": ["DesignChoice"], "text": "인용발명 1 의 단락 [0010] 참조",
             "refers": set(refers), "variant_of": set(variant),
@@ -515,3 +519,120 @@ def test_real_build_is_deterministic_and_passes_frozen_pilot_thresholds():
     assert ev["claim_coverage"] >= baa.PILOT_CLAIM_COVERAGE_MIN
     assert ev["document_match"] >= baa.PILOT_DOC_MATCH_MIN
     assert ev["pass"]
+
+
+def test_repeated_section_number_label_reference_is_not_linked():
+    """§20.23 c — 인쇄된 절 번호가 되풀이되면 `[거절이유 1-1]` 은 어느 절인지 말하지 않는다. 잇지 않고 센다."""
+    recs = [_rec("n_s1_b1", 1, 1, [1], mark="1-1", sid="1", repeated=True),
+            _rec("n_s1r2_b1", 1, 1, [2], mark="1-1", sid="1r2", repeated=True),
+            _rec("n_s2_b1", 2, 1, [3], text="청구항 3 은 [거절이유 1-1]에서 지적한 바와 같다.")]
+    st = Counter()
+    baa.resolve_references(recs, st)
+    assert recs[2]["refers"] == set() and st["ref_label_unresolved__repeated_section"] == 1
+
+
+def test_same_section_preference_uses_section_identity_not_printed_number():
+    """같은 번호의 두 절은 다른 절이다 — F3 의 '같은 절 우선' 은 절 식별자로 판단한다."""
+    recs = [_rec("n_s1_b1", 1, 1, [1], sid="1", repeated=True),
+            _rec("n_s1r2_b1", 1, 1, [1], sid="1r2", repeated=True),
+            _rec("n_s1r2_b2", 1, 2, [2], sid="1r2", repeated=True,
+                 text="청구항 2 는 청구항 1 의 거절이유와 동일합니다.")]
+    baa.resolve_references(recs, Counter())
+    assert recs[2]["refers"] == {"n_s1r2_b1"}
+
+
+# ── §20.23 c 선택적 적재 — 보류는 의존관계를 따라 전파된다 ─────────────
+def _held(r, block=(), locators=(), rationale=None):
+    r["holds"] = {"block": list(block), "locators": list(locators), "rationale": rationale or {}}
+    return r
+
+
+def test_held_block_drops_judgment_and_relations_that_touch_it():
+    g, st = _graph([_held(_full_rec("k_s1_b1", [1], {"KR-P-1": [3]}), block=["C1_foreign_subject"]),
+                    _held(_full_rec("k_s1_b2", [2], {"KR-P-1": [3]}, refers={"k_s1_b1"})),
+                    _held(_full_rec("k_s1_b3", [3], {"KR-P-1": [3]}, refers={"k_s1_b2"}), block=["C5_conclusion"])])
+    js = {str(j).rsplit("/", 1)[1] for j in g.subjects(RDF.type, PA.ExaminerJudgment)}
+    assert js == {"k_s1_b2"} and (None, PA.refersToJudgment, None) not in g
+    assert st["sel_judgment__candidate"] == 3 and st["sel_judgment__held"] == 2
+    assert st["hold__C8_target_held"] == 1 and st["hold__C8_source_held"] == 1
+    assert st["sel_relation__candidate"] == 2 and st["sel_relation__held"] == 2
+    baa.check(g)
+
+
+def test_held_locators_and_one_rationale_kind_only():
+    r = _full_rec("k_s1_b1", [1], {"KR-P-1": [3]})
+    r["rat"] = ["DesignChoice", "PredictableEffect"]
+    g, st = _graph([_held(r, locators=["C6_locators"], rationale={"PredictableEffect": ["C7_scope_partial"]})])
+    j = baa._jiri("k_s1_b1")
+    assert (j, PA.judgesClaim, None) in g                                   # 판단은 싣는다
+    assert (None, PA.locator, None) not in g and st["sel_locator_set__held"] == 1
+    rats = set(g.objects(None, PA.hasRationale))
+    assert rats == {PA.RationaleDesignChoice} and st["sel_rationale_PredictableEffect__held"] == 1
+
+
+@pytest.mark.parametrize("text,want", [
+    ("단락 [0071] 내지 [0073] 및 도 4A,B 참조", ["[0071]~[0073]", "도4A", "도4B"]),
+    ("[0036-0039]", ["[0036]~[0039]"]),
+    ("단락[0026]-[0029],[0045]-[0050] 등", ["[0026]~[0029]", "[0045]~[0050]"]),
+    ("[0013, 0014, 0029] 참조", ["[0013]", "[0014]", "[0029]"]),
+    ("도 3a, 3b 참조", ["도3a", "도3b"]),
+    ("도 5A-5B", ["도5A"]),                                       # 하이픈은 읽지 않는다(범위인지 복합 번호인지 모름)
+    ("도 10A 내지 10C 참조", ["도10A~10C"]),
+    ("도면 1(B))", ["도1B"]),
+    ("도 1a,2-4,6 참조", ["도1a", "도2"]),
+    ("도 8에서", ["도8"]),
+    ("도면 2·4·8·10", ["도2", "도4", "도8", "도10"]),
+    ("온도 300℃ 정도 1 이상 · 정도 3", []),                       # 낱말 속 `도` · 단위는 좌표가 아니다
+])
+def test_k1_locator_ranges_lists_and_suffixes(text, want):
+    """K1 (§20.23 c) — 원문이 적은 범위·나열·접미를 그대로 읽는다. 이미 읽은 괄호를 다시 세지 않는다."""
+    got = [v for _, items in baa.locator_items(text) for _, v in items]
+    assert got == want and all(baa.LOC_VALUE_RX.match(v) for v in got)
+
+
+def test_k2_summary_bundle_attributes_only_this_blocks_combination():
+    """K2 — 한 결론에 묶음별 결합이 다르면 현재 블록 묶음의 절만 문헌 근거다."""
+    s = "따라서 청구항 2, 3, 5 발명은 인용발명 1, 2의 결합으로, 제7-10항 발명은 인용발명 1, 3의 결합으로 쉽게 발명할 수 있습니다."
+    part, amb = baa.summary_for_block(s, {8, 9, 10})
+    assert not amb and "인용발명 1, 3" in part and "인용발명 1, 2" not in part
+
+
+def test_k2_adjective_eun_is_not_a_bundle_subject():
+    """`같은 이유로` 의 `-은` 은 주어 조사가 아니다 — 가짜 묶음이 절을 자르면 라벨을 잃는다(4차 57행)."""
+    s = "따라서 청구항 14,15 발명은 각각 위 청구항 2,3에 대한 거절이유와 같은 이유로 인용발명1과 실질적으로 동일합니다."
+    bundles = [sorted(c) for _, _, sps in baa.conclusion_bundles(s) for c, _, _ in sps]
+    assert bundles == [[14, 15]]
+    part, _ = baa.summary_for_block(s, {14, 15})
+    assert "인용발명1" in part
+
+
+def test_k2_split_piece_and_ambiguous_bundles():
+    s = "따라서 출원발명의 청구항 9 및 16 발명은 인용발명 1 및 3으로부터 쉽게 발명할 수 있습니다."
+    assert "인용발명 1 및 3" in baa.summary_for_block(s, {16})[0]          # 분할 조각(16)도 자기 묶음 절을 받는다
+    amb = "따라서 청구항 1, 2 발명은 인용발명 1로, 청구항 3 발명은 인용발명 2로 쉽게 발명할 수 있습니다."
+    assert baa.summary_for_block(amb, {2, 3}) == ("", True)                  # 블록이 두 묶음에 걸친다 — 보류
+
+
+def test_k2_broad_conclusion_does_not_add_claims():
+    """넓힌 결론 읽기는 종합 결론을 떼는 데만 쓴다 — 블록 청구항을 늘리지 않는다(§20.23 c 금지 목록)."""
+    b = {"mark": "1", "head": "1-11. 청구항 14, 15", "text": "1-11. 청구항 14, 15\n청구항 14, 15 발명은 청구항 2, 3 을 카테고리를 달리한 것이다.\n"
+         "그러므로 청구항 2, 3, 14, 15 발명은 인용발명 1로부터 쉽게 발명할 수 있습니다."}
+    out = baa.split_by_subject(b)
+    assert baa._block_claims(out[0]) == [14, 15]
+
+
+def test_gate5_zero_judged_is_undecidable_not_pass(tmp_path, monkeypatch):
+    """§20.23 e — 판정 0 건은 판정 불가(통과 아님) · 평가자 보류 20% 초과도 판정 불가 · 문턱 0.90."""
+    import csv
+    p = tmp_path / "s.csv"
+    rows = ([{"kind": "block", "correct": "1"}] * 9 + [{"kind": "block", "correct": "0"}]
+            + [{"kind": "DesignChoice", "correct": ""}] * 3 + [{"kind": "DesignChoice", "correct": "1"}] * 7
+            + [{"kind": "held_block", "correct": "1"}])
+    with p.open("w", newline="") as fh:
+        w = csv.DictWriter(fh, fieldnames=["kind", "correct"]); w.writeheader(); w.writerows(rows)
+    monkeypatch.setattr(baa, "ROOT", tmp_path)
+    out = baa.gate5(p)
+    assert out["by_kind"]["block"]["pass"] is True and out["by_kind"]["block"]["rate"] == 0.9
+    assert out["by_kind"]["DesignChoice"]["decidable"] is False                 # 보류 3/10 > 20%
+    assert out["by_kind"]["locator"]["decidable"] is False and out["by_kind"]["locator"]["pass"] is False   # 0 건
+    assert out["over_hold"]["held_block"] == {"rows": 1, "actually_correct": 1} and out["pass"] is False
