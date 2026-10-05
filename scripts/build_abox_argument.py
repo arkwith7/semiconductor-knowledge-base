@@ -47,6 +47,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from config.namespaces import SDKB_DATA, SDKB_PA, SDKB_PA_KR  # noqa: E402
 from build_priorart_modules import _emit  # noqa: E402
 import build_notice_evidence as N  # noqa: E402
+import argument_consistency as AC  # noqa: E402
 from build_abox_claim_features import _doc_key, _loose_map  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -58,6 +59,10 @@ SPLIT = ROOT / "benchmark" / "assets" / "split.csv"
 ARG_TTL = ROOT / "ontology" / "sdkb-priorart-argument.ttl"
 OUT = ROOT / "ontology" / "sdkb-abox-argument.ttl"
 REPORT = ROOT / "data" / "reports" / "abox_argument_report.json"
+# 판단별 보류 사유 · 보정 근거(키 · 규칙 · 오프셋) — 키에 통지서 파일명이 들어가므로 비공개 자리(gitignore)에만 쓴다.
+HOLDS_CSV = ROOT / "data" / "interim" / "argument_holds.csv"
+CORRECTIONS_CSV = ROOT / "data" / "interim" / "argument_corrections.csv"
+SELECTIVE_KINDS = ("judgment", "locator_set", "rationale_DesignChoice", "rationale_PredictableEffect", "relation")
 PILOT_DIR = ROOT / "data" / "sources" / "notice_dissection"
 SAMPLE_CSV = ROOT / "data" / "interim" / "argument_abox_sample.csv"
 
@@ -100,9 +105,21 @@ CL_MARKED = r"(?:" + CL + r"|(?:(?:독립|종속)\s*항\s*)?제\s*\d{1,3}(?:\s*[
 HEAD_RX = re.compile(r"^[ \t]*(?:" + MARK + r"[ \t]*[<\[(【]?[ \t]*" + CL_MARKED + r"|" + CL +
                      r"(?=[^\n]{0,40}?(?:인용|종속|부가|추가|에\s*대하여|에\s*관하여|에\s*있어서"
                      r"|의\s*(?:부가적인\s*|추가적인\s*)?(?:기술적\s*)?특징|\s비고\s*$)))", re.M)
+# K3 (§20.23 c) — 머리줄 변형: 나열 `6. 제10, 11항(…) 및 제12항` · 오탈자 `라. 청구하 제10-12항`. 표지가 있을 때만이고,
+# 새 꼴은 그 구간에 판단 서술이 있을 때만 머리줄로 받는다(split_blocks).
+CL_MARKED_K3 = (r"(?:" + CL + r"|청구\s*하\s*(?:제\s*)?\d{1,3}"
+                r"|(?:(?:독립|종속)\s*항\s*)?제\s*\d{1,3}(?:\s*[-–]\s*\d{1,3})?(?:\s*(?:,|및)\s*(?:제\s*)?\d{1,3})*\s*항)")
+HEAD_K3_RX = re.compile(r"^[ \t]*" + MARK + r"[ \t]*[<\[(【]?[ \t]*" + CL_MARKED_K3, re.M)
+JUDGE_RX = re.compile(r"(?:쉽게|용이하게)\s*(?:발명|도출|생각)|동일(?:합니다|하다|한\s*발명|하므로)|신규성|진보성|차이(?:가|점)")
 # 첫 블록 앞(절 서두)에서 독립항을 판단하고 `따라서 청구항 1 발명은` 으로 맺는 통지서가 있다 — 그 결론 문장의
 # 청구항으로 서두를 판단 하나(_b0)로 둔다.
 CONCL_RX = re.compile(r"따라서\s*,?\s*(?:본원\s*(?:의\s*)?)?((?:청구항|제\s*\d)[^.]{0,60}?)(?:에\s*기재된\s*)?(?:발명)?\s*(?:은|는)\s")
+# K2 (§20.23 c) — 종합 결론 문장. 여는 말(`따라서` · `그러므로` · `결국` · `이상과 같이`)과 앞말(`출원발명의` · `이 출원의`)을 받고,
+# 한 문장 안의 청구항 묶음(`청구항 2, 3, 5 발명은 … 1+2, 제7-10항 발명은 … 1+3`)을 모두 읽는다.
+CONCL_OPEN_RX = re.compile(r"(?:따라서|그러므로|결국|이상과\s*같이)\s*,?")
+# 묶음 주어 = 청구항 나열 **바로 뒤**의 `(발명)은/는` — 나열과 조사 사이에 다른 말을 허용하면 `같은 이유로` 의 `-은` 을 주어로 읽는다.
+BUNDLE_RX = re.compile(r"((?:청구항|제)\s*(?:제\s*)?\d{1,3}(?:\s*(?:항)?\s*(?:,|및|내지|~|∼|-|–|ㆍ|·|와|과)\s*(?:청구항\s*)?(?:제\s*)?\d{1,3})*"
+                       r"\s*(?:항)?)\s*(?:\([^()]{0,40}\))?\s*(?:에\s*기재된\s*)?(?:발명)?\s*(?:들?은|는)\s")
 # 머리줄의 괄호 속 인용항(`청구항 4(청구항 1 내지 3 인용)`)은 이 블록의 청구항이 아니다.
 PAREN_RX = re.compile(r"[\(\[]?[^()\[\]\n]{0,40}(?:인용|종속)[^()\[\]\n]{0,10}[\)\]]")
 ADDED_RX = re.compile(r"인용|종속|부가|추가|한정")
@@ -134,6 +151,85 @@ REF_LABEL_RX = re.compile(r"\[\s*거절\s*이유\s*(\d+)(?:\s*-\s*(\d+))?\s*\]\s
 REF_CLAIM_RX = re.compile(r"거절\s*이유(?:와|가|를)?\s*(?:동일|그대로|마찬가지)|동일한\s*취지|동일한\s*(?:거절\s*)?이유")
 CAT_RX = re.compile(r"카테고리(?:를|만|만을)?\s*(?:달리|상이|다른)")
 SENT_BOUND_RX = re.compile(r"(?:다|음|함)\s*\.|[가-힣]\.\s|\n\s*\n")
+
+# K1 (§20.23 c) — 좌표 표기의 범위·나열·접미. 원문이 적은 번호를 그대로 읽는다(추정으로 늘리지 않는다).
+# 단락: `[0071]` · `[0071]~[0073]` · `[0071] 내지 [0073]` · `[0036-0039]` · `[0013, 0014]` · `단락 0034, 0035`.
+# 도면: `도 3` (뒤 조사와 무관) · `도 4A,B` · `도 3a, 3b` · `도 2, 5` · `도 10A 내지 10C` · `도면 1(B)` · `도6 A`.
+# 도면의 하이픈(`도 1-5`)은 범위인지 복합 도면 번호(`도면 1-5, 1-6`)인지 원문이 말하지 않는다 — 읽지 않는다(C6 이 모호로 보류).
+_K1_PARA_RX = re.compile(r"(?:(?:식별\s*번호|단락|문단)\s*)?[\[【]\s*(\d{3,5})\s*(?:[-–~∼]\s*(\d{3,5})\s*)?((?:,\s*\d{3,5}\s*)*)[\]】]"
+                         r"|(?:식별\s*번호|단락|문단)\s*(\d{3,5})")
+_K1_PARA_NEXT_RX = re.compile(r"\s*(?:(~|∼|-|–|내지|부터)|,|및)\s*(?:[\[【]\s*(\d{3,5})\s*[\]】]|(\d{3,5})(?!\d))")
+_K1_FIG_RX = re.compile(r"(?<![가-힣])도(?:면)?\s*(\d{1,3})(?:\s*\(\s*([A-Za-z])\s*\)|\s?([A-Za-z])(?![A-Za-z]))?"
+                        r"(?!\s*(?:[%℃°]|mm|nm|μm|um|㎛|cm|분|초|이상|이하|정도))")
+_K1_FIG_NEXT_RX = re.compile(r"\s*(?:(~|∼|내지)|,|및|ㆍ|·|와|과)\s*(?:도(?:면)?\s*)?(\d{1,3})?\s?([A-Za-z])?(?![A-Za-z0-9])")
+_K1_RANGE_MAX = 300
+
+
+def _fig(base: str, suf: str | None) -> str:
+    return base + (suf or "")
+
+
+def locator_items(text: str) -> list[tuple[int, list[tuple[str, str]]]]:
+    """원문 좌표 표기 하나(나열·범위 포함) → (위치, [(종류, 값)]). 값은 LOC_VALUE_RX 형식이다."""
+    out = []
+    used = 0                                                   # 이어 읽기로 이미 소비한 곳은 새 표기가 아니다
+    for m in _K1_PARA_RX.finditer(text):
+        if m.start() < used:
+            continue
+        items: list[tuple[str, str]] = []
+        if m.group(1):
+            a, b = m.group(1), m.group(2)
+            items.append(("Paragraph", f"[{a}]" + (f"~[{b.zfill(len(a))}]" if b else "")))
+            items += [("Paragraph", f"[{x}]") for x in re.findall(r"\d{3,5}", m.group(3) or "")]
+            last = b or a
+        else:
+            last = m.group(4)
+            items.append(("Paragraph", f"[{last}]"))
+        at = m.end()
+        while True:
+            n = _K1_PARA_NEXT_RX.match(text, at)
+            if not n:
+                break
+            v = n.group(2) or n.group(3)
+            if n.group(1):                                     # 범위 — 앞 값의 끝을 늘린다
+                t_, prev = items[-1]
+                lo = prev.strip("[]").split("]~[")[0]
+                if not int(lo) < int(v) <= int(lo) + _K1_RANGE_MAX:
+                    break
+                items[-1] = ("Paragraph", f"[{lo}]~[{v.zfill(len(lo))}]")
+            else:
+                items.append(("Paragraph", f"[{v}]"))
+            last, at = v, n.end()
+        used = at
+        out.append((m.start(), items))
+    used = 0
+    for m in _K1_FIG_RX.finditer(text):
+        if m.start() < used:
+            continue
+        base, suf = m.group(1), m.group(2) or m.group(3)
+        items = [("Figure", "도" + _fig(base, suf))]
+        at = m.end()
+        while True:
+            n = _K1_FIG_NEXT_RX.match(text, at)
+            if not n or not (n.group(2) or n.group(3)):
+                break
+            nb, ns = n.group(2), n.group(3)
+            if nb is None:                                     # `4A,B` — 앞 번호의 다른 접미
+                if not suf:
+                    break
+                nb = base
+            if n.group(1):                                     # 범위 `10A 내지 10C` · `6~10`
+                t_, prev = items[-1]
+                if "~" in prev:
+                    break
+                items[-1] = ("Figure", prev + "~" + _fig(nb, ns))
+            else:
+                items.append(("Figure", "도" + _fig(nb, ns)))
+            base, suf, at = nb, ns, n.end()
+        used = at
+        out.append((m.start(), items))
+    return sorted(out, key=lambda x: x[0])
+
 
 LOC_VALUE_RX = re.compile(r"^(?:\[\d{3,5}\](?:~\[\d{3,5}\])?|도\d{1,3}[A-Za-z]?(?:~\d{1,3}[A-Za-z]?)?)$")
 
@@ -169,6 +265,8 @@ def _as_claim(s: str) -> str:
     """해석용 정규화 — 저장하는 원문은 바꾸지 않는다. `제2-7항` · `청구항 1-4` 는 범위다(H3)."""
     # 법조문(`특허법 제29조제2항` · `제42조 제4항`)의 `제N항` 은 청구항이 아니다 — `조` 뒤는 바꾸지 않는다.
     s = re.sub(r"(?<!조)(?<!조\s)제\s*(\d{1,3})\s*[-–]\s*(\d{1,3})\s*항", r"청구항 \1 내지 \2", s)
+    s = re.sub(r"(?<!조)(?<!조\s)제\s*(\d{1,3})((?:\s*(?:,|및)\s*(?:제\s*)?\d{1,3})+)\s*항",      # K3 `제10, 11항`
+               lambda m: "청구항 " + m.group(1) + re.sub(r"제\s*", "", m.group(2)), s)
     s = re.sub(r"(?<!청구항)(?<!청구항\s)(?<!조)(?<!조\s)제\s*(\d{1,3})\s*항", r"청구항 \1", s)
     s = re.sub(r"(?<=\d)\s*[·ㆍ+]\s*(?=\d)", ", ", s)          # `8·9항` · `청구항 2+4`
     s = re.sub(r"청\s+구\s*항|청구\s+항", "청구항", s)            # 줄바꿈에 끊긴 `청 구항`
@@ -218,6 +316,17 @@ def split_blocks(seg: str) -> list[dict]:
     """
     hs = [m for m in HEAD_RX.finditer(seg)
           if (m.group("mark") or _after_sentence_end(seg, m.start())) and not _bracket_locator(seg, m)]
+    # K3 — 기존 머리줄에 없는 새 꼴(나열 · 오탈자 · 위치 표기가 있는 번호 괄호 표지)을 더한다. 판단 서술이 있는 구간만.
+    have = {m.start() for m in hs}
+    # 표지가 줄을 넘거나 출원번호 꼴(`10-2015-0155906` · 쪽 바꿈 표기)이면 머리줄이 아니다(검토 34행).
+    k3 = [m for m in HEAD_K3_RX.finditer(seg) if m.start() not in have and not _bracket_locator(seg, m, numbered_ok=True)
+          and "\n" not in (m.group("mark") or "") and not re.match(r"\d{2}\s*-\s*\d{4}\s*-\s*\d{4,}", (m.group("mark") or "").strip())]
+    if k3:
+        starts = sorted(have | {m.start() for m in k3})
+        def _segment_judges(m):
+            nxt = [p for p in starts if p > m.start()]
+            return bool(JUDGE_RX.search(seg, m.start(), nxt[0] if nxt else len(seg)))
+        hs = sorted(hs + [m for m in k3 if _segment_judges(m)], key=lambda m: m.start())
     out: list[dict] = []
     carry = None
     for i, m in enumerate(hs):
@@ -272,9 +381,12 @@ def _mark_level(mark: str) -> int:
 
 
 # G5 — 괄호 표지 줄이 좌표·`참조` 를 담으면 문헌 위치 표기(`(청구항 2~5, 도 1 참조)`)이지 머리줄이 아니다.
-def _bracket_locator(seg: str, m: re.Match) -> bool:
-    if (m.group("mark") or "").strip()[:1] not in "([【<":
+def _bracket_locator(seg: str, m: re.Match, numbered_ok: bool = False) -> bool:
+    mark = (m.group("mark") or "").strip()
+    if mark[:1] not in "([【<":
         return False
+    if numbered_ok and re.fullmatch(r"\(\s*(?:\d+|[가-하])\s*\)", mark):
+        return False                    # K3 — 번호 괄호 표지 `(9)` 는 같은 줄에 위치 표기가 있어도 머리줄이다
     nl = seg.find("\n", m.start())
     line = seg[m.start(): nl if nl != -1 else len(seg)]
     return bool(LOC_RX.search(line) or "참조" in line)
@@ -299,12 +411,55 @@ def _cut_at_subheading(b: dict) -> dict:
 SUBJ_RX = re.compile(r"(?:^|(?<=다\.)|(?<=\n))[ \t]*(?:또한\s*,?\s*|그리고\s*,?\s*|한편\s*,?\s*)?"
                      r"((?:청구항|제)\s*(?:제\s*)?\d{1,3}(?:\s*(?:항)?\s*(?:,|및|내지|~|∼|-)\s*(?:청구항\s*)?(?:제\s*)?\d{1,3})*"
                      r"\s*(?:항)?)\s*(?:에\s*기재된\s*)?(?:발명)?\s*(?:은|는)\s")
+# K4 (§20.23 c) — 블록을 가르는 주어 꼴만 넓힌다(위 SUBJ_RX 는 결론으로 더할 청구항 판정에도 쓰이므로 그대로 둔다).
+# 접두 `본 출원의` · `출원발명의` · 꼬리 `발명의 한정 구성(들)은` · `발명에서 한정` · 하이픈 범위 `청구항 2-3는`.
+SUBJ_K4_RX = re.compile(
+    r"(?:^|(?<=다\.)|(?<=\n)|(?<=[.]\s))[ \t]*(?:또한\s*,?\s*|그리고\s*,?\s*|한편\s*,?\s*|다음으로\s*,?\s*)?"
+    r"(?:본\s*출원\s*(?:의\s*)?|출원\s*발명\s*(?:의\s*)?|본원\s*(?:발명\s*)?(?:의\s*)?)?"
+    r"((?:청구항|제)\s*(?:제\s*)?\d{1,3}(?:\s*(?:항)?\s*(?:,|및|내지|~|∼|-|–)\s*(?:청구항\s*)?(?:제\s*)?\d{1,3})*\s*(?:항)?)"
+    r"\s*(?:\([^()]{0,40}\))?\s*(?:에\s*기재된\s*)?(?:발명)?\s*"
+    r"(?:(?:의|에서)\s*(?:한정\s*(?:하고\s*있는\s*)?|부가\s*[·ㆍ]?\s*한정\s*|부가적인\s*|추가적인\s*)?"
+    r"(?:구성|사항|특징|기술적\s*특징)(?:들)?\s*)?(?:(?:은|는)\s|에\s*서\s*한정)")
 
 
 # 블록이 그 청구항 **자신을** 다뤘다는 표지 — `청구항 2 와 3 의 (부가적인 · 기술적) 특징` · `한정사항` · `부가 사항`.
 # `청구항 1 의 구성` 처럼 비교 대상으로만 언급된 것은 넣지 않는다(회귀 188행).
 DISCUSS_RX = re.compile(r"(" + CL_LIST + r"(?:\s*(?:과|와)\s*(?:청구항\s*)?\d{1,3}\s*(?:항)?)?)\s*(?:발명)?\s*의\s*"
                         r"(?:(?:부가적인|추가적인|기술적인?)\s*)*(?:기술적\s*)?(?:특징|한정\s*사항|한정\s*구성|부가\s*(?:한정\s*)?사항)")
+
+
+def conclusion_bundles(text: str) -> list[tuple[re.Match, set[int], list[tuple[set[int], int, int]]]]:
+    """종합 결론 문장마다 (여는 말 위치, 묶음 청구항 합집합, [(묶음 청구항, 절 시작, 절 끝)]). 묶음이 없으면 내지 않는다."""
+    out = []
+    for m in CONCL_OPEN_RX.finditer(text):
+        ends = [b.end() for b in SENT_BOUND_RX.finditer(text, m.end())]
+        end = ends[0] if ends else len(text)
+        bundles = []
+        for bm in BUNDLE_RX.finditer(text, m.end(), end):
+            if bm.start() - m.end() > 40 and not bundles:      # 여는 말과 첫 묶음 사이가 멀면 결론 문장이 아니다
+                break
+            cl = set(judged_claims(bm.group(1), first_only=False))
+            if cl:
+                bundles.append((cl, bm.start(), bm.end()))
+        if bundles:
+            spans = [(cl, a, bundles[i + 1][1] if i + 1 < len(bundles) else end) for i, (cl, a, _) in enumerate(bundles)]
+            out.append((m, set().union(*(c for c, _, _ in spans)), spans))
+    return out
+
+
+def summary_for_block(summary: str, claims: set[int]) -> tuple[str, bool]:
+    """K2 — 종합 결론에서 이 블록의 묶음 절만 문헌 근거로 쓴다. (근거 절 본문, 모호 여부).
+    블록 청구항을 **모두** 덮는 묶음이 하나면 그 절, 덮는 묶음이 없는데 여러 묶음에 걸쳐 있으면 모호(보류)."""
+    spans = [sp for _, _, sps in conclusion_bundles(summary) for sp in sps]
+    cover = [(a, z) for cl, a, z in spans if claims <= cl]
+    if len(cover) == 1:
+        a, z = cover[0]
+        return summary[a:z], False
+    if len(cover) > 1:
+        texts = {summary[a:z] for a, z in cover}
+        return (texts.pop(), False) if len(texts) == 1 else ("", True)
+    touching = [cl for cl, _, _ in spans if cl & claims]
+    return "", bool(touching) and set().union(*touching) >= claims
 
 
 def split_by_subject(b: dict) -> list[dict]:
@@ -316,6 +471,8 @@ def split_by_subject(b: dict) -> list[dict]:
     # 그 청구항들을 판단했다는 증거가 아니다(회귀 160행). 더한 것은 따로 적어 H6 내부 관계 판정에서 뺀다(185·188·191행).
     concl_added: set[int] = set()
     summary_at = None
+    # 결론으로 더하는 청구항은 **원래 결론 꼴(CONCL_RX)** 에서만 — K2 의 넓힌 결론 읽기는 종합 결론을 떼는 데만 쓴다.
+    # (넓힌 읽기를 여기 쓰면 결론이 블록 청구항을 늘린다 · 4차 57행 회귀 · §20.23 c 금지 목록)
     for m in CONCL_RX.finditer(text):
         cc = set(judged_claims(m.group(1), first_only=False))
         if not cc & claims:
@@ -329,24 +486,31 @@ def split_by_subject(b: dict) -> list[dict]:
         # 본문에서 떼어 `summary` 로 **별도 표시**한다(회귀 v2 17행). 다만 그 결론이 이 블록 청구항을 **모두** 덮으면 거기 적힌
         # 문헌은 이 블록의 근거이기도 하다 — 참조만 있고 자기 문헌이 없는 블록(`청구항 9~12 는 청구항 1, 3~5 를 카테고리를
         # 달리하여` → `따라서 청구항 7 내지 12 는 인용발명 1 내지 4 의 조합`)이 근거를 잃지 않게(회귀 v3 120·194행).
-        if cc - claims and summary_at is None:
+    for m, cc, _ in conclusion_bundles(text):
+        if cc & claims and cc - claims:
             summary_at = m.start()
-            summary_covers = claims <= cc
-    summary = ""
+            break
+    summary, summary_docs, ambiguous, summary_text = "", "", False, ""
     if summary_at is not None:
-        summary = text[summary_at:] if summary_covers else ""
+        summary_text = text[summary_at:]
+        summary_docs, ambiguous = summary_for_block(summary_text, claims)
+        summary = summary_text if summary_docs else ""
         text = text[:summary_at]
     cuts = []
-    for m in SUBJ_RX.finditer(text, body_at):
+    for m in SUBJ_K4_RX.finditer(text, body_at):
         cl = set(judged_claims(m.group(1), first_only=False))
         if cl and not cl & claims:
             cuts.append((m.start(), sorted(cl)))
-    out = [{**b, "text": text[:cuts[0][0]] if cuts else text, "summary": summary,
+    out = [{**b, "text": text[:cuts[0][0]] if cuts else text, "summary": summary, "summary_docs": summary_docs,
+            "k2_ambiguous": ambiguous,
             "claims_extra": sorted(claims - set(own_claims(b["head"]))), "claims_concl": sorted(concl_added)}]
     for i, (at, cl) in enumerate(cuts):
         end = cuts[i + 1][0] if i + 1 < len(cuts) else len(text)
+        # 주어 분할로 생긴 조각도 같은 종합 결론에서 **자기 묶음 절**을 받는다(`따라서 청구항 9 및 16 발명은` → 16 조각 · 회귀 186).
+        p_docs, p_amb = summary_for_block(summary_text, set(cl)) if summary_text else ("", False)
         out.append({"mark": "", "head": text[at:at + HEAD_SPAN].split("\n", 1)[0], "text": text[at:end],
-                    "claims_extra": cl, "split": True})
+                    "claims_extra": cl, "split": True, "summary": summary_text if p_docs else "",
+                    "summary_docs": p_docs, "k2_ambiguous": p_amb})
     return out
 
 
@@ -418,18 +582,59 @@ def notice_sections(text: str, app: str) -> tuple[list[dict], dict, dict]:
 
 # 줄바꿈이 낱말을 끊는다(`인용 발명 1`) — 라벨 용어 안의 공백을 허용한다. 번호 없는 라벨은 문헌이 하나뿐인
 # 절에서만 그 문헌으로 읽는다.
+_LABEL_TERM = r"(?:인\s*용\s*발\s*명|비\s*교\s*대\s*상\s*발\s*명|선\s*행\s*발\s*명|인\s*용\s*문\s*헌)"
+# K5 (§20.23 c) — 나열: 라벨 반복 범위 `인용발명1 내지 인용발명3` · 하이픈 범위 `1-2 및 5` · `혹은` · 이중 구분자 `1, 2, 또는 3`.
+_LABEL_SEP = r"(?:,|및|와|과|또는|혹은|내지|~|∼|ㆍ|·|-|–)"
 LABEL_FLEX_RX = re.compile(r"(인\s*용\s*발\s*명|비\s*교\s*대\s*상\s*발\s*명|선\s*행\s*발\s*명|인\s*용\s*문\s*헌)"
-                           r"(?:\s*(\d{1,2})(?!\d)((?:\s*(?:,|및|와|과|또는|내지|~|∼|ㆍ|·)\s*\d{1,2}(?!\d))*))?")
+                           r"(?:\s*(\d{1,2})(?!\d)((?:\s*" + _LABEL_SEP + r"(?:\s*(?:,|및|또는|혹은))?\s*(?:" + _LABEL_TERM
+                           + r"\s*)?\d{1,2}(?!\d))*))?")
 # F1 — 나열(`인용발명 1, 2` · `1 내지 3` · `1~4`)의 뒤 번호. 1차 사람 대조 블록 오답 16 중 10 이 이것이었다.
-_LIST_TAIL_RX = re.compile(r"\s*(,|및|와|과|또는|내지|~|∼|ㆍ|·)\s*(\d{1,2})")
+_LIST_TAIL_RX = re.compile(r"\s*(,|및|와|과|또는|혹은|내지|~|∼|ㆍ|·|-|–)(?:\s*(?:,|및|또는|혹은))?\s*(?:" + _LABEL_TERM + r"\s*)?(\d{1,2})")
 MAX_LABEL_RANGE = 10
+
+
+# K6 (§20.23 c) — 라벨 정의의 유효 범위. 정본 파서는 `라벨 : 문헌` 꼴(본문 표지 뒤)만 읽는다. 여기서는 번호 뒤 정의
+# `…호(이하 '인용발명 1')` 와 통지서 전체의 정의를 위치와 함께 모은다. 같은 절의 정의를 우선하고, 없으면 통지서 안에서 그 번호의
+# 정의가 **문헌 하나로만** 있을 때 잇는다. 서로 다른 문헌 정의가 있으면 잇지 않는다(반복 언급은 정상).
+K6_FWD_RX = re.compile(r"(" + _LABEL_TERM + r")\s*(\d{1,2})(?!\d)\s*[\]】)]?\s*(?:[:：=]|은|는|이라|로\s*칭)")
+K6_BACK_RX = re.compile(r"이하\s*[,'‘\"“]?\s*(" + _LABEL_TERM + r")\s*(\d{1,2})(?!\d)")
+
+
+def k6_definitions(text: str, app: str) -> dict[tuple[str, int], list[tuple[int, str]]]:
+    """(라벨 용어, 번호) → [(위치, 문헌)] — 앞 꼴은 라벨 뒤 같은 줄, 뒤 꼴은 `이하` 앞 같은 줄에서 가장 가까운 문헌."""
+    out: dict[tuple[str, int], list[tuple[int, str]]] = {}
+    for m in K6_FWD_RX.finditer(text):
+        win = text[m.end():m.end() + 120].split("\n")[0]
+        nid = N.normalize_cited(win)
+        if nid and not (app and _doc_key(nid) == _doc_key(f"KR-P-{app}")):
+            out.setdefault((re.sub(r"\s", "", m.group(1)), int(m.group(2))), []).append((m.start(), nid))
+    for m in K6_BACK_RX.finditer(text):
+        win = text[max(0, m.start() - 120):m.start()].split("\n")[-1]
+        docs = N.cited_in_section(win, app)
+        if docs:
+            last = max(docs, key=lambda d: win.rfind(d.split("-")[-1][-5:].lstrip("0")))
+            out.setdefault((re.sub(r"\s", "", m.group(1)), int(m.group(2))), []).append((m.start(), last))
+    return out
+
+
+def k6_scope(table: dict, lo: int, hi: int) -> dict[tuple[str, int], str]:
+    """절 [lo, hi) 에서 쓸 정의 — 같은 절 정의가 문헌 하나면 그것, 없으면 통지서 전체가 문헌 하나일 때만."""
+    out = {}
+    for k, v in table.items():
+        sec = {d for p, d in v if lo <= p < hi}
+        alld = {d for _, d in v}
+        if len(sec) == 1:
+            out[k] = next(iter(sec))
+        elif not sec and len(alld) == 1:
+            out[k] = next(iter(alld))
+    return out
 
 
 def label_numbers(first: str, tail: str) -> list[int]:
     nums, prev = [int(first)], int(first)
     for m in _LIST_TAIL_RX.finditer(tail or ""):
         n = int(m.group(2))
-        if m.group(1) in ("내지", "~", "∼") and prev < n <= prev + MAX_LABEL_RANGE:
+        if m.group(1) in ("내지", "~", "∼", "-", "–") and prev < n <= prev + MAX_LABEL_RANGE:
             nums.extend(range(prev + 1, n + 1))
         else:
             nums.append(n)
@@ -448,7 +653,7 @@ def section_docs(seg: str, app: str, defs: dict) -> set[str]:
 
 
 def docs_in(text: str, app: str, defs: dict, sec_docs: set[str], stat: Counter | None = None,
-            missing: list | None = None, how: dict | None = None) -> dict[str, list[int]]:
+            missing: list | None = None, how: dict | None = None, k6: dict | None = None) -> dict[str, list[int]]:
     """정규화 문헌 → 그 문헌을 가리키는 라벨 위치(좌표 귀속용). 직접 표기는 위치 없이 싣는다.
     `how` 에는 문헌마다 어떻게 해소했는지(직접 표기 · 라벨 정의 · 절의 유일 문헌)를 남긴다 — 사람 대조의 증거."""
     out: dict[str, list[int]] = {}
@@ -464,11 +669,16 @@ def docs_in(text: str, app: str, defs: dict, sec_docs: set[str], stat: Counter |
         nums = label_numbers(r.group(2), r.group(3)) if r.group(2) else [None]
         for k, n in enumerate(nums):
             nid = defs.get((term, n)) if n is not None else None
-            # H4 — 번호 라벨은 정의로 잇는다. 정의가 없을 때 대응이 **확정되는** 경우만 절의 유일 문헌으로 읽는다:
-            # 번호 없는 라벨, 또는 `인용발명 1` (절에 문헌이 하나뿐이면 1 번은 그것이다). `인용발명 2` 는 문헌 하나뿐인
-            # 절에서 그 문헌일 수 없다 — 3차 오답이 이것이었다. 그 밖은 미해결로 남긴다.
+            # H4 — 번호 라벨은 정의로만 잇는다. 정의가 없을 때 절의 유일 문헌으로 읽는 것은 **번호 없는 라벨**뿐이다.
+            # 단독 `인용발명 1` 을 유일 문헌으로 읽던 예외는 지웠다 — 그 문헌이 `[인용발명 2]` 로 선언된 경우가 있었다
+            # (4차 오답 2 · 검토 3 · §20.23 c 금지 목록). 번호 라벨을 못 이으면 미해결로 남긴다(G2 로 적재 제외).
             via = ("definition", term, n)
-            if nid is None and only and (n is None or (n == 1 and len(nums) == 1)):
+            if nid is None and n is not None and k6 and (term, n) in k6:
+                nid = k6[(term, n)]
+                via = ("definition_k6", term, n)
+                if stat is not None:
+                    stat["label_resolved_by_k6"] += 1
+            if nid is None and only and n is None:
                 nid = only
                 via = ("single_section_document", term, n)
                 if stat is not None:
@@ -530,10 +740,10 @@ def _locators(text: str, labels: dict[str, list[int]], single: str | None, stat:
     """좌표 → 귀속 문헌. 앞 80자 안의 가장 가까운 라벨, 없으면 단일문헌 블록의 그 문헌."""
     pos = sorted((p, nid) for nid, ps in labels.items() for p in ps)
     out: dict[str, set] = {}
-    for m in LOC_RX.finditer(text):
-        lo = max(0, m.start() - APPLICANT_NEAR)
-        app_at = [lo + a.end() for a in APPLICANT_RX.finditer(text, lo, m.start())]
-        near = [(p, nid) for p, nid in pos if m.start() - LABEL_NEAR <= p <= m.start()]
+    for start, items in locator_items(text):
+        lo = max(0, start - APPLICANT_NEAR)
+        app_at = [lo + a.end() for a in APPLICANT_RX.finditer(text, lo, start)]
+        near = [(p, nid) for p, nid in pos if start - LABEL_NEAR <= p <= start]
         # 본원 표지가 가장 가까운 라벨보다 뒤(좌표 쪽)에 있으면 본원 명세서의 좌표다.
         if app_at and (not near or app_at[-1] > near[-1][0]):
             stat["locator_applicant_side"] += 1
@@ -545,12 +755,7 @@ def _locators(text: str, labels: dict[str, list[int]], single: str | None, stat:
         else:
             stat["locator_unattributed"] += 1
             continue
-        if m.group("fig"):
-            t, v = "Figure", "도" + m.group("fn") + (f"~{m.group('fn2')}" if m.group("fn2") else "")
-        else:
-            lo = m.group("p1") or m.group("p2")
-            t, v = "Paragraph", f"[{lo}]" + (f"~[{m.group('p3').zfill(len(lo))}]" if m.group("p3") else "")
-        out.setdefault(nid, set()).add((t, v))
+        out.setdefault(nid, set()).update(items)
         stat["locator_attributed"] += 1
     return out
 
@@ -560,7 +765,15 @@ def extract_notice(stem: str, text: str) -> tuple[list[dict], Counter]:
     app = stem.split("_")[0]
     stat = Counter()
     sections, defs, lines = notice_sections(text, app)
+    k6_table = k6_definitions(text, app)
     recs = []
+    # 절 식별자 — 인쇄된 절 번호가 한 통지서에서 되풀이된다(`1,2,3,1,2,3` · 31 통지서). 번호만으로 키를 지으면 다른 판단이
+    # 한 IRI 로 합쳐진다(§20.23 b⑤). 원문 순서에서 같은 번호가 k 번째(k ≥ 2) 나오면 `{no}r{k}` 로 적는다.
+    seen_no: Counter = Counter()
+    for s in sections:
+        seen_no[s["no"]] += 1
+        s["sid"] = f"{s['no']}" if seen_no[s["no"]] == 1 else f"{s['no']}r{seen_no[s['no']]}"
+    repeated = {n for n, c in seen_no.items() if c > 1}
     for s in sections:
         grounds = [b for b in s["bases"] if b in GROUND]
         if not grounds:
@@ -571,13 +784,17 @@ def extract_notice(stem: str, text: str) -> tuple[list[dict], Counter]:
         # 절마다 번호를 새로 매기는 통지서가 있어(거절이유 1 의 인용발명 1 ≠ 거절이유 2 의 인용발명 1) 문서 전체
         # 정의는 그 라벨을 모호로 버린다 — 절 안의 정의를 먼저 쓴다.
         sdefs = {**defs, **N.label_definitions(s["seg"], app)}
+        k6 = k6_scope(k6_table, s["offset"], s["offset"] + len(s["seg"]))
         def_lines = {**lines, **definition_lines(s["seg"])}
         sdocs = section_docs(s["seg"], app, sdefs)
         decl_lines = declaration_lines(s["seg"], app, sdocs)
         units = ([(i, b["mark"], b["head"], b["text"], b.get("claims_extra", [])) for i, b in enumerate(blocks, 1)]
                  if blocks else [(0, "", "", s["seg"], [])])
+        split_of = {i: bool(b.get("split")) for i, b in enumerate(blocks, 1)}
         concl_of = {i: set(b.get("claims_concl", [])) for i, b in enumerate(blocks, 1)}
         summary_of = {i: b.get("summary", "") for i, b in enumerate(blocks, 1)}
+        sdocs_of = {i: b.get("summary_docs", "") for i, b in enumerate(blocks, 1)}
+        amb_of = {i: b.get("k2_ambiguous", False) for i, b in enumerate(blocks, 1)}
         if blocks:
             pre = s["seg"][:s["seg"].find(blocks[0]["text"])]
             pc = sorted({n for m in CONCL_RX.finditer(_flat(pre)) for n in claim_refs(m.group(1))})
@@ -594,17 +811,22 @@ def extract_notice(stem: str, text: str) -> tuple[list[dict], Counter]:
             how: dict = {}
             summ = summary_of.get(bi, "")
             # 문헌은 본문 + (블록 청구항을 모두 덮는) 종합 결론에서 — 좌표 귀속 위치는 본문 범위에서만 쓰인다.
-            labels = docs_in(text_ + ("\n" + summ if summ else ""), app, sdefs, sdocs, stat, missing, how)
+            sdoc = sdocs_of.get(bi, "")
+            labels = docs_in(text_ + ("\n" + sdoc if sdoc else ""), app, sdefs, sdocs, stat, missing, how, k6)
             recs.append({
-                "key": f"{stem}_s{s['no']}_b{bi}", "stem": stem, "app": app, "section": s["no"],
+                "key": f"{stem}_s{s['sid']}_b{bi}", "stem": stem, "app": app, "section": s["no"], "sid": s["sid"],
+                "section_repeated": s["no"] in repeated,
                 "core_claims": sorted(set(claims) - concl_of.get(bi, set())),
                 "offset": s["offset"] + max(0, s["seg"].find(text_)),
                 "block": bi, "mark": mark, "grounds": grounds, "claims": claims,
                 "scope": "added" if bi and ADDED_RX.search(head[:HEAD_SPAN]) else "whole",
                 "labels": labels,
                 "missing_labels": len(missing),
-                "summary": summ,
+                "summary": summ, "summary_docs": sdoc, "k2_ambiguous": amb_of.get(bi, False),
+                "head": head, "split": split_of.get(bi, False),
                 "evidence": _label_evidence(labels, how, def_lines, sdocs, decl_lines),
+                "how": {nid: sorted(v, key=str) for nid, v in how.items()},
+                "sec_span": (s["offset"], s["offset"] + len(s["seg"])),
                 "ck": bool(CK_RX.search(flat)),
                 "rat": sorted(k for k, rx in RATIONALE_RX.items() if rx.search(flat)),
                 "text": text_,
@@ -623,6 +845,8 @@ def _label_evidence(labels: dict, how: dict, def_lines: dict, sdocs: set, decl: 
                 ways.append("본문 직접 표기")
             elif v[0] == "definition":
                 ways.append(f"{v[1]} {v[2]} 정의: {def_lines.get((v[1], v[2]), '(정의 줄 미발견)')}")
+            elif v[0] == "definition_k6":
+                ways.append(f"{v[1]} {v[2]} 정의(K6 · 번호 뒤 정의 또는 통지서 범위): {def_lines.get((v[1], v[2]), '(정의 줄은 리포트에 싣지 않음)')}")
             else:
                 ways.append(f"{v[1]}{'' if v[2] is None else ' ' + str(v[2])} → 절의 유일 문헌 (절 문헌 {len(sdocs)}) · "
                             f"절의 선언: {decl.get(nid, '(선언 줄 미발견)')}")
@@ -682,14 +906,14 @@ def resolve_references(recs: list[dict], stat: Counter) -> None:
     by_mark = {}
     by_section: dict[int, list[dict]] = {}
     for r in recs:
-        by_section.setdefault(r["section"], []).append(r)
+        by_section.setdefault(r["sid"], []).append(r)
         if r["mark"]:
             by_mark.setdefault(r["mark"], []).append(r)
 
     def claim_target(r: dict, y: int) -> dict | None:
         """F3 — Y 를 담은 판단 중 같은 절 우선, 그중 **가장 좁은** 것. 동률이면 모호."""
         cands = [t for t in recs if t is not r and y in t["claims"]]
-        same = [t for t in cands if t["section"] == r["section"]]
+        same = [t for t in cands if t["sid"] == r["sid"]]
         pick = same if same else cands
         if pick:
             w = min(len(t["claims"]) for t in pick)
@@ -705,12 +929,16 @@ def resolve_references(recs: list[dict], stat: Counter) -> None:
         for m in REF_LABEL_RX.finditer(text):
             sec = int(m.group(1) or m.group(3))
             sub = m.group(2) if m.group(1) else m.group(4)
+            # 인쇄된 절 번호가 되풀이되는 통지서에서 `[거절이유 N-M]` 은 어느 절인지 말하지 않는다 — 잇지 않는다(§20.23 c).
+            if any(t["section"] == sec and t["section_repeated"] for t in recs):
+                stat["ref_label_unresolved__repeated_section"] += 1
+                continue
             if sub:
                 cands = by_mark.get(f"{sec}-{sub}", [])
                 if not cands:
-                    cands = [t for t in by_section.get(sec, []) if t["mark"] == sub]
+                    cands = [t for t in by_section.get(str(sec), []) if t["mark"] == sub]
             else:
-                cands = by_section.get(sec, [])
+                cands = by_section.get(str(sec), [])
             cands = [t for t in cands if t is not r]
             if len(cands) == 1:
                 r["refers"].add(cands[0]["key"])
@@ -748,6 +976,7 @@ def resolve_references(recs: list[dict], stat: Counter) -> None:
                     continue
                 keys = sorted({f["key"] for f in found})
                 r["groups"].append((kind, keys))
+                r.setdefault("group_claims", []).append(sorted(ys))
                 r["refers"].update(keys)
                 if kind == "variant":
                     r["variant_of"].update(keys)
@@ -761,6 +990,7 @@ def _jiri(key: str) -> URIRef:
 def build(recs: list[dict], resolver: DocResolver, claims_ok: set[str], stat: Counter) -> Graph:
     """레코드 → 그래프. 문헌·청구항이 그래프에 없으면 버리고 센다."""
     keep: dict[str, dict] = {}
+    held: dict[str, dict] = {}
     for r in recs:
         docs: dict[URIRef, str] = {}
         for nid in sorted(r["labels"]):
@@ -783,8 +1013,20 @@ def build(recs: list[dict], resolver: DocResolver, claims_ok: set[str], stat: Co
         if r.get("missing_labels"):
             stat["judgment_dropped__label_definition_missing"] += 1
             continue
+        stat["sel_judgment__candidate"] += 1
+        hb = r.get("holds", {}).get("block", [])
+        if hb:
+            stat["sel_judgment__held"] += 1
+            stat.update(f"hold__{h}" for h in hb)
+            held[r["key"]] = r
+            continue
         keep[r["key"]] = {**r, "docs": docs, "claims_ok": claims}
 
+    for r in held.values():
+        for _ in r.get("groups", []):
+            stat["sel_relation__candidate"] += 1
+            stat["sel_relation__held"] += 1
+            stat["hold__C8_source_held"] += 1
     g = Graph()
     for key in sorted(keep):
         r = keep[key]
@@ -807,10 +1049,23 @@ def build(recs: list[dict], resolver: DocResolver, claims_ok: set[str], stat: Co
             g.add((sn, PA.includesDocument, iri))
         if r["ck"]:
             g.add((sn, PA.reliesOnCommonKnowledge, Literal(True)))
+        rh = r.get("holds", {}).get("rationale", {})
         for rat in r["rat"]:
+            stat[f"sel_rationale_{rat}__candidate"] += 1
+            if rat in rh:                       # 그 종류의 적용 범위가 블록과 어긋난다 — 그 종류만 싣지 않는다
+                stat[f"sel_rationale_{rat}__held"] += 1
+                stat.update(f"hold__{h}" for h in rh[rat])
+                continue
             g.add((sn, PA.hasRationale, PA["Rationale" + rat]))
         single = next(iter(r["labels"])) if len(r["labels"]) == 1 else None
         locs = _locators(r["text"], r["labels"], single, stat)
+        lh = r.get("holds", {}).get("locators", [])
+        if locs or lh:
+            stat["sel_locator_set__candidate"] += 1
+        if lh:                                  # 좌표 집합이 원문과 어긋난다 — 이 판단의 좌표만 싣지 않는다
+            stat["sel_locator_set__held"] += 1
+            stat.update(f"hold__{h}" for h in lh)
+            locs = {}
         by_iri = {iri: nid for iri, nid in r["docs"].items()}
         for li, iri in enumerate(sorted(i for i in by_iri if by_iri[i] in locs), 1):
             ln = URIRef(f"{j}_l{li}")
@@ -825,6 +1080,11 @@ def build(recs: list[dict], resolver: DocResolver, claims_ok: set[str], stat: Co
                 g.add((loc, PA.locatorValue, Literal(v, datatype=XSD.string)))
         # G6 — 관계 하나(문장 하나)의 대상이 하나라도 적재되지 않았으면 그 관계 전체를 싣지 않는다.
         for kind, keys in r["groups"]:
+            stat["sel_relation__candidate"] += 1
+            if any(k in held for k in keys):
+                stat["sel_relation__held"] += 1
+                stat["hold__C8_target_held"] += 1
+                continue
             if any(k not in keep for k in keys):
                 stat["ref_dropped__target_not_emitted"] += 1
                 continue
@@ -873,12 +1133,48 @@ HEADER = """# ══════════════════════
 # ═══════════════════════════════════════════════════════════════════"""
 
 
+_K5_NEW_RX = re.compile(r"혹은|\d\s*[-–]\s*\d|" + _LABEL_SEP + r"\s*(?:,|및|또는|혹은)|\d\s*" + _LABEL_SEP + r"\s*" + _LABEL_TERM)
+
+
+def corrections_of(r: dict) -> list[tuple[str, int]]:
+    """보정 근거(§20.23 c) — 이 판단에서 K 경로가 실제로 작동한 곳 (규칙 ID, 원문 오프셋). 원문은 싣지 않는다."""
+    t, base, out = r["text"], r["offset"], []
+    for start, items in locator_items(t):
+        old = LOC_RX.match(t, start)              # 원래 읽기가 같은 자리에서 같은 값 하나를 냈으면 보정이 아니다
+        old_range = bool(old and (old.group("p3") or old.group("fn2")))
+        if not old or len(items) > 1 or (any("~" in v for _, v in items) and not old_range):
+            out.append(("K1", base + start))
+    if r.get("summary_docs"):
+        out.append(("K2", base + len(t)))
+    if r["head"] and not HEAD_RX.match(r["head"]) and HEAD_K3_RX.match(r["head"]):
+        out.append(("K3", base))
+    if r.get("split") and not SUBJ_RX.match(t):
+        out.append(("K4", base))
+    for m in LABEL_FLEX_RX.finditer(t):
+        if m.group(3) and _K5_NEW_RX.search(m.group(0)):
+            out.append(("K5", base + m.start()))
+    if any(v != "direct" and v[0] == "definition_k6" for vs in r["how"].values() for v in vs):
+        out.append(("K6", base))
+    return out
+
+
 def extract_all() -> tuple[list[list[dict]], Counter]:
     stat = Counter()
     per_notice = []
     for f in sorted(TXT_DIR.glob("*.txt")):
-        recs, st = extract_notice(f.stem, f.read_text(encoding="utf-8", errors="ignore"))
+        text = f.read_text(encoding="utf-8", errors="ignore")
+        recs, st = extract_notice(f.stem, text)
         resolve_references(recs, st)
+        # §20.23 c — 추출 결과를 본문의 다른 읽기와 대조한다. 어긋난 부분은 build 가 싣지 않는다.
+        for r in recs:
+            r["locs"] = _locators(r["text"], r["labels"], next(iter(r["labels"])) if len(r["labels"]) == 1 else None,
+                                  Counter())
+        holds = AC.check_notice(text, f.stem.split("_")[0], recs)
+        for r in recs:
+            r["holds"] = holds[r["key"]]
+            r["corrections"] = corrections_of(r)
+            if r.get("k2_ambiguous"):          # 종합 결론의 어느 묶음이 이 블록 것인지 정해지지 않았다
+                r["holds"]["block"] = sorted(set(r["holds"]["block"]) | {"K2_summary_ambiguous"})
         stat.update(st)
         stat["notices"] += 1
         per_notice.append(recs)
@@ -888,6 +1184,9 @@ def extract_all() -> tuple[list[list[dict]], Counter]:
 def render() -> tuple[str, Graph, Counter, list[dict]]:
     per_notice, stat = extract_all()
     flat = [r for recs in per_notice for r in recs]
+    dup = [k for k, c in Counter(r["key"] for r in flat).items() if c > 1]
+    if dup:                                   # 키가 겹치면 build 가 한쪽을 조용히 덮는다(§20.23 b⑤)
+        raise SystemExit(f"판단 키 중복 {len(dup)}: {dup[:3]}")
     stat["blocks"] = sum(1 for r in flat if r["block"])
     stat["whole_section_units"] = sum(1 for r in flat if not r["block"])
     g = build(flat, DocResolver(), present_claims(), stat)
@@ -985,6 +1284,38 @@ def _graph_relations(g: Graph) -> dict[str, dict[str, set]]:
         for s, o in g.subject_objects(p):
             out.setdefault(str(s).rsplit("/", 1)[1], {"refers": set(), "variant": set()})[name].add(str(o).rsplit("/", 1)[1])
     return out
+
+
+def selective_loading(stat: Counter, flat: list[dict]) -> dict:
+    """§20.23 c — 종류별 후보·적재·보류(시스템 보류 · 후보 대비), 보류 사유, 보정 규칙별 수, 알려진 맹점."""
+    kinds = {}
+    for k in SELECTIVE_KINDS:
+        ca, h = stat[f"sel_{k}__candidate"], stat[f"sel_{k}__held"]
+        kinds[k] = {"candidates": ca, "loaded": ca - h, "held": h, "held_rate": round(h / ca, 4) if ca else None}
+    return {"_README": "시스템 보류(검사가 어긋남을 찾아 싣지 않은 것)만 센다. 평가자 보류와 다르다. 비율의 분모는 후보다.",
+            "by_kind": kinds,
+            "holds_by_reason": {k[6:]: v for k, v in sorted(stat.items()) if k.startswith("hold__")},
+            "corrections_by_rule": dict(sorted(Counter(c for r in flat for c, _ in r.get("corrections", [])).items())),
+            "blind_spots": AC.BLIND_SPOTS,
+            "iri_key_rule": "판단 키 = {통지서}_s{절 번호}[r{k}]_b{블록} — 같은 절 번호의 k 번째(k≥2) 발생에 r{k}"}
+
+
+def write_sidecars(flat: list[dict]) -> None:
+    HOLDS_CSV.parent.mkdir(parents=True, exist_ok=True)
+    with HOLDS_CSV.open("w", encoding="utf-8", newline="") as fh:
+        w = csv.writer(fh)
+        w.writerow(["key", "block", "locators", "rationale"])
+        for r in flat:
+            h = r.get("holds", {})
+            if h.get("block") or h.get("locators") or h.get("rationale"):
+                w.writerow([r["key"], "|".join(h["block"]), "|".join(h["locators"]),
+                            json.dumps(h["rationale"], ensure_ascii=False, sort_keys=True) if h["rationale"] else ""])
+    with CORRECTIONS_CSV.open("w", encoding="utf-8", newline="") as fh:
+        w = csv.writer(fh)
+        w.writerow(["key", "rule", "offset"])
+        for r in flat:
+            for rule, off in r.get("corrections", []):
+                w.writerow([r["key"], rule, off])
 
 
 def make_sample(g: Graph, flat: list[dict]) -> list[dict]:
@@ -1254,11 +1585,154 @@ def regress(g: Graph, flat: list[dict]) -> tuple[list[dict], dict]:
     return rows, dict(sorted(summary.items()))
 
 
+# ── 5단계 표본 (§20.23 e · 규약은 표본 추출 전에 고정) ───────────────────
+SAMPLE5_SEED = 20261009
+SAMPLE5_CSV = ROOT / "data" / "interim" / "argument_abox_sample_r5.csv"
+MISSING5_CSV = ROOT / "data" / "interim" / "argument_abox_missing_r5.csv"
+SEEN_SHEETS = ([ROOT / "data" / "interim" / f"argument_abox_sample_r{i}.csv" for i in (1, 2, 3, 4)]
+               + [ROOT / "data" / "interim" / f"argument_abox_regression_judged_v{i}.csv" for i in (1, 2, 3, 4)]
+               + [ROOT / "data" / "interim" / "mixed_review_timing.csv"])
+PRECISION5 = {"block": 30, "DesignChoice": 10, "PredictableEffect": 10}
+LOCATOR5 = (("Paragraph", 5), ("Figure", 5))
+HELD5 = {"held_block": 10, "held_locator": 10}
+MISSING5_NOTICES = 10
+JUDGED5 = ("block", "DesignChoice", "PredictableEffect", "locator", "refersToJudgment", "categoryVariantOf")
+
+
+def seen_apps() -> set[str]:
+    """열람한 출원 — 지난 표본·회귀·검토 시트의 모든 판단 키·통지서에서."""
+    out: set[str] = set()
+    for p in SEEN_SHEETS:
+        if not p.exists():
+            continue
+        df = pd.read_csv(p, dtype=str).fillna("")
+        for col in ("judgment", "notice", "prior_judgment", "new_judgment", "v1_new_judgment"):
+            if col in df:
+                out |= {v.split("_")[0] for v in df[col] if v}
+    return out
+
+
+def _held_relation_sources(flat: list[dict]) -> list[dict]:
+    """관계가 보류된 출발 판단 — 출발 또는 대상이 블록 보류다."""
+    held = {r["key"] for r in flat if r.get("holds", {}).get("block")}
+    return [r for r in flat if r.get("groups") and (r["key"] in held or any(k in held for _, ks in r["groups"] for k in ks))]
+
+
+def make_sample5(g: Graph, flat: list[dict]) -> tuple[list[dict], list[dict]]:
+    """정밀도(적재된 것) · 과잉 보류(보류된 것) · 원문 출발 누락(통지서) — 서로 다른 출원에서, 미열람 출원만."""
+    sp = _split_map()
+    seen = seen_apps()
+    emitted = {str(j).rsplit("/", 1)[1] for j in g.subjects(RDF.type, PA.ExaminerJudgment)}
+    rel = _graph_relations(g)
+    links = _graph_links(g)
+    by_key = {r["key"]: r for r in flat}
+    none = {"refers": set(), "variant": set()}
+    rng = random.Random(SAMPLE5_SEED)
+    fresh = lambda r, splits: r["app"] not in seen and sp.get(r["app"]) in splits  # noqa: E731
+    loaded = sorted((r for r in flat if r["key"] in emitted and fresh(r, ("train",))), key=lambda r: r["key"])
+    rats = {r["key"]: {str(o).rsplit("Rationale", 1)[1] for o in g.objects(URIRef(f"{_jiri(r['key'])}_s1"), PA.hasRationale)}
+            for r in loaded}
+    rows: list[tuple[str, dict]] = []
+    rows += [("block", r) for r in rng.sample(loaded, min(PRECISION5["block"], len(loaded)))]
+    loaded_dev = sorted((r for r in flat if r["key"] in emitted and fresh(r, ("dev",))), key=lambda r: r["key"])
+    rats.update({r["key"]: {str(o).rsplit("Rationale", 1)[1]
+                            for o in g.objects(URIRef(f"{_jiri(r['key'])}_s1"), PA.hasRationale)} for r in loaded_dev})
+    for kind in ("DesignChoice", "PredictableEffect"):
+        # train 을 먼저 다 쓰고 모자라면 dev 로 채운다(관계와 같은 방식 · 출처는 split 칸에 남는다).
+        cand = [r for r in loaded if kind in rats[r["key"]]]
+        take = rng.sample(cand, min(PRECISION5[kind], len(cand)))
+        if len(take) < PRECISION5[kind]:
+            dcand = [r for r in loaded_dev if kind in rats[r["key"]]]
+            take += rng.sample(dcand, min(PRECISION5[kind] - len(take), len(dcand)))
+        rows += [(kind, r) for r in take]
+    for t_, n_ in LOCATOR5:
+        cand = [r for r in loaded if any(lt == t_ for lk in links.get(r["key"], {}).values() for lt, _ in lk)]
+        rows += [("locator", r) for r in rng.sample(cand, min(n_, len(cand)))]
+    # 관계 — 미열람 train·dev 의 **전부**. 참조와 범주 변형을 따로 센다(§20.23 e).
+    for r in sorted((r for r in flat if r["key"] in emitted and fresh(r, ("train", "dev"))), key=lambda r: r["key"]):
+        rr = rel.get(r["key"], none)
+        if rr["variant"]:
+            rows.append(("categoryVariantOf", r))
+        if rr["refers"] - rr["variant"]:
+            rows.append(("refersToJudgment", r))
+    used = {r["app"] for _, r in rows}
+    held_pool = sorted((r for r in flat if r["holds"]["block"] and fresh(r, ("train",)) and r["app"] not in used
+                        and r["claims"] and (r["labels"] or r["ck"])), key=lambda r: r["key"])
+    rows += [("held_block", r) for r in rng.sample(held_pool, min(HELD5["held_block"], len(held_pool)))]
+    loc_pool = sorted((r for r in flat if r["key"] in emitted and r["holds"]["locators"] and fresh(r, ("train",))
+                       and r["app"] not in used), key=lambda r: r["key"])
+    rows += [("held_locator", r) for r in rng.sample(loc_pool, min(HELD5["held_locator"], len(loc_pool)))]
+    rows += [("held_relation", r) for r in sorted(_held_relation_sources(flat), key=lambda r: r["key"])
+             if fresh(r, ("train", "dev")) and r["app"] not in used]
+    used |= {r["app"] for _, r in rows}
+    out = []
+    for kind, r in rows:
+        rr = rel.get(r["key"], none)
+        exp, unattr = AC.expected_locators(r)
+        out.append({"kind": kind, "split": sp.get(r["app"], ""), "judgment": r["key"], "notice": r["stem"],
+                    "section": r["section"], "block_mark": r["mark"], "grounds": "|".join(r["grounds"]),
+                    "claims": " ".join(map(str, r["claims"])), "documents": " ".join(sorted(r["labels"])),
+                    "common_knowledge": int(r["ck"]), "rationale": " ".join(sorted(rats.get(r["key"], set()))),
+                    "refers_to": " ".join(sorted(rr["refers"])), "variant_of": " ".join(sorted(rr["variant"])),
+                    "targets_detail": _targets_detail(r, rel, by_key), "evidence": r["evidence"],
+                    "locators": " || ".join(f"{d.rsplit('/', 1)[1]}: " + ", ".join(v for _, v in sorted(lk))
+                                            for d, lk in sorted(links.get(r["key"], {}).items())),
+                    "holds": json.dumps(r["holds"], ensure_ascii=False, sort_keys=True) if kind.startswith("held") else "",
+                    # 좌표 과잉 보류 — 검사가 원문에서 읽은 좌표(문장 안 귀속)와 귀속 못 한 표기 수. 80자 거리 제한의 영향을 보는 칸.
+                    "check_locators": (" | ".join(f"{n}:{t}:{v}" for n, t, v in sorted(exp)) + f" · 귀속 못 함 {unattr}")
+                    if kind == "held_locator" else "",
+                    "rationale_scope": "", "relation_exists": "", "correct": "", "missing": "",
+                    "distance_limited_ok": "", "minutes": "", "note": "",
+                    "block_text": _sheet_text(r)})
+    # 원문 출발 누락 — 원문 파일 목록에서 고른다(생성기 절 목록에 의존하지 않는다).
+    files = sorted(f for f in TXT_DIR.glob("*.txt")
+                   if f.stem.split("_")[0] not in seen and f.stem.split("_")[0] not in used
+                   and sp.get(f.stem.split("_")[0]) == "train"
+                   and re.search(r"29\s*조", f.read_text(encoding="utf-8", errors="ignore")))
+    miss = []
+    for f in rng.sample(files, min(MISSING5_NOTICES, len(files))):
+        units = [r for r in flat if r["stem"] == f.stem]
+        miss.append({"notice": f.stem, "split": sp.get(f.stem.split("_")[0], ""),
+                     "loaded": " || ".join(f"{r['key'].rsplit('_', 2)[-2]}_{r['key'].rsplit('_', 1)[-1]}: 청구항 "
+                                           f"{','.join(map(str, r['claims']))} · 문헌 {' '.join(sorted(r['labels']))}"
+                                           for r in units if r["key"] in emitted),
+                     "held_or_dropped": " || ".join(f"{r['key'].rsplit('_', 2)[-2]}_{r['key'].rsplit('_', 1)[-1]}: 청구항 "
+                                                    f"{','.join(map(str, r['claims']))} · "
+                                                    f"{'|'.join(r['holds']['block']) or '적재 제외'}"
+                                                    for r in units if r["key"] not in emitted),
+                     "source_judgments": "", "missing_judgments": "", "missing_claims": "", "missing_documents": "",
+                     "missing_rationale": "", "missing_locators": "", "missing_relations": "", "minutes": "", "note": "",
+                     "notice_text": f.read_text(encoding="utf-8", errors="ignore")})
+    return out, miss
+
+
+def gate5(path: Path = SAMPLE5_CSV) -> dict:
+    """5단계 판정 — 종류별 정답률 ≥ 0.90 · 평가자 보류 ≤ 20% · 판정 0 건은 판정 불가. 과잉 보류는 서술."""
+    df = pd.read_csv(path, dtype=str).fillna("")
+    res = {}
+    for kind in JUDGED5:
+        grp = df[df["kind"] == kind]
+        judged = grp[grp["correct"].isin(["0", "1"])]
+        n, c = len(judged), int((judged["correct"] == "1").sum())
+        withheld = len(grp) - n
+        decidable = n > 0 and withheld <= WITHHELD_MAX * len(grp)
+        res[kind] = {"rows": len(grp), "judged": n, "correct": c, "withheld": withheld,
+                     "rate": round(c / n, 4) if n else None, "decidable": decidable,
+                     "pass": bool(decidable and c / n >= HUMAN_RATE_MIN)}
+    over = {k: {"rows": int((df["kind"] == k).sum()),
+                "actually_correct": int(((df["kind"] == k) & (df["correct"] == "1")).sum())}
+            for k in ("held_block", "held_locator", "held_relation")}
+    return {"sheet": str(path.relative_to(ROOT)), "seed": SAMPLE5_SEED, "threshold": HUMAN_RATE_MIN, "by_kind": res,
+            "over_hold": over, "pass": all(v["pass"] for v in res.values())}
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--eval-pilot", action="store_true", help="파일럿 대조만 인쇄 (미달이면 exit 1)")
     ap.add_argument("--sample", action="store_true", help="사람 대조 시트를 data/interim/ 에 쓴다")
     ap.add_argument("--gate", action="store_true", help="사람 대조 시트를 집계해 리포트에 싣는다")
+    ap.add_argument("--sample5", action="store_true", help="5단계 표본(정밀도 · 과잉 보류 · 원문 출발 누락)을 data/interim/ 에 쓴다")
+    ap.add_argument("--gate5", action="store_true", help="5단계 판정 시트를 집계해 리포트에 싣는다")
     ap.add_argument("--regress", action="store_true", help="지난 표본 전 행을 지금 산출과 대조한 회귀 시트를 쓴다")
     ap.add_argument("--out", type=Path, default=OUT)
     ap.add_argument("--report", type=Path, default=REPORT)
@@ -1281,6 +1755,16 @@ def main() -> int:
         print(json.dumps(summary, ensure_ascii=False, indent=1))
         print(f"  {REGRESS_CSV.relative_to(ROOT)} · 다시 판정할 행 {sum(r['status'] == 'changed' for r in rows)}")
         return 0
+    if args.sample5:
+        rows, miss = make_sample5(g, flat)
+        for path, data in ((SAMPLE5_CSV, rows), (MISSING5_CSV, miss)):
+            with path.open("w", encoding="utf-8", newline="") as fh:
+                w = csv.DictWriter(fh, fieldnames=list(data[0]))
+                w.writeheader()
+                w.writerows(data)
+        print(f"  {SAMPLE5_CSV.relative_to(ROOT)} · {dict(Counter(r['kind'] for r in rows))}")
+        print(f"  {MISSING5_CSV.relative_to(ROOT)} · 통지서 {len(miss)}")
+        return 0
     if args.sample:
         rows = make_sample(g, flat)
         SAMPLE_CSV.parent.mkdir(parents=True, exist_ok=True)
@@ -1301,19 +1785,25 @@ def main() -> int:
         "triples": len(g),
         "counts": counts(g),
         "judgments_by_split": by_split(g),
-        "extraction": dict(sorted(stat.items())),
+        "extraction": dict(sorted((k, v) for k, v in stat.items() if not k.startswith(("sel_", "hold__")))),
+        "selective_loading": selective_loading(stat, flat),
         "pilot_eval": eval_pilot(flat),
         "human_gate": gate(g=g, flat=flat) if args.gate else rep_old.get("human_gate"),
+        "human_gate_r5": gate5() if args.gate5 else rep_old.get("human_gate_r5"),
         "variant_continuity": variant_continuity(g, flat) if CARRY_SHEET.exists() else None,
         # 지난 회차는 지우지 않는다 — 1차 FAIL 이 3단계 복귀의 근거다.
         "human_gate_history": rep_old.get("human_gate_history", []) + (
             [rep_old["human_gate"]] if args.gate and rep_old.get("human_gate") else []),
     }
     args.report.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    write_sidecars(flat)
     c = report["counts"]
     print(f"  {report['output']}  {len(g)} triples · 판단 {c['ExaminerJudgment']} · 링크 {c['EvidenceLink']} · "
           f"좌표 {c['DocumentLocator']} · 참조 {c['refersToJudgment']} · 범주 변형 {c['categoryVariantOf']}")
     ev = report["pilot_eval"]
+    sl = report["selective_loading"]["by_kind"]
+    print("  선택적 적재(후보 → 적재 · 보류율): " + " · ".join(f"{k} {v['candidates']}→{v['loaded']} ({v['held_rate']})"
+                                                    for k, v in sl.items()))
     print(f"  파일럿 대조: 청구항 피복 {ev['claim_coverage']} · 문헌 {ev['document_match']} → "
           f"{'PASS' if ev['pass'] else 'FAIL'}")
     hg = report["human_gate"]
