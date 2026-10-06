@@ -349,7 +349,86 @@
     },
     "pass": false
   },
-  "human_gate_r6": null,
+  "human_gate_r6": {
+    "sheet": "data/interim/argument_abox_sample_r6.csv",
+    "seed": 20261010,
+    "threshold": 0.9,
+    "by_kind": {
+      "block": {
+        "rows": 30,
+        "judged": 29,
+        "correct": 27,
+        "withheld": 1,
+        "rate": 0.931,
+        "decidable": true,
+        "pass": true
+      },
+      "DesignChoice": {
+        "rows": 10,
+        "judged": 10,
+        "correct": 10,
+        "withheld": 0,
+        "rate": 1.0,
+        "decidable": true,
+        "pass": true
+      },
+      "PredictableEffect": {
+        "rows": 10,
+        "judged": 10,
+        "correct": 10,
+        "withheld": 0,
+        "rate": 1.0,
+        "decidable": true,
+        "pass": true
+      },
+      "locator": {
+        "rows": 10,
+        "judged": 10,
+        "correct": 8,
+        "withheld": 0,
+        "rate": 0.8,
+        "decidable": true,
+        "pass": false
+      },
+      "refersToJudgment": {
+        "rows": 0,
+        "judged": 0,
+        "correct": 0,
+        "withheld": 0,
+        "rate": null,
+        "decidable": false,
+        "pass": false,
+        "note": "판정 불가 — 새 독립 관계 표본 없음(§20.24) · 서술만"
+      },
+      "categoryVariantOf": {
+        "rows": 1,
+        "judged": 1,
+        "correct": 1,
+        "withheld": 0,
+        "rate": 1.0,
+        "decidable": false,
+        "pass": false,
+        "note": "판정 불가 — 새 독립 관계 표본 없음(§20.24) · 서술만"
+      }
+    },
+    "over_hold": {
+      "held_block": {
+        "rows": 10,
+        "actually_correct": 3
+      },
+      "held_locator": {
+        "rows": 10,
+        "actually_correct": 1
+      },
+      "held_relation": {
+        "rows": 0,
+        "actually_correct": 0
+      }
+    },
+    "pass_judged_kinds": false,
+    "pass": false,
+    "_README": "relation_undecidable 이면 관계는 판정 불가라 '논증층 전체 통과' 가 아니다 — pass_judged_kinds 만 본다."
+  },
   "variant_continuity": {
     "sheet": "data/interim/argument_abox_sample_r2.csv",
     "rows": 5,
