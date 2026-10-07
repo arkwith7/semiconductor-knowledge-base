@@ -1,17 +1,17 @@
 {
   "_README": "논증층 A-Box 계수. 원문·통지서 파일명은 싣지 않는다. 판단 단위 = 청구항 블록(§20.22 A1).",
   "output": "ontology/sdkb-abox-argument.ttl",
-  "output_sha256": "14097618b281fbe4cca61e98263989b68d46e5fcd12bb8c071364132a6481666",
-  "triples": 108634,
+  "output_sha256": "98bd5677dd12e5a7f193df46ffc5e843c6bf95767e774aa7c42bb8a5a2b85b3a",
+  "triples": 108670,
   "counts": {
-    "ExaminerJudgment": 6625,
-    "EvidenceSet": 6625,
+    "ExaminerJudgment": 6628,
+    "EvidenceSet": 6628,
     "EvidenceLink": 3120,
     "DocumentLocator": 5441,
     "ExaminationDocument": 929,
     "refersToJudgment": 140,
     "categoryVariantOf": 69,
-    "commonKnowledgeSets": 205,
+    "commonKnowledgeSets": 206,
     "rationale_DesignChoice": 703,
     "rationale_PredictableEffect": 136,
     "locator_Paragraph": 3003,
@@ -19,11 +19,13 @@
   },
   "judgments_by_split": {
     "dev": 1474,
-    "test": 1489,
-    "train": 3662
+    "test": 1490,
+    "train": 3664
   },
   "extraction": {
     "blocks": 8614,
+    "c13_restore__key_missing": 0,
+    "c13_restore__lifted": 3,
     "claim_link_dropped_not_in_graph": 203,
     "doc_resolved_exact": 13427,
     "doc_resolved_loose": 975,
@@ -39,8 +41,8 @@
     "label_unresolved__bare": 359,
     "label_unresolved__numbered": 2232,
     "locator_applicant_side": 720,
-    "locator_attributed": 7109,
-    "locator_unattributed": 3064,
+    "locator_attributed": 7111,
+    "locator_unattributed": 3079,
     "notices": 1155,
     "preamble_units": 38,
     "ref_claim_intra_block_targets": 7,
@@ -71,27 +73,27 @@
     "by_kind": {
       "judgment": {
         "candidates": 7293,
-        "loaded": 6625,
-        "held": 668,
-        "held_rate": 0.0916
+        "loaded": 6628,
+        "held": 665,
+        "held_rate": 0.0912
       },
       "locator_set": {
-        "candidates": 4270,
+        "candidates": 4272,
         "loaded": 2771,
-        "held": 1499,
-        "held_rate": 0.3511
+        "held": 1501,
+        "held_rate": 0.3514
       },
       "rationale_DesignChoice": {
-        "candidates": 826,
+        "candidates": 827,
         "loaded": 703,
-        "held": 123,
-        "held_rate": 0.1489
+        "held": 124,
+        "held_rate": 0.1499
       },
       "rationale_PredictableEffect": {
-        "candidates": 147,
+        "candidates": 148,
         "loaded": 136,
-        "held": 11,
-        "held_rate": 0.0748
+        "held": 12,
+        "held_rate": 0.0811
       },
       "relation": {
         "candidates": 128,
@@ -105,7 +107,8 @@
       "C10_title_range": 30,
       "C11_common_knowledge": 17,
       "C12_section_conclusion": 42,
-      "C13_label_beyond_conclusion": 37,
+      "C13_label_beyond_conclusion": 34,
+      "C13_restore_rationale_unverified": 2,
       "C1_excess_claim": 13,
       "C1_foreign_subject": 268,
       "C2_new_judgment": 9,
@@ -114,7 +117,7 @@
       "C4_country": 20,
       "C4_country_serial": 18,
       "C5_conclusion": 64,
-      "C6_locators": 1499,
+      "C6_locators": 1501,
       "C7_scope_mismatch": 71,
       "C7_scope_partial": 28,
       "C7_scope_unclear": 35,
@@ -617,17 +620,17 @@
   "limited": {
     "_README": "좌표·판단 간 관계를 뺀 별도 산출물(§20.24 g). r6 블록·논거 표본 통과 · 전체 검증 FAIL 유지 · 이 파일은 그 뒤 변경된 별도 산출물이며 검증을 받은 것이 아니다.",
     "output": "ontology/sdkb-abox-argument-limited.ttl",
-    "output_sha256": "bcac84849075b188c5d67a3b441b5a5d1f5b2b9828bb138194548a306368cea8",
-    "triples": 77301,
+    "output_sha256": "984e99b959dc9d00ef346df7330cebe5dc3285fc58c60bc1fc3a3dc288c0d635",
+    "triples": 77337,
     "counts": {
-      "ExaminerJudgment": 6625,
-      "EvidenceSet": 6625,
+      "ExaminerJudgment": 6628,
+      "EvidenceSet": 6628,
       "EvidenceLink": 0,
       "DocumentLocator": 0,
       "ExaminationDocument": 929,
       "refersToJudgment": 0,
       "categoryVariantOf": 0,
-      "commonKnowledgeSets": 205,
+      "commonKnowledgeSets": 206,
       "rationale_DesignChoice": 703,
       "rationale_PredictableEffect": 136,
       "locator_Paragraph": 0,
@@ -666,6 +669,6 @@
         "self_reference": 0
       }
     },
-    "source_output_sha256": "14097618b281fbe4cca61e98263989b68d46e5fcd12bb8c071364132a6481666"
+    "source_output_sha256": "98bd5677dd12e5a7f193df46ffc5e843c6bf95767e774aa7c42bb8a5a2b85b3a"
   }
 }
