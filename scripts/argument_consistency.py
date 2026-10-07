@@ -601,6 +601,25 @@ def c12_section_conclusion(r: dict, text: str, recs: list[dict]) -> list[str]:
     return ["C12_section_conclusion"] if covers[0] - linked and len(covers[0]) > len(linked) + direct else []
 
 
+_CONCL_SENT_RX = re.compile(r"쉽게|용이|설계\s*변경|도출|발명할\s*수|동일한\s*발명|신규성이\s*없|진보성이\s*없")
+
+
+def c13_labels_beyond_conclusion(r: dict) -> list[str]:
+    """C13 (§20.24 g · 배포 전 오류 차단) — 블록 결론 문장들(검사 자신의 읽기 · 판단 서술이 있는 문장)에 나온 라벨이 블록에 이어진
+    라벨의 **진부분집합**이면 보류한다. 결론 밖 라벨이 소개·배경 언급인지 실제 대비·결합 근거인지는 사람이 가른다 —
+    여기서 해제하지 않는다(사용자 10-06: 결론 라벨만 남기기를 기본 해결책으로 삼지 않는다)."""
+    if r.get("summary_docs"):
+        return []
+    body = re.sub(r"\s+", " ", r["text"])
+    concl: set[int] = set()
+    for a, z in zip([0] + [m.end() for m in _SENT.finditer(body)], [m.end() for m in _SENT.finditer(body)] + [len(body)]):
+        sent = body[a:z]
+        if _CONCL_SENT_RX.search(sent):
+            concl |= label_numbers_used(sent)
+    linked = {v[2] for vs in r.get("how", {}).values() for v in vs if v != "direct" and v[2] is not None}
+    return ["C13_label_beyond_conclusion"] if concl and linked and concl < linked else []
+
+
 # ── 묶음 ────────────────────────────────────────────────────────────
 def check_notice(text: str, app: str, recs: list[dict]) -> dict[str, dict]:
     """통지서 하나의 판단들 → key → {block, locators, rationale}. 관계(C8)는 build 가 블록 보류로 전파한다."""
@@ -610,7 +629,7 @@ def check_notice(text: str, app: str, recs: list[dict]) -> dict[str, dict]:
     for r in recs:
         block = c1_claims(r) + c2_new_judgment(r) + c5_conclusion(r) + c3_documents(r, defs) + c4_country(r, wins)
         block += (c3_position(r, text) + c4_serial(r, text) + c9_judgment_statement(r) + c10_multiple_openings(r)
-                  + c11_common_knowledge(r) + c12_section_conclusion(r, text, recs))
+                  + c11_common_knowledge(r) + c12_section_conclusion(r, text, recs) + c13_labels_beyond_conclusion(r))
         out[r["key"]] = {"block": sorted(set(block)), "locators": c6_locators(r), "rationale": c7_rationale2(r)}
     return out
 

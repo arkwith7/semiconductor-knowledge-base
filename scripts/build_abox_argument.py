@@ -58,6 +58,9 @@ CLAIMS = ROOT / "mappings" / "claim_features.parquet"
 SPLIT = ROOT / "benchmark" / "assets" / "split.csv"
 ARG_TTL = ROOT / "ontology" / "sdkb-priorart-argument.ttl"
 OUT = ROOT / "ontology" / "sdkb-abox-argument.ttl"
+# 제한 버전(§20.24 g · 사용자 10-06) — 좌표(근거 링크·좌표)와 판단 간 관계(참조·범주 변형)를 뺀 **별도 산출물**.
+# 전체 검증 FAIL 은 그대로다. 이 파일은 그 뒤에 범위를 줄여 만든 다른 산출물이며 r6 검증을 받은 것이 아니다.
+OUT_LIMITED = ROOT / "ontology" / "sdkb-abox-argument-limited.ttl"
 REPORT = ROOT / "data" / "reports" / "abox_argument_report.json"
 # 판단별 보류 사유 · 보정 근거(키 · 규칙 · 오프셋) — 키에 통지서 파일명이 들어가므로 비공개 자리(gitignore)에만 쓴다.
 HOLDS_CSV = ROOT / "data" / "interim" / "argument_holds.csv"
@@ -508,6 +511,15 @@ ALT_RX = re.compile(r"또는|혹은")
 OWN_CONCL_RX = re.compile(r"(?:인\s*용\s*발\s*명|비\s*교\s*대\s*상\s*발\s*명)\s*\d[^.。]{0,80}?(?:쉽게|용이|설계\s*변경|도출|발명할\s*수|동일한\s*발명|신규성)")
 
 
+def bundle_guard(part: str, block_text: str) -> tuple[str, bool]:
+    """K2 · E7 공통 계약 (§20.24 · 재판정 10-05 · 사용자 10-06) — 종합 결론 묶음 절을 블록의 문헌 근거로 쓸 수 있는가.
+    대안 결합(`인용발명1, 또는 인용발명1,2의 결합`)은 공통 문헌 집합이 아니다 → 귀속하지 않는다. 블록 본문이 자기 결론을 가지면
+    그 문헌이 근거이고(보류 아님), 자기 결론이 없으면 어느 갈래인지 정할 수 없으므로 모호(보류)다. 반환: (쓸 절, 모호)."""
+    if not part or not ALT_RX.search(part):
+        return part, False
+    return "", not OWN_CONCL_RX.search(_flat(block_text))
+
+
 def summary_for_block(summary: str, claims: set[int]) -> tuple[str, bool]:
     """K2 — 종합 결론에서 이 블록의 묶음 절만 문헌 근거로 쓴다. (근거 절 본문, 모호 여부).
     블록 청구항을 **모두** 덮는 묶음이 하나면 그 절, 덮는 묶음이 없는데 여러 묶음에 걸쳐 있으면 모호(보류)."""
@@ -555,6 +567,8 @@ def split_by_subject(b: dict) -> list[dict]:
     if summary_at is not None:
         summary_text = text[summary_at:]
         summary_docs, ambiguous = summary_for_block(summary_text, claims)
+        summary_docs, alt_amb = bundle_guard(summary_docs, text[:summary_at])
+        ambiguous = ambiguous or alt_amb
         summary = summary_text if summary_docs else ""
         text = text[:summary_at]
     cuts = []
@@ -569,6 +583,8 @@ def split_by_subject(b: dict) -> list[dict]:
         end = cuts[i + 1][0] if i + 1 < len(cuts) else len(text)
         # 주어 분할로 생긴 조각도 같은 종합 결론에서 **자기 묶음 절**을 받는다(`따라서 청구항 9 및 16 발명은` → 16 조각 · 회귀 186).
         p_docs, p_amb = summary_for_block(summary_text, set(cl)) if summary_text else ("", False)
+        p_docs, p_alt = bundle_guard(p_docs, text[at:end])
+        p_amb = p_amb or p_alt
         out.append({"mark": "", "head": text[at:at + HEAD_SPAN].split("\n", 1)[0], "text": text[at:end],
                     "claims_extra": cl, "split": True, "summary": summary_text if p_docs else "",
                     "summary_docs": p_docs, "k2_ambiguous": p_amb})
@@ -906,11 +922,11 @@ def extract_notice(stem: str, text: str) -> tuple[list[dict], Counter]:
             # 대안 결합(`인용발명1, 또는 인용발명1,2의 결합`)은 공통 문헌 집합이 아니다 — 합집합으로 귀속하지 않는다(재판정 10-05:
             # 불인정 회귀 50·78·91·165 · 보류 4차 26 · 회귀 162). 블록 본문이 자기 결론을 갖고 있으면 그 문헌이 근거이고,
             # 자기 결론이 없으면 어느 갈래인지 정할 수 없으므로 보류한다.
-            if ALT_RX.search(part):
-                if not OWN_CONCL_RX.search(_flat(b["text"])):
-                    e7_amb.add(i)
-                continue
-            sdocs_of[i] = e7_of[i] = part
+            part, amb = bundle_guard(part, b["text"])
+            if amb:
+                e7_amb.add(i)
+            if part:
+                sdocs_of[i] = e7_of[i] = part
         amb_of = {i: b.get("k2_ambiguous", False) for i, b in enumerate(blocks, 1)}
         if blocks:
             pre = s["seg"][:s["seg"].find(blocks[0]["text"])]
@@ -1426,6 +1442,30 @@ def selective_loading(stat: Counter, flat: list[dict]) -> dict:
             "iri_key_rule": "판단 키 = {통지서}_s{절 번호}[r{k}]_b{블록} — 같은 절 번호의 k 번째(k≥2) 발생에 r{k}"}
 
 
+def limited_graph(g: Graph) -> Graph:
+    """좌표 · 판단 간 관계를 뺀 제한 그래프. 보류된 판단과 그 논거는 이미 g 에 없다(build)."""
+    drop = set(g.subjects(RDF.type, PA.EvidenceLink)) | set(g.subjects(RDF.type, PA.DocumentLocator))
+    out = Graph()
+    for t in g:
+        s_, p_, o_ = t
+        if s_ in drop or o_ in drop or p_ in (PA.refersToJudgment, PA.categoryVariantOf, PA.partOfJudgment, PA.locator):
+            continue
+        out.add(t)
+    return out
+
+
+def limited_report(g: Graph, lg: Graph, text: str) -> dict:
+    import build_abox_inferred as INF                 # 추론 생성기를 고치지 않고 같은 규칙으로 제한 그래프를 돌린다
+    _, full = INF.build_layer("argument_abox", g)
+    _, lim = INF.build_layer("argument_abox", lg)
+    return {"_README": "좌표·판단 간 관계를 뺀 별도 산출물(§20.24 g). r6 블록·논거 표본 통과 · 전체 검증 FAIL 유지 · "
+                      "이 파일은 그 뒤 변경된 별도 산출물이며 검증을 받은 것이 아니다.",
+            "output": str(OUT_LIMITED.relative_to(ROOT)), "output_sha256": hashlib.sha256(text.encode("utf-8")).hexdigest(),
+            "triples": len(lg), "counts": counts(lg),
+            "inferred_full": {k: full[k] for k in ("rules", "not_fired") if k in full},
+            "inferred_limited": {k: lim[k] for k in ("rules", "not_fired") if k in lim}}
+
+
 def write_sidecars(flat: list[dict]) -> None:
     HOLDS_CSV.parent.mkdir(parents=True, exist_ok=True)
     with HOLDS_CSV.open("w", encoding="utf-8", newline="") as fh:
@@ -1872,6 +1912,7 @@ def main() -> int:
     ap.add_argument("--gate", action="store_true", help="사람 대조 시트를 집계해 리포트에 싣는다")
     ap.add_argument("--sample5", action="store_true", help="5단계 표본(정밀도 · 과잉 보류 · 원문 출발 누락)을 data/interim/ 에 쓴다")
     ap.add_argument("--gate5", action="store_true", help="5단계 판정 시트를 집계해 리포트에 싣는다")
+    ap.add_argument("--limited", action="store_true", help="제한 버전(좌표·판단 간 관계 제외)과 추론 정합성을 만든다(느림)")
     ap.add_argument("--sample6", action="store_true", help="§20.24 검증 표본(시드 20261010)을 data/interim/ 에 쓴다")
     ap.add_argument("--gate6", action="store_true", help="§20.24 검증 시트를 집계해 리포트에 싣는다(관계 판정 불가)")
     ap.add_argument("--regress", action="store_true", help="지난 표본 전 행을 지금 산출과 대조한 회귀 시트를 쓴다")
@@ -1971,6 +2012,16 @@ def main() -> int:
     }
     args.report.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     write_sidecars(flat)
+    # 제한 버전 — 별도 파일 · 리포트 별도 칸. 추론 규칙을 두 번 더 돌려 느리므로 `--limited`(make abox-argument-limited)에서만 만든다.
+    # 배포(make public-release)는 argument-limited-fresh 로 이 칸이 지금 전체 산출물에서 나온 것인지 먼저 확인한다.
+    if args.limited:
+        lg = limited_graph(g)
+        ltext = _emit(lg, PREFIXES, HEADER.replace("논증층 A-Box", "논증층 A-Box · 제한 버전(좌표·판단 간 관계 제외 · §20.24 g)"))
+        OUT_LIMITED.write_text(ltext, encoding="utf-8")
+        report["limited"] = {**limited_report(g, lg, ltext), "source_output_sha256": report["output_sha256"]}
+    else:
+        report["limited"] = rep_old.get("limited")
+    args.report.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     c = report["counts"]
     print(f"  {report['output']}  {len(g)} triples · 판단 {c['ExaminerJudgment']} · 링크 {c['EvidenceLink']} · "
           f"좌표 {c['DocumentLocator']} · 참조 {c['refersToJudgment']} · 범주 변형 {c['categoryVariantOf']}")

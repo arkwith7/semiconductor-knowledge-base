@@ -1,4 +1,4 @@
-.PHONY: all install venv parse owl convert align validate test clean abox-argument \
+.PHONY: all install venv parse owl convert align validate test clean abox-argument abox-argument-limited argument-limited-fresh \
         ingest-sirp sirp-pairs sirp-problems sirp experts \
         compliance curated-experts curated-ratings expdataset abox abox-patents \
         priorart abox-priorart v1-ablation stage7-remeasure claim-concepts-7a abstract-diagnostic \
@@ -122,6 +122,16 @@ abox-inferred: priorart
 # 산출 TTL 은 gitignore 이고, 리포트(계수만)는 커밋한다. 사람 대조: `--sample` → 시트 기입 → `--gate`.
 abox-argument: priorart
 	$(PYTHON) scripts/build_abox_argument.py
+
+# PLAN-005 §20.24 g — 제한 버전(좌표·판단 간 관계 제외 · 별도 산출물 · 독립 검증 전). 추론을 두 번 더 돌려 느리다.
+abox-argument-limited: abox-argument
+	$(PYTHON) scripts/build_abox_argument.py --limited
+
+# 배포 전 연결 — 제한 버전이 지금 전체 산출물에서 나온 것이 아니면 멈춘다. 원천이 없는 공개 트리에서는 통과한다.
+argument-limited-fresh:
+	@$(PYTHON) -c "import json,os,sys; r=json.load(open('data/reports/abox_argument_report.json')); l=r.get('limited') or {}; \
+	ok=(not os.path.isdir('data/sources/opinion_notices/txt')) or l.get('source_output_sha256')==r.get('output_sha256'); \
+	sys.exit(0 if ok else '논증층 제한 버전이 지금 산출물과 다르다 — make abox-argument-limited 를 먼저 돌릴 것')"
 
 # ── 선행기술 판단층 A-Box (PLAN-005 단계 5-A) ─────────────────────
 # ClaimProfile·Disclosure·ExaminerElement 를 실체화한다. 입력은 전부 커밋된 파일
@@ -269,7 +279,7 @@ v7-rank: notice-edges abox-priorart check-leakage
 # 확인한 뒤에 한다 — 공개된 커밋은 지워도 포크·캐시·PR ref 로 남는다.
 PUBLIC_OUT ?= build/public
 
-public-release:
+public-release: argument-limited-fresh
 	$(PYTHON) scripts/build_public_release.py --out $(PUBLIC_OUT) --force
 # CQ 실행 결과는 **공개 트리 안에서 다시 낸다.** 리포지토리의 cq_report.json 은 원문이 전량
 # 있는 개발 환경의 값(2026-08-15 실측 0.871)인데, 공개본을 받은 사람이 그대로 돌리면 0.452 가

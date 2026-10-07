@@ -190,3 +190,5 @@ data/sources/notice_dissection/pilot_inferred.ttl
 # PLAN-005 §20.22 — 논증층 A-Box 는 통지서 원천(data/sources/ · 공개 DENY)의 파생이라 추적하지 않는다.
 # `make abox-argument` 가 다시 만든다. 리포트(data/reports/abox_argument_report.json)는 계수만이라 추적한다.
 ontology/sdkb-abox-argument.ttl
+# §20.24 g — 제한 버전(좌표·판단 간 관계 제외)도 같은 원천의 파생이다.
+ontology/sdkb-abox-argument-limited.ttl

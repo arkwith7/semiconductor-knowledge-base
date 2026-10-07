@@ -24,21 +24,21 @@
       "input": "ontology/sdkb-abox-claim-features.ttl (판단 블록 2614)",
       "input_sha256": "97665fe00a1e98af75126dca20fb8cf755763a8f6730885a8b0a2537e4090951",
       "output": "ontology/sdkb-abox-inferred.ttl",
-      "output_sha256": "dda3fa22b8e30777f6f40d5748a1ba93abf977482d9ec69bc26e63286dc86d3f"
+      "output_sha256": "321ba1baadb8fe01f9e5c82b268aa3818249f28b1e9be273ae1471bbb0a01e82"
     },
     "argument_abox": {
       "status": "built",
-      "input_triples": 109272,
+      "input_triples": 108634,
       "rules": {
         "pakr:Rule_NoveltyImpliesInventiveness": {
           "nodes": 231,
-          "claims": 332,
+          "claims": 333,
           "inherited_support": 0
         },
         "pa:Rule_EvidenceInheritance": {
-          "nodes": 141,
+          "nodes": 140,
           "claims": 0,
-          "inherited_support": 141
+          "inherited_support": 140
         }
       },
       "not_fired": {
@@ -46,11 +46,11 @@
         "reference_target_not_a_judgment": 0,
         "self_reference": 0
       },
-      "triples": 1961,
+      "triples": 1957,
       "input": "ontology/sdkb-abox-argument.ttl",
-      "input_sha256": "b61367f4a49df81c738a60fcc23567eb1216d2ccb7a6172a20285e90383f24c9",
+      "input_sha256": "14097618b281fbe4cca61e98263989b68d46e5fcd12bb8c071364132a6481666",
       "output": "ontology/sdkb-abox-inferred.ttl",
-      "output_sha256": "dda3fa22b8e30777f6f40d5748a1ba93abf977482d9ec69bc26e63286dc86d3f"
+      "output_sha256": "321ba1baadb8fe01f9e5c82b268aa3818249f28b1e9be273ae1471bbb0a01e82"
     },
     "argument": {
       "status": "built",
@@ -79,5 +79,5 @@
       "output_sha256": "24d621079d6ed6df739207a993d429de44a3d2c66800ce93e713e66b3c83568d"
     }
   },
-  "triples": 2571
+  "triples": 2567
 }
