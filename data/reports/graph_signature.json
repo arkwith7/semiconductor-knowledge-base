@@ -232,8 +232,8 @@
       "layer": "sdkb-abox-argument",
       "label": "examiner argument layer (claim-block judgments)",
       "status": "built",
-      "bytes": 9280421,
-      "triples": 108634,
+      "bytes": 9283482,
+      "triples": 108670,
       "triples_source": "parsed"
     },
     {

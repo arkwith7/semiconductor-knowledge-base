@@ -65,6 +65,9 @@ REPORT = ROOT / "data" / "reports" / "abox_argument_report.json"
 # 판단별 보류 사유 · 보정 근거(키 · 규칙 · 오프셋) — 키에 통지서 파일명이 들어가므로 비공개 자리(gitignore)에만 쓴다.
 HOLDS_CSV = ROOT / "data" / "interim" / "argument_holds.csv"
 CORRECTIONS_CSV = ROOT / "data" / "interim" / "argument_corrections.csv"
+# C13 개별 복귀 목록(§20.24 h · 사용자 승인 10-07) — 사람이 문헌 집합을 확인한 판단만, C13 보류**만** 푼다. 다른 보류는 그대로다.
+# 논거는 이 검토에서 보지 않았으므로 복귀한 판단의 논거는 보류한다. 키에 통지서 파일명이 들어가므로 원천 계층(공개 DENY)에 둔다.
+C13_RESTORE_CSV = ROOT / "data" / "sources" / "curation" / "argument_c13_restore.csv"
 SELECTIVE_KINDS = ("judgment", "locator_set", "rationale_DesignChoice", "rationale_PredictableEffect", "relation")
 PILOT_DIR = ROOT / "data" / "sources" / "notice_dissection"
 SAMPLE_CSV = ROOT / "data" / "interim" / "argument_abox_sample.csv"
@@ -1298,8 +1301,30 @@ def corrections_of(r: dict) -> list[tuple[str, int]]:
     return out
 
 
+def c13_restore_keys(path: Path = C13_RESTORE_CSV) -> set[str]:
+    if not path.exists():
+        return set()
+    return {r["judgment"] for r in csv.DictReader(path.open(encoding="utf-8")) if r.get("scope") == "block_documents"}
+
+
+def apply_c13_restore(recs: list[dict], keys: set[str], stat: Counter) -> None:
+    for r in recs:
+        if r["key"] not in keys:
+            continue
+        hb = r["holds"]["block"]
+        if "C13_label_beyond_conclusion" not in hb:
+            stat["c13_restore__key_not_c13_held"] += 1
+            continue
+        r["holds"]["block"] = [h for h in hb if h != "C13_label_beyond_conclusion"]
+        r["c13_restored"] = True
+        stat["c13_restore__lifted"] += 1
+        for kind in r.get("rat", []):                  # 논거는 확인되지 않았다 — 판단·문헌만 복귀
+            r["holds"]["rationale"].setdefault(kind, []).append("C13_restore_rationale_unverified")
+
+
 def extract_all() -> tuple[list[list[dict]], Counter]:
     stat = Counter()
+    restore = c13_restore_keys()
     per_notice = []
     for f in sorted(TXT_DIR.glob("*.txt")):
         text = f.read_text(encoding="utf-8", errors="ignore")
@@ -1317,9 +1342,12 @@ def extract_all() -> tuple[list[list[dict]], Counter]:
                 r["holds"]["block"] = sorted(set(r["holds"]["block"]) | {"K2_summary_ambiguous"})
             if r.get("e7_ambiguous"):          # 대안 결합 결론 · 블록에 자기 결론이 없다
                 r["holds"]["block"] = sorted(set(r["holds"]["block"]) | {"E7_alternative_ambiguous"})
+        apply_c13_restore(recs, restore, st)
         stat.update(st)
         stat["notices"] += 1
         per_notice.append(recs)
+    found = {r["key"] for recs in per_notice for r in recs}
+    stat["c13_restore__key_missing"] += len(restore - found)   # 키가 사라졌으면(분할 변경 등) 조용히 넘어가지 않고 센다
     return per_notice, stat
 
 

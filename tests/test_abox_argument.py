@@ -756,3 +756,19 @@ def test_k2_in_block_alternative_conclusion_is_guarded():
                  "따라서 청구항 1 내지 15 발명은 당업자가 인용발명1, 또는 인용발명1,2의 결합에 의해 쉽게 발명할 수 있습니다."}
     out = baa.split_by_subject(b)
     assert out[0]["summary_docs"] == "" and out[0]["k2_ambiguous"] is True
+
+
+def test_c13_restore_lifts_only_c13_and_keeps_rationale_held():
+    """C13 개별 복귀(§20.24 h) — 목록의 키만 C13 보류를 풀고, 다른 보류와 논거 보류는 남긴다."""
+    from collections import Counter as _C
+    r = {"key": "k1", "rat": ["DesignChoice"],
+         "holds": {"block": ["C13_label_beyond_conclusion", "C1_foreign_subject"], "locators": [], "rationale": {}}}
+    only = {"key": "k2", "rat": ["PredictableEffect"],
+            "holds": {"block": ["C13_label_beyond_conclusion"], "locators": [], "rationale": {}}}
+    other = {"key": "k3", "rat": [], "holds": {"block": ["C13_label_beyond_conclusion"], "locators": [], "rationale": {}}}
+    st = _C()
+    baa.apply_c13_restore([r, only, other], {"k1", "k2"}, st)
+    assert r["holds"]["block"] == ["C1_foreign_subject"]                       # 다른 보류는 그대로
+    assert only["holds"]["block"] == [] and only["holds"]["rationale"] == {"PredictableEffect": ["C13_restore_rationale_unverified"]}
+    assert other["holds"]["block"] == ["C13_label_beyond_conclusion"]          # 목록 밖은 보류 유지
+    assert st["c13_restore__lifted"] == 2
