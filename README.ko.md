@@ -329,8 +329,8 @@ blank nodes: `grep -c owl:Class` counts both and reports a larger number.
 | `sdkb-abox-claim-features.ttl` | claim features | 12,250,825 ¹ |
 | `sdkb-abox-b-layer-queries.ttl` | B-layer confirmation queries | 4,631 |
 | `sdkb-abox-priorart.ttl` | prior-art claim profiles, disclosures, examiner elements | 973,363 ¹ |
-| `sdkb-abox-argument.ttl` | examiner argument layer (claim-block judgments) | 109,272 |
-| `sdkb-abox-inferred.ttl` | rule-derived judgments (not examiner-asserted) | 2,571 |
+| `sdkb-abox-argument.ttl` | examiner argument layer (claim-block judgments) | 108,634 |
+| `sdkb-abox-inferred.ttl` | rule-derived judgments (not examiner-asserted) | 2,567 |
 | `sdkb-abox-experts-problems.ttl` | experts and problems | 8,483 |
 | `sdkb-abox-vendors.ttl` | equipment vendors | 2,601 |
 | `sdkb-governance-kr-instances.ttl` | Korea regulatory instances | 175 |

@@ -737,3 +737,22 @@ def test_gate6_relations_are_undecidable_and_never_whole_pass(tmp_path, monkeypa
     out = baa.gate5(p, relation_undecidable=True, seed=baa.SAMPLE6_SEED)
     assert out["by_kind"]["categoryVariantOf"]["decidable"] is False and out["by_kind"]["refersToJudgment"]["decidable"] is False
     assert out["pass_judged_kinds"] is True and out["pass"] is False
+
+
+def test_bundle_guard_is_one_contract_for_k2_and_e7():
+    """K2 · E7 공통 계약 — 대안 결합 결론은 공통 문헌 집합이 아니다(재판정 10-05 · K2 누락 사고 10-06).
+    두 경로가 같은 함수를 쓰므로, 한쪽에만 규칙을 넣는 누락이 다시 생기지 않는다."""
+    alt = "청구항 1 내지 3 발명은 인용발명1, 또는 인용발명1,2의 결합에 의해 쉽게 발명할 수 있습니다."
+    assert baa.bundle_guard(alt, "인용발명 1의 단순한 설계변경으로 쉽게 발명할 수 있다.") == ("", False)   # 자기 결론 → 귀속 없음
+    assert baa.bundle_guard(alt, "인용발명 1의 라인부에 대응한다.") == ("", True)                       # 자기 결론 없음 → 보류
+    plain = "청구항 1 내지 3 발명은 인용발명 1, 2의 결합으로 쉽게 발명할 수 있습니다."
+    assert baa.bundle_guard(plain, "x") == (plain, False)
+
+
+def test_k2_in_block_alternative_conclusion_is_guarded():
+    """K2 경로(블록 안 종합 결론)에도 같은 계약이 걸린다 — 누락 시트 r6 8번 12~15항 블록."""
+    b = {"mark": "1", "head": "1-12. 청구항 12 내지 15",
+         "text": "1-12. 청구항 12 내지 15\n청구항 12 내지 15 발명은 앞의 판단과 같이 인용발명 1의 구성에 대응합니다.\n"
+                 "따라서 청구항 1 내지 15 발명은 당업자가 인용발명1, 또는 인용발명1,2의 결합에 의해 쉽게 발명할 수 있습니다."}
+    out = baa.split_by_subject(b)
+    assert out[0]["summary_docs"] == "" and out[0]["k2_ambiguous"] is True
