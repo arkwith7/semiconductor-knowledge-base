@@ -43,6 +43,8 @@ size_categories:
 
 SDKB unifies semiconductor **process / equipment / defect / skill** knowledge, **patent taxonomies** (CPC / IPC / F-term), **firm resources** (RBV), **multi-jurisdictional regulation** (US BIS · NIST · ECHA + Korea ITPA), and **standards** (SEMI / JEDEC) under a single PROV-O-tracked ontology. It is built as the shared substrate for the lab's four research lines — *tech foresight, opportunity discovery, SME innovation analysis, and interactive tech / business visualization* — and as the seed dataset for an upcoming dissertation on a **compliance-aware semantic collaboration platform**.
 
+**Purpose (2026-10-09).** SDKB is being shaped into a knowledge base for **IP-R&D** (patent-driven R&D) that **AI agents** can use for four tasks: prior-art discovery, freedom-to-operate (FTO) screening, new-patent ideation, and turning an idea into a **structured KIPRIS search query**.
+
 **First application — SDKB-Match** (*SDKB Matching Layer — Korean semiconductor SME ↔ expert and patent application ↔ prior-art matching*): two matching markets implemented on a single compliance-first architecture rather than as a post-hoc filter.
 
 ## Glossary
