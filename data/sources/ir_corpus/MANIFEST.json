@@ -1,0 +1,52 @@
+{
+  "name": "ir_corpus_v09",
+  "role": "PLAN-006 T4 평가 후보 코퍼스 — 하류에서 이관한 동결 스냅샷. 이후 생성·정규화·버전 관리는 상류 단독(PLAN-006 §3.1′ 조건 8).",
+  "file": "ir_corpus_v09.parquet",
+  "sha256": "d856269392bdad5222cf5f87cadade0f66b6c9d842c6205c208845f4fc7be51e",
+  "bytes": 170218367,
+  "rows": 41223,
+  "rows_is_candidate": 41031,
+  "storage": {
+    "in_git": false,
+    "why_not_in_git": "GitHub 일반 저장소는 100MiB 초과 파일을 막는다. 또한 청구항·초록 원문을 담으므로 공개 발행 경로에 들어가면 안 된다(CLAUDE.md §1-5).",
+    "persistent_location": "GitHub Release `ir-corpus-v09` asset on arkwith7/semiconductor-knowledge-base (PRIVATE)",
+    "persistent_location_status": "업로드 대기 — 사용자가 `gh release create ir-corpus-v09 data/sources/ir_corpus/ir_corpus_v09.parquet --repo arkwith7/semiconductor-knowledge-base` 로 올린다",
+    "fetch": [
+      "python scripts/ir_corpus.py fetch --release   # gh release download 후 sha 검증",
+      "python scripts/ir_corpus.py fetch --from <path>  # 로컬 사본(하류 원본 등)에서 복사 후 sha 검증"
+    ],
+    "verify": "python scripts/ir_corpus.py verify   # 없거나 sha 가 다르면 비영 종료"
+  },
+  "provenance": {
+    "origin_repo": "arkwith7/sdkb-prior-art-paper (하류)",
+    "origin_path": "data/processed/ir/ir_corpus_v09.parquet",
+    "origin_repo_head_at_import": "3f8b11c",
+    "origin_file_in_git": false,
+    "origin_spec": "하류 01.code_spec/specs/SPEC-007-ir-corpus-asbuilt.md",
+    "imported_at": "2026-10-09"
+  },
+  "composition": {
+    "source_label_priority": "rej > cited > g1 > g2 (한 특허가 여러 그래프에 있으면 최상위 역할로 라벨)",
+    "source_counts": {"g0_rej": 1200, "g0_cited": 3513, "g1": 24173, "g2": 12337},
+    "is_candidate_by_source": {"g0_rej": 1008, "g0_cited": 3513, "g1": 24173, "g2": 12337},
+    "g1": "후보·hard negative — 삼성·SK하이닉스 출원 (출원인 기준 표집)",
+    "g2": "후보·이식성 — KSIA 소부장 188사 출원 (출원인 기준 표집)",
+    "g0_cited": "SIRP 거절출원의 인용문헌 중 서지가 확보된 것. 심사관 인용 중 일부(dev 14 · train 64 쌍)는 미수록",
+    "interpretation": "정답을 포함하도록 구성된 코퍼스 — 선별력 평가에 적합하며 전체 특허 DB 에서의 발견 성능으로 바로 일반화하지 않는다"
+  },
+  "fields": {
+    "doc_id": "kr_|us_|jp_|wo_|cn_|ep_ 접두 식별자 (split.csv 와 같은 꼴)",
+    "is_query": "SIRP 거절출원 질의 여부 (A층 1,000 · B층 200)",
+    "is_candidate": "후보 코퍼스 소속",
+    "lang": "ko 39,479 · en 1,412 · ja 140 (후보 기준)",
+    "title/abstract/claims_full/claims_independent/first_claim_original": "원문 — 비공개",
+    "ipc": "list<string> · 표기가 둘이다: 국내 `H01J_37-32` · 외국 `C04B41-85` → 사용 시 정규화",
+    "cpc": "list<string> · 외국 문서 위주(후보 2.8%)",
+    "concepts": "하류 링커가 붙인 SDKB 개념 id 목록",
+    "filing_date/publication_date": "외국 문서는 publication_date 결측"
+  },
+  "schema_arrow": {"doc_id": "large_string", "iri": "large_string", "source": "large_string", "is_query": "bool", "query_layer": "large_string", "is_candidate": "bool", "is_examiner_positive": "bool", "in_g0": "bool", "in_g1": "bool", "in_g2": "bool", "lang": "large_string", "title": "large_string", "abstract": "large_string", "first_claim_original": "large_string", "claims_independent": "large_string", "claims_full": "large_string", "text_main": "large_string", "n_claims": "int64", "n_independent": "int64", "filing_date": "large_string", "publication_date": "large_string", "publication_number": "large_string", "application_number": "large_string", "patent_office": "large_string", "ipc": "list<element: string>", "cpc": "list<element: string>", "concepts": "list<element: string>", "q_repr_abstract": "large_string", "q_repr_claims": "large_string", "q_repr_abstract_claims": "large_string", "q_repr_title_abstract_claims": "large_string"},
+  "split_link": "benchmark/assets/split.csv (sha 714dafe0…) 의 doc_id 와 같은 꼴 — 질의 분할은 그 파일이 정본",
+  "license": "KIPRIS 수집물 — 학술 이용·비재배포. 공개 파생(sdkb-dataset)에 싣지 않는다",
+  "pii": "출원인 법인명 포함 가능 · 개인 성명 필드 없음(발명자 열 없음)"
+}
