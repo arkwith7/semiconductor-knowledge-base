@@ -249,3 +249,70 @@ def adjust(facets: list[Facet], emu, *, budget: int, m_min: int, ipc_codes: dict
     best = max(inside, key=lambda r: (r.size >= m_min, r.k, -abs(budget - r.size), -IPC_LEVELS.index(r.ipc_level)))
     li_best = levels.index(best.ipc_level)
     return hist, best, sets[(best.k, li_best)]
+
+
+# ── R1 다중 부분 검색식 (PLAN-006 T4 4단계 설계 변경 · 2026-10-09 승인) ────────────────
+MULTI_MAX_RUNS = 12   # 다중 전략의 총 에뮬레이터 실행 상한(좁힘 포함)
+PAIR_MAX = 4          # 핵심 요소 + 주변 요소 쌍 검색식 수 상한
+
+
+@dataclass
+class SubQuery:
+    role: str            # all | core | pair | single
+    facets: tuple[int, ...]
+    query: str
+    size: int
+    narrowed: bool
+    accepted: bool
+
+
+def core_split(facets: list[Facet]) -> tuple[list[Facet], list[Facet]]:
+    """핵심 = df 가 가장 작은(가장 구체적인) 패싯 2개 · 주변 = 나머지(df 오름차순). 정답을 보지 않는다."""
+    by_spec = sorted(facets, key=lambda f: (f.df, f.seq))
+    return by_spec[:2], by_spec[2:]
+
+
+def plan_multi(facets: list[Facet], emu, *, budget: int, exclude: tuple[str, ...]) -> tuple[list[SubQuery], list[str]]:
+    """전체 AND 를 유지하고 부분 검색식을 더한다. 순위 없는 집합이므로 **검색식 단위로만** 채택한다.
+
+    순서(고정): all → core → pair(core1·core2 × 주변, PAIR_MAX) → single(core 각각)
+    개별 과대(> budget): 쓰지 않은 주변 요소 중 가장 구체적인 것 하나를 AND 해 한 번 좁힌다 — 그래도 크면 버린다.
+    누적: 합집합이 budget 을 넘게 되는 검색식은 통째로 건너뛴다(문헌 ID 순 절단 금지). 200 은 상한이지 목표가 아니다.
+    """
+    if not facets:
+        raise ValueError("패싯이 없다 — 검색식을 만들 수 없는 입력")
+    core, peri = core_split(facets)
+    order = list(range(len(facets)))
+    pos = {id(f): i for i, f in enumerate(facets)}
+    plan: list[tuple[str, tuple[int, ...]]] = [("all", tuple(order))]
+    if len(core) == 2:
+        plan.append(("core", tuple(sorted(pos[id(f)] for f in core))))
+    pairs = [(c, p) for c in core for p in peri][:PAIR_MAX]
+    plan += [("pair", tuple(sorted((pos[id(c)], pos[id(p)])))) for c, p in pairs]
+    plan += [("single", (pos[id(c)],)) for c in core]
+    seen, out, union, runs = set(), [], [], 0
+    useful_extra = [pos[id(f)] for f in peri]
+    for role, ids in plan:
+        if ids in seen or runs >= MULTI_MAX_RUNS:
+            continue
+        seen.add(ids)
+        q = "*".join(facets[i].clause() for i in ids)
+        res = emu.run(q, exclude=exclude); runs += 1
+        narrowed = False
+        if len(res) > budget:
+            extra = next((i for i in useful_extra if i not in ids), None)
+            if extra is None or runs >= MULTI_MAX_RUNS:
+                out.append(SubQuery(role, ids, q, len(res), False, False)); continue
+            ids2 = tuple(sorted(ids + (extra,)))
+            q = "*".join(facets[i].clause() for i in ids2)
+            res = emu.run(q, exclude=exclude); runs += 1; narrowed = True
+            seen.add(ids2)
+            if len(res) > budget:
+                out.append(SubQuery(role, ids2, q, len(res), True, False)); continue
+            ids = ids2
+        merged = sorted(set(union) | set(res))
+        ok = bool(res) and len(merged) <= budget
+        if ok:
+            union = merged
+        out.append(SubQuery(role, ids, q, len(res), narrowed, ok))
+    return out, union

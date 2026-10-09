@@ -84,3 +84,55 @@ def test_facet_clause_or_within_and_across():
 def test_positional_words_break_compounds():
     out = Q.noun_compounds("산화물 반도체막 위에 측벽 보호막을 형성하는 단계")
     assert "산화물 반도체막 위" not in out and any("보호막" in c for c in out)
+
+
+class SetEmu:
+    """검색식 문자열 → 고정 문헌 집합."""
+
+    def __init__(self, table):
+        self.table, self.calls = table, []
+
+    def run(self, q, ipc=None, exclude=()):
+        self.calls.append(q)
+        return list(self.table.get(q, []))
+
+
+def F4():
+    return [Q.Facet(1, "a", 900), Q.Facet(2, "b", 50), Q.Facet(3, "c", 40), Q.Facet(4, "d", 500)]
+
+
+def test_multi_keeps_full_and_query_first_and_core_is_most_specific():
+    core, peri = Q.core_split(F4())
+    assert [f.term for f in core] == ["c", "b"] and [f.term for f in peri] == ["d", "a"]
+    emu = SetEmu({})
+    out, union = Q.plan_multi(F4(), emu, budget=200, exclude=())
+    assert out[0].role == "all" and emu.calls[0] == "a*b*c*d" and union == []
+
+
+def test_multi_union_is_query_level_never_truncated():
+    t = {"a*b*c*d": ["x1"], "b*c": [f"y{i}" for i in range(150)], "c*d": [f"z{i}" for i in range(100)],
+         "a*c": ["w1", "w2"]}
+    out, union = Q.plan_multi(F4(), SetEmu(t), budget=200, exclude=())
+    acc = {o.query: o.accepted for o in out}
+    assert acc["a*b*c*d"] and acc["b*c"] and not acc["c*d"]      # c*d 를 넣으면 251 > 200 → 통째로 건너뜀
+    assert acc["a*c"] and len(union) == 153 and len(union) <= 200
+
+
+def test_multi_narrows_oversized_query_once_then_drops():
+    big = [f"n{i}" for i in range(500)]
+    t = {"b*c": big, "b*c*d": big[:300]}
+    out, _ = Q.plan_multi(F4(), SetEmu(t), budget=200, exclude=())
+    core = next(o for o in out if o.role == "core")
+    assert core.narrowed and not core.accepted and core.query == "b*c*d"
+
+
+def test_multi_run_cap():
+    emu = SetEmu({})
+    many = [Q.Facet(i, f"t{i}", 1000 - i) for i in range(1, 9)]
+    Q.plan_multi(many, emu, budget=200, exclude=())
+    assert len(emu.calls) <= Q.MULTI_MAX_RUNS
+
+
+def test_multi_empty_rejected():
+    with pytest.raises(ValueError):
+        Q.plan_multi([], SetEmu({}), budget=200, exclude=())

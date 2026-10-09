@@ -94,6 +94,7 @@ def main(argv=None) -> int:
     ap.add_argument("--m-min", default="10", help="쉼표로 여러 값 = train 격자")
     ap.add_argument("--a-n", default="6", help="a′ 키워드 수 · 쉼표로 여러 값 = train 격자")
     ap.add_argument("--params", type=Path, help="dev 실행에 필요한 동결 매개변수 JSON")
+    ap.add_argument("--strategy", default="single", help="single · multi(R1) · 쉼표로 둘 다")
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--rows-out", type=Path)
@@ -123,9 +124,11 @@ def main(argv=None) -> int:
 
     results, rows_all = [], []
     t0 = time.time()
-    for arm in arms:
+    strategies = a.strategy.split(",")
+    for strategy in strategies:
+      for arm in arms:
         for a_n in (a_ns if arm == "a_prime" else [None]):
-            for m_min in m_mins:
+            for m_min in (m_mins if strategy == "single" else [None]):
                 for B in budgets:
                     rows = []
                     for q in queries:
@@ -133,16 +136,23 @@ def main(argv=None) -> int:
                         if not F:
                             rows.append({"q": q, "hit": 0, "gt": len(gt[q]), "success": False, "size": None, "no_facet": True, "runs": 0})
                             continue
-                        hist, best, S = Q.adjust(F, emu, budget=B, m_min=m_min, ipc_codes=None, exclude=(q,))
-                        rows.append({"q": q, "hit": len(set(S) & gt[q]), "gt": len(gt[q]), "success": best is not None,
-                                     "size": best.size if best else None, "no_facet": False, "runs": len(hist),
-                                     "facets": len(F), "k_final": best.k if best else None})
-                    cfg = {"arm": arm, "budget": B, "m_min": m_min, "a_n": a_n}
+                        if strategy == "single":
+                            hist, best, S = Q.adjust(F, emu, budget=B, m_min=m_min, ipc_codes=None, exclude=(q,))
+                            rows.append({"q": q, "hit": len(set(S) & gt[q]), "gt": len(gt[q]), "success": best is not None,
+                                         "size": best.size if best else None, "no_facet": False, "runs": len(hist),
+                                         "facets": len(F), "k_final": best.k if best else None})
+                        else:
+                            subs, S = Q.plan_multi(F, emu, budget=B, exclude=(q,))
+                            rows.append({"q": q, "hit": len(set(S) & gt[q]), "gt": len(gt[q]), "success": bool(S),
+                                         "size": len(S) if S else None, "no_facet": False, "runs": len(subs),
+                                         "facets": len(F), "accepted": sum(x.accepted for x in subs),
+                                         "accepted_roles": "|".join(x.role for x in subs if x.accepted)})
+                    cfg = {"strategy": strategy, "arm": arm, "budget": B, "m_min": m_min, "a_n": a_n}
                     results.append({**cfg, **evaluate(rows)})
                     rows_all += [{**cfg, **r} for r in rows]
                     print(json.dumps(results[-1], ensure_ascii=False), f"t={time.time() - t0:.0f}s", flush=True)
 
-    params = {"m_min": m_mins, "a_n": a_ns, "MAX_RUNS": Q.MAX_RUNS, "DF_MIN": Q.DF_MIN, "DF_MAX_FRAC": Q.DF_MAX_FRAC,
+    params = {"strategy": strategies, "MULTI_MAX_RUNS": Q.MULTI_MAX_RUNS, "PAIR_MAX": Q.PAIR_MAX, "m_min": m_mins, "a_n": a_ns, "MAX_RUNS": Q.MAX_RUNS, "DF_MIN": Q.DF_MIN, "DF_MAX_FRAC": Q.DF_MAX_FRAC,
               "MAX_FACETS": Q.MAX_FACETS, "SYN_MAX": Q.SYN_MAX}
     out = {"plan": "PLAN-006 T4", "split": a.split, "queries": len(queries),
            "denominator": "코퍼스 안 심사관 인용(qrel_examiner) — 질의별 회수율의 분모",
