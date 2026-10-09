@@ -1,0 +1,162 @@
+#!/usr/bin/env python3
+"""PLAN-006 T4 S6 — 비교군별 구조화 검색식의 회수·검토량 리포트 (읽기 전용 · 그래프를 바꾸지 않는다).
+
+분할 규율 (PLAN-006 §3.1′ 조건 5·6)
+  train  매개변수(m_min · a′ 의 N)를 정하는 자리. 격자 결과를 그대로 싣는다.
+  dev    **동결 매개변수 파일이 커밋된 뒤에만** 돈다(`--params`). 개발 단계 효과 확인.
+  test · test_b  이 스크립트로는 열 수 없다(봉인).
+
+지표 (§3.3′ A4) — 예산 B 마다 같은 정책을 다시 실행한다
+  macro_recall   질의별 회수율 평균 (주 지표 · 실패 질의 = 0)
+  micro_recall   쌍 기준 (보조)
+  success_rate   예산 안 집합을 얻은 질의 비율
+  size_median    성공 질의의 최종 집합 크기
+  macro_recall_success_only  성공 질의만의 회수율 평균
+"""
+from __future__ import annotations
+
+import argparse
+import csv
+import hashlib
+import json
+import subprocess
+import sys
+import time
+from pathlib import Path
+from statistics import median
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+import build_search_query as Q  # noqa: E402
+import ir_corpus  # noqa: E402
+import kipris_emulator as K  # noqa: E402
+from splits import SEALED, load_split  # noqa: E402
+
+QREL = ROOT / "benchmark" / "assets" / "qrel_examiner.csv"
+ARMS = ("a_prime", "c1")
+
+
+def sha(p: Path) -> str:
+    return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+
+
+def bundle(params: dict) -> dict:
+    """하류가 이 결과를 쓰려면 함께 받아야 하는 버전 묶음 (§3.3′)."""
+    head = subprocess.run(["git", "-C", str(ROOT), "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip()
+    dirty = bool(subprocess.run(["git", "-C", str(ROOT), "status", "--porcelain", "scripts"], capture_output=True, text=True).stdout.strip())
+    return {
+        "corpus_sha256": ir_corpus.manifest()["sha256"],
+        "concordance_sha256": sha(K.CONCORDANCE),
+        "generator_commit": head, "generator_scripts_dirty": dirty,
+        "params_sha256": hashlib.sha256(json.dumps(params, sort_keys=True).encode()).hexdigest(),
+        "params": params,
+    }
+
+
+def load_gt(split: str, smap: dict[str, str]) -> dict[str, set[str]]:
+    gt: dict[str, set[str]] = {}
+    with QREL.open(encoding="utf-8") as fh:
+        for r in csv.DictReader(fh):
+            if smap.get(r["query_id"]) == split:
+                gt.setdefault(r["query_id"], set()).add(r["doc_id"])
+    return gt
+
+
+def facets_for(arm: str, claim: str, df, lex, a_n: int):
+    if arm == "a_prime":
+        F = Q.facets_keywords(claim, df, a_n)
+    elif arm == "c1":
+        F = Q.facets_elements(claim, df, lex)
+    else:
+        raise SystemExit(f"ERROR: 아직 구현하지 않은 비교군: {arm}")
+    return sorted(F, key=lambda f: (-f.df, f.seq))
+
+
+def evaluate(rows: list[dict]) -> dict:
+    ok = [r for r in rows if r["success"]]
+    gt_total = sum(r["gt"] for r in rows)
+    return {
+        "queries": len(rows),
+        "macro_recall": round(sum(r["hit"] / r["gt"] for r in rows) / len(rows), 4),
+        "micro_recall": round(sum(r["hit"] for r in rows) / gt_total, 4),
+        "success_rate": round(len(ok) / len(rows), 4),
+        "size_median": median([r["size"] for r in ok]) if ok else None,
+        "macro_recall_success_only": round(sum(r["hit"] / r["gt"] for r in ok) / len(ok), 4) if ok else None,
+        "no_facet_queries": sum(1 for r in rows if r["no_facet"]),
+    }
+
+
+def main(argv=None) -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--split", required=True, choices=["train", "dev"])
+    ap.add_argument("--arms", default=",".join(ARMS))
+    ap.add_argument("--budgets", default="100,200,500")
+    ap.add_argument("--m-min", default="10", help="쉼표로 여러 값 = train 격자")
+    ap.add_argument("--a-n", default="6", help="a′ 키워드 수 · 쉼표로 여러 값 = train 격자")
+    ap.add_argument("--params", type=Path, help="dev 실행에 필요한 동결 매개변수 JSON")
+    ap.add_argument("--limit", type=int, default=0)
+    ap.add_argument("--out", type=Path, required=True)
+    ap.add_argument("--rows-out", type=Path)
+    a = ap.parse_args(argv)
+
+    if a.split in SEALED:
+        raise SystemExit("ERROR: 봉인 분할은 열 수 없다")
+    if a.split == "dev":
+        if not a.params or not a.params.exists():
+            raise SystemExit("ERROR: dev 는 train 에서 정한 동결 매개변수(--params) 없이 돌지 않는다")
+        p = json.loads(a.params.read_text(encoding="utf-8"))
+        m_mins, a_ns = [p["m_min"]], [p["a_n"]]
+    else:
+        m_mins = [int(x) for x in a.m_min.split(",")]
+        a_ns = [int(x) for x in a.a_n.split(",")]
+    arms = a.arms.split(",")
+    budgets = [int(x) for x in a.budgets.split(",")]
+
+    smap = load_split()
+    gt = load_gt(a.split, smap)
+    C = ir_corpus.load(["doc_id", "is_candidate", "title", "abstract", "claims_full", "claims_independent",
+                        "first_claim_original", "ipc"])
+    claim = dict(zip(C["doc_id"], C["first_claim_original"]))
+    emu = K.Emulator(C)
+    df, lex = Q.DF(emu), Q.Lexicon()
+    queries = sorted(gt)[: a.limit or None]
+
+    results, rows_all = [], []
+    t0 = time.time()
+    for arm in arms:
+        for a_n in (a_ns if arm == "a_prime" else [None]):
+            for m_min in m_mins:
+                for B in budgets:
+                    rows = []
+                    for q in queries:
+                        F = facets_for(arm, claim.get(q) or "", df, lex, a_n or 0)
+                        if not F:
+                            rows.append({"q": q, "hit": 0, "gt": len(gt[q]), "success": False, "size": None, "no_facet": True, "runs": 0})
+                            continue
+                        hist, best, S = Q.adjust(F, emu, budget=B, m_min=m_min, ipc_codes=None, exclude=(q,))
+                        rows.append({"q": q, "hit": len(set(S) & gt[q]), "gt": len(gt[q]), "success": best is not None,
+                                     "size": best.size if best else None, "no_facet": False, "runs": len(hist),
+                                     "facets": len(F), "k_final": best.k if best else None})
+                    cfg = {"arm": arm, "budget": B, "m_min": m_min, "a_n": a_n}
+                    results.append({**cfg, **evaluate(rows)})
+                    rows_all += [{**cfg, **r} for r in rows]
+                    print(json.dumps(results[-1], ensure_ascii=False), f"t={time.time() - t0:.0f}s", flush=True)
+
+    params = {"m_min": m_mins, "a_n": a_ns, "MAX_RUNS": Q.MAX_RUNS, "DF_MIN": Q.DF_MIN, "DF_MAX_FRAC": Q.DF_MAX_FRAC,
+              "MAX_FACETS": Q.MAX_FACETS, "SYN_MAX": Q.SYN_MAX}
+    out = {"plan": "PLAN-006 T4", "split": a.split, "queries": len(queries),
+           "denominator": "코퍼스 안 심사관 인용(qrel_examiner) — 질의별 회수율의 분모",
+           "bundle": bundle(params), "results": results}
+    a.out.parent.mkdir(parents=True, exist_ok=True)
+    a.out.write_text(json.dumps(out, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    if a.rows_out:
+        a.rows_out.parent.mkdir(parents=True, exist_ok=True)
+        with a.rows_out.open("w", encoding="utf-8", newline="") as fh:
+            keys = sorted({k for r in rows_all for k in r})
+            w = csv.DictWriter(fh, fieldnames=keys, lineterminator="\n")
+            w.writeheader(); w.writerows(rows_all)
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
