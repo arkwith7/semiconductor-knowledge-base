@@ -81,6 +81,9 @@ dev = [
 ]
 # Full pipeline (all extras)
 full = ["sdkb[align,priorart,notebook,viz,nlp,dev]"]
+t4llm = [
+    "anthropic==1.12.1",
+]
 
 [project.scripts]
 sdkb-parse              = "scripts.parse_baseline:main"
