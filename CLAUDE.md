@@ -7,6 +7,13 @@ SDKB 는 **배포되는 연구 자산**이다. 논문 한 편의 부속물이 �
 그래서 이 저장소의 결함은 **조용히 하류로 전파된다.** 여기서 컬럼 하나가 잘못된 의미를 담으면,
 그것을 쓰는 논문의 통계가 통째로 무효가 된다. 이 규약의 나머지는 전부 그 한 문장의 각주다.
 
+> **목적 (2026-10-09 · 사용자 확정).** SDKB 는 **IP-R&D(특허 기반 연구개발)** 를 위한 지식베이스다 —
+> 기업이 특허를 분석해 신규 특허기술을 도출하고 출원·개발·양산·판매까지 잇는 업무에서 **AI 에이전트가
+> 쓰는 온톨로지**를 목표로 한다. 용도는 **T1 선행기술 도출 · T2 FTO 보장 · T3 신규 특허 도출 ·
+> T4 아이디어 → KIPRIS 구조화 검색식** 넷이다. 새 작업은 **이 넷 중 무엇을 진전시키는가**를 먼저
+> 답한다. 계획 정본은 [PLAN-006](01.code_spec/plans/PLAN-006-iprnd-agent-kb.md) 이다.
+> 사례 트랙의 대상 기업은 **익명("A사")** 으로만 적는다 — 실명은 비공개 원천 계층에만 둔다.
+
 > **공개 경계는 이 저장소가 아니라 발행 단계에 있다 (2026-08-23 개정 · 사용자 승인).**
 > 이 저장소(`arkwith7/semiconductor-knowledge-base`)는 **비공개(PRIVATE)로 확정**됐고,
 > 공개되는 것은 **파생 리포 `arkwith7/sdkb-dataset`**(PUBLIC)이다. 둘을 잇는 것은
@@ -35,6 +42,7 @@ SDKB 는 **배포되는 연구 자산**이다. 논문 한 편의 부속물이 �
 | **SDKB-Match (Expert / PriorArt)** | 매칭·선행기술검색의 지식 기반 | 매칭 결과·GT 평가가 흔들림 |
 | **공개 파생 리포 `sdkb-dataset`** (PUBLIC) | `build_public_release.py` 가 만든 **스크럽된** 트리 | 원문이 새어 나가거나(라이선스 위반) 인용된 데이터가 사후에 달라짐 |
 | **공개 사이트 / 데이터셋 이용자** | 릴리스된 그래프 | 인용된 데이터가 사후에 달라짐 |
+| **AI 에이전트 (IP-R&D · PLAN-006)** | 검색식 · 선행기술 후보 · 판단 근거 · 개념 링킹 | 에이전트 출력이 근거 없이 흔들리거나 설명할 수 없게 됨 |
 
 하류는 커밋 SHA + sha256 으로 우리를 **핀(pin)** 한다. 즉 우리가 이미 배포한 것을 제자리에서 바꾸면
 그들의 출처 기록이 거짓이 된다. **어휘·IRI·의미를 바꾸는 변경은 CHANGELOG 와 버전으로 알린다.**
@@ -253,9 +261,9 @@ make test             # pytest
 | 층 | 실측 | 처리 계획 |
 |---|---|---|
 | **어휘** | 기술요소·조합·포함·치환·결합을 담는 클래스 **0개**. ~~구조요소 15개가 *"축 부재"* 로 등재 보류~~ → **5-B(2026-09-08)에서 `StructuralElement` 15 노드로 등록** — 단 7개(기판·전극·게이트·적층·소스·드레인·채널)는 R7-DF-CEILING 에 걸려 접지에 쓰이지 않는다(별도 안건) | PLAN-001 §1.2 · §1.10 |
-| **R-Box** | 자체 T-Box 추론 공리 **8건**이 전부 · `inverseOf`·`propertyChainAxiom`·`disjointWith` 각 **0** · 명명 클래스 47% 계층 고립 | PLAN-001 §1.3 · PLAN-002 |
+| **R-Box** | 자체 T-Box 추론 공리 **8건**이 전부 · `inverseOf`·`propertyChainAxiom`·`disjointWith` 각 **0** · 명명 클래스 47% 계층 고립 → **2026-10-09 실측: 공리 29 중 소비 8 · 미소비 21**(`data/reports/priorart_v1_ablation.json` summary) · `disjointWith` **4** · `inverseOf`·`propertyChainAxiom` 0(`grep -c` ontology/*.ttl) | PLAN-001 §1.3 · PLAN-002 |
 | **A-Box** | ClaimFeature 1,306,191건 중 개념 접지 ~~33.1%(122종)~~ → **38.6%**(138종 · 5-B 2026-09-08 실측 · Kiwi 링커 기준선) · rej 독립항 미매핑 28.2 → **24.0%** · 비 KR/US 인용문헌 청구항 분해 **0%** · `PriorArtJudgment` 635건 중 신규성 근거 **9건** | PLAN-005 §4 단계 2·5 · §14 |
-| **검증** | CQ 31개 **전량 ground BGP**(property path 0) · 추론기 타깃 없음 · `onto` 랭커 R@50 **0.1606** 대 tfidf **0.4330** | PLAN-005 §5 V1–V6 |
+| **검증** | CQ 31개 **전량 ground BGP**(property path 0) · 추론기 타깃 없음 · `onto` 랭커 R@50 **0.1606** 대 tfidf **0.4330** → **2026-10-09 주의: 0.1606 은 재현되지 않는다**(PYTHONHASHSEED 에 따라 0.2061/0.2177 · `v7_coverage_rank.json`) · tfidf 0.4330 은 KR 0.6708 · 외국 0.0074 의 혼합(`priorart_baseline.json`) · `cq_rules` 에 property path 생김 | PLAN-005 §5 V1–V6 |
 | **이식성** | `featureConcept` range 가 반도체 클래스 합집합 · `noticeType`·`examinationStatus`·`groundClause` 가 KR 절차를 리터럴로 고정 | PLAN-001 §1.10 (`pa:` 슬롯) |
 
 **SIRP 는 1,000건이다** (초기 코호트 스냅샷이 773건이었고 GT 페어가 그 시점에 동결되어 있다 —
