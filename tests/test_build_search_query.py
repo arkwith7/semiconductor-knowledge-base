@@ -160,3 +160,23 @@ def test_translations_drop_absent_and_too_broad_candidates(tmp_path):
             return {"rare": 3, "common": 90, "absent": 0}[t]
     F = Q.Translations(p, m).apply([Q.Facet(1, "a", 10)], DFake())
     assert F[0].translations == ["rare"]
+
+
+def test_adaptive_never_loses_base_results_and_respects_union_budget():
+    F = [Q.Facet(1, "a", 900, translations=["A"]), Q.Facet(2, "b", 50, translations=["B"]),
+         Q.Facet(3, "c", 40), Q.Facet(4, "d", 500)]
+    base = {"a*b*c*d": ["x1"], "b*c": [f"y{i}" for i in range(150)]}
+    exp = {'(b+B)*c': [f"y{i}" for i in range(150)] + [f"n{i}" for i in range(80)],   # 230 > 200 → 줄여 재시도
+           'b*c': base["b*c"]}
+    t = {**base, **exp}
+    t["(a+A)*(b+B)*c*d"] = ["x1", "x2"]
+    out, union = Q.plan_multi_adaptive(F, SetEmu(t), budget=200, exclude=())
+    assert set(base["a*b*c*d"]) | set(base["b*c"]) <= set(union)          # 원 결과 보존
+    assert "x2" in union and len(union) <= 200                              # 확장 이득은 예산 안에서만
+    assert not any(o.accepted and o.query == "(b+B)*c" for o in out)        # 합집합 초과 확장은 취소
+
+
+def test_adaptive_without_expansions_equals_plan_multi():
+    t = {"a*b*c*d": ["x1"], "b*c": ["y1", "y2"]}
+    F = [Q.Facet(1, "a", 900), Q.Facet(2, "b", 50), Q.Facet(3, "c", 40), Q.Facet(4, "d", 500)]
+    assert Q.plan_multi_adaptive(F, SetEmu(t), budget=200, exclude=())[1] == Q.plan_multi(F, SetEmu(t), budget=200, exclude=())[1]

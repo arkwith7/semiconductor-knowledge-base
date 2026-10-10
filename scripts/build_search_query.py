@@ -345,3 +345,46 @@ class Translations:
         for f in facets:
             f.translations = [t for t in self.ko2en.get(f.term, []) if 1 <= df(f'"{t}"' if " " in t else t) <= DF_MAX_FRAC * df.n]
         return facets
+
+
+# ── §3.4 공통 적응 확장 (원 결과 보존) ─────────────────────────────────────────────
+ADAPT_TRIES = 2       # 부분 검색식마다 확장 시도: (1) 모든 확장어 (2) 패싯당 첫 확장어 하나
+
+
+def _strip(f: Facet) -> Facet:
+    return Facet(f.seq, f.term, f.df, f.concept)
+
+
+def _top1(f: Facet) -> Facet:
+    alts = [a for a in f.synonyms + f.translations if a != f.term]
+    return Facet(f.seq, f.term, f.df, f.concept, synonyms=alts[:1])
+
+
+def plan_multi_adaptive(facets: list[Facet], emu, *, budget: int, exclude: tuple[str, ...]) -> tuple[list[SubQuery], list[str]]:
+    """원 표현으로 얻은 합집합을 먼저 확보하고 보존한 뒤, 같은 부분 검색식 순서로 확장을 시도한다.
+
+    확장 결과는 **전체 합집합 기준** 잔여 예산 안일 때만 더한다 — 넘으면 패싯당 첫 확장어 하나로 줄여 한 번 더,
+    그래도 넘으면 그 확장을 취소한다. 원 결과는 어떤 경우에도 빼지 않는다. 정답을 보지 않는다.
+    확장어가 없는 입력은 plan_multi 와 같은 결과를 낸다.
+    """
+    bare = [_strip(f) for f in facets]
+    base_subs, union = plan_multi(bare, emu, budget=budget, exclude=exclude)
+    union_set = set(union)
+    out = list(base_subs)
+    if not any(f.synonyms or f.translations for f in facets):
+        return out, union
+    for s in base_subs:
+        ids = s.facets
+        if not any(facets[i].synonyms or facets[i].translations for i in ids):
+            continue
+        for attempt in range(ADAPT_TRIES):
+            fs = [facets[i] if attempt == 0 else _top1(facets[i]) for i in ids]
+            q = "*".join(f.clause() for f in fs)
+            res = emu.run(q, exclude=exclude)
+            merged = union_set | set(res)
+            if res and len(merged) <= budget:
+                union_set = merged
+                out.append(SubQuery(f"{s.role}+exp{attempt + 1}", ids, q, len(res), False, True))
+                break
+            out.append(SubQuery(f"{s.role}+exp{attempt + 1}", ids, q, len(res), False, False))
+    return out, sorted(union_set)
