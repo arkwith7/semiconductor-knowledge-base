@@ -273,7 +273,8 @@ def core_split(facets: list[Facet]) -> tuple[list[Facet], list[Facet]]:
     return by_spec[:2], by_spec[2:]
 
 
-def plan_multi(facets: list[Facet], emu, *, budget: int, exclude: tuple[str, ...]) -> tuple[list[SubQuery], list[str]]:
+def plan_multi(facets: list[Facet], emu, *, budget: int, exclude: tuple[str, ...],
+               ipc_narrow: list[str] | None = None, splitter=None) -> tuple[list[SubQuery], list[str]]:
     """전체 AND 를 유지하고 부분 검색식을 더한다. 순위 없는 집합이므로 **검색식 단위로만** 채택한다.
 
     순서(고정): all → core → pair(core1·core2 × 주변, PAIR_MAX) → single(core 각각)
@@ -282,7 +283,7 @@ def plan_multi(facets: list[Facet], emu, *, budget: int, exclude: tuple[str, ...
     """
     if not facets:
         raise ValueError("패싯이 없다 — 검색식을 만들 수 없는 입력")
-    core, peri = core_split(facets)
+    core, peri = (splitter or core_split)(facets)
     order = list(range(len(facets)))
     pos = {id(f): i for i, f in enumerate(facets)}
     plan: list[tuple[str, tuple[int, ...]]] = [("all", tuple(order))]
@@ -300,6 +301,12 @@ def plan_multi(facets: list[Facet], emu, *, budget: int, exclude: tuple[str, ...
         q = "*".join(facets[i].clause() for i in ids)
         res = emu.run(q, exclude=exclude); runs += 1
         narrowed = False
+        if len(res) > budget and ipc_narrow and runs < MULTI_MAX_RUNS:
+            # c2: 넓은 검색식만 IPC 로 좁힌다 — 예산 안 검색식에는 IPC 를 붙이지 않는다(정답 재탈락 방지)
+            res_i = emu.run(q, ipc=ipc_narrow, exclude=exclude); runs += 1
+            if len(res_i) <= budget:
+                res, narrowed = res_i, True
+                q = q + "  [IPC " + "+".join(ipc_narrow) + "]"
         if len(res) > budget:
             extra = next((i for i in useful_extra if i not in ids), None)
             if extra is None or runs >= MULTI_MAX_RUNS:
@@ -360,7 +367,8 @@ def _top1(f: Facet) -> Facet:
     return Facet(f.seq, f.term, f.df, f.concept, synonyms=alts[:1])
 
 
-def plan_multi_adaptive(facets: list[Facet], emu, *, budget: int, exclude: tuple[str, ...]) -> tuple[list[SubQuery], list[str]]:
+def plan_multi_adaptive(facets: list[Facet], emu, *, budget: int, exclude: tuple[str, ...],
+                        ipc_narrow: list[str] | None = None, splitter=None) -> tuple[list[SubQuery], list[str]]:
     """원 표현으로 얻은 합집합을 먼저 확보하고 보존한 뒤, 같은 부분 검색식 순서로 확장을 시도한다.
 
     확장 결과는 **전체 합집합 기준** 잔여 예산 안일 때만 더한다 — 넘으면 패싯당 첫 확장어 하나로 줄여 한 번 더,
@@ -368,7 +376,7 @@ def plan_multi_adaptive(facets: list[Facet], emu, *, budget: int, exclude: tuple
     확장어가 없는 입력은 plan_multi 와 같은 결과를 낸다.
     """
     bare = [_strip(f) for f in facets]
-    base_subs, union = plan_multi(bare, emu, budget=budget, exclude=exclude)
+    base_subs, union = plan_multi(bare, emu, budget=budget, exclude=exclude, ipc_narrow=ipc_narrow, splitter=splitter)
     union_set = set(union)
     out = list(base_subs)
     if not any(f.synonyms or f.translations for f in facets):
@@ -388,3 +396,89 @@ def plan_multi_adaptive(facets: list[Facet], emu, *, budget: int, exclude: tuple
                 break
             out.append(SubQuery(f"{s.role}+exp{attempt + 1}", ids, q, len(res), False, False))
     return out, sorted(union_set)
+
+
+# ── §3.4-③ c2 개념↔IPC (넓은 부분 검색식을 좁히는 데만) ────────────────────────────
+IPC_MIN_DOCS = 20     # 개념당 이보다 적은 문서로는 IPC 연결을 세우지 않는다
+IPC_TOP = 2           # 질의당 고르는 메인그룹 수
+
+
+def concept_local(cid: str | None) -> str | None:
+    return cid.split(":", 1)[-1] if cid else None
+
+
+class IpcSelector:
+    """코퍼스 후보 문서의 개념 × IPC 메인그룹 동시출현(lift)으로 질의의 IPC 를 고른다.
+
+    비지도 통계다 — 질의·인용 관계(정답)는 읽지 않는다. 다만 **dev·test·test_b 질의 문서는 표에서 뺀다**(§3.4).
+    판 정규화(H01L↔H10)는 에뮬레이터가 공통으로 하므로 여기서는 기호를 고르기만 한다.
+    """
+
+    def __init__(self, corpus, exclude_docs: set[str]):
+        from collections import Counter
+        from kipris_emulator import norm_ipc
+
+        c = corpus[corpus["is_candidate"] & ~corpus["doc_id"].isin(exclude_docs)]
+        self.n = len(c)
+        self.ipc_n: Counter = Counter()
+        self.con_n: Counter = Counter()
+        self.pair: Counter = Counter()
+        for cons, ipcs in zip(c["concepts"], c["ipc"]):
+            mg = sorted({x.split("/")[0] for x in (norm_ipc(i) for i in (ipcs if ipcs is not None else [])) if x and len(x) > 4})
+            cs = sorted(set(cons)) if cons is not None else []
+            self.ipc_n.update(mg)
+            self.con_n.update(cs)
+            for k in cs:
+                for g in mg:
+                    self.pair[(k, g)] += 1
+
+    def choose(self, concepts: list[str]) -> list[str]:
+        import math
+        score: dict[str, float] = {}
+        for k in sorted({x for x in concepts if x and self.con_n[x] >= IPC_MIN_DOCS}):
+            for (kk, g), n in self.pair.items():
+                if kk != k or n < 3:
+                    continue
+                lift = (n / self.con_n[k]) / (self.ipc_n[g] / self.n)
+                if lift > 1:
+                    score[g] = score.get(g, 0.0) + math.log(lift) * n / self.con_n[k]
+        return [g for g, _ in sorted(score.items(), key=lambda x: (-x[1], x[0]))[:IPC_TOP]]
+
+
+# ── §3.4-④ c3 심사관 판단 기반 요소 우선순위 ──────────────────────────────────────
+C3_LEARN_FRAC = 7     # 패밀리 해시 % 10 < 7 → 학습 · 나머지 → 점검 (train 안에서 출원·패밀리 단위 분리)
+C3_PRIOR = (1, 4)     # 베타 사전(성공 1 · 실패 4) — 드문 개념의 가중이 튀지 않게
+
+
+def family_bucket(family_id: str) -> int:
+    import hashlib
+    return int(hashlib.sha256(str(family_id).encode()).hexdigest(), 16) % 10
+
+
+class JudgmentWeights:
+    """train **학습 구간** 질의의 심사관 인용으로 개념별 가중 w(c) = P(인용문헌이 c 를 가짐 | 질의가 c 를 가짐).
+
+    학습 구간 밖(점검 구간·dev·test)의 인용은 읽지 않는다. 요소 우선순위(핵심 패싯 선택)에만 쓴다.
+    """
+
+    def __init__(self, learn_gt: dict[str, set[str]], doc_concepts: dict[str, set[str]]):
+        from collections import Counter
+        hit, tot = Counter(), Counter()
+        for q in sorted(learn_gt):
+            qc = doc_concepts.get(q, set())
+            for d in sorted(learn_gt[q]):
+                dc = doc_concepts.get(d, set())
+                for k in qc:
+                    tot[k] += 1
+                    hit[k] += k in dc
+        a, b = C3_PRIOR
+        self.w = {k: (hit[k] + a) / (tot[k] + a + b) for k in tot}
+        self.default = a / (a + b)
+
+    def weight(self, f: Facet) -> float:
+        return self.w.get(concept_local(f.concept), self.default)
+
+
+def core_split_weighted(facets: list[Facet], jw: JudgmentWeights) -> tuple[list[Facet], list[Facet]]:
+    by = sorted(facets, key=lambda f: (-jw.weight(f), f.df, f.seq))
+    return by[:2], by[2:]

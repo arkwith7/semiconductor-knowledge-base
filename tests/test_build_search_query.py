@@ -180,3 +180,32 @@ def test_adaptive_without_expansions_equals_plan_multi():
     t = {"a*b*c*d": ["x1"], "b*c": ["y1", "y2"]}
     F = [Q.Facet(1, "a", 900), Q.Facet(2, "b", 50), Q.Facet(3, "c", 40), Q.Facet(4, "d", 500)]
     assert Q.plan_multi_adaptive(F, SetEmu(t), budget=200, exclude=())[1] == Q.plan_multi(F, SetEmu(t), budget=200, exclude=())[1]
+
+
+def test_c2_ipc_only_narrows_oversized_queries():
+    class IpcEmu(SetEmu):
+        def run(self, q, ipc=None, exclude=()):
+            self.calls.append((q, tuple(ipc or ())))
+            if ipc:
+                return [f"i{k}" for k in range(50)]
+            return list(self.table.get(q, []))
+    t = {"a*b*c*d": ["x1"], "b*c": [f"y{i}" for i in range(500)]}
+    emu = IpcEmu(t)
+    out, union = Q.plan_multi(F4(), emu, budget=200, exclude=(), ipc_narrow=["H01L21"])
+    with_ipc = [c for c in emu.calls if c[1]]
+    assert with_ipc and all(c[0] == "b*c" for c in with_ipc)          # 예산 안이던 a*b*c*d 에는 IPC 를 붙이지 않는다
+    assert "x1" in union and "i0" in union
+
+
+def test_c3_weights_prior_and_family_bucket_deterministic():
+    jw = Q.JudgmentWeights({"q1": {"d1", "d2"}}, {"q1": {"etch", "oxide"}, "d1": {"etch"}, "d2": {"etch", "oxide"}})
+    assert jw.w["etch"] == (2 + 1) / (2 + 5) and jw.w["oxide"] == (1 + 1) / (2 + 5)
+    assert jw.weight(Q.Facet(1, "x", 10, concept="process:unknown")) == jw.default
+    assert Q.family_bucket("123") == Q.family_bucket("123") and 0 <= Q.family_bucket("123") < 10
+
+
+def test_c3_splitter_prefers_high_weight_concepts():
+    jw = Q.JudgmentWeights({"q": {"d"}}, {"q": {"etch", "cmp"}, "d": {"etch"}})
+    F = [Q.Facet(1, "a", 10, concept="subprocess:cmp"), Q.Facet(2, "b", 900, concept="process:etch"), Q.Facet(3, "c", 50)]
+    core, _ = Q.core_split_weighted(F, jw)
+    assert core[0].term == "b"

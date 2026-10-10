@@ -65,7 +65,7 @@ def load_gt(split: str, smap: dict[str, str]) -> dict[str, set[str]]:
 def facets_for(arm: str, claim: str, df, lex, a_n: int):
     if arm == "a_prime":
         F = Q.facets_keywords(claim, df, a_n)
-    elif arm == "c1":
+    elif arm in ("c1", "c2", "c3"):   # c2·c3 는 c1 과 같은 패싯 — 계획(planner) 단계만 다르다
         F = Q.facets_elements(claim, df, lex)
     elif arm == "c1_nosyn":   # 요소 패싯 · 온톨로지 동의어 없음 — 동의어의 추가 효과를 따로 재기 위한 셀
         F = Q.facets_elements(claim, df, None)
@@ -99,6 +99,8 @@ def main(argv=None) -> int:
     ap.add_argument("--strategy", default="single", help="single · multi(R1) · 쉼표로 둘 다")
     ap.add_argument("--lang", default="ko", help="ko(번역 없음) · tr(R2 공통 번역) · 쉼표로 둘 다")
     ap.add_argument("--df-max", default=str(Q.DF_MAX_FRAC), help="패싯 df 상한 비율 — a′·c 공통 · 쉼표로 여러 값 = train 격자")
+    ap.add_argument("--subset", default="all", choices=["all", "learn", "check"],
+                    help="train 안 패밀리 단위 구간 — c3 가중은 learn 에서만 배우고 비교는 check 에서 한다")
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--rows-out", type=Path)
@@ -120,11 +122,23 @@ def main(argv=None) -> int:
     smap = load_split()
     gt = load_gt(a.split, smap)
     C = ir_corpus.load(["doc_id", "is_candidate", "title", "abstract", "claims_full", "claims_independent",
-                        "first_claim_original", "ipc"])
+                        "first_claim_original", "ipc", "concepts"])
     claim = dict(zip(C["doc_id"], C["first_claim_original"]))
     emu = K.Emulator(C)
     df, lex = Q.DF(emu), Q.Lexicon()
+    fam = {r["doc_id"]: r["family_id"] for r in csv.DictReader(open(ROOT / "benchmark" / "assets" / "split.csv", encoding="utf-8"))}
+    learn = {q for q, s in smap.items() if s == "train" and Q.family_bucket(fam[q]) < Q.C3_LEARN_FRAC}
+    if a.split == "train" and a.subset != "all":
+        gt = {q: v for q, v in gt.items() if (q in learn) == (a.subset == "learn")}
     queries = sorted(gt)[: a.limit or None]
+    sel = jw = None
+    if {"c2", "c3"} & set(arms):
+        sel = Q.IpcSelector(C, exclude_docs={q for q, s in smap.items() if s != "train"})
+    if "c3" in arms:
+        train_gt = load_gt("train", smap)
+        learn_gt = {q: v for q, v in train_gt.items() if q in learn} if a.split == "train" else train_gt
+        dcon = {d: set(v) for d, v in zip(C["doc_id"], C["concepts"]) if v is not None}
+        jw = Q.JudgmentWeights(learn_gt, dcon)
 
     results, rows_all = [], []
     t0 = time.time()
@@ -155,7 +169,9 @@ def main(argv=None) -> int:
                                  "facets": len(F), "k_final": best.k if best else None})
                 else:
                     planner = Q.plan_multi_adaptive if strategy == "adaptive" else Q.plan_multi
-                    subs, S = planner(F, emu, budget=B, exclude=(q,))
+                    ipc_narrow = sel.choose([Q.concept_local(f.concept) for f in F]) if arm in ("c2", "c3") else None
+                    splitter = (lambda fs: Q.core_split_weighted(fs, jw)) if arm == "c3" else None
+                    subs, S = planner(F, emu, budget=B, exclude=(q,), ipc_narrow=ipc_narrow or None, splitter=splitter)
                     rows.append({"q": q, "hit": len(set(S) & gt[q]), "gt": len(gt[q]), "success": bool(S),
                                  "hit_ids": "|".join(sorted(set(S) & gt[q])),
                                  "size": len(S) if S else None, "no_facet": False, "runs": len(subs),
@@ -167,8 +183,10 @@ def main(argv=None) -> int:
             print(json.dumps(results[-1], ensure_ascii=False), f"t={time.time() - t0:.0f}s", flush=True)
 
     params = {"df_max": df_maxes, "ADAPT_TRIES": Q.ADAPT_TRIES, "lang": langs, "translations_sha256": tr.sha if tr else None, "strategy": strategies, "MULTI_MAX_RUNS": Q.MULTI_MAX_RUNS, "PAIR_MAX": Q.PAIR_MAX, "m_min": m_mins, "a_n": a_ns, "MAX_RUNS": Q.MAX_RUNS, "DF_MIN": Q.DF_MIN, "DF_MAX_FRAC": Q.DF_MAX_FRAC,
-              "MAX_FACETS": Q.MAX_FACETS, "SYN_MAX": Q.SYN_MAX}
-    out = {"plan": "PLAN-006 T4", "split": a.split, "queries": len(queries),
+              "MAX_FACETS": Q.MAX_FACETS, "SYN_MAX": Q.SYN_MAX,
+              "IPC_MIN_DOCS": Q.IPC_MIN_DOCS, "IPC_TOP": Q.IPC_TOP, "C3_LEARN_FRAC": Q.C3_LEARN_FRAC, "C3_PRIOR": Q.C3_PRIOR}
+    out = {"plan": "PLAN-006 T4", "split": a.split, "subset": a.subset, "queries": len(queries),
+           "c3_learn_queries": len(learn) if a.split == "train" else "train 전체",
            "denominator": "코퍼스 안 심사관 인용(qrel_examiner) — 질의별 회수율의 분모",
            "bundle": bundle(params), "results": results}
     a.out.parent.mkdir(parents=True, exist_ok=True)
