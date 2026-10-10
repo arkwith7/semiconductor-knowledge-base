@@ -7,9 +7,12 @@ a′ 는 "LLM 번역 전처리 + 규칙 검색식 생성" 이다 — "LLM 을 �
 재현성은 같은 설정의 재호출이 아니라 **산출물 동결**로 얻는다(§3.3′ A3). Opus 5.5 는 temperature 를 받지 않고
 thinking 을 끌 수 없으므로 고정하는 것은 모델·effort·토큰 상한·프롬프트·배치 크기다.
 
-호출 경로 (2026-10-10 사용자 결정): **Claude in Amazon Bedrock (Mantle)** — `AnthropicBedrockMantle` 이 AWS 자격 증명
-체인(환경변수 키 → 프로파일·SSO → 역할)으로 SigV4 서명한다. 비밀은 코드에 없다. 이 경로는
-- 구조화 출력(`output_config.format`)을 지원하지 않는다 → JSON 은 프롬프트로 요구하고 여기서 검증한다.
+호출 경로 (2026-10-10 사용자 결정): **Amazon Bedrock `bedrock-runtime` · 전역 교차 리전 추론 프로파일**
+(`AnthropicBedrock` · `global.anthropic.claude-opus-5-5`). 처음엔 Mantle(`AnthropicBedrockMantle`)로 정했으나
+서울 Mantle 엔드포인트에서 이 계정은 모든 모델이 404 였고, bedrock-runtime 전역 프로파일은 Opus 5.5 로 응답했다
+(응답 model=claude-opus-5-5 · effort 수용). AWS 자격 증명 체인(환경변수 키 → 프로파일·SSO → 역할)으로 서명하며
+비밀은 코드에 없다. 이 경로에서는
+- 구조화 출력을 쓰지 않는다 → JSON 은 프롬프트로 요구하고 여기서 검증한다.
 - 서버측 fallback 을 지원하지 않으며 **쓰지도 않는다** — 다른 모델의 번역이 섞이면 검색 결과에 모델 차이가 섞인다.
 실패 처리: 일시 오류(429·5xx·연결)는 SDK 가 같은 모델로 재시도(MAX_RETRIES) · 권한·모델 접근·요청 형식 오류는 중단 ·
 거절·형식이 깨진 출력은 그 배치의 표현을 실패 목록에 적고 계속한다 · 모델을 바꿔야 하면 새 번역 버전으로 만든다.
@@ -31,7 +34,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 OUT = ROOT / "data" / "queries" / "t4_term_translations_v1.jsonl"
 MANIFEST = ROOT / "data" / "queries" / "t4_term_translations_v1.manifest.json"
-MODEL = "anthropic.claude-opus-5-5"
+MODEL = "global.anthropic.claude-opus-5-5"
 MAX_RETRIES = 3
 # 설정 확인용 — 데이터에서 뽑지 않은 일반 기술어(코퍼스·청구항 원문 아님)
 PROBE_TERMS = ["측벽 보호막", "고종횡비 접촉홀", "플라즈마 식각 챔버", "터널 산화막", "반사방지막"]
@@ -121,14 +124,14 @@ def parse_items(text: str, asked: list[str]) -> dict[str, list[str]]:
 def make_client():
     import os
 
-    from anthropic import AnthropicBedrockMantle
+    from anthropic import AnthropicBedrock
     from dotenv import load_dotenv
 
     load_dotenv(ROOT / ".env")
     region = os.environ.get("AWS_REGION") or os.environ.get("AWS_DEFAULT_REGION")
     if not region:
         raise SystemExit("ERROR: AWS_REGION 이 없다 — 실행 환경에 리전을 지정한다")
-    return AnthropicBedrockMantle(aws_region=region, max_retries=MAX_RETRIES)
+    return AnthropicBedrock(aws_region=region, max_retries=MAX_RETRIES)
 
 
 def call(client, batch: list[str]):
@@ -204,7 +207,7 @@ def main(argv=None) -> int:
     MANIFEST.write_text(json.dumps({
         "file": OUT.name, "sha256": hashlib.sha256(OUT.read_bytes()).hexdigest(), "rows": len(rows),
         "with_translation": sum(1 for r in rows if r["en"]),
-        "model": MODEL, "endpoint": "Claude in Amazon Bedrock (Mantle) · AnthropicBedrockMantle", "fallback": "none",
+        "model": MODEL, "endpoint": "Amazon Bedrock bedrock-runtime · global 교차 리전 추론 · AnthropicBedrock", "fallback": "none",
         "served_models": sorted({r["served_model"] for r in rows}), "effort": EFFORT,
         "max_tokens": MAX_TOKENS, "batch": BATCH, "prompt_sha256": prompt_sha(),
         "sdk": f"anthropic=={anthropic.__version__}", "max_retries": MAX_RETRIES,
