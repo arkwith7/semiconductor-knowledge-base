@@ -136,3 +136,27 @@ def test_multi_run_cap():
 def test_multi_empty_rejected():
     with pytest.raises(ValueError):
         Q.plan_multi([], SetEmu({}), budget=200, exclude=())
+
+
+def test_translations_kept_separate_and_ored_after_synonyms():
+    f = Q.Facet(1, "측벽 보호막", 50, synonyms=["sidewall spacer"], translations=["sidewall protective film", "sidewall spacer"])
+    assert f.clause() == '(측벽 보호막+"sidewall spacer"+"sidewall protective film")'
+
+
+def test_translations_file_sha_mismatch_stops(tmp_path):
+    p = tmp_path / "t.jsonl"; p.write_text('{"ko": "a", "en": ["b"]}\n', encoding="utf-8")
+    m = tmp_path / "m.json"; m.write_text('{"sha256": "' + "0" * 64 + '"}', encoding="utf-8")
+    with pytest.raises(SystemExit):
+        Q.Translations(p, m)
+
+
+def test_translations_drop_absent_and_too_broad_candidates(tmp_path):
+    import hashlib
+    p = tmp_path / "t.jsonl"; p.write_text('{"ko": "a", "en": ["rare", "common", "absent"]}\n', encoding="utf-8")
+    m = tmp_path / "m.json"; m.write_text('{"sha256": "' + hashlib.sha256(p.read_bytes()).hexdigest() + '"}', encoding="utf-8")
+    class DFake:
+        n = 100
+        def __call__(self, t):
+            return {"rare": 3, "common": 90, "absent": 0}[t]
+    F = Q.Translations(p, m).apply([Q.Facet(1, "a", 10)], DFake())
+    assert F[0].translations == ["rare"]

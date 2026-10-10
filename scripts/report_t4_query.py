@@ -95,6 +95,7 @@ def main(argv=None) -> int:
     ap.add_argument("--a-n", default="6", help="a′ 키워드 수 · 쉼표로 여러 값 = train 격자")
     ap.add_argument("--params", type=Path, help="dev 실행에 필요한 동결 매개변수 JSON")
     ap.add_argument("--strategy", default="single", help="single · multi(R1) · 쉼표로 둘 다")
+    ap.add_argument("--lang", default="ko", help="ko(번역 없음) · tr(R2 공통 번역) · 쉼표로 둘 다")
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--rows-out", type=Path)
@@ -125,7 +126,10 @@ def main(argv=None) -> int:
     results, rows_all = [], []
     t0 = time.time()
     strategies = a.strategy.split(",")
-    for strategy in strategies:
+    langs = a.lang.split(",")
+    tr = Q.Translations() if "tr" in langs else None
+    for lang in langs:
+     for strategy in strategies:
       for arm in arms:
         for a_n in (a_ns if arm == "a_prime" else [None]):
             for m_min in (m_mins if strategy == "single" else [None]):
@@ -133,6 +137,8 @@ def main(argv=None) -> int:
                     rows = []
                     for q in queries:
                         F = facets_for(arm, claim.get(q) or "", df, lex, a_n or 0)
+                        if lang == "tr":
+                            F = tr.apply(F, df)
                         if not F:
                             rows.append({"q": q, "hit": 0, "gt": len(gt[q]), "success": False, "size": None, "no_facet": True, "runs": 0})
                             continue
@@ -147,12 +153,12 @@ def main(argv=None) -> int:
                                          "size": len(S) if S else None, "no_facet": False, "runs": len(subs),
                                          "facets": len(F), "accepted": sum(x.accepted for x in subs),
                                          "accepted_roles": "|".join(x.role for x in subs if x.accepted)})
-                    cfg = {"strategy": strategy, "arm": arm, "budget": B, "m_min": m_min, "a_n": a_n}
+                    cfg = {"lang": lang, "strategy": strategy, "arm": arm, "budget": B, "m_min": m_min, "a_n": a_n}
                     results.append({**cfg, **evaluate(rows)})
                     rows_all += [{**cfg, **r} for r in rows]
                     print(json.dumps(results[-1], ensure_ascii=False), f"t={time.time() - t0:.0f}s", flush=True)
 
-    params = {"strategy": strategies, "MULTI_MAX_RUNS": Q.MULTI_MAX_RUNS, "PAIR_MAX": Q.PAIR_MAX, "m_min": m_mins, "a_n": a_ns, "MAX_RUNS": Q.MAX_RUNS, "DF_MIN": Q.DF_MIN, "DF_MAX_FRAC": Q.DF_MAX_FRAC,
+    params = {"lang": langs, "translations_sha256": tr.sha if tr else None, "strategy": strategies, "MULTI_MAX_RUNS": Q.MULTI_MAX_RUNS, "PAIR_MAX": Q.PAIR_MAX, "m_min": m_mins, "a_n": a_ns, "MAX_RUNS": Q.MAX_RUNS, "DF_MIN": Q.DF_MIN, "DF_MAX_FRAC": Q.DF_MAX_FRAC,
               "MAX_FACETS": Q.MAX_FACETS, "SYN_MAX": Q.SYN_MAX}
     out = {"plan": "PLAN-006 T4", "split": a.split, "queries": len(queries),
            "denominator": "코퍼스 안 심사관 인용(qrel_examiner) — 질의별 회수율의 분모",

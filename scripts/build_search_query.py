@@ -136,10 +136,11 @@ class Facet:
     term: str
     df: int
     concept: str | None = None
-    synonyms: list[str] = field(default_factory=list)
+    synonyms: list[str] = field(default_factory=list)       # 온톨로지 표면형(검증된 개념명·별칭 · 개념 IRI 에 연결)
+    translations: list[str] = field(default_factory=list)   # 공통 번역 후보(동결 파일 · LLM 산출) — 출처가 다르므로 따로 둔다
 
     def clause(self) -> str:
-        alts = [self.term] + self.synonyms
+        alts = [self.term] + self.synonyms + [t for t in self.translations if t not in self.synonyms]
         q = [f'"{a}"' if (" " in a and not re.search(r"[가-힣]", a)) else a for a in alts]
         return q[0] if len(q) == 1 else "(" + "+".join(q) + ")"
 
@@ -316,3 +317,31 @@ def plan_multi(facets: list[Facet], emu, *, budget: int, exclude: tuple[str, ...
             union = merged
         out.append(SubQuery(role, ids, q, len(res), narrowed, ok))
     return out, union
+
+
+# ── R2 공통 번역 (a′·c 공통 · 동결 파일) ───────────────────────────────────────────
+TRANSLATIONS = ROOT / "data" / "queries" / "t4_term_translations_v1.jsonl"
+TRANSLATIONS_MANIFEST = ROOT / "data" / "queries" / "t4_term_translations_v1.manifest.json"
+
+
+class Translations:
+    """동결 번역 파일. sha 가 매니페스트와 다르면 중단한다 — 다른 번역으로 같은 이름의 결과를 내지 않기 위해."""
+
+    def __init__(self, path: Path = TRANSLATIONS, manifest: Path = TRANSLATIONS_MANIFEST):
+        import hashlib
+        m = json.loads(Path(manifest).read_text(encoding="utf-8"))
+        got = hashlib.sha256(Path(path).read_bytes()).hexdigest()
+        if got != m["sha256"]:
+            raise SystemExit(f"ERROR: 번역 파일 sha 가 매니페스트와 다르다\n  매니페스트 {m['sha256']}\n  실측 {got}")
+        self.sha = got
+        self.ko2en = {}
+        for line in Path(path).read_text(encoding="utf-8").splitlines():
+            r = json.loads(line)
+            self.ko2en[r["ko"]] = r["en"]
+
+    def apply(self, facets: list[Facet], df: "DF") -> list[Facet]:
+        """번역 후보를 붙인다. 코퍼스에 없거나(df 0) 패싯 상한보다 넓은 후보는 버린다 — 넓은 영어 단어가
+        수천 건 후보 문제를 되풀이하지 않게(패싯과 같은 규칙 · 정답을 보지 않는다)."""
+        for f in facets:
+            f.translations = [t for t in self.ko2en.get(f.term, []) if 1 <= df(f'"{t}"' if " " in t else t) <= DF_MAX_FRAC * df.n]
+        return facets
