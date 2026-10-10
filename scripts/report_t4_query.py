@@ -145,11 +145,13 @@ def main(argv=None) -> int:
                         if strategy == "single":
                             hist, best, S = Q.adjust(F, emu, budget=B, m_min=m_min, ipc_codes=None, exclude=(q,))
                             rows.append({"q": q, "hit": len(set(S) & gt[q]), "gt": len(gt[q]), "success": best is not None,
+                                         "hit_ids": "|".join(sorted(set(S) & gt[q])),
                                          "size": best.size if best else None, "no_facet": False, "runs": len(hist),
                                          "facets": len(F), "k_final": best.k if best else None})
                         else:
                             subs, S = Q.plan_multi(F, emu, budget=B, exclude=(q,))
                             rows.append({"q": q, "hit": len(set(S) & gt[q]), "gt": len(gt[q]), "success": bool(S),
+                                         "hit_ids": "|".join(sorted(set(S) & gt[q])),
                                          "size": len(S) if S else None, "no_facet": False, "runs": len(subs),
                                          "facets": len(F), "accepted": sum(x.accepted for x in subs),
                                          "accepted_roles": "|".join(x.role for x in subs if x.accepted)})

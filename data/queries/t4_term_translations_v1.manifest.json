@@ -18,5 +18,9 @@
  "failed_terms": 0,
  "created_at": "2026-10-10",
  "inputs": "train·dev 질의 청구항 1항에서 뽑은 명사 복합어 표현(공개 텍스트)만 · 봉인 분할 제외",
- "role": "a′·c 공통 번역 전처리 — 이 파일을 쓰는 a′ 는 'LLM 번역 전처리 + 규칙 검색식 생성' 이다"
+ "role": "a′·c 공통 번역 전처리 — 이 파일을 쓰는 a′ 는 'LLM 번역 전처리 + 규칙 검색식 생성' 이다",
+ "aws_region": "ap-northeast-2",
+ "inference_profile": "global (교차 리전 추론)",
+ "credential_source": "AWS 자격 증명 체인 — .env 의 IAM 사용자 키(값은 기록하지 않음)",
+ "request_model": "global.anthropic.claude-opus-5-5"
 }
