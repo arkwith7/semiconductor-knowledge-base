@@ -197,10 +197,20 @@ def main(argv=None) -> int:
     ap.add_argument("--subset", default="all", choices=["all", "learn", "check"])
     ap.add_argument("--budget", type=int, default=200)
     ap.add_argument("--limit", type=int, default=0)
+    ap.add_argument("--freeze", type=Path, help="dev 실행에 필요한 동결 명세")
     ap.add_argument("--out", type=Path, required=True)
     a = ap.parse_args(argv)
     if a.split in SEALED:
         raise SystemExit("ERROR: 봉인 분할은 열 수 없다")
+    spec = None
+    if a.split == "dev":
+        if not a.freeze or not a.freeze.exists():
+            raise SystemExit("ERROR: dev 는 동결 명세(--freeze) 없이 돌지 않는다")
+        spec = json.loads(a.freeze.read_text(encoding="utf-8"))
+        R.verify_freeze(spec)
+        want = spec["llm"]["prompt_sha256"][a.arm]
+        if prompt_sha(a.arm) != want:
+            raise SystemExit(f"ERROR: 프롬프트가 동결값과 다르다 ({a.arm})")
 
     smap = load_split()
     gt = R.load_gt(a.split, smap)
@@ -219,8 +229,12 @@ def main(argv=None) -> int:
     if a.arm == "d":
         sel = Q.IpcSelector(C, exclude_docs={q for q, s in smap.items() if s != "train"})
         train_gt = R.load_gt("train", smap)
-        learn_gt = {q: v for q, v in train_gt.items() if q in learn} if a.split == "train" else train_gt
-        jw = Q.JudgmentWeights(learn_gt, {d: set(v) for d, v in zip(C["doc_id"], C["concepts"]) if v is not None})
+        if a.split == "train":
+            learn_gt = {q: v for q, v in train_gt.items() if q in learn}
+            jw = Q.JudgmentWeights(learn_gt, {d: set(v) for d, v in zip(C["doc_id"], C["concepts"]) if v is not None})
+        else:
+            w = spec["resources"]["c3_weights"]
+            jw = Q.load_weights(ROOT / w["path"], w["sha256"])
 
     from dotenv import load_dotenv
     import os

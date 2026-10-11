@@ -53,6 +53,24 @@ def bundle(params: dict) -> dict:
     }
 
 
+def verify_freeze(spec: dict) -> None:
+    """동결 명세의 자원 해시와 실제 파일이 같은지 확인한다 — 다르면 dev 를 돌리지 않는다."""
+    import build_search_query as Qm
+    checks = {
+        "corpus": ir_corpus.manifest()["sha256"],
+        "split": sha(ROOT / "benchmark" / "assets" / "split.csv"),
+        "qrel": sha(QREL),
+        "concordance": sha(K.CONCORDANCE),
+        "translations": sha(Qm.TRANSLATIONS),
+        "c3_weights": sha(ROOT / spec["resources"]["c3_weights"]["path"]),
+        "concept_mapping": sha(ROOT / "mappings" / "concept_mapping.json"),
+        "aliases": sha(ROOT / "mappings" / "abox_term_aliases.json"),
+    }
+    bad = {k: (spec["resources"][k]["sha256"], v) for k, v in checks.items() if spec["resources"][k]["sha256"] != v}
+    if bad:
+        raise SystemExit(f"ERROR: 동결 명세와 다른 자원: {bad}")
+
+
 def load_gt(split: str, smap: dict[str, str]) -> dict[str, set[str]]:
     gt: dict[str, set[str]] = {}
     with QREL.open(encoding="utf-8") as fh:
@@ -111,8 +129,10 @@ def main(argv=None) -> int:
     if a.split == "dev":
         if not a.params or not a.params.exists():
             raise SystemExit("ERROR: dev 는 train 에서 정한 동결 매개변수(--params) 없이 돌지 않는다")
-        p = json.loads(a.params.read_text(encoding="utf-8"))
-        m_mins, a_ns = [p["m_min"]], [p["a_n"]]
+        spec = json.loads(a.params.read_text(encoding="utf-8"))
+        verify_freeze(spec)
+        m_mins, a_ns = [spec["rule"]["m_min"]], [spec["rule"]["a_n"]]
+        a.df_max = str(spec["rule"]["df_max"])
     else:
         m_mins = [int(x) for x in a.m_min.split(",")]
         a_ns = [int(x) for x in a.a_n.split(",")]
@@ -136,9 +156,12 @@ def main(argv=None) -> int:
         sel = Q.IpcSelector(C, exclude_docs={q for q, s in smap.items() if s != "train"})
     if "c3" in arms:
         train_gt = load_gt("train", smap)
-        learn_gt = {q: v for q, v in train_gt.items() if q in learn} if a.split == "train" else train_gt
-        dcon = {d: set(v) for d, v in zip(C["doc_id"], C["concepts"]) if v is not None}
-        jw = Q.JudgmentWeights(learn_gt, dcon)
+        if a.split == "train":
+            learn_gt = {q: v for q, v in train_gt.items() if q in learn}
+            jw = Q.JudgmentWeights(learn_gt, {d: set(v) for d, v in zip(C["doc_id"], C["concepts"]) if v is not None})
+        else:   # dev: train 전체로 배워 동결한 가중 파일만 읽는다
+            w = spec["resources"]["c3_weights"]
+            jw = Q.load_weights(ROOT / w["path"], w["sha256"])
 
     results, rows_all = [], []
     t0 = time.time()

@@ -482,3 +482,23 @@ class JudgmentWeights:
 def core_split_weighted(facets: list[Facet], jw: JudgmentWeights) -> tuple[list[Facet], list[Facet]]:
     by = sorted(facets, key=lambda f: (-jw.weight(f), f.df, f.seq))
     return by[:2], by[2:]
+
+
+def save_weights(jw: JudgmentWeights, path: Path, meta: dict) -> str:
+    """c3 가중을 결정적 JSON 으로 동결한다. 반환: sha256."""
+    import hashlib
+    body = {"meta": meta, "prior": list(C3_PRIOR), "default": jw.default, "w": {k: jw.w[k] for k in sorted(jw.w)}}
+    text = json.dumps(body, ensure_ascii=False, indent=1, sort_keys=True) + "\n"
+    Path(path).write_text(text, encoding="utf-8")
+    return hashlib.sha256(text.encode()).hexdigest()
+
+
+def load_weights(path: Path, sha: str | None = None) -> JudgmentWeights:
+    import hashlib
+    raw = Path(path).read_bytes()
+    if sha and hashlib.sha256(raw).hexdigest() != sha:
+        raise SystemExit(f"ERROR: c3 가중 파일 sha 가 동결값과 다르다: {path}")
+    body = json.loads(raw)
+    jw = JudgmentWeights.__new__(JudgmentWeights)
+    jw.w, jw.default = body["w"], body["default"]
+    return jw
