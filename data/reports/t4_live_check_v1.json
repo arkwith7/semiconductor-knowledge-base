@@ -1,0 +1,1569 @@
+{
+ "name": "T4 라이브 KIPRIS 표본 확인 v1",
+ "seed": 20261012,
+ "operation": "getAdvancedSearch",
+ "page_rows": 500,
+ "full_fetch_max": 1500,
+ "strata": {
+  "accepted": 6,
+  "rejected_over_budget": 4,
+  "zero_result": 3,
+  "phrase": 3,
+  "not": 2,
+  "english": 3,
+  "ipc": 3
+ },
+ "logs": [
+  "/home/arkwith/Dev/sdkb/data/queries/t4_dev_v1/dev_b.jsonl",
+  "/home/arkwith/Dev/sdkb/data/queries/t4_dev_v1/dev_d.jsonl"
+ ],
+ "corpus_sha256": "d856269392bdad5222cf5f87cadade0f66b6c9d842c6205c208845f4fc7be51e",
+ "results": [
+  {
+   "stratum": "accepted",
+   "arm": "b",
+   "query": "(게이트+gate) * (절연+insulat+dielectric) * (수소+hydrogen) * (반도체+semiconductor) * (농도+concentration) * (제1+first) * (제2+second)",
+   "ipc": [],
+   "logged_size": 30,
+   "local_size": 31,
+   "local_kr": 30,
+   "run_at": "2026-10-12T23:06:51+0900",
+   "live_word": {
+    "params_sent": {
+     "word": "(게이트+gate) * (절연+insulat+dielectric) * (수소+hydrogen) * (반도체+semiconductor) * (농도+concentration) * (제1+first) * (제2+second)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 500,
+     "pageNo": 1
+    },
+    "total": 27780,
+    "fetched": 0,
+    "pages": 0
+   },
+   "live_claims": {
+    "params_sent": {
+     "claimScope": "(게이트+gate) * (절연+insulat+dielectric) * (수소+hydrogen) * (반도체+semiconductor) * (농도+concentration) * (제1+first) * (제2+second)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 659,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_abstract": {
+    "params_sent": {
+     "astrtCont": "(게이트+gate) * (절연+insulat+dielectric) * (수소+hydrogen) * (반도체+semiconductor) * (농도+concentration) * (제1+first) * (제2+second)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 44,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_title": {
+    "params_sent": {
+     "inventionTitle": "(게이트+gate) * (절연+insulat+dielectric) * (수소+hydrogen) * (반도체+semiconductor) * (농도+concentration) * (제1+first) * (제2+second)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 0,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "cross": "라이브 결과를 모두 받지 않음(총건수 > 1500 또는 실패) — 교차 판정 안 함"
+  },
+  {
+   "stratum": "accepted",
+   "arm": "b",
+   "query": "(부품 + part + component) * (세정 + clean) * (침지 + 액조 + 수조 + immers + bath + tank) * (반도체 + 기판 + substrate + wafer)",
+   "ipc": [],
+   "logged_size": 4,
+   "local_size": 5,
+   "local_kr": 4,
+   "run_at": "2026-10-12T23:07:30+0900",
+   "live_word": {
+    "params_sent": {
+     "word": "(부품 + part + component) * (세정 + clean) * (침지 + 액조 + 수조 + immers + bath + tank) * (반도체 + 기판 + substrate + wafer)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 500,
+     "pageNo": 1
+    },
+    "total": 15687,
+    "fetched": 0,
+    "pages": 0
+   },
+   "live_claims": {
+    "params_sent": {
+     "claimScope": "(부품 + part + component) * (세정 + clean) * (침지 + 액조 + 수조 + immers + bath + tank) * (반도체 + 기판 + substrate + wafer)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 69,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_abstract": {
+    "params_sent": {
+     "astrtCont": "(부품 + part + component) * (세정 + clean) * (침지 + 액조 + 수조 + immers + bath + tank) * (반도체 + 기판 + substrate + wafer)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 9,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_title": {
+    "params_sent": {
+     "inventionTitle": "(부품 + part + component) * (세정 + clean) * (침지 + 액조 + 수조 + immers + bath + tank) * (반도체 + 기판 + substrate + wafer)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 2,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "cross": "라이브 결과를 모두 받지 않음(총건수 > 1500 또는 실패) — 교차 판정 안 함"
+  },
+  {
+   "stratum": "accepted",
+   "arm": "d",
+   "query": "(플렉서블+flexible+유연+plastic+플라스틱+polyimide) * (PECVD+\"plasma enhanced\"+\"plasma-enhanced\"+\"chemical vapor\"+증착)",
+   "ipc": [],
+   "logged_size": 81,
+   "local_size": 82,
+   "local_kr": 79,
+   "run_at": "2026-10-12T23:07:41+0900",
+   "live_word": {
+    "params_sent": {
+     "word": "(플렉서블+flexible+유연+plastic+플라스틱+polyimide) * (PECVD+\"plasma enhanced\"+\"plasma-enhanced\"+\"chemical vapor\"+증착)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 500,
+     "pageNo": 1
+    },
+    "total": 135858,
+    "fetched": 0,
+    "pages": 0
+   },
+   "live_claims": {
+    "params_sent": {
+     "claimScope": "(플렉서블+flexible+유연+plastic+플라스틱+polyimide) * (PECVD+\"plasma enhanced\"+\"plasma-enhanced\"+\"chemical vapor\"+증착)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 4923,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_abstract": {
+    "params_sent": {
+     "astrtCont": "(플렉서블+flexible+유연+plastic+플라스틱+polyimide) * (PECVD+\"plasma enhanced\"+\"plasma-enhanced\"+\"chemical vapor\"+증착)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 1192,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_title": {
+    "params_sent": {
+     "inventionTitle": "(플렉서블+flexible+유연+plastic+플라스틱+polyimide) * (PECVD+\"plasma enhanced\"+\"plasma-enhanced\"+\"chemical vapor\"+증착)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 106,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "cross": "라이브 결과를 모두 받지 않음(총건수 > 1500 또는 실패) — 교차 판정 안 함"
+  },
+  {
+   "stratum": "accepted",
+   "arm": "d",
+   "query": "(정전기+대전+\"static electricity\"+\"static charge\"+\"charge buildup\")*(기판+substrate+wafer)*(이오나이저+ionizer+이온 발생+\"ion generat\"+이온화+ioniz)",
+   "ipc": [],
+   "logged_size": 29,
+   "local_size": 30,
+   "local_kr": 30,
+   "run_at": "2026-10-12T23:07:48+0900",
+   "live_word": {
+    "params_sent": {
+     "word": "(정전기+대전+\"static electricity\"+\"static charge\"+\"charge buildup\")*(기판+substrate+wafer)*(이오나이저+ionizer+이온 발생+\"ion generat\"+이온화+ioniz)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 500,
+     "pageNo": 1
+    },
+    "total": 60506,
+    "fetched": 0,
+    "pages": 0
+   },
+   "live_claims": {
+    "params_sent": {
+     "claimScope": "(정전기+대전+\"static electricity\"+\"static charge\"+\"charge buildup\")*(기판+substrate+wafer)*(이오나이저+ionizer+이온 발생+\"ion generat\"+이온화+ioniz)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 433,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_abstract": {
+    "params_sent": {
+     "astrtCont": "(정전기+대전+\"static electricity\"+\"static charge\"+\"charge buildup\")*(기판+substrate+wafer)*(이오나이저+ionizer+이온 발생+\"ion generat\"+이온화+ioniz)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 170,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_title": {
+    "params_sent": {
+     "inventionTitle": "(정전기+대전+\"static electricity\"+\"static charge\"+\"charge buildup\")*(기판+substrate+wafer)*(이오나이저+ionizer+이온 발생+\"ion generat\"+이온화+ioniz)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 2,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "cross": "라이브 결과를 모두 받지 않음(총건수 > 1500 또는 실패) — 교차 판정 안 함"
+  },
+  {
+   "stratum": "accepted",
+   "arm": "b",
+   "query": "(\"hybrid bonding\" + 하이브리드 본딩 + \"bonded semiconductor\" + \"bonding layer\" + 본딩층 + \"bonding interface\" + 본딩 인터페이스) * (contact + 컨택 + pad + 패드 + 전도)",
+   "ipc": [],
+   "logged_size": 87,
+   "local_size": 88,
+   "local_kr": 86,
+   "run_at": "2026-10-12T23:07:55+0900",
+   "live_word": {
+    "params_sent": {
+     "word": "(\"hybrid bonding\" + 하이브리드 본딩 + \"bonded semiconductor\" + \"bonding layer\" + 본딩층 + \"bonding interface\" + 본딩 인터페이스) * (contact + 컨택 + pad + 패드 + 전도)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 500,
+     "pageNo": 1
+    },
+    "total": 20067,
+    "fetched": 0,
+    "pages": 0
+   },
+   "live_claims": {
+    "params_sent": {
+     "claimScope": "(\"hybrid bonding\" + 하이브리드 본딩 + \"bonded semiconductor\" + \"bonding layer\" + 본딩층 + \"bonding interface\" + 본딩 인터페이스) * (contact + 컨택 + pad + 패드 + 전도)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 883,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_abstract": {
+    "params_sent": {
+     "astrtCont": "(\"hybrid bonding\" + 하이브리드 본딩 + \"bonded semiconductor\" + \"bonding layer\" + 본딩층 + \"bonding interface\" + 본딩 인터페이스) * (contact + 컨택 + pad + 패드 + 전도)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 179,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_title": {
+    "params_sent": {
+     "inventionTitle": "(\"hybrid bonding\" + 하이브리드 본딩 + \"bonded semiconductor\" + \"bonding layer\" + 본딩층 + \"bonding interface\" + 본딩 인터페이스) * (contact + 컨택 + pad + 패드 + 전도)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 8,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "cross": "라이브 결과를 모두 받지 않음(총건수 > 1500 또는 실패) — 교차 판정 안 함"
+  },
+  {
+   "stratum": "accepted",
+   "arm": "d",
+   "query": "(인산+phosphoric) * (실리콘+silicon+실란+silane) * (질화+nitride) * (식각+etch) * (암모늄+ammonium)",
+   "ipc": [],
+   "logged_size": 84,
+   "local_size": 85,
+   "local_kr": 83,
+   "run_at": "2026-10-12T23:08:06+0900",
+   "live_word": {
+    "params_sent": {
+     "word": "(인산+phosphoric) * (실리콘+silicon+실란+silane) * (질화+nitride) * (식각+etch) * (암모늄+ammonium)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 500,
+     "pageNo": 1
+    },
+    "total": 3865,
+    "fetched": 0,
+    "pages": 0
+   },
+   "live_claims": {
+    "params_sent": {
+     "claimScope": "(인산+phosphoric) * (실리콘+silicon+실란+silane) * (질화+nitride) * (식각+etch) * (암모늄+ammonium)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 155,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_abstract": {
+    "params_sent": {
+     "astrtCont": "(인산+phosphoric) * (실리콘+silicon+실란+silane) * (질화+nitride) * (식각+etch) * (암모늄+ammonium)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 9,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_title": {
+    "params_sent": {
+     "inventionTitle": "(인산+phosphoric) * (실리콘+silicon+실란+silane) * (질화+nitride) * (식각+etch) * (암모늄+ammonium)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 0,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "cross": "라이브 결과를 모두 받지 않음(총건수 > 1500 또는 실패) — 교차 판정 안 함"
+  },
+  {
+   "stratum": "rejected_over_budget",
+   "arm": "d",
+   "query": "(lift+리프트+승강+높이+height) * (냉각+cooling) * (지지+support+stage+스테이지)",
+   "ipc": [],
+   "logged_size": 126,
+   "local_size": 127,
+   "local_kr": 125,
+   "run_at": "2026-10-12T23:08:14+0900",
+   "live_word": {
+    "params_sent": {
+     "word": "(lift+리프트+승강+높이+height) * (냉각+cooling) * (지지+support+stage+스테이지)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 500,
+     "pageNo": 1
+    },
+    "total": 188912,
+    "fetched": 0,
+    "pages": 0
+   },
+   "live_claims": {
+    "params_sent": {
+     "claimScope": "(lift+리프트+승강+높이+height) * (냉각+cooling) * (지지+support+stage+스테이지)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 6741,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_abstract": {
+    "params_sent": {
+     "astrtCont": "(lift+리프트+승강+높이+height) * (냉각+cooling) * (지지+support+stage+스테이지)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 1016,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_title": {
+    "params_sent": {
+     "inventionTitle": "(lift+리프트+승강+높이+height) * (냉각+cooling) * (지지+support+stage+스테이지)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 0,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "cross": "라이브 결과를 모두 받지 않음(총건수 > 1500 또는 실패) — 교차 판정 안 함"
+  },
+  {
+   "stratum": "rejected_over_budget",
+   "arm": "b",
+   "query": "(스퍼터+sputter) * (Li+Na+K+Mg+Ca+Sr+Ba+sodium+potassium+magnesium+calcium+나트륨+마그네슘+칼슘)",
+   "ipc": [],
+   "logged_size": 361,
+   "local_size": 361,
+   "local_kr": 182,
+   "run_at": "2026-10-12T23:08:29+0900",
+   "live_word": {
+    "params_sent": {
+     "word": "(스퍼터+sputter) * (Li+Na+K+Mg+Ca+Sr+Ba+sodium+potassium+magnesium+calcium+나트륨+마그네슘+칼슘)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 500,
+     "pageNo": 1
+    },
+    "total": 170628,
+    "fetched": 0,
+    "pages": 0
+   },
+   "live_claims": {
+    "params_sent": {
+     "claimScope": "(스퍼터+sputter) * (Li+Na+K+Mg+Ca+Sr+Ba+sodium+potassium+magnesium+calcium+나트륨+마그네슘+칼슘)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 3137,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_abstract": {
+    "params_sent": {
+     "astrtCont": "(스퍼터+sputter) * (Li+Na+K+Mg+Ca+Sr+Ba+sodium+potassium+magnesium+calcium+나트륨+마그네슘+칼슘)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 320,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_title": {
+    "params_sent": {
+     "inventionTitle": "(스퍼터+sputter) * (Li+Na+K+Mg+Ca+Sr+Ba+sodium+potassium+magnesium+calcium+나트륨+마그네슘+칼슘)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 25,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "cross": "라이브 결과를 모두 받지 않음(총건수 > 1500 또는 실패) — 교차 판정 안 함"
+  },
+  {
+   "stratum": "rejected_over_budget",
+   "arm": "b",
+   "query": "초소수성+superhydrophobic+\"super hydrophobic\"+초발수+superhydrophobicity+\"super-hydrophobic\"+소수성+hydrophobic+발수+\"water repellent\"",
+   "ipc": [],
+   "logged_size": 197,
+   "local_size": 198,
+   "local_kr": 195,
+   "run_at": "2026-10-12T23:08:40+0900",
+   "live_word": {
+    "params_sent": {
+     "word": "초소수성+superhydrophobic+\"super hydrophobic\"+초발수+superhydrophobicity+\"super-hydrophobic\"+소수성+hydrophobic+발수+\"water repellent\"",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 500,
+     "pageNo": 1
+    },
+    "total": 176933,
+    "fetched": 0,
+    "pages": 0
+   },
+   "live_claims": {
+    "params_sent": {
+     "claimScope": "초소수성+superhydrophobic+\"super hydrophobic\"+초발수+superhydrophobicity+\"super-hydrophobic\"+소수성+hydrophobic+발수+\"water repellent\"",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 28413,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_abstract": {
+    "params_sent": {
+     "astrtCont": "초소수성+superhydrophobic+\"super hydrophobic\"+초발수+superhydrophobicity+\"super-hydrophobic\"+소수성+hydrophobic+발수+\"water repellent\"",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 13809,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_title": {
+    "params_sent": {
+     "inventionTitle": "초소수성+superhydrophobic+\"super hydrophobic\"+초발수+superhydrophobicity+\"super-hydrophobic\"+소수성+hydrophobic+발수+\"water repellent\"",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 3176,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "cross": "라이브 결과를 모두 받지 않음(총건수 > 1500 또는 실패) — 교차 판정 안 함"
+  },
+  {
+   "stratum": "rejected_over_budget",
+   "arm": "b",
+   "query": "(stiffener+\"stiffening ring\"+\"reinforcing member\"+보강부재+\"보강 부재\"+\"dummy die\"+더미) * (encapsul+mold+봉합+몰딩) * (chip+die+칩) * (package+패키지)",
+   "ipc": [
+    "H01L23",
+    "H01L21",
+    "H01L25"
+   ],
+   "logged_size": 85,
+   "local_size": 86,
+   "local_kr": 86,
+   "run_at": "2026-10-12T23:08:50+0900",
+   "live_word": {
+    "params_sent": {
+     "word": "(stiffener+\"stiffening ring\"+\"reinforcing member\"+보강부재+\"보강 부재\"+\"dummy die\"+더미) * (encapsul+mold+봉합+몰딩) * (chip+die+칩) * (package+패키지)",
+     "ipcNumber": "H01L23",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 500,
+     "pageNo": 1
+    },
+    "total": 142,
+    "fetched": 142,
+    "pages": 1
+   },
+   "live_claims": {
+    "params_sent": {
+     "claimScope": "(stiffener+\"stiffening ring\"+\"reinforcing member\"+보강부재+\"보강 부재\"+\"dummy die\"+더미) * (encapsul+mold+봉합+몰딩) * (chip+die+칩) * (package+패키지)",
+     "ipcNumber": "H01L23",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 21,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_abstract": {
+    "params_sent": {
+     "astrtCont": "(stiffener+\"stiffening ring\"+\"reinforcing member\"+보강부재+\"보강 부재\"+\"dummy die\"+더미) * (encapsul+mold+봉합+몰딩) * (chip+die+칩) * (package+패키지)",
+     "ipcNumber": "H01L23",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 7,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_title": {
+    "params_sent": {
+     "inventionTitle": "(stiffener+\"stiffening ring\"+\"reinforcing member\"+보강부재+\"보강 부재\"+\"dummy die\"+더미) * (encapsul+mold+봉합+몰딩) * (chip+die+칩) * (package+패키지)",
+     "ipcNumber": "H01L23",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 0,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "cross": {
+    "live_in_corpus": 17,
+    "local_kr_missing_in_live": 85,
+    "live_in_corpus_missing_locally": 16
+   },
+   "note": "API 는 ipcNumber 하나만 받는다 — 첫 코드만 보냄"
+  },
+  {
+   "stratum": "zero_result",
+   "arm": "d",
+   "query": "(TiZn+Ti-Zn+\"티타늄 아연\"+티타늄-아연+\"titanium zinc\"+titanium-zinc)",
+   "ipc": [],
+   "logged_size": 0,
+   "local_size": 0,
+   "local_kr": 0,
+   "run_at": "2026-10-12T23:08:57+0900",
+   "live_word": {
+    "params_sent": {
+     "word": "(TiZn+Ti-Zn+\"티타늄 아연\"+티타늄-아연+\"titanium zinc\"+titanium-zinc)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 500,
+     "pageNo": 1
+    },
+    "total": 182591,
+    "fetched": 0,
+    "pages": 0
+   },
+   "live_claims": {
+    "params_sent": {
+     "claimScope": "(TiZn+Ti-Zn+\"티타늄 아연\"+티타늄-아연+\"titanium zinc\"+titanium-zinc)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 26935,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_abstract": {
+    "params_sent": {
+     "astrtCont": "(TiZn+Ti-Zn+\"티타늄 아연\"+티타늄-아연+\"titanium zinc\"+titanium-zinc)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 2697,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_title": {
+    "params_sent": {
+     "inventionTitle": "(TiZn+Ti-Zn+\"티타늄 아연\"+티타늄-아연+\"titanium zinc\"+titanium-zinc)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 59,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "cross": "라이브 결과를 모두 받지 않음(총건수 > 1500 또는 실패) — 교차 판정 안 함"
+  },
+  {
+   "stratum": "zero_result",
+   "arm": "b",
+   "query": "(격벽+partition) * (볼록+convex) * (수지+resin) * (EL층+\"EL layer\") * (매몰+embed+cover)",
+   "ipc": [],
+   "logged_size": 0,
+   "local_size": 1,
+   "local_kr": 1,
+   "run_at": "2026-10-12T23:09:08+0900",
+   "live_word": {
+    "params_sent": {
+     "word": "(격벽+partition) * (볼록+convex) * (수지+resin) * (EL층+\"EL layer\") * (매몰+embed+cover)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 500,
+     "pageNo": 1
+    },
+    "total": 50,
+    "fetched": 50,
+    "pages": 1
+   },
+   "live_claims": {
+    "params_sent": {
+     "claimScope": "(격벽+partition) * (볼록+convex) * (수지+resin) * (EL층+\"EL layer\") * (매몰+embed+cover)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 0,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_abstract": {
+    "params_sent": {
+     "astrtCont": "(격벽+partition) * (볼록+convex) * (수지+resin) * (EL층+\"EL layer\") * (매몰+embed+cover)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 0,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_title": {
+    "params_sent": {
+     "inventionTitle": "(격벽+partition) * (볼록+convex) * (수지+resin) * (EL층+\"EL layer\") * (매몰+embed+cover)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 0,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "cross": {
+    "live_in_corpus": 1,
+    "local_kr_missing_in_live": 0,
+    "live_in_corpus_missing_locally": 0
+   }
+  },
+  {
+   "stratum": "zero_result",
+   "arm": "b",
+   "query": "(마그네슘 화합물+\"magnesium compound\")*(박막+\"thin film\")*(원료+precursor+\"raw material\")",
+   "ipc": [],
+   "logged_size": 0,
+   "local_size": 1,
+   "local_kr": 1,
+   "run_at": "2026-10-12T23:09:15+0900",
+   "live_word": {
+    "params_sent": {
+     "word": "(마그네슘 화합물+\"magnesium compound\")*(박막+\"thin film\")*(원료+precursor+\"raw material\")",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 500,
+     "pageNo": 1
+    },
+    "total": 15855,
+    "fetched": 0,
+    "pages": 0
+   },
+   "live_claims": {
+    "params_sent": {
+     "claimScope": "(마그네슘 화합물+\"magnesium compound\")*(박막+\"thin film\")*(원료+precursor+\"raw material\")",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 21,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_abstract": {
+    "params_sent": {
+     "astrtCont": "(마그네슘 화합물+\"magnesium compound\")*(박막+\"thin film\")*(원료+precursor+\"raw material\")",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 3,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_title": {
+    "params_sent": {
+     "inventionTitle": "(마그네슘 화합물+\"magnesium compound\")*(박막+\"thin film\")*(원료+precursor+\"raw material\")",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 0,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "cross": "라이브 결과를 모두 받지 않음(총건수 > 1500 또는 실패) — 교차 판정 안 함"
+  },
+  {
+   "stratum": "phrase",
+   "arm": "d",
+   "query": "(배플+baffle+\"confinement\"+\"한정 링\"+\"가둠\") * (플라즈마+plasma) * (링+ring)",
+   "ipc": [],
+   "logged_size": 71,
+   "local_size": 71,
+   "local_kr": 69,
+   "run_at": "2026-10-12T23:09:24+0900",
+   "live_word": {
+    "params_sent": {
+     "word": "(배플+baffle+\"confinement\"+\"한정 링\"+\"가둠\") * (플라즈마+plasma) * (링+ring)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 500,
+     "pageNo": 1
+    },
+    "total": 6314,
+    "fetched": 0,
+    "pages": 0
+   },
+   "live_claims": {
+    "params_sent": {
+     "claimScope": "(배플+baffle+\"confinement\"+\"한정 링\"+\"가둠\") * (플라즈마+plasma) * (링+ring)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 815,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_abstract": {
+    "params_sent": {
+     "astrtCont": "(배플+baffle+\"confinement\"+\"한정 링\"+\"가둠\") * (플라즈마+plasma) * (링+ring)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 202,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_title": {
+    "params_sent": {
+     "inventionTitle": "(배플+baffle+\"confinement\"+\"한정 링\"+\"가둠\") * (플라즈마+plasma) * (링+ring)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 29,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "cross": "라이브 결과를 모두 받지 않음(총건수 > 1500 또는 실패) — 교차 판정 안 함"
+  },
+  {
+   "stratum": "phrase",
+   "arm": "b",
+   "query": "(PVD+\"physical vapor\"+물리기상) * (바이어스+bias) * (홀+hole+via+비아+trench+트렌치+opening+개구)",
+   "ipc": [],
+   "logged_size": 2,
+   "local_size": 2,
+   "local_kr": 1,
+   "run_at": "2026-10-12T23:09:36+0900",
+   "live_word": {
+    "params_sent": {
+     "word": "(PVD+\"physical vapor\"+물리기상) * (바이어스+bias) * (홀+hole+via+비아+trench+트렌치+opening+개구)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 500,
+     "pageNo": 1
+    },
+    "total": 14368,
+    "fetched": 0,
+    "pages": 0
+   },
+   "live_claims": {
+    "params_sent": {
+     "claimScope": "(PVD+\"physical vapor\"+물리기상) * (바이어스+bias) * (홀+hole+via+비아+trench+트렌치+opening+개구)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 180,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_abstract": {
+    "params_sent": {
+     "astrtCont": "(PVD+\"physical vapor\"+물리기상) * (바이어스+bias) * (홀+hole+via+비아+trench+트렌치+opening+개구)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 15,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_title": {
+    "params_sent": {
+     "inventionTitle": "(PVD+\"physical vapor\"+물리기상) * (바이어스+bias) * (홀+hole+via+비아+trench+트렌치+opening+개구)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 0,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "cross": "라이브 결과를 모두 받지 않음(총건수 > 1500 또는 실패) — 교차 판정 안 함"
+  },
+  {
+   "stratum": "phrase",
+   "arm": "b",
+   "query": "(pedestal+susceptor+페데스탈+서셉터+\"substrate support\"+기판 지지+chuck+척+heater+히터) * (\"cooling plate\"+냉각 플레이트+\"cooling base\"+냉각판+\"cooling member\"+냉각 부재+\"cooling block\"+냉각 블록)",
+   "ipc": [],
+   "logged_size": 363,
+   "local_size": 364,
+   "local_kr": 360,
+   "run_at": "2026-10-12T23:09:47+0900",
+   "live_word": {
+    "params_sent": {
+     "word": "(pedestal+susceptor+페데스탈+서셉터+\"substrate support\"+기판 지지+chuck+척+heater+히터) * (\"cooling plate\"+냉각 플레이트+\"cooling base\"+냉각판+\"cooling member\"+냉각 부재+\"cooling block\"+냉각 블록)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 500,
+     "pageNo": 1
+    },
+    "total": 154544,
+    "fetched": 0,
+    "pages": 0
+   },
+   "live_claims": {
+    "params_sent": {
+     "claimScope": "(pedestal+susceptor+페데스탈+서셉터+\"substrate support\"+기판 지지+chuck+척+heater+히터) * (\"cooling plate\"+냉각 플레이트+\"cooling base\"+냉각판+\"cooling member\"+냉각 부재+\"cooling block\"+냉각 블록)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 8792,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_abstract": {
+    "params_sent": {
+     "astrtCont": "(pedestal+susceptor+페데스탈+서셉터+\"substrate support\"+기판 지지+chuck+척+heater+히터) * (\"cooling plate\"+냉각 플레이트+\"cooling base\"+냉각판+\"cooling member\"+냉각 부재+\"cooling block\"+냉각 블록)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 2001,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_title": {
+    "params_sent": {
+     "inventionTitle": "(pedestal+susceptor+페데스탈+서셉터+\"substrate support\"+기판 지지+chuck+척+heater+히터) * (\"cooling plate\"+냉각 플레이트+\"cooling base\"+냉각판+\"cooling member\"+냉각 부재+\"cooling block\"+냉각 블록)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 16,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "cross": "라이브 결과를 모두 받지 않음(총건수 > 1500 또는 실패) — 교차 판정 안 함"
+  },
+  {
+   "stratum": "not",
+   "arm": "d",
+   "query": "(봉지+몰딩+몰드+encapsulat+mold) * (비아+via+관통 홀+through hole+관통홀+관통 전극) * (기판+substrate) * (재배선+배선층+금속층+금속화+redistribution+metal layer+wiring) * (제2 반도체+제 2 반도체+제2 칩+제 2 칩+second chip+second die+second semiconductor+second electronic+제2 전자+제 2 전자) * !(전력+power+세라믹+ceramic+모듈+module+수동 소자+passive)",
+   "ipc": [],
+   "logged_size": 210,
+   "local_size": 210,
+   "local_kr": 209,
+   "run_at": "2026-10-12T23:10:04+0900",
+   "live_word": {
+    "params_sent": {
+     "word": "(봉지+몰딩+몰드+encapsulat+mold) * (비아+via+관통 홀+through hole+관통홀+관통 전극) * (기판+substrate) * (재배선+배선층+금속층+금속화+redistribution+metal layer+wiring) * (제2 반도체+제 2 반도체+제2 칩+제 2 칩+second chip+second die+second semiconductor+second electronic+제2 전자+제 2 전자) * !(전력+power+세라믹+ceramic+모듈+module+수동 소자+passive)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 500,
+     "pageNo": 1
+    },
+    "total": 7745,
+    "fetched": 0,
+    "pages": 0
+   },
+   "live_claims": {
+    "params_sent": {
+     "claimScope": "(봉지+몰딩+몰드+encapsulat+mold) * (비아+via+관통 홀+through hole+관통홀+관통 전극) * (기판+substrate) * (재배선+배선층+금속층+금속화+redistribution+metal layer+wiring) * (제2 반도체+제 2 반도체+제2 칩+제 2 칩+second chip+second die+second semiconductor+second electronic+제2 전자+제 2 전자) * !(전력+power+세라믹+ceramic+모듈+module+수동 소자+passive)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 676,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_abstract": {
+    "params_sent": {
+     "astrtCont": "(봉지+몰딩+몰드+encapsulat+mold) * (비아+via+관통 홀+through hole+관통홀+관통 전극) * (기판+substrate) * (재배선+배선층+금속층+금속화+redistribution+metal layer+wiring) * (제2 반도체+제 2 반도체+제2 칩+제 2 칩+second chip+second die+second semiconductor+second electronic+제2 전자+제 2 전자) * !(전력+power+세라믹+ceramic+모듈+module+수동 소자+passive)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 63,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_title": {
+    "params_sent": {
+     "inventionTitle": "(봉지+몰딩+몰드+encapsulat+mold) * (비아+via+관통 홀+through hole+관통홀+관통 전극) * (기판+substrate) * (재배선+배선층+금속층+금속화+redistribution+metal layer+wiring) * (제2 반도체+제 2 반도체+제2 칩+제 2 칩+second chip+second die+second semiconductor+second electronic+제2 전자+제 2 전자) * !(전력+power+세라믹+ceramic+모듈+module+수동 소자+passive)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 0,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "cross": "라이브 결과를 모두 받지 않음(총건수 > 1500 또는 실패) — 교차 판정 안 함"
+  },
+  {
+   "stratum": "not",
+   "arm": "d",
+   "query": "(반사방지+antireflection+antireflective+\"anti-reflection\"+\"anti-reflective\"+\"반사 방지\") * (투과+transmittance+광학+optical+display+디스플레이+렌즈+lens) * !(photoresist+포토레지스트+resist+lithograph+리소그래피)",
+   "ipc": [],
+   "logged_size": 63,
+   "local_size": 64,
+   "local_kr": 64,
+   "run_at": "2026-10-12T23:10:33+0900",
+   "live_word": {
+    "params_sent": {
+     "word": "(반사방지+antireflection+antireflective+\"anti-reflection\"+\"anti-reflective\"+\"반사 방지\") * (투과+transmittance+광학+optical+display+디스플레이+렌즈+lens) * !(photoresist+포토레지스트+resist+lithograph+리소그래피)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 500,
+     "pageNo": 1
+    },
+    "total": 221068,
+    "fetched": 0,
+    "pages": 0
+   },
+   "live_claims": {
+    "params_sent": {
+     "claimScope": "(반사방지+antireflection+antireflective+\"anti-reflection\"+\"anti-reflective\"+\"반사 방지\") * (투과+transmittance+광학+optical+display+디스플레이+렌즈+lens) * !(photoresist+포토레지스트+resist+lithograph+리소그래피)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 10298,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_abstract": {
+    "params_sent": {
+     "astrtCont": "(반사방지+antireflection+antireflective+\"anti-reflection\"+\"anti-reflective\"+\"반사 방지\") * (투과+transmittance+광학+optical+display+디스플레이+렌즈+lens) * !(photoresist+포토레지스트+resist+lithograph+리소그래피)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 4583,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_title": {
+    "params_sent": {
+     "inventionTitle": "(반사방지+antireflection+antireflective+\"anti-reflection\"+\"anti-reflective\"+\"반사 방지\") * (투과+transmittance+광학+optical+display+디스플레이+렌즈+lens) * !(photoresist+포토레지스트+resist+lithograph+리소그래피)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 521,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "cross": "라이브 결과를 모두 받지 않음(총건수 > 1500 또는 실패) — 교차 판정 안 함"
+  },
+  {
+   "stratum": "english",
+   "arm": "d",
+   "query": "(퓨즈+fuse+efuse+antifuse)*(다이오드+diode)*(트랜지스터+transistor)*(메모리+memory)",
+   "ipc": [],
+   "logged_size": 5,
+   "local_size": 6,
+   "local_kr": 6,
+   "run_at": "2026-10-12T23:10:45+0900",
+   "live_word": {
+    "params_sent": {
+     "word": "(퓨즈+fuse+efuse+antifuse)*(다이오드+diode)*(트랜지스터+transistor)*(메모리+memory)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 500,
+     "pageNo": 1
+    },
+    "total": 2784,
+    "fetched": 0,
+    "pages": 0
+   },
+   "live_claims": {
+    "params_sent": {
+     "claimScope": "(퓨즈+fuse+efuse+antifuse)*(다이오드+diode)*(트랜지스터+transistor)*(메모리+memory)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 92,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_abstract": {
+    "params_sent": {
+     "astrtCont": "(퓨즈+fuse+efuse+antifuse)*(다이오드+diode)*(트랜지스터+transistor)*(메모리+memory)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 8,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_title": {
+    "params_sent": {
+     "inventionTitle": "(퓨즈+fuse+efuse+antifuse)*(다이오드+diode)*(트랜지스터+transistor)*(메모리+memory)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 0,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "cross": "라이브 결과를 모두 받지 않음(총건수 > 1500 또는 실패) — 교차 판정 안 함"
+  },
+  {
+   "stratum": "english",
+   "arm": "b",
+   "query": "(도금층+\"plated layer\"+\"plating layer\") * (원자층+\"atomic layer deposition\") * (전구체+precursor) * (반응체+reactant+치환)",
+   "ipc": [],
+   "logged_size": 0,
+   "local_size": 1,
+   "local_kr": 1,
+   "run_at": "2026-10-12T23:10:53+0900",
+   "live_word": {
+    "params_sent": {
+     "word": "(도금층+\"plated layer\"+\"plating layer\") * (원자층+\"atomic layer deposition\") * (전구체+precursor) * (반응체+reactant+치환)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 500,
+     "pageNo": 1
+    },
+    "total": 26,
+    "fetched": 26,
+    "pages": 1
+   },
+   "live_claims": {
+    "params_sent": {
+     "claimScope": "(도금층+\"plated layer\"+\"plating layer\") * (원자층+\"atomic layer deposition\") * (전구체+precursor) * (반응체+reactant+치환)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 1,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_abstract": {
+    "params_sent": {
+     "astrtCont": "(도금층+\"plated layer\"+\"plating layer\") * (원자층+\"atomic layer deposition\") * (전구체+precursor) * (반응체+reactant+치환)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 0,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_title": {
+    "params_sent": {
+     "inventionTitle": "(도금층+\"plated layer\"+\"plating layer\") * (원자층+\"atomic layer deposition\") * (전구체+precursor) * (반응체+reactant+치환)",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 0,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "cross": {
+    "live_in_corpus": 1,
+    "local_kr_missing_in_live": 0,
+    "live_in_corpus_missing_locally": 0
+   }
+  },
+  {
+   "stratum": "english",
+   "arm": "d",
+   "query": "항균+antibacterial+antimicrobial+antibiotic+\"anti-bacterial\"",
+   "ipc": [],
+   "logged_size": 3,
+   "local_size": 4,
+   "local_kr": 3,
+   "run_at": "2026-10-12T23:10:59+0900",
+   "live_word": {
+    "params_sent": {
+     "word": "항균+antibacterial+antimicrobial+antibiotic+\"anti-bacterial\"",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 500,
+     "pageNo": 1
+    },
+    "total": 135943,
+    "fetched": 0,
+    "pages": 0
+   },
+   "live_claims": {
+    "params_sent": {
+     "claimScope": "항균+antibacterial+antimicrobial+antibiotic+\"anti-bacterial\"",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 24392,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_abstract": {
+    "params_sent": {
+     "astrtCont": "항균+antibacterial+antimicrobial+antibiotic+\"anti-bacterial\"",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 25220,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_title": {
+    "params_sent": {
+     "inventionTitle": "항균+antibacterial+antimicrobial+antibiotic+\"anti-bacterial\"",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 11499,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "cross": "라이브 결과를 모두 받지 않음(총건수 > 1500 또는 실패) — 교차 판정 안 함"
+  },
+  {
+   "stratum": "ipc",
+   "arm": "b",
+   "query": "(플라스마+플라즈마+plasma)*(CVD+증착+deposition)*(바이어스+bias)*(접지+ground)",
+   "ipc": [
+    "C23C16",
+    "H01J37"
+   ],
+   "logged_size": 2,
+   "local_size": 3,
+   "local_kr": 3,
+   "run_at": "2026-10-12T23:11:05+0900",
+   "live_word": {
+    "params_sent": {
+     "word": "(플라스마+플라즈마+plasma)*(CVD+증착+deposition)*(바이어스+bias)*(접지+ground)",
+     "ipcNumber": "C23C16",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 500,
+     "pageNo": 1
+    },
+    "total": 1147,
+    "fetched": 1147,
+    "pages": 3
+   },
+   "live_claims": {
+    "params_sent": {
+     "claimScope": "(플라스마+플라즈마+plasma)*(CVD+증착+deposition)*(바이어스+bias)*(접지+ground)",
+     "ipcNumber": "C23C16",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 28,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_abstract": {
+    "params_sent": {
+     "astrtCont": "(플라스마+플라즈마+plasma)*(CVD+증착+deposition)*(바이어스+bias)*(접지+ground)",
+     "ipcNumber": "C23C16",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 8,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_title": {
+    "params_sent": {
+     "inventionTitle": "(플라스마+플라즈마+plasma)*(CVD+증착+deposition)*(바이어스+bias)*(접지+ground)",
+     "ipcNumber": "C23C16",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 0,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "cross": {
+    "live_in_corpus": 44,
+    "local_kr_missing_in_live": 2,
+    "live_in_corpus_missing_locally": 43
+   },
+   "note": "API 는 ipcNumber 하나만 받는다 — 첫 코드만 보냄"
+  },
+  {
+   "stratum": "ipc",
+   "arm": "b",
+   "query": "(보호막+\"protective film\"+\"protective layer\"+\"back surface\"+이면) * (antistatic+대전+\"surface resistivity\"+표면 저항+conductive+도전)",
+   "ipc": [
+    "H01L21",
+    "H01L23",
+    "C09J",
+    "B32B",
+    "C08J"
+   ],
+   "logged_size": 193,
+   "local_size": 194,
+   "local_kr": 190,
+   "run_at": "2026-10-12T23:11:14+0900",
+   "live_word": {
+    "params_sent": {
+     "word": "(보호막+\"protective film\"+\"protective layer\"+\"back surface\"+이면) * (antistatic+대전+\"surface resistivity\"+표면 저항+conductive+도전)",
+     "ipcNumber": "H01L21",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 500,
+     "pageNo": 1
+    },
+    "total": 1397,
+    "fetched": 1397,
+    "pages": 3
+   },
+   "live_claims": {
+    "params_sent": {
+     "claimScope": "(보호막+\"protective film\"+\"protective layer\"+\"back surface\"+이면) * (antistatic+대전+\"surface resistivity\"+표면 저항+conductive+도전)",
+     "ipcNumber": "H01L21",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 131,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_abstract": {
+    "params_sent": {
+     "astrtCont": "(보호막+\"protective film\"+\"protective layer\"+\"back surface\"+이면) * (antistatic+대전+\"surface resistivity\"+표면 저항+conductive+도전)",
+     "ipcNumber": "H01L21",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 46,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_title": {
+    "params_sent": {
+     "inventionTitle": "(보호막+\"protective film\"+\"protective layer\"+\"back surface\"+이면) * (antistatic+대전+\"surface resistivity\"+표면 저항+conductive+도전)",
+     "ipcNumber": "H01L21",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 0,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "cross": {
+    "live_in_corpus": 403,
+    "local_kr_missing_in_live": 148,
+    "live_in_corpus_missing_locally": 361
+   },
+   "note": "API 는 ipcNumber 하나만 받는다 — 첫 코드만 보냄"
+  },
+  {
+   "stratum": "ipc",
+   "arm": "b",
+   "query": "(위상+phase) * (마스크+mask) * (블랭크+blank)",
+   "ipc": [
+    "G03F1"
+   ],
+   "logged_size": 142,
+   "local_size": 143,
+   "local_kr": 142,
+   "run_at": "2026-10-12T23:11:28+0900",
+   "live_word": {
+    "params_sent": {
+     "word": "(위상+phase) * (마스크+mask) * (블랭크+blank)",
+     "ipcNumber": "G03F1",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 500,
+     "pageNo": 1
+    },
+    "total": 1457,
+    "fetched": 1457,
+    "pages": 3
+   },
+   "live_claims": {
+    "params_sent": {
+     "claimScope": "(위상+phase) * (마스크+mask) * (블랭크+blank)",
+     "ipcNumber": "G03F1",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 596,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_abstract": {
+    "params_sent": {
+     "astrtCont": "(위상+phase) * (마스크+mask) * (블랭크+blank)",
+     "ipcNumber": "G03F1",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 375,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "live_title": {
+    "params_sent": {
+     "inventionTitle": "(위상+phase) * (마스크+mask) * (블랭크+blank)",
+     "ipcNumber": "G03F1",
+     "patent": "true",
+     "utility": "true",
+     "numOfRows": 1,
+     "pageNo": 1
+    },
+    "total": 235,
+    "fetched": 0,
+    "pages": 0,
+    "app_numbers": []
+   },
+   "cross": {
+    "live_in_corpus": 238,
+    "local_kr_missing_in_live": 4,
+    "live_in_corpus_missing_locally": 100
+   }
+  }
+ ]
+}
