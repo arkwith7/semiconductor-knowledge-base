@@ -184,6 +184,24 @@ wheels = [
 ]
 
 [[package]]
+name = "anthropic"
+version = "1.12.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "anyio" },
+    { name = "docstring-parser" },
+    { name = "httpx2" },
+    { name = "jiter" },
+    { name = "pydantic" },
+    { name = "sniffio" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/bd/cc/0da23e94020c62c0077c17648252f32d575b187710faaf3b85145e8e555d/anthropic-1.12.1.tar.gz", hash = "sha256:10f720ab6ddf40ef12e0e5743412c3a6dfac1109c244e633c9a2dbd36778ad30", size = 1555908, upload-time = "2026-10-08T03:42:00.588Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/8b/35/1ccdc3e950dd869b66de15035e15d9614607fcef9664dec403fe639f01df/anthropic-1.12.1-py3-none-any.whl", hash = "sha256:1c1469bb3f4118291756816b7850cc839f17b2be5cdc99c8fde3890a61a49ca2", size = 1919752, upload-time = "2026-10-08T03:41:58.596Z" },
+]
+
+[[package]]
 name = "anyio"
 version = "4.14.1"
 source = { registry = "https://pypi.org/simple" }
@@ -5034,6 +5052,9 @@ notebook = [
 priorart = [
     { name = "scikit-learn" },
 ]
+t4llm = [
+    { name = "anthropic" },
+]
 viz = [
     { name = "networkx" },
     { name = "pyvis" },
@@ -5041,6 +5062,7 @@ viz = [
 
 [package.metadata]
 requires-dist = [
+    { name = "anthropic", marker = "extra == 't4llm'", specifier = "==1.12.1" },
     { name = "boto3", marker = "extra == 'benchmark'", specifier = ">=1.34" },
     { name = "boto3", marker = "extra == 'llm'", specifier = ">=1.34" },
     { name = "faiss-cpu", marker = "extra == 'benchmark'", specifier = ">=1.8" },
@@ -5069,7 +5091,7 @@ requires-dist = [
     { name = "sentence-transformers", marker = "extra == 'align'", specifier = ">=3.0" },
     { name = "xmltodict", specifier = ">=0.13" },
 ]
-provides-extras = ["align", "priorart", "llm", "notebook", "viz", "nlp", "benchmark", "dev", "full"]
+provides-extras = ["align", "priorart", "llm", "notebook", "viz", "nlp", "benchmark", "dev", "full", "t4llm"]
 
 [[package]]
 name = "secretstorage"

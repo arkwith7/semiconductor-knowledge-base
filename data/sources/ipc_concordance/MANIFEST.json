@@ -1,0 +1,19 @@
+{
+  "name": "WIPO IPC Revision Concordance Lists",
+  "role": "PLAN-006 T4 S2 — IPC 판 정규화(모든 비교군 공통 기반). 생성기 scripts/build_ipc_concordance.py → mappings/ipc_concordance.csv",
+  "publisher": "WIPO — International Patent Classification, IT support and download area",
+  "license": "WIPO IPC 마스터 파일 — 공개 다운로드 자료(출처 표기)",
+  "retrieved_at": "2026-10-09",
+  "conversion_rules": [
+    "concordance(from-symbol) × concordance-to(to-symbol) 한 쌍을 한 행으로 옮긴다 — 분할(1→n)·병합(n→1)·유지(c→c)를 원표 그대로 보존",
+    "기호 표기: 마스터 `H01L0021306000` → `H01L21/306` (서브그룹 뒤쪽 0 제거 · 최소 2자리)",
+    "판은 원표 from-version/to-version 그대로. 판을 건너는 합성(2022→2026)은 소비자가 간선을 이어서 계산한다 — 이 표는 합성하지 않는다",
+    "H01L 전체 ↔ H10 전체 같은 일괄 동등은 넣지 않는다 — 원표에 적힌 세부 분류 이동만"
+  ],
+  "files": [
+    {"file": "ipc_concordancelist_20230101.zip", "versions": "20220101→20230101", "url": "https://www.wipo.int/ipc/itos4ipc/ITSupport_and_download_area/20230101/MasterFiles/ipc_concordancelist_20230101.zip", "sha256": "6c6c87fe7f651a406ff130bcdf20b83ccb43c03a331442770ef11a660944076e", "h01l_note": "H01L → H10B·H10K·H10N"},
+    {"file": "ipc_concordancelist_20240101.zip", "versions": "20230101→20240101", "url": "https://www.wipo.int/ipc/itos4ipc/ITSupport_and_download_area/20240101/MasterFiles/ipc_concordancelist_20240101.zip", "sha256": "d99bdba4f5484157e01e64f50f4a407c532c606aebba7dee8190f8959e282c5f", "h01l_note": "H01L 이동 없음"},
+    {"file": "ipc_concordancelist_20250101.zip", "versions": "20240101→20250101", "url": "https://www.wipo.int/ipc/itos4ipc/ITSupport_and_download_area/20250101/MasterFiles/ipc_concordancelist_20250101.zip", "sha256": "fb6edda6725d629990d5c2241435933823d27beb88a5767fbe8347c616c8d338", "h01l_note": "H01L → H10D·H10F·H10H"},
+    {"file": "ipc_concordancelist_20260101.zip", "versions": "20250101→20260101", "url": "https://www.wipo.int/ipc/itos4ipc/ITSupport_and_download_area/20260101/MasterFiles/ipc_concordancelist_20260101.zip", "sha256": "f6aa2e89e264e3524fb87d40b2830407153ffd5f8bfe4d09f74f683fb0936933", "h01l_note": "H01L 삭제 → H10W·H10P 신설 + 기존 H10 하위로"}
+  ]
+}

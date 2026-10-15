@@ -1,0 +1,63 @@
+{
+ "split": "dev",
+ "gt_pairs": 519,
+ "categories": {
+  "missed_never_retrieved": 213,
+  "both": 200,
+  "b_only": 37,
+  "missed_seen_not_accepted": 26,
+  "d_only": 43
+ },
+ "by_language": {
+  "missed_never_retrieved": {
+   "ko": 90,
+   "en": 91,
+   "ja": 32
+  },
+  "both": {
+   "ko": 127,
+   "en": 72,
+   "ja": 1
+  },
+  "b_only": {
+   "ko": 23,
+   "en": 14
+  },
+  "missed_seen_not_accepted": {
+   "en": 11,
+   "ko": 14,
+   "ja": 1
+  },
+  "d_only": {
+   "ko": 25,
+   "en": 18
+  }
+ },
+ "features": {
+  "missed_never_retrieved": {
+   "shares_concept": 0.563,
+   "shares_ipc_subclass": 0.587,
+   "n": 213
+  },
+  "both": {
+   "shares_concept": 0.855,
+   "shares_ipc_subclass": 0.75,
+   "n": 200
+  },
+  "b_only": {
+   "shares_concept": 0.703,
+   "shares_ipc_subclass": 0.703,
+   "n": 37
+  },
+  "missed_seen_not_accepted": {
+   "shares_concept": 0.846,
+   "shares_ipc_subclass": 0.615,
+   "n": 26
+  },
+  "d_only": {
+   "shares_concept": 0.814,
+   "shares_ipc_subclass": 0.744,
+   "n": 43
+  }
+ }
+}

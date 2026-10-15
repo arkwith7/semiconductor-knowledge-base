@@ -192,3 +192,7 @@ data/sources/notice_dissection/pilot_inferred.ttl
 ontology/sdkb-abox-argument.ttl
 # §20.24 g — 제한 버전(좌표·판단 간 관계 제외)도 같은 원천의 파생이다.
 ontology/sdkb-abox-argument-limited.ttl
+
+# PLAN-006 T4 평가 코퍼스 스냅샷 — 170MB · 청구항·초록 원문 포함. 추적하는 것은 MANIFEST.json 뿐이다.
+# 내려받기·검증: python scripts/ir_corpus.py fetch --release | --from <path> · verify
+data/sources/ir_corpus/*.parquet
