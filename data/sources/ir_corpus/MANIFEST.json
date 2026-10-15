@@ -15,7 +15,9 @@
       "python scripts/ir_corpus.py fetch --release   # gh release download 후 sha 검증",
       "python scripts/ir_corpus.py fetch --from <path>  # 로컬 사본(하류 원본 등)에서 복사 후 sha 검증"
     ],
-    "verify": "python scripts/ir_corpus.py verify   # 없거나 sha 가 다르면 비영 종료"
+    "verify": "python scripts/ir_corpus.py verify   # 없거나 sha 가 다르면 비영 종료",
+    "release_repo": "arkwith7/semiconductor-knowledge-base",
+    "release_tag": "ir-corpus-v09"
   },
   "provenance": {
     "origin_repo": "arkwith7/sdkb-prior-art-paper (하류)",
@@ -27,8 +29,18 @@
   },
   "composition": {
     "source_label_priority": "rej > cited > g1 > g2 (한 특허가 여러 그래프에 있으면 최상위 역할로 라벨)",
-    "source_counts": {"g0_rej": 1200, "g0_cited": 3513, "g1": 24173, "g2": 12337},
-    "is_candidate_by_source": {"g0_rej": 1008, "g0_cited": 3513, "g1": 24173, "g2": 12337},
+    "source_counts": {
+      "g0_rej": 1200,
+      "g0_cited": 3513,
+      "g1": 24173,
+      "g2": 12337
+    },
+    "is_candidate_by_source": {
+      "g0_rej": 1008,
+      "g0_cited": 3513,
+      "g1": 24173,
+      "g2": 12337
+    },
     "g1": "후보·hard negative — 삼성·SK하이닉스 출원 (출원인 기준 표집)",
     "g2": "후보·이식성 — KSIA 소부장 188사 출원 (출원인 기준 표집)",
     "g0_cited": "SIRP 거절출원의 인용문헌 중 서지가 확보된 것. 심사관 인용 중 일부(dev 14 · train 64 쌍)는 미수록",
@@ -45,7 +57,39 @@
     "concepts": "하류 링커가 붙인 SDKB 개념 id 목록",
     "filing_date/publication_date": "외국 문서는 publication_date 결측"
   },
-  "schema_arrow": {"doc_id": "large_string", "iri": "large_string", "source": "large_string", "is_query": "bool", "query_layer": "large_string", "is_candidate": "bool", "is_examiner_positive": "bool", "in_g0": "bool", "in_g1": "bool", "in_g2": "bool", "lang": "large_string", "title": "large_string", "abstract": "large_string", "first_claim_original": "large_string", "claims_independent": "large_string", "claims_full": "large_string", "text_main": "large_string", "n_claims": "int64", "n_independent": "int64", "filing_date": "large_string", "publication_date": "large_string", "publication_number": "large_string", "application_number": "large_string", "patent_office": "large_string", "ipc": "list<element: string>", "cpc": "list<element: string>", "concepts": "list<element: string>", "q_repr_abstract": "large_string", "q_repr_claims": "large_string", "q_repr_abstract_claims": "large_string", "q_repr_title_abstract_claims": "large_string"},
+  "schema_arrow": {
+    "doc_id": "large_string",
+    "iri": "large_string",
+    "source": "large_string",
+    "is_query": "bool",
+    "query_layer": "large_string",
+    "is_candidate": "bool",
+    "is_examiner_positive": "bool",
+    "in_g0": "bool",
+    "in_g1": "bool",
+    "in_g2": "bool",
+    "lang": "large_string",
+    "title": "large_string",
+    "abstract": "large_string",
+    "first_claim_original": "large_string",
+    "claims_independent": "large_string",
+    "claims_full": "large_string",
+    "text_main": "large_string",
+    "n_claims": "int64",
+    "n_independent": "int64",
+    "filing_date": "large_string",
+    "publication_date": "large_string",
+    "publication_number": "large_string",
+    "application_number": "large_string",
+    "patent_office": "large_string",
+    "ipc": "list<element: string>",
+    "cpc": "list<element: string>",
+    "concepts": "list<element: string>",
+    "q_repr_abstract": "large_string",
+    "q_repr_claims": "large_string",
+    "q_repr_abstract_claims": "large_string",
+    "q_repr_title_abstract_claims": "large_string"
+  },
   "split_link": "benchmark/assets/split.csv (sha 714dafe0…) 의 doc_id 와 같은 꼴 — 질의 분할은 그 파일이 정본",
   "license": "KIPRIS 수집물 — 학술 이용·비재배포. 공개 파생(sdkb-dataset)에 싣지 않는다",
   "pii": "출원인 법인명 포함 가능 · 개인 성명 필드 없음(발명자 열 없음)"

@@ -19,8 +19,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CORPUS_DIR = ROOT / "data" / "sources" / "ir_corpus"
 MANIFEST = CORPUS_DIR / "MANIFEST.json"
-RELEASE_REPO = "arkwith7/semiconductor-knowledge-base"
-RELEASE_TAG = "ir-corpus-v09"
 
 
 def manifest(path: Path = MANIFEST) -> dict:
@@ -77,8 +75,12 @@ def fetch(*, src: Path | None, release: bool, m: dict | None = None, base: Path 
     if src is not None:
         shutil.copyfile(src, dst)
     elif release:
+        # 보관 저장소 이름은 비공개 원천 계층(MANIFEST)에만 둔다 — 코드에 박으면 공개 트리로 새어 나간다
+        st = m["storage"]
+        if not st.get("release_repo") or not st.get("release_tag"):
+            raise SystemExit("ERROR: MANIFEST storage 에 release_repo·release_tag 가 없다")
         subprocess.run(
-            ["gh", "release", "download", RELEASE_TAG, "--repo", RELEASE_REPO,
+            ["gh", "release", "download", st["release_tag"], "--repo", st["release_repo"],
              "--pattern", m["file"], "--dir", str(dst.parent), "--clobber"],
             check=True,
         )
